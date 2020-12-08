@@ -1,6 +1,6 @@
-import type { Context } from "./context";
-import type { CSSRules } from "./css";
-import type { Falsy } from "./util";
+import type { Context } from './context'
+import type { CSSRules } from './css'
+import type { Falsy } from './util'
 
 export type Plugin = string | CSSRules | DirectiveHandler
 

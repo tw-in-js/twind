@@ -59,5 +59,13 @@ export interface CSSRules {
   // ':root'?: CSSProperties
   // '*'?: CSSProperties
 
-  [key: string]: CSSProperties | CSSAtMedia | CSSAtSupports | CSSAtKeyframes | CSSRules | string | string[] | Falsy
+  [key: string]:
+    | CSSProperties
+    | CSSAtMedia
+    | CSSAtSupports
+    | CSSAtKeyframes
+    | CSSRules
+    | string
+    | string[]
+    | Falsy
 }

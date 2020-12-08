@@ -1,5 +1,5 @@
-import type { TW } from "./instance";
-import type { ThemeResolver } from "./theme";
+import type { TW } from './instance'
+import type { ThemeResolver } from './theme'
 
 export interface Context {
   /** Allow composition */

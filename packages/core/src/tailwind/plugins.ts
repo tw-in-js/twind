@@ -850,6 +850,6 @@ export const corePlugins: Plugins = {
       ],
       ' ',
     ),
-  })
+  }),
 }
 /* eslint-enable unicorn/prevent-abbreviations, no-return-assign, no-cond-assign, @typescript-eslint/consistent-type-assertions */

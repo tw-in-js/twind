@@ -19,7 +19,7 @@ export const create = (config?: Configuration): Instance => {
     // Replace implementation with configured ones
     // `process`: the real one
     // `setup`: is no op and invokes `mode.report` with `LATE_SETUP_CALL`
-    ({process, setup} = configure(config))
+    ;({ process, setup } = configure(config))
   }
 
   // If we got a config, start right away

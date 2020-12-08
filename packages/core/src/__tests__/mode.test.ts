@@ -15,11 +15,15 @@ test('mode warn (default)', () => {
 
     expect(tw('rounded-t-xxx')).toBe('rounded-t-xxx')
     expect(console.warn).toHaveBeenCalledTimes(2)
-    expect(console.warn).toHaveBeenLastCalledWith(`UNKNOWN_THEME_VALUE: {"id":"UNKNOWN_THEME_VALUE","section":"borderRadius","keypath":["t","xxx"]}`)
+    expect(console.warn).toHaveBeenLastCalledWith(
+      `UNKNOWN_THEME_VALUE: {"id":"UNKNOWN_THEME_VALUE","section":"borderRadius","keypath":["t","xxx"]}`,
+    )
 
     expect(tw('gap')).toBe('gap')
     expect(console.warn).toHaveBeenCalledTimes(3)
-    expect(console.warn).toHaveBeenLastCalledWith(`UNKNOWN_THEME_VALUE: {"id":"UNKNOWN_THEME_VALUE","section":"gap","keypath":["DEFAULT"]}`)
+    expect(console.warn).toHaveBeenLastCalledWith(
+      `UNKNOWN_THEME_VALUE: {"id":"UNKNOWN_THEME_VALUE","section":"gap","keypath":["DEFAULT"]}`,
+    )
   } finally {
     console.warn = consoleWarn
   }
@@ -62,11 +66,7 @@ test('ignore vendor specific pseudo classes errors', () => {
   expect(instance.tw('underline text-center')).toBe('underline text-center')
 
   expect(injector.insert).toHaveBeenCalledTimes(4)
-  expect(injector.insert).toHaveBeenNthCalledWith(
-    1,
-    '::-moz-focus-inner{border-style:none}',
-    0,
-  )
+  expect(injector.insert).toHaveBeenNthCalledWith(1, '::-moz-focus-inner{border-style:none}', 0)
   expect(injector.insert).toHaveBeenNthCalledWith(
     2,
     ':-moz-focusring{outline:1px dotted ButtonText}',

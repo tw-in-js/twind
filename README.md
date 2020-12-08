@@ -24,31 +24,15 @@ We aim to create a place for likeminded people to talk about problems and possib
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [tw-in-js](#tw-in-js)
-  - [Rational](#rational)
-  - [Challenges](#challenges)
-  - [Opportunities](#opportunities)
-  - [Inspiration](#inspiration)
-  - [Basic Usage](#basic-usage)
-  - [Customization](#customization)
-    - [Preflight](#preflight)
-    - [Strict](#strict)
-    - [Hash](#hash)
-    - [Theme](#theme)
-    - [Plugins](#plugins)
-  - [Advanced Usage](#advanced-usage)
-    - [Function Signature](#function-signature)
-      - [Template Literal](#template-literal)
-      - [Strings](#strings)
-      - [Objects](#objects)
-      - [Arrays](#arrays)
-      - [Mixture](#mixture)
-    - [Grouping](#grouping)
-      - [Variant Grouping](#variant-grouping)
-      - [Directive Grouping](#directive-grouping)
-  - [Contribute](#contribute)
-    - [Develop](#develop)
-  - [License](#license)
+- [Rational](#rational)
+- [Challenges](#challenges)
+- [Opportunities](#opportunities)
+- [Inspiration](#inspiration)
+- [Basic Usage](#basic-usage)
+- [Customization](#customization)
+- [Advanced Usage](#advanced-usage)
+- [Contribute](#contribute)
+- [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
@@ -109,13 +93,13 @@ Despite the module being very flexible and powerful, it is the intention to keep
 Getting started with the library requires no configuration, setup (or even installation if you use unpkg):
 
 ```js
-import { tw } from 'tw-in-js';
+import { tw } from 'tw-in-js'
 
 document.body.innerHTML = `
   <main class=${tw('bg-black text-white')}>
     <h1 class=${tw('text-xl')}>This is Tailwind in JS!</h1>
   </main>
-`;
+`
 ```
 
 Using the `tw` function exported by the module without any configuration results in the compilation of the rules `bg-black text-white` and `text-xl` in exactly as specified in the Tailwind documentation. It is possible to modilfy the behaviour of the compiler by providing a custom theme file but when none is passed then the default Tailwind theme is used.
@@ -127,7 +111,7 @@ Calling the `tw` function results in the passed rules to be interpretted, normal
 Understadably developers will more often than not, want to customize the out of the box experience. It is possible to do this with the exported `setup` function. Doing this will ultimately change the behaviour of calling the `tw` function, making it appropriate for your particular use case.
 
 ```js
-import { setup } from 'tw-in-js';
+import { setup } from 'tw-in-js'
 
 setup({
   preflight: true, // include base style reset
@@ -135,7 +119,7 @@ setup({
   hash: false, // hash all generated class names
   theme: {}, // define custom theme values
   plugins: {}, // define new grammars for the compiler
-});
+})
 ```
 
 The setup functions is a named export of the main module and accepts an config object as an argument.
@@ -170,7 +154,7 @@ Applying a new theme or extending the default is probably the most common custom
 Here is an example of overriding and extending values in the theme:
 
 ```js
-import { setup } from 'tw-in-js';
+import { setup } from 'tw-in-js'
 
 setup({
   theme: {
@@ -185,7 +169,7 @@ setup({
       },
     },
   },
-});
+})
 ```
 
 ### Plugins
@@ -195,13 +179,13 @@ A more advanced customization is to provide plugins in the form of named functio
 For example adding the support for the [scroll-snap](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-type) property:
 
 ```js
-import { setup } from 'tw-in-js';
+import { setup } from 'tw-in-js'
 
 setup({
   plugins: {
     'scroll-snap': (parts) => ({ 'scroll-snap-type': parts[1] }),
   },
-});
+})
 ```
 
 The above plugin would cover cases like `scroll-snap-none` and returning the appropriate CSS. Plugin functions are called upon when a built in translation function for a given directive can't be found.
@@ -224,37 +208,37 @@ It is possible to invoke the `tw` function in a multitude of different ways. It 
 #### Template Literal
 
 ```js
-bw`bg-gray-200 rounded`;
+bw`bg-gray-200 rounded`
 //=> bg-gray-200 rounded
-bw`bg-gray-200 ${false && 'rounded'}`;
+bw`bg-gray-200 ${false && 'rounded'}`
 //=> bg-gray-200
-bw`bg-gray-200 ${[false && 'rounded', 'block']}`;
+bw`bg-gray-200 ${[false && 'rounded', 'block']}`
 //=> bg-gray-200 block
-bw`bg-gray-200 ${{ rounded: false, underline: isTrue() }}`;
+bw`bg-gray-200 ${{ rounded: false, underline: isTrue() }}`
 //=> bg-gray-200 underline
 ```
 
 #### Strings
 
 ```js
-bw('bg-gray-200', true && 'rounded', 'underline');
+bw('bg-gray-200', true && 'rounded', 'underline')
 //=> bg-gray-200 rounded underline
 ```
 
 #### Objects
 
 ```js
-bw({ 'bg-gray-200': true, rounded: false, underline: isTrue() });
+bw({ 'bg-gray-200': true, rounded: false, underline: isTrue() })
 //=> bg-gray-200 underline
-bw({ 'bg-gray-200': true }, { rounded: false }, null, { underline: true });
+bw({ 'bg-gray-200': true }, { rounded: false }, null, { underline: true })
 //=> bg-gray-200 underline
 ```
 
 #### Arrays
 
 ```js
-bw(['bg-gray-200', 0, false, 'rounded']); //=> bg-gray-200 rounded
-bw(['bg-gray-200'], ['', 0, false, 'rounded'], [['underline']]); //=> bg-gray-200 rounded underline
+bw(['bg-gray-200', 0, false, 'rounded']) //=> bg-gray-200 rounded
+bw(['bg-gray-200'], ['', 0, false, 'rounded'], [['underline']]) //=> bg-gray-200 rounded underline
 ```
 
 #### Mixture
@@ -264,7 +248,7 @@ bw('bg-gray-200', [
   1 && 'rounded',
   { underline: false, 'text-black': null },
   ['text-lg', ['shadow-lg']],
-]); //=> bg-gray-200 rounded text-lg shadow-lg
+]) //=> bg-gray-200 rounded text-lg shadow-lg
 ```
 
 ### Grouping
@@ -280,7 +264,7 @@ Directives with the same variants can be grouped using parenthesis. The `tw` fun
 > Notice that directives within tagged template literals can span multiple lines
 
 ```js
-tw`sm:(bg-black text-white)`;
+tw`sm:(bg-black text-white)`
 //=> sm:bg-black sm:text-white
 ```
 
@@ -293,7 +277,7 @@ tw`
     text-white
     hover:(bg-white text-black)
   )
-`;
+`
 //=> sm:bg-black sm:text-white sm:hover:bg-white sm:hover:text-black
 ```
 
@@ -306,7 +290,7 @@ bw({
     'text-white': true,
     hover: 'bg-white text-black',
   },
-});
+})
 // => sm:bg-black sm:text-white sm:hover:bg-white sm:hover:text-black
 ```
 

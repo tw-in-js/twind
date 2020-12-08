@@ -1,8 +1,8 @@
-import type { Context } from "./context"
-import type { CSSRules } from "./css"
-import type { Mode } from "./mode"
-import type { Plugins } from "./plugins"
-import type { Theme } from "./theme"
+import type { Context } from './context'
+import type { CSSRules } from './css'
+import type { Mode } from './mode'
+import type { Plugins } from './plugins'
+import type { Theme } from './theme'
 
 export interface Preflight {
   (preflight: CSSRules, context: Context): CSSRules | undefined

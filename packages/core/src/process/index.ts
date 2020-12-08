@@ -99,22 +99,25 @@ export const configure = (
       // `context.theme()` needs know if it should negate the theme value
       negate = rule.negate
 
-      // Call the plugin for this rule
-      const translation = translate(rule)
+      // 2. translate each rule to css object using plugins
+      let translation = translate(rule)
 
       // Reset negate to not interfere with other theme() calls
       negate = false
 
       // CSS class names have been returned
       if (is.string(translation)) {
+        // Use as is
         className = translation
       } else if (translation) {
-        className = hash ? hash(JSON.stringify([rule.variants, rule.negate, translation])) : id
+        // 3. decorate: apply variants
+        translation = decorate(translation, rule)
 
-        // 1. decorate: apply variants
-        // 2. serialize: convert to css string with precedence
-        // 3. inject: add to dom
-        serialize(decorate(translation, rule), className, rule).forEach(inject)
+        className = hash ? hash(JSON.stringify(translation)) : id
+
+        // 4. serialize: convert to css string with precedence
+        // 5. inject: add to dom
+        serialize(translation, className, rule).forEach(inject)
       } else {
         // No plugin or plugin did not return something
         mode.report({ id: 'UNKNOWN_DIRECTIVE', rule }, context)

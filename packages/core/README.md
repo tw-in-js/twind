@@ -15,12 +15,11 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
-- [@tw-in-js/types](#tw-in-jstypes)
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Polyfills](#polyfills)
-  - [Contribute](#contribute)
-  - [License](#license)
+- [Installation](#installation)
+- [Usage](#usage)
+- [Polyfills](#polyfills)
+- [Contribute](#contribute)
+- [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->

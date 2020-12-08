@@ -1,4 +1,4 @@
-import type { Falsy } from "./util"
+import type { Falsy } from './util'
 
 export interface TokenGrouping extends Record<string, Token> {}
 

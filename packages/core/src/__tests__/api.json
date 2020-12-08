@@ -623,15 +623,13 @@
     ]
   ],
   "divide-dashed": ".divide-dashed>:not([hidden])~:not([hidden]){border-style:dashed}",
-  "divide-transparent":
-    ".divide-transparent>:not([hidden])~:not([hidden]){border-color:transparent}"
-  ,
+  "divide-transparent": ".divide-transparent>:not([hidden])~:not([hidden]){border-color:transparent}",
   "divide-opacity-95": ".divide-opacity-95>:not([hidden])~:not([hidden]){--tw-divide-opacity:0.95}",
   "first:font-bold": ".first\\:font-bold:first-child{font-weight:700}",
   "last:font-bold": ".last\\:font-bold:last-child{font-weight:700}",
   "odd:font-bold": ".odd\\:font-bold:nth-child(odd){font-weight:700}",
   "even:font-bold": ".even\\:font-bold:nth-child(2n){font-weight:700}",
-  "transform-none": ".transform-none{transform:none}" ,
+  "transform-none": ".transform-none{transform:none}",
   "transform-gpu": ".transform-gpu{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translate3d(var(--tw-translate-x,0),var(--tw-translate-y,0),0) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}",
   "transform": ".transform{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}",
   "rotate(-3 hover:6 md:(3 hover:-6))": [

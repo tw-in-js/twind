@@ -71,7 +71,6 @@ export const pseudoPrecedence = (pseudoClass: string): number =>
     ? precedence
     : PRECEDENCES_BY_PSEUDO_CLASS.length
 
-
 // https://github.com/kripod/otion/blob/main/packages/otion/src/propertyMatchers.ts
 // "+1": [
 // 	/* ^border-.*(w|c|sty) */

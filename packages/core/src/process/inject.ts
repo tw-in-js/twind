@@ -14,7 +14,6 @@ export const inject = (
 
   return ({ r: rule, p: presedence }) => {
     if (!insertedRules[rule]) {
-
       const index = sortedInsertionIndex(sortedPrecedences, presedence)
 
       try {

@@ -15,11 +15,11 @@ beforeEach(async () => {
 
 test('class names are hashed', () => {
   expect(instance.tw('group flex pt-4 text-center')).toBe(
-    'tw-1bk5mm5 tw-1r10iar tw-1rt79r9 tw-1utukjz',
+    'tw-1bk5mm5 tw-1sv1rgs tw-ocaj78 tw-5693iz',
   )
   expect(injector.target).toStrictEqual([
-    '.tw-1r10iar{display:flex}',
-    '.tw-1rt79r9{padding-top:1rem}',
-    '.tw-1utukjz{text-align:center}',
+    '.tw-1sv1rgs{display:flex}',
+    '.tw-ocaj78{padding-top:1rem}',
+    '.tw-5693iz{text-align:center}',
   ])
 })
