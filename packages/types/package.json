@@ -1,0 +1,49 @@
+{
+  "name": "@tw-in-js/types",
+  "version": "0.0.0",
+  "description": "Common typescript types",
+  "keywords": [
+    "tailwind",
+    "tw-in-js",
+    "tailwind-in-js",
+    "types",
+    "typescript"
+  ],
+  "homepage": "https://github.com/tw-in-js/core#readme",
+  "bugs": {
+    "url": "https://github.com/tw-in-js/core/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tw-in-js/core.git",
+    "directory": "packages/types"
+  },
+  "license": "MIT",
+  "contributors": [
+    "Luke Jackson (lukejacksonn.github.io)",
+    "Sascha Tandel (https://github.com/sastan)"
+  ],
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "nps",
+    "prepublishOnly": "nps",
+    "test": "nps"
+  },
+  "prettier": "@carv/prettier-config",
+  "eslintConfig": {
+    "extends": "@carv/eslint-config",
+    "root": true
+  },
+  "jest": {
+    "preset": "@carv/jest-preset"
+  },
+  "dependencies": {
+    "csstype": "^3.0.5"
+  },
+  "devDependencies": {
+    "nps": "^5.9.12"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

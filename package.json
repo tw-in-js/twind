@@ -1,0 +1,59 @@
+{
+  "name": "@tw-in-js/monorepo",
+  "version": "0.0.0-independent",
+  "private": true,
+  "homepage": "https://github.com/tw-in-js",
+  "bugs": "https://github.com/tw-in-js/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tw-in-js.git"
+  },
+  "license": "MIT",
+  "contributors": [
+    "Luke Jackson (lukejacksonn.github.io)",
+    "Sascha Tandel (https://github.com/sastan)"
+  ],
+  "workspaces": [
+    "benchmarks",
+    "types",
+    "examples/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "lerna run --no-private build",
+    "ci": "nps",
+    "clean": "nps clean && lerna exec -- nps clean",
+    "docs": "nps docs && lerna exec --no-private -- nps docs.package",
+    "format": "nps format && lerna exec -- nps format.package",
+    "preinstall": "npx only-allow yarn",
+    "publish": "lerna publish --no-private",
+    "test": "nps",
+    "preversion": "lerna exec -- nps prepare && nps test",
+    "version": "lerna exec -- nps version"
+  },
+  "prettier": "@carv/prettier-config",
+  "eslintConfig": {
+    "extends": "@carv/eslint-config",
+    "root": true
+  },
+  "jest": {
+    "projects": [
+      "<rootDir>/packages/*"
+    ]
+  },
+  "devDependencies": {
+    "@carv/esbundle": "^1.1.5",
+    "@carv/eslint-config": "^1.6.0",
+    "@carv/jest-preset": "^1.1.6",
+    "@carv/prettier-config": "^1.1.0",
+    "@carv/tsconfig": "^1.3.0",
+    "@carv/types": "^1.3.1",
+    "eslint": "^7.3.1",
+    "jest": "^26.1.0",
+    "lerna": "^3.22.1",
+    "nps": "^5.9.12",
+    "only-allow": "^1.0.0",
+    "prettier": "^2.0.5",
+    "typescript": "^4.1.0"
+  }
+}

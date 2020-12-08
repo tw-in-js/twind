@@ -2,11 +2,57 @@
 
 > a collective dedicated to Tailwind in JS
 
+[![MIT License](https://badgen.net/github/license/tw-in-js/core)](https://github.com/tw-in-js/core/blob/main/LICENSE)
+[![Latest Release](https://flat.badgen.net/npm/v/@tw-in-js/core?icon=npm&label)](https://www.npmjs.com/package/@tw-in-js/core)
+[![Bundle Size](https://flat.badgen.net/bundlephobia/minzip/@tw-in-js/core?icon=packagephobia&label&color=blue)](https://bundlephobia.com/result?p=@tw-in-js/core)
+[![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Fcore?icon=github&label)](https://github.com/tw-in-js/core)
+[![Typescript](https://flat.badgen.net/badge/icon/included?icon=typescript&label)](https://unpkg.com/browse/@tw-in-js/core/types/core.d.ts)
+[![CI](https://github.com/tw-in-js/core/workflows/CI/badge.svg)](https://github.com/tw-in-js/core/actions?query=workflow%3Aci)
+[![Coverage Status](https://flat.badgen.net/coveralls/c/github/tw-in-js/core/main?icon=codecov&label)](https://coveralls.io/github/tw-in-js/core?branch=main)
+[![PRs Welcome](https://flat.badgen.net/badge/PRs/welcome/purple)](http://makeapullrequest.com)
+
+---
+
 Welcome! If you are here then the likelihood is that you have heard of of used both Tailwind and CSS-in-JS implementations such as styled components. We think that these packages have revolutionised web development and for one reason or another, proved overwhelmingly popular in the world of frontend development.
 
 The purpose of this organization is to merge these two paradigms, both philosophically and practically. Offering all the benefits that come with using Tailwind and bringing them to the runtime.
 
 We aim to create a place for likeminded people to talk about problems and possibilities in this field, as well as come up with implementations that we can share as a community.
+
+<details><summary>Table Of Contents (click to expand)</summary>
+<!-- prettier-ignore-start -->
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [tw-in-js](#tw-in-js)
+  - [Rational](#rational)
+  - [Challenges](#challenges)
+  - [Opportunities](#opportunities)
+  - [Inspiration](#inspiration)
+  - [Basic Usage](#basic-usage)
+  - [Customization](#customization)
+    - [Preflight](#preflight)
+    - [Strict](#strict)
+    - [Hash](#hash)
+    - [Theme](#theme)
+    - [Plugins](#plugins)
+  - [Advanced Usage](#advanced-usage)
+    - [Function Signature](#function-signature)
+      - [Template Literal](#template-literal)
+      - [Strings](#strings)
+      - [Objects](#objects)
+      - [Arrays](#arrays)
+      - [Mixture](#mixture)
+    - [Grouping](#grouping)
+      - [Variant Grouping](#variant-grouping)
+      - [Directive Grouping](#directive-grouping)
+  - [Contribute](#contribute)
+    - [Develop](#develop)
+  - [License](#license)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+<!-- prettier-ignore-end -->
+</details>
 
 ## Rational
 
@@ -285,3 +331,32 @@ Some directives like `ring` need to be applied themselves as well as being a pre
 bw`ring(& ping-700 offset(4 ping-200))`)
 // => ring ring-ping-700 ring-offset-4 ring-offset-on-ping-200
 ```
+
+## Contribute
+
+Thanks for being willing to contribute!
+
+> This project is free and open-source, so if you think this project can help you or anyone else, you may [star it on GitHub](https://github.com/tw-in-js/core). Feel free to [open an issue](https://github.com/tw-in-js/core/issues) if you have any idea, question, or you've found a bug.
+
+**Working on your first Pull Request?** You can learn how from this _free_ series [How to Contribute to an Open Source Project on GitHub](https://egghead.io/series/how-to-contribute-to-an-open-source-project-on-github)
+
+We are following the [Conventional Commits](https://www.conventionalcommits.org) convention.
+
+### Develop
+
+> Ensure you run at least Node v14.
+
+Clone the repository and cd into the project directory.
+
+Run `yarn install && yarn build`.
+
+Cd into the package that you'd like to make progress on.
+
+- `yarn test`: Run test suite including linting
+- `yarn format`: Ensure consistent code style
+- `yarn build`: Build all packages
+- `yarn publish`: To publish all changed packages
+
+## License
+
+[MIT](https://github.com/tw-in-js/core/blob/main/LICENSE)

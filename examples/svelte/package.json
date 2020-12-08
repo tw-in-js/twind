@@ -1,0 +1,33 @@
+{
+  "name": "@tw-in-js/example-svelte",
+  "version": "1.2.0",
+  "private": true,
+  "description": "w-in-js svelte exmaple",
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "snowpack build",
+    "check": "svelte-check",
+    "start": "snowpack dev",
+    "start:reload": "snowpack dev --reload"
+  },
+  "prettier": "@carv/prettier-config",
+  "eslintConfig": {
+    "extends": "@carv/eslint-config",
+    "root": true
+  },
+  "dependencies": {
+    "@tw-in-js/core": "^0.0.0",
+    "svelte": "^3.24.0"
+  },
+  "devDependencies": {
+    "@carv/types": "^1.3.1",
+    "@snowpack/plugin-svelte": "^3.3.0",
+    "@snowpack/web-test-runner-plugin": "^0.1.4",
+    "@testing-library/svelte": "^3.0.0",
+    "@types/snowpack-env": "^2.3.0",
+    "chai": "^4.2.0",
+    "snowpack": "^2.17.1",
+    "svelte-check": "^1.1.11",
+    "svelte-preprocess": "^4.0.8"
+  }
+}

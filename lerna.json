@@ -1,0 +1,12 @@
+{
+  "npmClient": "yarn",
+  "version": "independent",
+  "useWorkspaces": true,
+  "command": {
+    "publish": {
+      "contents": "dist",
+      "conventionalCommits": true,
+      "createRelease": "github"
+    }
+  }
+}
