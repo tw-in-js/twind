@@ -614,8 +614,7 @@ export const corePlugins: Plugins = {
         ? { fontSize }
         : {
             fontSize: fontSize[0],
-            lineHeight: is.string(fontSize[1]) ? fontSize[1] : fontSize[1].lineHeight,
-            letterSpacing: (fontSize[1] as { letterSpacing?: string }).letterSpacing,
+            ...(is.string(fontSize[1]) ? { lineHeight: fontSize[1] } : fontSize[1]),
           }
     }
 
