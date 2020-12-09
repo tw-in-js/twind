@@ -6,7 +6,7 @@ export interface Options {
 
 declare module '@tw-in-js/types' {
   interface Theme {
-    typography: ThemeSection<{ css?: CSSRules }>
+    typography?: ThemeSection<{ css?: CSSRules }>
   }
 }
 
@@ -30,6 +30,7 @@ const typography = ({ className = 'prose' }: Options = {}): Record<string, Plugi
     const { css } = config[parameters[0] || 'DEFAULT'] || {}
 
     if (css) {
+      // TODO merge with styles from theme.typography
       const rules: CSSRules = {}
 
       css.forEach((css) =>
@@ -45,7 +46,6 @@ const typography = ({ className = 'prose' }: Options = {}): Record<string, Plugi
         }),
       )
 
-      console.log(rules)
       return rules
     }
   },
