@@ -9,3 +9,5 @@ export { create }
 export * from './injectors'
 export * from './modes'
 export * from './prefix'
+
+export * from './types'

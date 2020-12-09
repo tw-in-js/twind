@@ -371,12 +371,10 @@ Clone the repository and cd into the project directory.
 
 Run `yarn install && yarn build`.
 
-Cd into the package that you'd like to make progress on.
-
 - `yarn test`: Run test suite including linting
 - `yarn format`: Ensure consistent code style
-- `yarn build`: Build all packages
-- `yarn publish`: To publish all changed packages
+- `yarn build`: Build the package
+- `yarn release`: To publish the package
 
 ## License
 
