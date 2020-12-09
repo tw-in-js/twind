@@ -8,7 +8,7 @@ import type {
 
 import * as is from './is'
 import { defaultTheme } from '../tailwind/theme'
-import { join, tail } from './util'
+import { join, tail, includes } from './util'
 
 // https://github.com/tailwindlabs/tailwindcss/blob/master/src/util/flattenColorPalette.js
 const flattenColorPalette = (colors: Record<string, ThemeColor>): Record<string, ThemeColor> =>
@@ -103,22 +103,10 @@ export const makeThemeResolver = (config?: ThemeConfiguration): ThemeResolver =>
       return value == null
         ? defaultValue
         : is.array(value) &&
-          // eslint-disable-next-line no-implicit-coercion
-          ~[
-            // https://github.com/tailwindlabs/tailwindcss/blob/master/src/util/transformThemeValue.js
-            'fontFamily',
-            'boxShadow',
-            'transitionProperty',
-            'transitionDuration',
-            'transitionDelay',
-            'transitionTimingFunction',
-            'backgroundImage',
-            'backgroundSize',
-            'backgroundColor',
-            'cursor',
-            'animation',
-          ].indexOf(section)
-        ? value.join(',')
+          // https://github.com/tailwindlabs/tailwindcss/blob/master/src/util/transformThemeValue.js
+          // only testing for sections that uses an array for values
+          !includes(['fontSize', 'outline'], section)
+        ? join(value, ',')
         : value
     }
 
