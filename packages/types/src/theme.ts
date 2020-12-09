@@ -19,6 +19,13 @@ export type Unwrap<T> = T extends string[] ? string : T extends Record<string, i
 export type ThemeSectionType<T> = T extends ThemeSection<infer R> ? Unwrap<R> : never
 
 export interface ThemeSectionResolverContext {
+  /**
+   * No-op function as negated values are automatically infered and do _not_ not to be in the theme.
+   */
+  readonly negative: (
+    records: Record<string, string | undefined>,
+  ) => Record<string, string | undefined>
+
   readonly breakpoints: (
     records: Record<string, string | undefined>,
   ) => Record<string, string | undefined>

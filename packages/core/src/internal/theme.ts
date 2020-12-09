@@ -44,6 +44,8 @@ const resolveContext: ThemeSectionResolverContext = {
   //     },
   //     { ...source },
   //   ),
+  // Stub implementation as negated values are automatically infered and do _not_ not to be in the theme
+  negative: () => ({}),
 
   breakpoints: (source) =>
     // eslint-disable-next-line unicorn/no-reduce
