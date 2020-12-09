@@ -23,13 +23,13 @@
   "main": "src/index.ts",
   "scripts": {
     "build": "nps",
+    "postbuild": "size-limit",
     "ci": "nps",
     "format": "nps",
-    "postbuild": "size-limit",
-    "size": "size-limit",
-    "version": "nps build.package",
     "release": "np",
-    "test": "nps"
+    "size": "size-limit",
+    "test": "nps",
+    "version": "nps build.package"
   },
   "prettier": "@carv/prettier-config",
   "eslintConfig": {
