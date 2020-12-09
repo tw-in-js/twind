@@ -1,35 +1,35 @@
 {
-  "name": "@tw-in-js/monorepo",
-  "version": "0.0.0-independent",
-  "private": true,
-  "homepage": "https://github.com/tw-in-js",
-  "bugs": "https://github.com/tw-in-js/issues",
+  "name": "@tw-in-js/core",
+  "version": "0.0.0",
+  "description": "compiles tailwind like shorthand syntax into css at runtime",
+  "keywords": [
+    "tailwind",
+    "tw-in-js",
+    "tailwind-in-js"
+  ],
+  "homepage": "https://github.com/tw-in-js/core#readme",
+  "bugs": {
+    "url": "https://github.com/tw-in-js/core/issues"
+  },
   "repository": {
     "type": "git",
-    "url": "https://github.com/tw-in-js.git"
+    "url": "git+https://github.com/tw-in-js/core.git"
   },
   "license": "MIT",
   "contributors": [
     "Luke Jackson (lukejacksonn.github.io)",
     "Sascha Tandel (https://github.com/sastan)"
   ],
-  "workspaces": [
-    "benchmarks",
-    "types",
-    "examples/*",
-    "packages/*"
-  ],
+  "main": "src/index.ts",
   "scripts": {
-    "build": "lerna run --no-private build",
+    "build": "nps",
     "ci": "nps",
-    "clean": "nps clean && lerna exec -- nps clean",
-    "docs": "nps docs && lerna exec --no-private -- nps docs.package",
-    "format": "nps format && lerna exec -- nps format.package",
+    "format": "nps",
     "preinstall": "npx only-allow yarn",
-    "publish": "lerna publish --no-private",
-    "test": "nps",
-    "preversion": "lerna exec -- nps prepare && nps test",
-    "version": "lerna exec -- nps version"
+    "postbuild": "size-limit",
+    "prepublishOnly": "nps",
+    "size": "size-limit",
+    "test": "nps"
   },
   "prettier": "@carv/prettier-config",
   "eslintConfig": {
@@ -37,9 +37,11 @@
     "root": true
   },
   "jest": {
-    "projects": [
-      "<rootDir>/packages/*"
-    ]
+    "preset": "@carv/jest-preset"
+  },
+  "dependencies": {
+    "csstype": "^3.0.5",
+    "tiny-css-prefixer": "^1.1.4"
   },
   "devDependencies": {
     "@carv/esbundle": "^1.1.5",
@@ -47,13 +49,24 @@
     "@carv/jest-preset": "^1.1.6",
     "@carv/prettier-config": "^1.1.0",
     "@carv/tsconfig": "^1.3.0",
-    "@carv/types": "^1.3.1",
+    "@size-limit/preset-small-lib": "^4.6.0",
+    "dlv": "^1.1.3",
     "eslint": "^7.3.1",
     "jest": "^26.1.0",
-    "lerna": "^3.22.1",
     "nps": "^5.9.12",
     "only-allow": "^1.0.0",
     "prettier": "^2.0.5",
+    "size-limit": "^4.6.0",
+    "tailwindcss": "^2.0.1",
     "typescript": "^4.1.0"
-  }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "size-limit": [
+    {
+      "path": "./dist/esnext/core.js",
+      "limit": "11 KB"
+    }
+  ]
 }

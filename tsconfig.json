@@ -1,9 +1,5 @@
 {
   "$schema": "http://json.schemastore.org/tsconfig",
   "extends": "./node_modules/@carv/tsconfig/preset.json",
-  "include": ["examples/**/src/**/*", "packages/**/src/**/*", "types/**/*"],
-  "typedocOptions": {
-    "name": "Tailwind in JS",
-    "entryPoints": ["packages/core/src/index.ts"]
-  }
+  "include": ["src/**/*"]
 }

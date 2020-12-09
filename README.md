@@ -1,4 +1,4 @@
-# tw-in-js
+# @tw-in-js/core
 
 > a collective dedicated to Tailwind in JS
 
@@ -24,19 +24,56 @@ We aim to create a place for likeminded people to talk about problems and possib
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Rational](#rational)
-- [Challenges](#challenges)
-- [Opportunities](#opportunities)
-- [Inspiration](#inspiration)
-- [Basic Usage](#basic-usage)
-- [Customization](#customization)
-- [Advanced Usage](#advanced-usage)
-- [Contribute](#contribute)
-- [License](#license)
+- [@tw-in-js/core](#tw-in-jscore)
+  - [Installation](#installation)
+  - [Usage](#usage)
+    - [Polyfills](#polyfills)
+  - [Rational](#rational)
+  - [Challenges](#challenges)
+  - [Opportunities](#opportunities)
+  - [Inspiration](#inspiration)
+  - [Basic Usage](#basic-usage)
+  - [Customization](#customization)
+    - [Preflight](#preflight)
+    - [Strict](#strict)
+    - [Hash](#hash)
+    - [Theme](#theme)
+    - [Plugins](#plugins)
+  - [Advanced Usage](#advanced-usage)
+    - [Function Signature](#function-signature)
+      - [Template Literal](#template-literal)
+      - [Strings](#strings)
+      - [Objects](#objects)
+      - [Arrays](#arrays)
+      - [Mixture](#mixture)
+    - [Grouping](#grouping)
+      - [Variant Grouping](#variant-grouping)
+      - [Directive Grouping](#directive-grouping)
+  - [Contribute](#contribute)
+    - [Develop](#develop)
+  - [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
 </details>
+
+## Installation
+
+```sh
+npm install @tw-in-js/core
+```
+
+## Usage
+
+```js
+import { tw } from '@tw-in-js/core'
+```
+
+### Polyfills
+
+- Object.keys()
+- Array.isArray
+- Math.imul
 
 ## Rational
 
