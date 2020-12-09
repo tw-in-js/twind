@@ -1,6 +1,6 @@
 {
   "name": "@tw-in-js/core",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "compiles tailwind like shorthand syntax into css at runtime",
   "keywords": [
     "tailwind",
