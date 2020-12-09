@@ -27,8 +27,9 @@
     "format": "nps",
     "preinstall": "npx only-allow yarn",
     "postbuild": "size-limit",
-    "prepublishOnly": "nps",
     "size": "size-limit",
+    "version": "nps build.package",
+    "release": "np",
     "test": "nps"
   },
   "prettier": "@carv/prettier-config",
@@ -44,7 +45,7 @@
     "tiny-css-prefixer": "^1.1.4"
   },
   "devDependencies": {
-    "@carv/esbundle": "^1.1.5",
+    "@carv/esbundle": "^1.1.6",
     "@carv/eslint-config": "^1.6.0",
     "@carv/jest-preset": "^1.1.6",
     "@carv/prettier-config": "^1.1.0",
@@ -53,6 +54,7 @@
     "dlv": "^1.1.3",
     "eslint": "^7.3.1",
     "jest": "^26.1.0",
+    "np": "^7.0.0",
     "nps": "^5.9.12",
     "only-allow": "^1.0.0",
     "prettier": "^2.0.5",
@@ -62,6 +64,9 @@
   },
   "publishConfig": {
     "access": "public"
+  },
+  "np": {
+    "contents": "dist"
   },
   "size-limit": [
     {
