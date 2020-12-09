@@ -4,12 +4,11 @@
 // License MIT
 
 import type { ThemeResolver } from '@tw-in-js/types'
+
 import { tail, includes } from './util'
 
 // Shared variables
-let _: string
-let precedence: number
-let match: RegExpExecArray | null
+let _: string | RegExpExecArray | null | number
 
 // 0=none, 1=sm, 2=md, 3=lg, 4=xl, 5=2xl, 6=??, 7=??
 // 0 - 31: 5 bits
@@ -18,24 +17,24 @@ let match: RegExpExecArray | null
 // 36rem -> 3
 // 96rem -> 9
 export const responsivePrecedence = (css: string): number =>
-  (((match = /(?:^|min-width:\s*)(\d+(?:.\d+)?)(p)?/.exec(css))
-    ? +match[1] / (match[2] ? 15 : 1) / 10
-    : 0) &
+  (((_ = /(?:^|min-width:\s*)(\d+(?:.\d+)?)(p)?/.exec(css)) ? +_[1] / (_[2] ? 15 : 1) / 10 : 0) &
     31) <<
-  22
+  23
 
 // Colon and dash count of string (ascending): 0 -> 7 => 3 bits
 export const seperatorPrecedence = (string: string): number => {
-  precedence = 0
+  _ = 0
 
   for (let index = string.length; index--; ) {
     if (includes('-:,', string[index])) {
-      ++precedence
+      ++_
     }
   }
 
-  return precedence
+  return _
 }
+
+export const atRulePresedence = (css: string): number => (seperatorPrecedence(css) & 15) << 18
 
 // Pesudo variant presedence
 // Chars 3 - 8: Uniquely identifies a pseudo selector
@@ -73,13 +72,12 @@ const PRECEDENCES_BY_PSEUDO_CLASS = [
 /* eslint-enable capitalized-comments */
 
 const pseudoPrecedence = (pseudoClass: string): number =>
-  ~(precedence = PRECEDENCES_BY_PSEUDO_CLASS.indexOf(
-    pseudoClass.replace(/^:group-/, ':').slice(3, 8),
-  ))
-    ? precedence
-    : 17
+  1 <<
+  (~(_ = PRECEDENCES_BY_PSEUDO_CLASS.indexOf(pseudoClass.replace(/^:group-/, ':').slice(3, 8)))
+    ? _
+    : 17)
 
-// Variants: 27 bits
+// Variants: 28 bits
 export const makeVariantPresedenceCalculator = (
   theme: ThemeResolver,
   variants: Record<string, string | undefined>,
@@ -96,12 +94,12 @@ export const makeVariantPresedenceCalculator = (
       responsivePrecedence(_)
     : // 1: dark mode flag
     variant === ':dark'
-    ? 1 << 21
+    ? 1 << 22
     : // 4: precedence of other at-rules
     (_ = variants[variant] || variant)[0] === '@'
-    ? (seperatorPrecedence(_) & 15) << 17
+    ? atRulePresedence(_)
     : // 17: pseudo and group variants
-      1 << pseudoPrecedence(variant))
+      pseudoPrecedence(variant))
 
 // https://github.com/kripod/otion/blob/main/packages/otion/src/propertyMatchers.ts
 // "+1": [
@@ -142,11 +140,11 @@ const propertyPrecedence = (property: string): number => {
   const unprefixedProperty =
     property[0] === '-' ? tail(property, property.indexOf('-', 1) + 1) : property
 
-  const match = PROPERTY_PRECEDENCE_CORRECTION_GROUPS.exec(unprefixedProperty)
+  _ = PROPERTY_PRECEDENCE_CORRECTION_GROUPS.exec(unprefixedProperty)
 
   return (
     seperatorPrecedence(unprefixedProperty) +
-    (match ? +!!match[1] /* +1 */ || -!!match[2] /* -1 */ : 0) +
+    (_ ? +!!_[1] /* +1 */ || -!!_[2] /* -1 */ : 0) +
     1
   )
 }

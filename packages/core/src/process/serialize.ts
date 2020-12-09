@@ -9,6 +9,7 @@ import {
   declarationPropertyPrecedence,
   declarationValuePrecedence,
   makeVariantPresedenceCalculator,
+  atRulePresedence,
 } from '../internal/presedence'
 
 import { variants } from '../tailwind/variants'
@@ -98,7 +99,12 @@ export const serialize = (
               p: waypoints.reduce((sum, p) => sum + p.p, 0),
             })
           } else {
-            stringify(atRules.concat(key), selector, presedence | responsivePrecedence(key), value)
+            stringify(
+              atRules.concat(key),
+              selector,
+              presedence | (responsivePrecedence(key) || atRulePresedence(key)),
+              value,
+            )
           }
         } else {
           // Call the serialize for this block
