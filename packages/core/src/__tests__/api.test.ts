@@ -220,6 +220,90 @@ test('tw`bg-${"fuchsia"} rounded-${"xl"}`', () => {
 })
 /* eslint-enable no-template-curly-in-string */
 
+test('container center', () => {
+  const { tw } = create({
+    injector,
+    prefix: false,
+    preflight: false,
+    mode: strict,
+    theme: {
+      extend: {
+        container: {
+          center: true,
+        },
+      },
+    },
+  })
+
+  expect(tw`container`).toBe('container')
+  expect(injector.target).toStrictEqual([
+    '.container{width:100%;margin-right:auto;margin-left:auto}',
+    '@media (min-width: 640px){.container{max-width:640px}}',
+    '@media (min-width: 768px){.container{max-width:768px}}',
+    '@media (min-width: 1024px){.container{max-width:1024px}}',
+    '@media (min-width: 1280px){.container{max-width:1280px}}',
+    '@media (min-width: 1536px){.container{max-width:1536px}}',
+  ])
+})
+
+test('container padding', () => {
+  const { tw } = create({
+    injector,
+    prefix: false,
+    preflight: false,
+    mode: strict,
+    theme: {
+      extend: {
+        container: {
+          padding: '2rem',
+        },
+      },
+    },
+  })
+
+  expect(tw`container`).toBe('container')
+  expect(injector.target).toStrictEqual([
+    '.container{width:100%;padding-right:2rem;padding-left:2rem}',
+    '@media (min-width: 640px){.container{max-width:640px;padding-right:2rem;padding-left:2rem}}',
+    '@media (min-width: 768px){.container{max-width:768px;padding-right:2rem;padding-left:2rem}}',
+    '@media (min-width: 1024px){.container{max-width:1024px;padding-right:2rem;padding-left:2rem}}',
+    '@media (min-width: 1280px){.container{max-width:1280px;padding-right:2rem;padding-left:2rem}}',
+    '@media (min-width: 1536px){.container{max-width:1536px;padding-right:2rem;padding-left:2rem}}',
+  ])
+})
+
+test('container padding per screeen', () => {
+  const { tw } = create({
+    injector,
+    prefix: false,
+    preflight: false,
+    mode: strict,
+    theme: {
+      extend: {
+        container: {
+          padding: {
+            DEFAULT: '1rem',
+            sm: '2rem',
+            lg: '4rem',
+            xl: '5rem',
+            '2xl': '6rem',
+          },
+        },
+      },
+    },
+  })
+
+  expect(tw`container`).toBe('container')
+  expect(injector.target).toStrictEqual([
+    '.container{width:100%;padding-right:1rem;padding-left:1rem}',
+    '@media (min-width: 640px){.container{max-width:640px;padding-right:2rem;padding-left:2rem}}',
+    '@media (min-width: 768px){.container{max-width:768px;padding-right:1rem;padding-left:1rem}}',
+    '@media (min-width: 1024px){.container{max-width:1024px;padding-right:4rem;padding-left:4rem}}',
+    '@media (min-width: 1280px){.container{max-width:1280px;padding-right:5rem;padding-left:5rem}}',
+    '@media (min-width: 1536px){.container{max-width:1536px;padding-right:6rem;padding-left:6rem}}',
+  ])
+})
+
 test('falsy arguments', () => {
   expect(tw(true, false, '', null, undefined, 0, Number.NaN)).toBe('')
   expect(tw('')).toBe('')

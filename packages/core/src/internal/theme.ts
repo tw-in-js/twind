@@ -3,7 +3,6 @@ import type {
   ThemeColor,
   ThemeConfiguration,
   ThemeResolver,
-  ThemeSectionRecord,
   ThemeSectionResolverContext,
 } from '@tw-in-js/types'
 
@@ -76,14 +75,14 @@ export const makeThemeResolver = (config?: ThemeConfiguration): ThemeResolver =>
   const deref = (
     theme: undefined | Partial<Theme>,
     section: keyof Theme,
-  ): ThemeSectionRecord<unknown> | undefined => {
+  ): Record<string, unknown> | undefined => {
     const base = theme && theme[section]
 
     const value = is.function(base) ? base(themeResolver, resolveContext) : base
 
     return value && section === 'colors'
       ? flattenColorPalette(value as Record<string, ThemeColor>)
-      : value
+      : (value as Record<string, unknown>)
   }
 
   const resolve = ((

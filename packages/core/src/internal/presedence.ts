@@ -17,8 +17,12 @@ let match: RegExpExecArray | null
 // 1536px -> 9
 // 36rem -> 3
 // 96rem -> 9
-const responsivePrecedence = (css: string): number =>
-  (match = /^(\d+(?:.\d+)?)(p)?/.exec(css)) ? +match[1] / (match[2] ? 15 : 1) / 10 : 0
+export const responsivePrecedence = (css: string): number =>
+  (((match = /(?:^|min-width:\s*)(\d+(?:.\d+)?)(p)?/.exec(css))
+    ? +match[1] / (match[2] ? 15 : 1) / 10
+    : 0) &
+    31) <<
+  22
 
 // Colon and dash count of string (ascending): 0 -> 7 => 3 bits
 export const seperatorPrecedence = (string: string): number => {
@@ -89,7 +93,7 @@ export const makeVariantPresedenceCalculator = (
       // 1536px -> 9
       // 36rem -> 3
       // 96rem -> 9
-      (responsivePrecedence(_) & 31) << 22
+      responsivePrecedence(_)
     : // 1: dark mode flag
     variant === ':dark'
     ? 1 << 21

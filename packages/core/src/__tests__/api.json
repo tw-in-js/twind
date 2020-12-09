@@ -660,5 +660,28 @@
       "@media (min-width: 768px){.md\\:rotate-3{--tw-rotate:3deg;transform:rotate(3deg);transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}}",
       "@media (min-width: 768px){.md\\:hover\\:-rotate-6:hover{--tw-rotate:calc(6deg * -1);transform:rotate(calc(6deg * -1));transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}}"
     ]
+  ],
+  "container": [
+    "container",
+    [
+      ".container{width:100%}",
+      "@media (min-width: 640px){.container{max-width:640px}}",
+      "@media (min-width: 768px){.container{max-width:768px}}",
+      "@media (min-width: 1024px){.container{max-width:1024px}}",
+      "@media (min-width: 1280px){.container{max-width:1280px}}",
+      "@media (min-width: 1536px){.container{max-width:1536px}}"
+    ]
+  ],
+  "md:(container mx-auto)": [
+    "md:container md:mx-auto",
+    [
+      "@media (min-width: 768px){.md\\:mx-auto{margin-left:auto;margin-right:auto}}",
+      "@media (min-width: 768px){.md\\:container{width:100%}}",
+      "@media (min-width: 768px){@media (min-width: 640px){.md\\:container{max-width:640px}}}",
+      "@media (min-width: 768px){@media (min-width: 768px){.md\\:container{max-width:768px}}}",
+      "@media (min-width: 768px){@media (min-width: 1024px){.md\\:container{max-width:1024px}}}",
+      "@media (min-width: 768px){@media (min-width: 1280px){.md\\:container{max-width:1280px}}}",
+      "@media (min-width: 768px){@media (min-width: 1536px){.md\\:container{max-width:1536px}}}"
+    ]
   ]
 }

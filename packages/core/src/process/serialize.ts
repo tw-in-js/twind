@@ -4,6 +4,7 @@ import * as is from '../internal/is'
 
 import { join, includes, escape, hyphenate } from '../internal/util'
 import {
+  responsivePrecedence,
   descending,
   declarationPropertyPrecedence,
   declarationValuePrecedence,
@@ -71,7 +72,7 @@ export const serialize = (
             // Handling the `@font-face` where the
             // block doesn't need the brackets wrapped
             stringify([], key, 0, value)
-          } else {
+          } else if (key[1] === 'k') {
             // To prevent
             // "@keyframes spin{from{transform:rotate(0deg)}}"
             // "@keyframes spin{to{transform:rotate(360deg)}}"
@@ -81,7 +82,7 @@ export const serialize = (
             // => "@keyframes name{from{transform:rotate(0deg)}from{transform:rotate(0deg)}}"
             const currentSize = rules.length
 
-            stringify([], key[1] === 'k' ? '' : selector, presedence, value)
+            stringify([], '', 0, value)
 
             const waypoints = rules.splice(currentSize, rules.length - currentSize)
 
@@ -96,6 +97,8 @@ export const serialize = (
               // eslint-disable-next-line unicorn/no-reduce
               p: waypoints.reduce((sum, p) => sum + p.p, 0),
             })
+          } else {
+            stringify(atRules.concat(key), selector, presedence | responsivePrecedence(key), value)
           }
         } else {
           // Call the serialize for this block

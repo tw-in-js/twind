@@ -16,7 +16,9 @@ export interface ThemeResolver {
 
 export type Unwrap<T> = T extends string[] ? string : T extends Record<string, infer R> ? R : T
 
-export type ThemeSectionType<T> = T extends ThemeSection<infer R> ? Unwrap<R> : never
+export type ThemeSectionType<T> = T extends ThemeSection<infer R>
+  ? Unwrap<R>
+  : Exclude<T, ThemeSectionResolver<T>>
 
 export interface ThemeSectionResolverContext {
   /**
@@ -39,6 +41,12 @@ export type ThemeSectionResolver<T = string> = (
 ) => ThemeSectionRecord<T>
 
 export type ThemeSection<T = string> = ThemeSectionRecord<T> | ThemeSectionResolver<T>
+
+export interface ThemeContainer {
+  screens?: Record<string, string | undefined>
+  center?: boolean
+  padding?: string | Record<string, string | undefined>
+}
 
 export type ThemeColor = string | Record<string, string>
 
@@ -65,6 +73,7 @@ export interface Theme {
   borderRadius: ThemeSection
   borderWidth: ThemeSection
   boxShadow: ThemeSection<string | string[]>
+  container: ThemeContainer | ThemeSectionResolver<ThemeContainer>
   divideColor: ThemeSection<ThemeColor>
   divideOpacity: ThemeSection
   divideWidth: ThemeSection

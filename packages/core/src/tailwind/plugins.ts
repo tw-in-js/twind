@@ -8,6 +8,7 @@ import type {
   ThemeResolver,
   Context,
   Falsy,
+  ThemeContainer,
 } from '@tw-in-js/types'
 
 import * as is from '../internal/is'
@@ -20,12 +21,12 @@ let _: undefined | string | CSSRules | CSSProperties | string[] | boolean | Fals
 let __: undefined | string | CSSProperties
 let $: undefined | string
 
-const property = (property?: string) => (
+const property = (property: string) => (
   params: string[],
   context: unknown,
   id: string,
 ): CSSRules => ({
-  [property || id]: id + ((_ = join(params)) && '-' + _),
+  [property]: id + ((_ = join(params)) && '-' + _),
 })
 
 const propertyValue = (property: string, separator?: string) => (params: string[]): CSSRules => ({
@@ -91,14 +92,12 @@ const withOpacityFallback = (
   kind: string,
   color: string | undefined,
 ): CSSRules | undefined =>
-  color
-    ? (_ = asRGBA(color, kind + '-opacity')) && _ !== color
-      ? {
-          [`--tw-${kind}-opacity`]: '1',
-          [property]: [color, _],
-        }
-      : { [property]: color }
-    : undefined
+  color && (_ = asRGBA(color, kind + '-opacity')) && _ !== color
+    ? {
+        [`--tw-${kind}-opacity`]: '1',
+        [property]: [color, _],
+      }
+    : { [property]: color }
 
 const reversableEdge = (
   params: string[],
@@ -865,5 +864,38 @@ export const corePlugins: Plugins = {
       ' ',
     ),
   }),
+
+  container: (params, { theme }) => {
+    const { screens = theme('screens'), center, padding } = theme('container') as ThemeContainer
+
+    const paddingFor = (screen: string): CSSRules =>
+      (_ = padding && (is.string(padding) ? padding : padding[screen] || padding.DEFAULT))
+        ? {
+            paddingRight: _,
+            paddingLeft: _,
+          }
+        : {}
+
+    // eslint-disable-next-line unicorn/no-reduce
+    return Object.keys(screens).reduce(
+      (rules, screen) => {
+        if ((_ = screens[screen])) {
+          rules[`@media (min-width: ${_})`] = {
+            '&': {
+              'max-width': _,
+              ...paddingFor(screen),
+            },
+          }
+        }
+
+        return rules
+      },
+      {
+        width: '100%',
+        ...(center ? { marginRight: 'auto', marginLeft: 'auto' } : {}),
+        ...paddingFor('xs'),
+      } as CSSRules,
+    )
+  },
 }
 /* eslint-enable unicorn/prevent-abbreviations, no-return-assign, no-cond-assign, @typescript-eslint/consistent-type-assertions */

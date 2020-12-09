@@ -296,6 +296,7 @@ export const defaultTheme: Theme = {
     inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
     none: 'none',
   },
+  container: {},
   divideColor: (theme) => theme('borderColor'),
   divideOpacity: (theme) => theme('borderOpacity'),
   divideWidth: (theme) => theme('borderWidth'),
@@ -514,6 +515,8 @@ export const defaultTheme: Theme = {
     // 90: '0.9',
     // 100: '1',
     5: '0.05',
+    25: '0.25',
+    75: '0.75',
     95: '0.95',
   },
   order: {
