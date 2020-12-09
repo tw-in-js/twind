@@ -301,6 +301,20 @@ export const corePlugins: Plugins = {
     return display(params, context, id)
   },
 
+  auto: (params) =>
+    includes(['cols', 'rows'], params[0]) &&
+    (_ =
+      params.length === 2
+        ? ({
+            auto: 'auto',
+            min: 'min-content',
+            max: 'max-content',
+            fr: 'minmax(0,1fr)',
+          } as Record<string, undefined | string>)[params[1]] || `minmax(0,${params[1]})`
+        : params.length > 2 && `minmax(${join(tail(params), ',')})`) && {
+      [`grid-auto-${params[0] === 'cols' ? 'columns' : 'rows'}`]: _,
+    },
+
   static: position,
   fixed: position,
   absolute: position,
