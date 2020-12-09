@@ -89,9 +89,9 @@ test('variant pseudo presedence', () => {
     '.last\\:text-gray-100:last-child{--tw-text-opacity:1;color:#f3f4f6;color:rgba(243,244,246,var(--tw-text-opacity))}',
     '.even\\:text-gray-300:nth-child(2n){--tw-text-opacity:1;color:#d1d5db;color:rgba(209,213,219,var(--tw-text-opacity))}',
     '.odd\\:text-gray-200:nth-child(odd){--tw-text-opacity:1;color:#e5e7eb;color:rgba(229,231,235,var(--tw-text-opacity))}',
-    ".link\\:text-green-100:link{--tw-text-opacity:1;color:#d1fae5;color:rgba(209,250,229,var(--tw-text-opacity))}",
+    '.link\\:text-green-100:link{--tw-text-opacity:1;color:#d1fae5;color:rgba(209,250,229,var(--tw-text-opacity))}',
     '.visited\\:text-gray-400:visited{--tw-text-opacity:1;color:#9ca3af;color:rgba(156,163,175,var(--tw-text-opacity))}',
-    ".empty\\:text-green-500:empty{--tw-text-opacity:1;color:#10b981;color:rgba(16,185,129,var(--tw-text-opacity))}",
+    '.empty\\:text-green-500:empty{--tw-text-opacity:1;color:#10b981;color:rgba(16,185,129,var(--tw-text-opacity))}',
     '.checked\\:text-gray-500:checked{--tw-text-opacity:1;color:#6b7280;color:rgba(107,114,128,var(--tw-text-opacity))}',
     '.focus-within\\:text-gray-800:focus-within{--tw-text-opacity:1;color:#1f2937;color:rgba(31,41,55,var(--tw-text-opacity))}',
     '.group:hover .group-hover\\:text-gray-600{--tw-text-opacity:1;color:#4b5563;color:rgba(75,85,99,var(--tw-text-opacity))}',
@@ -104,7 +104,7 @@ test('variant pseudo presedence', () => {
     '.read-only\\:text-blue-700:read-only{--tw-text-opacity:1;color:#1d4ed8;color:rgba(29,78,216,var(--tw-text-opacity))}',
     '.optional\\:text-blue-800:optional{--tw-text-opacity:1;color:#1e40af;color:rgba(30,64,175,var(--tw-text-opacity))}',
     '.required\\:text-blue-400:required{--tw-text-opacity:1;color:#60a5fa;color:rgba(96,165,250,var(--tw-text-opacity))}',
-    ".group:invalid .group-invalid\\:text-red-400{--tw-text-opacity:1;color:#f87171;color:rgba(248,113,113,var(--tw-text-opacity))}",
+    '.group:invalid .group-invalid\\:text-red-400{--tw-text-opacity:1;color:#f87171;color:rgba(248,113,113,var(--tw-text-opacity))}',
     '.invalid\\:text-blue-600:invalid{--tw-text-opacity:1;color:#2563eb;color:rgba(37,99,235,var(--tw-text-opacity))}',
     '.valid\\:text-blue-500:valid{--tw-text-opacity:1;color:#3b82f6;color:rgba(59,130,246,var(--tw-text-opacity))}',
   ])
@@ -325,7 +325,7 @@ test('can not call setup after config', () => {
   }).toThrow('LATE_SETUP_CALL: {"id":"LATE_SETUP_CALL"}')
 })
 
-test('can call setup oncee', () => {
+test('can call setup once', () => {
   const instance = create()
   instance.setup({
     prefix: false,
