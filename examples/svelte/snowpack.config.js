@@ -27,5 +27,6 @@ module.exports = {
   alias: {
     '@tw-in-js/core': '@tw-in-js/core/dist/esnext/core.js',
     '@tw-in-js/types': '@tw-in-js/types/dist/esnext/types.js',
+    '@tw-in-js/typography': '@tw-in-js/typography/dist/esnext/typography.js',
   },
 }

@@ -1,0 +1,54 @@
+{
+  "name": "@tw-in-js/typography",
+  "version": "0.0.0",
+  "description": "A Tailwind JS plugin for automatically styling plain HTML content with beautiful typographic defaults.",
+  "keywords": [
+    "tailwind",
+    "tw-in-js",
+    "tailwind-in-js"
+  ],
+  "homepage": "https://github.com/tw-in-js/typography#readme",
+  "bugs": {
+    "url": "https://github.com/tw-in-js/typography/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tw-in-js/typography.git",
+    "directory": "packages/typography"
+  },
+  "license": "MIT",
+  "contributors": [
+    "Luke Jackson (lukejacksonn.github.io)",
+    "Sascha Tandel (https://github.com/sastan)"
+  ],
+  "main": "src/index.ts",
+  "scripts": {
+    "build": "nps",
+    "postbuild": "size-limit",
+    "prepublishOnly": "nps",
+    "size": "size-limit",
+    "test": "nps"
+  },
+  "prettier": "@carv/prettier-config",
+  "eslintConfig": {
+    "extends": "@carv/eslint-config",
+    "root": true
+  },
+  "jest": {
+    "preset": "@carv/jest-preset"
+  },
+  "devDependencies": {
+    "@size-limit/preset-small-lib": "^4.6.0",
+    "nps": "^5.9.12",
+    "size-limit": "^4.6.0"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "size-limit": [
+    {
+      "path": "./dist/esnext/typography.js",
+      "limit": "3 KB"
+    }
+  ]
+}
