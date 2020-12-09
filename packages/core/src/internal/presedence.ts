@@ -143,9 +143,7 @@ const propertyPrecedence = (property: string): number => {
   _ = PROPERTY_PRECEDENCE_CORRECTION_GROUPS.exec(unprefixedProperty)
 
   return (
-    seperatorPrecedence(unprefixedProperty) +
-    (_ ? +!!_[1] /* +1 */ || -!!_[2] /* -1 */ : 0) +
-    1
+    seperatorPrecedence(unprefixedProperty) + (_ ? +!!_[1] /* +1 */ || -!!_[2] /* -1 */ : 0) + 1
   )
 }
 

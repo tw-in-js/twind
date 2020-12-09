@@ -49,6 +49,12 @@ const position = property('position')
 const textTransform = property('textTransform')
 const textDecoration = property('textDecoration')
 const fontStyle = property('fontStyle')
+const fontVariantNumeric = (key: string): DirectiveHandler => (params, context, id) => ({
+  ['--tw-' + key]: id,
+  fontVariantNumeric:
+    'var(--tw-ordinal,/*!*/ /*!*/) var(--tw-slashed-zero,/*!*/ /*!*/) var(--tw-numeric-figure,/*!*/ /*!*/) var(--tw-numeric-spacing,/*!*/ /*!*/) var(--tw-numeric-fraction,/*!*/ /*!*/)',
+})
+
 const inset: DirectiveHandler = (params, { theme }, id) => ({ [id]: theme('inset', params) })
 
 const opacityProperty = (
@@ -516,6 +522,16 @@ export const corePlugins: Plugins = {
   align: propertyValue('verticalAlign'),
 
   whitespace: propertyValue('whiteSpace'),
+
+  'normal-nums': { fontVariantNumeric: 'normal' },
+  ordinal: fontVariantNumeric('ordinal'),
+  'slashed-zero': fontVariantNumeric('slashed-zero'),
+  'lining-nums': fontVariantNumeric('numeric-figure'),
+  'oldstyle-nums': fontVariantNumeric('numeric-figure'),
+  'proportional-nums': fontVariantNumeric('numeric-spacing'),
+  'tabular-nums': fontVariantNumeric('numeric-spacing'),
+  'diagonal-fractions': fontVariantNumeric('numeric-fraction'),
+  'stacked-fractions': fontVariantNumeric('numeric-fraction'),
 
   // 'overflow-visible'
   // 'overflow-x-hidden'
