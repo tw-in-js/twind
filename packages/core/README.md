@@ -1,4 +1,4 @@
-# @tw-in-js/types
+# @tw-in-js/core
 
 > compiles [Tailwind CSS] like shorthand syntax into CSS at runtime
 
@@ -15,11 +15,12 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Polyfills](#polyfills)
-- [Contribute](#contribute)
-- [License](#license)
+- [@tw-in-js/core](#tw-in-jscore)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Polyfills](#polyfills)
+  - [Contribute](#contribute)
+  - [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
