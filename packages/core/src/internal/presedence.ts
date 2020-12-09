@@ -1,9 +1,13 @@
+/* eslint-disable no-return-assign, no-cond-assign, no-implicit-coercion */
+
 // Based on https://github.com/kripod/otion
 // License MIT
 
+import type { ThemeResolver } from '@tw-in-js/types'
 import { tail, includes } from './util'
 
 // Shared variables
+let _: string
 let precedence: number
 let match: RegExpExecArray | null
 
@@ -13,19 +17,14 @@ let match: RegExpExecArray | null
 // 1536px -> 9
 // 36rem -> 3
 // 96rem -> 9
-// eslint-disable-next-line no-return-assign
-export const responsivePrecedence = (css: string): number =>
-  // eslint-disable-next-line no-cond-assign
-  (match = /^(\d+(?:.\d+)?)(p)?/.exec(css))
-    ? +match[1] / (match[2] ? 15 : 1) / 10 // eslint-disable-line no-implicit-coercion
-    : 0
+const responsivePrecedence = (css: string): number =>
+  (match = /^(\d+(?:.\d+)?)(p)?/.exec(css)) ? +match[1] / (match[2] ? 15 : 1) / 10 : 0
 
 // Colon and dash count of string (ascending): 0 -> 7 => 3 bits
 export const seperatorPrecedence = (string: string): number => {
   precedence = 0
 
   for (let index = string.length; index--; ) {
-    // eslint-disable-next-line no-implicit-coercion
     if (includes('-:,', string[index])) {
       ++precedence
     }
@@ -34,10 +33,13 @@ export const seperatorPrecedence = (string: string): number => {
   return precedence
 }
 
-// Pesude and groupd variant presedence
+// Pesudo variant presedence
 // Chars 3 - 8: Uniquely identifies a pseudo selector
 // represented as a bit set for each relevant value
-// 16 bits: one for each variant above plus one for unknown variants
+// 17 bits: one for each variant plus one for unknown variants
+//
+// ':group-*' variants are normalized to their native pseudo class (':group-hover' -> ':hover')
+// as they already have a higher selector presedence due to the add '.group' ('.group:hover .group-hover:...')
 
 // Sources:
 // - https://bitsofco.de/when-do-the-hover-focus-and-active-pseudo-classes-apply/#orderofstyleshoverthenfocusthenactive
@@ -54,22 +56,48 @@ const PRECEDENCES_BY_PSEUDO_CLASS = [
   /* vi */ 'sited' /* : 5 */,
   /* em */ 'pty' /* : 6 */,
   /* ch */ 'ecked' /* : 7 */,
-  /* gr */ 'oup-h' /* over : 8 */,
-  /* gr */ 'oup-f' /* ocus : 9 */,
-  /* fo */ 'cus-w' /* ithin : 10 */,
-  /* ho */ 'ver' /* : 11 */,
-  /* fo */ 'cus' /* : 12 */,
-  /* fo */ 'cus-v' /* isible : 13 */,
-  /* ac */ 'tive' /* : 14 */,
-  /* di */ 'sable' /* d : 15 */,
+  /* fo */ 'cus-w' /* ithin : 8 */,
+  /* ho */ 'ver' /* : 9 */,
+  /* fo */ 'cus' /* : 10 */,
+  /* fo */ 'cus-v' /* isible : 11 */,
+  /* ac */ 'tive' /* : 12 */,
+  /* di */ 'sable' /* d : 13 */,
+  /* re */ 'ad-on' /* ly: 14 */,
+  /* op */ 'tiona' /* l: 15 */,
+  /* re */ 'quire' /* d: 16 */,
 ]
 /* eslint-enable capitalized-comments */
 
-// eslint-disable-next-line no-return-assign
-export const pseudoPrecedence = (pseudoClass: string): number =>
-  ~(precedence = PRECEDENCES_BY_PSEUDO_CLASS.indexOf(pseudoClass.slice(3, 8)))
+const pseudoPrecedence = (pseudoClass: string): number =>
+  ~(precedence = PRECEDENCES_BY_PSEUDO_CLASS.indexOf(
+    pseudoClass.replace(/^:group-/, ':').slice(3, 8),
+  ))
     ? precedence
-    : PRECEDENCES_BY_PSEUDO_CLASS.length
+    : 17
+
+// Variants: 27 bits
+export const makeVariantPresedenceCalculator = (
+  theme: ThemeResolver,
+  variants: Record<string, string | undefined>,
+) => (presedence: number, variant: string): number =>
+  presedence |
+  // 5: responsive
+  ((_ = theme('screens', tail(variant), ''))
+    ? // 0=none, 1=sm, 2=md, 3=lg, 4=xl, 5=2xl, 6=??, 7=??
+      // 0 - 31: 5 bits
+      // 576px -> 3
+      // 1536px -> 9
+      // 36rem -> 3
+      // 96rem -> 9
+      (responsivePrecedence(_) & 31) << 22
+    : // 1: dark mode flag
+    variant === ':dark'
+    ? 1 << 21
+    : // 4: precedence of other at-rules
+    (_ = variants[variant] || variant)[0] === '@'
+    ? (seperatorPrecedence(_) & 15) << 17
+    : // 17: pseudo and group variants
+      1 << pseudoPrecedence(variant))
 
 // https://github.com/kripod/otion/blob/main/packages/otion/src/propertyMatchers.ts
 // "+1": [
@@ -114,7 +142,6 @@ const propertyPrecedence = (property: string): number => {
 
   return (
     seperatorPrecedence(unprefixedProperty) +
-    // eslint-disable-next-line no-implicit-coercion
     (match ? +!!match[1] /* +1 */ || -!!match[2] /* -1 */ : 0) +
     1
   )
@@ -130,3 +157,5 @@ export const descending = (value: number): number => Math.max(0, 15 - value)
 // 0 - 15 => 4 bits
 export const declarationValuePrecedence = (value: string): number =>
   descending(seperatorPrecedence(value))
+
+/* eslint-enable no-return-assign, no-cond-assign, no-implicit-coercion */

@@ -482,6 +482,14 @@
       ".group:hover .group-hover\\:text-yellow-600{--tw-text-opacity:1;color:#d97706;color:rgba(217,119,6,var(--tw-text-opacity))}"
     ]
   ],
+  "group-focus:text-red-500 group-active:text-blue-500 group-hover:text-yellow-500": [
+    "group-focus:text-red-500 group-active:text-blue-500 group-hover:text-yellow-500",
+    [
+      ".group:hover .group-hover\\:text-yellow-500{--tw-text-opacity:1;color:#f59e0b;color:rgba(245,158,11,var(--tw-text-opacity))}",
+      ".group:focus .group-focus\\:text-red-500{--tw-text-opacity:1;color:#ef4444;color:rgba(239,68,68,var(--tw-text-opacity))}",
+      ".group:active .group-active\\:text-blue-500{--tw-text-opacity:1;color:#3b82f6;color:rgba(59,130,246,var(--tw-text-opacity))}"
+    ]
+  ],
   "transform rotate-3 scale-125": [
     "transform rotate-3 scale-125",
     [

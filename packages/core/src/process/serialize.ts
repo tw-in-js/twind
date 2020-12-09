@@ -2,14 +2,12 @@ import type { Context, CSSRules, Prefixer, Rule } from '@tw-in-js/types'
 
 import * as is from '../internal/is'
 
-import { join, tail, includes, escape, hyphenate } from '../internal/util'
+import { join, includes, escape, hyphenate } from '../internal/util'
 import {
-  responsivePrecedence,
-  pseudoPrecedence,
-  seperatorPrecedence,
   descending,
   declarationPropertyPrecedence,
   declarationValuePrecedence,
+  makeVariantPresedenceCalculator,
 } from '../internal/presedence'
 
 import { variants } from '../tailwind/variants'
@@ -157,50 +155,16 @@ export const serialize = (
     }
   }
 
+  const variantPresedence = makeVariantPresedenceCalculator(theme, variants)
+
   return (css, className, rule) => {
     rules = []
 
     stringify(
       [],
-
       className ? '.' + escape(className) : '',
-
-      rule
-        ? // eslint-disable-next-line unicorn/no-reduce
-          rule.variants.reduceRight((presedence, variant) => {
-            // Variants: 26 bits
-
-            const size = theme('screens', tail(variant), '')
-
-            // 5: responsive
-            if (size) {
-              // 0=none, 1=sm, 2=md, 3=lg, 4=xl, 5=2xl, 6=??, 7=??
-              // 0 - 31: 5 bits
-              // 576px -> 3
-              // 1536px -> 9
-              // 36rem -> 3
-              // 96rem -> 9
-              return presedence | ((responsivePrecedence(size) & 31) << 22)
-            }
-
-            // 1: dark mode flag
-            if (variant === ':dark') {
-              return presedence | (1 << 21)
-            }
-
-            const atRule = variants[variant] || variant
-
-            return (
-              presedence |
-              (atRule[0] === '@'
-                ? // 4: precedence of other at-rules
-                  (seperatorPrecedence(atRule) & 15) << 17
-                : // 16: pseudo and group variants
-                  (1 << pseudoPrecedence(variant)) & 0x1ffff)
-            )
-          }, 0)
-        : 0,
-
+      // eslint-disable-next-line unicorn/no-reduce
+      rule ? rule.variants.reduceRight(variantPresedence, 0) : 0,
       css,
     )
 
