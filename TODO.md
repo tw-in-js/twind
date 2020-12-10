@@ -7,9 +7,9 @@
 
 - Ideas
 
-  - _"on"_ colors
+  - _"on"_ colors: generate matching contrast color and use that one as text/background color
   - play mode
-  - on to manual class name change in dev-tools and generate that directive
+  - on manual class name change in dev-tools and generate that directive
   - adapter for standard tailwindcss plugins
 
 - Theme
