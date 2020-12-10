@@ -40,7 +40,7 @@ test('plugin can return new tokens to parse using `tw`', () => {
           const color = theme('colors', args[0] + '-500', '')
 
           if (color) {
-            return tw`bg-${args[0]}-500 underline)`
+            return tw`hover:bg-${args[0]}-500 underline)`
           }
         } else {
           return tw('font-bold py-2 px-4 rounded')
@@ -50,9 +50,12 @@ test('plugin can return new tokens to parse using `tw`', () => {
   })
 
   expect(tw('btn')).toBe('font-bold py-2 px-4 rounded')
-  expect(tw('btn-purple cursor-not-allowed')).toBe('bg-purple-500 underline cursor-not-allowed')
+  expect(tw('btn-purple cursor-not-allowed')).toBe('hover:bg-purple-500 underline cursor-not-allowed')
   expect(tw('btn cursor-not-allowed btn-purple transition')).toBe(
-    'font-bold py-2 px-4 rounded cursor-not-allowed bg-purple-500 underline transition',
+    'font-bold py-2 px-4 rounded cursor-not-allowed hover:bg-purple-500 underline transition',
+  )
+  expect(tw('btn sm:focus:btn-purple transition')).toBe(
+    'font-bold py-2 px-4 rounded sm:focus:hover:bg-purple-500 sm:focus:underline transition',
   )
 
   expect(() => tw('btn-unknown-color')).toThrow(

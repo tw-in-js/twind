@@ -1,6 +1,4 @@
-import type { Rule, Hasher, Falsy } from '../types'
-
-import * as is from './is'
+import type { Hasher, Falsy } from '../types'
 
 interface Includes {
   (value: string, search: string): boolean
@@ -29,14 +27,6 @@ export const escape =
   (typeof CSS !== 'undefined' && CSS.escape) ||
   // Simplified: escaping only special characters
   ((className: string): string => className.replace(/[!"#$%&'()*+,./:;<=>?@[\]^`{|}~]/g, '\\$&'))
-
-export const toClassName = (rule: Rule): string => {
-  if (is.function(rule.directive)) return ''
-
-  const base = join(rule.variants, '')
-
-  return (base && tail(base) + ':') + (rule.negate ? '-' : '') + rule.directive
-}
 
 // Based on https://stackoverflow.com/a/52171480
 export const cyrb32: Hasher = (value: string): string => {

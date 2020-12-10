@@ -18,7 +18,7 @@ import { autoprefix, noprefix } from '../prefix'
 
 import * as is from '../internal/is'
 import { makeThemeResolver } from '../internal/theme'
-import { cyrb32, identity, toClassName } from '../internal/util'
+import { cyrb32, identity, join, tail } from '../internal/util'
 
 import { parse } from './parse'
 import { translate as makeTranslate } from './translate'
@@ -32,6 +32,16 @@ const sanitize = <T>(
   disabled: T,
   enabled = defaultValue,
 ): T => (value === false ? disabled : value === true ? enabled : value || defaultValue)
+
+// Creates rule id including variants, negate and directive
+// which is exactly like a tailwind rule
+const toId = (rule: Rule, directive = rule.directive): string => {
+  if (is.function(directive)) return ''
+
+  const base = join(rule.variants, '')
+
+  return (base && tail(base) + ':') + (rule.negate ? '-' : '') + directive
+}
 
 export const configure = (
   config: Configuration = {},
@@ -91,65 +101,88 @@ export const configure = (
     context,
   )
 
+  // Track active variants for nested `tw()` calls
+  // `sm:hover:${({ tw }) => tw`underline`}`
+  // == 'sm:hover:underline`
+  const activeVariants: string[][] = []
+
   // Cache rule ids and their generated class name
   const idToClassName = Object.create(null) as Record<string, string>
 
-  // Cache inline directives by their function identity
-  const inlineToClassName = new WeakMap<InlineDirective, string>()
+  // Cache generated inline directive names by their function identity
+  const inlineDirectiveName = new WeakMap<InlineDirective, string>()
 
   // Responsible for converting (translate, decorate, serialize, inject) a rule
   const convert = (rule: Rule): string | undefined | void => {
-    // For inline directive (functions) this returns an empty string
-    // we can test for an falsy id to check if the rule is a inline directive
-    const id = toClassName(rule)
+    // A rule id is the tailwind rule including variants, negate and directive
 
-    let className = id
-      ? idToClassName[id]
-      : inlineToClassName.get(rule.directive as InlineDirective)
+    // For inline rules (functions) `toId` returns an empty string
+    // in that case we check if we already have a name for the function
+    // and use that one to generate the id
+    let id = toId(rule) || toId(rule, inlineDirectiveName.get(rule.directive as InlineDirective))
 
-    // If a rule did not generate a class name
-    // we put an empty string into `idToClassName`
-    // this way we report the unknown directive only once
+    // Check if we already have a class name for this rule
+    let className = idToClassName[id]
+
+    // We check for nullish because we put an empty string into `idToClassName`
+    // if a rule did not generate a class name
+    // This way we report the unknown directives onyl once
     if (className == null) {
       // `context.theme()` needs know if it should negate the theme value
       negate = rule.negate
 
+      // Keep track of active variants for nested `tw` calls
+      activeVariants.unshift(rule.variants)
+
       // 2. translate each rule using plugins
       let translation = translate(rule)
 
-      // Reset negate to not interfere with other theme() calls
+      // Reset translate state variables to not interfere with other calls
+      activeVariants.shift()
       negate = false
 
-      // CSS class names have been returned
-      if (is.string(translation)) {
-        // Use as is
-        className = translation
-      } else if (translation) {
-        // 3. decorate: apply variants
-        translation = decorate(translation, rule)
+      // If this is a inline directive
+      if (!id) {
+        // We can now generate a unique name based on the created translation
+        // This id does not include the variants as a directive is always independent of variants
+        // Variants are applied below using `decorate()`
+        id = cyrb32(JSON.stringify(translation))
 
-        // If we have an id this is a tailwind rule
-        className = id
-          ? hash
-            ? hash(JSON.stringify(translation))
-            : id
-          : // For inline directives we alway use the hashed translation
-            cyrb32(JSON.stringify(translation))
+        // Remember it
+        inlineDirectiveName.set(rule.directive as InlineDirective, id)
 
-        // 4. serialize: convert to css string with precedence
-        // 5. inject: add to dom
-        serialize(translation, className, rule).forEach(inject)
-      } else {
-        // No plugin or plugin did not return something
-        mode.report({ id: 'UNKNOWN_DIRECTIVE', rule }, context)
-        className = ''
+        // Generate a id including the current variants
+        id = toId(rule, id)
+
+        // And use that to lookup a cached class name
+        className = idToClassName[id]
       }
 
-      if (id) {
-        idToClassName[id] = className
-      } else {
-        inlineToClassName.set(rule.directive as InlineDirective, className)
+      // In case this is a inline directive
+      // we may now have a class name
+      if (!className) {
+        // CSS class names have been returned
+        if (is.string(translation)) {
+          // Use as is
+          className = translation
+        } else if (translation) {
+          // 3. decorate: apply variants
+          translation = decorate(translation, rule)
+
+          className = hash ? hash(JSON.stringify(translation)) : id
+
+          // 4. serialize: convert to css string with precedence
+          // 5. inject: add to dom
+          serialize(translation, className, rule).forEach(inject)
+        } else {
+          // No plugin or plugin did not return something
+          mode.report({ id: 'UNKNOWN_DIRECTIVE', rule }, context)
+          className = ''
+        }
       }
+
+      // Remember the generated class name
+      idToClassName[id] = className
     }
 
     return className
@@ -158,7 +191,7 @@ export const configure = (
   // This function is called from `tw(...)`
   // it parses, translates, decorates, serializes and injects the tokens
   const process = (tokens: unknown[]): string =>
-    parse(tokens).map(convert).filter(Boolean).join(' ')
+    parse(tokens, activeVariants[0]).map(convert).filter(Boolean).join(' ')
 
   // Determine if we should inject the preflight (browser normalize)
   const preflight = sanitize<Preflight | false>(config.preflight, identity, false)

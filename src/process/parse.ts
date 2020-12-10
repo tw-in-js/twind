@@ -7,7 +7,7 @@ import { join, tail } from '../internal/util'
 // Shared variables used during parsing
 
 // List of active groupings: either variant ('xxx:') or prefix
-const groupings: string[] = []
+let groupings: string[]
 
 // List of parsed rules
 let rules: Rule[]
@@ -148,7 +148,8 @@ const parseGroup = (key: string, token: Token): void => {
   if (token) {
     startGrouping()
 
-    const isVariant = is.string(token) || is.object(token) // => is.array is already matched by is.object
+    // => is.array is already matched by is.object
+    const isVariant = is.string(token) || is.object(token) || is.function(token)
 
     parseString(key, isVariant)
 
@@ -177,11 +178,12 @@ const parseToken = (token: Token): void => {
   }
 }
 
-export const parse = (tokens: unknown[]): Rule[] => {
-  groupings.length = 0
+export const parse = (tokens: unknown[], variants: string[] | undefined): Rule[] => {
+  groupings = variants ? [...variants, ''] : ['']
+
   rules = []
 
-  asTokens(tokens).forEach(parseGroupedToken)
+  asTokens(tokens).forEach(parseToken)
 
   return rules
 }

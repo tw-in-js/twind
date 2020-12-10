@@ -1,4 +1,4 @@
-import type { Instance, Injector } from '../types'
+import type { Instance, Injector, InlineDirective } from '../types'
 
 import { create, virtualInjector, strict } from '..'
 
@@ -340,6 +340,47 @@ test('inline rule (tw combined)', () => {
     '.underline{text-decoration:underline}',
     '.text-center{text-align:center}',
     '.font-bold{font-weight:700}',
+  ])
+})
+
+test('inline rule (variants)', () => {
+  expect(tw`text-center sm:hover:${({ tw }) => tw`underline`} active:font-bold`).toBe(
+    'text-center sm:hover:underline active:font-bold',
+  )
+  expect(injector.target).toStrictEqual([
+    '.text-center{text-align:center}',
+    '.active\\:font-bold:active{font-weight:700}',
+    '@media (min-width: 640px){.sm\\:hover\\:underline:hover{text-decoration:underline}}',
+  ])
+})
+
+test('inline rule nested', () => {
+  // eslint-disable-next-line unicorn/consistent-function-scoping
+  const underline: InlineDirective = ({ tw }) => tw`underline`
+
+  expect(
+    tw(
+      'text-center',
+      {
+        sm: {
+          hover: underline,
+          focus: ({ theme }) => ({ color: theme('colors', 'red.500') }),
+        },
+        lg: ({ tw }) => tw`underline focus:${underline}`,
+      },
+      'font-bold',
+    ),
+  ).toBe(
+    'text-center sm:hover:underline sm:focus:tw-1e4d9nh lg:underline lg:focus:underline font-bold',
+  )
+
+  expect(injector.target).toStrictEqual([
+    '.text-center{text-align:center}',
+    '.font-bold{font-weight:700}',
+    '@media (min-width: 640px){.sm\\:hover\\:underline:hover{text-decoration:underline}}',
+    '@media (min-width: 640px){.sm\\:focus\\:tw-1e4d9nh:focus{color:#ef4444}}',
+    '@media (min-width: 1024px){.lg\\:underline{text-decoration:underline}}',
+    '@media (min-width: 1024px){.lg\\:focus\\:underline:focus{text-decoration:underline}}',
   ])
 })
 
