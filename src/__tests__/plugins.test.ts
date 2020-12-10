@@ -32,7 +32,7 @@ test('value can be a token string', () => {
   ])
 })
 
-test('plugin can return new tokens to parse using `apply`', () => {
+test('plugin can return new tokens to parse using `tw`', () => {
   const { tw } = setup({
     plugins: {
       btn(args, { theme, tw }) {

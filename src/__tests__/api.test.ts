@@ -317,6 +317,32 @@ test('no arguments', () => {
   expect(tw()).toBe('')
 })
 
+test('inline rule (css object)', () => {
+  expect(tw(({ theme }) => ({ color: theme('colors', 'red.500') }))).toBe('tw-1e4d9nh')
+  expect(injector.target).toStrictEqual(['.tw-1e4d9nh{color:#ef4444}'])
+})
+
+test('inline rule (tag)', () => {
+  expect(tw(({ tag }) => tag('marker'))).toBe('marker')
+  expect(injector.target).toStrictEqual([])
+})
+
+test('inline rule (tw)', () => {
+  expect(tw(({ tw }) => tw`text-center`)).toBe('text-center')
+  expect(injector.target).toStrictEqual(['.text-center{text-align:center}'])
+})
+
+test('inline rule (tw combined)', () => {
+  expect(tw`underline ${({ tw }) => tw`text-center`} font-bold`).toBe(
+    'underline text-center font-bold',
+  )
+  expect(injector.target).toStrictEqual([
+    '.underline{text-decoration:underline}',
+    '.text-center{text-align:center}',
+    '.font-bold{font-weight:700}',
+  ])
+})
+
 test('can not call setup after config', () => {
   expect(() => {
     setup()

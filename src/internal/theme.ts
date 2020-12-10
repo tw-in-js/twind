@@ -24,6 +24,7 @@ const flattenColorPalette = (colors: Record<string, ThemeColor>): Record<string,
           }
 
           flatColors[key + '-' + number] = value[number]
+          flatColors[key + '.' + number] = value[number]
 
           return flatColors
         }, flatColors)

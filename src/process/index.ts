@@ -6,6 +6,7 @@ import type {
   Theme,
   Rule,
   Hasher,
+  InlineDirective,
 } from '../types'
 
 import { corePlugins } from '../tailwind/plugins'
@@ -41,8 +42,10 @@ export const configure = (
 
   const hash = sanitize<Hasher | false>(config.hash, false, false, cyrb32)
 
-  let negate: boolean
+  // Used to detect if a theme value should be negated
+  let negate: boolean | undefined
 
+  // The context that is passed to functions to access the theme, ...
   const context: Context = {
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     tw: (...tokens: unknown[]) => process(tokens),
@@ -88,18 +91,30 @@ export const configure = (
     context,
   )
 
-  const ruleToClassNameCache = Object.create(null) as Record<string, string>
+  // Cache rule ids and their generated class name
+  const idToClassName = Object.create(null) as Record<string, string>
 
+  // Cache inline directives by their function identity
+  const inlineToClassName = new WeakMap<InlineDirective, string>()
+
+  // Responsible for converting (translate, decorate, serialize, inject) a rule
   const convert = (rule: Rule): string | undefined | void => {
+    // For inline directive (functions) this returns an empty string
+    // we can test for an falsy id to check if the rule is a inline directive
     const id = toClassName(rule)
 
-    let className = ruleToClassNameCache[id]
+    let className = id
+      ? idToClassName[id]
+      : inlineToClassName.get(rule.directive as InlineDirective)
 
-    if (!className) {
+    // If a rule did not generate a class name
+    // we put an empty string into `idToClassName`
+    // this way we report the unknown directive only once
+    if (className == null) {
       // `context.theme()` needs know if it should negate the theme value
       negate = rule.negate
 
-      // 2. translate each rule to css object using plugins
+      // 2. translate each rule using plugins
       let translation = translate(rule)
 
       // Reset negate to not interfere with other theme() calls
@@ -113,7 +128,13 @@ export const configure = (
         // 3. decorate: apply variants
         translation = decorate(translation, rule)
 
-        className = hash ? hash(JSON.stringify(translation)) : id
+        // If we have an id this is a tailwind rule
+        className = id
+          ? hash
+            ? hash(JSON.stringify(translation))
+            : id
+          : // For inline directives we alway use the hashed translation
+            cyrb32(JSON.stringify(translation))
 
         // 4. serialize: convert to css string with precedence
         // 5. inject: add to dom
@@ -124,20 +145,29 @@ export const configure = (
         className = ''
       }
 
-      ruleToClassNameCache[id] = className
+      if (id) {
+        idToClassName[id] = className
+      } else {
+        inlineToClassName.set(rule.directive as InlineDirective, className)
+      }
     }
 
     return className
   }
 
+  // This function is called from `tw(...)`
+  // it parses, translates, decorates, serializes and injects the tokens
   const process = (tokens: unknown[]): string =>
     parse(tokens).map(convert).filter(Boolean).join(' ')
 
+  // Determine if we should inject the preflight (browser normalize)
   const preflight = sanitize<Preflight | false>(config.preflight, identity, false)
 
   if (preflight) {
+    // Create the base tailwind preflight css rules
     const css = createPreflight(theme)
 
+    // Call the preflight handler, serialize and inject the result
     serialize(preflight(css, context) || css).forEach(inject)
   }
 

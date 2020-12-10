@@ -165,6 +165,11 @@ const parseToken = (token: Token): void => {
     parseString(token)
   } else if (is.array(token)) {
     token.forEach(parseGroupedToken)
+  } else if (is.function(token)) {
+    rules.push({
+      variants: groupings.filter(onlyVariants),
+      directive: token,
+    })
   } else if (is.object(token)) {
     Object.keys(token).forEach((key) => {
       parseGroup(key, token[key])

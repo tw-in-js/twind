@@ -4,7 +4,7 @@
 
 - `token`: things that can be passed to `tw` (string, array, object, falsey values)
 - `rules`: `rule`, `group`
-- `rule`: `variants`, `directive`
+- `rule`: `variants`, `directive`, `inline-directive`
 - `directive`: `negate`, `plugin`, `params`
 - `negate`: should a theme value be negated
 - `plugin`: `utility`, `component`
@@ -36,7 +36,11 @@ type Falsy = '' | 0 | -0 | false | null | undefined
 
 interface TokenGrouping extends Record<string, Token> {}
 
-type Token = string | TokenGrouping | Token[] | Falsy
+interface InlineDirective {
+  (context: Context): CSSRules | string | Falsy
+}
+
+type Token = string | InlineDirective | TokenGrouping | Token[] | Falsy
 
 interface Context {
   /** allow composition */
@@ -58,8 +62,8 @@ interface Context {
 
 - exposed as named export
 - supports
-  - tagged template where replacements can be interpolations can be strings, array, objects, falsey
-  - variadic strings, array, objects, falsey
+  - tagged template where replacements can be interpolations can be strings, array, objects, functions, falsey
+  - variadic strings, array, objects, functions, falsey
 
 ```js
 interface TW {
@@ -83,7 +87,7 @@ interface Setup {
 
   mode?: Mode
 
-  theme?: Partial<Theme> | ((defaultTheme: ThemeResolver) => Partial<Theme>)
+  theme?: Partial<Theme> & {extends?: Partial<Theme>}
 
   hash?: boolean | Hasher
 

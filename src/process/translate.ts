@@ -8,6 +8,10 @@ export const translate = (
   plugins: Plugins,
   context: Context,
 ): ((rule: Rule) => CSSRules | string | Falsy) => (rule) => {
+  if (is.function(rule.directive)) {
+    return rule.directive(context)
+  }
+
   const parameters = rule.directive.split('-')
 
   // Try to find a plugin to handle this directive

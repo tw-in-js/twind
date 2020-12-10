@@ -1,5 +1,7 @@
 import type { Rule, Hasher, Falsy } from '../types'
 
+import * as is from './is'
+
 interface Includes {
   (value: string, search: string): boolean
   <T>(value: readonly T[], search: T): boolean
@@ -29,6 +31,8 @@ export const escape =
   ((className: string): string => className.replace(/[!"#$%&'()*+,./:;<=>?@[\]^`{|}~]/g, '\\$&'))
 
 export const toClassName = (rule: Rule): string => {
+  if (is.function(rule.directive)) return ''
+
   const base = join(rule.variants, '')
 
   return (base && tail(base) + ':') + (rule.negate ? '-' : '') + rule.directive
