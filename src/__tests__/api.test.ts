@@ -366,12 +366,12 @@ test('inline rule nested', () => {
           hover: underline,
           focus: ({ theme }) => ({ color: theme('colors', 'red.500') }),
         },
-        lg: ({ tw }) => tw`underline focus:${underline}`,
+        lg: ({ tw }) => tw`text-lg focus:${underline}`,
       },
       'font-bold',
     ),
   ).toBe(
-    'text-center sm:hover:underline sm:focus:tw-1e4d9nh lg:underline lg:focus:underline font-bold',
+    'text-center sm:hover:underline sm:focus:tw-1e4d9nh lg:text-lg lg:focus:underline font-bold',
   )
 
   expect(injector.target).toStrictEqual([
@@ -379,7 +379,7 @@ test('inline rule nested', () => {
     '.font-bold{font-weight:700}',
     '@media (min-width: 640px){.sm\\:hover\\:underline:hover{text-decoration:underline}}',
     '@media (min-width: 640px){.sm\\:focus\\:tw-1e4d9nh:focus{color:#ef4444}}',
-    '@media (min-width: 1024px){.lg\\:underline{text-decoration:underline}}',
+    '@media (min-width: 1024px){.lg\\:text-lg{font-size:1.125rem;line-height:1.75rem}}',
     '@media (min-width: 1024px){.lg\\:focus\\:underline:focus{text-decoration:underline}}',
   ])
 })
