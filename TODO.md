@@ -1,7 +1,6 @@
 - Packages
 
   - Server Side Rendering
-  - typescript plugin
   - @tw-in-js/styled - like styled components
   - @tw-in-js/eslint-plugin - nice to have
   - @tw-in-js/tw.macro - maybe?
@@ -9,7 +8,6 @@
 - Ideas
 
   - stack trace point to callee
-  - inline plugins
   - _"on"_ colors
   - play mode
   - react to manual class name change in dev-tools and generate that directive

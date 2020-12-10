@@ -357,6 +357,7 @@ Run `yarn install && yarn build`.
 - `yarn test`: Run test suite including linting
 - `yarn format`: Ensure consistent code style
 - `yarn build`: Build the package
+- `yarn start`: Start example using snowpack
 - `yarn release`: To publish the package
 
 ## License

@@ -28,6 +28,7 @@
     "format": "nps",
     "release": "np",
     "size": "size-limit",
+    "start": "snowpack dev",
     "test": "nps",
     "version": "nps build.package"
   },
@@ -50,6 +51,7 @@
     "@carv/prettier-config": "^1.1.0",
     "@carv/tsconfig": "^1.3.2",
     "@size-limit/preset-small-lib": "^4.6.0",
+    "@snowpack/plugin-svelte": "^3.3.1",
     "dlv": "^1.1.3",
     "eslint": "^7.3.1",
     "jest": "^26.1.0",
@@ -57,6 +59,9 @@
     "nps": "^5.9.12",
     "prettier": "^2.0.5",
     "size-limit": "^4.6.0",
+    "snowpack": "^2.18.2",
+    "svelte": "^3.31.0",
+    "svelte-check": "^1.1.20",
     "tailwindcss": "^2.0.1",
     "typescript": "^4.1.0"
   },
