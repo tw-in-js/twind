@@ -50,7 +50,9 @@ test('plugin can return new tokens to parse using `tw`', () => {
   })
 
   expect(tw('btn')).toBe('font-bold py-2 px-4 rounded')
-  expect(tw('btn-purple cursor-not-allowed')).toBe('hover:bg-purple-500 underline cursor-not-allowed')
+  expect(tw('btn-purple cursor-not-allowed')).toBe(
+    'hover:bg-purple-500 underline cursor-not-allowed',
+  )
   expect(tw('btn cursor-not-allowed btn-purple transition')).toBe(
     'font-bold py-2 px-4 rounded cursor-not-allowed hover:bg-purple-500 underline transition',
   )

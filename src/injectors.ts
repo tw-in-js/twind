@@ -36,7 +36,7 @@ export const virtualInjector = ({ target = [] }: InjectorConfig<string[]> = {}):
 > => ({
   target,
   insert: (rule, index) => target.splice(index, 0, rule),
-  delete: (index) => target.splice(index, 1),
+  // delete: (index) => target.splice(index, 1),
 })
 
 /**
@@ -48,7 +48,7 @@ export const cssomInjector = ({
 }: InjectorConfig<CSSStyleSheet> = {}): Injector<CSSStyleSheet> => ({
   target,
   insert: target.insertRule.bind(target),
-  delete: target.deleteRule.bind(target),
+  // delete: target.deleteRule.bind(target),
 })
 
 /**
@@ -59,7 +59,7 @@ export const noOpInjector = (): Injector<null> => ({
   insert: () => {
     /* No-Op */
   },
-  delete: () => {
-    /* No-Op */
-  },
+  // delete: () => {
+  //   /* No-Op */
+  // },
 })

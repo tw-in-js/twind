@@ -21,4 +21,20 @@ test('injects in to a style sheet element', () => {
     '.text-center {text-align: center;}',
     '@media (min-width: 768px) {.md\\:text-left {text-align: left;}}',
   ])
+
+  // re-use existing stylesheet
+  const { tw: tw2 } = create({ mode: strict, preflight: false })
+
+  expect(tw2('group flex text-center md:text-left')).toBe('group flex text-center md:text-left')
+
+  expect(document.querySelectorAll('#__tw-in-js')).toHaveLength(1)
+
+  expect([...(style.sheet?.cssRules || [])].map((rule) => rule.cssText)).toMatchObject([
+    '.flex {display: flex;}',
+    '.text-center {text-align: center;}',
+    '@media (min-width: 768px) {.md\\:text-left {text-align: left;}}',
+    '.flex {display: flex;}',
+    '.text-center {text-align: center;}',
+    '@media (min-width: 768px) {.md\\:text-left {text-align: left;}}',
+  ])
 })

@@ -384,6 +384,56 @@ test('inline rule nested', () => {
   ])
 })
 
+test('inject @font-face', () => {
+  expect(
+    tw(() => ({
+      '& p': {
+        fontFamily: 'Open Sans',
+        '@font-face': {
+          fontFamily: 'Open Sans',
+          src: [
+            `url("/fonts/OpenSans-Regular-webfont.woff2") format("woff2")`,
+            `url("/fonts/OpenSans-Regular-webfont.woff") format("woff")`,
+          ].join(', '),
+        },
+      },
+    })),
+  ).toBe('tw-vqfbxj')
+
+  expect(injector.target).toStrictEqual([
+    '@font-face{font-family:Open Sans;src:url("/fonts/OpenSans-Regular-webfont.woff2") format("woff2"), url("/fonts/OpenSans-Regular-webfont.woff") format("woff")}',
+    '.tw-vqfbxj p{font-family:Open Sans}',
+  ])
+})
+
+test('inject global styles', () => {
+  expect(
+    tw(() => ({
+      ':root': {
+        '--main-bg-color': 'brown',
+      },
+      backgroundColor: 'var(--main-bg-color)',
+    })),
+  ).toBe('tw-1kfw9fm')
+
+  expect(injector.target).toStrictEqual([
+    ':root{--main-bg-color:brown}',
+    '.tw-1kfw9fm{background-color:var(--main-bg-color)}',
+  ])
+})
+
+test('expand nested selector', () => {
+  expect(
+    tw(() => ({
+      '&, a': {
+        color: 'black',
+      },
+    })),
+  ).toBe('tw-ec2uk9')
+
+  expect(injector.target).toStrictEqual(['.tw-ec2uk9, a{color:black}'])
+})
+
 test('can not call setup after config', () => {
   expect(() => {
     setup()

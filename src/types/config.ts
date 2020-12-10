@@ -29,7 +29,7 @@ export interface Injector<T = unknown> {
   target: T
 
   insert: (rule: string, index: number) => void
-  delete: (index: number) => void
+  // delete: (index: number) => void
 }
 
 export type Prefixer = (property: string, value: string) => string
