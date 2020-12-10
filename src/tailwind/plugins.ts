@@ -832,18 +832,10 @@ export const corePlugins: Plugins = {
         }
   },
 
-  object(params) {
-    switch (params[0]) {
-      case 'contain':
-      case 'cover':
-      case 'fill':
-      case 'none':
-      case 'scale':
-        return propertyValue('objectFit')(params)
-    }
-
-    return propertyValue('objectPosition', ' ')(params)
-  },
+  object: (params) =>
+    includes(['contain', 'cover', 'fill', 'none', 'scale'], params[0])
+      ? propertyValue('objectFit')(params)
+      : propertyValue('objectPosition', ' ')(params),
 
   list: (params) =>
     propertyValue(

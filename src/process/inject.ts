@@ -4,24 +4,38 @@ import { sortedInsertionIndex } from '../internal/util'
 
 import type { RuleWithPresedence } from './serialize'
 
+// Insert css rules using presedence to find the correct position within the sheet
 export const inject = (
   injector: Injector,
   mode: Mode,
   context: Context,
 ): ((rule: RuleWithPresedence) => void) => {
+  // An array of presedence by index within the sheet
+  // always sorted
   const sortedPrecedences: number[] = []
+
+  // Cache for already insert css rules
+  // to prevent double insertions
   const insertedRules = Object.create(null) as Record<string, boolean>
 
   return ({ r: rule, p: presedence }) => {
+    // If not already inserted
     if (!insertedRules[rule]) {
+      // Find the correct position
       const index = sortedInsertionIndex(sortedPrecedences, presedence)
 
       try {
+        // Insert
         injector.insert(rule, index)
+
+        // Mark rule as inserted
         insertedRules[rule] = true
+
+        // Update sorted index
         sortedPrecedences.splice(index, 0, presedence)
       } catch (error) {
-        // Filter out vendor specific pseudo classes to prevent unnecessary warnings
+        // Some thrown error a because of specific pseudo classes
+        // let filter them to prevent unnecessary warnings
         // ::-moz-focus-inner
         // :-moz-focusring
         if (!/:-[mwo]/.test(rule)) {

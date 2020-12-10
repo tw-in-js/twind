@@ -7,6 +7,7 @@
 
 - Ideas
 
+  - benchmark using https://github.com/A-gambit/CSS-IN-JS-Benchmarks
   - _"on"_ colors: generate matching contrast color and use that one as text/background color
   - play mode
   - on manual class name change in dev-tools and generate that directive

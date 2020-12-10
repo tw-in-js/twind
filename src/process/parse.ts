@@ -4,14 +4,28 @@ import * as is from '../internal/is'
 
 import { join, tail } from '../internal/util'
 
+// The parsing is stacked based
+// when ever we find a group start
+// - in strings ':' or '(',
+// - array values
+// - object keys and their value
+// we add an empty marker string `""` into `groupings` to mark the group start
+// if we find a variant or prefix we push it onto `groupings`
+// once the group ends (whitespace or ')') we drop all entries until the last marker
+// This way we can filter `groupings` for trithy values which are either
+// a variant (starting with ':') or a prefix
+
 // Shared variables used during parsing
 
-// List of active groupings: either variant ('xxx:') or prefix
+// List of active groupings: either variant (':xxx') or prefix
 let groupings: string[]
 
 // List of parsed rules
 let rules: Rule[]
 
+// Handles template literal strings
+// create a flat array with consecutive interpolated strings joined
+// and falsy value ignored
 const interleave = (strings: TemplateStringsArray, interpolations: Token[]): Token[] => {
   const result: Token[] = [strings[0]]
 
@@ -31,25 +45,27 @@ const interleave = (strings: TemplateStringsArray, interpolations: Token[]): Tok
   return result
 }
 
+// Tokens maybe a template literal -> interleave it to a flat array
 const asTokens = (tokens: unknown[]): Token[] =>
   is.array(tokens[0]) && is.array(((tokens[0] as unknown) as TemplateStringsArray).raw)
     ? interleave((tokens[0] as unknown) as TemplateStringsArray, tail(tokens) as Token[])
     : (tokens as Token[])
 
+// A new group has been found
+// this maybe a value (':variant' or 'prefix') or an empty marker string
 const startGrouping = (value = ''): '' => {
   groupings.push(value)
   return ''
 }
 
+// Close a group
+// Within strings we need to distinguish between a whitespace and a closing bracket
+// a) if we have a whitespace
+// we want to keep everything up to including the last group start
+//
+// b) if we have a non-whitespace
+// we want to keep everything before the last group start
 const endGrouping = (isWhitespace?: boolean): void => {
-  // If isWhitespace is true
-  // ['', ':sm', ':hover'] => ['']
-  // ['', ':sm', ':hover', ''] => ['', ':sm', ':hover']
-
-  // If isWhitespace is falsey
-  // ['', ':sm', ':hover'] => ['']
-  // ['', ':sm', ':hover', ''] => ['', ':sm', ':hover', '']
-
   const index = groupings.lastIndexOf('')
 
   if (~index) {

@@ -252,7 +252,7 @@ export const defaultTheme: Theme = {
   backgroundColor: (theme) => theme('colors'),
   backgroundImage: {
     none: 'none',
-    // TODO use edge helper to generate these
+    // These are built-in
     // 'gradient-to-t': 'linear-gradient(to top, var(--tw-gradient-stops))',
     // 'gradient-to-tr': 'linear-gradient(to top right, var(--tw-gradient-stops))',
     // 'gradient-to-r': 'linear-gradient(to right, var(--tw-gradient-stops))',

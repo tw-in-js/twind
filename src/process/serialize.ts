@@ -25,14 +25,17 @@ export const serialize = (
   prefix: Prefixer,
   { theme, tag }: Context,
 ): ((css: CSSRules, className?: string, rule?: Rule) => RuleWithPresedence[]) => {
-  // Hash/Tag custom variables during serialization
+  // Hash/Tag tailwind custom properties during serialization
+  // used by `tagVars` below
   const tagVar = (_: string, property: string): string => '--' + tag(property)
 
   const tagVars = (value: string): string => `${value}`.replace(/--(tw-[\w-]+)\b/g, tagVar)
 
+  // Create a css declaration with prefix and hashed custom properties
   const stringifyDeclaration = (property: string, value: string | string[]): string => {
     property = tagVars(property)
 
+    // Support array fallbacks
     return is.array(value)
       ? join(
           value.filter(Boolean).map((value) => prefix(property, tagVars(value))),
@@ -44,10 +47,16 @@ export const serialize = (
   // List of css rule with presedence to be injected
   let rules: RuleWithPresedence[]
 
+  // Responsible for converting the css into one or more css strings
+  // which will be injected into the page
   const stringify = (
+    // Upper at-rules, selctoer that should wrap each generated css block
     atRules: string[],
+    // The current css selector
     selector: string,
+    // The current presedence for determine the css position in the stylesheet
     presedence: number,
+    // The rules object
     css: CSSRules,
   ): void => {
     // 1. Properties
@@ -56,28 +65,32 @@ export const serialize = (
     // 3. :pseudo
     // 4. &
 
+    // The generated declaration block eg body of the css rule
     let declarations = ''
+
+    // Additional presedence values
     let numberOfDeclarations = 0
     let maxPropertyPresedence = 0
     let maxValuePresedence = 0
 
+    // Walk through the object
     Object.keys(css).forEach((key) => {
       const value = css[key] as CSSRules
 
       if (is.object(value) && !is.array(value)) {
         // If the value is an object this must be a nested block
         // like '@media ...', '@supports ... ', ':pseudo ...', '& > ...'
-        // If these are the `@` rule
+        // If this is a `@` rule
         if (key[0] === '@') {
           if (key[1] === 'f') {
-            // Handling the `@font-face` where the
-            // block doesn't need the brackets wrapped
+            // `@font-face` is never wrapped, eg always global/root
             stringify([], key, 0, value)
           } else if (key[1] === 'k') {
+            // @keyframes handling
             // To prevent
             // "@keyframes spin{from{transform:rotate(0deg)}}"
             // "@keyframes spin{to{transform:rotate(360deg)}}"
-            // we generate waypoint without prefix and grap them from the stack
+            // we generate waypoints without prefix and grap them from the stack
             // "from{transform:rotate(0deg)}"
             // "to{transform:rotate(360deg)}"
             // => "@keyframes name{from{transform:rotate(0deg)}from{transform:rotate(0deg)}}"
@@ -87,6 +100,7 @@ export const serialize = (
 
             const waypoints = rules.splice(currentSize, rules.length - currentSize)
 
+            // Insert without wrappers
             rules.push({
               r: stringifyBlock(
                 join(
@@ -98,6 +112,7 @@ export const serialize = (
               p: waypoints.reduce((sum, p) => sum + p.p, 0),
             })
           } else {
+            // Some nested block like @media, dive into it
             stringify(
               atRules.concat(key),
               selector,
@@ -106,7 +121,10 @@ export const serialize = (
             )
           }
         } else {
-          // Call the serialize for this block
+          // A slector block: { '&:focus': { ... } }
+          // If this is a nested selector we need to
+          // - replace `&` with the current selector
+          // - propagate the presedence; if it is not nested we reset the presedence as it is most likely a global styles
           const hasNestedSelector = selector && includes(key, '&')
 
           stringify(
@@ -137,14 +155,18 @@ export const serialize = (
         )
         maxValuePresedence = Math.max(maxValuePresedence, declarationValuePrecedence(String(value)))
 
+        // Add to the declaration block with prefixer applied
         declarations = (declarations && declarations + ';') + stringifyDeclaration(property, value)
       }
     })
 
+    // We have collected all properties
+    // if there have been some we need to create a css rule
     if (numberOfDeclarations) {
       // Inject declarations
 
       rules.push({
+        // Wrap block with upper at-rules
         r: atRules.reduceRight(stringifyBlock, stringifyBlock(declarations, selector)),
 
         // Calculate precedence
@@ -170,6 +192,7 @@ export const serialize = (
     stringify(
       [],
       className ? '.' + escape(className) : '',
+      // If we have a rule, create starting presedence based on the variants
       rule ? rule.variants.reduceRight(variantPresedence, 0) : 0,
       css,
     )

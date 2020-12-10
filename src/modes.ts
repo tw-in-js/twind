@@ -8,7 +8,7 @@ export const mode = (report: (message: string) => void): Mode => ({
     }
   },
 
-  report({id, ...info}) {
+  report({ id, ...info }) {
     // TODO message based on info
     let message = `[${id}] ${JSON.stringify(info)}`
 
@@ -19,7 +19,11 @@ export const mode = (report: (message: string) => void): Mode => ({
     message = stack.shift() as string
 
     // Drop all frames until we hit the first `tw` or `setup` call
-    for (let frame: string | undefined; (frame = stack.shift()) && !/(^|\.)(tw|setup) /.test(frame); ) {
+    for (
+      let frame: string | undefined;
+      (frame = stack.shift()) && !/(^|\.)(tw|setup) /.test(frame);
+
+    ) {
       /* no-op */
     }
 

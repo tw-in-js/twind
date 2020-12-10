@@ -8,6 +8,7 @@ export const translate = (
   plugins: Plugins,
   context: Context,
 ): ((rule: Rule) => CSSRules | string | Falsy) => (rule) => {
+  // If this is a inline directive - called it right away
   if (is.function(rule.directive)) {
     return rule.directive(context)
   }
