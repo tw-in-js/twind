@@ -286,10 +286,10 @@
   resolved "https://registry.npmjs.org/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@carv/bundle@^1.3.1":
-  version "1.3.1"
-  resolved "https://registry.npmjs.org/@carv/bundle/-/bundle-1.3.1.tgz#f4bbe4d29ed46a17dcea06cdab00f4b979e7ba0f"
-  integrity sha512-ivxzuS6nHOg3s88FWAT7AKXNmQp4sCNsRT5r6GxdSZyFHhAHEneQ43TwEUp2JVWXta17H/YVCo8XiGNlu3Xvfg==
+"@carv/bundle@^1.3.2":
+  version "1.3.2"
+  resolved "https://registry.npmjs.org/@carv/bundle/-/bundle-1.3.2.tgz#4841b28c6293be46972e6f1680f2cf096290626e"
+  integrity sha512-AhL9mZO4TOJWOmHhKs7ySul9FCno9yb1YtyNnzmS5AWGwe1P0So7hy+CGtetN7GT45G6mFYzZT4UdfVY475d2g==
   dependencies:
     "@carv/types" "^1.3.1"
     at-least-node "^1.0.0"
@@ -314,12 +314,12 @@
     update-notifier "^5.0.0"
     v8-compile-cache "^2.1.1"
 
-"@carv/esbundle@^1.1.6":
-  version "1.1.6"
-  resolved "https://registry.npmjs.org/@carv/esbundle/-/esbundle-1.1.6.tgz#4ea3315afe3e0ba36c514800566e932fb2998467"
-  integrity sha512-95uIHbf/P4v7KHMhvnamyw0ywfPl1arcNNxRI4c1Ap2j2dP40bLvQy8ljZFQH6q4r+4XoQ0/CK/p23CtbQ1aXQ==
+"@carv/esbundle@^1.1.7":
+  version "1.1.7"
+  resolved "https://registry.npmjs.org/@carv/esbundle/-/esbundle-1.1.7.tgz#08cf6067e5022878f26a18f276ba053c90b9d321"
+  integrity sha512-0Ka0iE3G9DNUlVGrkrlfj+cfy5GK3DaU4KmC0Db5TqThbv4hVGFST5uURx3YAA9jq0fALT24KScTQUqh4oHT3g==
   dependencies:
-    "@carv/bundle" "^1.3.1"
+    "@carv/bundle" "^1.3.2"
     esbuild "^0.8.14"
     execa "^4.0.3"
     find-up "^5.0.0"
@@ -330,10 +330,10 @@
     rollup-plugin-dts "^2.0.0"
     v8-compile-cache "^2.1.1"
 
-"@carv/eslint-config@^1.6.0":
-  version "1.6.0"
-  resolved "https://registry.npmjs.org/@carv/eslint-config/-/eslint-config-1.6.0.tgz#0caf8ae187459c22ed5cd74963864e3be7627663"
-  integrity sha512-79HrCcbtBVNrsW89eP/8LmfPoXL3QXe0ayHYP6K3jwVL5lokMyHpsjLtyGmaK6a7EXzl69Amm1lvTnbst/x4sg==
+"@carv/eslint-config@^1.6.1":
+  version "1.6.1"
+  resolved "https://registry.npmjs.org/@carv/eslint-config/-/eslint-config-1.6.1.tgz#addf573e3bb84881a340177948993af8078bd882"
+  integrity sha512-hQ0YdrunRnuJ1snoILQgJKh/1tXOlkdimiZNE+JrppCbx4zN3TybnjMCLye9p5dkt8g6b2WrQ7KjdtLTUr1dbw==
   dependencies:
     "@rushstack/eslint-patch" "^1.0.2"
     "@typescript-eslint/eslint-plugin" "^4.0.1"
@@ -353,12 +353,12 @@
     pkg-dir "^5.0.0"
     project-root-directory "^1.0.3"
 
-"@carv/jest-preset@^1.1.6":
-  version "1.1.7"
-  resolved "https://registry.npmjs.org/@carv/jest-preset/-/jest-preset-1.1.7.tgz#060a5e840091809d7be99eb5014b41fa6ea8f3b9"
-  integrity sha512-jQPJz4pTjBbvQ5swpTcs+fUHI5/9RHF2avm1uAD9e4vf5i9kh6KFv2KhJi/G7bPEPy1gVIPyKoS2FQvc6tlNqA==
+"@carv/jest-preset@^1.1.8":
+  version "1.1.8"
+  resolved "https://registry.npmjs.org/@carv/jest-preset/-/jest-preset-1.1.8.tgz#053ff3e40e3abf2b61bb2ff5158b465053d077c8"
+  integrity sha512-/gv7Jsk1rC9eOvlnBw7HKurc5+/4rLtph2u/4Mq8vukau8qo9DBEx1Q5VBfBwEqlbmovh+wiNHwHvBw60IeRIA==
   dependencies:
-    "@carv/bundle" "^1.3.1"
+    "@carv/bundle" "^1.3.2"
     "@peculiar/webcrypto" "^1.1.3"
     "@types/jest" "^26.0.13"
     cross-fetch "^3.0.6"
@@ -384,12 +384,12 @@
     prettier-plugin-packagejson "^2.2.5"
     prettier-plugin-svelte "^1.1.0"
 
-"@carv/tsconfig@^1.3.0":
-  version "1.3.1"
-  resolved "https://registry.npmjs.org/@carv/tsconfig/-/tsconfig-1.3.1.tgz#c9666f89771e7664f3fb88722d1f9b1b6214b390"
-  integrity sha512-9zEenvu/LjLtLWw2bEAc22dpFQ+jARtVFqqoOhUMun+MuHLW8whRZSuvOZ+bfuiKbP0uUgJLk/n3g0mfGY+Q4g==
+"@carv/tsconfig@^1.3.2":
+  version "1.3.2"
+  resolved "https://registry.npmjs.org/@carv/tsconfig/-/tsconfig-1.3.2.tgz#0b356167b4b0878c4887ef1e8ccbb5d977356bf3"
+  integrity sha512-TD8oMERLqSpzmPPqiV4f2F2Uv+r1UzEcfLFSr8Jfy8IgAmEilRb7amm6Em8Xwy3LG5dvq9VpvEwhShd3p0xUiw==
   dependencies:
-    "@carv/bundle" "^1.3.1"
+    "@carv/bundle" "^1.3.2"
     nps "^5.9.12"
     ts-graphql-plugin "^2.0.0"
     typedoc "^0.20.0-beta.14"
@@ -6959,14 +6959,6 @@ onigasm@^2.2.5:
   dependencies:
     lru-cache "^5.1.1"
 
-only-allow@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/only-allow/-/only-allow-1.0.0.tgz#1ac662a2ad77f6181240847481b6add201f4ef45"
-  integrity sha512-DQazysAz1cw8JxxYVqg+wXWSm6K7smVqORwS+dtXQWPeRwjsWvRpxMRa5FPiOPxH4e05xCDv12ncAUF8JlVukw==
-  dependencies:
-    boxen "^4.2.0"
-    which-pm-runs "^1.0.0"
-
 open@^7.3.0:
   version "7.3.0"
   resolved "https://registry.npmjs.org/open/-/open-7.3.0.tgz#45461fdee46444f3645b6e14eb3ca94b82e1be69"
@@ -10109,11 +10101,6 @@ which-module@^2.0.0:
   version "2.0.0"
   resolved "https://registry.npmjs.org/which-module/-/which-module-2.0.0.tgz#d9ef07dce77b9902b8a3a8fa4b31c3e3f7e6e87a"
   integrity sha1-2e8H3Od7mQK4o6j6SzHD4/fm6Ho=
-
-which-pm-runs@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/which-pm-runs/-/which-pm-runs-1.0.0.tgz#670b3afbc552e0b55df6b7780ca74615f23ad1cb"
-  integrity sha1-Zws6+8VS4LVd9rd4DKdGFfI60cs=
 
 which@^1.2.9:
   version "1.3.1"

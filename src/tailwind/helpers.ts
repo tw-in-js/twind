@@ -12,7 +12,6 @@ const positions = (resolve: (position: string) => undefined | string[] | void) =
     const properties = position && resolve(position)
 
     if (properties && properties.length > 0) {
-      // eslint-disable-next-line unicorn/no-reduce
       return properties.reduce((declarations, property) => {
         declarations[joinTruthy([prefix, property, suffix])] = value
         return declarations
@@ -47,7 +46,7 @@ export const expandEdges = (key: string): string[] | undefined => {
   const parts = (X_Y_TO_EDGES[key] || key || '')
     .split('')
     .sort()
-    // eslint-disable-next-line unicorn/no-reduce, array-callback-return
+    // eslint-disable-next-line array-callback-return
     .reduce((result, edge) => {
       if (result && EDGES[edge]) {
         result.push(EDGES[edge] as string)

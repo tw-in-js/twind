@@ -1,4 +1,4 @@
-/* eslint-disable unicorn/prevent-abbreviations, no-return-assign, no-cond-assign, @typescript-eslint/consistent-type-assertions */
+/* eslint-disable no-return-assign, no-cond-assign, @typescript-eslint/consistent-type-assertions */
 import type {
   Theme,
   CSSRules,
@@ -112,6 +112,7 @@ const reversableEdge = (
   section: 'divideWidth' | 'space',
   prefix: string,
   suffix?: string,
+  // eslint-disable-next-line max-params
 ): CSSRules | undefined =>
   (_ = ({ x: ['right', 'left'], y: ['bottom', 'top'] } as Record<string, undefined | string[]>)[
     params[0]
@@ -891,7 +892,6 @@ export const corePlugins: Plugins = {
           }
         : {}
 
-    // eslint-disable-next-line unicorn/no-reduce
     return Object.keys(screens).reduce(
       (rules, screen) => {
         if ((_ = screens[screen])) {
@@ -913,4 +913,4 @@ export const corePlugins: Plugins = {
     )
   },
 }
-/* eslint-enable unicorn/prevent-abbreviations, no-return-assign, no-cond-assign, @typescript-eslint/consistent-type-assertions */
+/* eslint-enable no-return-assign, no-cond-assign, @typescript-eslint/consistent-type-assertions */

@@ -12,15 +12,13 @@ import { join, tail, includes } from './util'
 
 // https://github.com/tailwindlabs/tailwindcss/blob/master/src/util/flattenColorPalette.js
 const flattenColorPalette = (colors: Record<string, ThemeColor>): Record<string, ThemeColor> =>
-  // eslint-disable-next-line unicorn/no-reduce
   Object.keys(colors).reduce((flatColors, key) => {
     const value = colors[key]
 
     flatColors[key] = value
 
     return is.object(value)
-      ? // eslint-disable-next-line unicorn/no-reduce
-        Object.keys(value).reduce((flatColors, number) => {
+      ? Object.keys(value).reduce((flatColors, number) => {
           if (number === 'DEFAULT') {
             flatColors[key] = value[number]
           }
@@ -34,7 +32,6 @@ const flattenColorPalette = (colors: Record<string, ThemeColor>): Record<string,
 
 const resolveContext: ThemeSectionResolverContext = {
   // ?negative: (source) =>
-  //   // eslint-disable-next-line unicorn/no-reduce
   //   Object.keys(source).reduce(
   //     (target, key) => {
   //       if (source[key]) target['-' + key] = '-' + (source[key] as string)
@@ -47,7 +44,6 @@ const resolveContext: ThemeSectionResolverContext = {
   negative: () => ({}),
 
   breakpoints: (source) =>
-    // eslint-disable-next-line unicorn/no-reduce
     Object.keys(source).reduce((target, key) => {
       target['screen-' + key] = source[key]
 

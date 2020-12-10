@@ -49,7 +49,6 @@ export const atRulePresedence = (css: string): number => (seperatorPrecedence(cs
 // - https://developer.mozilla.org/docs/Web/CSS/:active#Active_links
 // - https://github.com/tailwindlabs/tailwindcss/blob/master/stubs/defaultConfig.stub.js#L718
 
-/* eslint-disable capitalized-comments */
 const PRECEDENCES_BY_PSEUDO_CLASS = [
   /* fi */ 'rst' /* : 0 */,
   /* la */ 'st' /* : 1 */,
@@ -69,7 +68,6 @@ const PRECEDENCES_BY_PSEUDO_CLASS = [
   /* op */ 'tiona' /* l: 15 */,
   /* re */ 'quire' /* d: 16 */,
 ]
-/* eslint-enable capitalized-comments */
 
 const pseudoPrecedence = (pseudoClass: string): number =>
   1 <<

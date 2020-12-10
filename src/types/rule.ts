@@ -5,6 +5,6 @@ export interface Rule {
   /** "text-sm", "rotate-45" */
   directive: string
 
-  /** "-rotate-45" => true */
+  /** "-rotate-45" =\> true */
   negate: boolean
 }

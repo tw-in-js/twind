@@ -97,7 +97,7 @@ export const createPreflight = (theme: ThemeResolver): CSSRules => ({
 
   /**
    * Undo the `border-style: none` reset that Normalize applies to images so that
-   * our `border-{width} utilities have the expected effect.
+   * our `border-<width>` utilities have the expected effect.
    *
    * The Normalize reset is unnecessary for us since we default the border-width
    * to 0 on all elements.

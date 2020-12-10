@@ -1,16 +1,17 @@
 import type * as CSS from 'csstype'
+
 import type { Falsy } from './util'
 
 /**
  * Pseudo class
- * watch out for ':root' -> that could use '*' instead
+ * watch out for ':root' - that could use '*' instead
  */
 // [`:${string}`]: CSSRules
-export type CSSSimplePseudos = { [K in CSS.SimplePseudos]?: CSSRules }
+export type CSSSimplePseudos = { [K in CSS.SimplePseudos as `&${string & K}`]?: CSSRules }
 
 export interface CSSPseudos extends CSSSimplePseudos {
-  ':nth-child(2n)'?: CSSRules
-  ':nth-child(odd)'?: CSSRules
+  '&:nth-child(2n)'?: CSSRules
+  '&:nth-child(odd)'?: CSSRules
 }
 
 export interface CSSCustomProperties {
@@ -59,6 +60,7 @@ export interface CSSRules {
   // ':root'?: CSSProperties
   // '*'?: CSSProperties
 
+  // TODO it would be great if we could use CSS Properties with mapped types to typechecked CSS rules
   [key: string]:
     | CSSProperties
     | CSSAtMedia

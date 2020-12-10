@@ -95,7 +95,6 @@ export const serialize = (
                 ),
                 key,
               ),
-              // eslint-disable-next-line unicorn/no-reduce
               p: waypoints.reduce((sum, p) => sum + p.p, 0),
             })
           } else {
@@ -146,7 +145,6 @@ export const serialize = (
       // Inject declarations
 
       rules.push({
-        // eslint-disable-next-line unicorn/no-reduce
         r: atRules.reduceRight(stringifyBlock, stringifyBlock(declarations, selector)),
 
         // Calculate precedence
@@ -172,7 +170,6 @@ export const serialize = (
     stringify(
       [],
       className ? '.' + escape(className) : '',
-      // eslint-disable-next-line unicorn/no-reduce
       rule ? rule.variants.reduceRight(variantPresedence, 0) : 0,
       css,
     )

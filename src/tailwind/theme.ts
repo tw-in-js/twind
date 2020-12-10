@@ -57,6 +57,7 @@ const linear = (
   divideBy = 1,
   start = 0,
   step = 1,
+  // eslint-disable-next-line max-params
 ): Record<string, string> => {
   const result: Record<string, string> = {}
 

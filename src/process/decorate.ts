@@ -25,7 +25,5 @@ export const decorate = (
     return { [variants[variant] || '&' + variant]: translation }
   }
 
-  return (translation, rule) =>
-    // eslint-disable-next-line unicorn/no-reduce
-    rule.variants.reduceRight(applyVariant, translation)
+  return (translation, rule) => rule.variants.reduceRight(applyVariant, translation)
 }
