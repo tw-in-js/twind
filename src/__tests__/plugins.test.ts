@@ -60,7 +60,5 @@ test('plugin can return new tokens to parse using `tw`', () => {
     'font-bold py-2 px-4 rounded sm:focus:hover:bg-purple-500 sm:focus:underline transition',
   )
 
-  expect(() => tw('btn-unknown-color')).toThrow(
-    `UNKNOWN_DIRECTIVE: {"id":"UNKNOWN_DIRECTIVE","rule":{"variants":[],"directive":"btn-unknown-color","negate":false}}`,
-  )
+  expect(() => tw('btn-unknown-color')).toThrow(/UNKNOWN_DIRECTIVE/)
 })

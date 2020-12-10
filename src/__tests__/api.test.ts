@@ -437,7 +437,7 @@ test('expand nested selector', () => {
 test('can not call setup after config', () => {
   expect(() => {
     setup()
-  }).toThrow('LATE_SETUP_CALL: {"id":"LATE_SETUP_CALL"}')
+  }).toThrow('Error: [LATE_SETUP_CALL] {}')
 })
 
 test('can call setup once', () => {
@@ -450,5 +450,5 @@ test('can call setup once', () => {
 
   expect(() => {
     setup()
-  }).toThrow('LATE_SETUP_CALL: {"id":"LATE_SETUP_CALL"}')
+  }).toThrow('Error: [LATE_SETUP_CALL] {}')
 })

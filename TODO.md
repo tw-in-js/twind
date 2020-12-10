@@ -7,10 +7,9 @@
 
 - Ideas
 
-  - stack trace point to callee
   - _"on"_ colors
   - play mode
-  - react to manual class name change in dev-tools and generate that directive
+  - on to manual class name change in dev-tools and generate that directive
   - adapter for standard tailwindcss plugins
 
 - Theme

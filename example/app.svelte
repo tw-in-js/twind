@@ -7,6 +7,7 @@
       bg-current
       font-sans
       w-full
+      xxx
       min-h-screen
       flex
       items-center

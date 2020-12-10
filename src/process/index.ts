@@ -45,7 +45,7 @@ const toId = (rule: Rule, directive = rule.directive): string => {
 
 export const configure = (
   config: Configuration = {},
-): { setup: () => void; process: (tokens: unknown[]) => string } => {
+): { init: () => void; process: (tokens: unknown[]) => string } => {
   const theme = makeThemeResolver(config.theme)
 
   const mode = config.mode || warn
@@ -141,7 +141,7 @@ export const configure = (
       activeVariants.shift()
       negate = false
 
-      // If this is a inline directive
+      // If this is a unknown inline directive
       if (!id) {
         // We can now generate a unique name based on the created translation
         // This id does not include the variants as a directive is always independent of variants
@@ -151,34 +151,27 @@ export const configure = (
         // Remember it
         inlineDirectiveName.set(rule.directive as InlineDirective, id)
 
-        // Generate a id including the current variants
+        // Generate an id including the current variants
         id = toId(rule, id)
-
-        // And use that to lookup a cached class name
-        className = idToClassName[id]
       }
 
-      // In case this is a inline directive
-      // we may now have a class name
-      if (!className) {
-        // CSS class names have been returned
-        if (is.string(translation)) {
-          // Use as is
-          className = translation
-        } else if (translation) {
-          // 3. decorate: apply variants
-          translation = decorate(translation, rule)
+      // CSS class names have been returned
+      if (is.string(translation)) {
+        // Use as is
+        className = translation
+      } else if (translation) {
+        // 3. decorate: apply variants
+        translation = decorate(translation, rule)
 
-          className = hash ? hash(JSON.stringify(translation)) : id
+        className = hash ? hash(JSON.stringify(translation)) : id
 
-          // 4. serialize: convert to css string with precedence
-          // 5. inject: add to dom
-          serialize(translation, className, rule).forEach(inject)
-        } else {
-          // No plugin or plugin did not return something
-          mode.report({ id: 'UNKNOWN_DIRECTIVE', rule }, context)
-          className = ''
-        }
+        // 4. serialize: convert to css string with precedence
+        // 5. inject: add to dom
+        serialize(translation, className, rule).forEach(inject)
+      } else {
+        // No plugin or plugin did not return something
+        mode.report({ id: 'UNKNOWN_DIRECTIVE', rule }, context)
+        className = ''
       }
 
       // Remember the generated class name
@@ -205,7 +198,7 @@ export const configure = (
   }
 
   return {
-    setup: () => mode.report({ id: 'LATE_SETUP_CALL' }, context),
+    init: () => mode.report({ id: 'LATE_SETUP_CALL' }, context),
     process,
   }
 }

@@ -4,25 +4,20 @@ test('mode warn (default)', () => {
   const consoleWarn = console.warn
 
   try {
-    console.warn = jest.fn()
+    const warn = jest.fn()
+    console.warn = warn
 
     expect(tw('unknown-directive')).toBe('')
-    expect(console.warn).toHaveBeenCalledTimes(1)
-    expect(console.warn).toHaveBeenCalledWith(
-      `UNKNOWN_DIRECTIVE: {"id":"UNKNOWN_DIRECTIVE","rule":{"variants":[],"directive":"unknown-directive","negate":false}}`,
-    )
+    expect(warn).toHaveBeenCalledTimes(1)
+    expect(warn.mock.calls[0][0]).toMatch(/UNKNOWN_DIRECTIVE/)
 
     expect(tw('rounded-t-xxx')).toBe('rounded-t-xxx')
-    expect(console.warn).toHaveBeenCalledTimes(2)
-    expect(console.warn).toHaveBeenLastCalledWith(
-      `UNKNOWN_THEME_VALUE: {"id":"UNKNOWN_THEME_VALUE","section":"borderRadius","keypath":["t","xxx"]}`,
-    )
+    expect(warn).toHaveBeenCalledTimes(2)
+    expect(warn.mock.calls[1][0]).toMatch(/UNKNOWN_THEME_VALUE/)
 
     expect(tw('gap')).toBe('gap')
-    expect(console.warn).toHaveBeenCalledTimes(3)
-    expect(console.warn).toHaveBeenLastCalledWith(
-      `UNKNOWN_THEME_VALUE: {"id":"UNKNOWN_THEME_VALUE","section":"gap","keypath":["DEFAULT"]}`,
-    )
+    expect(warn).toHaveBeenCalledTimes(3)
+    expect(warn.mock.calls[2][0]).toMatch(/UNKNOWN_THEME_VALUE/)
   } finally {
     console.warn = consoleWarn
   }
@@ -34,9 +29,7 @@ test('mode strict', () => {
     mode: strict,
   })
 
-  expect(() => instance.tw('unknown-directive')).toThrow(
-    `UNKNOWN_DIRECTIVE: {"id":"UNKNOWN_DIRECTIVE","rule":{"variants":[],"directive":"unknown-directive","negate":false}}`,
-  )
+  expect(() => instance.tw('unknown-directive')).toThrow(/UNKNOWN_DIRECTIVE/)
 })
 
 test('ignore vendor specific pseudo classes errors', () => {
@@ -104,8 +97,5 @@ test('propagate other errors to warn', () => {
   expect(injector.insert).toHaveBeenNthCalledWith(2, '.underline{text-decoration:underline}', 0)
 
   expect(warn).toHaveBeenCalledTimes(1)
-  expect(warn).toHaveBeenNthCalledWith(
-    1,
-    `INJECT_CSS_ERROR: {"id":"INJECT_CSS_ERROR","rule":".invalid-web{color:blue}","error":{}}`,
-  )
+  expect(warn.mock.calls[0][0]).toMatch(/INJECT_CSS_ERROR/)
 })
