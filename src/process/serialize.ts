@@ -1,7 +1,5 @@
 import type { Context, CSSRules, Prefixer, Rule } from '../types'
 
-import * as is from '../internal/is'
-
 import { join, includes, escape, hyphenate } from '../internal/util'
 import {
   responsivePrecedence,
@@ -27,10 +25,10 @@ export const serialize = (
   // used by `tagVars` below
   const tagVar = (_: string, property: string): string => '--' + tag(property)
 
-  const tagVars = (value: string): string => `${value}`.replace(/--(tw-[\w-]+)\b/g, tagVar)
+  const tagVars = (value: string | number): string => `${value}`.replace(/--(tw-[\w-]+)\b/g, tagVar)
 
   // Create a css declaration with prefix and hashed custom properties
-  const stringifyDeclaration = (property: string, value: string | string[]): string => {
+  const stringifyDeclaration = (property: string, value: string | number | string[]): string => {
     property = tagVars(property)
 
     // Support array fallbacks
@@ -76,16 +74,32 @@ export const serialize = (
 
     // Walk through the object
     Object.keys(css).forEach((key) => {
-      const value = css[key] as CSSRules
+      const value = css[key]
 
-      if (is.object(value) && !Array.isArray(value)) {
+      // string or number
+      if (includes('rg', (typeof value)[5]) || Array.isArray(value)) {
+        // It is a Property
+        const property = hyphenate(key)
+
+        // Update presedence
+        numberOfDeclarations += 1
+        maxPropertyPresedence = Math.max(
+          maxPropertyPresedence,
+          declarationPropertyPrecedence(property),
+        )
+
+        // Add to the declaration block with prefixer applied
+        declarations =
+          (declarations && declarations + ';') +
+          stringifyDeclaration(property, value as string | number | string[])
+      } else if (value) {
         // If the value is an object this must be a nested block
         // like '@media ...', '@supports ... ', ':pseudo ...', '& > ...'
         // If this is a `@` rule
         if (key[0] === '@') {
           if (key[1] === 'f') {
             // `@font-face` is never wrapped, eg always global/root
-            stringify([], key, 0, value)
+            stringify([], key, 0, value as CSSRules)
           } else if (key[1] === 'k') {
             // @keyframes handling
             // To prevent
@@ -97,7 +111,7 @@ export const serialize = (
             // => "@keyframes name{from{transform:rotate(0deg)}from{transform:rotate(0deg)}}"
             const currentSize = rules.length
 
-            stringify([], '', 0, value)
+            stringify([], '', 0, value as CSSRules)
 
             const waypoints = rules.splice(currentSize, rules.length - currentSize)
 
@@ -118,11 +132,11 @@ export const serialize = (
               atRules.concat(key),
               selector,
               presedence | (responsivePrecedence(key) || atRulePresedence(key)),
-              value,
+              value as CSSRules,
             )
           }
         } else {
-          // A slector block: { '&:focus': { ... } }
+          // A selector block: { '&:focus': { ... } }
           // If this is a nested selector we need to
           // - replace `&` with the current selector
           // - propagate the presedence; if it is not nested we reset the presedence as it is most likely a global styles
@@ -141,22 +155,9 @@ export const serialize = (
                 )
               : key,
             hasNestedSelector ? presedence : 0,
-            value,
+            value as CSSRules,
           )
         }
-      } else if (value) {
-        // It is a Property
-        const property = hyphenate(key)
-
-        // Update presedence
-        numberOfDeclarations += 1
-        maxPropertyPresedence = Math.max(
-          maxPropertyPresedence,
-          declarationPropertyPrecedence(property),
-        )
-
-        // Add to the declaration block with prefixer applied
-        declarations = (declarations && declarations + ';') + stringifyDeclaration(property, value)
       }
     })
 
