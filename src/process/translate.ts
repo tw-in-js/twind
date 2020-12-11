@@ -9,11 +9,11 @@ export const translate = (
   context: Context,
 ): ((rule: Rule) => CSSRules | string | Falsy) => (rule) => {
   // If this is a inline directive - called it right away
-  if (is.function(rule.directive)) {
-    return rule.directive(context)
+  if (is.function(rule.d)) {
+    return rule.d(context)
   }
 
-  const parameters = rule.directive.split('-')
+  const parameters = rule.d.split('-')
 
   // Try to find a plugin to handle this directive
   // example 'bg-gradient-to-r'

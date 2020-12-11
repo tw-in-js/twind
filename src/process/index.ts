@@ -35,12 +35,12 @@ const sanitize = <T>(
 
 // Creates rule id including variants, negate and directive
 // which is exactly like a tailwind rule
-const toId = (rule: Rule, directive = rule.directive): string => {
+const toId = (rule: Rule, directive = rule.d): string => {
   if (is.function(directive)) return ''
 
-  const base = join(rule.variants, '')
+  const base = join(rule.v, '')
 
-  return (base && tail(base) + ':') + (rule.negate ? '-' : '') + directive
+  return (base && tail(base) + ':') + (rule.n ? '-' : '') + directive
 }
 
 export const configure = (
@@ -119,7 +119,7 @@ export const configure = (
     // For inline rules (functions) `toId` returns an empty string
     // in that case we check if we already have a name for the function
     // and use that one to generate the id
-    let id = toId(rule) || toId(rule, inlineDirectiveName.get(rule.directive as InlineDirective))
+    let id = toId(rule) || toId(rule, inlineDirectiveName.get(rule.d as InlineDirective))
 
     // Check if we already have a class name for this rule
     let className = idToClassName[id]
@@ -129,10 +129,10 @@ export const configure = (
     // This way we report the unknown directives onyl once
     if (className == null) {
       // `context.theme()` needs know if it should negate the theme value
-      negate = rule.negate
+      negate = rule.n
 
       // Keep track of active variants for nested `tw` calls
-      activeVariants.unshift(rule.variants)
+      activeVariants.unshift(rule.v)
 
       // 2. translate each rule using plugins
       let translation = translate(rule)
@@ -149,7 +149,7 @@ export const configure = (
         id = cyrb32(JSON.stringify(translation))
 
         // Remember it
-        inlineDirectiveName.set(rule.directive as InlineDirective, id)
+        inlineDirectiveName.set(rule.d as InlineDirective, id)
 
         // Generate an id including the current variants
         id = toId(rule, id)

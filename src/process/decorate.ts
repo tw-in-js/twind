@@ -38,5 +38,5 @@ export const decorate = (
   }
 
   // Apply variants depth-first
-  return (translation, rule) => rule.variants.reduceRight(applyVariant, translation)
+  return (translation, rule) => rule.v.reduceRight(applyVariant, translation)
 }

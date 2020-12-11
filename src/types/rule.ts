@@ -3,14 +3,18 @@ import type { CSSRules } from './css'
 import type { Falsy } from './util'
 
 export interface Rule {
-  /** [":sm", ":dark", ":hover"] */
-  variants: string[]
+  /**
+   * The variants: `[":sm", ":dark", ":hover"]`
+   */
+  v: string[]
 
-  /** "text-sm", "rotate-45" */
-  directive: string | InlineDirective
+  /**
+   * The directive: `"text-sm"`, `"rotate-45"`
+   */
+  d: string | InlineDirective
 
-  /** "-rotate-45" =\> true */
-  negate?: boolean
+  /** Is this rule negated: `"-rotate-45"` =\> `true` */
+  n?: boolean
 }
 
 export interface InlineDirective {

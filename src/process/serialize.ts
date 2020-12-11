@@ -193,7 +193,7 @@ export const serialize = (
       [],
       className ? '.' + escape(className) : '',
       // If we have a rule, create starting presedence based on the variants
-      rule ? rule.variants.reduceRight(variantPresedence, 0) : 0,
+      rule ? rule.v.reduceRight(variantPresedence, 0) : 0,
       css,
     )
 

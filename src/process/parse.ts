@@ -93,9 +93,9 @@ const saveRule = (buffer: string): '' => {
     const prefix = join(groupings.filter(onlyPrefixes))
 
     rules.push({
-      variants: groupings.filter(onlyVariants),
-      directive: buffer === '&' ? prefix : (prefix && prefix + '-') + buffer,
-      negate,
+      v: groupings.filter(onlyVariants),
+      d: buffer === '&' ? prefix : (prefix && prefix + '-') + buffer,
+      n: negate,
     })
   }
 
@@ -184,8 +184,8 @@ const parseToken = (token: Token): void => {
     token.forEach(parseGroupedToken)
   } else if (is.function(token)) {
     rules.push({
-      variants: groupings.filter(onlyVariants),
-      directive: token,
+      v: groupings.filter(onlyVariants),
+      d: token,
     })
   } else if (is.object(token)) {
     Object.keys(token).forEach((key) => {

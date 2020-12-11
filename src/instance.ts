@@ -11,7 +11,7 @@ export const create = (config?: Configuration): Instance => {
   // These variables are not named `tw` and `setup`
   // as we use `tw` and `setup` to find the callee site
   // during stacktrace generation
-  // This allows the reported stacktrace to start at the call site.
+  // This allows the error stacktrace to start at the call site.
 
   // Used by `tw`
   let process = (tokens: unknown[]): string => {
