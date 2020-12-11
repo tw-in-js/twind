@@ -2,7 +2,7 @@ import type { Rule, Token } from '../types'
 
 import * as is from '../internal/is'
 
-import { join, tail } from '../internal/util'
+import { join, tail, includes } from '../internal/util'
 
 // The parsing is stacked based
 // when ever we find a group start
@@ -82,22 +82,19 @@ const onlyPrefixes = (s: string): '' | boolean => s && s[0] !== ':'
 const onlyVariants = (s: string): '' | boolean => s[0] === ':'
 
 const saveRule = (buffer: string): '' => {
-  if (buffer) {
-    let negate = false
+  const negate = buffer[0] === '-'
 
-    if (buffer[0] === '-') {
-      negate = true
-      buffer = tail(buffer)
-    }
-
-    const prefix = join(groupings.filter(onlyPrefixes))
-
-    rules.push({
-      v: groupings.filter(onlyVariants),
-      d: buffer === '&' ? prefix : (prefix && prefix + '-') + buffer,
-      n: negate,
-    })
+  if (negate) {
+    buffer = tail(buffer)
   }
+
+  const prefix = join(groupings.filter(onlyPrefixes))
+
+  rules.push({
+    v: groupings.filter(onlyVariants),
+    d: buffer === '&' ? prefix : (prefix && prefix + '-') + buffer,
+    n: negate,
+  })
 
   return ''
 }
@@ -109,17 +106,13 @@ const parseString = (token: string, isVariant?: boolean): void => {
   for (let position = 0; position < token.length; ) {
     switch ((char = token[position++])) {
       case ':':
-        if (buffer) {
-          buffer = startGrouping(':' + buffer)
-        }
+        buffer = buffer && startGrouping(':' + buffer)
 
         break
 
       case '(':
         // If there is a buffer this is the prefix for all grouped tokens
-        if (buffer) {
-          buffer = startGrouping(buffer)
-        }
+        buffer = buffer && startGrouping(buffer)
 
         startGrouping()
 
@@ -130,7 +123,7 @@ const parseString = (token: string, isVariant?: boolean): void => {
       case '\t':
       case '\n':
       case '\r':
-        buffer = saveRule(buffer)
+        buffer = buffer && saveRule(buffer)
         endGrouping(char !== ')')
 
         break
@@ -140,32 +133,39 @@ const parseString = (token: string, isVariant?: boolean): void => {
     }
   }
 
-  if (isVariant) {
-    if (buffer) {
+  if (buffer) {
+    if (isVariant) {
       startGrouping(':' + buffer)
+    } else {
+      saveRule(buffer)
     }
-  } else {
-    saveRule(buffer)
   }
 }
 
 const parseGroupedToken = (token: Token): void => {
-  if (token) {
-    startGrouping()
+  startGrouping()
 
-    // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    parseToken(token)
+  // eslint-disable-next-line @typescript-eslint/no-use-before-define
+  parseToken(token)
 
-    endGrouping()
-  }
+  endGrouping()
 }
 
 const parseGroup = (key: string, token: Token): void => {
   if (token) {
     startGrouping()
 
-    // => Array.isArray is already matched by is.object
-    const isVariant = is.string(token) || is.object(token) || is.function(token)
+    // we care about: string, object and function
+    // "undefined"
+    // "object" - this includes arrays
+    // "boolean"
+    // "number"
+    // "bigint"
+    // "string"
+    // "symbol"
+    // "function"
+    // 2nd char is uniq
+    const isVariant = includes('tbu', (typeof token)[1])
 
     parseString(key, isVariant)
 
@@ -178,19 +178,24 @@ const parseGroup = (key: string, token: Token): void => {
 }
 
 const parseToken = (token: Token): void => {
-  if (is.string(token)) {
-    parseString(token)
-  } else if (Array.isArray(token)) {
-    token.forEach(parseGroupedToken)
-  } else if (is.function(token)) {
-    rules.push({
-      v: groupings.filter(onlyVariants),
-      d: token,
-    })
-  } else if (is.object(token)) {
-    Object.keys(token).forEach((key) => {
-      parseGroup(key, token[key])
-    })
+  switch (typeof token) {
+    case 'string':
+      parseString(token)
+      break
+    case 'function':
+      rules.push({
+        v: groupings.filter(onlyVariants),
+        d: token,
+      })
+      break
+    case 'object':
+      if (Array.isArray(token)) {
+        token.forEach(parseGroupedToken)
+      } else if (token) {
+        Object.keys(token).forEach((key) => {
+          parseGroup(key, token[key])
+        })
+      }
   }
 }
 
