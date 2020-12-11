@@ -73,7 +73,7 @@ export const configure = (
         theme(section, key as string, defaultValue as any) ||
         mode.unknown(
           section,
-          key == null || is.array(key) ? key : key.split('.'),
+          key == null || Array.isArray(key) ? key : key.split('.'),
           defaultValue != null,
           context,
         )
@@ -96,7 +96,7 @@ export const configure = (
 
   // Inject css into the target enviroment
   const inject = makeInject(
-    config.injector || (is.browser ? cssomInjector({ nonce: config.nonce }) : noOpInjector()),
+    config.injector || (typeof window === 'undefined' ? noOpInjector() : cssomInjector(config)),
     mode,
     context,
   )
@@ -170,7 +170,7 @@ export const configure = (
         serialize(translation, className, rule).forEach(inject)
       } else {
         // No plugin or plugin did not return something
-        mode.report({ id: 'UNKNOWN_DIRECTIVE', rule }, context)
+        mode.report({ id: 'UNKNOWN_DIRECTIVE', rule: id }, context)
         className = ''
       }
 

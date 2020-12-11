@@ -1,8 +1,6 @@
-/* eslint-disable tsdoc/syntax */
-/**
+/*
  * @jest-environment node
  */
-/* eslint-enable tsdoc/syntax */
 
 import { tw } from '..'
 

@@ -47,7 +47,7 @@ const interleave = (strings: TemplateStringsArray, interpolations: Token[]): Tok
 
 // Tokens maybe a template literal -> interleave it to a flat array
 const asTokens = (tokens: unknown[]): Token[] =>
-  is.array(tokens[0]) && is.array(((tokens[0] as unknown) as TemplateStringsArray).raw)
+  Array.isArray(tokens[0]) && Array.isArray(((tokens[0] as unknown) as TemplateStringsArray).raw)
     ? interleave((tokens[0] as unknown) as TemplateStringsArray, tail(tokens) as Token[])
     : (tokens as Token[])
 
@@ -164,7 +164,7 @@ const parseGroup = (key: string, token: Token): void => {
   if (token) {
     startGrouping()
 
-    // => is.array is already matched by is.object
+    // => Array.isArray is already matched by is.object
     const isVariant = is.string(token) || is.object(token) || is.function(token)
 
     parseString(key, isVariant)
@@ -180,7 +180,7 @@ const parseGroup = (key: string, token: Token): void => {
 const parseToken = (token: Token): void => {
   if (is.string(token)) {
     parseString(token)
-  } else if (is.array(token)) {
+  } else if (Array.isArray(token)) {
     token.forEach(parseGroupedToken)
   } else if (is.function(token)) {
     rules.push({

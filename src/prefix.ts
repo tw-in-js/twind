@@ -8,9 +8,10 @@ export const autoprefix: Prefixer = (property: string, value: string): string =>
   let cssText = declaration
 
   const flag = prefixProperty(property)
-  if (flag & 0b001) cssText += `;-ms-${declaration}`
-  if (flag & 0b010) cssText += `;-moz-${declaration}`
-  if (flag & 0b100) cssText += `;-webkit-${declaration}`
+
+  if (flag & 1 /* 0b001 */) cssText += `;-ms-${declaration}`
+  if (flag & 2 /* 0b010 */) cssText += `;-moz-${declaration}`
+  if (flag & 4 /* 0b100 */) cssText += `;-webkit-${declaration}`
 
   return cssText
 }

@@ -17,9 +17,9 @@ import { includes, join, joinTruthy, tail, capitalize } from '../internal/util'
 import { corners, expandEdges, edges } from './helpers'
 
 // Shared variables
-let _: undefined | string | CSSRules | CSSProperties | string[] | boolean | Falsy
+let _: undefined | string | CSSRules | CSSProperties | string[] | boolean | Falsy | number
 let __: undefined | string | CSSProperties
-let $: undefined | string
+let $: undefined | string | number
 
 const property = (property: string) => (
   params: string[],
@@ -76,16 +76,13 @@ const asRGBA = <T extends string | undefined>(
   opacityDefault?: string,
 ): T | string => {
   if (color && color[0] === '#') {
-    const length = (color.length - 1) / 3
-    const factor = [17, 1, 0.062272][length - 1]
-
     /* eslint-disable unicorn/prefer-string-slice */
-    return `rgba(${parseColorComponent(color.substr(1, length), factor)},${parseColorComponent(
-      color.substr(1 + length, length),
-      factor,
-    )},${parseColorComponent(
-      color.substr(1 + 2 * length, length),
-      factor,
+    return `rgba(${parseColorComponent(
+      color.substr(1, (_ = (color.length - 1) / 3)),
+      ($ = [17, 1, 0.062272][_ - 1]),
+    )},${parseColorComponent(color.substr(1 + _, _), $)},${parseColorComponent(
+      color.substr(1 + 2 * _, _),
+      $,
     )},var(--tw-${opacityProperty}${opacityDefault ? ',' + opacityDefault : ''}))`
     /* eslint-enable unicorn/prefer-string-slice */
   }
@@ -125,7 +122,7 @@ const reversableEdge = (
           [$]: '0',
           [joinTruthy([prefix, _[0], suffix])]:
             (__ = theme(section, tail(params))) && `calc(${__} * var(${$}))`,
-          // IE 11 fallback
+          // With fallback
           [joinTruthy([prefix, _[1], suffix])]: __ && [__, `calc(${__} * calc(1 - var(${$})))`],
         }
     : undefined
@@ -154,19 +151,14 @@ const gridPlugin = (kind: string): DirectiveHandler => (params) => {
     case 'auto':
       return { [`grid-${kind}`]: 'auto' }
     case 'span':
-      return (
-        params[1] && {
-          [`grid-${kind}`]:
-            params[1] === 'full' ? '1 / -1' : `span ${params[1]} / span ${params[1]}`,
-        }
-      )
+      return {
+        [`grid-${kind}`]: params[1] === 'full' ? '1 / -1' : `span ${params[1]} / span ${params[1]}`,
+      }
     case 'start':
     case 'end':
-      return (
-        params.length === 2 && {
-          [`grid-${kind}-${params[0]}`]: params[1],
-        }
-      )
+      return {
+        [`grid-${kind}-${params[0]}`]: params[1],
+      }
   }
 }
 
@@ -210,7 +202,7 @@ const transform = (gpu?: boolean): string =>
 // .translate-y-1/2	--translate-y: 50%;
 // .skew-y-0	--skew-y: 0;
 // .skew-y-1	--skew-y: 1deg;
-const transformFunction: DirectiveHandler = (params, context, id) =>
+const transformXYFunction: DirectiveHandler = (params, context, id) =>
   (_ = context.theme(id as 'scale' | 'skew' | 'translate', params[1] || params[0])) && {
     [`--tw-${id}-x`]: params[0] !== 'y' && _,
     [`--tw-${id}-y`]: params[0] !== 'x' && _,
@@ -240,8 +232,8 @@ const margin = edgesPluginFor('margin')
 // 'max-h-0.5' -> maxHeight
 const minMax: DirectiveHandler = (params, { theme }, id) =>
   (_ = ({ w: 'width', h: 'height' } as Record<string, undefined | string>)[params[0]]) && {
-    [`${id}-${_}`]: theme(
-      `${id}${capitalize(_)}` as 'minWidth' | 'minHeight' | 'maxWidth' | 'maxHeight',
+    [(_ = `${id}${capitalize(_)}`)]: theme(
+      _ as 'minWidth' | 'minHeight' | 'maxWidth' | 'maxHeight',
       tail(params),
     ),
   }
@@ -342,25 +334,8 @@ export const corePlugins: Plugins = {
 
   truncate: {
     overflow: 'hidden',
-    'text-overflow': 'ellipsis',
-    'white-space': 'nowrap',
-  },
-
-  resize: (params) =>
-    params.length < 2 && {
-      resize:
-        ({ x: 'vertical', y: 'horizontal' } as Record<string, string | undefined>)[params[0]] ||
-        params[0] ||
-        'both',
-    },
-
-  // TODO remove once IE11 support is dropped: https://www.digitalocean.com/community/tutorials/css-no-more-clearfix-flow-root
-  clearfix: {
-    '&::after': {
-      content: '""',
-      display: 'table',
-      clear: 'both',
-    },
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
   },
 
   'sr-only': {
@@ -370,8 +345,8 @@ export const corePlugins: Plugins = {
     padding: '0',
     margin: '-1px',
     overflow: 'hidden',
-    clip: 'rect(0,0,0,0)',
     whiteSpace: 'nowrap',
+    clip: 'rect(0,0,0,0)',
     borderWidth: '0',
   },
 
@@ -382,9 +357,16 @@ export const corePlugins: Plugins = {
     padding: '0',
     margin: '0',
     overflow: 'visible',
-    clip: 'auto',
     whiteSpace: 'normal',
+    clip: 'auto',
   },
+
+  resize: (params) => ({
+    resize:
+      ({ x: 'vertical', y: 'horizontal' } as Record<string, string | undefined>)[params[0]] ||
+      params[0] ||
+      'both',
+  }),
 
   box: (params) => ({ 'box-sizing': `${params[0]}-box` }),
 
@@ -453,7 +435,7 @@ export const corePlugins: Plugins = {
   place: (params) => placeHelper('place-' + params[0], tail(params)),
 
   overscroll: (params) => ({
-    ['overscroll-behavior' + (params[1] ? '-' + params[0] : '')]: params[1] || params[0],
+    ['overscrollBehavior' + (params[1] ? '-' + params[0] : '')]: params[1] || params[0],
   }),
 
   col: gridPlugin('column'),
@@ -565,9 +547,9 @@ export const corePlugins: Plugins = {
       transform: [`rotate(${_})`, transform()],
     },
 
-  scale: transformFunction,
-  translate: transformFunction,
-  skew: transformFunction,
+  scale: transformXYFunction,
+  translate: transformXYFunction,
+  skew: transformXYFunction,
 
   // .gap-0	gap: 0;
   // .gap-1	gap: 0.25rem;
@@ -576,7 +558,7 @@ export const corePlugins: Plugins = {
   // .gap-x-1	column-gap: 0.25rem;
   gap: (params, context, id) =>
     (_ = ({ x: 'column', y: 'row' } as Record<string, string | undefined>)[params[0]])
-      ? { [_ + '-gap']: context.theme('gap', tail(params)) }
+      ? { [_ + 'Gap']: context.theme('gap', tail(params)) }
       : themeProperty('gap')(params, context, id),
 
   // .stroke-current	stroke: currentColor;
@@ -592,7 +574,7 @@ export const corePlugins: Plugins = {
   outline: (params, { theme }) =>
     (_ = theme('outline', params)) && {
       outline: _[0],
-      'outline-offset': _[1],
+      outlineOffset: _[1],
     },
 
   break(params) {
@@ -644,7 +626,7 @@ export const corePlugins: Plugins = {
       case 'fixed':
       case 'local':
       case 'scroll':
-        return propertyValue('background-attachment', ',')(params)
+        return propertyValue('backgroundAttachment', ',')(params)
 
       case 'bottom':
       case 'center':
@@ -662,13 +644,9 @@ export const corePlugins: Plugins = {
         return propertyValue('backgroundSize')(params)
 
       case 'repeat':
-        switch (params[1]) {
-          case 'x':
-          case 'y':
-            return propertyValue('backgroundRepeat')(params)
-        }
-
-        return { 'background-repeat': params[1] || params[0] }
+        return includes('xy', params[1])
+          ? propertyValue('backgroundRepeat')(params)
+          : { 'background-repeat': params[1] || params[0] }
 
       case 'opacity':
         return opacityProperty(params, theme, id, 'background')
@@ -723,7 +701,9 @@ export const corePlugins: Plugins = {
   divide: (params, context, id) =>
     (_ =
       reversableEdge(params, context, id, 'divideWidth', 'border', 'width') ||
-      border(params, context, id)) && { '&>:not([hidden])~:not([hidden])': _ },
+      border(params, context, id)) && {
+      '&>:not([hidden])~:not([hidden])': _ as CSSRules,
+    },
 
   space: (params, context, id) =>
     (_ = reversableEdge(params, context, id, 'space', 'margin')) && {
@@ -744,7 +724,7 @@ export const corePlugins: Plugins = {
   shadow: (params, { theme }) =>
     (_ = theme('boxShadow', params)) && {
       '--tw-shadow': _,
-      // IE11 fallback first, then modern with ring-* support
+      // Fallback first, then modern with ring-* support
       boxShadow: [_, boxShadow()],
     },
 
@@ -753,15 +733,16 @@ export const corePlugins: Plugins = {
       // Try to auto inject keyframes
       const parts = $.split(' ')
 
-      // Try to find a keyframe defintion in the theme
+      // Try to find a keyframe defintion in the theme using the first part
       // Provide a default (__ = {}) and check if that is returned
       if ((_ = theme('keyframes', parts[0], (__ = {}))) !== __) {
-        const name = tag(parts[0])
-
-        return {
-          animation: name + ' ' + join(tail(parts), ' '),
-          ['@keyframes ' + name]: _,
-        }
+        // Use a hashed named for the keyframes
+        return (
+          ($ = tag(parts[0])) && {
+            animation: $ + ' ' + join(tail(parts), ' '),
+            ['@keyframes ' + $]: _,
+          }
+        )
       }
 
       return { animation: $ }

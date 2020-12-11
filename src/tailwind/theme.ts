@@ -1,4 +1,4 @@
-import type { Theme } from '../types'
+import type { Theme, ThemeSectionResolver } from '../types'
 
 // '1/2': '50%',
 // '1/3': '33.333333%',
@@ -68,6 +68,8 @@ const linear = (
 
   return result
 }
+
+const alias = (key: keyof Theme): ThemeSectionResolver => (theme) => theme(key)
 
 export const defaultTheme: Theme = {
   screens: {
@@ -249,7 +251,7 @@ export const defaultTheme: Theme = {
     bounce: 'bounce 1s infinite',
   },
 
-  backgroundColor: (theme) => theme('colors'),
+  backgroundColor: alias('colors'),
   backgroundImage: {
     none: 'none',
     // These are built-in
@@ -262,12 +264,12 @@ export const defaultTheme: Theme = {
     // 'gradient-to-l': 'linear-gradient(to left, var(--tw-gradient-stops))',
     // 'gradient-to-tl': 'linear-gradient(to top left, var(--tw-gradient-stops))',
   },
-  backgroundOpacity: (theme) => theme('opacity'),
+  backgroundOpacity: alias('opacity'),
   borderColor: (theme) => ({
     ...theme('colors'),
     DEFAULT: theme('colors.gray.200', 'currentColor'),
   }),
-  borderOpacity: (theme) => theme('opacity'),
+  borderOpacity: alias('opacity'),
   borderRadius: {
     none: '0px',
     sm: '0.125rem',
@@ -298,9 +300,9 @@ export const defaultTheme: Theme = {
     none: 'none',
   },
   container: {},
-  divideColor: (theme) => theme('borderColor'),
-  divideOpacity: (theme) => theme('borderOpacity'),
-  divideWidth: (theme) => theme('borderWidth'),
+  divideColor: alias('borderColor'),
+  divideOpacity: alias('borderOpacity'),
+  divideWidth: alias('borderWidth'),
   fill: { current: 'currentColor' },
   flex: {
     1: '1 1 0%',
@@ -309,48 +311,28 @@ export const defaultTheme: Theme = {
     none: 'none',
   },
   fontFamily: {
-    sans: [
-      'ui-sans-serif',
-      'system-ui',
-      '-apple-system',
-      'BlinkMacSystemFont',
-      '"Segoe UI"',
-      'Roboto',
-      '"Helvetica Neue"',
-      'Arial',
-      '"Noto Sans"',
-      'sans-serif',
-      '"Apple Color Emoji"',
-      '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-      '"Noto Color Emoji"',
-    ],
-    serif: ['ui-serif', 'Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
-    mono: [
-      'ui-monospace',
-      'SFMono-Regular',
-      'Menlo',
-      'Monaco',
-      'Consolas',
-      '"Liberation Mono"',
-      '"Courier New"',
-      'monospace',
-    ],
+    sans: 'ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"'.split(
+      ',',
+    ),
+    serif: 'ui-serif,Georgia,Cambria,"Times New Roman",Times,serif'.split(','),
+    mono: 'ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace'.split(
+      ',',
+    ),
   },
   fontSize: {
-    xs: ['0.75rem', { lineHeight: '1rem' }],
-    sm: ['0.875rem', { lineHeight: '1.25rem' }],
-    base: ['1rem', { lineHeight: '1.5rem' }],
-    lg: ['1.125rem', { lineHeight: '1.75rem' }],
-    xl: ['1.25rem', { lineHeight: '1.75rem' }],
-    '2xl': ['1.5rem', { lineHeight: '2rem' }],
-    '3xl': ['1.875rem', { lineHeight: '2.25rem' }],
-    '4xl': ['2.25rem', { lineHeight: '2.5rem' }],
-    '5xl': ['3rem', { lineHeight: '1' }],
-    '6xl': ['3.75rem', { lineHeight: '1' }],
-    '7xl': ['4.5rem', { lineHeight: '1' }],
-    '8xl': ['6rem', { lineHeight: '1' }],
-    '9xl': ['8rem', { lineHeight: '1' }],
+    xs: ['0.75rem', '1rem'],
+    sm: ['0.875rem', '1.25rem'],
+    base: ['1rem', '1.5rem'],
+    lg: ['1.125rem', '1.75rem'],
+    xl: ['1.25rem', '1.75rem'],
+    '2xl': ['1.5rem', '2rem'],
+    '3xl': ['1.875rem', '2.25rem'],
+    '4xl': ['2.25rem', '2.5rem'],
+    '5xl': ['3rem', '1'],
+    '6xl': ['3.75rem', '1'],
+    '7xl': ['4.5rem', '1'],
+    '8xl': ['6rem', '1'],
+    '9xl': ['8rem', '1'],
   },
   fontWeight: {
     thin: '100',
@@ -363,9 +345,8 @@ export const defaultTheme: Theme = {
     extrabold: '800',
     black: '900',
   },
-  gap: (theme) => theme('spacing'),
-  // TODO grid*
-  gradientColorStops: (theme) => theme('colors'),
+  gap: alias('spacing'),
+  gradientColorStops: alias('colors'),
   height: (theme) => ({
     auto: 'auto',
     ...theme('spacing'),
@@ -525,20 +506,32 @@ export const defaultTheme: Theme = {
     last: '9999',
     none: '0',
     ...linear(12, '', 1, 1),
+    // 1: '1',
+    // 2: '2',
+    // 3: '3',
+    // 4: '4',
+    // 5: '5',
+    // 6: '6',
+    // 7: '7',
+    // 8: '8',
+    // 9: '9',
+    // 10: '10',
+    // 11: '11',
+    // 12: '12',
   },
   outline: {
     none: ['2px solid transparent', '2px'],
     white: ['2px dotted white', '2px'],
     black: ['2px dotted black', '2px'],
   },
-  padding: (theme) => theme('spacing'),
-  placeholderColor: (theme) => theme('colors'),
-  placeholderOpacity: (theme) => theme('opacity'),
+  padding: alias('spacing'),
+  placeholderColor: alias('colors'),
+  placeholderOpacity: alias('opacity'),
   ringColor: (theme) => ({
     DEFAULT: theme('colors.blue.500', '#3b82f6'),
     ...theme('colors'),
   }),
-  ringOffsetColor: (theme) => theme('colors'),
+  ringOffsetColor: alias('colors'),
   ringOffsetWidth: exponential(8, 'px'),
   // 0: '0px',
   // 1: '1px',
@@ -595,7 +588,7 @@ export const defaultTheme: Theme = {
     // 6: '6deg',
     // 12: '12deg',
   },
-  space: (theme) => theme('spacing'),
+  space: alias('spacing'),
   stroke: {
     current: 'currentColor',
   },
@@ -603,13 +596,13 @@ export const defaultTheme: Theme = {
   // 0: '0',
   // 1: '1',
   // 2: '2',,
-  textColor: (theme) => theme('colors'),
-  textOpacity: (theme) => theme('opacity'),
+  textColor: alias('colors'),
+  textOpacity: alias('opacity'),
   transitionDuration: (theme) => ({
     DEFAULT: '150ms',
     ...theme('durations'),
   }),
-  transitionDelay: (theme) => theme('durations'),
+  transitionDelay: alias('durations'),
   transitionProperty: {
     none: 'none',
     all: 'all',
@@ -670,8 +663,8 @@ export const defaultTheme: Theme = {
     // '10/12': '83.333333%',
     // '11/12': '91.666667%',
 
-    full: '100%',
     screen: '100vw',
+    full: '100%',
     min: 'min-content',
     max: 'max-content',
   }),

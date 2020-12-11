@@ -1,34 +1,33 @@
 import type { Mode } from './types'
 
+import {join} from './internal/util'
+
 export const mode = (report: (message: string) => void): Mode => ({
-  unknown(section, keypath, optional, context) {
+  unknown(section, key = [], optional, context) {
     if (!optional) {
       // TODO hint about possible values, did you mean ...
-      this.report({ id: 'UNKNOWN_THEME_VALUE', section, keypath }, context)
+      this.report({ id: 'UNKNOWN_THEME_VALUE', key: join([section, ...key], '.') }, context)
     }
   },
 
   report({ id, ...info }) {
     // TODO message based on info
-    let message = `[${id}] ${JSON.stringify(info)}`
+    const message = `[${id}] ${JSON.stringify(info)}`
 
     // Generate a stacktrace that starts at callee site
     const stack = (new Error(message).stack || message).split('at ')
 
-    // Grap the message header - this includes line break and "at " indentation
-    message = stack.shift() as string
-
     // Drop all frames until we hit the first `tw` or `setup` call
+    // We are using splice(1, 1) to keep the message header - this includes line break and "at " indentation
     for (
       let frame: string | undefined;
-      (frame = stack.shift()) && !/(^|\.)(tw|setup) /.test(frame);
-
+      (frame = stack.splice(1, 1)[0]) && !/(^|\.)(tw|setup) /.test(frame);
     ) {
       /* no-op */
     }
 
     // Put it back together
-    report([message, ...stack].join('at '))
+    report(stack.join('at '))
   },
 })
 

@@ -54,9 +54,7 @@ import { tw } from '@tw-in-js/core'
 
 ### Polyfills
 
-- Object.keys()
-- Array.isArray
-- Math.imul
+- Math.imul for IE11
 
 ## Rational
 

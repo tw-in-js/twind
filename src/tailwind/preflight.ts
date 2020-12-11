@@ -20,9 +20,10 @@ export const createPreflight = (theme: ThemeResolver): CSSRules => ({
   /**
    * Removes the default spacing and border for appropriate elements.
    */
-  'blockquote,dl,dd,h1,h2,h3,h4,h5,h6,hr,figure,p,pre': { margin: '0' },
+  'body,blockquote,dl,dd,h1,h2,h3,h4,h5,h6,hr,figure,p,pre,fieldset,ol,ul': { margin: '0' },
 
   button: { backgroundColor: 'transparent', backgroundImage: 'none' },
+
   /**
    * Correct the inability to style clickable types in iOS and Safari.
    */
@@ -34,9 +35,12 @@ export const createPreflight = (theme: ThemeResolver): CSSRules => ({
    */
   'button:focus': { outline: ['1px dotted', '5px auto -webkit-focus-ring-color'] },
 
-  fieldset: { margin: '0', padding: '0' },
+  /**
+   * Remove the padding so developers are not caught out when they zero out 'fieldset' elements in all browsers.
+   */
+  'fieldset,ol,ul,legend': { padding: '0' },
 
-  'ol,ul': { listStyle: 'none', margin: '0', padding: '0' },
+  'ol,ul': { listStyle: 'none' },
 
   /**
    * 1. Use Tailwind's default "normal" line-height so the user isn't forced
@@ -56,7 +60,7 @@ export const createPreflight = (theme: ThemeResolver): CSSRules => ({
    * 2. Inherit font-family and line-height from `html` so users can set them as
    * a class directly on the `html` element.
    */
-  body: { margin: '0', fontFamily: 'inherit', lineHeight: 'inherit' },
+  body: { fontFamily: 'inherit', lineHeight: 'inherit' },
 
   /**
    * 1. Prevent padding and border from affecting element width.
@@ -167,12 +171,6 @@ export const createPreflight = (theme: ThemeResolver): CSSRules => ({
    * See: https://github.com/mozilla/gecko-dev/blob/2f9eacd9d3d995c937b4251a5557d95d494c9be1/layout/style/res/forms.css#L728-L737
    */
   ':-moz-ui-invalid': { boxShadow: 'none' },
-
-  /**
-   * Remove the padding so developers are not caught out when they zero out 'fieldset' elements in all browsers.
-   */
-
-  legend: { padding: '0' },
 
   /**
    * Add the correct vertical alignment in Chrome and Firefox.

@@ -45,7 +45,7 @@
     "tiny-css-prefixer": "^1.1.4"
   },
   "devDependencies": {
-    "@carv/esbundle": "^1.1.7",
+    "@carv/esbundle": "^1.1.8",
     "@carv/eslint-config": "^1.6.1",
     "@carv/jest-preset": "^1.1.8",
     "@carv/prettier-config": "^1.1.0",
@@ -69,6 +69,7 @@
     "access": "public",
     "registry": "https://registry.npmjs.com/"
   },
+  "amdName": "twInJs",
   "np": {
     "contents": "dist"
   },

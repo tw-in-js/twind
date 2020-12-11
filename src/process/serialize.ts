@@ -34,7 +34,7 @@ export const serialize = (
     property = tagVars(property)
 
     // Support array fallbacks
-    return is.array(value)
+    return Array.isArray(value)
       ? join(
           value.filter(Boolean).map((value) => prefix(property, tagVars(value))),
           ';',
@@ -78,7 +78,7 @@ export const serialize = (
     Object.keys(css).forEach((key) => {
       const value = css[key] as CSSRules
 
-      if (is.object(value) && !is.array(value)) {
+      if (is.object(value) && !Array.isArray(value)) {
         // If the value is an object this must be a nested block
         // like '@media ...', '@supports ... ', ':pseudo ...', '& > ...'
         // If this is a `@` rule

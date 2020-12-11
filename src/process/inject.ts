@@ -18,18 +18,18 @@ export const inject = (
   // to prevent double insertions
   const insertedRules = Object.create(null) as Record<string, boolean>
 
-  return ({ r: rule, p: presedence }) => {
+  return ({ r: css, p: presedence }) => {
     // If not already inserted
-    if (!insertedRules[rule]) {
+    if (!insertedRules[css]) {
       // Find the correct position
       const index = sortedInsertionIndex(sortedPrecedences, presedence)
 
       try {
         // Insert
-        injector.insert(rule, index)
+        injector.insert(css, index)
 
         // Mark rule as inserted
-        insertedRules[rule] = true
+        insertedRules[css] = true
 
         // Update sorted index
         sortedPrecedences.splice(index, 0, presedence)
@@ -38,8 +38,8 @@ export const inject = (
         // let filter them to prevent unnecessary warnings
         // ::-moz-focus-inner
         // :-moz-focusring
-        if (!/:-[mwo]/.test(rule)) {
-          mode.report({ id: 'INJECT_CSS_ERROR', rule, error: error as Error }, context)
+        if (!/:-[mwo]/.test(css)) {
+          mode.report({ id: 'INJECT_CSS_ERROR', css, error: error as Error }, context)
         }
       }
     }

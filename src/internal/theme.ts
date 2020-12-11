@@ -95,11 +95,11 @@ export const makeThemeResolver = (config?: ThemeConfiguration): ThemeResolver =>
       })
 
     if (key != null) {
-      const value: unknown = base[(is.array(key) ? join(key) : key) || 'DEFAULT']
+      const value: unknown = base[(Array.isArray(key) ? join(key) : key) || 'DEFAULT']
 
       return value == null
         ? defaultValue
-        : is.array(value) &&
+        : Array.isArray(value) &&
           // https://github.com/tailwindlabs/tailwindcss/blob/master/src/util/transformThemeValue.js
           // only testing for sections that uses an array for values
           !includes(['fontSize', 'outline'], section)
