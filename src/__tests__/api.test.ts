@@ -374,6 +374,34 @@ test('container padding per screeen', () => {
   ])
 })
 
+test('responsive if theme screens uses non px values', () => {
+  const { tw } = create({
+    injector,
+    prefix: false,
+    preflight: false,
+    mode: strict,
+    theme: {
+      screens: {
+        sm: '40rem',
+        md: '48rem',
+        lg: '64rem',
+        xl: '80rem',
+        '2xl': '96rem',
+      },
+    },
+  })
+
+  expect(tw`m(xl:8 2xl:16 sm:2 md:3 lg:4 1)`).toBe('xl:m-8 2xl:m-16 sm:m-2 md:m-3 lg:m-4 m-1')
+  expect(injector.target).toStrictEqual([
+    '.m-1{margin:0.25rem}',
+    '@media (min-width: 40rem){.sm\\:m-2{margin:0.5rem}}',
+    '@media (min-width: 48rem){.md\\:m-3{margin:0.75rem}}',
+    '@media (min-width: 64rem){.lg\\:m-4{margin:1rem}}',
+    '@media (min-width: 80rem){.xl\\:m-8{margin:2rem}}',
+    '@media (min-width: 96rem){.2xl\\:m-16{margin:4rem}}',
+  ])
+})
+
 test('falsy arguments', () => {
   expect(tw(true, false, '', null, undefined, 0, Number.NaN)).toBe('')
   expect(tw('')).toBe('')
@@ -504,6 +532,37 @@ test('expand nested selector', () => {
   ).toBe('tw-ec2uk9')
 
   expect(injector.target).toStrictEqual(['.tw-ec2uk9, a{color:black}'])
+})
+
+test('fontSize string', () => {
+  const { tw } = create({
+    injector,
+    prefix: false,
+    preflight: false,
+    mode: strict,
+    theme: {
+      extend: {
+        fontSize: {
+          big: '5.75rem',
+          'line-height': ['20px', '28px'],
+          css: [
+            '32px',
+            {
+              letterSpacing: '-0.02em',
+              lineHeight: '40px',
+            },
+          ],
+        },
+      },
+    },
+  })
+
+  expect(tw`text(big line-height css)`).toBe('text-big text-line-height text-css')
+  expect(injector.target).toStrictEqual([
+    '.text-css{font-size:32px;letter-spacing:-0.02em;line-height:40px}',
+    '.text-line-height{font-size:20px;line-height:28px}',
+    '.text-big{font-size:5.75rem}',
+  ])
 })
 
 test('can not call setup after config', () => {

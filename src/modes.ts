@@ -1,6 +1,6 @@
 import type { Mode } from './types'
 
-import {join} from './internal/util'
+import { join } from './internal/util'
 
 export const mode = (report: (message: string) => void): Mode => ({
   unknown(section, key = [], optional, context) {
@@ -22,6 +22,7 @@ export const mode = (report: (message: string) => void): Mode => ({
     for (
       let frame: string | undefined;
       (frame = stack.splice(1, 1)[0]) && !/(^|\.)(tw|setup) /.test(frame);
+
     ) {
       /* no-op */
     }

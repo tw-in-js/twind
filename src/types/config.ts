@@ -5,7 +5,7 @@ import type { Plugins } from './plugins'
 import type { Theme } from './theme'
 
 export interface Preflight {
-  (preflight: CSSRules, context: Context): CSSRules | undefined
+  (preflight: CSSRules, context: Context): CSSRules | undefined | void
 }
 
 export interface ThemeConfiguration extends Partial<Theme> {

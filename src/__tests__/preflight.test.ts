@@ -82,3 +82,27 @@ test('add preflight styles with theme missing some values', () => {
   )
   expect(injector.target).toContain('input::placeholder,textarea::placeholder{color:#a1a1aa}')
 })
+
+test('use custom preflight styles', () => {
+  const injector = virtualInjector()
+  create({
+    injector,
+    preflight: (css) => ({ html: css.html }),
+  })
+
+  expect(injector.target).toStrictEqual([
+    'html{line-height:1.5;-webkit-text-size-adjust:100%;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}',
+  ])
+})
+
+test('use custom preflight with fallback to built-in', () => {
+  const injector = virtualInjector()
+  create({
+    injector,
+    preflight: () => {
+      /* no-op */
+    },
+  })
+
+  expect(injector.target).toHaveLength(37)
+})
