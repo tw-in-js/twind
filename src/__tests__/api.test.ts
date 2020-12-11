@@ -108,6 +108,78 @@ test('variant pseudo presedence', () => {
   ])
 })
 
+test('responsive presedence', () => {
+  expect(tw`m(lg:9 2xl:6 xl:5 md:9 sm:7 8)`).toBe('lg:m-9 2xl:m-6 xl:m-5 md:m-9 sm:m-7 m-8')
+  expect(injector.target).toStrictEqual([
+    '.m-8{margin:2rem}',
+    '@media (min-width: 640px){.sm\\:m-7{margin:1.75rem}}',
+    '@media (min-width: 768px){.md\\:m-9{margin:2.25rem}}',
+    '@media (min-width: 1024px){.lg\\:m-9{margin:2.25rem}}',
+    '@media (min-width: 1280px){.xl\\:m-5{margin:1.25rem}}',
+    '@media (min-width: 1536px){.2xl\\:m-6{margin:1.5rem}}',
+  ])
+})
+
+test('at-rules presedence', () => {
+  expect(
+    tw`m(lg:9 sticky:6 motion-reduce:5 md:dark:4 motion-safe:9 dark:7 lg:motion-safe:12 8)`,
+  ).toBe(
+    'lg:m-9 sticky:m-6 motion-reduce:m-5 md:dark:m-4 motion-safe:m-9 dark:m-7 lg:motion-safe:m-12 m-8',
+  )
+  expect(injector.target).toStrictEqual([
+    '.m-8{margin:2rem}',
+    '@media (prefers-reduced-motion:reduce){.motion-reduce\\:m-5{margin:1.25rem}}',
+    '@supports ((position: -webkit-sticky) or (position:sticky)){.sticky\\:m-6{margin:1.5rem}}',
+    '@media (prefers-reduced-motion:no-preference){.motion-safe\\:m-9{margin:2.25rem}}',
+    '@media (prefers-color-scheme:dark){.dark\\:m-7{margin:1.75rem}}',
+    '@media (min-width: 768px){@media (prefers-color-scheme:dark){.md\\:dark\\:m-4{margin:1rem}}}',
+    '@media (min-width: 1024px){.lg\\:m-9{margin:2.25rem}}',
+    '@media (min-width: 1024px){@media (prefers-reduced-motion:no-preference){.lg\\:motion-safe\\:m-12{margin:3rem}}}',
+  ])
+})
+
+test('properties presedence (border)', () => {
+  expect(
+    tw`border rounded rounded-t-sm border-2 border-lrt-4 border-t-8 border-gray-300 border-dashed`,
+  ).toBe(
+    'border rounded rounded-t-sm border-2 border-lrt-4 border-t-8 border-gray-300 border-dashed',
+  )
+  expect(injector.target).toStrictEqual([
+    '.border-gray-300{--tw-border-opacity:1;border-color:#d1d5db;border-color:rgba(209,213,219,var(--tw-border-opacity))}',
+    '.border{border-width:1px}',
+    '.border-2{border-width:2px}',
+    '.border-dashed{border-style:dashed}',
+    '.rounded{border-radius:0.25rem}',
+    '.border-lrt-4{border-left-width:4px;border-right-width:4px;border-top-width:4px}',
+    '.border-t-8{border-top-width:8px}',
+    '.rounded-t-sm{border-top-left-radius:0.125rem;border-top-right-radius:0.125rem}',
+  ])
+})
+
+test('properties presedence (gradient)', () => {
+  expect(tw`bg-gradient-to-r from-purple-400 via-pink-500 to-red-500`).toBe(
+    'bg-gradient-to-r from-purple-400 via-pink-500 to-red-500',
+  )
+  expect(injector.target).toStrictEqual([
+    '.bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops,var(--tw-gradient-from,transparent),var(--tw-radient-to,transparent)))}',
+    '.from-purple-400{--tw-gradient-from:#a78bfa}',
+    '.via-pink-500{--tw-gradient-stops:var(--tw-gradient-from,transparent),#ec4899,var(--tw-gradient-to,transparent)}',
+    '.to-red-500{--tw-gradient-to:#ef4444}',
+  ])
+})
+
+test('properties presedence (divide)', () => {
+  expect(tw`divide(x x-reverse opacity-75 green-500)`).toBe(
+    'divide-x divide-x-reverse divide-opacity-75 divide-green-500',
+  )
+  expect(injector.target).toStrictEqual([
+    '.divide-green-500>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:#10b981;border-color:rgba(16,185,129,var(--tw-divide-opacity))}',
+    '.divide-x>:not([hidden])~:not([hidden]){--tw-divide-x-reverse:0;border-right-width:calc(1px * var(--tw-divide-x-reverse));border-left-width:1px;border-left-width:calc(1px * calc(1 - var(--tw-divide-x-reverse)))}',
+    '.divide-x-reverse>:not([hidden])~:not([hidden]){--tw-divide-x-reverse:1}',
+    '.divide-opacity-75>:not([hidden])~:not([hidden]){--tw-divide-opacity:0.75}',
+  ])
+})
+
 test.each([
   [
     ['bg-white', false && 'rounded'],
@@ -417,8 +489,8 @@ test('inject global styles', () => {
   ).toBe('tw-1kfw9fm')
 
   expect(injector.target).toStrictEqual([
-    ':root{--main-bg-color:brown}',
     '.tw-1kfw9fm{background-color:var(--main-bg-color)}',
+    ':root{--main-bg-color:brown}',
   ])
 })
 

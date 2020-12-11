@@ -24,8 +24,8 @@ test('add prefix', () => {
     'sticky scroll-snap-x appearance-menulist-button',
   )
   expect(injector.target).toMatchObject([
-    '.appearance-menulist-button{appearance:menulist-button;-moz-appearance:menulist-button;-webkit-appearance:menulist-button}',
     '.sticky{position:-webkit-sticky, sticky}',
+    '.appearance-menulist-button{appearance:menulist-button;-moz-appearance:menulist-button;-webkit-appearance:menulist-button}',
     '.scroll-snap-x{scroll-snap-type:x;-ms-scroll-snap-type:x;-webkit-scroll-snap-type:x}',
   ])
 })

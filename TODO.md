@@ -1,7 +1,9 @@
 - Packages
 
   - Server Side Rendering
-  - @tw-in-js/styled - like styled components
+  - @tw-in-js/legacy - for IE11 with reset and polyfills
+  - @tw-in-js/css: css and keyframes
+  - @tw-in-js/styled - like styled components (https://github.com/cristianbote/goober/tree/master/benchmarks)
   - @tw-in-js/eslint-plugin - nice to have
   - @tw-in-js/tw.macro - maybe?
 

@@ -17,7 +17,7 @@ let _: string | RegExpExecArray | null | number
 // 36rem -> 3
 // 96rem -> 9
 export const responsivePrecedence = (css: string): number =>
-  (((_ = /(?:^|min-width:\s*)(\d+(?:.\d+)?)(p)?/.exec(css)) ? +_[1] / (_[2] ? 15 : 1) / 10 : 0) &
+  (((_ = /(?:^|min-width: *)(\d+(?:.\d+)?)(p)?/.exec(css)) ? +_[1] / (_[2] ? 15 : 1) / 10 : 0) &
     31) <<
   23
 
@@ -26,9 +26,7 @@ export const seperatorPrecedence = (string: string): number => {
   _ = 0
 
   for (let index = string.length; index--; ) {
-    if (includes('-:,', string[index])) {
-      ++_
-    }
+    _ += (includes('-:,', string[index]) as unknown) as number
   }
 
   return _
@@ -130,30 +128,17 @@ export const makeVariantPresedenceCalculator = (
 
 // group: 1 => +1
 // group: 2 => -1
-const PROPERTY_PRECEDENCE_CORRECTION_GROUPS = /^(?:(border-(?:[tlbr].{2,4}-)?(?:w|c|sty)|[tlbr].{2,4}m?$|c.{7}$)|([fl].{5}l|g.{8}$|pl))/
-
-// 0 - 15 => 4 bits
-const propertyPrecedence = (property: string): number => {
-  // The property's baseline precedence is based on "-" counting
-  const unprefixedProperty =
-    property[0] === '-' ? tail(property, property.indexOf('-', 1) + 1) : property
-
-  _ = PROPERTY_PRECEDENCE_CORRECTION_GROUPS.exec(unprefixedProperty)
-
-  return (
-    seperatorPrecedence(unprefixedProperty) + (_ ? +!!_[1] /* +1 */ || -!!_[2] /* -1 */ : 0) + 1
-  )
-}
+const PROPERTY_PRECEDENCE_CORRECTION_GROUPS = /^(?:(border-(?!w|c|sty)|[tlbr].{2,4}m?$|c.{7}$)|([fl].{5}l|g.{8}$|pl))/
 
 // 0 - 15 => 4 bits
 // Ignore vendor prefixed and custom properties
 export const declarationPropertyPrecedence = (property: string): number =>
-  property[0] === '-' ? 0 : propertyPrecedence(property)
-
-export const descending = (value: number): number => Math.max(0, 15 - value)
-
-// 0 - 15 => 4 bits
-export const declarationValuePrecedence = (value: string): number =>
-  descending(seperatorPrecedence(value))
+  property[0] === '-'
+    ? 0
+    : seperatorPrecedence(property) +
+      ((_ = PROPERTY_PRECEDENCE_CORRECTION_GROUPS.exec(property))
+        ? +!!_[1] /* +1 */ || -!!_[2] /* -1 */
+        : 0) +
+      1
 
 /* eslint-enable no-return-assign, no-cond-assign, no-implicit-coercion */

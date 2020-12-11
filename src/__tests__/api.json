@@ -513,18 +513,18 @@
   "bg-gradient-to-r from-purple-400 via-pink-500 to-red-500": [
     "bg-gradient-to-r from-purple-400 via-pink-500 to-red-500",
     [
-      ".via-pink-500{--tw-gradient-stops:var(--tw-gradient-from,transparent),#ec4899,var(--tw-gradient-to,transparent)}",
+      ".bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops,var(--tw-gradient-from,transparent),var(--tw-radient-to,transparent)))}",
       ".from-purple-400{--tw-gradient-from:#a78bfa}",
-      ".to-red-500{--tw-gradient-to:#ef4444}",
-      ".bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops,var(--tw-gradient-from,transparent),var(--tw-radient-to,transparent)))}"
+      ".via-pink-500{--tw-gradient-stops:var(--tw-gradient-from,transparent),#ec4899,var(--tw-gradient-to,transparent)}",
+      ".to-red-500{--tw-gradient-to:#ef4444}"
     ]
   ],
   "bg-gradient-to-tl from-fuchsia to-blue-500": [
     "bg-gradient-to-tl from-fuchsia to-blue-500",
     [
+      ".bg-gradient-to-tl{background-image:linear-gradient(to left top,var(--tw-gradient-stops,var(--tw-gradient-from,transparent),var(--tw-radient-to,transparent)))}",
       ".from-fuchsia{--tw-gradient-from:fuchsia}",
-      ".to-blue-500{--tw-gradient-to:#3b82f6}",
-      ".bg-gradient-to-tl{background-image:linear-gradient(to left top,var(--tw-gradient-stops,var(--tw-gradient-from,transparent),var(--tw-radient-to,transparent)))}"
+      ".to-blue-500{--tw-gradient-to:#3b82f6}"
     ]
   ],
   "ring": ".ring{--tw-ring-offset-shadow:var(--tw-ring-inset,/*!*/ /*!*/) 0 0 0 var(--tw-ring-offset-width,0px) var(--tw-ring-offset-color,#fff);--tw-ring-shadow:var(--tw-ring-inset,/*!*/ /*!*/) 0 0 0 calc(3px + var(--tw-ring-offset-width,0px)) var(--tw-ring-color,rgba(59,130,246,var(--tw-ring-opacity,0.5)));box-shadow:var(--tw-ring-offset-shadow,0 0 transparent),var(--tw-ring-shadow,0 0 transparent),var(--tw-shadow,0 0 transparent)}",
@@ -552,8 +552,8 @@
     "ring ring-green-700 ring-offset-2 ring-offset-green-500 shadow-md",
     [
       ".ring{--tw-ring-offset-shadow:var(--tw-ring-inset,/*!*/ /*!*/) 0 0 0 var(--tw-ring-offset-width,0px) var(--tw-ring-offset-color,#fff);--tw-ring-shadow:var(--tw-ring-inset,/*!*/ /*!*/) 0 0 0 calc(3px + var(--tw-ring-offset-width,0px)) var(--tw-ring-color,rgba(59,130,246,var(--tw-ring-opacity,0.5)));box-shadow:var(--tw-ring-offset-shadow,0 0 transparent),var(--tw-ring-shadow,0 0 transparent),var(--tw-shadow,0 0 transparent)}",
-      ".ring-green-700{--tw-ring-opacity:1;--tw-ring-color:rgba(4,120,87,var(--tw-ring-opacity))}",
       ".shadow-md{--tw-shadow:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);box-shadow:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);box-shadow:var(--tw-ring-offset-shadow,0 0 transparent),var(--tw-ring-shadow,0 0 transparent),var(--tw-shadow,0 0 transparent)}",
+      ".ring-green-700{--tw-ring-opacity:1;--tw-ring-color:rgba(4,120,87,var(--tw-ring-opacity))}",
       ".ring-offset-2{--tw-ring-offset-width:2px}",
       ".ring-offset-green-500{--tw-ring-offset-color:#10b981}"
     ]
@@ -578,8 +578,8 @@
   "divide(y-2 green-600 opacity(80 md:50))": [
     "divide-y-2 divide-green-600 divide-opacity-80 md:divide-opacity-50",
     [
-      ".divide-y-2>:not([hidden])~:not([hidden]){--tw-divide-y-reverse:0;border-bottom-width:calc(2px * var(--tw-divide-y-reverse));border-top-width:2px;border-top-width:calc(2px * calc(1 - var(--tw-divide-y-reverse)))}",
       ".divide-green-600>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:#059669;border-color:rgba(5,150,105,var(--tw-divide-opacity))}",
+      ".divide-y-2>:not([hidden])~:not([hidden]){--tw-divide-y-reverse:0;border-bottom-width:calc(2px * var(--tw-divide-y-reverse));border-top-width:2px;border-top-width:calc(2px * calc(1 - var(--tw-divide-y-reverse)))}",
       ".divide-opacity-80>:not([hidden])~:not([hidden]){--tw-divide-opacity:0.8}",
       "@media (min-width: 768px){.md\\:divide-opacity-50>:not([hidden])~:not([hidden]){--tw-divide-opacity:0.5}}"
     ]
@@ -592,18 +592,18 @@
       ".hover\\:text-center:hover{text-align:center}",
       ".hover\\:active\\:ring:hover:active{--tw-ring-offset-shadow:var(--tw-ring-inset,/*!*/ /*!*/) 0 0 0 var(--tw-ring-offset-width,0px) var(--tw-ring-offset-color,#fff);--tw-ring-shadow:var(--tw-ring-inset,/*!*/ /*!*/) 0 0 0 calc(3px + var(--tw-ring-offset-width,0px)) var(--tw-ring-color,rgba(59,130,246,var(--tw-ring-opacity,0.5)));box-shadow:var(--tw-ring-offset-shadow,0 0 transparent),var(--tw-ring-shadow,0 0 transparent),var(--tw-shadow,0 0 transparent)}",
       ".active\\:hover\\:text-lg:active:hover{font-size:1.125rem;line-height:1.75rem}",
-      ".hover\\:active\\:ring-opacity-5:hover:active{--tw-ring-opacity:0.05}",
-      ".hover\\:active\\:text-underline:hover:active{text-decoration:underline}"
+      ".hover\\:active\\:text-underline:hover:active{text-decoration:underline}",
+      ".hover\\:active\\:ring-opacity-5:hover:active{--tw-ring-opacity:0.05}"
     ]
   ],
   "\n  text(4xl underline)\n  font(bold sans)\n  transition\n  hover:(transform rotate-6 scale-125 cursor-pointer)\n  active:(transform -rotate-12 scale-150)\n": [
     "text-4xl text-underline font-bold font-sans transition hover:transform hover:rotate-6 hover:scale-125 hover:cursor-pointer active:transform active:-rotate-12 active:scale-150",
     [
-      ".text-4xl{font-size:2.25rem;line-height:2.5rem}",
       ".transition{transition:background-color,border-color,color,fill,stroke,opacity,box-shadow,transform 150ms cubic-bezier(0.4,0,0.2,1)}",
-      ".font-sans{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"}",
+      ".text-4xl{font-size:2.25rem;line-height:2.5rem}",
       ".text-underline{text-decoration:underline}",
       ".font-bold{font-weight:700}",
+      ".font-sans{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"}",
       ".hover\\:transform:hover{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}",
       ".hover\\:scale-125:hover{--tw-scale-x:1.25;--tw-scale-y:1.25;transform:scale(1.25);transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}",
       ".hover\\:rotate-6:hover{--tw-rotate:6deg;transform:rotate(6deg);transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}",
@@ -675,8 +675,8 @@
   "md:(container mx-auto)": [
     "md:container md:mx-auto",
     [
-      "@media (min-width: 768px){.md\\:mx-auto{margin-left:auto;margin-right:auto}}",
       "@media (min-width: 768px){.md\\:container{width:100%}}",
+      "@media (min-width: 768px){.md\\:mx-auto{margin-left:auto;margin-right:auto}}",
       "@media (min-width: 768px){@media (min-width: 640px){.md\\:container{max-width:640px}}}",
       "@media (min-width: 768px){@media (min-width: 768px){.md\\:container{max-width:768px}}}",
       "@media (min-width: 768px){@media (min-width: 1024px){.md\\:container{max-width:1024px}}}",
@@ -687,9 +687,9 @@
   "ordinal slashed-zero tabular-nums md:normal-nums": [
     "ordinal slashed-zero tabular-nums md:normal-nums",
     [
+      ".ordinal{--tw-ordinal:ordinal;font-variant-numeric:var(--tw-ordinal,/*!*/ /*!*/) var(--tw-slashed-zero,/*!*/ /*!*/) var(--tw-numeric-figure,/*!*/ /*!*/) var(--tw-numeric-spacing,/*!*/ /*!*/) var(--tw-numeric-fraction,/*!*/ /*!*/)}",
       ".slashed-zero{--tw-slashed-zero:slashed-zero;font-variant-numeric:var(--tw-ordinal,/*!*/ /*!*/) var(--tw-slashed-zero,/*!*/ /*!*/) var(--tw-numeric-figure,/*!*/ /*!*/) var(--tw-numeric-spacing,/*!*/ /*!*/) var(--tw-numeric-fraction,/*!*/ /*!*/)}",
       ".tabular-nums{--tw-numeric-spacing:tabular-nums;font-variant-numeric:var(--tw-ordinal,/*!*/ /*!*/) var(--tw-slashed-zero,/*!*/ /*!*/) var(--tw-numeric-figure,/*!*/ /*!*/) var(--tw-numeric-spacing,/*!*/ /*!*/) var(--tw-numeric-fraction,/*!*/ /*!*/)}",
-      ".ordinal{--tw-ordinal:ordinal;font-variant-numeric:var(--tw-ordinal,/*!*/ /*!*/) var(--tw-slashed-zero,/*!*/ /*!*/) var(--tw-numeric-figure,/*!*/ /*!*/) var(--tw-numeric-spacing,/*!*/ /*!*/) var(--tw-numeric-fraction,/*!*/ /*!*/)}",
       "@media (min-width: 768px){.md\\:normal-nums{font-variant-numeric:normal}}"
     ]
   ],

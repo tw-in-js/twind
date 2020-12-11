@@ -5,9 +5,7 @@ import * as is from '../internal/is'
 import { join, includes, escape, hyphenate } from '../internal/util'
 import {
   responsivePrecedence,
-  descending,
   declarationPropertyPrecedence,
-  declarationValuePrecedence,
   makeVariantPresedenceCalculator,
   atRulePresedence,
 } from '../internal/presedence'
@@ -69,9 +67,12 @@ export const serialize = (
     let declarations = ''
 
     // Additional presedence values
-    let numberOfDeclarations = 0
+
+    // this ensures that 'border-top-width' has a higer presedence than 'border-top'
     let maxPropertyPresedence = 0
-    let maxValuePresedence = 0
+
+    // more specfic utilities have less declarations and a higher presedence
+    let numberOfDeclarations = 0
 
     // Walk through the object
     Object.keys(css).forEach((key) => {
@@ -153,7 +154,6 @@ export const serialize = (
           maxPropertyPresedence,
           declarationPropertyPrecedence(property),
         )
-        maxValuePresedence = Math.max(maxValuePresedence, declarationValuePrecedence(String(value)))
 
         // Add to the declaration block with prefixer applied
         declarations = (declarations && declarations + ';') + stringifyDeclaration(property, value)
@@ -172,14 +172,14 @@ export const serialize = (
         // Calculate precedence
         p:
           presedence *
-            // Declarations: 12 bits = 4096
-            (1 << 12) +
-          // 4: number of declarations (descending)
-          (((descending(numberOfDeclarations) & 15) << 8) |
-            // 4: greatest precedence of properties
-            ((maxPropertyPresedence & 15) << 4) |
-            // 4: greatest precedence of values
-            (maxValuePresedence & 15)),
+            // Declarations: 8 bits = 256
+            (1 << 8) +
+          // 4: greatest precedence of properties
+          // if there is no property presedence this is most likely a custom property only declaration
+          // these have the highest presedence
+          ((((maxPropertyPresedence || 15) & 15) << 4) |
+            // 4: number of declarations (descending)
+            (Math.max(0, 15 - numberOfDeclarations) & 15)),
       })
     }
   }
