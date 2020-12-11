@@ -54,7 +54,7 @@ import { tw } from '@tw-in-js/core'
 
 ### Polyfills
 
-- Math.imul for IE11
+- [Math.imul](https://caniuse.com/?search=math.imul) for IE11
 
 ## Rational
 
