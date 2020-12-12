@@ -4,9 +4,10 @@
 
 [![MIT License](https://badgen.net/github/license/tw-in-js/core)](https://github.com/tw-in-js/core/blob/main/LICENSE)
 [![Latest Release](https://flat.badgen.net/npm/v/@tw-in-js/core?icon=npm&label)](https://www.npmjs.com/package/@tw-in-js/core)
-[![Bundle Size](https://flat.badgen.net/bundlephobia/minzip/@tw-in-js/core?icon=packagephobia&label&color=blue)](https://bundlephobia.com/result?p=@tw-in-js/core)
-[![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Fcore?icon=github&label)](https://github.com/tw-in-js/core)
+[![Bundle Size](https://flat.badgen.net/bundlephobia/minzip/@tw-in-js/core@>0.2.1?icon=packagephobia&label&color=blue)](https://bundlephobia.com/result?p=@tw-in-js/core 'gzip bundle size (including dependencies)')
+[![Package Size](https://flat.badgen.net/badgesize/brotli/https:/unpkg.com/@tw-in-js/core/module/core.js?icon=jsdelivr&label&color=blue)](https://unpkg.com/@tw-in-js/core/module/core.js 'brotli package size (without dependencies)')
 [![Typescript](https://flat.badgen.net/badge/icon/included?icon=typescript&label)](https://unpkg.com/browse/@tw-in-js/core/types/core.d.ts)
+[![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Fcore?icon=github&label)](https://github.com/tw-in-js/core)
 [![CI](https://github.com/tw-in-js/core/workflows/CI/badge.svg)](https://github.com/tw-in-js/core/actions?query=workflow%3Aci)
 [![Coverage Status](https://flat.badgen.net/coveralls/c/github/tw-in-js/core/main?icon=codecov&label)](https://coveralls.io/github/tw-in-js/core?branch=main)
 [![PRs Welcome](https://flat.badgen.net/badge/PRs/welcome/purple)](http://makeapullrequest.com)
@@ -24,18 +25,18 @@ We aim to create a place for likeminded people to talk about problems and possib
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Rational](#rational)
-- [Challenges](#challenges)
-- [Opportunities](#opportunities)
-- [Inspiration](#inspiration)
-- [Basic Usage](#basic-usage)
-- [Customization](#customization)
-- [Advanced Usage](#advanced-usage)
-- [Browser Support](#browser-support)
-- [Contribute](#contribute)
-- [License](#license)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Rational](#rational)
+  - [Challenges](#challenges)
+  - [Opportunities](#opportunities)
+  - [Inspiration](#inspiration)
+  - [Basic Usage](#basic-usage)
+  - [Customization](#customization)
+  - [Advanced Usage](#advanced-usage)
+  - [Browser Support](#browser-support)
+  - [Contribute](#contribute)
+  - [License](#license)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 <!-- prettier-ignore-end -->
