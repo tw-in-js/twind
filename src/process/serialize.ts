@@ -129,7 +129,7 @@ export const serialize = (
           } else {
             // Some nested block like @media, dive into it
             stringify(
-              atRules.concat(key),
+              [...atRules, key],
               selector,
               presedence | (responsivePrecedence(key) || atRulePresedence(key)),
               value as CSSRules,

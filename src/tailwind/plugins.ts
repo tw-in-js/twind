@@ -257,7 +257,7 @@ export const corePlugins: Plugins = {
       case 'row':
       case 'col':
         return {
-          flexDirection: join(params[0] === 'col' ? ['column'].concat(tail(params)) : params),
+          flexDirection: join(params[0] === 'col' ? ['column', ...tail(params)] : params),
         }
       case 'nowrap':
       case 'wrap':
@@ -289,7 +289,7 @@ export const corePlugins: Plugins = {
         return (
           params.length > 1 && {
             gridAutoFlow: join(
-              params[1] === 'col' ? ['column'].concat(tail(params, 2)) : tail(params),
+              params[1] === 'col' ? ['column', ...tail(params, 2)] : tail(params),
               ' ',
             ),
           }
