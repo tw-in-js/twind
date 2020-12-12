@@ -131,7 +131,7 @@ export const configure = (
   const convert = (rule: Rule): string | undefined | void => {
     // A rule id is the tailwind rule including variants, negate and directive
 
-    // For inline rules (functions) `toId` returns an empty string
+    // For inline directives (functions) `toId` returns an empty string
     // in that case we check if we already have a name for the function
     // and use that one to generate the id
     let id = toId(rule) || toId(rule, inlineDirectiveName.get(rule.d as InlineDirective))

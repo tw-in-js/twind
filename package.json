@@ -45,9 +45,9 @@
     "tiny-css-prefixer": "^1.1.4"
   },
   "devDependencies": {
-    "@carv/esbundle": "^1.1.8",
+    "@carv/esbundle": "^1.1.9",
     "@carv/eslint-config": "^1.6.1",
-    "@carv/jest-preset": "^1.1.8",
+    "@carv/jest-preset": "^1.1.9",
     "@carv/prettier-config": "^1.1.0",
     "@carv/tsconfig": "^1.3.2",
     "@size-limit/preset-small-lib": "^4.6.0",
