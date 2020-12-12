@@ -6,6 +6,18 @@
   - @tw-in-js/styled - like styled components (https://github.com/cristianbote/goober/tree/master/benchmarks)
   - @tw-in-js/eslint-plugin - nice to have
   - @tw-in-js/tw.macro - maybe?
+  - @tw-in-js/extensions
+    - border gradients: https://t.co/W7YVS7f0Jp
+    - scroll snap: https://t.co/7xqvpFQ9Qu
+    - „on“ colors
+    - Floating labels: https://t.co/g5TMqIBh4b?ssr=true
+    - Stretched link: https://v5.getbootstrap.com/docs/5.0/helpers/stretched-link/
+    - and others (see Plugins below)
+
+- Docs
+
+  - differences
+    - tw.macro requires a build step and a run time lib (emotion, styled-components, ...)
 
 - Ideas
 
