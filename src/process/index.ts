@@ -52,8 +52,13 @@ export const configure = (
 
   const hash = sanitize<Hasher | false>(config.hash, false, false, cyrb32)
 
-  // Used to detect if a theme value should be negated
-  let negate: boolean | undefined
+  // Track the active rule
+  // 1. to detect if a theme value should be negated
+  // 2. for nested `tw()` calls
+  //    `sm:hover:${({ tw }) => tw`underline`}`
+  //    ==> 'sm:hover:underline`
+  // Start with an "empty" rule, to always have value to use
+  let activeRule: { v?: string[]; n?: boolean } = {}
 
   // The context that is passed to functions to access the theme, ...
   const context: Context = {
@@ -79,7 +84,7 @@ export const configure = (
         )
 
       // Add negate to theme value using calc to support complex values
-      return negate && value && is.string(value) ? `calc(${value} * -1)` : value
+      return activeRule.n && value && is.string(value) ? `calc(${value} * -1)` : value
     }) as ThemeResolver,
 
     tag: (value) => (hash ? hash(value) : value),
@@ -87,6 +92,21 @@ export const configure = (
 
   // Used to translate a rule using plugins
   const translate = makeTranslate({ ...corePlugins, ...config.plugins }, context)
+
+  // Wrap `translate()` to keep track of the active rule
+  // we need to use try-finally as mode.report may throw
+  // and we must always reset the active rule
+  const tryTranslate = (rule: Rule): ReturnType<typeof translate> => {
+    // Keep track of active variants for nested `tw` calls
+    const parentRule = activeRule
+    activeRule = rule
+
+    try {
+      return translate(rule)
+    } finally {
+      activeRule = parentRule
+    }
+  }
 
   // Apply variants to a translation
   const decorate = makeDecorate(config.darkMode || 'media', context)
@@ -100,11 +120,6 @@ export const configure = (
     mode,
     context,
   )
-
-  // Track active variants for nested `tw()` calls
-  // `sm:hover:${({ tw }) => tw`underline`}`
-  // == 'sm:hover:underline`
-  const activeVariants: string[][] = []
 
   // Cache rule ids and their generated class name
   const idToClassName = new Map<string, string>()
@@ -126,20 +141,10 @@ export const configure = (
 
     // We check for nullish because we put an empty string into `idToClassName`
     // if a rule did not generate a class name
-    // This way we report the unknown directives onyl once
+    // This way we report the unknown directives only once
     if (className == null) {
-      // `context.theme()` needs know if it should negate the theme value
-      negate = rule.n
-
-      // Keep track of active variants for nested `tw` calls
-      activeVariants.unshift(rule.v)
-
       // 2. translate each rule using plugins
-      let translation = translate(rule)
-
-      // Reset translate state variables to not interfere with other calls
-      activeVariants.shift()
-      negate = false
+      let translation = tryTranslate(rule)
 
       // If this is a unknown inline directive
       if (!id) {
@@ -184,7 +189,7 @@ export const configure = (
   // This function is called from `tw(...)`
   // it parses, translates, decorates, serializes and injects the tokens
   const process = (tokens: unknown[]): string =>
-    parse(tokens, activeVariants[0]).map(convert).filter(Boolean).join(' ')
+    parse(tokens, activeRule.v).map(convert).filter(Boolean).join(' ')
 
   // Determine if we should inject the preflight (browser normalize)
   const preflight = sanitize<Preflight | false>(config.preflight, identity, false)
