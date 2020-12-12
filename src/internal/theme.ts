@@ -53,7 +53,7 @@ const resolveContext: ThemeSectionResolverContext = {
 }
 
 export const makeThemeResolver = (config?: ThemeConfiguration): ThemeResolver => {
-  const cache = Object.create(null) as { [K in keyof Theme]?: Record<string, unknown> }
+  const cache = new Map<keyof Theme, Record<string, unknown>>()
 
   const theme = { ...defaultTheme, ...config }
 
@@ -87,12 +87,17 @@ export const makeThemeResolver = (config?: ThemeConfiguration): ThemeResolver =>
     key?: string | string[],
     defaultValue?: unknown,
   ): unknown => {
-    const base =
-      cache[section] ||
-      (cache[section] = {
-        ...deref(theme, section),
-        ...deref(theme.extend, section),
-      })
+    let base = cache.get(section)
+
+    if (!base) {
+      cache.set(
+        section,
+        (base = {
+          ...deref(theme, section),
+          ...deref(theme.extend, section),
+        }),
+      )
+    }
 
     if (key != null) {
       const value: unknown = base[(Array.isArray(key) ? join(key) : key) || 'DEFAULT']

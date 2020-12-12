@@ -107,7 +107,7 @@ export const configure = (
   const activeVariants: string[][] = []
 
   // Cache rule ids and their generated class name
-  const idToClassName = Object.create(null) as Record<string, string>
+  const idToClassName = new Map<string, string>()
 
   // Cache generated inline directive names by their function identity
   const inlineDirectiveName = new WeakMap<InlineDirective, string>()
@@ -122,7 +122,7 @@ export const configure = (
     let id = toId(rule) || toId(rule, inlineDirectiveName.get(rule.d as InlineDirective))
 
     // Check if we already have a class name for this rule
-    let className = idToClassName[id]
+    let className = idToClassName.get(id)
 
     // We check for nullish because we put an empty string into `idToClassName`
     // if a rule did not generate a class name
@@ -175,7 +175,7 @@ export const configure = (
       }
 
       // Remember the generated class name
-      idToClassName[id] = className
+      idToClassName.set(id, className)
     }
 
     return className

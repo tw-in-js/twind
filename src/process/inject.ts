@@ -16,11 +16,11 @@ export const inject = (
 
   // Cache for already insert css rules
   // to prevent double insertions
-  const insertedRules = Object.create(null) as Record<string, boolean>
+  const insertedRules = new Set<string>()
 
   return ({ r: css, p: presedence }) => {
     // If not already inserted
-    if (!insertedRules[css]) {
+    if (!insertedRules.has(css)) {
       // Find the correct position
       const index = sortedInsertionIndex(sortedPrecedences, presedence)
 
@@ -29,7 +29,7 @@ export const inject = (
         injector.insert(css, index)
 
         // Mark rule as inserted
-        insertedRules[css] = true
+        insertedRules.add(css)
 
         // Update sorted index
         sortedPrecedences.splice(index, 0, presedence)
