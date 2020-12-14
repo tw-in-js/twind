@@ -29,6 +29,7 @@ jobs:
         run: yarn run test:coverage
 
       - name: Build
+        # Not running build on 10.x as it does not have support for fs/promises
         if: ${{ matrix.node != '10.x'}}
         run: yarn run build
 
