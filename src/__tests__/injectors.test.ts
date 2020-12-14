@@ -1,20 +1,11 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import { JSDOM } from 'jsdom'
+import * as DOM from '../__fixtures__/dom-env'
 
 import { noOpInjector, cssomInjector } from '..'
 
-const test = suite<{
-  dom: JSDOM
-}>('injectors')
-
-test.before.each((context) => {
-  context.dom = new JSDOM(`<!DOCTYPE html>`)
-  globalThis.window = (context.dom.window as unknown) as typeof globalThis['window']
-  globalThis.self = (context.dom.window as unknown) as typeof globalThis['self']
-  globalThis.document = window.document
-})
+const test = DOM.configure(suite('injectors'))
 
 test('noOpInjector', () => {
   const injector = noOpInjector()

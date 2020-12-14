@@ -1,22 +1,11 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import { JSDOM } from 'jsdom'
+import * as DOM from '../__fixtures__/dom-env'
 
 import { create, strict } from '..'
 
-const test = suite<{
-  dom: JSDOM
-}>('dom')
-
-test.before.each((context) => {
-  context.dom = new JSDOM(`<!DOCTYPE html>`)
-  global.window = (context.dom.window as unknown) as typeof globalThis['window']
-  global.self = window
-  global.document = window.document
-  global.navigator = window.navigator
-  global.getComputedStyle = window.getComputedStyle
-})
+const test = DOM.configure(suite('dom'))
 
 test('injects in to a style sheet element', () => {
   const nonce = Math.random().toString(36)

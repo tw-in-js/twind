@@ -7,7 +7,7 @@ module.exports = {
   },
   install: ['uvu', 'uvu/assert', 'snoop'],
   installOptions: {
-    externalPackage: ['dlv', 'tailwindcss'],
+    externalPackage: ['dlv', 'tailwindcss', 'jsdom'],
   },
   experiments: {
     routes: [

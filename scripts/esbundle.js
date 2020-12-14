@@ -103,14 +103,12 @@ async function generateBundles() {
       platform: 'node',
       target: targets.node,
       format: 'cjs',
-      mainFields: ['esnext', 'es2015', 'module', 'main'],
     },
     esnext: {
       outfile: `./esnext/${unscopedPackageName}.js`,
       platform: 'browser',
       target: 'esnext',
       format: 'esm',
-      mainFields: ['esnext', 'es2015', 'module', 'main'],
     },
     // Can be used from a normal script tag without module system.
     script: {
@@ -120,7 +118,6 @@ async function generateBundles() {
       format: 'iife',
       // TODO find a better global name
       globalName: 'tw_in_js',
-      mainFields: ['esnext', 'es2015', 'module', 'main'],
       minify: true,
       external: false,
     },
@@ -130,7 +127,6 @@ async function generateBundles() {
       platform: 'browser',
       target: targets.browser,
       format: 'esm',
-      mainFields: ['esnext', 'es2015', 'module', 'main'],
       minify: true,
     },
   }
@@ -227,9 +223,9 @@ async function generateBundles() {
             charset: 'utf8',
             resolveExtensions: ['.tsx', '.ts', '.jsx', '.mjs', '.js', '.cjs', '.css', '.json'],
             bundle: true,
-            sourcemap: 'external',
-            // metafile: path.resolve(paths.build, `${outfile}.meta.json`),
             external: output.external === false ? undefined : external,
+            mainFields: ['esnext', 'es2015', 'module', 'main'],
+            sourcemap: 'external',
             tsconfig,
           })
 
