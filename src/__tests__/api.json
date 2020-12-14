@@ -683,6 +683,10 @@
       "@media (min-width: 768px){@media (min-width: 1536px){.md\\:container{max-width:1536px}}}"
     ]
   ],
+  "hover:md:text-center": [
+    "hover:md:text-center",
+    ["@media (min-width: 768px){.hover\\:md\\:text-center:hover{text-align:center}}"]
+  ],
   "ordinal slashed-zero tabular-nums md:normal-nums": [
     "ordinal slashed-zero tabular-nums md:normal-nums",
     [
