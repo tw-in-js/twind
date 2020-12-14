@@ -2,6 +2,7 @@
 build
 node_modules
 web_modules
+.DS_Store
 
 .cache
 dist
