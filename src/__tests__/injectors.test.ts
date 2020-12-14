@@ -20,7 +20,6 @@ test('noOpInjector', () => {
   const injector = noOpInjector()
 
   assert.is(injector.insert('', 0), undefined)
-  assert.is(injector.target, null)
 })
 
 test('cssomInjector', () => {

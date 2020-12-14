@@ -1,12 +1,12 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import type { Instance, Injector } from '../types'
+import type { Instance, VirtualInjector } from '../types'
 
 import { create, virtualInjector, strict } from '../index'
 
 const test = suite<{
-  injector: Injector<string[]>
+  injector: VirtualInjector
   instance: Instance
 }>('dark mode')
 

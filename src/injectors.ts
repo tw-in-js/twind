@@ -1,6 +1,6 @@
 // Based on https://github.com/kripod/otion/blob/main/packages/otion/src/injectors.ts
 // License MIT
-import type { InjectorConfig, Injector } from './types'
+import type { InjectorConfig, Injector, VirtualInjector, CSSOMInjector } from './types'
 
 const STYLE_ELEMENT_ID = '__tw-in-js' as const
 
@@ -30,9 +30,9 @@ const getStyleElement = (nonce?: string): HTMLStyleElement => {
 /**
  * Creates an injector which collects style rules during server-side rendering.
  */
-export const virtualInjector = ({ target = [] }: InjectorConfig<string[]> = {}): Injector<
-  string[]
-> => ({
+export const virtualInjector = ({
+  target = [],
+}: InjectorConfig<string[]> = {}): VirtualInjector => ({
   target,
   insert: (rule, index) => target.splice(index, 0, rule),
   // delete: (index) => target.splice(index, 1),
@@ -44,7 +44,7 @@ export const virtualInjector = ({ target = [] }: InjectorConfig<string[]> = {}):
 export const cssomInjector = ({
   nonce,
   target = getStyleElement(nonce).sheet as CSSStyleSheet,
-}: InjectorConfig<CSSStyleSheet> = {}): Injector<CSSStyleSheet> => ({
+}: InjectorConfig<CSSStyleSheet> = {}): CSSOMInjector => ({
   target,
   insert: target.insertRule.bind(target),
   // delete: target.deleteRule.bind(target),
@@ -53,8 +53,7 @@ export const cssomInjector = ({
 /**
  * An injector placeholder which performs no operations. Useful for avoiding errors in a non-browser environment.
  */
-export const noOpInjector = (): Injector<null> => ({
-  target: null,
+export const noOpInjector = (): Injector => ({
   insert: () => {
     /* No-Op */
   },

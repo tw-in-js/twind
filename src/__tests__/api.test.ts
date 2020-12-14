@@ -1,14 +1,14 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import type { Instance, Injector, InlineDirective } from '../types'
+import type { Instance, InlineDirective, VirtualInjector } from '../types'
 
 import { create, virtualInjector, strict } from '../index'
 
 import data from './api.json'
 
 const test = suite<{
-  injector: Injector<string[]>
+  injector: VirtualInjector
   tw: Instance['tw']
   setup: Instance['setup']
 }>('api')

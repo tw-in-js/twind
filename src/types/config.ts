@@ -24,12 +24,17 @@ export interface InjectorConfig<T = unknown> {
   target?: T
 }
 
-export interface Injector<T = unknown> {
-  /** Target the rules are inserted into. */
-  target: T
-
+export interface Injector {
   insert: (rule: string, index: number) => void
   // delete: (index: number) => void
+}
+
+export interface VirtualInjector extends Injector {
+  target: string[]
+}
+
+export interface CSSOMInjector extends Injector {
+  target: CSSStyleSheet
 }
 
 export type Prefixer = (property: string, value: string) => string

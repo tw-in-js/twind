@@ -1,12 +1,12 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import type { Instance, Injector, Configuration } from '../types'
+import type { Instance, VirtualInjector, Configuration } from '../types'
 
 import { create, virtualInjector, strict } from '../index'
 
 const test = suite<{
-  injector: Injector<string[]>
+  injector: VirtualInjector
   setup: (config?: Configuration) => Instance
 }>('plugins')
 
