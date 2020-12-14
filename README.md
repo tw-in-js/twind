@@ -363,16 +363,20 @@ We are following the [Conventional Commits](https://www.conventionalcommits.org)
 
 ### Develop
 
-> Ensure you run at least Node v14.
+> Ensure you run at least Node v12.
 
 Clone the repository and cd into the project directory.
 
-Run `yarn install && yarn build`.
+Run `yarn install`.
 
-- `yarn test`: Run test suite
-- `yarn format`: Ensure consistent code style
+- `yarn start`: Start example
 - `yarn build`: Build the package
-- `yarn start`: Start example using snowpack
+- `yarn test`: Run test suite
+- `yarn test:coverage`: Run test suite with coverage
+- `yarn test:watch`: Run test suite in watch mode
+- `yarn format`: Ensure consistent code style
+- `yarn lint`: Run eslint
+- `yarn lint:fix`: Run eslint fix
 - `yarn release`: To publish the package
 
 ## License

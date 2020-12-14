@@ -2,7 +2,7 @@ name: size
 on: [pull_request]
 jobs:
   size:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     env:
       CI_JOB_NUMBER: 1
     steps:

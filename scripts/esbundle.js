@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const fs = require('fs/promises')
+const { promises: fs } = require('fs')
 const path = require('path')
 
 const paths = {
@@ -9,8 +9,7 @@ const paths = {
 }
 
 const targets = {
-  // Last LTS
-  node: 'node10.23',
+  node: 'node10.13',
   browser: ['chrome79', 'firefox78', 'safari13.1', 'edge79'],
 }
 
@@ -69,6 +68,7 @@ async function generateTypescriptDeclarations() {
         extends: './' + path.basename(tsconfig),
         exclude: ['**/__fixtures__/**', '**/__tests__/**'],
         compilerOptions: {
+          target: 'ESNext',
           module: 'ESNext',
           emitDeclarationOnly: true,
           noEmit: false,

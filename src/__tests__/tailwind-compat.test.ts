@@ -7,19 +7,22 @@ const test = suite('tailwind compat')
 
 setup({ mode: strict })
 
-test('all tailwind directives are available', async () => {
-  const { processPlugins } = await import('../__fixtures__/process-plugins')
+// Tailwind only supports Node.JS >=12.13.0
+// use feature detection
+if (Object.entries && [].flatMap) {
+  test('all tailwind directives are available', async () => {
+    const { processPlugins } = await import('../__fixtures__/process-plugins')
 
-  const { directives } = processPlugins()
+    const { directives } = processPlugins()
 
-  for (const directive of Object.keys(directives)) {
-    try {
-      assert.ok(tw(directive))
-    } catch (error) {
-      console.warn(directive, directives[directive])
-      throw error
+    for (const directive of Object.keys(directives)) {
+      try {
+        assert.ok(tw(directive))
+      } catch (error) {
+        console.warn(directive, directives[directive])
+        throw error
+      }
     }
-  }
-})
-
+  })
+}
 test.run()
