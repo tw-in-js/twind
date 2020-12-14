@@ -3,7 +3,7 @@ import * as assert from 'uvu/assert'
 
 import type { Instance, Injector, Configuration } from '../types'
 
-import { create, virtualInjector, strict } from '..'
+import { create, virtualInjector, strict } from '../index'
 
 const test = suite<{
   injector: Injector<string[]>

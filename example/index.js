@@ -1,4 +1,5 @@
 /* eslint-env browser */
+import './test'
 
 import { tw } from '../src/index'
 

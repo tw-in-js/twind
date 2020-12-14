@@ -1,7 +1,8 @@
-import { tw, create, virtualInjector, strict, mode } from '..'
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 import { snoop } from 'snoop'
+
+import { create, virtualInjector, strict, mode } from '../index'
 
 const test = suite('mode')
 

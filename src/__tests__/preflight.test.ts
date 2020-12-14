@@ -1,6 +1,7 @@
-import { create, virtualInjector, strict } from '..'
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
+
+import { create, virtualInjector, strict } from '../index'
 
 const test = suite('preflight')
 
