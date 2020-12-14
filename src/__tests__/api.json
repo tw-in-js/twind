@@ -435,6 +435,23 @@
       "@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}"
     ]
   ],
+  "(text(center 2xl) underline)": [
+    "text-center text-2xl underline",
+    [
+      ".text-2xl{font-size:1.5rem;line-height:2rem}",
+      ".text-center{text-align:center}",
+      ".underline{text-decoration:underline}"
+    ]
+  ],
+  "((underline) (text(center 2xl)) (((font(bold)))))": [
+    "underline text-center text-2xl font-bold",
+    [
+      ".text-2xl{font-size:1.5rem;line-height:2rem}",
+      ".underline{text-decoration:underline}",
+      ".text-center{text-align:center}",
+      ".font-bold{font-weight:700}"
+    ]
+  ],
   "text(indigo-700 opacity-70)": [
     "text-indigo-700 text-opacity-70",
     [
