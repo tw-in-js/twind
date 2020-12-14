@@ -52,7 +52,6 @@ export const expandEdges = (key: string): string[] | undefined => {
       return
   }
 
-  // eslint-disable-next-line unicorn/explicit-length-check
   if (parts.length) return parts
 }
 

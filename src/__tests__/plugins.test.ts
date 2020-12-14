@@ -1,26 +1,33 @@
+import { suite } from 'uvu'
+import * as assert from 'uvu/assert'
+
 import type { Instance, Injector, Configuration } from '../types'
 
 import { create, virtualInjector, strict } from '..'
 
-let injector: Injector<string[]>
-const setup = (config?: Configuration): Instance =>
-  create({ injector, mode: strict, preflight: false, prefix: false, ...config })
+const test = suite<{
+  injector: Injector<string[]>
+  setup: (config?: Configuration) => Instance
+}>('plugins')
 
-beforeEach(() => {
-  injector = virtualInjector()
+test.before.each((context) => {
+  context.injector = virtualInjector()
+  context.setup = (config?: Configuration): Instance =>
+    create({ injector: context.injector, mode: strict, preflight: false, prefix: false, ...config })
 })
 
-test('value can be a token string', () => {
+test('value can be a token string', ({ setup, injector }) => {
   const { tw } = setup({
     plugins: {
       card: 'max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl',
     },
   })
 
-  expect(tw('mx-auto card my-4')).toBe(
+  assert.is(
+    tw('mx-auto card my-4'),
     'mx-auto max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl my-4',
   )
-  expect(injector.target).toStrictEqual([
+  assert.equal(injector.target, [
     '.overflow-hidden{overflow:hidden}',
     '.mx-auto{margin-left:auto;margin-right:auto}',
     '.bg-white{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}',
@@ -32,7 +39,7 @@ test('value can be a token string', () => {
   ])
 })
 
-test('plugin can return new tokens to parse using `tw`', () => {
+test('plugin can return new tokens to parse using `tw`', ({ setup }) => {
   const { tw } = setup({
     plugins: {
       btn(args, { theme, tw }) {
@@ -49,16 +56,18 @@ test('plugin can return new tokens to parse using `tw`', () => {
     },
   })
 
-  expect(tw('btn')).toBe('font-bold py-2 px-4 rounded')
-  expect(tw('btn-purple cursor-not-allowed')).toBe(
-    'hover:bg-purple-500 underline cursor-not-allowed',
-  )
-  expect(tw('btn cursor-not-allowed btn-purple transition')).toBe(
+  assert.is(tw('btn'), 'font-bold py-2 px-4 rounded')
+  assert.is(tw('btn-purple cursor-not-allowed'), 'hover:bg-purple-500 underline cursor-not-allowed')
+  assert.is(
+    tw('btn cursor-not-allowed btn-purple transition'),
     'font-bold py-2 px-4 rounded cursor-not-allowed hover:bg-purple-500 underline transition',
   )
-  expect(tw('btn sm:focus:btn-purple transition')).toBe(
+  assert.is(
+    tw('btn sm:focus:btn-purple transition'),
     'font-bold py-2 px-4 rounded sm:focus:hover:bg-purple-500 sm:focus:underline transition',
   )
 
-  expect(() => tw('btn-unknown-color')).toThrow(/UNKNOWN_DIRECTIVE/)
+  assert.throws(() => tw('btn-unknown-color'), /UNKNOWN_DIRECTIVE/)
 })
+
+test.run()

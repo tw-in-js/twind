@@ -21,25 +21,18 @@ The purpose of this organization is to merge these two paradigms, both philosoph
 We aim to create a place for likeminded people to talk about problems and possibilities in this field, as well as come up with implementations that we can share as a community.
 
 <details><summary>Table Of Contents (click to expand)</summary>
-<!-- prettier-ignore-start -->
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-  - [Installation](#installation)
-  - [Usage](#usage)
-  - [Rational](#rational)
-  - [Challenges](#challenges)
-  - [Opportunities](#opportunities)
-  - [Inspiration](#inspiration)
-  - [Basic Usage](#basic-usage)
-  - [Customization](#customization)
-  - [Advanced Usage](#advanced-usage)
-  - [Browser Support](#browser-support)
-  - [Contribute](#contribute)
-  - [License](#license)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-<!-- prettier-ignore-end -->
+- [Installation](#installation)
+- [Usage](#usage)
+- [Rational](#rational)
+- [Challenges](#challenges)
+- [Opportunities](#opportunities)
+- [Inspiration](#inspiration)
+- [Basic Usage](#basic-usage)
+- [Customization](#customization)
+- [Advanced Usage](#advanced-usage)
+- [Browser Support](#browser-support)
+- [Contribute](#contribute)
+- [License](#license)
 </details>
 
 ## Installation
@@ -376,7 +369,7 @@ Clone the repository and cd into the project directory.
 
 Run `yarn install && yarn build`.
 
-- `yarn test`: Run test suite including linting
+- `yarn test`: Run test suite
 - `yarn format`: Ensure consistent code style
 - `yarn build`: Build the package
 - `yarn start`: Start example using snowpack

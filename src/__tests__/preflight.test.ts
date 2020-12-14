@@ -1,10 +1,14 @@
 import { create, virtualInjector, strict } from '..'
+import { suite } from 'uvu'
+import * as assert from 'uvu/assert'
+
+const test = suite('preflight')
 
 test('add preflight styles', () => {
   const injector = virtualInjector()
   create({ injector, mode: strict })
 
-  expect(injector.target).toStrictEqual([
+  assert.equal(injector.target, [
     '::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}',
     'body,blockquote,dl,dd,h1,h2,h3,h4,h5,h6,hr,figure,p,pre,fieldset,ol,ul{margin:0}',
     'button:focus{outline:1px dotted;outline:5px auto -webkit-focus-ring-color}',
@@ -58,12 +62,16 @@ test('add preflight styles with custom theme', () => {
     },
   })
 
-  expect(injector.target).toContain(
-    'html{line-height:1.5;-webkit-text-size-adjust:100%;font-family:ui-sans-serif}',
+  assert.ok(
+    injector.target.includes(
+      'html{line-height:1.5;-webkit-text-size-adjust:100%;font-family:ui-sans-serif}',
+    ),
   )
-  expect(injector.target).toContain('*,::before,::after{box-sizing:border-box;border:0 solid #222}')
-  expect(injector.target).toContain('input::placeholder,textarea::placeholder{color:#333}')
-  expect(injector.target).toContain('pre,code,kbd,samp{font-family:ui-monospace;font-size:1em}')
+  assert.ok(
+    injector.target.includes('*,::before,::after{box-sizing:border-box;border:0 solid #222}'),
+  )
+  assert.ok(injector.target.includes('input::placeholder,textarea::placeholder{color:#333}'))
+  assert.ok(injector.target.includes('pre,code,kbd,samp{font-family:ui-monospace;font-size:1em}'))
 })
 
 test('add preflight styles with theme missing some values', () => {
@@ -77,10 +85,12 @@ test('add preflight styles with theme missing some values', () => {
     },
   })
 
-  expect(injector.target).toContain(
-    '*,::before,::after{box-sizing:border-box;border:0 solid currentColor}',
+  assert.ok(
+    injector.target.includes(
+      '*,::before,::after{box-sizing:border-box;border:0 solid currentColor}',
+    ),
   )
-  expect(injector.target).toContain('input::placeholder,textarea::placeholder{color:#a1a1aa}')
+  assert.ok(injector.target.includes('input::placeholder,textarea::placeholder{color:#a1a1aa}'))
 })
 
 test('use custom preflight styles', () => {
@@ -90,7 +100,7 @@ test('use custom preflight styles', () => {
     preflight: (css) => ({ html: css.html }),
   })
 
-  expect(injector.target).toStrictEqual([
+  assert.equal(injector.target, [
     'html{line-height:1.5;-webkit-text-size-adjust:100%;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}',
   ])
 })
@@ -104,5 +114,7 @@ test('use custom preflight with fallback to built-in', () => {
     },
   })
 
-  expect(injector.target).toHaveLength(37)
+  assert.is(injector.target.length, 37)
 })
+
+test.run()

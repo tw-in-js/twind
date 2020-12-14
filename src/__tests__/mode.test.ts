@@ -1,23 +1,34 @@
 import { tw, create, virtualInjector, strict, mode } from '..'
+import { suite } from 'uvu'
+import * as assert from 'uvu/assert'
+import { snoop } from 'snoop'
+
+const test = suite('mode')
+
+const noop: typeof console.warn = () => {
+  /* no-op */
+}
 
 test('mode warn (default)', () => {
   const consoleWarn = console.warn
 
   try {
-    const warn = jest.fn()
-    console.warn = warn
+    const { tw } = create()
 
-    expect(tw('unknown-directive')).toBe('')
-    expect(warn).toHaveBeenCalledTimes(1)
-    expect(warn.mock.calls[0][0]).toMatch(/UNKNOWN_DIRECTIVE/)
+    const warn = snoop(noop)
+    console.warn = warn.fn
 
-    expect(tw('rounded-t-xxx')).toBe('rounded-t-xxx')
-    expect(warn).toHaveBeenCalledTimes(2)
-    expect(warn.mock.calls[1][0]).toMatch(/UNKNOWN_THEME_VALUE/)
+    assert.is(tw('unknown-directive'), '')
+    assert.is(warn.callCount, 1)
+    assert.match(warn.lastCall.arguments[0], /UNKNOWN_DIRECTIVE/)
 
-    expect(tw('gap')).toBe('gap')
-    expect(warn).toHaveBeenCalledTimes(3)
-    expect(warn.mock.calls[2][0]).toMatch(/UNKNOWN_THEME_VALUE/)
+    assert.is(tw('rounded-t-xxx'), 'rounded-t-xxx')
+    assert.is(warn.callCount, 2)
+    assert.match(warn.lastCall.arguments[0], /UNKNOWN_THEME_VALUE/)
+
+    assert.is(tw('gap'), 'gap')
+    assert.is(warn.callCount, 3)
+    assert.match(warn.lastCall.arguments[0], /UNKNOWN_THEME_VALUE/)
   } finally {
     console.warn = consoleWarn
   }
@@ -29,24 +40,28 @@ test('mode strict', () => {
     mode: strict,
   })
 
-  expect(() => instance.tw('unknown-directive')).toThrow(/UNKNOWN_DIRECTIVE/)
+  assert.throws(() => instance.tw('unknown-directive'), /UNKNOWN_DIRECTIVE/)
 })
 
 test('ignore vendor specific pseudo classes errors', () => {
   const injector = virtualInjector()
-  const warn = jest.fn()
+  const warn = snoop(noop)
 
-  injector.insert = jest.fn((rule) => {
+  const calls: [string, number][] = []
+
+  injector.insert = (rule, index) => {
+    calls.push([rule, index])
+
     if (rule.includes(':-moz')) {
       throw new Error(
         `Failed to execute 'insertRule' on 'CSSStyleSheet': Failed to parse the rule '${rule}'.`,
       )
     }
-  })
+  }
 
   const instance = create({
     injector,
-    mode: mode(warn),
+    mode: mode(warn.fn),
     preflight() {
       return {
         '::-moz-focus-inner': { borderStyle: 'none' },
@@ -55,47 +70,51 @@ test('ignore vendor specific pseudo classes errors', () => {
     },
   })
 
-  expect(instance.tw('underline text-center')).toBe('underline text-center')
+  assert.is(instance.tw('underline text-center'), 'underline text-center')
 
-  expect(injector.insert).toHaveBeenCalledTimes(4)
-  expect(injector.insert).toHaveBeenNthCalledWith(1, '::-moz-focus-inner{border-style:none}', 0)
-  expect(injector.insert).toHaveBeenNthCalledWith(
-    2,
-    ':-moz-focusring{outline:1px dotted ButtonText}',
-    0,
-  )
-  expect(injector.insert).toHaveBeenNthCalledWith(3, '.underline{text-decoration:underline}', 0)
-  expect(injector.insert).toHaveBeenNthCalledWith(4, '.text-center{text-align:center}', 1)
+  assert.equal(calls, [
+    ['::-moz-focus-inner{border-style:none}', 0],
+    [':-moz-focusring{outline:1px dotted ButtonText}', 0],
+    ['.underline{text-decoration:underline}', 0],
+    ['.text-center{text-align:center}', 1],
+  ])
 
-  expect(warn).toHaveBeenCalledTimes(0)
+  assert.is(warn.callCount, 0)
 })
 
 test('propagate other errors to warn', () => {
   const injector = virtualInjector()
-  const warn = jest.fn()
+  const warn = snoop(noop)
 
-  injector.insert = jest.fn((rule) => {
+  const calls: [string, number][] = []
+
+  injector.insert = (rule, index) => {
+    calls.push([rule, index])
+
     if (rule.includes('-web')) {
       throw new Error(
         `Failed to execute 'insertRule' on 'CSSStyleSheet': Failed to parse the rule '${rule}'.`,
       )
     }
-  })
+  }
 
   const instance = create({
     injector,
-    mode: mode(warn),
+    mode: mode(warn.fn),
     preflight() {
       return { '.invalid-web': { color: 'blue' } }
     },
   })
 
-  expect(instance.tw('underline')).toBe('underline')
+  assert.is(instance.tw('underline'), 'underline')
 
-  expect(injector.insert).toHaveBeenCalledTimes(2)
-  expect(injector.insert).toHaveBeenNthCalledWith(1, '.invalid-web{color:blue}', 0)
-  expect(injector.insert).toHaveBeenNthCalledWith(2, '.underline{text-decoration:underline}', 0)
+  assert.equal(calls, [
+    ['.invalid-web{color:blue}', 0],
+    ['.underline{text-decoration:underline}', 0],
+  ])
 
-  expect(warn).toHaveBeenCalledTimes(1)
-  expect(warn.mock.calls[0][0]).toMatch(/INJECT_CSS_ERROR/)
+  assert.is(warn.callCount, 1)
+  assert.match(warn.lastCall.arguments[0], /INJECT_CSS_ERROR/)
 })
+
+test.run()

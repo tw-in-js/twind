@@ -18,7 +18,6 @@ const getStyleElement = (nonce?: string): HTMLStyleElement => {
 
   if (!element) {
     // Create a new one otherwise
-    // eslint-disable-next-line unicorn/prefer-node-append
     element = document.head.appendChild(document.createElement('style'))
 
     element.id = STYLE_ELEMENT_ID

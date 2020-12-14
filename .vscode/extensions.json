@@ -1,6 +1,5 @@
 {
   "recommendations": [
-    "Orta.vscode-jest",
     "esbenp.prettier-vscode",
     "dbaeumer.vscode-eslint",
     "drknoxy.eslint-disable-snippets",

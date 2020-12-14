@@ -1,6 +1,5 @@
 - Next Steps
 
-  - Name: gusty
   - Docs Repo @luke
   - Small Landing Page @luke
   - Presets Issue @sastan
@@ -8,6 +7,7 @@
     - vanilla, svelte, preact, react, vue @luke
     - deploy to unpkg
   - benchmarks in core: @sastan
+
     1. https://github.com/cristianbote/goober/tree/master/benchmarks
     2. create an realistic example
 

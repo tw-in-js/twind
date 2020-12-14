@@ -1,7 +1,10 @@
 import type { Falsy } from './util'
 import type { InlineDirective } from './rule'
 
-export interface TokenGrouping extends Record<string, Token> {}
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface TokenGrouping extends Record<string, Token> {
+  /* for recusive types */
+}
 
 export type TypescriptCompat = boolean | number
 

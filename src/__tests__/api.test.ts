@@ -1,17 +1,22 @@
+import { suite } from 'uvu'
+import * as assert from 'uvu/assert'
+
 import type { Instance, Injector, InlineDirective } from '../types'
 
 import { create, virtualInjector, strict } from '..'
 
 import data from './api.json'
 
-let injector: Injector<string[]>
-let tw: Instance['tw']
-let setup: Instance['setup']
+const test = suite<{
+  injector: Injector<string[]>
+  tw: Instance['tw']
+  setup: Instance['setup']
+}>('api')
 
-beforeEach(() => {
-  injector = virtualInjector()
+test.before.each((context) => {
+  context.injector = virtualInjector()
   const instance = create({
-    injector,
+    injector: context.injector,
     mode: strict,
     preflight: false,
     prefix: false,
@@ -24,17 +29,17 @@ beforeEach(() => {
       },
     },
   })
-  tw = instance.tw
-  setup = instance.setup
+  context.tw = instance.tw
+  context.setup = instance.setup
 })
 
-test.each(
-  // "bg-#f87171": ".bg-\\#f87171{--bg-opacity:1;background-color:#f87171;background-color:rgba(248,113,113,var(--bg-opacity));--text-opacity:1}",
-  // "group hover:bg-surface": [
-  //   "group hover:bg-surface",
-  //   [".hover\\:bg-surface:hover{background-color:#fff;color:#111}"]
-  // ],
-  Object.entries(data).map(([tokens, declarations]): [string, string, string[]] => {
+// "bg-#f87171": ".bg-\\#f87171{--bg-opacity:1;background-color:#f87171;background-color:rgba(248,113,113,var(--bg-opacity));--text-opacity:1}",
+// "group hover:bg-surface": [
+//   "group hover:bg-surface",
+//   [".hover\\:bg-surface:hover{background-color:#fff;color:#111}"]
+// ],
+Object.entries(data)
+  .map(([tokens, declarations]): [string, string, string[]] => {
     if (Array.isArray(declarations)) {
       // "group hover:bg-surface": [
       //   "group hover:bg-surface",
@@ -44,18 +49,21 @@ test.each(
     }
 
     return [tokens, tokens, [declarations]]
-  }),
-)('tw(%j) => %s', (tokens, classNames, rules) => {
-  expect(tw(tokens)).toBe(classNames)
-  expect(injector.target).toStrictEqual(rules)
+  })
+  .forEach(([tokens, classNames, rules]) =>
+    test(`tw(${JSON.stringify(tokens)}) => ${classNames}`, ({ injector, tw }) => {
+      assert.is(tw(tokens), classNames)
+      assert.equal(injector.target, rules)
 
-  // Cached access
-  expect(tw(tokens)).toBe(classNames)
-  expect(injector.target).toStrictEqual(rules)
-})
+      // Cached access
+      assert.is(tw(tokens), classNames)
+      assert.equal(injector.target, rules)
+    }),
+  )
 
-test('variant pseudo presedence', () => {
-  expect(tw`
+test('variant pseudo presedence', ({ injector, tw }) => {
+  assert.is(
+    tw`
     active:text-blue-200
     empty:text-green-500
     group-invalid:text-red-400
@@ -78,11 +86,11 @@ test('variant pseudo presedence', () => {
     required:text-blue-400
     valid:text-blue-500
     visited:text-gray-400
-  `).toBe(
+  `,
     'active:text-blue-200 empty:text-green-500 group-invalid:text-red-400 checked:text-gray-500 link:text-green-100 disabled:text-blue-300 even:text-gray-300 first:text-gray-50 focus-visible:text-blue-100 focus-within:text-gray-800 focus:text-blue-50 group-focus:text-gray-700 group-hover:text-gray-600 hover:text-gray-900 invalid:text-blue-600 last:text-gray-100 odd:text-gray-200 optional:text-blue-800 read-only:text-blue-700 required:text-blue-400 valid:text-blue-500 visited:text-gray-400',
   )
 
-  expect(injector.target).toStrictEqual([
+  assert.equal(injector.target, [
     '.first\\:text-gray-50:first-child{--tw-text-opacity:1;color:#f9fafb;color:rgba(249,250,251,var(--tw-text-opacity))}',
     '.last\\:text-gray-100:last-child{--tw-text-opacity:1;color:#f3f4f6;color:rgba(243,244,246,var(--tw-text-opacity))}',
     '.even\\:text-gray-300:nth-child(2n){--tw-text-opacity:1;color:#d1d5db;color:rgba(209,213,219,var(--tw-text-opacity))}',
@@ -108,9 +116,9 @@ test('variant pseudo presedence', () => {
   ])
 })
 
-test('responsive presedence', () => {
-  expect(tw`m(lg:9 2xl:6 xl:5 md:9 sm:7 8)`).toBe('lg:m-9 2xl:m-6 xl:m-5 md:m-9 sm:m-7 m-8')
-  expect(injector.target).toStrictEqual([
+test('responsive presedence', ({ injector, tw }) => {
+  assert.is(tw`m(lg:9 2xl:6 xl:5 md:9 sm:7 8)`, 'lg:m-9 2xl:m-6 xl:m-5 md:m-9 sm:m-7 m-8')
+  assert.equal(injector.target, [
     '.m-8{margin:2rem}',
     '@media (min-width: 640px){.sm\\:m-7{margin:1.75rem}}',
     '@media (min-width: 768px){.md\\:m-9{margin:2.25rem}}',
@@ -120,13 +128,12 @@ test('responsive presedence', () => {
   ])
 })
 
-test('at-rules presedence', () => {
-  expect(
+test('at-rules presedence', ({ injector, tw }) => {
+  assert.is(
     tw`m(lg:9 sticky:6 motion-reduce:5 md:dark:4 motion-safe:9 dark:7 lg:motion-safe:12 8)`,
-  ).toBe(
     'lg:m-9 sticky:m-6 motion-reduce:m-5 md:dark:m-4 motion-safe:m-9 dark:m-7 lg:motion-safe:m-12 m-8',
   )
-  expect(injector.target).toStrictEqual([
+  assert.equal(injector.target, [
     '.m-8{margin:2rem}',
     '@media (prefers-reduced-motion:reduce){.motion-reduce\\:m-5{margin:1.25rem}}',
     '@supports ((position: -webkit-sticky) or (position:sticky)){.sticky\\:m-6{margin:1.5rem}}',
@@ -138,13 +145,12 @@ test('at-rules presedence', () => {
   ])
 })
 
-test('properties presedence (border)', () => {
-  expect(
+test('properties presedence (border)', ({ injector, tw }) => {
+  assert.is(
     tw`border rounded rounded-t-sm border-2 border-lrt-4 border-t-8 border-gray-300 border-dashed`,
-  ).toBe(
     'border rounded rounded-t-sm border-2 border-lrt-4 border-t-8 border-gray-300 border-dashed',
   )
-  expect(injector.target).toStrictEqual([
+  assert.equal(injector.target, [
     '.border-gray-300{--tw-border-opacity:1;border-color:#d1d5db;border-color:rgba(209,213,219,var(--tw-border-opacity))}',
     '.border{border-width:1px}',
     '.border-2{border-width:2px}',
@@ -156,11 +162,12 @@ test('properties presedence (border)', () => {
   ])
 })
 
-test('properties presedence (gradient)', () => {
-  expect(tw`bg-gradient-to-r from-purple-400 via-pink-500 to-red-500`).toBe(
+test('properties presedence (gradient)', ({ injector, tw }) => {
+  assert.is(
+    tw`bg-gradient-to-r from-purple-400 via-pink-500 to-red-500`,
     'bg-gradient-to-r from-purple-400 via-pink-500 to-red-500',
   )
-  expect(injector.target).toStrictEqual([
+  assert.equal(injector.target, [
     '.bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops,var(--tw-gradient-from,transparent),var(--tw-radient-to,transparent)))}',
     '.from-purple-400{--tw-gradient-from:#a78bfa}',
     '.via-pink-500{--tw-gradient-stops:var(--tw-gradient-from,transparent),#ec4899,var(--tw-gradient-to,transparent)}',
@@ -168,19 +175,19 @@ test('properties presedence (gradient)', () => {
   ])
 })
 
-test('properties presedence (divide)', () => {
-  expect(tw`divide(x x-reverse opacity-75 green-500)`).toBe(
+test('properties presedence (divide)', ({ injector, tw }) => {
+  assert.is(
+    tw`divide(x x-reverse opacity-75 green-500)`,
     'divide-x divide-x-reverse divide-opacity-75 divide-green-500',
   )
-  expect(injector.target).toStrictEqual([
+  assert.equal(injector.target, [
     '.divide-green-500>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:#10b981;border-color:rgba(16,185,129,var(--tw-divide-opacity))}',
     '.divide-x>:not([hidden])~:not([hidden]){--tw-divide-x-reverse:0;border-right-width:calc(1px * var(--tw-divide-x-reverse));border-left-width:1px;border-left-width:calc(1px * calc(1 - var(--tw-divide-x-reverse)))}',
     '.divide-x-reverse>:not([hidden])~:not([hidden]){--tw-divide-x-reverse:1}',
     '.divide-opacity-75>:not([hidden])~:not([hidden]){--tw-divide-opacity:0.75}',
   ])
 })
-
-test.each([
+;[
   [
     ['bg-white', false && 'rounded'],
     'bg-white',
@@ -241,56 +248,58 @@ test.each([
       '@media (min-width: 1024px){.lg\\:hover\\:active\\:underline:hover:active{text-decoration:underline}}',
     ],
   ],
-])('tw(%j) => %s', (tokens, classNames, rules) => {
-  expect(tw(tokens)).toBe(classNames)
-  expect(injector.target).toStrictEqual(rules)
+].forEach(([tokens, classNames, rules]) =>
+  test(`tw(${JSON.stringify(tokens)}) => ${classNames}`, ({ injector, tw }) => {
+    assert.is(tw(tokens), classNames)
+    assert.equal(injector.target, rules)
 
-  // Cached access
-  expect(tw(tokens)).toBe(classNames)
-  expect(injector.target).toStrictEqual(rules)
-})
+    // Cached access
+    assert.is(tw(tokens), classNames)
+    assert.equal(injector.target, rules)
+  }),
+)
 
 /* eslint-disable no-template-curly-in-string */
-test('tw`bg-white ${false && "rounded"}`', () => {
-  expect(tw`bg-white ${false && 'rounded'}`).toBe('bg-white')
-  expect(injector.target).toStrictEqual([
+test('tw`bg-white ${false && "rounded"}`', ({ injector, tw }) => {
+  assert.is(tw`bg-white ${false && 'rounded'}`, 'bg-white')
+  assert.equal(injector.target, [
     '.bg-white{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}',
   ])
 })
 
-test('tw`bg-white ${true && "rounded"}`', () => {
-  expect(tw`bg-white ${true && 'rounded'}`).toBe('bg-white rounded')
-  expect(injector.target).toStrictEqual([
-    '.bg-white{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}',
-    '.rounded{border-radius:0.25rem}',
-  ])
-})
-
-test('tw`bg-white ${{rounded: true}}`', () => {
-  expect(tw`bg-white ${{ rounded: true }}`).toBe('bg-white rounded')
-  expect(injector.target).toStrictEqual([
+test('tw`bg-white ${true && "rounded"}`', ({ injector, tw }) => {
+  assert.is(tw`bg-white ${true && 'rounded'}`, 'bg-white rounded')
+  assert.equal(injector.target, [
     '.bg-white{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}',
     '.rounded{border-radius:0.25rem}',
   ])
 })
 
-test('tw`bg-white ${{rounded: false}}`', () => {
-  expect(tw`bg-white ${{ rounded: false }}`).toBe('bg-white')
-  expect(injector.target).toStrictEqual([
+test('tw`bg-white ${{rounded: true}}`', ({ injector, tw }) => {
+  assert.is(tw`bg-white ${{ rounded: true }}`, 'bg-white rounded')
+  assert.equal(injector.target, [
+    '.bg-white{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}',
+    '.rounded{border-radius:0.25rem}',
+  ])
+})
+
+test('tw`bg-white ${{rounded: false}}`', ({ injector, tw }) => {
+  assert.is(tw`bg-white ${{ rounded: false }}`, 'bg-white')
+  assert.equal(injector.target, [
     '.bg-white{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}',
   ])
 })
 
-test('tw`bg-${"fuchsia"} rounded-${"xl"}`', () => {
-  expect(tw`bg-${'fuchsia'} rounded-${'xl'}`).toBe('bg-fuchsia rounded-xl')
-  expect(injector.target).toStrictEqual([
+test('tw`bg-${"fuchsia"} rounded-${"xl"}`', ({ injector, tw }) => {
+  assert.is(tw`bg-${'fuchsia'} rounded-${'xl'}`, 'bg-fuchsia rounded-xl')
+  assert.equal(injector.target, [
     '.bg-fuchsia{background-color:fuchsia}',
     '.rounded-xl{border-radius:0.75rem}',
   ])
 })
 /* eslint-enable no-template-curly-in-string */
 
-test('container center', () => {
+test('container center', ({ injector }) => {
   const { tw } = create({
     injector,
     prefix: false,
@@ -305,8 +314,8 @@ test('container center', () => {
     },
   })
 
-  expect(tw`container`).toBe('container')
-  expect(injector.target).toStrictEqual([
+  assert.is(tw`container`, 'container')
+  assert.equal(injector.target, [
     '.container{width:100%;margin-right:auto;margin-left:auto}',
     '@media (min-width: 640px){.container{max-width:640px}}',
     '@media (min-width: 768px){.container{max-width:768px}}',
@@ -316,7 +325,7 @@ test('container center', () => {
   ])
 })
 
-test('container padding', () => {
+test('container padding', ({ injector }) => {
   const { tw } = create({
     injector,
     prefix: false,
@@ -331,8 +340,8 @@ test('container padding', () => {
     },
   })
 
-  expect(tw`container`).toBe('container')
-  expect(injector.target).toStrictEqual([
+  assert.is(tw`container`, 'container')
+  assert.equal(injector.target, [
     '.container{width:100%;padding-right:2rem;padding-left:2rem}',
     '@media (min-width: 640px){.container{max-width:640px;padding-right:2rem;padding-left:2rem}}',
     '@media (min-width: 768px){.container{max-width:768px;padding-right:2rem;padding-left:2rem}}',
@@ -342,7 +351,7 @@ test('container padding', () => {
   ])
 })
 
-test('container padding per screeen', () => {
+test('container padding per screeen', ({ injector }) => {
   const { tw } = create({
     injector,
     prefix: false,
@@ -363,8 +372,8 @@ test('container padding per screeen', () => {
     },
   })
 
-  expect(tw`container`).toBe('container')
-  expect(injector.target).toStrictEqual([
+  assert.is(tw`container`, 'container')
+  assert.equal(injector.target, [
     '.container{width:100%;padding-right:1rem;padding-left:1rem}',
     '@media (min-width: 640px){.container{max-width:640px;padding-right:2rem;padding-left:2rem}}',
     '@media (min-width: 768px){.container{max-width:768px;padding-right:1rem;padding-left:1rem}}',
@@ -374,7 +383,7 @@ test('container padding per screeen', () => {
   ])
 })
 
-test('responsive if theme screens uses non px values', () => {
+test('responsive if theme screens uses non px values', ({ injector }) => {
   const { tw } = create({
     injector,
     prefix: false,
@@ -391,8 +400,8 @@ test('responsive if theme screens uses non px values', () => {
     },
   })
 
-  expect(tw`m(xl:8 2xl:16 sm:2 md:3 lg:4 1)`).toBe('xl:m-8 2xl:m-16 sm:m-2 md:m-3 lg:m-4 m-1')
-  expect(injector.target).toStrictEqual([
+  assert.is(tw`m(xl:8 2xl:16 sm:2 md:3 lg:4 1)`, 'xl:m-8 2xl:m-16 sm:m-2 md:m-3 lg:m-4 m-1')
+  assert.equal(injector.target, [
     '.m-1{margin:0.25rem}',
     '@media (min-width: 40rem){.sm\\:m-2{margin:0.5rem}}',
     '@media (min-width: 48rem){.md\\:m-3{margin:0.75rem}}',
@@ -402,63 +411,73 @@ test('responsive if theme screens uses non px values', () => {
   ])
 })
 
-test('falsy arguments', () => {
-  expect(tw(true, false, '', null, undefined, 0, Number.NaN)).toBe('')
-  expect(tw('')).toBe('')
+test('falsy arguments', ({ tw }) => {
+  assert.is(tw(true, false, '', null, undefined, 0, Number.NaN), '')
+  assert.is(tw(''), '')
 })
 
-test('empty arguments', () => {
-  expect(tw('')).toBe('')
-  expect(tw([])).toBe('')
-  expect(tw({})).toBe('')
+test('empty arguments', ({ tw }) => {
+  assert.is(tw(''), '')
+  assert.is(tw([]), '')
+  assert.is(tw({}), '')
 })
 
-test('no arguments', () => {
-  expect(tw()).toBe('')
+test('no arguments', ({ tw }) => {
+  assert.is(tw(), '')
 })
 
-test('inline rule (css object)', () => {
-  expect(tw(({ theme }) => ({ color: theme('colors', 'red.500') }))).toBe('tw-1e4d9nh')
-  expect(injector.target).toStrictEqual(['.tw-1e4d9nh{color:#ef4444}'])
+test('inline rule (css object)', ({ injector, tw }) => {
+  assert.is(
+    tw(({ theme }) => ({ color: theme('colors', 'red.500') })),
+    'tw-1e4d9nh',
+  )
+  assert.equal(injector.target, ['.tw-1e4d9nh{color:#ef4444}'])
 })
 
-test('inline rule (tag)', () => {
-  expect(tw(({ tag }) => tag('marker'))).toBe('marker')
-  expect(injector.target).toStrictEqual([])
+test('inline rule (tag)', ({ injector, tw }) => {
+  assert.is(
+    tw(({ tag }) => tag('marker')),
+    'marker',
+  )
+  assert.equal(injector.target, [])
 })
 
-test('inline rule (tw)', () => {
-  expect(tw(({ tw }) => tw`text-center`)).toBe('text-center')
-  expect(injector.target).toStrictEqual(['.text-center{text-align:center}'])
+test('inline rule (tw)', ({ injector, tw }) => {
+  assert.is(
+    tw(({ tw }) => tw`text-center`),
+    'text-center',
+  )
+  assert.equal(injector.target, ['.text-center{text-align:center}'])
 })
 
-test('inline rule (tw combined)', () => {
-  expect(tw`underline ${({ tw }) => tw`text-center`} font-bold`).toBe(
+test('inline rule (tw combined)', ({ injector, tw }) => {
+  assert.is(
+    tw`underline ${({ tw }) => tw`text-center`} font-bold`,
     'underline text-center font-bold',
   )
-  expect(injector.target).toStrictEqual([
+  assert.equal(injector.target, [
     '.underline{text-decoration:underline}',
     '.text-center{text-align:center}',
     '.font-bold{font-weight:700}',
   ])
 })
 
-test('inline rule (variants)', () => {
-  expect(tw`text-center sm:hover:${({ tw }) => tw`underline`} active:font-bold`).toBe(
+test('inline rule (variants)', ({ injector, tw }) => {
+  assert.is(
+    tw`text-center sm:hover:${({ tw }) => tw`underline`} active:font-bold`,
     'text-center sm:hover:underline active:font-bold',
   )
-  expect(injector.target).toStrictEqual([
+  assert.equal(injector.target, [
     '.text-center{text-align:center}',
     '.active\\:font-bold:active{font-weight:700}',
     '@media (min-width: 640px){.sm\\:hover\\:underline:hover{text-decoration:underline}}',
   ])
 })
 
-test('inline rule nested', () => {
-  // eslint-disable-next-line unicorn/consistent-function-scoping
+test('inline rule nested', ({ injector, tw }) => {
   const underline: InlineDirective = ({ tw }) => tw`underline`
 
-  expect(
+  assert.is(
     tw(
       'text-center',
       {
@@ -470,11 +489,10 @@ test('inline rule nested', () => {
       },
       'font-bold',
     ),
-  ).toBe(
     'text-center sm:hover:underline sm:focus:tw-1e4d9nh lg:text-lg lg:focus:underline font-bold',
   )
 
-  expect(injector.target).toStrictEqual([
+  assert.equal(injector.target, [
     '.text-center{text-align:center}',
     '.font-bold{font-weight:700}',
     '@media (min-width: 640px){.sm\\:hover\\:underline:hover{text-decoration:underline}}',
@@ -484,8 +502,8 @@ test('inline rule nested', () => {
   ])
 })
 
-test('inject @font-face', () => {
-  expect(
+test('inject @font-face', ({ injector, tw }) => {
+  assert.is(
     tw(() => ({
       '& p': {
         fontFamily: 'Open Sans',
@@ -498,43 +516,46 @@ test('inject @font-face', () => {
         },
       },
     })),
-  ).toBe('tw-vqfbxj')
+    'tw-vqfbxj',
+  )
 
-  expect(injector.target).toStrictEqual([
+  assert.equal(injector.target, [
     '@font-face{font-family:Open Sans;src:url("/fonts/OpenSans-Regular-webfont.woff2") format("woff2"), url("/fonts/OpenSans-Regular-webfont.woff") format("woff")}',
     '.tw-vqfbxj p{font-family:Open Sans}',
   ])
 })
 
-test('inject global styles', () => {
-  expect(
+test('inject global styles', ({ injector, tw }) => {
+  assert.is(
     tw(() => ({
       ':root': {
         '--main-bg-color': 'brown',
       },
       backgroundColor: 'var(--main-bg-color)',
     })),
-  ).toBe('tw-1kfw9fm')
+    'tw-1kfw9fm',
+  )
 
-  expect(injector.target).toStrictEqual([
+  assert.equal(injector.target, [
     '.tw-1kfw9fm{background-color:var(--main-bg-color)}',
     ':root{--main-bg-color:brown}',
   ])
 })
 
-test('expand nested selector', () => {
-  expect(
+test('expand nested selector', ({ injector, tw }) => {
+  assert.is(
     tw(() => ({
       '&, a': {
         color: 'black',
       },
     })),
-  ).toBe('tw-ec2uk9')
+    'tw-ec2uk9',
+  )
 
-  expect(injector.target).toStrictEqual(['.tw-ec2uk9, a{color:black}'])
+  assert.equal(injector.target, ['.tw-ec2uk9, a{color:black}'])
 })
 
-test('fontSize string', () => {
+test('fontSize string', ({ injector }) => {
   const { tw } = create({
     injector,
     prefix: false,
@@ -557,29 +578,31 @@ test('fontSize string', () => {
     },
   })
 
-  expect(tw`text(big line-height css)`).toBe('text-big text-line-height text-css')
-  expect(injector.target).toStrictEqual([
+  assert.is(tw`text(big line-height css)`, 'text-big text-line-height text-css')
+  assert.equal(injector.target, [
     '.text-css{font-size:32px;letter-spacing:-0.02em;line-height:40px}',
     '.text-line-height{font-size:20px;line-height:28px}',
     '.text-big{font-size:5.75rem}',
   ])
 })
 
-test('can not call setup after config', () => {
-  expect(() => {
+test('can not call setup after config', ({ setup }) => {
+  assert.throws(() => {
     setup()
-  }).toThrow('Error: [LATE_SETUP_CALL] {}')
+  }, 'Error: [LATE_SETUP_CALL] {}')
 })
 
 test('can call setup once', () => {
-  const instance = create()
-  instance.setup({
+  const { setup } = create()
+  setup({
     prefix: false,
     preflight: false,
     mode: strict,
   })
 
-  expect(() => {
+  assert.throws(() => {
     setup()
-  }).toThrow('Error: [LATE_SETUP_CALL] {}')
+  }, 'Error: [LATE_SETUP_CALL] {}')
 })
+
+test.run()

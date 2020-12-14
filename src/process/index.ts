@@ -67,7 +67,6 @@ export const configure = (
 
     theme: ((section: keyof Theme, key?: string | string[], defaultValue?: unknown): unknown => {
       // Empty key us ethe standard tailwind default key
-      // eslint-disable-next-line unicorn/explicit-length-check
       if (key != null && !key.length) {
         key = 'DEFAULT'
       }

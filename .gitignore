@@ -6,6 +6,7 @@ web_modules
 .cache
 dist
 __generated__
+tsconfig.dist.json
 
 docs
 !packages/*/docs

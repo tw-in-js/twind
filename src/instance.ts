@@ -25,6 +25,7 @@ export const create = (config?: Configuration): Instance => {
     // Replace implementation with configured ones
     // `process`: the real one
     // `init`: invokes `mode.report` with `LATE_SETUP_CALL`
+    // eslint-disable-next-line @typescript-eslint/no-extra-semi
     ;({ process, init } = configure(config))
   }
 

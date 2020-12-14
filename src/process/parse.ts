@@ -32,6 +32,7 @@ const interleave = (strings: TemplateStringsArray, interpolations: Token[]): Tok
   for (let index = 0; index < interpolations.length; ) {
     // Join consecutive strings
     if (is.string(interpolations[index])) {
+      // eslint-disable-next-line @typescript-eslint/no-extra-semi
       ;(result[result.length - 1] as string) += (interpolations[index] as string) + strings[++index]
     } else {
       if (interpolations[index]) {
@@ -69,12 +70,10 @@ const endGrouping = (isWhitespace?: boolean): void => {
   const index = groupings.lastIndexOf('')
 
   if (~index) {
-    /* eslint-disable unicorn/prefer-math-trunc */
     groupings.splice(
       index + ~~(isWhitespace as boolean),
       groupings.length - index + ~~(isWhitespace as boolean),
     )
-    /* eslint-enable unicorn/prefer-math-trunc */
   }
 }
 

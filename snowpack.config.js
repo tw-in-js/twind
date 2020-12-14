@@ -5,11 +5,10 @@ module.exports = {
     example: '/',
     src: '/_dist_',
   },
-  plugins: ['@snowpack/plugin-svelte'],
+  install: ['uvu', 'uvu/assert', 'snoop'],
   installOptions: {
     externalPackage: ['dlv', 'tailwindcss'],
   },
-
   experiments: {
     routes: [
       // Prevent type only exports (eg empty modules) to break snowpack

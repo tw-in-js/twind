@@ -18,7 +18,6 @@ export function processPlugins() {
     separator,
   } = config
 
-  // eslint-disable-next-line unicorn/consistent-function-scoping
   const applyConfiguredPrefix = (selector) => selector
 
   const getConfigValue = (path, defaultValue) => (path ? dlv(config, path, defaultValue) : config)
@@ -80,7 +79,7 @@ export function processPlugins() {
         // )
       },
 
-      addComponents: (newComponents, _options) => {
+      addComponents: (newComponents /*, options */) => {
         // => const defaultOptions = { variants: [], respectPrefix: true }
         // options = Array.isArray(options)
         //   ? { ...defaultOptions, variants: options }
@@ -94,11 +93,11 @@ export function processPlugins() {
         )
       },
 
-      addBase: (_baseStyles) => {
+      addBase: (/* baseStyles */) => {
         // => pluginBaseStyles.push(wrapWithLayer(parseStyles(baseStyles), 'base'))
       },
 
-      addVariant: (_name, _generator, _options = {}) => {
+      addVariant: (/* name, generator, options = {} */) => {
         // =>pluginVariantGenerators[name] = generateVariantFunction(generator, options)
       },
     })
@@ -121,7 +120,7 @@ export function processPlugins() {
 
     // '.placeholder-black::placeholder'
     // '.divide-pink-50 > :not([hidden]) ~ :not([hidden])'
-    const [_, directive] = /^\.([^\s:]+)/.exec(selector) || []
+    const [, directive] = /^\.([^\s:]+)/.exec(selector) || []
 
     if (directive) {
       // Unescape

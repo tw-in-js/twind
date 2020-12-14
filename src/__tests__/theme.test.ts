@@ -1,9 +1,14 @@
+import { suite } from 'uvu'
+import * as assert from 'uvu/assert'
+
 import { makeThemeResolver } from '../internal/theme'
+
+const test = suite('theme')
 
 test('no custom theme', () => {
   const theme = makeThemeResolver()
 
-  expect(theme('borderColor', [])).toBe('#e5e7eb')
+  assert.is(theme('borderColor', []), '#e5e7eb')
 })
 
 test('default color', () => {
@@ -17,7 +22,7 @@ test('default color', () => {
     },
   })
 
-  expect(theme('borderColor', 'gray')).toBe('#aaa')
+  assert.is(theme('borderColor', 'gray'), '#aaa')
 })
 
 test('negative is available and no-op', () => {
@@ -29,8 +34,10 @@ test('negative is available and no-op', () => {
     },
   })
 
-  expect(theme('spacing', 'xs')).toBeUndefined()
-  expect(theme('spacing', '-xs')).toBeUndefined()
+  assert.is(theme('spacing', 'xs'), undefined)
+  assert.is(theme('spacing', '-xs'), undefined)
 
-  expect(theme('spacing', 'px')).toBe('1px')
+  assert.is(theme('spacing', 'px'), '1px')
 })
+
+test.run()

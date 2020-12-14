@@ -67,7 +67,6 @@ const opacityProperty = (
 })
 
 const parseColorComponent = (chars: string, factor: number): number =>
-  // eslint-disable-next-line unicorn/prefer-number-properties
   Math.round(parseInt(chars, 16) * factor)
 
 const asRGBA = <T extends string | undefined>(
@@ -76,7 +75,6 @@ const asRGBA = <T extends string | undefined>(
   opacityDefault?: string,
 ): T | string => {
   if (color && color[0] === '#') {
-    /* eslint-disable unicorn/prefer-string-slice */
     return `rgba(${parseColorComponent(
       color.substr(1, (_ = (color.length - 1) / 3)),
       ($ = [17, 1, 0.062272][_ - 1]),
@@ -84,7 +82,6 @@ const asRGBA = <T extends string | undefined>(
       color.substr(1 + 2 * _, _),
       $,
     )},var(--tw-${opacityProperty}${opacityDefault ? ',' + opacityDefault : ''}))`
-    /* eslint-enable unicorn/prefer-string-slice */
   }
 
   return color
