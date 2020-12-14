@@ -124,7 +124,7 @@ test('responsive presedence', ({ injector, tw }) => {
     '@media (min-width: 768px){.md\\:m-9{margin:2.25rem}}',
     '@media (min-width: 1024px){.lg\\:m-9{margin:2.25rem}}',
     '@media (min-width: 1280px){.xl\\:m-5{margin:1.25rem}}',
-    '@media (min-width: 1536px){.2xl\\:m-6{margin:1.5rem}}',
+    '@media (min-width: 1536px){.\\32 xl\\:m-6{margin:1.5rem}}',
   ])
 })
 
@@ -407,7 +407,7 @@ test('responsive if theme screens uses non px values', ({ injector }) => {
     '@media (min-width: 48rem){.md\\:m-3{margin:0.75rem}}',
     '@media (min-width: 64rem){.lg\\:m-4{margin:1rem}}',
     '@media (min-width: 80rem){.xl\\:m-8{margin:2rem}}',
-    '@media (min-width: 96rem){.2xl\\:m-16{margin:4rem}}',
+    '@media (min-width: 96rem){.\\32 xl\\:m-16{margin:4rem}}',
   ])
 })
 
