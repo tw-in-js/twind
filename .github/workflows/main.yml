@@ -29,8 +29,9 @@ jobs:
         run: yarn run test:coverage
 
       - name: Build
-        # Not running build on 10.x as it does not have support for fs/promises
-        if: ${{ matrix.node != '10.x'}}
+        # Not running on Node 10.x as it does not have support for 'fs/promises'
+        # Not running on windows as it hangs (don't know why)
+        if: ${{ matrix.node != '10.x' && !startsWith(matrix.os, 'windows') }}
         run: yarn run build
 
       - name: Coveralls

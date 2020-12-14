@@ -11,9 +11,11 @@ const test = suite<{
 
 test.before.each((context) => {
   context.dom = new JSDOM(`<!DOCTYPE html>`)
-  globalThis.window = (context.dom.window as unknown) as typeof globalThis['window']
-  globalThis.self = (context.dom.window as unknown) as typeof globalThis['self']
-  globalThis.document = window.document
+  global.window = (context.dom.window as unknown) as typeof globalThis['window']
+  global.self = window
+  global.document = window.document
+  global.navigator = window.navigator
+  global.getComputedStyle = window.getComputedStyle
 })
 
 test('injects in to a style sheet element', () => {
