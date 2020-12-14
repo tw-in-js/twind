@@ -2,10 +2,9 @@
   "$schema": "http://json.schemastore.org/tsconfig",
   "include": ["src/**/*"],
   "compilerOptions": {
-    // Target latest version of ECMAScript.
-    "target": "ESNext",
-    // During development use cjs
-    "module": "CommonJS",
+    // During development for Node v10.8 support
+    "target": "es2018",
+    "module": "ESNext",
     "lib": ["esnext", "dom", "dom.iterable"],
     // ensure that nobody can accidentally use this config for a build
     "noEmit": true,
