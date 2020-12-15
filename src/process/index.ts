@@ -35,7 +35,7 @@ const sanitize = <T>(
 
 // Creates rule id including variants, negate and directive
 // which is exactly like a tailwind rule
-const toId = (rule: Rule, directive = rule.d): string => {
+const toString = (rule: Rule, directive = rule.d): string => {
   if (is.function(directive)) return ''
 
   const base = join(rule.v, '')
@@ -128,15 +128,23 @@ export const configure = (
 
   // Responsible for converting (translate, decorate, serialize, inject) a rule
   const convert = (rule: Rule): string | undefined | void => {
-    // A rule id is the tailwind rule including variants, negate and directive
+    // If there is a active rule this one is nested
+    // we must add the variants and need to reset the id
+    if (activeRule.v?.length) {
+      rule = { ...rule, v: [...activeRule.v, ...rule.v], $: '' }
+    }
 
-    // For inline directives (functions) `toId` returns an empty string
-    // in that case we check if we already have a name for the function
-    // and use that one to generate the id
-    let id = toId(rule) || toId(rule, inlineDirectiveName.get(rule.d as InlineDirective))
+    // Static rules (from template literals) can cache their id
+    // this greatly improves performance
+    if (!rule.$) {
+      // For inline directives (functions) `toString` returns an empty string
+      // in that case we check if we already have a name for the function
+      // and use that one to generate the id
+      rule.$ = toString(rule) || toString(rule, inlineDirectiveName.get(rule.d as InlineDirective))
+    }
 
-    // Check if we already have a class name for this rule
-    let className = idToClassName.get(id)
+    // Check if we already have a class name for this rule id
+    let className = idToClassName.get(rule.$)
 
     // We check for nullish because we put an empty string into `idToClassName`
     // if a rule did not generate a class name
@@ -146,17 +154,17 @@ export const configure = (
       let translation = tryTranslate(rule)
 
       // If this is a unknown inline directive
-      if (!id) {
+      if (!rule.$) {
         // We can now generate a unique name based on the created translation
         // This id does not include the variants as a directive is always independent of variants
         // Variants are applied below using `decorate()`
-        id = cyrb32(JSON.stringify(translation))
+        rule.$ = cyrb32(JSON.stringify(translation))
 
         // Remember it
-        inlineDirectiveName.set(rule.d as InlineDirective, id)
+        inlineDirectiveName.set(rule.d as InlineDirective, rule.$)
 
         // Generate an id including the current variants
-        id = toId(rule, id)
+        rule.$ = toString(rule, rule.$)
       }
 
       // CSS class names have been returned
@@ -167,19 +175,19 @@ export const configure = (
         // 3. decorate: apply variants
         translation = decorate(translation, rule)
 
-        className = hash ? hash(JSON.stringify(translation)) : id
+        className = hash ? hash(JSON.stringify(translation)) : rule.$
 
         // 4. serialize: convert to css string with precedence
         // 5. inject: add to dom
         serialize(translation, className, rule).forEach(inject)
       } else {
         // No plugin or plugin did not return something
-        mode.report({ id: 'UNKNOWN_DIRECTIVE', rule: id }, context)
+        mode.report({ id: 'UNKNOWN_DIRECTIVE', rule: rule.$ }, context)
         className = ''
       }
 
       // Remember the generated class name
-      idToClassName.set(id, className)
+      idToClassName.set(rule.$, className)
     }
 
     return className
@@ -188,7 +196,7 @@ export const configure = (
   // This function is called from `tw(...)`
   // it parses, translates, decorates, serializes and injects the tokens
   const process = (tokens: unknown[]): string =>
-    parse(tokens, activeRule.v).map(convert).filter(Boolean).join(' ')
+    parse(tokens).map(convert).filter(Boolean).join(' ')
 
   // Determine if we should inject the preflight (browser normalize)
   const preflight = sanitize<Preflight | false>(config.preflight, identity, false)

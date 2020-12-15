@@ -47,7 +47,7 @@ test('plugin can return new tokens to parse using `tw`', ({ setup }) => {
           const color = theme('colors', args[0] + '-500', '')
 
           if (color) {
-            return tw`hover:bg-${args[0]}-500 underline)`
+            return tw`hover:bg(${args[0] + '-500'}) underline)`
           }
         } else {
           return tw('font-bold py-2 px-4 rounded')

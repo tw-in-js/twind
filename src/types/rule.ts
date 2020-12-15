@@ -14,7 +14,16 @@ export interface Rule {
   d: string | InlineDirective
 
   /** Is this rule negated: `"-rotate-45"` =\> `true` */
-  n?: boolean
+  n: boolean | undefined
+
+  /**
+   * The id is the tailwind rule including variants, negate and directive
+   *
+   * Initialy this is set to an empty string.
+   *
+   * This is used to cache the id of static rules (from template literals).
+   */
+  $: string
 }
 
 export interface InlineDirective {
