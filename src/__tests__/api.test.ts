@@ -320,6 +320,29 @@ test('tw`bg(${"fuchsia"}) rounded(${"xl"})`', ({ injector, tw }) => {
     '.rounded-xl{border-radius:0.75rem}',
   ])
 })
+
+test('tw`bg-${"fuchsia"}) sm:${"underline"} lg:${false && "line-through"} text-${["underline", "center"]} rounded-${{lg: false, xl: true}})`', ({
+  injector,
+  tw,
+}) => {
+  assert.is(
+    tw`bg-${'fuchsia'} sm:${'underline'} lg:${false && 'line-through'} text-${[
+      'underline',
+      'center',
+    ]} rounded-${{
+      lg: false,
+      xl: true,
+    }}`,
+    'bg-fuchsia sm:underline text-underline text-center rounded-xl',
+  )
+  assert.equal(injector.target, [
+    '.bg-fuchsia{background-color:fuchsia}',
+    '.text-underline{text-decoration:underline}',
+    '.text-center{text-align:center}',
+    '.rounded-xl{border-radius:0.75rem}',
+    '@media (min-width: 640px){.sm\\:underline{text-decoration:underline}}',
+  ])
+})
 /* eslint-enable no-template-curly-in-string */
 
 test('container center', ({ injector }) => {

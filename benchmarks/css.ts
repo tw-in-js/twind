@@ -129,7 +129,7 @@ function templateLiteralStyles(): Promise<void> {
       bg-transparent
       text-white
       border(2 solid white)
-      hover:text(${color})
+      hover:text-${color}
       focus:border(2 dashed black)
       text(sm md:base lg:lg)
     `,
@@ -151,7 +151,7 @@ function templateLiteralStyles(): Promise<void> {
             bg-transparent
             text-white
             border(2 solid white)
-            hover:text(${color})
+            hover:text-${color}
             focus:border(2 dashed black)
             text(sm md:base lg:lg)
           `,
