@@ -116,6 +116,8 @@ const parseString = (token: string, isVariant?: boolean): void => {
   if (buffer) {
     if (isVariant) {
       startGrouping(':' + buffer)
+    } else if (buffer.slice(-1) === '-') {
+      startGrouping(buffer.slice(0, -1))
     } else {
       saveRule(buffer)
     }
