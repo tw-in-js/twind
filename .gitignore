@@ -9,9 +9,6 @@ dist
 __generated__
 tsconfig.dist.json
 
-docs
-!packages/*/docs
-
 benchmarks/*.min.mjs
 
 # Svelte Component type defs
