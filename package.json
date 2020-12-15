@@ -2,6 +2,8 @@
   "name": "@tw-in-js/core",
   "version": "0.3.1",
   "description": "compiles tailwind like shorthand syntax into css at runtime",
+  "//": "mark as private to prevent accidental publish - use 'yarn release'",
+  "private": true,
   "keywords": [
     "tailwind",
     "tw-in-js",
@@ -111,6 +113,7 @@
     "watchlist": "^0.2.3"
   },
   "optionalDependencies": {
+    "//": "Tailwind required Node v12, we support v10 => mark it as optional",
     "tailwindcss": "^2.0.1"
   },
   "publishConfig": {
