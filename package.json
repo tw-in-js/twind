@@ -26,7 +26,7 @@
     "format": "prettier --write --ignore-path .gitignore .",
     "lint": "eslint --ext .js,.ts --ignore-path .gitignore .",
     "lint:fix": "yarn lint -- --fix",
-    "release": "npx np",
+    "release": "npx np --contents dist",
     "start": "snowpack dev",
     "test": "uvu -r esm -r ./src/__fixtures__/env.js",
     "test:coverage": "c8 --src src -x '**/__fixtures__/**' -x '**/__tests__/**' -x 'src/types/**' --all -r lcov -r text yarn test",
@@ -119,9 +119,6 @@
   },
   "engines": {
     "node": ">=10.13"
-  },
-  "np": {
-    "contents": "dist"
   },
   "size-limit": [
     {
