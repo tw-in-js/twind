@@ -79,8 +79,10 @@ export function destroy(): void {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const defaultView = (global as any)[kDefaultView] as WindowProxy & typeof globalThis
 
-  // Dispose "document" to prevent "load" event from triggering.
-  Object.defineProperty(defaultView, 'document', { value: null })
+  if (defaultView) {
+    // Dispose "document" to prevent "load" event from triggering.
+    Object.defineProperty(defaultView, 'document', { value: null })
 
-  defaultView.close()
+    defaultView.close()
+  }
 }
