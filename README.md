@@ -36,7 +36,7 @@ document.body.innerHTML = `
 `
 ```
 
-For further instruction on usage please [read the documentation]('./docs')!
+For further instruction on usage please [read the documentation](docs)!
 
 ## Rational
 
