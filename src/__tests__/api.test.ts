@@ -290,8 +290,31 @@ test('tw`bg-white ${{rounded: false}}`', ({ injector, tw }) => {
   ])
 })
 
-test('tw`bg-${"fuchsia"} rounded-${"xl"}`', ({ injector, tw }) => {
-  assert.is(tw`bg-${'fuchsia'} rounded-${'xl'}`, 'bg-fuchsia rounded-xl')
+test('tw`bg-white sm:${["rounded"]} text-black hover:${{sm: tw`undeline`, lg: "line-through"}} font(${{bold: true}})`', ({
+  injector,
+  tw,
+}) => {
+  assert.is(
+    tw`bg-white sm:${['rounded']} text-black hover:${{
+      sm: tw`underline`,
+      lg: 'no-underline line-through',
+    }} font(${{ bold: true }})`,
+    'bg-white sm:rounded text-black hover:sm:underline hover:lg:no-underline hover:lg:line-through font-bold',
+  )
+  assert.equal(injector.target, [
+    '.text-black{--tw-text-opacity:1;color:#000;color:rgba(0,0,0,var(--tw-text-opacity))}',
+    '.bg-white{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}',
+    '.underline{text-decoration:underline}',
+    '.font-bold{font-weight:700}',
+    '@media (min-width: 640px){.sm\\:rounded{border-radius:0.25rem}}',
+    '@media (min-width: 640px){.hover\\:sm\\:underline:hover{text-decoration:underline}}',
+    '@media (min-width: 1024px){.hover\\:lg\\:no-underline:hover{text-decoration:none}}',
+    '@media (min-width: 1024px){.hover\\:lg\\:line-through:hover{text-decoration:line-through}}',
+  ])
+})
+
+test('tw`bg(${"fuchsia"}) rounded(${"xl"})`', ({ injector, tw }) => {
+  assert.is(tw`bg(${'fuchsia'}) rounded(${'xl'})`, 'bg-fuchsia rounded-xl')
   assert.equal(injector.target, [
     '.bg-fuchsia{background-color:fuchsia}',
     '.rounded-xl{border-radius:0.75rem}',

@@ -1,7 +1,5 @@
 import type { Rule, Token } from '../types'
 
-import * as is from '../internal/is'
-
 import { join, tail, includes } from '../internal/util'
 
 // The parsing is stacked based
@@ -18,39 +16,22 @@ import { join, tail, includes } from '../internal/util'
 // Shared variables used during parsing
 
 // List of active groupings: either variant (':xxx') or prefix
+// sm:text => ':sm'
+// sm:(text) => ':sm', ''
+// text(center sm:hover:underline focus:black) sm:rounded
+// => 'text'
+// => 'text', ''
+// => 'text', '', ':sm'
+// => 'text', '', ':sm', ':hover'
+// => 'text', ''
+// => 'text', '', ':focus'
+// => 'text'
+// =>
+// => ':sm'
 let groupings: string[]
 
 // List of parsed rules
 let rules: Rule[]
-
-// Handles template literal strings
-// create a flat array with consecutive interpolated strings joined
-// and falsy value ignored
-const interleave = (strings: TemplateStringsArray, interpolations: Token[]): Token[] => {
-  const result: Token[] = [strings[0]]
-
-  for (let index = 0; index < interpolations.length; ) {
-    // Join consecutive strings
-    if (is.string(interpolations[index])) {
-      // eslint-disable-next-line @typescript-eslint/no-extra-semi
-      ;(result[result.length - 1] as string) += (interpolations[index] as string) + strings[++index]
-    } else {
-      if (interpolations[index]) {
-        result.push(interpolations[index])
-      }
-
-      result.push(strings[++index])
-    }
-  }
-
-  return result
-}
-
-// Tokens maybe a template literal -> interleave it to a flat array
-const asTokens = (tokens: unknown[]): Token[] =>
-  Array.isArray(tokens[0]) && Array.isArray(((tokens[0] as unknown) as TemplateStringsArray).raw)
-    ? interleave((tokens[0] as unknown) as TemplateStringsArray, tail(tokens) as Token[])
-    : (tokens as Token[])
 
 // A new group has been found
 // this maybe a value (':variant' or 'prefix') or an empty marker string
@@ -67,18 +48,22 @@ const startGrouping = (value = ''): '' => {
 // b) if we have a non-whitespace
 // we want to keep everything before the last group start
 const endGrouping = (isWhitespace?: boolean): void => {
-  const index = groupings.lastIndexOf('')
-
-  if (~index) {
-    groupings.splice(
-      index + ~~(isWhitespace as boolean),
-      groupings.length - index + ~~(isWhitespace as boolean),
-    )
-  }
+  // true => +1
+  // false => +0
+  groupings.length = Math.max(groupings.lastIndexOf('') + ~~(isWhitespace as boolean), 0)
 }
 
 const onlyPrefixes = (s: string): '' | boolean => s && s[0] !== ':'
 const onlyVariants = (s: string): '' | boolean => s[0] === ':'
+
+const addRule = (directive: Rule['d'], negate?: boolean): void => {
+  rules.push({
+    v: groupings.filter(onlyVariants),
+    d: directive,
+    n: negate,
+    $: '',
+  })
+}
 
 const saveRule = (buffer: string): '' => {
   const negate = buffer[0] === '-'
@@ -89,11 +74,7 @@ const saveRule = (buffer: string): '' => {
 
   const prefix = join(groupings.filter(onlyPrefixes))
 
-  rules.push({
-    v: groupings.filter(onlyVariants),
-    d: buffer === '&' ? prefix : (prefix && prefix + '-') + buffer,
-    n: negate,
-  })
+  addRule(buffer === '&' ? prefix : (prefix && prefix + '-') + buffer, negate)
 
   return ''
 }
@@ -182,10 +163,7 @@ const parseToken = (token: Token): void => {
       parseString(token)
       break
     case 'function':
-      rules.push({
-        v: groupings.filter(onlyVariants),
-        d: token,
-      })
+      addRule(token)
       break
     case 'object':
       if (Array.isArray(token)) {
@@ -198,12 +176,67 @@ const parseToken = (token: Token): void => {
   }
 }
 
-export const parse = (tokens: unknown[], variants: string[] | undefined): Rule[] => {
-  groupings = variants ? [...variants, ''] : ['']
+// A function to be called with an interpolation
+// to add dynamic rules
+type Static = (interpolation: Token) => void
 
+// Template literal strings do not change
+// we can pre-calculate all groupings and static rules
+// which are later combined with the dynamic rules from interpolations
+//
+// For this to work we assume that interpolations do not
+// affect the current groupings:
+// Valid: tw`text(${'center'})`
+// Invalid: tw`text-${'center'}`
+const staticsCaches = new WeakMap<TemplateStringsArray, Static[]>()
+
+const buildStatics = (strings: TemplateStringsArray): Static[] => {
+  let statics = staticsCaches.get(strings)
+
+  if (!statics) {
+    // For each static string
+    statics = strings.map((token) => {
+      // Reset rules to extract all static generated rules
+      const staticRules = (rules = [])
+
+      parseString(token)
+
+      // Copy the active groupings to set them
+      // before interpolation processing
+      const activeGroupings = [...groupings]
+
+      // Reset the rules
+      rules = []
+
+      return (interpolation) => {
+        rules.push(...staticRules)
+        groupings = [...activeGroupings]
+        interpolation && parseToken(interpolation)
+      }
+    })
+
+    staticsCaches.set(strings, statics)
+  }
+
+  return statics
+}
+
+export const parse = (tokens: unknown[]): Rule[] => {
+  groupings = []
   rules = []
 
-  asTokens(tokens).forEach(parseToken)
+  // Handles template literal strings
+  if (
+    Array.isArray(tokens[0] as TemplateStringsArray) &&
+    Array.isArray((tokens[0] as TemplateStringsArray).raw)
+  ) {
+    buildStatics(tokens[0] as TemplateStringsArray).forEach((apply, index) =>
+      apply(tokens[index + 1] as Token),
+    )
+  } else {
+    // eslint-disable-next-line @typescript-eslint/no-extra-semi
+    ;(tokens as Token[]).forEach(parseToken)
+  }
 
   return rules
 }
