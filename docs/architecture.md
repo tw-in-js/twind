@@ -1,5 +1,7 @@
 # Architecture Decision Record
 
+Here is a high level overview of decisions that were made when designing the API and ultimately had an impact in shaping the implementation. Including but not limited to type information
+
 ## Taxomony
 
 - `token`: things that can be passed to `tw` (string, array, object, falsey values)
@@ -12,24 +14,21 @@
 
 ## Architecture
 
-0. setup - create theme and stuff
-
 **Phases** (details below)
 
-1. **parse** rules
-2. **translate** each rule to css object using plugins
-3. **decorate** add variant rules to the css object (basically wrapping it again and again)
-4. **serialize** convert css object into css declarations with precedence and hash
-5. **inject** css rules
+0. **setup** override and extend the theme available to the compiler
+1. **parse** rules as a string, array, object or variadic arguments
+2. **translate** each rule into css objects using plugins
+3. **decorate** recursively applying variant rules to the css objects
+4. **serialize** convert css objects into css declarations with precedence and hash
+5. **inject** css rules into the DOM and maintain a record of injected rules
 
 Feature evaluation based on:
 
-- size limit (current stats: 10.8kb)
-- performance budget
+- Size limit
+- Performance budget
 
 ## API
-
-_common types used below_
 
 ```js
 type Falsy = '' | 0 | -0 | false | null | undefined
@@ -58,7 +57,7 @@ interface Context {
 
 ### tw
 
-> converts rules into CSS class names
+> Converts rules into CSS class names and injects them into the DOM
 
 - exposed as named export
 - supports
@@ -74,7 +73,7 @@ interface TW {
 
 ### setup
 
-> customize `tw`
+> Customize the theme which defines the behavior of the compiler
 
 - default to dev settings
   - with example for recommended prod settings
@@ -84,17 +83,11 @@ interface TW {
 ```js
 interface Setup {
   preflight?: boolean | Preflight
-
   mode?: Mode
-
   theme?: Partial<Theme> & {extends?: Partial<Theme>}
-
   hash?: boolean | Hasher
-
   plugins?: Record<string, string | CSSRules | Plugin>
-
   injector?: Injector
-
   prefix?: boolean | Prefix
 }
 ```
@@ -102,10 +95,10 @@ interface Setup {
 #### preflight
 
 > Add global styles before first rule is injected
-> **default**: tailwind preflight
 
-- boolean
-- function - allow to use a different reset
+- defaults to tailwind preflight
+- boolean `false` to disable
+- function to use a different reset
 
 ```js
 interface Preflight {
@@ -115,12 +108,11 @@ interface Preflight {
 
 #### mode
 
-> customize behaviour
-> **default**: warn
+> customize error logging behavior
 
-- warn
-- strict
-- play
+- **warn** error messages get logged to the console
+- **strict** errors throw and cause the program to crash
+- **play** errors fall through are not reported
 
 ```js
 interface Mode {
@@ -153,11 +145,10 @@ interface Mode {
 
 > **default**: tailwind
 
-- mergeing and extending like tailwind compatible
+- A tailwind compatible theme object that overwrites or extends the default
 
 #### plugins
 
-> allows to define/override plugins
 > **default**: core plugins
 
 Plugins are searched for by name using the longest prefix before a dash (`"-"'`). The name and the remaining parts (splitted by a dash) are provided as first argument to the plugin function. For example if the directive is `bg-gradient-to-t` the following order applies:
@@ -400,19 +391,13 @@ interface Inject {
 }
 ```
 
-## Packages
+## Organization
 
-> monorepo
+Github & npm: `tw-in-js`
 
-**Try to get `tailwindjs`**
-Github: `tailwind-in-js`
-NPM: organization `tailwindjs`
-
-name: why not go with ocean/beamwind
-
-- @tw-in-js/core - not really happy with the name; but i have no alternative
+- @tw-in-js/core
 - @tw-in-js/typography
-- @tw-in-js/server - for ssr
+- @tw-in-js/examples
 - @tw-in-js/typescript-plugin
 
 ## Development
