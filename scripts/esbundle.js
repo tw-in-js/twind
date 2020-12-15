@@ -179,6 +179,7 @@ async function generateBundles() {
     source: undefined,
     scripts: undefined,
     devDependencies: undefined,
+    optionalDependencies: undefined,
 
     // Reset bundledDependencies as esbuild includes those into the bundle
     bundledDependencies: undefined,
@@ -188,6 +189,10 @@ async function generateBundles() {
     eslintConfig: undefined,
     prettier: undefined,
     np: undefined,
+    'size-limit': undefined,
+
+    // Resets comments
+    '//': undefined,
   }
 
   await fs.writeFile(
