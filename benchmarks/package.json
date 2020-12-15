@@ -1,0 +1,15 @@
+{
+  "private": true,
+  "name": "benchmarks",
+  "scripts": {
+    "bench": "node -r esm -r esbuild-register"
+  },
+  "dependencies": {
+    "@emotion/css": "^11.0.0",
+    "@types/benchmark": "^2.1.0",
+    "benchmark": "^2.1.4",
+    "goober": "^2.0.18",
+    "otion": "^0.6.2",
+    "styled-components": "^5.2.1"
+  }
+}

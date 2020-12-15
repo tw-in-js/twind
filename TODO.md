@@ -2,7 +2,6 @@
 
   - Docs Repo @luke
   - Small Landing Page @luke
-  - Presets Issue @sastan
   - Examples
     - vanilla, svelte, preact, react, vue @luke
     - deploy to unpkg
