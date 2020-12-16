@@ -15,7 +15,7 @@ For example, say you wanted to support the directive `scroll-snap-x` based on th
 Then you could create a plugin like so:
 
 ```js
-import { setup } from 'twind'
+import { setup } from '@tw-in-js/core'
 
 setup({
   plugins: {
@@ -33,7 +33,7 @@ The above example is trivial to implement but it is contrived and only accounts 
 It is possible to generalize a plugins behavior, making its response dynamic by using a function:
 
 ```js
-import { setup } from 'twind'
+import { setup } from '@tw-in-js/core'
 
 setup({
   plugins: {
@@ -60,7 +60,7 @@ Meaning that the example plugin above with cover more complex cases of the rule 
 The second named argument passed to a plugin is the configured theme that is being used by the compiler. This is not always required but is useful in circumstances where you might want to provide a default or user defined set of values for a directive to use.
 
 ```js
-import { setup } from 'twind'
+import { setup } from '@tw-in-js/core'
 
 setup({
   theme: {

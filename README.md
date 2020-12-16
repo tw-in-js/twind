@@ -24,14 +24,14 @@ We aim to create a place for likeminded people to discuss issues and share imple
 
 If you would like to get started with twind right away then copy paste this code into your favorite sandbox.
 
-> ⚡️ Alternatively try the [live and interactive demo](https://esm.codes/)
+> ⚡️ Alternatively try the [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgdHcsIHNldHVwIH0gZnJvbSAnaHR0cHM6Ly9jZG4uc2t5cGFjay5kZXYvQHR3LWluLWpzL2NvcmUnCgpkb2N1bWVudC5ib2R5LmlubmVySFRNTCA9IGAKICA8bWFpbiBjbGFzcz0iJHt0d2BiZy1ibGFjayB0ZXh0LXdoaXRlYH0iPgogICAgPGgxIGNsYXNzPSIke3R3YHRleHQteGxgfSI+VGhpcyBpcyBUYWlsd2luZCBpbiBKUyE8L2gxPgogIDwvbWFpbj4KYA==)
 
 ```js
-import { tw, setup } from 'https://unpkg.com/twind'
+import { tw, setup } from 'https://cdn.skypack.dev/@tw-in-js/core'
 
 document.body.innerHTML = `
-  <main class=${tw('bg-black text-white')}>
-    <h1 class=${tw('text-xl')}>This is Tailwind in JS!</h1>
+  <main class="${tw`bg-black text-white`}">
+    <h1 class="${tw`text-xl`}">This is Tailwind in JS!</h1>
   </main>
 `
 ```

@@ -9,25 +9,25 @@ Most build tools rely on modules to be installed locally on the machine they are
 1. Run the following command in your terminal, from your project root:
 
 ```sh
-npm i twind
+npm i @tw-in-js/core
 ```
 
 2. Then go ahead and import the module into your application using the bare module specifier:
 
 ```js
-import { tw, setup } from 'twind'
+import { tw, setup } from '@tw-in-js/core'
 ```
 
 Assuming you have your bundler configured to consume modules correctly then you should now be able to use the module.
 
 ## Importing as a remote dependency
 
-Now that nearly all browsers support es-modules sometimes it is desireable to import a module straight from the internet from a CDN such as [skypack](https://skypack.dev/) or [unpkg](https://unpkg.com/).
+Now that nearly all browsers support es-modules sometimes it is desirable to import a module straight from the internet from a CDN such as [skypack](https://skypack.dev/) or [unpkg](https://unpkg.com/).
 
 1. Add the following line to a javascript file referenced by a script tag with `type="module"`:
 
 ```js
-import { tw, setup } from 'https://cdn.skypack.dev/twind'
+import { tw, setup } from 'https://cdn.skypack.dev/@tw-in-js/core'
 ```
 
 Assuming you have an internet connection then you should now be able to use the module.
@@ -49,5 +49,5 @@ import {
   strict,
   autoprefix,
   noprefix,
-} from 'twind'
+} from '@tw-in-js/core'
 ```

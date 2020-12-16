@@ -1,13 +1,13 @@
 # Basic Usage
 
-Despite the module being very flexible and powerful, it was our intention to keep the surface API as minimal as possible. We appreciate that this module is likely to be used by developers & designers alike and so we try provide sensible defaults out of the box, with little need for customisation.
+Despite the module being very flexible and powerful, it was our intention to keep the surface API as minimal as possible. We appreciate that this module is likely to be used by developers & designers alike and so we try provide sensible defaults out of the box, with little need for customization.
 
 > Note that examples are given in vanilla JS but the module is compatible with all popular frameworks
 
-Getting started with the library requires no configuration, setup (or even installation if you use unpkg):
+Getting started with the library requires no configuration, setup (or even installation if you use [skypack](https://skypack.dev/) or [unpkg](https://unpkg.com/)):
 
 ```js
-import { tw } from 'tw-in-js'
+import { tw } from '@tw-in-js/core'
 
 document.body.innerHTML = `
   <main class=${tw('bg-black text-white')}>
@@ -16,9 +16,9 @@ document.body.innerHTML = `
 `
 ```
 
-Using the `tw` function exported by the module without any further configuration, results in the compilation of the rules `bg-black text-white` and `text-xl` exactly as specified in the [Tailwind documentation](https://tailwincss.com/docs). It is possible to modilfy the behaviour of the compiler by providing a custom theme file but when none is passed then the default Tailwind theme is used.
+Using the `tw` function exported by the module without any further configuration, results in the compilation of the rules `bg-black text-white` and `text-xl` exactly as specified in the [Tailwind documentation](https://tailwincss.com/docs). It is possible to modify the behavior of the compiler by providing a custom theme file but when none is passed then the default Tailwind theme is used.
 
-Calling the `tw` function results in the passed rules to be interpretted, normalized, compiled into CSS and added to a stylesheet in the head of the document.
+Calling the `tw` function results in the passed rules to be interpreted, normalized, compiled into CSS and added to a stylesheet in the head of the document.
 
 ## Function Signature
 
