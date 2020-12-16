@@ -58,8 +58,10 @@ bw({ 'bg-gray-200': true }, { rounded: false }, null, { underline: true })
 ### Arrays
 
 ```js
-bw(['bg-gray-200', 0, false, 'rounded']) //=> bg-gray-200 rounded
-bw(['bg-gray-200'], ['', 0, false, 'rounded'], [['underline']]) //=> bg-gray-200 rounded underline
+bw(['bg-gray-200', 0, false, 'rounded'])
+//=> bg-gray-200 rounded
+bw(['bg-gray-200'], ['', 0, false, 'rounded'], [['underline']])
+//=> bg-gray-200 rounded underline
 ```
 
 ### Mixture
@@ -69,5 +71,6 @@ bw('bg-gray-200', [
   1 && 'rounded',
   { underline: false, 'text-black': null },
   ['text-lg', ['shadow-lg']],
-]) //=> bg-gray-200 rounded text-lg shadow-lg
+])
+//=> bg-gray-200 rounded text-lg shadow-lg
 ```

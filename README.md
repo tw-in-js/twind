@@ -14,15 +14,15 @@
 
 ---
 
-If you are here then the likelihood is that you have heard of and are interested in, or have used both Tailwind and CSS-in-JS libraries such as styled components, emotion or goober before. These packages have revolutionised web development and for one reason or another, have proved overwhelmingly popular with the community.
+If you are here then the likelihood is that you have heard of and are interested in, or have used both Tailwind and CSS-in-JS libraries such as styled components, emotion or goober before. These packages have revolutionized web development and for one reason or another, have proved overwhelmingly popular with the community.
 
 The purpose of this project is to create and maintain the smallest, fastest, most feature complete Tailwind-in-JS solution in the world. Exercising the flexibility of CSS-in-JS within the constraints of the Tailwind API.
 
-We aim to create a place for likeminded people to discuss issues and share implemetations around this idea.
+We aim to create a place for likeminded people to discuss issues and share implementations around this idea.
 
 ## Quickstart
 
-If you would like to get started with twind right away then copy paste this code into your favourite sandbox.
+If you would like to get started with twind right away then copy paste this code into your favorite sandbox.
 
 > ⚡️ Alternatively try the [live and interactive demo](https://esm.codes/)
 
@@ -40,7 +40,7 @@ For further instruction on usage please [read the documentation](docs)!
 
 ## Rational
 
-This project was started by the authors of two similar libraries – [oceanwind](https://github.com/lukejacksonn/oceanwind) and [beamwind](https://github.com/kenoxa/beamwind) – who chose to collaborate rather than compete with each other in this space. The open source community is full of fragmentation but we wanted to see cohesion here. We hope that combining efforts helps us coin standards for certain aspects of the implementation; things like input parsing, grouping syntax and prescedence calculation.
+This project was started by the authors of two similar libraries – [oceanwind](https://github.com/lukejacksonn/oceanwind) and [beamwind](https://github.com/kenoxa/beamwind) – who chose to collaborate rather than compete with each other in this space. The open source community is full of fragmentation but we wanted to see cohesion here. We hope that combining efforts helps us coin standards for certain aspects of the implementation; things like input parsing, [grouping syntax](./docs/grouping.md) and prescedence calculation.
 
 ## Challenges
 
@@ -65,25 +65,25 @@ The flexible nature of a runtime first approach affords us possibilities like:
 - Dynamic Theming: generating new themes on the fly without the need to recompile anything
 - Unlimited Variants: enabling every variant combination by default because unused rules are never generated
 - Enhanced Syntax: taking advantage of macros within template literals to create more terse rules
-- Error Handling: warning the developer about dublicate and missing variants or directives
+- Error Handling: warning the developer about duplicate and missing variants or directives
 - Hashing Classes: reducing the overall output size and eliminating conflicts via deterministic hashing
 - Inline Plugins: extending the capabilities of the compiler with simple functions at runtime
 
-Another big advantage we see of shipping the interpretter compiler itself (rather than pre-compiled output) is that the effective size of the CSS for your whole app is deterministic and fixed. The weight of the compiler itself along with your theme file is all that users will ever download, no matter how many styles you use.
+Another big advantage we see of shipping the interpreter compiler itself (rather than pre-compiled output) is that the effective size of the CSS for your whole app is deterministic and fixed. The weight of the compiler itself along with your theme file is all that users will ever download, no matter how many styles you use.
 
 Currently the compiler weighs around 10KB which is smaller than styled-components and the average tailwind output.
 
 ## Inspiration
 
-It goes without saying that the primary inspiration here comes from Tailwind. It is a revolutionary take on styling the web which has proven popular by designers and developers alike. All the core plugins here, abide by the rules painstakingly thought out, implemented and popularised by Adam Wathan et al. making us forever in his debt.
+It goes without saying that the primary inspiration here comes from Tailwind. It is a revolutionary take on styling the web which has proven popular by designers and developers alike. All the core plugins here, abide by the rules painstakingly thought out, implemented and popularized by Adam Wathan et al. making us forever in his debt.
 
 > I've wanted to do a CSS-in-JS flavor of Tailwind for over 2 years because of all the neat benefits you get there so it's cool to see projects like this! – [@adamwathan](https://twitter.com/adamwathan/status/1320370489408225282)
 
 We hope one day we will get the chance to collaborate together on an official implementation!
 
-Another big motiovator was seeing `htm` by Jason Miller at Google, compiling JSX at runtime with performance characteristics that were comparable to code that was transpile ahead of time with babel.
+Another big motivator was seeing [htm](https://www.npmjs.com/package/htm) by Jason Miller at Google, compiling JSX at runtime with performance characteristics that were comparable to code that was transpile ahead of time with babel.
 
-We'd like to call ourselves the htm of the css world but that awards goes to `goober` wich is an inspiringly small and efficient CSS-in-JS library by Cristian Bote a member of the core preact team.
+We'd like to call ourselves the htm of the css world but that awards goes to [goober](https://www.npmjs.com/package/goober) which is an inspiringly small and efficient CSS-in-JS library by Cristian Bote a member of the core preact team.
 
 ## License
 

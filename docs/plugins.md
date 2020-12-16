@@ -4,7 +4,7 @@ Theming and customization lets you specify the values that built in directives u
 
 > Note there are a handful of ways to build plugins but the API differs slightly to tailwind plugins
 
-Plugins make it possible to extend the compilers grammar by adding new directives or variants. Language extension like this is acieved by providing plugins in the form of named functions to the setup function.
+Plugins make it possible to extend the compilers grammar by adding new directives or variants. Language extension like this is achieved by providing plugins in the form of named functions to the setup function.
 
 ## Plugin without arguments
 
@@ -37,7 +37,7 @@ import { setup } from 'twind'
 
 setup({
   plugins: {
-    'scroll-snap': ({ parts }) => ({ 'scroll-snap-type': parts[0] }),
+    'scroll-snap': (parts) => ({ 'scroll-snap-type': parts[0] }),
   },
 })
 ```
@@ -45,7 +45,11 @@ setup({
 Plugins are passed two arguments:
 
 - `parts`: the directive split on '-' with the plugin name excluded
-- `theme`: the currently configured theme that is being used by the compiler
+- `context`: an object providing access to several commonly used functions
+
+  - `theme`: the currently configured theme that is being used by the compiler
+  - `tw`: the configured `tw` export
+  - `tag`: generate a unique value; this can be used to create marker classes like `group`
 
 Meaning that the example plugin above with cover more complex cases of the rule like `scroll-snap-x`, `scroll-snap-y` and `scroll-snap-y` etc. It is worth noting now that the whole of Twind is built upon this exact same premise, every rule outlined in the Tailwind docs has an equivalent plugin. We refer to these as _core plugins_.
 
@@ -66,7 +70,7 @@ setup({
     },
   },
   plugins: {
-    'scroll-snap': ({ parts, theme }) => ({
+    'scroll-snap': (parts, { theme }) => ({
       'scroll-snap-type': theme('scroll', parts[0]),
     }),
   },
@@ -75,7 +79,7 @@ setup({
 
 In the above example, the directive `scroll-snap` with no arguments with result in the CSS rule `{ scroll-snap-type: both }` being returned (the `DEFUALT` value from the theme). As you can see the `theme` that gets passed to plugins isn't an object but rather a function that takes a path and attempts to return a matching value from the theme.
 
-The rules determining the theme functions behaviour can be found in the [Tailwind documentation](https://tailwindcss.com/).
+The rules determining the theme functions behavior can be found in the [Tailwind documentation](https://tailwindcss.com/).
 
 ## Inline Plugin
 
@@ -96,11 +100,11 @@ Furthermore any active variants or groupings that are active when the plugin is 
 
 ```js
 tw`
-  sm:hover:${{
+  sm:hover:${() => ({
     '&::before': { content: '🙁' }
     '&::after': { content: '😊' }
-  }}
+  })}
 `
 ```
 
-In the above example, the before and after styles are only applied on small screens and when the user is hovering over the element. Notice as well that if none of the props from the plugin function are required, then just returnings a rules object is sufficient (similarly to a plugin with no arguments).
+In the above example, the before and after styles are only applied on small screens and when the user is hovering over the element.

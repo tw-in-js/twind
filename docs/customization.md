@@ -3,12 +3,12 @@
 Understadably developers will more often than not, want to customize the out of the box experience. It is possible to do this with the exported `setup` function. Doing this will ultimately change the behaviour of calling the `tw` function, making it appropriate for your particular use case.
 
 ```js
-import { setup } from 'tw-in-js'
+import { setup, strict } from 'tw-in-js'
 
 setup({
-  preflight: true, // include base style reset
-  strict: false, // throw errors for invalid rules
-  hash: false, // hash all generated class names
+  preflight: false, // do not include base style reset
+  mode: strict, // throw errors for invalid rules
+  hash: true, // hash all generated class names
   theme: {}, // define custom theme values
 })
 ```
@@ -17,22 +17,30 @@ The setup functions is a named export of the main module and accepts an config o
 
 ## Preflight
 
-To smooth over browser inconsistencies, Tailwind provide a [opinionated modern reset](https://tailwindcss.com/docs/preflight) stylesheet. By default the reset stylesheet will be download and injected into the head of the document as a link tag. In order to prevent this from happening set `preflight` to `false`.
+To smooth over browser inconsistencies, Tailwind provide a [opinionated modern reset](https://tailwindcss.com/docs/preflight) stylesheet. By default the reset styles will be injected into the head of the document. In order to prevent this from happening set `preflight` to `false`.
 
 ## Strict
 
 One benefit of doing compilation at runtime is that it is possible to warn developers about errors such as:
 
-- Duplication: warn when two of the same rules exist within the same rule set
-- Missing Translation: warn when an unrecognized rule is passed to the compiler
+- Unknown directive: warn when an unrecognized rule is passed to the compiler
+- Missing theme value: warn when a unknown theme value is used
 
-By default these warnings will be surfaced in the developer console but will not cause the program to properly throw an error and crash. However, sometimes this might be desireable; for example during testing or continuous integrations.
+By default these warnings will be surfaced in the developer console but will not cause the program to properly throw an error and crash. However, sometimes this might be desirable; for example during testing or continuous integrations.
 
-To force the program to error instead of warn set `strict` to `true`.
+To force the program to error instead of warn set `mode` to `strict`:
+
+```js
+import { setup, strict } from 'tw-in-js'
+
+setup({
+  mode: strict, // throw errors for invalid rules
+})
+```
 
 ## Hash
 
-Most CSS-in-JS solutions, such as styled components or emotion will create hashed class names for rule sets. This makes sense becuase there is no logical way of naming an arbritary set of styles. But it makes less sense to do when using an atomic utility class approach because are already carefully named.
+Most CSS-in-JS solutions, such as styled components or emotion will create hashed class names for rule sets. This makes sense because there is no logical way of naming an arbritary set of styles. But it makes less sense to do when using an atomic utility class approach because are already carefully named.
 
 By default, class names that are passed into the `tw` function are not hashed in any way. This helps retain the advantage of using utility classes, aiding inspection and debugging.
 

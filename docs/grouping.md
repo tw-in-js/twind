@@ -1,8 +1,8 @@
 # Grouping
 
-One specific advantage of doing CSS in JS is that we are not limited to the restrictions of a class name as input. Becuase the compiler is just a function, it can take almost any form of input (strings, array, objects or arguments) and turn it into meaningful output.
+One specific advantage of doing CSS in JS is that we are not limited to the restrictions of a class name as input. Because the compiler is just a function, it can take almost any form of input (strings, array, objects or arguments) and turn it into meaningful output.
 
-A painpoint commonly felt when using utility CSS classes generally is that it can result is some long and unweildly lines of code which are quite hard for humans hard to parse.
+A painpoint commonly felt when using utility CSS classes generally is that it can result is some long and unwieldily lines of code which are quite hard for humans hard to parse.
 
 Below is an example of some reasonably contrived button styles. The amount of rules applied to this element has been exaggerated for demonstrative purposes, however it is not uncommon for a single element to have tens of rules applied to it and so any savings we can make here are massively exaggerated when applied at scale.
 
@@ -16,7 +16,7 @@ The option to pass a template literal as input to the compiler made it convenien
 
 ## Directive grouping
 
-The first grouping syntax works by factoring out common directive prefixes. Below is an example of a rule set without directive grouping and the equivolent rule set with `border` factored out.
+The first grouping syntax works by factoring out common directive prefixes. Below is an example of a rule set without directive grouping and the equivalent rule set with `border` factored out.
 
 ```js
 tw`border-2 border-black border-opacity-50 border-dashed`
@@ -45,7 +45,7 @@ tw`
 
 ## Mixed Groupings
 
-It is possible to nest directive groups inside of responsive groups and vice versa, however it is important to note that nesting reponsive variants inside of responsive variants doesn't make sense and is not permitted.
+It is possible to nest directive groups inside of responsive groups and vice versa, however it is important to note that nesting responsive variants inside of responsive variants doesn't make sense and is not permitted.
 
 ```js
 tw`sm:(border(2 black opacity-50 hover:dashed))`
@@ -53,7 +53,7 @@ tw`border(md:(2 black opacity-50 hover:dashed))`
 // => sm:border-2 sm:border-black sm:border-opacity-50 sm:hover:border-dashed
 ```
 
-Thanks to some ordering logic in the compiler, both of the above groupings will be interpretted the same. That is to say, that directive groupings always get expanded before variant groupings.
+Thanks to some ordering logic in the compiler, both of the above groupings will be interpreted the same. That is to say, that directive groupings always get expanded before variant groupings.
 
 Some directives like `ring` need to be applied themselves as well as being a prefix. In this case you can use the reserved `&` character which is replaced literally with the current prefix:
 

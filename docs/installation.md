@@ -18,16 +18,16 @@ npm i twind
 import { tw, setup } from 'twind'
 ```
 
-Assuming you have your bunder configured to consume modules correctly then you should now be able to use the module.
+Assuming you have your bundler configured to consume modules correctly then you should now be able to use the module.
 
 ## Importing as a remote dependency
 
-Now that nearly all browsers support es-modules sometimes it is desireable to import a module straight from the internet from a CDN such as unpkg or snowpack.
+Now that nearly all browsers support es-modules sometimes it is desireable to import a module straight from the internet from a CDN such as [skypack](https://skypack.dev/) or [unpkg](https://unpkg.com/).
 
 1. Add the following line to a javascript file referenced by a script tag with `type="module"`:
 
 ```js
-import { tw, setup } from 'https://unpkg.com/twind'
+import { tw, setup } from 'https://cdn.skypack.dev/twind'
 ```
 
 Assuming you have an internet connection then you should now be able to use the module.
