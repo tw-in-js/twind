@@ -57,7 +57,7 @@ function objectStyles(): Promise<void> {
   })
 
   console.log('# Object Styles')
-  console.log('tw:', tw(styles))
+  console.log('twind:', tw(styles))
   console.log('otion:', otion(styles()))
   console.log('goober:', goober(styles()))
   console.log('emotion:', emotion(styles()))
@@ -119,7 +119,7 @@ function templateLiteralStyles(): Promise<void> {
 
   console.log('# Template Literal Styles')
   console.log(
-    'tw:',
+    'twind:',
     tw`
       inline-block
       rounded

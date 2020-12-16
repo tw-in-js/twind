@@ -26,7 +26,7 @@ If you would like to get started with twind right away then copy paste this code
 > ⚡️ Alternatively try the [live and interactive demo](https://esm.codes/)
 
 ```js
-import { tw, setup } from 'https://unpkg.com/@tw-in-js/core'
+import { tw, setup } from 'https://unpkg.com/twind?module'
 
 document.body.innerHTML = `
   <main class=${tw('bg-black text-white')}>

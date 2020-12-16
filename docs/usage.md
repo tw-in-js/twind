@@ -7,7 +7,7 @@ Despite the module being very flexible and powerful, it was our intention to kee
 Getting started with the library requires no configuration, setup (or even installation if you use [skypack](https://skypack.dev/) or [unpkg](https://unpkg.com/)):
 
 ```js
-import { tw } from '@tw-in-js/core'
+import { tw } from 'twind'
 
 document.body.innerHTML = `
   <main class=${tw('bg-black text-white')}>

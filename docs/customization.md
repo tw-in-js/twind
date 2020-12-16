@@ -3,7 +3,7 @@
 Understandably developers will more often than not, want to customize the out of the box experience. It is possible to do this with the exported `setup` function. Doing this will ultimately change the behaviour of calling the `tw` function, making it appropriate for your particular use case.
 
 ```js
-import { setup, strict } from '@tw-in-js/core'
+import { setup, strict } from 'twind'
 
 setup({
   preflight: false, // do not include base style reset
@@ -31,7 +31,7 @@ By default these warnings will be surfaced in the developer console but will not
 To force the program to error instead of warn set `mode` to `strict`:
 
 ```js
-import { setup, strict } from '@tw-in-js/core'
+import { setup, strict } from 'twind'
 
 setup({
   mode: strict, // throw errors for invalid rules
@@ -53,7 +53,7 @@ Applying a new theme or extending the default is probably the most common custom
 Here is an example of overriding and extending values in the theme:
 
 ```js
-import { setup } from '@tw-in-js/core'
+import { setup } from 'twind'
 
 setup({
   theme: {

@@ -1,5 +1,5 @@
 {
-  "name": "@tw-in-js/core",
+  "name": "twind",
   "version": "0.3.2",
   "description": "compiles tailwind like shorthand syntax into css at runtime",
   "//": "mark as private to prevent accidental publish - use 'yarn release'",
@@ -9,14 +9,9 @@
     "tw-in-js",
     "tailwind-in-js"
   ],
-  "homepage": "https://github.com/tw-in-js/core#readme",
-  "bugs": {
-    "url": "https://github.com/tw-in-js/core/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/tw-in-js/core.git"
-  },
+  "homepage": "https://github.com/tw-in-js/twind#readme",
+  "bugs": "https://github.com/tw-in-js/twind/issues",
+  "repository": "github:tw-in-js/twind",
   "license": "MIT",
   "contributors": [
     "Luke Jackson (lukejacksonn.github.io)",
@@ -125,7 +120,7 @@
   },
   "size-limit": [
     {
-      "path": "dist/module/core.js",
+      "path": "dist/module/twind.js",
       "gzip": true,
       "limit": "11kb"
     }

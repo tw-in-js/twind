@@ -228,8 +228,8 @@ const plugins = {
 > **default**: based on enviroment
 
 - dom
-- collect - for testing in @tw-in-js/test
-- ssr - move to @tw-in-js/server
+- collect - for testing in @twind/test
+- ssr - move to @twind/server
 
 ```js
 interface Injector {
@@ -395,10 +395,10 @@ interface Inject {
 
 Github & npm: `tw-in-js`
 
-- @tw-in-js/core
-- @tw-in-js/typography
-- @tw-in-js/examples
-- @tw-in-js/typescript-plugin
+- twind
+- @twind/typography
+- @twind/examples
+- @twind/typescript-plugin
 
 ## Development
 

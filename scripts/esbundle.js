@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-const { promises: fs } = require('fs')
+const { existsSync, promises: fs } = require('fs')
 const path = require('path')
 
 const paths = {
@@ -8,16 +8,27 @@ const paths = {
   dist: path.resolve(__dirname, '..', 'dist'),
 }
 
+const manifest = require(path.resolve(paths.root, 'package.json'))
+
+const packageName = manifest.name.replace('@', '').replace('/', '_')
+const globalName = manifest.globalName || manifest.name.replace('@', '').replace('/', '.')
+
+const inputFile = path.resolve(paths.root, manifest.source || manifest.main)
+const tsconfig = path.resolve(paths.root, 'tsconfig.json')
+
+const useTypescript = existsSync(tsconfig)
+
 const targets = {
   node: 'node10.13',
   browser: ['chrome79', 'firefox78', 'safari13.1', 'edge79'],
 }
 
-const manifest = require('../package.json')
-const unscopedPackageName = 'core'
-
-const inputFile = require.resolve('..', manifest.main)
-const tsconfig = path.resolve(paths.root, 'tsconfig.json')
+const external = Object.keys({
+  ...manifest.dependencies,
+  ...manifest.peerDependencies,
+  ...manifest.devDependencies,
+  ...manifest.optinonalDependencies,
+})
 
 main().catch((error) => {
   console.error(error)
@@ -28,9 +39,15 @@ async function main() {
   console.log(`Building bundle for ${path.relative(process.cwd(), inputFile)} ...`)
 
   await prepare()
-  await Promise.all([copyFiles(), generateTypescriptDeclarations(), generateBundles()])
+  await Promise.all([
+    copyFiles(),
+    useTypescript && generateTypescriptDeclarations(),
+    generateBundles(),
+  ])
 
-  await require('size-limit/run')(process)
+  if (manifest['size-limit']) {
+    await require('size-limit/run')(process)
+  }
 }
 
 async function prepare() {
@@ -69,7 +86,7 @@ async function generateTypescriptDeclarations() {
         exclude: ['**/__fixtures__/**', '**/__tests__/**'],
         compilerOptions: {
           target: 'ESNext',
-          module: 'ESNext',
+          module: manifest.browser === false ? 'CommonJS' : 'ESNext',
           emitDeclarationOnly: true,
           noEmit: false,
           outDir: path.resolve(paths.dist, 'types'),
@@ -96,39 +113,47 @@ async function generateTypescriptDeclarations() {
 }
 
 async function generateBundles() {
-  const outputs = {
-    // Used by nodejs
-    node: {
-      outfile: `./node/${unscopedPackageName}.js`,
-      platform: 'node',
-      target: targets.node,
-      format: 'cjs',
-    },
-    esnext: {
-      outfile: `./esnext/${unscopedPackageName}.js`,
-      platform: 'browser',
-      target: 'esnext',
-      format: 'esm',
-    },
-    // Can be used from a normal script tag without module system.
-    script: {
-      outfile: `./script/${unscopedPackageName}.js`,
-      platform: 'browser',
-      target: 'es2017',
-      format: 'iife',
-      // TODO find a better global name
-      globalName: 'tw_in_js',
-      minify: true,
-      external: false,
-    },
-    // Used by bundlers like rollup and cdn
-    default: {
-      outfile: `./module/${unscopedPackageName}.js`,
-      platform: 'browser',
-      target: targets.browser,
-      format: 'esm',
-      minify: true,
-    },
+  const outputs = {}
+
+  if (manifest.browser !== true) {
+    Object.assign(outputs, {
+      // Used by nodejs
+      node: {
+        outfile: `./node/${packageName}.js`,
+        platform: 'node',
+        target: targets.node,
+        format: 'cjs',
+      },
+    })
+  }
+
+  if (manifest.browser !== false) {
+    Object.assign(outputs, {
+      esnext: {
+        outfile: `./esnext/${packageName}.js`,
+        platform: 'browser',
+        target: 'esnext',
+        format: 'esm',
+      },
+      // Can be used from a normal script tag without module system.
+      script: {
+        outfile: `./script/${packageName}.js`,
+        platform: 'browser',
+        target: 'es2017',
+        format: 'iife',
+        globalName,
+        minify: true,
+        external: false,
+      },
+      // Used by bundlers like rollup and cdn
+      default: {
+        outfile: `./module/${packageName}.js`,
+        platform: 'browser',
+        target: targets.browser,
+        format: 'esm',
+        minify: true,
+      },
+    })
   }
 
   const publishManifest = {
@@ -139,10 +164,9 @@ async function generateBundles() {
     exports: {
       ...manifest.exports,
       '.': {
-        node: outputs.node.outfile,
-        esnext: outputs.esnext.outfile,
-        default: outputs.default.outfile,
-        types: './types/index.d.ts',
+        node: outputs.node && outputs.node.outfile,
+        esnext: outputs.esnext && outputs.esnext.outfile,
+        default: outputs.default ? outputs.default.outfile : outputs.node.outfile,
       },
 
       // Allow access to all files (including package.json, ...)
@@ -150,18 +174,17 @@ async function generateBundles() {
     },
 
     // Used by nodejs
-    main: outputs.node.outfile,
+    main: outputs.node ? outputs.node.outfile : outputs.default.outfile,
 
     // Used by carv cdn
-    esnext: outputs.esnext.outfile,
+    esnext: outputs.esnext && outputs.esnext.outfile,
 
     // Used by bundlers like rollup and cdns
-    module: outputs.default.outfile,
+    module: outputs.default && outputs.default.outfile,
 
-    unpkg: outputs.script.outfile,
+    unpkg: outputs.script && outputs.script.outfile,
 
-    // Typying
-    types: './types/index.d.ts',
+    types: useTypescript ? './types/index.d.ts' : undefined,
 
     // Some defaults
     sideEffects: false,
@@ -199,13 +222,6 @@ async function generateBundles() {
     path.join(paths.dist, 'package.json'),
     JSON.stringify(publishManifest, null, 2),
   )
-
-  const external = Object.keys({
-    ...manifest.dependencies,
-    ...manifest.peerDependencies,
-    ...manifest.devDependencies,
-    ...manifest.optinonalDependencies,
-  })
 
   const service = await require('esbuild').startService()
 

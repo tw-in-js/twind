@@ -23,20 +23,20 @@ Run `yarn install`.
 ## Packages
 
 - Server Side Rendering
-- @tw-in-js/legacy - for IE11 with reset and polyfills (Math.imul, CSS.escape)
-- @tw-in-js/css: css and keyframes
-- @tw-in-js/styled - like styled components (https://github.com/cristianbote/goober/tree/master/benchmarks)
-- @tw-in-js/eslint-plugin - nice to have
-- @tw-in-js/prettier-plugin - nice to have
-- @tw-in-js/tw.macro - maybe?
-- @tw-in-js/extensions
+- @twind/legacy - for IE11 with reset and polyfills (Math.imul, CSS.escape)
+- @twind/css: css and keyframes
+- @twind/styled - like styled components (https://github.com/cristianbote/goober/tree/master/benchmarks)
+- @twind/eslint-plugin - nice to have
+- @twind/prettier-plugin - nice to have
+- @twind/tw.macro - maybe?
+- @twind/extensions
   - border gradients: https://t.co/W7YVS7f0Jp
   - scroll snap: https://t.co/7xqvpFQ9Qu
   - "on" colors: generate matching contrast color and use that one as text/background color
   - Floating labels: https://t.co/g5TMqIBh4b?ssr=true
   - Stretched link: https://v5.getbootstrap.com/docs/5.0/helpers/stretched-link/
   - and others (see Plugins below)
-- @tw-in-js/play - play mode
+- @twind/play - play mode
 
 ## Docs
 

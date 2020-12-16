@@ -1,15 +1,15 @@
-# @tw-in-js/core
+# twind
 
 > the smallest, fastest, most feature complete Tailwind-in-JS solution ever
 
-[![MIT License](https://badgen.net/github/license/tw-in-js/core)](https://github.com/tw-in-js/core/blob/main/LICENSE)
-[![Latest Release](https://flat.badgen.net/npm/v/@tw-in-js/core?icon=npm&label)](https://www.npmjs.com/package/@tw-in-js/core)
-[![Bundle Size](https://flat.badgen.net/bundlephobia/minzip/@tw-in-js/core@>0.2.1?icon=packagephobia&label&color=blue)](https://bundlephobia.com/result?p=@tw-in-js/core 'gzip bundle size (including dependencies)')
-[![Package Size](https://flat.badgen.net/badgesize/brotli/https:/unpkg.com/@tw-in-js/core/module/core.js?icon=jsdelivr&label&color=blue)](https://unpkg.com/@tw-in-js/core/module/core.js 'brotli package size (without dependencies)')
-[![Typescript](https://flat.badgen.net/badge/icon/included?icon=typescript&label)](https://unpkg.com/browse/@tw-in-js/core/types/core.d.ts)
-[![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Fcore?icon=github&label)](https://github.com/tw-in-js/core)
-[![CI](https://github.com/tw-in-js/core/workflows/CI/badge.svg)](https://github.com/tw-in-js/core/actions?query=workflow%3Aci)
-[![Coverage Status](https://flat.badgen.net/coveralls/c/github/tw-in-js/core/main?icon=codecov&label)](https://coveralls.io/github/tw-in-js/core?branch=main)
+[![MIT License](https://badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE)
+[![Latest Release](https://flat.badgen.net/npm/v/twind?icon=npm&label)](https://www.npmjs.com/package/twind)
+[![Bundle Size](https://flat.badgen.net/bundlephobia/minzip/twind?icon=packagephobia&label&color=blue)](https://bundlephobia.com/result?p=twind 'gzip bundle size (including dependencies)')
+[![Package Size](https://flat.badgen.net/badgesize/brotli/https:/unpkg.com/twind/module/twind.js?icon=jsdelivr&label&color=blue)](https://unpkg.com/twind/module/twind.js 'brotli package size (without dependencies)')
+[![Typescript](https://flat.badgen.net/badge/icon/included?icon=typescript&label)](https://unpkg.com/browse/twind/types/index.d.ts)
+[![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind?icon=github&label)](https://github.com/tw-in-js/twind)
+[![CI](https://github.com/tw-in-js/twind/workflows/CI/badge.svg)](https://github.com/tw-in-js/twind/actions?query=workflow%3Aci)
+[![Coverage Status](https://flat.badgen.net/coveralls/c/github/tw-in-js/twind/main?icon=codecov&label)](https://coveralls.io/github/tw-in-js/twind?branch=main)
 [![PRs Welcome](https://flat.badgen.net/badge/PRs/welcome/purple)](http://makeapullrequest.com)
 
 ---
@@ -24,10 +24,10 @@ We aim to create a place for likeminded people to discuss issues and share imple
 
 If you would like to get started with twind right away then copy paste this code into your favorite sandbox.
 
-> ⚡️ Alternatively try the [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgdHcsIHNldHVwIH0gZnJvbSAnaHR0cHM6Ly9jZG4uc2t5cGFjay5kZXYvQHR3LWluLWpzL2NvcmUnCgpkb2N1bWVudC5ib2R5LmlubmVySFRNTCA9IGAKICA8bWFpbiBjbGFzcz0iJHt0d2BiZy1ibGFjayB0ZXh0LXdoaXRlYH0iPgogICAgPGgxIGNsYXNzPSIke3R3YHRleHQteGxgfSI+VGhpcyBpcyBUYWlsd2luZCBpbiBKUyE8L2gxPgogIDwvbWFpbj4KYA==)
+> ⚡️ Alternatively try the [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgdHcsIHNldHVwIH0gZnJvbSAnaHR0cHM6Ly9jZG4uc2t5cGFjay5kZXYvdHdpbmQnCgpkb2N1bWVudC5ib2R5LmlubmVySFRNTCA9IGAKICA8bWFpbiBjbGFzcz0iJHt0d2BiZy1ibGFjayB0ZXh0LXdoaXRlYH0iPgogICAgPGgxIGNsYXNzPSIke3R3YHRleHQteGxgfSI+VGhpcyBpcyBUYWlsd2luZCBpbiBKUyE8L2gxPgogIDwvbWFpbj4KYA==)
 
 ```js
-import { tw, setup } from 'https://cdn.skypack.dev/@tw-in-js/core'
+import { tw, setup } from 'https://cdn.skypack.dev/twind'
 
 document.body.innerHTML = `
   <main class="${tw`bg-black text-white`}">
@@ -87,4 +87,4 @@ We'd like to call ourselves the htm of the css world but that awards goes to [go
 
 ## License
 
-[MIT](https://github.com/tw-in-js/core/blob/main/LICENSE)
+[MIT](https://github.com/tw-in-js/twind/blob/main/LICENSE)
