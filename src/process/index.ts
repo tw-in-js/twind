@@ -58,7 +58,7 @@ export const configure = (
   //    `sm:hover:${({ tw }) => tw`underline`}`
   //    ==> 'sm:hover:underline`
   // Start with an "empty" rule, to always have value to use
-  let activeRule: { v?: string[]; n?: boolean } = {}
+  let activeRule: { v: string[]; n?: boolean } = { v: [] }
 
   // The context that is passed to functions to access the theme, ...
   const context: Context = {
@@ -130,7 +130,7 @@ export const configure = (
   const convert = (rule: Rule): string | undefined | void => {
     // If there is a active rule this one is nested
     // we must add the variants and need to reset the id
-    if (activeRule.v?.length) {
+    if (activeRule.v.length) {
       rule = { ...rule, v: [...activeRule.v, ...rule.v], $: '' }
     }
 
