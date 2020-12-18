@@ -1,10 +1,10 @@
 # Grouping
 
-One specific advantage of doing CSS in JS is that we are not limited to the restrictions of a class name as input. Because the compiler is just a function, it can take almost any form of input (strings, array, objects or arguments) and turn it into meaningful output.
+Unlike Tailwind, Twind is not limited to the restrictions of a class name strings as input. The compiler is just a function and has been designed to be able to inerpret input in almost any form – strings, array, objects, template literals or variadic arguments – turn it into meaningful output.
 
-A painpoint commonly felt when using utility CSS classes generally is that it can result is some long and unwieldily lines of code which are quite hard for humans hard to parse.
+One painpoint commonly felt when using utility CSS is long and unwieldily lines of code consisting of class names, often denoting styles at various breakpoints, which are quite hard to comprehend.
 
-Below is an example of some reasonably contrived button styles. The amount of rules applied to this element has been exaggerated for demonstrative purposes, however it is not uncommon for a single element to have tens of rules applied to it and so any savings we can make here are massively exaggerated when applied at scale.
+It is not uncommon for a single element to have tens of rules applied to it like below:
 
 ```html
 <button
@@ -12,14 +12,16 @@ Below is an example of some reasonably contrived button styles. The amount of ru
 ></button>
 ```
 
-The option to pass a template literal as input to the compiler made it convenient to embed domain specific syntax that extends the capabilities of Tailwind and try help reduce the amount of repetition often required when trying to apply styles over with multiple breakpoints.
+However, when using Twind we have the option to pass a template literal as input to the compiler. This made it convenient to invent a domain specific syntax that extends the capabilities of Tailwind and helps reduce repetition.
 
 ## Directive grouping
 
 The first grouping syntax works by factoring out common directive prefixes. Below is an example of a rule set without directive grouping and the equivalent rule set with `border` factored out.
 
 ```js
+// Before directive grouping
 tw`border-2 border-black border-opacity-50 border-dashed`
+// After directing grouping
 tw`border(2 black opacity-50 dashed)`
 ```
 
@@ -32,11 +34,14 @@ The second grouping syntax works by factoring out common variants. Both responsi
 > Note how rules within tagged template literals are able to span multiple lines
 
 ```js
+// Before variant grouping
+tw`bg-red-500 shadow-xs sm:bg-red-600 sm:shadow-sm md:bg-red-700 md:shadow lg:bg-red-800 lg:shadow-xl`
+// After variant grouping
 tw`
   bg-red-500 shadow-xs
   sm:(
     bg-red-600
-    shadow-sm
+    shadow-md
   )
   md:(bg-red-700 shadow)
   lg:(bg-red-800 shadow-xl)
@@ -49,15 +54,34 @@ It is possible to nest directive groups inside of responsive groups and vice ver
 
 ```js
 tw`sm:(border(2 black opacity-50 hover:dashed))`
+// => sm:border-2 sm:border-black sm:border-opacity-50 sm:hover:border-dashed
 tw`border(md:(2 black opacity-50 hover:dashed))`
 // => sm:border-2 sm:border-black sm:border-opacity-50 sm:hover:border-dashed
 ```
 
-Thanks to some ordering logic in the compiler, both of the above groupings will be interpreted the same. That is to say, that directive groupings always get expanded before variant groupings.
+Thanks to some ordering logic in the compiler, both of the above groupings will result in the same output. That is to say more generally, that directive groupings always get expanded before variant groupings.
+
+## Self Reference
 
 Some directives like `ring` need to be applied themselves as well as being a prefix. In this case you can use the reserved `&` character which is replaced literally with the current prefix:
 
 ```js
 bw`ring(& ping-700 offset(4 ping-200))`)
-// => ring ring-ping-700 ring-offset-4 ring-offset-on-ping-200
+// => ring ring-ping-700 ring-offset-4 ring-offset-ping-200
 ```
+
+## Inherited Groups
+
+It is possible to define arbritarty styles by providing a functiion. Like all other directives these will inherit any active grouping.
+
+```js
+tw`
+  hover:${() => ({ '&::after': { content: '🌈' } })}
+`
+```
+
+In the above example, the `after` pseudo element will only be applied upon hover.
+
+<hr/>
+
+Continue to [Plugins](./plugins.md)
