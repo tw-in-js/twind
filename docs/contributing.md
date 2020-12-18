@@ -52,7 +52,6 @@ Below is an outline of some todos, packages, plugins and ideas that we would lik
 - benchmark using https://github.com/A-gambit/CSS-IN-JS-Benchmarks
 - size comparison: build same page with other libs and compare size
 - on manual class name change in dev-tools and generate that directive
-- maybe observe tw dom attribute with allow list of unknown directives
 - adapter for standard tailwindcss plugins
 
 ### Theme

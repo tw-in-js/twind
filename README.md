@@ -36,13 +36,13 @@ document.body.innerHTML = `
 `
 ```
 
-> 📚 For further instruction on usage please [read the documentation](docs)!
+> 📚 For further instruction on usage please [read the documentation](https://github.com/tw-in-js/twind/tree/main/docs)!
 
 ## Rational
 
 This project was started by the authors of two similar libraries – [oceanwind](https://github.com/lukejacksonn/oceanwind) and [beamwind](https://github.com/kenoxa/beamwind) – who chose to collaborate rather than compete with each other in this space. The open source community is full of fragmentation but we wanted to see cohesion here.
 
-Combining efforts has saved us time and resulted in a much more complete and production ready offering. Furthermore we were able to agree on and coin some standards for certain aspects of the implementation, based on all of our learnings; things like parsing input, [grouping syntax](./docs/grouping.md), prescedence calculation and [plugin API](./docs/plugins.md).
+Combining efforts has saved us time and resulted in a much more complete and production ready offering. Furthermore we were able to agree on and coin some standards for certain aspects of the implementation, based on all of our learnings; things like parsing input, [grouping syntax](https://github.com/tw-in-js/twind/blob/main/docs/grouping.md), prescedence calculation and [plugin API](https://github.com/tw-in-js/twind/blob/main/docs/plugins.md).
 
 ## Why twind?
 
@@ -53,12 +53,11 @@ A lot of developers ask _"Why not just use Tailwind?"_ and our answer is always 
 Take the following snippet for example:
 
 ```js
-import { tw, setup } from 'https://cdn.skypack.dev/twind'
+import { tw, setup, strict } from 'https://cdn.skypack.dev/twind'
 
 setup({
-  preflight: true, // Includes Tailwind preflight
   hash: true, // Hashes all generated class names
-  mode: 'warn', // Warn the developer about invalid inputs
+  mode: strict, // Throw errors for invalid rules instead of logging
   theme: {
     fontFamily: {
       sans: ['Helvetica', 'sans-serif'],
@@ -108,30 +107,30 @@ document.body.innerHTML = app()
 ```
 
 - All setup is done at runtime, no build step required! This makes that is possible to configure and reconfigure the compiler on the fly.
-- By shipping the compiler (rather than the resultant output) there is a known and fixed cost associated with styling. No matter how many styles you write or how many variants you use, all your users will ever have to downlod is approximately 10Kb of code (which is less than styled-components or your average Tailwind build).
-- By default the base reset provided by tailwind is instantiated with your theme values (like fonts and colors) and injected in the document during setup. Guaranteeing more consistent cross browser results out of the box.
-- It is possible to configure twind to hash class names before injecting them into the DOM. This can reduce the overall down the wire size of pages and eliminate any chance of class name conflicts.
-- Theming is done exactly as documented by the Tailwind meaning that you can copy paste in your project theme from existing projects. The only different here is that there is no need to rebuild after changing you theme. Just refresh the page!
+- By shipping the compiler (rather than the resultant output) there is a known and fixed cost associated with styling. No matter how many styles you write or how many variants you use, all your users will ever have to download is approximately 10Kb of code (which is less than styled-components or your average Tailwind build).
+- By default the [base reset](https://tailwindcss.com/docs/preflight) provided by tailwind is instantiated with your theme values (like fonts and colors) and injected in the document during setup. Guaranteeing more consistent cross browser results out of the box.
+- It is possible to configure twind to [hash class names](https://github.com/tw-in-js/twind/blob/main/docs/customization.md#hash) before injecting them into the DOM. This can reduce the overall down the wire size of pages and eliminate any chance of class name conflicts.
+- Theming is done exactly as [documented by the Tailwind](https://tailwindcss.com/docs/theme) meaning that you can copy paste in your project theme from existing projects. The only different here is that there is no need to rebuild after changing you theme. Just refresh the page!
 - Input to the compiler is not limited to just a string like HTML classes are. Twind accept arrays, objects, template literals, functions, almost everything! The interpretter spec is inspired by and very similar to [clsx](https://github.com/lukeed/clsx) and offers a much more developer friendly API that handles null values gracefully.
-- Using template literals as input (the recommended method) allows you to break rules over multiple lines, drastically improving readability and maintainability.
-- Control over the interpreter affords us the possibility of defining syntax for grouping reponsive and pseudo variants as well as directives with common prefixes. This massively reduces repetition and improves comprehension.
-- The fact that the compiler accepts functions that return arbritary CSS-in-JS provides an escape hatch for all those one off rules which aren't supported by tailwind. The `&` keyword allows you to write complex rules (like pseudo elements `&::before` and `&::after`) that are beyond the scope of inline styles.
-- Given the finite grammars that the compiler has to support, we are able to specialise it to compile and inject CSS faster than all the popular CSS-in-JS solutions.
-- Extending the grammar is trivial and can be achieved by providing a function _inline_ or generalising inline rules and defining them during setup under the _plugins_ key.
+- Using template literals as input ([the recommended method](https://github.com/tw-in-js/twind/blob/main/docs/usage.md#template-literal-recommended)) allows you to break rules over multiple lines, drastically improving readability and maintainability.
+- Control over the interpreter affords us the possibility of defining syntax for [grouping responsive and pseudo variants](https://github.com/tw-in-js/twind/blob/main/docs/grouping.md) as well as directives with common prefixes. This massively reduces repetition and improves comprehension.
+- The fact that the compiler [accepts functions](https://github.com/tw-in-js/twind/blob/main/docs/usage.md#inline-plugins) that return arbritary CSS-in-JS provides an escape hatch for all those one off rules which aren't supported by tailwind. The `&` keyword allows you to write complex rules (like pseudo elements `&::before` and `&::after`) that are beyond the scope of inline styles.
+- Given the finite grammars that the compiler has to support, we are able to specialize it to compile and inject CSS faster than all the popular CSS-in-JS solutions.
+- Extending the grammar is trivial and can be achieved by providing a function _inline_ or generalizing inline rules and defining them during setup under [the _plugins_ key](https://github.com/tw-in-js/twind/blob/main/docs/plugins.md).
 - The compiler itself is not reliant on the DOM at all, which makes it an ideal candidate for static extraction which would remove all runtime overhead. This is possible during SSR or build time prepass.
 
 ## Prior Art
 
 It would be untrue to suggest that the design here is totally original, other than the founders initial attempts at implementing such a module ([oceanwind](https://github.com/lukejacksonn/oceanwind) and [beamwind](https://github.com/kenoxa/beamwind)) we are truly standing on the shoulders of giants. Prior art includes but is not limited to:
 
-- tailwind: created a wonderfully thought out API on which the compiler's grammar was defined.
-- styled-components: implemented and popularised the advantages of doing CSS-in-JS.
-- htm: a JSX compiler that proved there is merit in doing runtime compilation of DSLs like JSX.
-- goober: an impossibly small yet efficient CSS-in-JS implemetation that defines critical module features.
-- otion: the first CSS-in-JS solution specifically oriented around handling CSS in an atomic fashion.
-- clsx: a tiny utility for constructing class name strings conditionally.
-- tiny-css-prefixer: essentials CSS prefixing helpers in less than 1KB of JavaScript.
-- csstype: providing autocompletion and type checking for CSS properties and values.
+- [tailwind](https://tailwindcss.com/): created a wonderfully thought out API on which the compiler's grammar was defined.
+- [styled-components](https://styled-components.com/): implemented and popularised the advantages of doing CSS-in-JS.
+- [htm](https://github.com/developit/htm): a JSX compiler that proved there is merit in doing runtime compilation of DSLs like JSX.
+- [goober](https://github.com/cristianbote/goober): an impossibly small yet efficient CSS-in-JS implemetation that defines critical module features.
+- [otion](https://github.com/kripod/otion): the first CSS-in-JS solution specifically oriented around handling CSS in an atomic fashion.
+- [clsx](https://github.com/lukeed/clsx): a tiny utility for constructing class name strings conditionally.
+- [tiny-css-prefixer](https://github.com/kitten/tiny-css-prefixer): essentials CSS prefixing helpers in less than 1KB of JavaScript.
+- [csstype](https://github.com/frenic/csstype): providing autocompletion and type checking for CSS properties and values.
 
 ## License
 

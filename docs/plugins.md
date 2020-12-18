@@ -97,7 +97,7 @@ Rules determining the theme functions behavior can be found in the [Tailwind doc
 
 The final kind of plugin is described as an inline plugin but is not strictly a plugin because it doesn't get defined up front in the setup function. They can be used as an escape hatch when writing out "one off" rules.
 
-Sometimes you might find yourself wanting to write some arbritary styles for an element. Some rule that isn't covered by Tailwind API but perhaps isn't general enough to warrant creating a real plugin for.
+Sometimes you might find yourself wanting to write some arbitrary styles for an element. Some rule that isn't covered by Tailwind API but perhaps isn't general enough to warrant creating a real plugin for.
 
 If you find yourself in this circumstance, use an inline plugin:
 
@@ -122,6 +122,15 @@ tw`
 ```
 
 In the above example, the before and after styles are only applied on small screens and when the user is hovering over the element.
+
+Additionally inline plugins allow to extract common definitions:
+
+```js
+const link = ({ tw }) => tw`text-cyan-600 hover:text-cyan-700`
+
+tw`font-bold ${link}`
+// => font-bold text-cyan-600 hover:text-cyan-700
+```
 
 <hr/>
 

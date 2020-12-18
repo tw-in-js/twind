@@ -1,6 +1,6 @@
 # Installation
 
-It is possible to install and thus use Twind in a multitude of different ways. We expose various different modules – from the latest es syntax to IIFE builds – with the aim of accommodating for as many dev setups as possible. This said, for the smallest size and fastest performance we recommend you use the esnext build.
+It is possible to install and thus use Twind in a multitude of different ways. We expose various different modules – from the latest es syntax to umd builds – with the aim of accommodating for as many dev setups as possible. This said, for the smallest size and fastest performance we recommend you use the module build.
 
 > Although compatible with traditional bundlers no build step is required to use the module
 

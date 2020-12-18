@@ -1,6 +1,6 @@
 # Grouping
 
-Unlike Tailwind, Twind is not limited to the restrictions of a class name strings as input. The compiler is just a function and has been designed to be able to inerpret input in almost any form – strings, array, objects, template literals or variadic arguments – turn it into meaningful output.
+Unlike Tailwind, Twind is not limited to the restrictions of a class name strings as input. The compiler is just a function and has been designed to be able to interpret input in almost any form – strings, array, objects, template literals or variadic arguments – turn it into meaningful output.
 
 One painpoint commonly felt when using utility CSS is long and unwieldily lines of code consisting of class names, often denoting styles at various breakpoints, which are quite hard to comprehend.
 
@@ -46,6 +46,9 @@ tw`
   md:(bg-red-700 shadow)
   lg:(bg-red-800 shadow-xl)
 `
+
+bw`w(1/2 sm:1/3 lg:1/6) p-2`
+// => w-1/2 sm:w-1/3 lg:w-1/6 p-2
 ```
 
 ## Mixed Groupings
@@ -57,6 +60,13 @@ tw`sm:(border(2 black opacity-50 hover:dashed))`
 // => sm:border-2 sm:border-black sm:border-opacity-50 sm:hover:border-dashed
 tw`border(md:(2 black opacity-50 hover:dashed))`
 // => sm:border-2 sm:border-black sm:border-opacity-50 sm:hover:border-dashed
+
+bw`divide(y-2 blue-500 opacity(75 md:50))`
+// => divide-y-2 divide-blue-500 divide-opacity-75 md:divide-opacity-50
+
+// Negated values can be used within the braces and will be applied to the directive:
+bw`rotate(-3 hover:6 md:(3 hover:-6))`
+// => -rotate-3 hover:rotate-6 md:rotate-3 md:hover:-rotate-6"
 ```
 
 Thanks to some ordering logic in the compiler, both of the above groupings will result in the same output. That is to say more generally, that directive groupings always get expanded before variant groupings.
@@ -72,11 +82,20 @@ bw`ring(& ping-700 offset(4 ping-200))`)
 
 ## Inherited Groups
 
-It is possible to define arbritarty styles by providing a functiion. Like all other directives these will inherit any active grouping.
+It is possible to define arbitrary styles by providing a function. Like all other directives these will inherit any active grouping.
 
 ```js
 tw`
   hover:${() => ({ '&::after': { content: '🌈' } })}
+
+  hover:${{
+    sm: tw`underline`,
+    lg: 'no-underline line-through',
+  }}
+  // => sm:hover:underline lg:hover:no-underline lg:hover:line-through
+
+  sm:${['rounded']}
+  // => sm:rounded
 `
 ```
 

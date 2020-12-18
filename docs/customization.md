@@ -1,6 +1,6 @@
 # Customization
 
-Understandably developers will more often than not want to customize the out of the box experience. It is possible to achieve this with the `setup` function. Doing so will ultimately change the behaviour of calling the `tw` function, making it appropriate for your particular use case.
+Understandably developers will more often than not want to customize the out of the box experience. It is possible to achieve this with the `setup` function. Doing so will ultimately change the behavior of calling the `tw` function, making it appropriate for your particular use case.
 
 ```js
 import { setup, strict } from 'twind'
@@ -39,15 +39,15 @@ To force the program to error instead of warn set `mode` to `strict`:
 import { setup, strict } from 'twind'
 
 setup({
-  mode: 'strict', // throw errors for invalid rules instead of logging
+  mode: strict, // Throw errors for invalid rules instead of logging
 })
 ```
 
 ## Hash
 
-Most CSS-in-JS solutions, such as styled components or emotion will create hashed class names for rule sets. This makes sense because there is no logical way of naming an arbritary set of styles. Doing this makes less sense when using an atomic utility class approach because directives are usually atomic and carefully named.
+Most CSS-in-JS solutions, such as styled components or emotion will create hashed class names for rule sets. This makes sense because there is no logical way of naming an arbritary set of styles. Doing this makes less sense when using an utility class approach because directives are usually carefully named.
 
-By default, shorthand that is passed into the `tw` function is not hashed. This helps retain the advantage of using utility classes, aiding inspection and debugging.
+By default, rules that are passed into the `tw` function are not hashed. This helps retain the advantage of using utility classes, aiding inspection and debugging.
 
 To enable hashing of class names set `hash` to `true`.
 

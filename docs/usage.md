@@ -28,6 +28,8 @@ It is possible to invoke the `tw` function in a multitude of different ways. It 
 
 ### Template Literal (recommended)
 
+> See [Grouping](./grouping.md) for more syntax examples.
+
 ```js
 tw`bg-gray-200 rounded`
 //=> bg-gray-200 rounded
@@ -37,6 +39,10 @@ tw`bg-gray-200 ${[false && 'rounded', 'block']}`
 //=> bg-gray-200 block
 tw`bg-gray-200 ${{ rounded: false, underline: isTrue() }}`
 //=> bg-gray-200 underline
+tw`bg-${randomColor()}`
+//=> bg-blue-500
+tw`hover:${({ tw }) => tw`underline`}`
+//=> hover:underline
 ```
 
 ### Strings
