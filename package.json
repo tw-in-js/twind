@@ -20,8 +20,13 @@
   "main": "src/index.ts",
   "exports": {
     ".": "./src/index.ts",
+    "./shim": "./src/shim/index.ts",
+    "./shim/auto": "./src/shim/auto/index.ts",
     "./package.json": "./package.json"
   },
+  "sideEffects": [
+    "./dist/shim/auto/auto.js"
+  ],
   "scripts": {
     "build": "distilt",
     "format": "prettier --write --ignore-path .gitignore .",
