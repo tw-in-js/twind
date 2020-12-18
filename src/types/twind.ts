@@ -74,6 +74,15 @@ export interface Configuration {
   plugins?: Plugins
 
   /**
+   * ```js
+   * {
+   *   ':new-variant': '& .selector',
+   * }
+   * ```
+   */
+  variants?: Record<string, string>
+
+  /**
    * Sets a cryptographic nonce (number used once) on the enclosing `<style>` tag when generating a page on demand.
    *
    * Useful for enforcing a [Content Security Policy (CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP).

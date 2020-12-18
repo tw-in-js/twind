@@ -1,7 +1,6 @@
 import type { Context, CSSRules, Rule, DarkMode } from '../types'
 
 import { tail, escape } from '../internal/util'
-import { variants } from '../tailwind/variants'
 
 // Wraps a CSS rule object with variant at-rules and pseudo classes
 // { '.selector': {...} }
@@ -9,6 +8,7 @@ import { variants } from '../tailwind/variants'
 // => { '@media (mind-width: ...)': { '&:hover': { '.selector': {...} } } }
 export const decorate = (
   darkMode: DarkMode,
+  variants: Record<string, string>,
   { theme, tag }: Context,
 ): ((translation: CSSRules, rule: Rule) => CSSRules) => {
   // Select the wrapper for a variant

@@ -8,8 +8,6 @@ import {
   atRulePresedence,
 } from '../internal/presedence'
 
-import { variants } from '../tailwind/variants'
-
 export interface RuleWithPresedence {
   r: string
   p: number
@@ -19,6 +17,7 @@ const stringifyBlock = (body: string, selector: string): string => selector + '{
 
 export const serialize = (
   prefix: Prefixer,
+  variants: Record<string, string>,
   { theme, tag }: Context,
 ): ((css: CSSRules, className?: string, rule?: Rule) => RuleWithPresedence[]) => {
   // Hash/Tag tailwind custom properties during serialization

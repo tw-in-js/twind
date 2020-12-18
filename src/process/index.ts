@@ -11,6 +11,7 @@ import type {
 
 import { corePlugins } from '../tailwind/plugins'
 import { createPreflight } from '../tailwind/preflight'
+import { coreVariants } from '../tailwind/variants'
 
 import { cssomInjector, noOpInjector } from '../injectors'
 import { warn } from '../modes'
@@ -45,7 +46,7 @@ const toString = (rule: Rule, directive = rule.d): string => {
 
 export const configure = (
   config: Configuration = {},
-): { init: () => void; process: (tokens: unknown[]) => string, theme: ThemeResolver } => {
+): { init: () => void; process: (tokens: unknown[]) => string; theme: ThemeResolver } => {
   const theme = makeThemeResolver(config.theme)
 
   const mode = config.mode || warn
@@ -107,11 +108,13 @@ export const configure = (
     }
   }
 
+  const variants = { ...coreVariants, ...config.variants }
+
   // Apply variants to a translation
-  const decorate = makeDecorate(config.darkMode || 'media', context)
+  const decorate = makeDecorate(config.darkMode || 'media', variants, context)
 
   // Serialize a translation to css
-  const serialize = makeSerialize(sanitize(config.prefix, autoprefix, noprefix), context)
+  const serialize = makeSerialize(sanitize(config.prefix, autoprefix, noprefix), variants, context)
 
   // Inject css into the target enviroment
   const inject = makeInject(
