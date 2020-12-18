@@ -7,7 +7,7 @@ web_modules
 .cache
 dist
 __generated__
-tsconfig.dist.json
+tsconfig.dist*.json
 
 benchmarks/*.min.mjs
 

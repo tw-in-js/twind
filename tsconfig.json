@@ -1,6 +1,6 @@
 {
   "$schema": "http://json.schemastore.org/tsconfig",
-  "include": ["src/**/*"],
+  "include": ["src"],
   "compilerOptions": {
     // During development for Node v10.8 support
     "target": "es2018",

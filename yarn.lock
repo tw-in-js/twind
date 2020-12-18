@@ -1020,14 +1020,13 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
-distilt@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.npmjs.org/distilt/-/distilt-0.2.1.tgz#19de67cebea5f73279c66e1926688831cbc5439b"
-  integrity sha512-BDnrYvqsxsqz0Tf/qPKRObHrj1u/Gw6pPgN4ih1Fz7nZS7+xZ+APtOcqQg18kJduSyTKWVfY7xDEwqjQV3DYJg==
+distilt@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.npmjs.org/distilt/-/distilt-0.3.0.tgz#715379fe42d60497b13ff6a9a3a87f13a70dd740"
+  integrity sha512-6ZnC2j6QGBxx/waMRU40NdrCQ1tri4t1LL4RfAa2kWJ3oFjTMvLqC6pD0w/fL2a+ele3OEzuOCb0754JvwOc0A==
   dependencies:
     esbuild "^0.8.23"
     execa "^5.0.0"
-    find-up "^5.0.0"
     globby "^11.0.1"
     pkg-dir "^5.0.0"
     project-root-directory "^1.0.3"
@@ -1177,9 +1176,9 @@ esbuild@^0.8.23:
   integrity sha512-LkgCmotGnhVgRGxjDkTBBYrnJ5stcxK+40cEJGtXUS16hcAWy90cn1qjxKCogzLPJ75gW/L6ejly7VKrMstVGQ==
 
 esbuild@^0.8.7:
-  version "0.8.22"
-  resolved "https://registry.npmjs.org/esbuild/-/esbuild-0.8.22.tgz#d558dd8579eb824a10ca04daa7be712379cae759"
-  integrity sha512-7cgcJwjff5pw6JLTpUyN3QZ6raOYamfvBt7ry0tyGZwZJ/W8mJrHuv+VC5rbNEO4Mz8s8ElmcavKc7R2g1HWow==
+  version "0.8.24"
+  resolved "https://registry.npmjs.org/esbuild/-/esbuild-0.8.24.tgz#18645e102254682909017cec648f84d4834f15b3"
+  integrity sha512-bqgEa2VemAN+YM52SM1626+/pdLp+p9NyqISB06ixcvauKIJk6akia3UTTsGAgn0oHEdReZ97gL+LYX+UjgwKA==
 
 escalade@^3.1.1:
   version "3.1.1"
