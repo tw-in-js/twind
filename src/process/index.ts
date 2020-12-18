@@ -183,7 +183,7 @@ export const configure = (
       } else {
         // No plugin or plugin did not return something
         mode.report({ id: 'UNKNOWN_DIRECTIVE', rule: rule.$ }, context)
-        className = ''
+        className = rule.$
       }
 
       // Remember the generated class name

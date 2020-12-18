@@ -19,7 +19,7 @@ test('mode warn (default)', () => {
     const warn = snoop(noop)
     console.warn = warn.fn
 
-    assert.is(tw('unknown-directive'), '')
+    assert.is(tw('unknown-directive'), 'unknown-directive')
     assert.is(warn.callCount, 1)
     assert.match(warn.lastCall.arguments[0], /UNKNOWN_DIRECTIVE/)
 
@@ -44,7 +44,7 @@ test('mode silent', () => {
     const warn = snoop(noop)
     console.warn = warn.fn
 
-    assert.is(tw('unknown-directive'), '')
+    assert.is(tw('unknown-directive'), 'unknown-directive')
     assert.is(warn.callCount, 0)
 
     assert.is(tw('rounded-t-xxx'), 'rounded-t-xxx')
