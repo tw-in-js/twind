@@ -1,10 +1,12 @@
 # Installation
 
-It is possible to install and thus use Twind in a multitude of different ways. We expose various different modules, from the latest es syntax to umds builds, with the hope of accommodating for as many dev setups as possible. This said, for the smallest size and fastest performance we recommend you use the esnext build.
+It is possible to install and thus use Twind in a multitude of different ways. We expose various different modules – from the latest es syntax to umd builds – with the aim of accommodating for as many dev setups as possible. This said, for the smallest size and fastest performance we recommend you use the module build.
+
+> Although compatible with traditional bundlers no build step is required to use the module
 
 ## Importing as a local dependency
 
-Most build tools rely on modules to be installed locally on the machine they are running. Usually these modules are available and downloaded from npm. Twind is no different in this regard.
+Most build tools rely on modules to be installed locally on the machine they are running on. Usually these modules are available on and installed via npm. Twind is no different in this regard.
 
 1. Run the following command in your terminal, from your project root:
 
@@ -18,36 +20,22 @@ npm i twind
 import { tw, setup } from 'twind'
 ```
 
-Assuming you have your bundler configured to consume modules correctly then you should now be able to use the module.
+Assuming you have your bundler configured correctly then you should now be able to just use the module.
 
 ## Importing as a remote dependency
 
-Now that nearly all browsers support es-modules sometimes it is desirable to import a module straight from the internet from a CDN such as [skypack](https://skypack.dev/) or [unpkg](https://unpkg.com/).
+Given that nearly all browsers support es modules now, sometimes it is desirable to import a module straight from from a CDN such as [skypack](https://skypack.dev/) or [unpkg](https://unpkg.com/).
 
-1. Add the following line to a javascript file referenced by a script tag with `type="module"`:
+1. Add the following line to a javascript file referenced by a script tag with `type="module"` like below:
 
-```js
-import { tw, setup } from 'https://cdn.skypack.dev/twind'
+```html
+<script type="module">
+  import { tw, setup } from 'https://cdn.skypack.dev/twind'
+</script>
 ```
 
 Assuming you have an internet connection then you should now be able to use the module.
 
-## Named Exports
+<hr/>
 
-The module primarily exposes two named exports meant for general purpose use. However for more advanced use cases some internal functions are also exposed.
-
-```js
-import {
-  tw, // A configured compiler function which abides by the default Tailwind theme
-  setup, // A function for configuring the compiler with a theme and/or plugins
-  create, // A function for creating a new unconfigured compiler instance
-  virtualInjector, // An injector which collects style rules during server-side rendering
-  cssomInjector, // An injector which inserts style rules through the CSS Object Model
-  noOpInjector, // An injector placeholder which performs no operations useful for testing
-  mode,
-  warn,
-  strict,
-  autoprefix,
-  noprefix,
-} from 'twind'
-```
+Continue to [Basic Usage](./usage.md)

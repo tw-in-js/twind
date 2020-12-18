@@ -1,14 +1,18 @@
 # Contributing
 
-Here is an outline of some todos, packages, plugins and ideas that we would like to explore or implement given enough time and resources. If you would like to help us at all then please create an issue around any of the following points so that we can discuss the idea further.
+If you have made it this far then thanks for checkin gout Twind. We hoped you have enjoyed learning about Tailwind-in-JS and would love to hear what you think!
+
+Please show your appreciation by sharing the project on twitter or by starring it on GitHub.
+
+If you have any implementation specific feedback or ideas then please [create an issue](https://github.com/tw-in-js/twind) for discussion.
 
 ## Local development
 
+If you would like to try your hand at fixing a bug or adding a new feature then first clone the repository and cd into the project directory.
+
 > Ensure you run at least Node v12.
 
-To develop the project locally, first clone the repository and cd into the project directory.
-
-Run `yarn install`.
+Then run `yarn install` followed by any of the following commands:
 
 - `yarn start`: Start example
 - `yarn build`: Build the package
@@ -19,6 +23,10 @@ Run `yarn install`.
 - `yarn lint`: Run eslint
 - `yarn lint:fix`: Run eslint fix
 - `yarn release`: To publish the package
+
+## Ideas for the future
+
+Below is an outline of some todos, packages, plugins and ideas that we would like to explore or implement given enough time and resources. If you would like to help us at all then please create an issue around any of the following points so that we can discuss the idea further.
 
 ## Packages
 
@@ -38,20 +46,12 @@ Run `yarn install`.
   - and others (see Plugins below)
 - @twind/play - play mode
 
-## Docs
-
-- Explain differences with twin.macro
-  - requires a build step and a run time lib (emotion, styled-components, ...)
-  - has only hashed class names?
-  - no directive grouping
-
 ## Ideas
 
 - presets: https://tailwindcss.com/docs/presets
 - benchmark using https://github.com/A-gambit/CSS-IN-JS-Benchmarks
 - size comparison: build same page with other libs and compare size
 - on manual class name change in dev-tools and generate that directive
-- maybe observe tw dom attribute with allow list of unknown directives
 - adapter for standard tailwindcss plugins
 
 ### Theme
