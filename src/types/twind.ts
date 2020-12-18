@@ -21,6 +21,7 @@ export interface Context {
 export interface Instance {
   readonly tw: TW
   readonly setup: (options?: Configuration) => void
+  readonly theme: ThemeResolver
 }
 
 export interface Preflight {

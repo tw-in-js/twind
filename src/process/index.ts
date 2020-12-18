@@ -45,7 +45,7 @@ const toString = (rule: Rule, directive = rule.d): string => {
 
 export const configure = (
   config: Configuration = {},
-): { init: () => void; process: (tokens: unknown[]) => string } => {
+): { init: () => void; process: (tokens: unknown[]) => string, theme: ThemeResolver } => {
   const theme = makeThemeResolver(config.theme)
 
   const mode = config.mode || warn
@@ -212,5 +212,6 @@ export const configure = (
   return {
     init: () => mode.report({ id: 'LATE_SETUP_CALL' }, context),
     process,
+    theme,
   }
 }

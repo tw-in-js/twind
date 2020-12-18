@@ -4,6 +4,7 @@ const instance = create()
 
 export const { tw } = instance
 export const { setup } = instance
+export const { theme } = instance
 
 export { create }
 export * from './injectors'
