@@ -2,7 +2,7 @@ import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 import { snoop } from 'snoop'
 
-import { create, virtualInjector, strict, mode } from '../index'
+import { create, virtualInjector, strict, silent, mode } from '../index'
 
 const test = suite('mode')
 
@@ -30,6 +30,25 @@ test('mode warn (default)', () => {
     assert.is(tw('gap'), 'gap')
     assert.is(warn.callCount, 3)
     assert.match(warn.lastCall.arguments[0], /UNKNOWN_THEME_VALUE/)
+  } finally {
+    console.warn = consoleWarn
+  }
+})
+
+test('mode silent', () => {
+  const consoleWarn = console.warn
+
+  try {
+    const { tw } = create({ mode: silent })
+
+    const warn = snoop(noop)
+    console.warn = warn.fn
+
+    assert.is(tw('unknown-directive'), '')
+    assert.is(warn.callCount, 0)
+
+    assert.is(tw('rounded-t-xxx'), 'rounded-t-xxx')
+    assert.is(warn.callCount, 0)
   } finally {
     console.warn = consoleWarn
   }

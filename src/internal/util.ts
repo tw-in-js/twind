@@ -19,6 +19,10 @@ export const tail = <T extends string | readonly unknown[]>(array: T, startIndex
 
 export const identity = <T>(value: T): T => value
 
+export const noop = (): void => {
+  /* no-op */
+}
+
 export const capitalize = (value: string): string => value[0].toUpperCase() + tail(value)
 
 export const hyphenate = (value: string): string => value.replace(/[A-Z]/g, '-$&').toLowerCase()

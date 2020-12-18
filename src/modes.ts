@@ -1,6 +1,6 @@
 import type { Mode } from './types'
 
-import { join } from './internal/util'
+import { join, noop } from './internal/util'
 
 export const mode = (report: (message: string) => void): Mode => ({
   unknown(section, key = [], optional, context) {
@@ -37,3 +37,5 @@ export const warn = mode((message) => console.warn(message))
 export const strict = mode((message) => {
   throw new Error(message)
 })
+
+export const silent = mode(noop)
