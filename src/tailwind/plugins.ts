@@ -659,7 +659,7 @@ export const corePlugins: Plugins = {
             backgroundImage: `linear-gradient(to ${join(
               _,
               ' ',
-            )},var(--tw-gradient-stops,var(--tw-gradient-from,transparent),var(--tw-radient-to,transparent)))`,
+            )},var(--tw-gradient-stops,var(--tw-gradient-from,transparent),var(--tw-gradient-to,transparent)))`,
           }
         }
     }

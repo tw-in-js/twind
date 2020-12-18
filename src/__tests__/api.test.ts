@@ -168,7 +168,7 @@ test('properties presedence (gradient)', ({ injector, tw }) => {
     'bg-gradient-to-r from-purple-400 via-pink-500 to-red-500',
   )
   assert.equal(injector.target, [
-    '.bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops,var(--tw-gradient-from,transparent),var(--tw-radient-to,transparent)))}',
+    '.bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops,var(--tw-gradient-from,transparent),var(--tw-gradient-to,transparent)))}',
     '.from-purple-400{--tw-gradient-from:#a78bfa}',
     '.via-pink-500{--tw-gradient-stops:var(--tw-gradient-from,transparent),#ec4899,var(--tw-gradient-to,transparent)}',
     '.to-red-500{--tw-gradient-to:#ef4444}',

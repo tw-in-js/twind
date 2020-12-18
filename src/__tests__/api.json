@@ -172,7 +172,7 @@
   "bg-fuchsia": ".bg-fuchsia{background-color:fuchsia}",
   "bg-opacity-30": ".bg-opacity-30{--tw-bg-opacity:0.3}",
   "bg-hero-pattern": ".bg-hero-pattern{background-image:url('/img/hero-pattern.svg')}",
-  "bg-gradient-to-tl": ".bg-gradient-to-tl{background-image:linear-gradient(to left top,var(--tw-gradient-stops,var(--tw-gradient-from,transparent),var(--tw-radient-to,transparent)))}",
+  "bg-gradient-to-tl": ".bg-gradient-to-tl{background-image:linear-gradient(to left top,var(--tw-gradient-stops,var(--tw-gradient-from,transparent),var(--tw-gradient-to,transparent)))}",
   "border": ".border{border-width:1px}",
   "border-solid": ".border-solid{border-style:solid}",
   "border-dashed": ".border-dashed{border-style:dashed}",
@@ -529,7 +529,7 @@
   "bg-gradient-to-r from-purple-400 via-pink-500 to-red-500": [
     "bg-gradient-to-r from-purple-400 via-pink-500 to-red-500",
     [
-      ".bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops,var(--tw-gradient-from,transparent),var(--tw-radient-to,transparent)))}",
+      ".bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops,var(--tw-gradient-from,transparent),var(--tw-gradient-to,transparent)))}",
       ".from-purple-400{--tw-gradient-from:#a78bfa}",
       ".via-pink-500{--tw-gradient-stops:var(--tw-gradient-from,transparent),#ec4899,var(--tw-gradient-to,transparent)}",
       ".to-red-500{--tw-gradient-to:#ef4444}"
@@ -538,7 +538,7 @@
   "bg-gradient-to-tl from-fuchsia to-blue-500": [
     "bg-gradient-to-tl from-fuchsia to-blue-500",
     [
-      ".bg-gradient-to-tl{background-image:linear-gradient(to left top,var(--tw-gradient-stops,var(--tw-gradient-from,transparent),var(--tw-radient-to,transparent)))}",
+      ".bg-gradient-to-tl{background-image:linear-gradient(to left top,var(--tw-gradient-stops,var(--tw-gradient-from,transparent),var(--tw-gradient-to,transparent)))}",
       ".from-fuchsia{--tw-gradient-from:fuchsia}",
       ".to-blue-500{--tw-gradient-to:#3b82f6}"
     ]
