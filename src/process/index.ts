@@ -174,7 +174,7 @@ export const configure = (
       if (is.string(translation)) {
         // Use as is
         className = translation
-      } else if (translation) {
+      } else if (is.object(translation)) {
         // 3. decorate: apply variants
         translation = decorate(translation, rule)
 
@@ -185,13 +185,12 @@ export const configure = (
         serialize(translation, className, rule).forEach(inject)
       } else {
         // No plugin or plugin did not return something
+        className = rule.$
 
         // Ignore hashed class names
-        if (rule.$.slice(0, 3) !== 'tw-') {
-          mode.report({ id: 'UNKNOWN_DIRECTIVE', rule: rule.$ }, context)
+        if (className.slice(0, 3) !== 'tw-') {
+          mode.report({ id: 'UNKNOWN_DIRECTIVE', rule: className }, context)
         }
-
-        className = rule.$
       }
 
       // Remember the generated class name
