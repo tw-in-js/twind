@@ -1,10 +1,8 @@
-import type { TW } from '../types'
-import { tw as defaultTW } from '../index'
+import type { Configuration } from '../types'
+import { tw, setup as setupTW } from '../index'
 
-export interface ShimOptions {
+export interface ShimConfiguration extends Configuration {
   target?: HTMLElement
-  attributes?: string[]
-  tw?: TW
 }
 
 interface NodeList {
@@ -15,67 +13,73 @@ interface NodeList {
 
 interface MutationRecord {
   readonly addedNodes: NodeList
-  readonly target?: Node
+  readonly target: Node
 }
 
-export const shim = ({
-  target = document.documentElement,
-  attributes = ['tw', 'data-tw'],
-  tw = defaultTW,
-}: ShimOptions = {}): MutationObserver => {
-  const classNamesCache = new WeakMap<Node, string[]>()
+const handleMutation = ({ target, addedNodes }: MutationRecord): void => {
+  // Not using target.classList.value (not supported in all browsers) or target.class (this is an SVGAnimatedString for svg)
+  const tokens = (target as Element).getAttribute?.('class')
 
-  const update = (node: Node) => {
-    const { classList, getAttribute } = node as Element
+  if (tokens) {
+    const className = tw(tokens)
 
-    if (classList && getAttribute) {
-      const tokens = attributes.map(getAttribute.bind(node)).filter(Boolean)
-
-      const oldClassNames = classNamesCache.get(node) || []
-      const newClassNames = tokens.length ? tw(tokens).split(' ') : []
-
-      oldClassNames.forEach(
-        (className) => !newClassNames.includes(className) && classList.remove(className),
-      )
-
-      newClassNames.forEach(
-        (className) => !oldClassNames.includes(className) && classList.add(className),
-      )
-
-      if (newClassNames.length) {
-        classNamesCache.set(node, newClassNames)
-      } else if (oldClassNames.length) {
-        classNamesCache.delete(node)
-      }
+    if (tokens !== className) {
+      // Not using `target.className = ...` as that is read-only for SVGElements
+      // eslint-disable-next-line @typescript-eslint/no-extra-semi
+      ;(target as Element).setAttribute('class', className)
     }
   }
 
-  const handleMutations = (mutations: MutationRecord[]): void =>
-    mutations.forEach(({ target, addedNodes }) => {
-      target && update(target)
+  for (let index = addedNodes.length; index--; ) {
+    const node = addedNodes[index]
 
-      for (let index = addedNodes.length; index--; ) {
-        const node = addedNodes[index]
+    handleMutations([
+      {
+        target: node,
+        addedNodes: (node as Element).children || [],
+      },
+    ])
+  }
+}
 
-        handleMutations([
-          {
-            target: node,
-            addedNodes: (node as Element).children || [],
-          },
-        ])
-      }
-    })
+const handleMutations = (mutations: MutationRecord[]): void => mutations.forEach(handleMutation)
+
+const observer = new MutationObserver(handleMutations)
+
+export const stop = (): void => observer.disconnect()
+
+const onload = () => {
+  const script = document.querySelector('script[type="twind-shim"]')
+
+  setup(script ? JSON.parse(script.innerHTML) : {})
+}
+
+export const setup = ({
+  target = document.documentElement,
+  ...config
+}: ShimConfiguration = {}): void => {
+  removeEventListener('DOMContentLoaded', onload)
+
+  setupTW(config)
+
+  stop()
 
   handleMutations([{ target, addedNodes: [target] }])
 
-  const observer = new MutationObserver(handleMutations)
+  target.hidden = false
 
   observer.observe(target, {
     attributes: true,
-    attributeFilter: attributes,
+    attributeFilter: ['class'],
     subtree: true,
     childList: true,
   })
+}
 
-  return observer
+if (document.readyState === 'loading') {
+  // Loading hasn't finished yet
+  addEventListener('DOMContentLoaded', onload)
+} else {
+  // `DOMContentLoaded` has already fired
+  onload()
 }

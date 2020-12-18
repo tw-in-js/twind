@@ -21,11 +21,10 @@
   "exports": {
     ".": "./src/index.ts",
     "./shim": "./src/shim/index.ts",
-    "./shim/auto": "./src/shim/auto/index.ts",
     "./package.json": "./package.json"
   },
   "sideEffects": [
-    "./dist/shim/auto/auto.js"
+    "./dist/shim/shim.js"
   ],
   "scripts": {
     "build": "distilt",

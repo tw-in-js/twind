@@ -31,9 +31,10 @@ Below is an outline of some todos, packages, plugins and ideas that we would lik
 ## Packages
 
 - Server Side Rendering
+- twind/css: css and keyframes
+- twind/animate: animate('1s linear infinite', { /_ keyframes _/ })
+- twind/styled - like styled components (https://github.com/cristianbote/goober/tree/master/benchmarks)
 - @twind/legacy - for IE11 with reset and polyfills (Math.imul, CSS.escape)
-- @twind/css: css and keyframes
-- @twind/styled - like styled components (https://github.com/cristianbote/goober/tree/master/benchmarks)
 - @twind/eslint-plugin - nice to have
 - @twind/prettier-plugin - nice to have
 - @twind/tw.macro - maybe?

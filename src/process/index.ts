@@ -185,7 +185,12 @@ export const configure = (
         serialize(translation, className, rule).forEach(inject)
       } else {
         // No plugin or plugin did not return something
-        mode.report({ id: 'UNKNOWN_DIRECTIVE', rule: rule.$ }, context)
+
+        // Ignore hashed class names
+        if (rule.$.slice(0, 3) !== 'tw-') {
+          mode.report({ id: 'UNKNOWN_DIRECTIVE', rule: rule.$ }, context)
+        }
+
         className = rule.$
       }
 
