@@ -290,13 +290,13 @@ test('tw`bg-white ${{rounded: false}}`', ({ injector, tw }) => {
   ])
 })
 
-test('tw`bg-white sm:${["rounded"]} text-black hover:${{sm: tw`undeline`, lg: "line-through"}} font(${{bold: true}})`', ({
+test('tw`bg-white sm:${["rounded"]} text-black hover:${{sm: ({tw}) => tw`underline`, lg: "line-through"}} font(${{bold: true}})`', ({
   injector,
   tw,
 }) => {
   assert.is(
     tw`bg-white sm:${['rounded']} text-black hover:${{
-      sm: tw`underline`,
+      sm: ({ tw }) => tw`underline`,
       lg: 'no-underline line-through',
     }} font(${{ bold: true }})`,
     'bg-white sm:rounded text-black hover:sm:underline hover:lg:no-underline hover:lg:line-through font-bold',
@@ -304,7 +304,6 @@ test('tw`bg-white sm:${["rounded"]} text-black hover:${{sm: tw`undeline`, lg: "l
   assert.equal(injector.target, [
     '.text-black{--tw-text-opacity:1;color:#000;color:rgba(0,0,0,var(--tw-text-opacity))}',
     '.bg-white{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}',
-    '.underline{text-decoration:underline}',
     '.font-bold{font-weight:700}',
     '@media (min-width: 640px){.sm\\:rounded{border-radius:0.25rem}}',
     '@media (min-width: 640px){.hover\\:sm\\:underline:hover{text-decoration:underline}}',

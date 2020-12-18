@@ -66,9 +66,9 @@ test('scale', ({ instance, injector }) => {
 })
 
 test('bg-gradient-to-r from-purple-500', ({ instance, injector }) => {
-  assert.is(instance.tw('bg-gradient-to-r from-purple-500'), 'tw-8lrugz tw-1unz9xc')
+  assert.is(instance.tw('bg-gradient-to-r from-purple-500'), 'tw-kvlmqb tw-1unz9xc')
   assert.equal(injector.target, [
-    '.tw-8lrugz{background-image:linear-gradient(to right,var(--tw-wt1r4o,var(--tw-sc6ze8,transparent),var(--tw-1h61fts,transparent)))}',
+    '.tw-kvlmqb{background-image:linear-gradient(to right,var(--tw-wt1r4o,var(--tw-sc6ze8,transparent),var(--tw-z5bexf,transparent)))}',
     '.tw-1unz9xc{--tw-sc6ze8:#8b5cf6}',
   ])
 })
