@@ -7,4 +7,6 @@ export const variants: Record<string, string> = {
   ':last': '&:last-child',
   ':even': '&:nth-child(2n)',
   ':odd': '&:nth-child(odd)',
+  ':children': '&>*',
+  ':siblings': '&~*',
 }
