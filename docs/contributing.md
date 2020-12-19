@@ -28,13 +28,16 @@ Then run `yarn install` followed by any of the following commands:
 
 Below is an outline of some todos, packages, plugins and ideas that we would like to explore or implement given enough time and resources. If you would like to help us at all then please create an issue around any of the following points so that we can discuss the idea further.
 
-## Packages
+## Packages / Modules
 
-- Server Side Rendering
 - twind/css: css and keyframes
-- twind/animate: animate('1s linear infinite', { /_ keyframes _/ })
+- twind/animate: `animate('1s linear infinite', { /* waypoints */ })`
 - twind/styled - like styled components (https://github.com/cristianbote/goober/tree/master/benchmarks)
+- @twind/server - for server side rendering
+  - extract critical css
+  - support for shim
 - @twind/legacy - for IE11 with reset and polyfills (Math.imul, CSS.escape)
+  - add note in docs about umd bundles and how to use them
 - @twind/eslint-plugin - nice to have
 - @twind/prettier-plugin - nice to have
 - @twind/tw.macro - maybe?
@@ -52,7 +55,6 @@ Below is an outline of some todos, packages, plugins and ideas that we would lik
 - presets: https://tailwindcss.com/docs/presets
 - benchmark using https://github.com/A-gambit/CSS-IN-JS-Benchmarks
 - size comparison: build same page with other libs and compare size
-- on manual class name change in dev-tools and generate that directive
 - adapter for standard tailwindcss plugins
 
 ### Theme
@@ -63,6 +65,7 @@ Below is an outline of some todos, packages, plugins and ideas that we would lik
 ### Plugins
 
 - plugin api like tailwind: `setup({ plugins: [typography] })`
+- `flex-gap-*`: https://github.com/tailwindlabs/tailwindcss/discussions/2316
 - https://www.npmjs.com/package/@savvywombat/tailwindcss-grid-areas
 - https://www.npmjs.com/package/tailwindcss-ripple
 - https://github.com/tailwindlabs/tailwindcss-aspect-ratio
