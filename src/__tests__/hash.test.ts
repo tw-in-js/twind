@@ -44,6 +44,23 @@ test('same declarations are inserted only once', ({ instance, injector }) => {
   assert.equal(injector.target, ['.tw-1kfasqk{border-left-width:1px;border-right-width:1px}'])
 })
 
+test('accept already hashed rules', ({ instance, injector }) => {
+  assert.is(instance.tw('tw-1bk5mm5 tw-1sv1rgs'), 'tw-1bk5mm5 tw-1sv1rgs')
+  assert.equal(injector.target, [])
+})
+
+test('already hashed rule can not have variants', ({ instance }) => {
+  assert.throws(() => {
+    instance.tw('md:tw-1sv1rgs')
+  }, /UNKNOWN_DIRECTIVE/)
+})
+
+test('already hashed rule can be negated', ({ instance }) => {
+  assert.throws(() => {
+    instance.tw('-tw-1sv1rgs')
+  }, /UNKNOWN_DIRECTIVE/)
+})
+
 test('same color is inserted only once', ({ instance, injector }) => {
   assert.is(instance.tw('text-primary text-#0d3880'), 'tw-1hgnj9x tw-1hgnj9x')
   assert.equal(injector.target, [

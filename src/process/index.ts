@@ -186,11 +186,7 @@ export const configure = (
       } else {
         // No plugin or plugin did not return something
         className = rule.$
-
-        // Ignore hashed class names
-        if (className.slice(0, 3) !== 'tw-') {
-          mode.report({ id: 'UNKNOWN_DIRECTIVE', rule: className }, context)
-        }
+        mode.report({ id: 'UNKNOWN_DIRECTIVE', rule: className }, context)
       }
 
       // Remember the generated class name
