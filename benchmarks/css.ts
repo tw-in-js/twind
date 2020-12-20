@@ -149,7 +149,7 @@ function templateLiteralStyles(): Promise<void> {
   console.log('emotion:', styles(emotion))
 
   return new Promise((resolve, reject) => {
-    new Benchmark.Suite('Template Literal')
+    new Benchmark.Suite('Template Literal Styles')
       .add(
         'twind',
         () =>

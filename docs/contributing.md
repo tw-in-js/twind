@@ -55,6 +55,7 @@ Below is an outline of some todos, packages, plugins and ideas that we would lik
 - @twind/eslint-plugin - nice to have
 - @twind/prettier-plugin - nice to have
 - @twind/tw.macro - maybe?
+- @twind/babel-plugin https://github.com/emotion-js/emotion/tree/master/packages/babel-plugin
 - @twind/extensions
   - border gradients: https://t.co/W7YVS7f0Jp
   - scroll snap: https://t.co/7xqvpFQ9Qu
