@@ -23,7 +23,7 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
 - If you would like to inject a custom reset instead then provide a function as a value.
 - You can provide additional CSS rules as an object which are merged with the default reset.
 
-## Strict
+## Mode
 
 One benefit of doing compilation at runtime is that it is possible to warn developers about errors such as:
 
@@ -43,6 +43,18 @@ setup({
   mode: strict, // Throw errors for invalid rules instead of logging
 })
 ```
+
+To ignore all warnings set the `mode` to `silent`:
+
+```js
+import { setup, silent } from 'twind'
+
+setup({
+  mode: silent,
+})
+```
+
+If you are using JSON configuration the modes can be set using strings: `"strict"`, `"warn"` or `"silent"`.
 
 ## Hash
 

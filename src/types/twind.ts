@@ -102,7 +102,7 @@ export interface Configuration {
 
   hash?: Hasher | boolean
 
-  mode?: Mode
+  mode?: Mode | 'strict' | 'warn' | 'silent'
 }
 
 export type ReportInfo =

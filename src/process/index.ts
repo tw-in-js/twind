@@ -8,6 +8,7 @@ import type {
   Hasher,
   InlineDirective,
   CSSRules,
+  Mode,
 } from '../types'
 
 import { corePlugins } from '../tailwind/plugins'
@@ -15,7 +16,7 @@ import { createPreflight } from '../tailwind/preflight'
 import { coreVariants } from '../tailwind/variants'
 
 import { cssomInjector, noOpInjector } from '../injectors'
-import { warn } from '../modes'
+import { silent, strict, warn } from '../modes'
 import { autoprefix, noprefix } from '../prefix'
 
 import * as is from '../internal/is'
@@ -35,6 +36,10 @@ const sanitize = <T>(
   enabled = defaultValue,
 ): T => (value === false ? disabled : value === true ? enabled : value || defaultValue)
 
+const loadMode = (mode: Configuration['mode']): Mode =>
+  (is.string(mode) ? ({ t: strict, a: warn, i: silent } as Record<string, Mode>)[mode[1]] : mode) ||
+  warn
+
 // Creates rule id including variants, negate and directive
 // which is exactly like a tailwind rule
 const toString = (rule: Rule, directive = rule.d): string => {
@@ -50,7 +55,7 @@ export const configure = (
 ): { init: () => void; process: (tokens: unknown[]) => string; theme: ThemeResolver } => {
   const theme = makeThemeResolver(config.theme)
 
-  const mode = config.mode || warn
+  const mode = loadMode(config.mode)
 
   const hash = sanitize<Hasher | false>(config.hash, false, false, cyrb32)
 
