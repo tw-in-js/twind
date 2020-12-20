@@ -2,8 +2,6 @@
 
 Sometimes you might find yourself wanting to write some arbitrary styles for an element. Some rule that isn't covered by Tailwind API but perhaps isn't general enough to warrant creating a real plugin for.
 
-TODO test animation in example
-
 ## CSS directive
 
 Essentially a CSS directive uses some CSS rules in object notation format to create a optimized [inline plugin]('./plugins.md#inline-plugin). Here you can use the `&` selector to target the current element much like in other CSS-in-JS libraries. In this way, it is possible to write styles that cannot be described using an inline style attribute alone; things like specific children selectors.
@@ -40,6 +38,19 @@ tw`
   })}
 `
 // => sm:hover:tw-xxxx
+```
+
+Values within the CSS object can be a function which are called with the `context` and should return the value to be used:
+
+```js
+const styles = css({
+  '& a': ({ theme }) => ({
+    color: theme('color', 'blue-500'),
+  }),
+  '& a:hover': {
+    color: ({ theme }) => theme('color', 'blue-700'),
+  },
+})
 ```
 
 CSS directives can be used without applying it through `tw`:
@@ -81,12 +92,12 @@ document.body.className = smiley({ tw })
 
 ## Animation Directive
 
-Custom animations are difficult to configure in Tailwind. During `setup` you to add to the `theme.animation` section and the `theme.keyframes` section. This must know all animation before hand and can not use "one-off" animations.
+Custom animations are difficult to configure in Tailwind. During `setup` you need to add to the `theme.animation` section and the `theme.keyframes` section. This means all animations must known before hand and you can not use "one-off" animations.
 
 With the `animation` exports this task is greatly simplified:
 
 ```js
-import { css } from 'twind/css'
+import { animation } from 'twind/css'
 
 const bounce = animation('1s ease infinite', {
   'from, 20%, 53%, 80%, to': {
@@ -100,18 +111,17 @@ const bounce = animation('1s ease infinite', {
   },
   '90%': {
     transform: 'translate3d(0, -4px, 0)',
-  }
+  },
 })
 
 tw`hover:${bounce}`
 ```
 
-The first argument can be a [animation shorthand CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) string, an object of CSS animation properties or a function which is passed the context:
+The first argument can be a [animation shorthand CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) string, an object of CSS animation properties or a function which is passed the context to return the shorthand CSS:
 
 ```js
 const slidein = animation(
-  ({ theme }) =>
-    `${theme('durations', '500')} ${theme('transitionTimingFunction', 'in-out')}`,
+  ({ theme }) => `${theme('durations', '500')} ${theme('transitionTimingFunction', 'in-out')}`,
   {
     from: {
       transform: 'translateX(0%)',
@@ -119,6 +129,17 @@ const slidein = animation(
     to: {
       transform: 'translateX(100%)',
     },
+  },
+)
+
+const bounce = animation(
+  {
+    animationDuration: '1s',
+    animationTimingFunction: ({ theme }) => theme('transitionTimingFunction', 'in-out'),
+    animationIterationCount: 'infinite',
+  },
+  {
+    /* keyframes */
   },
 )
 ```
@@ -141,7 +162,9 @@ const { tw } = create(/* options */)
 const animate = animation.bind(tw)
 
 // Or providing tw on invocation
-const bounce = animation.call(tw, { /* same as above */ })
+const bounce = animation.call(tw, {
+  /* same as above */
+})
 
 // Or providing tw on generation
 const slidein = animation('1s slidein', {
@@ -149,7 +172,7 @@ const slidein = animation('1s slidein', {
     transform: 'translateX(0%)',
   },
   to: {
-    transform: 'translateX(100%)'
+    transform: 'translateX(100%)',
   },
 })
 slidein({ tw })
@@ -174,7 +197,7 @@ const bounce = keyframes({
   },
   '90%': {
     transform: 'translate3d(0, -4px, 0)',
-  }
+  },
 })
 ```
 
@@ -207,7 +230,9 @@ const { tw } = create(/* options */)
 const kf = keyframes.bind(tw)
 
 // Or providing tw on invocation
-const bounce = keyframes.call(tw, { /* same as above */ })
+const bounce = keyframes.call(tw, {
+  /* same as above */
+})
 
 // Or providing tw on generation
 const slidein = keyframes({
@@ -215,8 +240,12 @@ const slidein = keyframes({
     transform: 'translateX(0%)',
   },
   to: {
-    transform: 'translateX(100%)'
+    transform: 'translateX(100%)',
   },
 })
 slidein({ tw })
 ```
+
+<hr/>
+
+Continue to [Plugins](./plugins.md)

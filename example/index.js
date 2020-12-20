@@ -3,6 +3,23 @@ import './test'
 
 import { tw } from '../src/index'
 
+import { animation } from '../src/css/index'
+
+const bounce = animation('1s ease infinite', {
+  'from, 20%, 53%, 80%, to': {
+    transform: 'translate3d(0,0,0)',
+  },
+  '40%, 43%': {
+    transform: 'translate3d(0, -30px, 0)',
+  },
+  '70%': {
+    transform: 'translate3d(0, -15px, 0)',
+  },
+  '90%': {
+    transform: 'translate3d(0, -4px, 0)',
+  },
+})
+
 const style = {
   main: tw`
     text-green-500
@@ -41,6 +58,7 @@ const style = {
       bg-gray-100
       text-gray-800
       shadow-lg
+      ${bounce}
     )
     border(& gray-400)
     rounded-full

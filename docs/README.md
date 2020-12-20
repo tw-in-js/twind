@@ -14,6 +14,7 @@ If you find any incorrect or missing documentation then please [open an issue](h
 - [Usage](./usage.md)
 - [Customization](./customization.md)
 - [Grouping](./grouping.md)
+- [CSS in JS](./css.md)
 - [Plugins](./plugins.md)
 - [Architecture](./architectiure.md)
 - [Contributing](./contributing.md)

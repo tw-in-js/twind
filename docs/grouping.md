@@ -103,4 +103,4 @@ In the above example, the `after` pseudo element will only be applied upon hover
 
 <hr/>
 
-Continue to [Plugins](./plugins.md)
+Continue to [CSS in JS](./css.md)
