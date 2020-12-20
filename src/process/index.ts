@@ -47,7 +47,7 @@ const toString = (rule: Rule, directive = rule.d): string => {
 
   const base = join(rule.v, '')
 
-  return (base && tail(base) + ':') + (rule.n ? '-' : '') + directive
+  return (base && tail(base) + ':') + (rule.n ? '-' : '') + directive + (rule.i ? '!' : '')
 }
 
 export const configure = (

@@ -2,8 +2,15 @@ import type { Prefixer } from './types'
 
 import { prefixProperty, prefixValue } from 'tiny-css-prefixer'
 
-export const autoprefix: Prefixer = (property: string, value: string): string => {
-  const declaration = `${property}:${prefixValue(property, value)}`
+export const noprefix: Prefixer = (property: string, value: string, important?: boolean): string =>
+  `${property}:${value}${important ? ' !important' : ''}`
+
+export const autoprefix: Prefixer = (
+  property: string,
+  value: string,
+  important?: boolean,
+): string => {
+  const declaration = noprefix(property, prefixValue(property, value), important)
 
   let cssText = declaration
 
@@ -15,6 +22,3 @@ export const autoprefix: Prefixer = (property: string, value: string): string =>
 
   return cssText
 }
-
-export const noprefix: Prefixer = (property: string, value: string): string =>
-  `${property}:${value}`

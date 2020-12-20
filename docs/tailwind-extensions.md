@@ -19,6 +19,8 @@ The following is a list of directives we have added or support additional featur
 
   > `transform rotate-45` works but when using `transform rotate-45 scale-150` only one of both is applied.
 
+- directives may end with exclamation point (`text-center!`) to be marked as [important](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity#The_!important_exception)
+
 <hr/>
 
 Continue to [CSS in JS](./css.md)

@@ -31,16 +31,20 @@ export const serialize = (
   const tagVars = (value: string | number): string => `${value}`.replace(/--(tw-[\w-]+)\b/g, tagVar)
 
   // Create a css declaration with prefix and hashed custom properties
-  const stringifyDeclaration = (property: string, value: string | number | string[]): string => {
+  const stringifyDeclaration = (
+    property: string,
+    value: string | number | string[],
+    important: boolean | undefined,
+  ): string => {
     property = tagVars(property)
 
     // Support array fallbacks
     return Array.isArray(value)
       ? join(
-          value.filter(Boolean).map((value) => prefix(property, tagVars(value))),
+          value.filter(Boolean).map((value) => prefix(property, tagVars(value), important)),
           ';',
         )
-      : prefix(property, tagVars(value))
+      : prefix(property, tagVars(value), important)
   }
 
   // List of css rule with presedence to be injected
@@ -57,6 +61,7 @@ export const serialize = (
     presedence: number,
     // The rules object
     css: CSSRules,
+    important: boolean | undefined,
   ): void => {
     // 1. Properties
     // 3. *
@@ -98,7 +103,7 @@ export const serialize = (
         // Add to the declaration block with prefixer applied
         declarations =
           (declarations && declarations + ';') +
-          stringifyDeclaration(property, value as string | number | string[])
+          stringifyDeclaration(property, value as string | number | string[], important)
       } else if (value) {
         // If the value is an object this must be a nested block
         // like '@media ...', '@supports ... ', ':pseudo ...', '& > ...'
@@ -106,7 +111,7 @@ export const serialize = (
         if (key[0] === '@') {
           if (key[1] === 'f') {
             // `@font-face` is never wrapped, eg always global/root
-            stringify([], key, 0, value as CSSRules)
+            stringify([], key, 0, value as CSSRules, important)
           } else if (key[1] === 'k') {
             // @keyframes handling
             // To prevent
@@ -118,7 +123,7 @@ export const serialize = (
             // => "@keyframes name{from{transform:rotate(0deg)}from{transform:rotate(0deg)}}"
             const currentSize = rules.length
 
-            stringify([], '', 0, value as CSSRules)
+            stringify([], '', 0, value as CSSRules, important)
 
             const waypoints = rules.splice(currentSize, rules.length - currentSize)
 
@@ -140,6 +145,7 @@ export const serialize = (
               selector,
               presedence | (responsivePrecedence(key) || atRulePresedence(key)),
               value as CSSRules,
+              important,
             )
           }
         } else {
@@ -163,6 +169,7 @@ export const serialize = (
               : key,
             hasNestedSelector ? presedence : 0,
             value as CSSRules,
+            important,
           )
         }
       }
@@ -203,6 +210,7 @@ export const serialize = (
       // If we have a rule, create starting presedence based on the variants
       rule ? rule.v.reduceRight(variantPresedence, 0) : 0,
       css,
+      rule && rule.i,
     )
 
     return rules

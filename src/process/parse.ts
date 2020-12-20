@@ -56,11 +56,12 @@ const endGrouping = (isWhitespace?: boolean): void => {
 const onlyPrefixes = (s: string): '' | boolean => s && s[0] !== ':'
 const onlyVariants = (s: string): '' | boolean => s[0] === ':'
 
-const addRule = (directive: Rule['d'], negate?: boolean): void => {
+const addRule = (directive: Rule['d'], negate?: boolean, important?: boolean): void => {
   rules.push({
     v: groupings.filter(onlyVariants),
     d: directive,
     n: negate,
+    i: important,
     $: '',
   })
 }
@@ -72,9 +73,15 @@ const saveRule = (buffer: string): '' => {
     buffer = tail(buffer)
   }
 
+  const important = buffer[buffer.length - 1] === '!'
+
+  if (important) {
+    buffer = buffer.slice(0, -1)
+  }
+
   const prefix = join(groupings.filter(onlyPrefixes))
 
-  addRule(buffer === '&' ? prefix : (prefix && prefix + '-') + buffer, negate)
+  addRule(buffer === '&' ? prefix : (prefix && prefix + '-') + buffer, negate, important)
 
   return ''
 }

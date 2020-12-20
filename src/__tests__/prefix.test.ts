@@ -36,4 +36,16 @@ test('add prefix', ({ injector, instance }) => {
   ])
 })
 
+test('add prefix with important', ({ injector, instance }) => {
+  assert.is(
+    instance.tw('sticky! scroll-snap-x! appearance-menulist-button!'),
+    'sticky! scroll-snap-x! appearance-menulist-button!',
+  )
+  assert.equal(injector.target, [
+    '.sticky\\!{position:-webkit-sticky, sticky !important}',
+    '.appearance-menulist-button\\!{appearance:menulist-button !important;-moz-appearance:menulist-button !important;-webkit-appearance:menulist-button !important}',
+    '.scroll-snap-x\\!{scroll-snap-type:x !important;-ms-scroll-snap-type:x !important;-webkit-scroll-snap-type:x !important}',
+  ])
+})
+
 test.run()

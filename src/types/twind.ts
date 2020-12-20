@@ -59,7 +59,7 @@ export interface CSSOMInjector extends Injector {
   target: CSSStyleSheet
 }
 
-export type Prefixer = (property: string, value: string) => string
+export type Prefixer = (property: string, value: string, important?: boolean) => string
 
 export type Hasher = (value: string) => string
 
@@ -154,6 +154,9 @@ export interface Rule {
 
   /** Is this rule negated: `"-rotate-45"` =\> `true` */
   n: boolean | undefined
+
+  /** Is this rule marked as important: `"stroke-4!"` =\> `true` */
+  i: boolean | undefined
 
   /**
    * The id is the tailwind rule including variants, negate and directive
