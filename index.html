@@ -1,49 +1,49 @@
 <!DOCTYPE html>
-<html lang='en'>
-<head>
-  <meta charset='UTF-8'>
-  <meta name='viewport' content='width=device-width,initial-scale=1.0'>
-  <title>Twind | Tailwind-in-JS</title>
-</head>
-<body></body>
-<script type='module'>
-  import { tw, setup } from 'https://cdn.skypack.dev/twind';
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Twind | Tailwind-in-JS</title>
+  </head>
+  <body></body>
+  <script type="module">
+    import { tw, setup } from 'https://cdn.skypack.dev/twind'
 
-  setup({
-    preflight: (reset) => ({
-      ...reset,
-      '@font-face': {
-        'font-family': 'Baloo',
-        src: 'url(./Baloo-Regular.ttf)',
-      },
-    }),
-    theme: {
-      extend: {
-        colors: {
-          primary: '#80CBC4',
+    setup({
+      preflight: (reset) => ({
+        ...reset,
+        '@font-face': {
+          'font-family': 'Baloo',
+          src: 'url(./Baloo-Regular.ttf)',
         },
-        fontFamily: { 'display': 'Baloo, sans-serif' }
-      }
-    },
-    plugins: {
-      'gust': {
-        'animation': 'gust 2s infinite',
-        'transform-origin': 'top right',
-        '@keyframes gust': {
-          '0%, 100%': { 'transform': 'rotate(0deg)' },
-          '40%': { 'transform': 'rotate(3deg)' },
-          '50%': { 'transform': 'rotate(2deg)' },
-          '70%': { 'transform': 'rotate(4deg)' }
-        }
-      }
-    }
-  });
+      }),
+      theme: {
+        extend: {
+          colors: {
+            primary: '#80CBC4',
+          },
+          fontFamily: { display: 'Baloo, sans-serif' },
+        },
+      },
+      plugins: {
+        gust: {
+          animation: 'gust 2s infinite',
+          'transform-origin': 'top right',
+          '@keyframes gust': {
+            '0%, 100%': { transform: 'rotate(0deg)' },
+            '40%': { transform: 'rotate(3deg)' },
+            '50%': { transform: 'rotate(2deg)' },
+            '70%': { transform: 'rotate(4deg)' },
+          },
+        },
+      },
+    })
 
-  const tickIcon = `
+    const tickIcon = `
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" class='${tw`w-5 h-5 md:(w-6 h-6) text-primary`}' fill='currentColor'><path fill-rule="evenodd" d="M1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0zM0 8a8 8 0 1116 0A8 8 0 010 8zm11.78-1.72a.75.75 0 00-1.06-1.06L6.75 9.19 5.28 7.72a.75.75 0 00-1.06 1.06l2 2a.75.75 0 001.06 0l4.5-4.5z"></path></svg>
   `
 
-  document.body.innerHTML = `
+    document.body.innerHTML = `
   <main class='${tw`flex flex-col w-full max-w-screen-lg p(8 sm:10 md:12 lg:16) mx-auto space(y-10 md:y-12 lg:y-16)`}'>
     <header>
       <div class='${tw`relative w-32 h-32 md:(w-48 h-48) ml-auto`}'>
@@ -96,5 +96,5 @@
     </footer>
   </main>
   `
-</script>
+  </script>
 </html>

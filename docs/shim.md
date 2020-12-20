@@ -4,7 +4,7 @@
 
 The `twind/shim` modules allows to use the `class` attribute for tailwind rules.
 If such a rule is detected the corresponding CSS rule is created and injected
-into the stylesheet. *No need for `tw`* but it can be used on the same page as well.
+into the stylesheet. _No need for `tw`_ but it can be used on the same page as well.
 
 ```html
 <!DOCTYPE html>

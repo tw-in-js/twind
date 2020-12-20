@@ -22,10 +22,14 @@
     ".": "./src/index.ts",
     "./shim": "./src/shim/index.ts",
     "./css": "./src/css/index.ts",
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./index.html": "./index.html"
   },
   "sideEffects": [
     "./dist/shim/shim.js"
+  ],
+  "files": [
+    "./index.html"
   ],
   "scripts": {
     "build": "distilt",
