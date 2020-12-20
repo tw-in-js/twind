@@ -149,7 +149,7 @@ export const keyframes = create<CSSAtKeyframes, CSSKeyframes>((waypoints, key) =
  */
 export function animation(
   this: TW | null | undefined | void,
-  value: string | CSSRules | InlineDirective,
+  value: string | CSSRules | ((context: Context) => string),
   waypoints: CSSAtKeyframes | CSSKeyframes,
 ): CSSDirective {
   return css.call(this, {

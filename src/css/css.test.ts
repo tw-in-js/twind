@@ -277,7 +277,7 @@ test('animation object notation', ({ animation, tw, injector }) => {
   const bounce = animation(
     {
       animationDuration: '1s',
-      animationTimingFunction: 'ease',
+      animationTimingFunction: ({ theme }) => theme('transitionTimingFunction', 'in-out'),
       animationIterationCount: 'infinite',
     },
     {
@@ -299,9 +299,9 @@ test('animation object notation', ({ animation, tw, injector }) => {
   // Nothing applied yet
   assert.equal(injector.target, [])
 
-  assert.is(tw(bounce), 'tw-hgkewl')
+  assert.is(tw(bounce), 'tw-1e66f79')
   assert.equal(injector.target, [
-    '.tw-hgkewl{animation-duration:1s;animation-timing-function:ease;animation-iteration-count:infinite;animation-name:tw-cm8eaz}',
+    '.tw-1e66f79{animation-duration:1s;animation-timing-function:cubic-bezier(0.4,0,0.2,1);animation-iteration-count:infinite;animation-name:tw-cm8eaz}',
     '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
   ])
 })
