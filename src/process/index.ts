@@ -129,6 +129,10 @@ export const configure = (
   // Cache generated inline directive names by their function identity
   const inlineDirectiveName = new WeakMap<InlineDirective, string>()
 
+  // Used as replacer for JSON.stringify to calculate the hash for a inline function
+  const evaluateFunctions = (key: string, value: unknown): unknown =>
+    is.function(value) ? value(context) : value
+
   // Responsible for converting (translate, decorate, serialize, inject) a rule
   const convert = (rule: Rule): string | undefined | void => {
     // If there is a active rule this one is nested
@@ -161,7 +165,9 @@ export const configure = (
         // We can now generate a unique name based on the created translation
         // This id does not include the variants as a directive is always independent of variants
         // Variants are applied below using `decorate()`
-        rule.$ = cyrb32(JSON.stringify(translation))
+        // JSON.stringify ignores functions - by using a custom replace
+        // we can calculate a hash based on the value returned by these functions
+        rule.$ = cyrb32(JSON.stringify(translation, evaluateFunctions))
 
         // Remember it
         inlineDirectiveName.set(rule.d as InlineDirective, rule.$)
@@ -178,7 +184,7 @@ export const configure = (
         // 3. decorate: apply variants
         translation = decorate(translation, rule)
 
-        className = hash ? hash(JSON.stringify(translation)) : rule.$
+        className = hash ? hash(JSON.stringify(translation, evaluateFunctions)) : rule.$
 
         // 4. serialize: convert to css string with precedence
         // 5. inject: add to dom

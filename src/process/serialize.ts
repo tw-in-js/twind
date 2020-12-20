@@ -1,5 +1,7 @@
 import type { Context, CSSRules, Prefixer, Rule } from '../types'
 
+import * as is from '../internal/is'
+
 import { join, includes, escape, hyphenate } from '../internal/util'
 import {
   responsivePrecedence,
@@ -18,8 +20,10 @@ const stringifyBlock = (body: string, selector: string): string => selector + '{
 export const serialize = (
   prefix: Prefixer,
   variants: Record<string, string>,
-  { theme, tag }: Context,
+  context: Context,
 ): ((css: CSSRules, className?: string, rule?: Rule) => RuleWithPresedence[]) => {
+  const { theme, tag } = context
+
   // Hash/Tag tailwind custom properties during serialization
   // used by `tagVars` below
   const tagVar = (_: string, property: string): string => '--' + tag(property)
@@ -73,7 +77,11 @@ export const serialize = (
 
     // Walk through the object
     Object.keys(css).forEach((key) => {
-      const value = css[key]
+      let value = css[key]
+
+      if (is.function(value)) {
+        value = value(context)
+      }
 
       // string or number
       if (includes('rg', (typeof value)[5]) || Array.isArray(value)) {
