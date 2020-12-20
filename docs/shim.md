@@ -4,8 +4,7 @@
 
 The `twind/shim` modules allows to use the `class` attribute for tailwind rules.
 If such a rule is detected the corresponding CSS rule is created and injected
-into the stylesheet. *No need for `tw`*. All twind syntax feature like
-[grouping](./grouping.md) are supported.
+into the stylesheet. *No need for `tw`* but it can be used on the same page as well.
 
 ```html
 <!DOCTYPE html>
@@ -19,7 +18,8 @@ into the stylesheet. *No need for `tw`*. All twind syntax feature like
 </html>
 ```
 
-See `example/shim.html` for a full example.
+All twind syntax features like [grouping](./grouping.md) are supported.
+See [example/shim.html](https://github.com/tw-in-js/twind/blob/main/example/shim.html) for a full example.
 
 To customize the default `tw` instance you can provide a `<script type="twind-shim">...</script>`
 within the document. The content must be valid JSON and all twind setup option are supported.

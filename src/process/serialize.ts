@@ -83,7 +83,7 @@ export const serialize = (
         value = value(context)
       }
 
-      // string or number
+      // string, number or Array => a property with a value
       if (includes('rg', (typeof value)[5]) || Array.isArray(value)) {
         // It is a Property
         const property = hyphenate(key)
