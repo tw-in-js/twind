@@ -199,7 +199,7 @@ export const configure = (
       idToClassName.set(rule.$, className)
 
       // Ensure the cache does not grow unlimited
-      if (idToClassName.size > 10000) {
+      if (idToClassName.size > 30000) {
         idToClassName.delete(idToClassName.keys().next().value)
       }
     }
