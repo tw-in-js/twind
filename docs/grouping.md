@@ -76,8 +76,8 @@ Thanks to some ordering logic in the compiler, both of the above groupings will 
 Some directives like `ring` need to be applied themselves as well as being a prefix. In this case you can use the reserved `&` character which is replaced literally with the current prefix:
 
 ```js
-bw`ring(& ping-700 offset(4 ping-200))`)
-// => ring ring-ping-700 ring-offset-4 ring-offset-ping-200
+bw`ring(& pink-700 offset(4 pink-200))`)
+// => ring ring-pink-700 ring-offset-4 ring-offset-pink-200
 ```
 
 ## Inherited Groups
@@ -103,4 +103,4 @@ In the above example, the `after` pseudo element will only be applied upon hover
 
 <hr/>
 
-Continue to [CSS in JS](./css.md)
+Continue to [Tailwind via class attribute](./shim.md)
