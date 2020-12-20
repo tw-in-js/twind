@@ -21,7 +21,7 @@ test('cssomInjector', () => {
   assert.is(injector.insert('body{margin:0}', 1), 1)
   assert.is(injector.insert('*{margin:0}', 1), 1)
 
-  const style = document.querySelector('#__tw-in-js') as HTMLStyleElement
+  const style = document.querySelector('#__twind') as HTMLStyleElement
 
   assert.is(style.tagName, 'STYLE')
   assert.is(style.nonce, '')

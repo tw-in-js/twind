@@ -12,11 +12,11 @@ test('injects in to a style sheet element', () => {
 
   const { tw, setup } = create()
 
-  assert.not.ok(document.querySelector('#__tw-in-js'))
+  assert.not.ok(document.querySelector('#__twind'))
 
   setup({ nonce, mode: strict, preflight: false })
 
-  const style = document.querySelector('#__tw-in-js') as HTMLStyleElement
+  const style = document.querySelector('#__twind') as HTMLStyleElement
 
   assert.is(style.tagName, 'STYLE')
   assert.is(style.nonce, nonce)
@@ -37,7 +37,7 @@ test('injects in to a style sheet element', () => {
 
   assert.is(tw2('group flex text-center md:text-left'), 'group flex text-center md:text-left')
 
-  assert.is(document.querySelectorAll('#__tw-in-js').length, 1)
+  assert.is(document.querySelectorAll('#__twind').length, 1)
 
   assert.equal(
     [...(style.sheet?.cssRules || [])].map((rule) => rule.cssText),

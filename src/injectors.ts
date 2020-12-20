@@ -2,7 +2,7 @@
 // License MIT
 import type { InjectorConfig, Injector, VirtualInjector, CSSOMInjector } from './types'
 
-const STYLE_ELEMENT_ID = '__tw-in-js' as const
+const STYLE_ELEMENT_ID = '__twind' as const
 
 declare global {
   interface Window {
