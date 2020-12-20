@@ -2,6 +2,7 @@
 import Benchmark from 'benchmark'
 
 import { tw } from '../src'
+import { css } from '../src/css'
 
 import { css as otion } from 'otion'
 import { version as otionVersion } from 'otion/package.json'
@@ -56,15 +57,25 @@ function objectStyles(): Promise<void> {
     },
   })
 
+  const staticCss = css(styles())
   console.log('# Object Styles')
-  console.log('twind:', tw(styles))
+  console.log('twind/css (static):', tw(staticCss))
+  console.log('twind/css (dynamic):', tw(css(styles())))
+  console.log('twind inline plugin (static):', tw(styles))
+  console.log(
+    'twind inline plugin (dynamic):',
+    tw(() => styles()),
+  )
   console.log('otion:', otion(styles()))
   console.log('goober:', goober(styles()))
   console.log('emotion:', emotion(styles()))
 
   return new Promise((resolve, reject) => {
     new Benchmark.Suite('Object Styles')
-      .add('twind', () => tw(styles))
+      .add('twind/css (static)', () => tw(staticCss))
+      .add('twind/css (dynamic)', () => tw(css(styles())))
+      .add('twind inline plugin (static)', () => tw(styles))
+      .add('twind inline plugin (dynamic)', () => tw(() => styles()))
       .add(`otion@${otionVersion}`, () => otion(styles()))
       .add(`goober@${gooberVersion}`, () => goober(styles()))
       .add(`emotion@${emotionVersion}`, () => emotion(styles()))

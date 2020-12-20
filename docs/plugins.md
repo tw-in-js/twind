@@ -106,11 +106,12 @@ tw(({ theme }) => ({
   '&::before': { content: '🙁' }
   '&::after': { content: '😊' }
 }))
+// => tw-xxxx
 ```
 
-Essentially an inline plugin is a function that returns some CSS rules in object notation format. Here you can use the `&` selector to target the current element much like in other CSS-in-JS libraries. In this way, it is possible to write styles that cannot be described using an inline style attribute alone; things like children or pseudo selectors.
+Essentially an inline plugin is a function that returns some CSS rules in object notation format. Here you can use the `&` selector to target the current element much like in other CSS-in-JS libraries. In this way, it is possible to write styles that cannot be described using an inline style attribute alone; things like specific children selectors.
 
-Furthermore any variants or groupings that are active when the plugin is called, will be respected by the return value. Meaning that you can scope inline plugin content with responsive variants:
+Furthermore any variants or groupings that are active when the plugin is called, will be respected by the return value. Meaning that you can scope inline plugins with responsive variants:
 
 ```js
 tw`
@@ -119,9 +120,12 @@ tw`
     '&::after': { content: '😊' }
   })}
 `
+// => sm:hover:tw-xxxx
 ```
 
 In the above example, the before and after styles are only applied on small screens and when the user is hovering over the element.
+
+> **Note**: The above examples can be written more concise using [twind/css](./css.md).
 
 Additionally inline plugins allow to extract common definitions:
 
@@ -131,6 +135,8 @@ const link = ({ tw }) => tw`text-cyan-600 hover:text-cyan-700`
 tw`font-bold ${link}`
 // => font-bold text-cyan-600 hover:text-cyan-700
 ```
+
+> **Note**: Inline plugins must be idempotent and side-effect free.
 
 <hr/>
 

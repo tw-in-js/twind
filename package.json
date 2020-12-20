@@ -21,6 +21,7 @@
   "exports": {
     ".": "./src/index.ts",
     "./shim": "./src/shim/index.ts",
+    "./css": "./src/css/index.ts",
     "./package.json": "./package.json"
   },
   "sideEffects": [
@@ -131,7 +132,7 @@
     {
       "path": "dist/twind.js",
       "gzip": true,
-      "limit": "11kb"
+      "limit": "11.5kb"
     }
   ]
 }

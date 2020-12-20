@@ -30,8 +30,6 @@ Below is an outline of some todos, packages, plugins and ideas that we would lik
 
 ## Packages / Modules
 
-- twind/css: css and keyframes
-- twind/animate: `animate('1s linear infinite', { /* waypoints */ })`
 - twind/styled - like styled components (https://github.com/cristianbote/goober/tree/master/benchmarks)
 - @twind/server - for server side rendering
   - extract critical css
