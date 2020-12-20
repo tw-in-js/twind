@@ -15,11 +15,12 @@ If you find any incorrect or missing documentation then please [open an issue](h
 - [Customization](./customization.md)
 - [Grouping](./grouping.md)
 - [Tailwind via class attribute](./shim.md)
-- [CSS in JS](./css.md)
+- [Tailwind Extensions](./tailwind-extensions.md)
+- [CSS in JS](./css-in-js.md)
 - [Plugins](./plugins.md)
-- [Architecture](./architectiure.md)
-- [Contributing](./contributing.md)
 - [Browser Support](./browser-support.md)
+- [Contributing](./contributing.md)
+- [Architecture](./architecture.md)
 
 ## Quickstart
 

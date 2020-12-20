@@ -69,7 +69,6 @@ to detect changed class attributes or added DOM nodes. On detection the class at
 is parsed and translated by twind to inject the required classes into the stylesheet and the
 class attribute is updated to reflect the added CSS class names that may have been hashed.
 
-
 <hr/>
 
-Continue to [CSS in JS](./css.md)
+Continue to [Tailwind Extensions](./tailwind-extensions.md)

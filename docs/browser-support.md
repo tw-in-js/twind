@@ -23,3 +23,7 @@ We included fallbacks for the following directives which mimic [Tailwind v1](htt
 Some directive only work with CSS Variables and are not supported in legacy browsers:
 
 - [Ring](https://tailwindcss.com/docs/ring-width)
+
+<hr/>
+
+Continue to [Contributing](./contributing.md)

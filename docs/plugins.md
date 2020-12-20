@@ -140,4 +140,4 @@ tw`font-bold ${link}`
 
 <hr/>
 
-Continue to [Contributing](./contributing.md)
+Continue to [Browser Support](./browser-support.md)
