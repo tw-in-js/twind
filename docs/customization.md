@@ -21,6 +21,7 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
 
 - In order to prevent this from happening set this attribute to `false`.
 - If you would like to inject a custom reset instead then provide a function as a value.
+- You can provide additional CSS rules as an object which are merged with the default reset.
 
 ## Strict
 

@@ -95,7 +95,7 @@ export interface Configuration {
   injector?: Injector
 
   /** Called right before the first rule is injected. */
-  preflight?: Preflight | boolean
+  preflight?: Preflight | boolean | CSSRules
 
   /** Auto-prefixer method for CSS property–value pairs. */
   prefix?: Prefixer | boolean

@@ -118,4 +118,20 @@ test('use custom preflight with fallback to built-in', () => {
   assert.is(injector.target.length, 37)
 })
 
+test('use custom preflight JSON style', () => {
+  const injector = virtualInjector()
+  create({
+    injector,
+    preflight: {
+      '@font-face': {
+        'font-family': 'Baloo',
+        src: 'url(./Baloo-Regular.ttf)',
+      },
+    },
+  })
+
+  assert.is(injector.target.length, 38)
+  assert.ok(injector.target.includes('@font-face{font-family:Baloo;src:url(./Baloo-Regular.ttf)}'))
+})
+
 test.run()

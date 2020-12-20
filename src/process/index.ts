@@ -7,6 +7,7 @@ import type {
   Rule,
   Hasher,
   InlineDirective,
+  CSSRules,
 } from '../types'
 
 import { corePlugins } from '../tailwind/plugins'
@@ -213,14 +214,16 @@ export const configure = (
     parse(tokens).map(convert).filter(Boolean).join(' ')
 
   // Determine if we should inject the preflight (browser normalize)
-  const preflight = sanitize<Preflight | false>(config.preflight, identity, false)
+  const preflight = sanitize<Preflight | false | CSSRules>(config.preflight, identity, false)
 
   if (preflight) {
     // Create the base tailwind preflight css rules
     const css = createPreflight(theme)
 
     // Call the preflight handler, serialize and inject the result
-    serialize(preflight(css, context) || css).forEach(inject)
+    serialize(
+      is.function(preflight) ? preflight(css, context) || css : { ...css, ...preflight },
+    ).forEach(inject)
   }
 
   return {
