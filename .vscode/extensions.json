@@ -1,9 +1,0 @@
-{
-  "recommendations": [
-    "esbenp.prettier-vscode",
-    "dbaeumer.vscode-eslint",
-    "drknoxy.eslint-disable-snippets",
-    "eg2.vscode-npm-script",
-    "visualstudioexptteam.vscodeintellicode"
-  ]
-}
