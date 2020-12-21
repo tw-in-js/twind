@@ -21,7 +21,7 @@ into the stylesheet. _No need for `tw`_ but it can be used on the same page as w
 All twind syntax features like [grouping](./grouping.md) are supported.
 See [example/shim.html](https://github.com/tw-in-js/twind/blob/main/example/shim.html) for a full example.
 
-To customize the default `tw` instance you can provide a `<script type="twind-shim">...</script>`
+To customize the default `tw` instance you can provide a `<script type="twind-config">...</script>`
 within the document. The content must be valid JSON and all twind setup option are supported.
 
 ```html
@@ -29,7 +29,7 @@ within the document. The content must be valid JSON and all twind setup option a
 <html lang="en" hidden>
   <head>
     <script type="module" src="https://cdn.skypack.dev/twind/shim"></script>
-    <script type="twind-shim">
+    <script type="twind-config">
       {
         "hash": true
       }

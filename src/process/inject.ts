@@ -14,22 +14,22 @@ export const inject = (
   // always sorted
   const sortedPrecedences: number[] = []
 
-  // Cache for already insert css rules
+  // Cache for already inserted css rules
   // to prevent double insertions
   const insertedRules = new Set<string>()
 
   return ({ r: css, p: presedence }) => {
     // If not already inserted
     if (!insertedRules.has(css)) {
+      // Mark rule as inserted
+      insertedRules.add(css)
+
       // Find the correct position
       const index = sortedInsertionIndex(sortedPrecedences, presedence)
 
       try {
         // Insert
         injector.insert(css, index)
-
-        // Mark rule as inserted
-        insertedRules.add(css)
 
         // Update sorted index
         sortedPrecedences.splice(index, 0, presedence)
