@@ -49,7 +49,7 @@ const observer = new MutationObserver(handleMutations)
 export const stop = (): void => observer.disconnect()
 
 const onload = () => {
-  const script = document.querySelector('script[type="twind-shim"]')
+  const script = document.querySelector('script[type="twind-config"]')
 
   setup(script ? JSON.parse(script.innerHTML) : {})
 }
