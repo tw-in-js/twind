@@ -11,8 +11,9 @@ If you find any incorrect or missing documentation then please [open an issue](h
 ## Getting Started
 
 - [Installation](./installation.md)
-- [Customization](./customization.md)
-- [Tailwind-in-JS](./shim.md)
+- [Setup](./customization.md)
+- [Theming](./customization.md#theme)
+- [Examples](./examples.md)
 
 ## Usage
 
