@@ -1,37 +1,41 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import type { Instance, VirtualInjector } from '../types'
+import type { Instance } from '../types'
+import type { VirtualSheet } from '../sheets/index'
 
-import { create, virtualInjector, strict } from '../index'
+import { virtualSheet } from '../sheets/index'
+import { create, strict } from '../index'
 import { css, keyframes, animation } from './index'
 
 const test = suite<{
-  injector: VirtualInjector
+  sheet: VirtualSheet
   tw: Instance['tw']
-  setup: Instance['setup']
   css: typeof css
   keyframes: typeof keyframes
   animation: typeof animation
 }>('css')
 
-test.before.each((context) => {
-  context.injector = virtualInjector()
+test.before((context) => {
+  context.sheet = virtualSheet()
   const instance = create({
-    injector: context.injector,
+    sheet: context.sheet,
     mode: strict,
     preflight: false,
     prefix: false,
   })
   context.tw = instance.tw
-  context.setup = instance.setup
 
   context.css = css.bind(context.tw)
   context.keyframes = keyframes.bind(context.tw)
   context.animation = animation.bind(context.tw)
 })
 
-test('create css', ({ css, tw, injector }) => {
+test.after.each(({ sheet }) => {
+  sheet.reset()
+})
+
+test('create css', ({ css, tw, sheet }) => {
   const style = css({
     backgroundColor: 'hotpink',
     '&:hover': {
@@ -40,11 +44,11 @@ test('create css', ({ css, tw, injector }) => {
   })
 
   // It is lazy
-  assert.equal(injector.target, [])
+  assert.equal(sheet.target, [])
 
   assert.is(tw(style), 'tw-5fqnnd')
 
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.tw-5fqnnd:hover{color:darkgreen}',
     '.tw-5fqnnd{background-color:hotpink}',
   ])
@@ -52,39 +56,39 @@ test('create css', ({ css, tw, injector }) => {
   // it is cached
   assert.is(tw(style), 'tw-5fqnnd')
 
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.tw-5fqnnd:hover{color:darkgreen}',
     '.tw-5fqnnd{background-color:hotpink}',
   ])
 })
 
-test('create with global css within custom tw', ({ tw, injector }) => {
+test('create with global css within custom tw', ({ tw, sheet }) => {
   const style = css({
     backgroundColor: 'darkgreen',
   })
 
   // It is lazy
-  assert.equal(injector.target, [])
+  assert.equal(sheet.target, [])
 
   assert.is(tw(style), 'tw-1yoxc1q')
 
-  assert.equal(injector.target, ['.tw-1yoxc1q{background-color:darkgreen}'])
+  assert.equal(sheet.target, ['.tw-1yoxc1q{background-color:darkgreen}'])
 })
 
-test('create with global css and call with tw', ({ tw, injector }) => {
+test('create with global css and call with tw', ({ tw, sheet }) => {
   const style = css({
     backgroundColor: 'darkgreen',
   })
 
   // It is lazy
-  assert.equal(injector.target, [])
+  assert.equal(sheet.target, [])
 
   assert.is(style({ tw }), 'tw-1yoxc1q')
 
-  assert.equal(injector.target, ['.tw-1yoxc1q{background-color:darkgreen}'])
+  assert.equal(sheet.target, ['.tw-1yoxc1q{background-color:darkgreen}'])
 })
 
-test('cached by its JSON representation', ({ css, injector }) => {
+test('cached by its JSON representation', ({ css, sheet }) => {
   const style = css({
     backgroundColor: 'hotpink',
     '&:hover': {
@@ -102,10 +106,10 @@ test('cached by its JSON representation', ({ css, injector }) => {
     style,
   )
 
-  assert.equal(injector.target, [])
+  assert.equal(sheet.target, [])
 })
 
-test('can be used with variants', ({ tw, injector }) => {
+test('can be used with variants', ({ tw, sheet }) => {
   const style = css({
     backgroundColor: 'hotpink',
     '&:hover': {
@@ -115,7 +119,7 @@ test('can be used with variants', ({ tw, injector }) => {
 
   assert.is(tw`sm:${style} focus:${style}`, 'sm:tw-5fqnnd focus:tw-5fqnnd')
 
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.focus\\:tw-5fqnnd:focus:hover{color:darkgreen}',
     '.focus\\:tw-5fqnnd:focus{background-color:hotpink}',
     '@media (min-width: 640px){.sm\\:tw-5fqnnd:hover{color:darkgreen}}',
@@ -123,43 +127,43 @@ test('can be used with variants', ({ tw, injector }) => {
   ])
 })
 
-test('toString uses bound tw', ({ css, injector }) => {
+test('toString uses bound tw', ({ css, sheet }) => {
   const style = css({
     color: 'rebeccapurple',
   })
 
   assert.is(`${style}`, 'tw-1ha8m0q')
-  assert.equal(injector.target, ['.tw-1ha8m0q{color:rebeccapurple}'])
+  assert.equal(sheet.target, ['.tw-1ha8m0q{color:rebeccapurple}'])
 })
 
-test('valueOf uses bound tw', ({ css, injector }) => {
+test('valueOf uses bound tw', ({ css, sheet }) => {
   const style = css({
     color: 'hotpink',
   })
 
   assert.is(style.valueOf(), 'tw-14q97zu')
-  assert.equal(injector.target, ['.tw-14q97zu{color:hotpink}'])
+  assert.equal(sheet.target, ['.tw-14q97zu{color:hotpink}'])
 })
 
-test('toString uses global tw', ({ injector }) => {
+test('toString uses global tw', ({ sheet }) => {
   const style = css({
     color: 'rebeccapurple',
   })
 
   assert.is(`${style}`, 'tw-1ha8m0q')
-  assert.equal(injector.target, [])
+  assert.equal(sheet.target, [])
 })
 
-test('valueOf uses global tw', ({ injector }) => {
+test('valueOf uses global tw', ({ sheet }) => {
   const style = css({
     color: 'hotpink',
   })
 
   assert.is(style.valueOf(), 'tw-14q97zu')
-  assert.equal(injector.target, [])
+  assert.equal(sheet.target, [])
 })
 
-test('keyframes', ({ keyframes, css, tw, injector }) => {
+test('keyframes', ({ keyframes, css, tw, sheet }) => {
   const bounce = keyframes({
     'from, 20%, 53%, 80%, to': {
       transform: 'translate3d(0,0,0)',
@@ -176,7 +180,7 @@ test('keyframes', ({ keyframes, css, tw, injector }) => {
   })
 
   // Nothing applied yet
-  assert.equal(injector.target, [])
+  assert.equal(sheet.target, [])
 
   assert.is(
     tw(
@@ -186,13 +190,13 @@ test('keyframes', ({ keyframes, css, tw, injector }) => {
     ),
     'tw-1v80189',
   )
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.tw-1v80189{animation:tw-cm8eaz 1s ease infinite}',
     '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
   ])
 })
 
-test('keyframes lazy', ({ keyframes, css, tw, injector }) => {
+test('keyframes lazy', ({ keyframes, css, tw, sheet }) => {
   const bounce = keyframes({
     'from, 20%, 53%, 80%, to': {
       transform: 'translate3d(0,0,0)',
@@ -214,17 +218,17 @@ test('keyframes lazy', ({ keyframes, css, tw, injector }) => {
   })
 
   // Nothing applied yet
-  assert.equal(injector.target, [])
+  assert.equal(sheet.target, [])
 
   assert.is(tw(styles), 'tw-14tbawn')
 
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.tw-14tbawn{animation:1s ease infinite;animation-name:tw-cm8eaz}',
     '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
   ])
 })
 
-test('animation', ({ animation, tw, injector }) => {
+test('animation', ({ animation, tw, sheet }) => {
   const bounce = animation('1s ease infinite', {
     'from, 20%, 53%, 80%, to': {
       transform: 'translate3d(0,0,0)',
@@ -241,16 +245,16 @@ test('animation', ({ animation, tw, injector }) => {
   })
 
   // Nothing applied yet
-  assert.equal(injector.target, [])
+  assert.equal(sheet.target, [])
 
   assert.is(tw(bounce), 'tw-14tbawn')
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.tw-14tbawn{animation:1s ease infinite;animation-name:tw-cm8eaz}',
     '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
   ])
 })
 
-test('animation with callback', ({ animation, tw, injector }) => {
+test('animation with callback', ({ animation, tw, sheet }) => {
   const slidein = animation(
     ({ theme }) => `${theme('durations', '500')} ${theme('transitionTimingFunction', 'in-out')}`,
     {
@@ -264,16 +268,16 @@ test('animation with callback', ({ animation, tw, injector }) => {
   )
 
   // Nothing applied yet
-  assert.equal(injector.target, [])
+  assert.equal(sheet.target, [])
 
   assert.is(tw(slidein), 'tw-tchezo')
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.tw-tchezo{animation:500ms cubic-bezier(0.4,0,0.2,1);animation-name:tw-nlnhc}',
     '@keyframes tw-nlnhc{from{transform:translateX(0%)}to{transform:translateX(100%)}}',
   ])
 })
 
-test('animation object notation', ({ animation, tw, injector }) => {
+test('animation object notation', ({ animation, tw, sheet }) => {
   const bounce = animation(
     {
       animationDuration: '1s',
@@ -297,16 +301,16 @@ test('animation object notation', ({ animation, tw, injector }) => {
   )
 
   // Nothing applied yet
-  assert.equal(injector.target, [])
+  assert.equal(sheet.target, [])
 
   assert.is(tw(bounce), 'tw-1e66f79')
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.tw-1e66f79{animation-duration:1s;animation-timing-function:cubic-bezier(0.4,0,0.2,1);animation-iteration-count:infinite;animation-name:tw-cm8eaz}',
     '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
   ])
 })
 
-test('animation with variant', ({ animation, tw, injector }) => {
+test('animation with variant', ({ animation, tw, sheet }) => {
   const bounce = animation('1s ease infinite', {
     'from, 20%, 53%, 80%, to': {
       transform: 'translate3d(0,0,0)',
@@ -323,10 +327,10 @@ test('animation with variant', ({ animation, tw, injector }) => {
   })
 
   // Nothing applied yet
-  assert.equal(injector.target, [])
+  assert.equal(sheet.target, [])
 
   assert.is(tw`hover:${bounce}`, 'hover:tw-14tbawn')
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
     '.hover\\:tw-14tbawn:hover{animation:1s ease infinite;animation-name:tw-cm8eaz}',
   ])

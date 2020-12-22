@@ -1,7 +1,9 @@
 /* eslint-env browser */
 import './test'
 
-import { tw } from '../src/index'
+import { tw, setup } from '../src/index'
+import { domSheet } from '../src/sheets/index'
+setup({ sheet: domSheet() })
 
 import { animation } from '../src/css/index'
 

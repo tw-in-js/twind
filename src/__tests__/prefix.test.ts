@@ -1,19 +1,21 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import type { Instance, VirtualInjector } from '../types'
+import type { Instance } from '../types'
+import type { VirtualSheet } from '../sheets/index'
 
-import { create, virtualInjector, strict } from '../index'
+import { virtualSheet } from '../sheets/index'
+import { create, strict } from '../index'
 
 const test = suite<{
-  injector: VirtualInjector
+  sheet: VirtualSheet
   instance: Instance
 }>('prefix')
 
-test.before.each((context) => {
-  context.injector = virtualInjector()
+test.before((context) => {
+  context.sheet = virtualSheet()
   context.instance = create({
-    injector: context.injector,
+    sheet: context.sheet,
     mode: strict,
     preflight: false,
     plugins: {
@@ -24,24 +26,28 @@ test.before.each((context) => {
   })
 })
 
-test('add prefix', ({ injector, instance }) => {
+test.after.each(({ sheet }) => {
+  sheet.reset()
+})
+
+test('add prefix', ({ sheet, instance }) => {
   assert.is(
     instance.tw('sticky scroll-snap-x appearance-menulist-button'),
     'sticky scroll-snap-x appearance-menulist-button',
   )
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.sticky{position:-webkit-sticky, sticky}',
     '.appearance-menulist-button{appearance:menulist-button;-moz-appearance:menulist-button;-webkit-appearance:menulist-button}',
     '.scroll-snap-x{scroll-snap-type:x;-ms-scroll-snap-type:x;-webkit-scroll-snap-type:x}',
   ])
 })
 
-test('add prefix with important', ({ injector, instance }) => {
+test('add prefix with important', ({ sheet, instance }) => {
   assert.is(
     instance.tw('sticky! scroll-snap-x! appearance-menulist-button!'),
     'sticky! scroll-snap-x! appearance-menulist-button!',
   )
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.sticky\\!{position:-webkit-sticky, sticky !important}',
     '.appearance-menulist-button\\!{appearance:menulist-button !important;-moz-appearance:menulist-button !important;-webkit-appearance:menulist-button !important}',
     '.scroll-snap-x\\!{scroll-snap-type:x !important;-ms-scroll-snap-type:x !important;-webkit-scroll-snap-type:x !important}',

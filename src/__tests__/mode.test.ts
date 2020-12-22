@@ -2,7 +2,8 @@ import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 import { snoop } from 'snoop'
 
-import { create, virtualInjector, strict, silent, mode } from '../index'
+import { virtualSheet } from '../sheets/index'
+import { create, strict, silent, mode } from '../index'
 
 const test = suite('mode')
 
@@ -56,7 +57,7 @@ test('mode silent', () => {
 
 test('mode strict', () => {
   const instance = create({
-    injector: virtualInjector(),
+    sheet: virtualSheet(),
     mode: strict,
   })
 
@@ -64,12 +65,12 @@ test('mode strict', () => {
 })
 
 test('ignore vendor specific pseudo classes errors', () => {
-  const injector = virtualInjector()
+  const sheet = virtualSheet()
   const warn = snoop(noop)
 
   const calls: [string, number][] = []
 
-  injector.insert = (rule, index) => {
+  sheet.insert = (rule, index) => {
     calls.push([rule, index])
 
     if (rule.includes(':-moz')) {
@@ -80,7 +81,7 @@ test('ignore vendor specific pseudo classes errors', () => {
   }
 
   const instance = create({
-    injector,
+    sheet: sheet,
     mode: mode(warn.fn),
     preflight() {
       return {
@@ -103,12 +104,12 @@ test('ignore vendor specific pseudo classes errors', () => {
 })
 
 test('propagate other errors to warn', () => {
-  const injector = virtualInjector()
+  const sheet = virtualSheet()
   const warn = snoop(noop)
 
   const calls: [string, number][] = []
 
-  injector.insert = (rule, index) => {
+  sheet.insert = (rule, index) => {
     calls.push([rule, index])
 
     if (rule.includes('-web')) {
@@ -119,7 +120,7 @@ test('propagate other errors to warn', () => {
   }
 
   const instance = create({
-    injector,
+    sheet: sheet,
     mode: mode(warn.fn),
     preflight() {
       return { '.invalid-web': { color: 'blue' } }

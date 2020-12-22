@@ -82,12 +82,12 @@ interface TW {
 
 ```js
 interface Setup {
-  preflight?: boolean | Preflight
-  mode?: Mode
+  preflight?: boolean | Preflight | CSSRules
+  mode?: Mode | 'strict' | 'warn' | 'silent'
   theme?: Partial<Theme> & {extends?: Partial<Theme>}
   hash?: boolean | Hasher
   plugins?: Record<string, string | CSSRules | Plugin>
-  injector?: Injector
+  sheet?: Sheet
   prefix?: boolean | Prefix
 }
 ```
@@ -222,19 +222,14 @@ const plugins = {
 }
 ```
 
-#### injector
+#### sheet
 
 > insert CSS rules into runtime
-> **default**: based on enviroment
-
-- dom
-- collect - for testing in @twind/test
-- ssr - move to @twind/server
+> **default**: based on environment
 
 ```js
-interface Injector {
-  insert(rule: string, index: number): void
-  delete(index: number): void
+interface Sheet {
+  insert(rule: string, index: number): void;
 }
 ```
 

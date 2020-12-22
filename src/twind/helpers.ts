@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
 import type { CSSRules } from '../types'
 
-import { joinTruthy } from '../internal/util'
+import { joinTruthy } from './util'
 
 const positions = (resolve: (position: string) => undefined | string[] | void) => (
   value: string | string[] | undefined,

@@ -2,13 +2,13 @@ import type { Context, CSSRules, Prefixer, Rule } from '../types'
 
 import * as is from '../internal/is'
 
-import { join, includes, escape, hyphenate } from '../internal/util'
+import { join, includes, escape, hyphenate } from './util'
 import {
   responsivePrecedence,
   declarationPropertyPrecedence,
   makeVariantPresedenceCalculator,
   atRulePresedence,
-} from '../internal/presedence'
+} from './presedence'
 
 export interface RuleWithPresedence {
   r: string

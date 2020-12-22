@@ -34,7 +34,7 @@ export interface ThemeConfiguration extends Partial<Theme> {
   extend?: Partial<Theme>
 }
 
-export interface InjectorConfig<T = unknown> {
+export interface SheetConfig<T = unknown> {
   /**
    * Sets a cryptographic nonce (number used once) on the enclosing `<style>` tag when generating a page on demand.
    *
@@ -46,17 +46,19 @@ export interface InjectorConfig<T = unknown> {
   target?: T
 }
 
-export interface Injector {
+export interface Sheet {
   insert: (rule: string, index: number) => void
-  // delete: (index: number) => void
+
+  init?: SheetInit
 }
 
-export interface VirtualInjector extends Injector {
-  target: string[]
-}
+export type SheetInitCallback<T = unknown> = (value?: T | undefined) => T
 
-export interface CSSOMInjector extends Injector {
-  target: CSSStyleSheet
+export interface SheetInit {
+  /**
+   * Register a function that should be called to use a snapshot state or create a new state.
+   */
+  <T>(callback: SheetInitCallback<T>): T
 }
 
 export type Prefixer = (property: string, value: string, important?: boolean) => string
@@ -92,7 +94,7 @@ export interface Configuration {
   nonce?: string
 
   /** Style insertion methodology to be used. */
-  injector?: Injector
+  sheet?: Sheet
 
   /** Called right before the first rule is injected. */
   preflight?: Preflight | boolean | CSSRules

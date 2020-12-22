@@ -1,6 +1,6 @@
-import type { Configuration, Instance, ThemeResolver, Theme } from './types'
+import type { Configuration, Instance, ThemeResolver, Theme } from '../types'
 
-import { configure } from './process'
+import { configure } from './configure'
 
 export const create = (config?: Configuration): Instance => {
   // We are using lazy variables to trigger setup either

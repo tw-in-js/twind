@@ -11,17 +11,17 @@ import type {
   Mode,
 } from '../types'
 
-import { corePlugins } from '../tailwind/plugins'
-import { createPreflight } from '../tailwind/preflight'
-import { coreVariants } from '../tailwind/variants'
+import { corePlugins } from './plugins'
+import { createPreflight } from './preflight'
+import { coreVariants } from './variants'
 
-import { cssomInjector, noOpInjector } from '../injectors'
-import { silent, strict, warn } from '../modes'
-import { autoprefix, noprefix } from '../prefix'
+import { cssomSheet, voidSheet } from './sheets'
+import { silent, strict, warn } from './modes'
+import { autoprefix, noprefix } from './prefix'
+import { makeThemeResolver } from './theme'
 
 import * as is from '../internal/is'
-import { makeThemeResolver } from '../internal/theme'
-import { cyrb32, identity, join, tail } from '../internal/util'
+import { cyrb32, identity, join, tail } from './util'
 
 import { parse } from './parse'
 import { translate as makeTranslate } from './translate'
@@ -122,15 +122,16 @@ export const configure = (
   // Serialize a translation to css
   const serialize = makeSerialize(sanitize(config.prefix, autoprefix, noprefix), variants, context)
 
+  const sheet = config.sheet || (typeof window === 'undefined' ? voidSheet() : cssomSheet(config))
+
+  const { init = (callback) => callback() } = sheet
+
   // Inject css into the target enviroment
-  const inject = makeInject(
-    config.injector || (typeof window === 'undefined' ? noOpInjector() : cssomInjector(config)),
-    mode,
-    context,
-  )
+  const inject = makeInject(sheet, mode, init, context)
 
   // Cache rule ids and their generated class name
-  const idToClassName = new Map<string, string>()
+  let idToClassName: Map<string, string>
+  init<Map<string, string>>((value = new Map()) => (idToClassName = value))
 
   // Cache generated inline directive names by their function identity
   const inlineDirectiveName = new WeakMap<InlineDirective, string>()
@@ -226,9 +227,11 @@ export const configure = (
     const css = createPreflight(theme)
 
     // Call the preflight handler, serialize and inject the result
-    serialize(
+    const styles = serialize(
       is.function(preflight) ? preflight(css, context) || css : { ...css, ...preflight },
-    ).forEach(inject)
+    )
+
+    init<boolean>((injected = (styles.forEach(inject), true)) => injected)
   }
 
   return {
