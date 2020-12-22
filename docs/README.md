@@ -8,16 +8,24 @@ We are confident that feature parity with Tailwind V2 has been achieved. We reco
 
 If you find any incorrect or missing documentation then please [open an issue](https://github.com/tw-in-js/twind/issues) for discussion.
 
-## Table Of Contents
+## Getting Started
 
 - [Installation](./installation.md)
-- [Usage](./usage.md)
 - [Customization](./customization.md)
+- [Tailwind-in-JS](./shim.md)
+
+## Usage
+
+- [Function](./usage.md)
 - [Grouping](./grouping.md)
-- [Tailwind via class attribute](./shim.md)
-- [Tailwind Extensions](./tailwind-extensions.md)
-- [CSS in JS](./css-in-js.md)
+- [CSS-in-JS](./css-in-js.md)
 - [Plugins](./plugins.md)
+- [Testing](./sheets.md)
+- [Static Extraction (SSR)](./ssr.md)
+
+## Supporting Materials
+
+- [Tailwind Extensions](./tailwind-extensions.md)
 - [Browser Support](./browser-support.md)
 - [Contributing](./contributing.md)
 - [Architecture](./architecture.md)
