@@ -2,7 +2,7 @@ import type { Context, CSSRules, Plugins, Rule, Falsy } from '../types'
 
 import * as is from '../internal/is'
 
-import { join, tail } from '../internal/util'
+import { join, tail } from './util'
 
 export const translate = (
   plugins: Plugins,

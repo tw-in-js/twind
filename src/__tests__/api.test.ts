@@ -1,22 +1,24 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import type { Instance, InlineDirective, VirtualInjector } from '../types'
+import type { Instance, InlineDirective } from '../types'
+import type { VirtualSheet } from '../sheets/index'
 
-import { create, virtualInjector, strict } from '../index'
+import { virtualSheet } from '../sheets/index'
+import { create, strict } from '../index'
 
 import data from './api.json'
 
 const test = suite<{
-  injector: VirtualInjector
+  sheet: VirtualSheet
   tw: Instance['tw']
   setup: Instance['setup']
 }>('api')
 
-test.before.each((context) => {
-  context.injector = virtualInjector()
+test.before((context) => {
+  context.sheet = virtualSheet()
   const instance = create({
-    injector: context.injector,
+    sheet: context.sheet,
     mode: strict,
     preflight: false,
     prefix: false,
@@ -31,6 +33,10 @@ test.before.each((context) => {
   })
   context.tw = instance.tw
   context.setup = instance.setup
+})
+
+test.after.each(({ sheet }) => {
+  sheet.reset()
 })
 
 // "bg-#f87171": ".bg-\\#f87171{--bg-opacity:1;background-color:#f87171;background-color:rgba(248,113,113,var(--bg-opacity));--text-opacity:1}",
@@ -51,17 +57,17 @@ Object.entries(data)
     return [tokens, tokens, [declarations]]
   })
   .forEach(([tokens, classNames, rules]) =>
-    test(`tw(${JSON.stringify(tokens)}) => ${classNames}`, ({ injector, tw }) => {
+    test(`tw(${JSON.stringify(tokens)}) => ${classNames}`, ({ sheet, tw }) => {
       assert.is(tw(tokens), classNames)
-      assert.equal(injector.target, rules)
+      assert.equal(sheet.target, rules)
 
       // Cached access
       assert.is(tw(tokens), classNames)
-      assert.equal(injector.target, rules)
+      assert.equal(sheet.target, rules)
     }),
   )
 
-test('variant pseudo presedence', ({ injector, tw }) => {
+test('variant pseudo presedence', ({ sheet, tw }) => {
   assert.is(
     tw`
     active:text-blue-200
@@ -90,7 +96,7 @@ test('variant pseudo presedence', ({ injector, tw }) => {
     'active:text-blue-200 empty:text-green-500 group-invalid:text-red-400 checked:text-gray-500 link:text-green-100 disabled:text-blue-300 even:text-gray-300 first:text-gray-50 focus-visible:text-blue-100 focus-within:text-gray-800 focus:text-blue-50 group-focus:text-gray-700 group-hover:text-gray-600 hover:text-gray-900 invalid:text-blue-600 last:text-gray-100 odd:text-gray-200 optional:text-blue-800 read-only:text-blue-700 required:text-blue-400 valid:text-blue-500 visited:text-gray-400',
   )
 
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.first\\:text-gray-50:first-child{--tw-text-opacity:1;color:#f9fafb;color:rgba(249,250,251,var(--tw-text-opacity))}',
     '.last\\:text-gray-100:last-child{--tw-text-opacity:1;color:#f3f4f6;color:rgba(243,244,246,var(--tw-text-opacity))}',
     '.even\\:text-gray-300:nth-child(2n){--tw-text-opacity:1;color:#d1d5db;color:rgba(209,213,219,var(--tw-text-opacity))}',
@@ -116,9 +122,9 @@ test('variant pseudo presedence', ({ injector, tw }) => {
   ])
 })
 
-test('responsive presedence', ({ injector, tw }) => {
+test('responsive presedence', ({ sheet, tw }) => {
   assert.is(tw`m(lg:9 2xl:6 xl:5 md:9 sm:7 8)`, 'lg:m-9 2xl:m-6 xl:m-5 md:m-9 sm:m-7 m-8')
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.m-8{margin:2rem}',
     '@media (min-width: 640px){.sm\\:m-7{margin:1.75rem}}',
     '@media (min-width: 768px){.md\\:m-9{margin:2.25rem}}',
@@ -128,12 +134,12 @@ test('responsive presedence', ({ injector, tw }) => {
   ])
 })
 
-test('at-rules presedence', ({ injector, tw }) => {
+test('at-rules presedence', ({ sheet, tw }) => {
   assert.is(
     tw`m(lg:9 sticky:6 motion-reduce:5 md:dark:4 motion-safe:9 dark:7 lg:motion-safe:12 8)`,
     'lg:m-9 sticky:m-6 motion-reduce:m-5 md:dark:m-4 motion-safe:m-9 dark:m-7 lg:motion-safe:m-12 m-8',
   )
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.m-8{margin:2rem}',
     '@media (prefers-reduced-motion:reduce){.motion-reduce\\:m-5{margin:1.25rem}}',
     '@supports ((position: -webkit-sticky) or (position:sticky)){.sticky\\:m-6{margin:1.5rem}}',
@@ -145,12 +151,12 @@ test('at-rules presedence', ({ injector, tw }) => {
   ])
 })
 
-test('properties presedence (border)', ({ injector, tw }) => {
+test('properties presedence (border)', ({ sheet, tw }) => {
   assert.is(
     tw`border rounded rounded-t-sm border-2 border-lrt-4 border-t-8 border-gray-300 border-dashed`,
     'border rounded rounded-t-sm border-2 border-lrt-4 border-t-8 border-gray-300 border-dashed',
   )
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.border-gray-300{--tw-border-opacity:1;border-color:#d1d5db;border-color:rgba(209,213,219,var(--tw-border-opacity))}',
     '.border{border-width:1px}',
     '.border-2{border-width:2px}',
@@ -162,12 +168,12 @@ test('properties presedence (border)', ({ injector, tw }) => {
   ])
 })
 
-test('properties presedence (gradient)', ({ injector, tw }) => {
+test('properties presedence (gradient)', ({ sheet, tw }) => {
   assert.is(
     tw`bg-gradient-to-r from-purple-400 via-pink-500 to-red-500`,
     'bg-gradient-to-r from-purple-400 via-pink-500 to-red-500',
   )
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops,var(--tw-gradient-from,transparent),var(--tw-gradient-to,transparent)))}',
     '.from-purple-400{--tw-gradient-from:#a78bfa}',
     '.via-pink-500{--tw-gradient-stops:var(--tw-gradient-from,transparent),#ec4899,var(--tw-gradient-to,transparent)}',
@@ -175,12 +181,12 @@ test('properties presedence (gradient)', ({ injector, tw }) => {
   ])
 })
 
-test('properties presedence (divide)', ({ injector, tw }) => {
+test('properties presedence (divide)', ({ sheet, tw }) => {
   assert.is(
     tw`divide(x x-reverse opacity-75 green-500)`,
     'divide-x divide-x-reverse divide-opacity-75 divide-green-500',
   )
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.divide-green-500>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:#10b981;border-color:rgba(16,185,129,var(--tw-divide-opacity))}',
     '.divide-x>:not([hidden])~:not([hidden]){--tw-divide-x-reverse:0;border-right-width:calc(1px * var(--tw-divide-x-reverse));border-left-width:1px;border-left-width:calc(1px * calc(1 - var(--tw-divide-x-reverse)))}',
     '.divide-x-reverse>:not([hidden])~:not([hidden]){--tw-divide-x-reverse:1}',
@@ -249,49 +255,49 @@ test('properties presedence (divide)', ({ injector, tw }) => {
     ],
   ],
 ].forEach(([tokens, classNames, rules]) =>
-  test(`tw(${JSON.stringify(tokens)}) => ${classNames}`, ({ injector, tw }) => {
+  test(`tw(${JSON.stringify(tokens)}) => ${classNames}`, ({ sheet, tw }) => {
     assert.is(tw(tokens), classNames)
-    assert.equal(injector.target, rules)
+    assert.equal(sheet.target, rules)
 
     // Cached access
     assert.is(tw(tokens), classNames)
-    assert.equal(injector.target, rules)
+    assert.equal(sheet.target, rules)
   }),
 )
 
 /* eslint-disable no-template-curly-in-string */
-test('tw`bg-white ${false && "rounded"}`', ({ injector, tw }) => {
+test('tw`bg-white ${false && "rounded"}`', ({ sheet, tw }) => {
   assert.is(tw`bg-white ${false && 'rounded'}`, 'bg-white')
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.bg-white{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}',
   ])
 })
 
-test('tw`bg-white ${true && "rounded"}`', ({ injector, tw }) => {
+test('tw`bg-white ${true && "rounded"}`', ({ sheet, tw }) => {
   assert.is(tw`bg-white ${true && 'rounded'}`, 'bg-white rounded')
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.bg-white{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}',
     '.rounded{border-radius:0.25rem}',
   ])
 })
 
-test('tw`bg-white ${{rounded: true}}`', ({ injector, tw }) => {
+test('tw`bg-white ${{rounded: true}}`', ({ sheet, tw }) => {
   assert.is(tw`bg-white ${{ rounded: true }}`, 'bg-white rounded')
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.bg-white{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}',
     '.rounded{border-radius:0.25rem}',
   ])
 })
 
-test('tw`bg-white ${{rounded: false}}`', ({ injector, tw }) => {
+test('tw`bg-white ${{rounded: false}}`', ({ sheet, tw }) => {
   assert.is(tw`bg-white ${{ rounded: false }}`, 'bg-white')
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.bg-white{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}',
   ])
 })
 
 test('tw`bg-white sm:${["rounded"]} text-black hover:${{sm: ({tw}) => tw`underline`, lg: "line-through"}} font(${{bold: true}})`', ({
-  injector,
+  sheet,
   tw,
 }) => {
   assert.is(
@@ -301,7 +307,7 @@ test('tw`bg-white sm:${["rounded"]} text-black hover:${{sm: ({tw}) => tw`underli
     }} font(${{ bold: true }})`,
     'bg-white sm:rounded text-black hover:sm:underline hover:lg:no-underline hover:lg:line-through font-bold',
   )
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.text-black{--tw-text-opacity:1;color:#000;color:rgba(0,0,0,var(--tw-text-opacity))}',
     '.bg-white{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}',
     '.font-bold{font-weight:700}',
@@ -312,16 +318,16 @@ test('tw`bg-white sm:${["rounded"]} text-black hover:${{sm: ({tw}) => tw`underli
   ])
 })
 
-test('tw`bg(${"fuchsia"}) rounded(${"xl"})`', ({ injector, tw }) => {
+test('tw`bg(${"fuchsia"}) rounded(${"xl"})`', ({ sheet, tw }) => {
   assert.is(tw`bg(${'fuchsia'}) rounded(${'xl'})`, 'bg-fuchsia rounded-xl')
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.bg-fuchsia{background-color:fuchsia}',
     '.rounded-xl{border-radius:0.75rem}',
   ])
 })
 
 test('tw`bg-${"fuchsia"}) sm:${"underline"} lg:${false && "line-through"} text-${["underline", "center"]} rounded-${{lg: false, xl: true}})`', ({
-  injector,
+  sheet,
   tw,
 }) => {
   assert.is(
@@ -334,7 +340,7 @@ test('tw`bg-${"fuchsia"}) sm:${"underline"} lg:${false && "line-through"} text-$
     }}`,
     'bg-fuchsia sm:underline text-underline text-center rounded-xl',
   )
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.bg-fuchsia{background-color:fuchsia}',
     '.text-underline{text-decoration:underline}',
     '.text-center{text-align:center}',
@@ -344,9 +350,9 @@ test('tw`bg-${"fuchsia"}) sm:${"underline"} lg:${false && "line-through"} text-$
 })
 /* eslint-enable no-template-curly-in-string */
 
-test('container center', ({ injector }) => {
+test('container center', ({ sheet }) => {
   const { tw } = create({
-    injector,
+    sheet: sheet,
     prefix: false,
     preflight: false,
     mode: strict,
@@ -360,7 +366,7 @@ test('container center', ({ injector }) => {
   })
 
   assert.is(tw`container`, 'container')
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.container{width:100%;margin-right:auto;margin-left:auto}',
     '@media (min-width: 640px){.container{max-width:640px}}',
     '@media (min-width: 768px){.container{max-width:768px}}',
@@ -370,9 +376,9 @@ test('container center', ({ injector }) => {
   ])
 })
 
-test('container padding', ({ injector }) => {
+test('container padding', ({ sheet }) => {
   const { tw } = create({
-    injector,
+    sheet: sheet,
     prefix: false,
     preflight: false,
     mode: strict,
@@ -386,7 +392,7 @@ test('container padding', ({ injector }) => {
   })
 
   assert.is(tw`container`, 'container')
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.container{width:100%;padding-right:2rem;padding-left:2rem}',
     '@media (min-width: 640px){.container{max-width:640px;padding-right:2rem;padding-left:2rem}}',
     '@media (min-width: 768px){.container{max-width:768px;padding-right:2rem;padding-left:2rem}}',
@@ -396,9 +402,9 @@ test('container padding', ({ injector }) => {
   ])
 })
 
-test('container padding per screeen', ({ injector }) => {
+test('container padding per screeen', ({ sheet }) => {
   const { tw } = create({
-    injector,
+    sheet: sheet,
     prefix: false,
     preflight: false,
     mode: strict,
@@ -418,7 +424,7 @@ test('container padding per screeen', ({ injector }) => {
   })
 
   assert.is(tw`container`, 'container')
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.container{width:100%;padding-right:1rem;padding-left:1rem}',
     '@media (min-width: 640px){.container{max-width:640px;padding-right:2rem;padding-left:2rem}}',
     '@media (min-width: 768px){.container{max-width:768px;padding-right:1rem;padding-left:1rem}}',
@@ -428,9 +434,9 @@ test('container padding per screeen', ({ injector }) => {
   ])
 })
 
-test('responsive if theme screens uses non px values', ({ injector }) => {
+test('responsive if theme screens uses non px values', ({ sheet }) => {
   const { tw } = create({
-    injector,
+    sheet: sheet,
     prefix: false,
     preflight: false,
     mode: strict,
@@ -446,7 +452,7 @@ test('responsive if theme screens uses non px values', ({ injector }) => {
   })
 
   assert.is(tw`m(xl:8 2xl:16 sm:2 md:3 lg:4 1)`, 'xl:m-8 2xl:m-16 sm:m-2 md:m-3 lg:m-4 m-1')
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.m-1{margin:0.25rem}',
     '@media (min-width: 40rem){.sm\\:m-2{margin:0.5rem}}',
     '@media (min-width: 48rem){.md\\:m-3{margin:0.75rem}}',
@@ -471,55 +477,55 @@ test('no arguments', ({ tw }) => {
   assert.is(tw(), '')
 })
 
-test('inline rule (css object)', ({ injector, tw }) => {
+test('inline rule (css object)', ({ sheet, tw }) => {
   assert.is(
     tw(({ theme }) => ({ color: theme('colors', 'red.500') })),
     'tw-1e4d9nh',
   )
-  assert.equal(injector.target, ['.tw-1e4d9nh{color:#ef4444}'])
+  assert.equal(sheet.target, ['.tw-1e4d9nh{color:#ef4444}'])
 })
 
-test('inline rule (tag)', ({ injector, tw }) => {
+test('inline rule (tag)', ({ sheet, tw }) => {
   assert.is(
     tw(({ tag }) => tag('marker')),
     'marker',
   )
-  assert.equal(injector.target, [])
+  assert.equal(sheet.target, [])
 })
 
-test('inline rule (tw)', ({ injector, tw }) => {
+test('inline rule (tw)', ({ sheet, tw }) => {
   assert.is(
     tw(({ tw }) => tw`text-center`),
     'text-center',
   )
-  assert.equal(injector.target, ['.text-center{text-align:center}'])
+  assert.equal(sheet.target, ['.text-center{text-align:center}'])
 })
 
-test('inline rule (tw combined)', ({ injector, tw }) => {
+test('inline rule (tw combined)', ({ sheet, tw }) => {
   assert.is(
     tw`underline ${({ tw }) => tw`text-center`} font-bold`,
     'underline text-center font-bold',
   )
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.underline{text-decoration:underline}',
     '.text-center{text-align:center}',
     '.font-bold{font-weight:700}',
   ])
 })
 
-test('inline rule (variants)', ({ injector, tw }) => {
+test('inline rule (variants)', ({ sheet, tw }) => {
   assert.is(
     tw`text-center sm:hover:${({ tw }) => tw`underline`} active:font-bold`,
     'text-center sm:hover:underline active:font-bold',
   )
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.text-center{text-align:center}',
     '.active\\:font-bold:active{font-weight:700}',
     '@media (min-width: 640px){.sm\\:hover\\:underline:hover{text-decoration:underline}}',
   ])
 })
 
-test('inline rule nested', ({ injector, tw }) => {
+test('inline rule nested', ({ sheet, tw }) => {
   const underline: InlineDirective = ({ tw }) => tw`underline`
 
   assert.is(
@@ -537,7 +543,7 @@ test('inline rule nested', ({ injector, tw }) => {
     'text-center sm:hover:underline sm:focus:tw-1e4d9nh lg:text-lg lg:focus:underline font-bold',
   )
 
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.text-center{text-align:center}',
     '.font-bold{font-weight:700}',
     '@media (min-width: 640px){.sm\\:hover\\:underline:hover{text-decoration:underline}}',
@@ -547,7 +553,7 @@ test('inline rule nested', ({ injector, tw }) => {
   ])
 })
 
-test('inject @font-face', ({ injector, tw }) => {
+test('inject @font-face', ({ sheet, tw }) => {
   assert.is(
     tw(() => ({
       '& p': {
@@ -564,13 +570,13 @@ test('inject @font-face', ({ injector, tw }) => {
     'tw-vqfbxj',
   )
 
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '@font-face{font-family:Open Sans;src:url("/fonts/OpenSans-Regular-webfont.woff2") format("woff2"), url("/fonts/OpenSans-Regular-webfont.woff") format("woff")}',
     '.tw-vqfbxj p{font-family:Open Sans}',
   ])
 })
 
-test('inject global styles', ({ injector, tw }) => {
+test('inject global styles', ({ sheet, tw }) => {
   assert.is(
     tw(() => ({
       ':root': {
@@ -581,13 +587,13 @@ test('inject global styles', ({ injector, tw }) => {
     'tw-1kfw9fm',
   )
 
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.tw-1kfw9fm{background-color:var(--main-bg-color)}',
     ':root{--main-bg-color:brown}',
   ])
 })
 
-test('expand nested selector', ({ injector, tw }) => {
+test('expand nested selector', ({ sheet, tw }) => {
   assert.is(
     tw(() => ({
       '&, a': {
@@ -597,12 +603,12 @@ test('expand nested selector', ({ injector, tw }) => {
     'tw-ec2uk9',
   )
 
-  assert.equal(injector.target, ['.tw-ec2uk9, a{color:black}'])
+  assert.equal(sheet.target, ['.tw-ec2uk9, a{color:black}'])
 })
 
-test('fontSize string', ({ injector }) => {
+test('fontSize string', ({ sheet }) => {
   const { tw } = create({
-    injector,
+    sheet: sheet,
     prefix: false,
     preflight: false,
     mode: strict,
@@ -624,7 +630,7 @@ test('fontSize string', ({ injector }) => {
   })
 
   assert.is(tw`text(big line-height css)`, 'text-big text-line-height text-css')
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.text-css{font-size:32px;letter-spacing:-0.02em;line-height:40px}',
     '.text-line-height{font-size:20px;line-height:28px}',
     '.text-big{font-size:5.75rem}',

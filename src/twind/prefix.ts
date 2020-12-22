@@ -1,4 +1,4 @@
-import type { Prefixer } from './types'
+import type { Prefixer } from '../types'
 
 import { prefixProperty, prefixValue } from 'tiny-css-prefixer'
 

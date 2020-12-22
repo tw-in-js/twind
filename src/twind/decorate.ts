@@ -1,6 +1,6 @@
 import type { Context, CSSRules, Rule, DarkMode } from '../types'
 
-import { tail, escape } from '../internal/util'
+import { tail, escape } from './util'
 
 // Wraps a CSS rule object with variant at-rules and pseudo classes
 // { '.selector': {...} }

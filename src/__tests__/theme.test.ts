@@ -1,7 +1,7 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import { makeThemeResolver } from '../internal/theme'
+import { makeThemeResolver } from '../twind/theme'
 
 const test = suite('theme')
 

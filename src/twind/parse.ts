@@ -1,6 +1,6 @@
 import type { Rule, Token } from '../types'
 
-import { join, tail, includes } from '../internal/util'
+import { join, tail, includes } from './util'
 
 // The parsing is stacked based
 // when ever we find a group start

@@ -5,7 +5,7 @@ import { tw } from '..'
 
 const test = suite('ssr')
 
-test('uses the no-op injector by default', () => {
+test('uses the no-op sheet by default', () => {
   assert.is(tw('group flex text-center md:text-left'), 'group flex text-center md:text-left')
 })
 

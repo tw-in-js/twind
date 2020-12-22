@@ -1,15 +1,16 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import { create, virtualInjector, strict } from '../index'
+import { virtualSheet } from '../sheets/index'
+import { create, strict } from '../index'
 
 const test = suite('preflight')
 
 test('add preflight styles', () => {
-  const injector = virtualInjector()
-  create({ injector, mode: strict })
+  const sheet = virtualSheet()
+  create({ sheet: sheet, mode: strict })
 
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}',
     'body,blockquote,dl,dd,h1,h2,h3,h4,h5,h6,hr,figure,p,pre,fieldset,ol,ul{margin:0}',
     'button:focus{outline:1px dotted;outline:5px auto -webkit-focus-ring-color}',
@@ -51,9 +52,9 @@ test('add preflight styles', () => {
 })
 
 test('add preflight styles with custom theme', () => {
-  const injector = virtualInjector()
+  const sheet = virtualSheet()
   create({
-    injector,
+    sheet: sheet,
     theme: {
       extend: {
         fontFamily: { sans: 'ui-sans-serif', mono: 'ui-monospace' },
@@ -64,21 +65,19 @@ test('add preflight styles with custom theme', () => {
   })
 
   assert.ok(
-    injector.target.includes(
+    sheet.target.includes(
       'html{line-height:1.5;-webkit-text-size-adjust:100%;font-family:ui-sans-serif}',
     ),
   )
-  assert.ok(
-    injector.target.includes('*,::before,::after{box-sizing:border-box;border:0 solid #222}'),
-  )
-  assert.ok(injector.target.includes('input::placeholder,textarea::placeholder{color:#333}'))
-  assert.ok(injector.target.includes('pre,code,kbd,samp{font-family:ui-monospace;font-size:1em}'))
+  assert.ok(sheet.target.includes('*,::before,::after{box-sizing:border-box;border:0 solid #222}'))
+  assert.ok(sheet.target.includes('input::placeholder,textarea::placeholder{color:#333}'))
+  assert.ok(sheet.target.includes('pre,code,kbd,samp{font-family:ui-monospace;font-size:1em}'))
 })
 
 test('add preflight styles with theme missing some values', () => {
-  const injector = virtualInjector()
+  const sheet = virtualSheet()
   create({
-    injector,
+    sheet: sheet,
     theme: {
       fontFamily: { sans: 'ui-sans-serif', mono: 'ui-monospace' },
       borderColor: {},
@@ -87,41 +86,39 @@ test('add preflight styles with theme missing some values', () => {
   })
 
   assert.ok(
-    injector.target.includes(
-      '*,::before,::after{box-sizing:border-box;border:0 solid currentColor}',
-    ),
+    sheet.target.includes('*,::before,::after{box-sizing:border-box;border:0 solid currentColor}'),
   )
-  assert.ok(injector.target.includes('input::placeholder,textarea::placeholder{color:#a1a1aa}'))
+  assert.ok(sheet.target.includes('input::placeholder,textarea::placeholder{color:#a1a1aa}'))
 })
 
 test('use custom preflight styles', () => {
-  const injector = virtualInjector()
+  const sheet = virtualSheet()
   create({
-    injector,
+    sheet: sheet,
     preflight: (css) => ({ html: css.html }),
   })
 
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     'html{line-height:1.5;-webkit-text-size-adjust:100%;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}',
   ])
 })
 
 test('use custom preflight with fallback to built-in', () => {
-  const injector = virtualInjector()
+  const sheet = virtualSheet()
   create({
-    injector,
+    sheet: sheet,
     preflight: () => {
       /* no-op */
     },
   })
 
-  assert.is(injector.target.length, 37)
+  assert.is(sheet.target.length, 37)
 })
 
 test('use custom preflight JSON style', () => {
-  const injector = virtualInjector()
+  const sheet = virtualSheet()
   create({
-    injector,
+    sheet: sheet,
     preflight: {
       '@font-face': {
         'font-family': 'Baloo',
@@ -130,8 +127,8 @@ test('use custom preflight JSON style', () => {
     },
   })
 
-  assert.is(injector.target.length, 38)
-  assert.ok(injector.target.includes('@font-face{font-family:Baloo;src:url(./Baloo-Regular.ttf)}'))
+  assert.is(sheet.target.length, 38)
+  assert.ok(sheet.target.includes('@font-face{font-family:Baloo;src:url(./Baloo-Regular.ttf)}'))
 })
 
 test.run()

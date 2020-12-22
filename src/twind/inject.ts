@@ -1,22 +1,25 @@
-import type { Context, Injector, Mode } from '../types'
+import type { Context, Sheet, Mode, SheetInit } from '../types'
 
-import { sortedInsertionIndex } from '../internal/util'
+import { sortedInsertionIndex } from './util'
 
 import type { RuleWithPresedence } from './serialize'
 
 // Insert css rules using presedence to find the correct position within the sheet
 export const inject = (
-  injector: Injector,
+  sheet: Sheet,
   mode: Mode,
+  init: SheetInit,
   context: Context,
 ): ((rule: RuleWithPresedence) => void) => {
   // An array of presedence by index within the sheet
   // always sorted
-  const sortedPrecedences: number[] = []
+  let sortedPrecedences: number[]
+  init<number[]>((value = []) => (sortedPrecedences = value))
 
   // Cache for already inserted css rules
   // to prevent double insertions
-  const insertedRules = new Set<string>()
+  let insertedRules: Set<string>
+  init<Set<string>>((value = new Set()) => (insertedRules = value))
 
   return ({ r: css, p: presedence }) => {
     // If not already inserted
@@ -29,7 +32,7 @@ export const inject = (
 
       try {
         // Insert
-        injector.insert(css, index)
+        sheet.insert(css, index)
 
         // Update sorted index
         sortedPrecedences.splice(index, 0, presedence)

@@ -13,7 +13,7 @@ import type {
 
 import * as is from '../internal/is'
 
-import { includes, join, joinTruthy, tail, capitalize } from '../internal/util'
+import { includes, join, joinTruthy, tail, capitalize } from './util'
 import { corners, expandEdges, edges } from './helpers'
 
 // Shared variables

@@ -1,22 +1,24 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import type { Instance, VirtualInjector, Configuration } from '../types'
+import type { Instance, Configuration } from '../types'
+import type { VirtualSheet } from '../sheets/index'
 
-import { create, virtualInjector, strict } from '../index'
+import { virtualSheet } from '../sheets/index'
+import { create, strict } from '../index'
 
 const test = suite<{
-  injector: VirtualInjector
+  sheet: VirtualSheet
   setup: (config?: Configuration) => Instance
 }>('plugins')
 
 test.before.each((context) => {
-  context.injector = virtualInjector()
+  context.sheet = virtualSheet()
   context.setup = (config?: Configuration): Instance =>
-    create({ injector: context.injector, mode: strict, preflight: false, prefix: false, ...config })
+    create({ sheet: context.sheet, mode: strict, preflight: false, prefix: false, ...config })
 })
 
-test('value can be a token string', ({ setup, injector }) => {
+test('value can be a token string', ({ setup, sheet }) => {
   const { tw } = setup({
     plugins: {
       card: 'max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl',
@@ -27,7 +29,7 @@ test('value can be a token string', ({ setup, injector }) => {
     tw('mx-auto card my-4'),
     'mx-auto max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl my-4',
   )
-  assert.equal(injector.target, [
+  assert.equal(sheet.target, [
     '.overflow-hidden{overflow:hidden}',
     '.mx-auto{margin-left:auto;margin-right:auto}',
     '.bg-white{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}',

@@ -128,7 +128,6 @@ export const makeVariantPresedenceCalculator = (
 
 // group: 1 => +1
 // group: 2 => -1
-const PROPERTY_PRECEDENCE_CORRECTION_GROUPS = /^(?:(border-(?!w|c|sty)|[tlbr].{2,4}m?$|c.{7}$)|([fl].{5}l|g.{8}$|pl))/
 
 // 0 - 15 => 4 bits
 // Ignore vendor prefixed and custom properties
@@ -136,7 +135,7 @@ export const declarationPropertyPrecedence = (property: string): number =>
   property[0] === '-'
     ? 0
     : seperatorPrecedence(property) +
-      ((_ = PROPERTY_PRECEDENCE_CORRECTION_GROUPS.exec(property))
+      ((_ = /^(?:(border-(?!w|c|sty)|[tlbr].{2,4}m?$|c.{7}$)|([fl].{5}l|g.{8}$|pl))/.exec(property))
         ? +!!_[1] /* +1 */ || -!!_[2] /* -1 */
         : 0) +
       1
