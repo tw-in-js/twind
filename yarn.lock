@@ -1020,10 +1020,10 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
-distilt@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.npmjs.org/distilt/-/distilt-0.6.0.tgz#c5ea0db03e53c068e637e0083e5e4a30a6146657"
-  integrity sha512-SgQ0vAwZ/odXMuY/RrWuJuNM3XTAbsQJLr7XUDhX0+Vd+3UwTc3mwqHUpx95SHTSLCOs8hlOj8/onRowsCUnpw==
+distilt@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.npmjs.org/distilt/-/distilt-0.6.1.tgz#fd3879f3250eb23be36b9858ce72515ad37032c0"
+  integrity sha512-kSpr/dxbEgjezkCH4aYQPXmf0Qyu0TcJoT2tnxe2TvLY31ZHLHAaaWb4R1sY+MP3WyFnsCGB79U0CuSOcrm0Pw==
   dependencies:
     esbuild "^0.8.23"
     execa "^5.0.0"

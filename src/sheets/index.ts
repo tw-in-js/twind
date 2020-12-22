@@ -54,7 +54,7 @@ const createStorage = (): Storage => {
 }
 
 export interface VirtualSheet extends Sheet, Storage {
-  readonly target: string[]
+  readonly target: readonly string[]
   init: SheetInit
 }
 
@@ -81,14 +81,18 @@ export interface StyleTagProperties {
   textContent: string
 }
 
-export type StyleTagSheet = { target: string[] } | string[]
+export interface HasTarget {
+  readonly target: readonly string[]
+}
+
+export type StyleTagSheet = HasTarget | readonly string[]
 
 /**
  * Transforms css rules into `<style>` tag properties.
  */
 export const getStyleTagProperties = (sheet: StyleTagSheet): StyleTagProperties => ({
   id: STYLE_ELEMENT_ID,
-  textContent: (Array.isArray(sheet) ? sheet : sheet.target).join(''),
+  textContent: (Array.isArray(sheet) ? sheet : (sheet as HasTarget).target).join(''),
 })
 
 /**

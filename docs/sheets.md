@@ -19,9 +19,9 @@ setup({ ...sharedOptions, sheet: domSheet() })
 
 ## Virtual Sheet
 
-The virtual sheet collects style rules into an array. This is most useful during (see blow) and [server side rendering (SSR)](./ssr.md).
+The virtual sheet collects style rules into an array. This is most useful during testing (see blow) and [server side rendering (SSR)](./ssr.md).
 
-Additionally it provides an API to reset, save and restore the current internal state of its `tw` function.
+Additionally it provides an API to reset the current internal state of its `tw` function.
 
 > The example below uses [uvu](https://github.com/lukeed/uvu). Please adjust the test code to your testing framework.
 
