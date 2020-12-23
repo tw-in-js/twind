@@ -92,6 +92,36 @@ setup({
 })
 ```
 
+The Tailwind v2 [extended color palette](https://tailwindcss.com/docs/customizing-colors#color-palette-reference) is available as `twind/colors`:
+
+```js
+import * as colors from 'twind/colors'
+
+setup({
+  theme: {
+    // Build your palette here
+    gray: colors.trueGray,
+    red: colors.red,
+    blue: colors.lightBlue,
+    yellow: colors.amber,
+  },
+})
+```
+
+The extend the existing color palette use `theme.extend`:
+
+```js
+import * as colors from 'twind/colors'
+
+setup({
+  theme: {
+    extend: {
+      colors,
+    },
+  },
+})
+```
+
 ### Referencing other values
 
 If you need to reference another value in your theme, you can do so by providing a closure instead of a static value. The closure will receive a `theme()` function that you can use to look up other values in your theme.
