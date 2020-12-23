@@ -25,8 +25,7 @@
     "./shim": "./src/shim/index.ts",
     "./server": "./src/server/index.ts",
     "./sheets": "./src/sheets/index.ts",
-    "./package.json": "./package.json",
-    "./index.html": "./index.html"
+    "./package.json": "./package.json"
   },
   "sideEffects": [
     "./dist/shim/shim.js"
