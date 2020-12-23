@@ -41,7 +41,7 @@
     "release": "npx np --contents dist",
     "start": "snowpack dev",
     "test": "uvu -r esm -r ./src/__fixtures__/env.js",
-    "test:coverage": "c8 --src src -x '**/__fixtures__/**' -x '**/__tests__/**' -x 'src/types/**' --all -r lcov -r text yarn test",
+    "test:coverage": "c8 --src src -x '**/__fixtures__/**' -x '**/__tests__/**' -x '**/*.test.ts' -x 'src/types/**' --all -r lcov -r text yarn test",
     "test:watch": "watchlist src -- yarn test",
     "version": "yarn build"
   },

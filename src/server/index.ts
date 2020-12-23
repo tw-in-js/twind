@@ -64,7 +64,16 @@ export const asyncVirtualSheet = (): AsyncVirtualSheet => {
     insert: sheet.insert,
     init: sheet.init,
     reset: () => {
-      store.set(executionAsyncId(), { state: undefined })
+      const asyncId = executionAsyncId()
+
+      const snapshot = store.get(asyncId)
+
+      if (snapshot) {
+        snapshot.state = undefined
+      } else {
+        store.set(asyncId, { state: undefined })
+      }
+
       sheet.reset()
     },
     enable: () => asyncHook.enable(),

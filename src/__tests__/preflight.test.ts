@@ -8,7 +8,7 @@ const test = suite('preflight')
 
 test('add preflight styles', () => {
   const sheet = virtualSheet()
-  create({ sheet: sheet, mode: strict })
+  create({ sheet, mode: strict })
 
   assert.equal(sheet.target, [
     '::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}',
@@ -54,7 +54,7 @@ test('add preflight styles', () => {
 test('add preflight styles with custom theme', () => {
   const sheet = virtualSheet()
   create({
-    sheet: sheet,
+    sheet,
     theme: {
       extend: {
         fontFamily: { sans: 'ui-sans-serif', mono: 'ui-monospace' },
@@ -77,7 +77,7 @@ test('add preflight styles with custom theme', () => {
 test('add preflight styles with theme missing some values', () => {
   const sheet = virtualSheet()
   create({
-    sheet: sheet,
+    sheet,
     theme: {
       fontFamily: { sans: 'ui-sans-serif', mono: 'ui-monospace' },
       borderColor: {},
@@ -94,7 +94,7 @@ test('add preflight styles with theme missing some values', () => {
 test('use custom preflight styles', () => {
   const sheet = virtualSheet()
   create({
-    sheet: sheet,
+    sheet,
     preflight: (css) => ({ html: css.html }),
   })
 
@@ -106,7 +106,7 @@ test('use custom preflight styles', () => {
 test('use custom preflight with fallback to built-in', () => {
   const sheet = virtualSheet()
   create({
-    sheet: sheet,
+    sheet,
     preflight: () => {
       /* no-op */
     },
@@ -118,7 +118,7 @@ test('use custom preflight with fallback to built-in', () => {
 test('use custom preflight JSON style', () => {
   const sheet = virtualSheet()
   create({
-    sheet: sheet,
+    sheet,
     preflight: {
       '@font-face': {
         'font-family': 'Baloo',
