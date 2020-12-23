@@ -93,9 +93,13 @@ export const defaultTheme: Theme = {
     transparent: 'transparent',
     current: 'currentColor',
 
+    // black: colors.black,
     black: '#000',
+
+    // white: colors.white,
     white: '#fff',
 
+    // gray: colors.coolGray,
     gray: {
       50: '#f9fafb',
       100: '#f3f4f6',
@@ -109,6 +113,7 @@ export const defaultTheme: Theme = {
       900: '#111827',
     },
 
+    // red: colors.red,
     red: {
       50: '#fef2f2',
       100: '#fee2e2',
@@ -122,6 +127,7 @@ export const defaultTheme: Theme = {
       900: '#7f1d1d',
     },
 
+    // yellow: colors.amber,
     yellow: {
       50: '#fffbeb',
       100: '#fef3c7',
@@ -135,6 +141,7 @@ export const defaultTheme: Theme = {
       900: '#78350f',
     },
 
+    // green: colors.emerald,
     green: {
       50: '#ecfdf5',
       100: '#d1fae5',
@@ -148,6 +155,7 @@ export const defaultTheme: Theme = {
       900: '#064e3b',
     },
 
+    // blue: colors.blue,
     blue: {
       50: '#eff6ff',
       100: '#dbeafe',
@@ -161,6 +169,7 @@ export const defaultTheme: Theme = {
       900: '#1e3a8a',
     },
 
+    // indigo: colors.indigo,
     indigo: {
       50: '#eef2ff',
       100: '#e0e7ff',
@@ -174,6 +183,7 @@ export const defaultTheme: Theme = {
       900: '#312e81',
     },
 
+    // purple: colors.violet,
     purple: {
       50: '#f5f3ff',
       100: '#ede9fe',
@@ -187,6 +197,7 @@ export const defaultTheme: Theme = {
       900: '#4c1d95',
     },
 
+    // pink: colors.pink,
     pink: {
       50: '#fdf2f8',
       100: '#fce7f3',
