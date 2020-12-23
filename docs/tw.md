@@ -1,6 +1,6 @@
-# Basic Usage
+# The `tw` function
 
-Despite the module being very flexible and powerful, it was our intention to keep the surface API as minimal as possible. We appreciate that this module is likely to be used by developers & designers alike and so we try provide sensible defaults out of the box, with little to no need for [customization](./customization.md).
+Despite the module being very flexible and powerful, it was our intention to keep the surface API as minimal as possible. We appreciate that this module is likely to be used by developers & designers alike and so we try provide sensible defaults out of the box, with little to no need for [customization](./setup.md).
 
 > Note that examples are given in vanilla JS but the module is compatible with all popular frameworks
 
@@ -18,7 +18,7 @@ document.body.innerHTML = `
 
 Using the exported `tw` function without any setup results in the compilation of the rules like `bg-black text-white` and `text-xl` exactly as specified in the [Tailwind documentation](https://tailwincss.com/docs). For convnience the default [tailwind theme](https://github.com/tailwindlabs/tailwindcss/blob/v1/stubs/defaultConfig.stub.js) is used along with the preflight [base styles](https://tailwindcss.com/docs/preflight) if neither are provided by the developer.
 
-Calling the `tw` function like in the example above results in the shorthand rules to be interpreted, normalized and compiled into CSS rules which get added to a stylesheet in the head of the document. The function will return a string consisting of all the class names that were processed and apply them to the element itself much like any other CSS-in-JS libaray.
+Calling the `tw` function like in the example above results in the shorthand rules to be interpreted, normalized and compiled into CSS rules which get added to a stylesheet in the head of the document. The function will return a string consisting of all the class names that were processed and apply them to the element itself much like any other CSS-in-JS library.
 
 ## Function Signature
 
@@ -35,6 +35,11 @@ tw`bg-gray-200 rounded`
 //=> bg-gray-200 rounded
 tw`bg-gray-200 ${false && 'rounded'}`
 //=> bg-gray-200
+```
+
+<details><summary>Show me more examples</summary>
+
+```js
 tw`bg-gray-200 ${[false && 'rounded', 'block']}`
 //=> bg-gray-200 block
 tw`bg-gray-200 ${{ rounded: false, underline: isTrue() }}`
@@ -43,7 +48,14 @@ tw`bg-${randomColor()}`
 //=> bg-blue-500
 tw`hover:${({ tw }) => tw`underline`}`
 //=> hover:underline
+tw`bg-${'fuchsia'}) sm:${'underline'} lg:${false && 'line-through'} text-${[
+  'underline',
+  'center',
+]} rounded-${{ lg: false, xl: true }})`
+// => bg-fuchsia sm:underline text-underline text-center rounded-xl
 ```
+
+</details>
 
 ### Strings
 
@@ -60,6 +72,22 @@ tw({ 'bg-gray-200': true, rounded: false, underline: isTrue() })
 tw({ 'bg-gray-200': true }, { rounded: false }, null, { underline: true })
 //=> bg-gray-200 underline
 ```
+
+<details><summary>Show me more examples</summary>
+
+```js
+tw({
+  sm: ['hover:rounded', 'active:rounded-full'],
+  md: { rounded: true, hover: 'bg-white' },
+  lg: {
+    'rounded-full': true,
+    hover: 'bg-white text-black active:(underline shadow)',
+  },
+})
+// sm:hover:rounded sm:active:rounded-full md:rounded md:hover:bg-white lg:rounded-full lg:hover:bg-white lg:hover:text-black lg:hover:active:underline lg:hover:active:shadow
+```
+
+</details>
 
 ### Arrays
 
@@ -98,4 +126,4 @@ For a further explanation on this mechanism see [Plugins](./plugins.md).
 
 <hr/>
 
-Continue to [Customization](./customization.md)
+Continue to [Grouping](./grouping.md)

@@ -1,5 +1,7 @@
 # Grouping
 
+> If you are unfamiliar with the Tailwind CSS shorthand syntax please read the [Tailwind documentation](https://tailwindcss.com/docs) about [Utility-First](https://tailwindcss.com/docs/utility-first), [Responsive Design](https://tailwindcss.com/docs/responsive-design) and [Hover, Focus, & Other States](https://tailwindcss.com/docs/hover-focus-and-other-states).
+
 Unlike Tailwind, Twind is not limited to the restrictions of a class name strings as input. The compiler is just a function and has been designed to be able to interpret input in almost any form – strings, array, objects, template literals or variadic arguments – turn it into meaningful output.
 
 One painpoint commonly felt when using utility CSS is long and unwieldily lines of code consisting of class names, often denoting styles at various breakpoints, which are quite hard to comprehend.
@@ -8,7 +10,7 @@ It is not uncommon for a single element to have tens of rules applied to it like
 
 ```html
 <button
-  class="shadow-xl m-auto border-2 border-black border-opacity-50 border-dashed px-4 md:px-6 py-3 md:py-4 space-x-2 md:space-x-4 transform transition-all delay-300 duration-500 hover:scale-110 hover:rotate-5 animate-pulse absolute top-0 left-0 rounded-full"
+  class="shadow-xl m-auto border-2 border-black border-opacity-50 border-dashed px-4 md:px-6 py-3 md:py-4 space-x-2 md:space-x-4 transform hover:scale-110 hover:rotate-5 animate-pulse absolute top-0 left-0 rounded-full"
 ></button>
 ```
 
@@ -86,21 +88,20 @@ It is possible to define arbitrary styles by providing a function. Like all othe
 
 ```js
 tw`
-  hover:${() => ({ '&::after': { content: '🌈' } })}
+  hover:${css({ '&::after': { content: '🌈' } })}
 
-  hover:${{
+  hover:${({ tw }) => ({
     sm: tw`underline`,
     lg: 'no-underline line-through',
-  }}
-  // => sm:hover:underline lg:hover:no-underline lg:hover:line-through
+  })}
 
   sm:${['rounded']}
-  // => sm:rounded
 `
+// => hover:tw-xxx sm:hover:underline lg:hover:no-underline lg:hover:line-through sm:rounded
 ```
 
 In the above example, the `after` pseudo element will only be applied upon hover.
 
 <hr/>
 
-Continue to [Tailwind via class attribute](./shim.md)
+Continue to [Tailwind Extensions](./tailwind-extensions.md)

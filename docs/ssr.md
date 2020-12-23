@@ -2,7 +2,7 @@
 
 Twind supports Server Side Rendering (SSR) out of the box.
 
-> Please note the the `twind/server` bundle is Node.JS only.
+> Please note the `twind/server` bundle is Node.JS only.
 
 ## Synchronous SSR
 
@@ -311,3 +311,7 @@ exports.onRenderBody = ({ setHeadComponents, pathname }) => {
   ])
 }
 ```
+
+<hr/>
+
+Continue to [Browser Support](./browser-support.md)

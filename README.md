@@ -12,12 +12,38 @@
 [![Coverage Status](https://flat.badgen.net/coveralls/c/github/tw-in-js/twind/main?icon=codecov&label)](https://coveralls.io/github/tw-in-js/twind?branch=main)
 [![PRs Welcome](https://flat.badgen.net/badge/PRs/welcome/purple)](http://makeapullrequest.com)
 
----
-
 <details><summary>Quick Links (click to expand)</summary>
 
+- [Quickstart](#quickstart)
+- [Rational](#rational)
+- [Why Twind?](#why-twind)
+  - [Advantages](#advantages)
+- [Documentation](https://github.com/tw-in-js/twind/tree/main/docs#readme)
+  - Getting Started
+    - [Installation](https://github.com/tw-in-js/twind/tree/main/docs/installation.md) - how to install `twind` or apply `twind/shim`
+    - [Setup](https://github.com/tw-in-js/twind/tree/main/docs/setup.md) - how to use `setup`
+    - [Theming](https://github.com/tw-in-js/twind/tree/main/docs/setup.md#theme) - how to apply your theme
+    - [Examples](https://github.com/tw-in-js/twind/tree/main/docs/examples.md) - how to integrate with different frameworks
+  - Usage
+    - [`tw` Function](https://github.com/tw-in-js/twind/tree/main/docs/tw.md) - how to use `tw`
+    - [Grouping](https://github.com/tw-in-js/twind/tree/main/docs/grouping.md) - how to optimize rules size
+    - [Tailwind Extensions](https://github.com/tw-in-js/twind/tree/main/docs/tailwind-extensions.md) - which additional features are available
+    - [CSS-in-JS](https://github.com/tw-in-js/twind/tree/main/docs/css-in-js.md) - how to apply custom css
+    - [Plugins](https://github.com/tw-in-js/twind/tree/main/docs/plugins.md) - how to extend twind
+    - [Testing](https://github.com/tw-in-js/twind/tree/main/docs/sheets.md) - how to verify the generated class names
+    - [Static Extraction (SSR)](https://github.com/tw-in-js/twind/tree/main/docs/ssr.md) - how to extract the generated css on the server
+  - Supporting Materials
+    - [Tailwind Documentation](https://tailwindcss.com)
+    - [Browser Support](https://github.com/tw-in-js/twind/tree/main/docs/browser-support.md)
+    - [Contributing](https://github.com/tw-in-js/twind/tree/main/docs/contributing.md)
+    - [Architecture](https://github.com/tw-in-js/twind/tree/main/docs/architecture.md)
+- [Benchmarks](#benchmarks) - how does twind compare to other libraries
+- [Inspiration](#inspiration) - who inspired us
+- [Changelog](https://github.com/tw-in-js/twind/releases) - what is new
 
 </details>
+
+---
 
 If you are here then the likelihood is that you using Tailwind or a CSS-in-JS solution such as styled-components, emotion or goober in order to style your web applications. These packages have proven overwhelmingly popular and revolutionized web development as we know it.
 
@@ -41,7 +67,7 @@ document.body.innerHTML = `
 
 Alternatively try the [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgdHcgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZCcKCmRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gYAogIDxtYWluIGNsYXNzPSIke3R3YGgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJgfSI+CiAgICA8aDEgY2xhc3M9IiR7dHdgZm9udC1ib2xkIHRleHQoY2VudGVyIDV4bCB3aGl0ZSBzbTpncmF5LTgwMCBtZDpwaW5rLTcwMClgfSI+VGhpcyBpcyBUd2luZCE8L2gxPgogIDwvbWFpbj4KYA==).
 
-For seamless integration with existing Tailwind HTML you can use [twind/shim](https://github.com/tw-in-js/twind/blob/main/docs/shim.md):
+For seamless integration with existing Tailwind HTML you can use [twind/shim](https://github.com/tw-in-js/twind/blob/main/docs/installation.md#twindshim):
 
 ```html
 <script type="module" src="https://cdn.skypack.dev/twind/shim"></script>
@@ -53,7 +79,7 @@ For seamless integration with existing Tailwind HTML you can use [twind/shim](ht
 
 Try `twind/shim` in the [live and interactive shim demo](https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPG1haW4gY2xhc3M9Imgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIiPgogICAgPGgxIGNsYXNzPSJmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKSI+VGhpcyBpcyBUd2luZCE8L2gxPgogIDwvbWFpbj4KYA==)
 
-> 📚 For more detailed instruction on usage please [read the documentation](https://github.com/tw-in-js/twind/tree/main/docs) and check out [this extended demo](https://esm.codes/#aW1wb3J0IHsgdHcsIHNldHVwIH0gZnJvbSAnaHR0cHM6Ly9jZG4uc2t5cGFjay5kZXYvdHdpbmQnCgpzZXR1cCh7CiAgdGhlbWU6IHsKICAgIC8vIEV4YW1wbGUgb2YgZXh0ZW5kaW5nIHRoZSBkZWZhdWx0IHRoZW1lCiAgICBleHRlbmQ6IHsKICAgICAgY29sb3JzOiB7IGhvdHBpbms6ICcjRkYwMEZGJyB9LAogICAgICByb3RhdGU6IHsgNTogJzVkZWcnIH0KICAgIH0KICB9Cn0pCgpjb25zdCBhcHAgPSAoKSA9PiBgCiAgICA8ZGl2IGNsYXNzPScke3N0eWxlLmNvbnRhaW5lcn0nPgogICAgICA8aDEgY2xhc3M9JyR7CiAgICAgICAgLy8gRXhhbXBsZSBvZiBhbiBpbmxpbmUgc3R5bGUKICAgICAgICB0d2AKICAgICAgICAgIHRleHQod2hpdGUgNHhsKQogICAgICAgICAgZm9udChib2xkIHNhbnMpCiAgICAgICAgICB0cmFuc2l0aW9uLXRyYW5zZm9ybQogICAgICAgICAgaG92ZXI6KAogICAgICAgICAgICByb3RhdGUtNQogICAgICAgICAgICBzY2FsZS0xNTAKICAgICAgICAgICAgY3Vyc29yLXBvaW50ZXIKICAgICAgICAgICkKICAgICAgICBgCiAgICAgIH0nPkhlbGxvIFdvcmxkPC9oMT4KICAgIDwvZGl2PgogIGA7CiAgCiAgCmNvbnN0IHN0eWxlID0gewogIC8vIEV4YW1wbGUgb2YgYWJzdHJhY3RlZCBzdHlsZQogIGNvbnRhaW5lcjogdHdgCiAgICBoLWZ1bGwKICAgIGJnLWhvdHBpbmsKICAgIGZsZXgKICAgIGl0ZW1zLWNlbnRlcgogICAganVzdGlmeS1jZW50ZXIKICBgCn0KCmRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gYXBwKCk=)
+> 📚 For more detailed instruction on usage please [read the documentation](https://github.com/tw-in-js/twind/tree/main/docs#readme) and check out [this extended demo](https://esm.codes/#aW1wb3J0IHsgdHcsIHNldHVwIH0gZnJvbSAnaHR0cHM6Ly9jZG4uc2t5cGFjay5kZXYvdHdpbmQnCgpzZXR1cCh7CiAgdGhlbWU6IHsKICAgIC8vIEV4YW1wbGUgb2YgZXh0ZW5kaW5nIHRoZSBkZWZhdWx0IHRoZW1lCiAgICBleHRlbmQ6IHsKICAgICAgY29sb3JzOiB7IGhvdHBpbms6ICcjRkYwMEZGJyB9LAogICAgICByb3RhdGU6IHsgNTogJzVkZWcnIH0KICAgIH0KICB9Cn0pCgpjb25zdCBhcHAgPSAoKSA9PiBgCiAgICA8ZGl2IGNsYXNzPScke3N0eWxlLmNvbnRhaW5lcn0nPgogICAgICA8aDEgY2xhc3M9JyR7CiAgICAgICAgLy8gRXhhbXBsZSBvZiBhbiBpbmxpbmUgc3R5bGUKICAgICAgICB0d2AKICAgICAgICAgIHRleHQod2hpdGUgNHhsKQogICAgICAgICAgZm9udChib2xkIHNhbnMpCiAgICAgICAgICB0cmFuc2l0aW9uLXRyYW5zZm9ybQogICAgICAgICAgaG92ZXI6KAogICAgICAgICAgICByb3RhdGUtNQogICAgICAgICAgICBzY2FsZS0xNTAKICAgICAgICAgICAgY3Vyc29yLXBvaW50ZXIKICAgICAgICAgICkKICAgICAgICBgCiAgICAgIH0nPkhlbGxvIFdvcmxkPC9oMT4KICAgIDwvZGl2PgogIGA7CiAgCiAgCmNvbnN0IHN0eWxlID0gewogIC8vIEV4YW1wbGUgb2YgYWJzdHJhY3RlZCBzdHlsZQogIGNvbnRhaW5lcjogdHdgCiAgICBoLWZ1bGwKICAgIGJnLWhvdHBpbmsKICAgIGZsZXgKICAgIGl0ZW1zLWNlbnRlcgogICAganVzdGlmeS1jZW50ZXIKICBgCn0KCmRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gYXBwKCk=)
 
 ## Rational
 
@@ -93,27 +119,27 @@ The [base reset](https://tailwindcss.com/docs/preflight) provided by Tailwind is
 
 </details>
 
-<details><summary>❄️ Optional hashing of class names ensuring no conflicts</summary>
-
-By default no hashing is enabled to aid debugging during development. However it is possible to configure Twind to [hash class names](https://github.com/tw-in-js/twind/blob/main/docs/customization.md#hash) before injecting them into the DOM. This may be useful in production as it can reduce the down the wire size of server side rendered pages pages and eliminates any chance of class name conflicts with third party styles.
-
-</details>
-
 <details><summary>🎢 Familiar and Tailwind V2 compliant theming</summary>
 
 Theming is done exactly as [documented by the Tailwind](https://tailwindcss.com/docs/theme) meaning that you can copy paste in your themes from existing projects. The only different here is that there is no need to rebuild anything after changing you theme. Just refresh the page!
 
 </details>
 
+<details><summary>🧪 Generate styles for Tailwind HTML markup</summary>
+
+It might not always be desirable to generate rules by invoking the compiler direct via function call. In this case you may use the [shim module](https://github.com/tw-in-js/twind/blob/main/docs/installation.md#twindshim) which finds and replaces class names within static HTML, generating styles appropriately. This is especially useful during development too; for example when editing classes in the inspector.
+
+</details>
+
 <details><summary>🤖 Built in support for conditionally combining rules</summary>
 
-Input is not limited to strings like with HTML classes. The Twind function accept arrays, objects, template literals, functions, almost everything! The interpretter spec is inspired by and very similar to [clsx](https://github.com/lukeed/clsx) and offers a much more developer friendly API that handles null values gracefully.
+Input is not limited to strings like with HTML classes. The [Twind function](https://github.com/tw-in-js/twind/tree/main/docs/tw.md) accept arrays, objects, template literals, functions, almost everything! The interpretter spec is inspired by and very similar to [clsx](https://github.com/lukeed/clsx) and offers a much more developer friendly API that handles null values gracefully.
 
 </details>
 
 <details><summary>🌈 Improve readability by breaking rules over multiple lines</summary>
 
-Using template literals as input ([the recommended method](https://github.com/tw-in-js/twind/blob/main/docs/usage.md#template-literal-recommended)) or even object syntax allows you to break rules over multiple lines, drastically improving readability and maintainability of complex rules.
+Using template literals as input ([the recommended method](https://github.com/tw-in-js/twind/blob/main/docs/tw.md#template-literal-recommended)) or even [object syntax](https://github.com/tw-in-js/twind/blob/main/docs/tw.md#objects) allows you to break rules over multiple lines, drastically improving readability and maintainability of complex rules.
 
 </details>
 
@@ -123,31 +149,35 @@ Having control over the interpreter affords us the possibility of defining terse
 
 </details>
 
-<details><summary>🚓 Escape hatch for writing arbritary styles</summary>
+<details><summary>🚓 Escape hatch for writing arbitrary CSS</summary>
 
-The compiler [accepts functions](https://github.com/tw-in-js/twind/blob/main/docs/usage.md#inline-plugins) that can return arbritary CSS-in-JS objects. A convenient a escape hatch for all those one off rules which aren't supported by tailwind. The `&` keyword allows you to write complex rules (like pseudo elements `&::before` and `&::after`) that are beyond the scope of inline styles without having to add another dependency.
+The compiler [accepts functions](https://github.com/tw-in-js/twind/blob/main/docs/tw.md#inline-plugins) that can return arbritary CSS-in-JS objects. A convenient a escape hatch for all those one off rules which aren't supported by tailwind. The `&` keyword allows you to write complex rules (like pseudo elements `&::before` and `&::after`) that are beyond the scope of inline styles without having to add another dependency.
+
+> We provide a [css helper](https://github.com/tw-in-js/twind/tree/main/docs/css-in-js.md) as a convenience for this case.
+
+</details>
+
+<details><summary>❄️ Optional hashing of class names ensuring no conflicts</summary>
+
+By default no hashing is enabled to aid debugging during development. However it is possible to configure Twind to [hash class names](https://github.com/tw-in-js/twind/blob/main/docs/setup.md#hash) before injecting them into the DOM. This may be useful in production as it can reduce the down the wire size of server side rendered pages pages and eliminates any chance of class name conflicts with third party styles.
 
 </details>
 
 <details><summary>🚅 Faster than all popular CSS-in-JS libraries</summary>
 
-Given the limited grammar that the compiler has to support there is a much higher chance of finding a rule and its variant in the cache, because of this along with some other specialist optimizations we are able to compile and inject CSS faster than all the popular CSS-in-JS solutions.
+Given the limited grammar that the compiler has to support there is a much higher chance of finding a rule and its variant in the cache, because of this along with some other specialist optimizations we are able to compile and inject CSS [faster than all the popular](#benchmarks) CSS-in-JS solutions.
 
 </details>
 
 <details><summary>🔌 Language extension via plugins </summary>
+
 Extending the grammar is trivial and can be achieved by providing functions _inline_ or by generalizing inline rules and defining them during setup under [the _plugins_ key](https://github.com/tw-in-js/twind/blob/main/docs/plugins.md).
+
 </details>
 
 <details><summary>🎩 Remove all runtime overhead with static extraction</summary>
 
-The compiler itself is not reliant on the DOM at all which makes it an ideal candidate for static extraction which essentially removes all runtime overhead. This is possible during SSR or build time prepass.
-
-</details>
-
-<details><summary>🧪 Generate styles for stringified markup</summary>
-
-It might not always be desireable to generate rules by invoking the compiler direct via function call. In this case you may use the shim module which finds and replaces class names within static HTML, generating styles appropriately. This is especially useful during developemnt too; for example when editing classes in the inspector.
+The compiler itself is not reliant on the DOM at all which makes it an ideal candidate for static extraction which essentially removes all runtime overhead. This is possible during [SSR](https://github.com/tw-in-js/twind/tree/main/docs/ssr.md) or build time prepass.
 
 </details>
 
@@ -207,16 +237,16 @@ emotion@11.0.0              x 35,349 ops/sec ±1.01% (93 runs sampled)
 styled-components@5.2.1     x 38,284 ops/sec ±0.48% (93 runs sampled)
 ```
 
-For a more detailed testing summary please see the [benchmarks](/benchmarks) directory.
+For a more detailed testing summary please see the [benchmarks](https://github.com/tw-in-js/twind/blob/main/benchmarks) directory.
 
 ## Inspiration
 
 It would be untrue to suggest that the design here is totally original, other than the founders initial attempts at implementing such a module ([oceanwind](https://github.com/lukejacksonn/oceanwind) and [beamwind](https://github.com/kenoxa/beamwind)) we are truly standing on the shoulders of giants.
 
 - [tailwind](https://tailwindcss.com/): created a wonderfully thought out API on which the compiler's grammar was defined.
-- [styled-components](https://styled-components.com/): implemented and popularised the advantages of doing CSS-in-JS.
+- [styled-components](https://styled-components.com/): implemented and popularized the advantages of doing CSS-in-JS.
 - [htm](https://github.com/developit/htm): a JSX compiler that proved there is merit in doing runtime compilation of DSLs like JSX.
-- [goober](https://github.com/cristianbote/goober): an impossibly small yet efficient CSS-in-JS implemetation that defines critical module features.
+- [goober](https://github.com/cristianbote/goober): an impossibly small yet efficient CSS-in-JS implementation that defines critical module features.
 - [otion](https://github.com/kripod/otion): the first CSS-in-JS solution specifically oriented around handling CSS in an atomic fashion.
 - [clsx](https://github.com/lukeed/clsx): a tiny utility for constructing class name strings conditionally.
 - [tiny-css-prefixer](https://github.com/kitten/tiny-css-prefixer): essentials CSS prefixing helpers in less than 1KB of JavaScript.

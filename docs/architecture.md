@@ -371,6 +371,25 @@ interface CSSRules extends CSSProperties {
 
 > convert css object into css declarations with precedence and hash
 
+## Selector Ordering
+
+> This section describes the internal ordering of the generated CSS rules.
+
+Twind creates, except for a few exceptions, one CSS rule with a single class as selector per directive. This means they have all the same specificity.
+
+> If two declarations have the same weight, origin, and specificity, the latter specified wins.
+
+Some directives depend on each other. For example the [`via-<color>`](https://tailwindcss.com/docs/gradient-color-stops#middle-color) must be declared after the [`from-<color>`](https://tailwindcss.com/docs/gradient-color-stops#from-color) directive. As a result twind has to ensure that all CSS rules are in a specific order.
+
+The following rules apply to deterministically sort the injected CSS rules:
+
+- media queries are sorted in a mobile first manner using the `min-width` value
+- dark mode rules
+- other at-rules - based on `-:;,#(` counting
+- pseudo classes and variants are sorted in the following order: `first`, `last`, `odd`, `even`, `link`, `visited`, `empty`, `checked`, `group-hover`, `group-focus`, `focus-within`, `hover`, `focus`, `focus-visible`, `active`, `disabled`, others - meaning that `active` overrides `focus` and `hover` for example (see [When do the :hover, :focus, and :active pseudo-classes apply?](https://bitsofco.de/when-do-the-hover-focus-and-active-pseudo-classes-apply/#orderofstyleshoverthenfocusthenactive)
+- greatest precedence of properties (ignoring vendor prefixed and custom properties) based on `-` counting - shorthand properties are inserted first eg longhand properties override shorthands.
+- number of declarations (descending) - this allows single declaration styles to overwrite styles from multi declaration styles
+
 ### Inject
 
 > insert CSSRules into the enviroment returning a string with class names

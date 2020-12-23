@@ -1,15 +1,18 @@
-# Customization
+# Setup
 
 Understandably developers will more often than not want to customize the out of the box experience. It is possible to achieve this with the `setup` function. Doing so will ultimately change the behavior of calling the `tw` function, making it appropriate for your particular use case.
+
+> To use `tw` you **do not** need to call `setup`.
 
 ```js
 import { setup, strict } from 'twind'
 
 setup({
-  preflight: false, // do not include base style reset
-  mode: strict, // throw errors for invalid rules
-  hash: true, // hash all generated class names
-  theme: {}, // define custom theme values
+  preflight: false, // do not include base style reset (default: use tailwind preflight)
+  mode: strict, // throw errors for invalid rules (default: warn)
+  hash: true, // hash all generated class names (default: false)
+  theme: {}, // define custom theme values (default: tailwind theme)
+  darkMode: 'class', // us ea different dark mode strategy (default: 'media')
 })
 ```
 
@@ -89,6 +92,45 @@ setup({
 })
 ```
 
+### Referencing other values
+
+If you need to reference another value in your theme, you can do so by providing a closure instead of a static value. The closure will receive a `theme()` function that you can use to look up other values in your theme.
+
+```js
+setup({
+  theme: {
+    colors: {
+      important: (theme) => theme('colors.red.500', 'red' /* Fallback */),
+    },
+    fill: (theme) => theme('colors'),
+  },
+})
+```
+
+## Dark Mode
+
+Now that dark mode is a first-class feature of many operating systems, it's becoming more and more common to design a dark version of your website to go along with the default design.
+
+To make this as easy as possible, twind includes a dark variant that lets you style your site differently when dark mode is enabled:
+
+```js
+bw`
+  bg-white text-black
+  dark:(bg-gray-800 text-white)`
+```
+
+> It's important to note that the dark mode variant is **always** enabled and available for all directives.
+
+Now whenever dark mode is enabled on the user's operating system, `dark:{directive}` rules will take precedence over unprefixed rules. The `media` strategy uses the [prefers-color-scheme media feature](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) under the hood, but if you'd like to support toggling dark mode manually, you can also use the `class` strategy which uses adds a `.dark` class selector for more control:
+
+```js
+setup({
+  darkMode: 'class', // default is 'media'
+})
+```
+
+For an example how to toggle dark mode manually read the [Tailwind Guide](https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually).
+
 <hr/>
 
-Continue to [Grouping](./grouping.md)
+Continue to [Examples](./examples.md)

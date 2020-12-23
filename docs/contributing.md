@@ -1,6 +1,6 @@
 # Contributing
 
-If you have made it this far then thanks for checkin gout Twind. We hoped you have enjoyed learning about Tailwind-in-JS and would love to hear what you think!
+If you have made it this far then thanks for checking out Twind. We hoped you have enjoyed learning about Tailwind-in-JS and would love to hear what you think!
 
 Please show your appreciation by sharing the project on twitter or by starring it on GitHub.
 
@@ -31,11 +31,10 @@ Below is an outline of some todos, packages, plugins and ideas that we would lik
 ## Packages / Modules
 
 - twind/styled - like styled components (https://github.com/cristianbote/goober/tree/master/benchmarks)
-- @twind/server - for server side rendering
-  - extract critical css
-  - support for shim
-- @twind/legacy - for IE11 with reset and polyfills (Math.imul, CSS.escape)
+- twind/server - support for shim (HTML find class and replace)
+- twind/legacy - for IE11 with reset and polyfills (Math.imul, CSS.escape)
   - add note in docs about umd bundles and how to use them
+- twind/play - play mode
 - @twind/eslint-plugin - nice to have
 - @twind/prettier-plugin - nice to have
 - @twind/tw.macro - maybe?
@@ -46,7 +45,6 @@ Below is an outline of some todos, packages, plugins and ideas that we would lik
   - Floating labels: https://t.co/g5TMqIBh4b?ssr=true
   - Stretched link: https://v5.getbootstrap.com/docs/5.0/helpers/stretched-link/
   - and others (see Plugins below)
-- @twind/play - play mode
 
 ## Ideas
 

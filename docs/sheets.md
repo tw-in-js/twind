@@ -1,21 +1,6 @@
 # twind/sheets
 
-This module provides two additional sheets: [domSheet](#dom-sheet) and [virtualSheet](#virtual-sheet)
-
-## DOM Sheet
-
-This sheet uses DOM Text nodes to insert the CSS rules into the stylesheet.
-Using DOM manipulation makes this way slower than the default sheet but allows to see the generated CSS in to DOM.
-Most modern browser display CSS rules from the speedy default sheet using their CSS inspector.
-
-> In production it is advised to use speedy default sheet.
-
-```js
-import { setup } from 'twind'
-import { domSheet } from 'twind/sheets'
-
-setup({ ...sharedOptions, sheet: domSheet() })
-```
+This module provides two additional sheets: [virtualSheet](#virtual-sheet) and [domSheet](#dom-sheet)
 
 ## Virtual Sheet
 
@@ -61,3 +46,20 @@ test('render one rule', ({ tw, sheet }) => {
   assert.equal(sheet.target, '.text-center{text-align:center}')
 })
 ```
+
+## DOM Sheet
+
+This sheet uses DOM Text nodes to insert the CSS rules into the stylesheet. Using DOM manipulation makes this way slower than the default sheet but allows to see the generated CSS in to DOM. Most modern browser display CSS rules from the speedy default sheet using their CSS inspector.
+
+> In production it is advised to use speedy default sheet.
+
+```js
+import { setup } from 'twind'
+import { domSheet } from 'twind/sheets'
+
+setup({ ...sharedOptions, sheet: domSheet() })
+```
+
+<hr/>
+
+Continue to [Static Extraction (SSR)](./ssr.md)

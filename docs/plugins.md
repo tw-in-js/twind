@@ -6,6 +6,17 @@ Theming and customization lets you specify how core plugins and the compiler beh
 
 Plugins make it possible to extend the compilers grammar by adding new directives or variants. Language extension like this is achieved by providing plugins as named functions during setup.
 
+New plugins can be provided using the `plugins` property when calling the `setup` method.
+
+Plugins are searched for by name using the longest prefix before a dash (`"-"'`). The remaining parts (splitted by a dash) are provided as first argument to the plugin function. For example if the directive is `bg-gradient-to-t` the following order applies:
+
+| Plugin             | Parts                     |
+| ------------------ | ------------------------- |
+| `bg-gradient-to-t` | `[]`                      |
+| `bg-gradient-to`   | `["t"]`                   |
+| `bg-gradient`      | `["to", "t"]`             |
+| `bg`               | `["gradient", "to", "t"]` |
+
 ## Plugin without arguments
 
 The simplest form of plugin is one that returns the literal CSS rules that the compiler should return in response to a single directive.
@@ -42,7 +53,7 @@ setup({
 })
 ```
 
-Plugins are passed two arguments:
+Plugins are passed three arguments:
 
 - `parts`: the directive split on '-' with the plugin name excluded
 - `context`: an object providing access to several commonly used functions
@@ -50,6 +61,8 @@ Plugins are passed two arguments:
   - `theme`: the currently configured theme that is being used by the compiler
   - `tw`: the configured `tw` export
   - `tag`: generate a unique value; this can be used to create marker classes like `group`
+
+- `id`: the name of the plugin
 
 This means that the plugin above now covers more single part cases like `scroll-snap-x`, `scroll-snap-y` and `scroll-snap-none` etc. It is worth noting now that the whole of Twind is built upon this exact same premise, every rule outlined in the Tailwind docs has an equivalent plugin. We refer to these as _core plugins_.
 
@@ -140,4 +153,4 @@ tw`font-bold ${link}`
 
 <hr/>
 
-Continue to [Browser Support](./browser-support.md)
+Continue to [Testing](./sheets.md)
