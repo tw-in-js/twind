@@ -1,7 +1,7 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import { getStyleTag, virtualSheet } from '.'
+import { getStyleTag, virtualSheet } from './index'
 
 const test = suite('virtualSheet')
 
