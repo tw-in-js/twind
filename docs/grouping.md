@@ -23,7 +23,7 @@ The first grouping syntax works by factoring out common directive prefixes. Belo
 ```js
 // Before directive grouping
 tw`border-2 border-black border-opacity-50 border-dashed`
-// After directing grouping
+// After directive grouping
 tw`border(2 black opacity-50 dashed)`
 ```
 
