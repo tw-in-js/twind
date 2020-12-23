@@ -54,13 +54,28 @@ const onload = () => {
   setup(script ? JSON.parse(script.innerHTML) : {})
 }
 
+if (document.readyState === 'loading') {
+  // Loading hasn't finished yet
+  addEventListener('DOMContentLoaded', onload)
+} else {
+  // `DOMContentLoaded` has already fired
+  // invoke on next tick to allow other setup methods to run
+  // eslint-disable-next-line no-var
+  var timeoutRef = setTimeout(onload)
+}
+
 export const setup = ({
   target = document.documentElement,
   ...config
 }: ShimConfiguration = {}): void => {
+  // Removing the callbacks ensures that the setup is called only once
+  // either by programmatically from userland or by DOMContentLoaded/timeout
   removeEventListener('DOMContentLoaded', onload)
+  clearTimeout(timeoutRef)
 
-  setupTW(config)
+  if (Object.keys(config).length) {
+    setupTW(config)
+  }
 
   stop()
 
@@ -74,12 +89,4 @@ export const setup = ({
     subtree: true,
     childList: true,
   })
-}
-
-if (document.readyState === 'loading') {
-  // Loading hasn't finished yet
-  addEventListener('DOMContentLoaded', onload)
-} else {
-  // `DOMContentLoaded` has already fired
-  onload()
 }

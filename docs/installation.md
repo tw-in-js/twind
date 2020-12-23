@@ -42,7 +42,7 @@ Assuming you have an internet connection then you should now be able to use the 
 
 The `twind/shim` modules allows to use the `class` attribute for tailwind rules.
 If such a rule is detected the corresponding CSS rule is created and injected
-into the stylesheet. _No need for `tw`_ but it can be used on the same page as well.
+into the stylesheet. _No need for `tw`_ but it can be used on the same page as well (see example below).
 
 ```html
 <!DOCTYPE html>
@@ -90,7 +90,24 @@ setup({
 })
 ```
 
-To prevent FOUC (flash of unstyled content) it is advised to set the `hidden` attribute on the target element. twind/shim will remove it once all styles have been generated.
+It is possible to mix `twind/shim` with `tw`:
+
+```js
+import "twind/shim"
+import { tw } from "twind"
+
+const styles = {
+  center: tw`flex items-center justify-center`,
+}
+
+document.body.innerHTML = `
+  <main class="h-screen bg-purple-400 ${center}">
+    <h1 class="font-bold ${tw`text(center 5xl white sm:gray-800 md:pink-700)`}">This is Twind!</h1>
+  </main>
+`
+```
+
+To prevent FOUC (flash of unstyled content) it is advised to set the `hidden` attribute on the target element. `twind/shim` will remove it once all styles have been generated.
 
 ```html
 <!DOCTYPE html>
