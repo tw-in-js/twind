@@ -99,11 +99,13 @@ import * as colors from 'twind/colors'
 
 setup({
   theme: {
-    // Build your palette here
-    gray: colors.trueGray,
-    red: colors.red,
-    blue: colors.lightBlue,
-    yellow: colors.amber,
+    colors: {
+      // Build your palette here
+      gray: colors.trueGray,
+      red: colors.red,
+      blue: colors.lightBlue,
+      yellow: colors.amber,
+    },
   },
 })
 ```
