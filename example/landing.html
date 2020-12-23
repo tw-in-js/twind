@@ -7,33 +7,14 @@
     <script type="module" src="/_dist_/shim/index.js"></script>
     <script type="twind-config">
       {
-        "preflight": {
-          "@font-face": {
-            "fontFamily": "Baloo",
-            "src": "url(./Baloo-Regular.ttf)"
-          }
-        },
         "theme": {
           "extend": {
             "colors": {
               "primary": "#80CBC4"
             },
-            "fontFamily": {
-              "display": "Baloo, sans-serif"
-            },
             "fill": {
               "none": "none",
-              "dark": "#212121",
-              "primary": "#80CBC4",
-              "accent": "#EE999C"
-            },
-            "stroke": {
-              "black": "black"
-            },
-            "strokeWidth": {
-              "4": "4",
-              "5": "5",
-              "6": "6"
+              "dark": "#212121"
             },
             "animation": {
               "gust": "gust 2s infinite"
@@ -65,47 +46,16 @@
     >
       <header>
         <div class="relative w-32 h-32 md:(w-48 h-48) ml-auto">
-          <svg class="absolute fill-none" viewBox="0 0 189 165" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="104.307" cy="82.6119" r="81.6546" fill="#999999" fill-opacity="0.1" />
-            <line
-              x1="149.562"
-              y1="34.6116"
-              x2="149.562"
-              y2="161.536"
-              class="stroke-black stroke-6"
-              stroke-linecap="round"
-            />
+          <svg class="absolute" viewBox='0 0 189 165' fill='none' xmlns='http://www.w3.org/2000/svg'>
+            <circle cx="104.307" cy="82.6119" r="81.6546" fill="#999999" fill-opacity="0.1"/>
+            <line x1="149.562" y1="34.6116" x2="149.562" y2="161.536" stroke="black" stroke-width="6" stroke-linecap="round"/>
           </svg>
-          <svg
-            class="animate-gust origin-top-right fill-none children:stroke(black 5)"
-            viewBox="0 0 189 165"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M13.8897 94.4911L102.818 42.3475C102.818 42.3475 116.121 52.0884 122.412 67.4891C128.703 82.8898 127.582 97.4568 127.582 97.4568L30.3798 132.131C30.3798 132.131 19.6057 124.2 16.3881 116.701C13.1706 109.202 13.8897 94.4911 13.8897 94.4911Z"
-              class="fill-primary"
-              stroke-linejoin="round"
-            />
-            <line
-              y1="-2.5"
-              x2="41.5698"
-              y2="-2.5"
-              transform="matrix(0.627063 -0.778969 0.627063 0.778969 127.246 84.6594)"
-            />
-            <line
-              y1="-2.5"
-              x2="37.9955"
-              y2="-2.5"
-              transform="matrix(0.998587 -0.053132 0.0356084 0.999366 114.038 55.5195)"
-            />
-            <path
-              d="M57.5448 122.33L38.7373 79.9333L52.7632 71.6452L71.8895 116.911L57.5448 122.33Z"
-              class="fill-accent stroke-4!"
-            />
-            <path
-              d="M72.5861 117.33L52.7373 72.5861L67.5397 63.8392L87.7249 111.611L72.5861 117.33Z"
-              class="fill-accent stroke-4!"
-            />
+          <svg class="animate-gust origin-top-right" viewBox='0 0 189 165' fill='none' xmlns='http://www.w3.org/2000/svg'>
+            <path d='M13.8897 94.4911L102.818 42.3475C102.818 42.3475 116.121 52.0884 122.412 67.4891C128.703 82.8898 127.582 97.4568 127.582 97.4568L30.3798 132.131C30.3798 132.131 19.6057 124.2 16.3881 116.701C13.1706 109.202 13.8897 94.4911 13.8897 94.4911Z' fill='#80CBC4' stroke='black' stroke-width='5' stroke-linejoin='round'/>
+            <line y1='-2.5' x2='41.5698' y2='-2.5' transform='matrix(0.627063 -0.778969 0.627063 0.778969 127.246 84.6594)' stroke='black' stroke-width='5'/>
+            <line y1='-2.5' x2='37.9955' y2='-2.5' transform='matrix(0.998587 -0.053132 0.0356084 0.999366 114.038 55.5195)' stroke='black' stroke-width='5'/>
+            <path d='M57.5448 122.33L38.7373 79.9333L52.7632 71.6452L71.8895 116.911L57.5448 122.33Z' fill='#EE999C' stroke='black' stroke-width='4'/>
+            <path d='M72.5861 117.33L52.7373 72.5861L67.5397 63.8392L87.7249 111.611L72.5861 117.33Z' fill='#EE999C' stroke='black' stroke-width='4'/>
           </svg>
         </div>
       </header>
@@ -132,9 +82,7 @@
               d="M320.122 67.7377C320.122 61.4017 321.082 55.9297 323.002 51.3217C324.922 46.6177 327.562 42.7297 330.922 39.6577C334.378 36.5857 338.362 34.3297 342.874 32.8897C347.482 31.3537 352.426 30.5857 357.706 30.5857C359.626 30.5857 361.498 30.7777 363.322 31.1617C365.146 31.4497 366.634 31.8337 367.786 32.3137V8.9857C368.746 8.6977 370.282 8.4097 372.394 8.1217C374.506 7.7377 376.666 7.5457 378.874 7.5457C380.986 7.5457 382.858 7.6897 384.49 7.9777C386.218 8.2657 387.658 8.8417 388.81 9.7057C389.962 10.5697 390.826 11.7697 391.402 13.3057C391.978 14.7457 392.266 16.6657 392.266 19.0657V87.3217C392.266 91.8337 390.154 95.4337 385.93 98.1217C383.146 99.9457 379.546 101.53 375.13 102.874C370.714 104.314 365.626 105.034 359.866 105.034C353.626 105.034 348.01 104.17 343.018 102.442C338.122 100.714 333.946 98.2177 330.49 94.9537C327.13 91.6897 324.538 87.8017 322.714 83.2897C320.986 78.6817 320.122 73.4977 320.122 67.7377ZM361.018 49.7377C355.834 49.7377 351.85 51.2257 349.066 54.2017C346.282 57.1777 344.89 61.6897 344.89 67.7377C344.89 73.6897 346.186 78.2017 348.778 81.2737C351.37 84.2497 355.114 85.7377 360.01 85.7377C361.738 85.7377 363.274 85.4977 364.618 85.0177C366.058 84.4417 367.162 83.8177 367.93 83.1457V51.4657C366.01 50.3137 363.706 49.7377 361.018 49.7377Z"
             />
           </svg>
-          <p
-            class="text-xl leading-normal sm:(text-3xl leading-normal) md:(text-4xl leading-normal) lg:(text-5xl leading-normal) text-gray-400"
-          >
+          <p class="text(xl sm:3xl md:4xl lg:5xl gray-400) leading-normal!">
             The smallest, fastest, most feature complete tailwind-in-js solution in existence
           </p>
         </div>
