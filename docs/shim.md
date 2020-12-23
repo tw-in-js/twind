@@ -44,7 +44,7 @@ within the document. The content must be valid JSON and all twind setup option a
 Alternatively the following works:
 
 ```js
-import { setup } "https://cdn.skypack.dev/twind/shim"
+import { setup } from "https://cdn.skypack.dev/twind/shim"
 
 setup({
   target: document.body, // Default document.documentElement (eg html)
@@ -62,7 +62,7 @@ the `hidden` attribute on the target element:
 </html>
 ```
 
-## Implmentation Details
+## Implementation Details
 
 This uses a [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver)
 to detect changed class attributes or added DOM nodes. On detection the class attribute
