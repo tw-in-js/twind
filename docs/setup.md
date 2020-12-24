@@ -146,7 +146,7 @@ Now that dark mode is a first-class feature of many operating systems, it's beco
 To make this as easy as possible, twind includes a dark variant that lets you style your site differently when dark mode is enabled:
 
 ```js
-bw`
+tw`
   bg-white text-black
   dark:(bg-gray-800 text-white)`
 ```

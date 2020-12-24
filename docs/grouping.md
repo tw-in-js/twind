@@ -49,7 +49,7 @@ tw`
   lg:(bg-red-800 shadow-xl)
 `
 
-bw`w(1/2 sm:1/3 lg:1/6) p-2`
+tw`w(1/2 sm:1/3 lg:1/6) p-2`
 // => w-1/2 sm:w-1/3 lg:w-1/6 p-2
 ```
 
@@ -63,11 +63,11 @@ tw`sm:(border(2 black opacity-50 hover:dashed))`
 tw`border(md:(2 black opacity-50 hover:dashed))`
 // => sm:border-2 sm:border-black sm:border-opacity-50 sm:hover:border-dashed
 
-bw`divide(y-2 blue-500 opacity(75 md:50))`
+tw`divide(y-2 blue-500 opacity(75 md:50))`
 // => divide-y-2 divide-blue-500 divide-opacity-75 md:divide-opacity-50
 
 // Negated values can be used within the braces and will be applied to the directive:
-bw`rotate(-3 hover:6 md:(3 hover:-6))`
+tw`rotate(-3 hover:6 md:(3 hover:-6))`
 // => -rotate-3 hover:rotate-6 md:rotate-3 md:hover:-rotate-6"
 ```
 
@@ -78,7 +78,7 @@ Thanks to some ordering logic in the compiler, both of the above groupings will 
 Some directives like `ring` need to be applied themselves as well as being a prefix. In this case you can use the reserved `&` character which is replaced literally with the current prefix:
 
 ```js
-bw`ring(& pink-700 offset(4 pink-200))`)
+tw`ring(& pink-700 offset(4 pink-200))`)
 // => ring ring-pink-700 ring-offset-4 ring-offset-pink-200
 ```
 
