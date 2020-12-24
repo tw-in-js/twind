@@ -3,7 +3,8 @@
 module.exports = {
   mount: {
     example: '/',
-    src: '/_dist_',
+    src: '/_src_',
+    dist: '/_dist_',
   },
   install: ['uvu', 'uvu/assert', 'snoop'],
   installOptions: {
@@ -13,7 +14,7 @@ module.exports = {
     routes: [
       // Prevent type only exports (eg empty modules) to break snowpack
       {
-        src: '/_dist_/types/index.js',
+        src: '/_src_/types/index.js',
         dest: (request, response) => {
           response.writeHead(200, { 'Content-Type': 'application/javascript' })
           response.end('')

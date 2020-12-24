@@ -135,12 +135,8 @@ To prevent FOUC (flash of unstyled content) it is advised to set the `hidden` at
 > You may need to provide certain [polyfills](./browser-support.md) depending on your target browser.
 
 ```html
-<script src="https://unpkg.com/twind/twind.umd.js"></script>
-<script src="https://unpkg.com/twind/shim/shim.umd.js"></script>
-<script>
-  var tw = twind.tw
-  var setup = twind.setup
-</script>
+<script defer src="https://unpkg.com/twind/twind.umd.js"></script>
+<script defer src="https://unpkg.com/twind/shim/shim.umd.js"></script>
 ```
 
 </details>

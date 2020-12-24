@@ -20,7 +20,7 @@ jobs:
       - name: Build 🔧
         run: |
           mkdir website
-          sed 's% src="/_dist_/shim/index.js"% src="https://cdn.skypack.dev/twind/shim"%g' < example/landing.html > website/index.html
+          sed 's% src="/_src_/index.js"% src="https://cdn.skypack.dev/twind"%g;s% src="/_src_/shim/index.js"% src="https://cdn.skypack.dev/twind/shim"%g' < example/landing.html > website/index.html
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
