@@ -35,6 +35,7 @@ Below is an outline of some todos, packages, plugins and ideas that we would lik
 - twind/legacy - for IE11 with reset and polyfills (Math.imul, CSS.escape)
   - add note in docs about umd bundles and how to use them
 - twind/play - play mode
+- @twind/forms
 - @twind/eslint-plugin - nice to have
 - @twind/prettier-plugin - nice to have
 - @twind/tw.macro - maybe?

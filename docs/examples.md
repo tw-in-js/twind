@@ -1,6 +1,8 @@
 # Examples
 
-Twind is built to work without a framework - eg framework agnostic - but can be used with every framework. This page shows how integrate twind with some well known libraries. Most examples will use the `tw` function. Please read its [documentation](./tw.md) if it is unfamiliar.
+Twind is built to work without a framework - eg framework agnostic - but can be used with every framework. This page shows how integrate twind with some well known libraries.
+
+> Most examples will use the `tw` function. Please read its [documentation](./tw.md) if it is unfamiliar.
 
 - [Vanilla](#vanilla) - plain js; no framework
 - [twind/shim](#twindshim) - plain Tailwind HTML with [twind/shim](./installation.md#twindshim)
@@ -9,6 +11,8 @@ Twind is built to work without a framework - eg framework agnostic - but can be 
 - [Preact](#preact) - using with [Preact](https://preactjs.com/)
 - [Preact w/ htm](#htmpreact) - using [Preact](https://preactjs.com/) with [htm](https://github.com/developit/htm)
 - [Svelte](#svelte) - using with [Svelte](https://svelte.dev/)
+- [Web Components](#web-components) - using with [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) and [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM)
+- [LitElement](#litelement) - using with [LitElement](https://lit-element.polymer-project.org/)
 
 > If you need to support Server Side Rendering (SSR) aka Static Extraction please read [this guide](./ssr.md) for more details how to implement it.
 
@@ -17,7 +21,7 @@ Twind is built to work without a framework - eg framework agnostic - but can be 
 > [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgdHcgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZCcKCmRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gYAogIDxtYWluIGNsYXNzPSIke3R3YGgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJgfSI+CiAgICA8aDEgY2xhc3M9IiR7dHdgZm9udC1ib2xkIHRleHQoY2VudGVyIDV4bCB3aGl0ZSBzbTpncmF5LTgwMCBtZDpwaW5rLTcwMClgfSI+VGhpcyBpcyBUd2luZCE8L2gxPgogIDwvbWFpbj4KYA==)
 
 ```js
-import { tw } from 'https://cdn.skypack.dev/twind'
+import { tw } from 'twind'
 
 document.body.innerHTML = `
   <main class="${tw`h-screen bg-purple-400 flex items-center justify-center`}">
@@ -28,10 +32,10 @@ document.body.innerHTML = `
 
 ## twind/shim
 
-[live and interactive shim demo](https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPG1haW4gY2xhc3M9Imgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIiPgogICAgPGgxIGNsYXNzPSJmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKSI+VGhpcyBpcyBUd2luZCE8L2gxPgogIDwvbWFpbj4KYA==)
+> [live and interactive shim demo](https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPG1haW4gY2xhc3M9Imgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIiPgogICAgPGgxIGNsYXNzPSJmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKSI+VGhpcyBpcyBUd2luZCE8L2gxPgogIDwvbWFpbj4KYA==)
 
 ```html
-<script type="module" src="https://cdn.skypack.dev/twind/shim"></script>
+<script type="module" src="twind/shim"></script>
 
 <main class="h-screen bg-purple-400 flex items-center justify-center">
   <h1 class="font-bold text(center 5xl white sm:gray-800 md:pink-700)">This is Twind!</h1>
@@ -57,6 +61,8 @@ ReactDOM.render(
 ```
 
 ## htm/react
+
+> [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgcmVuZGVyIH0gZnJvbSAnaHR0cHM6Ly9jZG4uc2t5cGFjay5kZXYvcmVhY3QtZG9tJwppbXBvcnQgKiBhcyBSZWFjdCBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi9yZWFjdCcKaW1wb3J0IGh0bSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi9odG0nCgppbXBvcnQgeyB0dyB9IGZyb20gJ2h0dHBzOi8vY2RuLnNreXBhY2suZGV2L3R3aW5kJwoKY29uc3QgaHRtbCA9IGh0bS5iaW5kKFJlYWN0LmNyZWF0ZUVsZW1lbnQpCgpyZW5kZXIoCiAgaHRtbGAKICAgIDxtYWluIGNsYXNzTmFtZT0iJHt0d2BoLXNjcmVlbiBiZy1wdXJwbGUtNDAwIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyYH0iPgogICAgICA8aDEgY2xhc3NOYW1lPSIke3R3YGZvbnQtYm9sZCB0ZXh0KGNlbnRlciA1eGwgd2hpdGUgc206Z3JheS04MDAgbWQ6cGluay03MDApYH0iPgogICAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICAgIDwvaDE+CiAgICA8L21haW4+CiAgYCwKICBkb2N1bWVudC5ib2R5LAopCg==)
 
 ```js
 import ReactDOM from 'react-dom'
@@ -93,6 +99,8 @@ render(
 
 ## htm/preact
 
+> [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgaCwgcmVuZGVyIH0gZnJvbSAnaHR0cHM6Ly9jZG4uc2t5cGFjay5kZXYvcHJlYWN0JwppbXBvcnQgaHRtIGZyb20gJ2h0dHBzOi8vY2RuLnNreXBhY2suZGV2L2h0bScKCmltcG9ydCB7IHR3IH0gZnJvbSAnaHR0cHM6Ly9jZG4uc2t5cGFjay5kZXYvdHdpbmQnCgpjb25zdCBodG1sID0gaHRtLmJpbmQoaCkKCnJlbmRlcigKICBodG1sYAogICAgPG1haW4gY2xhc3NOYW1lPSIke3R3YGgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJgfSI+CiAgICAgIDxoMSBjbGFzc05hbWU9IiR7dHdgZm9udC1ib2xkIHRleHQoY2VudGVyIDV4bCB3aGl0ZSBzbTpncmF5LTgwMCBtZDpwaW5rLTcwMClgfSI+CiAgICAgICAgVGhpcyBpcyBUd2luZCEKICAgICAgPC9oMT4KICAgIDwvbWFpbj4KICBgLAogIGRvY3VtZW50LmJvZHksCikK)
+
 ```js
 import { render } from 'preact'
 import { html } from 'htm/preact'
@@ -118,9 +126,94 @@ render(
   import { tw } from 'twind'
 </script>
 
-<main class="{tw`h-screen" bg-purple-400 flex items-center justify-center`}>
-  <h1 class="{tw`font-bold" text(center 5xl white sm:gray-800 md:pink-700)`}>This is Twind!</h1>
+<main class="{tw`h-screen bg-purple-400 flex items-center justify-center`}">
+  <h1 class="{tw`font-bold text(center 5xl white sm:gray-800 md:pink-700)`}">This is Twind!</h1>
 </main>
+```
+
+## Web Components
+
+This example shows how Custom Element can have its styles separated without having the side effect of polluting the root document's styles.
+
+> [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgY3JlYXRlLCBjc3NvbVNoZWV0IH0gZnJvbSAnaHR0cHM6Ly9jZG4uc2t5cGFjay5kZXYvdHdpbmQnCgpjb25zdCBjb21wb25lbnRTdHlsZXMgPSBuZXcgQ1NTU3R5bGVTaGVldCgpCgpjb25zdCB7IHR3IH0gPSBjcmVhdGUoewogIHNoZWV0OiBjc3NvbVNoZWV0KHsgdGFyZ2V0OiBjb21wb25lbnRTdHlsZXMgfSkKfSk7CgpjbGFzcyBUd2luZEVsZW1lbnQgZXh0ZW5kcyBIVE1MRWxlbWVudCB7CiAgY29uc3RydWN0b3IoKSB7CiAgICBzdXBlcigpCgogICAgY29uc3Qgc2hhZG93ID0gdGhpcy5hdHRhY2hTaGFkb3coeyBtb2RlOiAnb3BlbicgfSkKCiAgICBzaGFkb3cuYWRvcHRlZFN0eWxlU2hlZXRzID0gW2NvbXBvbmVudFN0eWxlc10KCiAgICBzaGFkb3cuaW5uZXJIVE1MID0gYAogICAgICA8bWFpbiBjbGFzcz0iJHt0d2BoLXNjcmVlbiBiZy1wdXJwbGUtNDAwIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyYH0iPgogICAgICAgIDxoMSBjbGFzcz0iJHt0d2Bmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKWB9Ij4KICAgICAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICAgICAgPC9oMT4KICAgICAgPC9tYWluPgogICAgYAogIH0KfQoKY3VzdG9tRWxlbWVudHMuZGVmaW5lKCd0d2luZC1lbGVtZW50JywgVHdpbmRFbGVtZW50KQoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSAnPHR3aW5kLWVsZW1lbnQ+PC90d2luZC1lbGVtZW50PicK)
+
+```js
+import { create, cssomSheet } from twind'
+
+// 1. Create seperate CSSStyleSheet
+const componentStyles = new CSSStyleSheet()
+
+// 2. Use that to create an own twind instance
+const { tw } = create({
+  sheet: cssomSheet({ target: componentStyles })
+});
+
+class TwindElement extends HTMLElement {
+  constructor() {
+    super()
+
+    const shadow = this.attachShadow({ mode: 'open' })
+
+    // 3. Apply the same style to each instance of this component
+    shadow.adoptedStyleSheets = [componentStyles]
+
+    // 4. Use "own" tw function
+    shadow.innerHTML = `
+      <main class="${tw`h-screen bg-purple-400 flex items-center justify-center`}">
+        <h1 class="${tw`font-bold text(center 5xl white sm:gray-800 md:pink-700)`}">
+          This is Twind!
+        </h1>
+      </main>
+    `
+  }
+}
+
+customElements.define('twind-element', TwindElement)
+
+document.body.innerHTML = '<twind-element></twind-element>'
+```
+
+## LitElement
+
+> [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgTGl0RWxlbWVudCwgaHRtbCB9IGZyb20gJ2h0dHBzOi8vY2RuLnNreXBhY2suZGV2L2xpdC1lbGVtZW50JwppbXBvcnQgeyBjcmVhdGUsIGNzc29tU2hlZXQgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZCcKCmNvbnN0IGNvbXBvbmVudFN0eWxlcyA9IG5ldyBDU1NTdHlsZVNoZWV0KCkKCmNvbnN0IHsgdHcgfSA9IGNyZWF0ZSh7CiAgc2hlZXQ6IGNzc29tU2hlZXQoeyB0YXJnZXQ6IGNvbXBvbmVudFN0eWxlcyB9KQp9KTsKCmNsYXNzIFR3aW5kRWxlbWVudCBleHRlbmRzIExpdEVsZW1lbnQgewogIGNyZWF0ZVJlbmRlclJvb3QoKSB7CiAgICBjb25zdCBzaGFkb3cgPSBzdXBlci5jcmVhdGVSZW5kZXJSb290KCkKICAgIHNoYWRvdy5hZG9wdGVkU3R5bGVTaGVldHMgPSBbY29tcG9uZW50U3R5bGVzXQogICAgcmV0dXJuIHNoYWRvdwogIH0KCiAgcmVuZGVyKCkgewogICAgcmV0dXJuIGh0bWxgCiAgICAgIDxtYWluIGNsYXNzPSIke3R3YGgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJgfSI+CiAgICAgICAgPGgxIGNsYXNzPSIke3R3YGZvbnQtYm9sZCB0ZXh0KGNlbnRlciA1eGwgd2hpdGUgc206Z3JheS04MDAgbWQ6cGluay03MDApYH0iPgogICAgICAgICAgVGhpcyBpcyBUd2luZCEKICAgICAgICA8L2gxPgogICAgICA8L21haW4+CiAgICBgCiAgfQp9CgpjdXN0b21FbGVtZW50cy5kZWZpbmUoJ3R3aW5kLWVsZW1lbnQnLCBUd2luZEVsZW1lbnQpOwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSAnPHR3aW5kLWVsZW1lbnQ+PC90d2luZC1lbGVtZW50PicK)
+
+```js
+import { LitElement, html } from 'lit-element'
+import { create, cssomSheet } from 'twind'
+
+// 1. Create seperate CSSStyleSheet
+const componentStyles = new CSSStyleSheet()
+
+// 2. Use that to create an own twind instance
+const { tw } = create({
+  sheet: cssomSheet({ target: componentStyles })
+});
+
+class TwindElement extends LitElement {
+  createRenderRoot() {
+    const shadow = super.createRenderRoot()
+
+    // 3. Apply the same style to each instance of this component
+    shadow.adoptedStyleSheets = [componentStyles]
+    
+    return shadow
+  }
+
+  render() {
+    // 4. Use "own" tw function
+    return html`
+      <main class="${tw`h-screen bg-purple-400 flex items-center justify-center`}">
+        <h1 class="${tw`font-bold text(center 5xl white sm:gray-800 md:pink-700)`}">
+          This is Twind!
+        </h1>
+      </main>
+    `
+  }
+}
+
+customElements.define('twind-element', TwindElement);
+
+document.body.innerHTML = '<twind-element></twind-element>'
 ```
 
 <hr/>
