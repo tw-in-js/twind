@@ -31,7 +31,9 @@
     "./dist/shim/shim.js"
   ],
   "// These are ONLY bundled (eg included) in the umd builds": "",
-  "bundledDependencies": ["tiny-css-prefixer"],
+  "bundledDependencies": [
+    "tiny-css-prefixer"
+  ],
   "scripts": {
     "build": "distilt",
     "format": "prettier --write --ignore-path .gitignore .",

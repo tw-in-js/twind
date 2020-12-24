@@ -24,7 +24,7 @@ Assuming you have your bundler configured correctly then you should now be able 
 
 ## Importing as a remote dependency
 
-Given that nearly all browsers support es modules now, sometimes it is desirable to import a module straight from from a CDN such as [skypack](https://skypack.dev/) or [unpkg](https://unpkg.com/).
+Given that nearly all [browsers support es modules](https://caniuse.com/es6-module) now, sometimes it is desirable to import a module straight from from a CDN such as [skypack](https://skypack.dev/) or [unpkg](https://unpkg.com/).
 
 1. Add the following line to a javascript file referenced by a script tag with `type="module"` like below:
 
@@ -35,6 +35,20 @@ Given that nearly all browsers support es modules now, sometimes it is desirable
 ```
 
 Assuming you have an internet connection then you should now be able to use the module.
+
+<details><summary>How to support legacy browser with the UMD bundles (Click to expand)</summary>
+
+> You may need to provide certain [polyfills](./browser-support.md) depending on your target browser.
+
+```html
+<script src="https://unpkg.com/twind/twind.umd.js"></script>
+<script>
+  var tw = twind.tw
+  var setup = twind.setup
+</script>
+```
+
+</summary>
 
 ## twind/shim
 
@@ -93,8 +107,8 @@ setup({
 It is possible to mix `twind/shim` with `tw`:
 
 ```js
-import "twind/shim"
-import { tw } from "twind"
+import 'twind/shim'
+import { tw } from 'twind'
 
 const styles = {
   center: tw`flex items-center justify-center`,
@@ -115,6 +129,21 @@ To prevent FOUC (flash of unstyled content) it is advised to set the `hidden` at
   <!-- ... -->
 </html>
 ```
+
+<details><summary>How to support legacy browser with the UMD bundles (Click to expand)</summary>
+
+> You may need to provide certain [polyfills](./browser-support.md) depending on your target browser.
+
+```html
+<script src="https://unpkg.com/twind/twind.umd.js"></script>
+<script src="https://unpkg.com/twind/shim/shim.umd.js"></script>
+<script>
+  var tw = twind.tw
+  var setup = twind.setup
+</script>
+```
+
+</details>
 
 <details><summary>Implementation Details (Click to expand)</summary>
 

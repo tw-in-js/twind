@@ -186,7 +186,7 @@ const sheet = cssomSheet({ target: new CSSStyleSheet() })
 const { tw } = create({ sheet })
 
 class TwindElement extends LitElement {
-    // 3. Apply the same style to each instance of this component
+  // 3. Apply the same style to each instance of this component
   static styles = [sheet.target]
 
   render() {
@@ -201,7 +201,7 @@ class TwindElement extends LitElement {
   }
 }
 
-customElements.define('twind-element', TwindElement);
+customElements.define('twind-element', TwindElement)
 
 document.body.innerHTML = '<twind-element></twind-element>'
 ```
