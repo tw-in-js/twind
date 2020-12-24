@@ -190,14 +190,8 @@ const { tw } = create({
 });
 
 class TwindElement extends LitElement {
-  createRenderRoot() {
-    const shadow = super.createRenderRoot()
-
     // 3. Apply the same style to each instance of this component
-    shadow.adoptedStyleSheets = [componentStyles]
-    
-    return shadow
-  }
+  static styles = [componentStyles]
 
   render() {
     // 4. Use "own" tw function
