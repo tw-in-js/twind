@@ -46,7 +46,9 @@ export interface SheetConfig<T = unknown> {
   target?: T
 }
 
-export interface Sheet {
+export interface Sheet<T = unknown> {
+  readonly target: T
+
   insert: (rule: string, index: number) => void
 
   init?: SheetInit

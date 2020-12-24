@@ -135,18 +135,16 @@ render(
 
 This example shows how Custom Element can have its styles separated without having the side effect of polluting the root document's styles.
 
-> [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgY3JlYXRlLCBjc3NvbVNoZWV0IH0gZnJvbSAnaHR0cHM6Ly9jZG4uc2t5cGFjay5kZXYvdHdpbmQnCgpjb25zdCBjb21wb25lbnRTdHlsZXMgPSBuZXcgQ1NTU3R5bGVTaGVldCgpCgpjb25zdCB7IHR3IH0gPSBjcmVhdGUoewogIHNoZWV0OiBjc3NvbVNoZWV0KHsgdGFyZ2V0OiBjb21wb25lbnRTdHlsZXMgfSkKfSk7CgpjbGFzcyBUd2luZEVsZW1lbnQgZXh0ZW5kcyBIVE1MRWxlbWVudCB7CiAgY29uc3RydWN0b3IoKSB7CiAgICBzdXBlcigpCgogICAgY29uc3Qgc2hhZG93ID0gdGhpcy5hdHRhY2hTaGFkb3coeyBtb2RlOiAnb3BlbicgfSkKCiAgICBzaGFkb3cuYWRvcHRlZFN0eWxlU2hlZXRzID0gW2NvbXBvbmVudFN0eWxlc10KCiAgICBzaGFkb3cuaW5uZXJIVE1MID0gYAogICAgICA8bWFpbiBjbGFzcz0iJHt0d2BoLXNjcmVlbiBiZy1wdXJwbGUtNDAwIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyYH0iPgogICAgICAgIDxoMSBjbGFzcz0iJHt0d2Bmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKWB9Ij4KICAgICAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICAgICAgPC9oMT4KICAgICAgPC9tYWluPgogICAgYAogIH0KfQoKY3VzdG9tRWxlbWVudHMuZGVmaW5lKCd0d2luZC1lbGVtZW50JywgVHdpbmRFbGVtZW50KQoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSAnPHR3aW5kLWVsZW1lbnQ+PC90d2luZC1lbGVtZW50PicK)
+> [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgY3JlYXRlLCBjc3NvbVNoZWV0IH0gZnJvbSAnaHR0cHM6Ly9jZG4uc2t5cGFjay5kZXYvdHdpbmQnCgpjb25zdCBzaGVldCA9IGNzc29tU2hlZXQoeyB0YXJnZXQ6IG5ldyBDU1NTdHlsZVNoZWV0KCkgfSkKCmNvbnN0IHsgdHcgfSA9IGNyZWF0ZSh7IHNoZWV0IH0pCgpjbGFzcyBUd2luZEVsZW1lbnQgZXh0ZW5kcyBIVE1MRWxlbWVudCB7CiAgY29uc3RydWN0b3IoKSB7CiAgICBzdXBlcigpCgogICAgY29uc3Qgc2hhZG93ID0gdGhpcy5hdHRhY2hTaGFkb3coeyBtb2RlOiAnb3BlbicgfSkKCiAgICBzaGFkb3cuYWRvcHRlZFN0eWxlU2hlZXRzID0gW3NoZWV0LnRhcmdldF0KCiAgICBzaGFkb3cuaW5uZXJIVE1MID0gYAogICAgICA8bWFpbiBjbGFzcz0iJHt0d2BoLXNjcmVlbiBiZy1wdXJwbGUtNDAwIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyYH0iPgogICAgICAgIDxoMSBjbGFzcz0iJHt0d2Bmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKWB9Ij4KICAgICAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICAgICAgPC9oMT4KICAgICAgPC9tYWluPgogICAgYAogIH0KfQoKY3VzdG9tRWxlbWVudHMuZGVmaW5lKCd0d2luZC1lbGVtZW50JywgVHdpbmRFbGVtZW50KQoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSAnPHR3aW5kLWVsZW1lbnQ+PC90d2luZC1lbGVtZW50PicK)
 
 ```js
 import { create, cssomSheet } from twind'
 
-// 1. Create seperate CSSStyleSheet
-const componentStyles = new CSSStyleSheet()
+// 1. Create separate CSSStyleSheet
+const sheet = cssomSheet({ target: new CSSStyleSheet() })
 
 // 2. Use that to create an own twind instance
-const { tw } = create({
-  sheet: cssomSheet({ target: componentStyles })
-});
+const { tw } = create({ sheet })
 
 class TwindElement extends HTMLElement {
   constructor() {
@@ -155,7 +153,7 @@ class TwindElement extends HTMLElement {
     const shadow = this.attachShadow({ mode: 'open' })
 
     // 3. Apply the same style to each instance of this component
-    shadow.adoptedStyleSheets = [componentStyles]
+    shadow.adoptedStyleSheets = [sheet.target]
 
     // 4. Use "own" tw function
     shadow.innerHTML = `
@@ -175,23 +173,21 @@ document.body.innerHTML = '<twind-element></twind-element>'
 
 ## LitElement
 
-> [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgTGl0RWxlbWVudCwgaHRtbCB9IGZyb20gJ2h0dHBzOi8vY2RuLnNreXBhY2suZGV2L2xpdC1lbGVtZW50JwppbXBvcnQgeyBjcmVhdGUsIGNzc29tU2hlZXQgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZCcKCmNvbnN0IGNvbXBvbmVudFN0eWxlcyA9IG5ldyBDU1NTdHlsZVNoZWV0KCkKCmNvbnN0IHsgdHcgfSA9IGNyZWF0ZSh7CiAgc2hlZXQ6IGNzc29tU2hlZXQoeyB0YXJnZXQ6IGNvbXBvbmVudFN0eWxlcyB9KQp9KTsKCmNsYXNzIFR3aW5kRWxlbWVudCBleHRlbmRzIExpdEVsZW1lbnQgewogIGNyZWF0ZVJlbmRlclJvb3QoKSB7CiAgICBjb25zdCBzaGFkb3cgPSBzdXBlci5jcmVhdGVSZW5kZXJSb290KCkKICAgIHNoYWRvdy5hZG9wdGVkU3R5bGVTaGVldHMgPSBbY29tcG9uZW50U3R5bGVzXQogICAgcmV0dXJuIHNoYWRvdwogIH0KCiAgcmVuZGVyKCkgewogICAgcmV0dXJuIGh0bWxgCiAgICAgIDxtYWluIGNsYXNzPSIke3R3YGgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJgfSI+CiAgICAgICAgPGgxIGNsYXNzPSIke3R3YGZvbnQtYm9sZCB0ZXh0KGNlbnRlciA1eGwgd2hpdGUgc206Z3JheS04MDAgbWQ6cGluay03MDApYH0iPgogICAgICAgICAgVGhpcyBpcyBUd2luZCEKICAgICAgICA8L2gxPgogICAgICA8L21haW4+CiAgICBgCiAgfQp9CgpjdXN0b21FbGVtZW50cy5kZWZpbmUoJ3R3aW5kLWVsZW1lbnQnLCBUd2luZEVsZW1lbnQpOwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSAnPHR3aW5kLWVsZW1lbnQ+PC90d2luZC1lbGVtZW50PicK)
+> [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgTGl0RWxlbWVudCwgaHRtbCB9IGZyb20gJ2h0dHBzOi8vY2RuLnNreXBhY2suZGV2L2xpdC1lbGVtZW50JwppbXBvcnQgeyBjcmVhdGUsIGNzc29tU2hlZXQgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZCcKCmNvbnN0IHNoZWV0ID0gY3Nzb21TaGVldCh7IHRhcmdldDogbmV3IENTU1N0eWxlU2hlZXQoKSB9KQoKY29uc3QgeyB0dyB9ID0gY3JlYXRlKHsgc2hlZXQgfSkKCmNsYXNzIFR3aW5kRWxlbWVudCBleHRlbmRzIExpdEVsZW1lbnQgewogIGNyZWF0ZVJlbmRlclJvb3QoKSB7CiAgICBjb25zdCBzaGFkb3cgPSBzdXBlci5jcmVhdGVSZW5kZXJSb290KCkKICAgIHNoYWRvdy5hZG9wdGVkU3R5bGVTaGVldHMgPSBbc2hlZXQudGFyZ2V0XQogICAgcmV0dXJuIHNoYWRvdwogIH0KCiAgcmVuZGVyKCkgewogICAgcmV0dXJuIGh0bWxgCiAgICAgIDxtYWluIGNsYXNzPSIke3R3YGgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJgfSI+CiAgICAgICAgPGgxIGNsYXNzPSIke3R3YGZvbnQtYm9sZCB0ZXh0KGNlbnRlciA1eGwgd2hpdGUgc206Z3JheS04MDAgbWQ6cGluay03MDApYH0iPgogICAgICAgICAgVGhpcyBpcyBUd2luZCEKICAgICAgICA8L2gxPgogICAgICA8L21haW4+CiAgICBgCiAgfQp9CgpjdXN0b21FbGVtZW50cy5kZWZpbmUoJ3R3aW5kLWVsZW1lbnQnLCBUd2luZEVsZW1lbnQpOwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSAnPHR3aW5kLWVsZW1lbnQ+PC90d2luZC1lbGVtZW50PicK)
 
 ```js
 import { LitElement, html } from 'lit-element'
 import { create, cssomSheet } from 'twind'
 
-// 1. Create seperate CSSStyleSheet
-const componentStyles = new CSSStyleSheet()
+// 1. Create separate CSSStyleSheet
+const sheet = cssomSheet({ target: new CSSStyleSheet() })
 
 // 2. Use that to create an own twind instance
-const { tw } = create({
-  sheet: cssomSheet({ target: componentStyles })
-});
+const { tw } = create({ sheet })
 
 class TwindElement extends LitElement {
     // 3. Apply the same style to each instance of this component
-  static styles = [componentStyles]
+  static styles = [sheet.target]
 
   render() {
     // 4. Use "own" tw function

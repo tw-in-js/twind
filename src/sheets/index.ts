@@ -1,17 +1,13 @@
 import type { SheetConfig, Sheet, SheetInit, SheetInitCallback } from '../types'
 import { getStyleElement, STYLE_ELEMENT_ID } from '../internal/dom'
 
-export interface DOMSheet extends Sheet {
-  target: HTMLStyleElement
-}
-
 /**
  * Creates an sheet which inserts style rules through the Document Object Model.
  */
 export const domSheet = ({
   nonce,
   target = getStyleElement(nonce),
-}: SheetConfig<HTMLStyleElement> = {}): DOMSheet => ({
+}: SheetConfig<HTMLStyleElement> = {}): Sheet<HTMLStyleElement> => ({
   target,
   insert: (rule, index) => {
     target.insertBefore(document.createTextNode(rule), target.childNodes[index])
@@ -53,8 +49,7 @@ const createStorage = (): Storage => {
   }
 }
 
-export interface VirtualSheet extends Sheet, Storage {
-  readonly target: readonly string[]
+export interface VirtualSheet extends Sheet<string[]>, Storage {
   init: SheetInit
 }
 
