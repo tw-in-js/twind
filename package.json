@@ -1,6 +1,6 @@
 {
   "name": "twind",
-  "version": "0.8.2",
+  "version": "0.9.0",
   "description": "compiles tailwind like shorthand syntax into css at runtime",
   "// mark as private to prevent accidental publish - use 'yarn release'": "",
   "private": true,
