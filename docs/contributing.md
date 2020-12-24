@@ -49,7 +49,7 @@ Below is an outline of some todos, packages, plugins and ideas that we would lik
 
 ## Ideas
 
-- Examples how to use with react, preact, svelte, vue
+- react-native support
 - presets: https://tailwindcss.com/docs/presets
 - benchmark using https://github.com/A-gambit/CSS-IN-JS-Benchmarks
 - size comparison: build same page with other libs and compare size
