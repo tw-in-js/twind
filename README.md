@@ -138,13 +138,17 @@ It might not always be desirable to generate rules by invoking the compiler dire
 
   Because twind is generating CSS during runtime there is no to need restrict the usage of variants.
 
-- Using exclamation point (`!`) after a directive to override any other declarations
+- Most pseudo classes can be uses as variant or `group-*` variant
 
-  Directives may end with exclamation point (`text-center!`) to be marked as [important](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity#The_!important_exception)
+  Unknown variants ([see core variants](https://github.com/tw-in-js/twind/blob/main/src/twind/variants.ts)) are assumed to be [pseudo classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes).
 
 - `siblings`, `sibling` and `children` variants
 
   Allows to apply styling to different elements instead of repeating a directive on each one. This feature can be combined with other variants like `hover`.
+
+- Using exclamation point (`!`) after a directive to override any other declarations
+
+  Directives may end with exclamation point (`text-center!`) to be marked as [important](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity#The_!important_exception)
 
 - Dark mode is always available
 
