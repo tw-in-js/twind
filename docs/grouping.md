@@ -94,6 +94,9 @@ Some directives like `ring` need to be applied themselves as well as being a pre
 ```js
 tw`ring(& pink-700 offset(4 pink-200))`)
 // => ring ring-pink-700 ring-offset-4 ring-offset-pink-200
+
+tw`bg-blue-500(hover:& focus:& active:&) rounded-full`
+// => hover:bg-blue-500 focus:bg-blue-500 active:bg-blue-500 rounded-full
 ```
 
 ## Inherited Groups

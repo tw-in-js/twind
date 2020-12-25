@@ -48,6 +48,8 @@ Given that nearly all [browsers support es modules](https://caniuse.com/es6-modu
 
 Assuming you have an internet connection then you should now be able to use the module.
 
+> [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgdHcgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZCcKCmRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gYAogIDxtYWluIGNsYXNzPSIke3R3YGgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJgfSI+CiAgICA8aDEgY2xhc3M9IiR7dHdgZm9udC1ib2xkIHRleHQoY2VudGVyIDV4bCB3aGl0ZSBzbTpncmF5LTgwMCBtZDpwaW5rLTcwMClgfSI+CiAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICA8L2gxPgogIDwvbWFpbj4KYA==)
+
 <details><summary>How to support legacy browser with the UMD bundles (Click to expand)</summary>
 
 > You may need to provide certain [polyfills](./browser-support.md) depending on your target browser.
@@ -60,14 +62,13 @@ Assuming you have an internet connection then you should now be able to use the 
 </script>
 ```
 
-</summary>
+</details>
 
 ## twind/shim
 
-> Allows to copy-paste tailwind examples.
+> Allows to copy-paste tailwind examples. This feature can be used together with your favorite framework without any additional setup.
 
-The `twind/shim` modules allows to use the `class` attribute for tailwind rules.
-If such a rule is detected the corresponding CSS rule is created and injected
+The `twind/shim` modules allows to use the `class` attribute for tailwind rules. If such a rule is detected the corresponding CSS rule is created and injected
 into the stylesheet. _No need for `tw`_ but it can be used on the same page as well (see example below).
 
 ```html
@@ -77,16 +78,20 @@ into the stylesheet. _No need for `tw`_ but it can be used on the same page as w
     <script type="module" src="https://cdn.skypack.dev/twind/shim"></script>
   </head>
   <body>
-    <h1 class="text-7xl border(2 black opacity-50 dashed)">Hello World</h1>
-</bod>
+    <main class="h-screen bg-purple-400 flex items-center justify-center">
+      <h1 class="font-bold text(center 5xl white sm:gray-800 md:pink-700)">
+        This is Twind!
+      </h1>
+    </main>
+  </body>
 </html>
 ```
 
-All twind syntax features like [grouping](./grouping.md) are supported.
-See [example/shim.html](https://github.com/tw-in-js/twind/blob/main/example/shim.html) for a full example.
+> [live and interactive shim demo](https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPG1haW4gY2xhc3M9Imgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIiPgogICAgPGgxIGNsYXNzPSJmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKSI+CiAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICA8L2gxPgogIDwvbWFpbj4KYA==)
 
-To customize the default `tw` instance you can provide a `<script type="twind-config">...</script>`
-within the document. The content must be valid JSON and all twind setup options are supported.
+All twind syntax features like [grouping](./grouping.md) are supported. See [example/shim.html](https://github.com/tw-in-js/twind/blob/main/example/shim.html) for a full example.
+
+To customize the default `tw` instance you can provide a `<script type="twind-config">...</script>` within the document. The content must be valid JSON and all twind setup options are supported.
 
 ```html
 <!DOCTYPE html>
@@ -101,7 +106,7 @@ within the document. The content must be valid JSON and all twind setup options 
   </head>
   <body>
     <h1 class="text-7xl rounded-md ring(& pink-700 offset(4 pink-200))">Hello World</h1>
-  </bod>
+  </body>
 </html>
 ```
 
@@ -127,8 +132,10 @@ const styles = {
 }
 
 document.body.innerHTML = `
-  <main class="h-screen bg-purple-400 ${center}">
-    <h1 class="font-bold ${tw`text(center 5xl white sm:gray-800 md:pink-700)`}">This is Twind!</h1>
+  <main class="h-screen bg-purple-400 ${styles.center}">
+    <h1 class="font-bold ${tw`text(center 5xl white sm:gray-800 md:pink-700)`}">
+      This is Twind!
+    </h1>
   </main>
 `
 ```
@@ -141,6 +148,14 @@ To prevent FOUC (flash of unstyled content) it is advised to set the `hidden` at
   <!-- ... -->
 </html>
 ```
+
+<details><summary>How can I use twind/shim from javascript (Click to expand)</summary>
+
+```js
+import 'twind/shim'
+```
+
+</details>
 
 <details><summary>How to support legacy browser with the UMD bundles (Click to expand)</summary>
 

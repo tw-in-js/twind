@@ -101,27 +101,53 @@ However, if like us you are already building your app in JS using a framework li
 
 > _Hint_ You can click on each summary to show additional details.
 
-<details><summary>⚡️ All setup is done almost instantly at runtime, no build step required</summary>
+<details><summary>⚡️ No build step</summary>
 
-In fact, there is no dependency on Tailwind or PostCSS at all. This makes that is possible to reconfigure the compiler on the fly and apply new themes without rebuilding anything.
+In fact, there is no dependency on Tailwind or PostCSS at all. This makes it possible to use twind without a development server. The various ways how to start using twind are described in the [installation guide](https://github.com/tw-in-js/twind/blob/main/docs/installation.md).
+
+```js
+import { tw } from 'twind'
+
+document.body.innerHTML = `
+  <main class="${tw`h-screen bg-purple-400 flex items-center justify-center`}">
+    <h1 class="${tw`font-bold text(center 5xl white sm:gray-800 md:pink-700)`}">
+      This is Twind!
+    </h1>
+  </main>
+`
+```
+
+> [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgdHcgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZCcKCmRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gYAogIDxtYWluIGNsYXNzPSIke3R3YGgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJgfSI+CiAgICA8aDEgY2xhc3M9IiR7dHdgZm9udC1ib2xkIHRleHQoY2VudGVyIDV4bCB3aGl0ZSBzbTpncmF5LTgwMCBtZDpwaW5rLTcwMClgfSI+CiAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICA8L2gxPgogIDwvbWFpbj4KYA==)
+
+</details>
+
+<details><summary>🧪 Use plain Tailwind HTML markup</summary>
+
+It might not always be desirable to generate rules by invoking the compiler directly via function call. In this case you may use the [shim module](https://github.com/tw-in-js/twind/blob/main/docs/installation.md#twindshim) which finds and replaces class names within HTML, generating styles appropriately. This feature can be used together with your favorite framework without any additional setup. This is especially useful during development too; for example when editing classes in the inspector.
+
+```html
+<script type="module" src="https://cdn.skypack.dev/twind/shim"></script>
+
+<main class="h-screen bg-purple-400 flex items-center justify-center">
+  <h1 class="font-bold text(center 5xl white sm:gray-800 md:pink-700)">
+    This is Twind!
+  </h1>
+</main>
+```
+
+> [live and interactive shim demo](https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPG1haW4gY2xhc3M9Imgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIiPgogICAgPGgxIGNsYXNzPSJmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKSI+CiAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICA8L2gxPgogIDwvbWFpbj4KYA==)
 
 </details>
 
 <details><summary>💸 Unlimited styles for a low fixed cost of ~11KB</summary>
 
-By shipping the compiler (rather than the resultant output) there is a known and fixed cost associated with styling. No matter how many styles you write or how many variants you use, all your users will ever have to download is approximately 10Kb of code (which is less than styled-components or your average Tailwind build).
-
-</details>
-
-<details><summary>🧪 Generate styles for Tailwind HTML markup</summary>
-
-It might not always be desirable to generate rules by invoking the compiler direct via function call. In this case you may use the [shim module](https://github.com/tw-in-js/twind/blob/main/docs/installation.md#twindshim) which finds and replaces class names within static HTML, generating styles appropriately. This is especially useful during development too; for example when editing classes in the inspector.
+By shipping the compiler (rather than the resultant output) there is a known and fixed cost associated with styling. No matter how many styles you write or how many variants you use, all your users will ever have to download is approximately 11Kb of code (which is less than styled-components or your average purged Tailwind build).
 
 </details>
 
 <details><summary>🎯 Extended syntax, variants and directives</summary>
 
-> The following list is just excerpt. Please take a look at the [Tailwind Extensions](https://github.com/tw-in-js/twind/tree/main/docs/tailwind-extensions.md) documentation page.
+> The following list is just an excerpt. Please take a look at the [Tailwind Extensions](https://github.com/tw-in-js/twind/tree/main/docs/tailwind-extensions.md) documentation page.
 
 - Custom syntax for grouping directives and variants
 
@@ -132,15 +158,22 @@ It might not always be desirable to generate rules by invoking the compiler dire
   tw`border-2 border-black border-opacity-50 border-dashed`
   // After directive grouping
   tw`border(2 black opacity-50 dashed)`
+
+  // With variants
+  tw`sm:(border(2 black opacity-50 hover:dashed))`
+  // => sm:border-2 sm:border-black sm:border-opacity-50 sm:hover:border-dashed
+
+  tw`w(1/2 sm:1/3 lg:1/6) p-2`
+  // => w-1/2 sm:w-1/3 lg:w-1/6 p-2
   ```
 
 - Every variant can be applied to every directive
 
-  Because twind is generating CSS during runtime there is no to need restrict the usage of variants.
+  Because twind is generating CSS during runtime there is no restriction to which directives variants can be applied.
 
 - Most pseudo classes can be uses as variant or `group-*` variant
 
-  Unknown variants ([see core variants](https://github.com/tw-in-js/twind/blob/main/src/twind/variants.ts)) are assumed to be [pseudo classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes).
+  Unknown variants (not listed in [core variants](https://github.com/tw-in-js/twind/blob/main/src/twind/variants.ts)) are assumed to be [pseudo classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes).
 
 - `siblings`, `sibling` and `children` variants
 
@@ -160,11 +193,15 @@ It might not always be desirable to generate rules by invoking the compiler dire
 
 The [base reset](https://tailwindcss.com/docs/preflight) provided by Tailwind is instantiated with respect to your theme (values like fonts, colors etc.) and injected in the stylesheet during setup. This guarantees more consistent cross browser results out of the box.
 
+> It is possible to [customize or disable the preflight](https://github.com/tw-in-js/twind/blob/main/docs/setup.md#preflight).
+
 </details>
 
 <details><summary>🎢 Familiar and Tailwind V2 compliant theming</summary>
 
 Theming is done exactly as [documented by the Tailwind](https://tailwindcss.com/docs/theme) meaning that you can copy paste in your themes from existing projects. The only different here is that there is no need to rebuild anything after changing you theme. Just refresh the page!
+
+> For further details please read the [theme section](https://github.com/tw-in-js/twind/blob/main/docs/setup.md#theme) within the [installation guide](https://github.com/tw-in-js/twind/blob/main/docs/setup.md).
 
 </details>
 
@@ -178,7 +215,7 @@ The compiler [accepts functions](https://github.com/tw-in-js/twind/blob/main/doc
 
 <details><summary>🤖 Built in support for conditionally combining rules</summary>
 
-Input is not limited to strings like with HTML classes. The [Twind function](https://github.com/tw-in-js/twind/tree/main/docs/tw.md) accept arrays, objects, template literals, functions, almost everything! The interpretter spec is inspired by and very similar to [clsx](https://github.com/lukeed/clsx) and offers a much more developer friendly API that handles null values gracefully.
+Input is not limited to strings like with HTML classes. The [Twind function](https://github.com/tw-in-js/twind/tree/main/docs/tw.md) accept arrays, objects, template literals, functions, almost everything! The interpreter spec is inspired by and very similar to [clsx](https://github.com/lukeed/clsx) and offers a much more developer friendly API that handles null values gracefully.
 
 </details>
 

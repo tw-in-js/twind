@@ -22,6 +22,20 @@ Tailwind provides a [comprehensive list of variants and directives](https://tail
 
 Having control over the interpreter affords us the possibility of defining terse syntax for [grouping responsive and pseudo variants](./grouping.md) as well as directives with common prefixes. This massively reduces repetition and improves comprehension.
 
+```js
+// Before directive grouping
+tw`border-2 border-black border-opacity-50 border-dashed`
+// After directive grouping
+tw`border(2 black opacity-50 dashed)`
+
+// With variants
+tw`sm:(border(2 black opacity-50 hover:dashed))`
+// => sm:border-2 sm:border-black sm:border-opacity-50 sm:hover:border-dashed
+
+tw`w(1/2 sm:1/3 lg:1/6) p-2`
+// => w-1/2 sm:w-1/3 lg:w-1/6 p-2
+```
+
 </details>
 
 <details><summary>Using exclamation point (<code>!</code>) after a directive to override any other declarations</summary>
@@ -56,9 +70,9 @@ Please see [Installation - Dark Mode](./setup.md#dark-mode) for details.
 
 <details><summary>Most pseudo classes can be uses as variant or <code>group-*</code> variant</summary>
 
-Unknown variants ([see core variants](https://github.com/tw-in-js/twind/blob/main/src/twind/variants.ts)) are assumed to be [pseudo classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes).
+Unknown variants (not listed in [core variants](https://github.com/tw-in-js/twind/blob/main/src/twind/variants.ts)) are assumed to be [pseudo classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes).
 
-Please not that _advanced_ pseudo classes (those that take parameters like `:is(header)`) are not supported out of the box as they use `(...)` which is parsed as [a variant or directive grouping](./grouping.md). You can define an alias for those during [setup](./setup.md):
+_Advanced_ pseudo classes (those that take parameters like `:is(header)`) are not supported out of the box as they use `(...)` which is parsed as [a variant or directive grouping](./grouping.md). You can define an alias for those during [setup](./setup.md):
 
 ```js
 setup({

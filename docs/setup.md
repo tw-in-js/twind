@@ -38,8 +38,30 @@ The setup functions is a named export of the main module and accepts an config o
 To smooth over browser inconsistencies, Tailwind provide a [opinionated modern reset](https://tailwindcss.com/docs/preflight) stylesheet. By default the base reset styles will be injected into the head of the document before any other rules.
 
 - In order to prevent this from happening set this attribute to `false`.
+
+  ```js
+  setup({
+    preflight: false,
+  })
+  ```
+
 - If you would like to inject a custom reset instead then provide a function as a value.
+
+  ```js
+  setup({
+    // preflight: the default preflight CSS object
+    // context: tw, theme and, tag functions
+    preflight: (preflight, context) => ({ ...preflight, /* ... */ }),
+  })
+  ```
+
 - You can provide additional CSS rules as an object which are merged with the default reset.
+
+  ```js
+  setup({
+    preflight: { /* ... */ },
+  })
+  ```
 
 ## Mode
 
@@ -81,6 +103,23 @@ Most CSS-in-JS solutions, such as styled components or emotion will create hashe
 By default, rules that are passed into the `tw` function are not hashed. This helps retain the advantage of using utility classes, aiding inspection and debugging.
 
 To enable hashing of class names set `hash` to `true`.
+
+```js
+setup({
+  hash: true,
+})
+```
+
+Alternatively a custom hash function can be provided:
+
+```js
+import hash from '@emotion/hash'
+
+setup({
+  hash: (string) => 'tw-' + hash(string)
+})
+```
+
 
 ## Theme
 
