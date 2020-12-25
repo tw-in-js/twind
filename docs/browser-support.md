@@ -1,3 +1,10 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Browser Support](#browser-support)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Browser Support
 
 The module will currently run in [all browsers](https://browserslist.dev/?q=PjAlLCBub3QgQ2hyb21lIDwzNiwgbm90IEVkZ2UgPDEyLCBub3QgRmlyZWZveCA8MjAsIG5vdCBPcGVyYSA8MjUsIG5vdCBTYWZhcmkgPDgsIG5vdCBpT1MgPDgsIG5vdCBPcGVyYU1vYmlsZSA8PSAxMi4xLCBub3QgaWUgPD0gMTEsIG5vdCBJRV9Nb2IgPD0gMTE%3D) that support [Math.imul](https://caniuse.com/mdn-javascript_builtins_math_imul), [Map](https://caniuse.com/mdn-javascript_builtins_map), [Set](https://caniuse.com/mdn-javascript_builtins_set) and [WeakMap](https://caniuse.com/mdn-javascript_builtins_weakmap) (eg Chrome >=36, Edge >=12, Firefox >=20, Opera >=25, Safari >=8, iOS >=8) are supported. Additionally all LTS versions of Node.js are supported.

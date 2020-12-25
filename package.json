@@ -36,6 +36,7 @@
   ],
   "scripts": {
     "build": "distilt",
+    "preformat": "doctoc --notitle --maxlevel 3 docs/*.md",
     "format": "prettier --write --ignore-path .gitignore .",
     "lint": "eslint --ext .js,.ts --ignore-path .gitignore .",
     "lint:fix": "yarn lint -- --fix",
@@ -107,6 +108,7 @@
     "c8": "^7.3.5",
     "distilt": "^0.7.0",
     "dlv": "^1.1.3",
+    "doctoc": "^2.0.0",
     "esbuild": "^0.8.23",
     "esbuild-register": "^1.1.1",
     "eslint": "^7.15.0",

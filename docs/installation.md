@@ -4,6 +4,18 @@ It is possible to install and thus use Twind in a multitude of different ways. W
 
 > Although compatible with traditional bundlers no build step is required to use the module
 
+<details><summary>Table Of Contents (Click To Expand)</summary>
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Importing as a local dependency](#importing-as-a-local-dependency)
+- [Importing as a remote dependency](#importing-as-a-remote-dependency)
+- [twind/shim](#twindshim)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+</details>
+
 ## Importing as a local dependency
 
 Most build tools rely on modules to be installed locally on the machine they are running on. Usually these modules are available on and installed via npm. Twind is no different in this regard.

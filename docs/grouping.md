@@ -16,6 +16,20 @@ It is not uncommon for a single element to have tens of rules applied to it like
 
 However, when using Twind we have the option to pass a template literal as input to the compiler. This made it convenient to invent a domain specific syntax that extends the capabilities of Tailwind and helps reduce repetition.
 
+<details><summary>Table Of Contents (Click To Expand)</summary>
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Directive grouping](#directive-grouping)
+- [Variant Grouping](#variant-grouping)
+- [Mixed Groupings](#mixed-groupings)
+- [Self Reference](#self-reference)
+- [Inherited Groups](#inherited-groups)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+</details>
+
 ## Directive grouping
 
 The first grouping syntax works by factoring out common directive prefixes. Below is an example of a rule set without directive grouping and the equivalent rule set with `border` factored out.

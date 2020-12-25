@@ -2,6 +2,17 @@
 
 This module provides two additional sheets: [virtualSheet](#virtual-sheet) and [domSheet](#dom-sheet)
 
+<details><summary>Table Of Contents (Click To Expand)</summary>
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Virtual Sheet](#virtual-sheet)
+- [DOM Sheet](#dom-sheet)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+</details>
+
 ## Virtual Sheet
 
 The virtual sheet collects style rules into an array. This is most useful during testing (see blow) and [server side rendering (SSR)](./ssr.md).

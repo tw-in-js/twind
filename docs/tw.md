@@ -20,6 +20,22 @@ Using the exported `tw` function without any setup results in the compilation of
 
 Calling the `tw` function like in the example above results in the shorthand rules to be interpreted, normalized and compiled into CSS rules which get added to a stylesheet in the head of the document. The function will return a string consisting of all the class names that were processed and apply them to the element itself much like any other CSS-in-JS library.
 
+<details><summary>Table Of Contents (Click To Expand)</summary>
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Function Signature](#function-signature)
+  - [Template Literal (recommended)](#template-literal-recommended)
+  - [Strings](#strings)
+  - [Objects](#objects)
+  - [Arrays](#arrays)
+  - [Variadic](#variadic)
+- [Inline Plugins](#inline-plugins)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+</details>
+
 ## Function Signature
 
 It is possible to invoke the `tw` function in a multitude of different ways. It can take any number of arguments, each of which can be an Object, Array, Boolean, Number, String or Template Literal. This ability is inspired heavily by the [clsx](https://npmjs.com/clsx) library by [Luke Edwards](https://github.com/lukeed).

@@ -4,6 +4,25 @@ Twind supports Server Side Rendering (SSR) out of the box.
 
 > Please note the `twind/server` bundle is Node.JS only.
 
+<details><summary>Table Of Contents (Click To Expand)</summary>
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Synchronous SSR](#synchronous-ssr)
+- [Asynchronous SSR](#asynchronous-ssr)
+- [Streaming SSR](#streaming-ssr)
+- [Frameworks](#frameworks)
+  - [React](#react)
+  - [Preact](#preact)
+  - [Svelte](#svelte)
+  - [Vue](#vue)
+- [Next.js](#nextjs)
+- [Gatsby](#gatsby)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+</details>
+
 ## Synchronous SSR
 
 The following example assumes your app is using the `tw` named export from `twind`

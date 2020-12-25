@@ -2,6 +2,28 @@
 
 Here is a high level overview of decisions that were made when designing the API and ultimately had an impact in shaping the implementation. Including but not limited to type information
 
+<details><summary>Table Of Contents (Click To Expand)</summary>
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Taxomony](#taxomony)
+- [Architecture](#architecture)
+- [API](#api)
+  - [tw](#tw)
+  - [setup](#setup)
+- [Browser Support](#browser-support)
+- [Phases](#phases)
+  - [Parse](#parse)
+  - [Translate](#translate)
+  - [Decorate](#decorate)
+  - [Serialize](#serialize)
+- [Selector Ordering](#selector-ordering)
+  - [Inject](#inject)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+</details>
+
 ## Taxomony
 
 - `token`: things that can be passed to `tw` (string, array, object, falsey values)

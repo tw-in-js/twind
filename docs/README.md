@@ -1,3 +1,18 @@
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Twind](#twind)
+  - [Getting Started](#getting-started)
+  - [Usage](#usage)
+  - [Supporting Materials](#supporting-materials)
+  - [Quickstart](#quickstart)
+  - [Challenges](#challenges)
+  - [Opportunities](#opportunities)
+  - [Motivation](#motivation)
+  - [Licence](#licence)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 # Twind
 
 This is the user manual for the `twind` library. A small compiler that turns Tailwind short hand into CSS rules at run, build or serve time. If you have used Tailwind and/or a CSS-in-JS solution before then most of the API will feel very familiar.

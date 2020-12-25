@@ -4,6 +4,18 @@ Tailwind provides a [comprehensive list of variants and directives](https://tail
 
 > You can click on each summary to reveal more details.
 
+<details><summary>Table Of Contents (Click To Expand)</summary>
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Syntax](#syntax)
+- [Variants](#variants)
+- [Directives](#directives)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+</details>
+
 ## Syntax
 
 <details><summary>Custom syntax for grouping directives and variants</summary>

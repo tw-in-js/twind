@@ -6,6 +6,22 @@ Please show your appreciation by sharing the project on twitter or by starring i
 
 If you have any implementation specific feedback or ideas then please [create an issue](https://github.com/tw-in-js/twind) for discussion.
 
+<details><summary>Table Of Contents (Click To Expand)</summary>
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Local development](#local-development)
+- [Ideas for the future](#ideas-for-the-future)
+- [Packages / Modules](#packages--modules)
+- [Ideas](#ideas)
+  - [Theme](#theme)
+  - [Plugins](#plugins)
+- [Links](#links)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+</details>
+
 ## Local development
 
 If you would like to try your hand at fixing a bug or adding a new feature then first clone the repository and cd into the project directory.

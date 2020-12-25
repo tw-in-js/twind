@@ -2,6 +2,22 @@
 
 Theming and customization lets you specify how core plugins and the compiler behave. This is usually ample for most use cases but sometimes more flexibility is required. Sometimes you might want to extend the abilities of the compiler. When this is the case then most likely you are going to need to write a plugin.
 
+<details><summary>Table Of Contents (Click To Expand)</summary>
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Introduction](#introduction)
+- [Plugins without arguments](#plugins-without-arguments)
+- [Plugins with arguments](#plugins-with-arguments)
+  - [Referencing the theme](#referencing-the-theme)
+- [Inline Plugins](#inline-plugins)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+</details>
+
+## Introduction
+
 > Note that currently the plugin API for Twind differs slightly to tailwind plugins
 
 Plugins make it possible to extend the compilers grammar by adding new directives or variants. Language extension like this is achieved by providing plugins as named functions during setup.
@@ -17,7 +33,7 @@ Plugins are searched for by name using the longest prefix before a dash (`"-"'`)
 | `bg-gradient`      | `["to", "t"]`             |
 | `bg`               | `["gradient", "to", "t"]` |
 
-## Plugin without arguments
+## Plugins without arguments
 
 The simplest form of plugin is one that returns the literal CSS rules that the compiler should return in response to a single directive.
 
@@ -37,7 +53,7 @@ setup({
 
 The above code will result in the compiler returning `{ scroll-snap-type: x }` every time it encounters the directive `scroll-snap-x` within a set of rules.
 
-## Plugin with arguments
+## Plugins with arguments
 
 The previous example is trivial to implement but it only accounts for one of the many valid scroll snap values in the CSS specification. It is possible to write out all the possible scroll-snap rules like this but it would be arduous and somewhat wasteful.
 
@@ -80,7 +96,7 @@ setup({
 
 This would now work for multi-part rules like `scroll-snap-both-proximity` which would return `{ scroll-snap-type: both proximity; }` demonstrating how parts can be combined to produce output which adheres to whatever CSS specification they are trying to abstract over.
 
-## Plugins that reference the theme
+### Referencing the theme
 
 The second named argument passed to a plugin is the configured theme that is being used by the compiler. This is not always required but is useful in circumstances where you might want to provide a default or configurable set of values for a given directive.
 
@@ -106,7 +122,7 @@ In the above example, the directive `scroll-snap` with no arguments with result 
 
 Rules determining the theme functions behavior can be found in the [Tailwind documentation](https://tailwindcss.com/).
 
-## Inline Plugin
+## Inline Plugins
 
 The final kind of plugin is described as an inline plugin but is not strictly a plugin because it doesn't get defined up front in the setup function. They can be used as an escape hatch when writing out "one off" rules.
 

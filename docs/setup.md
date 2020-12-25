@@ -18,6 +18,21 @@ setup({
 
 The setup functions is a named export of the main module and accepts an config object as an argument.
 
+<details><summary>Table Of Contents (Click To Expand)</summary>
+
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+- [Preflight](#preflight)
+- [Mode](#mode)
+- [Hash](#hash)
+- [Theme](#theme)
+  - [Referencing other values](#referencing-other-values)
+- [Dark Mode](#dark-mode)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+</details>
+
 ## Preflight
 
 To smooth over browser inconsistencies, Tailwind provide a [opinionated modern reset](https://tailwindcss.com/docs/preflight) stylesheet. By default the base reset styles will be injected into the head of the document before any other rules.
