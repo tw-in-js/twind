@@ -9,4 +9,5 @@ export const coreVariants: Record<string, string> = {
   ':odd': '&:nth-child(odd)',
   ':children': '&>*',
   ':siblings': '&~*',
+  ':sibling': '&+*',
 }
