@@ -77,7 +77,7 @@ For seamless integration with existing Tailwind HTML you can use [twind/shim](ht
 </main>
 ```
 
-Try `twind/shim` in the [live and interactive shim demo](https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPG1haW4gY2xhc3M9Imgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIiPgogICAgPGgxIGNsYXNzPSJmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKSI+VGhpcyBpcyBUd2luZCE8L2gxPgogIDwvbWFpbj4KYA==)
+Try `twind/shim` in the [live and interactive shim demo](https://esm.codes/#aW1wb3J0IHsgdHcgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZCcKCmRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gYAogIDxtYWluIGNsYXNzPSIke3R3YGgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJgfSI+CiAgICA8aDEgY2xhc3M9IiR7dHdgZm9udC1ib2xkIHRleHQoY2VudGVyIDV4bCB3aGl0ZSBzbTpncmF5LTgwMCBtZDpwaW5rLTcwMClgfSI+CiAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICA8L2gxPgogIDwvbWFpbj4KYA==)
 
 > 📚 For more detailed instruction on usage please [read the documentation](https://github.com/tw-in-js/twind/tree/main/docs#readme) and check out [this extended demo](https://esm.codes/#aW1wb3J0IHsgdHcsIHNldHVwIH0gZnJvbSAnaHR0cHM6Ly9jZG4uc2t5cGFjay5kZXYvdHdpbmQnCgpzZXR1cCh7CiAgdGhlbWU6IHsKICAgIC8vIEV4YW1wbGUgb2YgZXh0ZW5kaW5nIHRoZSBkZWZhdWx0IHRoZW1lCiAgICBleHRlbmQ6IHsKICAgICAgY29sb3JzOiB7IGhvdHBpbms6ICcjRkYwMEZGJyB9LAogICAgICByb3RhdGU6IHsgNTogJzVkZWcnIH0KICAgIH0KICB9Cn0pCgpjb25zdCBhcHAgPSAoKSA9PiBgCiAgICA8ZGl2IGNsYXNzPScke3N0eWxlLmNvbnRhaW5lcn0nPgogICAgICA8aDEgY2xhc3M9JyR7CiAgICAgICAgLy8gRXhhbXBsZSBvZiBhbiBpbmxpbmUgc3R5bGUKICAgICAgICB0d2AKICAgICAgICAgIHRleHQod2hpdGUgNHhsKQogICAgICAgICAgZm9udChib2xkIHNhbnMpCiAgICAgICAgICB0cmFuc2l0aW9uLXRyYW5zZm9ybQogICAgICAgICAgaG92ZXI6KAogICAgICAgICAgICByb3RhdGUtNQogICAgICAgICAgICBzY2FsZS0xNTAKICAgICAgICAgICAgY3Vyc29yLXBvaW50ZXIKICAgICAgICAgICkKICAgICAgICBgCiAgICAgIH0nPkhlbGxvIFdvcmxkPC9oMT4KICAgIDwvZGl2PgogIGA7CiAgCiAgCmNvbnN0IHN0eWxlID0gewogIC8vIEV4YW1wbGUgb2YgYWJzdHJhY3RlZCBzdHlsZQogIGNvbnRhaW5lcjogdHdgCiAgICBoLWZ1bGwKICAgIGJnLWhvdHBpbmsKICAgIGZsZXgKICAgIGl0ZW1zLWNlbnRlcgogICAganVzdGlmeS1jZW50ZXIKICBgCn0KCmRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gYXBwKCk=)
 
@@ -107,9 +107,48 @@ In fact, there is no dependency on Tailwind or PostCSS at all. This makes that i
 
 </details>
 
-<details><summary>💸 Unlimited styles for a low fixed cost of ~10KB</summary>
+<details><summary>💸 Unlimited styles for a low fixed cost of ~11KB</summary>
 
 By shipping the compiler (rather than the resultant output) there is a known and fixed cost associated with styling. No matter how many styles you write or how many variants you use, all your users will ever have to download is approximately 10Kb of code (which is less than styled-components or your average Tailwind build).
+
+</details>
+
+<details><summary>🧪 Generate styles for Tailwind HTML markup</summary>
+
+It might not always be desirable to generate rules by invoking the compiler direct via function call. In this case you may use the [shim module](https://github.com/tw-in-js/twind/blob/main/docs/installation.md#twindshim) which finds and replaces class names within static HTML, generating styles appropriately. This is especially useful during development too; for example when editing classes in the inspector.
+
+</details>
+
+<details><summary>🎯 Extended syntax, variants and directives</summary>
+
+The following list is just excerpt. Please take a look at the [Tailwind Extensions](https://github.com/tw-in-js/twind/tree/main/docs/tailwind-extensions.md) documentation page.
+
+- Custom syntax for grouping directives and variants
+
+  Having control over the interpreter affords us the possibility of defining terse syntax for [grouping responsive and pseudo variants](https://github.com/tw-in-js/twind/blob/main/docs/grouping.md) as well as directives with common prefixes. This massively reduces repetition and improves comprehension.
+
+  ```js
+  // Before directive grouping
+  tw`border-2 border-black border-opacity-50 border-dashed`
+  // After directive grouping
+  tw`border(2 black opacity-50 dashed)`
+  ```
+
+- Every variant can be applied to every directive
+
+  Because twind is generating CSS during runtime there is no to need restrict the usage of variants.
+
+- Using exclamation point (`!`) after a directive to override any other declarations
+
+  Directives may end with exclamation point (`text-center!`) to be marked as [important](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity#The_!important_exception)
+
+- `siblings`, `sibling` and `children` variants
+
+  Allows to apply styling to different elements instead of repeating a directive on each one. This feature can be combined with other variants like `hover`.
+
+- Dark mode is always available
+
+  Please see [Installation - Dark Mode](https://github.com/tw-in-js/twind/tree/main/docs//setup.md#dark-mode) for details.
 
 </details>
 
@@ -125,9 +164,11 @@ Theming is done exactly as [documented by the Tailwind](https://tailwindcss.com/
 
 </details>
 
-<details><summary>🧪 Generate styles for Tailwind HTML markup</summary>
+<details><summary>🚓 Escape hatch for writing arbitrary CSS</summary>
 
-It might not always be desirable to generate rules by invoking the compiler direct via function call. In this case you may use the [shim module](https://github.com/tw-in-js/twind/blob/main/docs/installation.md#twindshim) which finds and replaces class names within static HTML, generating styles appropriately. This is especially useful during development too; for example when editing classes in the inspector.
+The compiler [accepts functions](https://github.com/tw-in-js/twind/blob/main/docs/tw.md#inline-plugins) that can return arbritary CSS-in-JS objects. A convenient a escape hatch for all those one off rules which aren't supported by tailwind. The `&` keyword allows you to write complex rules (like pseudo elements `&::before` and `&::after`) that are beyond the scope of inline styles without having to add another dependency.
+
+> We provide a [css helper](https://github.com/tw-in-js/twind/tree/main/docs/css-in-js.md) as a convenience for this case.
 
 </details>
 
@@ -140,20 +181,6 @@ Input is not limited to strings like with HTML classes. The [Twind function](htt
 <details><summary>🌈 Improve readability by breaking rules over multiple lines</summary>
 
 Using template literals as input ([the recommended method](https://github.com/tw-in-js/twind/blob/main/docs/tw.md#template-literal-recommended)) or even [object syntax](https://github.com/tw-in-js/twind/blob/main/docs/tw.md#objects) allows you to break rules over multiple lines, drastically improving readability and maintainability of complex rules.
-
-</details>
-
-<details><summary>🎯 Custom syntax for grouping directives and variants</summary>
-
-Having control over the interpreter affords us the possibility of defining terse syntax for [grouping responsive and pseudo variants](https://github.com/tw-in-js/twind/blob/main/docs/grouping.md) as well as directives with common prefixes. This massively reduces repetition and improves comprehension.
-
-</details>
-
-<details><summary>🚓 Escape hatch for writing arbitrary CSS</summary>
-
-The compiler [accepts functions](https://github.com/tw-in-js/twind/blob/main/docs/tw.md#inline-plugins) that can return arbritary CSS-in-JS objects. A convenient a escape hatch for all those one off rules which aren't supported by tailwind. The `&` keyword allows you to write complex rules (like pseudo elements `&::before` and `&::after`) that are beyond the scope of inline styles without having to add another dependency.
-
-> We provide a [css helper](https://github.com/tw-in-js/twind/tree/main/docs/css-in-js.md) as a convenience for this case.
 
 </details>
 
