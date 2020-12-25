@@ -65,7 +65,7 @@ document.body.innerHTML = `
 `
 ```
 
-Alternatively try the [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgdHcgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZCcKCmRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gYAogIDxtYWluIGNsYXNzPSIke3R3YGgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJgfSI+CiAgICA8aDEgY2xhc3M9IiR7dHdgZm9udC1ib2xkIHRleHQoY2VudGVyIDV4bCB3aGl0ZSBzbTpncmF5LTgwMCBtZDpwaW5rLTcwMClgfSI+VGhpcyBpcyBUd2luZCE8L2gxPgogIDwvbWFpbj4KYA==).
+Alternatively try the [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgdHcgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZCcKCmRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gYAogIDxtYWluIGNsYXNzPSIke3R3YGgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJgfSI+CiAgICA8aDEgY2xhc3M9IiR7dHdgZm9udC1ib2xkIHRleHQoY2VudGVyIDV4bCB3aGl0ZSBzbTpncmF5LTgwMCBtZDpwaW5rLTcwMClgfSI+VGhpcyBpcyBUd2luZCE8L2gxPgogIDwvbWFpbj4KYA==) and take a look at the [installation guide](https://github.com/tw-in-js/twind/blob/main/docs/installation.md).
 
 For seamless integration with existing Tailwind HTML you can use [twind/shim](https://github.com/tw-in-js/twind/blob/main/docs/installation.md#twindshim):
 
@@ -121,7 +121,7 @@ It might not always be desirable to generate rules by invoking the compiler dire
 
 <details><summary>🎯 Extended syntax, variants and directives</summary>
 
-The following list is just excerpt. Please take a look at the [Tailwind Extensions](https://github.com/tw-in-js/twind/tree/main/docs/tailwind-extensions.md) documentation page.
+> The following list is just excerpt. Please take a look at the [Tailwind Extensions](https://github.com/tw-in-js/twind/tree/main/docs/tailwind-extensions.md) documentation page.
 
 - Custom syntax for grouping directives and variants
 
