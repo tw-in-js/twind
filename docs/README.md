@@ -26,6 +26,15 @@ If you find any incorrect or missing documentation then please [open an issue](h
   - [Testing](./sheets.md) - how to verify the generated class names
   - [Static Extraction (SSR)](./ssr.md) - how to extract the generated css on the server
 
+- **Modules**
+
+  - twind - [tw](./tw.md) and [setup](./setup.md)
+  - [twind/colors](./setup.md#colors) - the Tailwind v2 [extended color palette](https://tailwindcss.com/docs/customizing-colors#color-palette-reference)
+  - [twind/css](./css-in-js.md) - how to apply custom css
+  - [twind/server](./ssr.md) - how to extract the generated css on the server
+  - [twind/sheets](./sheets.md) - several additional sheet implementations that can be used with [setup({ sheet })](./setup.md#sheet).
+  - [twind/shim](./installation.md#twindshim) - allows to copy-paste tailwind examples
+
 - **Supporting Materials**
 
   - [Tailwind Documentation](https://tailwindcss.com)

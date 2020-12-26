@@ -28,6 +28,7 @@ The setup functions is a named export of the main module and accepts an config o
 - [Mode](#mode)
 - [Hash](#hash)
 - [Theme](#theme)
+  - [Colors](#colors)
   - [Referencing other values](#referencing-other-values)
 - [Dark Mode](#dark-mode)
 - [Sheet](#sheet)
@@ -152,6 +153,8 @@ setup({
   },
 })
 ```
+
+### Colors
 
 The Tailwind v2 [extended color palette](https://tailwindcss.com/docs/customizing-colors#color-palette-reference) is available as `twind/colors`:
 
