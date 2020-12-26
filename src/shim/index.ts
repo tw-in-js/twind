@@ -16,14 +16,28 @@ interface MutationRecord {
   readonly target: Node
 }
 
+const rulesToClassCache = new Map<string, string>()
+
 const handleMutation = ({ target, addedNodes }: MutationRecord): void => {
   // Not using target.classList.value (not supported in all browsers) or target.class (this is an SVGAnimatedString for svg)
-  const tokens = (target as Element).getAttribute?.('class')
+  const rules = (target as Element).getAttribute?.('class')
 
-  if (tokens) {
-    const className = tw(tokens)
+  if (rules) {
+    let className = rulesToClassCache.get(rules)
 
-    if (tokens !== className) {
+    if (!className) {
+      className = tw(rules)
+
+      // Remember the generated class name
+      rulesToClassCache.set(rules, className)
+
+      // Ensure the cache does not grow unlimited
+      if (rulesToClassCache.size > 10000) {
+        rulesToClassCache.delete(rulesToClassCache.keys().next().value)
+      }
+    }
+
+    if (rules !== className) {
       // Not using `target.className = ...` as that is read-only for SVGElements
       // eslint-disable-next-line @typescript-eslint/no-extra-semi
       ;(target as Element).setAttribute('class', className)
