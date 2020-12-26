@@ -82,7 +82,9 @@ observer.disconnect(node)
 
 ## Example
 
-> This example show how a custom observer instance can be used to shim a web component.
+This example shows how a custom observer instance can be used to shim a web component.
+
+> This example is using [Constructable Stylesheet Objects](https://wicg.github.io/construct-stylesheets/) and `DocumentOrShadowRoot.adoptedStyleSheets` which have [limited browser support](https://caniuse.com/mdn-api_documentorshadowroot_adoptedstylesheets) at the moment (December 2020).
 
 ```js
 import { LitElement, html } from 'lit-element'
@@ -101,11 +103,13 @@ class TwindElement extends LitElement {
 
   // 4. Start observing class attributes changes
   connectedCallback() {
+    super.connectedCallback()
     this._observer = createObserver(instance).observe(this.renderRoot)
   }
 
   // 5. Stop observing class attributes changes
   disconnectedCallback() {
+    super.disconnectedCallback()
     this._observer.disconnect()
   }
 
