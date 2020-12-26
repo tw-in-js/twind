@@ -22,6 +22,7 @@
     ".": "./src/index.ts",
     "./colors": "./src/colors/index.ts",
     "./css": "./src/css/index.ts",
+    "./observe": "./src/observe/index.ts",
     "./shim": "./src/shim/index.ts",
     "./server": "./src/server/index.ts",
     "./sheets": "./src/sheets/index.ts",
