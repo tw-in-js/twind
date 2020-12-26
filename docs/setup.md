@@ -36,6 +36,7 @@ The setup functions is a named export of the main module and accepts an config o
   - [Void Sheet](#void-sheet)
   - [DOM Sheet](#dom-sheet)
   - [Virtual Sheet](#virtual-sheet)
+  - [Custom Sheet Implementation](#custom-sheet-implementation)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 </details>
@@ -287,6 +288,10 @@ sheet.target
 ```
 
 > See [Sheets - Virtual Sheet](./sheets.md#virtual-sheet) for details.
+
+### Custom Sheet Implementation
+
+In case the builtin sheet implementations do not solve your use case, you can [create your own](./sheets.md#custom-sheet-implementation).
 
 <hr/>
 

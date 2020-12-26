@@ -9,6 +9,7 @@ This module provides [virtualSheet](#virtual-sheet) and [domSheet](#dom-sheet) w
 
 - [Virtual Sheet](#virtual-sheet)
 - [DOM Sheet](#dom-sheet)
+- [Custom Sheet Implementation](#custom-sheet-implementation)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 </details>
@@ -71,6 +72,25 @@ import { setup } from 'twind'
 import { domSheet } from 'twind/sheets'
 
 setup({ ...sharedOptions, sheet: domSheet() })
+```
+
+## Custom Sheet Implementation
+
+In case the builtin sheet implementations do not solve your use case, you can create your own:
+
+```js
+import { setup } from 'twind'
+
+const customSheet = (target = []) => ({
+  target,
+  insert: (rule, index) => {
+    // rule: the CSS rule to insert
+    // index: the rule's position
+    target.splice(index, 0, rule)
+  },
+})
+
+setup({ ...sharedOptions, sheet: customSheet() })
 ```
 
 <hr/>
