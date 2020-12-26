@@ -51,7 +51,7 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
   setup({
     // preflight: the default preflight CSS object
     // context: tw, theme and, tag functions
-    preflight: (preflight, context) => ({ ...preflight, /* ... */ }),
+    preflight: (preflight, context) => ({ ...preflight /* ... */ }),
   })
   ```
 
@@ -59,7 +59,9 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
 
   ```js
   setup({
-    preflight: { /* ... */ },
+    preflight: {
+      /* ... */
+    },
   })
   ```
 
@@ -116,10 +118,9 @@ Alternatively a custom hash function can be provided:
 import hash from '@emotion/hash'
 
 setup({
-  hash: (string) => 'tw-' + hash(string)
+  hash: (string) => 'tw-' + hash(string),
 })
 ```
-
 
 ## Theme
 
