@@ -5,14 +5,15 @@ Understandably developers will more often than not want to customize the out of 
 > To use `tw` you **do not** need to call `setup`.
 
 ```js
-import { setup, strict } from 'twind'
+import { setup, strict, voidSheet } from 'twind'
 
 setup({
   preflight: false, // do not include base style reset (default: use tailwind preflight)
   mode: strict, // throw errors for invalid rules (default: warn)
   hash: true, // hash all generated class names (default: false)
   theme: {}, // define custom theme values (default: tailwind theme)
-  darkMode: 'class', // us ea different dark mode strategy (default: 'media')
+  darkMode: 'class', // use a different dark mode strategy (default: 'media')
+  sheet: voidSheet, // use custom sheet (default: cssomSheet in a browser or no-op)
 })
 ```
 
@@ -29,6 +30,11 @@ The setup functions is a named export of the main module and accepts an config o
 - [Theme](#theme)
   - [Referencing other values](#referencing-other-values)
 - [Dark Mode](#dark-mode)
+- [Sheet](#sheet)
+  - [CSSOM Sheet](#cssom-sheet)
+  - [Void Sheet](#void-sheet)
+  - [DOM Sheet](#dom-sheet)
+  - [Virtual Sheet](#virtual-sheet)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 </details>
@@ -217,6 +223,67 @@ setup({
 ```
 
 For an example how to toggle dark mode manually read the [Tailwind Guide](https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually).
+
+## Sheet
+
+Twind collects generated CSS rules in sheet to make theme available to the environment. By default twind uses a speedy (CSSOM) implementation when running in the browser. On the server a no-op implementation is used.
+
+### CSSOM Sheet
+
+> This is the default implementation in browser environments.
+
+If the `cssomSheet` is passed no `target` it looks for an style element with the id `__twind`. If no such element is found it will create one and append it to the `document.head`.
+
+```js
+import { setup, cssomSheet } from 'twind'
+
+const sheet = cssomSheet({ target: new CSSStyleSheet() })
+setup({ sheet })
+```
+
+> See [Examples - LitElement](./examples.md#litelement) how this can be used.
+
+### Void Sheet
+
+> This is the default implementation on server environments.
+
+```js
+import { setup, voidSheet } from 'twind'
+
+setup({ sheet: voidSheet() })
+```
+
+### DOM Sheet
+
+A sheet implementation which inserts style rules through the Document Object Model.
+
+> This implementation is way slower than the default ([cssomSheet](#cssom-sheet)) but may be useful to see the generated CSS right in the DOM. Most modern browser display CSS rules from the speedy default sheet using their CSS inspector.
+
+```js
+import { setup } from 'twind'
+import { domSheet } from 'twind/sheets'
+
+setup({ sheet: domSheet() })
+```
+
+> See [Sheets - DOM Sheet](./sheets.md#dom-sheet) for details.
+
+### Virtual Sheet
+
+A sheet implementation which collects style rules into an array.
+
+```js
+import { setup } from 'twind'
+import { virtualSheet } from 'twind/sheets'
+
+const sheet = virtualSheet()
+setup({ sheet })
+
+// An array of all inserted CSS rules
+sheet.target
+```
+
+> See [Sheets - Virtual Sheet](./sheets.md#virtual-sheet) for details.
 
 <hr/>
 

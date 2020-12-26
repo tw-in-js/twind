@@ -1,6 +1,6 @@
 # twind/sheets
 
-This module provides two additional sheets: [virtualSheet](#virtual-sheet) and [domSheet](#dom-sheet)
+This module provides [virtualSheet](#virtual-sheet) and [domSheet](#dom-sheet) which can be used with [setup({ sheet })](./setup.md#sheet).
 
 <details><summary>Table Of Contents (Click To Expand)</summary>
 
@@ -60,9 +60,11 @@ test('render one rule', ({ tw, sheet }) => {
 
 ## DOM Sheet
 
-This sheet uses DOM Text nodes to insert the CSS rules into the stylesheet. Using DOM manipulation makes this way slower than the default sheet but allows to see the generated CSS in to DOM. Most modern browser display CSS rules from the speedy default sheet using their CSS inspector.
+This sheet uses DOM Text nodes to insert the CSS rules into the stylesheet. Using DOM manipulation makes this way slower than the [default sheet](./setup.md#cssom-sheet) but allows to see the generated CSS in to DOM. Most modern browser display CSS rules from the speedy default sheet using their CSS inspector.
 
-> In production it is advised to use speedy default sheet.
+> In production it is advised to use [speedy default sheet](./setup.md#cssom-sheet).
+
+If the `domSheet` is passed no `target` it looks for an style element with the id `__twind`. If no such element is found it will create one and append it to the `document.head`.
 
 ```js
 import { setup } from 'twind'
