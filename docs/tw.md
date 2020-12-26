@@ -127,7 +127,7 @@ tw('bg-gray-200', [
 
 ## Inline Plugins
 
-Sometimes developers might want to break out of the defined Tailwind grammar and insert arbritary CSS rules. Although this slightly defeats the purpose of using Tailwind and is not actively encouraged, we realise that is often necessary and so have provided an escape hatch for developers.
+Sometimes developers might want to break out of the defined Tailwind grammar and insert arbitrary CSS rules. Although this slightly defeats the purpose of using Tailwind and is not actively encouraged, we realize that is often necessary and so have provided an escape hatch for developers.
 
 ```js
 tw`
@@ -136,9 +136,9 @@ tw`
 `
 ```
 
-In the above example a class is generate for an `::after` pseudo element. Something that isn't possible withing the confides of the Tailwind API nor possible to denote using a style attribute on an element.
+In the above example a class is generate for an `::after` pseudo element. Something that isn't possible within the confides of the Tailwind API nor possible to denote using a style attribute on an element.
 
-For a further explanation on this mechanism see [Plugins](./plugins.md).
+For a further explanation on this mechanism see [Plugins](./plugins.md#inline-plugins).
 
 <hr/>
 

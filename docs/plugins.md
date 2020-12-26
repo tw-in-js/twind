@@ -154,7 +154,17 @@ tw`
 
 In the above example, the before and after styles are only applied on small screens and when the user is hovering over the element.
 
-> **Note**: The above examples can be written more concise using [twind/css](./css.md).
+> **Note**: The above examples are for exploratory purposes. Consider using [twind/css](./css.md) for optimal performance.
+>
+> ```js
+> tw`
+>   sm:hover:${css({
+>     '&::before': { content: '🙁' }
+>     '&::after': { content: '😊' }
+>   })}
+> `
+> // => sm:hover:tw-xxxx
+> ```
 
 Additionally inline plugins allow to extract common definitions:
 
