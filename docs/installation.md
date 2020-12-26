@@ -91,7 +91,7 @@ into the stylesheet. _No need for `tw`_ but it can be used on the same page as w
 
 All twind syntax features like [grouping](./grouping.md) are supported. See [example/shim.html](https://github.com/tw-in-js/twind/blob/main/example/shim.html) for a full example.
 
-To customize the default `tw` instance you can provide a `<script type="twind-config">...</script>` within the document. The content must be valid JSON and all twind setup options are supported.
+To customize the default `tw` instance you can provide a `<script type="twind-config">...</script>` within the document. The content must be valid JSON and all [twind setup options](./setup.md) (including [hash](https://github.com/tw-in-js/twind/blob/main/docs/setup.md#hash)) are supported.
 
 ```html
 <!DOCTYPE html>
