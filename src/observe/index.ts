@@ -34,7 +34,7 @@ const getCache = (tw: TW): Map<string, string> => {
 export const createObserver = ({ tw = defaultTW }: ShimConfiguration = {}): TwindObserver => {
   const rulesToClassCache = getCache(tw)
 
-  const handleMutation = ({ target, addedNodes }: MutationRecord): void => {
+  const handleMutation = ({ target, addedNodes }: MinimalMutationRecord): void => {
     // Not using target.classList.value (not supported in all browsers) or target.class (this is an SVGAnimatedString for svg)
     const rules = (target as Element).getAttribute?.('class')
 
@@ -72,7 +72,8 @@ export const createObserver = ({ tw = defaultTW }: ShimConfiguration = {}): Twin
     }
   }
 
-  const handleMutations = (mutations: MutationRecord[]): void => mutations.forEach(handleMutation)
+  const handleMutations = (mutations: MinimalMutationRecord[]): void =>
+    mutations.forEach(handleMutation)
 
   const observer = new MutationObserver(handleMutations)
 
@@ -104,13 +105,12 @@ export function observe(
   return createObserver(config as ShimConfiguration | undefined).observe(target)
 }
 
-interface NodeList {
-  readonly length: number
-
-  [index: number]: Node
-}
-
-interface MutationRecord {
-  readonly addedNodes: NodeList
+/**
+ * Simplified MutationRecord which allows use to pass an
+ * ArrayLike (compatible with Array and NodeList) `addedNodes` and
+ * omit other properties we are not interested in.
+ */
+interface MinimalMutationRecord {
+  readonly addedNodes: ArrayLike<Node>
   readonly target: Node
 }
