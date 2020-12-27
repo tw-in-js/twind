@@ -132,7 +132,7 @@ Sometimes developers might want to break out of the defined Tailwind grammar and
 ```js
 tw`
   text-sm
-  ${() => ({ '&::after': { content: '🌈' } })}
+  ${() => ({ '&::after': { content: '"🌈"' } })}
 `
 ```
 
