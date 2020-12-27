@@ -23,9 +23,12 @@ export interface MutableRefObject<T> {
   current: T
 }
 
-export type ForwardedRef<T> = ((instance: T | null) => void) | MutableRefObject<T | null> | null
+export type ForwardedRef<T = RefDefault> =
+  | ((instance: T | null) => void)
+  | MutableRefObject<T | null>
+  | null
 
-export interface ForwardRefRenderFunction<T, P = {}> {
+export interface ForwardRefRenderFunction<T = RefDefault, P = PropsDefault> {
   (props: StyledProps<P>, ref: ForwardedRef<T>): any
 
   displayName?: string
@@ -38,31 +41,23 @@ export interface ForwardRefRenderFunction<T, P = {}> {
 }
 
 export interface ForwardRef {
-  <T extends GenericType = GenericType>(
-    render: ForwardRefRenderFunction<T['Ref'], T['Props']>,
-  ): StyledComponent<{ Props: T['Props']; Ref: T['Ref']; HResult: T['HResult'] }>
+  <Ref = RefDefault, Props = PropsDefault, HResult = HResultDefault>(
+    render: ForwardRefRenderFunction<Ref, Props>,
+  ): (props: Props) => HResult
 }
 
 export type PropsDefault = {}
 export type RefDefault = any
 export type HResultDefault = any
 
-export interface GenericType<HResult = HResultDefault, Props = PropsDefault, Ref = RefDefault> {
-  Props?: Props
-  Ref?: Ref
-  HResult?: HResult
-}
-
-export interface StyledComponent<T extends GenericType = GenericType> {
-  (props: StyledProps<T['Props']>, ref?: ForwardedRef<T['Ref']>): T['HResult']
+export interface StyledComponent<Props = PropsDefault, Ref = RefDefault, HResult = HResultDefault> {
+  (props: StyledProps<Props>, ref?: ForwardedRef<Ref>): HResult
   // propTypes?: WeakValidationMap<P>;
   // contextTypes?: ValidationMap<any>;
-  defaultProps?: Partial<StyledProps<T['Props']>>
+  defaultProps?: Partial<StyledProps<Props>>
   displayName?: string
 
-  attrs<A extends T['Props'] = T['Props']>(
-    attrs: Attrs<T['Props'], A>,
-  ): StyledComponent<{ Props: T['Props'] & A; Ref: T['Ref']; HResult: T['HResult'] }>
+  attrs<A extends Props = Props>(attrs: Attrs<Props, A>): StyledComponent<Props & A, Ref, HResult>
 
   /**
    * Returns the marker class as a selector: `.tw-xxx`
@@ -78,42 +73,37 @@ export type Attrs<P = PropsDefault, A extends P = P> =
   | A
   | ((props: StyledProps<P>) => Partial<StyledProps<A>>)
 
-export interface PartialStyledComponent<T extends GenericType = GenericType> {
-  <A extends T['Props'] = T['Props']>(
+export interface PartialStyledComponent<
+  Props = PropsDefault,
+  Ref = RefDefault,
+  HResult = HResultDefault
+> {
+  <A extends Props = Props>(
     strings: TemplateStringsArray,
     ...interpolations: (Token | StyleFactory<A>)[]
-  ): StyledComponent<{ Props: T['Props'] & A; Ref: T['Ref']; HResult: T['HResult'] }>
+  ): StyledComponent<Props & A, Ref, HResult>
 
-  <A extends T['Props'] = T['Props']>(factory: StyleFactory<A>): StyledComponent<{
-    Props: T['Props'] & A
-    Ref: T['Ref']
-    HResult: T['HResult']
-  }>
+  <A extends Props = Props>(factory: StyleFactory<A>): StyledComponent<Props & A, Ref, HResult>
 
-  <A extends T['Props'] = T['Props']>(
-    token: Token,
-    ...tokens: (Token | StyleFactory<A>)[]
-  ): StyledComponent<{
-    Props: T['Props'] & A
-    Ref: T['Ref']
-    HResult: T['HResult']
-  }>
+  <A extends Props = Props>(token: Token, ...tokens: (Token | StyleFactory<A>)[]): StyledComponent<
+    Props & A,
+    Ref,
+    HResult
+  >
 
-  attrs<A extends T['Props']>(
-    attrs: Attrs<T['Props'], A>,
-  ): PartialStyledComponent<{ Props: T['Props'] & A; Ref: T['Ref']; HResult: T['HResult'] }>
+  attrs<A extends Props>(attrs: Attrs<Props, A>): PartialStyledComponent<Props & A, Ref, HResult>
 }
 
 export interface Styled<HResult = HResultDefault> {
-  <H = HResult>(
+  <P = PropsDefault, R = RefDefault, H = HResult>(
     this: StyledContext<H> | Pragma<H> | null | undefined | void,
     tag: Tag,
-  ): PartialStyledComponent<{ HResult: H }>
+  ): PartialStyledComponent<P, R, H>
 
-  <T extends GenericType = GenericType<HResult>>(
-    this: StyledContext<T['HResult']> | Pragma<T['HResult']> | null | undefined | void,
-    tag: StyledComponent<T>,
-  ): PartialStyledComponent<T>
+  <P = PropsDefault, R = RefDefault, H = HResult>(
+    this: StyledContext<HResult> | Pragma<HResult> | null | undefined | void,
+    tag: StyledComponent<P, R, H>,
+  ): PartialStyledComponent<P, R, H>
 }
 
 export interface UnboundStyled<HResult = HResultDefault> extends Styled<HResult> {
@@ -288,7 +278,7 @@ const create = (
   }
 
   if (forwardRef) {
-    Styled = forwardRef(Styled as any)
+    Styled = forwardRef(Styled as any) as any
   }
 
   Styled.attrs = (newAttrs) => create(context, tag, [...attrs, newAttrs] as any, tokens) as any
@@ -326,7 +316,7 @@ export const bind = (context: StyledContext | Pragma, tw?: TW): void => {
 export type WithTags<T extends Styled> = T &
   {
     readonly [P in keyof Tags]: T extends Styled<infer HResult>
-      ? PartialStyledComponent<{ HResult: HResult }>
+      ? PartialStyledComponent<PropsDefault, RefDefault, HResult>
       : never
   }
 

@@ -286,7 +286,7 @@ test('targeting another component', ({ styled, sheet }) => {
 })
 
 test('using "as" prop', ({ styled, sheet }) => {
-  const Button: StyledComponent<{ Props: { href?: string } }> = styled('button')({
+  const Button = styled<{ href?: string }>('button')({
     sm: 'text-sm',
     md: 'text-lg',
   })
@@ -317,7 +317,7 @@ test('using "as" prop', ({ styled, sheet }) => {
 test('using "as" prop on Components', ({ styled, sheet }) => {
   const Span = styled.span('text-sm')
 
-  const Button: StyledComponent<{ Props: { href?: string } }> = styled(Span)('rounded-md')
+  const Button = styled(Span)<{ href?: string }>('rounded-md')
 
   // Nothing injected yet
   assert.equal(sheet.target, [])
