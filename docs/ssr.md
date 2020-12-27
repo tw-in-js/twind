@@ -49,8 +49,8 @@ function ssr() {
   // 4. Generate the reponse html
   return `<!DOCTYPE html>
     <html lang="en">
-    <head>${styleTag}</head>
-    <body>${body}</body>
+      <head>${styleTag}</head>
+      <body>${body}</body>
     </html>
   `
 }
@@ -92,8 +92,8 @@ async function ssr() {
   // 4. Generate the reponse html
   return `<!DOCTYPE html>
     <html lang="en">
-    <head>${styleTag}</head>
-    <body>${body}</body>
+      <head>${styleTag}</head>
+      <body>${body}</body>
     </html>
   `
 }
@@ -132,8 +132,8 @@ function ssr() {
   // 4. Generate the reponse html
   return `<!DOCTYPE html>
     <html lang="en">
-    <head>${styleTag}</head>
-    <body>${body}</body>
+      <head>${styleTag}</head>
+      <body>${body}</body>
     </html>
   `
 }
@@ -166,8 +166,8 @@ function ssr() {
   // 4. Generate the reponse html
   return `<!DOCTYPE html>
     <html lang="en">
-    <head>${styleTag}</head>
-    <body>${body}</body>
+      <head>${styleTag}</head>
+      <body>${body}</body>
     </html>
   `
 }
@@ -202,8 +202,8 @@ function ssr() {
   // 4. Generate the reponse html
   return `<!DOCTYPE html>
     <html lang="en">
-    <head>${head}</head>
-    <body>${html}</body>
+      <head>${head}</head>
+      <body>${html}</body>
     </html>
   `
 }
@@ -241,8 +241,8 @@ async function ssr() {
   // 4. Generate the reponse html
   return `<!DOCTYPE html>
     <html lang="en">
-    <head>${styleTag}</head>
-    <body>${body}</body>
+      <head>${styleTag}</head>
+      <body>${body}</body>
     </html>
   `
 }
@@ -250,17 +250,43 @@ async function ssr() {
 
 ## Next.js
 
+> The [tw-in-js/example-next](https://github.com/tw-in-js/example-next) repository uses this setup.
+
+```js
+/* twind.config.js */
+export default {
+  /* Shared config */
+}
+```
+
+```js
+/* pages/_app.js */
+import App from 'next/app'
+
+import { setup } from 'twind'
+import twindConfig from '../twind.config'
+
+if (typeof window !== 'undefined') {
+  setup(twindConfig)
+}
+
+export default App
+```
+
 ```js
 /* pages/_document.js */
 
 import Document from 'next/document'
+import * as React from 'react'
 
 import { setup } from 'twind'
 import { asyncVirtualSheet, getStyleTagProperties } from 'twind/server'
 
+import twindConfig from '../twind.config'
+
 const sheet = asyncVirtualSheet()
 
-setup({ ...sharedOptions, sheet })
+setup({ ...twindConfig, sheet })
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -272,6 +298,7 @@ export default class MyDocument extends Document {
 
     const styleProps = {
       id,
+      key: id,
       dangerouslySetInnerHTML: {
         __html: textContent,
       },
@@ -279,12 +306,10 @@ export default class MyDocument extends Document {
 
     return {
       ...initialProps,
-      styles: (
-        <>
-          {initialProps.styles}
-          <style {...styleProps} />
-        </>
-      ),
+      styles: [
+        ...initialProps.styles,
+        React.createElement('style', styleProps),
+      ],
     }
   }
 }
