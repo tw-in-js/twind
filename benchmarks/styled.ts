@@ -27,6 +27,7 @@ function renderComponent(Component) {
 }
 
 // Run the benchmarks
+// eslint-disable-next-line @typescript-eslint/no-extra-semi
 ;(async function run() {
   await objectStyles()
   await templateLiteralStyles()
