@@ -46,7 +46,7 @@ function ssr() {
   // 3. Create the style tag with all generated CSS rules
   const styleTag = getStyleTag(sheet)
 
-  // 4. Generate the reponse html
+  // 4. Generate the response html
   return `<!DOCTYPE html>
     <html lang="en">
       <head>${styleTag}</head>
@@ -89,7 +89,7 @@ async function ssr() {
   // 3. Create the style tag with all generated CSS rules
   const styleTag = getStyleTag(sheet)
 
-  // 4. Generate the reponse html
+  // 4. Generate the response html
   return `<!DOCTYPE html>
     <html lang="en">
       <head>${styleTag}</head>
@@ -129,7 +129,7 @@ function ssr() {
   // 3. Create the style tag with all generated CSS rules
   const styleTag = getStyleTag(sheet)
 
-  // 4. Generate the reponse html
+  // 4. Generate the response html
   return `<!DOCTYPE html>
     <html lang="en">
       <head>${styleTag}</head>
@@ -163,7 +163,7 @@ function ssr() {
   // 3. Create the style tag with all generated CSS rules
   const styleTag = getStyleTag(sheet)
 
-  // 4. Generate the reponse html
+  // 4. Generate the response html
   return `<!DOCTYPE html>
     <html lang="en">
       <head>${styleTag}</head>
@@ -199,7 +199,7 @@ function ssr() {
   // 3. Create the style tag with all generated CSS rules
   head += getStyleTag(sheet)
 
-  // 4. Generate the reponse html
+  // 4. Generate the response html
   return `<!DOCTYPE html>
     <html lang="en">
       <head>${head}</head>
@@ -238,7 +238,7 @@ async function ssr() {
   // 3. Create the style tag with all generated CSS rules
   const styleTag = getStyleTag(sheet)
 
-  // 4. Generate the reponse html
+  // 4. Generate the response html
   return `<!DOCTYPE html>
     <html lang="en">
       <head>${styleTag}</head>
