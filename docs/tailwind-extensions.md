@@ -152,6 +152,23 @@ Please note that [some CSS properties are inherited](https://developer.mozilla.o
 
 ## Directives
 
+<details><summary>Some directives support all CSS values</summary>
+
+- `align-*` - [vertical-align](https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align)
+- `appearance-*` - [appearance](https://developer.mozilla.org/en-US/docs/Web/CSS/appearance)
+- `clear-*` - [clear](https://developer.mozilla.org/en-US/docs/Web/CSS/clear)
+- `cursor-*` - [cursor](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor)
+- `float-*` - [float](https://developer.mozilla.org/en-US/docs/Web/CSS/float)
+- `list-*` - [list-style-type](https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type)
+- `object-*` - [object-position](https://developer.mozilla.org/en-US/docs/Web/CSS/object-position); using a dash as separator: `object-right-top`
+- `origin-*` - [transform-origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin); using a dash as separator: `origin-top-left`
+- `overflow-*` - [overflow](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow)
+- `pointer-events-*` - [pointer-events](https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events)
+- `select-*` - [user-select](https://developer.mozilla.org/en-US/docs/Web/CSS/user-select)
+- `whitespace-*` - [white-space](https://developer.mozilla.org/en-US/docs/Web/CSS/white-space)
+
+</details>
+
 <details><summary><code>text-underline</code>, <code>text-uppercase</code>, ...</summary>
   
 This allows grouping of text directives: `text(lg red-500 capitalize underline)`
@@ -218,12 +235,6 @@ Every permutation of `t`op, `r`righ, `l`eft, and `b`ottom is allowed:
 <details><summary><code>rotate</code>, <code>scale</code> , <code>skew</code> and <code>translate</code> provide a fallback for IE 11</summary>
 
 Please note that `transform rotate-45` works but when using `transform rotate-45 scale-150` only one of both is applied.
-
-</details>
-
-<details><summary><code>appearance-*</code>: supports all values</summary>
-
-See [MDN - appearance](https://developer.mozilla.org/en-US/docs/Web/CSS/appearance) for a reference of possible values.
 
 </details>
 
