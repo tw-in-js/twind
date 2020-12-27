@@ -306,10 +306,7 @@ export default class MyDocument extends Document {
 
     return {
       ...initialProps,
-      styles: [
-        ...initialProps.styles,
-        React.createElement('style', styleProps),
-      ],
+      styles: [...initialProps.styles, React.createElement('style', styleProps)],
     }
   }
 }

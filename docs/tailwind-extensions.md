@@ -238,6 +238,12 @@ Please note that `transform rotate-45` works but when using `transform rotate-45
 
 </details>
 
+<details><summary>Theme values are automatically negated</summary>
+
+There is no need to provided negated values in the theme. As soon as twind detect a negated directive like `-mx-2` it negates the theme value.
+
+</details>
+
 <hr/>
 
 Continue to [CSS-in-JS](./css-in-js.md)

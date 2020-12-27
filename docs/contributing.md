@@ -65,6 +65,12 @@ Below is an outline of some todos, packages, plugins and ideas that we would lik
 
 ## Ideas
 
+- convert css to twind
+  - https://github.com/miklosme/css-to-tailwind
+  - https://github.com/ritz078/transform/pull/263
+  - https://transform-git-fork-jlarky-convert-to-twind.ritz078.now.sh/css-to-twind
+- minifier for template-literals
+  - apply grouping where possible
 - react-native support
 - presets: https://tailwindcss.com/docs/presets
 - benchmark using https://github.com/A-gambit/CSS-IN-JS-Benchmarks
