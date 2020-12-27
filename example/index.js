@@ -5,7 +5,7 @@ import { tw, setup } from '../src/index'
 import { domSheet } from '../src/sheets/index'
 setup({ sheet: domSheet() })
 
-import { animation } from '../src/css/index'
+import { css, animation } from '../src/css/index'
 
 const bounce = animation('1s ease infinite', {
   'from, 20%, 53%, 80%, to': {
@@ -72,6 +72,11 @@ const style = {
   `,
 }
 
+const beforeAndAfter = css({
+  '&::before': { background: 'red', content: '🙁' },
+  '&::after': { background: 'green', content: '😊' },
+})
+
 document.body.innerHTML = `
   <main class="${style.main}">
   <div class="${style.card}">
@@ -84,7 +89,7 @@ document.body.innerHTML = `
         <h1 class="${tw`text-3xl`}">The Coldest Sunset In The World</h1>
       </div>
       <div>
-        <p class="${tw`text-gray-700 text-base`}">
+        <p class="${tw`text-gray-700 text-base ${beforeAndAfter}`}">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla!
           Maiores et perferendis eaque, exercitationem praesentium nihil.
         </p>
