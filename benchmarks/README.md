@@ -40,26 +40,26 @@ The following benchmarks are available:
 
   ```
   # Object Styles
-  twind: <div color="black" random="0.2416930362369536" class="tw-1ys3ex2 tw-14ssw6o"></div>
-  goober: <div color="black" random="0.9613646689851119" class="go3955375025" data-reactroot=""></div>
-  emotion: <style data-emotion="css 1rcabg1">.css-1rcabg1{display:inline-block;border-radius:3px;padding:0.5rem 0;margin:0.5rem 1rem;width:11rem;background:transparent;color:white;border:2px solid white;font-size:0.875rem;line-height:1.25rem;}.css-1rcabg1:hover{color:black;opacity:1;}.css-1rcabg1:focus{border:2px dashed black;}@media (min-width: 768px){.css-1rcabg1{font-size:1rem;line-height:1.5rem;}}@media (min-width: 1280px){.css-1rcabg1{font-size:1.125rem;line-height:1.75rem;}}</style><div color="black" class="css-1rcabg1"></div>
+  twind: <div color="black" class="tw-3u6ba0 tw-14ssw6o"></div>
+  goober: <div color="black" random="0.014518000616767335" class="go3334449672" data-reactroot=""></div>
+  emotion: <style data-emotion="css 14zyg7u">.css-14zyg7u{display:inline-block;border-radius:3px;padding:0.5rem 0;margin:0.5rem 1rem;width:11rem;background:transparent;color:white;border:2px solid white;font-size:0.875rem;line-height:1.25rem;}.css-14zyg7u:hover{color:black;opacity:0;}.css-14zyg7u:focus{border:2px dashed black;}@media (min-width: 768px){.css-14zyg7u{font-size:1rem;line-height:1.5rem;}}@media (min-width: 1280px){.css-14zyg7u{font-size:1.125rem;line-height:1.75rem;}}</style><div color="black" class="css-14zyg7u"></div>
   styled-components: <div color="black" class="sc-bdfBwQ kIZhoG"></div>
-  twind x 51,628 ops/sec ±0.63% (89 runs sampled)
-  goober@2.0.18 x 40,069 ops/sec ±0.43% (96 runs sampled)
-  emotion@11.0.0 x 35,349 ops/sec ±1.01% (93 runs sampled)
-  styled-components@5.2.1 x 38,284 ops/sec ±0.48% (93 runs sampled)
+  twind x 52,441 ops/sec ±0.55% (90 runs sampled)
+  goober@2.0.18 x 40,491 ops/sec ±0.43% (96 runs sampled)
+  emotion@11.0.0 x 36,848 ops/sec ±0.69% (91 runs sampled)
+  styled-components@5.2.1 x 38,456 ops/sec ±0.62% (90 runs sampled)
 
   Fastest is: twind
 
   # Template Literal Styles
-  twind: <div color="black" random="0.7099076646992102" class="tw-1g0ngli inline-block rounded py-2 my-2 mx-4 w-44 bg-transparent text-white border-2 border-solid border-white hover:text-black hover:opacity-100 focus:border-2 focus:border-dashed focus:border-black text-sm md:text-base lg:text-lg"></div>
-  goober: <div color="black" random="0.30976624968405986" class="go602841230" data-reactroot=""></div>
+  twind: <div color="black" class="tw-la1urp inline-block rounded py-2 my-2 mx-4 w-44 bg-transparent text-white border-2 border-solid border-white hover:text-black hover:opacity-100 focus:border-2 focus:border-dashed focus:border-black text-sm md:text-base lg:text-lg"></div>
+  goober: <div color="black" random="0.44058694455997416" class="go602841230" data-reactroot=""></div>
   emotion: <style data-emotion="css 1j1rmlp">.css-1j1rmlp{display:inline-block;border-radius:3px;padding:0.5rem 0;margin:0.5rem 1rem;width:11rem;background:transparent;color:white;border:2px solid white;font-size:0.875rem;line-height:1.25rem;}.css-1j1rmlp:hover{color:black;opacity:1;}.css-1j1rmlp:focus{border:2px dashed black;}@media (min-width: 768px){.css-1j1rmlp{font-size:1rem;line-height:1.5rem;}}@media (min-width: 1280px){.css-1j1rmlp{font-size:1.125rem;line-height:1.75rem;}}</style><div color="black" class="css-1j1rmlp"></div>
   styled-components: <div color="black" class="sc-gsTCUz bzdKjA"></div>
-  twind x 57,657 ops/sec ±0.56% (90 runs sampled)
-  goober@2.0.18 x 44,305 ops/sec ±0.51% (93 runs sampled)
-  emotion@11.0.0 x 35,793 ops/sec ±0.72% (92 runs sampled)
-  styled-components@5.2.1 x 56,204 ops/sec ±0.42% (95 runs sampled)
+  twind x 57,979 ops/sec ±0.38% (93 runs sampled)
+  goober@2.0.18 x 43,721 ops/sec ±0.56% (96 runs sampled)
+  emotion@11.0.0 x 36,768 ops/sec ±0.63% (94 runs sampled)
+  styled-components@5.2.1 x 57,611 ops/sec ±0.45% (94 runs sampled)
 
   Fastest is: twind
   ```

@@ -134,7 +134,7 @@ test('styled with props', ({ styled, sheet }) => {
 
   assert.equal(Btn({ primary: true }), {
     type: 'button',
-    props: { primary: true, className: 'tw-u1t3pg text-purple-600' },
+    props: { className: 'tw-u1t3pg text-purple-600' },
     children: [],
   })
   assert.equal(sheet.target, [
@@ -165,7 +165,7 @@ test('tag with props', ({ styled, sheet }) => {
 
   assert.equal(Btn({ primary: true }), {
     type: 'button',
-    props: { primary: true, className: 'tw-u1t3pg text-purple-600' },
+    props: { className: 'tw-u1t3pg text-purple-600' },
     children: [],
   })
   assert.equal(sheet.target, [
@@ -200,7 +200,7 @@ test('tag with inline prop', ({ styled, sheet }) => {
 
   assert.equal(Btn({ primary: true }), {
     type: 'button',
-    props: { primary: true, className: 'tw-4gg6zc text-purple-600 sm:tw-rzyaiu' },
+    props: { className: 'tw-4gg6zc text-purple-600 sm:tw-rzyaiu' },
     children: [],
   })
   assert.equal(sheet.target, [
@@ -233,7 +233,7 @@ test('styled with props using tw', ({ styled, sheet }) => {
 
   assert.equal(Btn({ primary: true }), {
     type: 'button',
-    props: { primary: true, className: 'tw-qo692d text-purple-600' },
+    props: { className: 'tw-qo692d text-purple-600' },
     children: [],
   })
   assert.equal(sheet.target, [
@@ -371,6 +371,56 @@ test('merge "class" prop', ({ styled, sheet }) => {
   assert.equal(Span({ class: 'hero' }), {
     type: 'span',
     props: { className: 'hero tw-6mvkxr text-sm' },
+    children: [],
+  })
+
+  assert.equal(sheet.target, ['.text-sm{font-size:0.875rem;line-height:1.25rem}'])
+})
+
+test('attrs', ({ styled, sheet }) => {
+  const Span = styled('span', { shouldForwardProp: () => true }).attrs({ a: 23 })<{
+    b: number
+  }>`text-sm`.attrs((props) => ({
+    x: props.a * props.b,
+  }))
+
+  const b = Math.random()
+
+  assert.equal(Span({ class: 'hero', b }), {
+    type: 'span',
+    props: { className: 'hero tw-qyp3x2 text-sm', a: 23, b, x: 23 * b },
+    children: [],
+  })
+
+  assert.equal(sheet.target, ['.text-sm{font-size:0.875rem;line-height:1.25rem}'])
+})
+
+test('using attrs to change rendered tag', ({ styled, sheet }) => {
+  const Span = styled.span`text-sm`
+  const Div = Span.attrs({ as: 'div' })
+
+  // Still renders a span
+  assert.equal(Span({}), {
+    type: 'span',
+    props: { className: 'tw-6mvkxr text-sm' },
+    children: [],
+  })
+
+  assert.equal(Div({}), {
+    type: 'div',
+    props: { className: 'tw-u4kn28 text-sm' },
+    children: [],
+  })
+
+  assert.equal(sheet.target, ['.text-sm{font-size:0.875rem;line-height:1.25rem}'])
+})
+
+test('attrs merges className', ({ styled, sheet }) => {
+  const Div = styled.div.attrs({ className: 'hero' })`text-sm`.attrs(() => ({ className: 'large' }))
+
+  assert.equal(Div({ className: 'primary' }), {
+    type: 'div',
+    props: { className: 'primary hero large tw-1m43mr3 text-sm' },
     children: [],
   })
 
