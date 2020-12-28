@@ -54,7 +54,7 @@ export type RefDefault = any
 export type HResultDefault = any
 
 export interface AttrsCallback<P = PropsDefault, A = PropsDefault> {
-  (props: StyledProps<P>): A
+  (props: StyledProps<P>, context: Context): A
 }
 
 export interface ShouldForwardProp {
@@ -229,21 +229,6 @@ const stringifyFunctions = (key: string, value: any): unknown => {
   return value
 }
 
-const mergeAttrs = (props: any, attrs: any): any => {
-  if (is.function(attrs)) {
-    attrs = attrs(props)
-  }
-
-  Object.keys(attrs).forEach((key) => {
-    props[key] =
-      key === 'className' || key === 'class'
-        ? [props[key], attrs[key]].filter(Boolean).join(' ')
-        : attrs[key]
-  })
-
-  return props
-}
-
 const create = (
   context: StyledContext,
   tag: Tag | StyledComponent,
@@ -253,6 +238,21 @@ const create = (
 ): StyledComponent => {
   const { createElement, forwardRef, tw = defaultTW } = context
   const { shouldForwardProp = context.shouldForwardProp || isPropValid } = options
+
+  const mergeAttrs = (props: any, attrs: any): any => {
+    if (is.function(attrs)) {
+      attrs = attrs(props, getContext(tw))
+    }
+
+    Object.keys(attrs).forEach((key) => {
+      props[key] =
+        key === 'className' || key === 'class'
+          ? [props[key], attrs[key]].filter(Boolean).join(' ')
+          : attrs[key]
+    })
+
+    return props
+  }
 
   const validateProp = (prop: string): boolean => shouldForwardProp(prop, isPropValid)
 
