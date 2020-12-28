@@ -721,5 +721,6 @@
   "children:underline": ".children\\:underline>*{text-decoration:underline}",
   "siblings:underline": ".siblings\\:underline~*{text-decoration:underline}",
   "sibling:underline": ".sibling\\:underline+*{text-decoration:underline}",
-  "text-center!": ".text-center\\!{text-align:center !important}"
+  "text-center!": ".text-center\\!{text-align:center !important}",
+  "override:text-center": ".override\\:text-center.override\\:text-center{text-align:center}"
 }

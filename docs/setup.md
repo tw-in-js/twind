@@ -37,6 +37,8 @@ The setup functions is a named export of the main module and accepts an config o
   - [DOM Sheet](#dom-sheet)
   - [Virtual Sheet](#virtual-sheet)
   - [Custom Sheet Implementation](#custom-sheet-implementation)
+- [Plugins](#plugins)
+- [Variants](#variants)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 </details>
@@ -292,6 +294,22 @@ sheet.target
 ### Custom Sheet Implementation
 
 In case the builtin sheet implementations do not solve your use case, you can [create your own](./sheets.md#custom-sheet-implementation).
+
+## Plugins
+
+The `plugins` property allows to define new plugins or override core plugins. See [Plugins](./plugins.md) for details.
+
+## Variants
+
+The `variants` property allows to define new variants or override [core variants](./tailwind-extensions.md#variants).
+
+```js
+setup({
+  variants: {
+    'not-checked': '&:not(:checked)',
+  },
+})
+```
 
 <hr/>
 
