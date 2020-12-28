@@ -22,6 +22,7 @@ If you find any incorrect or missing documentation then please [open an issue](h
   - [Grouping](./grouping.md) - how to optimize rules size
   - [Tailwind Extensions](./tailwind-extensions.md) - which additional features are available
   - [CSS-in-JS](./css-in-js.md) - how to apply custom css
+  - [Styled Components](./styled.md) - create components that have styles attached to them
   - [Plugins](./plugins.md) - how to extend twind
   - [Testing](./sheets.md) - how to verify the generated class names
   - [Static Extraction (SSR)](./ssr.md) - how to extract the generated css on the server
@@ -35,6 +36,7 @@ If you find any incorrect or missing documentation then please [open an issue](h
   - [twind/observe](./observe.md) - the base for [twind/shim](./installation.md#twindshim) which can be used standalone
   - [twind/sheets](./sheets.md) - several additional sheet implementations that can be used with [setup({ sheet })](./setup.md#sheet).
   - [twind/shim](./installation.md#twindshim) - allows to copy-paste tailwind examples
+  - [twind/styled](./styled.md) - create components that have styles attached to them
 
 - **Supporting Materials**
 
