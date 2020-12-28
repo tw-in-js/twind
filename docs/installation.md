@@ -68,8 +68,7 @@ Assuming you have an internet connection then you should now be able to use the 
 
 > Allows to copy-paste tailwind examples. This feature can be used together with your favorite framework without any additional setup.
 
-The `twind/shim` modules allows to use the `class` attribute for tailwind rules. If such a rule is detected the corresponding CSS rule is created and injected
-into the stylesheet. _No need for `tw`_ but it can be used on the same page as well (see example below).
+The `twind/shim` modules allows to use the `class` attribute for tailwind rules. If such a rule is detected the corresponding CSS rule is created and injected into the stylesheet. _No need for `tw`_ but it can be used on the same page as well (see example below).
 
 ```html
 <!DOCTYPE html>
@@ -149,8 +148,14 @@ To prevent FOUC (flash of unstyled content) it is advised to set the `hidden` at
 
 <details><summary>How can I use twind/shim from javascript (Click to expand)</summary>
 
+> Internally `twind/shim` uses [twind/observe](./observe.md) which may be useful for advanced use cases.
+
 ```js
 import 'twind/shim'
+```
+
+```js
+import { setup, disconnect } from 'twind/shim'
 ```
 
 </details>
@@ -161,6 +166,7 @@ import 'twind/shim'
 
 ```html
 <script defer src="https://unpkg.com/twind/twind.umd.js"></script>
+<script defer src="https://unpkg.com/twind/observe/observe.umd.js"></script>
 <script defer src="https://unpkg.com/twind/shim/shim.umd.js"></script>
 ```
 
@@ -168,7 +174,7 @@ import 'twind/shim'
 
 <details><summary>Implementation Details (Click to expand)</summary>
 
-This uses a [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) to detect changed class attributes or added DOM nodes. On detection the class attribute is parsed and translated by twind to inject the required classes into the stylesheet and the class attribute is updated to reflect the added CSS class names that may have been hashed.
+`twind/shim` starts [observing](./observe.md) class attributes changes right after the [DOM content has been loaded](https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event). For further details see [twind/observe - Implementation Details](./observe.md#implementation-details).
 
 </details>
 

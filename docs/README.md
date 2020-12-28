@@ -32,6 +32,7 @@ If you find any incorrect or missing documentation then please [open an issue](h
   - [twind/colors](./setup.md#colors) - the Tailwind v2 [extended color palette](https://tailwindcss.com/docs/customizing-colors#color-palette-reference)
   - [twind/css](./css-in-js.md) - how to apply custom css
   - [twind/server](./ssr.md) - how to extract the generated css on the server
+  - [twind/observe](./observe.md) - the base for [twind/shim](./installation.md#twindshim) which can be used standalone
   - [twind/sheets](./sheets.md) - several additional sheet implementations that can be used with [setup({ sheet })](./setup.md#sheet).
   - [twind/shim](./installation.md#twindshim) - allows to copy-paste tailwind examples
 
