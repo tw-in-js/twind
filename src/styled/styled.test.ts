@@ -3,7 +3,7 @@ import * as assert from 'uvu/assert'
 
 import type { Instance } from '../types'
 import type { VirtualSheet } from '../sheets/index'
-import type { Styled, StyledComponent, WithTags } from './index'
+import type { Styled, WithTags } from './index'
 
 import { create, strict } from '../index'
 import { virtualSheet } from '../sheets/index'
@@ -171,7 +171,7 @@ test('tag with props', ({ styled, sheet }) => {
     children: [],
   })
   assert.equal(sheet.target, [
-    '.text-indigo-600{--tw-text-opacity:1;color:#6366f1;color:rgba(99,102,241,var(--tw-text-opacity))}',
+    '.text-indigo-600{--tw-text-opacity:1;color:#4f46e5;color:rgba(79,70,229,var(--tw-text-opacity))}',
     '.text-purple-600{--tw-text-opacity:1;color:#7c3aed;color:rgba(124,58,237,var(--tw-text-opacity))}',
     '.rounded{border-radius:0.25rem}',
   ])
