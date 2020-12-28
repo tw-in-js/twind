@@ -57,7 +57,7 @@ const instance = create(/* ... */)
 observe(document.body, instance)
 
 // 2. As this context
-observe.call(document.body)
+observe.call(instance, document.body)
 observe.bind(instance)(document.body)
 
 // 3. Use the factory
@@ -70,14 +70,15 @@ createObserver(instance).observe(document.body)
 import { createObserver, observe } from 'twind/observe'
 
 const observer = createObserver(/* custom instance */)
-// Or to start observing an element right away
-// const observer = observe(document.body)
 
-// Start observing a node
+// Or to start observing an element right away
+// const observer = observe(node, /* custom instance */)
+
+// Start observing a node; can be called several times with different nodes
 observer.observe(node)
 
-// Stop observing
-observer.disconnect(node)
+// Stop observing all nodes
+observer.disconnect()
 ```
 
 ## Example
