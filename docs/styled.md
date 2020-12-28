@@ -258,3 +258,7 @@ const { tw } = create(/* addtional config */)
 
 const myStyled = styled.bind(tw)
 ```
+
+<hr/>
+
+Continue to [Plugins](./plugins.md)

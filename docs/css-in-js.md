@@ -264,4 +264,4 @@ slidein({ tw })
 
 <hr/>
 
-Continue to [Plugins](./plugins.md)
+Continue to [Styled Components](./styled.md)
