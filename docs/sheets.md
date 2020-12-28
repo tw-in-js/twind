@@ -1,4 +1,4 @@
-# twind/sheets
+# twind/sheets [![Module Size](https://flat.badgen.net/badgesize/brotli/https:/unpkg.com/twind/sheets/sheets.js?icon=jsdelivr&label&color=blue&cache=10800)](https://unpkg.com/twind/sheets/sheets.js 'brotli module size') [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%2Fsrc%2Fsheets?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/src/sheets) [![Typescript](https://flat.badgen.net/badge/icon/included?icon=typescript&label)](https://unpkg.com/browse/twind/sheets/sheets.d.ts)
 
 This module provides [virtualSheet](#virtual-sheet) and [domSheet](#dom-sheet) which can be used with [setup({ sheet })](./setup.md#sheet).
 

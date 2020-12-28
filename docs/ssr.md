@@ -1,6 +1,6 @@
-# Server Side Rendering (SSR)
+# twind/server [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%2Fsrc%2Fserver?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/src/server) [![Typescript](https://flat.badgen.net/badge/icon/included?icon=typescript&label)](https://unpkg.com/browse/twind/server/server.d.ts)
 
-Twind supports Server Side Rendering (SSR) out of the box.
+Twind supports static extraction a.k.a. Server Side Rendering (SSR) out of the box.
 
 > Please note the `twind/server` bundle is Node.JS only.
 

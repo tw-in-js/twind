@@ -1,4 +1,4 @@
-# twind/observe
+# twind/observe [![Module Size](https://flat.badgen.net/badgesize/brotli/https:/unpkg.com/twind/observe/observe.js?icon=jsdelivr&label&color=blue&cache=10800)](https://unpkg.com/twind/observe/observe.js 'brotli module size') [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%2Fsrc%2Fobserve?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/src/observe) [![Typescript](https://flat.badgen.net/badge/icon/included?icon=typescript&label)](https://unpkg.com/browse/twind/observe/observe.d.ts)
 
 > Allows to copy-paste tailwind examples. This feature can be used together with your favorite framework without any additional setup.
 
