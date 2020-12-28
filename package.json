@@ -49,10 +49,13 @@
   ],
   "// These are ONLY bundled (eg included) in the umd builds": "",
   "bundledDependencies": [
+    "@emotion/is-prop-valid",
+    "@emotion/memoize",
     "style-vendorizer"
   ],
   "dependencies": {
     "csstype": "^3.0.5",
+    "@emotion/is-prop-valid": "^1.0.0",
     "node-html-parser": "^2.0.1",
     "style-vendorizer": "^2.0.0"
   },
