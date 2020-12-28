@@ -144,33 +144,36 @@ test('styled with props', ({ styled, sheet }) => {
 })
 
 test('tag with props', ({ styled, sheet }) => {
-  const Btn = styled.button((props: { primary?: boolean }) => [
-    props.primary ? 'text(purple-600)' : 'text(indigo-500)',
-  ])
+  const Button = styled.button`
+    ${(props: { primary?: boolean }) =>
+      props.primary ? 'text-purple-600' : 'text-indigo-600'} rounded
+  `
 
-  assert.is(Btn.displayName, 'Styled(button)')
-  assert.is(Btn.toString(), '.tw-u1t3pg')
+  assert.is(Button.displayName, 'Styled(button)')
+  assert.is(Button.toString(), '.tw-19zjimz')
 
   // Nothing injected yet
   assert.equal(sheet.target, [])
 
-  assert.equal(Btn({}), {
+  assert.equal(Button({}), {
     type: 'button',
-    props: { className: 'tw-u1t3pg text-indigo-500' },
+    props: { className: 'tw-19zjimz text-indigo-600 rounded' },
     children: [],
   })
   assert.equal(sheet.target, [
-    '.text-indigo-500{--tw-text-opacity:1;color:#6366f1;color:rgba(99,102,241,var(--tw-text-opacity))}',
+    '.text-indigo-600{--tw-text-opacity:1;color:#4f46e5;color:rgba(79,70,229,var(--tw-text-opacity))}',
+    '.rounded{border-radius:0.25rem}',
   ])
 
-  assert.equal(Btn({ primary: true }), {
+  assert.equal(Button({ primary: true }), {
     type: 'button',
-    props: { className: 'tw-u1t3pg text-purple-600' },
+    props: { className: 'tw-19zjimz text-purple-600 rounded' },
     children: [],
   })
   assert.equal(sheet.target, [
-    '.text-indigo-500{--tw-text-opacity:1;color:#6366f1;color:rgba(99,102,241,var(--tw-text-opacity))}',
+    '.text-indigo-600{--tw-text-opacity:1;color:#6366f1;color:rgba(99,102,241,var(--tw-text-opacity))}',
     '.text-purple-600{--tw-text-opacity:1;color:#7c3aed;color:rgba(124,58,237,var(--tw-text-opacity))}',
+    '.rounded{border-radius:0.25rem}',
   ])
 })
 
