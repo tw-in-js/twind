@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-types, @typescript-eslint/no-explicit-any */
+import isPropValid from '@emotion/is-prop-valid'
+
 import type { Token, TW, Context } from '../types'
 
 import { tw as defaultTW, hash } from '../index'
@@ -47,17 +49,39 @@ export interface ForwardRef {
 }
 
 export type PropsDefault = {}
+export type AttrsDefault = {}
 export type RefDefault = any
 export type HResultDefault = any
 
-export interface StyledComponent<Props = PropsDefault, Ref = RefDefault, HResult = HResultDefault> {
+export interface AttrsCallback<P = PropsDefault, A = PropsDefault> {
+  (props: StyledProps<P>): A
+}
+
+export interface ShouldForwardProp {
+  (prop: string, defaultValidatorFn: (prop: string) => boolean): boolean
+}
+
+export interface StyledOptions {
+  shouldForwardProp?: ShouldForwardProp
+}
+
+export interface StyledComponent<
+  Props = PropsDefault,
+  Attrs = AttrsDefault,
+  Ref = RefDefault,
+  HResult = HResultDefault
+> {
   (props: StyledProps<Props>, ref?: ForwardedRef<Ref>): HResult
   // propTypes?: WeakValidationMap<P>;
   // contextTypes?: ValidationMap<any>;
   defaultProps?: Partial<StyledProps<Props>>
   displayName?: string
 
-  attrs<A extends Props = Props>(attrs: Attrs<Props, A>): StyledComponent<Props & A, Ref, HResult>
+  attrs<A = Attrs>(
+    attrs: AttrsCallback<Props & Attrs, Partial<Attrs & A>>,
+  ): StyledComponent<Props, Attrs & A, Ref, HResult>
+
+  attrs<A = AttrsDefault>(attrs: A): StyledComponent<Props, Attrs & A, Ref, HResult>
 
   /**
    * Returns the marker class as a selector: `.tw-xxx`
@@ -69,41 +93,45 @@ export interface StyleFactory<P = PropsDefault> {
   (props: StyledProps<P>, context: Context): Token
 }
 
-export type Attrs<P = PropsDefault, A extends P = P> =
-  | A
-  | ((props: StyledProps<P>) => Partial<StyledProps<A>>)
-
 export interface PartialStyledComponent<
   Props = PropsDefault,
+  Attrs = AttrsDefault,
   Ref = RefDefault,
   HResult = HResultDefault
 > {
-  <A extends Props = Props>(
+  <P = Props>(
     strings: TemplateStringsArray,
-    ...interpolations: (Token | StyleFactory<A>)[]
-  ): StyledComponent<Props & A, Ref, HResult>
+    ...interpolations: (Token | StyleFactory<P & Attrs>)[]
+  ): StyledComponent<Props & P, Attrs, Ref, HResult>
 
-  <A extends Props = Props>(factory: StyleFactory<A>): StyledComponent<Props & A, Ref, HResult>
+  <P = Props>(factory: StyleFactory<P & Attrs>): StyledComponent<Props & P, Attrs, Ref, HResult>
 
-  <A extends Props = Props>(token: Token, ...tokens: (Token | StyleFactory<A>)[]): StyledComponent<
-    Props & A,
+  <P = Props>(token: Token, ...tokens: (Token | StyleFactory<P & Attrs>)[]): StyledComponent<
+    Props & P,
+    Attrs,
     Ref,
     HResult
   >
 
-  attrs<A extends Props>(attrs: Attrs<Props, A>): PartialStyledComponent<Props & A, Ref, HResult>
+  attrs<A = AttrsDefault>(
+    attrs: AttrsCallback<Props & Attrs, Partial<Attrs & A>>,
+  ): PartialStyledComponent<Props, Attrs & A, Ref, HResult>
+
+  attrs<A = AttrsDefault>(attrs: A): PartialStyledComponent<Props, Attrs & A, Ref, HResult>
 }
 
 export interface Styled<HResult = HResultDefault> {
   <P = PropsDefault, R = RefDefault, H = HResult>(
     this: StyledContext<H> | Pragma<H> | null | undefined | void,
     tag: Tag,
-  ): PartialStyledComponent<P, R, H>
+    options?: StyledOptions,
+  ): PartialStyledComponent<P, AttrsDefault, R, H>
 
-  <P = PropsDefault, R = RefDefault, H = HResult>(
+  <P = PropsDefault, A = AttrsDefault, R = RefDefault, H = HResult>(
     this: StyledContext<HResult> | Pragma<HResult> | null | undefined | void,
-    tag: StyledComponent<P, R, H>,
-  ): PartialStyledComponent<P, R, H>
+    tag: StyledComponent<P, A, R, H>,
+    options?: StyledOptions,
+  ): PartialStyledComponent<P, A, R, H>
 }
 
 export interface UnboundStyled<HResult = HResultDefault> extends Styled<HResult> {
@@ -111,7 +139,7 @@ export interface UnboundStyled<HResult = HResultDefault> extends Styled<HResult>
   bind<H = HResult>(h: Pragma<H>, tw?: TW): WithTags<Styled<H>>
 }
 
-export interface StyledContext<HResult = HResultDefault> {
+export interface StyledContext<HResult = HResultDefault> extends StyledOptions {
   createElement: Pragma<HResult>
   forwardRef?: ForwardRef
   tw?: TW
@@ -206,15 +234,12 @@ const mergeAttrs = (props: any, attrs: any): any => {
     attrs = attrs(props)
   }
 
-  // eslint-disable-next-line guard-for-in
-  for (const key in attrs) {
+  Object.keys(attrs).forEach((key) => {
     props[key] =
       key === 'className' || key === 'class'
         ? [props[key], attrs[key]].filter(Boolean).join(' ')
-        : key === 'style'
-        ? { ...props[key], ...attrs[key] }
         : attrs[key]
-  }
+  })
 
   return props
 }
@@ -222,10 +247,22 @@ const mergeAttrs = (props: any, attrs: any): any => {
 const create = (
   context: StyledContext,
   tag: Tag | StyledComponent,
-  attrs: Attrs[],
+  options: StyledOptions,
+  attrs: AttrsCallback[],
   tokens: unknown[],
 ): StyledComponent => {
   const { createElement, forwardRef, tw = defaultTW } = context
+  const { shouldForwardProp = context.shouldForwardProp || isPropValid } = options
+
+  const validateProp = (prop: string): boolean => shouldForwardProp(prop, isPropValid)
+
+  const filterProps = (props: any): any =>
+    Object.keys(props)
+      .filter(validateProp)
+      .reduce(($props, key) => {
+        $props[key] = props[key]
+        return $props
+      }, {} as any)
 
   const targetClassName = hash(JSON.stringify([tag, attrs, tokens], stringifyFunctions))
 
@@ -234,8 +271,6 @@ const create = (
   const forwardAsProp = !is.string(tag)
 
   let Styled = ((props, ref) => {
-    // console.log('Styled', {tag, attrs, tokens, targetClassName, props})
-
     // Apply attrs
     if (attrs.length) {
       props = attrs.reduce(mergeAttrs, { ...props })
@@ -247,7 +282,7 @@ const create = (
     // eslint-disable-next-line @typescript-eslint/no-extra-semi
     ;($props as BaseProps).className = [
       className,
-      $props.className as string,
+      $props.className,
       targetClassName,
       evaluate($props),
     ]
@@ -266,6 +301,10 @@ const create = (
       as = tag as any
     }
 
+    if (is.string(as)) {
+      $props = filterProps($props)
+    }
+
     return createElement(as, $props)
   }) as StyledComponent
 
@@ -273,7 +312,7 @@ const create = (
     is.string(tag) ? tag : (tag as any).displayName || (tag as any).name || 'Component'
   })`
 
-  if (!is.string(tag)) {
+  if (forwardAsProp) {
     Styled.defaultProps = (tag as any).defaultProps
   }
 
@@ -281,7 +320,8 @@ const create = (
     Styled = forwardRef(Styled as any) as any
   }
 
-  Styled.attrs = (newAttrs) => create(context, tag, [...attrs, newAttrs] as any, tokens) as any
+  Styled.attrs = (newAttrs: any) =>
+    create(context, tag, options, [...attrs, newAttrs] as any, tokens) as any
 
   const toString = () => `.${targetClassName}`
 
@@ -299,6 +339,8 @@ let styledContext: StyledContext = {
   },
 
   tw: defaultTW,
+
+  shouldForwardProp: isPropValid,
 }
 
 const createStyledContext = <HResult = HResultDefault>(
@@ -316,7 +358,7 @@ export const bind = (context: StyledContext | Pragma, tw?: TW): void => {
 export type WithTags<T extends Styled> = T &
   {
     readonly [P in keyof Tags]: T extends Styled<infer HResult>
-      ? PartialStyledComponent<PropsDefault, RefDefault, HResult>
+      ? PartialStyledComponent<PropsDefault, AttrsDefault, RefDefault, HResult>
       : never
   }
 
@@ -335,13 +377,14 @@ const withTags = <T extends Styled>(styled: T): WithTags<T> => new Proxy(styled,
 const partial = (
   context: StyledContext,
   tag: Tag | StyledComponent,
-  attrs: Attrs[],
+  options: StyledOptions,
+  attrs: AttrsCallback[],
 ): PartialStyledComponent => {
   const PartialStyledComponent = ((...tokens: unknown[]) =>
-    create(context, tag, attrs, tokens)) as PartialStyledComponent
+    create(context, tag, options, attrs, tokens)) as PartialStyledComponent
 
-  PartialStyledComponent.attrs = (newAttrs) =>
-    partial(context, tag, [...attrs, newAttrs] as any) as any
+  PartialStyledComponent.attrs = (newAttrs: any) =>
+    partial(context, tag, options, [...attrs, newAttrs] as any) as any
 
   return PartialStyledComponent
 }
@@ -349,8 +392,9 @@ const partial = (
 export const styled = withTags(function <HResult = HResultDefault>(
   this: StyledContext<HResult> | Pragma<HResult> | null | undefined | void,
   tag: Tag | StyledComponent,
+  options: StyledOptions = {},
 ) {
-  return partial(this ? createStyledContext(this) : styledContext, tag, [])
+  return partial(this ? createStyledContext(this) : styledContext, tag, options, [])
 } as UnboundStyled)
 
 styled.bind = function <HResult>(
