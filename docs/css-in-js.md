@@ -21,10 +21,12 @@ Essentially a CSS directive uses some CSS rules in object notation format to cre
 ```js
 import { css } from 'twind/css'
 
-tw(css({
-  '&::before': { content: '🙁' }
-  '&::after': { content: '😊' }
-}))
+tw(
+  css({
+    '&::before': { content: '"🙁"' },
+    '&::after': { content: '"😊"' },
+  }),
+)
 // => tw-xxxx
 ```
 
@@ -32,8 +34,8 @@ For best performance it is advised to extract CSS directive into a variable:
 
 ```js
 const styles = css({
-  '&::before': { content: '🙁' }
-  '&::after': { content: '😊' }
+  '&::before': { content: '"🙁"' },
+  '&::after': { content: '"😊"' },
 })
 
 tw(styles)
@@ -45,8 +47,8 @@ Furthermore any variants or groupings that are active when the CSS directive is 
 ```js
 tw`
   sm:hover:${css({
-    '&::before': { content: '🙁' }
-    '&::after': { content: '😊' }
+    '&::before': { content: '"🙁"' },
+    '&::after': { content: '"😊"' },
   })}
 `
 // => sm:hover:tw-xxxx
@@ -69,8 +71,8 @@ CSS directives can be used without applying it through `tw`:
 
 ```js
 document.body.className = css({
-  '&::before': { content: '🙁' }
-  '&::after': { content: '😊' }
+  '&::before': { content: '"🙁"' },
+  '&::after': { content: '"😊"' },
 })
 // => tw-xxxx
 ```
@@ -84,20 +86,20 @@ const { tw } = create(/* options */)
 const cx = css.bind(tw)
 
 document.body.className = cx({
-  '&::before': { content: '🙁' }
-  '&::after': { content: '😊' }
+  '&::before': { content: '"🙁"' },
+  '&::after': { content: '"😊"' },
 })
 
 // Or providing tw on invocation
 document.body.className = css.call(tw, {
-  '&::before': { content: '🙁' }
-  '&::after': { content: '😊' }
+  '&::before': { content: '"🙁"' },
+  '&::after': { content: '"😊"' },
 })
 
 // Or providing tw on generation
 const smiley = css({
-  '&::before': { content: '🙁' }
-  '&::after': { content: '😊' }
+  '&::before': { content: '"🙁"' },
+  '&::after': { content: '"😊"' },
 })
 document.body.className = smiley({ tw })
 ```

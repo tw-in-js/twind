@@ -105,7 +105,7 @@ It is possible to define arbitrary styles by providing a function. Like all othe
 
 ```js
 tw`
-  hover:${css({ '&::after': { content: '🌈' } })}
+  hover:${css({ '&::after': { content: '"🌈"' } })}
 
   hover:${({ tw }) => ({
     sm: tw`underline`,

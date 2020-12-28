@@ -132,8 +132,8 @@ If you find yourself in this circumstance, use an inline plugin:
 
 ```js
 tw(({ theme }) => ({
-  '&::before': { content: '🙁' }
-  '&::after': { content: '😊' }
+  '&::before': { content: '"🙁"' },
+  '&::after': { content: '"😊"' },
 }))
 // => tw-xxxx
 ```
@@ -145,8 +145,8 @@ Furthermore any variants or groupings that are active when the plugin is called,
 ```js
 tw`
   sm:hover:${() => ({
-    '&::before': { content: '🙁' }
-    '&::after': { content: '😊' }
+    '&::before': { content: '"🙁"' },
+    '&::after': { content: '"😊"' },
   })}
 `
 // => sm:hover:tw-xxxx
@@ -159,8 +159,8 @@ In the above example, the before and after styles are only applied on small scre
 > ```js
 > tw`
 >   sm:hover:${css({
->     '&::before': { content: '🙁' }
->     '&::after': { content: '😊' }
+>     '&::before': { content: '"🙁"' },
+>     '&::after': { content: '"😊"' },
 >   })}
 > `
 > // => sm:hover:tw-xxxx
