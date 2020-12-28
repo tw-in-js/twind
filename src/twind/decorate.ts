@@ -34,7 +34,7 @@ export const decorate = (
 
     // Check other well known variants
     // and fallback to pseudo class
-    return { [variants[variant] || '&' + variant]: translation }
+    return { [variants[tail(variant)] || '&' + variant]: translation }
   }
 
   // Apply variants depth-first

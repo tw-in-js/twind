@@ -77,7 +77,7 @@ _Advanced_ pseudo classes (those that take parameters like `:is(header)`) are no
 ```js
 setup({
   variants: {
-    ':is-header': '&:is(header)',
+    'is-header': '&:is(header)',
   },
 })
 
@@ -147,6 +147,31 @@ Please note that [some CSS properties are inherited](https://developer.mozilla.o
 - `whitespace-*`
 
 > If you find any incorrect or missing directive then please [open an issue](https://github.com/tw-in-js/twind/issues).
+
+</details>
+
+<details><summary><code>override:*</code> - Increase the specificity of rules</summary>
+
+When using components that have some default styles (like [twin/styled](./styled.md)) it happens that one wants to override a rule. Consider the following example:
+
+```js
+const shared = tw`text(xl center blue-600) underline`
+const special = tw`${shared} text-purple-600 no-underline`
+// => text-xl text-center text-blue-600 underline text-purple-600 no-underline
+```
+
+One can not be sure that the `text-purple-600` would be correctly applied as the order of classes does not matter. Only the [specificity](https://specificity.keegan.st/).
+
+To support these cases twind includes the `override` variant which uses a little trick to increase the specificity: `.class-name.class-name` is more specific than just `.class-name`
+
+The above example should be re-written to:
+
+```js
+const shared = tw`text(xl center blue-600) underline`
+const special = tw`${shared} override:(text-purple-600 no-underline)`
+```
+
+> [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgdHcgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZCcKCmNvbnN0IHNoYXJlZCA9IHR3YHRleHQoeGwgY2VudGVyIGJsdWUtNjAwKSB1bmRlcmxpbmVgCmNvbnN0IHNwZWNpYWwgPSB0d2Ake3NoYXJlZH0gb3ZlcnJpZGU6KHRleHQtcHVycGxlLTYwMCBuby11bmRlcmxpbmUpYAoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPHAgY2xhc3M9IiR7c2hhcmVkfSI+Q29tbW9uIFN0eWxlczwvcD4KICA8cCBjbGFzcz0iJHtzcGVjaWFsfSI+U3BlY2lhbCBTdHlsZXM8L3A+CmAK)
 
 </details>
 
