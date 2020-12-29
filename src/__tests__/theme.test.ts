@@ -36,13 +36,20 @@ test('custom color', () => {
     },
   })
 
+  assert.is(theme('borderColor.gray.custom'), '#aaa')
   assert.is(theme('borderColor', 'gray.custom'), '#aaa')
   assert.is(theme('borderColor', 'gray-custom'), '#aaa')
   assert.is(theme('borderColor', ['gray', 'custom']), '#aaa')
 
+  assert.is(theme('borderColor.gray.300'), '#d1d5db')
   assert.is(theme('borderColor', 'gray.300'), '#d1d5db')
   assert.is(theme('borderColor', 'gray-300'), '#d1d5db')
   assert.is(theme('borderColor', ['gray', '300']), '#d1d5db')
+
+  assert.is(theme('borderColor.gray.special', '#bbb'), '#bbb')
+  assert.is(theme('borderColor', 'gray.special', '#bbb'), '#bbb')
+  assert.is(theme('borderColor', 'gray-special', '#bbb'), '#bbb')
+  assert.is(theme('borderColor', ['gray', 'special'], '#bbb'), '#bbb')
 })
 
 test('deep custom color', () => {

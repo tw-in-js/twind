@@ -17,7 +17,9 @@
     "Luke Jackson (lukejacksonn.github.io)",
     "Sascha Tandel (https://github.com/sastan)"
   ],
+  "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
   "main": "src/index.ts",
+  "// Each entry is expanded twith several bundles (node, script, types and default)": "",
   "exports": {
     ".": "./src/index.ts",
     "./colors": "./src/colors/index.ts",
@@ -28,8 +30,9 @@
     "./sheets": "./src/sheets/index.ts",
     "./package.json": "./package.json"
   },
+  "// These are relative from within the dist/ folder": "",
   "sideEffects": [
-    "./dist/shim/shim.js"
+    "./shim/shim.js"
   ],
   "// These are ONLY bundled (eg included) in the umd builds": "",
   "bundledDependencies": [
@@ -99,6 +102,14 @@
   "dependencies": {
     "csstype": "^3.0.5",
     "tiny-css-prefixer": "^1.1.4"
+  },
+  "peerDependencies": {
+    "typescript": "^4.1.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@size-limit/file": "^4.9.1",

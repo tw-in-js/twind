@@ -3,6 +3,15 @@ import type { CSSAtKeyframes } from './css'
 export interface ThemeResolver {
   <Section extends keyof Theme>(section: Section): Record<string, ThemeSectionType<Theme[Section]>>
 
+  <Section extends keyof Theme>(keypath: `${Section}.${string}`):
+    | ThemeSectionType<Theme[Section]>
+    | undefined
+
+  <Section extends keyof Theme>(
+    keypath: `${Section}.${string}`,
+    defaultValue: NonNullable<ThemeSectionType<Theme[Section]>>,
+  ): NonNullable<ThemeSectionType<Theme[Section]>>
+
   <Section extends keyof Theme>(section: Section, key: string | string[]):
     | ThemeSectionType<Theme[Section]>
     | undefined
@@ -36,7 +45,7 @@ export interface ThemeSectionResolverContext {
 export type ThemeSectionRecord<T = string> = Record<string, T | undefined>
 
 export type ThemeSectionResolver<T = string> = (
-  theme: <T>(keypath: string, defaultValue?: T) => T,
+  theme: ThemeResolver,
   context: ThemeSectionResolverContext,
 ) => ThemeSectionRecord<T>
 

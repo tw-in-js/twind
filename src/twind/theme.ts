@@ -3,6 +3,7 @@ import type {
   ThemeColor,
   ThemeConfiguration,
   ThemeResolver,
+  ThemeSectionType,
   ThemeSectionResolver,
   ThemeSectionResolverContext,
 } from '../types'
@@ -79,7 +80,9 @@ const linear = (
   return result
 }
 
-const alias = (key: keyof Theme): ThemeSectionResolver => (theme) => theme(key)
+const alias = <Section extends keyof Theme>(
+  section: Section,
+): ThemeSectionResolver<ThemeSectionType<Theme[Section]>> => (theme) => theme(section)
 
 export const defaultTheme: Theme = {
   screens: {
@@ -753,36 +756,30 @@ export const makeThemeResolver = (config?: ThemeConfiguration): ThemeResolver =>
 
   const theme = { ...defaultTheme, ...config }
 
-  const themeResolver = <T>(key: string, defaultValue?: T): T => {
-    const keypath = key.split('.')
-
-    /* eslint-disable @typescript-eslint/no-use-before-define, @typescript-eslint/no-explicit-any */
-    return resolve(
-      keypath[0] as keyof Theme,
-      (keypath.length > 1 ? tail(keypath) : undefined) as any,
-      defaultValue as any,
-    ) as T
-    /* eslint-enable @typescript-eslint/no-use-before-define, @typescript-eslint/no-explicit-any */
-  }
-
   const deref = (
     theme: undefined | Partial<Theme>,
     section: keyof Theme,
   ): Record<string, unknown> | undefined => {
     const base = theme && theme[section]
 
-    const value = is.function(base) ? base(themeResolver, resolveContext) : base
+    const value = is.function(base) ? base(resolve, resolveContext) : base
 
     return value && section === 'colors'
       ? flattenColorPalette(value as Record<string, ThemeColor>)
       : (value as Record<string, unknown>)
   }
 
-  const resolve = ((
-    section: keyof Theme,
-    key?: string | string[],
-    defaultValue?: unknown,
-  ): unknown => {
+  const resolve = ((section: keyof Theme, key: unknown, defaultValue: unknown): unknown => {
+    const keypath = section.split('.')
+    section = keypath[0] as keyof Theme
+
+    // theme('colors.gray.500', maybeDefault)
+    if (keypath.length > 1) {
+      defaultValue = key
+      key = join(tail(keypath), '.')
+    }
+    // else: theme('colors', 'gray.500', maybeDefault)
+
     let base = cache.get(section)
 
     if (!base) {
@@ -796,7 +793,7 @@ export const makeThemeResolver = (config?: ThemeConfiguration): ThemeResolver =>
     }
 
     if (key != null) {
-      const value: unknown = base[(Array.isArray(key) ? join(key) : key) || 'DEFAULT']
+      const value: unknown = base[(Array.isArray(key) ? join(key) : (key as string)) || 'DEFAULT']
 
       return value == null
         ? defaultValue
