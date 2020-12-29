@@ -1,5 +1,4 @@
 import type { Configuration } from '../types'
-import type { TwindObserver } from '../observe'
 
 import { setup as setupTW } from '../index'
 import { createObserver } from '../observe/index'

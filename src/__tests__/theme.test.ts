@@ -45,6 +45,36 @@ test('custom color', () => {
   assert.is(theme('borderColor', ['gray', '300']), '#d1d5db')
 })
 
+test('deep custom color', () => {
+  const theme = makeThemeResolver({
+    extend: {
+      colors: {
+        gray: {
+          a: {
+            b: {
+              c: {
+                d: {
+                  e: {
+                    f: '#abcdef',
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  })
+
+  assert.is(theme('colors', 'gray.a.b.c.d.e.f'), '#abcdef')
+  assert.is(theme('colors', 'gray-a-b-c-d-e-f'), '#abcdef')
+  assert.is(theme('colors', ['gray', 'a', 'b', 'c', 'd', 'e', 'f']), '#abcdef')
+
+  assert.is(theme('colors', 'gray.300'), '#d1d5db')
+  assert.is(theme('colors', 'gray-300'), '#d1d5db')
+  assert.is(theme('colors', ['gray', '300']), '#d1d5db')
+})
+
 test('negative is available and no-op', () => {
   const theme = makeThemeResolver({
     extend: {

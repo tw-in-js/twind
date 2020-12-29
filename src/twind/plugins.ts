@@ -179,7 +179,7 @@ const border: DirectiveHandler = (params, { theme }, id): CSSRules | undefined =
     : withOpacityFallback(
         'borderColor',
         id,
-        theme((id + 'Color') as 'borderColor' | 'divideColor', params),
+        theme((id + 'Color') as 'borderColor' | 'divideColor', params) as string,
       )
 }
 
@@ -614,7 +614,7 @@ export const corePlugins: Plugins = {
           }
     }
 
-    return withOpacityFallback('color', 'text', theme('textColor', params))
+    return withOpacityFallback('color', 'text', theme('textColor', params) as string)
   },
 
   // eslint-disable-next-line complexity
@@ -666,7 +666,7 @@ export const corePlugins: Plugins = {
 
     return (_ = theme('backgroundImage', params, '' /* Optional */))
       ? { backgroundImage: _ }
-      : withOpacityFallback('backgroundColor', 'bg', theme('backgroundColor', params))
+      : withOpacityFallback('backgroundColor', 'bg', theme('backgroundColor', params) as string)
   },
 
   // .from-purple-400
@@ -711,7 +711,11 @@ export const corePlugins: Plugins = {
     (_ =
       params[0] === 'opacity'
         ? opacityProperty(params, theme, id)
-        : withOpacityFallback('color', 'placeholder', theme('placeholderColor', params))) && {
+        : withOpacityFallback(
+            'color',
+            'placeholder',
+            theme('placeholderColor', params) as string,
+          )) && {
       '&::placeholder': _,
     },
 
@@ -796,7 +800,7 @@ export const corePlugins: Plugins = {
             '',
             '0px',
           )})) var(--tw-ring-color,${asRGBA(
-            theme('ringColor', '', '#93c5fd'),
+            theme('ringColor', '', '#93c5fd') as string,
             'ring-opacity',
             theme('ringOpacity', '', '0.5'),
           )})`,
@@ -806,7 +810,7 @@ export const corePlugins: Plugins = {
       : {
           // A color
           '--tw-ring-opacity': '1',
-          '--tw-ring-color': asRGBA(theme('ringColor', params), 'ring-opacity'),
+          '--tw-ring-color': asRGBA(theme('ringColor', params) as string, 'ring-opacity'),
         }
   },
 
