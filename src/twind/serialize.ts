@@ -150,24 +150,24 @@ export const serialize = (
           }
         } else {
           // A selector block: { '&:focus': { ... } }
-          // If this is a nested selector we need to
-          // - replace `&` with the current selector
-          // - propagate the presedence; if it is not nested we reset the presedence as it is most likely a global styles
-          const hasNestedSelector = selector && includes(key, '&')
-
           stringify(
             atRules,
-            hasNestedSelector
+            // If this is a nested selector we need to
+            // - replace `&` with the current selector
+            selector
               ? // Go over the selector and replace the matching selectors respecting multiple selectors
                 selector.replace(/([^,])+/g, (selectorPart) =>
                   // Same for the key
                   key.replace(/([^,])+/g, (keyPart) =>
                     // If the current part has a nested selector replace it
-                    includes(keyPart, '&') ? keyPart.replace(/&/g, selectorPart) : keyPart,
+                    includes(keyPart, '&')
+                      ? keyPart.replace(/&/g, selectorPart)
+                      : (selectorPart && selectorPart + ' ') + keyPart,
                   ),
                 )
               : key,
-            hasNestedSelector ? presedence : 0,
+            // - propagate the presedence; if it is not nested we reset the presedence as it is most likely a global styles
+            selector && includes(key, '&') ? presedence : 0,
             value as CSSRules,
             important,
           )

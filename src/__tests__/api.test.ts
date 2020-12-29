@@ -589,7 +589,7 @@ test('inject global styles', ({ sheet, tw }) => {
 
   assert.equal(sheet.target, [
     '.tw-1kfw9fm{background-color:var(--main-bg-color)}',
-    ':root{--main-bg-color:brown}',
+    '.tw-1kfw9fm :root{--main-bg-color:brown}',
   ])
 })
 
@@ -603,7 +603,7 @@ test('expand nested selector', ({ sheet, tw }) => {
     'tw-ec2uk9',
   )
 
-  assert.equal(sheet.target, ['.tw-ec2uk9, a{color:black}'])
+  assert.equal(sheet.target, ['.tw-ec2uk9,.tw-ec2uk9  a{color:black}'])
 })
 
 test('fontSize string', ({ sheet }) => {
