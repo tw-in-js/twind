@@ -702,25 +702,30 @@ export const defaultTheme: Theme = {
 }
 
 // https://github.com/tailwindlabs/tailwindcss/blob/master/src/util/flattenColorPalette.js
-const flattenColorPalette = (colors: Record<string, ThemeColor>): Record<string, ThemeColor> =>
-  Object.keys(colors).reduce((flatColors, key) => {
-    const value = colors[key]
+const flattenColorPalette = (
+  colors: Record<string, ThemeColor>,
+  target: Record<string, ThemeColor> = {},
+  prefix: string[] = [],
+): Record<string, ThemeColor> => {
+  Object.keys(colors).forEach((property) => {
+    const value = colors[property]
 
-    flatColors[key] = value
+    if (property === 'DEFAULT') {
+      target[join(prefix)] = value
+      target[join(prefix, '.')] = value
+    }
 
-    return is.object(value)
-      ? Object.keys(value).reduce((flatColors, number) => {
-          if (number === 'DEFAULT') {
-            flatColors[key] = value[number]
-          }
+    const key = [...prefix, property]
+    target[join(key)] = value
+    target[join(key, '.')] = value
 
-          flatColors[key + '-' + number] = value[number]
-          flatColors[key + '.' + number] = value[number]
+    if (is.object(value)) {
+      flattenColorPalette(value, target, key)
+    }
+  }, target)
 
-          return flatColors
-        }, flatColors)
-      : flatColors
-  }, {} as Record<string, ThemeColor>)
+  return target
+}
 
 const resolveContext: ThemeSectionResolverContext = {
   // ?negative: (source) =>

@@ -48,7 +48,12 @@ export interface ThemeContainer {
   padding?: string | Record<string, string | undefined>
 }
 
-export type ThemeColor = string | Record<string, string>
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface ThemeColorObject extends Record<string, ThemeColor> {
+  /* empty */
+}
+
+export type ThemeColor = string | ThemeColorObject
 
 export type ThemeFontSize =
   | string
