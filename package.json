@@ -9,7 +9,7 @@
     "tw-in-js",
     "tailwind-in-js"
   ],
-  "homepage": "https://github.com/tw-in-js/twind#readme",
+  "homepage": "https://twind.dev",
   "bugs": "https://github.com/tw-in-js/twind/issues",
   "repository": "github:tw-in-js/twind",
   "license": "MIT",
@@ -72,8 +72,7 @@
     "overrides": [
       {
         "files": [
-          "snowpack.config.js",
-          "scripts/*.js"
+          "snowpack.config.js"
         ],
         "env": {
           "node": true
