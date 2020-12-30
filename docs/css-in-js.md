@@ -59,7 +59,7 @@ Values within the CSS object can be a function which are called with the `contex
 ```js
 const styles = css({
   // .tw-xxx a
-  'a': ({ theme }) => ({
+  a: ({ theme }) => ({
     color: theme('colors.blue.500'),
     // .tw-xxx a:hover
     '&:hover': {

@@ -63,7 +63,7 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
   setup({
     // preflight: the default preflight CSS object
     // context: tw, theme and, tag functions
-    preflight: (preflight, { theme } ) => ({ ...preflight /* ... */ }),
+    preflight: (preflight, { theme }) => ({ ...preflight /* ... */ }),
   })
   ```
 
