@@ -6,6 +6,10 @@
     "target": "es2018",
     "module": "ESNext",
     "lib": ["esnext", "dom", "dom.iterable"],
+    // Use preact in the examples
+    "jsx": "react",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
     // ensure that nobody can accidentally use this config for a build
     "noEmit": true,
     "declaration": true,
