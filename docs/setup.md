@@ -47,6 +47,8 @@ The setup functions is a named export of the main module and accepts an config o
 
 To smooth over browser inconsistencies, Tailwind provide a [opinionated modern reset](https://tailwindcss.com/docs/preflight) stylesheet. By default the base reset styles will be injected into the head of the document before any other rules.
 
+> This can be used to inject additional global styles.
+
 - In order to prevent this from happening set this attribute to `false`.
 
   ```js
@@ -61,7 +63,7 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
   setup({
     // preflight: the default preflight CSS object
     // context: tw, theme and, tag functions
-    preflight: (preflight, context) => ({ ...preflight /* ... */ }),
+    preflight: (preflight, { theme } ) => ({ ...preflight /* ... */ }),
   })
   ```
 
