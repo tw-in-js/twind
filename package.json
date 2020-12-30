@@ -36,7 +36,7 @@
   ],
   "// These are ONLY bundled (eg included) in the umd builds": "",
   "bundledDependencies": [
-    "tiny-css-prefixer"
+    "style-vendorizer"
   ],
   "scripts": {
     "build": "distilt",
@@ -101,7 +101,7 @@
   },
   "dependencies": {
     "csstype": "^3.0.5",
-    "tiny-css-prefixer": "^1.1.4"
+    "style-vendorizer": "^2.0.0"
   },
   "peerDependencies": {
     "typescript": "^4.1.0"

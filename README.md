@@ -331,7 +331,7 @@ It would be untrue to suggest that the design here is totally original, other th
 - [goober](https://github.com/cristianbote/goober): an impossibly small yet efficient CSS-in-JS implementation that defines critical module features.
 - [otion](https://github.com/kripod/otion): the first CSS-in-JS solution specifically oriented around handling CSS in an atomic fashion.
 - [clsx](https://github.com/lukeed/clsx): a tiny utility for constructing class name strings conditionally.
-- [tiny-css-prefixer](https://github.com/kitten/tiny-css-prefixer): essentials CSS prefixing helpers in less than 1KB of JavaScript.
+- [style-vendorizer](https://github.com/kripod/style-vendorizer): essentials CSS prefixing helpers in less than 1KB of JavaScript.
 - [csstype](https://github.com/frenic/csstype): providing autocompletion and type checking for CSS properties and values.
 
 ## License

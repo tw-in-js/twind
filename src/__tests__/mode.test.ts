@@ -96,7 +96,7 @@ test('ignore vendor specific pseudo classes errors', () => {
   assert.equal(calls, [
     ['::-moz-focus-inner{border-style:none}', 0],
     [':-moz-focusring{outline:1px dotted ButtonText}', 0],
-    ['.underline{text-decoration:underline}', 0],
+    ['.underline{-webkit-text-decoration:underline;text-decoration:underline}', 0],
     ['.text-center{text-align:center}', 1],
   ])
 
@@ -112,7 +112,7 @@ test('propagate other errors to warn', () => {
   sheet.insert = (rule, index) => {
     calls.push([rule, index])
 
-    if (rule.includes('-web')) {
+    if (rule.includes('invalid-web')) {
       throw new Error(
         `Failed to execute 'insertRule' on 'CSSStyleSheet': Failed to parse the rule '${rule}'.`,
       )
@@ -131,7 +131,7 @@ test('propagate other errors to warn', () => {
 
   assert.equal(calls, [
     ['.invalid-web{color:blue}', 0],
-    ['.underline{text-decoration:underline}', 0],
+    ['.underline{-webkit-text-decoration:underline;text-decoration:underline}', 0],
   ])
 
   assert.is(warn.callCount, 1)
