@@ -67,6 +67,19 @@ tw`w(1/2 sm:1/3 lg:1/6) p-2`
 // => w-1/2 sm:w-1/3 lg:w-1/6 p-2
 ```
 
+<details><summary>Show me more examples</summary>
+
+```js
+// Grouping across string boundaries
+tw('hover:(', 'bg-red-500', 'p-3', ')', 'm-1')
+// => hover:bg-red-500 hover:p-3 m-1
+
+tw('hover:(bg-red-500', 'p-3)', 'm-1')
+// => hover:bg-red-500 hover:p-3 m-1
+```
+
+</details>
+
 ## Mixed Groupings
 
 It is possible to nest directive groups inside of responsive groups and vice versa, however it is important to note that nesting responsive variants inside of responsive variants doesn't make sense and is not permitted.

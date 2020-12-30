@@ -85,8 +85,12 @@ tw('bg-gray-200', true && 'rounded', 'underline')
 ```js
 tw({ 'bg-gray-200': true, rounded: false, underline: isTrue() })
 //=> bg-gray-200 underline
+
 tw({ 'bg-gray-200': true }, { rounded: false }, null, { underline: true })
 //=> bg-gray-200 underline
+
+tw({ hover: ['bg-red-500', 'p-3'] }, 'm-1')
+// => hover:bg-red-500 hover:p-3 m-1```
 ```
 
 <details><summary>Show me more examples</summary>
