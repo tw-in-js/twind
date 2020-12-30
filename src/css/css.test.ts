@@ -88,6 +88,22 @@ test('create with global css and call with tw', ({ tw, sheet }) => {
   assert.equal(sheet.target, ['.tw-1yoxc1q{background-color:darkgreen}'])
 })
 
+test('nested selectors', ({ tw, sheet }) => {
+  const styles = css({
+    // .tw-xxx a
+    a: ({ theme }) => ({
+      color: theme('colors.blue.500'),
+      // .tw-xxx a:hover
+      '&:hover': {
+        color: theme('colors.blue.700'),
+      },
+    }),
+  })
+
+  assert.is(tw(styles), 'tw-af4r5s')
+
+  assert.equal(sheet.target, ['.tw-af4r5s a:hover{color:#1d4ed8}', '.tw-af4r5s a{color:#3b82f6}'])
+})
 test('cached by its JSON representation', ({ css, sheet }) => {
   const style = css({
     backgroundColor: 'hotpink',

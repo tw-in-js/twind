@@ -58,12 +58,14 @@ Values within the CSS object can be a function which are called with the `contex
 
 ```js
 const styles = css({
-  '& a': ({ theme }) => ({
-    color: theme('color', 'blue-500'),
+  // .tw-xxx a
+  'a': ({ theme }) => ({
+    color: theme('colors.blue.500'),
+    // .tw-xxx a:hover
+    '&:hover': {
+      color: theme('colors.blue.700'),
+    },
   }),
-  '& a:hover': {
-    color: ({ theme }) => theme('color', 'blue-700'),
-  },
 })
 ```
 
@@ -135,7 +137,7 @@ The first argument can be a [animation shorthand CSS](https://developer.mozilla.
 
 ```js
 const slidein = animation(
-  ({ theme }) => `${theme('durations', '500')} ${theme('transitionTimingFunction', 'in-out')}`,
+  ({ theme }) => `${theme('durations.500')} ${theme('transitionTimingFunction.in-out')}`,
   {
     from: {
       transform: 'translateX(0%)',
@@ -149,7 +151,7 @@ const slidein = animation(
 const bounce = animation(
   {
     animationDuration: '1s',
-    animationTimingFunction: ({ theme }) => theme('transitionTimingFunction', 'in-out'),
+    animationTimingFunction: ({ theme }) => theme('transitionTimingFunction.in-out'),
     animationIterationCount: 'infinite',
   },
   {
