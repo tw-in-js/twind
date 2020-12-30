@@ -1,6 +1,6 @@
 import type { Prefixer } from '../types'
 
-import { prefixProperty, prefixValue } from 'tiny-css-prefixer'
+import { cssPropertyAlias, cssPropertyPrefixFlags, cssValuePrefixFlags } from 'style-vendorizer'
 
 export const noprefix: Prefixer = (property: string, value: string, important?: boolean): string =>
   `${property}:${value}${important ? ' !important' : ''}`
@@ -10,15 +10,28 @@ export const autoprefix: Prefixer = (
   value: string,
   important?: boolean,
 ): string => {
-  const declaration = noprefix(property, prefixValue(property, value), important)
+  let cssText = ''
 
-  let cssText = declaration
+  // Resolve aliases, e.g. `gap` -> `grid-gap`
+  const propertyAlias = cssPropertyAlias(property)
+  if (propertyAlias) cssText += `${noprefix(propertyAlias, value, important)};`
 
-  const flag = prefixProperty(property)
+  // Prefix properties, e.g. `backdrop-filter` -> `-webkit-backdrop-filter`
+  let flags = cssPropertyPrefixFlags(property)
+  if (flags & 0b001) cssText += `-webkit-${noprefix(property, value, important)};`
+  if (flags & 0b010) cssText += `-moz-${noprefix(property, value, important)};`
+  if (flags & 0b100) cssText += `-ms-${noprefix(property, value, important)};`
 
-  if (flag & 1 /* 0b001 */) cssText += `;-ms-${declaration}`
-  if (flag & 2 /* 0b010 */) cssText += `;-moz-${declaration}`
-  if (flag & 4 /* 0b100 */) cssText += `;-webkit-${declaration}`
+  // Prefix values, e.g. `position: "sticky"` -> `position: "-webkit-sticky"`
+  // Notice that flags don't overlap and property prefixing isn't needed here
+  flags = cssValuePrefixFlags(property, value)
+  if (flags & 0b001) cssText += `${noprefix(property, `-webkit-${value}`, important)};`
+  if (flags & 0b010) cssText += `${noprefix(property, `-moz-${value}`, important)};`
+  if (flags & 0b100) cssText += `${noprefix(property, `-ms-${value}`, important)};`
+
+  /* Include the standardized declaration last */
+  /* https://css-tricks.com/ordering-css3-properties/ */
+  cssText += noprefix(property, value, important)
 
   return cssText
 }

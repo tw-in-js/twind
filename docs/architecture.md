@@ -258,14 +258,14 @@ interface Sheet {
 #### prefix
 
 > CSS prefixing
-> **default**: based on tiny-css-prefixer
+> **default**: based on [style-vendorizer](https://github.com/kripod/style-vendorizer)
 
 - boolean
 - function
 
 ```js
 interface Prefixer {
-  (property: string, value: string): string;
+  (property: string, value: string, important?: boolean): string;
 }
 ```
 
