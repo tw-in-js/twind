@@ -243,8 +243,7 @@ export const parse = (tokens: unknown[]): Rule[] => {
       apply(tokens[index + 1] as Token),
     )
   } else {
-    // eslint-disable-next-line @typescript-eslint/no-extra-semi
-    ;(tokens as Token[]).forEach(parseToken)
+    parseToken(tokens as Token)
   }
 
   return rules
