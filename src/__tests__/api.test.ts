@@ -233,6 +233,41 @@ test('properties presedence (divide)', ({ sheet, tw }) => {
     ],
   ],
   [
+    ['hover:bg-red-500', 'p-3'],
+    'hover:bg-red-500 p-3',
+    [
+      '.p-3{padding:0.75rem}',
+      '.hover\\:bg-red-500:hover{--tw-bg-opacity:1;background-color:#ef4444;background-color:rgba(239,68,68,var(--tw-bg-opacity))}',
+    ],
+  ],
+  [
+    ['hover:(bg-red-500', 'p-3)', 'm-1'],
+    'hover:bg-red-500 hover:p-3 m-1',
+    [
+      '.m-1{margin:0.25rem}',
+      '.hover\\:p-3:hover{padding:0.75rem}',
+      '.hover\\:bg-red-500:hover{--tw-bg-opacity:1;background-color:#ef4444;background-color:rgba(239,68,68,var(--tw-bg-opacity))}',
+    ],
+  ],
+  [
+    ['hover:(', 'bg-red-500', 'p-3', ')', 'm-1'],
+    'hover:bg-red-500 hover:p-3 m-1',
+    [
+      '.m-1{margin:0.25rem}',
+      '.hover\\:p-3:hover{padding:0.75rem}',
+      '.hover\\:bg-red-500:hover{--tw-bg-opacity:1;background-color:#ef4444;background-color:rgba(239,68,68,var(--tw-bg-opacity))}',
+    ],
+  ],
+  [
+    ['m-1', { hover: ['bg-red-500', 'p-3'] }],
+    'm-1 hover:bg-red-500 hover:p-3',
+    [
+      '.m-1{margin:0.25rem}',
+      '.hover\\:p-3:hover{padding:0.75rem}',
+      '.hover\\:bg-red-500:hover{--tw-bg-opacity:1;background-color:#ef4444;background-color:rgba(239,68,68,var(--tw-bg-opacity))}',
+    ],
+  ],
+  [
     {
       sm: ['hover:rounded', 'active:rounded-full'],
       md: { rounded: true, hover: 'bg-white' },
@@ -254,7 +289,7 @@ test('properties presedence (divide)', ({ sheet, tw }) => {
       '@media (min-width: 1024px){.lg\\:hover\\:active\\:underline:hover:active{text-decoration:underline}}',
     ],
   ],
-].forEach(([tokens, classNames, rules]) =>
+].forEach(([tokens, classNames, rules]) => {
   test(`tw(${JSON.stringify(tokens)}) => ${classNames}`, ({ sheet, tw }) => {
     assert.is(tw(tokens), classNames)
     assert.equal(sheet.target, rules)
@@ -262,8 +297,19 @@ test('properties presedence (divide)', ({ sheet, tw }) => {
     // Cached access
     assert.is(tw(tokens), classNames)
     assert.equal(sheet.target, rules)
-  }),
-)
+  })
+
+  if (Array.isArray(tokens)) {
+    test(`tw(${JSON.stringify(tokens).slice(1, -1)}) => ${classNames}`, ({ sheet, tw }) => {
+      assert.is(tw(...tokens), classNames)
+      assert.equal(sheet.target, rules)
+
+      // Cached access
+      assert.is(tw(...tokens), classNames)
+      assert.equal(sheet.target, rules)
+    })
+  }
+})
 
 /* eslint-disable no-template-curly-in-string */
 test('tw`bg-white ${false && "rounded"}`', ({ sheet, tw }) => {
