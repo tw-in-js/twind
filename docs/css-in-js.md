@@ -8,6 +8,7 @@ Sometimes you might find yourself wanting to write some arbitrary styles for an 
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [CSS directive](#css-directive)
+  - [Accessing the theme](#accessing-the-theme)
 - [Animation Directive](#animation-directive)
 - [Keyframes Helper](#keyframes-helper)
 
@@ -104,6 +105,29 @@ const smiley = css({
   '&::after': { content: '"😊"' },
 })
 document.body.className = smiley({ tw })
+```
+
+### Accessing the theme
+
+Values of the CSS object maybe functions that are passed the context and should return the value to be used:
+
+```js
+css({
+  color: ({ theme }) => theme('colors.blue.500'),
+  '&:hover': {
+    color: ({ theme }) => theme('colors.blue.700'),
+  },
+})
+
+css({
+  a: ({ theme }) => ({
+    color: theme('colors.blue.500'),
+    // .tw-xxx a:hover
+    '&:hover': {
+      color: theme('colors.blue.700'),
+    },
+  }),
+})
 ```
 
 ## Animation Directive
