@@ -194,6 +194,15 @@ By shipping the compiler (rather than the resultant output) there is a known and
 
   Allows to apply styling to different elements instead of repeating a directive on each one. This feature can be combined with other variants like `hover`.
 
+- `override` variant to increase the specificity of rules
+
+  This can be used to ensure a rule has a higher [specificity](https://specificity.keegan.st/) than others:
+
+  ```js
+  const shared = tw`text(xl center blue-600) underline`
+  const special = tw`${shared} override:(text-purple-600 no-underline)`
+  ```
+
 - Using exclamation point (`!`) after a directive to override any other declarations
 
   Directives may end with exclamation point (`text-center!`) to be marked as [important](https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity#The_!important_exception)
