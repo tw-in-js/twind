@@ -17,6 +17,7 @@ Twind supports static extraction a.k.a. Server Side Rendering (SSR) out of the b
   - [Preact](#preact)
   - [Svelte](#svelte)
   - [Vue](#vue)
+- [WMR](#wmr)
 - [Next.js](#nextjs)
 - [Gatsby](#gatsby)
 
@@ -246,6 +247,70 @@ async function ssr() {
     </html>
   `
 }
+```
+
+## [WMR](https://github.com/preactjs/wmr)
+
+> The [tw-in-js/example-wmr](https://github.com/tw-in-js/example-wmr) repository uses this setup.
+
+```js
+/* pages/twind.config.js */
+export default {
+  /* Shared config */
+}
+```
+
+```js
+/* pages/index.js */
+import hydrate from 'preact-iso/hydrate'
+
+import { setup } from 'twind'
+import twindConfig from './twind.config'
+
+if (typeof window !== 'undefined') {
+  setup(twindConfig)
+}
+
+export function App() {
+  /* Your app */
+}
+
+hydrate(<App />)
+
+export async function prerender(data) {
+  const { default: prerender } = await import('preact-iso/prerender')
+
+  const { sheet, getStyleTagProperties } = await import('./twind.prerender')
+
+  sheet.reset()
+
+  const result = await prerender(<App {...data} />)
+
+  const { id, textContent } = getStyleTagProperties(sheet)
+
+  result.html = `<style id="${id}">${textContent}</style>${result.html}`
+
+  return result
+}
+```
+
+```js
+/* pages/twind.prerender.js */
+import { setup } from 'twind'
+
+// twind/server has currently only a CJS bundle
+// which available as the default export
+import twind from 'twind/server'
+
+import twindConfig from './twind.config'
+
+const { asyncVirtualSheet, getStyleTagProperties } = twind
+
+const sheet = asyncVirtualSheet()
+
+setup({ ...twindConfig, sheet })
+
+export { sheet, getStyleTagProperties }
 ```
 
 ## Next.js
