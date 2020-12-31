@@ -3,7 +3,11 @@
 
 import { executionAsyncId, createHook } from 'async_hooks'
 
+import type { Node, HTMLElement } from 'node-html-parser'
+import * as HTMLParser from 'node-html-parser'
+
 import type { Sheet, SheetInit } from '../types'
+import { tw as defaultTW } from '../index'
 import { virtualSheet } from '../sheets'
 
 export type { Storage, StyleTagProperties, StyleTagSheet, VirtualSheet } from '../sheets'
@@ -79,4 +83,29 @@ export const asyncVirtualSheet = (): AsyncVirtualSheet => {
     enable: () => asyncHook.enable(),
     disable: () => asyncHook.disable(),
   }
+}
+
+function isElementNode(node: Node): node is HTMLElement {
+  return node && node.nodeType === HTMLParser.NodeType.ELEMENT_NODE
+}
+
+function* traverse(node: Node): IterableIterator<HTMLElement> {
+  if (isElementNode(node) && node.getAttribute('class')) {
+    yield node
+  }
+
+  for (const childNode of node.childNodes) {
+    yield* traverse(childNode)
+  }
+}
+
+export const shim = (html: string, tw = defaultTW): string => {
+  const root = HTMLParser.parse(html)
+
+  // Traverse tree to find all element with classNames
+  for (const node of traverse(root)) {
+    node.setAttribute('class', tw(node.getAttribute('class')))
+  }
+
+  return root.toString()
 }

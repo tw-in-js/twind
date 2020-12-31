@@ -1075,12 +1075,13 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
-distilt@^0.8.1:
-  version "0.8.1"
-  resolved "https://registry.npmjs.org/distilt/-/distilt-0.8.1.tgz#cbfc4c774ea815961d5e3895c17ab4d6a3656ef5"
-  integrity sha512-Bpf3HGVlVNCtsKvo7Aul34CYICGtM4Bplh9mkvTtp2+zir3WwBlHgSKbaH8Bph8hs9W2iQX3RA0r8ZQ5QyANAw==
+distilt@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.npmjs.org/distilt/-/distilt-0.9.0.tgz#b9ae7fedf0a1308103658e0a33be61909aa462cd"
+  integrity sha512-AzQN60esfzwfCkTia6EqhlNWra8OdETxU9LYvFOcP0py79MDUpUHYZR5qhKMzRkJ8mM5gwA3Oww0+cXSkGhvXg==
   dependencies:
-    esbuild "^0.8.23"
+    es-module-lexer "^0.3.26"
+    esbuild "^0.8.28"
     execa "^5.0.0"
     globby "^11.0.1"
     pkg-dir "^5.0.0"
@@ -1259,7 +1260,7 @@ error-ex@^1.3.1:
   dependencies:
     is-arrayish "^0.2.1"
 
-es-module-lexer@^0.3.24:
+es-module-lexer@^0.3.24, es-module-lexer@^0.3.26:
   version "0.3.26"
   resolved "https://registry.npmjs.org/es-module-lexer/-/es-module-lexer-0.3.26.tgz#7b507044e97d5b03b01d4392c74ffeb9c177a83b"
   integrity sha512-Va0Q/xqtrss45hWzP8CZJwzGSZJjDM5/MJRE3IXXnUCcVLElR9BRaE9F62BopysASyc4nM3uwhSW7FFB9nlWAA==
@@ -1278,6 +1279,11 @@ esbuild@^0.8.23:
   version "0.8.23"
   resolved "https://registry.npmjs.org/esbuild/-/esbuild-0.8.23.tgz#8c4ccd3abb5f7b4ae9f31c571971517be4ae60d2"
   integrity sha512-LkgCmotGnhVgRGxjDkTBBYrnJ5stcxK+40cEJGtXUS16hcAWy90cn1qjxKCogzLPJ75gW/L6ejly7VKrMstVGQ==
+
+esbuild@^0.8.28:
+  version "0.8.28"
+  resolved "https://registry.npmjs.org/esbuild/-/esbuild-0.8.28.tgz#54f1b2dda1c1a8613308a41d31f9a5ad9fbbcbed"
+  integrity sha512-8u4PliPrsELMwl0X4ChPJvlNfoSh5OSpLHcAFFiipi2m/k+9i4cEjQB8rztLiiqO7kXnL+IaNU36StgnpHhOwA==
 
 esbuild@^0.8.7:
   version "0.8.24"
@@ -1821,6 +1827,11 @@ has@^1.0.3:
   integrity sha512-f2dvO0VU6Oej7RkWJGrehjbzMAjFp5/VKPp5tTpWIV4JHHZK1/BxbFRtf/siA2SWTe09caDmVtYYzWEIbBS4zw==
   dependencies:
     function-bind "^1.1.1"
+
+he@1.2.0:
+  version "1.2.0"
+  resolved "https://registry.npmjs.org/he/-/he-1.2.0.tgz#84ae65fa7eafb165fddb61566ae14baf05664f0f"
+  integrity sha512-F/1DnUGPopORZi0ni+CvrCgHQ5FyEAHRLSApuYWMmrbSwoN2Mn/7k+Gl38gJnR7yyDZk6WLXwiGod1JOWNDKGw==
 
 hosted-git-info@^2.1.4:
   version "2.8.8"
@@ -2558,6 +2569,13 @@ node-emoji@^1.8.1:
   integrity sha512-Yt3384If5H6BYGVHiHwTL+99OzJKHhgp82S8/dktEK73T26BazdgZ4JZh92xSVtGNJvz9UbXdNAc5hcrXV42vw==
   dependencies:
     lodash.toarray "^4.4.0"
+
+node-html-parser@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.npmjs.org/node-html-parser/-/node-html-parser-2.0.1.tgz#66e3a6178f5fbf345f5e0e7522d36af7625a3346"
+  integrity sha512-CE0K6zALs+pS+SsQd8oKKF51cNrpwZ6gj/8OSzjhQ2vTfCOnlNtZakgv0MKuEOAZ4kBiKRgJBUicvjAxaFM4Hw==
+  dependencies:
+    he "1.2.0"
 
 node-modules-regexp@^1.0.0:
   version "1.0.0"
