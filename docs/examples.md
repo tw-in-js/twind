@@ -13,6 +13,7 @@ Twind is built to work without a framework - eg framework agnostic - but can be 
 - [htm/react - React with htm](#htmreact---react-with-htm)
 - [Preact](#preact)
 - [htm/preact - Preact with htm](#htmpreact---preact-with-htm)
+- [Next.js](#nextjs)
 - [Svelte](#svelte)
 - [Web Components - Custom Elements and Shadow DOM](#web-components---custom-elements-and-shadow-dom)
 - [LitElement](#litelement)
