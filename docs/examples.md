@@ -142,7 +142,7 @@ render(
 
 This example shows how Custom Element can have its styles separated without having the side effect of polluting the root document's styles.
 
-> This example is using [Constructable Stylesheet Objects](https://wicg.github.io/construct-stylesheets/) and `DocumentOrShadowRoot.adoptedStyleSheets` which have [limited browser support](https://caniuse.com/mdn-api_documentorshadowroot_adoptedstylesheets) at the moment (December 2020).
+> This example is using [Constructable Stylesheet Objects](https://wicg.github.io/construct-stylesheets/) and `DocumentOrShadowRoot.adoptedStyleSheets` which have [limited browser support](https://caniuse.com/mdn-api_documentorshadowroot_adoptedstylesheets) at the moment (December 2020). The [Constructible style sheets polyfill](https://github.com/calebdwilliams/construct-style-sheets) offers a solution for all modern browsers and IE 11.
 
 ```js
 import { create, cssomSheet } from 'twind'
