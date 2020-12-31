@@ -124,6 +124,24 @@ render(
 
 > [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgaCwgcmVuZGVyIH0gZnJvbSAnaHR0cHM6Ly9jZG4uc2t5cGFjay5kZXYvcHJlYWN0JwppbXBvcnQgaHRtIGZyb20gJ2h0dHBzOi8vY2RuLnNreXBhY2suZGV2L2h0bScKCmltcG9ydCB7IHR3IH0gZnJvbSAnaHR0cHM6Ly9jZG4uc2t5cGFjay5kZXYvdHdpbmQnCgpjb25zdCBodG1sID0gaHRtLmJpbmQoaCkKCnJlbmRlcigKICBodG1sYAogICAgPG1haW4gY2xhc3NOYW1lPSIke3R3YGgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJgfSI+CiAgICAgIDxoMSBjbGFzc05hbWU9IiR7dHdgZm9udC1ib2xkIHRleHQoY2VudGVyIDV4bCB3aGl0ZSBzbTpncmF5LTgwMCBtZDpwaW5rLTcwMClgfSI+CiAgICAgICAgVGhpcyBpcyBUd2luZCEKICAgICAgPC9oMT4KICAgIDwvbWFpbj4KICBgLAogIGRvY3VtZW50LmJvZHksCikK)
 
+## [Next.js](https://nextjs.org/)
+
+```jsx
+import { tw } from "twind"
+
+export default function IndexPage() {
+  return (
+    <main className={tw`h-screen bg-purple-400 flex items-center justify-center`}>
+      <h1 className={tw`font-bold text(center 5xl white sm:gray-800 md:pink-700)`}>
+        This is Twind!
+      </h1>
+    </main>
+  )
+}
+```
+
+> [live and interactive demo](https://codesandbox.io/s/twind-next-x5gtk)
+
 ## [Svelte](https://svelte.dev/)
 
 ```html
