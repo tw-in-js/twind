@@ -75,24 +75,37 @@ export const createObserver = ({ tw = defaultTW }: ShimConfiguration = {}): Twin
   const handleMutations = (mutations: MinimalMutationRecord[]): void =>
     mutations.forEach(handleMutation)
 
-  const observer = new MutationObserver(handleMutations)
+  if (typeof MutationObserver === 'function') {
+    const observer = new MutationObserver(handleMutations)
 
+    return {
+      observe(target) {
+        handleMutations([{ target, addedNodes: [target] }])
+
+        observer.observe(target, {
+          attributes: true,
+          attributeFilter: ['class'],
+          subtree: true,
+          childList: true,
+        })
+
+        return this
+      },
+
+      disconnect() {
+        observer.disconnect()
+        return this
+      },
+    }
+  }
+
+  // Non-browser-like environment – return a no-op implementation
   return {
-    observe(target) {
-      handleMutations([{ target, addedNodes: [target] }])
-
-      observer.observe(target, {
-        attributes: true,
-        attributeFilter: ['class'],
-        subtree: true,
-        childList: true,
-      })
-
+    observe() {
       return this
     },
 
     disconnect() {
-      observer.disconnect()
       return this
     },
   }

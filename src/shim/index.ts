@@ -7,29 +7,34 @@ export interface ShimConfiguration extends Configuration {
   target?: HTMLElement
 }
 
-const onload = () => {
-  const script = document.querySelector('script[type="twind-config"]')
-
-  setup(script ? JSON.parse(script.innerHTML) : {})
-}
-
-if (document.readyState === 'loading') {
-  // Loading hasn't finished yet
-  addEventListener('DOMContentLoaded', onload)
-} else {
-  // `DOMContentLoaded` has already fired
-  // invoke on next tick to allow other setup methods to run
+if (typeof document !== 'undefined' && typeof addEventListener === 'function') {
   // eslint-disable-next-line no-var
-  var timeoutRef = setTimeout(onload)
+  var onload = () => {
+    const script = document.querySelector('script[type="twind-config"]')
+
+    setup(script ? JSON.parse(script.innerHTML) : {})
+  }
+
+  if (document.readyState === 'loading') {
+    // Loading hasn't finished yet
+    addEventListener('DOMContentLoaded', onload)
+  } else {
+    // `DOMContentLoaded` has already fired
+    // invoke on next tick to allow other setup methods to run
+    // eslint-disable-next-line no-var
+    var timeoutRef = setTimeout(onload)
+  }
 }
 
 const observer = createObserver()
 
 export const disconnect = (): void => {
-  // Removing the callbacks ensures that the setup is called only once
-  // either programmatically from userland or by DOMContentLoaded/setTimeout
-  removeEventListener('DOMContentLoaded', onload)
-  clearTimeout(timeoutRef)
+  if (onload) {
+    // Removing the callbacks ensures that the setup is called only once
+    // either programmatically from userland or by DOMContentLoaded/setTimeout
+    removeEventListener('DOMContentLoaded', onload)
+    clearTimeout(timeoutRef)
+  }
 
   observer.disconnect()
 }
