@@ -1,0 +1,97 @@
+name: Publish PR
+
+on: [pull_request]
+
+jobs:
+  publish:
+    name: Publish to Github Packages
+    runs-on: ubuntu-20.04
+    env:
+      NPM_PACKAGE_NAME: twind
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+
+      - name: Use Node v14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+
+      - name: Install 🔧
+        uses: bahmutov/npm-install@v1
+
+      - name: Build
+        run: yarn run build
+
+      - uses: actions/setup-node@v1
+        with:
+          registry-url: 'https://npm.pkg.github.com'
+
+      - name: Publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          sed -i -r 's|("name": ")[^"]+(")|\1@${{ github.repository }}\2|;s|("version": ")[^"]+(")|\10.${{ github.event.number }}.${{ github.run_number }}\2|' dist/package.json
+
+          echo '# THIS IS THE [PR ${{ github.event.number }}](${{ github.event.pull_request.html_url }}) PREVIEW PACKAGE' > dist/README.md
+          echo "" >> dist/README.md
+          echo '> Official releases are _only_ available on [registry.npmjs.org](https://www.npmjs.com/package/${{ env.NPM_PACKAGE_NAME }}) as `${{ env.NPM_PACKAGE_NAME }}`.' >> dist/README.md
+          echo "" >> dist/README.md
+          echo "---" >> dist/README.md
+          echo "" >> dist/README.md
+          cat README.md >> dist/README.md
+
+          npm publish --tag "pr${{ github.event.number }}" --access public dist
+
+      - name: Comment
+        uses: mshick/add-pr-comment@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token-user-login: 'github-actions[bot]' # The user.login for temporary GitHub tokens
+          allow-repeats: false # This is the default
+          message: |
+            ## Try the Preview Package
+
+            > Official releases are **only** available on [registry.npmjs.org](https://www.npmjs.com/package/${{ env.NPM_PACKAGE_NAME }}) as `${{ env.NPM_PACKAGE_NAME }}`.
+
+            This PR has been published to [npm.pkg.github.com](https://github.com/orgs/${{ github.repository_owner }}/packages?repo_name=${{ env.NPM_PACKAGE_NAME }}) as `@${{ github.repository }}@pr${{ github.event.number }}`.
+
+            <details><summary>Configure your NPM client (click to expand)</summary>
+
+            Adjust you `.npmrc` to use `https://npm.pkg.github.com` for `@${{ github.repository_owner }}`
+
+            ```
+            @${{ github.repository_owner }}:registry=https://npm.pkg.github.com
+            ```
+
+            Using the command line:
+
+            ```sh
+            npm config set @${{ github.repository_owner }}:registry https://npm.pkg.github.com --global
+            ```
+
+            </details>
+
+            <details><summary>Install from command line (click to expand)</summary>
+
+            ```sh
+            # For npm
+            npm install ${{ env.NPM_PACKAGE_NAME }}@npm:@${{ github.repository }}@pr${{ github.event.number }}
+
+            # For yarn
+            yarn add ${{ env.NPM_PACKAGE_NAME }}@npm:@${{ github.repository }}@pr${{ github.event.number }}
+            ```
+
+            </details>
+
+            <details><summary>Install via package.json (click to expand)</summary>
+
+            ```json
+            {
+              "dependencies": {
+                "${{ env.NPM_PACKAGE_NAME }}": "npm:@${{ github.repository }}@pr${{ github.event.number }}"
+              }
+            }
+            ```
+
+            </details>

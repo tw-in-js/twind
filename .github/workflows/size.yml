@@ -1,5 +1,7 @@
-name: size
+name: Size Limit
+
 on: [pull_request]
+
 jobs:
   size:
     runs-on: ubuntu-20.04

@@ -1,5 +1,7 @@
 name: CI
+
 on: [push]
+
 jobs:
   build:
     name: Node ${{ matrix.node }} on ${{ matrix.os }}
@@ -8,7 +10,7 @@ jobs:
     strategy:
       matrix:
         node: ['10.x', '12.x', '14.x']
-        os: [ubuntu-18.04, macos-10.15, windows-2019]
+        os: [ubuntu-20.04, macos-10.15, windows-2019]
 
     steps:
       - name: Checkout 🛎️
@@ -41,9 +43,10 @@ jobs:
           flag-name: build-${{ matrix.node }}-${{ matrix.os }}
           parallel: true
 
-  finish:
+  coveralls:
+    name: Collect Coverage
     needs: build
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Coveralls Finished
         uses: coverallsapp/github-action@master
