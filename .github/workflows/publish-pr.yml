@@ -56,6 +56,8 @@ jobs:
 
             This PR has been published to [npm.pkg.github.com](https://github.com/orgs/${{ github.repository_owner }}/packages?repo_name=${{ env.NPM_PACKAGE_NAME }}) as `@${{ github.repository }}@pr${{ github.event.number }}`.
 
+            **Install/Update**
+
             <details><summary>Configure your NPM client (click to expand)</summary>
 
             Adjust you `.npmrc` to use `https://npm.pkg.github.com` for `@${{ github.repository_owner }}`
@@ -72,26 +74,10 @@ jobs:
 
             </details>
 
-            <details><summary>Install from command line (click to expand)</summary>
-
             ```sh
             # For npm
-            npm install ${{ env.NPM_PACKAGE_NAME }}@npm:@${{ github.repository }}@pr${{ github.event.number }}
+            npm install --force ${{ env.NPM_PACKAGE_NAME }}@npm:@${{ github.repository }}@pr${{ github.event.number }}
 
-            # For yarn
-            yarn add ${{ env.NPM_PACKAGE_NAME }}@npm:@${{ github.repository }}@pr${{ github.event.number }}
+            # For yarn - upgrade implies install
+            yarn upgrade ${{ env.NPM_PACKAGE_NAME }}@npm:@${{ github.repository }}@pr${{ github.event.number }}
             ```
-
-            </details>
-
-            <details><summary>Install via package.json (click to expand)</summary>
-
-            ```json
-            {
-              "dependencies": {
-                "${{ env.NPM_PACKAGE_NAME }}": "npm:@${{ github.repository }}@pr${{ github.event.number }}"
-              }
-            }
-            ```
-
-            </details>
