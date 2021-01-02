@@ -41,8 +41,8 @@ test('class names are hashed', ({ instance, sheet }) => {
 test('keyframes are hashed', ({ instance, sheet }) => {
   assert.is(instance.tw('animate-pulse'), 'tw-15o2im6')
   assert.equal(sheet.target, [
-    '.tw-15o2im6{animation:tw-sktrkv 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}',
     '@keyframes tw-sktrkv{0%,100%{opacity:1}50%{opacity:.5}}',
+    '.tw-15o2im6{animation:tw-sktrkv 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}',
   ])
 })
 

@@ -30,11 +30,11 @@ test('value can be a token string', ({ setup, sheet }) => {
     'mx-auto max-w-md mx-auto bg-white rounded-xl shadow-md overflow-hidden md:max-w-2xl my-4',
   )
   assert.equal(sheet.target, [
-    '.overflow-hidden{overflow:hidden}',
     '.mx-auto{margin-left:auto;margin-right:auto}',
     '.bg-white{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}',
     '.shadow-md{--tw-shadow:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);box-shadow:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);box-shadow:var(--tw-ring-offset-shadow,0 0 transparent),var(--tw-ring-shadow,0 0 transparent),var(--tw-shadow,0 0 transparent)}',
     '.my-4{margin-bottom:1rem;margin-top:1rem}',
+    '.overflow-hidden{overflow:hidden}',
     '.max-w-md{max-width:28rem}',
     '.rounded-xl{border-radius:0.75rem}',
     '@media (min-width: 768px){.md\\:max-w-2xl{max-width:42rem}}',

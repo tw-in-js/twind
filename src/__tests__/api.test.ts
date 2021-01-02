@@ -157,14 +157,14 @@ test('properties presedence (border)', ({ sheet, tw }) => {
     'border rounded rounded-t-sm border-2 border-lrt-4 border-t-8 border-gray-300 border-dashed',
   )
   assert.equal(sheet.target, [
+    '.border-lrt-4{border-left-width:4px;border-right-width:4px;border-top-width:4px}',
     '.border-gray-300{--tw-border-opacity:1;border-color:#d1d5db;border-color:rgba(209,213,219,var(--tw-border-opacity))}',
+    '.rounded-t-sm{border-top-left-radius:0.125rem;border-top-right-radius:0.125rem}',
     '.border{border-width:1px}',
     '.border-2{border-width:2px}',
     '.border-dashed{border-style:dashed}',
     '.rounded{border-radius:0.25rem}',
-    '.border-lrt-4{border-left-width:4px;border-right-width:4px;border-top-width:4px}',
     '.border-t-8{border-top-width:8px}',
-    '.rounded-t-sm{border-top-left-radius:0.125rem;border-top-right-radius:0.125rem}',
   ])
 })
 
@@ -187,8 +187,8 @@ test('properties presedence (divide)', ({ sheet, tw }) => {
     'divide-x divide-x-reverse divide-opacity-75 divide-green-500',
   )
   assert.equal(sheet.target, [
-    '.divide-green-500>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:#10b981;border-color:rgba(16,185,129,var(--tw-divide-opacity))}',
     '.divide-x>:not([hidden])~:not([hidden]){--tw-divide-x-reverse:0;border-right-width:calc(1px * var(--tw-divide-x-reverse));border-left-width:1px;border-left-width:calc(1px * calc(1 - var(--tw-divide-x-reverse)))}',
+    '.divide-green-500>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:#10b981;border-color:rgba(16,185,129,var(--tw-divide-opacity))}',
     '.divide-x-reverse>:not([hidden])~:not([hidden]){--tw-divide-x-reverse:1}',
     '.divide-opacity-75>:not([hidden])~:not([hidden]){--tw-divide-opacity:0.75}',
   ])
@@ -245,8 +245,8 @@ test('properties presedence (divide)', ({ sheet, tw }) => {
     'hover:bg-red-500 hover:p-3 m-1',
     [
       '.m-1{margin:0.25rem}',
-      '.hover\\:p-3:hover{padding:0.75rem}',
       '.hover\\:bg-red-500:hover{--tw-bg-opacity:1;background-color:#ef4444;background-color:rgba(239,68,68,var(--tw-bg-opacity))}',
+      '.hover\\:p-3:hover{padding:0.75rem}',
     ],
   ],
   [
@@ -254,8 +254,8 @@ test('properties presedence (divide)', ({ sheet, tw }) => {
     'hover:bg-red-500 hover:p-3 m-1',
     [
       '.m-1{margin:0.25rem}',
-      '.hover\\:p-3:hover{padding:0.75rem}',
       '.hover\\:bg-red-500:hover{--tw-bg-opacity:1;background-color:#ef4444;background-color:rgba(239,68,68,var(--tw-bg-opacity))}',
+      '.hover\\:p-3:hover{padding:0.75rem}',
     ],
   ],
   [
@@ -263,8 +263,8 @@ test('properties presedence (divide)', ({ sheet, tw }) => {
     'm-1 hover:bg-red-500 hover:p-3',
     [
       '.m-1{margin:0.25rem}',
-      '.hover\\:p-3:hover{padding:0.75rem}',
       '.hover\\:bg-red-500:hover{--tw-bg-opacity:1;background-color:#ef4444;background-color:rgba(239,68,68,var(--tw-bg-opacity))}',
+      '.hover\\:p-3:hover{padding:0.75rem}',
     ],
   ],
   [
@@ -634,8 +634,8 @@ test('inject global styles', ({ sheet, tw }) => {
   )
 
   assert.equal(sheet.target, [
-    '.tw-1kfw9fm{background-color:var(--main-bg-color)}',
     '.tw-1kfw9fm :root{--main-bg-color:brown}',
+    '.tw-1kfw9fm{background-color:var(--main-bg-color)}',
   ])
 })
 

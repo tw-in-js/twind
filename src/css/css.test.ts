@@ -207,8 +207,8 @@ test('keyframes', ({ keyframes, css, tw, sheet }) => {
     'tw-1v80189',
   )
   assert.equal(sheet.target, [
-    '.tw-1v80189{animation:tw-cm8eaz 1s ease infinite}',
     '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
+    '.tw-1v80189{animation:tw-cm8eaz 1s ease infinite}',
   ])
 })
 
@@ -239,8 +239,8 @@ test('keyframes lazy', ({ keyframes, css, tw, sheet }) => {
   assert.is(tw(styles), 'tw-14tbawn')
 
   assert.equal(sheet.target, [
-    '.tw-14tbawn{animation:1s ease infinite;animation-name:tw-cm8eaz}',
     '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
+    '.tw-14tbawn{animation:1s ease infinite;animation-name:tw-cm8eaz}',
   ])
 })
 
@@ -265,8 +265,8 @@ test('animation', ({ animation, tw, sheet }) => {
 
   assert.is(tw(bounce), 'tw-14tbawn')
   assert.equal(sheet.target, [
-    '.tw-14tbawn{animation:1s ease infinite;animation-name:tw-cm8eaz}',
     '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
+    '.tw-14tbawn{animation:1s ease infinite;animation-name:tw-cm8eaz}',
   ])
 })
 
@@ -288,8 +288,8 @@ test('animation with callback', ({ animation, tw, sheet }) => {
 
   assert.is(tw(slidein), 'tw-tchezo')
   assert.equal(sheet.target, [
-    '.tw-tchezo{animation:500ms cubic-bezier(0.4,0,0.2,1);animation-name:tw-nlnhc}',
     '@keyframes tw-nlnhc{from{transform:translateX(0%)}to{transform:translateX(100%)}}',
+    '.tw-tchezo{animation:500ms cubic-bezier(0.4,0,0.2,1);animation-name:tw-nlnhc}',
   ])
 })
 
@@ -321,8 +321,8 @@ test('animation object notation', ({ animation, tw, sheet }) => {
 
   assert.is(tw(bounce), 'tw-1e66f79')
   assert.equal(sheet.target, [
-    '.tw-1e66f79{animation-duration:1s;animation-timing-function:cubic-bezier(0.4,0,0.2,1);animation-iteration-count:infinite;animation-name:tw-cm8eaz}',
     '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
+    '.tw-1e66f79{animation-duration:1s;animation-timing-function:cubic-bezier(0.4,0,0.2,1);animation-iteration-count:infinite;animation-name:tw-cm8eaz}',
   ])
 })
 

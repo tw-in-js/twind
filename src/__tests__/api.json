@@ -431,8 +431,8 @@
   "animate-spin": [
     "animate-spin",
     [
-      ".animate-spin{animation:spin 1s linear infinite}",
-      "@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}"
+      "@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}",
+      ".animate-spin{animation:spin 1s linear infinite}"
     ]
   ],
   "(text(center 2xl) underline)": [
@@ -594,8 +594,8 @@
   "divide(y-2 green-600 opacity(80 md:50))": [
     "divide-y-2 divide-green-600 divide-opacity-80 md:divide-opacity-50",
     [
-      ".divide-green-600>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:#059669;border-color:rgba(5,150,105,var(--tw-divide-opacity))}",
       ".divide-y-2>:not([hidden])~:not([hidden]){--tw-divide-y-reverse:0;border-bottom-width:calc(2px * var(--tw-divide-y-reverse));border-top-width:2px;border-top-width:calc(2px * calc(1 - var(--tw-divide-y-reverse)))}",
+      ".divide-green-600>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:#059669;border-color:rgba(5,150,105,var(--tw-divide-opacity))}",
       ".divide-opacity-80>:not([hidden])~:not([hidden]){--tw-divide-opacity:0.8}",
       "@media (min-width: 768px){.md\\:divide-opacity-50>:not([hidden])~:not([hidden]){--tw-divide-opacity:0.5}}"
     ]
@@ -699,8 +699,8 @@
   "md:(container mx-auto)": [
     "md:container md:mx-auto",
     [
-      "@media (min-width: 768px){.md\\:container{width:100%}}",
       "@media (min-width: 768px){.md\\:mx-auto{margin-left:auto;margin-right:auto}}",
+      "@media (min-width: 768px){.md\\:container{width:100%}}",
       "@media (min-width: 768px){@media (min-width: 640px){.md\\:container{max-width:640px}}}",
       "@media (min-width: 768px){@media (min-width: 768px){.md\\:container{max-width:768px}}}",
       "@media (min-width: 768px){@media (min-width: 1024px){.md\\:container{max-width:1024px}}}",

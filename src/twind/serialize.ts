@@ -17,11 +17,17 @@ export interface RuleWithPresedence {
 
 const stringifyBlock = (body: string, selector: string): string => selector + '{' + body + '}'
 
+export const enum Layer {
+  base = 0,
+  utilities = 1,
+  components = 2,
+}
+
 export const serialize = (
   prefix: Prefixer,
   variants: Record<string, string>,
   context: Context,
-): ((css: CSSRules, className?: string, rule?: Rule) => RuleWithPresedence[]) => {
+): ((css: CSSRules, className?: string, rule?: Rule, layer?: Layer) => RuleWithPresedence[]) => {
   const { theme, tag } = context
 
   // Hash/Tag tailwind custom properties during serialization
@@ -189,26 +195,29 @@ export const serialize = (
           presedence *
             // Declarations: 8 bits = 256
             (1 << 8) +
-          // 4: greatest precedence of properties
-          // if there is no property presedence this is most likely a custom property only declaration
-          // these have the highest presedence
-          ((((maxPropertyPresedence || 15) & 15) << 4) |
-            // 4: number of declarations (descending)
-            (Math.max(0, 15 - numberOfDeclarations) & 15)),
+          // 4: number of declarations (descending)
+          (((Math.max(0, 15 - numberOfDeclarations) & 15) << 4) |
+            // 4: greatest precedence of properties
+            // if there is no property presedence this is most likely a custom property only declaration
+            // these have the highest presedence
+            ((maxPropertyPresedence || 15) & 15)),
       })
     }
   }
 
   const variantPresedence = makeVariantPresedenceCalculator(theme, variants)
 
-  return (css, className, rule) => {
+  return (css, className, rule, layer = className ? 1 : 0) => {
+    // Initial presedence based on layer (base = 0, utilities = 1, components = 2)
+    layer <<= 28
+
     rules = []
 
     stringify(
       [],
       className ? '.' + escape(className) : '',
       // If we have a rule, create starting presedence based on the variants
-      rule ? rule.v.reduceRight(variantPresedence, 0) : 0,
+      rule ? rule.v.reduceRight(variantPresedence, layer) : layer,
       css,
       rule && rule.i,
     )

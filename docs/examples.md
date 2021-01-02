@@ -128,7 +128,7 @@ render(
 ## [Next.js](https://nextjs.org/)
 
 ```jsx
-import { tw } from "twind"
+import { tw } from 'twind'
 
 export default function IndexPage() {
   return (
