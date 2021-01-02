@@ -8,7 +8,14 @@ module.exports = {
   },
   install: ['uvu', 'uvu/assert', 'snoop'],
   installOptions: {
-    externalPackage: ['dlv', 'tailwindcss', 'jsdom', 'async_hooks'],
+    externalPackage: [
+      'dlv',
+      'tailwindcss',
+      'jsdom',
+      'node-html-parser',
+      'async_hooks',
+      'node:async_hooks',
+    ],
   },
   experiments: {
     routes: [
