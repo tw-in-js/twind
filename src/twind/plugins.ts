@@ -29,8 +29,12 @@ const property = (property: string) => (
   [property]: id + ((_ = join(params)) && '-' + _),
 })
 
-const propertyValue = (property: string, separator?: string) => (params: string[]): CSSRules => ({
-  [property]: join(params, separator),
+const propertyValue = (property?: string, separator?: string) => (
+  params: string[],
+  context?: Context,
+  id?: string,
+): CSSRules => ({
+  [property || (id as string)]: join(params, separator),
 })
 
 const themeProperty = (section?: keyof Theme): DirectiveHandler => (
@@ -371,11 +375,11 @@ export const corePlugins: Plugins = {
   // .appearance-auto -> appearance: auto;
   // .appearance-menulist-button; -> appearance: menulist-button;
   // .appearance-textfield -> appearance: textfield;
-  appearance: propertyValue('appearance'),
-  cursor: propertyValue('cursor'),
+  appearance: propertyValue(),
+  cursor: propertyValue(),
 
-  float: propertyValue('float'),
-  clear: propertyValue('clear'),
+  float: propertyValue(),
+  clear: propertyValue(),
 
   top: inset,
   right: inset,
@@ -425,8 +429,8 @@ export const corePlugins: Plugins = {
     alignItems: includes(['start', 'end'], params[0]) ? `flex-${params[0]}` : join(params),
   }),
 
-  'justify-self': propertyValue('justifySelf'),
-  'justify-items': propertyValue('justifyItems'),
+  'justify-self': propertyValue(),
+  'justify-items': propertyValue(),
   justify: contentPluginFor('justifyContent'),
   content: contentPluginFor('alignContent'),
   self: contentPluginFor('alignSelf'),
@@ -499,7 +503,7 @@ export const corePlugins: Plugins = {
 
   select: propertyValue('userSelect'),
 
-  'pointer-events': propertyValue('pointerEvents'),
+  'pointer-events': propertyValue(),
 
   align: propertyValue('verticalAlign'),
 
@@ -517,12 +521,12 @@ export const corePlugins: Plugins = {
 
   // 'overflow-visible'
   // 'overflow-x-hidden'
-  overflow: (params) =>
+  overflow: (params, context, id) =>
     includes(['ellipsis', 'clip'], params[0])
       ? propertyValue('textOverflow')(params)
       : params[1]
       ? { [`overflow-${params[0]}`]: params[1] }
-      : propertyValue('overflow')(params),
+      : propertyValue()(params, context, id),
 
   transform: (params) =>
     params[0] === 'none'
