@@ -254,17 +254,20 @@ async function ssr() {
 > The [tw-in-js/example-wmr](https://github.com/tw-in-js/example-wmr) repository uses this setup.
 
 ```js
-/* pages/twind.config.js */
+/* public/twind.config.js */
 export default {
   /* Shared config */
 }
 ```
 
 ```js
-/* pages/index.js */
+/* public/index.js */
 import hydrate from 'preact-iso/hydrate'
 
 import { setup } from 'twind'
+// Or if you are using twind/shim
+// import { setup } from 'twind/shim'
+
 import twindConfig from './twind.config'
 
 if (typeof window !== 'undefined') {
@@ -278,13 +281,35 @@ export function App() {
 hydrate(<App />)
 
 export async function prerender(data) {
-  const { default: prerender } = await import('preact-iso/prerender')
+  const { default: prerender } = await import('./prerender')
 
-  const { sheet, getStyleTagProperties } = await import('./twind.prerender')
+  return prerender(<App {...data} />)
+  // Or if you are using twind/shim
+  // return prerender(<App {...data} />, { shim: true })
+}
+```
 
+```js
+/* public/prerender.js */
+import prerender from 'preact-iso/prerender'
+
+import { setup } from 'twind'
+import { asyncVirtualSheet, getStyleTagProperties, shim } from 'twind/server'
+
+import twindConfig from './twind.config'
+
+const sheet = asyncVirtualSheet()
+
+setup({ ...twindConfig, sheet })
+
+export default async (app, options = {}) => {
   sheet.reset()
 
-  const result = await prerender(<App {...data} />)
+  const result = await prerender(app)
+
+  if (options.shim) {
+    result.html = shim(result.html)
+  }
 
   const { id, textContent } = getStyleTagProperties(sheet)
 
@@ -292,25 +317,6 @@ export async function prerender(data) {
 
   return result
 }
-```
-
-```js
-/* pages/twind.prerender.js */
-import { setup } from 'twind'
-
-// twind/server has currently only a CJS bundle
-// which available as the default export
-import twind from 'twind/server'
-
-import twindConfig from './twind.config'
-
-const { asyncVirtualSheet, getStyleTagProperties } = twind
-
-const sheet = asyncVirtualSheet()
-
-setup({ ...twindConfig, sheet })
-
-export { sheet, getStyleTagProperties }
 ```
 
 ## Next.js
