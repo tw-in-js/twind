@@ -845,14 +845,9 @@ export const corePlugins: Plugins = {
   'transition-none': { 'transition-property': 'none' },
 
   transition: (params, { theme }) => ({
-    transition: joinTruthy(
-      [
-        theme('transitionProperty', params),
-        theme('transitionDuration', ''),
-        theme('transitionTimingFunction', ''),
-      ],
-      ' ',
-    ),
+    transitionProperty: theme('transitionProperty', params),
+    transitionTimingFunction: theme('transitionTimingFunction', ''),
+    transitionDuration: theme('transitionDuration', ''),
   }),
 
   container: (params, { theme }) => {
