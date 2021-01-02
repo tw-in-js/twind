@@ -10,10 +10,14 @@ import { getStyleElement } from '../internal/dom'
 export const cssomSheet = ({
   nonce,
   target = getStyleElement(nonce).sheet as CSSStyleSheet,
-}: SheetConfig<CSSStyleSheet> = {}): Sheet<CSSStyleSheet> => ({
-  target,
-  insert: target.insertRule.bind(target),
-})
+}: SheetConfig<CSSStyleSheet> = {}): Sheet<CSSStyleSheet> => {
+  const offset = target.cssRules.length
+
+  return {
+    target,
+    insert: (rule, index) => target.insertRule(rule, offset + index),
+  }
+}
 
 /**
  * An sheet placeholder which performs no operations. Useful for avoiding errors in a non-browser environment.
