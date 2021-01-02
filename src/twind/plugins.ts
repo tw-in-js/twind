@@ -425,8 +425,10 @@ export const corePlugins: Plugins = {
     alignItems: includes(['start', 'end'], params[0]) ? `flex-${params[0]}` : join(params),
   }),
 
-  content: contentPluginFor('alignContent'),
+  'justify-self': propertyValue('justifySelf'),
+  'justify-items': propertyValue('justifyItems'),
   justify: contentPluginFor('justifyContent'),
+  content: contentPluginFor('alignContent'),
   self: contentPluginFor('alignSelf'),
 
   place: (params) => placeHelper('place-' + params[0], tail(params)),
