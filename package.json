@@ -54,8 +54,8 @@
     "style-vendorizer"
   ],
   "dependencies": {
-    "csstype": "^3.0.5",
     "@emotion/is-prop-valid": "^1.0.0",
+    "csstype": "^3.0.5",
     "node-html-parser": "^2.0.1",
     "style-vendorizer": "^2.0.0"
   },
@@ -93,6 +93,7 @@
     "eslint-plugin-prettier": "^3.2.0",
     "esm": "^3.2.25",
     "husky": ">=4",
+    "htm": "^3.0.4",
     "jsdom": "^16.4.0",
     "preact": "^10.5.7",
     "prettier": "^2.0.5",
