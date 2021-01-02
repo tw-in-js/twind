@@ -394,6 +394,63 @@ test('tw`bg-${"fuchsia"}) sm:${"underline"} lg:${false && "line-through"} text-$
     '@media (min-width: 640px){.sm\\:underline{text-decoration:underline}}',
   ])
 })
+
+test('tw`bg(${"red"}(600 700(hover:& focus:&)))`', ({ tw, sheet }) => {
+  assert.is(
+    tw`bg(${'red'}(600 700(hover:& focus:&)))`,
+    'bg-red-600 hover:bg-red-700 focus:bg-red-700',
+  )
+  assert.equal(sheet.target, [
+    '.bg-red-600{--tw-bg-opacity:1;background-color:#dc2626;background-color:rgba(220,38,38,var(--tw-bg-opacity))}',
+    '.hover\\:bg-red-700:hover{--tw-bg-opacity:1;background-color:#b91c1c;background-color:rgba(185,28,28,var(--tw-bg-opacity))}',
+    '.focus\\:bg-red-700:focus{--tw-bg-opacity:1;background-color:#b91c1c;background-color:rgba(185,28,28,var(--tw-bg-opacity))}',
+  ])
+})
+
+test('tw`bg(${"red(600 700(hover:& focus:&)"}))`', ({ tw, sheet }) => {
+  assert.is(
+    tw`bg(${'red'}(600 700(hover:& focus:&)))`,
+    'bg-red-600 hover:bg-red-700 focus:bg-red-700',
+  )
+  assert.equal(sheet.target, [
+    '.bg-red-600{--tw-bg-opacity:1;background-color:#dc2626;background-color:rgba(220,38,38,var(--tw-bg-opacity))}',
+    '.hover\\:bg-red-700:hover{--tw-bg-opacity:1;background-color:#b91c1c;background-color:rgba(185,28,28,var(--tw-bg-opacity))}',
+    '.focus\\:bg-red-700:focus{--tw-bg-opacity:1;background-color:#b91c1c;background-color:rgba(185,28,28,var(--tw-bg-opacity))}',
+  ])
+})
+
+test('tw`hover:${() => ...} bg-${"red"}-600 ${"underline"}`', ({ tw, sheet }) => {
+  assert.is(
+    tw`hover:${() => ({ color: 'fuchsia' })} bg-${'red'}-600 ${'underline'}`,
+    'hover:tw-l9c87d bg-red-600 underline',
+  )
+  assert.equal(sheet.target, [
+    '.bg-red-600{--tw-bg-opacity:1;background-color:#dc2626;background-color:rgba(220,38,38,var(--tw-bg-opacity))}',
+    '.underline{text-decoration:underline}',
+    '.hover\\:tw-l9c87d:hover{color:fuchsia}',
+  ])
+})
+
+test('tw`${"bg-red"}(600 hover:700)`', ({ tw, sheet }) => {
+  assert.is(tw`${'bg-red'}(600 hover:700)`, 'bg-red-600 hover:bg-red-700')
+  assert.equal(sheet.target, [
+    '.bg-red-600{--tw-bg-opacity:1;background-color:#dc2626;background-color:rgba(220,38,38,var(--tw-bg-opacity))}',
+    '.hover\\:bg-red-700:hover{--tw-bg-opacity:1;background-color:#b91c1c;background-color:rgba(185,28,28,var(--tw-bg-opacity))}',
+  ])
+})
+
+test('tw`bg-red(600 hover:700 ${"focus"}:800)`', ({ tw, sheet }) => {
+  assert.is(
+    tw`bg-red(600 hover:700 ${'focus'}:800)`,
+    'bg-red-600 hover:bg-red-700 focus:bg-red-800',
+  )
+  assert.equal(sheet.target, [
+    '.bg-red-600{--tw-bg-opacity:1;background-color:#dc2626;background-color:rgba(220,38,38,var(--tw-bg-opacity))}',
+    '.hover\\:bg-red-700:hover{--tw-bg-opacity:1;background-color:#b91c1c;background-color:rgba(185,28,28,var(--tw-bg-opacity))}',
+    '.focus\\:bg-red-800:focus{--tw-bg-opacity:1;background-color:#991b1b;background-color:rgba(153,27,27,var(--tw-bg-opacity))}',
+  ])
+})
+
 /* eslint-enable no-template-curly-in-string */
 
 test('container center', ({ sheet }) => {
