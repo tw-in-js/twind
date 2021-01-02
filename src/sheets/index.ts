@@ -7,12 +7,15 @@ import { getStyleElement, STYLE_ELEMENT_ID } from '../internal/dom'
 export const domSheet = ({
   nonce,
   target = getStyleElement(nonce),
-}: SheetConfig<HTMLStyleElement> = {}): Sheet<HTMLStyleElement> => ({
-  target,
-  insert: (rule, index) => {
-    target.insertBefore(document.createTextNode(rule), target.childNodes[index])
-  },
-})
+}: SheetConfig<HTMLStyleElement> = {}): Sheet<HTMLStyleElement> => {
+  const offset = target.childNodes.length
+
+  return {
+    target,
+    insert: (rule, index) =>
+      target.insertBefore(document.createTextNode(rule), target.childNodes[offset + index]),
+  }
+}
 
 /**
  * Allows to reset and snaphot the current state of an sheet and

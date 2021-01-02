@@ -43,10 +43,10 @@ test('injects in to a style sheet element', () => {
   assert.is(
     style.textContent,
     [
-      '.font-bold{font-weight:700}',
       '.flex{display:flex}',
       '.text-center{text-align:center}',
       '@media (min-width: 768px){.md\\:text-left{text-align:left}}',
+      '.font-bold{font-weight:700}',
     ].join(''),
   )
 })
