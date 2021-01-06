@@ -69,6 +69,9 @@ tw`bg-${'fuchsia'}) sm:${'underline'} lg:${false && 'line-through'} text-${[
   'center',
 ]} rounded-${{ lg: false, xl: true }})`
 // => bg-fuchsia sm:underline text-underline text-center rounded-xl
+
+tw`text-${'gray'}-100 bg-${'red'}(600 hover:700 ${'focus'}:800)`
+// => text-gray-100 bg-red-600 hover:bg-red-700 focus:bg-red-800
 ```
 
 </details>

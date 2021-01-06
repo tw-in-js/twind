@@ -1,5 +1,6 @@
 import type { Rule, Token } from '../types'
 
+import * as is from '../internal/is'
 import { join, tail, includes } from './util'
 
 // The parsing is stacked based
@@ -195,16 +196,56 @@ type Static = (interpolation: Token) => void
 //
 // For this to work we assume that interpolations do not
 // affect the current groupings:
-// Valid: tw`text(${'center'})`
-// Invalid: tw`text-${'center'}`
+// Fast mode: tw`text(${'center'})`, tw`text-${'center'}`
+// Slow mode: tw`text-${'red'}-600`, tw`bg(${'red'}(600 700(hover:&))`, tw`${"hover"}:text-blue-600`,
 const staticsCaches = new WeakMap<TemplateStringsArray, Static[]>()
 
 const buildStatics = (strings: TemplateStringsArray): Static[] => {
   let statics = staticsCaches.get(strings)
 
   if (!statics) {
-    // For each static string
-    statics = strings.map((token) => {
+    // Index within strings from which on we use slow mode for parsing
+    // these means collecting all strings and string interpolations
+    // into `buffer` and parse it dynamicly
+    let slowModeIndex = NaN
+
+    // Used during slow mode to join consecutive strings
+    let buffer = ''
+
+    statics = strings.map((token, index) => {
+      if (slowModeIndex != slowModeIndex && includes(':-(', (strings[index + 1] || '')[0])) {
+        // If the the string after the upcoming interpolation
+        // would start a grouping we switch to slow mode now
+        slowModeIndex = index
+      }
+
+      // Slow mode
+      if (index >= slowModeIndex) {
+        return (interpolation) => {
+          // If first => reset bufferd tokens
+          if (index === slowModeIndex) {
+            buffer = ''
+          }
+
+          buffer += token
+
+          // Join consecutive strings
+          if (is.string(interpolation)) {
+            buffer += interpolation
+          } else if (interpolation) {
+            parseString(buffer)
+            buffer = ''
+            parseToken(interpolation)
+          }
+
+          // If last => parse remaining buffered tokens
+          if (index === strings.length - 1) {
+            parseString(buffer)
+          }
+        }
+      }
+
+      // Fast mode
       // Reset rules to extract all static generated rules
       const staticRules = (rules = [])
 
@@ -220,7 +261,9 @@ const buildStatics = (strings: TemplateStringsArray): Static[] => {
       return (interpolation) => {
         rules.push(...staticRules)
         groupings = [...activeGroupings]
-        interpolation && parseToken(interpolation)
+        if (interpolation) {
+          parseToken(interpolation)
+        }
       }
     })
 

@@ -11,9 +11,7 @@ export const mode = (report: (message: string) => void): Mode => ({
   },
 
   report({ id, ...info }) {
-    // TODO message based on info
     const message = `[${id}] ${JSON.stringify(info)}`
-
     // Generate a stacktrace that starts at callee site
     const stack = (new Error(message).stack || message).split('at ')
 
@@ -28,7 +26,7 @@ export const mode = (report: (message: string) => void): Mode => ({
     }
 
     // Put it back together
-    report(stack.join('at '))
+    return report(stack.join('at '))
   },
 })
 
