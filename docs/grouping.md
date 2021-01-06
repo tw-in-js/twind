@@ -76,6 +76,9 @@ tw('hover:(', 'bg-red-500', 'p-3', ')', 'm-1')
 
 tw('hover:(bg-red-500', 'p-3)', 'm-1')
 // => hover:bg-red-500 hover:p-3 m-1
+
+tw`bg-${'red'}(600 700(hover:& focus:&))`
+// => bg-red-600 hover:bg-red-700 focus:bg-red-700
 ```
 
 </details>
