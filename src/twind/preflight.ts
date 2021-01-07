@@ -89,7 +89,7 @@ export const createPreflight = (theme: ThemeResolver): CSSRules => ({
    */
   '*,::before,::after': {
     boxSizing: 'border-box',
-    border: `0 solid ${theme('borderColor', 'DEFAULT', 'currentColor')}`,
+    border: `0 solid ${theme('borderColor.DEFAULT', 'currentColor')}`,
   },
 
   /*
@@ -114,7 +114,7 @@ export const createPreflight = (theme: ThemeResolver): CSSRules => ({
 
   'input::placeholder,textarea::placeholder': {
     opacity: '1',
-    color: theme('placeholderColor', 'DEFAULT', theme('colors.gray.400', '#a1a1aa')),
+    color: theme('placeholderColor.DEFAULT', theme('colors.gray.400', '#a1a1aa')),
   },
 
   'button,[role="button"]': { cursor: 'pointer' },
