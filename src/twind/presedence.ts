@@ -87,7 +87,8 @@ export const makeVariantPresedenceCalculator = (
       // 1536px -> 9
       // 36rem -> 3
       // 96rem -> 9
-      responsivePrecedence(_)
+      // Move into screens layer and adjust based on min-width
+      (3 << 28) | responsivePrecedence(_)
     : // 1: dark mode flag
     variant === ':dark'
     ? 1 << 22
