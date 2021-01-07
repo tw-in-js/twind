@@ -113,7 +113,8 @@ export const createPreflight = (theme: ThemeResolver): CSSRules => ({
   textarea: { resize: 'vertical' },
 
   'input::placeholder,textarea::placeholder': {
-    color: theme('placeholderColor', 'DEFAULT', '#a1a1aa'),
+    opacity: '1',
+    color: theme('placeholderColor', 'DEFAULT', theme('colors.gray.400', '#a1a1aa')),
   },
 
   'button,[role="button"]': { cursor: 'pointer' },

@@ -20,6 +20,7 @@ test('add preflight styles', () => {
     'html{line-height:1.5;-webkit-text-size-adjust:100%;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}',
     'table{text-indent:0;border-color:inherit;border-collapse:collapse}',
     'hr{height:0;color:inherit;border-top-width:1px}',
+    'input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}',
     '::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}',
     'button{background-color:transparent;background-image:none}',
     'body{font-family:inherit;line-height:inherit}',
@@ -35,7 +36,6 @@ test('add preflight styles', () => {
     'button:focus{outline:1px dotted;outline:5px auto -webkit-focus-ring-color}',
     'fieldset,ol,ul,legend{padding:0}',
     'textarea{resize:vertical}',
-    'input::placeholder,textarea::placeholder{color:#a1a1aa}',
     'button,[role="button"]{cursor:pointer}',
     ':-moz-focusring{outline:1px dotted ButtonText}',
     '::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}',
@@ -75,7 +75,7 @@ test('add preflight styles with custom theme', () => {
     ),
   )
   assert.ok(sheet.target.includes('*,::before,::after{box-sizing:border-box;border:0 solid #222}'))
-  assert.ok(sheet.target.includes('input::placeholder,textarea::placeholder{color:#333}'))
+  assert.ok(sheet.target.includes('input::placeholder,textarea::placeholder{opacity:1;color:#333}'))
   assert.ok(sheet.target.includes('pre,code,kbd,samp{font-family:ui-monospace;font-size:1em}'))
 })
 
@@ -85,6 +85,7 @@ test('add preflight styles with theme missing some values', () => {
     sheet,
     theme: {
       fontFamily: { sans: 'ui-sans-serif', mono: 'ui-monospace' },
+      colors: {},
       borderColor: {},
       placeholderColor: {},
     },
@@ -93,7 +94,9 @@ test('add preflight styles with theme missing some values', () => {
   assert.ok(
     sheet.target.includes('*,::before,::after{box-sizing:border-box;border:0 solid currentColor}'),
   )
-  assert.ok(sheet.target.includes('input::placeholder,textarea::placeholder{color:#a1a1aa}'))
+  assert.ok(
+    sheet.target.includes('input::placeholder,textarea::placeholder{opacity:1;color:#a1a1aa}'),
+  )
 })
 
 test('use custom preflight styles', () => {
