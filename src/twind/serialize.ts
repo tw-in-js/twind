@@ -17,10 +17,31 @@ export interface RuleWithPresedence {
 
 const stringifyBlock = (body: string, selector: string): string => selector + '{' + body + '}'
 
-export const enum Layer {
+/**
+ * Determines the default order of styles.
+ *
+ * For example: screens have a higher presedence (eg override) utilities
+ */
+const enum Layer {
+  /**
+   * The preflight styles and any base styles registered by plugins.
+   */
   base = 0,
-  utilities = 1,
-  components = 2,
+
+  /**
+   * Component classes and any component classes registered by plugins.
+   */
+  components = 1,
+
+  /**
+   * Utility classes and any utility classes registered by plugins.
+   */
+  utilities = 2,
+
+  /**
+   * The responsive variations of each utility.
+   */
+  screens = 3,
 }
 
 export const serialize = (
@@ -149,7 +170,7 @@ export const serialize = (
             stringify(
               [...atRules, key],
               selector,
-              presedence | (responsivePrecedence(key) || atRulePresedence(key)),
+              presedence | responsivePrecedence(key) | atRulePresedence(key),
               value as CSSRules,
               important,
             )
@@ -207,8 +228,8 @@ export const serialize = (
 
   const variantPresedence = makeVariantPresedenceCalculator(theme, variants)
 
-  return (css, className, rule, layer = className ? 1 : 0) => {
-    // Initial presedence based on layer (base = 0, utilities = 1, components = 2)
+  return (css, className, rule, layer = className ? Layer.utilities : Layer.base) => {
+    // Initial presedence based on layer (base = 0, components = 1, utilities = 2, screens = 3)
     layer <<= 28
 
     rules = []
