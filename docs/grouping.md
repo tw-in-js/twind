@@ -22,7 +22,7 @@ However, when using Twind we have the option to pass a template literal as input
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Thinking in Groups](#thinking-in-groups)
-- [Directive grouping](#directive-grouping)
+- [Directive Grouping](#directive-grouping)
 - [Variant Grouping](#variant-grouping)
 - [Mixed Groupings](#mixed-groupings)
 - [Self Reference](#self-reference)
@@ -109,7 +109,7 @@ After
 
 As you can see, grouping saved a few characters. For some people, the grouped classes may improve readability. Other people may prefer the Tailwind style. Grouping is fully opt-in, highly expressive, and can be used as little or as much as you'd like.
 
-## Directive grouping
+## Directive Grouping
 
 The first grouping syntax works by factoring out common directive prefixes. Below is an example of a rule set without directive grouping and the equivalent rule set with `border` factored out.
 
