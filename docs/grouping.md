@@ -21,15 +21,93 @@ However, when using Twind we have the option to pass a template literal as input
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
+- [Thinking in Groups](#thinking-in-groups)
 - [Directive grouping](#directive-grouping)
 - [Variant Grouping](#variant-grouping)
 - [Mixed Groupings](#mixed-groupings)
 - [Self Reference](#self-reference)
 - [Inherited Groups](#inherited-groups)
-- [Thinking in Groups](#thinking-in-groups)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 </details>
+
+## Thinking in Groups
+
+Take a look at this button implemented in Tailwind. It requires quite a few classes to achieve the desired functionality:
+
+```html
+<button
+  class="w-full sm:w-auto text-lg uppercase text-gray-100 bg-purple-800 hover:bg-purple-700 focus:bg-purple-700 focus-visible:ring-4 ring-purple-400 px-6 py-2 rounded-full transition-colors duration-300"
+>
+  Click Me
+</button>
+```
+
+Let's see how we can use grouping to improve readability and save a few characters in the process.
+
+**The width classes**
+
+These classes can be grouped using directive grouping:
+
+Before: `w-full sm:w-auto`
+
+After: `w(full sm:auto)`
+
+**The text classes**
+
+Twind convienently provides a `text-uppercase` class, which allows us to group all of the text-related classes together also using directive grouping:
+
+Before: `text-lg uppercase text-gray-100`
+
+After: `text(lg uppercase gray-100)`
+
+**The background classes**
+
+The background classes can be grouped in several combinations. Here are a couple options:
+
+1. Using a combination of directive and variant (mixed) grouping:
+
+   Before: `bg-purple-800 hover:bg-purple-700 focus:bg-purple-700`
+
+   After: `bg(purple-800 hover:(purple-700) focus:(purple-700))`
+
+2. Using a combination of mixed grouping and self-referencing:
+
+   Before: `bg-purple-800 hover:bg-purple-700 focus:bg-purple-700`
+
+   After: `bg-purple(800 700(hover:& focus:&))`
+
+**The ring classes**
+
+The ring classes can be combined using mixed grouping:
+
+Before: `focus-visible:ring-4 ring-purple-400`
+
+After: `ring(purple-400 focus-visible:4)`
+
+And finally, all together:
+
+Before
+
+```html
+<button
+  class="w-full sm:w-auto text-lg uppercase text-gray-100 bg-purple-800 hover:bg-purple-700 focus:bg-purple-700 focus-visible:ring-4 ring-purple-400 px-6 py-2 rounded-full transition-colors duration-300"
+>
+  Click Me
+</button>
+```
+
+After
+
+```html
+<button
+  class="w(full sm:auto) text(lg uppercase gray-100) bg-purple(800 700(hover:& focus:&)) ring(purple-400 focus-visible:4)) px-6 py-2 rounded-full transition-colors duration-300"
+>
+  Click Me
+</button>
+```
+
+As you can see, grouping saved a few characters. For some people, the grouped classes may improve readability. Other people may prefer the Tailwind style. Grouping is fully opt-in, highly expressive, and can be used as little or as much as you'd like.
 
 ## Directive grouping
 
@@ -135,84 +213,6 @@ tw`
 ```
 
 In the above example, the `after` pseudo element will only be applied upon hover.
-
-## Thinking in Groups
-
-Take a look at this button implemented in Tailwind. It requires quite a few classes to achieve the desired functionality:
-
-```html
-<button
-  class="w-full sm:w-auto text-lg uppercase text-gray-100 bg-purple-800 hover:bg-purple-700 focus:bg-purple-700 focus-visible:ring-4 ring-purple-400 px-6 py-2 rounded-full transition-colors duration-300"
->
-  Click Me
-</button>
-```
-
-Let's see how we can use grouping to improve readability and save a few characters in the process.
-
-**The width classes**
-
-These classes can be grouped using directive grouping:
-
-Before: `w-full sm:w-auto`
-
-After: `w(full sm:auto)`
-
-**The text classes**
-
-Twind convienently provides a `text-uppercase` class, which allows us to group all of the text-related classes together also using directive grouping:
-
-Before: `text-lg uppercase text-gray-100`
-
-After: `text(lg uppercase gray-100)`
-
-**The background classes**
-
-The background classes can be grouped in several combinations. Here are a couple options:
-
-1. Using a combination of directive and variant (mixed) grouping:
-
-   Before: `bg-purple-800 hover:bg-purple-700 focus:bg-purple-700`
-
-   After: `bg(purple-800 hover:(purple-700) focus:(purple-700))`
-
-2. Using a combination of mixed grouping and self-referencing:
-
-   Before: `bg-purple-800 hover:bg-purple-700 focus:bg-purple-700`
-
-   After: `bg-purple(800 700(hover:& focus:&))`
-
-**The ring classes**
-
-The ring classes can be combined using mixed grouping:
-
-Before: `focus-visible:ring-4 ring-purple-400`
-
-After: `ring(purple-400 focus-visible:4)`
-
-And finally, all together:
-
-Before
-
-```html
-<button
-  class="w-full sm:w-auto text-lg uppercase text-gray-100 bg-purple-800 hover:bg-purple-700 focus:bg-purple-700 focus-visible:ring-4 ring-purple-400 px-6 py-2 rounded-full transition-colors duration-300"
->
-  Click Me
-</button>
-```
-
-After
-
-```html
-<button
-  class="w(full sm:auto) text(lg uppercase gray-100) bg-purple(800 700(hover:& focus:&)) ring(purple-400 focus-visible:4)) px-6 py-2 rounded-full transition-colors duration-300"
->
-  Click Me
-</button>
-```
-
-As you can see, grouping saved a few characters. For some people, the grouped classes may improve readability. Other people may prefer the Tailwind style. Grouping is fully opt-in, highly expressive, and can be used as little or as much as you'd like.
 
 <hr/>
 
