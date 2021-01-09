@@ -76,7 +76,6 @@
     "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-prettier": "^3.2.0",
     "esm": "^3.2.25",
-    "execa": "^5.0.0",
     "jsdom": "^16.4.0",
     "prettier": "^2.0.5",
     "size-limit": "^4.9.1",
@@ -93,7 +92,7 @@
   },
   "scripts": {
     "build": "distilt",
-    "preformat": "doctoc --update-only --notitle --maxlevel 3 docs/*.md",
+    "preformat": "doctoc --update-only --notitle --maxlevel 3 docs",
     "format": "prettier --write --ignore-path .gitignore .",
     "lint": "eslint --ext .js,.ts --ignore-path .gitignore .",
     "lint:fix": "yarn lint -- --fix",
