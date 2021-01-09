@@ -1,6 +1,6 @@
 name: CI
 
-on: [push]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -52,3 +52,111 @@ jobs:
         with:
           github-token: ${{ secrets.github_token }}
           parallel-finished: true
+
+  publish-pr:
+    name: Publish PR to Github Packages
+    # Run only for PRs originated from same repo
+    if: ${{ github.event.pull_request && github.repository == github.event.pull_request.head.repo.full_name }}
+    needs: build
+    runs-on: ubuntu-20.04
+    env:
+      NPM_PACKAGE_NAME: twind
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+
+      - name: Use Node v14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+
+      - name: Install 🔧
+        uses: bahmutov/npm-install@v1
+
+      - name: Build
+        run: yarn run build
+
+      - uses: actions/setup-node@v1
+        with:
+          registry-url: 'https://npm.pkg.github.com'
+
+      - name: Publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          sed -i -r 's|("name": ")[^"]+(")|\1@${{ github.repository }}\2|;s|("version": ")[^"]+(")|\10.${{ github.event.number }}.${{ github.run_number }}\2|' dist/package.json
+
+          echo '# THIS IS THE [PR ${{ github.event.number }}](${{ github.event.pull_request.html_url }}) PREVIEW PACKAGE' > dist/README.md
+          echo "" >> dist/README.md
+          echo '> Official releases are _only_ available on [registry.npmjs.org](https://www.npmjs.com/package/${{ env.NPM_PACKAGE_NAME }}) as `${{ env.NPM_PACKAGE_NAME }}`.' >> dist/README.md
+          echo "" >> dist/README.md
+          echo "---" >> dist/README.md
+          echo "" >> dist/README.md
+          cat README.md >> dist/README.md
+
+          npm publish --tag "pr${{ github.event.number }}" --access public dist
+
+      - name: Comment
+        uses: mshick/add-pr-comment@v1
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          repo-token-user-login: 'github-actions[bot]' # The user.login for temporary GitHub tokens
+          allow-repeats: false # This is the default
+          message: |
+            ## Try the Preview Package
+
+            > Official releases are **only** available on [registry.npmjs.org](https://www.npmjs.com/package/${{ env.NPM_PACKAGE_NAME }}) as `${{ env.NPM_PACKAGE_NAME }}`.
+
+            This PR has been published to [npm.pkg.github.com](https://github.com/orgs/${{ github.repository_owner }}/packages?repo_name=${{ env.NPM_PACKAGE_NAME }}) as `@${{ github.repository }}@pr${{ github.event.number }}`.
+
+            **Install/Update**
+
+            <details><summary>Configure your NPM client (click to expand)</summary>
+
+            Adjust you `.npmrc` to use `https://npm.pkg.github.com` for `@${{ github.repository_owner }}`
+
+            ```
+            @${{ github.repository_owner }}:registry=https://npm.pkg.github.com
+            ```
+
+            Using the command line:
+
+            ```sh
+            npm config set @${{ github.repository_owner }}:registry https://npm.pkg.github.com --global
+            ```
+
+            </details>
+
+            ```sh
+            # For npm
+            npm install --force ${{ env.NPM_PACKAGE_NAME }}@npm:@${{ github.repository }}@pr${{ github.event.number }}
+
+            # For yarn - upgrade implies install
+            yarn upgrade ${{ env.NPM_PACKAGE_NAME }}@npm:@${{ github.repository }}@pr${{ github.event.number }}
+            ```
+
+  size-pr:
+    name: Size Limit
+    runs-on: ubuntu-20.04
+    # Run only for PRs
+    if: ${{ github.event.pull_request }}
+    needs: build
+    env:
+      CI_JOB_NUMBER: 1
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+
+      - name: Use Node v14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+
+      - name: Install 🔧
+        uses: bahmutov/npm-install@v1
+
+      - name: size-limit
+        uses: andresz1/size-limit-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          skip_step: install
