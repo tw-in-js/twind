@@ -76,7 +76,9 @@
     "eslint-config-prettier": "^7.0.0",
     "eslint-plugin-prettier": "^3.2.0",
     "esm": "^3.2.25",
+    "husky": ">=4",
     "jsdom": "^16.4.0",
+    "lint-staged": ">=10",
     "prettier": "^2.0.5",
     "size-limit": "^4.9.1",
     "snoop": "^1.0.2",
@@ -150,5 +152,15 @@
         ]
       }
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "docs/**/*.md": "doctoc --update-only --notitle --maxlevel 3",
+    "*.{js,jsx,cjs,mjs,ts,tsx}": "eslint --cache --fix",
+    "*.{json,js,jsx,cjs,mjs,ts,tsx,md,html,css,yml,yaml}": "prettier --write"
   }
 }
