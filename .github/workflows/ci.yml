@@ -1,6 +1,22 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      # Push events on main branch
+      - main
+    paths-ignore:
+      # Do not run for docs changes
+      - 'docs/**'
+
+  pull_request:
+    paths-ignore:
+      # Do not run for docs changes
+      - 'docs/**'
+
+  # Publish to NPM
+  release:
+    types: [published, created, prereleased, released]
 
 jobs:
   build:
@@ -53,8 +69,43 @@ jobs:
           github-token: ${{ secrets.github_token }}
           parallel-finished: true
 
+  publish-release:
+    name: Publish to NPM
+    # Run only for PRs originated from same repo
+    if: ${{ github.event.release && !github.event.release.draft }}
+    needs: build
+    runs-on: ubuntu-20.04
+    env:
+      NPM_PACKAGE_NAME: twind
+    steps:
+      - name: Checkout 🛎️
+        uses: actions/checkout@v2
+
+      - name: Use Node v14.x
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+
+      - name: Install 🔧
+        uses: bahmutov/npm-install@v1
+
+      - name: Build
+        run: yarn run build
+
+      - name: Publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
+        run: |
+          if [ ${{ github.event.release.prerelease }} == true ]; then
+            DIST_TAG='canary'
+          else
+            DIST_TAG='latest'
+          fi
+
+          npm publish --tag "${DIST_TAG}" --access public dist
+
   publish-pr:
-    name: Publish PR to Github Packages
+    name: Publish to Github Packages
     # Run only for PRs originated from same repo
     if: ${{ github.event.pull_request && github.repository == github.event.pull_request.head.repo.full_name }}
     needs: build
