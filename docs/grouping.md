@@ -69,7 +69,7 @@ The background classes can be grouped in several combinations. Here are a couple
 
    Before: `bg-purple-800 hover:bg-purple-700 focus:bg-purple-700`
 
-   After: `bg(purple-800 hover:(purple-700) focus:(purple-700))`
+   After: `bg(purple-800 hover:purple-700 focus:purple-700)`
 
 2. Using a combination of mixed grouping and self-referencing:
 
