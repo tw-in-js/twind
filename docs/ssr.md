@@ -31,7 +31,7 @@ but the same logic can be applied to custom instances.
 
 ```js
 import { setup } from 'twind'
-import { virtualSheet, getStyleTag } from 'twind/server'
+import { virtualSheet, getStyleTag } from 'twind/sheets'
 
 const sheet = virtualSheet()
 
@@ -112,7 +112,7 @@ async function ssr() {
 import { renderToString } from 'react-dom/server'
 
 import { setup } from 'twind'
-import { virtualSheet, getStyleTag } from 'twind/server'
+import { virtualSheet, getStyleTag } from 'twind/sheets'
 
 import App from './app'
 
@@ -146,7 +146,7 @@ function ssr() {
 import renderToString from 'preact-render-to-string'
 
 import { setup } from 'twind'
-import { virtualSheet, getStyleTag } from 'twind/server'
+import { virtualSheet, getStyleTag } from 'twind/sheets'
 
 import App from './app'
 
@@ -178,7 +178,7 @@ function ssr() {
 
 ```js
 import { setup } from 'twind'
-import { virtualSheet, getStyleTag } from 'twind/server'
+import { virtualSheet, getStyleTag } from 'twind/sheets'
 
 import App from './app.svelte'
 
