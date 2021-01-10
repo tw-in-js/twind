@@ -29,6 +29,7 @@
     "./css": "./src/css/index.ts",
     "./observe": "./src/observe/index.ts",
     "./shim": "./src/shim/index.ts",
+    "./shim/server": "./src/shim/server/index.ts",
     "./server": "./src/server/index.ts",
     "./sheets": "./src/sheets/index.ts",
     "./package.json": "./package.json"
