@@ -160,6 +160,63 @@ import { setup, disconnect } from 'twind/shim'
 
 </details>
 
+<details><summary>Static Extraction a.k.a. Server Side Rendering (Click to expand)</summary>
+
+**Synchronous SSR**
+
+```js
+import { setup } from 'twind'
+import { virtualSheet, getStyleTag, shim } from 'twind/shim/server'
+
+const sheet = virtualSheet()
+
+setup({ ...sharedOptions, sheet })
+
+function ssr() {
+  // 1. Reset the sheet for a new rendering
+  sheet.reset()
+
+  // 2. Render the app to an html string and handle class attributes
+  const body = shim(renderTheApp())
+
+  // 3. Create the style tag with all generated CSS rules
+  const styleTag = getStyleTag(sheet)
+
+  // 4. Generate the response html
+  return `<!DOCTYPE html>
+    <html lang="en">
+      <head>${styleTag}</head>
+      <body>${body}</body>
+    </html>
+  `
+}
+```
+
+**Asynchronous SSR**: see [WMR example in SSR docs](./ssr.md#wmr)
+
+**Custom `tw` instances**
+
+`shim` accepts an optional second argument which should be the `tw` instance to use.
+
+```js
+import { create } from 'twind'
+
+const sheet = virtualSheet()
+
+const { tw } create({ ...sharedOptions, sheet })
+
+function ssr() {
+  // Same as before
+
+  // 2. Render the app to an html string and handle class attributes
+  const body = shim(renderTheApp(), tw)
+
+  // Same as before
+}
+```
+
+</details>
+
 <details><summary>How to support legacy browser with the UMD bundles (Click to expand)</summary>
 
 > You may need to provide certain [polyfills](./browser-support.md) depending on your target browser.
