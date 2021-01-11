@@ -425,9 +425,9 @@ test('tw`hover:${() => ...} bg-${"red"}-600 ${"underline"}`', ({ tw, sheet }) =>
     'hover:tw-l9c87d bg-red-600 underline',
   )
   assert.equal(sheet.target, [
+    '.hover\\:tw-l9c87d:hover{color:fuchsia}',
     '.bg-red-600{--tw-bg-opacity:1;background-color:#dc2626;background-color:rgba(220,38,38,var(--tw-bg-opacity))}',
     '.underline{text-decoration:underline}',
-    '.hover\\:tw-l9c87d:hover{color:fuchsia}',
   ])
 })
 

@@ -194,8 +194,10 @@ export const configure = (
         className = hash ? hash(JSON.stringify(translation, evaluateFunctions)) : rule.$
 
         // 4. serialize: convert to css string with precedence
+        // - move inline directives into the component layer (1)
+        // - all other are utilities (2)
         // 5. inject: add to dom
-        serialize(translation, className, rule).forEach(inject)
+        serialize(translation, className, rule, is.function(rule.d) ? 1 : 2).forEach(inject)
       } else {
         // No plugin or plugin did not return something
         className = rule.$
