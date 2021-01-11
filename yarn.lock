@@ -1115,10 +1115,10 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
-distilt@^0.9.2:
-  version "0.9.2"
-  resolved "https://registry.npmjs.org/distilt/-/distilt-0.9.2.tgz#cf997a31c86c77a9a49c516dedca9a0533ad882a"
-  integrity sha512-wYVsQ1PDAbJvGC5NO6MYzPUXEPfX0lKx8uLkW2syVZ5oeT+y8UbArBs5ZLHeGzQm5htfLtSCH9b6S7GuSdmNQg==
+distilt@^0.9.3:
+  version "0.9.3"
+  resolved "https://registry.npmjs.org/distilt/-/distilt-0.9.3.tgz#e1411f7c8b43fb5fe8efe44375cf0844e7184ebb"
+  integrity sha512-q9KiEaPqxucOgowHLel8i2aFTRgU8nt5kyRDJkwP2XVe2yTpE5xXDd9/HG1EaodWOj4OD79C6vs/fPXAdFX2uA==
   dependencies:
     es-module-lexer "^0.3.26"
     esbuild "^0.8.28"
@@ -2700,10 +2700,10 @@ node-emoji@^1.8.1:
   dependencies:
     lodash.toarray "^4.4.0"
 
-node-html-parser@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.npmjs.org/node-html-parser/-/node-html-parser-2.0.1.tgz#66e3a6178f5fbf345f5e0e7522d36af7625a3346"
-  integrity sha512-CE0K6zALs+pS+SsQd8oKKF51cNrpwZ6gj/8OSzjhQ2vTfCOnlNtZakgv0MKuEOAZ4kBiKRgJBUicvjAxaFM4Hw==
+node-html-parser@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.npmjs.org/node-html-parser/-/node-html-parser-2.0.2.tgz#168c9cfb77ae58fe4038d84862a0fc8f2ad8e3fd"
+  integrity sha512-N2000Ho9dkabvRZcyiwm6zOpdiAzxAxcJ0Z0WNoh/yXHG0YCuiK2WpNQfN+9vheLNY/h/It11Gk7uwT4QTfk9Q==
   dependencies:
     he "1.2.0"
 
