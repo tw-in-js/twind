@@ -179,7 +179,7 @@ setup({
 })
 ```
 
-The extend the existing color palette use `theme.extend`:
+To extend the existing color palette use `theme.extend`:
 
 ```js
 import * as colors from 'twind/colors'
