@@ -39,9 +39,9 @@ const enum Layer {
   utilities = 2,
 
   /**
-   * The responsive variations of each utility.
+   * Inline directives
    */
-  screens = 3,
+  css = 3,
 }
 
 export const serialize = (
@@ -228,8 +228,8 @@ export const serialize = (
 
   const variantPresedence = makeVariantPresedenceCalculator(theme, variants)
 
-  return (css, className, rule, layer = className ? Layer.utilities : Layer.base) => {
-    // Initial presedence based on layer (base = 0, components = 1, utilities = 2, screens = 3)
+  return (css, className, rule, layer = Layer.base) => {
+    // Initial presedence based on layer (base = 0, components = 1, utilities = 2, css = 3)
     layer <<= 28
 
     rules = []

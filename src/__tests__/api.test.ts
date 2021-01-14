@@ -144,10 +144,10 @@ test('at-rules presedence', ({ sheet, tw }) => {
     '@media (prefers-reduced-motion:reduce){.motion-reduce\\:m-5{margin:1.25rem}}',
     '@supports ((position: -webkit-sticky) or (position:sticky)){.sticky\\:m-6{margin:1.5rem}}',
     '@media (prefers-reduced-motion:no-preference){.motion-safe\\:m-9{margin:2.25rem}}',
-    '@media (prefers-color-scheme:dark){.dark\\:m-7{margin:1.75rem}}',
-    '@media (min-width: 768px){@media (prefers-color-scheme:dark){.md\\:dark\\:m-4{margin:1rem}}}',
     '@media (min-width: 1024px){.lg\\:m-9{margin:2.25rem}}',
     '@media (min-width: 1024px){@media (prefers-reduced-motion:no-preference){.lg\\:motion-safe\\:m-12{margin:3rem}}}',
+    '@media (prefers-color-scheme:dark){.dark\\:m-7{margin:1.75rem}}',
+    '@media (min-width: 768px){@media (prefers-color-scheme:dark){.md\\:dark\\:m-4{margin:1rem}}}',
   ])
 })
 
@@ -425,9 +425,9 @@ test('tw`hover:${() => ...} bg-${"red"}-600 ${"underline"}`', ({ tw, sheet }) =>
     'hover:tw-l9c87d bg-red-600 underline',
   )
   assert.equal(sheet.target, [
-    '.hover\\:tw-l9c87d:hover{color:fuchsia}',
     '.bg-red-600{--tw-bg-opacity:1;background-color:#dc2626;background-color:rgba(220,38,38,var(--tw-bg-opacity))}',
     '.underline{text-decoration:underline}',
+    '.hover\\:tw-l9c87d:hover{color:fuchsia}',
   ])
 })
 
@@ -650,9 +650,9 @@ test('inline rule nested', ({ sheet, tw }) => {
     '.text-center{text-align:center}',
     '.font-bold{font-weight:700}',
     '@media (min-width: 640px){.sm\\:hover\\:underline:hover{text-decoration:underline}}',
-    '@media (min-width: 640px){.sm\\:focus\\:tw-1e4d9nh:focus{color:#ef4444}}',
     '@media (min-width: 1024px){.lg\\:text-lg{font-size:1.125rem;line-height:1.75rem}}',
     '@media (min-width: 1024px){.lg\\:focus\\:underline:focus{text-decoration:underline}}',
+    '@media (min-width: 640px){.sm\\:focus\\:tw-1e4d9nh:focus{color:#ef4444}}',
   ])
 })
 
