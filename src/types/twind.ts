@@ -1,12 +1,26 @@
 import type * as CSS from 'csstype'
 
-import type { CSSProperties, CSSAtKeyframes } from './css'
+import type { CSSProperties } from './css'
 import type { Theme, ThemeResolver, ThemeSectionType } from './theme'
 import type { Falsy } from './util'
 
 export interface TW {
   (strings: TemplateStringsArray, ...interpolations: Token[]): string
   (...tokens: Token[]): string
+
+  apply(strings: TemplateStringsArray, ...interpolations: Token[]): TWApply
+  apply(...tokens: Token[]): TWApply
+}
+
+export interface LazyInjected {
+  valueOf(): string
+  toString(): string
+
+  toJSON(): unknown
+}
+
+export interface TWApply extends LazyInjected {
+  (context: Context): CSSRules
 }
 
 export interface Context {
@@ -18,6 +32,8 @@ export interface Context {
 
   /** Create unique identifier (group, custom properties) */
   readonly tag: (key: string) => string
+
+  readonly css: (rule: Rule[] | string) => CSSRules
 }
 
 export interface Instance {
@@ -199,6 +215,7 @@ export interface CSSPseudos extends CSSSimplePseudos {
 
 export type CSSAtMedia = Record<string, CSSRules>
 export type CSSAtSupports = Record<string, CSSRules>
+export type CSSAtKeyframes = Record<string, CSSProperties | ((context: Context) => CSSProperties)>
 
 /**
  * See: https://drafts.csswg.org/css-nesting/#nest-selector

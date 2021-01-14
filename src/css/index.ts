@@ -1,11 +1,6 @@
-import type { TW, CSSRules, CSSAtKeyframes, InlineDirective, Context } from '../types'
+import type { TW, CSSRules, CSSAtKeyframes, InlineDirective, Context, LazyInjected } from '../types'
 
 import { tw as defaultTW, hash } from '../index'
-
-export interface LazyInjected {
-  valueOf: () => string
-  toString: () => string
-}
 
 export interface CSSDirective extends LazyInjected {
   (context: { tw: TW }): CSSRules
