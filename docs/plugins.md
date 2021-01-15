@@ -8,9 +8,11 @@ Theming and customization lets you specify how core plugins and the compiler beh
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [Introduction](#introduction)
+- [Plugin as alias](#plugin-as-alias)
 - [Plugins without arguments](#plugins-without-arguments)
 - [Plugins with arguments](#plugins-with-arguments)
   - [Referencing the theme](#referencing-the-theme)
+- [Inject global styles](#inject-global-styles)
 - [Inline Plugins](#inline-plugins)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
@@ -33,9 +35,35 @@ Plugins are searched for by name using the longest prefix before a dash (`"-"'`)
 | `bg-gradient`      | `["to", "t"]`             |
 | `bg`               | `["gradient", "to", "t"]` |
 
+## Plugin as alias
+
+The simplest form of a plugin is one defines a list of tailwind rules to use – basically an alias for the rules:
+
+```js
+import { tw, setup } from 'twind'
+
+setup({
+  plugins: {
+    btn: `
+      py-2 px-4
+      font-semibold
+      rounded-lg shadow-md
+      focus:(outline-none ring(2 indigo-400 opacity-75))
+   `,
+    'btn-indigo': `btn bg-indigo(500 hover:700) text-white`,
+  },
+})
+
+tw`btn`
+// => py-2 px-4 font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75
+
+tw`btn-indigo`
+// => py-2 px-4 font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75 bg-indigo-500 hover:bg-indigo-700 text-white
+```
+
 ## Plugins without arguments
 
-The simplest form of plugin is one that returns the literal CSS rules that the compiler should return in response to a single directive.
+Another form of plugin is one that returns the literal CSS rules that the compiler should return in response to a single directive.
 
 For example, say you wanted to take advantage of the [scroll-snap API](https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-snap-type) which isn't supported by tailwind currently.
 
@@ -84,7 +112,7 @@ This means that the plugin above now covers more single part cases like `scroll-
 
 > Core plugins cannot be deleted but they can be overwritten
 
-If we wanted to take this one step futher and cover all scroll-snap cases then we could do something like:
+If we wanted to take this one step further and cover all scroll-snap cases then we could do something like:
 
 ```js
 setup({
@@ -176,6 +204,25 @@ tw`font-bold ${link}`
 ```
 
 > **Note**: Inline plugins must be idempotent and side-effect free.
+
+## Inject global styles
+
+If a plugin needs to define some global styles it can use the `:global` property which should contain an selectors object with css properties:
+
+```js
+setup({
+  plugins: {
+    link: {
+      ':global': {
+        a: {
+          /* global styles for anchors */
+        },
+      },
+      /* element styles */
+    },
+  },
+})
+```
 
 <hr/>
 

@@ -42,7 +42,7 @@
     {
       "path": "dist/twind.js",
       "gzip": true,
-      "limit": "11.5kb"
+      "limit": "12kb"
     }
   ],
   "// These are ONLY bundled (eg included) in the umd builds": "",

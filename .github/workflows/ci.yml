@@ -58,17 +58,6 @@ jobs:
           flag-name: build-${{ matrix.node }}-${{ matrix.os }}
           parallel: true
 
-  coveralls:
-    name: Collect Coverage
-    needs: build
-    runs-on: ubuntu-20.04
-    steps:
-      - name: Coveralls Finished
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.github_token }}
-          parallel-finished: true
-
   publish-release:
     name: Publish to NPM
     # Run only for PRs originated from same repo
@@ -211,3 +200,14 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           skip_step: install
+
+  coveralls:
+    name: Collect Coverage
+    needs: build
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
+          parallel-finished: true
