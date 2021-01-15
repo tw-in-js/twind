@@ -22,6 +22,7 @@ If you find any incorrect or missing documentation then please [open an issue](h
   - [Grouping](./grouping.md) - how to optimize rules size
   - [Tailwind Extensions](./tailwind-extensions.md) - which additional features are available
   - [CSS-in-JS](./css-in-js.md) - how to apply custom css
+  - [Components](./components.md) - how to define component styles
   - [Plugins](./plugins.md) - how to extend twind
   - [Testing](./sheets.md) - how to verify the generated class names
   - [Static Extraction (SSR)](./ssr.md) - how to extract the generated css on the server
