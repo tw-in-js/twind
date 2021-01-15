@@ -188,6 +188,11 @@ export const configure = (
         // Use as is
         className = translation
       } else if (is.object(translation)) {
+        // Allow global styles
+        if (translation[':global']) {
+          translation[':global'] = serialize(translation[':global'] as CSSRules).forEach(inject)
+        }
+
         // 3. decorate: apply variants
         translation = decorate(translation, rule)
 

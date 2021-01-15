@@ -51,7 +51,9 @@ Object.entries(data)
       //   "group hover:bg-surface",
       //   [".hover\\:bg-surface:hover{background-color:#fff;color:#111}"]
       // ],
-      return [tokens, declarations[0] as string, declarations[1] as string[]]
+      return Array.isArray(declarations[1])
+        ? [tokens, declarations[0] as string, declarations[1] as string[]]
+        : [tokens, tokens, declarations as string[]]
     }
 
     return [tokens, tokens, [declarations]]
@@ -174,9 +176,9 @@ test('properties presedence (gradient)', ({ sheet, tw }) => {
     'bg-gradient-to-r from-purple-400 via-pink-500 to-red-500',
   )
   assert.equal(sheet.target, [
-    '.bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops,var(--tw-gradient-from,transparent),var(--tw-gradient-to,transparent)))}',
-    '.from-purple-400{--tw-gradient-from:#a78bfa}',
-    '.via-pink-500{--tw-gradient-stops:var(--tw-gradient-from,transparent),#ec4899,var(--tw-gradient-to,transparent)}',
+    '.from-purple-400{--tw-gradient-from:#a78bfa;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to,rgba(167,139,250,0))}',
+    '.bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops)}',
+    '.via-pink-500{--tw-gradient-stops:var(--tw-gradient-from),#ec4899,var(--tw-gradient-to,rgba(236,72,153,0))}',
     '.to-red-500{--tw-gradient-to:#ef4444}',
   ])
 })
@@ -278,6 +280,7 @@ test('properties presedence (divide)', ({ sheet, tw }) => {
     },
     'sm:hover:rounded sm:active:rounded-full md:rounded md:hover:bg-white lg:rounded-full lg:hover:bg-white lg:hover:text-black lg:hover:active:underline lg:hover:active:shadow',
     [
+      '*{--tw-shadow:0 0 transparent}',
       '@media (min-width: 640px){.sm\\:hover\\:rounded:hover{border-radius:0.25rem}}',
       '@media (min-width: 640px){.sm\\:active\\:rounded-full:active{border-radius:9999px}}',
       '@media (min-width: 768px){.md\\:rounded{border-radius:0.25rem}}',
@@ -285,7 +288,7 @@ test('properties presedence (divide)', ({ sheet, tw }) => {
       '@media (min-width: 1024px){.lg\\:rounded-full{border-radius:9999px}}',
       '@media (min-width: 1024px){.lg\\:hover\\:text-black:hover{--tw-text-opacity:1;color:#000;color:rgba(0,0,0,var(--tw-text-opacity))}}',
       '@media (min-width: 1024px){.lg\\:hover\\:bg-white:hover{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}}',
-      '@media (min-width: 1024px){.lg\\:hover\\:active\\:shadow:hover:active{--tw-shadow:0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);box-shadow:0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);box-shadow:var(--tw-ring-offset-shadow,0 0 transparent),var(--tw-ring-shadow,0 0 transparent),var(--tw-shadow,0 0 transparent)}}',
+      '@media (min-width: 1024px){.lg\\:hover\\:active\\:shadow:hover:active{--tw-shadow:0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);box-shadow:0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);box-shadow:var(--tw-ring-offset-shadow,0 0 transparent),var(--tw-ring-shadow,0 0 transparent),var(--tw-shadow)}}',
       '@media (min-width: 1024px){.lg\\:hover\\:active\\:underline:hover:active{text-decoration:underline}}',
     ],
   ],

@@ -85,7 +85,11 @@ const asRGBA = <T extends string | undefined>(
     )},${parseColorComponent(color.substr(1 + _, _), $)},${parseColorComponent(
       color.substr(1 + 2 * _, _),
       $,
-    )},var(--tw-${opacityProperty}${opacityDefault ? ',' + opacityDefault : ''}))`
+    )},${
+      opacityProperty
+        ? `var(--tw-${opacityProperty}${opacityDefault ? ',' + opacityDefault : ''})`
+        : opacityDefault || 1
+    })`
   }
 
   return color
@@ -102,6 +106,8 @@ const withOpacityFallback = (
         [property]: [color, _],
       }
     : { [property]: color }
+
+const transparentTo = (color: string) => (($ = asRGBA(color, '', '0')) === _ ? 'transparent' : $)
 
 const reversableEdge = (
   params: string[],
@@ -208,16 +214,6 @@ const transformXYFunction: DirectiveHandler = (params, context, id) =>
     [`--tw-${id}-x`]: params[0] !== 'y' && _,
     [`--tw-${id}-y`]: params[0] !== 'x' && _,
     transform: [`${id}${params[1] ? params[0].toUpperCase() : ''}(${_})`, transform()],
-  }
-
-const boxShadow = (): string =>
-  `var(--tw-ring-offset-shadow,0 0 transparent),var(--tw-ring-shadow,0 0 transparent),var(--tw-shadow,0 0 transparent)`
-
-// .from-purple-400
-// .to-red-500
-const gradientColorStop: DirectiveHandler = (params, { theme }, id) =>
-  (_ = theme('gradientColorStops', params)) && {
-    ['--tw-gradient-' + id]: _,
   }
 
 const edgesPluginFor = (key: 'margin' | 'padding'): DirectiveHandler => (params, context, id) =>
@@ -662,10 +658,7 @@ export const corePlugins: Plugins = {
       case 'gradient':
         if (params[1] === 'to' && (_ = expandEdges(params[2]))) {
           return {
-            backgroundImage: `linear-gradient(to ${join(
-              _,
-              ' ',
-            )},var(--tw-gradient-stops,var(--tw-gradient-from,transparent),var(--tw-gradient-to,transparent)))`,
+            backgroundImage: `linear-gradient(to ${join(_, ' ')},var(--tw-gradient-stops)`,
           }
         }
     }
@@ -676,16 +669,26 @@ export const corePlugins: Plugins = {
   },
 
   // .from-purple-400
-  from: gradientColorStop,
-
-  // .to-red-500
-  to: gradientColorStop,
+  from: (params, { theme }) =>
+    (_ = theme('gradientColorStops', params)) && {
+      '--tw-gradient-from': _,
+      '--tw-gradient-stops': `var(--tw-gradient-from),var(--tw-gradient-to,${transparentTo(
+        _ as string,
+      )})`,
+    },
 
   // .via-pink-500
   via: (params, { theme }) =>
     (_ = theme('gradientColorStops', params)) && {
-      '--tw-gradient-stops': `var(--tw-gradient-from,transparent),${_},var(--tw-gradient-to,transparent)`,
+      '--tw-gradient-stops': `var(--tw-gradient-from),${_},var(--tw-gradient-to,${transparentTo(
+        _ as string,
+      )})`,
     },
+
+  // .to-red-500
+  to: (params, { theme }) => ({
+    '--tw-gradient-to': theme('gradientColorStops', params),
+  }),
 
   // .border	border-width: 1px;
   // .border-0	border-width: 0;
@@ -730,9 +733,17 @@ export const corePlugins: Plugins = {
   // .shadow-none	box-shadow: none;
   shadow: (params, { theme }) =>
     (_ = theme('boxShadow', params)) && {
-      '--tw-shadow': _,
+      ':global': {
+        '*': {
+          '--tw-shadow': '0 0 transparent',
+        },
+      },
+      '--tw-shadow': _ === 'none' ? '0 0 transparent' : _,
       // Fallback first, then modern with ring-* support
-      boxShadow: [_, boxShadow()],
+      boxShadow: [
+        _,
+        `var(--tw-ring-offset-shadow,0 0 transparent),var(--tw-ring-shadow,0 0 transparent),var(--tw-shadow)`,
+      ],
     },
 
   animate: (params, { theme, tag }) => {
@@ -795,23 +806,24 @@ export const corePlugins: Plugins = {
     return (_ = theme('ringWidth', params, '' /* Optional */))
       ? {
           // A width
-          '--tw-ring-offset-shadow': `var(--tw-ring-inset,/*!*/ /*!*/) 0 0 0 var(--tw-ring-offset-width,${theme(
-            'ringOffsetWidth',
-            '',
-            '0px',
-          )}) var(--tw-ring-offset-color,${theme('ringOffsetColor', '', '#fff')})`,
+          '--tw-ring-offset-shadow': `var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)`,
+          '--tw-ring-shadow': `var(--tw-ring-inset) 0 0 0 calc(${_} + var(--tw-ring-offset-width)) var(--tw-ring-color)`,
+          'box-shadow': `var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 transparent)`,
 
-          '--tw-ring-shadow': `var(--tw-ring-inset,/*!*/ /*!*/) 0 0 0 calc(${_} + var(--tw-ring-offset-width,${theme(
-            'ringOffsetWidth',
-            '',
-            '0px',
-          )})) var(--tw-ring-color,${asRGBA(
-            theme('ringColor', '', '#93c5fd') as string,
-            'ring-opacity',
-            theme('ringOpacity', '', '0.5'),
-          )})`,
-
-          'box-shadow': boxShadow(),
+          ':global': {
+            '*': {
+              '--tw-ring-inset': 'var(--tw-empty,/*!*/ /*!*/)',
+              '--tw-ring-offset-width': theme('ringOffsetWidth', '', '0px'),
+              '--tw-ring-offset-color': theme('ringOffsetColor', '', '#fff'),
+              '--tw-ring-color': asRGBA(
+                theme('ringColor', '', '#93c5fd') as string,
+                'ring-opacity',
+                theme('ringOpacity', '', '0.5'),
+              ),
+              '--tw-ring-offset-shadow': '0 0 transparent',
+              '--tw-ring-shadow': '0 0 transparent',
+            },
+          },
         }
       : {
           // A color

@@ -90,10 +90,10 @@ test('scale', ({ instance, sheet }) => {
 })
 
 test('bg-gradient-to-r from-purple-500', ({ instance, sheet }) => {
-  assert.is(instance.tw('bg-gradient-to-r from-purple-500'), 'tw-kvlmqb tw-1unz9xc')
+  assert.is(instance.tw('bg-gradient-to-r from-purple-500'), 'tw-1g4n8v8 tw-1wr14we')
   assert.equal(sheet.target, [
-    '.tw-kvlmqb{background-image:linear-gradient(to right,var(--tw-wt1r4o,var(--tw-sc6ze8,transparent),var(--tw-z5bexf,transparent)))}',
-    '.tw-1unz9xc{--tw-sc6ze8:#8b5cf6}',
+    '.tw-1wr14we{--tw-sc6ze8:#8b5cf6;--tw-wt1r4o:var(--tw-sc6ze8),var(--tw-z5bexf,rgba(139,92,246,0))}',
+    '.tw-1g4n8v8{background-image:linear-gradient(to right,var(--tw-wt1r4o)}',
   ])
 })
 
