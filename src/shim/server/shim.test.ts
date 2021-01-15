@@ -134,4 +134,155 @@ test('hash class names', () => {
   ])
 })
 
+test('apply node-html-parser options (comment: true)', () => {
+  const sheet = virtualSheet()
+  const { tw } = create({
+    sheet,
+    mode: strict,
+    preflight: false,
+    prefix: false,
+  })
+
+  const html = shim(
+    {
+      html: `
+    <!-- HTML Comment -->
+    <main class="h-screen bg-purple-400 flex items-center justify-center">
+      <h1 class="text(center 5xl white sm:gray-800 md:pink-700)">
+        This is <span class="font-bold">Twind</span>!
+      </h1>
+    </main>
+    `,
+      options: {
+        comment: true,
+      },
+    },
+    tw,
+  )
+
+  assert.is(
+    html,
+    `
+    <!-- HTML Comment -->
+    <main class="h-screen bg-purple-400 flex items-center justify-center">
+      <h1 class="text-center text-5xl text-white sm:text-gray-800 md:text-pink-700">
+        This is <span class="font-bold">Twind</span>!
+      </h1>
+    </main>
+    `,
+  )
+  assert.equal(sheet.target, [
+    '.text-white{--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity))}',
+    '.bg-purple-400{--tw-bg-opacity:1;background-color:#a78bfa;background-color:rgba(167,139,250,var(--tw-bg-opacity))}',
+    '.text-5xl{font-size:3rem;line-height:1}',
+    '.h-screen{height:100vh}',
+    '.flex{display:flex}',
+    '.items-center{align-items:center}',
+    '.justify-center{justify-content:center}',
+    '.text-center{text-align:center}',
+    '.font-bold{font-weight:700}',
+    '@media (min-width: 640px){.sm\\:text-gray-800{--tw-text-opacity:1;color:#1f2937;color:rgba(31,41,55,var(--tw-text-opacity))}}',
+    '@media (min-width: 768px){.md\\:text-pink-700{--tw-text-opacity:1;color:#be185d;color:rgba(190,24,93,var(--tw-text-opacity))}}',
+  ])
+})
+
+test('apply node-html-parser options (comment: false)', () => {
+  const sheet = virtualSheet()
+  const { tw } = create({
+    sheet,
+    mode: strict,
+    preflight: false,
+    prefix: false,
+  })
+
+  const html = shim(
+    {
+      html: `
+    <!-- HTML Comment -->
+    <main class="h-screen bg-purple-400 flex items-center justify-center">
+      <h1 class="text(center 5xl white sm:gray-800 md:pink-700)">
+        This is <span class="font-bold">Twind</span>!
+      </h1>
+    </main>
+    `,
+      options: {
+        comment: false,
+      },
+    },
+    tw,
+  )
+
+  assert.is(
+    html,
+    `
+    
+    <main class="h-screen bg-purple-400 flex items-center justify-center">
+      <h1 class="text-center text-5xl text-white sm:text-gray-800 md:text-pink-700">
+        This is <span class="font-bold">Twind</span>!
+      </h1>
+    </main>
+    `,
+  )
+  assert.equal(sheet.target, [
+    '.text-white{--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity))}',
+    '.bg-purple-400{--tw-bg-opacity:1;background-color:#a78bfa;background-color:rgba(167,139,250,var(--tw-bg-opacity))}',
+    '.text-5xl{font-size:3rem;line-height:1}',
+    '.h-screen{height:100vh}',
+    '.flex{display:flex}',
+    '.items-center{align-items:center}',
+    '.justify-center{justify-content:center}',
+    '.text-center{text-align:center}',
+    '.font-bold{font-weight:700}',
+    '@media (min-width: 640px){.sm\\:text-gray-800{--tw-text-opacity:1;color:#1f2937;color:rgba(31,41,55,var(--tw-text-opacity))}}',
+    '@media (min-width: 768px){.md\\:text-pink-700{--tw-text-opacity:1;color:#be185d;color:rgba(190,24,93,var(--tw-text-opacity))}}',
+  ])
+})
+
+test('use object argument, no options', () => {
+  const sheet = virtualSheet()
+  const { tw } = create({
+    sheet,
+    mode: strict,
+    preflight: false,
+    prefix: false,
+  })
+
+  const html = shim(
+    {
+      html: `
+    <main class="h-screen bg-purple-400 flex items-center justify-center">
+      <h1 class="text(center 5xl white sm:gray-800 md:pink-700)">
+        This is <span class="font-bold">Twind</span>!
+      </h1>
+    </main>
+    `,
+    },
+    tw,
+  )
+
+  assert.is(
+    html,
+    `
+    <main class="h-screen bg-purple-400 flex items-center justify-center">
+      <h1 class="text-center text-5xl text-white sm:text-gray-800 md:text-pink-700">
+        This is <span class="font-bold">Twind</span>!
+      </h1>
+    </main>
+    `,
+  )
+  assert.equal(sheet.target, [
+    '.text-white{--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity))}',
+    '.bg-purple-400{--tw-bg-opacity:1;background-color:#a78bfa;background-color:rgba(167,139,250,var(--tw-bg-opacity))}',
+    '.text-5xl{font-size:3rem;line-height:1}',
+    '.h-screen{height:100vh}',
+    '.flex{display:flex}',
+    '.items-center{align-items:center}',
+    '.justify-center{justify-content:center}',
+    '.text-center{text-align:center}',
+    '.font-bold{font-weight:700}',
+    '@media (min-width: 640px){.sm\\:text-gray-800{--tw-text-opacity:1;color:#1f2937;color:rgba(31,41,55,var(--tw-text-opacity))}}',
+    '@media (min-width: 768px){.md\\:text-pink-700{--tw-text-opacity:1;color:#be185d;color:rgba(190,24,93,var(--tw-text-opacity))}}',
+  ])
+})
+
 test.run()

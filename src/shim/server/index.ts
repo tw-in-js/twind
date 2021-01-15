@@ -1,10 +1,15 @@
 /* eslint-env node */
 // ^^^^ This comment is need to prevent browser bundles of this file
 
-import type { Node, HTMLElement } from 'node-html-parser'
+import type { Node, HTMLElement, Options as HTMLParserOptions } from 'node-html-parser'
 import * as HTMLParser from 'node-html-parser'
 
 import { tw as defaultTW } from '../../index'
+
+export interface HTMLParserArgs {
+  html: string
+  options: HTMLParserOptions
+}
 
 export { virtualSheet, getStyleTag, getStyleTagProperties } from '../../sheets/index'
 
@@ -21,8 +26,11 @@ function* traverse(node: Node): IterableIterator<HTMLElement> {
   }
 }
 
-export const shim = (html: string, tw = defaultTW): string => {
-  const root = HTMLParser.parse(html)
+export const shim = (markup: string | HTMLParserArgs, tw = defaultTW): string => {
+  const root = HTMLParser.parse(
+    typeof markup === 'string' ? markup : markup.html,
+    typeof markup === 'object' ? markup.options : undefined,
+  )
 
   // Traverse tree to find all element with classNames
   for (const node of traverse(root)) {
