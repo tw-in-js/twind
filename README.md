@@ -26,6 +26,7 @@
     - [Setup](https://github.com/tw-in-js/twind/tree/main/docs/setup.md) - how to use `setup`
     - [Theming](https://github.com/tw-in-js/twind/tree/main/docs/setup.md#theme) - how to apply your theme
     - [Examples](https://github.com/tw-in-js/twind/tree/main/docs/examples.md) - how to integrate with different frameworks
+    - [Shim](https://github.com/tw-in-js/twind/tree/main/docs/shim.md) - how to use tailwind classes without `tw`
 
   - Usage
 

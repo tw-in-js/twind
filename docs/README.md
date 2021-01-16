@@ -15,6 +15,7 @@ If you find any incorrect or missing documentation then please [open an issue](h
   - [Setup](./setup.md) - how to use `setup`
   - [Theming](./setup.md#theme) - how to apply your theme
   - [Examples](./examples.md) - how to integrate with different frameworks
+  - [Shim](./shim.md) - how to use tailwind classes without `tw`
 
 - **Usage**
 

@@ -17,7 +17,6 @@ There is _no need for `tw`_ but it can be used on the same elements as well. All
 - [API](#api)
   - [`shim(html[, options])`](#shimhtml-options)
   - [Examples](#examples)
-- [Implementation Details](#implementation-details)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 </details>
@@ -131,6 +130,12 @@ import { setup, disconnect } from 'twind/shim'
 <script defer src="https://unpkg.com/twind/observe/observe.umd.js"></script>
 <script defer src="https://unpkg.com/twind/shim/shim.umd.js"></script>
 ```
+
+</details>
+
+<details><summary>Implementation Details (Click to expand)</summary>
+
+`twind/shim` starts [observing](./observe.md) class attributes changes right after the [DOM content has been loaded](https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event). For further details see [twind/observe - Implementation Details](./observe.md#implementation-details).
 
 </details>
 
@@ -273,6 +278,6 @@ shim(htmlString, { comment: true })
 shim(htmlString, { comment: true, tw })
 ```
 
-## Implementation Details
+<hr/>
 
-`twind/shim` starts [observing](./observe.md) class attributes changes right after the [DOM content has been loaded](https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event). For further details see [twind/observe - Implementation Details](./observe.md#implementation-details).
+Continue to [`tw` function](./tw.md)
