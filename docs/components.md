@@ -215,7 +215,7 @@ const prose = css`
 
 </details>
 
-<details><summary>Using tailwind directives with <code>animation</code> from <code>twind/css</code></summary>
+<details><summary>Using Tailwind directives with <code>animation</code> from <code>twind/css</code></summary>
 
 ```js
 const motion = animation('.6s ease-in-out infinite', {
