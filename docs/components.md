@@ -6,7 +6,7 @@ As a component author, one often wants to re-use Tailwind directive styles for d
 
 ```jsx
 const btn = tw.apply`inline-block bg-gray-500 text-base`
-// => generates on css class with all declarations of the above rules when used
+// => generates on CSS class with all declarations of the above rules when used
 
 const btnBlock = tw.apply`${btn} block`
 // => generates on css class with all declarations of btn & block
