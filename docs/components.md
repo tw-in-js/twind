@@ -227,7 +227,7 @@ const motion = animation('.6s ease-in-out infinite', {
 
 </details>
 
-<details><summary>A react button component</summary>
+<details><summary>A React button component</summary>
 
 ```jsx
 import { tw } from 'twind'
