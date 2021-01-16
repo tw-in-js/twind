@@ -9,5 +9,3 @@ export interface CSSProperties
   extends CSS.PropertiesFallback<string, string>,
     CSS.PropertiesHyphenFallback<string, string>,
     CSSCustomProperties {}
-
-export type CSSAtKeyframes = Record<string, CSSProperties>
