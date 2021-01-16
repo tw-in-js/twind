@@ -7,7 +7,7 @@ import * as HTMLParser from 'node-html-parser'
 
 import { tw as defaultTW } from '../../index'
 
-interface ShimOptions extends HTMLParserOptions {
+interface ShimOptions extends Partial<HTMLParserOptions> {
   tw?: TW
 }
 
@@ -26,9 +26,10 @@ function* traverse(node: Node): IterableIterator<HTMLElement> {
   }
 }
 
-export const shim = (markup: string, options: TW | ShimOptions): string => {
+export const shim = (markup: string, options: TW | ShimOptions = {}): string => {
   const { tw = defaultTW, ...parserOptions } =
-    typeof options === 'function' ? { tw: options } : options || {}
+    typeof options === 'function' ? { tw: options } : options
+
   const root = HTMLParser.parse(markup, parserOptions)
 
   // Traverse tree to find all element with classNames
