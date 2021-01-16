@@ -147,7 +147,7 @@ test('apply HTML parser options (comment: true)', () => {
     `
     <!-- HTML Comment -->
     <main class="h-screen bg-purple-400 flex items-center justify-center">
-      <h1 class="text-center text-5xl text-white sm:text-gray-800 md:text-pink-700">
+      <h1 class="text(center 5xl white sm:gray-800 md:pink-700)">
         This is <span class="font-bold">Twind</span>!
       </h1>
     </main>
@@ -195,28 +195,27 @@ test('apply HTML parser options with only TW instance', () => {
 
   const html = shim(
     `
-    <!-- HTML Comment -->
-    <main class="h-screen bg-purple-400 flex items-center justify-center">
-      <h1 class="text-center text-5xl text-white sm:text-gray-800 md:text-pink-700">
-        This is <span class="font-bold">Twind</span>!
-      </h1>
-    </main>
-    `,
+      <!-- HTML Comment -->
+      <main class="h-screen bg-purple-400 flex items-center justify-center">
+        <h1 class="text(center 5xl white sm:gray-800 md:pink-700)">
+          This is <span class="font-bold">Twind</span>!
+        </h1>
+      </main>
+    `.trim(),
     {
       tw,
     },
   )
 
   assert.is(
-    html,
+    html.trim(),
     `
-    
-    <main class="h-screen bg-purple-400 flex items-center justify-center">
-      <h1 class="text-center text-5xl text-white sm:text-gray-800 md:text-pink-700">
-        This is <span class="font-bold">Twind</span>!
-      </h1>
-    </main>
-    `,
+      <main class="h-screen bg-purple-400 flex items-center justify-center">
+        <h1 class="text-center text-5xl text-white sm:text-gray-800 md:text-pink-700">
+          This is <span class="font-bold">Twind</span>!
+        </h1>
+      </main>
+    `.trim(),
   )
   assert.equal(sheet.target, [
     '.text-white{--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity))}',
