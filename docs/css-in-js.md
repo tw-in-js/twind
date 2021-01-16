@@ -288,4 +288,4 @@ slidein({ tw })
 
 <hr/>
 
-Continue to [Defining Components](./components.md)
+Continue to [Plugins](./plugins.md)

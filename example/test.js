@@ -1,5 +1,4 @@
 import '../src/__tests__/api.test'
-import '../src/__tests__/apply.test'
 import '../src/__tests__/dark-mode.test'
 import '../src/__tests__/hash.test'
 import '../src/__tests__/mode.test'

@@ -7,13 +7,9 @@ import { join, tail } from './util'
 export const translate = (
   plugins: Plugins,
   context: Context,
-): ((rule: Rule, isTranslating?: boolean) => CSSRules | string | Falsy) => (
-  rule,
-  isTranslating,
-) => {
+): ((rule: Rule) => CSSRules | string | Falsy) => (rule) => {
   // If this is a inline directive - called it right away
   if (is.function(rule.d)) {
-    // TODO that may return a string
     return rule.d(context)
   }
 
@@ -21,8 +17,7 @@ export const translate = (
 
   // Bail early for already hashed class names
   // Only if there are no variants and no negation
-  // If there are variants or negation unknown directive will be reported
-  if (!isTranslating && parameters[0] === 'tw' && rule.$ === rule.d) {
+  if (parameters[0] === 'tw' && rule.$ === rule.d) {
     return rule.$
   }
 
@@ -41,7 +36,7 @@ export const translate = (
       return is.function(plugin)
         ? plugin(tail(parameters, index), context, id)
         : is.string(plugin)
-        ? context[isTranslating ? 'css' : 'tw'](plugin)
+        ? context.tw(plugin)
         : plugin
     }
   }

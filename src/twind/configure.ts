@@ -21,7 +21,7 @@ import { autoprefix, noprefix } from './prefix'
 import { makeThemeResolver } from './theme'
 
 import * as is from '../internal/is'
-import { cyrb32, hyphenate, identity, join, tail } from './util'
+import { cyrb32, identity, join, tail } from './util'
 
 import { parse } from './parse'
 import { translate as makeTranslate } from './translate'
@@ -50,35 +50,9 @@ const toString = (rule: Rule, directive = rule.d): string => {
   return (base && tail(base) + ':') + (rule.n ? '-' : '') + directive + (rule.i ? '!' : '')
 }
 
-const merge = (target: CSSRules, source: CSSRules, context: Context): CSSRules =>
-  Object.keys(source).reduce((target, key) => {
-    let value = source[key]
-
-    if (is.function(value)) {
-      value = value(context)
-    }
-
-    // hyphenate target key only if key is property like (\w-)
-    const targetKey = /^[A-Z0-9-]+$/i.test(key) ? hyphenate(key) : key
-
-    target[targetKey] =
-      is.object(value) && !Array.isArray(value)
-        ? merge(target[targetKey] as CSSRules, value as CSSRules, context)
-        : value
-
-    return target
-  }, target || {})
-
-// Use hidden '_' property to collect class names which have no css translation like hashed twind classes
-const COMPONENT_PROPS = { _: { value: '', writable: true } }
-
 export const configure = (
   config: Configuration = {},
-): {
-  init: () => void
-  process: (tokens: unknown[]) => string
-  theme: ThemeResolver
-} => {
+): { init: () => void; process: (tokens: unknown[]) => string; theme: ThemeResolver } => {
   const theme = makeThemeResolver(config.theme)
 
   const mode = loadMode(config.mode)
@@ -92,9 +66,6 @@ export const configure = (
   //    ==> 'sm:hover:underline`
   // Start with an "empty" rule, to always have value to use
   let activeRule: { v: string[]; n?: boolean } = { v: [] }
-
-  let translateDepth = 0
-  const lastTranslations: ReturnType<typeof translate>[] = []
 
   // The context that is passed to functions to access the theme, ...
   const context: Context = {
@@ -123,33 +94,6 @@ export const configure = (
     }) as ThemeResolver,
 
     tag: (value) => (hash ? hash(value) : value),
-
-    css: (rules) => {
-      translateDepth++
-      const lastTranslationsIndex = lastTranslations.length
-
-      try {
-        // eslint-disable-next-line @typescript-eslint/no-extra-semi
-        ;(is.string(rules) ? parse([rules]) : rules).forEach(convert)
-
-        const css = Object.create(null, COMPONENT_PROPS)
-
-        for (let index = lastTranslationsIndex; index < lastTranslations.length; index++) {
-          const translation = lastTranslations[index]
-
-          if (is.object(translation)) {
-            merge(css, translation, context)
-          } else if (translation && is.string(translation)) {
-            css._ += (css._ && ' ') + translation
-          }
-        }
-
-        return css
-      } finally {
-        lastTranslations.length = lastTranslationsIndex
-        translateDepth--
-      }
-    },
   }
 
   // Used to translate a rule using plugins
@@ -158,7 +102,7 @@ export const configure = (
   // Wrap `translate()` to keep track of the active rule
   // we need to use try-finally as mode.report may throw
   // and we must always reset the active rule
-  const doTranslate = (rule: Rule): ReturnType<typeof translate> => {
+  const tryTranslate = (rule: Rule): ReturnType<typeof translate> => {
     // Keep track of active variants for nested `tw` calls
     const parentRule = activeRule
     activeRule = rule
@@ -214,14 +158,14 @@ export const configure = (
     }
 
     // Check if we already have a class name for this rule id
-    let className = translateDepth ? null : idToClassName.get(rule.$)
+    let className = idToClassName.get(rule.$)
 
     // We check for nullish because we put an empty string into `idToClassName`
     // if a rule did not generate a class name
     // This way we report the unknown directives only once
     if (className == null) {
       // 2. translate each rule using plugins
-      let translation = doTranslate(rule)
+      let translation = tryTranslate(rule)
 
       // If this is a unknown inline directive
       if (!rule.$) {
@@ -239,45 +183,30 @@ export const configure = (
         rule.$ = toString(rule, rule.$)
       }
 
-      if (is.object(translation)) {
+      // CSS class names have been returned
+      if (is.string(translation)) {
+        // Use as is
+        className = translation
+      } else if (is.object(translation)) {
+        // Allow global styles
+        if (translation[':global']) {
+          translation[':global'] = serialize(translation[':global'] as CSSRules).forEach(inject)
+        }
+
         // 3. decorate: apply variants
         translation = decorate(translation, rule)
 
         className = hash ? hash(JSON.stringify(translation, evaluateFunctions)) : rule.$
 
-        if (translateDepth) {
-          lastTranslations.push(translation)
-        } else {
-          // 4. serialize: convert to css string with precedence
-          // - components: layer.components = 1
-          // - plugins: layer.utilities = 2
-          // - inline directive: layer.css = 3
-          // 5. inject: add to dom
-          serialize(
-            translation,
-            className,
-            rule,
-            is.function(rule.d) ? (is.string(translation._) ? 1 : 3) : 2,
-          ).forEach(inject)
-
-          if (translation._) {
-            className += ' ' + translation._
-          }
-        }
+        // 4. serialize: convert to css string with precedence
+        // - move inline directives into the component layer (1)
+        // - all other are utilities (2)
+        // 5. inject: add to dom
+        serialize(translation, className, rule, is.function(rule.d) ? 1 : 2).forEach(inject)
       } else {
-        // CSS class names have been returned
-        if (is.string(translation)) {
-          // Use as is
-          className = translation
-        } else {
-          // No plugin or plugin did not return something
-          className = rule.$
-          mode.report({ id: 'UNKNOWN_DIRECTIVE', rule: className }, context)
-        }
-
-        if (translateDepth && !is.function(rule.d)) {
-          lastTranslations.push(className)
-        }
+        // No plugin or plugin did not return something
+        className = rule.$
+        mode.report({ id: 'UNKNOWN_DIRECTIVE', rule: className }, context)
       }
 
       // Remember the generated class name

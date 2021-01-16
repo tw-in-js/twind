@@ -3,100 +3,12 @@
 // Based on https://github.com/kripod/otion
 // License MIT
 
-/*
-To have a predictable styling the styles must be ordered.
-
-This order is represented by a precedence number. The lower values
-are inserted before higher values. Meaning higher precedence styles
-overwrite lower precedence styles.
-
-Each rule has some traits that are put into a bit set which form
-the precedence:
-
-| bits | trait                                             |
-| ---- | ------------------------------------------------- |
-| 1    | dark mode                                         |
-| 2    | layer: base = 0, components = 1, utilities = 2    |
-| 1    | screens: is this a responsive variation of a rule |
-| 5    | responsive based on min-width                     |
-| 4    | at-rules                                          |
-| 17   | pseudo and group variants                         |
-| 4    | number of declarations (descending)               |
-| 4    | greatest precedence of properties                 |
-
-**Dark Mode: 1 bit**
-
-Flag for dark mode rules.
-
-**Layer: 3 bits**
-
-- base = 0: The preflight styles and any base styles registered by plugins.
-- components = 1: Component classes and any component classes registered by plugins.
-- utilities = 2: Utility classes and any utility classes registered by plugins.
-
-**Screens: 1 bit**
-
-Flag for screen variants. They may not always have a `min-width` to be detected by _Responsive_ below.
-
-**Responsive: 5 bits**
-
-Based on extracted `min-width` value:
-
-- 576px -> 3
-- 1536px -> 9
-- 36rem -> 3
-- 96rem -> 9
-
-**At-Rules: 4 bits**
-
-Based on the count of special chars (`-:,`) within the at-rule.
-
-**Pseudo and group variants: 17 bits**
-
-Ensures predictable order of pseudo classes.
-
-- https://bitsofco.de/when-do-the-hover-focus-and-active-pseudo-classes-apply/#orderofstyleshoverthenfocusthenactive
-- https://developer.mozilla.org/docs/Web/CSS/:active#Active_links
-- https://github.com/tailwindlabs/tailwindcss/blob/master/stubs/defaultConfig.stub.js#L718
-
-**Number of declarations (descending): 4 bits**
-
-Allows single declaration styles to overwrite styles from multi declaration styles.
-
-**Greatest precedence of properties: 4 bits**
-
-Ensure shorthand properties are inserted before longhand properties; eg longhand override shorthand
-*/
-
 import type { ThemeResolver } from '../types'
 
 import { tail, includes } from './util'
 
 // Shared variables
 let _: string | RegExpExecArray | null | number
-
-/*
-Bit shifts for the primary bits:
-
-| bits | trait                                                   | shift |
-| ---- | ------------------------------------------------------- | ----- |
-| 1    | dark mode                                               | 30    |
-| 2    | layer: base = 0, components = 1, utilities = 2, css = 3 | 28    |
-| 1    | screens: is this a responsive variation of a rule       | 27    |
-| 5    | responsive based on min-width                           | 22    |
-| 4    | at-rules                                                | 18    |
-| 17   | pseudo and group variants                               | 0     |
-
-These are calculated by serialize and added afterwards:
-
-| bits | trait                               |
-| ---- | ----------------------------------- |
-| 4    | number of declarations (descending) |
-| 4    | greatest precedence of properties   |
-
-These are added by shifting the primary bits using multiplication as js only
-supports bit shift up to 32 bits.
-*/
 
 // 0=none, 1=sm, 2=md, 3=lg, 4=xl, 5=2xl, 6=??, 7=??
 // 0 - 31: 5 bits
@@ -107,7 +19,7 @@ supports bit shift up to 32 bits.
 export const responsivePrecedence = (css: string): number =>
   (((_ = /(?:^|min-width: *)(\d+(?:.\d+)?)(p)?/.exec(css)) ? +_[1] / (_[2] ? 15 : 1) / 10 : 0) &
     31) <<
-  22
+  23
 
 // Colon and dash count of string (ascending): 0 -> 7 => 3 bits
 export const seperatorPrecedence = (string: string): number => {
@@ -176,10 +88,10 @@ export const makeVariantPresedenceCalculator = (
       // 36rem -> 3
       // 96rem -> 9
       // Move into screens layer and adjust based on min-width
-      (1 << 27) | responsivePrecedence(_)
+      (3 << 28) | responsivePrecedence(_)
     : // 1: dark mode flag
     variant === ':dark'
-    ? 1 << 30
+    ? 1 << 22
     : // 4: precedence of other at-rules
     (_ = variants[variant] || variant)[0] === '@'
     ? atRulePresedence(_)

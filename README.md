@@ -33,7 +33,6 @@
     - [Grouping](https://github.com/tw-in-js/twind/tree/main/docs/grouping.md) - how to optimize rules size
     - [Tailwind Extensions](https://github.com/tw-in-js/twind/tree/main/docs/tailwind-extensions.md) - which additional features are available
     - [CSS-in-JS](https://github.com/tw-in-js/twind/tree/main/docs/css-in-js.md) - how to apply custom css
-    - [Components](https://github.com/tw-in-js/twind/tree/main/docs/components.md) - how to define component styles
     - [Plugins](https://github.com/tw-in-js/twind/tree/main/docs/plugins.md) - how to extend twind
     - [Testing](https://github.com/tw-in-js/twind/tree/main/docs/sheets.md) - how to verify the generated class names
     - [Static Extraction (SSR)](https://github.com/tw-in-js/twind/tree/main/docs/ssr.md) - how to extract the generated css on the server
