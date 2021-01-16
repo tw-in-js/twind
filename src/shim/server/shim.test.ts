@@ -5,7 +5,7 @@ import { virtualSheet } from '../../sheets/index'
 import { create, strict } from '../../index'
 import { shim } from './index'
 
-const test = suite('server/shim')
+const test = suite('shim/server')
 
 test('expand class names with preflight', () => {
   const sheet = virtualSheet()
