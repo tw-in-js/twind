@@ -9,7 +9,7 @@ const btn = tw.apply`inline-block bg-gray-500 text-base`
 // => generates on CSS class with all declarations of the above rules when used
 
 const btnBlock = tw.apply`${btn} block`
-// => generates on css class with all declarations of btn & block
+// => generates on CSS class with all declarations of btn & block
 
 <button class={tw`${btn}`}>gray-500</button>
 // => tw-XXXXX
