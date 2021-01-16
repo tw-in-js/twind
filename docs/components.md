@@ -40,7 +40,7 @@ const ButtonBlock = ({ className, children}) => {
 <Button className="bg-red-500 text-lg">red-500 large</Button>
 ```
 
-The example above does not reliably work because the injected css classes have all the same specificity and therefore the order they appear in the stylesheet determine which styles are applied.
+The example above does not reliably work because the injected CSS classes have all the same specificity and therefore the order in which they appear in the stylesheet determines which styles are applied.
 
 It is really difficult to know which directive does override another. Lets stick with `bg-*` but there are others. The `bg` prefix and its plugin handle several css properties where `background-color` is only one of them.
 
