@@ -194,7 +194,7 @@ const prose = css(
 )
 ```
 
-Using template literal syntax (_pending, but i'm working on it_):
+Using template literal syntax (_pending, but I'm working on it_):
 
 ```js
 const prose = css`
