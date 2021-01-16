@@ -171,7 +171,7 @@ const btn = tw.apply`
 
 </details>
 
-<details><summary>Using within <code>css</code> – pending</summary>
+<details><summary>Using within <code>CSS</code> – pending</summary>
 
 `tw.apply` can be used with `css` ( (_pending variable arguments, array support_):
 
