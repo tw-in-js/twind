@@ -155,9 +155,9 @@ It might not always be desirable to generate rules by invoking the compiler dire
 
 </details>
 
-<details><summary>💸 Unlimited styles for a low fixed cost of ~11KB</summary>
+<details><summary>💸 Unlimited styles for a low fixed cost of ~12KB</summary>
 
-By shipping the compiler (rather than the resultant output) there is a known and fixed cost associated with styling. No matter how many styles you write or how many variants you use, all your users will ever have to download is approximately 11Kb of code (which is less than styled-components or your average purged Tailwind build).
+By shipping the compiler (rather than the resultant output) there is a known and fixed cost associated with styling. No matter how many styles you write or how many variants you use, all your users will ever have to download is approximately 12Kb of code (which is less than styled-components or your average purged Tailwind build).
 
 </details>
 
