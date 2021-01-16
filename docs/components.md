@@ -154,9 +154,7 @@ document.body.className = twind`bg-blue bg-red`
 // => tw-blue-red
 ```
 
-
 ## Examples
-
 
 <details><summary><code>css</code> can be used within <code>tw.apply</code></summary>
 

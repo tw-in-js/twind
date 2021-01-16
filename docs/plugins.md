@@ -12,8 +12,8 @@ Theming and customization lets you specify how core plugins and the compiler beh
 - [Plugins without arguments](#plugins-without-arguments)
 - [Plugins with arguments](#plugins-with-arguments)
   - [Referencing the theme](#referencing-the-theme)
-- [Inject global styles](#inject-global-styles)
 - [Inline Plugins](#inline-plugins)
+- [Inject global styles](#inject-global-styles)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 </details>
