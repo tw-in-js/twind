@@ -34,7 +34,8 @@ If you find any incorrect or missing documentation then please [open an issue](h
   - [twind/server](./ssr.md) - how to extract the generated css on the server
   - [twind/observe](./observe.md) - the base for [twind/shim](./installation.md#twindshim) which can be used standalone
   - [twind/sheets](./sheets.md) - several additional sheet implementations that can be used with [setup({ sheet })](./setup.md#sheet).
-  - [twind/shim](./installation.md#twindshim) - allows to copy-paste tailwind examples
+  - [twind/shim](./shim.md##client-side-dynamic-extraction) - allows to copy-paste tailwind examples
+  - [twind/shim/server](./shim.md#server-side-static-extraction) - generate CSS from static HTML
 
 - **Supporting Materials**
 
