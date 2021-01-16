@@ -21,7 +21,7 @@ const btnBlock = tw.apply`${btn} block`
 // => tw-YYYY
 ```
 
-> Another way to extract common component styles is [using an alias plugin](./plugins.md#plugin-as-alias).
+> Another way to extract common component styles is by [using an alias plugin](./plugins.md#plugin-as-alias).
 
 The component styles are added **before** the utility classes to the stylesheet which allows utilities to override component styles.
 
