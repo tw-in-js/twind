@@ -1,6 +1,6 @@
 # Defining Components
 
-As a component author one often wants to re-use tailwind directive styles for defining a component and allow users of the component to override styles using tailwind rules. The created component can be used as a base for child components and override or add some styles using tailwind rules.
+As a component author, one often wants to re-use Tailwind directive styles for defining a component and allow users of the component to override styles using Tailwind rules. The created component can be used as a base for child components and override or add some styles using Tailwind rules.
 
 `tw.apply` generates one style object, eg one css class, combining all tailwind rules by deep merging rules in order of declaration.
 
