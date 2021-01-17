@@ -158,7 +158,7 @@ document.body.className = twind`bg-blue bg-red`
 
 <details><summary>Using <code>tw.apply</code> within <code>preflight</code></summary>
 
-Use Tailwind rules within [preflight])(./setup.md#preflight).
+Use Tailwind rules within [preflight](./setup.md#preflight).
 
 ```js
 setup({
@@ -172,7 +172,7 @@ setup({
 
 <details><summary><code>CSS</code> can be used within <code>tw.apply</code></summary>
 
-[twind/css])(./css-in-js.md) can be used to define additional styles.
+[twind/css](./css-in-js.md) can be used to define additional styles.
 
 ```js
 const btn = tw.apply`
@@ -187,7 +187,7 @@ const btn = tw.apply`
 
 <details><summary>Using within <code>CSS</code> – pending</summary>
 
-`tw.apply` can be used with `css` ( (_pending variable arguments, array support_):
+`tw.apply` can be used with `css` (_pending variable arguments, array support_):
 
 ```js
 const prose = css(
