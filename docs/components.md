@@ -75,7 +75,7 @@ Tailwind has a component concept using [@apply](https://tailwindcss.com/docs/ext
 
 <details><summary>Details of Tailwind @apply</summary>
 
-Tailwindcss provides [@apply to extract component classes](https://tailwindcss.com/docs/extracting-components#extracting-component-classes-with-apply) which merges the underlying styles of the utility classes into a single css class.
+Tailwind CSS provides [@apply to extract component classes](https://tailwindcss.com/docs/extracting-components#extracting-component-classes-with-apply) which merges the underlying styles of the utility classes into a single CSS class.
 
 ```css
 .btn-indigo {
