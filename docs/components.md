@@ -83,7 +83,7 @@ Tailwind CSS provides [@apply to extract component classes](https://tailwindcss.
 }
 ```
 
-[twind.macro](https://github.com/ben-rogerson/twin.macro) does the same during build time to generate css-in-js objects which are evaluated with a runtime like emotion or styled-component:
+[twin.macro](https://github.com/ben-rogerson/twin.macro) does the same during build time to generate CSS-in-JS objects which are evaluated with a runtime like Emotion or styled-components:
 
 ```js
 const hoverStyles = css`
