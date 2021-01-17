@@ -195,7 +195,7 @@ export const configure = (
 
   // Used as replacer for JSON.stringify to calculate the hash for a inline function
   const evaluateFunctions = (key: string, value: unknown): unknown =>
-    is.function(value) ? value(context) : value
+    is.function(value) ? JSON.stringify(value(context), evaluateFunctions) : value
 
   // Responsible for converting (translate, decorate, serialize, inject) a rule
   const convert = (rule: Rule): string | undefined | void => {
