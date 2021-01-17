@@ -319,6 +319,30 @@ test('animation with variant', ({ animation, tw, sheet }) => {
   ])
 })
 
+test('animation with template literal', ({ tw, sheet }) => {
+  const style = animation('1s ease infinite')`
+    from, 20%, 53%, 80%, to {
+      transform: translate3d(0,0,0);
+    }
+    40%, 43% {
+      transform: translate3d(0, -30px, 0);
+    }
+    70% {
+      transform: translate3d(0, -15px, 0);
+    },
+    90% {
+      transform: translate3d(0, -4px, 0);
+    }
+  `
+
+  assert.is(tw(style), 'tw-f6qz2h')
+
+  assert.equal(sheet.target, [
+    '@keyframes tw-v87p2q{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}, 90%{transform:translate3d(0, -4px, 0)}}',
+    '.tw-f6qz2h{animation:1s ease infinite;animation-name:tw-v87p2q}',
+  ])
+})
+
 test('use :global with property callback', ({ tw, sheet }) => {
   const style = css({
     ':global': {

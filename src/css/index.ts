@@ -288,8 +288,28 @@ export const keyframes: CSSFactory<
 export function animation(
   this: TW | null | undefined | void,
   value: string | CSSRules | ((context: Context) => string),
+): CSSFactory<CSSAtKeyframes, CSSAtKeyframes | CSSProperties, CSSDirective>
+
+export function animation(
+  this: TW | null | undefined | void,
+  value: string | CSSRules | ((context: Context) => string),
   waypoints: CSSAtKeyframes | CSSKeyframes,
-): CSSDirective {
+): CSSDirective
+
+export function animation(
+  this: TW | null | undefined | void,
+  value: string | CSSRules | ((context: Context) => string),
+  waypoints?: CSSAtKeyframes | CSSKeyframes,
+): CSSDirective | CSSFactory<CSSAtKeyframes, CSSAtKeyframes | CSSProperties, CSSDirective> {
+  if (waypoints === undefined) {
+    return ((...args: Parameters<typeof keyframes>): CSSDirective =>
+      animation.call(this, value, keyframes.apply(this, args))) as CSSFactory<
+      CSSAtKeyframes,
+      CSSAtKeyframes | CSSProperties,
+      CSSDirective
+    >
+  }
+
   return css.call(this, {
     ...(is.object(value) ? value : { animation: value }),
     animationName: is.function(waypoints) ? waypoints : keyframes.call(this, waypoints),
