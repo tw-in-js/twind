@@ -95,7 +95,7 @@ const hoverStyles = css`
 const Input = ({ hasHover }) => <input css={[tw`border`, hasHover && hoverStyles]} />
 ```
 
-> The `tw` function from `twin.macro` acts like the `@apply` helper from tailwindcss.
+> The `tw` function from `twin.macro` acts like the `@apply` helper from Tailwind CSS.
 
 </details>
 
