@@ -26,6 +26,7 @@
     - [Setup](https://github.com/tw-in-js/twind/tree/main/docs/setup.md) - how to use `setup`
     - [Theming](https://github.com/tw-in-js/twind/tree/main/docs/setup.md#theme) - how to apply your theme
     - [Examples](https://github.com/tw-in-js/twind/tree/main/docs/examples.md) - how to integrate with different frameworks
+    - [Shim](https://github.com/tw-in-js/twind/tree/main/docs/shim.md) - how to use tailwind classes without `tw`
 
   - Usage
 
@@ -46,7 +47,8 @@
     - [twind/observe](https://github.com/tw-in-js/twind/tree/main/docs/observe.md) - the base for [twind/shim](https://github.com/tw-in-js/twind/tree/main/docs/installation.md#twindshim) which can be used standalone
     - [twind/server](https://github.com/tw-in-js/twind/tree/main/docs/ssr.md) - how to extract the generated css on the server
     - [twind/sheets](https://github.com/tw-in-js/twind/tree/main/docs/sheets.md) - several additional sheet implementations that can be used with [setup({ sheet })](https://github.com/tw-in-js/twind/tree/main/docs/setup.md#sheet).
-    - [twind/shim](https://github.com/tw-in-js/twind/tree/main/docs/installation.md#twindshim) - allows to copy-paste tailwind examples
+    - [twind/shim](https://github.com/tw-in-js/twind/tree/main/docs/shim.md##client-side-dynamic-extraction) - allows to copy-paste tailwind examples
+    - [twind/shim/server](https://github.com/tw-in-js/twind/tree/main/docs/shim.md#server-side-static-extraction) - generate CSS from static HTML
 
   - Supporting Materials
 

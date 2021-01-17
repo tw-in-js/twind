@@ -238,4 +238,4 @@ document.body.innerHTML = '<twind-element></twind-element>'
 
 <hr/>
 
-Continue to [`tw` function](./tw.md)
+Continue to [twind/shim](./shim.md)
