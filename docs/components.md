@@ -170,7 +170,7 @@ setup({
 
 </details>
 
-<details><summary><code>css</code> can be used within <code>tw.apply</code></summary>
+<details><summary><code>CSS</code> can be used within <code>tw.apply</code></summary>
 
 [twind/css])(./css-in-js.md) can be used to define additional styles.
 
