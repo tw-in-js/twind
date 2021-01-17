@@ -2,7 +2,7 @@ import type { Context, CSSRules, Prefixer, Rule } from '../types'
 
 import * as is from '../internal/is'
 
-import { join, includes, escape, hyphenate } from './util'
+import { join, includes, escape, hyphenate, evalThunk } from './util'
 import {
   responsivePrecedence,
   declarationPropertyPrecedence,
@@ -109,11 +109,7 @@ export const serialize = (
 
     // Walk through the object
     Object.keys(css).forEach((key) => {
-      let value = css[key]
-
-      while (is.function(value)) {
-        value = value(context)
-      }
+      const value = evalThunk(css[key], context)
 
       // string, number or Array => a property with a value
       if ((includes('rg', (typeof value)[5]) && value !== '') || Array.isArray(value)) {

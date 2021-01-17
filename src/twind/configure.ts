@@ -51,25 +51,6 @@ const toString = (rule: Rule, directive = rule.d): string => {
   return (base && tail(base) + ':') + (rule.n ? '-' : '') + directive + (rule.i ? '!' : '')
 }
 
-const merge = (target: CSSRules, source: CSSRules, context: Context): CSSRules =>
-  Object.keys(source).reduce((target, key) => {
-    let value = source[key]
-
-    if (is.function(value)) {
-      value = value(context)
-    }
-
-    // hyphenate target key only if key is property like (\w-)
-    const targetKey = /^[A-Z0-9-]+$/i.test(key) ? hyphenate(key) : key
-
-    target[targetKey] =
-      is.object(value) && !Array.isArray(value)
-        ? merge(target[targetKey] as CSSRules, value as CSSRules, context)
-        : value
-
-    return target
-  }, target || {})
-
 // Use hidden '_' property to collect class names which have no css translation like hashed twind classes
 const COMPONENT_PROPS = { _: { value: '', writable: true } }
 
