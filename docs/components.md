@@ -185,9 +185,9 @@ const btn = tw.apply`
 
 </details>
 
-<details><summary>Using within <code>CSS</code> – pending</summary>
+<details><summary>Using within <code>CSS</code></summary>
 
-`tw.apply` can be used with `css` (_pending variable arguments, array support_):
+`tw.apply` can be used with `css`:
 
 ```js
 const prose = css(
@@ -208,13 +208,15 @@ const prose = css(
 )
 ```
 
-Using template literal syntax (_pending, but I'm working on it_):
+Using template literal syntax:
 
 ```js
 const prose = css`
-  ${tw.apply`text-gray-700 dark:text-gray-300`)
+  ${tw.apply`text-gray-700 dark:text-gray-300`}
 
-  p { ${tw.apply('my-5')} }
+  p {
+    ${tw.apply`my-5`}
+  }
 
   h1 {
     ${tw.apply`text-black dark:text-white`}
@@ -237,6 +239,24 @@ const motion = animation('.6s ease-in-out infinite', {
   '50%': tw.apply`scale-125 rotate-45`,
   '100%': tw.apply`scale-100 rotate-0`,
 })
+
+const bounce = animation(
+  '1s ease infinite',
+  keyframes`
+  from, 20%, 53%, 80%, to {
+    ${tw.apply`transform-gpu translate-x-0`}
+  }
+  40%, 43% {
+    ${tw.apply`transform-gpu -translate-x-7`}
+  }
+  70% {
+    ${tw.apply`transform-gpu -translate-x-3.5`}
+  },
+  90% {
+    ${tw.apply`transform-gpu -translate-x-1`}
+  }
+`,
+)
 ```
 
 </details>
