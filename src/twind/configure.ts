@@ -21,7 +21,7 @@ import { autoprefix, noprefix } from './prefix'
 import { makeThemeResolver } from './theme'
 
 import * as is from '../internal/is'
-import { cyrb32, hyphenate, identity, join, tail } from './util'
+import { cyrb32, identity, join, tail, merge, evalThunk } from './util'
 
 import { parse } from './parse'
 import { translate as makeTranslate } from './translate'
@@ -311,7 +311,9 @@ export const configure = (
 
     // Call the preflight handler, serialize and inject the result
     const styles = serialize(
-      is.function(preflight) ? preflight(css, context) || css : { ...css, ...preflight },
+      is.function(preflight)
+        ? evalThunk(preflight(css, context), context) || css
+        : { ...css, ...preflight },
     )
 
     init<boolean>((injected = (styles.forEach(inject), true)) => injected)

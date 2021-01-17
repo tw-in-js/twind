@@ -5,7 +5,7 @@ import type { Instance } from '../types'
 import type { VirtualSheet } from '../sheets/index'
 
 import { virtualSheet } from '../sheets/index'
-import { create, strict, theme } from '../index'
+import { create, strict, tw, theme } from '../index'
 import { css, keyframes, animation } from './index'
 
 const test = suite<{
@@ -28,7 +28,7 @@ test.before((context) => {
 
   context.css = css.bind(context.tw)
   context.keyframes = keyframes.bind(context.tw)
-  context.animation = animation.bind(context.tw)
+  context.animation = animation.bind(context.tw) as typeof animation
 })
 
 test.after.each(({ sheet }) => {
@@ -689,6 +689,33 @@ test('use :global with property callback', ({ tw, sheet }) => {
   assert.is(tw(style), 'tw-mppuc2')
 
   assert.equal(sheet.target, ['html{background-color:#111827}'])
+})
+
+test('extending preflight styles', () => {
+  const sheet = virtualSheet()
+
+  create({
+    sheet,
+    mode: strict,
+    preflight: (preflight) =>
+      css(
+        preflight,
+        {
+          body: {
+            backgroundColor: ({ theme }) => theme('colors.gray.900'),
+          },
+        },
+        { body: tw.apply`text-gray-100` },
+      ),
+    prefix: false,
+  })
+
+  assert.equal(
+    sheet.target.filter((x) => x.startsWith('body{')),
+    [
+      'body{font-family:inherit;line-height:inherit;background-color:#111827;--tw-text-opacity:1;color:#f3f4f6;color:rgba(243,244,246,var(--tw-text-opacity))}',
+    ],
+  )
 })
 
 test.run()

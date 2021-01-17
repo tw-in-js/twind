@@ -7,17 +7,16 @@ import type {
   Context,
   CSSProperties,
   Falsy,
+  MaybeThunk,
 } from '../types'
 
 import { tw as defaultTW, hash } from '../index'
 import * as is from '../internal/is'
-import { hyphenate } from '../twind/util'
+import { evalThunk, merge } from '../twind/util'
 
 export interface CSSDirective extends LazyInjected {
   (context: Context): CSSRules
 }
-
-export type MaybeThunk<T> = T | ((context: Context) => T)
 
 export type MaybeArray<T> = T | readonly T[]
 
@@ -34,34 +33,6 @@ function evaluateFunctions(this: TW, key: string, value: unknown): unknown {
   return is.function(value) ? this(value as InlineDirective) : value
 }
 
-// TODO move to utils
-const evalThunk = <T>(value: MaybeThunk<T>, context: Context): T => {
-  while (is.function(value)) {
-    value = value(context)
-  }
-
-  return value
-}
-
-// TODO use utils once tw.apply is merged
-const merge = (target: CSSRules, source: CSSRules, context: Context): CSSRules =>
-  source
-    ? Object.keys(source).reduce((target, key) => {
-        const value = evalThunk(source[key], context)
-
-        // hyphenate target key only if key is property like (\w-)
-        const targetKey = /^[A-Z0-9-]+$/i.test(key) ? hyphenate(key) : key
-
-        target[targetKey] =
-          is.object(value) && !Array.isArray(value)
-            ? merge((target[targetKey] || {}) as CSSRules, value as CSSRules, context)
-            : value
-
-        return target
-      }, target)
-    : target
-
-// TODO use once tw.apply is merged
 // eslint-disable-next-line @typescript-eslint/ban-types
 const lazy = <T extends Function>(
   directive: T,
