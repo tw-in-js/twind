@@ -1,4 +1,4 @@
-import type { Context, Hasher, Falsy, MaybeThunk, CSSRules, TW, InlineDirective } from '../types'
+import type { Context, Hasher, Falsy, MaybeThunk, CSSRules } from '../types'
 
 interface Includes {
   (value: string, search: string): boolean

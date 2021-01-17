@@ -1,7 +1,5 @@
 import type { Context, CSSRules, Prefixer, Rule } from '../types'
 
-import * as is from '../internal/is'
-
 import { join, includes, escape, hyphenate, evalThunk } from './util'
 import {
   responsivePrecedence,
