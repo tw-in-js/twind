@@ -8,6 +8,7 @@ Sometimes you might find yourself wanting to write some arbitrary styles for an 
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [CSS directive](#css-directive)
+  - [Template Literals](#template-literals)
   - [Accessing the theme](#accessing-the-theme)
 - [Animation Directive](#animation-directive)
 - [Keyframes Helper](#keyframes-helper)
@@ -55,7 +56,7 @@ tw`
 // => sm:hover:tw-xxxx
 ```
 
-Values within the CSS object can be a function which are called with the `context` and should return the value to be used:
+Values within the CSS object can be functions which are called with the `context` and should return the value to be used:
 
 ```js
 const styles = css({
@@ -68,6 +69,78 @@ const styles = css({
     },
   }),
 })
+```
+
+`css` allows to define global styles using the `:global` selector:
+
+```js
+const styles = css({
+  ':global': {
+    a: {
+      color: ({ theme }) => theme('colors.blue.500'),
+    },
+  },
+})
+```
+
+Tagged template literal syntax works like in emotion, goober or styled-components:
+
+```js
+const style = css`
+  color: rebeccapurple;
+  background-color: ${({ theme }) => theme('colors.gray.500')};
+  &:hover {
+    ${tw.apply`text-purple-700`}
+  }
+`
+```
+
+> Please note that the template literal syntax has a little performance impact as twind needs to parse the CSS. For optimal performance use the object notation.
+
+Variadic arguments and arrays (nested as deep as you like) are supported as well:
+
+```js
+const style = css(
+  {
+    backgroundColor: 'hotpink',
+    '&:hover': {
+      color: 'darkgreen',
+    },
+  },
+  {
+    color: 'red',
+  },
+)
+
+const style = css([
+  {
+    backgroundColor: 'hotpink',
+    '&:hover': {
+      color: 'darkgreen',
+    },
+  },
+  {
+    color: 'red',
+  },
+])
+```
+
+[tw.apply](./components) can be used within `css`:
+
+```js
+css(tw.apply`text-gray(700 dark:300)`, {
+  p: tw.apply`my-5`,
+  h1: tw.apply`text(black dark:white hover:purple-500)`,
+})
+
+// Or using template literals
+css`
+  ${tw.apply`text-gray(700 dark:300)`}
+
+  p {
+    ${tw.apply('my-5')}
+  }
+`
 ```
 
 CSS directives can be used without applying it through `tw`:
@@ -98,14 +171,9 @@ document.body.className = css.call(tw, {
   '&::before': { content: '"🙁"' },
   '&::after': { content: '"😊"' },
 })
-
-// Or providing tw on generation
-const smiley = css({
-  '&::before': { content: '"🙁"' },
-  '&::after': { content: '"😊"' },
-})
-document.body.className = smiley({ tw })
 ```
+
+### Template Literals
 
 ### Accessing the theme
 
@@ -157,6 +225,25 @@ const bounce = animation('1s ease infinite', {
 tw`hover:${bounce}`
 ```
 
+Template literal syntax is supported as well:
+
+```js
+const bounce = animation('1s ease infinite')`
+  from, 20%, 53%, 80%, to {
+    ${tw.apply`transform-gpu translate-x-0`}
+  }
+  40%, 43% {
+    ${tw.apply`transform-gpu -translate-x-7`}
+  }
+  70% {
+    ${tw.apply`transform-gpu -translate-x-3.5`}
+  },
+  90% {
+    ${tw.apply`transform-gpu -translate-x-1`}
+  }
+`
+```
+
 The first argument can be a [animation shorthand CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/animation) string, an object of CSS animation properties or a function which is passed the context to return the shorthand CSS:
 
 ```js
@@ -205,17 +292,6 @@ const animate = animation.bind(tw)
 const bounce = animation.call(tw, {
   /* same as above */
 })
-
-// Or providing tw on generation
-const slidein = animation('1s slidein', {
-  from: {
-    transform: 'translateX(0%)',
-  },
-  to: {
-    transform: 'translateX(100%)',
-  },
-})
-slidein({ tw })
 ```
 
 ## Keyframes Helper
@@ -239,6 +315,25 @@ const bounce = keyframes({
     transform: 'translate3d(0, -4px, 0)',
   },
 })
+```
+
+Template literal syntax is supported as well:
+
+```js
+const bounce = keyframes`
+  from, 20%, 53%, 80%, to {
+    ${tw.apply`transform-gpu translate-x-0`}
+  }
+  40%, 43% {
+    ${tw.apply`transform-gpu -translate-x-7`}
+  }
+  70% {
+    ${tw.apply`transform-gpu -translate-x-3.5`}
+  },
+  90% {
+    ${tw.apply`transform-gpu -translate-x-1`}
+  }
+`
 ```
 
 The returned values can be used like this:
@@ -273,17 +368,6 @@ const kf = keyframes.bind(tw)
 const bounce = keyframes.call(tw, {
   /* same as above */
 })
-
-// Or providing tw on generation
-const slidein = keyframes({
-  from: {
-    transform: 'translateX(0%)',
-  },
-  to: {
-    transform: 'translateX(100%)',
-  },
-})
-slidein({ tw })
 ```
 
 <hr/>

@@ -87,6 +87,25 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
   })
   ```
 
+- use [css](./css-in-js.md) to merge rules
+
+  ```js
+  import { css } from 'twind/css'
+
+  setup({
+    preflight: (preflight) =>
+      css(
+        preflight,
+        {
+          body: {
+            backgroundColor: ({ theme }) => theme('colors.gray.900'),
+          },
+        },
+        { body: tw.apply`text-gray-100` },
+      ),
+  })
+  ```
+
 ## Mode
 
 One benefit of doing compilation at runtime is that it is possible to warn developers about errors such as:
