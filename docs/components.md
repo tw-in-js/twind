@@ -42,7 +42,7 @@ const ButtonBlock = ({ className, children}) => {
 
 The example above does not reliably work because the injected CSS classes have all the same specificity and therefore the order in which they appear in the stylesheet determines which styles are applied.
 
-It is really difficult to know which directive does override another. Lets stick with `bg-*` but there are others. The `bg` prefix and its plugin handle several css properties where `background-color` is only one of them.
+It is really difficult to know which directive does override another. For now, let's stick with `bg-*` but there are others. The `bg` prefix and its plugin handle several CSS properties where `background-color` is only one of them.
 
 - `background-color`: `bg-current`, `bg-gray-50`, ... (see https://tailwindcss.com/docs/background-color)
 - `background-attachment`: `bg-local`, ... (see https://tailwindcss.com/docs/background-attachment)
