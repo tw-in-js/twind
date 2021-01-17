@@ -73,7 +73,7 @@ As you see it is difficult to override certain utility classes on usage or when 
 
 Tailwind has a component concept using [@apply](https://tailwindcss.com/docs/extracting-components#extracting-component-classes-with-apply) which basically merges the CSS rules of several Tailwind classes into one class. twin.macro does the same.
 
-<details><summary>Details of tailwind @apply</summary>
+<details><summary>Details of Tailwind @apply</summary>
 
 Tailwindcss provides [@apply to extract component classes](https://tailwindcss.com/docs/extracting-components#extracting-component-classes-with-apply) which merges the underlying styles of the utility classes into a single css class.
 
