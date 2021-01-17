@@ -1,4 +1,4 @@
-import type { CSSAtKeyframes } from './css'
+import type { CSSProperties } from './css'
 
 export interface ThemeResolver {
   <Section extends keyof Theme>(section: Section): Record<string, ThemeSectionType<Theme[Section]>>
@@ -100,7 +100,7 @@ export interface Theme {
   gradientColorStops: ThemeSection<ThemeColor>
   height: ThemeSection
   inset: ThemeSection
-  keyframes: ThemeSection<CSSAtKeyframes>
+  keyframes: ThemeSection<Record<string, CSSProperties>>
   letterSpacing: ThemeSection
   lineHeight: ThemeSection
   margin: ThemeSection

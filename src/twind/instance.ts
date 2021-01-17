@@ -1,6 +1,8 @@
-import type { Configuration, Instance, ThemeResolver, Theme } from '../types'
+import type { Configuration, Instance, ThemeResolver, Theme, TWApply, TW, Context } from '../types'
+import { withApply } from './apply'
 
 import { configure } from './configure'
+import { parse } from './parse'
 
 export const create = (config?: Configuration): Instance => {
   // We are using lazy variables to trigger setup either
@@ -42,7 +44,7 @@ export const create = (config?: Configuration): Instance => {
   // This ensures that after setup we use the configured
   // `process` and `setup` fails.
   return {
-    tw: (...tokens: unknown[]) => process(tokens),
+    tw: withApply(((...tokens: unknown[]) => process(tokens)) as TW),
 
     setup: (config) => init(config),
 

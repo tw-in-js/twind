@@ -39,9 +39,9 @@ const enum Layer {
   utilities = 2,
 
   /**
-   * The responsive variations of each utility.
+   * Inline directives
    */
-  screens = 3,
+  css = 3,
 }
 
 export const serialize = (
@@ -111,12 +111,12 @@ export const serialize = (
     Object.keys(css).forEach((key) => {
       let value = css[key]
 
-      if (is.function(value)) {
+      while (is.function(value)) {
         value = value(context)
       }
 
       // string, number or Array => a property with a value
-      if (includes('rg', (typeof value)[5]) || Array.isArray(value)) {
+      if ((includes('rg', (typeof value)[5]) && value !== '') || Array.isArray(value)) {
         // It is a Property
         const property = hyphenate(key)
 
@@ -228,8 +228,8 @@ export const serialize = (
 
   const variantPresedence = makeVariantPresedenceCalculator(theme, variants)
 
-  return (css, className, rule, layer = className ? Layer.utilities : Layer.base) => {
-    // Initial presedence based on layer (base = 0, components = 1, utilities = 2, screens = 3)
+  return (css, className, rule, layer = Layer.base) => {
+    // Initial presedence based on layer (base = 0, components = 1, utilities = 2, css = 3)
     layer <<= 28
 
     rules = []

@@ -100,9 +100,9 @@ test('nested selectors', ({ tw, sheet }) => {
     }),
   })
 
-  assert.is(tw(styles), 'tw-af4r5s')
+  assert.is(tw(styles), 'tw-1bxgl9r')
 
-  assert.equal(sheet.target, ['.tw-af4r5s a:hover{color:#1d4ed8}', '.tw-af4r5s a{color:#3b82f6}'])
+  assert.equal(sheet.target, ['.tw-1bxgl9r a:hover{color:#1d4ed8}', '.tw-1bxgl9r a{color:#3b82f6}'])
 })
 test('cached by its JSON representation', ({ css, sheet }) => {
   const style = css({
@@ -286,10 +286,10 @@ test('animation with callback', ({ animation, tw, sheet }) => {
   // Nothing applied yet
   assert.equal(sheet.target, [])
 
-  assert.is(tw(slidein), 'tw-tchezo')
+  assert.is(tw(slidein), 'tw-1go26ky')
   assert.equal(sheet.target, [
     '@keyframes tw-nlnhc{from{transform:translateX(0%)}to{transform:translateX(100%)}}',
-    '.tw-tchezo{animation:500ms cubic-bezier(0.4,0,0.2,1);animation-name:tw-nlnhc}',
+    '.tw-1go26ky{animation:500ms cubic-bezier(0.4,0,0.2,1);animation-name:tw-nlnhc}',
   ])
 })
 
@@ -319,10 +319,10 @@ test('animation object notation', ({ animation, tw, sheet }) => {
   // Nothing applied yet
   assert.equal(sheet.target, [])
 
-  assert.is(tw(bounce), 'tw-1e66f79')
+  assert.is(tw(bounce), 'tw-1k5i0ed')
   assert.equal(sheet.target, [
     '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
-    '.tw-1e66f79{animation-duration:1s;animation-timing-function:cubic-bezier(0.4,0,0.2,1);animation-iteration-count:infinite;animation-name:tw-cm8eaz}',
+    '.tw-1k5i0ed{animation-duration:1s;animation-timing-function:cubic-bezier(0.4,0,0.2,1);animation-iteration-count:infinite;animation-name:tw-cm8eaz}',
   ])
 })
 
@@ -350,6 +350,20 @@ test('animation with variant', ({ animation, tw, sheet }) => {
     '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
     '.hover\\:tw-14tbawn:hover{animation:1s ease infinite;animation-name:tw-cm8eaz}',
   ])
+})
+
+test('use :global with property callback', ({ tw, sheet }) => {
+  const style = css({
+    ':global': {
+      html: {
+        backgroundColor: ({ theme }) => theme('colors.gray.900'),
+      },
+    },
+  })
+
+  assert.is(tw(style), 'tw-k73ke2')
+
+  assert.equal(sheet.target, ['html{background-color:#111827}'])
 })
 
 test.run()
