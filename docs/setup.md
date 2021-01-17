@@ -77,6 +77,16 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
   })
   ```
 
+- [apply](./components.md) Tailwind rules
+
+  ```js
+  setup({
+    preflight: {
+      body: tw.apply('bg-gray-900 text-white'),
+    },
+  })
+  ```
+
 ## Mode
 
 One benefit of doing compilation at runtime is that it is possible to warn developers about errors such as:

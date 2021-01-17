@@ -1,7 +1,7 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import type { Instance } from '../types'
+import type { InlineDirective, Instance } from '../types'
 import type { VirtualSheet } from '../sheets/index'
 
 import { virtualSheet } from '../sheets/index'
@@ -350,6 +350,20 @@ test('animation with variant', ({ animation, tw, sheet }) => {
     '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
     '.hover\\:tw-14tbawn:hover{animation:1s ease infinite;animation-name:tw-cm8eaz}',
   ])
+})
+
+test('use :global with property callback', ({ tw, sheet }) => {
+  const style = css({
+    ':global': {
+      html: {
+        backgroundColor: ({ theme }) => theme('colors.gray.900'),
+      },
+    },
+  })
+
+  assert.is(tw(style), 'tw-10a7ran')
+
+  assert.equal(sheet.target, ['html{background-color:#111827}'])
 })
 
 test.run()

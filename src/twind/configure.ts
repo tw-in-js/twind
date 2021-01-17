@@ -28,6 +28,7 @@ import { translate as makeTranslate } from './translate'
 import { decorate as makeDecorate } from './decorate'
 import { serialize as makeSerialize } from './serialize'
 import { inject as makeInject } from './inject'
+import { withApply } from './apply'
 
 const sanitize = <T>(
   value: T | boolean | undefined,
@@ -99,7 +100,7 @@ export const configure = (
   // The context that is passed to functions to access the theme, ...
   const context: Context = {
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    tw: (...tokens: unknown[]) => process(tokens),
+    tw: withApply((...tokens: unknown[]) => process(tokens)),
 
     theme: ((section: keyof Theme, key?: string | string[], defaultValue?: unknown): unknown => {
       // Empty key us ethe standard tailwind default key

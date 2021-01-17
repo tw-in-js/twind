@@ -259,15 +259,18 @@ export interface CSSRules {
     | string
     | string[]
     | Falsy
-    | ((
-        context: Context,
-      ) =>
-        | CSSProperties
-        | CSSAtMedia
-        | CSSAtSupports
-        | CSSAtKeyframes
-        | CSSRules
-        | string
-        | string[]
-        | Falsy)
+    | CSSRulesThunk
+}
+
+export interface CSSRulesThunk {
+  (context: Context):
+    | CSSProperties
+    | CSSAtMedia
+    | CSSAtSupports
+    | CSSAtKeyframes
+    | CSSRules
+    | CSSRulesThunk
+    | string
+    | string[]
+    | Falsy
 }

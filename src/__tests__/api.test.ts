@@ -743,6 +743,20 @@ test('fontSize string', ({ sheet }) => {
   ])
 })
 
+test('use :global', ({ tw, sheet }) => {
+  const style: InlineDirective = ({ theme }) => ({
+    ':global': {
+      html: {
+        backgroundColor: theme('colors.gray.900'),
+      },
+    },
+  })
+
+  assert.is(tw(style), 'tw-10a7ran')
+
+  assert.equal(sheet.target, ['html{background-color:#111827}'])
+})
+
 test('can not call setup after config', ({ setup }) => {
   assert.throws(() => {
     setup()

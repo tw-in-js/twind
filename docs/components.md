@@ -156,6 +156,20 @@ document.body.className = twind`bg-blue bg-red`
 
 ## Examples
 
+<details><summary>Using <code>tw.apply</code> within <code>preflight</code></summary>
+
+Use Tailwind rules within [preflight])(./setup.md#preflight).
+
+```js
+setup({
+  preflight: {
+    body: tw.apply('bg-gray-900 text-white'),
+  },
+})
+```
+
+</details>
+
 <details><summary><code>css</code> can be used within <code>tw.apply</code></summary>
 
 [twind/css])(./css-in-js.md) can be used to define additional styles.

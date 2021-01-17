@@ -111,12 +111,12 @@ export const serialize = (
     Object.keys(css).forEach((key) => {
       let value = css[key]
 
-      if (is.function(value)) {
+      while (is.function(value)) {
         value = value(context)
       }
 
       // string, number or Array => a property with a value
-      if (includes('rg', (typeof value)[5]) || Array.isArray(value)) {
+      if ((includes('rg', (typeof value)[5]) && value !== '') || Array.isArray(value)) {
         // It is a Property
         const property = hyphenate(key)
 

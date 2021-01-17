@@ -5,7 +5,7 @@ import type { Instance } from '../types'
 import type { VirtualSheet } from '../sheets/index'
 
 import { virtualSheet } from '../sheets/index'
-import { create, strict } from '../index'
+import { create, strict, tw } from '../index'
 import { animation, css } from '../css/index'
 
 const test = suite<{
@@ -281,4 +281,91 @@ test('complex', ({ tw, sheet }) => {
     '.tw-b13grf{font-weight:700}',
   ])
 })
+
+test('use :global', ({ tw, sheet }) => {
+  const style = () => ({
+    ':global': {
+      html: tw.apply('bg-gray-900 text-white'),
+    },
+  })
+
+  assert.is(tw(style), 'tw-1dpp5mc')
+
+  assert.equal(sheet.target, [
+    'html{--tw-17cwy6m:1;background-color:#111827;background-color:rgba(17,24,39,var(--tw-17cwy6m));--tw-dxr4o8:1;color:#fff;color:rgba(255,255,255,var(--tw-dxr4o8))}',
+  ])
+})
+
+test('use :global within css', ({ tw, sheet }) => {
+  const style = css({
+    ':global': {
+      body: tw.apply('bg-gray-900 text-white'),
+    },
+    a: tw.apply('text-blue(500 hover:700)'),
+  })
+
+  assert.is(tw(style), 'tw-dhqh4q')
+
+  assert.equal(sheet.target, [
+    'body{--tw-17cwy6m:1;background-color:#111827;background-color:rgba(17,24,39,var(--tw-17cwy6m));--tw-dxr4o8:1;color:#fff;color:rgba(255,255,255,var(--tw-dxr4o8))}',
+    '.tw-dhqh4q a:hover{--tw-dxr4o8:1;color:#1d4ed8;color:rgba(29,78,216,var(--tw-dxr4o8))}',
+    '.tw-dhqh4q a{--tw-dxr4o8:1;color:#3b82f6;color:rgba(59,130,246,var(--tw-dxr4o8))}',
+  ])
+})
+
+test('use with preflight', () => {
+  const sheet = virtualSheet()
+
+  create({
+    sheet,
+    mode: strict,
+    preflight: (preflight, { tw }) => ({
+      html: tw.apply('bg-gray-900 text-white'),
+    }),
+    prefix: false,
+  })
+
+  assert.equal(sheet.target, [
+    'html{--tw-bg-opacity:1;background-color:#111827;background-color:rgba(17,24,39,var(--tw-bg-opacity));--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity))}',
+  ])
+})
+
+test('use with preflight and global tw', () => {
+  const sheet = virtualSheet()
+
+  create({
+    sheet,
+    mode: strict,
+    preflight: {
+      body: tw.apply('bg-gray-900 text-white'),
+    },
+    prefix: false,
+  })
+
+  assert.ok(
+    sheet.target.includes(
+      'body{--tw-bg-opacity:1;background-color:#111827;background-color:rgba(17,24,39,var(--tw-bg-opacity));--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity))}',
+    ),
+  )
+})
+
+test('use with preflight as property', () => {
+  const sheet = virtualSheet()
+
+  create({
+    sheet,
+    mode: strict,
+    preflight: {
+      html: ({ tw }) => tw.apply('bg-gray-900 text-white'),
+    },
+    prefix: false,
+  })
+
+  assert.ok(
+    sheet.target.includes(
+      'html{--tw-bg-opacity:1;background-color:#111827;background-color:rgba(17,24,39,var(--tw-bg-opacity));--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity))}',
+    ),
+  )
+})
+
 test.run()
