@@ -2,7 +2,7 @@
 
 > Allows to copy-paste tailwind examples. This feature can be used together with your favorite framework without any additional setup.
 
-The `twind/shim` module allows for the use of the `class` attribute for tailwind rules. If such a rule is detected, the corresponding CSS rule is created and injected into the stylesheet dynamically. The default `shim` export is intended for [client-side](#client-side-dynamic-extraction) usage and, without configuration, utilizes the default `tw` instance. For [server-side](#server-side-static-extraction) usage, `twind/shim/server` exports a special flavor of `shim` that will parse and update a static HTML string while collecting the style rules into a sheet for further usage in your respective framework.
+The `twind/shim` module allows for the use of the `class` attribute for tailwind rules. If such a rule is detected, the corresponding CSS rule is created and injected into the stylesheet dynamically. The default `twind/shim` export is intended for [client-side](#client-side-dynamic-extraction) usage and, without configuration, utilizes the default/global `tw` instance. For [server-side](#server-side-static-extraction) usage, `twind/shim/server` exports a dedicated `shim` function that will parse and update a static HTML string while collecting the style rules into a sheet for further usage in your respective framework.
 
 There is _no need for `tw`_ but it can be used on the same elements as well. All twind syntax features like [grouping](./grouping.md) are supported. See [example/shim.html](https://github.com/tw-in-js/twind/blob/main/example/shim.html) for a full example.
 
@@ -15,8 +15,8 @@ There is _no need for `tw`_ but it can be used on the same elements as well. All
   - [Client-side (Dynamic Extraction)](#client-side-dynamic-extraction)
   - [Server-side (Static Extraction)](#server-side-static-extraction)
 - [API](#api)
-  - [`shim(html[, options])`](#shimhtml-options)
-  - [Examples](#examples)
+  - [Client-side implementation](#client-side-implementation)
+  - [Server-side implementation](#server-side-implementation)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 </details>
@@ -141,7 +141,7 @@ import { setup, disconnect } from 'twind/shim'
 
 ### Server-side (Static Extraction)
 
-If you wish to remove twind's runtime overhead or you're interested in using twind in a universal or "isomorphic" web app, we provide a implementation of `shim` for performant processing of static HTML.
+If you wish to remove twind's runtime overhead or you're interested in using twind in a universal or "isomorphic" web app, `twind/shim/server` exports the dedicated `shim` function for performant processing of static HTML.
 
 > You'll find more detail and examples in the [twind/server](./ssr.md) documentation.
 
@@ -192,7 +192,7 @@ const styleTag = getStyleTag(sheet, { nonce: __webpack_nonce__ })
 
 ```js
 import { setup } from 'twind'
-import { asyncVirtualSheet, getStyleTagProperties, shim } from 'twind/server'
+import { asyncVirtualSheet, getStyleTagProperties, shim } from 'twind/shim/server'
 
 const sheet = asyncVirtualSheet()
 
@@ -243,39 +243,57 @@ function ssr() {
 
 ## API
 
-### `shim(html[, options])`
+### Client-side implementation
 
-- **html** (_required_) - HTML string to process
-- **options** (_optional_) - Custom `tw` instance or options object (including `tw` instance) for [node-html-parser](https://www.npmjs.com/package/node-html-parser)
-
-  ```js
-  {
-    tw: defaultTW,            // defaults to default `tw` instance
-    lowerCaseTagName: false,  // convert tag name to lower case (hurt performance heavily)
-    comment: false            // retrieve comments (hurt performance slightly)
-    blockTextElements: {
-      script: true,           // keep text content when parsing
-      noscript: true,         // keep text content when parsing
-      style: true,            // keep text content when parsing
-      pre: true,              // keep text content when parsing
-    }
-  }
-  ```
-
-### Examples
+The `twind/shim` module utilizes the [`twind/observe`](./observe.md) module internally, but it provides its own `setup` function for customizing the `tw` instance and setting the target node to be shimmed, and it also provides a `disconnect` function to stop shimming/observing all nodes.
 
 ```js
-// Basic
-shim(htmlString)
+import 'twind/shim'
+import { setup, disconnect } from 'twind/shim'
+import { strict, voidSheet } from 'twind'
 
-// Custom `tw` instance
-shim(htmlString, tw)
+setup({
+  preflight: false, // do not include base style reset (default: use tailwind preflight)
+  mode: strict, // throw errors for invalid rules (default: warn)
+  hash: true, // hash all generated class names (default: false)
+  theme: {}, // define custom theme values (default: tailwind theme)
+  darkMode: 'class', // use a different dark mode strategy (default: 'media')
+  sheet: voidSheet, // use custom sheet (default: cssomSheet in a browser or no-op)
+  target: document.querySelector('#__twind'), // node element to shim/observe (default: document.documentElement)
+})
 
-// Options for HTML parser
-shim(htmlString, { comment: true })
+// stop shimming/observing all nodes
+disconnect()
+```
 
-// Options for HTML parser + custom `tw` instance
-shim(htmlString, { comment: true, tw })
+### Server-side implementation
+
+For static HTML processing (usually to provide SSR support for your javascript-powered web apps), `twind/shim/server` exports a dedicated `shim` function that accepts HTML strings as input and will:
+a) parse the string and process element classes with either the default/global `tw` instance or a custom `tw` instance
+b) populate the provided sheet with the generated rules
+c) output the HTML string with the final element classes
+
+This function also accepts an optional 2nd argument that can be a custom `tw` instance or an options object (including `tw` instance) for [node-html-parser](https://www.npmjs.com/package/node-html-parser).
+
+```js
+import { create } from 'twind'
+import { virtualSheet, shim } from 'twind/shim/server'
+
+const sheet = virtualSheet()
+
+const { tw } create({ ...sharedOptions, sheet })
+
+shim(htmlString, {
+  tw: tw,                   // defaults to default `tw` instance
+  lowerCaseTagName: false,  // convert tag name to lower case (hurt performance heavily)
+  comment: false            // retrieve comments (hurt performance slightly)
+  blockTextElements: {
+    script: true,           // keep text content when parsing
+    noscript: true,         // keep text content when parsing
+    style: true,            // keep text content when parsing
+    pre: true,              // keep text content when parsing
+  }
+})
 ```
 
 <hr/>
