@@ -29,7 +29,6 @@ export const capitalize = (value: string): string => value[0].toUpperCase() + ta
 
 export const hyphenate = (value: string): string => value.replace(/[A-Z]/g, '-$&').toLowerCase()
 
-// TODO move to utils
 export const evalThunk = <T>(value: MaybeThunk<T>, context: Context): T => {
   while (is.function(value)) {
     value = value(context)

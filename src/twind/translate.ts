@@ -13,7 +13,6 @@ export const translate = (
 ) => {
   // If this is a inline directive - called it right away
   if (is.function(rule.d)) {
-    // TODO that may return a string
     return rule.d(context)
   }
 
