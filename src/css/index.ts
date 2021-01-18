@@ -33,8 +33,7 @@ function evaluateFunctions(this: TW, key: string, value: unknown): unknown {
   return is.function(value) ? this(value as InlineDirective) : value
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-const lazy = <T extends Function>(
+const lazy = <T extends InlineDirective>(
   directive: T,
   data: unknown,
   tw: TW | null | undefined | void,
