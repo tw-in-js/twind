@@ -82,8 +82,28 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
   ```js
   setup({
     preflight: {
-      body: tw.apply('bg-gray-900 text-white'),
+      body: tw.apply`bg-gray-900 text-white`,
     },
+  })
+  ```
+
+- use [css](./css-in-js.md) to merge rules
+
+  ```js
+  import { theme } from 'twind'
+  import { css } from 'twind/css'
+
+  setup({
+    preflight: (preflight) =>
+      css(
+        preflight,
+        {
+          body: {
+            backgroundColor: theme('colors.gray.900'),
+          },
+        },
+        { body: tw.apply`text-gray-100` },
+      ),
   })
   ```
 

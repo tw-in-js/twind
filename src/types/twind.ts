@@ -41,8 +41,10 @@ export interface Instance {
   readonly setup: (options?: Configuration) => void
 }
 
+export type MaybeThunk<T> = T | ((context: Context) => T)
+
 export interface Preflight {
-  (preflight: CSSRules, context: Context): CSSRules | undefined | void
+  (preflight: CSSRules, context: Context): MaybeThunk<CSSRules | undefined | void>
 }
 
 export interface ThemeConfiguration extends Partial<Theme> {

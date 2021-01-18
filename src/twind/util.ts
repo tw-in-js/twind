@@ -1,9 +1,11 @@
-import type { Hasher, Falsy } from '../types'
+import type { Context, Hasher, Falsy, MaybeThunk, CSSRules } from '../types'
 
 interface Includes {
   (value: string, search: string): boolean
   <T>(value: readonly T[], search: T): boolean
 }
+
+import * as is from '../internal/is'
 
 export const includes: Includes = (value: string | readonly unknown[], search: unknown) =>
   // eslint-disable-next-line no-implicit-coercion
@@ -26,6 +28,31 @@ export const noop = (): void => {
 export const capitalize = (value: string): string => value[0].toUpperCase() + tail(value)
 
 export const hyphenate = (value: string): string => value.replace(/[A-Z]/g, '-$&').toLowerCase()
+
+export const evalThunk = <T>(value: MaybeThunk<T>, context: Context): T => {
+  while (is.function(value)) {
+    value = value(context)
+  }
+
+  return value
+}
+
+export const merge = (target: CSSRules, source: CSSRules, context: Context): CSSRules =>
+  source
+    ? Object.keys(source).reduce((target, key) => {
+        const value = evalThunk(source[key], context)
+
+        // hyphenate target key only if key is property like (\w-)
+        const targetKey = /^[A-Z0-9-]+$/i.test(key) ? hyphenate(key) : key
+
+        target[targetKey] =
+          is.object(value) && !Array.isArray(value)
+            ? merge((target[targetKey] || {}) as CSSRules, value as CSSRules, context)
+            : value
+
+        return target
+      }, target)
+    : target
 
 export const escape =
   (typeof CSS !== 'undefined' && CSS.escape) ||
