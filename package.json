@@ -27,6 +27,7 @@
     ".": "./src/index.ts",
     "./colors": "./src/colors/index.ts",
     "./css": "./src/css/index.ts",
+    "./defaultTheme": "./src/defaultTheme/index.ts",
     "./observe": "./src/observe/index.ts",
     "./shim": "./src/shim/index.ts",
     "./shim/server": "./src/shim/server/index.ts",
