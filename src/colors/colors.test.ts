@@ -5,7 +5,7 @@ import { virtualSheet } from '../sheets/index'
 
 import { create, strict } from '../index'
 import * as colors from './index'
-import type { Theme, ThemeResolver, TW } from '../types'
+import type { ThemeResolver, TW } from '../types'
 
 const test = suite('twind/colors')
 

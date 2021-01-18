@@ -11,7 +11,6 @@ import type {
 
 import * as is from '../internal/is'
 import { join, tail, includes } from './util'
-import type { Context } from 'uvu'
 
 // '1/2': '50%',
 // '1/3': '33.333333%',

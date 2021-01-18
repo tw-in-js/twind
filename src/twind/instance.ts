@@ -1,4 +1,4 @@
-import type { Configuration, Instance, ThemeResolver, Theme, TW } from '../types'
+import type { Configuration, Instance, TW } from '../types'
 import { withApply } from './apply'
 
 import { configure } from './configure'
