@@ -78,7 +78,6 @@ export const configure = (
 ): {
   init: () => void
   process: (tokens: unknown[]) => string
-  theme: ThemeResolver
 } => {
   const theme = makeThemeResolver(config.theme)
 
@@ -103,7 +102,7 @@ export const configure = (
     tw: withApply((...tokens: unknown[]) => process(tokens)),
 
     theme: ((section: keyof Theme, key?: string | string[], defaultValue?: unknown): unknown => {
-      // Empty key us ethe standard tailwind default key
+      // Empty key use the standard tailwind default key
       if (key != null && !key.length) {
         key = 'DEFAULT'
       }
@@ -321,6 +320,5 @@ export const configure = (
   return {
     init: () => mode.report({ id: 'LATE_SETUP_CALL' }, context),
     process,
-    theme,
   }
 }

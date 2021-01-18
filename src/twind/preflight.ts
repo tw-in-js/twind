@@ -52,7 +52,7 @@ export const createPreflight = (theme: ThemeResolver): CSSRules => ({
   html: {
     lineHeight: '1.5',
     WebkitTextSizeAdjust: '100%',
-    fontFamily: theme('fontFamily', 'sans', 'ui-sans-serif,system-ui,sans-serif'),
+    fontFamily: theme('fontFamily.sans', 'ui-sans-serif,system-ui,sans-serif'),
   },
 
   /**

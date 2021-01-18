@@ -6,10 +6,12 @@ import type {
   ThemeSectionType,
   ThemeSectionResolver,
   ThemeSectionResolverContext,
+  ThemeHelper,
 } from '../types'
 
 import * as is from '../internal/is'
 import { join, tail, includes } from './util'
+import type { Context } from 'uvu'
 
 // '1/2': '50%',
 // '1/3': '33.333333%',
@@ -83,6 +85,10 @@ const linear = (
 const alias = <Section extends keyof Theme>(
   section: Section,
 ): ThemeSectionResolver<ThemeSectionType<Theme[Section]>> => (theme) => theme(section)
+
+export const theme = ((...args: Parameters<ThemeResolver>): ReturnType<ThemeHelper> => ({
+  theme,
+}) => theme(...args)) as ThemeHelper
 
 export const defaultTheme: Theme = {
   screens: {

@@ -23,6 +23,37 @@ export interface ThemeResolver {
   ): NonNullable<ThemeSectionType<Theme[Section]>>
 }
 
+export interface ThemeHelper {
+  <Section extends keyof Theme>(section: Section): ({
+    theme,
+  }: {
+    theme: ThemeResolver
+  }) => Record<string, ThemeSectionType<Theme[Section]>>
+
+  <Section extends keyof Theme>(keypath: `${Section}.${string}`): ({
+    theme,
+  }: {
+    theme: ThemeResolver
+  }) => ThemeSectionType<Theme[Section]> | undefined
+
+  <Section extends keyof Theme>(
+    keypath: `${Section}.${string}`,
+    defaultValue: NonNullable<ThemeSectionType<Theme[Section]>>,
+  ): ({ theme }: { theme: ThemeResolver }) => NonNullable<ThemeSectionType<Theme[Section]>>
+
+  <Section extends keyof Theme>(section: Section, key: string | string[]): ({
+    theme,
+  }: {
+    theme: ThemeResolver
+  }) => ThemeSectionType<Theme[Section]> | undefined
+
+  <Section extends keyof Theme>(
+    section: Section,
+    key: string | string[],
+    defaultValue: NonNullable<ThemeSectionType<Theme[Section]>>,
+  ): ({ theme }: { theme: ThemeResolver }) => NonNullable<ThemeSectionType<Theme[Section]>>
+}
+
 export type Unwrap<T> = T extends string[] ? string : T extends Record<string, infer R> ? R : T
 
 export type ThemeSectionType<T> = T extends ThemeSection<infer R>

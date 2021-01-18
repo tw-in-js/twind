@@ -5,7 +5,7 @@ import type { Instance, InlineDirective } from '../types'
 import type { VirtualSheet } from '../sheets/index'
 
 import { virtualSheet } from '../sheets/index'
-import { create, strict } from '../index'
+import { create, strict, theme } from '../index'
 
 import data from './api.json'
 
@@ -583,6 +583,14 @@ test('no arguments', ({ tw }) => {
   assert.is(tw(), '')
 })
 
+test('theme helper', ({ sheet, tw }) => {
+  assert.is(
+    tw(() => ({ color: theme('colors', 'red.500') })),
+    'tw-jwcipf',
+  )
+  assert.equal(sheet.target, ['.tw-jwcipf{color:#ef4444}'])
+})
+
 test('inline rule (css object)', ({ sheet, tw }) => {
   assert.is(
     tw(({ theme }) => ({ color: theme('colors', 'red.500') })),
@@ -640,13 +648,13 @@ test('inline rule nested', ({ sheet, tw }) => {
       {
         sm: {
           hover: underline,
-          focus: ({ theme }) => ({ color: theme('colors', 'red.500') }),
+          focus: () => ({ color: theme('colors.red.500') }),
         },
         lg: ({ tw }) => tw`text-lg focus:${underline}`,
       },
       'font-bold',
     ),
-    'text-center sm:hover:underline sm:focus:tw-1e4d9nh lg:text-lg lg:focus:underline font-bold',
+    'text-center sm:hover:underline sm:focus:tw-jwcipf lg:text-lg lg:focus:underline font-bold',
   )
 
   assert.equal(sheet.target, [
@@ -655,7 +663,7 @@ test('inline rule nested', ({ sheet, tw }) => {
     '@media (min-width: 640px){.sm\\:hover\\:underline:hover{text-decoration:underline}}',
     '@media (min-width: 1024px){.lg\\:text-lg{font-size:1.125rem;line-height:1.75rem}}',
     '@media (min-width: 1024px){.lg\\:focus\\:underline:focus{text-decoration:underline}}',
-    '@media (min-width: 640px){.sm\\:focus\\:tw-1e4d9nh:focus{color:#ef4444}}',
+    '@media (min-width: 640px){.sm\\:focus\\:tw-jwcipf:focus{color:#ef4444}}',
   ])
 })
 

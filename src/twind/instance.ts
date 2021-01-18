@@ -22,19 +22,13 @@ export const create = (config?: Configuration): Instance => {
     return process(tokens)
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  let theme = ((section: keyof Theme, key?: string | string[], defaultValue?: any) => {
-    init()
-    return theme(section, key as string, defaultValue)
-  }) as ThemeResolver
-
   // Used by `setup`
   let init = (config?: Configuration): void => {
     // Replace implementation with configured ones
     // `process`: the real one
     // `init`: invokes `mode.report` with `LATE_SETUP_CALL`
     // eslint-disable-next-line @typescript-eslint/no-extra-semi
-    ;({ process, init, theme } = configure(config))
+    ;({ process, init } = configure(config))
   }
 
   // If we got a config, start right away
@@ -47,7 +41,5 @@ export const create = (config?: Configuration): Instance => {
     tw: withApply(((...tokens: unknown[]) => process(tokens)) as TW),
 
     setup: (config) => init(config),
-
-    theme,
   }
 }

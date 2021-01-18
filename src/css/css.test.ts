@@ -5,7 +5,7 @@ import type { Instance } from '../types'
 import type { VirtualSheet } from '../sheets/index'
 
 import { virtualSheet } from '../sheets/index'
-import { create, strict } from '../index'
+import { create, strict, theme } from '../index'
 import { css, keyframes, animation } from './index'
 
 const test = suite<{
@@ -297,7 +297,7 @@ test('animation object notation', ({ animation, tw, sheet }) => {
   const bounce = animation(
     {
       animationDuration: '1s',
-      animationTimingFunction: ({ theme }) => theme('transitionTimingFunction', 'in-out'),
+      animationTimingFunction: theme('transitionTimingFunction', 'in-out'),
       animationIterationCount: 'infinite',
     },
     {

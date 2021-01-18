@@ -5,6 +5,7 @@ import { virtualSheet } from '../sheets/index'
 
 import { create, strict } from '../index'
 import * as colors from './index'
+import type { Theme, ThemeResolver, TW } from '../types'
 
 const test = suite('twind/colors')
 
@@ -24,8 +25,22 @@ test('new colors are available', () => {
   ])
 })
 
+const getTheme = (tw: TW): ThemeResolver => {
+  let theme: ThemeResolver
+
+  tw((context) => {
+    theme = context.theme
+    return ''
+  })
+
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  return theme!
+}
+
 test('default theme colors match tailwind v2 config', () => {
-  const { theme } = create({ mode: strict, prefix: false })
+  const { tw } = create({ mode: strict, prefix: false })
+
+  const theme = getTheme(tw)
 
   assert.equal(
     {

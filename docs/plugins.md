@@ -159,7 +159,7 @@ Sometimes you might find yourself wanting to write some arbitrary styles for an 
 If you find yourself in this circumstance, use an inline plugin:
 
 ```js
-tw(({ theme }) => ({
+tw(() => ({
   '&::before': { content: '"🙁"' },
   '&::after': { content: '"😊"' },
 }))
