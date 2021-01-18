@@ -1,0 +1,519 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>twind/colors | twind - v0.11.2</title>
+	<meta name="description" content="Documentation for twind - v0.11.2">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">twind - v0.11.2</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">twind - v0.11.2</a>
+				</li>
+				<li>
+					<a href="twind_colors.html">twind/colors</a>
+				</li>
+			</ul>
+			<h1>Module twind/colors</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p><a href="https://twind.dev/api/modules/twind_colors.html"><img src="https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label" alt="Documentation"></a>
+							<a href="https://github.com/tw-in-js/twind/tree/main/src/colors"><img src="https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%2Fsrc%2Fcolors?icon=github&label" alt="Github"></a>
+							<a href="https://unpkg.com/twind/colors/colors.js" title="brotli module size"><img src="https://flat.badgen.net/badgesize/brotli/https:/unpkg.com/twind/colors/colors.js?icon=jsdelivr&label&color=blue&cache=10800" alt="Module Size"></a>
+						<a href="https://unpkg.com/browse/twind/colors/colors.d.ts"><img src="https://flat.badgen.net/badge/icon/included?icon=typescript&label" alt="Typescript"></a></p>
+						<p><code>twind/colors</code> exposes all <a href="https://tailwindcss.com/docs/customizing-colors#color-palette-reference">Taiwlind v2 colors</a> as named exports.</p>
+						<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #0000FF">*</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #001080">colors</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind/colors&#039;</span>
+
+<span style="color: #795E26">setup</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">theme:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">colors:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #008000">// Build your palette here</span>
+<span style="color: #000000">      </span><span style="color: #001080">gray:</span><span style="color: #000000"> </span><span style="color: #001080">colors</span><span style="color: #000000">.</span><span style="color: #001080">trueGray</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">red:</span><span style="color: #000000"> </span><span style="color: #001080">colors</span><span style="color: #000000">.</span><span style="color: #001080">red</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">blue:</span><span style="color: #000000"> </span><span style="color: #001080">colors</span><span style="color: #000000">.</span><span style="color: #001080">lightBlue</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">yellow:</span><span style="color: #000000"> </span><span style="color: #001080">colors</span><span style="color: #000000">.</span><span style="color: #001080">amber</span><span style="color: #000000">,</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">})</span>
+</code></pre>
+						<p>To extend the existing color palette use <code>theme.extend</code>:</p>
+						<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #0000FF">*</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #001080">colors</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind/colors&#039;</span>
+
+<span style="color: #795E26">setup</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">theme:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">extend:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #001080">colors</span><span style="color: #000000">,</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">})</span>
+</code></pre>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Variables</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#amber" class="tsd-kind-icon">amber</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#black" class="tsd-kind-icon">black</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#blue" class="tsd-kind-icon">blue</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#bluegray" class="tsd-kind-icon">blue<wbr>Gray</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#coolgray" class="tsd-kind-icon">cool<wbr>Gray</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#cyan" class="tsd-kind-icon">cyan</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#emerald" class="tsd-kind-icon">emerald</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#fuchsia" class="tsd-kind-icon">fuchsia</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#gray" class="tsd-kind-icon">gray</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#green" class="tsd-kind-icon">green</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#indigo" class="tsd-kind-icon">indigo</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#lightblue" class="tsd-kind-icon">light<wbr>Blue</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#lime" class="tsd-kind-icon">lime</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#orange" class="tsd-kind-icon">orange</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#pink" class="tsd-kind-icon">pink</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#purple" class="tsd-kind-icon">purple</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#red" class="tsd-kind-icon">red</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#rose" class="tsd-kind-icon">rose</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#teal" class="tsd-kind-icon">teal</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#truegray" class="tsd-kind-icon">true<wbr>Gray</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#violet" class="tsd-kind-icon">violet</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#warmgray" class="tsd-kind-icon">warm<wbr>Gray</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#white" class="tsd-kind-icon">white</a></li>
+								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind_colors.html#yellow" class="tsd-kind-icon">yellow</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Variables</h2>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="amber" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> amber</h3>
+					<div class="tsd-signature tsd-kind-icon">amber<span class="tsd-signature-symbol">:</span> <a href="twind.html#themecolor" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeColor</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L198">src/colors/index.ts:198</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="black" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> black</h3>
+					<div class="tsd-signature tsd-kind-icon">black<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;#000&quot;</span><span class="tsd-signature-symbol"> = &#x27;#000&#x27;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L13">src/colors/index.ts:13</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="blue" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> blue</h3>
+					<div class="tsd-signature tsd-kind-icon">blue<span class="tsd-signature-symbol">:</span> <a href="twind.html#themecolor" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeColor</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L94">src/colors/index.ts:94</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="bluegray" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> blue<wbr>Gray</h3>
+					<div class="tsd-signature tsd-kind-icon">blue<wbr>Gray<span class="tsd-signature-symbol">:</span> <a href="twind.html#themecolor" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeColor</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L289">src/colors/index.ts:289</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="coolgray" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> cool<wbr>Gray</h3>
+					<div class="tsd-signature tsd-kind-icon">cool<wbr>Gray<span class="tsd-signature-symbol">:</span> <a href="twind.html#themecolor" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeColor</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L276">src/colors/index.ts:276</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="cyan" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> cyan</h3>
+					<div class="tsd-signature tsd-kind-icon">cyan<span class="tsd-signature-symbol">:</span> <a href="twind.html#themecolor" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeColor</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L120">src/colors/index.ts:120</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="emerald" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> emerald</h3>
+					<div class="tsd-signature tsd-kind-icon">emerald<span class="tsd-signature-symbol">:</span> <a href="twind.html#themecolor" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeColor</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L146">src/colors/index.ts:146</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="fuchsia" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> fuchsia</h3>
+					<div class="tsd-signature tsd-kind-icon">fuchsia<span class="tsd-signature-symbol">:</span> <a href="twind.html#themecolor" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeColor</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L42">src/colors/index.ts:42</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="gray" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> gray</h3>
+					<div class="tsd-signature tsd-kind-icon">gray<span class="tsd-signature-symbol">:</span> <a href="twind.html#themecolor" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeColor</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L263">src/colors/index.ts:263</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="green" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> green</h3>
+					<div class="tsd-signature tsd-kind-icon">green<span class="tsd-signature-symbol">:</span> <a href="twind.html#themecolor" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeColor</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L159">src/colors/index.ts:159</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="indigo" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> indigo</h3>
+					<div class="tsd-signature tsd-kind-icon">indigo<span class="tsd-signature-symbol">:</span> <a href="twind.html#themecolor" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeColor</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L81">src/colors/index.ts:81</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="lightblue" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> light<wbr>Blue</h3>
+					<div class="tsd-signature tsd-kind-icon">light<wbr>Blue<span class="tsd-signature-symbol">:</span> <a href="twind.html#themecolor" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeColor</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L107">src/colors/index.ts:107</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="lime" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> lime</h3>
+					<div class="tsd-signature tsd-kind-icon">lime<span class="tsd-signature-symbol">:</span> <a href="twind.html#themecolor" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeColor</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L172">src/colors/index.ts:172</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="orange" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> orange</h3>
+					<div class="tsd-signature tsd-kind-icon">orange<span class="tsd-signature-symbol">:</span> <a href="twind.html#themecolor" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeColor</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L211">src/colors/index.ts:211</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="pink" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> pink</h3>
+					<div class="tsd-signature tsd-kind-icon">pink<span class="tsd-signature-symbol">:</span> <a href="twind.html#themecolor" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeColor</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L29">src/colors/index.ts:29</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="purple" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> purple</h3>
+					<div class="tsd-signature tsd-kind-icon">purple<span class="tsd-signature-symbol">:</span> <a href="twind.html#themecolor" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeColor</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L55">src/colors/index.ts:55</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="red" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> red</h3>
+					<div class="tsd-signature tsd-kind-icon">red<span class="tsd-signature-symbol">:</span> <a href="twind.html#themecolor" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeColor</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L224">src/colors/index.ts:224</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="rose" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> rose</h3>
+					<div class="tsd-signature tsd-kind-icon">rose<span class="tsd-signature-symbol">:</span> <a href="twind.html#themecolor" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeColor</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L16">src/colors/index.ts:16</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="teal" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> teal</h3>
+					<div class="tsd-signature tsd-kind-icon">teal<span class="tsd-signature-symbol">:</span> <a href="twind.html#themecolor" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeColor</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L133">src/colors/index.ts:133</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="truegray" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> true<wbr>Gray</h3>
+					<div class="tsd-signature tsd-kind-icon">true<wbr>Gray<span class="tsd-signature-symbol">:</span> <a href="twind.html#themecolor" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeColor</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L250">src/colors/index.ts:250</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="violet" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> violet</h3>
+					<div class="tsd-signature tsd-kind-icon">violet<span class="tsd-signature-symbol">:</span> <a href="twind.html#themecolor" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeColor</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L68">src/colors/index.ts:68</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="warmgray" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> warm<wbr>Gray</h3>
+					<div class="tsd-signature tsd-kind-icon">warm<wbr>Gray<span class="tsd-signature-symbol">:</span> <a href="twind.html#themecolor" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeColor</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L237">src/colors/index.ts:237</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="white" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> white</h3>
+					<div class="tsd-signature tsd-kind-icon">white<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;#fff&quot;</span><span class="tsd-signature-symbol"> = &#x27;#fff&#x27;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L14">src/colors/index.ts:14</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
+					<a name="yellow" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> yellow</h3>
+					<div class="tsd-signature tsd-kind-icon">yellow<span class="tsd-signature-symbol">:</span> <a href="twind.html#themecolor" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeColor</a><span class="tsd-signature-symbol"> = ...</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/colors/index.ts#L185">src/colors/index.ts:185</a></li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Modules</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="twind.html">twind</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="twind_colors.html">twind/colors</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="twind_css.html">twind/css</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="twind_observe.html">twind/observe</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="twind_server.html">twind/server</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="twind_sheets.html">twind/sheets</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="twind_shim.html">twind/shim</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="twind_shim_server.html">twind/shim/server</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#amber" class="tsd-kind-icon">amber</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#black" class="tsd-kind-icon">black</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#blue" class="tsd-kind-icon">blue</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#bluegray" class="tsd-kind-icon">blue<wbr>Gray</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#coolgray" class="tsd-kind-icon">cool<wbr>Gray</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#cyan" class="tsd-kind-icon">cyan</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#emerald" class="tsd-kind-icon">emerald</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#fuchsia" class="tsd-kind-icon">fuchsia</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#gray" class="tsd-kind-icon">gray</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#green" class="tsd-kind-icon">green</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#indigo" class="tsd-kind-icon">indigo</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#lightblue" class="tsd-kind-icon">light<wbr>Blue</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#lime" class="tsd-kind-icon">lime</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#orange" class="tsd-kind-icon">orange</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#pink" class="tsd-kind-icon">pink</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#purple" class="tsd-kind-icon">purple</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#red" class="tsd-kind-icon">red</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#rose" class="tsd-kind-icon">rose</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#teal" class="tsd-kind-icon">teal</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#truegray" class="tsd-kind-icon">true<wbr>Gray</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#violet" class="tsd-kind-icon">violet</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#warmgray" class="tsd-kind-icon">warm<wbr>Gray</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#white" class="tsd-kind-icon">white</a>
+					</li>
+					<li class=" tsd-kind-variable tsd-parent-kind-module">
+						<a href="twind_colors.html#yellow" class="tsd-kind-icon">yellow</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

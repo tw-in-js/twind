@@ -1,0 +1,768 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>twind/css | twind - v0.11.2</title>
+	<meta name="description" content="Documentation for twind - v0.11.2">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">twind - v0.11.2</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">twind - v0.11.2</a>
+				</li>
+				<li>
+					<a href="twind_css.html">twind/css</a>
+				</li>
+			</ul>
+			<h1>Module twind/css</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p><a href="https://twind.dev/api/modules/twind_css.html"><img src="https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label" alt="Documentation"></a>
+							<a href="https://github.com/tw-in-js/twind/tree/main/src/css"><img src="https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%2Fsrc%2Fcss?icon=github&label" alt="Github"></a>
+							<a href="https://unpkg.com/twind/css/css.js" title="brotli module size"><img src="https://flat.badgen.net/badgesize/brotli/https:/unpkg.com/twind/css/css.js?icon=jsdelivr&label&color=blue&cache=10800" alt="Module Size"></a>
+						<a href="https://unpkg.com/browse/twind/css/css.d.ts"><img src="https://flat.badgen.net/badge/icon/included?icon=typescript&label" alt="Typescript"></a></p>
+						<p>Sometimes you might find yourself wanting to write some arbitrary styles for an element. Some rule that isn&#39;t covered by Tailwind API but perhaps isn&#39;t general enough to warrant creating a real plugin for.</p>
+						<details><summary>Table Of Contents (Click To Expand)</summary>
+							<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+							<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+							<ul>
+								<li><a href="#css-directive">CSS directive</a><ul>
+										<li><a href="#accessing-the-theme">Accessing the theme</a></li>
+									</ul>
+								</li>
+								<li><a href="#animation-directive">Animation Directive</a></li>
+								<li><a href="#keyframes-helper">Keyframes Helper</a></li>
+							</ul>
+							<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+						</details>
+						<a href="#css-directive" id="css-directive" style="color: inherit; text-decoration: none;">
+							<h2>CSS directive</h2>
+						</a>
+						<p>Essentially the <a href="twind_css.html#css">css</a> directive uses some CSS rules in object notation, array or template literal format to create a optimized <a href="https://github.com/tw-in-js/twind/blob/main/docs/plugins.md#inline-plugin">inline plugin</a>. Here you can use the <code>&amp;</code> selector to target the current element much like in other CSS-in-JS libraries. In this way, it is possible to write styles that cannot be described using an inline style attribute alone; things like specific children selectors.</p>
+						<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">css</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind/css&#039;</span>
+
+<span style="color: #795E26">tw</span><span style="color: #000000">(</span>
+<span style="color: #000000">  </span><span style="color: #795E26">css</span><span style="color: #000000">({</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&#039;&amp;::before&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> { </span><span style="color: #001080">content:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&quot;🙁&quot;&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&#039;&amp;::after&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> { </span><span style="color: #001080">content:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&quot;😊&quot;&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  }),</span>
+<span style="color: #000000">)</span>
+<span style="color: #008000">// =&gt; tw-xxxx</span>
+</code></pre>
+						<p>For best performance it is advised to extract CSS directive into a variable:</p>
+						<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">styles</span><span style="color: #000000"> = </span><span style="color: #795E26">css</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;&amp;::before&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> { </span><span style="color: #001080">content:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&quot;🙁&quot;&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;&amp;::after&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> { </span><span style="color: #001080">content:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&quot;😊&quot;&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">})</span>
+
+<span style="color: #795E26">tw</span><span style="color: #000000">(</span><span style="color: #001080">styles</span><span style="color: #000000">)</span>
+<span style="color: #008000">// =&gt; tw-xxxx</span>
+</code></pre>
+						<p>Furthermore any variants or groupings that are active when the CSS directive is called, will be respected by the return value. Meaning that you can scope CSS directives with responsive variants:</p>
+						<pre><code class="language-js"><span style="color: #795E26">tw</span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  sm:hover:</span><span style="color: #0000FF">${</span><span style="color: #795E26">css</span><span style="color: #000000FF">({</span>
+<span style="color: #000000FF">    </span><span style="color: #A31515">&#039;&amp;::before&#039;</span><span style="color: #001080">:</span><span style="color: #000000FF"> { </span><span style="color: #001080">content:</span><span style="color: #000000FF"> </span><span style="color: #A31515">&#039;&quot;🙁&quot;&#039;</span><span style="color: #000000FF"> },</span>
+<span style="color: #000000FF">    </span><span style="color: #A31515">&#039;&amp;::after&#039;</span><span style="color: #001080">:</span><span style="color: #000000FF"> { </span><span style="color: #001080">content:</span><span style="color: #000000FF"> </span><span style="color: #A31515">&#039;&quot;😊&quot;&#039;</span><span style="color: #000000FF"> },</span>
+<span style="color: #000000FF">  })</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">`</span>
+<span style="color: #008000">// =&gt; sm:hover:tw-xxxx</span>
+</code></pre>
+						<p>Values within the CSS object can be functions which are called with the <code>context</code> and should return the value to be used:</p>
+						<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">theme</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">styles</span><span style="color: #000000"> = </span><span style="color: #795E26">css</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #008000">// .tw-xxx a</span>
+<span style="color: #000000">  </span><span style="color: #001080">a:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">color:</span><span style="color: #000000"> </span><span style="color: #795E26">theme</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;colors.blue.500&#039;</span><span style="color: #000000">),</span>
+<span style="color: #000000">    </span><span style="color: #008000">// .tw-xxx a:hover</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&#039;&amp;:hover&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #001080">color:</span><span style="color: #000000"> </span><span style="color: #795E26">theme</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;colors.blue.700&#039;</span><span style="color: #000000">),</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">})</span>
+</code></pre>
+						<p><code>css</code> allows to define global styles using the <code>:global</code> selector:</p>
+						<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">styles</span><span style="color: #000000"> = </span><span style="color: #795E26">css</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;:global&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">a:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #001080">color:</span><span style="color: #000000"> </span><span style="color: #795E26">theme</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;colors.blue.500&#039;</span><span style="color: #000000">),</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">})</span>
+</code></pre>
+						<p>Tagged template literal syntax works like in emotion, goober or styled-components:</p>
+						<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">style</span><span style="color: #000000"> = </span><span style="color: #795E26">css</span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  color: rebeccapurple;</span>
+<span style="color: #A31515">  background-color: </span><span style="color: #0000FF">${</span><span style="color: #795E26">theme</span><span style="color: #000000FF">(</span><span style="color: #A31515">&#039;colors.gray.500&#039;</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span><span style="color: #A31515">;</span>
+<span style="color: #A31515">  &amp;:hover {</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-purple-700`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  }</span>
+<span style="color: #A31515">`</span>
+</code></pre>
+						<blockquote>
+							<p>Please note that the template literal syntax has a little performance impact as twind needs to parse the CSS. For optimal performance use the object notation.</p>
+						</blockquote>
+						<p>Variadic arguments and arrays (nested as deep as you like) are supported as well:</p>
+						<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">style</span><span style="color: #000000"> = </span><span style="color: #795E26">css</span><span style="color: #000000">(</span>
+<span style="color: #000000">  {</span>
+<span style="color: #000000">    </span><span style="color: #001080">backgroundColor:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;hotpink&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&#039;&amp;:hover&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #001080">color:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;darkgreen&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">  {</span>
+<span style="color: #000000">    </span><span style="color: #001080">color:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;red&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">)</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">style</span><span style="color: #000000"> = </span><span style="color: #795E26">css</span><span style="color: #000000">([</span>
+<span style="color: #000000">  {</span>
+<span style="color: #000000">    </span><span style="color: #001080">backgroundColor:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;hotpink&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&#039;&amp;:hover&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #001080">color:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;darkgreen&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">  {</span>
+<span style="color: #000000">    </span><span style="color: #001080">color:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;red&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">])</span>
+</code></pre>
+						<p><a href="https://github.com/tw-in-js/twind/blob/main/docs/components">tw.apply</a> can be used within <code>css</code>:</p>
+						<pre><code class="language-js"><span style="color: #795E26">css</span><span style="color: #000000">(</span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-gray(700 dark:300)`</span><span style="color: #000000">, {</span>
+<span style="color: #000000">  </span><span style="color: #001080">p:</span><span style="color: #000000"> </span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`my-5`</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">h1:</span><span style="color: #000000"> </span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`text(black dark:white hover:purple-500)`</span><span style="color: #000000">,</span>
+<span style="color: #000000">})</span>
+
+<span style="color: #008000">// Or using template literals</span>
+<span style="color: #795E26">css</span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  </span><span style="color: #0000FF">${</span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-gray(700 dark:300)`</span><span style="color: #0000FF">}</span>
+
+<span style="color: #A31515">  p {</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #001080">tw</span><span style="color: #000000FF">.</span><span style="color: #795E26">apply</span><span style="color: #000000FF">(</span><span style="color: #A31515">&#039;my-5&#039;</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  }</span>
+<span style="color: #A31515">`</span>
+</code></pre>
+						<p>CSS directives can be used without applying it through <code>tw</code>:</p>
+						<pre><code class="language-js"><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">.</span><span style="color: #001080">className</span><span style="color: #000000"> = </span><span style="color: #795E26">css</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;&amp;::before&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> { </span><span style="color: #001080">content:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&quot;🙁&quot;&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;&amp;::after&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> { </span><span style="color: #001080">content:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&quot;😊&quot;&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">})</span>
+<span style="color: #008000">// =&gt; tw-xxxx</span>
+</code></pre>
+						<p>This works because they have a <code>toString()</code> function that internally calls default <code>tw</code> to generate a class name. To use a custom <code>tw</code> function you can bind the <code>css</code> function:</p>
+						<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">create</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">tw</span><span style="color: #000000"> } = </span><span style="color: #795E26">create</span><span style="color: #000000">(</span><span style="color: #008000">/* options */</span><span style="color: #000000">)</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">cx</span><span style="color: #000000"> = </span><span style="color: #001080">css</span><span style="color: #000000">.</span><span style="color: #795E26">bind</span><span style="color: #000000">(</span><span style="color: #001080">tw</span><span style="color: #000000">)</span>
+
+<span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">.</span><span style="color: #001080">className</span><span style="color: #000000"> = </span><span style="color: #795E26">cx</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;&amp;::before&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> { </span><span style="color: #001080">content:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&quot;🙁&quot;&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;&amp;::after&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> { </span><span style="color: #001080">content:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&quot;😊&quot;&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">})</span>
+
+<span style="color: #008000">// Or providing tw on invocation</span>
+<span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">.</span><span style="color: #001080">className</span><span style="color: #000000"> = </span><span style="color: #001080">css</span><span style="color: #000000">.</span><span style="color: #795E26">call</span><span style="color: #000000">(</span><span style="color: #001080">tw</span><span style="color: #000000">, {</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;&amp;::before&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> { </span><span style="color: #001080">content:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&quot;🙁&quot;&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;&amp;::after&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> { </span><span style="color: #001080">content:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&quot;😊&quot;&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">})</span>
+</code></pre>
+						<a href="#accessing-the-theme" id="accessing-the-theme" style="color: inherit; text-decoration: none;">
+							<h3>Accessing the theme</h3>
+						</a>
+						<p>Values of the CSS object maybe functions that are passed the context and should return the value to be used:</p>
+						<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">theme</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">css</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind/css&#039;</span>
+
+<span style="color: #795E26">css</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">color:</span><span style="color: #000000"> </span><span style="color: #795E26">theme</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;colors.blue.500&#039;</span><span style="color: #000000">),</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;&amp;:hover&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">color:</span><span style="color: #000000"> </span><span style="color: #795E26">theme</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;colors.blue.700&#039;</span><span style="color: #000000">),</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">})</span>
+
+<span style="color: #795E26">css</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">a:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">color:</span><span style="color: #000000"> </span><span style="color: #795E26">theme</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;colors.blue.500&#039;</span><span style="color: #000000">),</span>
+<span style="color: #000000">    </span><span style="color: #008000">// .tw-xxx a:hover</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&#039;&amp;:hover&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #001080">color:</span><span style="color: #000000"> </span><span style="color: #795E26">theme</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;colors.blue.700&#039;</span><span style="color: #000000">),</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">})</span>
+</code></pre>
+						<a href="#animation-directive" id="animation-directive" style="color: inherit; text-decoration: none;">
+							<h2>Animation Directive</h2>
+						</a>
+						<p>Custom animations are difficult to configure in Tailwind. During <a href="twind.html#setup">twind.setup</a> you need to add to the <code>theme.animation</code> section and the <code>theme.keyframes</code> section. This means all animations must known before hand and you can not use &quot;one-off&quot; animations.</p>
+						<p>With the <a href="twind_css.html#animation">animation</a> exports this task is greatly simplified:</p>
+						<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">animation</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind/css&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">bounce</span><span style="color: #000000"> = </span><span style="color: #795E26">animation</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;1s ease infinite&#039;</span><span style="color: #000000">, {</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;from, 20%, 53%, 80%, to&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">transform:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;translate3d(0,0,0)&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;40%, 43%&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">transform:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;translate3d(0, -30px, 0)&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;70%&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">transform:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;translate3d(0, -15px, 0)&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;90%&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">transform:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;translate3d(0, -4px, 0)&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">})</span>
+
+<span style="color: #795E26">tw</span><span style="color: #A31515">`hover:</span><span style="color: #0000FF">${</span><span style="color: #001080">bounce</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span>
+</code></pre>
+						<p>Template literal syntax is supported as well:</p>
+						<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">bounce</span><span style="color: #000000"> = </span><span style="color: #795E26">animation</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;1s ease infinite&#039;</span><span style="color: #000000">)</span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  from, 20%, 53%, 80%, to {</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`transform-gpu translate-x-0`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  }</span>
+<span style="color: #A31515">  40%, 43% {</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`transform-gpu -translate-x-7`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  }</span>
+<span style="color: #A31515">  70% {</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`transform-gpu -translate-x-3.5`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  },</span>
+<span style="color: #A31515">  90% {</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`transform-gpu -translate-x-1`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  }</span>
+<span style="color: #A31515">`</span>
+</code></pre>
+						<p>The first argument can be a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/animation">animation shorthand CSS</a> string, an object of CSS animation properties or a function which is passed the context to return the shorthand CSS:</p>
+						<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">slidein</span><span style="color: #000000"> = </span><span style="color: #795E26">animation</span><span style="color: #000000">(</span>
+<span style="color: #000000">  ({ </span><span style="color: #001080">theme</span><span style="color: #000000"> }) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #795E26">theme</span><span style="color: #000000FF">(</span><span style="color: #A31515">&#039;durations.500&#039;</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span><span style="color: #A31515"> </span><span style="color: #0000FF">${</span><span style="color: #795E26">theme</span><span style="color: #000000FF">(</span><span style="color: #A31515">&#039;transitionTimingFunction.in-out&#039;</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">,</span>
+<span style="color: #000000">  {</span>
+<span style="color: #000000">    </span><span style="color: #001080">from:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #001080">transform:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;translateX(0%)&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">    </span><span style="color: #001080">to:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #001080">transform:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;translateX(100%)&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">)</span>
+
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">theme</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">bounce</span><span style="color: #000000"> = </span><span style="color: #795E26">animation</span><span style="color: #000000">(</span>
+<span style="color: #000000">  {</span>
+<span style="color: #000000">    </span><span style="color: #001080">animationDuration:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;1s&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">animationTimingFunction:</span><span style="color: #000000"> </span><span style="color: #795E26">theme</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;transitionTimingFunction.in-out&#039;</span><span style="color: #000000">),</span>
+<span style="color: #000000">    </span><span style="color: #001080">animationIterationCount:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;infinite&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">  {</span>
+<span style="color: #000000">    </span><span style="color: #008000">/* keyframes */</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">)</span>
+</code></pre>
+						<p>The second parameter are the waypoints of a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes">@keyframes</a> at-rule in CSS object format.</p>
+						<p>Just like CSS Directives they can be used without a <code>tw</code> function:</p>
+						<pre><code class="language-js"><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000"> = </span><span style="color: #001080">bounce</span>
+</code></pre>
+						<p>To use a custom <code>tw</code> function you can bind the <code>animate</code> function just like you can with CSS directives.</p>
+						<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">create</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">tw</span><span style="color: #000000"> } = </span><span style="color: #795E26">create</span><span style="color: #000000">(</span><span style="color: #008000">/* options */</span><span style="color: #000000">)</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">animate</span><span style="color: #000000"> = </span><span style="color: #001080">animation</span><span style="color: #000000">.</span><span style="color: #795E26">bind</span><span style="color: #000000">(</span><span style="color: #001080">tw</span><span style="color: #000000">)</span>
+
+<span style="color: #008000">// Or providing tw on invocation</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">bounce</span><span style="color: #000000"> = </span><span style="color: #001080">animation</span><span style="color: #000000">.</span><span style="color: #795E26">call</span><span style="color: #000000">(</span><span style="color: #001080">tw</span><span style="color: #000000">, {</span>
+<span style="color: #000000">  </span><span style="color: #008000">/* same as above */</span>
+<span style="color: #000000">})</span>
+</code></pre>
+						<a href="#keyframes-helper" id="keyframes-helper" style="color: inherit; text-decoration: none;">
+							<h2>Keyframes Helper</h2>
+						</a>
+						<p>The <a href="twind_css.html#keyframes">keyframes</a> export helps to create custom <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes">@keyframes</a>:</p>
+						<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">keyframes</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind/css&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">bounce</span><span style="color: #000000"> = </span><span style="color: #795E26">keyframes</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;from, 20%, 53%, 80%, to&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">transform:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;translate3d(0,0,0)&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;40%, 43%&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">transform:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;translate3d(0, -30px, 0)&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;70%&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">transform:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;translate3d(0, -15px, 0)&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;90%&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">transform:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;translate3d(0, -4px, 0)&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">})</span>
+</code></pre>
+						<p>Template literal syntax is supported as well:</p>
+						<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">bounce</span><span style="color: #000000"> = </span><span style="color: #795E26">keyframes</span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  from, 20%, 53%, 80%, to {</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`transform-gpu translate-x-0`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  }</span>
+<span style="color: #A31515">  40%, 43% {</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`transform-gpu -translate-x-7`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  }</span>
+<span style="color: #A31515">  70% {</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`transform-gpu -translate-x-3.5`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  },</span>
+<span style="color: #A31515">  90% {</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`transform-gpu -translate-x-1`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  }</span>
+<span style="color: #A31515">`</span>
+</code></pre>
+						<p>The returned values can be used like this:</p>
+						<pre><code class="language-js"><span style="color: #008000">// As second parameter for animation</span>
+<span style="color: #795E26">animation</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;1s ease infinite&#039;</span><span style="color: #000000">, </span><span style="color: #001080">bounce</span><span style="color: #000000">)</span>
+
+<span style="color: #008000">// Within CSS directives</span>
+<span style="color: #795E26">css</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">animation:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;1s ease infinite&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">animationName:</span><span style="color: #000000"> </span><span style="color: #001080">bounce</span><span style="color: #000000">,</span>
+<span style="color: #000000">})</span>
+</code></pre>
+						<p>Keyframes can be used without another <code>css</code> or <code>animation</code>:</p>
+						<pre><code class="language-js"><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">.</span><span style="color: #001080">style</span><span style="color: #000000">.</span><span style="color: #001080">animation</span><span style="color: #000000"> = </span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">bounce</span><span style="color: #0000FF">}</span><span style="color: #A31515"> 1s ease infinite`</span>
+</code></pre>
+						<p>This works because they have a <code>toString()</code> function that internally calls the default <code>tw</code> to generate a class name. To use a custom <code>tw</code> function you can bind the <code>keyframes</code> function:</p>
+						<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">create</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">tw</span><span style="color: #000000"> } = </span><span style="color: #795E26">create</span><span style="color: #000000">(</span><span style="color: #008000">/* options */</span><span style="color: #000000">)</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">kf</span><span style="color: #000000"> = </span><span style="color: #001080">keyframes</span><span style="color: #000000">.</span><span style="color: #795E26">bind</span><span style="color: #000000">(</span><span style="color: #001080">tw</span><span style="color: #000000">)</span>
+
+<span style="color: #008000">// Or providing tw on invocation</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">bounce</span><span style="color: #000000"> = </span><span style="color: #001080">keyframes</span><span style="color: #000000">.</span><span style="color: #795E26">call</span><span style="color: #000000">(</span><span style="color: #001080">tw</span><span style="color: #000000">, {</span>
+<span style="color: #000000">  </span><span style="color: #008000">/* same as above */</span>
+<span style="color: #000000">})</span>
+</code></pre>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind_css.cssdirective.html" class="tsd-kind-icon">CSSDirective</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter"><a href="../interfaces/twind_css.cssfactory.html" class="tsd-kind-icon">CSSFactory</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind_css.csskeyframes.html" class="tsd-kind-icon">CSSKeyframes</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Type aliases</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter"><a href="twind_css.html#maybearray" class="tsd-kind-icon">Maybe<wbr>Array</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind_css.html#animation" class="tsd-kind-icon">animation</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind_css.html#css" class="tsd-kind-icon">css</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind_css.html#keyframes" class="tsd-kind-icon">keyframes</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Type aliases</h2>
+				<section class="tsd-panel tsd-member tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="maybearray" class="tsd-anchor"></a>
+					<h3>Maybe<wbr>Array</h3>
+					<div class="tsd-signature tsd-kind-icon">Maybe<wbr>Array&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/css/index.ts#L28">src/css/index.ts:28</a></li>
+						</ul>
+					</aside>
+					<h4 class="tsd-type-parameters-title">Type parameters</h4>
+					<ul class="tsd-type-parameters">
+						<li>
+							<h4>T</h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="animation" class="tsd-anchor"></a>
+					<h3>animation</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">animation<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/twind_css.cssfactory.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSFactory</a><span class="tsd-signature-symbol">&lt;</span><a href="twind.html#cssatkeyframes" class="tsd-signature-type" data-tsd-kind="Type alias">CSSAtKeyframes</a><span class="tsd-signature-symbol">, </span><a href="twind.html#cssatkeyframes" class="tsd-signature-type" data-tsd-kind="Type alias">CSSAtKeyframes</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">animation<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span>, waypoints<span class="tsd-signature-symbol">: </span><a href="twind.html#cssatkeyframes" class="tsd-signature-type" data-tsd-kind="Type alias">CSSAtKeyframes</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind_css.csskeyframes.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSKeyframes</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/css/index.ts#L265">src/css/index.ts:265</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">bounce</span><span style="color: #000000"> = </span><span style="color: #795E26">animation</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;1s ease infinite&#039;</span><span style="color: #000000">, {</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;from, 20%, 53%, 80%, to&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">transform:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;translate3d(0,0,0)&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;40%, 43%&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">transform:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;translate3d(0, -30px, 0)&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;70%&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">transform:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;translate3d(0, -15px, 0)&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;90%&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">transform:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;translate3d(0, -4px, 0)&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  }</span>
+<span style="color: #000000">})</span>
+</code></pre>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/twind_css.cssfactory.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSFactory</a><span class="tsd-signature-symbol">&lt;</span><a href="twind.html#cssatkeyframes" class="tsd-signature-type" data-tsd-kind="Type alias">CSSAtKeyframes</a><span class="tsd-signature-symbol">, </span><a href="twind.html#cssatkeyframes" class="tsd-signature-type" data-tsd-kind="Type alias">CSSAtKeyframes</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/css/index.ts#L270">src/css/index.ts:270</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span></h5>
+								</li>
+								<li>
+									<h5>waypoints: <a href="twind.html#cssatkeyframes" class="tsd-signature-type" data-tsd-kind="Type alias">CSSAtKeyframes</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind_css.csskeyframes.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSKeyframes</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="css" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> css</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">css<span class="tsd-signature-symbol">(</span>strings<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateStringsArray</span>, <span class="tsd-signature-symbol">...</span>interpolations<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">readonly </span><a href="twind.html#maybethunk" class="tsd-signature-type" data-tsd-kind="Type alias">MaybeThunk</a><span class="tsd-signature-symbol">&lt;</span><a href="twind_css.html#maybearray" class="tsd-signature-type" data-tsd-kind="Type alias">MaybeArray</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a></li>
+						<li class="tsd-signature tsd-kind-icon">css<span class="tsd-signature-symbol">(</span>tokens<span class="tsd-signature-symbol">: </span><a href="twind.html#maybethunk" class="tsd-signature-type" data-tsd-kind="Type alias">MaybeThunk</a><span class="tsd-signature-symbol">&lt;</span><a href="twind_css.html#maybearray" class="tsd-signature-type" data-tsd-kind="Type alias">MaybeArray</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a></li>
+						<li class="tsd-signature tsd-kind-icon">css<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>tokens<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">readonly </span><a href="twind.html#maybethunk" class="tsd-signature-type" data-tsd-kind="Type alias">MaybeThunk</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/css/index.ts#L170">src/css/index.ts:170</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>strings: <span class="tsd-signature-type">TemplateStringsArray</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>interpolations: <span class="tsd-signature-symbol">readonly </span><a href="twind.html#maybethunk" class="tsd-signature-type" data-tsd-kind="Type alias">MaybeThunk</a><span class="tsd-signature-symbol">&lt;</span><a href="twind_css.html#maybearray" class="tsd-signature-type" data-tsd-kind="Type alias">MaybeArray</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/css/index.ts#L170">src/css/index.ts:170</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>tokens: <a href="twind.html#maybethunk" class="tsd-signature-type" data-tsd-kind="Type alias">MaybeThunk</a><span class="tsd-signature-symbol">&lt;</span><a href="twind_css.html#maybearray" class="tsd-signature-type" data-tsd-kind="Type alias">MaybeArray</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/css/index.ts#L170">src/css/index.ts:170</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>tokens: <span class="tsd-signature-symbol">readonly </span><a href="twind.html#maybethunk" class="tsd-signature-type" data-tsd-kind="Type alias">MaybeThunk</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="keyframes" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> keyframes</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">keyframes<span class="tsd-signature-symbol">(</span>strings<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateStringsArray</span>, <span class="tsd-signature-symbol">...</span>interpolations<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">readonly </span><a href="twind.html#maybethunk" class="tsd-signature-type" data-tsd-kind="Type alias">MaybeThunk</a><span class="tsd-signature-symbol">&lt;</span><a href="twind_css.html#maybearray" class="tsd-signature-type" data-tsd-kind="Type alias">MaybeArray</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/twind_css.csskeyframes.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSKeyframes</a></li>
+						<li class="tsd-signature tsd-kind-icon">keyframes<span class="tsd-signature-symbol">(</span>tokens<span class="tsd-signature-symbol">: </span><a href="twind.html#maybethunk" class="tsd-signature-type" data-tsd-kind="Type alias">MaybeThunk</a><span class="tsd-signature-symbol">&lt;</span><a href="twind_css.html#maybearray" class="tsd-signature-type" data-tsd-kind="Type alias">MaybeArray</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/twind_css.csskeyframes.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSKeyframes</a></li>
+						<li class="tsd-signature tsd-kind-icon">keyframes<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>tokens<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">readonly </span><a href="twind.html#maybethunk" class="tsd-signature-type" data-tsd-kind="Type alias">MaybeThunk</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/twind_css.csskeyframes.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSKeyframes</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/css/index.ts#L219">src/css/index.ts:219</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>```js
+										const bounce = keyframes({
+										&#39;from, 20%, 53%, 80%, to&#39;: {
+										transform: &#39;translate3d(0,0,0)&#39;,
+										},
+										&#39;40%, 43%&#39;: {
+										transform: &#39;translate3d(0, -30px, 0)&#39;,
+										},
+										&#39;70%&#39;: {
+										transform: &#39;translate3d(0, -15px, 0)&#39;,
+										},
+										&#39;90%&#39;: {
+										transform: &#39;translate3d(0, -4px, 0)&#39;,
+										}
+									})</p>
+								</div>
+								<p>css({
+									animation: <code>${bounce} 1s ease infinite</code>,
+									})
+								```</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>strings: <span class="tsd-signature-type">TemplateStringsArray</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>interpolations: <span class="tsd-signature-symbol">readonly </span><a href="twind.html#maybethunk" class="tsd-signature-type" data-tsd-kind="Type alias">MaybeThunk</a><span class="tsd-signature-symbol">&lt;</span><a href="twind_css.html#maybearray" class="tsd-signature-type" data-tsd-kind="Type alias">MaybeArray</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/twind_css.csskeyframes.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSKeyframes</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/css/index.ts#L219">src/css/index.ts:219</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>```js
+										const bounce = keyframes({
+										&#39;from, 20%, 53%, 80%, to&#39;: {
+										transform: &#39;translate3d(0,0,0)&#39;,
+										},
+										&#39;40%, 43%&#39;: {
+										transform: &#39;translate3d(0, -30px, 0)&#39;,
+										},
+										&#39;70%&#39;: {
+										transform: &#39;translate3d(0, -15px, 0)&#39;,
+										},
+										&#39;90%&#39;: {
+										transform: &#39;translate3d(0, -4px, 0)&#39;,
+										}
+									})</p>
+								</div>
+								<p>css({
+									animation: <code>${bounce} 1s ease infinite</code>,
+									})
+								```</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>tokens: <a href="twind.html#maybethunk" class="tsd-signature-type" data-tsd-kind="Type alias">MaybeThunk</a><span class="tsd-signature-symbol">&lt;</span><a href="twind_css.html#maybearray" class="tsd-signature-type" data-tsd-kind="Type alias">MaybeArray</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/twind_css.csskeyframes.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSKeyframes</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/css/index.ts#L219">src/css/index.ts:219</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>```js
+										const bounce = keyframes({
+										&#39;from, 20%, 53%, 80%, to&#39;: {
+										transform: &#39;translate3d(0,0,0)&#39;,
+										},
+										&#39;40%, 43%&#39;: {
+										transform: &#39;translate3d(0, -30px, 0)&#39;,
+										},
+										&#39;70%&#39;: {
+										transform: &#39;translate3d(0, -15px, 0)&#39;,
+										},
+										&#39;90%&#39;: {
+										transform: &#39;translate3d(0, -4px, 0)&#39;,
+										}
+									})</p>
+								</div>
+								<p>css({
+									animation: <code>${bounce} 1s ease infinite</code>,
+									})
+								```</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>tokens: <span class="tsd-signature-symbol">readonly </span><a href="twind.html#maybethunk" class="tsd-signature-type" data-tsd-kind="Type alias">MaybeThunk</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/twind_css.csskeyframes.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSKeyframes</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Modules</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="twind.html">twind</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="twind_colors.html">twind/colors</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="twind_css.html">twind/css</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="twind_observe.html">twind/observe</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="twind_server.html">twind/server</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="twind_sheets.html">twind/sheets</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="twind_shim.html">twind/shim</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="twind_shim_server.html">twind/shim/server</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/twind_css.cssdirective.html" class="tsd-kind-icon">CSSDirective</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="../interfaces/twind_css.cssfactory.html" class="tsd-kind-icon">CSSFactory</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/twind_css.csskeyframes.html" class="tsd-kind-icon">CSSKeyframes</a>
+					</li>
+					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="twind_css.html#maybearray" class="tsd-kind-icon">Maybe<wbr>Array</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="twind_css.html#animation" class="tsd-kind-icon">animation</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="twind_css.html#css" class="tsd-kind-icon">css</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="twind_css.html#keyframes" class="tsd-kind-icon">keyframes</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

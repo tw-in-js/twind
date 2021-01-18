@@ -1,0 +1,360 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>twind/shim | twind - v0.11.2</title>
+	<meta name="description" content="Documentation for twind - v0.11.2">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">twind - v0.11.2</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">twind - v0.11.2</a>
+				</li>
+				<li>
+					<a href="twind_shim.html">twind/shim</a>
+				</li>
+			</ul>
+			<h1>Module twind/shim</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p><a href="https://twind.dev/api/modules/twind_shim.html"><img src="https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label" alt="Documentation"></a>
+							<a href="https://github.com/tw-in-js/twind/tree/main/src/shim"><img src="https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%2Fsrc%2Fshim?icon=github&label" alt="Github"></a>
+							<a href="https://unpkg.com/twind/shim/shim.js" title="brotli module size"><img src="https://flat.badgen.net/badgesize/brotli/https:/unpkg.com/twind/shim/shim.js?icon=jsdelivr&label&color=blue&cache=10800" alt="Module Size"></a>
+						<a href="https://unpkg.com/browse/twind/shim/shim.d.ts"><img src="https://flat.badgen.net/badge/icon/included?icon=typescript&label" alt="Typescript"></a></p>
+						<blockquote>
+							<p>Allows to copy-paste tailwind examples. This feature can be used together with your favorite framework without any additional setup.</p>
+						</blockquote>
+						<p>The <code>twind/shim</code> module allows for the use of the <code>class</code> attribute for tailwind rules. If such a rule is detected, the corresponding CSS rule is created and injected into the stylesheet dynamically. <code>twind/shim</code> is intended for client-side usage and, without configuration, utilizes the default/global <a href="twind.html#tw-1">tw instance</a>. For server-side usage, <a href="twind_shim_server.html">twind/shim/server</a> exports a dedicated <a href="twind_shim_server.html#shim">shim function</a> that will parse and update a static HTML string while collecting the style rules into a sheet for further usage in your respective framework.</p>
+						<p>There is <em>no need for <code>tw</code></em> but it can be used on the same elements as well. All twind syntax features like <a href="https://github.com/tw-in-js/twind/blob/main/docs/grouping.md">grouping</a> are supported within class attributes. See <a href="https://github.com/tw-in-js/twind/blob/main/example/shim.html">example/shim.html</a> for a full example.</p>
+						<details><summary>Table Of Contents (Click To Expand)</summary>
+							<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+							<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+							<ul>
+								<li><a href="#usage">Usage</a></li>
+								<li><a href="#customize-tw-instance">Customize <code>tw</code> instance</a></li>
+								<li><a href="#prevent-fouc-_flash-of-unstyled-content_">Prevent FOUC (<em>flash of unstyled content</em>)</a></li>
+								<li><a href="#faq">FAQ</a></li>
+							</ul>
+							<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+						</details>
+						<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+							<h2>Usage</h2>
+						</a>
+						<p>For runtime processing of your javascript-assisted HTML documents, simply include the <code>twind/shim</code> module and watch the magic happen.</p>
+						<pre><code class="language-html"><span style="color: #800000">&lt;!DOCTYPE</span><span style="color: #000000"> </span><span style="color: #FF0000">html</span><span style="color: #800000">&gt;</span>
+<span style="color: #800000">&lt;html</span><span style="color: #000000"> </span><span style="color: #FF0000">lang</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;en&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">hidden</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;head&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">type</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;module&quot;</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;https://cdn.skypack.dev/twind/shim&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;/head&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;body&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;main</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;h-screen bg-purple-400 flex items-center justify-center&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">      </span><span style="color: #800000">&lt;h1</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;font-bold text(center 5xl white sm:gray-800 md:pink-700)&quot;</span><span style="color: #800000">&gt;</span><span style="color: #000000">This is Twind!</span><span style="color: #800000">&lt;/h1&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;/main&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;/body&gt;</span>
+<span style="color: #800000">&lt;/html&gt;</span>
+</code></pre>
+						<blockquote>
+							<p><a href="https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPG1haW4gY2xhc3M9Imgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIiPgogICAgPGgxIGNsYXNzPSJmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKSI+CiAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICA8L2gxPgogIDwvbWFpbj4KYA==">live and interactive shim demo</a></p>
+						</blockquote>
+						<p>The <code>twind/shim</code> module utilizes the <a href="twind_observe.html">twind/observe</a> module internally, but it provides its own <a href="twind_shim.html#setup">setup</a> function for customizing the used <a href="twind.html#tw-1">tw</a> instance and setting the target node to be shimmed. It also provides a <a href="twind_shim.html#disconnect">disconnect</a> function to stop shimming/observing all nodes.</p>
+						<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">setup</span><span style="color: #000000">, </span><span style="color: #001080">disconnect</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind/shim&#039;</span>
+
+<span style="color: #795E26">setup</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #008000">// node element to shim/observe (default: document.documentElement)</span>
+<span style="color: #000000">  </span><span style="color: #001080">target:</span><span style="color: #000000"> </span><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #795E26">querySelector</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;#__twind&#039;</span><span style="color: #000000">),</span>
+
+<span style="color: #000000">  </span><span style="color: #008000">// All other setup options are supported</span>
+<span style="color: #000000">})</span>
+
+<span style="color: #008000">// stop shimming/observing all nodes</span>
+<span style="color: #795E26">disconnect</span><span style="color: #000000">()</span>
+</code></pre>
+						<a href="#customize-tw-instance" id="customize-tw-instance" style="color: inherit; text-decoration: none;">
+							<h2>Customize <code>tw</code> instance</h2>
+						</a>
+						<p>You can provide a <code>&lt;script type=&quot;twind-config&quot;&gt;...&lt;/script&gt;</code> within the document. The content must be valid JSON and all <a href="twind.html#setup">twind setup options</a> (including <a href="../interfaces/twind.configuration.html#hash">hash</a>) are supported.</p>
+						<pre><code class="language-html"><span style="color: #800000">&lt;!DOCTYPE</span><span style="color: #000000"> </span><span style="color: #FF0000">html</span><span style="color: #800000">&gt;</span>
+<span style="color: #800000">&lt;html</span><span style="color: #000000"> </span><span style="color: #FF0000">lang</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;en&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">hidden</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;head&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">type</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;module&quot;</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;https://cdn.skypack.dev/twind/shim&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">type</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;twind-config&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000FF">      {</span>
+<span style="color: #000000FF">        &quot;hash&quot;: true</span>
+<span style="color: #000000FF">      }</span>
+<span style="color: #000000FF">    </span><span style="color: #800000">&lt;/script&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;/head&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;body&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;main</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;h-screen bg-purple-400 flex items-center justify-center&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">      </span><span style="color: #800000">&lt;h1</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;text(center 5xl white sm:gray-800 md:pink-700)&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">        This is </span><span style="color: #800000">&lt;span</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;font-bold&quot;</span><span style="color: #800000">&gt;</span><span style="color: #000000">Twind</span><span style="color: #800000">&lt;/span&gt;</span><span style="color: #000000">!</span>
+<span style="color: #000000">      </span><span style="color: #800000">&lt;/h1&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;/main&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;/body&gt;</span>
+<span style="color: #800000">&lt;/html&gt;</span>
+</code></pre>
+						<p>Alternatively the following works:</p>
+						<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">setup</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;https://cdn.skypack.dev/twind/shim&quot;</span>
+
+<span style="color: #795E26">setup</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">target:</span><span style="color: #000000"> </span><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">, </span><span style="color: #008000">// Default document.documentElement (eg html)</span>
+<span style="color: #000000">  ... </span><span style="color: #008000">// All other twind setup options are supported</span>
+<span style="color: #000000">})</span>
+</code></pre>
+						<p>It is possible to mix <code>twind/shim</code> with <a href="twind.html#tw-1">tw</a>:</p>
+						<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind/shim&#039;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">tw</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">styles</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">  </span><span style="color: #001080">center:</span><span style="color: #000000"> </span><span style="color: #795E26">tw</span><span style="color: #A31515">`flex items-center justify-center`</span><span style="color: #000000">,</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">.</span><span style="color: #001080">innerHTML</span><span style="color: #000000"> = </span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  &lt;main class=&quot;h-screen bg-purple-400 </span><span style="color: #0000FF">${</span><span style="color: #001080">styles</span><span style="color: #000000FF">.</span><span style="color: #001080">center</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot;&gt;</span>
+<span style="color: #A31515">    &lt;h1 class=&quot;font-bold </span><span style="color: #0000FF">${</span><span style="color: #795E26">tw</span><span style="color: #A31515">`text(center 5xl white sm:gray-800 md:pink-700)`</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot;&gt;</span>
+<span style="color: #A31515">      This is Twind!</span>
+<span style="color: #A31515">    &lt;/h1&gt;</span>
+<span style="color: #A31515">  &lt;/main&gt;</span>
+<span style="color: #A31515">`</span>
+</code></pre>
+						<a href="#prevent-fouc-flash-of-unstyled-content" id="prevent-fouc-flash-of-unstyled-content" style="color: inherit; text-decoration: none;">
+							<h2>Prevent FOUC (<em>flash of unstyled content</em>)</h2>
+						</a>
+						<p>To prevent FOUC (<em>flash of unstyled content</em>) it is advised to set the <code>hidden</code> attribute on the target element. <code>twind/shim</code> will remove it once all styles have been generated.</p>
+						<pre><code class="language-html"><span style="color: #800000">&lt;!DOCTYPE</span><span style="color: #000000"> </span><span style="color: #FF0000">html</span><span style="color: #800000">&gt;</span>
+<span style="color: #800000">&lt;html</span><span style="color: #000000"> </span><span style="color: #FF0000">lang</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;en&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">hidden</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">  </span><span style="color: #008000">&lt;!-- ... --&gt;</span>
+<span style="color: #800000">&lt;/html&gt;</span>
+</code></pre>
+						<a href="#faq" id="faq" style="color: inherit; text-decoration: none;">
+							<h2>FAQ</h2>
+						</a>
+						<blockquote>
+							<p>You can click on each question to reveal the answer.</p>
+						</blockquote>
+						<details><summary>How can I use twind/shim from javascript?</summary>
+							<blockquote>
+								<p>Internally <code>twind/shim</code> uses <a href="twind_observe.html">twind/observe</a> which may be useful on its own for advanced use cases.</p>
+							</blockquote>
+							<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind/shim&#039;</span>
+</code></pre>
+							<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">setup</span><span style="color: #000000">, </span><span style="color: #001080">disconnect</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind/shim&#039;</span>
+</code></pre>
+						</details>
+						<details><summary>How to support legacy browser with the UMD bundles?</summary>
+							<blockquote>
+								<p>You may need to provide certain <a href="./browser-support.md">polyfills</a> depending on your target browser.</p>
+							</blockquote>
+							<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">defer</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;https://unpkg.com/twind/twind.umd.js&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+<span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">defer</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;https://unpkg.com/twind/observe/observe.umd.js&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+<span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">defer</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;https://unpkg.com/twind/shim/shim.umd.js&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+</code></pre>
+						</details>
+						<details><summary>How does the shim work?</summary>
+							<p><code>twind/shim</code> starts {@link observer | observing} class attributes changes right after the <a href="https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event">DOM content has been loaded</a>. For further details see <a href="twind_observe.html">twind/observe</a>.</p>
+						</details>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Interfaces</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind_shim.shimconfiguration.html" class="tsd-kind-icon">Shim<wbr>Configuration</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Functions</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind_shim.html#disconnect" class="tsd-kind-icon">disconnect</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind_shim.html#setup" class="tsd-kind-icon">setup</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="disconnect" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> disconnect</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">disconnect<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/shim/index.ts#L47">src/shim/index.ts:47</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Stop shimming/observing all nodes.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="setup" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> setup</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">setup<span class="tsd-signature-symbol">(</span>__namedParameters<span class="tsd-signature-symbol">?: </span><a href="../interfaces/twind_shim.shimconfiguration.html" class="tsd-signature-type" data-tsd-kind="Interface">ShimConfiguration</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/44907b9/src/shim/index.ts#L67">src/shim/index.ts:67</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Configure the default <a href="twind.html#tw-1">tw</a> and starts <a href="twind_observe.html#observe">observing</a> the
+									<a href="../interfaces/twind_shim.shimconfiguration.html#target">target element</a> (default: <code>document.documentElement</code>).</p>
+								</div>
+								<p>You do not need to call this method. As an alternativ you can provide a
+									<code>&lt;script type=&quot;twind-config&quot;&gt;...&lt;/script&gt;</code> element within the document.
+									The content must be valid JSON and all <a href="twind.html#setup">twind setup options</a>
+								(including hash) are supported.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>__namedParameters: <a href="../interfaces/twind_shim.shimconfiguration.html" class="tsd-signature-type" data-tsd-kind="Interface">ShimConfiguration</a><span class="tsd-signature-symbol"> = ...</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Modules</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="twind.html">twind</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="twind_colors.html">twind/colors</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="twind_css.html">twind/css</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="twind_observe.html">twind/observe</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="twind_server.html">twind/server</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="twind_sheets.html">twind/sheets</a>
+					</li>
+					<li class="current tsd-kind-module">
+						<a href="twind_shim.html">twind/shim</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="twind_shim_server.html">twind/shim/server</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/twind_shim.shimconfiguration.html" class="tsd-kind-icon">Shim<wbr>Configuration</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="twind_shim.html#disconnect" class="tsd-kind-icon">disconnect</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="twind_shim.html#setup" class="tsd-kind-icon">setup</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
