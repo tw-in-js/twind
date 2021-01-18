@@ -78,13 +78,13 @@ test('create with global css within custom tw', ({ tw, sheet }) => {
 test('nested selectors', ({ tw, sheet }) => {
   const styles = css({
     // .tw-xxx a
-    a: ({ theme }) => ({
+    a: {
       color: theme('colors.blue.500'),
       // .tw-xxx a:hover
       '&:hover': {
         color: theme('colors.blue.700'),
       },
-    }),
+    },
   })
 
   assert.is(tw(styles), 'tw-af4r5s')
@@ -347,7 +347,7 @@ test('use :global with property callback', ({ tw, sheet }) => {
   const style = css({
     ':global': {
       html: {
-        backgroundColor: ({ theme }) => theme('colors.gray.900'),
+        backgroundColor: theme('colors.gray.900'),
       },
     },
   })
@@ -403,7 +403,7 @@ test('is variadic', ({ tw, sheet }) => {
 
 test('can be nested', ({ tw, sheet }) => {
   const style = css({
-    backgroundColor: ({ theme }) => theme('colors.gray.500'),
+    backgroundColor: theme('colors.gray.500'),
     '&:hover': css({
       color: 'darkgreen',
     }),
@@ -420,7 +420,7 @@ test('can be nested', ({ tw, sheet }) => {
 test('basic template literal', ({ tw, sheet }) => {
   const style = css`
     color: rebeccapurple;
-    background-color: ${({ theme }) => theme('colors.gray.500')};
+    background-color: ${theme('colors.gray.500')};
     &:hover {
       ${css`
         color: darkgreen;
@@ -487,8 +487,7 @@ test('interpolation values', ({ tw, sheet }) => {
     background: dodgerblue;
     color: white;
     border: ${random}px solid white;
-    animation: ${({ theme }) => theme('durations.500')}
-      ${({ theme }) => theme('transitionTimingFunction.in-out')};
+    animation: ${theme('durations.500')} ${theme('transitionTimingFunction.in-out')};
 
     &:focus,
     &:hover {
@@ -681,7 +680,7 @@ test('use :global with property callback', ({ tw, sheet }) => {
   const style = css({
     ':global': {
       html: {
-        backgroundColor: ({ theme }) => theme('colors.gray.900'),
+        backgroundColor: theme('colors.gray.900'),
       },
     },
   })
@@ -702,7 +701,7 @@ test('extending preflight styles', () => {
         preflight,
         {
           body: {
-            backgroundColor: ({ theme }) => theme('colors.gray.900'),
+            backgroundColor: theme('colors.gray.900'),
           },
         },
         { body: tw.apply`text-gray-100` },

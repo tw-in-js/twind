@@ -59,15 +59,17 @@ tw`
 Values within the CSS object can be functions which are called with the `context` and should return the value to be used:
 
 ```js
+import { theme } from 'twind'
+
 const styles = css({
   // .tw-xxx a
-  a: ({ theme }) => ({
+  a: {
     color: theme('colors.blue.500'),
     // .tw-xxx a:hover
     '&:hover': {
       color: theme('colors.blue.700'),
     },
-  }),
+  },
 })
 ```
 
@@ -77,7 +79,7 @@ const styles = css({
 const styles = css({
   ':global': {
     a: {
-      color: ({ theme }) => theme('colors.blue.500'),
+      color: theme('colors.blue.500'),
     },
   },
 })
@@ -88,7 +90,7 @@ Tagged template literal syntax works like in emotion, goober or styled-component
 ```js
 const style = css`
   color: rebeccapurple;
-  background-color: ${({ theme }) => theme('colors.gray.500')};
+  background-color: ${theme('colors.gray.500')};
   &:hover {
     ${tw.apply`text-purple-700`}
   }
@@ -181,20 +183,20 @@ Values of the CSS object maybe functions that are passed the context and should 
 
 ```js
 css({
-  color: ({ theme }) => theme('colors.blue.500'),
+  color: theme('colors.blue.500'),
   '&:hover': {
-    color: ({ theme }) => theme('colors.blue.700'),
+    color: theme('colors.blue.700'),
   },
 })
 
 css({
-  a: ({ theme }) => ({
+  a: {
     color: theme('colors.blue.500'),
     // .tw-xxx a:hover
     '&:hover': {
       color: theme('colors.blue.700'),
     },
-  }),
+  },
 })
 ```
 
@@ -259,10 +261,12 @@ const slidein = animation(
   },
 )
 
+import { theme } from 'twind'
+
 const bounce = animation(
   {
     animationDuration: '1s',
-    animationTimingFunction: ({ theme }) => theme('transitionTimingFunction.in-out'),
+    animationTimingFunction: theme('transitionTimingFunction.in-out'),
     animationIterationCount: 'infinite',
   },
   {
