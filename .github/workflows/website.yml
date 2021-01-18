@@ -17,9 +17,13 @@ jobs:
           # for the deployment to work correctly
           persist-credentials: false
 
+      - name: Install
+        uses: bahmutov/npm-install@v1
+
       - name: Build 🔧
         run: |
           mkdir website
+          yarn typedoc
           sed 's% src="/_src_/index.js"% src="https://cdn.skypack.dev/twind"%g;s% src="/_src_/shim/index.js"% src="https://cdn.skypack.dev/twind/shim"%g' < example/landing.html > website/index.html
 
       - name: Deploy 🚀

@@ -1,3 +1,10 @@
+/**
+ * [[include:src/sheets/README.md]]
+ *
+ * @packageDocumentation
+ * @module twind/sheets
+ */
+
 import type { SheetConfig, Sheet, SheetInit, SheetInitCallback } from '../types'
 import { getStyleElement, STYLE_ELEMENT_ID } from '../internal/dom'
 
@@ -52,6 +59,9 @@ const createStorage = (): Storage => {
   }
 }
 
+/**
+ * A sheet that collects styles into an array.
+ */
 export interface VirtualSheet extends Sheet<string[]>, Storage {
   init: SheetInit
 }

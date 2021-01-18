@@ -1,3 +1,10 @@
+/**
+ * [[include:src/README.md]]
+ *
+ * @packageDocumentation
+ * @module twind
+ */
+
 import { create } from './twind/instance'
 
 const instance = create()

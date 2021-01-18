@@ -1,7 +1,20 @@
+/**
+ * [[include:src/observe/README.md]]
+ *
+ * @packageDocumentation
+ * @module twind/observe
+ */
+
 import type { TW } from '../types'
 import { tw as defaultTW } from '../index'
 
+/**
+ * Options for {@link createObserver}.
+ */
 export interface ShimConfiguration {
+  /**
+   * Custom {@link twind.tw | tw} instance to use (default: {@link twind.tw}).
+   */
   tw?: TW
 }
 
@@ -31,6 +44,11 @@ const getCache = (tw: TW): Map<string, string> => {
   return rulesToClassCache
 }
 
+/**
+ * Creates a new {@link TwindObserver}.
+ *
+ * @param options to use
+ */
 export const createObserver = ({ tw = defaultTW }: ShimConfiguration = {}): TwindObserver => {
   const rulesToClassCache = getCache(tw)
 
@@ -110,6 +128,13 @@ export const createObserver = ({ tw = defaultTW }: ShimConfiguration = {}): Twin
     },
   }
 }
+
+/**
+ * Creates a new {@link TwindObserver} and {@link TwindObserver.observe | start observing} the passed target element.
+ * @param this to bind
+ * @param target to shim
+ * @param config to use
+ */
 export function observe(
   this: ShimConfiguration | undefined | void,
   target: Node,

@@ -1,3 +1,10 @@
+/**
+ * [[include:src/css/README.md]]
+ *
+ * @packageDocumentation
+ * @module twind/css
+ */
+
 import type {
   TW,
   CSSRules,

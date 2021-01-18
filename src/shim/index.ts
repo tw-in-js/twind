@@ -1,9 +1,22 @@
+/**
+ * [[include:src/shim/README.md]]
+ *
+ * @packageDocumentation
+ * @module twind/shim
+ */
+
 import type { Configuration } from '../types'
 
 import { setup as setupTW } from '../index'
 import { createObserver } from '../observe/index'
 
+/**
+ * Options for {@link setup}.
+ */
 export interface ShimConfiguration extends Configuration {
+  /**
+   * The root element to shim (default: `document.documentElement`).
+   */
   target?: HTMLElement
 }
 
@@ -28,6 +41,9 @@ if (typeof document !== 'undefined' && typeof addEventListener === 'function') {
 
 const observer = createObserver()
 
+/**
+ * Stop shimming/observing all nodes.
+ */
 export const disconnect = (): void => {
   if (onload) {
     // Removing the callbacks ensures that the setup is called only once
@@ -39,6 +55,15 @@ export const disconnect = (): void => {
   observer.disconnect()
 }
 
+/**
+ * Configure the default {@link tw} and starts {@link observe | observing} the
+ * {@link ShimConfiguration.target | target element} (default: `document.documentElement`).
+ *
+ * You do not need to call this method. As an alternativ you can provide a
+ * `<script type="twind-config">...</script>` element within the document.
+ * The content must be valid JSON and all {@link twind.setup | twind setup options}
+ * (including hash) are supported.
+ */
 export const setup = ({
   target = document.documentElement,
   ...config

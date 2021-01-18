@@ -1,6 +1,13 @@
 /* eslint-env node */
 // ^^^^ This comment is need to prevent browser bundles of this file
 
+/**
+ * [[include:src/server/README.md]]
+ *
+ * @packageDocumentation
+ * @module twind/server
+ */
+
 import { executionAsyncId, createHook } from 'async_hooks'
 
 import type { Sheet, SheetInit } from '../types'

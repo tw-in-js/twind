@@ -1,6 +1,13 @@
 // Source from https://github.com/tailwindlabs/tailwindcss/blob/master/colors.js
 // License: MIT
 
+/**
+ * [[include:src/colors/README.md]]
+ *
+ * @packageDocumentation
+ * @module twind/colors
+ */
+
 import type { ThemeColor } from '../types'
 
 export const black = '#000'
