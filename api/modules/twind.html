@@ -94,7 +94,7 @@
 								<li><a href="#installation">Installation</a></li>
 								<li><a href="#api">API</a><ul>
 										<li><a href="#tw-function"><code>tw</code> function</a></li>
-										<li><a href="#twapply-function"><code>tw.apply</code> function</a></li>
+										<li><a href="#apply-function"><code>apply</code> function</a></li>
 										<li><a href="#setup-function"><code>setup</code> function</a></li>
 										<li><a href="#theme-helper"><code>theme</code> helper</a></li>
 									</ul>
@@ -205,18 +205,18 @@
 </code></pre>
 						</blockquote>
 						<p>For a further explanation on this mechanism see <a href="https://github.com/tw-in-js/twind/blob/main/docs/plugins.md#inline-plugins">Plugins</a>.</p>
-						<a href="#twapply-function" id="twapply-function" style="color: inherit; text-decoration: none;">
-							<h3><code>tw.apply</code> function</h3>
+						<a href="#apply-function" id="apply-function" style="color: inherit; text-decoration: none;">
+							<h3><code>apply</code> function</h3>
 						</a>
 						<p>As a component author, one often wants to re-use Tailwind directive styles for defining a component and allow users of the component to override styles using Tailwind rules. The created component can be used as a base for child components and override or add some styles using Tailwind rules.</p>
-						<p><a href="../interfaces/twind.tw.html#apply">tw.apply</a> generates one style object, e.g., one CSS class, combining all Tailwind rules by deep merging rules in order of declaration.</p>
+						<p><a href="twind.html#apply">apply</a> generates one style object, e.g., one CSS class, combining all Tailwind rules by deep merging rules in order of declaration.</p>
 						<blockquote>
-							<p><code>tw.apply</code> accepts the same arguments as <a href="#tw-function">tw</a>.</p>
+							<p><code>apply</code> accepts the same arguments as <a href="#tw-function">tw</a>.</p>
 						</blockquote>
-						<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">btn</span><span style="color: #000000"> = </span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`inline-block bg-gray-500 text-base`</span>
+						<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">btn</span><span style="color: #000000"> = </span><span style="color: #795E26">apply</span><span style="color: #A31515">`inline-block bg-gray-500 text-base`</span>
 <span style="color: #008000">// =&gt; generates on CSS class with all declarations of the above rules when used</span>
 
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">btnBlock</span><span style="color: #000000"> = </span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">btn</span><span style="color: #0000FF">}</span><span style="color: #A31515"> block`</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">btnBlock</span><span style="color: #000000"> = </span><span style="color: #795E26">apply</span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">btn</span><span style="color: #0000FF">}</span><span style="color: #A31515"> block`</span>
 <span style="color: #008000">// =&gt; generates on CSS class with all declarations of btn &amp; block</span>
 
 <span style="color: #800000">&lt;button</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #795E26">tw</span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">btn</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #0000FF">}</span><span style="color: #800000">&gt;</span><span style="color: #000000">gray-500</span><span style="color: #800000">&lt;/button&gt;</span>
@@ -228,18 +228,18 @@
 <span style="color: #800000">&lt;button</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #795E26">tw</span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">btnBlock</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #0000FF">}</span><span style="color: #800000">&gt;</span><span style="color: #000000">block button</span><span style="color: #800000">&lt;/button&gt;</span>
 <span style="color: #008000">// =&gt; tw-YYYY</span>
 </code></pre>
-						<details><summary>Using <code>tw.apply</code> within <code>preflight</code></summary>
+						<details><summary>Using <code>apply</code> within <code>preflight</code></summary>
 							<p>Use Tailwind rules within <code><a href="twind.html#setup">setup</a>({ <a href="../interfaces/twind.configuration.html#preflight">preflight</a> })</code>.</p>
 							<pre><code class="language-js"><span style="color: #795E26">setup</span><span style="color: #000000">({</span>
 <span style="color: #000000">  </span><span style="color: #001080">preflight:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">    </span><span style="color: #001080">body:</span><span style="color: #000000"> </span><span style="color: #001080">tw</span><span style="color: #000000">.</span><span style="color: #795E26">apply</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;bg-gray-900 text-white&#039;</span><span style="color: #000000">),</span>
+<span style="color: #000000">    </span><span style="color: #001080">body:</span><span style="color: #000000"> </span><span style="color: #795E26">apply</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;bg-gray-900 text-white&#039;</span><span style="color: #000000">),</span>
 <span style="color: #000000">  },</span>
 <span style="color: #000000">})</span>
 </code></pre>
 						</details>
-						<details><summary><code>CSS</code> can be used within <code>tw.apply</code></summary>
+						<details><summary><code>CSS</code> can be used within <code>apply</code></summary>
 							<p><a href="twind_css.html">twind/css</a> can be used to define additional styles.</p>
-							<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">btn</span><span style="color: #000000"> = </span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`</span>
+							<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">btn</span><span style="color: #000000"> = </span><span style="color: #795E26">apply</span><span style="color: #A31515">`</span>
 <span style="color: #A31515">  py-2 px-4</span>
 <span style="color: #A31515">  </span><span style="color: #0000FF">${</span><span style="color: #795E26">css</span><span style="color: #000000FF">({</span>
 <span style="color: #000000FF">    </span><span style="color: #001080">borderColor:</span><span style="color: #000000FF"> </span><span style="color: #A31515">&#039;black&#039;</span><span style="color: #000000FF">,</span>
@@ -248,12 +248,12 @@
 </code></pre>
 						</details>
 						<details><summary>Using within <code>CSS</code></summary>
-							<p><code>tw.apply</code> can be used with <code>css</code>:</p>
+							<p><code>apply</code> can be used with <code>css</code>:</p>
 							<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">prose</span><span style="color: #000000"> = </span><span style="color: #795E26">css</span><span style="color: #000000">(</span>
-<span style="color: #000000">  </span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-gray-700 dark:text-gray-300`</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-gray-700 dark:text-gray-300`</span><span style="color: #000000">,</span>
 <span style="color: #000000">  {</span>
-<span style="color: #000000">    </span><span style="color: #001080">p:</span><span style="color: #000000"> </span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`my-5`</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #001080">h1:</span><span style="color: #000000"> </span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-black dark:text-white`</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">p:</span><span style="color: #000000"> </span><span style="color: #795E26">apply</span><span style="color: #A31515">`my-5`</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">h1:</span><span style="color: #000000"> </span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-black dark:text-white`</span><span style="color: #000000">,</span>
 <span style="color: #000000">  },</span>
 <span style="color: #000000">  {</span>
 <span style="color: #000000">    </span><span style="color: #001080">h1:</span><span style="color: #000000"> {</span>
@@ -268,14 +268,14 @@
 </code></pre>
 							<p>Using template literal syntax:</p>
 							<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">prose</span><span style="color: #000000"> = </span><span style="color: #795E26">css</span><span style="color: #A31515">`</span>
-<span style="color: #A31515">  </span><span style="color: #0000FF">${</span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-gray-700 dark:text-gray-300`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  </span><span style="color: #0000FF">${</span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-gray-700 dark:text-gray-300`</span><span style="color: #0000FF">}</span>
 
 <span style="color: #A31515">  p {</span>
-<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`my-5`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #795E26">apply</span><span style="color: #A31515">`my-5`</span><span style="color: #0000FF">}</span>
 <span style="color: #A31515">  }</span>
 
 <span style="color: #A31515">  h1 {</span>
-<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-black dark:text-white`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-black dark:text-white`</span><span style="color: #0000FF">}</span>
 <span style="color: #A31515">    font-weight: 800;</span>
 <span style="color: #A31515">    font-size: 2.25em;</span>
 <span style="color: #A31515">    margin-top: 0;</span>
@@ -287,25 +287,25 @@
 						</details>
 						<details><summary>Using Tailwind directives with <code>animation</code> from <code>twind/css</code></summary>
 							<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">motion</span><span style="color: #000000"> = </span><span style="color: #795E26">animation</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;.6s ease-in-out infinite&#039;</span><span style="color: #000000">, {</span>
-<span style="color: #000000">  </span><span style="color: #A31515">&#039;0%&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`scale-100`</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #A31515">&#039;50%&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`scale-125 rotate-45`</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #A31515">&#039;100%&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`scale-100 rotate-0`</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;0%&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #795E26">apply</span><span style="color: #A31515">`scale-100`</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;50%&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #795E26">apply</span><span style="color: #A31515">`scale-125 rotate-45`</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;100%&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #795E26">apply</span><span style="color: #A31515">`scale-100 rotate-0`</span><span style="color: #000000">,</span>
 <span style="color: #000000">})</span>
 
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">bounce</span><span style="color: #000000"> = </span><span style="color: #795E26">animation</span><span style="color: #000000">(</span>
 <span style="color: #000000">  </span><span style="color: #A31515">&#039;1s ease infinite&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">  </span><span style="color: #795E26">keyframes</span><span style="color: #A31515">`</span>
 <span style="color: #A31515">  from, 20%, 53%, 80%, to {</span>
-<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`transform-gpu translate-x-0`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #795E26">apply</span><span style="color: #A31515">`transform-gpu translate-x-0`</span><span style="color: #0000FF">}</span>
 <span style="color: #A31515">  }</span>
 <span style="color: #A31515">  40%, 43% {</span>
-<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`transform-gpu -translate-x-7`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #795E26">apply</span><span style="color: #A31515">`transform-gpu -translate-x-7`</span><span style="color: #0000FF">}</span>
 <span style="color: #A31515">  }</span>
 <span style="color: #A31515">  70% {</span>
-<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`transform-gpu -translate-x-3.5`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #795E26">apply</span><span style="color: #A31515">`transform-gpu -translate-x-3.5`</span><span style="color: #0000FF">}</span>
 <span style="color: #A31515">  },</span>
 <span style="color: #A31515">  90% {</span>
-<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`transform-gpu -translate-x-1`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #795E26">apply</span><span style="color: #A31515">`transform-gpu -translate-x-1`</span><span style="color: #0000FF">}</span>
 <span style="color: #A31515">  }</span>
 <span style="color: #A31515">`</span><span style="color: #000000">,</span>
 <span style="color: #000000">)</span>
@@ -323,13 +323,13 @@
 <span style="color: #000000">}</span>
 
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">sizeMap</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">  </span><span style="color: #001080">sm:</span><span style="color: #000000"> </span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-xs py(2 md:1) px-2`</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">md:</span><span style="color: #000000"> </span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-sm py(3 md:2) px-2`</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">lg:</span><span style="color: #000000"> </span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-lg py-2 px-4`</span><span style="color: #000000">,</span>
-<span style="color: #000000">  </span><span style="color: #001080">xl:</span><span style="color: #000000"> </span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-xl py-3 px-6`</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">sm:</span><span style="color: #000000"> </span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-xs py(2 md:1) px-2`</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">md:</span><span style="color: #000000"> </span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-sm py(3 md:2) px-2`</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">lg:</span><span style="color: #000000"> </span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-lg py-2 px-4`</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">xl:</span><span style="color: #000000"> </span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-xl py-3 px-6`</span><span style="color: #000000">,</span>
 <span style="color: #000000">}</span>
 
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">baseStyles</span><span style="color: #000000"> = </span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">baseStyles</span><span style="color: #000000"> = </span><span style="color: #795E26">apply</span><span style="color: #A31515">`</span>
 <span style="color: #A31515">  w(full md:auto)</span>
 <span style="color: #A31515">  text(sm white uppercase)</span>
 <span style="color: #A31515">  px-4</span>
@@ -347,7 +347,7 @@
 <span style="color: #000000">  </span><span style="color: #001080">children</span><span style="color: #000000">,</span>
 <span style="color: #000000">}) {</span>
 <span style="color: #000000">  </span><span style="color: #008000">// Collect all styles into one class</span>
-<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">instanceStyles</span><span style="color: #000000"> = </span><span style="color: #001080">tw</span><span style="color: #A31515">.</span><span style="color: #795E26">apply</span><span style="color: #A31515">`</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">instanceStyles</span><span style="color: #000000"> = </span><span style="color: #795E26">apply</span><span style="color: #A31515">`</span>
 <span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #001080">baseStyles</span><span style="color: #0000FF">}</span>
 <span style="color: #A31515">    bg-</span><span style="color: #0000FF">${</span><span style="color: #001080">variantMap</span><span style="color: #000000FF">[</span><span style="color: #001080">variant</span><span style="color: #000000FF">]</span><span style="color: #0000FF">}</span><span style="color: #A31515">(600 700(hover:&amp; focus:&amp;)))</span>
 <span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #001080">sizeMap</span><span style="color: #000000FF">[</span><span style="color: #001080">size</span><span style="color: #000000FF">]</span><span style="color: #0000FF">}</span>
@@ -367,7 +367,7 @@
 </code></pre>
 						</details>
 						<blockquote>
-							<p>The <a href="https://github.com/tw-in-js/twind/blob/main/docs/components.md">Defining Components guide</a> explains how <code>tw.apply</code> can be used.</p>
+							<p>The <a href="https://github.com/tw-in-js/twind/blob/main/docs/components.md">Defining Components guide</a> explains how <code>apply</code> can be used.</p>
 						</blockquote>
 						<a href="#setup-function" id="setup-function" style="color: inherit; text-decoration: none;">
 							<h3><code>setup</code> function</h3>
@@ -412,6 +412,7 @@
 						<section class="tsd-index-section ">
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind.applydirective.html" class="tsd-kind-icon">Apply<wbr>Directive</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind.csscustomproperties.html" class="tsd-kind-icon">CSSCustom<wbr>Properties</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind.cssproperties.html" class="tsd-kind-icon">CSSProperties</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind.csspseudos.html" class="tsd-kind-icon">CSSPseudos</a></li>
@@ -422,7 +423,6 @@
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind.directivehandler.html" class="tsd-kind-icon">Directive<wbr>Handler</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind.inlinedirective.html" class="tsd-kind-icon">Inline<wbr>Directive</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind.instance.html" class="tsd-kind-icon">Instance</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind.lazyinjected.html" class="tsd-kind-icon">Lazy<wbr>Injected</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind.mode.html" class="tsd-kind-icon">Mode</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind.preflight.html" class="tsd-kind-icon">Preflight</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind.rule.html" class="tsd-kind-icon">Rule</a></li>
@@ -430,7 +430,6 @@
 								<li class="tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter"><a href="../interfaces/twind.sheetconfig.html" class="tsd-kind-icon">Sheet<wbr>Config</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter"><a href="../interfaces/twind.sheetinit.html" class="tsd-kind-icon">Sheet<wbr>Init</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind.tw.html" class="tsd-kind-icon">TW</a></li>
-								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind.twapply.html" class="tsd-kind-icon">TWApply</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind.theme.html" class="tsd-kind-icon">Theme</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind.themecolorobject.html" class="tsd-kind-icon">Theme<wbr>Color<wbr>Object</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind.themeconfiguration.html" class="tsd-kind-icon">Theme<wbr>Configuration</a></li>
@@ -474,21 +473,23 @@
 							<ul class="tsd-index-list">
 								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind.html#silent" class="tsd-kind-icon">silent</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind.html#strict" class="tsd-kind-icon">strict</a></li>
-								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind.html#tw-1" class="tsd-kind-icon">tw</a></li>
 								<li class="tsd-kind-variable tsd-parent-kind-module"><a href="twind.html#warn" class="tsd-kind-icon">warn</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind.html#apply" class="tsd-kind-icon">apply</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind.html#autoprefix" class="tsd-kind-icon">autoprefix</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind.html#create" class="tsd-kind-icon">create</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind.html#cssomsheet" class="tsd-kind-icon">cssom<wbr>Sheet</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="twind.html#directive" class="tsd-kind-icon">directive</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind.html#hash" class="tsd-kind-icon">hash</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind.html#mode-1" class="tsd-kind-icon">mode</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind.html#noprefix" class="tsd-kind-icon">noprefix</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind.html#setup" class="tsd-kind-icon">setup</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter"><a href="twind.html#theme-1" class="tsd-kind-icon">theme</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind.html#tw-1" class="tsd-kind-icon">tw</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind.html#voidsheet" class="tsd-kind-icon">void<wbr>Sheet</a></li>
 							</ul>
 						</section>
@@ -503,7 +504,7 @@
 					<div class="tsd-signature tsd-kind-icon">CSSAt<wbr>Keyframes<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/twind.ts#L219">src/types/twind.ts:219</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/twind.ts#L209">src/types/twind.ts:209</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -513,7 +514,7 @@
 					<div class="tsd-signature tsd-kind-icon">CSSAt<wbr>Media<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/twind.ts#L217">src/types/twind.ts:217</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/twind.ts#L207">src/types/twind.ts:207</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -523,7 +524,7 @@
 					<div class="tsd-signature tsd-kind-icon">CSSAt<wbr>Supports<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/twind.ts#L218">src/types/twind.ts:218</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/twind.ts#L208">src/types/twind.ts:208</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -533,7 +534,7 @@
 					<div class="tsd-signature tsd-kind-icon">CSSSimple<wbr>Pseudos<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{</span><span class="tsd-signature-symbol">[ </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol"> in </span><span class="tsd-signature-type">CSS.SimplePseudos</span><span class="tsd-signature-symbol"> as </span><span class="tsd-signature-symbol">`</span><span class="tsd-signature-type">&amp;</span><span class="tsd-signature-symbol">${</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">K</span><span class="tsd-signature-symbol">}</span><span class="tsd-signature-symbol">`</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/twind.ts#L210">src/types/twind.ts:210</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/twind.ts#L200">src/types/twind.ts:200</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -549,7 +550,7 @@
 					<div class="tsd-signature tsd-kind-icon">Dark<wbr>Mode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;media&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;class&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/twind.ts#L87">src/types/twind.ts:87</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/twind.ts#L77">src/types/twind.ts:77</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -559,7 +560,7 @@
 					<div class="tsd-signature tsd-kind-icon">Falsy<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">&quot;&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/util.ts#L1">src/types/util.ts:1</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/util.ts#L1">src/types/util.ts:1</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -569,7 +570,7 @@
 					<div class="tsd-signature tsd-kind-icon">Hasher<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/twind.ts#L85">src/types/twind.ts:85</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/twind.ts#L75">src/types/twind.ts:75</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -600,7 +601,7 @@
 					<div class="tsd-signature tsd-kind-icon">Maybe<wbr>Thunk&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/twind.ts#L44">src/types/twind.ts:44</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/twind.ts#L34">src/types/twind.ts:34</a></li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -616,7 +617,7 @@
 					<div class="tsd-signature tsd-kind-icon">Plugin<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.directivehandler.html" class="tsd-signature-type" data-tsd-kind="Interface">DirectiveHandler</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/twind.ts#L154">src/types/twind.ts:154</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/twind.ts#L144">src/types/twind.ts:144</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -626,7 +627,7 @@
 					<div class="tsd-signature tsd-kind-icon">Plugins<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="twind.html#plugin" class="tsd-signature-type" data-tsd-kind="Type alias">Plugin</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/twind.ts#L156">src/types/twind.ts:156</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/twind.ts#L146">src/types/twind.ts:146</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -636,7 +637,7 @@
 					<div class="tsd-signature tsd-kind-icon">Prefixer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>property<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, important<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/twind.ts#L83">src/types/twind.ts:83</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/twind.ts#L73">src/types/twind.ts:73</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-type-declaration">
@@ -673,7 +674,7 @@
 					<div class="tsd-signature tsd-kind-icon">Report<wbr>Info<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;LATE_SETUP_CALL&quot;</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;UNKNOWN_DIRECTIVE&quot;</span><span class="tsd-signature-symbol">; </span>rule<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;UNKNOWN_THEME_VALUE&quot;</span><span class="tsd-signature-symbol">; </span>key<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{ </span>css<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>error<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Error</span><span class="tsd-signature-symbol">; </span>id<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">&quot;INJECT_CSS_ERROR&quot;</span><span class="tsd-signature-symbol"> }</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/twind.ts#L129">src/types/twind.ts:129</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/twind.ts#L119">src/types/twind.ts:119</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -683,7 +684,7 @@
 					<div class="tsd-signature tsd-kind-icon">Sheet<wbr>Init<wbr>Callback&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">T</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/twind.ts#L74">src/types/twind.ts:74</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/twind.ts#L64">src/types/twind.ts:64</a></li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -720,7 +721,7 @@
 					<div class="tsd-signature tsd-kind-icon">Theme<wbr>Color<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.themecolorobject.html" class="tsd-signature-type" data-tsd-kind="Interface">ThemeColorObject</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/theme.ts#L96">src/types/theme.ts:96</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/theme.ts#L96">src/types/theme.ts:96</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -730,7 +731,7 @@
 					<div class="tsd-signature tsd-kind-icon">Theme<wbr>Font<wbr>Size<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">[</span>size<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span>lineHeight<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">[</span>size<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span>options<span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">{ </span>letterSpacing<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">; </span>lineHeight<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> }</span><span class="tsd-signature-symbol">]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/theme.ts#L98">src/types/theme.ts:98</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/theme.ts#L98">src/types/theme.ts:98</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -740,7 +741,7 @@
 					<div class="tsd-signature tsd-kind-icon">Theme<wbr>Outline<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">[</span>outline<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span>offset<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/theme.ts#L103">src/types/theme.ts:103</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/theme.ts#L103">src/types/theme.ts:103</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -750,7 +751,7 @@
 					<div class="tsd-signature tsd-kind-icon">Theme<wbr>Section&lt;T&gt;<span class="tsd-signature-symbol">:</span> <a href="twind.html#themesectionrecord" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeSectionRecord</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><a href="twind.html#themesectionresolver" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeSectionResolver</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/theme.ts#L83">src/types/theme.ts:83</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/theme.ts#L83">src/types/theme.ts:83</a></li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -766,7 +767,7 @@
 					<div class="tsd-signature tsd-kind-icon">Theme<wbr>Section<wbr>Record&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/theme.ts#L76">src/types/theme.ts:76</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/theme.ts#L76">src/types/theme.ts:76</a></li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -782,7 +783,7 @@
 					<div class="tsd-signature tsd-kind-icon">Theme<wbr>Section<wbr>Resolver&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span>theme<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.themeresolver.html" class="tsd-signature-type" data-tsd-kind="Interface">ThemeResolver</a>, context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.themesectionresolvercontext.html" class="tsd-signature-type" data-tsd-kind="Interface">ThemeSectionResolverContext</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="twind.html#themesectionrecord" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeSectionRecord</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/theme.ts#L78">src/types/theme.ts:78</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/theme.ts#L78">src/types/theme.ts:78</a></li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -822,7 +823,7 @@
 					<div class="tsd-signature tsd-kind-icon">Theme<wbr>Section<wbr>Type&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> extends </span><a href="twind.html#themesection" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeSection</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-symbol">infer </span> R<span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> ? </span><a href="twind.html#unwrap" class="tsd-signature-type" data-tsd-kind="Type alias">Unwrap</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">Exclude</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">, </span><a href="twind.html#themesectionresolver" class="tsd-signature-type" data-tsd-kind="Type alias">ThemeSectionResolver</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/theme.ts#L59">src/types/theme.ts:59</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/theme.ts#L59">src/types/theme.ts:59</a></li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -838,7 +839,7 @@
 					<div class="tsd-signature tsd-kind-icon">Token<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.tokengrouping.html" class="tsd-signature-type" data-tsd-kind="Interface">TokenGrouping</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.inlinedirective.html" class="tsd-signature-type" data-tsd-kind="Interface">InlineDirective</a><span class="tsd-signature-symbol"> | </span><a href="twind.html#token" class="tsd-signature-type" data-tsd-kind="Type alias">Token</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="twind.html#falsy" class="tsd-signature-type" data-tsd-kind="Type alias">Falsy</a><span class="tsd-signature-symbol"> | </span><a href="twind.html#typescriptcompat" class="tsd-signature-type" data-tsd-kind="Type alias">TypescriptCompat</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/twind.ts#L203">src/types/twind.ts:203</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/twind.ts#L193">src/types/twind.ts:193</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -848,7 +849,7 @@
 					<div class="tsd-signature tsd-kind-icon">Typescript<wbr>Compat<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/twind.ts#L201">src/types/twind.ts:201</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/twind.ts#L191">src/types/twind.ts:191</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -858,7 +859,7 @@
 					<div class="tsd-signature tsd-kind-icon">Unwrap&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> extends </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><span class="tsd-signature-symbol">infer </span> R<span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> ? </span><span class="tsd-signature-type">R</span><span class="tsd-signature-symbol"> : </span><span class="tsd-signature-type">T</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/theme.ts#L57">src/types/theme.ts:57</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/theme.ts#L57">src/types/theme.ts:57</a></li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -877,7 +878,7 @@
 					<div class="tsd-signature tsd-kind-icon">silent<span class="tsd-signature-symbol">:</span> <a href="../interfaces/twind.mode.html" class="tsd-signature-type" data-tsd-kind="Interface">Mode</a><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/twind/modes.ts#L39">src/twind/modes.ts:39</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/twind/modes.ts#L39">src/twind/modes.ts:39</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -887,15 +888,8 @@
 					<div class="tsd-signature tsd-kind-icon">strict<span class="tsd-signature-symbol">:</span> <a href="../interfaces/twind.mode.html" class="tsd-signature-type" data-tsd-kind="Interface">Mode</a><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/twind/modes.ts#L35">src/twind/modes.ts:35</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/twind/modes.ts#L35">src/twind/modes.ts:35</a></li>
 						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
-					<a name="tw-1" class="tsd-anchor"></a>
-					<h3>tw</h3>
-					<div class="tsd-signature tsd-kind-icon">tw<span class="tsd-signature-symbol">:</span> <a href="../interfaces/twind.tw.html" class="tsd-signature-type" data-tsd-kind="Interface">TW</a></div>
-					<aside class="tsd-sources">
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-variable tsd-parent-kind-module">
@@ -904,13 +898,54 @@
 					<div class="tsd-signature tsd-kind-icon">warn<span class="tsd-signature-symbol">:</span> <a href="../interfaces/twind.mode.html" class="tsd-signature-type" data-tsd-kind="Interface">Mode</a><span class="tsd-signature-symbol"> = ...</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/twind/modes.ts#L33">src/twind/modes.ts:33</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/twind/modes.ts#L33">src/twind/modes.ts:33</a></li>
 						</ul>
 					</aside>
 				</section>
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="apply" class="tsd-anchor"></a>
+					<h3>apply</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">apply<span class="tsd-signature-symbol">(</span>strings<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateStringsArray</span>, <span class="tsd-signature-symbol">...</span>interpolations<span class="tsd-signature-symbol">: </span><a href="twind.html#token" class="tsd-signature-type" data-tsd-kind="Type alias">Token</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.applydirective.html" class="tsd-signature-type" data-tsd-kind="Interface">ApplyDirective</a></li>
+						<li class="tsd-signature tsd-kind-icon">apply<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>tokens<span class="tsd-signature-symbol">: </span><a href="twind.html#token" class="tsd-signature-type" data-tsd-kind="Type alias">Token</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.applydirective.html" class="tsd-signature-type" data-tsd-kind="Interface">ApplyDirective</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/twind/apply.ts#L6">src/twind/apply.ts:6</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>strings: <span class="tsd-signature-type">TemplateStringsArray</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>interpolations: <a href="twind.html#token" class="tsd-signature-type" data-tsd-kind="Type alias">Token</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/twind.applydirective.html" class="tsd-signature-type" data-tsd-kind="Interface">ApplyDirective</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/twind/apply.ts#L12">src/twind/apply.ts:12</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>tokens: <a href="twind.html#token" class="tsd-signature-type" data-tsd-kind="Type alias">Token</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/twind.applydirective.html" class="tsd-signature-type" data-tsd-kind="Interface">ApplyDirective</a></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="autoprefix" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> autoprefix</h3>
@@ -921,7 +956,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/twind/prefix.ts#L8">src/twind/prefix.ts:8</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/twind/prefix.ts#L8">src/twind/prefix.ts:8</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -950,7 +985,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/twind/instance.ts#L6">src/twind/instance.ts:6</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/twind/instance.ts#L5">src/twind/instance.ts:5</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -973,7 +1008,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/twind/sheets.ts#L10">src/twind/sheets.ts:10</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/twind/sheets.ts#L10">src/twind/sheets.ts:10</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -991,6 +1026,41 @@
 						</li>
 					</ul>
 				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+					<a name="directive" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> directive</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">directive&lt;T&gt;<span class="tsd-signature-symbol">(</span>directive<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span>, data<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">unknown</span>, tw<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.tw.html" class="tsd-signature-type" data-tsd-kind="Interface">TW</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/twind/directive.ts#L5">src/twind/directive.ts:5</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.inlinedirective.html" class="tsd-signature-type" data-tsd-kind="Interface">InlineDirective</a></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>directive: <span class="tsd-signature-type">T</span></h5>
+								</li>
+								<li>
+									<h5>data: <span class="tsd-signature-type">unknown</span></h5>
+								</li>
+								<li>
+									<h5>tw: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.tw.html" class="tsd-signature-type" data-tsd-kind="Interface">TW</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+						</li>
+					</ul>
+				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="hash" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> hash</h3>
@@ -1001,7 +1071,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/twind/util.ts#L77">src/twind/util.ts:77</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/internal/util.ts#L77">src/internal/util.ts:77</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1024,7 +1094,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/twind/modes.ts#L5">src/twind/modes.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/twind/modes.ts#L5">src/twind/modes.ts:5</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1065,7 +1135,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/twind/prefix.ts#L5">src/twind/prefix.ts:5</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/twind/prefix.ts#L5">src/twind/prefix.ts:5</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1094,7 +1164,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/types/twind.ts#L41">src/types/twind.ts:41</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/twind.ts#L31">src/types/twind.ts:31</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -1121,7 +1191,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/twind/theme.ts#L88">src/twind/theme.ts:88</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/twind/theme.ts#L88">src/twind/theme.ts:88</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1164,7 +1234,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/twind/theme.ts#L88">src/twind/theme.ts:88</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/twind/theme.ts#L88">src/twind/theme.ts:88</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1207,7 +1277,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/twind/theme.ts#L88">src/twind/theme.ts:88</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/twind/theme.ts#L88">src/twind/theme.ts:88</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1253,7 +1323,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/twind/theme.ts#L88">src/twind/theme.ts:88</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/twind/theme.ts#L88">src/twind/theme.ts:88</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1299,7 +1369,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/twind/theme.ts#L88">src/twind/theme.ts:88</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/twind/theme.ts#L88">src/twind/theme.ts:88</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -1348,6 +1418,47 @@
 					</ul>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="tw-1" class="tsd-anchor"></a>
+					<h3>tw</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">tw<span class="tsd-signature-symbol">(</span>strings<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemplateStringsArray</span>, <span class="tsd-signature-symbol">...</span>interpolations<span class="tsd-signature-symbol">: </span><a href="twind.html#token" class="tsd-signature-type" data-tsd-kind="Type alias">Token</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+						<li class="tsd-signature tsd-kind-icon">tw<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>tokens<span class="tsd-signature-symbol">: </span><a href="twind.html#token" class="tsd-signature-type" data-tsd-kind="Type alias">Token</a><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/twind.ts#L7">src/types/twind.ts:7</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>strings: <span class="tsd-signature-type">TemplateStringsArray</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>interpolations: <a href="twind.html#token" class="tsd-signature-type" data-tsd-kind="Type alias">Token</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/types/twind.ts#L8">src/types/twind.ts:8</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>tokens: <a href="twind.html#token" class="tsd-signature-type" data-tsd-kind="Type alias">Token</a><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
 					<a name="voidsheet" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagConst">Const</span> void<wbr>Sheet</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
@@ -1357,7 +1468,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/814eb44/src/twind/sheets.ts#L25">src/twind/sheets.ts:25</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/a39c3d4/src/twind/sheets.ts#L25">src/twind/sheets.ts:25</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1406,6 +1517,9 @@
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/twind.applydirective.html" class="tsd-kind-icon">Apply<wbr>Directive</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/twind.csscustomproperties.html" class="tsd-kind-icon">CSSCustom<wbr>Properties</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
@@ -1436,9 +1550,6 @@
 						<a href="../interfaces/twind.instance.html" class="tsd-kind-icon">Instance</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="../interfaces/twind.lazyinjected.html" class="tsd-kind-icon">Lazy<wbr>Injected</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/twind.mode.html" class="tsd-kind-icon">Mode</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
@@ -1458,9 +1569,6 @@
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/twind.tw.html" class="tsd-kind-icon">TW</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="../interfaces/twind.twapply.html" class="tsd-kind-icon">TWApply</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/twind.theme.html" class="tsd-kind-icon">Theme</a>
@@ -1562,10 +1670,10 @@
 						<a href="twind.html#strict" class="tsd-kind-icon">strict</a>
 					</li>
 					<li class=" tsd-kind-variable tsd-parent-kind-module">
-						<a href="twind.html#tw-1" class="tsd-kind-icon">tw</a>
-					</li>
-					<li class=" tsd-kind-variable tsd-parent-kind-module">
 						<a href="twind.html#warn" class="tsd-kind-icon">warn</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="twind.html#apply" class="tsd-kind-icon">apply</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="twind.html#autoprefix" class="tsd-kind-icon">autoprefix</a>
@@ -1575,6 +1683,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="twind.html#cssomsheet" class="tsd-kind-icon">cssom<wbr>Sheet</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="twind.html#directive" class="tsd-kind-icon">directive</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="twind.html#hash" class="tsd-kind-icon">hash</a>
@@ -1590,6 +1701,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="twind.html#theme-1" class="tsd-kind-icon">theme</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="twind.html#tw-1" class="tsd-kind-icon">tw</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="twind.html#voidsheet" class="tsd-kind-icon">void<wbr>Sheet</a>
