@@ -1,7 +1,7 @@
 // Based on https://github.com/kripod/otion/blob/main/packages/otion/src/injectors.ts
 // License MIT
 import type { SheetConfig, Sheet } from '../types'
-import { noop } from './util'
+import { noop } from '../internal/util'
 import { getStyleElement } from '../internal/dom'
 
 /**

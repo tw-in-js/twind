@@ -80,9 +80,11 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
 - [apply](./components.md) Tailwind rules
 
   ```js
+  import { apply, setup } from 'twind'
+
   setup({
     preflight: {
-      body: tw.apply`bg-gray-900 text-white`,
+      body: apply`bg-gray-900 text-white`,
     },
   })
   ```
@@ -90,8 +92,7 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
 - use [css](./css-in-js.md) to merge rules
 
   ```js
-  import { theme } from 'twind'
-  import { css } from 'twind/css'
+  import { css, theme, apply } from 'twind/css'
 
   setup({
     preflight: (preflight) =>
@@ -102,7 +103,7 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
             backgroundColor: theme('colors.gray.900'),
           },
         },
-        { body: tw.apply`text-gray-100` },
+        { body: apply`text-gray-100` },
       ),
   })
   ```

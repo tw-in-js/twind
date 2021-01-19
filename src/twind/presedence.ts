@@ -70,7 +70,7 @@ Ensure shorthand properties are inserted before longhand properties; eg longhand
 
 import type { ThemeResolver } from '../types'
 
-import { tail, includes } from './util'
+import { tail, includes } from '../internal/util'
 
 // Shared variables
 let _: string | RegExpExecArray | null | number

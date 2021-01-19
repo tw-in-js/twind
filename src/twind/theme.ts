@@ -10,7 +10,7 @@ import type {
 } from '../types'
 
 import * as is from '../internal/is'
-import { join, tail, includes } from './util'
+import { join, tail, includes } from '../internal/util'
 
 // '1/2': '50%',
 // '1/3': '33.333333%',

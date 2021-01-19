@@ -5,18 +5,14 @@
  * @module twind
  */
 
-import { create } from './twind/instance'
-
-const instance = create()
-
-export const { tw } = instance
-export const { setup } = instance
-
-export { create }
-export * from './twind/sheets'
+export * from './twind/apply'
+export * from './twind/default'
+export * from './twind/directive'
+export * from './twind/instance'
 export * from './twind/modes'
 export * from './twind/prefix'
+export * from './twind/sheets'
 export { theme } from './twind/theme'
-export { cyrb32 as hash } from './twind/util'
+export { cyrb32 as hash } from './internal/util'
 
 export * from './types'

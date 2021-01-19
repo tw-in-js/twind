@@ -5,7 +5,7 @@ interface Includes {
   <T>(value: readonly T[], search: T): boolean
 }
 
-import * as is from '../internal/is'
+import * as is from './is'
 
 export const includes: Includes = (value: string | readonly unknown[], search: unknown) =>
   // eslint-disable-next-line no-implicit-coercion

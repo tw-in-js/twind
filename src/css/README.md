@@ -23,7 +23,7 @@ Sometimes you might find yourself wanting to write some arbitrary styles for an 
 Essentially the {@link css} directive uses some CSS rules in object notation, array or template literal format to create a optimized [inline plugin](https://github.com/tw-in-js/twind/blob/main/docs/plugins.md#inline-plugin). Here you can use the `&` selector to target the current element much like in other CSS-in-JS libraries. In this way, it is possible to write styles that cannot be described using an inline style attribute alone; things like specific children selectors.
 
 ```js
-import { css } from 'twind/css'
+import { tw, css } from 'twind/css'
 
 tw(
   css({
@@ -61,7 +61,7 @@ tw`
 Values within the CSS object can be functions which are called with the `context` and should return the value to be used:
 
 ```js
-import { theme } from 'twind'
+import { css, theme } from 'twind/css'
 
 const styles = css({
   // .tw-xxx a
@@ -94,7 +94,7 @@ const style = css`
   color: rebeccapurple;
   background-color: ${theme('colors.gray.500')};
   &:hover {
-    ${tw.apply`text-purple-700`}
+    ${apply`text-purple-700`}
   }
 `
 ```
@@ -129,20 +129,22 @@ const style = css([
 ])
 ```
 
-[tw.apply](https://github.com/tw-in-js/twind/blob/main/docs/components) can be used within `css`:
+[apply](https://github.com/tw-in-js/twind/blob/main/docs/components) can be used within `css`:
 
 ```js
-css(tw.apply`text-gray(700 dark:300)`, {
-  p: tw.apply`my-5`,
-  h1: tw.apply`text(black dark:white hover:purple-500)`,
+import { css, apply } from 'twind/css'
+
+css(apply`text-gray(700 dark:300)`, {
+  p: apply`my-5`,
+  h1: apply`text(black dark:white hover:purple-500)`,
 })
 
 // Or using template literals
 css`
-  ${tw.apply`text-gray(700 dark:300)`}
+  ${apply`text-gray(700 dark:300)`}
 
   p {
-    ${tw.apply('my-5')}
+    ${apply('my-5')}
   }
 `
 ```
@@ -182,8 +184,7 @@ document.body.className = css.call(tw, {
 Values of the CSS object maybe functions that are passed the context and should return the value to be used:
 
 ```js
-import { theme } from 'twind'
-import { css } from 'twind/css'
+import { css, theme } from 'twind/css'
 
 css({
   color: theme('colors.blue.500'),
@@ -235,16 +236,16 @@ Template literal syntax is supported as well:
 ```js
 const bounce = animation('1s ease infinite')`
   from, 20%, 53%, 80%, to {
-    ${tw.apply`transform-gpu translate-x-0`}
+    ${apply`transform-gpu translate-x-0`}
   }
   40%, 43% {
-    ${tw.apply`transform-gpu -translate-x-7`}
+    ${apply`transform-gpu -translate-x-7`}
   }
   70% {
-    ${tw.apply`transform-gpu -translate-x-3.5`}
+    ${apply`transform-gpu -translate-x-3.5`}
   },
   90% {
-    ${tw.apply`transform-gpu -translate-x-1`}
+    ${apply`transform-gpu -translate-x-1`}
   }
 `
 ```
@@ -329,16 +330,16 @@ Template literal syntax is supported as well:
 ```js
 const bounce = keyframes`
   from, 20%, 53%, 80%, to {
-    ${tw.apply`transform-gpu translate-x-0`}
+    ${apply`transform-gpu translate-x-0`}
   }
   40%, 43% {
-    ${tw.apply`transform-gpu -translate-x-7`}
+    ${apply`transform-gpu -translate-x-7`}
   }
   70% {
-    ${tw.apply`transform-gpu -translate-x-3.5`}
+    ${apply`transform-gpu -translate-x-3.5`}
   },
   90% {
-    ${tw.apply`transform-gpu -translate-x-1`}
+    ${apply`transform-gpu -translate-x-1`}
   }
 `
 ```

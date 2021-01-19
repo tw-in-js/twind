@@ -1,5 +1,4 @@
 import type { Configuration, Instance, TW } from '../types'
-import { withApply } from './apply'
 
 import { configure } from './configure'
 
@@ -37,7 +36,7 @@ export const create = (config?: Configuration): Instance => {
   // This ensures that after setup we use the configured
   // `process` and `setup` fails.
   return {
-    tw: withApply(((...tokens: unknown[]) => process(tokens)) as TW),
+    tw: (...tokens: unknown[]) => process(tokens),
 
     setup: (config) => init(config),
   }

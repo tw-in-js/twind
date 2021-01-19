@@ -1,27 +1,16 @@
-import type { TWApply, Context, TW } from '../types'
+import type { Token, ApplyDirective, TW } from '../types'
+
 import { parse } from './parse'
+import { directive } from './directive'
 
-export const withApply = (tw: TW): TW => {
-  function toString(this: TWApply): string {
-    return tw(this)
-  }
+export function apply(
+  this: TW | null | undefined | void,
+  strings: TemplateStringsArray,
+  ...interpolations: Token[]
+): ApplyDirective
 
-  tw.apply = (...tokens: unknown[]): TWApply => {
-    return Object.defineProperties(({ css }: Context) => css(parse(tokens)), {
-      valueOf: {
-        value: toString,
-      },
-      toString: {
-        value: toString,
-      },
-      // Allow twind to generate a unique id for this directive
-      // twind uses JSON.stringify which returns undefined for functions like this directive
-      // providing a toJSON function allows to include this directive in the id generation
-      toJSON: {
-        value: () => tokens,
-      },
-    })
-  }
+export function apply(this: TW | null | undefined | void, ...tokens: Token[]): ApplyDirective
 
-  return tw
+export function apply(this: TW | null | undefined | void, ...tokens: unknown[]): ApplyDirective {
+  return directive(({ css }) => css(parse(tokens)), tokens, this)
 }

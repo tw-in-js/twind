@@ -10,18 +10,19 @@ import type {
   CSSRules,
   CSSAtKeyframes,
   InlineDirective,
-  LazyInjected,
   Context,
   CSSProperties,
   Falsy,
   MaybeThunk,
 } from '../types'
 
-import { tw as defaultTW, hash } from '../index'
+import { hash, directive } from '../index'
 import * as is from '../internal/is'
-import { evalThunk, merge } from '../twind/util'
+import { evalThunk, merge } from '../internal/util'
 
-export interface CSSDirective extends LazyInjected {
+export { tw, apply, setup, theme } from '../index'
+
+export interface CSSDirective {
   (context: Context): CSSRules
 }
 
@@ -29,40 +30,16 @@ export type MaybeArray<T> = T | readonly T[]
 
 export interface CSSFactory<T, I, R> {
   (
+    this: TW | null | undefined | void,
     strings: TemplateStringsArray,
     ...interpolations: readonly MaybeThunk<MaybeArray<I | string | number | Falsy>>[]
   ): R
-  (tokens: MaybeThunk<MaybeArray<T | Falsy>>): R
-  (...tokens: readonly MaybeThunk<T | Falsy>[]): R
+  (this: TW | null | undefined | void, tokens: MaybeThunk<MaybeArray<T | Falsy>>): R
+  (this: TW | null | undefined | void, ...tokens: readonly MaybeThunk<T | Falsy>[]): R
 }
 
 function evaluateFunctions(this: TW, key: string, value: unknown): unknown {
   return is.function(value) ? this(value as InlineDirective) : value
-}
-
-const lazy = <T extends InlineDirective>(
-  directive: T,
-  data: unknown,
-  tw: TW | null | undefined | void,
-): T & LazyInjected => {
-  function toString(this: InlineDirective): string {
-    return (tw || defaultTW)(this)
-  }
-
-  return Object.defineProperties(directive, {
-    valueOf: {
-      value: toString,
-    },
-    toString: {
-      value: toString,
-    },
-    // Allow twind to generate a unique id for this directive
-    // twind uses JSON.stringify which returns undefined for functions like this directive
-    // providing a toJSON function allows to include this directive in the id generation
-    toJSON: {
-      value: () => data,
-    },
-  })
 }
 
 const translate = (tokens: unknown[], context: Context): CSSRules => {
@@ -102,11 +79,7 @@ const interleave = (
     const interpolation = evalThunk(interpolations[index], context)
 
     if (is.object(interpolation)) {
-      if (interpolation) {
-        result.push(interpolation)
-      }
-
-      result.push(strings[++index])
+      result.push(interpolation, strings[++index])
     } else {
       // Join consecutive strings
       // eslint-disable-next-line @typescript-eslint/no-extra-semi
@@ -180,7 +153,7 @@ export const css: CSSFactory<CSSRules, CSSRules, CSSDirective> = function (
     tokens = tokens.slice(1)
   }
 
-  return lazy(
+  return directive(
     (context: Context): CSSRules =>
       translate(strings ? astish(interleave(strings, tokens, context)) : tokens, context),
     tokens,
@@ -188,7 +161,7 @@ export const css: CSSFactory<CSSRules, CSSRules, CSSDirective> = function (
   )
 }
 
-export interface CSSKeyframes extends LazyInjected {
+export interface CSSKeyframes {
   (context: Context): string
 }
 
@@ -230,7 +203,7 @@ export const keyframes: CSSFactory<
     return { [`@keyframes ${id}`]: waypoints(context) }
   }
 
-  return lazy(
+  return directive(
     (({ tw }) => {
       // Inject the keyframes
       tw(keyframes)

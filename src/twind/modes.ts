@@ -1,6 +1,6 @@
 import type { Mode } from '../types'
 
-import { join, noop } from './util'
+import { join, noop } from '../internal/util'
 
 export const mode = (report: (message: string) => void): Mode => ({
   unknown(section, key = [], optional, context) {

@@ -5,13 +5,13 @@ import type { Instance } from '../types'
 import type { VirtualSheet } from '../sheets/index'
 
 import { virtualSheet } from '../sheets/index'
-import { create, strict, tw } from '../index'
+import { create, strict, tw, apply } from '../index'
 import { animation, css } from '../css/index'
 
 const test = suite<{
   sheet: VirtualSheet
   tw: Instance['tw']
-}>('tw.apply')
+}>('apply')
 
 test.before((context) => {
   context.sheet = virtualSheet()
@@ -31,7 +31,7 @@ test.after.each(({ sheet }) => {
 })
 
 test('simple component', ({ tw, sheet }) => {
-  const btn = tw.apply`inline-block bg-gray-500 text-base`
+  const btn = apply`inline-block bg-gray-500 text-base`
 
   assert.type(btn, 'function')
   assert.equal(sheet.target, [], 'nothing injected yet')
@@ -50,8 +50,8 @@ test('simple component', ({ tw, sheet }) => {
 })
 
 test('child components', ({ tw, sheet }) => {
-  const btn = tw.apply`inline-block bg-gray-500 text-base`
-  const btnBlock = tw.apply`${btn} block`
+  const btn = apply`inline-block bg-gray-500 text-base`
+  const btnBlock = apply`${btn} block`
 
   assert.type(btnBlock, 'function')
   assert.equal(sheet.target, [], 'nothing injected yet')
@@ -63,21 +63,21 @@ test('child components', ({ tw, sheet }) => {
 })
 
 test('non tw usage (toString)', ({ tw, sheet }) => {
-  const btn = tw.apply`inline-block`
+  const btn = apply.call(tw, `inline-block`)
 
   assert.is(btn.toString(), 'tw-ri1alh')
   assert.equal(sheet.target, ['.tw-ri1alh{display:inline-block}'])
 })
 
 test('non tw usage (valueOf)', ({ tw, sheet }) => {
-  const btn = tw.apply`inline-block`
+  const btn = apply.call(tw, `inline-block`)
 
   assert.is(btn.valueOf(), 'tw-ri1alh')
   assert.equal(sheet.target, ['.tw-ri1alh{display:inline-block}'])
 })
 
 test('with variants', ({ tw, sheet }) => {
-  const btn = tw.apply`
+  const btn = apply`
     py-2 px-4
     font-semibold
     rounded-lg shadow-md
@@ -94,8 +94,8 @@ test('with variants', ({ tw, sheet }) => {
 })
 
 test('rule order matters', ({ tw, sheet }) => {
-  const blue = tw.apply`text-red-500 text-blue-500`
-  const red = tw.apply`text-blue-500 text-red-500`
+  const blue = apply`text-red-500 text-blue-500`
+  const red = apply`text-blue-500 text-red-500`
 
   assert.is(tw`${blue} ${red}`, 'tw-z8gzwe tw-17jpxhn')
   assert.equal(sheet.target, [
@@ -105,7 +105,7 @@ test('rule order matters', ({ tw, sheet }) => {
 })
 
 test('css can be used', ({ tw, sheet }) => {
-  const btn = tw.apply`
+  const btn = apply`
     py-2 px-4
     ${css({
       borderColor: 'black',
@@ -122,9 +122,9 @@ test('css can be used', ({ tw, sheet }) => {
 
 test('with animation', ({ tw, sheet }) => {
   const motion = animation('.6s ease-in-out infinite', {
-    '0%': tw.apply`scale-100`,
-    '50%': tw.apply`scale-125 rotate-45`,
-    '100%': tw.apply`scale-100 rotate-0`,
+    '0%': apply`scale-100`,
+    '50%': apply`scale-125 rotate-45`,
+    '100%': apply`scale-100 rotate-0`,
   })
 
   assert.equal(sheet.target, [])
@@ -137,7 +137,7 @@ test('with animation', ({ tw, sheet }) => {
 })
 
 test('inline plugin using tw', ({ tw, sheet }) => {
-  const btn = tw.apply`
+  const btn = apply`
     py-2 px-4
     ${({ tw }) => tw`px-8`}
   `
@@ -152,7 +152,7 @@ test('using class which has already been injected with tw', ({ tw, sheet }) => {
   const blue = tw`text-blue-500 hover:text-blue-700`
   assert.is(blue, 'tw-z8gzwe tw-aecrv7')
 
-  const link = tw.apply`block ${blue} text-center`
+  const link = apply`block ${blue} text-center`
 
   assert.is(tw`${link}`, 'tw-1psz0ut tw-z8gzwe tw-aecrv7')
   assert.equal(sheet.target, [
@@ -176,7 +176,7 @@ test('plugin with string', () => {
     },
   })
 
-  const link = tw.apply`group block blue text-center`
+  const link = apply`group block blue text-center`
 
   assert.is(tw`${link} text-justify`, 'tw-la40fd tw-1bk5mm5 tw-z8gzwe tw-aecrv7 tw-1tvd98m')
   assert.equal(sheet.target, [
@@ -196,7 +196,7 @@ test('pass unknown class names through', () => {
     prefix: false,
   })
 
-  const link = tw.apply`block unknown-class text-justify`
+  const link = apply`block unknown-class text-justify`
 
   assert.is(
     tw`text-center ${link} some-other-class`,
@@ -218,13 +218,13 @@ test('complex', ({ tw, sheet }) => {
   } as const
 
   const sizeMap = {
-    sm: tw.apply`text-xs py(2 md:1) px-2`,
-    md: tw.apply`text-sm py(3 md:2) px-2`,
-    lg: tw.apply`text-lg py-2 px-4`,
-    xl: tw.apply`text-xl py-3 px-6`,
+    sm: apply`text-xs py(2 md:1) px-2`,
+    md: apply`text-sm py(3 md:2) px-2`,
+    lg: apply`text-lg py-2 px-4`,
+    xl: apply`text-xl py-3 px-6`,
   } as const
 
-  const baseStyles = tw.apply`
+  const baseStyles = apply`
     w(full md:auto)
     text(sm white uppercase)
     px-4
@@ -247,7 +247,7 @@ test('complex', ({ tw, sheet }) => {
     className?: string
   } = {}) {
     // Collect all styles into one class
-    const instanceStyles = tw.apply`
+    const instanceStyles = apply`
       ${baseStyles}
       bg-${variantMap[variant]}(600 700(hover:& focus:&)))
       ${sizeMap[size]}
@@ -285,7 +285,7 @@ test('complex', ({ tw, sheet }) => {
 test('use :global', ({ tw, sheet }) => {
   const style = () => ({
     ':global': {
-      html: tw.apply('bg-gray-900 text-white'),
+      html: apply('bg-gray-900 text-white'),
     },
   })
 
@@ -299,9 +299,9 @@ test('use :global', ({ tw, sheet }) => {
 test('use :global within css', ({ tw, sheet }) => {
   const style = css({
     ':global': {
-      body: tw.apply('bg-gray-900 text-white'),
+      body: apply('bg-gray-900 text-white'),
     },
-    a: tw.apply('text-blue(500 hover:700)'),
+    a: apply('text-blue(500 hover:700)'),
   })
 
   assert.is(tw(style), 'tw-18yto84')
@@ -320,7 +320,7 @@ test('use with preflight', () => {
     sheet,
     mode: strict,
     preflight: (preflight, { tw }) => ({
-      html: tw.apply('bg-gray-900 text-white'),
+      html: apply('bg-gray-900 text-white'),
     }),
     prefix: false,
   })
@@ -337,7 +337,7 @@ test('use with preflight and global tw', () => {
     sheet,
     mode: strict,
     preflight: {
-      body: tw.apply('bg-gray-900 text-white'),
+      body: apply('bg-gray-900 text-white'),
     },
     prefix: false,
   })
@@ -356,7 +356,7 @@ test('use with preflight as property', () => {
     sheet,
     mode: strict,
     preflight: {
-      html: ({ tw }) => tw.apply('bg-gray-900 text-white'),
+      html: ({ tw }) => apply('bg-gray-900 text-white'),
     },
     prefix: false,
   })
@@ -366,6 +366,16 @@ test('use with preflight as property', () => {
       'html{--tw-bg-opacity:1;background-color:#111827;background-color:rgba(17,24,39,var(--tw-bg-opacity));--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity))}',
     ),
   )
+})
+
+test('use global apply with custom tw', ({ tw, sheet }) => {
+  const btn = apply`inline-block bg-gray-500 text-base`
+
+  assert.is(tw(btn), 'tw-z1u1ls')
+
+  assert.equal(sheet.target, [
+    '.tw-z1u1ls{display:inline-block;--tw-17cwy6m:1;background-color:#6b7280;background-color:rgba(107,114,128,var(--tw-17cwy6m));font-size:1rem;line-height:1.5rem}',
+  ])
 })
 
 test.run()

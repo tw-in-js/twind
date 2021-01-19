@@ -1,6 +1,6 @@
 import type { Context, Sheet, Mode, SheetInit } from '../types'
 
-import { sortedInsertionIndex } from './util'
+import { sortedInsertionIndex } from '../internal/util'
 
 import type { RuleWithPresedence } from './serialize'
 

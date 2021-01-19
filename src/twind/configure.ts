@@ -21,14 +21,13 @@ import { autoprefix, noprefix } from './prefix'
 import { makeThemeResolver } from './theme'
 
 import * as is from '../internal/is'
-import { cyrb32, identity, join, tail, merge, evalThunk } from './util'
+import { cyrb32, identity, join, tail, merge, evalThunk } from '../internal/util'
 
 import { parse } from './parse'
 import { translate as makeTranslate } from './translate'
 import { decorate as makeDecorate } from './decorate'
 import { serialize as makeSerialize } from './serialize'
 import { inject as makeInject } from './inject'
-import { withApply } from './apply'
 
 const sanitize = <T>(
   value: T | boolean | undefined,
@@ -80,7 +79,7 @@ export const configure = (
   // The context that is passed to functions to access the theme, ...
   const context: Context = {
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    tw: withApply((...tokens: unknown[]) => process(tokens)),
+    tw: (...tokens: unknown[]) => process(tokens),
 
     theme: ((section: keyof Theme, key?: string | string[], defaultValue?: unknown): unknown => {
       // Empty key use the standard tailwind default key

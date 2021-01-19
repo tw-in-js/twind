@@ -5,8 +5,8 @@ import type { Instance } from '../types'
 import type { VirtualSheet } from '../sheets/index'
 
 import { virtualSheet } from '../sheets/index'
-import { create, strict, tw, theme } from '../index'
-import { css, keyframes, animation } from './index'
+import { create, strict } from '../index'
+import { css, keyframes, animation, tw, apply, theme } from './index'
 
 const test = suite<{
   sheet: VirtualSheet
@@ -589,21 +589,21 @@ test('keyframes template literal', ({ tw, sheet }) => {
   ])
 })
 
-test('keyframes with tw.apply', ({ tw, sheet }) => {
+test('keyframes with apply', ({ tw, sheet }) => {
   const bounce = animation(
     '1s ease infinite',
     keyframes`
       from, 20%, 53%, 80%, to {
-        ${tw.apply`transform-gpu translate-x-0`}
+        ${apply`transform-gpu translate-x-0`}
       }
       40%, 43% {
-        ${tw.apply`transform-gpu -translate-x-7`}
+        ${apply`transform-gpu -translate-x-7`}
       }
       70% {
-        ${tw.apply`transform-gpu -translate-x-3.5`}
+        ${apply`transform-gpu -translate-x-3.5`}
       },
       90% {
-        ${tw.apply`transform-gpu -translate-x-1`}
+        ${apply`transform-gpu -translate-x-1`}
       }
     `,
   )
@@ -618,10 +618,10 @@ test('keyframes with tw.apply', ({ tw, sheet }) => {
 
 test('prose with tw-apply using variadic', ({ tw, sheet }) => {
   const prose = css(
-    tw.apply`text-gray(700 dark:300)`,
+    apply`text-gray(700 dark:300)`,
     {
-      p: tw.apply`my-5`,
-      h1: tw.apply`text(black dark:white hover:purple-500)`,
+      p: apply`my-5`,
+      h1: apply`text(black dark:white hover:purple-500)`,
     },
     {
       h1: {
@@ -646,16 +646,16 @@ test('prose with tw-apply using variadic', ({ tw, sheet }) => {
   ])
 })
 
-test('prose with tw-apply using template literal', ({ tw, sheet }) => {
+test('prose with apply using template literal', ({ tw, sheet }) => {
   const prose = css`
-    ${tw.apply`text-gray(700 dark:300)`}
+    ${apply`text-gray(700 dark:300)`}
 
     p {
-      ${tw.apply('my-5')}
+      ${apply('my-5')}
     }
 
     h1 {
-      ${tw.apply`text(black dark:white hover:purple-500)`}
+      ${apply`text(black dark:white hover:purple-500)`}
       font-weight: 800;
       font-size: 2.25em;
       margin-top: 0;
@@ -704,7 +704,7 @@ test('extending preflight styles', () => {
             backgroundColor: theme('colors.gray.900'),
           },
         },
-        { body: tw.apply`text-gray-100` },
+        { body: apply`text-gray-100` },
       ),
     prefix: false,
   })

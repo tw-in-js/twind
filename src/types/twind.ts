@@ -7,19 +7,9 @@ import type { Falsy } from './util'
 export interface TW {
   (strings: TemplateStringsArray, ...interpolations: Token[]): string
   (...tokens: Token[]): string
-
-  apply(strings: TemplateStringsArray, ...interpolations: Token[]): TWApply
-  apply(...tokens: Token[]): TWApply
 }
 
-export interface LazyInjected {
-  valueOf(): string
-  toString(): string
-
-  toJSON(): unknown
-}
-
-export interface TWApply extends LazyInjected {
+export interface ApplyDirective {
   (context: Context): CSSRules
 }
 

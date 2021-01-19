@@ -8,7 +8,6 @@ Sometimes you might find yourself wanting to write some arbitrary styles for an 
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
 - [CSS directive](#css-directive)
-  - [Template Literals](#template-literals)
   - [Accessing the theme](#accessing-the-theme)
 - [Animation Directive](#animation-directive)
 - [Keyframes Helper](#keyframes-helper)
@@ -92,7 +91,7 @@ const style = css`
   color: rebeccapurple;
   background-color: ${theme('colors.gray.500')};
   &:hover {
-    ${tw.apply`text-purple-700`}
+    ${apply`text-purple-700`}
   }
 `
 ```
@@ -127,20 +126,24 @@ const style = css([
 ])
 ```
 
-[tw.apply](./components) can be used within `css`:
+[apply](./components) can be used within `css`:
 
 ```js
-css(tw.apply`text-gray(700 dark:300)`, {
-  p: tw.apply`my-5`,
-  h1: tw.apply`text(black dark:white hover:purple-500)`,
+css(apply`text-gray(700 dark:300)`, {
+  p: apply`my-5`,
+  h1: apply`text(black dark:white hover:purple-500)`,
 })
 
 // Or using template literals
 css`
-  ${tw.apply`text-gray(700 dark:300)`}
+  ${apply`text-gray(700 dark:300)`}
 
   p {
-    ${tw.apply('my-5')}
+    ${apply('my-5')}
+  }
+
+  h1 {
+    ${apply`text(black dark:white hover:purple-500)`}
   }
 `
 ```
@@ -174,8 +177,6 @@ document.body.className = css.call(tw, {
   '&::after': { content: '"😊"' },
 })
 ```
-
-### Template Literals
 
 ### Accessing the theme
 
@@ -232,16 +233,16 @@ Template literal syntax is supported as well:
 ```js
 const bounce = animation('1s ease infinite')`
   from, 20%, 53%, 80%, to {
-    ${tw.apply`transform-gpu translate-x-0`}
+    ${apply`transform-gpu translate-x-0`}
   }
   40%, 43% {
-    ${tw.apply`transform-gpu -translate-x-7`}
+    ${apply`transform-gpu -translate-x-7`}
   }
   70% {
-    ${tw.apply`transform-gpu -translate-x-3.5`}
+    ${apply`transform-gpu -translate-x-3.5`}
   },
   90% {
-    ${tw.apply`transform-gpu -translate-x-1`}
+    ${apply`transform-gpu -translate-x-1`}
   }
 `
 ```
@@ -280,7 +281,7 @@ The second parameter are the waypoints of a [@keyframes](https://developer.mozil
 Just like CSS Directives they can be used without a `tw` function:
 
 ```js
-document.body = bounce
+document.body.className = bounce
 ```
 
 To use a custom `tw` function you can bind the `animate` function just like you can with CSS directives.
@@ -326,16 +327,16 @@ Template literal syntax is supported as well:
 ```js
 const bounce = keyframes`
   from, 20%, 53%, 80%, to {
-    ${tw.apply`transform-gpu translate-x-0`}
+    ${apply`transform-gpu translate-x-0`}
   }
   40%, 43% {
-    ${tw.apply`transform-gpu -translate-x-7`}
+    ${apply`transform-gpu -translate-x-7`}
   }
   70% {
-    ${tw.apply`transform-gpu -translate-x-3.5`}
+    ${apply`transform-gpu -translate-x-3.5`}
   },
   90% {
-    ${tw.apply`transform-gpu -translate-x-1`}
+    ${apply`transform-gpu -translate-x-1`}
   }
 `
 ```

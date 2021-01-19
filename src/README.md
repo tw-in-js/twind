@@ -31,7 +31,7 @@ Calling the [tw](#tw-function) function like in the example above results in the
 - [Installation](#installation)
 - [API](#api)
   - [`tw` function](#tw-function)
-  - [`tw.apply` function](#twapply-function)
+  - [`apply` function](#apply-function)
   - [`setup` function](#setup-function)
   - [`theme` helper](#theme-helper)
 
@@ -149,19 +149,19 @@ In the above example a class is generate for an `::after` pseudo element. Someth
 
 For a further explanation on this mechanism see [Plugins](https://github.com/tw-in-js/twind/blob/main/docs/plugins.md#inline-plugins).
 
-### `tw.apply` function
+### `apply` function
 
 As a component author, one often wants to re-use Tailwind directive styles for defining a component and allow users of the component to override styles using Tailwind rules. The created component can be used as a base for child components and override or add some styles using Tailwind rules.
 
-{@link TW.apply | tw.apply} generates one style object, e.g., one CSS class, combining all Tailwind rules by deep merging rules in order of declaration.
+{@link apply | apply} generates one style object, e.g., one CSS class, combining all Tailwind rules by deep merging rules in order of declaration.
 
-> `tw.apply` accepts the same arguments as [tw](#tw-function).
+> `apply` accepts the same arguments as [tw](#tw-function).
 
 ```js
-const btn = tw.apply`inline-block bg-gray-500 text-base`
+const btn = apply`inline-block bg-gray-500 text-base`
 // => generates on CSS class with all declarations of the above rules when used
 
-const btnBlock = tw.apply`${btn} block`
+const btnBlock = apply`${btn} block`
 // => generates on CSS class with all declarations of btn & block
 
 <button class={tw`${btn}`}>gray-500</button>
@@ -174,26 +174,26 @@ const btnBlock = tw.apply`${btn} block`
 // => tw-YYYY
 ```
 
-<details><summary>Using <code>tw.apply</code> within <code>preflight</code></summary>
+<details><summary>Using <code>apply</code> within <code>preflight</code></summary>
 
 Use Tailwind rules within <code>{@link twind.setup | setup}({ {@link twind.Configuration.preflight | preflight} })</code>.
 
 ```js
 setup({
   preflight: {
-    body: tw.apply('bg-gray-900 text-white'),
+    body: apply('bg-gray-900 text-white'),
   },
 })
 ```
 
 </details>
 
-<details><summary><code>CSS</code> can be used within <code>tw.apply</code></summary>
+<details><summary><code>CSS</code> can be used within <code>apply</code></summary>
 
 {@link twind/css} can be used to define additional styles.
 
 ```js
-const btn = tw.apply`
+const btn = apply`
   py-2 px-4
   ${css({
     borderColor: 'black',
@@ -205,14 +205,14 @@ const btn = tw.apply`
 
 <details><summary>Using within <code>CSS</code></summary>
 
-`tw.apply` can be used with `css`:
+`apply` can be used with `css`:
 
 ```js
 const prose = css(
-  tw.apply`text-gray-700 dark:text-gray-300`,
+  apply`text-gray-700 dark:text-gray-300`,
   {
-    p: tw.apply`my-5`,
-    h1: tw.apply`text-black dark:text-white`,
+    p: apply`my-5`,
+    h1: apply`text-black dark:text-white`,
   },
   {
     h1: {
@@ -230,14 +230,14 @@ Using template literal syntax:
 
 ```js
 const prose = css`
-  ${tw.apply`text-gray-700 dark:text-gray-300`}
+  ${apply`text-gray-700 dark:text-gray-300`}
 
   p {
-    ${tw.apply`my-5`}
+    ${apply`my-5`}
   }
 
   h1 {
-    ${tw.apply`text-black dark:text-white`}
+    ${apply`text-black dark:text-white`}
     font-weight: 800;
     font-size: 2.25em;
     margin-top: 0;
@@ -253,25 +253,25 @@ const prose = css`
 
 ```js
 const motion = animation('.6s ease-in-out infinite', {
-  '0%': tw.apply`scale-100`,
-  '50%': tw.apply`scale-125 rotate-45`,
-  '100%': tw.apply`scale-100 rotate-0`,
+  '0%': apply`scale-100`,
+  '50%': apply`scale-125 rotate-45`,
+  '100%': apply`scale-100 rotate-0`,
 })
 
 const bounce = animation(
   '1s ease infinite',
   keyframes`
   from, 20%, 53%, 80%, to {
-    ${tw.apply`transform-gpu translate-x-0`}
+    ${apply`transform-gpu translate-x-0`}
   }
   40%, 43% {
-    ${tw.apply`transform-gpu -translate-x-7`}
+    ${apply`transform-gpu -translate-x-7`}
   }
   70% {
-    ${tw.apply`transform-gpu -translate-x-3.5`}
+    ${apply`transform-gpu -translate-x-3.5`}
   },
   90% {
-    ${tw.apply`transform-gpu -translate-x-1`}
+    ${apply`transform-gpu -translate-x-1`}
   }
 `,
 )
@@ -293,13 +293,13 @@ const variantMap = {
 }
 
 const sizeMap = {
-  sm: tw.apply`text-xs py(2 md:1) px-2`,
-  md: tw.apply`text-sm py(3 md:2) px-2`,
-  lg: tw.apply`text-lg py-2 px-4`,
-  xl: tw.apply`text-xl py-3 px-6`,
+  sm: apply`text-xs py(2 md:1) px-2`,
+  md: apply`text-sm py(3 md:2) px-2`,
+  lg: apply`text-lg py-2 px-4`,
+  xl: apply`text-xl py-3 px-6`,
 }
 
-const baseStyles = tw.apply`
+const baseStyles = apply`
   w(full md:auto)
   text(sm white uppercase)
   px-4
@@ -317,7 +317,7 @@ function Button({
   children,
 }) {
   // Collect all styles into one class
-  const instanceStyles = tw.apply`
+  const instanceStyles = apply`
     ${baseStyles}
     bg-${variantMap[variant]}(600 700(hover:& focus:&)))
     ${sizeMap[size]}
@@ -338,7 +338,7 @@ render(
 
 </details>
 
-> The [Defining Components guide](https://github.com/tw-in-js/twind/blob/main/docs/components.md) explains how `tw.apply` can be used.
+> The [Defining Components guide](https://github.com/tw-in-js/twind/blob/main/docs/components.md) explains how `apply` can be used.
 
 ### `setup` function
 
