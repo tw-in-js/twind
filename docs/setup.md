@@ -106,6 +106,18 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
         { body: apply`text-gray-100` },
       ),
   })
+
+  // Or using template literal:
+
+  setup({
+    preflight: (preflight) => css`
+      ${preflight}
+      body {
+        background-color: ${theme('colors.gray.900')};
+        ${apply`text-gray-100`}
+      }
+    `,
+  })
   ```
 
 ## Mode
