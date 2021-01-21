@@ -182,7 +182,7 @@
   "bg-fuchsia": ".bg-fuchsia{background-color:fuchsia}",
   "bg-opacity-30": ".bg-opacity-30{--tw-bg-opacity:0.3}",
   "bg-hero-pattern": ".bg-hero-pattern{background-image:url('/img/hero-pattern.svg')}",
-  "bg-gradient-to-tl": ".bg-gradient-to-tl{background-image:linear-gradient(to left top,var(--tw-gradient-stops)}",
+  "bg-gradient-to-tl": ".bg-gradient-to-tl{background-image:linear-gradient(to left top,var(--tw-gradient-stops))}",
   "border": ".border{border-width:1px}",
   "border-solid": ".border-solid{border-style:solid}",
   "border-dashed": ".border-dashed{border-style:dashed}",
@@ -535,13 +535,13 @@
   ],
   "bg-gradient-to-r from-purple-400 via-pink-500 to-red-500": [
     ".from-purple-400{--tw-gradient-from:#a78bfa;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to,rgba(167,139,250,0))}",
-    ".bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops)}",
+    ".bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops))}",
     ".via-pink-500{--tw-gradient-stops:var(--tw-gradient-from),#ec4899,var(--tw-gradient-to,rgba(236,72,153,0))}",
     ".to-red-500{--tw-gradient-to:#ef4444}"
   ],
   "bg-gradient-to-tl from-fuchsia to-blue-500": [
     ".from-fuchsia{--tw-gradient-from:fuchsia;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to,transparent)}",
-    ".bg-gradient-to-tl{background-image:linear-gradient(to left top,var(--tw-gradient-stops)}",
+    ".bg-gradient-to-tl{background-image:linear-gradient(to left top,var(--tw-gradient-stops))}",
     ".to-blue-500{--tw-gradient-to:#3b82f6}"
   ],
   "ring": [

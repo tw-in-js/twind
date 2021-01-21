@@ -658,7 +658,7 @@ export const corePlugins: Plugins = {
       case 'gradient':
         if (params[1] === 'to' && (_ = expandEdges(params[2]))) {
           return {
-            backgroundImage: `linear-gradient(to ${join(_, ' ')},var(--tw-gradient-stops)`,
+            backgroundImage: `linear-gradient(to ${join(_, ' ')},var(--tw-gradient-stops))`,
           }
         }
     }

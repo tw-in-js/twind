@@ -177,7 +177,7 @@ test('properties presedence (gradient)', ({ sheet, tw }) => {
   )
   assert.equal(sheet.target, [
     '.from-purple-400{--tw-gradient-from:#a78bfa;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to,rgba(167,139,250,0))}',
-    '.bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops)}',
+    '.bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops))}',
     '.via-pink-500{--tw-gradient-stops:var(--tw-gradient-from),#ec4899,var(--tw-gradient-to,rgba(236,72,153,0))}',
     '.to-red-500{--tw-gradient-to:#ef4444}',
   ])
