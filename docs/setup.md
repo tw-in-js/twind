@@ -243,9 +243,6 @@ If you need to reference another value in your theme, you can do so by providing
 ```js
 setup({
   theme: {
-    colors: {
-      important: (theme) => theme('colors.red.500', 'red' /* Fallback */),
-    },
     fill: (theme) => theme('colors'),
   },
 })
