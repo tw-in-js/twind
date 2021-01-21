@@ -246,27 +246,18 @@ const bounce = animation(
 )
 ```
 
-The second parameter are the waypoints of a [@keyframes](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes) at-rule in CSS object format.
+The second parameter are the waypoints of a [@keyframes](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes) at-rule in CSS object format. The [keyframes helper](#keyframes-helper) can be used the create waypoints.
 
-Just like CSS Directives they can be used without a `tw` function:
-
-```js
-document.body.className = bounce
-```
-
-To use a custom `tw` function you can bind the `animate` function just like you can with CSS directives.
+The result of `animation` can be used within `css`:
 
 ```js
-import { create } from 'twind'
-
-const { tw } = create(/* options */)
-
-const animate = animation.bind(tw)
-
-// Or providing tw on invocation
-const bounce = animation.call(tw, {
-  /* same as above */
+css(bounce, {
+  /* other properties */
 })
+
+css`
+  ${bounce}
+`
 ```
 
 ## Keyframes Helper
