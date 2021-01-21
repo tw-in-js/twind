@@ -205,31 +205,32 @@ export const keyframes: CSSFactory<CSSAtKeyframes, CSSAtKeyframes | CSSPropertie
  * })
  * ```
  */
-export function animation(
-  value: string | CSSRules | ((context: Context) => string),
-): CSSFactory<CSSAtKeyframes, CSSAtKeyframes | CSSProperties, CSSDirective>
+export interface Animation {
+  (value: string | CSSRules | ((context: Context) => string)): CSSFactory<
+    CSSAtKeyframes,
+    CSSAtKeyframes | CSSProperties,
+    CSSDirective
+  >
 
-export function animation(
-  value: string | CSSRules | ((context: Context) => string),
-  waypoints: CSSAtKeyframes | CSSKeyframes,
-): CSSDirective
+  (
+    value: string | CSSRules | ((context: Context) => string),
+    waypoints: CSSAtKeyframes | CSSKeyframes,
+  ): CSSDirective
+}
 
-export function animation(
+export const animation = ((
   value: string | CSSRules | ((context: Context) => string),
   waypoints?: CSSAtKeyframes | CSSKeyframes,
-): CSSDirective | CSSFactory<CSSAtKeyframes, CSSAtKeyframes | CSSProperties, CSSDirective> {
-  if (waypoints === undefined) {
-    return ((...args: Parameters<typeof keyframes>): CSSDirective =>
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      animation(value, keyframes(...(args as any)))) as CSSFactory<
-      CSSAtKeyframes,
-      CSSAtKeyframes | CSSProperties,
-      CSSDirective
-    >
-  }
-
-  return css({
-    ...(is.object(value) ? value : { animation: value }),
-    animationName: is.function(waypoints) ? waypoints : keyframes(waypoints),
-  })
-}
+): CSSDirective | CSSFactory<CSSAtKeyframes, CSSAtKeyframes | CSSProperties, CSSDirective> =>
+  waypoints === undefined
+    ? (((...args: Parameters<typeof keyframes>): CSSDirective =>
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        animation(value, keyframes(...(args as any)))) as CSSFactory<
+        CSSAtKeyframes,
+        CSSAtKeyframes | CSSProperties,
+        CSSDirective
+      >)
+    : css({
+        ...(is.object(value) ? value : { animation: value }),
+        animationName: is.function(waypoints) ? waypoints : keyframes(waypoints),
+      })) as Animation
