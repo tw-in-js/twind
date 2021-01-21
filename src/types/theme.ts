@@ -1,4 +1,5 @@
 import type { CSSProperties } from './css'
+import type { MaybeArray } from './util'
 
 export interface ThemeResolver {
   <Section extends keyof Theme>(section: Section): Record<string, ThemeSectionType<Theme[Section]>>
@@ -69,7 +70,7 @@ export interface ThemeSectionResolverContext {
   ) => Record<string, string | undefined>
 
   readonly breakpoints: (
-    records: Record<string, string | undefined>,
+    records: Record<string, ThemeScreen | undefined>,
   ) => Record<string, string | undefined>
 }
 
@@ -87,6 +88,14 @@ export interface ThemeContainer {
   center?: boolean
   padding?: string | Record<string, string | undefined>
 }
+
+export type ThemeScreenValue =
+  | string
+  | { raw: string }
+  | { min: string; max?: string }
+  | { min?: string; max: string }
+
+export type ThemeScreen = MaybeArray<ThemeScreenValue>
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
 export interface ThemeColorObject extends Record<string, ThemeColor> {
@@ -107,7 +116,7 @@ export interface Theme {
   spacing: ThemeSection
   durations: ThemeSection<string | string[]>
 
-  screens: ThemeSection
+  screens: ThemeSection<ThemeScreen>
 
   animation: ThemeSection<string | string[]>
   backgroundColor: ThemeSection<ThemeColor>

@@ -9,17 +9,18 @@ import type {
   Context,
   Falsy,
   ThemeContainer,
+  ThemeScreen,
 } from '../types'
 
 import * as is from '../internal/is'
 
-import { includes, join, joinTruthy, tail, capitalize } from '../internal/util'
+import { includes, join, joinTruthy, tail, capitalize, buildMediaQuery } from '../internal/util'
 import { corners, expandEdges, edges } from './helpers'
 
 // Shared variables
 let _: undefined | string | CSSRules | CSSProperties | string[] | boolean | Falsy | number
 let __: undefined | string | CSSProperties
-let $: undefined | string | number
+let $: undefined | string | number | ThemeScreen
 
 const property = (property: string) => (
   params: string[],
@@ -881,10 +882,10 @@ export const corePlugins: Plugins = {
 
     return Object.keys(screens).reduce(
       (rules, screen) => {
-        if ((_ = screens[screen])) {
-          rules[`@media (min-width: ${_})`] = {
+        if (($ = screens[screen]) && is.string($)) {
+          rules[buildMediaQuery($)] = {
             '&': {
-              'max-width': _,
+              'max-width': $,
               ...paddingFor(screen),
             },
           }

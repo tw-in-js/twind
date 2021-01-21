@@ -28,7 +28,7 @@ test('injects in to a style sheet element', () => {
     [
       '.flex {display: flex;}',
       '.text-center {text-align: center;}',
-      '@media (min-width: 768px) {.md\\:text-left {text-align: left;}}',
+      '@media (min-width:768px) {.md\\:text-left {text-align: left;}}',
     ],
   )
 
@@ -44,10 +44,10 @@ test('injects in to a style sheet element', () => {
     [
       '.flex {display: flex;}',
       '.text-center {text-align: center;}',
-      '@media (min-width: 768px) {.md\\:text-left {text-align: left;}}',
+      '@media (min-width:768px) {.md\\:text-left {text-align: left;}}',
       '.flex {display: flex;}',
       '.text-center {text-align: center;}',
-      '@media (min-width: 768px) {.md\\:text-left {text-align: left;}}',
+      '@media (min-width:768px) {.md\\:text-left {text-align: left;}}',
     ],
   )
 })

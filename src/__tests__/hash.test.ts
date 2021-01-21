@@ -98,10 +98,10 @@ test('bg-gradient-to-r from-purple-500', ({ instance, sheet }) => {
 })
 
 test('different variant produce different hashes', ({ instance, sheet }) => {
-  assert.is(instance.tw('sm:text-center lg:text-center'), 'tw-zqeog8 tw-ymouy7')
+  assert.is(instance.tw('sm:text-center lg:text-center'), 'tw-172fxgp tw-1kpr4zu')
   assert.equal(sheet.target, [
-    '@media (min-width: 640px){.tw-zqeog8{text-align:center}}',
-    '@media (min-width: 1024px){.tw-ymouy7{text-align:center}}',
+    '@media (min-width:640px){.tw-172fxgp{text-align:center}}',
+    '@media (min-width:1024px){.tw-1kpr4zu{text-align:center}}',
   ])
 })
 

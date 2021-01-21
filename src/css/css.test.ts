@@ -98,8 +98,8 @@ test('can be used with variants', ({ tw, sheet }) => {
   assert.equal(sheet.target, [
     '.focus\\:tw-af5k28:focus:hover{color:darkgreen}',
     '.focus\\:tw-af5k28:focus{background-color:hotpink}',
-    '@media (min-width: 640px){.sm\\:tw-af5k28:hover{color:darkgreen}}',
-    '@media (min-width: 640px){.sm\\:tw-af5k28{background-color:hotpink}}',
+    '@media (min-width:640px){.sm\\:tw-af5k28:hover{color:darkgreen}}',
+    '@media (min-width:640px){.sm\\:tw-af5k28{background-color:hotpink}}',
   ])
 })
 
