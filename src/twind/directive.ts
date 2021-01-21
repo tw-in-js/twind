@@ -1,6 +1,5 @@
-import type { Context, CSSRules, Falsy, TW } from '../types'
+import type { Context, CSSRules, Falsy } from '../types'
 
-import { tw as defaultTW } from './default'
 import * as is from '../internal/is'
 import { ensureMaxSize } from '../internal/util'
 
@@ -24,7 +23,7 @@ const stringify = (data: unknown): string | undefined => {
 type Factory = (data: any, context: Context) => any
 type Directive<T = any> = (context: Context) => T
 
-const cacheByTW = new WeakMap<TW, WeakMap<Factory, Map<string, Directive>>>()
+const cacheByFactory = new WeakMap<Factory, Map<string, Directive>>()
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
 /**
@@ -39,22 +38,12 @@ const cacheByTW = new WeakMap<TW, WeakMap<Factory, Map<string, Directive>>>()
 export const directive = <Data, T extends CSSRules | string | Falsy>(
   factory: (data: Data, context: Context) => T,
   data: Data,
-  tw?: TW | null | undefined | void,
 ): Directive<T> => {
-  if (!is.function(tw)) {
-    tw = defaultTW
-  }
-
   const key = stringify(data)
 
   let directive: Directive<T> | undefined
 
   if (key) {
-    let cacheByFactory = cacheByTW.get(tw)
-    if (!cacheByFactory) {
-      cacheByTW.set(tw, (cacheByFactory = new WeakMap()))
-    }
-
     // eslint-disable-next-line no-var
     var cache = cacheByFactory.get(factory)
     if (!cache) {
@@ -65,21 +54,11 @@ export const directive = <Data, T extends CSSRules | string | Falsy>(
   }
 
   if (!directive) {
-    const toString = (): string => (tw as TW)(directive)
-
-    directive = Object.defineProperties((context: Context): T => factory(data, context), {
-      valueOf: {
-        value: toString,
-      },
-      toString: {
-        value: toString,
-      },
+    directive = Object.defineProperty((context: Context): T => factory(data, context), 'toJSON', {
       // Allow twind to generate a unique id for this directive
       // twind uses JSON.stringify which returns undefined for functions like this directive
       // providing a toJSON function allows to include this directive in the id generation
-      toJSON: {
-        value: () => data,
-      },
+      value: () => data,
     })
 
     if (cache) {

@@ -110,42 +110,6 @@ test('can be used with variants', ({ tw, sheet }) => {
   ])
 })
 
-test('toString uses bound tw', ({ css, sheet }) => {
-  const style = css({
-    color: 'rebeccapurple',
-  })
-
-  assert.is(`${style}`, 'tw-1ha8m0q')
-  assert.equal(sheet.target, ['.tw-1ha8m0q{color:rebeccapurple}'])
-})
-
-test('valueOf uses bound tw', ({ css, sheet }) => {
-  const style = css({
-    color: 'hotpink',
-  })
-
-  assert.is(style.valueOf(), 'tw-14q97zu')
-  assert.equal(sheet.target, ['.tw-14q97zu{color:hotpink}'])
-})
-
-test('toString uses global tw', ({ sheet }) => {
-  const style = css({
-    color: 'rebeccapurple',
-  })
-
-  assert.is(`${style}`, 'tw-1ha8m0q')
-  assert.equal(sheet.target, [])
-})
-
-test('valueOf uses global tw', ({ sheet }) => {
-  const style = css({
-    color: 'hotpink',
-  })
-
-  assert.is(style.valueOf(), 'tw-14q97zu')
-  assert.equal(sheet.target, [])
-})
-
 test('keyframes', ({ keyframes, css, tw, sheet }) => {
   const bounce = keyframes({
     'from, 20%, 53%, 80%, to': {
@@ -168,14 +132,14 @@ test('keyframes', ({ keyframes, css, tw, sheet }) => {
   assert.is(
     tw(
       css({
-        animation: `${bounce} 1s ease infinite`,
+        animation: animation(`1s ease infinite`, bounce),
       }),
     ),
-    'tw-1v80189',
+    'tw-4l4ydd',
   )
   assert.equal(sheet.target, [
+    '.tw-4l4ydd animation{animation:1s ease infinite;animation-name:tw-cm8eaz}',
     '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
-    '.tw-1v80189{animation:tw-cm8eaz 1s ease infinite}',
   ])
 })
 

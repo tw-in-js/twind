@@ -62,20 +62,6 @@ test('child components', ({ tw, sheet }) => {
   ])
 })
 
-test('non tw usage (toString)', ({ tw, sheet }) => {
-  const btn = apply.call(tw, `inline-block`)
-
-  assert.is(btn.toString(), 'tw-ri1alh')
-  assert.equal(sheet.target, ['.tw-ri1alh{display:inline-block}'])
-})
-
-test('non tw usage (valueOf)', ({ tw, sheet }) => {
-  const btn = apply.call(tw, `inline-block`)
-
-  assert.is(btn.valueOf(), 'tw-ri1alh')
-  assert.equal(sheet.target, ['.tw-ri1alh{display:inline-block}'])
-})
-
 test('with variants', ({ tw, sheet }) => {
   const btn = apply`
     py-2 px-4

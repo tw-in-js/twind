@@ -5,15 +5,7 @@
  * @module twind/css
  */
 
-import type {
-  TW,
-  CSSRules,
-  CSSAtKeyframes,
-  Context,
-  CSSProperties,
-  Falsy,
-  MaybeThunk,
-} from '../types'
+import type { CSSRules, CSSAtKeyframes, Context, CSSProperties, Falsy, MaybeThunk } from '../types'
 
 import { hash, directive } from '../index'
 import * as is from '../internal/is'
@@ -29,12 +21,11 @@ export type MaybeArray<T> = T | readonly T[]
 
 export interface CSSFactory<T, I, R> {
   (
-    this: TW | null | undefined | void,
     strings: TemplateStringsArray,
     ...interpolations: readonly MaybeThunk<MaybeArray<I | string | number | Falsy>>[]
   ): R
-  (this: TW | null | undefined | void, tokens: MaybeThunk<MaybeArray<T | Falsy>>): R
-  (this: TW | null | undefined | void, ...tokens: readonly MaybeThunk<T | Falsy>[]): R
+  (tokens: MaybeThunk<MaybeArray<T | Falsy>>): R
+  (...tokens: readonly MaybeThunk<T | Falsy>[]): R
 }
 
 const translate = (tokens: unknown[], context: Context): CSSRules => {
@@ -147,12 +138,9 @@ const cssFactory = (tokens: unknown[], context: Context): CSSRules =>
     context,
   )
 
-export const css: CSSFactory<CSSRules, CSSRules, CSSDirective> = function (
-  this: TW | null | undefined | void,
+export const css: CSSFactory<CSSRules, CSSRules, CSSDirective> = (
   ...tokens: unknown[]
-): CSSDirective {
-  return directive(cssFactory, tokens, this)
-}
+): CSSDirective => directive(cssFactory, tokens)
 
 export interface CSSKeyframes {
   (context: Context): string
@@ -194,13 +182,9 @@ const keyframesFactory = (tokens: unknown[], context: Context): string => {
  * ```
  * @param waypoints
  */
-export const keyframes: CSSFactory<
-  CSSAtKeyframes,
-  CSSAtKeyframes | CSSProperties,
-  CSSKeyframes
-> = function (this: TW | null | undefined | void, ...tokens: unknown[]): CSSKeyframes {
-  return directive(keyframesFactory, tokens, this)
-}
+export const keyframes: CSSFactory<CSSAtKeyframes, CSSAtKeyframes | CSSProperties, CSSKeyframes> = (
+  ...tokens: unknown[]
+): CSSKeyframes => directive(keyframesFactory, tokens)
 
 /**
  *
@@ -222,32 +206,30 @@ export const keyframes: CSSFactory<
  * ```
  */
 export function animation(
-  this: TW | null | undefined | void,
   value: string | CSSRules | ((context: Context) => string),
 ): CSSFactory<CSSAtKeyframes, CSSAtKeyframes | CSSProperties, CSSDirective>
 
 export function animation(
-  this: TW | null | undefined | void,
   value: string | CSSRules | ((context: Context) => string),
   waypoints: CSSAtKeyframes | CSSKeyframes,
 ): CSSDirective
 
 export function animation(
-  this: TW | null | undefined | void,
   value: string | CSSRules | ((context: Context) => string),
   waypoints?: CSSAtKeyframes | CSSKeyframes,
 ): CSSDirective | CSSFactory<CSSAtKeyframes, CSSAtKeyframes | CSSProperties, CSSDirective> {
   if (waypoints === undefined) {
     return ((...args: Parameters<typeof keyframes>): CSSDirective =>
-      animation.call(this, value, keyframes.apply(this, args))) as CSSFactory<
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      animation(value, keyframes(...(args as any)))) as CSSFactory<
       CSSAtKeyframes,
       CSSAtKeyframes | CSSProperties,
       CSSDirective
     >
   }
 
-  return css.call(this, {
+  return css({
     ...(is.object(value) ? value : { animation: value }),
-    animationName: is.function(waypoints) ? waypoints : keyframes.call(this, waypoints),
+    animationName: is.function(waypoints) ? waypoints : keyframes(waypoints),
   })
 }
