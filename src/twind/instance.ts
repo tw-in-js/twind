@@ -1,4 +1,4 @@
-import type { Configuration, Instance, TW } from '../types'
+import type { Configuration, Instance } from '../types'
 
 import { configure } from './configure'
 

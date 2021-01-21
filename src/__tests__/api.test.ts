@@ -586,9 +586,9 @@ test('no arguments', ({ tw }) => {
 test('theme helper', ({ sheet, tw }) => {
   assert.is(
     tw(() => ({ color: theme('colors', 'red.500') })),
-    'tw-jwcipf',
+    'tw-zq2gjv',
   )
-  assert.equal(sheet.target, ['.tw-jwcipf{color:#ef4444}'])
+  assert.equal(sheet.target, ['.tw-zq2gjv{color:#ef4444}'])
 })
 
 test('inline rule (css object)', ({ sheet, tw }) => {
@@ -654,7 +654,7 @@ test('inline rule nested', ({ sheet, tw }) => {
       },
       'font-bold',
     ),
-    'text-center sm:hover:underline sm:focus:tw-jwcipf lg:text-lg lg:focus:underline font-bold',
+    'text-center sm:hover:underline sm:focus:tw-xqkwh8 lg:text-lg lg:focus:underline font-bold',
   )
 
   assert.equal(sheet.target, [
@@ -663,7 +663,7 @@ test('inline rule nested', ({ sheet, tw }) => {
     '@media (min-width: 640px){.sm\\:hover\\:underline:hover{text-decoration:underline}}',
     '@media (min-width: 1024px){.lg\\:text-lg{font-size:1.125rem;line-height:1.75rem}}',
     '@media (min-width: 1024px){.lg\\:focus\\:underline:focus{text-decoration:underline}}',
-    '@media (min-width: 640px){.sm\\:focus\\:tw-jwcipf:focus{color:#ef4444}}',
+    '@media (min-width: 640px){.sm\\:focus\\:tw-xqkwh8:focus{color:#ef4444}}',
   ])
 })
 

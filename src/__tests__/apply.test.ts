@@ -5,7 +5,7 @@ import type { Instance } from '../types'
 import type { VirtualSheet } from '../sheets/index'
 
 import { virtualSheet } from '../sheets/index'
-import { create, strict, tw, apply } from '../index'
+import { create, strict, apply } from '../index'
 import { animation, css } from '../css/index'
 
 const test = suite<{
@@ -129,10 +129,10 @@ test('with animation', ({ tw, sheet }) => {
 
   assert.equal(sheet.target, [])
 
-  assert.is(tw(motion), 'tw-1u2v2kj')
+  assert.is(tw(motion), 'tw-921wd5')
   assert.equal(sheet.target, [
-    '@keyframes tw-25lzqb{0%{--tw-vkgkf8:1;--tw-1lff04g:1;transform:scale(1);transform:translateX(var(--tw-1e4pbj4,0)) translateY(var(--tw-142admc,0)) rotate(var(--tw-9ouawy,0)) skewX(var(--tw-wnlb2r,0)) skewY(var(--tw-o4ir2d,0)) scaleX(var(--tw-vkgkf8,1)) scaleY(var(--tw-1lff04g,1))}50%{--tw-vkgkf8:1.25;--tw-1lff04g:1.25;transform:rotate(45deg);transform:translateX(var(--tw-1e4pbj4,0)) translateY(var(--tw-142admc,0)) rotate(var(--tw-9ouawy,0)) skewX(var(--tw-wnlb2r,0)) skewY(var(--tw-o4ir2d,0)) scaleX(var(--tw-vkgkf8,1)) scaleY(var(--tw-1lff04g,1));--tw-9ouawy:45deg}100%{--tw-vkgkf8:1;--tw-1lff04g:1;transform:rotate(0deg);transform:translateX(var(--tw-1e4pbj4,0)) translateY(var(--tw-142admc,0)) rotate(var(--tw-9ouawy,0)) skewX(var(--tw-wnlb2r,0)) skewY(var(--tw-o4ir2d,0)) scaleX(var(--tw-vkgkf8,1)) scaleY(var(--tw-1lff04g,1));--tw-9ouawy:0deg}}',
-    '.tw-1u2v2kj{animation:.6s ease-in-out infinite;animation-name:tw-25lzqb}',
+    '@keyframes tw-44iuml{0%{--tw-vkgkf8:1;--tw-1lff04g:1;transform:scale(1);transform:translateX(var(--tw-1e4pbj4,0)) translateY(var(--tw-142admc,0)) rotate(var(--tw-9ouawy,0)) skewX(var(--tw-wnlb2r,0)) skewY(var(--tw-o4ir2d,0)) scaleX(var(--tw-vkgkf8,1)) scaleY(var(--tw-1lff04g,1))}50%{--tw-vkgkf8:1.25;--tw-1lff04g:1.25;transform:rotate(45deg);transform:translateX(var(--tw-1e4pbj4,0)) translateY(var(--tw-142admc,0)) rotate(var(--tw-9ouawy,0)) skewX(var(--tw-wnlb2r,0)) skewY(var(--tw-o4ir2d,0)) scaleX(var(--tw-vkgkf8,1)) scaleY(var(--tw-1lff04g,1));--tw-9ouawy:45deg}100%{--tw-vkgkf8:1;--tw-1lff04g:1;transform:rotate(0deg);transform:translateX(var(--tw-1e4pbj4,0)) translateY(var(--tw-142admc,0)) rotate(var(--tw-9ouawy,0)) skewX(var(--tw-wnlb2r,0)) skewY(var(--tw-o4ir2d,0)) scaleX(var(--tw-vkgkf8,1)) scaleY(var(--tw-1lff04g,1));--tw-9ouawy:0deg}}',
+    '.tw-921wd5{animation:.6s ease-in-out infinite;animation-name:tw-44iuml}',
   ])
 })
 
@@ -289,7 +289,7 @@ test('use :global', ({ tw, sheet }) => {
     },
   })
 
-  assert.is(tw(style), 'tw-1dpp5mc')
+  assert.is(tw(style), 'tw-uib79w')
 
   assert.equal(sheet.target, [
     'html{--tw-17cwy6m:1;background-color:#111827;background-color:rgba(17,24,39,var(--tw-17cwy6m));--tw-dxr4o8:1;color:#fff;color:rgba(255,255,255,var(--tw-dxr4o8))}',
@@ -304,12 +304,12 @@ test('use :global within css', ({ tw, sheet }) => {
     a: apply('text-blue(500 hover:700)'),
   })
 
-  assert.is(tw(style), 'tw-18yto84')
+  assert.is(tw(style), 'tw-zxxecb')
 
   assert.equal(sheet.target, [
     'body{--tw-17cwy6m:1;background-color:#111827;background-color:rgba(17,24,39,var(--tw-17cwy6m));--tw-dxr4o8:1;color:#fff;color:rgba(255,255,255,var(--tw-dxr4o8))}',
-    '.tw-18yto84 a:hover{--tw-dxr4o8:1;color:#1d4ed8;color:rgba(29,78,216,var(--tw-dxr4o8))}',
-    '.tw-18yto84 a{--tw-dxr4o8:1;color:#3b82f6;color:rgba(59,130,246,var(--tw-dxr4o8))}',
+    '.tw-zxxecb a:hover{--tw-dxr4o8:1;color:#1d4ed8;color:rgba(29,78,216,var(--tw-dxr4o8))}',
+    '.tw-zxxecb a{--tw-dxr4o8:1;color:#3b82f6;color:rgba(59,130,246,var(--tw-dxr4o8))}',
   ])
 })
 
@@ -319,7 +319,7 @@ test('use with preflight', () => {
   create({
     sheet,
     mode: strict,
-    preflight: (preflight, { tw }) => ({
+    preflight: () => ({
       html: apply('bg-gray-900 text-white'),
     }),
     prefix: false,
@@ -330,45 +330,7 @@ test('use with preflight', () => {
   ])
 })
 
-test('use with preflight and global tw', () => {
-  const sheet = virtualSheet()
-
-  create({
-    sheet,
-    mode: strict,
-    preflight: {
-      body: apply('bg-gray-900 text-white'),
-    },
-    prefix: false,
-  })
-
-  assert.ok(
-    sheet.target.includes(
-      'body{--tw-bg-opacity:1;background-color:#111827;background-color:rgba(17,24,39,var(--tw-bg-opacity));--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity))}',
-    ),
-  )
-})
-
-test('use with preflight as property', () => {
-  const sheet = virtualSheet()
-
-  create({
-    sheet,
-    mode: strict,
-    preflight: {
-      html: ({ tw }) => apply('bg-gray-900 text-white'),
-    },
-    prefix: false,
-  })
-
-  assert.ok(
-    sheet.target.includes(
-      'html{--tw-bg-opacity:1;background-color:#111827;background-color:rgba(17,24,39,var(--tw-bg-opacity));--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity))}',
-    ),
-  )
-})
-
-test('use global apply with custom tw', ({ tw, sheet }) => {
+test('use apply with custom tw', ({ tw, sheet }) => {
   const btn = apply`inline-block bg-gray-500 text-base`
 
   assert.is(tw(btn), 'tw-z1u1ls')
@@ -376,6 +338,11 @@ test('use global apply with custom tw', ({ tw, sheet }) => {
   assert.equal(sheet.target, [
     '.tw-z1u1ls{display:inline-block;--tw-17cwy6m:1;background-color:#6b7280;background-color:rgba(107,114,128,var(--tw-17cwy6m));font-size:1rem;line-height:1.5rem}',
   ])
+})
+
+test('same directive for same data ', () => {
+  assert.is(apply`inline-block bg-gray-500 text-base`, apply`inline-block bg-gray-500 text-base`)
+  assert.is.not(apply`inline-block`, apply`block`)
 })
 
 test.run()

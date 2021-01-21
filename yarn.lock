@@ -1310,10 +1310,10 @@ es-module-lexer@^0.3.24, es-module-lexer@^0.3.26:
   resolved "https://registry.npmjs.org/es-module-lexer/-/es-module-lexer-0.3.26.tgz#7b507044e97d5b03b01d4392c74ffeb9c177a83b"
   integrity sha512-Va0Q/xqtrss45hWzP8CZJwzGSZJjDM5/MJRE3IXXnUCcVLElR9BRaE9F62BopysASyc4nM3uwhSW7FFB9nlWAA==
 
-esbuild-register@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.npmjs.org/esbuild-register/-/esbuild-register-1.1.1.tgz#7d50e87ac0b9000085d9e6d9a78e4c2223fcce83"
-  integrity sha512-hAPWuaUkPDLXCENc/AigJZaaDCvCkpmghRw8XPyT+rk08JHcIgUrmw1uabbUTfa6B6J9Wo2bFufb01JjbmzcfQ==
+esbuild-register@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/esbuild-register/-/esbuild-register-2.0.0.tgz#579a6eff4e5713a318602b4d305bcb6f8c5b08f9"
+  integrity sha512-98i1+7OnCURCbKaWw5wnY05e4v7uknFEER7LtVxi/lCs8U+sl6/LnITvfeoDLrsqxlA3O6BjxK8QqsirfYULfA==
   dependencies:
     joycon "^2.2.5"
     pirates "^4.0.1"

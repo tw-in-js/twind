@@ -1,7 +1,7 @@
 /* eslint-env node */
 import Benchmark from 'benchmark'
 
-import { tw } from '../src'
+import { tw, apply } from '../src'
 import { css } from '../src/css'
 
 import { css as otion } from 'otion'
@@ -57,25 +57,22 @@ function objectStyles(): Promise<void> {
     },
   })
 
-  const staticCss = css(styles())
   console.log('# Object Styles')
-  console.log('twind/css (static):', tw(staticCss))
-  console.log('twind/css (dynamic):', tw(css(styles())))
-  console.log('twind inline plugin (static):', tw(styles))
+  console.log('twind (inline static):', tw(styles))
   console.log(
-    'twind inline plugin (dynamic):',
+    'twind (inline dynamic):',
     tw(() => styles()),
   )
+  console.log('twind (css):', tw(css(styles())))
   console.log('otion:', otion(styles()))
   console.log('goober:', goober(styles()))
   console.log('emotion:', emotion(styles()))
 
   return new Promise((resolve, reject) => {
     new Benchmark.Suite('Object Styles')
-      .add('twind/css (static)', () => tw(staticCss))
-      .add('twind/css (dynamic)', () => tw(css(styles())))
-      .add('twind inline plugin (static)', () => tw(styles))
-      .add('twind inline plugin (dynamic)', () => tw(() => styles()))
+      .add('twind (inline static)', () => tw(styles))
+      .add('twind (inline dynamic)', () => tw(() => styles()))
+      .add('twind (css)', () => tw(css(styles())))
       .add(`otion@${otionVersion}`, () => otion(styles()))
       .add(`goober@${gooberVersion}`, () => goober(styles()))
       .add(`emotion@${emotionVersion}`, () => emotion(styles()))
@@ -98,7 +95,7 @@ function templateLiteralStyles(): Promise<void> {
   const color = 'black'
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const styles = (impl: (template: TemplateStringsArray, ...args: any[]) => string): string => impl`
+  const styles = (impl: (template: TemplateStringsArray, ...args: any[]) => any): any => impl`
     display: inline-block;
     border-radius: 3px;
     padding: 0.5rem 0;
@@ -130,7 +127,7 @@ function templateLiteralStyles(): Promise<void> {
 
   console.log('# Template Literal Styles')
   console.log(
-    'twind:',
+    'twind (tw):',
     tw`
       inline-block
       rounded
@@ -145,13 +142,35 @@ function templateLiteralStyles(): Promise<void> {
       text(sm md:base lg:lg)
     `,
   )
+
+  console.log(
+    'twind (apply):',
+    tw(apply`
+      inline-block
+      rounded
+      py-2
+      my-2 mx-4
+      w-44
+      bg-transparent
+      text-white
+      border(2 solid white)
+      hover:text-${color}
+      focus:border(2 dashed black)
+      text(sm md:base lg:lg)
+    `),
+  )
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const twind = (...args: any[]): string => tw(css(...args))
+
+  console.log('twind (css):', styles(twind))
   console.log('goober:', styles(goober))
   console.log('emotion:', styles(emotion))
 
   return new Promise((resolve, reject) => {
     new Benchmark.Suite('Template Literal')
       .add(
-        'twind',
+        'twind (tw)',
         () =>
           tw`
             inline-block
@@ -167,6 +186,22 @@ function templateLiteralStyles(): Promise<void> {
             text(sm md:base lg:lg)
           `,
       )
+      .add('twind (apply)', () =>
+        tw(apply`
+            inline-block
+            rounded
+            py-2
+            my-2 mx-4
+            w-44
+            bg-transparent
+            text-white
+            border(2 solid white)
+            hover:text-${color}
+            focus:border(2 dashed black)
+            text(sm md:base lg:lg)
+          `),
+      )
+      .add(`twind (css)`, () => styles(twind))
       .add(`goober@${gooberVersion}`, () => styles(goober))
       .add(`emotion@${emotionVersion}`, () => styles(emotion))
       .on('error', reject)

@@ -9,7 +9,6 @@ import type {
   TW,
   CSSRules,
   CSSAtKeyframes,
-  InlineDirective,
   Context,
   CSSProperties,
   Falsy,
@@ -36,10 +35,6 @@ export interface CSSFactory<T, I, R> {
   ): R
   (this: TW | null | undefined | void, tokens: MaybeThunk<MaybeArray<T | Falsy>>): R
   (this: TW | null | undefined | void, ...tokens: readonly MaybeThunk<T | Falsy>[]): R
-}
-
-function evaluateFunctions(this: TW, key: string, value: unknown): unknown {
-  return is.function(value) ? this(value as InlineDirective) : value
 }
 
 const translate = (tokens: unknown[], context: Context): CSSRules => {
@@ -73,19 +68,22 @@ const interleave = (
   interpolations: unknown[],
   context: Context,
 ): unknown[] => {
-  const result: unknown[] = [strings[0]]
+  let buffer = strings[0]
+  const result: unknown[] = []
 
   for (let index = 0; index < interpolations.length; ) {
     const interpolation = evalThunk(interpolations[index], context)
 
     if (is.object(interpolation)) {
-      result.push(interpolation, strings[++index])
+      result.push(buffer, interpolation)
+      buffer = strings[++index]
     } else {
       // Join consecutive strings
-      // eslint-disable-next-line @typescript-eslint/no-extra-semi
-      ;(result[result.length - 1] as string) += ((interpolation || '') as string) + strings[++index]
+      buffer += ((interpolation || '') as string) + strings[++index]
     }
   }
+
+  result.push(buffer)
 
   return result
 }
@@ -140,29 +138,36 @@ const astish = (values: unknown[]): CSSRules[] => {
   return rules
 }
 
+const cssFactory = (tokens: unknown[], context: Context): CSSRules =>
+  translate(
+    Array.isArray(tokens[0] as TemplateStringsArray) &&
+      Array.isArray((tokens[0] as TemplateStringsArray).raw)
+      ? astish(interleave(tokens[0] as TemplateStringsArray, tokens.slice(1), context))
+      : tokens,
+    context,
+  )
+
 export const css: CSSFactory<CSSRules, CSSRules, CSSDirective> = function (
   this: TW | null | undefined | void,
   ...tokens: unknown[]
 ): CSSDirective {
-  if (
-    Array.isArray(tokens[0] as TemplateStringsArray) &&
-    Array.isArray((tokens[0] as TemplateStringsArray).raw)
-  ) {
-    // eslint-disable-next-line no-var
-    var strings = tokens[0] as TemplateStringsArray
-    tokens = tokens.slice(1)
-  }
-
-  return directive(
-    (context: Context): CSSRules =>
-      translate(strings ? astish(interleave(strings, tokens, context)) : tokens, context),
-    tokens,
-    this,
-  )
+  return directive(cssFactory, tokens, this)
 }
 
 export interface CSSKeyframes {
   (context: Context): string
+}
+
+const keyframesFactory = (tokens: unknown[], context: Context): string => {
+  const waypoints = cssFactory(tokens as CSSRules[], context)
+
+  const id = hash(JSON.stringify(waypoints))
+
+  // Inject the keyframes
+  context.tw(() => ({ [`@keyframes ${id}`]: waypoints }))
+
+  // but return the keyframe id
+  return id
 }
 
 /**
@@ -194,26 +199,7 @@ export const keyframes: CSSFactory<
   CSSAtKeyframes | CSSProperties,
   CSSKeyframes
 > = function (this: TW | null | undefined | void, ...tokens: unknown[]): CSSKeyframes {
-  let id: string
-  const waypoints = css.apply(this, tokens as CSSRules[])
-
-  const keyframes: InlineDirective = (context) => {
-    id = hash(JSON.stringify(tokens, evaluateFunctions.bind(context.tw)))
-
-    return { [`@keyframes ${id}`]: waypoints(context) }
-  }
-
-  return directive(
-    (({ tw }) => {
-      // Inject the keyframes
-      tw(keyframes)
-
-      // but return the keyframe id
-      return id
-    }) as CSSKeyframes,
-    tokens,
-    this,
-  )
+  return directive(keyframesFactory, tokens, this)
 }
 
 /**

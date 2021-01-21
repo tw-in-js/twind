@@ -37,6 +37,13 @@ export const evalThunk = <T>(value: MaybeThunk<T>, context: Context): T => {
   return value
 }
 
+export const ensureMaxSize = <K, V>(map: Map<K, V>, max: number): void => {
+  // Ensure the cache does not grow unlimited
+  if (map.size > max) {
+    map.delete(map.keys().next().value)
+  }
+}
+
 export const merge = (target: CSSRules, source: CSSRules, context: Context): CSSRules =>
   source
     ? Object.keys(source).reduce((target, key) => {

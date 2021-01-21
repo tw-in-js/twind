@@ -11,6 +11,8 @@ import type {
 
 import * as is from '../internal/is'
 import { join, tail, includes } from '../internal/util'
+import type { Context } from 'uvu'
+import { directive } from './directive'
 
 // '1/2': '50%',
 // '1/3': '33.333333%',
@@ -85,9 +87,10 @@ const alias = <Section extends keyof Theme>(
   section: Section,
 ): ThemeSectionResolver<ThemeSectionType<Theme[Section]>> => (theme) => theme(section)
 
-export const theme = ((...args: Parameters<ThemeResolver>): ReturnType<ThemeHelper> => ({
-  theme,
-}) => theme(...args)) as ThemeHelper
+const themeFactory = (args: Parameters<ThemeResolver>, { theme }: Context) => theme(...args)
+
+export const theme = ((...args: Parameters<ThemeResolver>): ReturnType<ThemeHelper> =>
+  directive(themeFactory, args) as ReturnType<ThemeHelper>) as ThemeHelper
 
 export const defaultTheme: Theme = {
   screens: {

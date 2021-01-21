@@ -7,6 +7,7 @@
 
 import type { TW } from '../types'
 import { tw as defaultTW } from '../index'
+import { ensureMaxSize } from '../internal/util'
 
 /**
  * Options for {@link createObserver}.
@@ -66,9 +67,7 @@ export const createObserver = ({ tw = defaultTW }: ShimConfiguration = {}): Twin
         rulesToClassCache.set(rules, className)
 
         // Ensure the cache does not grow unlimited
-        if (rulesToClassCache.size > 10000) {
-          rulesToClassCache.delete(rulesToClassCache.keys().next().value)
-        }
+        ensureMaxSize(rulesToClassCache, 10000)
       }
 
       if (rules !== className) {

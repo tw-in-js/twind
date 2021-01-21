@@ -6,7 +6,7 @@ import type { VirtualSheet } from '../sheets/index'
 
 import { virtualSheet } from '../sheets/index'
 import { create, strict } from '../index'
-import { css, keyframes, animation, tw, apply, theme } from './index'
+import { css, keyframes, animation, apply, theme } from './index'
 
 const test = suite<{
   sheet: VirtualSheet
@@ -171,11 +171,11 @@ test('keyframes', ({ keyframes, css, tw, sheet }) => {
         animation: `${bounce} 1s ease infinite`,
       }),
     ),
-    'tw-15ziufb',
+    'tw-1v80189',
   )
   assert.equal(sheet.target, [
-    '@keyframes tw-w4cbcw{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
-    '.tw-15ziufb{animation:tw-w4cbcw 1s ease infinite}',
+    '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
+    '.tw-1v80189{animation:tw-cm8eaz 1s ease infinite}',
   ])
 })
 
@@ -203,11 +203,11 @@ test('keyframes lazy', ({ keyframes, css, tw, sheet }) => {
   // Nothing applied yet
   assert.equal(sheet.target, [])
 
-  assert.is(tw(styles), 'tw-1u18b6c')
+  assert.is(tw(styles), 'tw-pflk76')
 
   assert.equal(sheet.target, [
-    '@keyframes tw-w4cbcw{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
-    '.tw-1u18b6c{animation:1s ease infinite;animation-name:tw-w4cbcw}',
+    '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
+    '.tw-pflk76{animation:1s ease infinite;animation-name:tw-cm8eaz}',
   ])
 })
 
@@ -230,10 +230,10 @@ test('animation', ({ animation, tw, sheet }) => {
   // Nothing applied yet
   assert.equal(sheet.target, [])
 
-  assert.is(tw(bounce), 'tw-1u18b6c')
+  assert.is(tw(bounce), 'tw-pflk76')
   assert.equal(sheet.target, [
-    '@keyframes tw-w4cbcw{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
-    '.tw-1u18b6c{animation:1s ease infinite;animation-name:tw-w4cbcw}',
+    '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
+    '.tw-pflk76{animation:1s ease infinite;animation-name:tw-cm8eaz}',
   ])
 })
 
@@ -253,10 +253,10 @@ test('animation with callback', ({ animation, tw, sheet }) => {
   // Nothing applied yet
   assert.equal(sheet.target, [])
 
-  assert.is(tw(slidein), 'tw-t9bwf7')
+  assert.is(tw(slidein), 'tw-1om6vki')
   assert.equal(sheet.target, [
-    '@keyframes tw-17sq2wg{from{transform:translateX(0%)}to{transform:translateX(100%)}}',
-    '.tw-t9bwf7{animation:500ms cubic-bezier(0.4,0,0.2,1);animation-name:tw-17sq2wg}',
+    '@keyframes tw-nlnhc{from{transform:translateX(0%)}to{transform:translateX(100%)}}',
+    '.tw-1om6vki{animation:500ms cubic-bezier(0.4,0,0.2,1);animation-name:tw-nlnhc}',
   ])
 })
 
@@ -286,10 +286,10 @@ test('animation object notation', ({ animation, tw, sheet }) => {
   // Nothing applied yet
   assert.equal(sheet.target, [])
 
-  assert.is(tw(bounce), 'tw-xlkmxq')
+  assert.is(tw(bounce), 'tw-hduhmc')
   assert.equal(sheet.target, [
-    '@keyframes tw-w4cbcw{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
-    '.tw-xlkmxq{animation-duration:1s;animation-timing-function:cubic-bezier(0.4,0,0.2,1);animation-iteration-count:infinite;animation-name:tw-w4cbcw}',
+    '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
+    '.tw-hduhmc{animation-duration:1s;animation-timing-function:cubic-bezier(0.4,0,0.2,1);animation-iteration-count:infinite;animation-name:tw-cm8eaz}',
   ])
 })
 
@@ -312,10 +312,10 @@ test('animation with variant', ({ animation, tw, sheet }) => {
   // Nothing applied yet
   assert.equal(sheet.target, [])
 
-  assert.is(tw`hover:${bounce}`, 'hover:tw-1u18b6c')
+  assert.is(tw`hover:${bounce}`, 'hover:tw-pflk76')
   assert.equal(sheet.target, [
-    '@keyframes tw-w4cbcw{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
-    '.hover\\:tw-1u18b6c:hover{animation:1s ease infinite;animation-name:tw-w4cbcw}',
+    '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
+    '.hover\\:tw-pflk76:hover{animation:1s ease infinite;animation-name:tw-cm8eaz}',
   ])
 })
 
@@ -335,11 +335,11 @@ test('animation with template literal', ({ tw, sheet }) => {
     }
   `
 
-  assert.is(tw(style), 'tw-f6qz2h')
+  assert.is(tw(style), 'tw-1qjz0n0')
 
   assert.equal(sheet.target, [
-    '@keyframes tw-v87p2q{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}, 90%{transform:translate3d(0, -4px, 0)}}',
-    '.tw-f6qz2h{animation:1s ease infinite;animation-name:tw-v87p2q}',
+    '@keyframes tw-1tx88h0{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}, 90%{transform:translate3d(0, -4px, 0)}}',
+    '.tw-1qjz0n0{animation:1s ease infinite;animation-name:tw-1tx88h0}',
   ])
 })
 
@@ -582,10 +582,10 @@ test('keyframes template literal', ({ tw, sheet }) => {
     }
   `
 
-  assert.is(tw(style), 'tw-v87p2q')
+  assert.is(tw(style), 'tw-1tx88h0')
 
   assert.equal(sheet.target, [
-    '@keyframes tw-v87p2q{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}, 90%{transform:translate3d(0, -4px, 0)}}',
+    '@keyframes tw-1tx88h0{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}, 90%{transform:translate3d(0, -4px, 0)}}',
   ])
 })
 
@@ -608,11 +608,11 @@ test('keyframes with apply', ({ tw, sheet }) => {
     `,
   )
 
-  assert.is(tw(bounce), 'tw-17ra3w6')
+  assert.is(tw(bounce), 'tw-1urc447')
 
   assert.equal(sheet.target, [
-    '@keyframes tw-1anmneu{from, 20%, 53%, 80%, to{--tw-translate-x:0px;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translateX(0px);transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}40%, 43%{--tw-translate-x:calc(1.75rem * -1);--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translateX(calc(1.75rem * -1));transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}70%{--tw-translate-x:calc(0.875rem * -1);--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translateX(calc(0.875rem * -1));transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}, 90%{--tw-translate-x:calc(0.25rem * -1);--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translateX(calc(0.25rem * -1));transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}}',
-    '.tw-17ra3w6{animation:1s ease infinite;animation-name:tw-1anmneu}',
+    '@keyframes tw-p4d614{from, 20%, 53%, 80%, to{--tw-translate-x:0px;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translateX(0px);transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}40%, 43%{--tw-translate-x:calc(1.75rem * -1);--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translateX(calc(1.75rem * -1));transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}70%{--tw-translate-x:calc(0.875rem * -1);--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translateX(calc(0.875rem * -1));transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}, 90%{--tw-translate-x:calc(0.25rem * -1);--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translateX(calc(0.25rem * -1));transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}}',
+    '.tw-1urc447{animation:1s ease infinite;animation-name:tw-p4d614}',
   ])
 })
 

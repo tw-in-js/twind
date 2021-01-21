@@ -21,7 +21,7 @@ import { autoprefix, noprefix } from './prefix'
 import { makeThemeResolver } from './theme'
 
 import * as is from '../internal/is'
-import { cyrb32, identity, join, tail, merge, evalThunk } from '../internal/util'
+import { cyrb32, identity, join, tail, merge, evalThunk, ensureMaxSize } from '../internal/util'
 
 import { parse } from './parse'
 import { translate as makeTranslate } from './translate'
@@ -203,6 +203,8 @@ export const configure = (
       // 2. translate each rule using plugins
       let translation = doTranslate(rule)
 
+      let translationKey: string | undefined
+
       // If this is a unknown inline directive
       if (!rule.$) {
         // We can now generate a unique name based on the created translation
@@ -210,7 +212,8 @@ export const configure = (
         // Variants are applied below using `decorate()`
         // JSON.stringify ignores functions - by using a custom replace
         // we can calculate a hash based on the value returned by these functions
-        rule.$ = cyrb32(JSON.stringify(translation, evaluateFunctions))
+        // eslint-disable-next-line no-var
+        rule.$ = cyrb32((translationKey = JSON.stringify(translation, evaluateFunctions)))
 
         // Remember it
         inlineDirectiveName.set(rule.d as InlineDirective, rule.$)
@@ -228,7 +231,9 @@ export const configure = (
         // 3. decorate: apply variants
         translation = decorate(translation, rule)
 
-        className = hash ? hash(JSON.stringify(translation, evaluateFunctions)) : rule.$
+        className = hash
+          ? hash(translationKey || JSON.stringify(translation, evaluateFunctions))
+          : rule.$
 
         if (translateDepth) {
           lastTranslations.push(translation)
@@ -269,9 +274,7 @@ export const configure = (
       idToClassName.set(rule.$, className)
 
       // Ensure the cache does not grow unlimited
-      if (idToClassName.size > 30000) {
-        idToClassName.delete(idToClassName.keys().next().value)
-      }
+      ensureMaxSize(idToClassName, 30000)
     }
 
     return className
