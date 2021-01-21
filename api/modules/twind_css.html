@@ -195,30 +195,6 @@
 <span style="color: #A31515">  }</span>
 <span style="color: #A31515">`</span>
 </code></pre>
-						<p>CSS directives can be used without applying it through <code>tw</code>:</p>
-						<pre><code class="language-js"><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">.</span><span style="color: #001080">className</span><span style="color: #000000"> = </span><span style="color: #795E26">css</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #A31515">&#039;&amp;::before&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> { </span><span style="color: #001080">content:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&quot;🙁&quot;&#039;</span><span style="color: #000000"> },</span>
-<span style="color: #000000">  </span><span style="color: #A31515">&#039;&amp;::after&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> { </span><span style="color: #001080">content:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&quot;😊&quot;&#039;</span><span style="color: #000000"> },</span>
-<span style="color: #000000">})</span>
-<span style="color: #008000">// =&gt; tw-xxxx</span>
-</code></pre>
-						<p>This works because they have a <code>toString()</code> function that internally calls default <code>tw</code> to generate a class name. To use a custom <code>tw</code> function you can bind the <code>css</code> function:</p>
-						<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">create</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
-
-<span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">tw</span><span style="color: #000000"> } = </span><span style="color: #795E26">create</span><span style="color: #000000">(</span><span style="color: #008000">/* options */</span><span style="color: #000000">)</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">cx</span><span style="color: #000000"> = </span><span style="color: #001080">css</span><span style="color: #000000">.</span><span style="color: #795E26">bind</span><span style="color: #000000">(</span><span style="color: #001080">tw</span><span style="color: #000000">)</span>
-
-<span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">.</span><span style="color: #001080">className</span><span style="color: #000000"> = </span><span style="color: #795E26">cx</span><span style="color: #000000">({</span>
-<span style="color: #000000">  </span><span style="color: #A31515">&#039;&amp;::before&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> { </span><span style="color: #001080">content:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&quot;🙁&quot;&#039;</span><span style="color: #000000"> },</span>
-<span style="color: #000000">  </span><span style="color: #A31515">&#039;&amp;::after&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> { </span><span style="color: #001080">content:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&quot;😊&quot;&#039;</span><span style="color: #000000"> },</span>
-<span style="color: #000000">})</span>
-
-<span style="color: #008000">// Or providing tw on invocation</span>
-<span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">.</span><span style="color: #001080">className</span><span style="color: #000000"> = </span><span style="color: #001080">css</span><span style="color: #000000">.</span><span style="color: #795E26">call</span><span style="color: #000000">(</span><span style="color: #001080">tw</span><span style="color: #000000">, {</span>
-<span style="color: #000000">  </span><span style="color: #A31515">&#039;&amp;::before&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> { </span><span style="color: #001080">content:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&quot;🙁&quot;&#039;</span><span style="color: #000000"> },</span>
-<span style="color: #000000">  </span><span style="color: #A31515">&#039;&amp;::after&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> { </span><span style="color: #001080">content:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&quot;😊&quot;&#039;</span><span style="color: #000000"> },</span>
-<span style="color: #000000">})</span>
-</code></pre>
 						<a href="#accessing-the-theme" id="accessing-the-theme" style="color: inherit; text-decoration: none;">
 							<h3>Accessing the theme</h3>
 						</a>
@@ -309,21 +285,6 @@
 <span style="color: #000000">)</span>
 </code></pre>
 						<p>The second parameter are the waypoints of a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes">@keyframes</a> at-rule in CSS object format.</p>
-						<p>Just like CSS Directives they can be used without a <code>tw</code> function:</p>
-						<pre><code class="language-js"><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000"> = </span><span style="color: #001080">bounce</span>
-</code></pre>
-						<p>To use a custom <code>tw</code> function you can bind the <code>animate</code> function just like you can with CSS directives.</p>
-						<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">create</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
-
-<span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">tw</span><span style="color: #000000"> } = </span><span style="color: #795E26">create</span><span style="color: #000000">(</span><span style="color: #008000">/* options */</span><span style="color: #000000">)</span>
-
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">animate</span><span style="color: #000000"> = </span><span style="color: #001080">animation</span><span style="color: #000000">.</span><span style="color: #795E26">bind</span><span style="color: #000000">(</span><span style="color: #001080">tw</span><span style="color: #000000">)</span>
-
-<span style="color: #008000">// Or providing tw on invocation</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">bounce</span><span style="color: #000000"> = </span><span style="color: #001080">animation</span><span style="color: #000000">.</span><span style="color: #795E26">call</span><span style="color: #000000">(</span><span style="color: #001080">tw</span><span style="color: #000000">, {</span>
-<span style="color: #000000">  </span><span style="color: #008000">/* same as above */</span>
-<span style="color: #000000">})</span>
-</code></pre>
 						<a href="#keyframes-helper" id="keyframes-helper" style="color: inherit; text-decoration: none;">
 							<h2>Keyframes Helper</h2>
 						</a>
@@ -369,21 +330,6 @@
 <span style="color: #795E26">css</span><span style="color: #000000">({</span>
 <span style="color: #000000">  </span><span style="color: #001080">animation:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;1s ease infinite&#039;</span><span style="color: #000000">,</span>
 <span style="color: #000000">  </span><span style="color: #001080">animationName:</span><span style="color: #000000"> </span><span style="color: #001080">bounce</span><span style="color: #000000">,</span>
-<span style="color: #000000">})</span>
-</code></pre>
-						<p>Keyframes can be used without another <code>css</code> or <code>animation</code>:</p>
-						<pre><code class="language-js"><span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">.</span><span style="color: #001080">style</span><span style="color: #000000">.</span><span style="color: #001080">animation</span><span style="color: #000000"> = </span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">bounce</span><span style="color: #0000FF">}</span><span style="color: #A31515"> 1s ease infinite`</span>
-</code></pre>
-						<p>This works because they have a <code>toString()</code> function that internally calls the default <code>tw</code> to generate a class name. To use a custom <code>tw</code> function you can bind the <code>keyframes</code> function:</p>
-						<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">create</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
-
-<span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">tw</span><span style="color: #000000"> } = </span><span style="color: #795E26">create</span><span style="color: #000000">(</span><span style="color: #008000">/* options */</span><span style="color: #000000">)</span>
-
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">kf</span><span style="color: #000000"> = </span><span style="color: #001080">keyframes</span><span style="color: #000000">.</span><span style="color: #795E26">bind</span><span style="color: #000000">(</span><span style="color: #001080">tw</span><span style="color: #000000">)</span>
-
-<span style="color: #008000">// Or providing tw on invocation</span>
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">bounce</span><span style="color: #000000"> = </span><span style="color: #001080">keyframes</span><span style="color: #000000">.</span><span style="color: #795E26">call</span><span style="color: #000000">(</span><span style="color: #001080">tw</span><span style="color: #000000">, {</span>
-<span style="color: #000000">  </span><span style="color: #008000">/* same as above */</span>
 <span style="color: #000000">})</span>
 </code></pre>
 					</div>
@@ -458,7 +404,7 @@
 					<div class="tsd-signature tsd-kind-icon">Maybe<wbr>Array&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/92cd17a/src/css/index.ts#L28">src/css/index.ts:28</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/f2b8ed5/src/css/index.ts#L20">src/css/index.ts:20</a></li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -482,7 +428,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/92cd17a/src/css/index.ts#L224">src/css/index.ts:224</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/f2b8ed5/src/css/index.ts#L208">src/css/index.ts:208</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -515,7 +461,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/92cd17a/src/css/index.ts#L229">src/css/index.ts:229</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/f2b8ed5/src/css/index.ts#L212">src/css/index.ts:212</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -543,7 +489,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/92cd17a/src/css/index.ts#L150">src/css/index.ts:150</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/f2b8ed5/src/css/index.ts#L141">src/css/index.ts:141</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -560,7 +506,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/92cd17a/src/css/index.ts#L150">src/css/index.ts:150</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/f2b8ed5/src/css/index.ts#L141">src/css/index.ts:141</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -574,7 +520,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/92cd17a/src/css/index.ts#L150">src/css/index.ts:150</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/f2b8ed5/src/css/index.ts#L141">src/css/index.ts:141</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -599,7 +545,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/92cd17a/src/css/index.ts#L197">src/css/index.ts:197</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/f2b8ed5/src/css/index.ts#L185">src/css/index.ts:185</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -639,7 +585,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/92cd17a/src/css/index.ts#L197">src/css/index.ts:197</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/f2b8ed5/src/css/index.ts#L185">src/css/index.ts:185</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -676,7 +622,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/92cd17a/src/css/index.ts#L197">src/css/index.ts:197</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/f2b8ed5/src/css/index.ts#L185">src/css/index.ts:185</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
