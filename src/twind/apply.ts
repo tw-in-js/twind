@@ -11,8 +11,8 @@ export function apply(
   ...interpolations: Token[]
 ): ApplyDirective
 
-export function apply(this: TW | null | undefined | void, ...tokens: Token[]): ApplyDirective
+export function apply(...tokens: Token[]): ApplyDirective
 
-export function apply(this: TW | null | undefined | void, ...tokens: unknown[]): ApplyDirective {
-  return directive(applyFactory, tokens, this)
+export function apply(...tokens: unknown[]): ApplyDirective {
+  return directive(applyFactory, tokens)
 }

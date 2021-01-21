@@ -45,8 +45,8 @@ const themeProperty = (section?: keyof Theme): DirectiveHandler => (
   [section || id]: theme(section || (id as keyof Theme), params) as string,
 })
 
-const alias = (directive: DirectiveHandler, name: string): DirectiveHandler => (params, context) =>
-  directive(params, context, name)
+const alias = (handler: DirectiveHandler, name: string): DirectiveHandler => (params, context) =>
+  handler(params, context, name)
 
 const display = property('display')
 const position = property('position')

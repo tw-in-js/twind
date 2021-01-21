@@ -148,36 +148,6 @@ css`
 `
 ```
 
-CSS directives can be used without applying it through `tw`:
-
-```js
-document.body.className = css({
-  '&::before': { content: '"🙁"' },
-  '&::after': { content: '"😊"' },
-})
-// => tw-xxxx
-```
-
-This works because they have a `toString()` function that internally calls default `tw` to generate a class name. To use a custom `tw` function you can bind the `css` function:
-
-```js
-import { create } from 'twind'
-
-const { tw } = create(/* options */)
-const cx = css.bind(tw)
-
-document.body.className = cx({
-  '&::before': { content: '"🙁"' },
-  '&::after': { content: '"😊"' },
-})
-
-// Or providing tw on invocation
-document.body.className = css.call(tw, {
-  '&::before': { content: '"🙁"' },
-  '&::after': { content: '"😊"' },
-})
-```
-
 ### Accessing the theme
 
 Values of the CSS object maybe functions that are passed the context and should return the value to be used:
@@ -351,27 +321,6 @@ animation('1s ease infinite', bounce)
 css({
   animation: '1s ease infinite',
   animationName: bounce,
-})
-```
-
-Keyframes can be used without another `css` or `animation`:
-
-```js
-document.body.style.animation = `${bounce} 1s ease infinite`
-```
-
-This works because they have a `toString()` function that internally calls the default `tw` to generate a class name. To use a custom `tw` function you can bind the `keyframes` function:
-
-```js
-import { create } from 'twind'
-
-const { tw } = create(/* options */)
-
-const kf = keyframes.bind(tw)
-
-// Or providing tw on invocation
-const bounce = keyframes.call(tw, {
-  /* same as above */
 })
 ```
 

@@ -133,17 +133,7 @@ tw`${btnLarge} rounded-md`
 // .rounded-md { ... }
 ```
 
-The returned function has `toString` and `valueOf` methods which inject the styles and return the class name without the need to pass theme to `tw`:
-
-```jsx
-;<button className={apply`bg-red bg-blue`}>blue</button>
-// => tw-red-blue
-
-document.body.className = apply`bg-blue bg-red`
-// => tw-blue-red
-```
-
-Or use this helper:
+You can use this helper to use `apply` together with `tw`:
 
 ```jsx
 import { tw, apply } from 'twind'
