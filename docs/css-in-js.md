@@ -9,6 +9,7 @@ Sometimes you might find yourself wanting to write some arbitrary styles for an 
 
 - [CSS directive](#css-directive)
   - [Accessing the theme](#accessing-the-theme)
+- [Screen Directive](#screen-directive)
 - [Animation Directive](#animation-directive)
 - [Keyframes Helper](#keyframes-helper)
 
@@ -17,10 +18,10 @@ Sometimes you might find yourself wanting to write some arbitrary styles for an 
 
 ## CSS directive
 
-Essentially a CSS directive uses some CSS rules in object notation format to create a optimized [inline plugin]('./plugins.md#inline-plugin). Here you can use the `&` selector to target the current element much like in other CSS-in-JS libraries. In this way, it is possible to write styles that cannot be described using an inline style attribute alone; things like specific children selectors.
+Essentially a CSS directive uses some CSS rules in object notation, array or template literal format to create a optimized [inline plugin](./plugins.md#inline-plugin). Here you can use the `&` selector to target the current element much like in other CSS-in-JS libraries. In this way, it is possible to write styles that cannot be described using an inline style attribute alone; things like specific children selectors.
 
 ```js
-import { css } from 'twind/css'
+import { tw, css } from 'twind/css'
 
 tw(
   css({
@@ -175,6 +176,48 @@ css({
     },
   },
 })
+```
+
+## Screen Directive
+
+The `screen` directive allows you to create media queries that reference your breakpoints by name instead of duplicating their values in your own CSS.
+
+For example, say you have a `sm` breakpoint at `640px` and you need to write some custom CSS that references this breakpoint.
+
+Instead of writing a raw media query that duplicates that value like this:
+
+```js
+css`
+  @media (min-width: 640px) {
+    /* ... */
+  }
+`
+```
+
+...you can use the `screen` directive and reference the breakpoint by name:
+
+```js
+import { css, screen, apply } from 'twind/css'
+
+// With template literal
+css`
+  ${screen('sm')} {
+    /* ... */
+  }
+  ${screen('md', css` /* ... */ `)}
+  ${screen('lg', css({ /* ... */ }))}
+  ${screen('xl', { /* ... */ })}
+  ${screen('2xl', apply` ... `)}
+`
+
+// With object notation
+css(
+  screen('md', css` /* ... */ `),
+  screen('lg', css({ /* ... */ })),
+  screen('xl', { /* ... */ }),
+  screen('2xl', apply` ... `),
+)
+`
 ```
 
 ## Animation Directive
