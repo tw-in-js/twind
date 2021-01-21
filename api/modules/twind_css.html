@@ -222,7 +222,7 @@
 							<h2>Animation Directive</h2>
 						</a>
 						<p>Custom animations are difficult to configure in Tailwind. During <a href="twind.html#setup">twind.setup</a> you need to add to the <code>theme.animation</code> section and the <code>theme.keyframes</code> section. This means all animations must known before hand and you can not use &quot;one-off&quot; animations.</p>
-						<p>With the <a href="twind_css.html#animation">animation</a> exports this task is greatly simplified:</p>
+						<p>With the <a href="twind_css.html#animation-1">animation</a> exports this task is greatly simplified:</p>
 						<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">animation</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind/css&#039;</span>
 
 <span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">bounce</span><span style="color: #000000"> = </span><span style="color: #795E26">animation</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;1s ease infinite&#039;</span><span style="color: #000000">, {</span>
@@ -351,6 +351,7 @@
 						<section class="tsd-index-section ">
 							<h3>Interfaces</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind_css.animation.html" class="tsd-kind-icon">Animation</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind_css.cssdirective.html" class="tsd-kind-icon">CSSDirective</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter"><a href="../interfaces/twind_css.cssfactory.html" class="tsd-kind-icon">CSSFactory</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind_css.csskeyframes.html" class="tsd-kind-icon">CSSKeyframes</a></li>
@@ -365,7 +366,7 @@
 						<section class="tsd-index-section ">
 							<h3>Functions</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind_css.html#animation" class="tsd-kind-icon">animation</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind_css.html#animation-1" class="tsd-kind-icon">animation</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind_css.html#css" class="tsd-kind-icon">css</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind_css.html#keyframes" class="tsd-kind-icon">keyframes</a></li>
 							</ul>
@@ -378,7 +379,7 @@
 				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
 					<a name="apply" class="tsd-anchor"></a>
 					<h3>apply</h3>
-					Re-exports <a href="twind.html#apply">apply</a>
+					Re-exports <a href="twind.html#apply-1">apply</a>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-reference tsd-parent-kind-module">
 					<a name="setup" class="tsd-anchor"></a>
@@ -404,7 +405,7 @@
 					<div class="tsd-signature tsd-kind-icon">Maybe<wbr>Array&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/41beaaf/src/css/index.ts#L20">src/css/index.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/70b013b/src/css/index.ts#L20">src/css/index.ts:20</a></li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -418,50 +419,31 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Functions</h2>
 				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
-					<a name="animation" class="tsd-anchor"></a>
-					<h3>animation</h3>
+					<a name="animation-1" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> animation</h3>
 					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
-						<li class="tsd-signature tsd-kind-icon">animation<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/twind_css.cssfactory.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSFactory</a><span class="tsd-signature-symbol">&lt;</span><a href="twind.html#cssatkeyframes" class="tsd-signature-type" data-tsd-kind="Type alias">CSSAtKeyframes</a><span class="tsd-signature-symbol">, </span><a href="twind.html#cssatkeyframes" class="tsd-signature-type" data-tsd-kind="Type alias">CSSAtKeyframes</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a><span class="tsd-signature-symbol">&gt;</span></li>
-						<li class="tsd-signature tsd-kind-icon">animation<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span>, waypoints<span class="tsd-signature-symbol">: </span><a href="twind.html#cssatkeyframes" class="tsd-signature-type" data-tsd-kind="Type alias">CSSAtKeyframes</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind_css.csskeyframes.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSKeyframes</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a></li>
+						<li class="tsd-signature tsd-kind-icon">animation<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/twind_css.cssfactory.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon">animation<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span>, waypoints<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind_css.csskeyframes.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSKeyframes</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/41beaaf/src/css/index.ts#L208">src/css/index.ts:208</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/70b013b/src/css/index.ts#L221">src/css/index.ts:221</a></li>
 								</ul>
 							</aside>
-							<div class="tsd-comment tsd-typography">
-								<div class="lead">
-									<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">bounce</span><span style="color: #000000"> = </span><span style="color: #795E26">animation</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;1s ease infinite&#039;</span><span style="color: #000000">, {</span>
-<span style="color: #000000">  </span><span style="color: #A31515">&#039;from, 20%, 53%, 80%, to&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">    </span><span style="color: #001080">transform:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;translate3d(0,0,0)&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  },</span>
-<span style="color: #000000">  </span><span style="color: #A31515">&#039;40%, 43%&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">    </span><span style="color: #001080">transform:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;translate3d(0, -30px, 0)&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  },</span>
-<span style="color: #000000">  </span><span style="color: #A31515">&#039;70%&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">    </span><span style="color: #001080">transform:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;translate3d(0, -15px, 0)&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  },</span>
-<span style="color: #000000">  </span><span style="color: #A31515">&#039;90%&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">    </span><span style="color: #001080">transform:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;translate3d(0, -4px, 0)&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">  }</span>
-<span style="color: #000000">})</span>
-</code></pre>
-								</div>
-							</div>
 							<h4 class="tsd-parameters-title">Parameters</h4>
 							<ul class="tsd-parameters">
 								<li>
 									<h5>value: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span></h5>
 								</li>
 							</ul>
-							<h4 class="tsd-returns-title">Returns <a href="../interfaces/twind_css.cssfactory.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSFactory</a><span class="tsd-signature-symbol">&lt;</span><a href="twind.html#cssatkeyframes" class="tsd-signature-type" data-tsd-kind="Type alias">CSSAtKeyframes</a><span class="tsd-signature-symbol">, </span><a href="twind.html#cssatkeyframes" class="tsd-signature-type" data-tsd-kind="Type alias">CSSAtKeyframes</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a><span class="tsd-signature-symbol">&gt;</span></h4>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/twind_css.cssfactory.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSFactory</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a><span class="tsd-signature-symbol">&gt;</span></h4>
 						</li>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/41beaaf/src/css/index.ts#L212">src/css/index.ts:212</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/70b013b/src/css/index.ts#L221">src/css/index.ts:221</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -470,7 +452,7 @@
 									<h5>value: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span></h5>
 								</li>
 								<li>
-									<h5>waypoints: <a href="twind.html#cssatkeyframes" class="tsd-signature-type" data-tsd-kind="Type alias">CSSAtKeyframes</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind_css.csskeyframes.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSKeyframes</a></h5>
+									<h5>waypoints: <a href="../interfaces/twind_css.csskeyframes.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSKeyframes</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="../interfaces/twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="../interfaces/twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">&gt;</span></h5>
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a></h4>
@@ -489,7 +471,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/41beaaf/src/css/index.ts#L141">src/css/index.ts:141</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/70b013b/src/css/index.ts#L141">src/css/index.ts:141</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -506,7 +488,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/41beaaf/src/css/index.ts#L141">src/css/index.ts:141</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/70b013b/src/css/index.ts#L141">src/css/index.ts:141</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -520,7 +502,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/41beaaf/src/css/index.ts#L141">src/css/index.ts:141</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/70b013b/src/css/index.ts#L141">src/css/index.ts:141</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -545,7 +527,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/41beaaf/src/css/index.ts#L185">src/css/index.ts:185</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/70b013b/src/css/index.ts#L185">src/css/index.ts:185</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -585,7 +567,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/41beaaf/src/css/index.ts#L185">src/css/index.ts:185</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/70b013b/src/css/index.ts#L185">src/css/index.ts:185</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -622,7 +604,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/41beaaf/src/css/index.ts#L185">src/css/index.ts:185</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/70b013b/src/css/index.ts#L185">src/css/index.ts:185</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -707,6 +689,9 @@
 						<a href="twind_css.html#tw" class="tsd-kind-icon">tw</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/twind_css.animation.html" class="tsd-kind-icon">Animation</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/twind_css.cssdirective.html" class="tsd-kind-icon">CSSDirective</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
@@ -719,7 +704,7 @@
 						<a href="twind_css.html#maybearray" class="tsd-kind-icon">Maybe<wbr>Array</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="twind_css.html#animation" class="tsd-kind-icon">animation</a>
+						<a href="twind_css.html#animation-1" class="tsd-kind-icon">animation</a>
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="twind_css.html#css" class="tsd-kind-icon">css</a>

@@ -199,7 +199,7 @@
 					<h3><code>apply</code> function</h3>
 				</a>
 				<p>As a component author, one often wants to re-use Tailwind directive styles for defining a component and allow users of the component to override styles using Tailwind rules. The created component can be used as a base for child components and override or add some styles using Tailwind rules.</p>
-				<p><a href="modules/twind.html#apply">apply</a> generates one style object, e.g., one CSS class, combining all Tailwind rules by deep merging rules in order of declaration.</p>
+				<p><a href="modules/twind.html#apply-1">apply</a> generates one style object, e.g., one CSS class, combining all Tailwind rules by deep merging rules in order of declaration.</p>
 				<blockquote>
 					<p><code>apply</code> accepts the same arguments as <a href="#tw-function">tw</a>.</p>
 				</blockquote>
@@ -385,8 +385,7 @@
 					<h3><code>theme</code> helper</h3>
 				</a>
 				<p>The <a href="interfaces/twind_shim.shimconfiguration.html#theme">theme</a> helper simplifies using theme values:</p>
-				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">theme</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">css</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind/css&#039;</span>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">css</span><span style="color: #000000">, </span><span style="color: #001080">theme</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind/css&#039;</span>
 
 <span style="color: #795E26">css</span><span style="color: #000000">({</span>
 <span style="color: #000000">  </span><span style="color: #001080">backgroundColor:</span><span style="color: #000000"> </span><span style="color: #795E26">theme</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;colors.gray.900&#039;</span><span style="color: #000000"> </span><span style="color: #008000">/*, defaultValue */</span><span style="color: #000000">),</span>
