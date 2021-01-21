@@ -368,8 +368,7 @@ The setup function is a named export of the twind and accepts an config object a
 The {@link theme} helper simplifies using theme values:
 
 ```js
-import { theme } from 'twind'
-import { css } from 'twind/css'
+import { css, theme } from 'twind/css'
 
 css({
   backgroundColor: theme('colors.gray.900' /*, defaultValue */),

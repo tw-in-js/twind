@@ -58,7 +58,7 @@ tw`
 Values within the CSS object can be functions which are called with the `context` and should return the value to be used:
 
 ```js
-import { theme } from 'twind'
+import { css, theme } from 'twind/css'
 
 const styles = css({
   // .tw-xxx a
@@ -87,6 +87,8 @@ const styles = css({
 Tagged template literal syntax works like in emotion, goober or styled-components:
 
 ```js
+import { css, apply, theme } from 'twind/css'
+
 const style = css`
   color: rebeccapurple;
   background-color: ${theme('colors.gray.500')};
@@ -129,6 +131,8 @@ const style = css([
 [apply](./components) can be used within `css`:
 
 ```js
+import { css, apply } from 'twind/css'
+
 css(apply`text-gray(700 dark:300)`, {
   p: apply`my-5`,
   h1: apply`text(black dark:white hover:purple-500)`,
@@ -153,6 +157,8 @@ css`
 Values of the CSS object maybe functions that are passed the context and should return the value to be used:
 
 ```js
+import { css, theme } from 'twind/css'
+
 css({
   color: theme('colors.blue.500'),
   '&:hover': {
