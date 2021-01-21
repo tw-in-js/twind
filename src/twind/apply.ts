@@ -3,7 +3,6 @@ import type { Token, ApplyDirective, Context } from '../types'
 import { parse } from './parse'
 import { directive } from './directive'
 
-
 export interface Apply {
   (strings: TemplateStringsArray, ...interpolations: Token[]): ApplyDirective
 

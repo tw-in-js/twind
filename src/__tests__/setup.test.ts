@@ -1,9 +1,6 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import type { Instance } from '../types'
-import type { VirtualSheet } from '../sheets/index'
-
 import { virtualSheet } from '../sheets/index'
 
 import { create, strict } from '../index'
