@@ -331,4 +331,24 @@ test('same directive for same data ', () => {
   assert.is.not(apply`inline-block`, apply`block`)
 })
 
+test('applied rules can be used alone after apply', ({ tw, sheet }) => {
+  assert.equal(sheet.target, [])
+
+  assert.is(
+    tw(
+      css({
+        h1: apply`bg-red-500`,
+      }),
+    ),
+    'tw-17bpa8l',
+  )
+
+  assert.is(tw(`bg-red-500`), 'tw-f1tjd')
+
+  assert.equal(sheet.target, [
+    '.tw-17bpa8l h1{--tw-17cwy6m:1;background-color:#ef4444;background-color:rgba(239,68,68,var(--tw-17cwy6m))}',
+    '.tw-f1tjd{--tw-17cwy6m:1;background-color:#ef4444;background-color:rgba(239,68,68,var(--tw-17cwy6m))}',
+  ])
+})
+
 test.run()

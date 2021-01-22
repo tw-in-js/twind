@@ -270,11 +270,13 @@ export const configure = (
         }
       }
 
-      // Remember the generated class name
-      idToClassName.set(rule.$, className)
+      if (!translateDepth) {
+        // Remember the generated class name
+        idToClassName.set(rule.$, className)
 
-      // Ensure the cache does not grow unlimited
-      ensureMaxSize(idToClassName, 30000)
+        // Ensure the cache does not grow unlimited
+        ensureMaxSize(idToClassName, 30000)
+      }
     }
 
     return className
