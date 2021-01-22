@@ -58,7 +58,7 @@ export const directive = <Data, T extends CSSRules | string | Falsy>(
       // Allow twind to generate a unique id for this directive
       // twind uses JSON.stringify which returns undefined for functions like this directive
       // providing a toJSON function allows to include this directive in the id generation
-      value: () => data,
+      value: () => key || data,
     })
 
     if (cache) {

@@ -58,9 +58,9 @@ function objectStyles(): Promise<void> {
   })
 
   console.log('# Object Styles')
-  console.log('twind (inline static):', tw(styles))
+  console.log('twind (static):', tw(styles))
   console.log(
-    'twind (inline dynamic):',
+    'twind (dynamic):',
     tw(() => styles()),
   )
   console.log('twind (css):', tw(css(styles())))
@@ -70,8 +70,8 @@ function objectStyles(): Promise<void> {
 
   return new Promise((resolve, reject) => {
     new Benchmark.Suite('Object Styles')
-      .add('twind (inline static)', () => tw(styles))
-      .add('twind (inline dynamic)', () => tw(() => styles()))
+      .add('twind (static)', () => tw(styles))
+      .add('twind (dynamic)', () => tw(() => styles()))
       .add('twind (css)', () => tw(css(styles())))
       .add(`otion@${otionVersion}`, () => otion(styles()))
       .add(`goober@${gooberVersion}`, () => goober(styles()))

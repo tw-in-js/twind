@@ -317,11 +317,11 @@ The implementation is tested for speed alongside several popular CSS-in-JS solut
 ### CSS Function w/ template literal
 
 ```
-twind (tw) x 276,789 ops/sec ±0.34% (94 runs sampled)
-twind (apply) x 111,319 ops/sec ±0.50% (94 runs sampled)
-twind (css) x 102,938 ops/sec ±0.32% (93 runs sampled)
-goober@2.0.18 x 141,827 ops/sec ±0.44% (96 runs sampled)
-emotion@11.1.3 x 227,533 ops/sec ±0.46% (98 runs sampled)
+twind (tw)                  x 262,054 ops/sec ±1.15% (89 runs sampled)
+twind (apply)               x 118,972 ops/sec ±1.16% (89 runs sampled)
+twind (css)                 x 110,865 ops/sec ±0.91% (95 runs sampled)
+goober@2.0.18               x 143,256 ops/sec ±0.49% (97 runs sampled)
+emotion@11.1.3              x 228,671 ops/sec ±0.34% (93 runs sampled)
 ```
 
 ### Styled component w/ template literal

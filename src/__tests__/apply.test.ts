@@ -275,7 +275,7 @@ test('use :global', ({ tw, sheet }) => {
     },
   })
 
-  assert.is(tw(style), 'tw-uib79w')
+  assert.is(tw(style), 'tw-pjwfov')
 
   assert.equal(sheet.target, [
     'html{--tw-17cwy6m:1;background-color:#111827;background-color:rgba(17,24,39,var(--tw-17cwy6m));--tw-dxr4o8:1;color:#fff;color:rgba(255,255,255,var(--tw-dxr4o8))}',
