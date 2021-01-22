@@ -24,6 +24,18 @@ test.before((context) => {
     prefix: false,
     theme: {
       extend: {
+        screens: {
+          standalone: { raw: '(display-mode:standalone)' },
+          portrait: { raw: '(orientation: portrait)' },
+          print: { raw: 'print' },
+          special: [
+            // Sidebar appears at 768px, so revert to `sm:` styles between 768px
+            // and 868px, after which the main content area is wide enough again to
+            // apply the `md:` styles.
+            { min: '668px', max: '767px' },
+            { min: '868px' },
+          ],
+        },
         colors: { fuchsia: 'fuchsia' },
         backgroundImage: {
           'hero-pattern': "url('/img/hero-pattern.svg')",
@@ -128,11 +140,11 @@ test('responsive presedence', ({ sheet, tw }) => {
   assert.is(tw`m(lg:9 2xl:6 xl:5 md:9 sm:7 8)`, 'lg:m-9 2xl:m-6 xl:m-5 md:m-9 sm:m-7 m-8')
   assert.equal(sheet.target, [
     '.m-8{margin:2rem}',
-    '@media (min-width: 640px){.sm\\:m-7{margin:1.75rem}}',
-    '@media (min-width: 768px){.md\\:m-9{margin:2.25rem}}',
-    '@media (min-width: 1024px){.lg\\:m-9{margin:2.25rem}}',
-    '@media (min-width: 1280px){.xl\\:m-5{margin:1.25rem}}',
-    '@media (min-width: 1536px){.\\32 xl\\:m-6{margin:1.5rem}}',
+    '@media (min-width:640px){.sm\\:m-7{margin:1.75rem}}',
+    '@media (min-width:768px){.md\\:m-9{margin:2.25rem}}',
+    '@media (min-width:1024px){.lg\\:m-9{margin:2.25rem}}',
+    '@media (min-width:1280px){.xl\\:m-5{margin:1.25rem}}',
+    '@media (min-width:1536px){.\\32 xl\\:m-6{margin:1.5rem}}',
   ])
 })
 
@@ -146,10 +158,10 @@ test('at-rules presedence', ({ sheet, tw }) => {
     '@media (prefers-reduced-motion:reduce){.motion-reduce\\:m-5{margin:1.25rem}}',
     '@supports ((position: -webkit-sticky) or (position:sticky)){.sticky\\:m-6{margin:1.5rem}}',
     '@media (prefers-reduced-motion:no-preference){.motion-safe\\:m-9{margin:2.25rem}}',
-    '@media (min-width: 1024px){.lg\\:m-9{margin:2.25rem}}',
-    '@media (min-width: 1024px){@media (prefers-reduced-motion:no-preference){.lg\\:motion-safe\\:m-12{margin:3rem}}}',
+    '@media (min-width:1024px){.lg\\:m-9{margin:2.25rem}}',
+    '@media (min-width:1024px){@media (prefers-reduced-motion:no-preference){.lg\\:motion-safe\\:m-12{margin:3rem}}}',
     '@media (prefers-color-scheme:dark){.dark\\:m-7{margin:1.75rem}}',
-    '@media (min-width: 768px){@media (prefers-color-scheme:dark){.md\\:dark\\:m-4{margin:1rem}}}',
+    '@media (min-width:768px){@media (prefers-color-scheme:dark){.md\\:dark\\:m-4{margin:1rem}}}',
   ])
 })
 
@@ -281,15 +293,15 @@ test('properties presedence (divide)', ({ sheet, tw }) => {
     'sm:hover:rounded sm:active:rounded-full md:rounded md:hover:bg-white lg:rounded-full lg:hover:bg-white lg:hover:text-black lg:hover:active:underline lg:hover:active:shadow',
     [
       '*{--tw-shadow:0 0 transparent}',
-      '@media (min-width: 640px){.sm\\:hover\\:rounded:hover{border-radius:0.25rem}}',
-      '@media (min-width: 640px){.sm\\:active\\:rounded-full:active{border-radius:9999px}}',
-      '@media (min-width: 768px){.md\\:rounded{border-radius:0.25rem}}',
-      '@media (min-width: 768px){.md\\:hover\\:bg-white:hover{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}}',
-      '@media (min-width: 1024px){.lg\\:rounded-full{border-radius:9999px}}',
-      '@media (min-width: 1024px){.lg\\:hover\\:text-black:hover{--tw-text-opacity:1;color:#000;color:rgba(0,0,0,var(--tw-text-opacity))}}',
-      '@media (min-width: 1024px){.lg\\:hover\\:bg-white:hover{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}}',
-      '@media (min-width: 1024px){.lg\\:hover\\:active\\:shadow:hover:active{--tw-shadow:0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);box-shadow:0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);box-shadow:var(--tw-ring-offset-shadow,0 0 transparent),var(--tw-ring-shadow,0 0 transparent),var(--tw-shadow)}}',
-      '@media (min-width: 1024px){.lg\\:hover\\:active\\:underline:hover:active{text-decoration:underline}}',
+      '@media (min-width:640px){.sm\\:hover\\:rounded:hover{border-radius:0.25rem}}',
+      '@media (min-width:640px){.sm\\:active\\:rounded-full:active{border-radius:9999px}}',
+      '@media (min-width:768px){.md\\:rounded{border-radius:0.25rem}}',
+      '@media (min-width:768px){.md\\:hover\\:bg-white:hover{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}}',
+      '@media (min-width:1024px){.lg\\:rounded-full{border-radius:9999px}}',
+      '@media (min-width:1024px){.lg\\:hover\\:text-black:hover{--tw-text-opacity:1;color:#000;color:rgba(0,0,0,var(--tw-text-opacity))}}',
+      '@media (min-width:1024px){.lg\\:hover\\:bg-white:hover{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}}',
+      '@media (min-width:1024px){.lg\\:hover\\:active\\:shadow:hover:active{--tw-shadow:0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);box-shadow:0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);box-shadow:var(--tw-ring-offset-shadow,0 0 transparent),var(--tw-ring-shadow,0 0 transparent),var(--tw-shadow)}}',
+      '@media (min-width:1024px){.lg\\:hover\\:active\\:underline:hover:active{text-decoration:underline}}',
     ],
   ],
 ].forEach(([tokens, classNames, rules]) => {
@@ -360,10 +372,10 @@ test('tw`bg-white sm:${["rounded"]} text-black hover:${{sm: ({tw}) => tw`underli
     '.text-black{--tw-text-opacity:1;color:#000;color:rgba(0,0,0,var(--tw-text-opacity))}',
     '.bg-white{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}',
     '.font-bold{font-weight:700}',
-    '@media (min-width: 640px){.sm\\:rounded{border-radius:0.25rem}}',
-    '@media (min-width: 640px){.hover\\:sm\\:underline:hover{text-decoration:underline}}',
-    '@media (min-width: 1024px){.hover\\:lg\\:no-underline:hover{text-decoration:none}}',
-    '@media (min-width: 1024px){.hover\\:lg\\:line-through:hover{text-decoration:line-through}}',
+    '@media (min-width:640px){.sm\\:rounded{border-radius:0.25rem}}',
+    '@media (min-width:640px){.hover\\:sm\\:underline:hover{text-decoration:underline}}',
+    '@media (min-width:1024px){.hover\\:lg\\:no-underline:hover{text-decoration:none}}',
+    '@media (min-width:1024px){.hover\\:lg\\:line-through:hover{text-decoration:line-through}}',
   ])
 })
 
@@ -394,7 +406,7 @@ test('tw`bg-${"fuchsia"}) sm:${"underline"} lg:${false && "line-through"} text-$
     '.text-underline{text-decoration:underline}',
     '.text-center{text-align:center}',
     '.rounded-xl{border-radius:0.75rem}',
-    '@media (min-width: 640px){.sm\\:underline{text-decoration:underline}}',
+    '@media (min-width:640px){.sm\\:underline{text-decoration:underline}}',
   ])
 })
 
@@ -474,11 +486,11 @@ test('container center', ({ sheet }) => {
   assert.is(tw`container`, 'container')
   assert.equal(sheet.target, [
     '.container{width:100%;margin-right:auto;margin-left:auto}',
-    '@media (min-width: 640px){.container{max-width:640px}}',
-    '@media (min-width: 768px){.container{max-width:768px}}',
-    '@media (min-width: 1024px){.container{max-width:1024px}}',
-    '@media (min-width: 1280px){.container{max-width:1280px}}',
-    '@media (min-width: 1536px){.container{max-width:1536px}}',
+    '@media (min-width:640px){.container{max-width:640px}}',
+    '@media (min-width:768px){.container{max-width:768px}}',
+    '@media (min-width:1024px){.container{max-width:1024px}}',
+    '@media (min-width:1280px){.container{max-width:1280px}}',
+    '@media (min-width:1536px){.container{max-width:1536px}}',
   ])
 })
 
@@ -500,11 +512,11 @@ test('container padding', ({ sheet }) => {
   assert.is(tw`container`, 'container')
   assert.equal(sheet.target, [
     '.container{width:100%;padding-right:2rem;padding-left:2rem}',
-    '@media (min-width: 640px){.container{max-width:640px;padding-right:2rem;padding-left:2rem}}',
-    '@media (min-width: 768px){.container{max-width:768px;padding-right:2rem;padding-left:2rem}}',
-    '@media (min-width: 1024px){.container{max-width:1024px;padding-right:2rem;padding-left:2rem}}',
-    '@media (min-width: 1280px){.container{max-width:1280px;padding-right:2rem;padding-left:2rem}}',
-    '@media (min-width: 1536px){.container{max-width:1536px;padding-right:2rem;padding-left:2rem}}',
+    '@media (min-width:640px){.container{max-width:640px;padding-right:2rem;padding-left:2rem}}',
+    '@media (min-width:768px){.container{max-width:768px;padding-right:2rem;padding-left:2rem}}',
+    '@media (min-width:1024px){.container{max-width:1024px;padding-right:2rem;padding-left:2rem}}',
+    '@media (min-width:1280px){.container{max-width:1280px;padding-right:2rem;padding-left:2rem}}',
+    '@media (min-width:1536px){.container{max-width:1536px;padding-right:2rem;padding-left:2rem}}',
   ])
 })
 
@@ -532,11 +544,11 @@ test('container padding per screeen', ({ sheet }) => {
   assert.is(tw`container`, 'container')
   assert.equal(sheet.target, [
     '.container{width:100%;padding-right:1rem;padding-left:1rem}',
-    '@media (min-width: 640px){.container{max-width:640px;padding-right:2rem;padding-left:2rem}}',
-    '@media (min-width: 768px){.container{max-width:768px;padding-right:1rem;padding-left:1rem}}',
-    '@media (min-width: 1024px){.container{max-width:1024px;padding-right:4rem;padding-left:4rem}}',
-    '@media (min-width: 1280px){.container{max-width:1280px;padding-right:5rem;padding-left:5rem}}',
-    '@media (min-width: 1536px){.container{max-width:1536px;padding-right:6rem;padding-left:6rem}}',
+    '@media (min-width:640px){.container{max-width:640px;padding-right:2rem;padding-left:2rem}}',
+    '@media (min-width:768px){.container{max-width:768px;padding-right:1rem;padding-left:1rem}}',
+    '@media (min-width:1024px){.container{max-width:1024px;padding-right:4rem;padding-left:4rem}}',
+    '@media (min-width:1280px){.container{max-width:1280px;padding-right:5rem;padding-left:5rem}}',
+    '@media (min-width:1536px){.container{max-width:1536px;padding-right:6rem;padding-left:6rem}}',
   ])
 })
 
@@ -560,11 +572,11 @@ test('responsive if theme screens uses non px values', ({ sheet }) => {
   assert.is(tw`m(xl:8 2xl:16 sm:2 md:3 lg:4 1)`, 'xl:m-8 2xl:m-16 sm:m-2 md:m-3 lg:m-4 m-1')
   assert.equal(sheet.target, [
     '.m-1{margin:0.25rem}',
-    '@media (min-width: 40rem){.sm\\:m-2{margin:0.5rem}}',
-    '@media (min-width: 48rem){.md\\:m-3{margin:0.75rem}}',
-    '@media (min-width: 64rem){.lg\\:m-4{margin:1rem}}',
-    '@media (min-width: 80rem){.xl\\:m-8{margin:2rem}}',
-    '@media (min-width: 96rem){.\\32 xl\\:m-16{margin:4rem}}',
+    '@media (min-width:40rem){.sm\\:m-2{margin:0.5rem}}',
+    '@media (min-width:48rem){.md\\:m-3{margin:0.75rem}}',
+    '@media (min-width:64rem){.lg\\:m-4{margin:1rem}}',
+    '@media (min-width:80rem){.xl\\:m-8{margin:2rem}}',
+    '@media (min-width:96rem){.\\32 xl\\:m-16{margin:4rem}}',
   ])
 })
 
@@ -635,7 +647,7 @@ test('inline rule (variants)', ({ sheet, tw }) => {
   assert.equal(sheet.target, [
     '.text-center{text-align:center}',
     '.active\\:font-bold:active{font-weight:700}',
-    '@media (min-width: 640px){.sm\\:hover\\:underline:hover{text-decoration:underline}}',
+    '@media (min-width:640px){.sm\\:hover\\:underline:hover{text-decoration:underline}}',
   ])
 })
 
@@ -660,10 +672,10 @@ test('inline rule nested', ({ sheet, tw }) => {
   assert.equal(sheet.target, [
     '.text-center{text-align:center}',
     '.font-bold{font-weight:700}',
-    '@media (min-width: 640px){.sm\\:hover\\:underline:hover{text-decoration:underline}}',
-    '@media (min-width: 1024px){.lg\\:text-lg{font-size:1.125rem;line-height:1.75rem}}',
-    '@media (min-width: 1024px){.lg\\:focus\\:underline:focus{text-decoration:underline}}',
-    '@media (min-width: 640px){.sm\\:focus\\:tw-lbtuhn:focus{color:#ef4444}}',
+    '@media (min-width:640px){.sm\\:hover\\:underline:hover{text-decoration:underline}}',
+    '@media (min-width:1024px){.lg\\:text-lg{font-size:1.125rem;line-height:1.75rem}}',
+    '@media (min-width:1024px){.lg\\:focus\\:underline:focus{text-decoration:underline}}',
+    '@media (min-width:640px){.sm\\:focus\\:tw-lbtuhn:focus{color:#ef4444}}',
   ])
 })
 

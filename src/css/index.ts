@@ -5,7 +5,15 @@
  * @module twind/css
  */
 
-import type { CSSRules, CSSAtKeyframes, Context, CSSProperties, Falsy, MaybeThunk } from '../types'
+import type {
+  CSSRules,
+  CSSAtKeyframes,
+  Context,
+  CSSProperties,
+  Falsy,
+  MaybeThunk,
+  MaybeArray,
+} from '../types'
 
 import { hash, directive } from '../index'
 import * as is from '../internal/is'
@@ -16,8 +24,6 @@ export { tw, apply, setup, theme } from '../index'
 export interface CSSDirective {
   (context: Context): CSSRules
 }
-
-export type MaybeArray<T> = T | readonly T[]
 
 export interface CSSFactory<T, I, R> {
   (

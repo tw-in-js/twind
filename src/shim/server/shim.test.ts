@@ -83,8 +83,8 @@ test('expand class names with preflight', () => {
     '.justify-center{justify-content:center}',
     '.text-center{text-align:center}',
     '.font-bold{font-weight:700}',
-    '@media (min-width: 640px){.sm\\:text-gray-800{--tw-text-opacity:1;color:#1f2937;color:rgba(31,41,55,var(--tw-text-opacity))}}',
-    '@media (min-width: 768px){.md\\:text-pink-700{--tw-text-opacity:1;color:#be185d;color:rgba(190,24,93,var(--tw-text-opacity))}}',
+    '@media (min-width:640px){.sm\\:text-gray-800{--tw-text-opacity:1;color:#1f2937;color:rgba(31,41,55,var(--tw-text-opacity))}}',
+    '@media (min-width:768px){.md\\:text-pink-700{--tw-text-opacity:1;color:#be185d;color:rgba(190,24,93,var(--tw-text-opacity))}}',
   ])
 })
 
@@ -113,7 +113,7 @@ test('hash class names', () => {
     html,
     `
     <main class="tw-s71qpw tw-15v4579 tw-1sv1rgs tw-6q7m7e tw-1u5qtu">
-      <h1 class="tw-5693iz tw-1eqnqhy tw-1ehy2ck tw-f8j2my tw-oxtcu9">
+      <h1 class="tw-5693iz tw-1eqnqhy tw-1ehy2ck tw-1v0lbgq tw-16puy3r">
         This is <span class="tw-b13grf">Twind</span>!
       </h1>
     </main>
@@ -129,8 +129,8 @@ test('hash class names', () => {
     '.tw-1u5qtu{justify-content:center}',
     '.tw-5693iz{text-align:center}',
     '.tw-b13grf{font-weight:700}',
-    '@media (min-width: 640px){.tw-f8j2my{--tw-dxr4o8:1;color:#1f2937;color:rgba(31,41,55,var(--tw-dxr4o8))}}',
-    '@media (min-width: 768px){.tw-oxtcu9{--tw-dxr4o8:1;color:#be185d;color:rgba(190,24,93,var(--tw-dxr4o8))}}',
+    '@media (min-width:640px){.tw-1v0lbgq{--tw-dxr4o8:1;color:#1f2937;color:rgba(31,41,55,var(--tw-dxr4o8))}}',
+    '@media (min-width:768px){.tw-16puy3r{--tw-dxr4o8:1;color:#be185d;color:rgba(190,24,93,var(--tw-dxr4o8))}}',
   ])
 })
 
@@ -179,8 +179,8 @@ test('apply HTML parser options (comment: true)', () => {
     '.justify-center{justify-content:center}',
     '.text-center{text-align:center}',
     '.font-bold{font-weight:700}',
-    '@media (min-width: 640px){.sm\\:text-gray-800{--tw-text-opacity:1;color:#1f2937;color:rgba(31,41,55,var(--tw-text-opacity))}}',
-    '@media (min-width: 768px){.md\\:text-pink-700{--tw-text-opacity:1;color:#be185d;color:rgba(190,24,93,var(--tw-text-opacity))}}',
+    '@media (min-width:640px){.sm\\:text-gray-800{--tw-text-opacity:1;color:#1f2937;color:rgba(31,41,55,var(--tw-text-opacity))}}',
+    '@media (min-width:768px){.md\\:text-pink-700{--tw-text-opacity:1;color:#be185d;color:rgba(190,24,93,var(--tw-text-opacity))}}',
   ])
 })
 
@@ -227,8 +227,8 @@ test('apply HTML parser options with only TW instance', () => {
     '.justify-center{justify-content:center}',
     '.text-center{text-align:center}',
     '.font-bold{font-weight:700}',
-    '@media (min-width: 640px){.sm\\:text-gray-800{--tw-text-opacity:1;color:#1f2937;color:rgba(31,41,55,var(--tw-text-opacity))}}',
-    '@media (min-width: 768px){.md\\:text-pink-700{--tw-text-opacity:1;color:#be185d;color:rgba(190,24,93,var(--tw-text-opacity))}}',
+    '@media (min-width:640px){.sm\\:text-gray-800{--tw-text-opacity:1;color:#1f2937;color:rgba(31,41,55,var(--tw-text-opacity))}}',
+    '@media (min-width:768px){.md\\:text-pink-700{--tw-text-opacity:1;color:#be185d;color:rgba(190,24,93,var(--tw-text-opacity))}}',
   ])
 })
 

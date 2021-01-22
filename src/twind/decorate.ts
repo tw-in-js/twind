@@ -1,6 +1,6 @@
 import type { Context, CSSRules, Rule, DarkMode } from '../types'
 
-import { tail, escape } from '../internal/util'
+import { tail, escape, buildMediaQuery } from '../internal/util'
 
 // Wraps a CSS rule object with variant at-rules and pseudo classes
 // { '.selector': {...} }
@@ -14,10 +14,10 @@ export const decorate = (
   // Select the wrapper for a variant
   const applyVariant = (translation: CSSRules, variant: string): CSSRules => {
     // Check responsive
-    const size = theme('screens', tail(variant), '')
+    const screen = theme('screens', tail(variant), '')
 
-    if (size) {
-      return { [`@media (min-width: ${size})`]: translation }
+    if (screen) {
+      return { [buildMediaQuery(screen)]: translation }
     }
 
     // Dark mode

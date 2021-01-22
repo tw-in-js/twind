@@ -68,12 +68,12 @@ Allows single declaration styles to overwrite styles from multi declaration styl
 Ensure shorthand properties are inserted before longhand properties; eg longhand override shorthand
 */
 
-import type { ThemeResolver } from '../types'
+import type { ThemeResolver, ThemeScreen } from '../types'
 
-import { tail, includes } from '../internal/util'
+import { tail, includes, buildMediaQuery } from '../internal/util'
 
 // Shared variables
-let _: string | RegExpExecArray | null | number
+let _: string | RegExpExecArray | null | number | ThemeScreen
 
 /*
 Bit shifts for the primary bits:
@@ -176,7 +176,7 @@ export const makeVariantPresedenceCalculator = (
       // 36rem -> 3
       // 96rem -> 9
       // Move into screens layer and adjust based on min-width
-      (1 << 27) | responsivePrecedence(_)
+      (1 << 27) | responsivePrecedence(buildMediaQuery(_))
     : // 1: dark mode flag
     variant === ':dark'
     ? 1 << 30

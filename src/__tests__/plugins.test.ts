@@ -38,7 +38,7 @@ test('value can be a token string', ({ setup, sheet }) => {
     '.overflow-hidden{overflow:hidden}',
     '.max-w-md{max-width:28rem}',
     '.rounded-xl{border-radius:0.75rem}',
-    '@media (min-width: 768px){.md\\:max-w-2xl{max-width:42rem}}',
+    '@media (min-width:768px){.md\\:max-w-2xl{max-width:42rem}}',
   ])
 })
 

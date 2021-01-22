@@ -751,12 +751,14 @@ const resolveContext: ThemeSectionResolverContext = {
   // Stub implementation as negated values are automatically infered and do _not_ not to be in the theme
   negative: () => ({}),
 
-  breakpoints: (source) =>
-    Object.keys(source).reduce((target, key) => {
-      target['screen-' + key] = source[key]
+  breakpoints: (screens) =>
+    Object.keys(screens)
+      .filter((key) => is.string(screens[key]))
+      .reduce((target, key) => {
+        target['screen-' + key] = screens[key] as string
 
-      return target
-    }, {} as Record<string, string | undefined>),
+        return target
+      }, {} as Record<string, string | undefined>),
 }
 
 export const makeThemeResolver = (config?: ThemeConfiguration): ThemeResolver => {

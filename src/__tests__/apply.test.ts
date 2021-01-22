@@ -245,25 +245,25 @@ test('complex', ({ tw, sheet }) => {
     return tw(instanceStyles, className)
   }
 
-  assert.is(Button(), 'tw-10l2puq')
+  assert.is(Button(), 'tw-quup5s')
   assert.equal(sheet.target, [
-    '.tw-10l2puq{width:100%;font-size:0.875rem;line-height:1.25rem;--tw-dxr4o8:1;color:#fff;color:rgba(255,255,255,var(--tw-dxr4o8));text-transform:uppercase;padding-left:0.5rem;padding-right:0.5rem;border-style:none;transition-property:background-color,border-color,color,fill,stroke;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:300ms;--tw-17cwy6m:1;background-color:#2563eb;background-color:rgba(37,99,235,var(--tw-17cwy6m));padding-bottom:0.75rem;padding-top:0.75rem;border-radius:0.5rem}',
-    '.tw-10l2puq:hover{--tw-17cwy6m:1;background-color:#1d4ed8;background-color:rgba(29,78,216,var(--tw-17cwy6m))}',
-    '.tw-10l2puq:focus{--tw-17cwy6m:1;background-color:#1d4ed8;background-color:rgba(29,78,216,var(--tw-17cwy6m))}',
-    '@media (min-width: 768px){.tw-10l2puq{width:auto;padding-bottom:0.5rem;padding-top:0.5rem}}',
+    '.tw-quup5s{width:100%;font-size:0.875rem;line-height:1.25rem;--tw-dxr4o8:1;color:#fff;color:rgba(255,255,255,var(--tw-dxr4o8));text-transform:uppercase;padding-left:0.5rem;padding-right:0.5rem;border-style:none;transition-property:background-color,border-color,color,fill,stroke;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:300ms;--tw-17cwy6m:1;background-color:#2563eb;background-color:rgba(37,99,235,var(--tw-17cwy6m));padding-bottom:0.75rem;padding-top:0.75rem;border-radius:0.5rem}',
+    '.tw-quup5s:hover{--tw-17cwy6m:1;background-color:#1d4ed8;background-color:rgba(29,78,216,var(--tw-17cwy6m))}',
+    '.tw-quup5s:focus{--tw-17cwy6m:1;background-color:#1d4ed8;background-color:rgba(29,78,216,var(--tw-17cwy6m))}',
+    '@media (min-width:768px){.tw-quup5s{width:auto;padding-bottom:0.5rem;padding-top:0.5rem}}',
   ])
 
   sheet.reset()
 
   assert.is(
     Button({ size: 'sm', round: true, disabled: true, className: 'font-bold' }),
-    'tw-rcqzz4 tw-b13grf',
+    'tw-1ibx07s tw-b13grf',
   )
   assert.equal(sheet.target, [
-    '.tw-rcqzz4{width:100%;font-size:0.75rem;line-height:1rem;--tw-dxr4o8:1;color:#f3f4f6;color:rgba(243,244,246,var(--tw-dxr4o8));text-transform:uppercase;padding-left:0.5rem;padding-right:0.5rem;border-style:none;transition-property:background-color,border-color,color,fill,stroke;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:300ms;--tw-17cwy6m:1;background-color:#9ca3af;background-color:rgba(156,163,175,var(--tw-17cwy6m));padding-bottom:0.5rem;padding-top:0.5rem;border-radius:9999px;cursor:not-allowed}',
-    '.tw-rcqzz4:hover{--tw-17cwy6m:1;background-color:#1d4ed8;background-color:rgba(29,78,216,var(--tw-17cwy6m))}',
-    '.tw-rcqzz4:focus{--tw-17cwy6m:1;background-color:#1d4ed8;background-color:rgba(29,78,216,var(--tw-17cwy6m))}',
-    '@media (min-width: 768px){.tw-rcqzz4{width:auto;padding-bottom:0.25rem;padding-top:0.25rem}}',
+    '.tw-1ibx07s{width:100%;font-size:0.75rem;line-height:1rem;--tw-dxr4o8:1;color:#f3f4f6;color:rgba(243,244,246,var(--tw-dxr4o8));text-transform:uppercase;padding-left:0.5rem;padding-right:0.5rem;border-style:none;transition-property:background-color,border-color,color,fill,stroke;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:300ms;--tw-17cwy6m:1;background-color:#9ca3af;background-color:rgba(156,163,175,var(--tw-17cwy6m));padding-bottom:0.5rem;padding-top:0.5rem;border-radius:9999px;cursor:not-allowed}',
+    '.tw-1ibx07s:hover{--tw-17cwy6m:1;background-color:#1d4ed8;background-color:rgba(29,78,216,var(--tw-17cwy6m))}',
+    '.tw-1ibx07s:focus{--tw-17cwy6m:1;background-color:#1d4ed8;background-color:rgba(29,78,216,var(--tw-17cwy6m))}',
+    '@media (min-width:768px){.tw-1ibx07s{width:auto;padding-bottom:0.25rem;padding-top:0.25rem}}',
     '.tw-b13grf{font-weight:700}',
   ])
 })

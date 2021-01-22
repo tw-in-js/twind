@@ -1,4 +1,12 @@
-import type { Context, Hasher, Falsy, MaybeThunk, CSSRules } from '../types'
+import type {
+  Context,
+  Hasher,
+  Falsy,
+  MaybeThunk,
+  CSSRules,
+  ThemeScreen,
+  ThemeScreenValue,
+} from '../types'
 
 interface Includes {
   (value: string, search: string): boolean
@@ -79,6 +87,34 @@ export const escape =
     // Simplifed escape testing only for chars that we know happen to be in tailwind directives
     return firstChar + className.replace(/[!./:#]/g, '\\$&')
   })
+
+export const buildMediaQuery = (screen: ThemeScreen): string => {
+  if (!Array.isArray(screen)) {
+    screen = [screen as ThemeScreenValue]
+  }
+
+  return (
+    '@media ' +
+    join(
+      (screen as ThemeScreenValue[]).map((screen) => {
+        if (is.string(screen)) {
+          screen = { min: screen }
+        }
+
+        return (
+          (screen as { raw?: string }).raw ||
+          join(
+            Object.keys(screen).map(
+              (feature) => `(${feature}-width:${(screen as Record<string, string>)[feature]})`,
+            ),
+            ' and ',
+          )
+        )
+      }),
+      ',',
+    )
+  )
+}
 
 // Based on https://stackoverflow.com/a/52171480
 export const cyrb32: Hasher = (value: string): string => {
