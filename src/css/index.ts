@@ -234,3 +234,27 @@ export const animation = ((
         ...(is.object(value) ? value : { animation: value }),
         animationName: is.function(waypoints) ? waypoints : keyframes(waypoints),
       })) as Animation
+
+export interface ScreenDirective {
+  (context: Context): string
+}
+export interface Screen {
+  (size: string): ScreenDirective
+  (size: string, css: CSSDirective | MaybeArray<CSSRules | Falsy>): CSSDirective
+}
+
+const screenFactory = (
+  { size, rules }: { size: string; rules?: CSSDirective | MaybeArray<CSSRules | Falsy> },
+  context: Context,
+): string | CSSRules => {
+  const media = `@media (min-width: ${context.theme('screens', size)})`
+
+  return rules === undefined
+    ? media
+    : {
+        [media]: is.function(rules) ? evalThunk(rules, context) : cssFactory([rules], context),
+      }
+}
+
+export const screen = ((size: string, rules?: CSSDirective | MaybeArray<CSSRules | Falsy>) =>
+  directive(screenFactory, { size, rules })) as Screen

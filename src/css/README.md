@@ -12,6 +12,7 @@ Sometimes you might find yourself wanting to write some arbitrary styles for an 
 
 - [CSS directive](#css-directive)
   - [Accessing the theme](#accessing-the-theme)
+- [Screen Directive](#screen-directive)
 - [Animation Directive](#animation-directive)
 - [Keyframes Helper](#keyframes-helper)
 
@@ -90,6 +91,8 @@ const styles = css({
 Tagged template literal syntax works like in emotion, goober or styled-components:
 
 ```js
+import { css, apply, theme } from 'twind/css'
+
 const style = css`
   color: rebeccapurple;
   background-color: ${theme('colors.gray.500')};
@@ -146,6 +149,10 @@ css`
   p {
     ${apply('my-5')}
   }
+
+  h1 {
+    ${apply`text(black dark:white hover:purple-500)`}
+  }
 `
 ```
 
@@ -172,6 +179,48 @@ css({
     },
   },
 })
+```
+
+## Screen Directive
+
+The `screen` directive allows you to create media queries that reference your breakpoints by name instead of duplicating their values in your own CSS.
+
+For example, say you have a `sm` breakpoint at `640px` and you need to write some custom CSS that references this breakpoint.
+
+Instead of writing a raw media query that duplicates that value like this:
+
+```js
+css`
+  @media (min-width: 640px) {
+    /* ... */
+  }
+`
+```
+
+...you can use the `screen` directive and reference the breakpoint by name:
+
+```js
+import { css, screen, apply } from 'twind/css'
+
+// With template literal
+css`
+  ${screen('sm')} {
+    /* ... */
+  }
+  ${screen('md', css` /* ... */ `)}
+  ${screen('lg', css({ /* ... */ }))}
+  ${screen('xl', { /* ... */ })}
+  ${screen('2xl', apply` ... `)}
+`
+
+// With object notation
+css(
+  screen('md', css` /* ... */ `),
+  screen('lg', css({ /* ... */ })),
+  screen('xl', { /* ... */ }),
+  screen('2xl', apply` ... `),
+)
+`
 ```
 
 ## Animation Directive
@@ -249,7 +298,19 @@ const bounce = animation(
 )
 ```
 
-The second parameter are the waypoints of a [@keyframes](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes) at-rule in CSS object format.
+The second parameter are the waypoints of a [@keyframes](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes) at-rule in CSS object format. The [keyframes helper](#keyframes-helper) can be used the create waypoints.
+
+The result of `animation` can be used within `css`:
+
+```js
+css(bounce, {
+  /* other properties */
+})
+
+css`
+  ${bounce}
+`
+```
 
 ## Keyframes Helper
 

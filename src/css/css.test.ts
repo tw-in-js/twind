@@ -6,14 +6,11 @@ import type { VirtualSheet } from '../sheets/index'
 
 import { virtualSheet } from '../sheets/index'
 import { create, strict } from '../index'
-import { css, keyframes, animation, apply, theme } from './index'
+import { css, keyframes, animation, apply, theme, screen } from './index'
 
 const test = suite<{
   sheet: VirtualSheet
   tw: Instance['tw']
-  css: typeof css
-  keyframes: typeof keyframes
-  animation: typeof animation
 }>('css')
 
 test.before((context) => {
@@ -25,17 +22,13 @@ test.before((context) => {
     prefix: false,
   })
   context.tw = instance.tw
-
-  context.css = css.bind(context.tw)
-  context.keyframes = keyframes.bind(context.tw)
-  context.animation = animation.bind(context.tw) as typeof animation
 })
 
 test.after.each(({ sheet }) => {
   sheet.reset()
 })
 
-test('create css', ({ css, tw, sheet }) => {
+test('create css', ({ tw, sheet }) => {
   const style = css({
     backgroundColor: 'hotpink',
     '&:hover': {
@@ -110,7 +103,7 @@ test('can be used with variants', ({ tw, sheet }) => {
   ])
 })
 
-test('keyframes', ({ keyframes, css, tw, sheet }) => {
+test('keyframes', ({ tw, sheet }) => {
   const bounce = keyframes({
     'from, 20%, 53%, 80%, to': {
       transform: 'translate3d(0,0,0)',
@@ -143,7 +136,7 @@ test('keyframes', ({ keyframes, css, tw, sheet }) => {
   ])
 })
 
-test('keyframes lazy', ({ keyframes, css, tw, sheet }) => {
+test('keyframes lazy', ({ tw, sheet }) => {
   const bounce = keyframes({
     'from, 20%, 53%, 80%, to': {
       transform: 'translate3d(0,0,0)',
@@ -175,7 +168,7 @@ test('keyframes lazy', ({ keyframes, css, tw, sheet }) => {
   ])
 })
 
-test('animation', ({ animation, tw, sheet }) => {
+test('animation', ({ tw, sheet }) => {
   const bounce = animation('1s ease infinite', {
     'from, 20%, 53%, 80%, to': {
       transform: 'translate3d(0,0,0)',
@@ -201,7 +194,7 @@ test('animation', ({ animation, tw, sheet }) => {
   ])
 })
 
-test('animation with callback', ({ animation, tw, sheet }) => {
+test('animation with callback', ({ tw, sheet }) => {
   const slidein = animation(
     ({ theme }) => `${theme('durations', '500')} ${theme('transitionTimingFunction', 'in-out')}`,
     {
@@ -224,7 +217,7 @@ test('animation with callback', ({ animation, tw, sheet }) => {
   ])
 })
 
-test('animation object notation', ({ animation, tw, sheet }) => {
+test('animation object notation', ({ tw, sheet }) => {
   const bounce = animation(
     {
       animationDuration: '1s',
@@ -257,7 +250,7 @@ test('animation object notation', ({ animation, tw, sheet }) => {
   ])
 })
 
-test('animation with variant', ({ animation, tw, sheet }) => {
+test('animation with variant', ({ tw, sheet }) => {
   const bounce = animation('1s ease infinite', {
     'from, 20%, 53%, 80%, to': {
       transform: 'translate3d(0,0,0)',
@@ -679,6 +672,58 @@ test('extending preflight styles', () => {
       'body{font-family:inherit;line-height:inherit;background-color:#111827;--tw-text-opacity:1;color:#f3f4f6;color:rgba(243,244,246,var(--tw-text-opacity))}',
     ],
   )
+})
+
+test('screen directive (template literal)', ({ tw, sheet }) => {
+  const style = css`
+    ${screen('sm')} {
+      match: sm;
+    }
+    ${screen(
+      'md',
+      css`
+        match: md;
+      `,
+    )}
+    ${screen('lg', css({ match: 'md' }))}
+    ${screen('xl', { match: 'xl' })}
+    ${screen('2xl', apply`underline`)}
+  `
+
+  assert.equal(sheet.target, [])
+
+  assert.is(tw(style), 'tw-560pmr')
+  assert.equal(sheet.target, [
+    '@media (min-width: 640px){.tw-560pmr{match:sm}}',
+    '@media (min-width: 768px){.tw-560pmr{match:md}}',
+    '@media (min-width: 1024px){.tw-560pmr{match:md}}',
+    '@media (min-width: 1280px){.tw-560pmr{match:xl}}',
+    '@media (min-width: 1536px){.tw-560pmr{text-decoration:underline}}',
+  ])
+})
+
+test('screen directive (object notation)', ({ tw, sheet }) => {
+  const style = css(
+    screen(
+      'md',
+      css`
+        match: md;
+      `,
+    ),
+    screen('lg', css({ match: 'md' })),
+    screen('xl', { match: 'xl' }),
+    screen('2xl', apply`underline`),
+  )
+
+  assert.equal(sheet.target, [])
+
+  assert.is(tw(style), 'tw-uorso7')
+  assert.equal(sheet.target, [
+    '@media (min-width: 768px){.tw-uorso7{match:md}}',
+    '@media (min-width: 1024px){.tw-uorso7{match:md}}',
+    '@media (min-width: 1280px){.tw-uorso7{match:xl}}',
+    '@media (min-width: 1536px){.tw-uorso7{text-decoration:underline}}',
+  ])
 })
 
 test.run()
