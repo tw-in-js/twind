@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>CSSDirective | twind - v0.13.0</title>
+	<title>Screen | twind - v0.13.0</title>
 	<meta name="description" content="Documentation for twind - v0.13.0">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -58,10 +58,10 @@
 					<a href="../modules/twind_css.html">twind/css</a>
 				</li>
 				<li>
-					<a href="twind_css.cssdirective.html">CSSDirective</a>
+					<a href="twind_css.screen.html">Screen</a>
 				</li>
 			</ul>
-			<h1>Interface CSSDirective</h1>
+			<h1>Interface Screen</h1>
 		</div>
 	</div>
 </header>
@@ -72,29 +72,47 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">CSSDirective</span>
+						<span class="target">Screen</span>
 					</li>
 				</ul>
 			</section>
 			<section class="tsd-panel">
 				<h3 class="tsd-before-signature">Callable</h3>
 				<ul class="tsd-signatures tsd-kind-interface tsd-parent-kind-module">
-					<li class="tsd-signature tsd-kind-icon">CSSDirective<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a></li>
+					<li class="tsd-signature tsd-kind-icon">Screen<span class="tsd-signature-symbol">(</span>size<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="twind_css.screendirective.html" class="tsd-signature-type" data-tsd-kind="Interface">ScreenDirective</a></li>
+					<li class="tsd-signature tsd-kind-icon">Screen<span class="tsd-signature-symbol">(</span>size<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, css<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><a href="twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a><span class="tsd-signature-symbol"> | </span><a href="twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><a href="twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/cf37f6d/src/css/index.ts#L16">src/css/index.ts:16</a></li>
+								<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/cf37f6d/src/css/index.ts#L241">src/css/index.ts:241</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
-								<h5>context: <a href="twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a></h5>
+								<h5>size: <span class="tsd-signature-type">string</span></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <a href="twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a></h4>
+						<h4 class="tsd-returns-title">Returns <a href="twind_css.screendirective.html" class="tsd-signature-type" data-tsd-kind="Interface">ScreenDirective</a></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/cf37f6d/src/css/index.ts#L242">src/css/index.ts:242</a></li>
+							</ul>
+						</aside>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>size: <span class="tsd-signature-type">string</span></h5>
+							</li>
+							<li>
+								<h5>css: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><a href="twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a><span class="tsd-signature-symbol"> | </span><a href="twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><a href="twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <a href="twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a></h4>
 					</li>
 				</ul>
 			</section>
@@ -148,22 +166,22 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="twind_css.animation.html" class="tsd-kind-icon">Animation</a>
 					</li>
-				</ul>
-				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module">
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="twind_css.cssdirective.html" class="tsd-kind-icon">CSSDirective</a>
 					</li>
-				</ul>
-				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="twind_css.cssfactory.html" class="tsd-kind-icon">CSSFactory</a>
 					</li>
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="twind_css.csskeyframes.html" class="tsd-kind-icon">CSSKeyframes</a>
 					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-interface tsd-parent-kind-module">
 						<a href="twind_css.screen.html" class="tsd-kind-icon">Screen</a>
 					</li>
+				</ul>
+				<ul class="after-current">
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="twind_css.screendirective.html" class="tsd-kind-icon">Screen<wbr>Directive</a>
 					</li>

@@ -81,6 +81,7 @@
 										<li><a href="#accessing-the-theme">Accessing the theme</a></li>
 									</ul>
 								</li>
+								<li><a href="#screen-directive">Screen Directive</a></li>
 								<li><a href="#animation-directive">Animation Directive</a></li>
 								<li><a href="#keyframes-helper">Keyframes Helper</a></li>
 							</ul>
@@ -142,7 +143,9 @@
 <span style="color: #000000">})</span>
 </code></pre>
 						<p>Tagged template literal syntax works like in emotion, goober or styled-components:</p>
-						<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">style</span><span style="color: #000000"> = </span><span style="color: #795E26">css</span><span style="color: #A31515">`</span>
+						<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">css</span><span style="color: #000000">, </span><span style="color: #001080">apply</span><span style="color: #000000">, </span><span style="color: #001080">theme</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind/css&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">style</span><span style="color: #000000"> = </span><span style="color: #795E26">css</span><span style="color: #A31515">`</span>
 <span style="color: #A31515">  color: rebeccapurple;</span>
 <span style="color: #A31515">  background-color: </span><span style="color: #0000FF">${</span><span style="color: #795E26">theme</span><span style="color: #000000FF">(</span><span style="color: #A31515">&#039;colors.gray.500&#039;</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span><span style="color: #A31515">;</span>
 <span style="color: #A31515">  &amp;:hover {</span>
@@ -193,6 +196,10 @@
 <span style="color: #A31515">  p {</span>
 <span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #795E26">apply</span><span style="color: #000000FF">(</span><span style="color: #A31515">&#039;my-5&#039;</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span>
 <span style="color: #A31515">  }</span>
+
+<span style="color: #A31515">  h1 {</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #795E26">apply</span><span style="color: #A31515">`text(black dark:white hover:purple-500)`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  }</span>
 <span style="color: #A31515">`</span>
 </code></pre>
 						<a href="#accessing-the-theme" id="accessing-the-theme" style="color: inherit; text-decoration: none;">
@@ -217,6 +224,41 @@
 <span style="color: #000000">    },</span>
 <span style="color: #000000">  },</span>
 <span style="color: #000000">})</span>
+</code></pre>
+						<a href="#screen-directive" id="screen-directive" style="color: inherit; text-decoration: none;">
+							<h2>Screen Directive</h2>
+						</a>
+						<p>The <code>screen</code> directive allows you to create media queries that reference your breakpoints by name instead of duplicating their values in your own CSS.</p>
+						<p>For example, say you have a <code>sm</code> breakpoint at <code>640px</code> and you need to write some custom CSS that references this breakpoint.</p>
+						<p>Instead of writing a raw media query that duplicates that value like this:</p>
+						<pre><code class="language-js"><span style="color: #795E26">css</span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  @media (min-width: 640px) {</span>
+<span style="color: #A31515">    /* ... */</span>
+<span style="color: #A31515">  }</span>
+<span style="color: #A31515">`</span>
+</code></pre>
+						<p>...you can use the <code>screen</code> directive and reference the breakpoint by name:</p>
+						<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">css</span><span style="color: #000000">, </span><span style="color: #001080">screen</span><span style="color: #000000">, </span><span style="color: #001080">apply</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind/css&#039;</span>
+
+<span style="color: #008000">// With template literal</span>
+<span style="color: #795E26">css</span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  </span><span style="color: #0000FF">${</span><span style="color: #795E26">screen</span><span style="color: #000000FF">(</span><span style="color: #A31515">&#039;sm&#039;</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span><span style="color: #A31515"> {</span>
+<span style="color: #A31515">    /* ... */</span>
+<span style="color: #A31515">  }</span>
+<span style="color: #A31515">  </span><span style="color: #0000FF">${</span><span style="color: #795E26">screen</span><span style="color: #000000FF">(</span><span style="color: #A31515">&#039;md&#039;</span><span style="color: #000000FF">, </span><span style="color: #795E26">css</span><span style="color: #A31515">` /* ... */ `</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  </span><span style="color: #0000FF">${</span><span style="color: #795E26">screen</span><span style="color: #000000FF">(</span><span style="color: #A31515">&#039;lg&#039;</span><span style="color: #000000FF">, </span><span style="color: #795E26">css</span><span style="color: #000000FF">({ </span><span style="color: #008000">/* ... */</span><span style="color: #000000FF"> }))</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  </span><span style="color: #0000FF">${</span><span style="color: #795E26">screen</span><span style="color: #000000FF">(</span><span style="color: #A31515">&#039;xl&#039;</span><span style="color: #000000FF">, { </span><span style="color: #008000">/* ... */</span><span style="color: #000000FF"> })</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  </span><span style="color: #0000FF">${</span><span style="color: #795E26">screen</span><span style="color: #000000FF">(</span><span style="color: #A31515">&#039;2xl&#039;</span><span style="color: #000000FF">, </span><span style="color: #795E26">apply</span><span style="color: #A31515">` ... `</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">`</span>
+
+<span style="color: #008000">// With object notation</span>
+<span style="color: #795E26">css</span><span style="color: #000000">(</span>
+<span style="color: #000000">  </span><span style="color: #795E26">screen</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;md&#039;</span><span style="color: #000000">, </span><span style="color: #795E26">css</span><span style="color: #A31515">` /* ... */ `</span><span style="color: #000000">),</span>
+<span style="color: #000000">  </span><span style="color: #795E26">screen</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;lg&#039;</span><span style="color: #000000">, </span><span style="color: #795E26">css</span><span style="color: #000000">({ </span><span style="color: #008000">/* ... */</span><span style="color: #000000"> })),</span>
+<span style="color: #000000">  </span><span style="color: #795E26">screen</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;xl&#039;</span><span style="color: #000000">, { </span><span style="color: #008000">/* ... */</span><span style="color: #000000"> }),</span>
+<span style="color: #000000">  </span><span style="color: #795E26">screen</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;2xl&#039;</span><span style="color: #000000">, </span><span style="color: #795E26">apply</span><span style="color: #A31515">` ... `</span><span style="color: #000000">),</span>
+<span style="color: #000000">)</span>
+<span style="color: #A31515">`</span>
 </code></pre>
 						<a href="#animation-directive" id="animation-directive" style="color: inherit; text-decoration: none;">
 							<h2>Animation Directive</h2>
@@ -284,7 +326,16 @@
 <span style="color: #000000">  },</span>
 <span style="color: #000000">)</span>
 </code></pre>
-						<p>The second parameter are the waypoints of a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes">@keyframes</a> at-rule in CSS object format.</p>
+						<p>The second parameter are the waypoints of a <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes">@keyframes</a> at-rule in CSS object format. The <a href="#keyframes-helper">keyframes helper</a> can be used the create waypoints.</p>
+						<p>The result of <code>animation</code> can be used within <code>css</code>:</p>
+						<pre><code class="language-js"><span style="color: #795E26">css</span><span style="color: #000000">(</span><span style="color: #001080">bounce</span><span style="color: #000000">, {</span>
+<span style="color: #000000">  </span><span style="color: #008000">/* other properties */</span>
+<span style="color: #000000">})</span>
+
+<span style="color: #795E26">css</span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  </span><span style="color: #0000FF">${</span><span style="color: #001080">bounce</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">`</span>
+</code></pre>
 						<a href="#keyframes-helper" id="keyframes-helper" style="color: inherit; text-decoration: none;">
 							<h2>Keyframes Helper</h2>
 						</a>
@@ -355,6 +406,8 @@
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind_css.cssdirective.html" class="tsd-kind-icon">CSSDirective</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter"><a href="../interfaces/twind_css.cssfactory.html" class="tsd-kind-icon">CSSFactory</a></li>
 								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind_css.csskeyframes.html" class="tsd-kind-icon">CSSKeyframes</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind_css.screen.html" class="tsd-kind-icon">Screen</a></li>
+								<li class="tsd-kind-interface tsd-parent-kind-module"><a href="../interfaces/twind_css.screendirective.html" class="tsd-kind-icon">Screen<wbr>Directive</a></li>
 							</ul>
 						</section>
 						<section class="tsd-index-section ">
@@ -369,6 +422,7 @@
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind_css.html#animation-1" class="tsd-kind-icon">animation</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind_css.html#css" class="tsd-kind-icon">css</a></li>
 								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind_css.html#keyframes" class="tsd-kind-icon">keyframes</a></li>
+								<li class="tsd-kind-function tsd-parent-kind-module"><a href="twind_css.html#screen-1" class="tsd-kind-icon">screen</a></li>
 							</ul>
 						</section>
 					</div>
@@ -405,7 +459,7 @@
 					<div class="tsd-signature tsd-kind-icon">Maybe<wbr>Array&lt;T&gt;<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/68189af/src/css/index.ts#L20">src/css/index.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/cf37f6d/src/css/index.ts#L20">src/css/index.ts:20</a></li>
 						</ul>
 					</aside>
 					<h4 class="tsd-type-parameters-title">Type parameters</h4>
@@ -429,7 +483,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/68189af/src/css/index.ts#L221">src/css/index.ts:221</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/cf37f6d/src/css/index.ts#L221">src/css/index.ts:221</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -443,7 +497,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/68189af/src/css/index.ts#L221">src/css/index.ts:221</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/cf37f6d/src/css/index.ts#L221">src/css/index.ts:221</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -471,7 +525,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/68189af/src/css/index.ts#L141">src/css/index.ts:141</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/cf37f6d/src/css/index.ts#L141">src/css/index.ts:141</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -488,7 +542,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/68189af/src/css/index.ts#L141">src/css/index.ts:141</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/cf37f6d/src/css/index.ts#L141">src/css/index.ts:141</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -502,7 +556,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/68189af/src/css/index.ts#L141">src/css/index.ts:141</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/cf37f6d/src/css/index.ts#L141">src/css/index.ts:141</a></li>
 								</ul>
 							</aside>
 							<h4 class="tsd-parameters-title">Parameters</h4>
@@ -527,7 +581,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/68189af/src/css/index.ts#L185">src/css/index.ts:185</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/cf37f6d/src/css/index.ts#L185">src/css/index.ts:185</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -567,7 +621,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/68189af/src/css/index.ts#L185">src/css/index.ts:185</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/cf37f6d/src/css/index.ts#L185">src/css/index.ts:185</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -604,7 +658,7 @@
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/68189af/src/css/index.ts#L185">src/css/index.ts:185</a></li>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/cf37f6d/src/css/index.ts#L185">src/css/index.ts:185</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -637,6 +691,47 @@
 								</li>
 							</ul>
 							<h4 class="tsd-returns-title">Returns <a href="../interfaces/twind_css.csskeyframes.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSKeyframes</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-function tsd-parent-kind-module">
+					<a name="screen-1" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagConst">Const</span> screen</h3>
+					<ul class="tsd-signatures tsd-kind-function tsd-parent-kind-module">
+						<li class="tsd-signature tsd-kind-icon">screen<span class="tsd-signature-symbol">(</span>size<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/twind_css.screendirective.html" class="tsd-signature-type" data-tsd-kind="Interface">ScreenDirective</a></li>
+						<li class="tsd-signature tsd-kind-icon">screen<span class="tsd-signature-symbol">(</span>size<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span>, css<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/cf37f6d/src/css/index.ts#L259">src/css/index.ts:259</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>size: <span class="tsd-signature-type">string</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/twind_css.screendirective.html" class="tsd-signature-type" data-tsd-kind="Interface">ScreenDirective</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/cf37f6d/src/css/index.ts#L259">src/css/index.ts:259</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>size: <span class="tsd-signature-type">string</span></h5>
+								</li>
+								<li>
+									<h5>css: <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">&quot;&quot;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol"> | </span><a href="../interfaces/twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/twind_css.cssdirective.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSDirective</a></h4>
 						</li>
 					</ul>
 				</section>
@@ -700,6 +795,12 @@
 					<li class=" tsd-kind-interface tsd-parent-kind-module">
 						<a href="../interfaces/twind_css.csskeyframes.html" class="tsd-kind-icon">CSSKeyframes</a>
 					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/twind_css.screen.html" class="tsd-kind-icon">Screen</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-parent-kind-module">
+						<a href="../interfaces/twind_css.screendirective.html" class="tsd-kind-icon">Screen<wbr>Directive</a>
+					</li>
 					<li class=" tsd-kind-type-alias tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="twind_css.html#maybearray" class="tsd-kind-icon">Maybe<wbr>Array</a>
 					</li>
@@ -711,6 +812,9 @@
 					</li>
 					<li class=" tsd-kind-function tsd-parent-kind-module">
 						<a href="twind_css.html#keyframes" class="tsd-kind-icon">keyframes</a>
+					</li>
+					<li class=" tsd-kind-function tsd-parent-kind-module">
+						<a href="twind_css.html#screen-1" class="tsd-kind-icon">screen</a>
 					</li>
 				</ul>
 			</nav>
