@@ -8,11 +8,13 @@ on:
     paths-ignore:
       # Do not run for docs changes
       - 'docs/**'
+      - '**/*.md'
 
   pull_request:
     paths-ignore:
       # Do not run for docs changes
       - 'docs/**'
+      - '**/*.md'
 
 jobs:
   build:
