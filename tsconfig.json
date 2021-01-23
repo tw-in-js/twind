@@ -12,12 +12,14 @@
       "./src/shim/index.ts",
       "./src/shim/server/index.ts"
     ],
-    "out": "./website/api",
+    "out": "./website/docs",
     "includeVersion": true,
-    "readme": false,
+    "readme": "./README.md",
     "excludePrivate": true,
     "excludeInternal": true,
-    "includes": "./"
+    "includes": "./",
+    "theme": "pages-plugin",
+    "pages": "./docs/pages.json"
   },
   "compilerOptions": {
     // During development for Node v10.8 support

@@ -1,8 +1,6 @@
-# Plugins
+Components - start with utilities and extract them
 
 Theming and customization lets you specify how core plugins and the compiler behave. This is usually ample for most use cases but sometimes more flexibility is required. Sometimes you might want to extend the abilities of the compiler. When this is the case then most likely you are going to need to write a plugin.
-
-<details><summary>Table Of Contents (Click To Expand)</summary>
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -16,11 +14,10 @@ Theming and customization lets you specify how core plugins and the compiler beh
 - [Inject global styles](#inject-global-styles)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-</details>
 
 ## Introduction
 
-> Note that currently the plugin API for Twind differs slightly to tailwind plugins
+> ❗ Note that currently the plugin API for Twind differs slightly to tailwind plugins
 
 Plugins make it possible to extend the compilers grammar by adding new directives or variants. Language extension like this is achieved by providing plugins as named functions during setup.
 
@@ -153,7 +150,10 @@ import { css } from 'twind/css'
 
 setup({
   plugins: {
-    'scroll-snap': (parts) => css`scroll-snap-type: ${parts[0]};`,
+    'scroll-snap': (parts) =>
+      css`
+        scroll-snap-type: ${parts[0]};
+      `,
   },
 })
 ```
@@ -271,7 +271,3 @@ setup({
   },
 })
 ```
-
-<hr/>
-
-Continue to [Testing](./sheets.md)

@@ -1,11 +1,9 @@
-[![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.dev/api/modules/twind_sheets.html)
+[![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.dev/docs/modules/twind_sheets.html)
 [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%2Fsrc%2Fsheets?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/src/sheets)
 [![Module Size](https://flat.badgen.net/badgesize/brotli/https:/unpkg.com/twind/sheets/sheets.js?icon=jsdelivr&label&color=blue&cache=10800)](https://unpkg.com/twind/sheets/sheets.js 'brotli module size')
 [![Typescript](https://flat.badgen.net/badge/icon/included?icon=typescript&label)](https://unpkg.com/browse/twind/sheets/sheets.d.ts)
 
 This module provides [virtualSheet](#virtual-sheet) and [domSheet](#dom-sheet) which can be used with <code>{@link twind.setup | setup}({ {@link twind.Configuration.sheet | sheet} })</code>.
-
-<details><summary>Table Of Contents (Click To Expand)</summary>
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -17,17 +15,16 @@ This module provides [virtualSheet](#virtual-sheet) and [domSheet](#dom-sheet) w
 - [Custom Sheet Implementation](#custom-sheet-implementation)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-</details>
 
 ## Virtual Sheet
 
-The virtual sheet collects style rules into an array. This is most useful during testing and [server side rendering (SSR)](https://github.com/tw-in-js/twind/blob/main/docs/ssr.md).
+The virtual sheet collects style rules into an array. This is most useful during testing and {@page Extract Styles aka SSR | server side rendering (SSR)}.
 
 Additionally it provides an API to reset the current internal state of its `tw` function.
 
 ### Using for Static Extraction a.k.a. Server Side Rendering (SSR)
 
-> You can find detailed instructions and example in the [Server Side Rendering (SSR) guide](https://github.com/tw-in-js/twind/blob/main/docs/ssr.md).
+> 💡 You can find detailed instructions and example in the {@page Extract Styles aka SSR | Server Side Rendering (SSR) guide}.
 
 The following example assumes your app is using the `tw` named export from `twind`
 but the same logic can be applied to custom instances.
@@ -62,7 +59,7 @@ function ssr() {
 
 ### Using in tests
 
-> The example below uses [uvu](https://github.com/lukeed/uvu). Please adjust the test code to your testing framework.
+> 💡 The example below uses [uvu](https://github.com/lukeed/uvu). Please adjust the test code to your testing framework.
 
 ```js
 import { suite } from 'uvu'
@@ -105,7 +102,7 @@ test('render one rule', ({ tw, sheet }) => {
 
 This sheet uses DOM Text nodes to insert the CSS rules into the stylesheet. Using DOM manipulation makes this way slower than the {@link twind.cssomSheet | default sheet} but allows to see the generated CSS in to DOM. Most modern browser display CSS rules from the speedy default sheet using their CSS inspector.
 
-> In production it is advised to use {@link twind.cssomSheet | speedy default sheet}.
+> 💡 In production it is advised to use {@link twind.cssomSheet | speedy default sheet}.
 
 If the `domSheet` is passed no `target` it looks for an style element with the id `__twind`. If no such element is found it will create one and append it to the `document.head`.
 

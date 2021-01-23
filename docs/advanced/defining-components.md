@@ -1,10 +1,8 @@
-# Defining Components
-
 As a component author, one often wants to re-use Tailwind directive styles for defining a component and allow users of the component to override styles using Tailwind rules. The created component can be used as a base for child components and override or add some styles using Tailwind rules.
 
-`apply` generates one style object, e.g., one CSS class, combining all Tailwind rules by deep merging rules in order of declaration.
+{@link twind.apply | apply} generates one style object, e.g., one CSS class, combining all Tailwind rules by deep merging rules in order of declaration.
 
-```jsx
+```js
 import { apply } from 'twind'
 
 const btn = apply`inline-block bg-gray-500 text-base`
@@ -23,13 +21,13 @@ const btnBlock = apply`${btn} block`
 // => tw-YYYY
 ```
 
-> Another way to extract common component styles is by [using an alias plugin](./plugins.md#plugin-as-alias).
+> 💡 Another way to extract common component styles is by {@page Plugins | using an alias plugin}.
 
 The component styles are added **before** the utility classes to the stylesheet which allows utilities to override component styles.
 
 <details><summary>Why can I not use <code>tw</code> for components?</summary>
 
-```jsx
+```js
 const Button = ({ className, children}) => {
   return <button className={tw`inline-block bg-gray-500 text-base ${className}`}>{children}</button>
 }
@@ -105,10 +103,10 @@ const Input = ({ hasHover }) => <input css={[tw`border`, hasHover && hoverStyles
 
 ## API
 
-> `apply` accepts the same arguments as [tw](./tw.md#function-signature).
+> `apply` accepts the same arguments as {@page Styling with Twind | tw}.
 
 ```js
-import { tw } from 'twind'
+import { tw, apply } from 'twind'
 
 const btn = apply`
   py-2 px-4
@@ -135,7 +133,7 @@ tw`${btnLarge} rounded-md`
 
 You can use this helper to use `apply` together with `tw`:
 
-```jsx
+```js
 import { tw, apply } from 'twind'
 
 // There is a better name out there somewhere
@@ -152,7 +150,7 @@ document.body.className = twind`bg-blue bg-red`
 
 <details><summary>Using <code>apply</code> within <code>preflight</code></summary>
 
-Use Tailwind rules within [preflight](./setup.md#preflight).
+Use Tailwind rules within {@page Setup | preflight}.
 
 ```js
 setup({
@@ -166,7 +164,7 @@ setup({
 
 <details><summary><code>CSS</code> can be used within <code>apply</code></summary>
 
-[twind/css](./css-in-js.md) can be used to define additional styles.
+{@page CSS in JS | twind/css} can be used to define additional styles.
 
 ```js
 const btn = apply`
@@ -181,7 +179,7 @@ const btn = apply`
 
 <details><summary>Using within <code>CSS</code></summary>
 
-`apply` can be used with `css`:
+`apply` can be used with {@link twind/css | css}:
 
 ```js
 const prose = css(
@@ -257,7 +255,7 @@ const bounce = animation(
 
 <details><summary>A React button component</summary>
 
-```jsx
+```js
 import { tw } from 'twind'
 
 const variantMap = {
@@ -313,7 +311,3 @@ render(
 ```
 
 </details>
-
-<hr/>
-
-Continue to [Plugins](./plugins.md)

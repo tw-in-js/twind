@@ -1,12 +1,8 @@
-# Contributing
-
 If you have made it this far then thanks for checking out Twind. We hoped you have enjoyed learning about Tailwind-in-JS and would love to hear what you think!
 
 Please show your appreciation by sharing the project on twitter or by starring it on GitHub.
 
 If you have any implementation specific feedback or ideas then please [create an issue](https://github.com/tw-in-js/twind) for discussion.
-
-<details><summary>Table Of Contents (Click To Expand)</summary>
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -20,7 +16,6 @@ If you have any implementation specific feedback or ideas then please [create an
 - [Links](#links)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-</details>
 
 ## Local development
 
@@ -47,14 +42,12 @@ Below is an outline of some todos, packages, plugins and ideas that we would lik
 ## Packages / Modules
 
 - twind/styled - like styled components (https://github.com/cristianbote/goober/tree/master/benchmarks)
-- twind/server - support for shim (HTML find class and replace)
 - twind/legacy - for IE11 with reset and polyfills (Math.imul, CSS.escape)
   - add note in docs about umd bundles and how to use them
 - twind/play - play mode
 - @twind/forms
 - @twind/eslint-plugin - nice to have
 - @twind/prettier-plugin - nice to have
-- @twind/tw.macro - maybe?
 - @twind/extensions
   - border gradients: https://t.co/W7YVS7f0Jp
   - scroll snap: https://t.co/7xqvpFQ9Qu
@@ -99,7 +92,3 @@ Below is an outline of some todos, packages, plugins and ideas that we would lik
 
 - https://github.com/aniftyco/awesome-tailwindcss
 - https://nerdcave.com/tailwind-cheat-sheet
-
-<hr/>
-
-Continue to [Architecture](./architecture.md)

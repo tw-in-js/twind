@@ -1992,7 +1992,7 @@ lru-cache@^6.0.0:
   dependencies:
     yallist "^4.0.0"
 
-lunr@^2.3.9:
+lunr@^2.3.8, lunr@^2.3.9:
   version "2.3.9"
   resolved "https://registry.npmjs.org/lunr/-/lunr-2.3.9.tgz#18b123142832337dd6e964df1a5a7707b25d35e1"
   integrity sha512-zTU3DaZaF3Rt9rhN3uBMGQD3dD2/vFQqnvZCDv4dl5iOzq2IZQqTxu90r4E5J+nP70J3ilqVCrbho2eWaeW8Ow==
@@ -3221,10 +3221,30 @@ type-fest@^0.8.1:
   resolved "https://registry.npmjs.org/type-fest/-/type-fest-0.8.1.tgz#09e249ebde851d3b1e48d27c105444667f17b83d"
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
 
+typedoc-default-themes@^0.10.1:
+  version "0.10.2"
+  resolved "https://registry.npmjs.org/typedoc-default-themes/-/typedoc-default-themes-0.10.2.tgz#743380a80afe62c5ef92ca1bd4abe2ac596be4d2"
+  integrity sha512-zo09yRj+xwLFE3hyhJeVHWRSPuKEIAsFK5r2u47KL/HBKqpwdUSanoaz5L34IKiSATFrjG5ywmIu98hPVMfxZg==
+  dependencies:
+    lunr "^2.3.8"
+
 typedoc-default-themes@^0.12.4:
   version "0.12.4"
   resolved "https://registry.npmjs.org/typedoc-default-themes/-/typedoc-default-themes-0.12.4.tgz#5cbb79c1d6421f1274e86b1b542934eb557abd4f"
   integrity sha512-EZiXBUpogsYWe0dLgy47J8yRZCd+HAn9woGzO28XJxxSCSwZRYGKeQiw1KjyIcm3cBtLWUXiPD5+Bgx24GgZjg==
+
+"typedoc-plugin-pages@npm:@sastan/typedoc-plugin-pages@0.0.1":
+  version "0.0.1"
+  resolved "https://registry.npmjs.org/@sastan/typedoc-plugin-pages/-/typedoc-plugin-pages-0.0.1.tgz#a0229571eb4177409a14a0f12a709d6d88c57bbe"
+  integrity sha512-eHFH4/Vab/Dqc1MK3Zbfga3siwdmgzX4zizTSlk/uXBex9uYjtut2xzTXrY8HS0ya+4FLjxGAnio4TveHwErUw==
+  dependencies:
+    compare-versions "^3.6.0"
+    typedoc-default-themes "^0.10.1"
+
+typedoc-plugin-param-names@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.npmjs.org/typedoc-plugin-param-names/-/typedoc-plugin-param-names-2.0.0.tgz#9b116445d4fcb64208aa1e24935be4691344c5a6"
+  integrity sha512-Uf9otc8n9U8J9R2edtNowehLWK4oBD17ckVX/c0uCky254k2vrvZ5CvpRBHwLm+EpMRK+IVzYbiLxNSG4JXRsA==
 
 typedoc@^0.20.16:
   version "0.20.16"

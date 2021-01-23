@@ -1,8 +1,4 @@
-# twind/css [![Module Size](https://flat.badgen.net/badgesize/brotli/https:/unpkg.com/twind/css/css.js?icon=jsdelivr&label&color=blue&cache=10800)](https://unpkg.com/twind/css/css.js 'brotli module size') [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%2Fsrc%2Fcss?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/src/css) [![Typescript](https://flat.badgen.net/badge/icon/included?icon=typescript&label)](https://unpkg.com/browse/twind/css/css.d.ts)
-
 Sometimes you might find yourself wanting to write some arbitrary styles for an element. Some rule that isn't covered by Tailwind API but perhaps isn't general enough to warrant creating a real plugin for.
-
-<details><summary>Table Of Contents (Click To Expand)</summary>
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -14,11 +10,10 @@ Sometimes you might find yourself wanting to write some arbitrary styles for an 
 - [Keyframes Helper](#keyframes-helper)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-</details>
 
 ## CSS directive
 
-Essentially a CSS directive uses some CSS rules in object notation, array or template literal format to create a optimized [inline plugin](./plugins.md#inline-plugin). Here you can use the `&` selector to target the current element much like in other CSS-in-JS libraries. In this way, it is possible to write styles that cannot be described using an inline style attribute alone; things like specific children selectors.
+Essentially a CSS directive uses some CSS rules in object notation, array or template literal format. Here you can use the `&` selector to target the current element much like in other CSS-in-JS libraries.
 
 ```js
 import { tw, css } from 'twind/css'
@@ -44,7 +39,7 @@ tw(styles)
 // => tw-xxxx
 ```
 
-Furthermore any variants or groupings that are active when the CSS directive is called, will be respected by the return value. Meaning that you can scope CSS directives with responsive variants:
+Furthermore any variants or groupings that are active when the CSS directive is called, will be respected by the return value. Meaning that you can scope CSS directives with every variant:
 
 ```js
 tw`
@@ -56,7 +51,7 @@ tw`
 // => sm:hover:tw-xxxx
 ```
 
-Values within the CSS object can be functions which are called with the `context` and should return the value to be used:
+Values within the CSS object can be functions which are called with the {@link twind.Context | context} and should return the value to be used:
 
 ```js
 import { css, theme } from 'twind/css'
@@ -99,7 +94,7 @@ const style = css`
 `
 ```
 
-> Please note that the template literal syntax has a little performance impact as twind needs to parse the CSS. For optimal performance use the object notation.
+> ❗ Please note that the template literal syntax has a little performance impact as Twind needs to parse the CSS. For optimal performance use the object notation.
 
 Variadic arguments and arrays (nested as deep as you like) are supported as well:
 
@@ -129,7 +124,7 @@ const style = css([
 ])
 ```
 
-[apply](./components) can be used within `css`:
+{@link twind.apply | apply} can be used within `css`:
 
 ```js
 import { css, apply } from 'twind/css'
@@ -366,4 +361,4 @@ css({
 
 <hr/>
 
-Continue to [Defining Components](./components.md)
+Continue to {@page Best Practices

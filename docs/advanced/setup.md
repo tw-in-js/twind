@@ -1,8 +1,8 @@
-# Setup
-
 Understandably developers will more often than not want to customize the out of the box experience. It is possible to achieve this with the `setup` function. Doing so will ultimately change the behavior of calling the `tw` function, making it appropriate for your particular use case.
 
-> To use `tw` you **do not** need to call `setup`.
+> 💡 To use `tw` you **do not** need to call `setup`.
+
+The {@link twind.setup} function is a named export of the {@link twind} module and accepts an config object as an argument.
 
 ```js
 import { setup, strict, voidSheet } from 'twind'
@@ -17,19 +17,15 @@ setup({
 })
 ```
 
-The setup functions is a named export of the main module and accepts an config object as an argument.
-
-<details><summary>Table Of Contents (Click To Expand)</summary>
-
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Preflight](#preflight)
-- [Mode](#mode)
-- [Hash](#hash)
 - [Theme](#theme)
   - [Colors](#colors)
   - [Referencing other values](#referencing-other-values)
+- [Preflight](#preflight)
+- [Mode](#mode)
+- [Hash](#hash)
 - [Dark Mode](#dark-mode)
 - [Sheet](#sheet)
   - [CSSOM Sheet](#cssom-sheet)
@@ -41,13 +37,83 @@ The setup functions is a named export of the main module and accepts an config o
 - [Variants](#variants)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-</details>
+
+## Theme
+
+Applying a new theme or extending the default is probably the most common customization. For maximum compatibility and ease of adoption, theming in Twind works exactly the same as [theming in Tailwind](https://tailwindcss.com/docs/theme).
+
+Here is an example of overriding and extending values in the theme:
+
+```js
+import { setup } from 'twind'
+
+setup({
+  theme: {
+    fontFamily: {
+      sans: ['Helvetica', 'sans-serif'],
+      serif: ['Times', 'serif'],
+    },
+    extend: {
+      spacing: {
+        128: '32rem',
+        144: '36rem',
+      },
+    },
+  },
+})
+```
+
+### Colors
+
+The Tailwind v2 [extended color palette](https://tailwindcss.com/docs/customizing-colors#color-palette-reference) is available as {@link twind/colors}:
+
+```js
+import * as colors from 'twind/colors'
+
+setup({
+  theme: {
+    colors: {
+      // Build your palette here
+      gray: colors.trueGray,
+      red: colors.red,
+      blue: colors.lightBlue,
+      yellow: colors.amber,
+    },
+  },
+})
+```
+
+To extend the existing color palette use `theme.extend`:
+
+```js
+import * as colors from 'twind/colors'
+
+setup({
+  theme: {
+    extend: {
+      colors,
+    },
+  },
+})
+```
+
+### Referencing other values
+
+If you need to reference another value in your theme, you can do so by providing a closure instead of a static value. The closure will receive a `theme()` function that you can use to look up other values in your theme.
+
+```js
+setup({
+  theme: {
+    fill: (theme) => theme('colors'),
+  },
+})
+```
 
 ## Preflight
 
 To smooth over browser inconsistencies, Tailwind provide a [opinionated modern reset](https://tailwindcss.com/docs/preflight) stylesheet. By default the base reset styles will be injected into the head of the document before any other rules.
 
-> This can be used to inject additional global styles.
+> 💡 This can be used to inject additional global styles.
 
 - In order to prevent this from happening set this attribute to `false`.
 
@@ -77,7 +143,7 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
   })
   ```
 
-- [apply](./components.md) Tailwind rules
+- {@link twind.apply | apply} Tailwind rules
 
   ```js
   import { apply, setup } from 'twind'
@@ -89,7 +155,7 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
   })
   ```
 
-- use [css](./css-in-js.md) to merge rules
+- use {@link twind/css.css | css} to merge rules
 
   ```js
   import { css, theme, apply } from 'twind/css'
@@ -151,11 +217,11 @@ setup({
 })
 ```
 
-If you are using JSON configuration the modes can be set using strings: `"strict"`, `"warn"` or `"silent"`.
+> 💡 If you are using JSON configuration the modes can be set using strings: `"strict"`, `"warn"` or `"silent"`.
 
 ## Hash
 
-Most CSS-in-JS solutions, such as styled components or emotion will create hashed class names for rule sets. This makes sense because there is no logical way of naming an arbritary set of styles. Doing this makes less sense when using an utility class approach because directives are usually carefully named.
+Most CSS-in-JS solutions, such as styled components or emotion will create hashed class names for rule sets. This makes sense because there is no logical way of naming an arbitrary set of styles. Doing this makes less sense when using an utility class approach because directives are usually carefully named.
 
 By default, rules that are passed into the `tw` function are not hashed. This helps retain the advantage of using utility classes, aiding inspection and debugging.
 
@@ -177,82 +243,11 @@ setup({
 })
 ```
 
-## Theme
-
-Applying a new theme or extending the default is probably the most common customization. For maximum compatibility and ease of adoption, theming in Twind works exactly the same as [theming in Tailwind](https://tailwindcss.com/docs/theme).
-
-Here is an example of overriding and extending values in the theme:
-
-```js
-import { setup } from 'twind'
-
-setup({
-  theme: {
-    fontFamily: {
-      sans: ['Helvetica', 'sans-serif'],
-      serif: ['Times', 'serif'],
-    },
-    extend: {
-      spacing: {
-        128: '32rem',
-        144: '36rem',
-      },
-    },
-  },
-})
-```
-
-### Colors
-
-The Tailwind v2 [extended color palette](https://tailwindcss.com/docs/customizing-colors#color-palette-reference) is available as `twind/colors`:
-
-```js
-import * as colors from 'twind/colors'
-
-setup({
-  theme: {
-    colors: {
-      // Build your palette here
-      gray: colors.trueGray,
-      red: colors.red,
-      blue: colors.lightBlue,
-      yellow: colors.amber,
-    },
-  },
-})
-```
-
-To extend the existing color palette use `theme.extend`:
-
-```js
-import * as colors from 'twind/colors'
-
-setup({
-  theme: {
-    extend: {
-      colors,
-    },
-  },
-})
-```
-
-### Referencing other values
-
-If you need to reference another value in your theme, you can do so by providing a closure instead of a static value. The closure will receive a `theme()` function that you can use to look up other values in your theme.
-
-```js
-setup({
-  theme: {
-    fill: (theme) => theme('colors'),
-  },
-})
-```
-
 ## Dark Mode
 
 Now that dark mode is a first-class feature of many operating systems, it's becoming more and more common to design a dark version of your website to go along with the default design.
 
-To make this as easy as possible, twind includes a dark variant that lets you style your site differently when dark mode is enabled:
+To make this as easy as possible, Twind includes a dark variant that lets you style your site differently when dark mode is enabled:
 
 ```js
 tw`
@@ -260,7 +255,7 @@ tw`
   dark:(bg-gray-800 text-white)`
 ```
 
-> It's important to note that the dark mode variant is **always** enabled and available for all directives.
+> 💡 It's important to note that the dark mode variant is **always** enabled and available for all directives.
 
 Now whenever dark mode is enabled on the user's operating system, `dark:{directive}` rules will take precedence over unprefixed rules. The `media` strategy uses the [prefers-color-scheme media feature](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) under the hood, but if you'd like to support toggling dark mode manually, you can also use the `class` strategy which uses adds a `.dark` class selector for more control:
 
@@ -274,11 +269,11 @@ For an example how to toggle dark mode manually read the [Tailwind Guide](https:
 
 ## Sheet
 
-Twind collects generated CSS rules in sheet to make theme available to the environment. By default twind uses a speedy (CSSOM) implementation when running in the browser. On the server a no-op implementation is used.
+Twind collects generated CSS rules in sheet to make theme available to the environment. By default Twind uses a speedy (CSSOM) implementation when running in the browser. On the server a no-op implementation is used.
 
 ### CSSOM Sheet
 
-> This is the default implementation in browser environments.
+> 💡 This is the default implementation in browser environments.
 
 If the `cssomSheet` is passed no `target` it looks for an style element with the id `__twind`. If no such element is found it will create one and append it to the `document.head`.
 
@@ -289,11 +284,11 @@ const sheet = cssomSheet({ target: new CSSStyleSheet() })
 setup({ sheet })
 ```
 
-> See [Examples - LitElement](./examples.md#litelement) how this can be used.
+> 💡 See [Examples - LitElement](./examples.md#litelement) how this can be used.
 
 ### Void Sheet
 
-> This is the default implementation on server environments.
+> 💡 This is the default implementation on server environments.
 
 ```js
 import { setup, voidSheet } from 'twind'
@@ -305,7 +300,7 @@ setup({ sheet: voidSheet() })
 
 A sheet implementation which inserts style rules through the Document Object Model.
 
-> This implementation is way slower than the default ([cssomSheet](#cssom-sheet)) but may be useful to see the generated CSS right in the DOM. Most modern browser display CSS rules from the speedy default sheet using their CSS inspector.
+> 💡 This implementation is way slower than the default ([cssomSheet](#cssom-sheet)) but may be useful to see the generated CSS right in the DOM. Most modern browser display CSS rules from the speedy default sheet using their CSS inspector.
 
 ```js
 import { setup } from 'twind'
@@ -314,7 +309,7 @@ import { domSheet } from 'twind/sheets'
 setup({ sheet: domSheet() })
 ```
 
-> See [Sheets - DOM Sheet](./sheets.md#dom-sheet) for details.
+> 💡 See {@link twind/sheets} for details.
 
 ### Virtual Sheet
 
@@ -331,19 +326,19 @@ setup({ sheet })
 sheet.target
 ```
 
-> See [Sheets - Virtual Sheet](./sheets.md#virtual-sheet) for details.
+> 💡 See {@link twind/sheets} for details.
 
 ### Custom Sheet Implementation
 
-In case the builtin sheet implementations do not solve your use case, you can [create your own](./sheets.md#custom-sheet-implementation).
+In case the builtin sheet implementations do not solve your use case, you can {@link twind/sheets | create your own}.
 
 ## Plugins
 
-The `plugins` property allows to define new plugins or override core plugins. See [Plugins](./plugins.md) for details.
+The `plugins` property allows to define new plugins or override core plugins. See {@page Plugins} for details.
 
 ## Variants
 
-The `variants` property allows to define new variants or override [core variants](./tailwind-extensions.md#variants).
+The `variants` property allows to define new variants or override {@page Tailwind Extensions | core variants}.
 
 ```js
 setup({
@@ -355,4 +350,4 @@ setup({
 
 <hr/>
 
-Continue to [Examples](./examples.md)
+Continue to {@page Defining Components}

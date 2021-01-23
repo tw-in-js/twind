@@ -1,11 +1,9 @@
-[![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.dev/api/modules/twind_css.html)
+[![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.dev/docs/modules/twind_css.html)
 [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%2Fsrc%2Fcss?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/src/css)
 [![Module Size](https://flat.badgen.net/badgesize/brotli/https:/unpkg.com/twind/css/css.js?icon=jsdelivr&label&color=blue&cache=10800)](https://unpkg.com/twind/css/css.js 'brotli module size')
 [![Typescript](https://flat.badgen.net/badge/icon/included?icon=typescript&label)](https://unpkg.com/browse/twind/css/css.d.ts)
 
 Sometimes you might find yourself wanting to write some arbitrary styles for an element. Some rule that isn't covered by Tailwind API but perhaps isn't general enough to warrant creating a real plugin for.
-
-<details><summary>Table Of Contents (Click To Expand)</summary>
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -17,11 +15,10 @@ Sometimes you might find yourself wanting to write some arbitrary styles for an 
 - [Keyframes Helper](#keyframes-helper)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-</details>
 
 ## CSS directive
 
-Essentially the {@link css} directive uses some CSS rules in object notation, array or template literal format to create a optimized [inline plugin](https://github.com/tw-in-js/twind/blob/main/docs/plugins.md#inline-plugin). Here you can use the `&` selector to target the current element much like in other CSS-in-JS libraries. In this way, it is possible to write styles that cannot be described using an inline style attribute alone; things like specific children selectors.
+Essentially the {@link css} directive uses some CSS rules in object notation, array or template literal format to create a optimized [inline plugin](https://twind.dev/docs/handbook/advanced/plugins.html#inline-plugins). Here you can use the `&` selector to target the current element much like in other CSS-in-JS libraries. In this way, it is possible to write styles that cannot be described using an inline style attribute alone; things like specific children selectors.
 
 ```js
 import { tw, css } from 'twind/css'
@@ -132,7 +129,7 @@ const style = css([
 ])
 ```
 
-[apply](https://github.com/tw-in-js/twind/blob/main/docs/components) can be used within `css`:
+{@page Defining Components | apply} can be used within `css`:
 
 ```js
 import { css, apply } from 'twind/css'

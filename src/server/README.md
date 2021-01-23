@@ -1,6 +1,6 @@
-This module provides asynchronous Node.JS **only** Static Extraction a.k.a. Server Side Rendering (SSR). In most cases the {@link twind/sheets | synchronous SSR} should be preferred. Please refer to the [SSR guide](https://github.com/tw-in-js/twind/blob/main/docs/ssr.md) for more details.
+This module provides asynchronous Node.JS **only** Static Extraction a.k.a. Server Side Rendering (SSR). In most cases the {@link twind/sheets | synchronous SSR} should be preferred. Please refer to the {@page Extract Styles aka SSR | SSR guide} for more details.
 
-> **Note**: This is an experimental feature and only supported for Node.JS >=12. Use with care and please [report any issue](https://github.com/tw-in-js/twind/issues/new) you find.
+> ❗ This is an experimental feature and only supported for Node.JS >=12. Use with care and please [report any issue](https://github.com/tw-in-js/twind/issues/new) you find.
 > Consider using the synchronous API when ever possible due to the relatively expensive nature of the [promise introspection API](https://docs.google.com/document/d/1rda3yKGHimKIhg5YeoAmCOtyURgsbTH_qaYR79FELlk/edit) provided by V8.
 > Async server side rendering is implemented using [async_hooks](https://nodejs.org/docs/latest-v14.x/api/async_hooks.html). Callback-based APIs and event emitters may not work or need special handling.
 

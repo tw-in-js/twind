@@ -1,15 +1,13 @@
-[![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.dev/api/modules/twind_shim.html)
+[![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.dev/docs/modules/twind_shim.html)
 [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%2Fsrc%2Fshim?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/src/shim)
 [![Module Size](https://flat.badgen.net/badgesize/brotli/https:/unpkg.com/twind/shim/shim.js?icon=jsdelivr&label&color=blue&cache=10800)](https://unpkg.com/twind/shim/shim.js 'brotli module size')
 [![Typescript](https://flat.badgen.net/badge/icon/included?icon=typescript&label)](https://unpkg.com/browse/twind/shim/shim.d.ts)
 
 > Allows to copy-paste tailwind examples. This feature can be used together with your favorite framework without any additional setup.
 
-The `twind/shim` module allows for the use of the `class` attribute for tailwind rules. If such a rule is detected, the corresponding CSS rule is created and injected into the stylesheet dynamically. `twind/shim` is intended for client-side usage and, without configuration, utilizes the default/global {@link tw | tw instance}. For server-side usage, {@link twind/shim/server} exports a dedicated {@link twind/shim/server.shim | shim function} that will parse and update a static HTML string while collecting the style rules into a sheet for further usage in your respective framework.
+The `twind/shim` module allows for the use of the `class` attribute for tailwind rules. If such a rule is detected, the corresponding CSS rule is created and injected into the stylesheet dynamically. `twind/shim` is intended for client-side usage and, without configuration, utilizes the default/global {@link twind.tw | tw instance}. For server-side usage, {@link twind/shim/server} exports a dedicated {@link twind/shim/server.shim | shim function} that will parse and update a static HTML string while collecting the style rules into a sheet for further usage in your respective framework.
 
-There is _no need for `tw`_ but it can be used on the same elements as well. All twind syntax features like [grouping](https://github.com/tw-in-js/twind/blob/main/docs/grouping.md) are supported within class attributes. See [example/shim.html](https://github.com/tw-in-js/twind/blob/main/example/shim.html) for a full example.
-
-<details><summary>Table Of Contents (Click To Expand)</summary>
+There is _no need for `tw`_ but it can be used on the same elements as well. All Twind syntax features like {@page Thinking in Groups | grouping} are supported within class attributes. See [example/shim.html](https://github.com/tw-in-js/twind/blob/main/example/shim.html) for a full example.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -20,7 +18,6 @@ There is _no need for `tw`_ but it can be used on the same elements as well. All
 - [FAQ](#faq)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-</details>
 
 ## Usage
 
@@ -40,7 +37,7 @@ For runtime processing of your javascript-assisted HTML documents, simply includ
 </html>
 ```
 
-> [live and interactive shim demo](https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPG1haW4gY2xhc3M9Imgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIiPgogICAgPGgxIGNsYXNzPSJmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKSI+CiAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICA8L2gxPgogIDwvbWFpbj4KYA==)
+> 🚀 [live and interactive shim demo](https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPG1haW4gY2xhc3M9Imgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIiPgogICAgPGgxIGNsYXNzPSJmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKSI+CiAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICA8L2gxPgogIDwvbWFpbj4KYA==)
 
 The `twind/shim` module utilizes the {@link twind/observe} module internally, but it provides its own {@link setup} function for customizing the used {@link tw} instance and setting the target node to be shimmed. It also provides a {@link disconnect} function to stop shimming/observing all nodes.
 
@@ -156,6 +153,6 @@ import { setup, disconnect } from 'twind/shim'
 
 <details><summary>How does the shim work?</summary>
 
-`twind/shim` starts {@link observer | observing} class attributes changes right after the [DOM content has been loaded](https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event). For further details see {@link twind/observe}.
+`twind/shim` starts {@link twind/observe.observer | observing} class attributes changes right after the [DOM content has been loaded](https://developer.mozilla.org/en-US/docs/Web/API/Document/DOMContentLoaded_event). For further details see {@link twind/observe}.
 
 </details>

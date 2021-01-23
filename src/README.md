@@ -1,13 +1,13 @@
-[![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.dev/api/modules/twind.html)
+[![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.dev/docs/modules/twind.html)
 [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%2Fsrc?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/src)
 [![Module Size](https://flat.badgen.net/badgesize/brotli/https:/unpkg.com/twind/twind.js?icon=jsdelivr&label&color=blue&cache=10800)](https://unpkg.com/twind/twind.js 'brotli module size')
 [![Typescript](https://flat.badgen.net/badge/icon/included?icon=typescript&label)](https://unpkg.com/browse/twind/twind.d.ts)
 
-Despite the module being very flexible and powerful, it was our intention to keep the surface API as minimal as possible. We appreciate that this module is likely to be used by developers & designers alike and so we try provide sensible defaults out of the box, with little to no need for [customization](https://github.com/tw-in-js/twind/blob/main/docs/setup.md).
+Despite the module being very flexible and powerful, it was our intention to keep the surface API as minimal as possible. We appreciate that this module is likely to be used by developers & designers alike and so we try provide sensible defaults out of the box, with little to no need for {@page Setup | customization}.
 
 > Note that examples are given in vanilla JS but the module is compatible with all popular frameworks
 
-Getting started with the library requires no configuration, build step or even installation if you use [skypack](https://skypack.dev/) or [unpkg](https://unpkg.com/) (see the [Installation](https://github.com/tw-in-js/twind/blob/main/docs/installation.md) guide for more information).
+Getting started with the library requires no configuration, build step or even installation if you use [skypack](https://skypack.dev/) or [unpkg](https://unpkg.com/) (see the {@page Installation} guide for more information).
 
 ```js
 import { tw } from 'twind'
@@ -23,8 +23,6 @@ Using the exported [tw](#tw-function) function without any setup results in the 
 
 Calling the [tw](#tw-function) function like in the example above results in the shorthand rules to be interpreted, normalized and compiled into CSS rules which get added to a stylesheet in the head of the document. The function will return a string consisting of all the class names that were processed and apply them to the element itself much like any other CSS-in-JS library.
 
-<details><summary>Table Of Contents (Click To Expand)</summary>
-
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -36,7 +34,6 @@ Calling the [tw](#tw-function) function like in the example above results in the
   - [`theme` helper](#theme-helper)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-</details>
 
 ## Installation
 
@@ -44,13 +41,11 @@ Calling the [tw](#tw-function) function like in the example above results in the
 npm i twind
 ```
 
-> You can find more example like CDN import in the [installation guide](https://github.com/tw-in-js/twind/blob/main/docs/installation.md).
+> 💡 You can find more example like CDN import in the {@page Installation | installation guide}.
 
 ## API
 
 ### `tw` function
-
-> See [tw guide](https://github.com/tw-in-js/twind/blob/main/docs/tw.md) for more syntax examples.
 
 It is possible to invoke the {@link tw} function in a multitude of different ways. It can take any number of arguments, each of which can be an Object, Array, Boolean, Number, String or Template Literal. This ability is inspired heavily by the [clsx](https://npmjs.com/clsx) library by [Luke Edwards](https://github.com/lukeed).
 
@@ -121,7 +116,7 @@ tw({
 
 </details>
 
-> See [tw guide](https://github.com/tw-in-js/twind/blob/main/docs/tw.md) and [grouping guide](https://github.com/tw-in-js/twind/blob/main/docs/grouping.md) for more syntax examples.
+> 💡 See {@page Styling with Twind} and {@page Thinking in Groups} for more syntax examples.
 
 #### Inline Plugins
 
@@ -136,7 +131,7 @@ tw`
 
 In the above example a class is generate for an `::after` pseudo element. Something that isn't possible within the confides of the Tailwind API nor possible to denote using a style attribute on an element.
 
-> **Note**: The above example is for exploratory purposes. Consider using {@link twind/css} for optimal performance.
+> 💡 The above example is for exploratory purposes. Consider using {@link twind/css} for optimal performance.
 >
 > ```js
 > tw`
@@ -147,15 +142,15 @@ In the above example a class is generate for an `::after` pseudo element. Someth
 > `
 > ```
 
-For a further explanation on this mechanism see [Plugins](https://github.com/tw-in-js/twind/blob/main/docs/plugins.md#inline-plugins).
+For a further explanation on this mechanism see [Plugins](https://twind.dev/docs/handbook/advanced/plugins.html#inline-plugins).
 
 ### `apply` function
 
 As a component author, one often wants to re-use Tailwind directive styles for defining a component and allow users of the component to override styles using Tailwind rules. The created component can be used as a base for child components and override or add some styles using Tailwind rules.
 
-{@link apply | apply} generates one style object, e.g., one CSS class, combining all Tailwind rules by deep merging rules in order of declaration.
+{@link apply} generates one style object, e.g., one CSS class, combining all Tailwind rules by deep merging rules in order of declaration.
 
-> `apply` accepts the same arguments as [tw](#tw-function).
+> 💡 `apply` accepts the same arguments as [tw](#tw-function).
 
 ```js
 const btn = apply`inline-block bg-gray-500 text-base`
@@ -338,13 +333,13 @@ render(
 
 </details>
 
-> The [Defining Components guide](https://github.com/tw-in-js/twind/blob/main/docs/components.md) explains how `apply` can be used.
+> 💡 The {@page Defining Components} guide explains how `apply` can be used.
 
 ### `setup` function
 
 Understandably developers will more often than not want to customize the out of the box experience. It is possible to achieve this with the {@link setup} function. Doing so will ultimately change the behavior of calling the `tw` function, making it appropriate for your particular use case.
 
-> To use `tw` you **do not** need to call `setup`.
+> 💡 To use `tw` you **do not** need to call `setup`.
 
 ```js
 import { setup, strict, voidSheet } from 'twind'
@@ -359,9 +354,9 @@ setup({
 })
 ```
 
-The setup function is a named export of the twind and accepts an config object as an argument.
+The setup function is a named export of the Twind and accepts an config object as an argument.
 
-> See [setup guide](https://github.com/tw-in-js/twind/blob/main/docs/setup.md) for more details.
+> See {@page Setup | setup guide} for more details.
 
 ### `theme` helper
 

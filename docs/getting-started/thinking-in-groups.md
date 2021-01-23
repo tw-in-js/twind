@@ -1,10 +1,6 @@
-# Grouping
-
-> If you are unfamiliar with the Tailwind CSS shorthand syntax please read the [Tailwind documentation](https://tailwindcss.com/docs) about [Utility-First](https://tailwindcss.com/docs/utility-first), [Responsive Design](https://tailwindcss.com/docs/responsive-design) and [Hover, Focus, & Other States](https://tailwindcss.com/docs/hover-focus-and-other-states).
-
 Unlike Tailwind, Twind is not limited to the restrictions of a class name strings as input. The compiler is just a function and has been designed to be able to interpret input in almost any form – strings, array, objects, template literals or variadic arguments – turn it into meaningful output.
 
-One painpoint commonly felt when using utility CSS is long and unwieldily lines of code consisting of class names, often denoting styles at various breakpoints, which are quite hard to comprehend.
+One pain-point commonly felt when using utility CSS is long and unwieldily lines of code consisting of class names, often denoting styles at various breakpoints, which are quite hard to comprehend.
 
 It is not uncommon for a single element to have tens of rules applied to it like below:
 
@@ -16,8 +12,6 @@ It is not uncommon for a single element to have tens of rules applied to it like
 
 However, when using Twind we have the option to pass a template literal as input to the compiler. This made it convenient to invent a domain specific syntax that extends the capabilities of Tailwind and helps reduce repetition.
 
-<details><summary>Table Of Contents (Click To Expand)</summary>
-
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
@@ -26,10 +20,8 @@ However, when using Twind we have the option to pass a template literal as input
 - [Variant Grouping](#variant-grouping)
 - [Mixed Groupings](#mixed-groupings)
 - [Self Reference](#self-reference)
-- [Inherited Groups](#inherited-groups)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
-</details>
 
 ## Thinking in Groups
 
@@ -194,26 +186,6 @@ tw`bg-blue-500(hover:& focus:& active:&) rounded-full`
 // => hover:bg-blue-500 focus:bg-blue-500 active:bg-blue-500 rounded-full
 ```
 
-## Inherited Groups
-
-It is possible to define arbitrary styles by providing a function. Like all other directives these will inherit any active grouping.
-
-```js
-tw`
-  hover:${css({ '&::after': { content: '"🌈"' } })}
-
-  hover:${({ tw }) => ({
-    sm: tw`underline`,
-    lg: 'no-underline line-through',
-  })}
-
-  sm:${['rounded']}
-`
-// => hover:tw-xxx sm:hover:underline lg:hover:no-underline lg:hover:line-through sm:rounded
-```
-
-In the above example, the `after` pseudo element will only be applied upon hover.
-
 <hr/>
 
-Continue to [Tailwind Extensions](./tailwind-extensions.md)
+Continue to {@page Using the Shim}
