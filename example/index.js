@@ -1,11 +1,11 @@
 /* eslint-env browser */
 import './test'
 
-import { tw, setup } from '../src/index'
-import { domSheet } from '../src/sheets/index'
-setup({ sheet: domSheet() })
+import { tw, setup } from 'twind'
+import { domSheet } from 'twind/sheets'
+import { animation } from 'twind/css'
 
-import { animation } from '../src/css/index'
+setup({ sheet: domSheet() })
 
 const bounce = animation('1s ease infinite', {
   'from, 20%, 53%, 80%, to': {

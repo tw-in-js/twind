@@ -83,7 +83,7 @@
     "prettier": "^2.0.5",
     "size-limit": "^4.9.1",
     "snoop": "^1.0.2",
-    "snowpack": "^2.18.2",
+    "snowpack": "^3.0.11",
     "tailwindcss": "^2.0.1",
     "typedoc": "^0.20.16",
     "typescript": "^4.1.3",
