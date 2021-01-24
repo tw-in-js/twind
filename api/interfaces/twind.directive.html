@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>ScreenDirective | twind - v0.14.1</title>
+	<title>Directive | twind - v0.14.1</title>
 	<meta name="description" content="Documentation for twind - v0.14.1">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -55,46 +55,82 @@
 					<a href="../modules.html">twind - v0.14.1</a>
 				</li>
 				<li>
-					<a href="../modules/twind_css.html">twind/css</a>
+					<a href="../modules/twind.html">twind</a>
 				</li>
 				<li>
-					<a href="twind_css.screendirective.html">ScreenDirective</a>
+					<a href="twind.directive.html">Directive</a>
 				</li>
 			</ul>
-			<h1>Interface ScreenDirective</h1>
+			<h1>Interface Directive&lt;T&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>T</h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">ScreenDirective</span>
+						<span class="target">Directive</span>
 					</li>
 				</ul>
 			</section>
 			<section class="tsd-panel">
 				<h3 class="tsd-before-signature">Callable</h3>
-				<ul class="tsd-signatures tsd-kind-interface tsd-parent-kind-module">
-					<li class="tsd-signature tsd-kind-icon">Screen<wbr>Directive<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span></li>
+				<ul class="tsd-signatures tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">Directive<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					<li class="tsd-signature tsd-kind-icon">Directive<span class="tsd-signature-symbol">(</span>params<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span>, context<span class="tsd-signature-symbol">: </span><a href="twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/1a0e053/src/css/index.ts#L244">src/css/index.ts:244</a></li>
+								<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/1dfa4f1/src/types/twind.ts#L179">src/types/twind.ts:179</a></li>
 							</ul>
 						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Can be used as a inline directive</p>
+							</div>
+						</div>
 						<h4 class="tsd-parameters-title">Parameters</h4>
 						<ul class="tsd-parameters">
 							<li>
 								<h5>context: <a href="twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">string</span></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+					</li>
+					<li class="tsd-description">
+						<aside class="tsd-sources">
+							<ul>
+								<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/1dfa4f1/src/types/twind.ts#L181">src/types/twind.ts:181</a></li>
+							</ul>
+						</aside>
+						<div class="tsd-comment tsd-typography">
+							<div class="lead">
+								<p>Can be used as a plugin</p>
+							</div>
+						</div>
+						<h4 class="tsd-parameters-title">Parameters</h4>
+						<ul class="tsd-parameters">
+							<li>
+								<h5>params: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></h5>
+							</li>
+							<li>
+								<h5>context: <a href="twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a></h5>
+							</li>
+						</ul>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -105,13 +141,13 @@
 					<li class=" ">
 						<a href="../modules.html">Modules</a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class="current tsd-kind-module">
 						<a href="../modules/twind.html">twind</a>
 					</li>
 					<li class=" tsd-kind-module">
 						<a href="../modules/twind_colors.html">twind/colors</a>
 					</li>
-					<li class="current tsd-kind-module">
+					<li class=" tsd-kind-module">
 						<a href="../modules/twind_css.html">twind/css</a>
 					</li>
 					<li class=" tsd-kind-module">
@@ -133,52 +169,13 @@
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-reference tsd-parent-kind-module">
-						<a href="../modules/twind_css.html#apply" class="tsd-kind-icon">apply</a>
-					</li>
-					<li class=" tsd-kind-reference tsd-parent-kind-module">
-						<a href="../modules/twind_css.html#setup" class="tsd-kind-icon">setup</a>
-					</li>
-					<li class=" tsd-kind-reference tsd-parent-kind-module">
-						<a href="../modules/twind_css.html#theme" class="tsd-kind-icon">theme</a>
-					</li>
-					<li class=" tsd-kind-reference tsd-parent-kind-module">
-						<a href="../modules/twind_css.html#tw" class="tsd-kind-icon">tw</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="twind_css.animation.html" class="tsd-kind-icon">Animation</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="twind_css.cssdirective.html" class="tsd-kind-icon">CSSDirective</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
-						<a href="twind_css.cssfactory.html" class="tsd-kind-icon">CSSFactory</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="twind_css.csskeyframes.html" class="tsd-kind-icon">CSSKeyframes</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-parent-kind-module">
-						<a href="twind_css.screen.html" class="tsd-kind-icon">Screen</a>
-					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module">
-						<a href="twind_css.screendirective.html" class="tsd-kind-icon">Screen<wbr>Directive</a>
+					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+						<a href="twind.directive.html" class="tsd-kind-icon">Directive</a>
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/twind_css.html#animation-1" class="tsd-kind-icon">animation</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/twind_css.html#css" class="tsd-kind-icon">css</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/twind_css.html#keyframes" class="tsd-kind-icon">keyframes</a>
-					</li>
-					<li class=" tsd-kind-function tsd-parent-kind-module">
-						<a href="../modules/twind_css.html#screen-1" class="tsd-kind-icon">screen</a>
-					</li>
 				</ul>
 			</nav>
 		</div>
