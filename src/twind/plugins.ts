@@ -3,7 +3,6 @@ import type {
   Theme,
   CSSRules,
   CSSProperties,
-  DirectiveHandler,
   Plugins,
   ThemeResolver,
   Context,
@@ -16,6 +15,12 @@ import * as is from '../internal/is'
 
 import { includes, join, joinTruthy, tail, capitalize, buildMediaQuery } from '../internal/util'
 import { corners, expandEdges, edges } from './helpers'
+
+type PluginHandler = (
+  parameters: string[],
+  context: Context,
+  id: string,
+) => CSSRules | string | Falsy
 
 // Shared variables
 let _: undefined | string | CSSRules | CSSProperties | string[] | boolean | Falsy | number
@@ -38,7 +43,7 @@ const propertyValue = (property?: string, separator?: string) => (
   [property || (id as string)]: join(params, separator),
 })
 
-const themeProperty = (section?: keyof Theme): DirectiveHandler => (
+const themeProperty = (section?: keyof Theme): PluginHandler => (
   params: string[],
   { theme },
   id,
@@ -46,7 +51,7 @@ const themeProperty = (section?: keyof Theme): DirectiveHandler => (
   [section || id]: theme(section || (id as keyof Theme), params) as string,
 })
 
-const alias = (handler: DirectiveHandler, name: string): DirectiveHandler => (params, context) =>
+const alias = (handler: PluginHandler, name: string): PluginHandler => (params, context) =>
   handler(params, context, name)
 
 const display = property('display')
@@ -54,13 +59,13 @@ const position = property('position')
 const textTransform = property('textTransform')
 const textDecoration = property('textDecoration')
 const fontStyle = property('fontStyle')
-const fontVariantNumeric = (key: string): DirectiveHandler => (params, context, id) => ({
+const fontVariantNumeric = (key: string): PluginHandler => (params, context, id) => ({
   ['--tw-' + key]: id,
   fontVariantNumeric:
     'var(--tw-ordinal,/*!*/ /*!*/) var(--tw-slashed-zero,/*!*/ /*!*/) var(--tw-numeric-figure,/*!*/ /*!*/) var(--tw-numeric-spacing,/*!*/ /*!*/) var(--tw-numeric-fraction,/*!*/ /*!*/)',
 })
 
-const inset: DirectiveHandler = (params, { theme }, id) => ({ [id]: theme('inset', params) })
+const inset: PluginHandler = (params, { theme }, id) => ({ [id]: theme('inset', params) })
 
 const opacityProperty = (
   params: string[],
@@ -154,7 +159,7 @@ const contentPluginFor = (property: string) => (params: string[]): CSSRules =>
     ? { [property]: `flex-${params[0]}` }
     : placeHelper(property, params)
 
-const gridPlugin = (kind: string): DirectiveHandler => (params) => {
+const gridPlugin = (kind: string): PluginHandler => (params) => {
   switch (params[0]) {
     case 'auto':
       return { [`grid-${kind}`]: 'auto' }
@@ -170,7 +175,7 @@ const gridPlugin = (kind: string): DirectiveHandler => (params) => {
   }
 }
 
-const border: DirectiveHandler = (params, { theme }, id): CSSRules | undefined => {
+const border: PluginHandler = (params, { theme }, id): CSSRules | undefined => {
   switch (params[0]) {
     case 'solid':
     case 'dashed':
@@ -210,14 +215,14 @@ const transform = (gpu?: boolean): string =>
 // .translate-y-1/2	--translate-y: 50%;
 // .skew-y-0	--skew-y: 0;
 // .skew-y-1	--skew-y: 1deg;
-const transformXYFunction: DirectiveHandler = (params, context, id) =>
+const transformXYFunction: PluginHandler = (params, context, id) =>
   (_ = context.theme(id as 'scale' | 'skew' | 'translate', params[1] || params[0])) && {
     [`--tw-${id}-x`]: params[0] !== 'y' && _,
     [`--tw-${id}-y`]: params[0] !== 'x' && _,
     transform: [`${id}${params[1] ? params[0].toUpperCase() : ''}(${_})`, transform()],
   }
 
-const edgesPluginFor = (key: 'margin' | 'padding'): DirectiveHandler => (params, context, id) =>
+const edgesPluginFor = (key: 'margin' | 'padding'): PluginHandler => (params, context, id) =>
   id[1] ? edges(context.theme(key, params), id[1], key) : themeProperty(key)(params, context, id)
 
 // For p-*, px-*, pt-*
@@ -228,7 +233,7 @@ const margin = edgesPluginFor('margin')
 
 // 'min-w-full' -> minWidth
 // 'max-h-0.5' -> maxHeight
-const minMax: DirectiveHandler = (params, { theme }, id) =>
+const minMax: PluginHandler = (params, { theme }, id) =>
   (_ = ({ w: 'width', h: 'height' } as Record<string, undefined | string>)[params[0]]) && {
     [(_ = `${id}${capitalize(_)}`)]: theme(
       _ as 'minWidth' | 'minHeight' | 'maxWidth' | 'maxHeight',

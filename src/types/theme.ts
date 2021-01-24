@@ -1,4 +1,5 @@
 import type { CSSProperties } from './css'
+import type { Context } from './twind'
 import type { MaybeArray } from './util'
 
 export interface ThemeResolver {
@@ -25,34 +26,28 @@ export interface ThemeResolver {
 }
 
 export interface ThemeHelper {
-  <Section extends keyof Theme>(section: Section): ({
-    theme,
-  }: {
-    theme: ThemeResolver
-  }) => Record<string, ThemeSectionType<Theme[Section]>>
+  <Section extends keyof Theme>(section: Section): (
+    context: Context,
+  ) => Record<string, ThemeSectionType<Theme[Section]>>
 
-  <Section extends keyof Theme>(keypath: `${Section}.${string}`): ({
-    theme,
-  }: {
-    theme: ThemeResolver
-  }) => ThemeSectionType<Theme[Section]> | undefined
+  <Section extends keyof Theme>(keypath: `${Section}.${string}`): (
+    context: Context,
+  ) => ThemeSectionType<Theme[Section]> | undefined
 
   <Section extends keyof Theme>(
     keypath: `${Section}.${string}`,
     defaultValue: NonNullable<ThemeSectionType<Theme[Section]>>,
-  ): ({ theme }: { theme: ThemeResolver }) => NonNullable<ThemeSectionType<Theme[Section]>>
+  ): (context: Context) => NonNullable<ThemeSectionType<Theme[Section]>>
 
-  <Section extends keyof Theme>(section: Section, key: string | string[]): ({
-    theme,
-  }: {
-    theme: ThemeResolver
-  }) => ThemeSectionType<Theme[Section]> | undefined
+  <Section extends keyof Theme>(section: Section, key: string | string[]): (
+    context: Context,
+  ) => ThemeSectionType<Theme[Section]> | undefined
 
   <Section extends keyof Theme>(
     section: Section,
     key: string | string[],
     defaultValue: NonNullable<ThemeSectionType<Theme[Section]>>,
-  ): ({ theme }: { theme: ThemeResolver }) => NonNullable<ThemeSectionType<Theme[Section]>>
+  ): (context: Context) => NonNullable<ThemeSectionType<Theme[Section]>>
 }
 
 export type Unwrap<T> = T extends string[] ? string : T extends Record<string, infer R> ? R : T

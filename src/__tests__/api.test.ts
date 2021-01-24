@@ -5,7 +5,8 @@ import type { Instance, InlineDirective } from '../types'
 import type { VirtualSheet } from '../sheets/index'
 
 import { virtualSheet } from '../sheets/index'
-import { create, strict, theme } from '../index'
+import { create, strict, theme, apply } from '../index'
+import { css } from '../css/index'
 
 import data from './api.json'
 
@@ -437,12 +438,12 @@ test('tw`bg(${"red(600 700(hover:& focus:&)"}))`', ({ tw, sheet }) => {
 test('tw`hover:${() => ...} bg-${"red"}-600 ${"underline"}`', ({ tw, sheet }) => {
   assert.is(
     tw`hover:${() => ({ color: 'fuchsia' })} bg-${'red'}-600 ${'underline'}`,
-    'hover:tw-l9c87d bg-red-600 underline',
+    'tw-41gqd9 bg-red-600 underline',
   )
   assert.equal(sheet.target, [
     '.bg-red-600{--tw-bg-opacity:1;background-color:#dc2626;background-color:rgba(220,38,38,var(--tw-bg-opacity))}',
     '.underline{text-decoration:underline}',
-    '.hover\\:tw-l9c87d:hover{color:fuchsia}',
+    '.tw-41gqd9:hover{color:fuchsia}',
   ])
 })
 
@@ -598,17 +599,17 @@ test('no arguments', ({ tw }) => {
 test('theme helper', ({ sheet, tw }) => {
   assert.is(
     tw(() => ({ color: theme('colors', 'red.500') })),
-    'tw-1xw1vyh',
+    'tw-1qoppr4',
   )
-  assert.equal(sheet.target, ['.tw-1xw1vyh{color:#ef4444}'])
+  assert.equal(sheet.target, ['.tw-1qoppr4{color:#ef4444}'])
 })
 
 test('inline rule (css object)', ({ sheet, tw }) => {
   assert.is(
     tw(({ theme }) => ({ color: theme('colors', 'red.500') })),
-    'tw-1e4d9nh',
+    'tw-yinfv4',
   )
-  assert.equal(sheet.target, ['.tw-1e4d9nh{color:#ef4444}'])
+  assert.equal(sheet.target, ['.tw-yinfv4{color:#ef4444}'])
 })
 
 test('inline rule (tag)', ({ sheet, tw }) => {
@@ -666,7 +667,7 @@ test('inline rule nested', ({ sheet, tw }) => {
       },
       'font-bold',
     ),
-    'text-center sm:hover:underline sm:focus:tw-lbtuhn lg:text-lg lg:focus:underline font-bold',
+    'text-center sm:hover:underline tw-1xfd7yc lg:text-lg lg:focus:underline font-bold',
   )
 
   assert.equal(sheet.target, [
@@ -675,7 +676,7 @@ test('inline rule nested', ({ sheet, tw }) => {
     '@media (min-width:640px){.sm\\:hover\\:underline:hover{text-decoration:underline}}',
     '@media (min-width:1024px){.lg\\:text-lg{font-size:1.125rem;line-height:1.75rem}}',
     '@media (min-width:1024px){.lg\\:focus\\:underline:focus{text-decoration:underline}}',
-    '@media (min-width:640px){.sm\\:focus\\:tw-lbtuhn:focus{color:#ef4444}}',
+    '@media (min-width:640px){.tw-1xfd7yc:focus{color:#ef4444}}',
   ])
 })
 
@@ -693,12 +694,12 @@ test('inject @font-face', ({ sheet, tw }) => {
         },
       },
     })),
-    'tw-vqfbxj',
+    'tw-1vn7hw5',
   )
 
   assert.equal(sheet.target, [
     '@font-face{font-family:Open Sans;src:url("/fonts/OpenSans-Regular-webfont.woff2") format("woff2"), url("/fonts/OpenSans-Regular-webfont.woff") format("woff")}',
-    '.tw-vqfbxj p{font-family:Open Sans}',
+    '.tw-1vn7hw5 p{font-family:Open Sans}',
   ])
 })
 
@@ -710,12 +711,12 @@ test('inject global styles', ({ sheet, tw }) => {
       },
       backgroundColor: 'var(--main-bg-color)',
     })),
-    'tw-1kfw9fm',
+    'tw-h2hhry',
   )
 
   assert.equal(sheet.target, [
-    '.tw-1kfw9fm :root{--main-bg-color:brown}',
-    '.tw-1kfw9fm{background-color:var(--main-bg-color)}',
+    '.tw-h2hhry :root{--main-bg-color:brown}',
+    '.tw-h2hhry{background-color:var(--main-bg-color)}',
   ])
 })
 
@@ -726,10 +727,10 @@ test('expand nested selector', ({ sheet, tw }) => {
         color: 'black',
       },
     })),
-    'tw-ec2uk9',
+    'tw-n3qe40',
   )
 
-  assert.equal(sheet.target, ['.tw-ec2uk9,.tw-ec2uk9  a{color:black}'])
+  assert.equal(sheet.target, ['.tw-n3qe40,.tw-n3qe40  a{color:black}'])
 })
 
 test('fontSize string', ({ sheet }) => {
@@ -772,7 +773,7 @@ test('use :global', ({ tw, sheet }) => {
     },
   })
 
-  assert.is(tw(style), 'tw-10a7ran')
+  assert.is(tw(style), 'tw-1wz18eh')
 
   assert.equal(sheet.target, ['html{background-color:#111827}'])
 })
@@ -794,6 +795,18 @@ test('can call setup once', () => {
   assert.throws(() => {
     setup()
   }, 'Error: [LATE_SETUP_CALL] {}')
+})
+
+test('same style in different layers has different hash', ({ tw, sheet }) => {
+  assert.is(tw`w-0 ${css({ width: '0px' })} ${apply(`w-0`)}`, 'w-0 tw-1r1ybee tw-a7wz74')
+  assert.equal(sheet.target, [
+    // apply(`w-0`)
+    '.tw-a7wz74{width:0px}',
+    // w-0
+    '.w-0{width:0px}',
+    // css({ width: '0px' })
+    '.tw-1r1ybee{width:0px}',
+  ])
 })
 
 test.run()

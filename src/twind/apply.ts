@@ -1,15 +1,15 @@
-import type { Token, ApplyDirective, Context } from '../types'
+import type { Token, Directive, CSSRules, Context } from '../types'
 
 import { parse } from './parse'
 import { directive } from './directive'
 
 export interface Apply {
-  (strings: TemplateStringsArray, ...interpolations: Token[]): ApplyDirective
+  (strings: TemplateStringsArray, ...interpolations: Token[]): Directive<CSSRules>
 
-  (...tokens: Token[]): ApplyDirective
+  (...tokens: Token[]): Directive<CSSRules>
 }
 
 const applyFactory = (tokens: unknown[], { css }: Context) => css(parse(tokens))
 
-export const apply: Apply = (...tokens: unknown[]): ApplyDirective =>
+export const apply: Apply = (...tokens: unknown[]): Directive<CSSRules> =>
   directive(applyFactory, tokens)

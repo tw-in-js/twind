@@ -1,4 +1,4 @@
-import type { Context, CSSRules, Plugins, Rule, Falsy } from '../types'
+import type { Context, CSSRules, Plugins, Rule, Falsy, InlineDirective } from '../types'
 
 import * as is from '../internal/is'
 
@@ -7,7 +7,7 @@ import { join, tail } from '../internal/util'
 export const translate = (
   plugins: Plugins,
   context: Context,
-): ((rule: Rule, isTranslating?: boolean) => CSSRules | string | Falsy) => (
+): ((rule: Rule, isTranslating?: boolean) => InlineDirective | CSSRules | string | Falsy) => (
   rule,
   isTranslating,
 ) => {

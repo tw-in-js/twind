@@ -808,14 +808,15 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
-distilt@^0.9.3:
-  version "0.9.3"
-  resolved "https://registry.npmjs.org/distilt/-/distilt-0.9.3.tgz#e1411f7c8b43fb5fe8efe44375cf0844e7184ebb"
-  integrity sha512-q9KiEaPqxucOgowHLel8i2aFTRgU8nt5kyRDJkwP2XVe2yTpE5xXDd9/HG1EaodWOj4OD79C6vs/fPXAdFX2uA==
+distilt@^0.9.4:
+  version "0.9.4"
+  resolved "https://registry.npmjs.org/distilt/-/distilt-0.9.4.tgz#ac5f587b6a7568eed2bc54d5bf2fb4b7092aa5c6"
+  integrity sha512-t66NqIK8RQHX2vwgYWwIWnooJ3hbs4+AkJAiiB8bgNocSx/MjfQdiV54iYJzmuUtuOgRQuqi13gELb1S2u6y3g==
   dependencies:
     es-module-lexer "^0.3.26"
     esbuild "^0.8.28"
     execa "^5.0.0"
+    find-up "^5.0.0"
     globby "^11.0.1"
     pkg-dir "^5.0.0"
     project-root-directory "^1.0.3"

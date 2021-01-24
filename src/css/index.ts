@@ -10,6 +10,7 @@ import type {
   CSSAtKeyframes,
   Context,
   CSSProperties,
+  Directive,
   Falsy,
   MaybeThunk,
   MaybeArray,
@@ -21,17 +22,13 @@ import { evalThunk, merge } from '../internal/util'
 
 export { tw, apply, setup, theme } from '../index'
 
-export interface CSSDirective {
-  (context: Context): CSSRules
-}
-
 export interface CSSFactory<T, I, R> {
   (
     strings: TemplateStringsArray,
     ...interpolations: readonly MaybeThunk<MaybeArray<I | string | number | Falsy>>[]
-  ): R
-  (tokens: MaybeThunk<MaybeArray<T | Falsy>>): R
-  (...tokens: readonly MaybeThunk<T | Falsy>[]): R
+  ): Directive<R>
+  (tokens: MaybeThunk<MaybeArray<T | Falsy>>): Directive<R>
+  (...tokens: readonly MaybeThunk<T | Falsy>[]): Directive<R>
 }
 
 const translate = (tokens: unknown[], context: Context): CSSRules => {
@@ -144,13 +141,9 @@ const cssFactory = (tokens: unknown[], context: Context): CSSRules =>
     context,
   )
 
-export const css: CSSFactory<CSSRules, CSSRules, CSSDirective> = (
+export const css: CSSFactory<CSSRules, CSSRules, CSSRules> = (
   ...tokens: unknown[]
-): CSSDirective => directive(cssFactory, tokens)
-
-export interface CSSKeyframes {
-  (context: Context): string
-}
+): Directive<CSSRules> => directive(cssFactory, tokens)
 
 const keyframesFactory = (tokens: unknown[], context: Context): string => {
   const waypoints = cssFactory(tokens as CSSRules[], context)
@@ -188,9 +181,9 @@ const keyframesFactory = (tokens: unknown[], context: Context): string => {
  * ```
  * @param waypoints
  */
-export const keyframes: CSSFactory<CSSAtKeyframes, CSSAtKeyframes | CSSProperties, CSSKeyframes> = (
+export const keyframes: CSSFactory<CSSAtKeyframes, CSSAtKeyframes | CSSProperties, string> = (
   ...tokens: unknown[]
-): CSSKeyframes => directive(keyframesFactory, tokens)
+): Directive<string> => directive(keyframesFactory, tokens)
 
 /**
  *
@@ -215,42 +208,39 @@ export interface Animation {
   (value: string | CSSRules | ((context: Context) => string)): CSSFactory<
     CSSAtKeyframes,
     CSSAtKeyframes | CSSProperties,
-    CSSDirective
+    CSSRules
   >
 
   (
     value: string | CSSRules | ((context: Context) => string),
-    waypoints: CSSAtKeyframes | CSSKeyframes,
-  ): CSSDirective
+    waypoints: CSSAtKeyframes | Directive<string>,
+  ): Directive<CSSRules>
 }
 
 export const animation = ((
   value: string | CSSRules | ((context: Context) => string),
-  waypoints?: CSSAtKeyframes | CSSKeyframes,
-): CSSDirective | CSSFactory<CSSAtKeyframes, CSSAtKeyframes | CSSProperties, CSSDirective> =>
+  waypoints?: CSSAtKeyframes | Directive<string>,
+): Directive<CSSRules> | CSSFactory<CSSAtKeyframes, CSSAtKeyframes | CSSProperties, CSSRules> =>
   waypoints === undefined
-    ? (((...args: Parameters<typeof keyframes>): CSSDirective =>
+    ? (((...args: Parameters<typeof keyframes>): Directive<CSSRules> =>
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         animation(value, keyframes(...(args as any)))) as CSSFactory<
         CSSAtKeyframes,
         CSSAtKeyframes | CSSProperties,
-        CSSDirective
+        CSSRules
       >)
     : css({
         ...(is.object(value) ? value : { animation: value }),
         animationName: is.function(waypoints) ? waypoints : keyframes(waypoints),
       })) as Animation
 
-export interface ScreenDirective {
-  (context: Context): string
-}
 export interface Screen {
-  (size: string): ScreenDirective
-  (size: string, css: CSSDirective | MaybeArray<CSSRules | Falsy>): CSSDirective
+  (size: string): Directive<string>
+  (size: string, css: Directive<CSSRules> | MaybeArray<CSSRules | Falsy>): Directive<CSSRules>
 }
 
 const screenFactory = (
-  { size, rules }: { size: string; rules?: CSSDirective | MaybeArray<CSSRules | Falsy> },
+  { size, rules }: { size: string; rules?: Directive<CSSRules> | MaybeArray<CSSRules | Falsy> },
   context: Context,
 ): string | CSSRules => {
   const media = `@media (min-width: ${context.theme('screens', size)})`
@@ -262,5 +252,5 @@ const screenFactory = (
       }
 }
 
-export const screen = ((size: string, rules?: CSSDirective | MaybeArray<CSSRules | Falsy>) =>
+export const screen = ((size: string, rules?: Directive<CSSRules> | MaybeArray<CSSRules | Falsy>) =>
   directive(screenFactory, { size, rules })) as Screen

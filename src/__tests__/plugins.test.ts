@@ -5,6 +5,7 @@ import type { Instance, Configuration } from '../types'
 import type { VirtualSheet } from '../sheets/index'
 
 import { virtualSheet } from '../sheets/index'
+import { css, theme, apply } from '../css/index'
 import { create, strict } from '../index'
 
 const test = suite<{
@@ -71,6 +72,71 @@ test('plugin can return new tokens to parse using `tw`', ({ setup }) => {
   )
 
   assert.throws(() => tw('btn-unknown-color'), /UNKNOWN_DIRECTIVE/)
+})
+
+test('value can be a css object', ({ setup, sheet }) => {
+  const { tw } = setup({
+    plugins: {
+      amazing: { color: 'blue', fontSize: '99px' },
+    },
+  })
+
+  assert.is(tw('amazing'), 'amazing')
+  assert.equal(sheet.target, ['.amazing{color:blue;font-size:99px}'])
+})
+
+test('value can be an CSS directive', ({ setup, sheet }) => {
+  const { tw } = setup({
+    plugins: {
+      amazing: css`
+        color: red;
+        font-size: ${theme('spacing.96')};
+      `,
+    },
+  })
+
+  assert.is(tw('amazing'), 'amazing')
+  assert.equal(sheet.target, ['.amazing{color:red;font-size:24rem}'])
+})
+
+test('value can return an CSS directive', ({ setup, sheet }) => {
+  const { tw } = setup({
+    plugins: {
+      amazing: (params) => css`
+        color: ${theme('colors', params[0] + '-500')};
+        font-size: ${theme('spacing.96')};
+      `,
+    },
+  })
+
+  assert.is(tw('amazing-blue'), 'amazing-blue')
+  assert.equal(sheet.target, ['.amazing-blue{color:#3b82f6;font-size:24rem}'])
+})
+
+test('value can be an apply directive', ({ setup, sheet }) => {
+  const { tw } = setup({
+    plugins: {
+      amazing: apply`text(red-500 7xl)`,
+    },
+  })
+
+  assert.is(tw('amazing'), 'amazing')
+  assert.equal(sheet.target, [
+    '.amazing{--tw-text-opacity:1;color:#ef4444;color:rgba(239,68,68,var(--tw-text-opacity));font-size:4.5rem;line-height:1}',
+  ])
+})
+
+test('value can be an apply directive', ({ setup, sheet }) => {
+  const { tw } = setup({
+    plugins: {
+      amazing: (params) => apply`text(${params[0]}-500 7xl)`,
+    },
+  })
+
+  assert.is(tw('amazing-blue'), 'amazing-blue')
+  assert.equal(sheet.target, [
+    '.amazing-blue{--tw-text-opacity:1;color:#3b82f6;color:rgba(59,130,246,var(--tw-text-opacity));font-size:4.5rem;line-height:1}',
+  ])
 })
 
 test.run()

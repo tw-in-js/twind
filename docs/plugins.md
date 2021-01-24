@@ -61,6 +61,26 @@ tw`btn-indigo`
 // => py-2 px-4 font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75 bg-indigo-500 hover:bg-indigo-700 text-white
 ```
 
+If you want to combine all CSS declarations of these rules into one class use `apply`:
+
+```js
+import { tw, setup, apply } from 'twind'
+
+setup({
+  plugins: {
+    btn: apply`
+      py-2 px-4
+      font-semibold
+      rounded-lg shadow-md
+      focus:(outline-none ring(2 indigo-400 opacity-75))
+   `,
+  },
+})
+
+tw`btn`
+// tw-XXXXX
+```
+
 ## Plugins without arguments
 
 Another form of plugin is one that returns the literal CSS rules that the compiler should return in response to a single directive.
@@ -80,6 +100,21 @@ setup({
 ```
 
 The above code will result in the compiler returning `{ scroll-snap-type: x }` every time it encounters the directive `scroll-snap-x` within a set of rules.
+
+If you are migrating existing CSS you can use the `css` helper:
+
+```js
+import { setup } from 'twind'
+import { css } from 'twind/css'
+
+setup({
+  plugins: {
+    'scroll-snap-x': css`
+      scroll-snap-type: x;
+    `;
+  },
+})
+```
 
 ## Plugins with arguments
 

@@ -9,6 +9,7 @@ import type {
   InlineDirective,
   CSSRules,
   Mode,
+  Falsy,
 } from '../types'
 
 import { corePlugins } from './plugins'
@@ -42,7 +43,7 @@ const loadMode = (mode: Configuration['mode']): Mode =>
 
 // Creates rule id including variants, negate and directive
 // which is exactly like a tailwind rule
-const toString = (rule: Rule, directive = rule.d): string => {
+const stringify = (rule: Rule, directive = rule.d): string => {
   if (is.function(directive)) return ''
 
   const base = join(rule.v, '')
@@ -74,7 +75,7 @@ export const configure = (
   let activeRule: { v: string[]; n?: boolean } = { v: [] }
 
   let translateDepth = 0
-  const lastTranslations: ReturnType<typeof translate>[] = []
+  const lastTranslations: (CSSRules | string | Falsy)[] = []
 
   // The context that is passed to functions to access the theme, ...
   const context: Context = {
@@ -138,13 +139,13 @@ export const configure = (
   // Wrap `translate()` to keep track of the active rule
   // we need to use try-finally as mode.report may throw
   // and we must always reset the active rule
-  const doTranslate = (rule: Rule): ReturnType<typeof translate> => {
+  const doTranslate = (rule: Rule): CSSRules | string | Falsy => {
     // Keep track of active variants for nested `tw` calls
     const parentRule = activeRule
     activeRule = rule
 
     try {
-      return translate(rule)
+      return evalThunk(translate(rule), context)
     } finally {
       activeRule = parentRule
     }
@@ -187,23 +188,19 @@ export const configure = (
     // Static rules (from template literals) can cache their id
     // this greatly improves performance
     if (!rule.$) {
-      // For inline directives (functions) `toString` returns an empty string
+      // For inline directives (functions) `stringify` returns an empty string
       // in that case we check if we already have a name for the function
       // and use that one to generate the id
-      rule.$ = toString(rule) || toString(rule, inlineDirectiveName.get(rule.d as InlineDirective))
+      rule.$ =
+        stringify(rule) || stringify(rule, inlineDirectiveName.get(rule.d as InlineDirective))
     }
 
     // Check if we already have a class name for this rule id
     let className = translateDepth ? null : idToClassName.get(rule.$)
 
-    // We check for nullish because we put an empty string into `idToClassName`
-    // if a rule did not generate a class name
-    // This way we report the unknown directives only once
     if (className == null) {
       // 2. translate each rule using plugins
       let translation = doTranslate(rule)
-
-      let translationKey: string | undefined
 
       // If this is a unknown inline directive
       if (!rule.$) {
@@ -213,13 +210,13 @@ export const configure = (
         // JSON.stringify ignores functions - by using a custom replace
         // we can calculate a hash based on the value returned by these functions
         // eslint-disable-next-line no-var
-        rule.$ = cyrb32((translationKey = JSON.stringify(translation, evaluateFunctions)))
+        rule.$ = cyrb32(JSON.stringify(translation, evaluateFunctions))
 
         // Remember it
         inlineDirectiveName.set(rule.d as InlineDirective, rule.$)
 
         // Generate an id including the current variants
-        rule.$ = toString(rule, rule.$)
+        rule.$ = stringify(rule, rule.$)
       }
 
       if (is.object(translation)) {
@@ -228,27 +225,22 @@ export const configure = (
           translation[':global'] = serialize(translation[':global'] as CSSRules).forEach(inject)
         }
 
+        // - components: layer.components = 1
+        // - plugins: layer.utilities = 2
+        // - inline directive: layer.css = 3
+        const layer = is.function(rule.d) ? (is.string(translation._) ? 1 : 3) : 2
+
+        className = hash || is.function(rule.d) ? (hash || cyrb32)(layer + rule.$) : rule.$
+
         // 3. decorate: apply variants
         translation = decorate(translation, rule)
-
-        className = hash
-          ? hash(translationKey || JSON.stringify(translation, evaluateFunctions))
-          : rule.$
 
         if (translateDepth) {
           lastTranslations.push(translation)
         } else {
           // 4. serialize: convert to css string with precedence
-          // - components: layer.components = 1
-          // - plugins: layer.utilities = 2
-          // - inline directive: layer.css = 3
           // 5. inject: add to dom
-          serialize(
-            translation,
-            className,
-            rule,
-            is.function(rule.d) ? (is.string(translation._) ? 1 : 3) : 2,
-          ).forEach(inject)
+          serialize(translation, className, rule, layer).forEach(inject)
 
           if (translation._) {
             className += ' ' + translation._

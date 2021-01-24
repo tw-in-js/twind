@@ -9,10 +9,6 @@ export interface TW {
   (...tokens: Token[]): string
 }
 
-export interface ApplyDirective {
-  (context: Context): CSSRules
-}
-
 export interface Context {
   /** Allow composition */
   readonly tw: TW
@@ -149,7 +145,7 @@ export interface DirectiveHandler {
   /**
    * Creates CSSRules based on `parameters`
    */
-  (parameters: string[], context: Context, id: string): CSSRules | string | Falsy
+  (parameters: string[], context: Context, id: string): InlineDirective | CSSRules | string | Falsy
 }
 
 export interface Rule {
@@ -177,6 +173,14 @@ export interface Rule {
    * This is used to cache the id of static rules (from template literals).
    */
   $: string
+}
+
+export interface Directive<T> {
+  /** Can be used as a inline directive */
+  (context: Context): T
+
+  /** Can be used as a plugin */
+  (params: string[], context: Context): T
 }
 
 export interface InlineDirective {

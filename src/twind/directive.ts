@@ -1,4 +1,4 @@
-import type { Context, CSSRules, Falsy } from '../types'
+import type { Context, Directive } from '../types'
 
 import * as is from '../internal/is'
 import { ensureMaxSize } from '../internal/util'
@@ -20,10 +20,10 @@ const stringify = (data: unknown): string | undefined => {
 }
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
-type Factory = (data: any, context: Context) => any
-type Directive<T = any> = (context: Context) => T
-
-const cacheByFactory = new WeakMap<Factory, Map<string, Directive>>()
+const cacheByFactory = new WeakMap<
+  (data: any, context: Context) => any,
+  Map<string, Directive<any>>
+>()
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
 /**
@@ -35,7 +35,7 @@ const cacheByFactory = new WeakMap<Factory, Map<string, Directive>>()
  * @param factory to use when the directive is invoked
  * @param data to use
  */
-export const directive = <Data, T extends CSSRules | string | Falsy>(
+export const directive = <Data, T>(
   factory: (data: Data, context: Context) => T,
   data: Data,
 ): Directive<T> => {
@@ -54,12 +54,17 @@ export const directive = <Data, T extends CSSRules | string | Falsy>(
   }
 
   if (!directive) {
-    directive = Object.defineProperty((context: Context): T => factory(data, context), 'toJSON', {
-      // Allow twind to generate a unique id for this directive
-      // twind uses JSON.stringify which returns undefined for functions like this directive
-      // providing a toJSON function allows to include this directive in the id generation
-      value: () => key || data,
-    })
+    directive = Object.defineProperty(
+      (params: string[] | Context, context: Context): T =>
+        factory(data, Array.isArray(params) ? context : params),
+      'toJSON',
+      {
+        // Allow twind to generate a unique id for this directive
+        // twind uses JSON.stringify which returns undefined for functions like this directive
+        // providing a toJSON function allows to include this directive in the id generation
+        value: () => key || data,
+      },
+    )
 
     if (cache) {
       cache.set(key as string, directive as Directive<T>)

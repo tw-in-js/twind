@@ -36,16 +36,16 @@ test('simple component', ({ tw, sheet }) => {
   assert.type(btn, 'function')
   assert.equal(sheet.target, [], 'nothing injected yet')
 
-  assert.is(tw(btn), 'tw-z1u1ls')
+  assert.is(tw(btn), 'tw-4tvvl1')
   assert.equal(sheet.target, [
-    '.tw-z1u1ls{display:inline-block;--tw-17cwy6m:1;background-color:#6b7280;background-color:rgba(107,114,128,var(--tw-17cwy6m));font-size:1rem;line-height:1.5rem}',
+    '.tw-4tvvl1{display:inline-block;--tw-17cwy6m:1;background-color:#6b7280;background-color:rgba(107,114,128,var(--tw-17cwy6m));font-size:1rem;line-height:1.5rem}',
   ])
 
-  assert.is(tw`${btn} bg-red-500 text-lg`, 'tw-z1u1ls tw-f1tjd tw-1n46r4m')
+  assert.is(tw`${btn} bg-red-500 text-lg`, 'tw-4tvvl1 tw-1u8yv89 tw-1ubuvjp')
   assert.equal(sheet.target, [
-    '.tw-z1u1ls{display:inline-block;--tw-17cwy6m:1;background-color:#6b7280;background-color:rgba(107,114,128,var(--tw-17cwy6m));font-size:1rem;line-height:1.5rem}',
-    '.tw-f1tjd{--tw-17cwy6m:1;background-color:#ef4444;background-color:rgba(239,68,68,var(--tw-17cwy6m))}',
-    '.tw-1n46r4m{font-size:1.125rem;line-height:1.75rem}',
+    '.tw-4tvvl1{display:inline-block;--tw-17cwy6m:1;background-color:#6b7280;background-color:rgba(107,114,128,var(--tw-17cwy6m));font-size:1rem;line-height:1.5rem}',
+    '.tw-1u8yv89{--tw-17cwy6m:1;background-color:#ef4444;background-color:rgba(239,68,68,var(--tw-17cwy6m))}',
+    '.tw-1ubuvjp{font-size:1.125rem;line-height:1.75rem}',
   ])
 })
 
@@ -56,9 +56,9 @@ test('child components', ({ tw, sheet }) => {
   assert.type(btnBlock, 'function')
   assert.equal(sheet.target, [], 'nothing injected yet')
 
-  assert.is(tw(btnBlock), 'tw-jo609v')
+  assert.is(tw(btnBlock), 'tw-4ca4gm')
   assert.equal(sheet.target, [
-    '.tw-jo609v{display:block;--tw-17cwy6m:1;background-color:#6b7280;background-color:rgba(107,114,128,var(--tw-17cwy6m));font-size:1rem;line-height:1.5rem}',
+    '.tw-4ca4gm{display:block;--tw-17cwy6m:1;background-color:#6b7280;background-color:rgba(107,114,128,var(--tw-17cwy6m));font-size:1rem;line-height:1.5rem}',
   ])
 })
 
@@ -70,12 +70,12 @@ test('with variants', ({ tw, sheet }) => {
     focus:(outline-none ring(2 indigo-400 opacity-75))
   `
 
-  assert.is(tw(btn), 'tw-v24ifx')
+  assert.is(tw(btn), 'tw-eqx6xz')
   assert.equal(sheet.target, [
     '*{--tw-1m9cmzd:var(--tw-rz3pvs,/*!*/ /*!*/);--tw-iljcf6:0px;--tw-1q9ryqm:#fff;--tw-g5efu5:rgba(59,130,246,var(--tw-mo52hn,0.5));--tw-1s0t3ke:0 0 transparent;--tw-zxn4nw:0 0 transparent}',
     '*{--tw-1qg7wmx:0 0 transparent}',
-    '.tw-v24ifx{padding-bottom:0.5rem;padding-top:0.5rem;padding-left:1rem;padding-right:1rem;font-weight:600;border-radius:0.5rem;--tw-1qg7wmx:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);box-shadow:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);box-shadow:var(--tw-1s0t3ke,0 0 transparent),var(--tw-zxn4nw,0 0 transparent),var(--tw-1qg7wmx)}',
-    '.tw-v24ifx:focus{outline:2px solid transparent;outline-offset:2px;--tw-1s0t3ke:var(--tw-1m9cmzd) 0 0 0 var(--tw-iljcf6) var(--tw-1q9ryqm);--tw-zxn4nw:var(--tw-1m9cmzd) 0 0 0 calc(2px + var(--tw-iljcf6)) var(--tw-g5efu5);box-shadow:var(--tw-1s0t3ke),var(--tw-zxn4nw),var(--tw-1qg7wmx,0 0 transparent);--tw-mo52hn:0.75;--tw-g5efu5:rgba(129,140,248,var(--tw-mo52hn))}',
+    '.tw-eqx6xz{padding-bottom:0.5rem;padding-top:0.5rem;padding-left:1rem;padding-right:1rem;font-weight:600;border-radius:0.5rem;--tw-1qg7wmx:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);box-shadow:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);box-shadow:var(--tw-1s0t3ke,0 0 transparent),var(--tw-zxn4nw,0 0 transparent),var(--tw-1qg7wmx)}',
+    '.tw-eqx6xz:focus{outline:2px solid transparent;outline-offset:2px;--tw-1s0t3ke:var(--tw-1m9cmzd) 0 0 0 var(--tw-iljcf6) var(--tw-1q9ryqm);--tw-zxn4nw:var(--tw-1m9cmzd) 0 0 0 calc(2px + var(--tw-iljcf6)) var(--tw-g5efu5);box-shadow:var(--tw-1s0t3ke),var(--tw-zxn4nw),var(--tw-1qg7wmx,0 0 transparent);--tw-mo52hn:0.75;--tw-g5efu5:rgba(129,140,248,var(--tw-mo52hn))}',
   ])
 })
 
@@ -83,10 +83,10 @@ test('rule order matters', ({ tw, sheet }) => {
   const blue = apply`text-red-500 text-blue-500`
   const red = apply`text-blue-500 text-red-500`
 
-  assert.is(tw`${blue} ${red}`, 'tw-z8gzwe tw-17jpxhn')
+  assert.is(tw`${blue} ${red}`, 'tw-1lpdkf2 tw-30bsuq')
   assert.equal(sheet.target, [
-    '.tw-z8gzwe{--tw-dxr4o8:1;color:#3b82f6;color:rgba(59,130,246,var(--tw-dxr4o8))}',
-    '.tw-17jpxhn{--tw-dxr4o8:1;color:#ef4444;color:rgba(239,68,68,var(--tw-dxr4o8))}',
+    '.tw-1lpdkf2{--tw-dxr4o8:1;color:#3b82f6;color:rgba(59,130,246,var(--tw-dxr4o8))}',
+    '.tw-30bsuq{--tw-dxr4o8:1;color:#ef4444;color:rgba(239,68,68,var(--tw-dxr4o8))}',
   ])
 })
 
@@ -98,11 +98,11 @@ test('css can be used', ({ tw, sheet }) => {
     })}
   `
 
-  assert.is(tw`underline ${btn} px-8`, 'tw-rg25wp tw-196pg2c tw-817e0v')
+  assert.is(tw`underline ${btn} px-8`, 'tw-1tbrnfj tw-1ky59p5 tw-x66wbi')
   assert.equal(sheet.target, [
-    '.tw-196pg2c{padding-bottom:0.5rem;padding-top:0.5rem;padding-left:1rem;padding-right:1rem;border-color:black}',
-    '.tw-817e0v{padding-left:2rem;padding-right:2rem}',
-    '.tw-rg25wp{text-decoration:underline}',
+    '.tw-1ky59p5{padding-bottom:0.5rem;padding-top:0.5rem;padding-left:1rem;padding-right:1rem;border-color:black}',
+    '.tw-x66wbi{padding-left:2rem;padding-right:2rem}',
+    '.tw-1tbrnfj{text-decoration:underline}',
   ])
 })
 
@@ -115,10 +115,10 @@ test('with animation', ({ tw, sheet }) => {
 
   assert.equal(sheet.target, [])
 
-  assert.is(tw(motion), 'tw-921wd5')
+  assert.is(tw(motion), 'tw-1ug6s8k')
   assert.equal(sheet.target, [
     '@keyframes tw-44iuml{0%{--tw-vkgkf8:1;--tw-1lff04g:1;transform:scale(1);transform:translateX(var(--tw-1e4pbj4,0)) translateY(var(--tw-142admc,0)) rotate(var(--tw-9ouawy,0)) skewX(var(--tw-wnlb2r,0)) skewY(var(--tw-o4ir2d,0)) scaleX(var(--tw-vkgkf8,1)) scaleY(var(--tw-1lff04g,1))}50%{--tw-vkgkf8:1.25;--tw-1lff04g:1.25;transform:rotate(45deg);transform:translateX(var(--tw-1e4pbj4,0)) translateY(var(--tw-142admc,0)) rotate(var(--tw-9ouawy,0)) skewX(var(--tw-wnlb2r,0)) skewY(var(--tw-o4ir2d,0)) scaleX(var(--tw-vkgkf8,1)) scaleY(var(--tw-1lff04g,1));--tw-9ouawy:45deg}100%{--tw-vkgkf8:1;--tw-1lff04g:1;transform:rotate(0deg);transform:translateX(var(--tw-1e4pbj4,0)) translateY(var(--tw-142admc,0)) rotate(var(--tw-9ouawy,0)) skewX(var(--tw-wnlb2r,0)) skewY(var(--tw-o4ir2d,0)) scaleX(var(--tw-vkgkf8,1)) scaleY(var(--tw-1lff04g,1));--tw-9ouawy:0deg}}',
-    '.tw-921wd5{animation:.6s ease-in-out infinite;animation-name:tw-44iuml}',
+    '.tw-1ug6s8k{animation:.6s ease-in-out infinite;animation-name:tw-44iuml}',
   ])
 })
 
@@ -128,23 +128,23 @@ test('inline plugin using tw', ({ tw, sheet }) => {
     ${({ tw }) => tw`px-8`}
   `
 
-  assert.is(tw`${btn}`, 'tw-t4qybq')
+  assert.is(tw`${btn}`, 'tw-tb6vfp')
   assert.equal(sheet.target, [
-    '.tw-t4qybq{padding-bottom:0.5rem;padding-top:0.5rem;padding-left:2rem;padding-right:2rem}',
+    '.tw-tb6vfp{padding-bottom:0.5rem;padding-top:0.5rem;padding-left:2rem;padding-right:2rem}',
   ])
 })
 
 test('using class which has already been injected with tw', ({ tw, sheet }) => {
   const blue = tw`text-blue-500 hover:text-blue-700`
-  assert.is(blue, 'tw-z8gzwe tw-aecrv7')
+  assert.is(blue, 'tw-t5vtoy tw-17gtnyz')
 
   const link = apply`block ${blue} text-center`
 
-  assert.is(tw`${link}`, 'tw-1psz0ut tw-z8gzwe tw-aecrv7')
+  assert.is(tw`${link}`, 'tw-la28d8 tw-t5vtoy tw-17gtnyz')
   assert.equal(sheet.target, [
-    '.tw-1psz0ut{display:block;text-align:center}',
-    '.tw-z8gzwe{--tw-dxr4o8:1;color:#3b82f6;color:rgba(59,130,246,var(--tw-dxr4o8))}',
-    '.tw-aecrv7:hover{--tw-dxr4o8:1;color:#1d4ed8;color:rgba(29,78,216,var(--tw-dxr4o8))}',
+    '.tw-la28d8{display:block;text-align:center}',
+    '.tw-t5vtoy{--tw-dxr4o8:1;color:#3b82f6;color:rgba(59,130,246,var(--tw-dxr4o8))}',
+    '.tw-17gtnyz:hover{--tw-dxr4o8:1;color:#1d4ed8;color:rgba(29,78,216,var(--tw-dxr4o8))}',
   ])
 })
 
@@ -164,11 +164,11 @@ test('plugin with string', () => {
 
   const link = apply`group block blue text-center`
 
-  assert.is(tw`${link} text-justify`, 'tw-la40fd tw-1bk5mm5 tw-z8gzwe tw-aecrv7 tw-1tvd98m')
+  assert.is(tw`${link} text-justify`, 'tw-1y6ogf8 tw-1bk5mm5 tw-t5vtoy tw-17gtnyz tw-l89jgz')
   assert.equal(sheet.target, [
-    '.tw-la40fd{display:block;--tw-dxr4o8:1;color:#3b82f6;color:rgba(59,130,246,var(--tw-dxr4o8));text-align:center}',
-    '.tw-la40fd:hover{--tw-dxr4o8:1;color:#1d4ed8;color:rgba(29,78,216,var(--tw-dxr4o8))}',
-    '.tw-1tvd98m{text-align:justify}',
+    '.tw-1y6ogf8{display:block;--tw-dxr4o8:1;color:#3b82f6;color:rgba(59,130,246,var(--tw-dxr4o8));text-align:center}',
+    '.tw-1y6ogf8:hover{--tw-dxr4o8:1;color:#1d4ed8;color:rgba(29,78,216,var(--tw-dxr4o8))}',
+    '.tw-l89jgz{text-align:justify}',
   ])
 })
 
@@ -186,10 +186,10 @@ test('pass unknown class names through', () => {
 
   assert.is(
     tw`text-center ${link} some-other-class`,
-    'text-center tw-1s0yk82 unknown-class some-other-class',
+    'text-center tw-16wyhrm unknown-class some-other-class',
   )
   assert.equal(sheet.target, [
-    '.tw-1s0yk82{display:block;text-align:justify}',
+    '.tw-16wyhrm{display:block;text-align:justify}',
     '.text-center{text-align:center}',
   ])
 })
@@ -245,26 +245,26 @@ test('complex', ({ tw, sheet }) => {
     return tw(instanceStyles, className)
   }
 
-  assert.is(Button(), 'tw-quup5s')
+  assert.is(Button(), 'tw-qolm3m')
   assert.equal(sheet.target, [
-    '.tw-quup5s{width:100%;font-size:0.875rem;line-height:1.25rem;--tw-dxr4o8:1;color:#fff;color:rgba(255,255,255,var(--tw-dxr4o8));text-transform:uppercase;padding-left:0.5rem;padding-right:0.5rem;border-style:none;transition-property:background-color,border-color,color,fill,stroke;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:300ms;--tw-17cwy6m:1;background-color:#2563eb;background-color:rgba(37,99,235,var(--tw-17cwy6m));padding-bottom:0.75rem;padding-top:0.75rem;border-radius:0.5rem}',
-    '.tw-quup5s:hover{--tw-17cwy6m:1;background-color:#1d4ed8;background-color:rgba(29,78,216,var(--tw-17cwy6m))}',
-    '.tw-quup5s:focus{--tw-17cwy6m:1;background-color:#1d4ed8;background-color:rgba(29,78,216,var(--tw-17cwy6m))}',
-    '@media (min-width:768px){.tw-quup5s{width:auto;padding-bottom:0.5rem;padding-top:0.5rem}}',
+    '.tw-qolm3m{width:100%;font-size:0.875rem;line-height:1.25rem;--tw-dxr4o8:1;color:#fff;color:rgba(255,255,255,var(--tw-dxr4o8));text-transform:uppercase;padding-left:0.5rem;padding-right:0.5rem;border-style:none;transition-property:background-color,border-color,color,fill,stroke;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:300ms;--tw-17cwy6m:1;background-color:#2563eb;background-color:rgba(37,99,235,var(--tw-17cwy6m));padding-bottom:0.75rem;padding-top:0.75rem;border-radius:0.5rem}',
+    '.tw-qolm3m:hover{--tw-17cwy6m:1;background-color:#1d4ed8;background-color:rgba(29,78,216,var(--tw-17cwy6m))}',
+    '.tw-qolm3m:focus{--tw-17cwy6m:1;background-color:#1d4ed8;background-color:rgba(29,78,216,var(--tw-17cwy6m))}',
+    '@media (min-width:768px){.tw-qolm3m{width:auto;padding-bottom:0.5rem;padding-top:0.5rem}}',
   ])
 
   sheet.reset()
 
   assert.is(
     Button({ size: 'sm', round: true, disabled: true, className: 'font-bold' }),
-    'tw-1ibx07s tw-b13grf',
+    'tw-12bsa7j tw-9wyrdi',
   )
   assert.equal(sheet.target, [
-    '.tw-1ibx07s{width:100%;font-size:0.75rem;line-height:1rem;--tw-dxr4o8:1;color:#f3f4f6;color:rgba(243,244,246,var(--tw-dxr4o8));text-transform:uppercase;padding-left:0.5rem;padding-right:0.5rem;border-style:none;transition-property:background-color,border-color,color,fill,stroke;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:300ms;--tw-17cwy6m:1;background-color:#9ca3af;background-color:rgba(156,163,175,var(--tw-17cwy6m));padding-bottom:0.5rem;padding-top:0.5rem;border-radius:9999px;cursor:not-allowed}',
-    '.tw-1ibx07s:hover{--tw-17cwy6m:1;background-color:#1d4ed8;background-color:rgba(29,78,216,var(--tw-17cwy6m))}',
-    '.tw-1ibx07s:focus{--tw-17cwy6m:1;background-color:#1d4ed8;background-color:rgba(29,78,216,var(--tw-17cwy6m))}',
-    '@media (min-width:768px){.tw-1ibx07s{width:auto;padding-bottom:0.25rem;padding-top:0.25rem}}',
-    '.tw-b13grf{font-weight:700}',
+    '.tw-12bsa7j{width:100%;font-size:0.75rem;line-height:1rem;--tw-dxr4o8:1;color:#f3f4f6;color:rgba(243,244,246,var(--tw-dxr4o8));text-transform:uppercase;padding-left:0.5rem;padding-right:0.5rem;border-style:none;transition-property:background-color,border-color,color,fill,stroke;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:300ms;--tw-17cwy6m:1;background-color:#9ca3af;background-color:rgba(156,163,175,var(--tw-17cwy6m));padding-bottom:0.5rem;padding-top:0.5rem;border-radius:9999px;cursor:not-allowed}',
+    '.tw-12bsa7j:hover{--tw-17cwy6m:1;background-color:#1d4ed8;background-color:rgba(29,78,216,var(--tw-17cwy6m))}',
+    '.tw-12bsa7j:focus{--tw-17cwy6m:1;background-color:#1d4ed8;background-color:rgba(29,78,216,var(--tw-17cwy6m))}',
+    '@media (min-width:768px){.tw-12bsa7j{width:auto;padding-bottom:0.25rem;padding-top:0.25rem}}',
+    '.tw-9wyrdi{font-weight:700}',
   ])
 })
 
@@ -275,7 +275,7 @@ test('use :global', ({ tw, sheet }) => {
     },
   })
 
-  assert.is(tw(style), 'tw-pjwfov')
+  assert.is(tw(style), 'tw-9z52qd')
 
   assert.equal(sheet.target, [
     'html{--tw-17cwy6m:1;background-color:#111827;background-color:rgba(17,24,39,var(--tw-17cwy6m));--tw-dxr4o8:1;color:#fff;color:rgba(255,255,255,var(--tw-dxr4o8))}',
@@ -290,12 +290,12 @@ test('use :global within css', ({ tw, sheet }) => {
     a: apply('text-blue(500 hover:700)'),
   })
 
-  assert.is(tw(style), 'tw-zxxecb')
+  assert.is(tw(style), 'tw-49gfd9')
 
   assert.equal(sheet.target, [
     'body{--tw-17cwy6m:1;background-color:#111827;background-color:rgba(17,24,39,var(--tw-17cwy6m));--tw-dxr4o8:1;color:#fff;color:rgba(255,255,255,var(--tw-dxr4o8))}',
-    '.tw-zxxecb a:hover{--tw-dxr4o8:1;color:#1d4ed8;color:rgba(29,78,216,var(--tw-dxr4o8))}',
-    '.tw-zxxecb a{--tw-dxr4o8:1;color:#3b82f6;color:rgba(59,130,246,var(--tw-dxr4o8))}',
+    '.tw-49gfd9 a:hover{--tw-dxr4o8:1;color:#1d4ed8;color:rgba(29,78,216,var(--tw-dxr4o8))}',
+    '.tw-49gfd9 a{--tw-dxr4o8:1;color:#3b82f6;color:rgba(59,130,246,var(--tw-dxr4o8))}',
   ])
 })
 
@@ -319,10 +319,10 @@ test('use with preflight', () => {
 test('use apply with custom tw', ({ tw, sheet }) => {
   const btn = apply`inline-block bg-gray-500 text-base`
 
-  assert.is(tw(btn), 'tw-z1u1ls')
+  assert.is(tw(btn), 'tw-4tvvl1')
 
   assert.equal(sheet.target, [
-    '.tw-z1u1ls{display:inline-block;--tw-17cwy6m:1;background-color:#6b7280;background-color:rgba(107,114,128,var(--tw-17cwy6m));font-size:1rem;line-height:1.5rem}',
+    '.tw-4tvvl1{display:inline-block;--tw-17cwy6m:1;background-color:#6b7280;background-color:rgba(107,114,128,var(--tw-17cwy6m));font-size:1rem;line-height:1.5rem}',
   ])
 })
 
@@ -340,14 +340,32 @@ test('applied rules can be used alone after apply', ({ tw, sheet }) => {
         h1: apply`bg-red-500`,
       }),
     ),
-    'tw-17bpa8l',
+    'tw-rrz49t',
   )
 
-  assert.is(tw(`bg-red-500`), 'tw-f1tjd')
+  assert.is(tw(`bg-red-500`), 'tw-1u8yv89')
 
   assert.equal(sheet.target, [
-    '.tw-17bpa8l h1{--tw-17cwy6m:1;background-color:#ef4444;background-color:rgba(239,68,68,var(--tw-17cwy6m))}',
-    '.tw-f1tjd{--tw-17cwy6m:1;background-color:#ef4444;background-color:rgba(239,68,68,var(--tw-17cwy6m))}',
+    '.tw-rrz49t h1{--tw-17cwy6m:1;background-color:#ef4444;background-color:rgba(239,68,68,var(--tw-17cwy6m))}',
+    '.tw-1u8yv89{--tw-17cwy6m:1;background-color:#ef4444;background-color:rgba(239,68,68,var(--tw-17cwy6m))}',
+  ])
+})
+
+test('applied rules are within component layer', ({ tw, sheet }) => {
+  assert.is(tw(apply`underline`, 'bg-red-500'), 'tw-1h2u08d tw-1u8yv89')
+
+  assert.equal(sheet.target, [
+    '.tw-1h2u08d{text-decoration:underline}',
+    '.tw-1u8yv89{--tw-17cwy6m:1;background-color:#ef4444;background-color:rgba(239,68,68,var(--tw-17cwy6m))}',
+  ])
+
+  // Cross check
+  sheet.reset()
+  assert.is(tw`underline bg-red-500`, 'tw-1tbrnfj tw-1u8yv89')
+
+  assert.equal(sheet.target, [
+    '.tw-1u8yv89{--tw-17cwy6m:1;background-color:#ef4444;background-color:rgba(239,68,68,var(--tw-17cwy6m))}',
+    '.tw-1tbrnfj{text-decoration:underline}',
   ])
 })
 

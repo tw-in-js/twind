@@ -90,7 +90,7 @@ const alias = <Section extends keyof Theme>(
 const themeFactory = (args: Parameters<ThemeResolver>, { theme }: Context) => theme(...args)
 
 export const theme = ((...args: Parameters<ThemeResolver>): ReturnType<ThemeHelper> =>
-  directive(themeFactory, args) as ReturnType<ThemeHelper>) as ThemeHelper
+  directive(themeFactory, args)) as ThemeHelper
 
 export const defaultTheme: Theme = {
   screens: {

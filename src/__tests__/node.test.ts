@@ -28,11 +28,11 @@ test.after.each(({ sheet }) => {
 })
 
 test('class names are hashed', ({ instance, sheet }) => {
-  assert.is(instance.tw('group flex pt-4 text-center'), 'tw-1bk5mm5 tw-1sv1rgs tw-ocaj78 tw-5693iz')
+  assert.is(instance.tw('group flex pt-4 text-center'), 'tw-1bk5mm5 tw-bibj42 tw-aysv3w tw-10s9vuy')
   assert.equal(sheet.target, [
-    '.tw-1sv1rgs{display:flex}',
-    '.tw-ocaj78{padding-top:1rem}',
-    '.tw-5693iz{text-align:center}',
+    '.tw-bibj42{display:flex}',
+    '.tw-aysv3w{padding-top:1rem}',
+    '.tw-10s9vuy{text-align:center}',
   ])
 })
 

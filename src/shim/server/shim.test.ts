@@ -112,25 +112,25 @@ test('hash class names', () => {
   assert.is(
     html,
     `
-    <main class="tw-s71qpw tw-15v4579 tw-1sv1rgs tw-6q7m7e tw-1u5qtu">
-      <h1 class="tw-5693iz tw-1eqnqhy tw-1ehy2ck tw-1v0lbgq tw-16puy3r">
-        This is <span class="tw-b13grf">Twind</span>!
+    <main class="tw-1kyz2p7 tw-bi2ogn tw-bibj42 tw-5swr3n tw-1gttjin">
+      <h1 class="tw-10s9vuy tw-19q8ab7 tw-2aezhj tw-136otvb tw-2jaq45">
+        This is <span class="tw-9wyrdi">Twind</span>!
       </h1>
     </main>
     `,
   )
   assert.equal(sheet.target, [
-    '.tw-1ehy2ck{--tw-dxr4o8:1;color:#fff;color:rgba(255,255,255,var(--tw-dxr4o8))}',
-    '.tw-15v4579{--tw-17cwy6m:1;background-color:#a78bfa;background-color:rgba(167,139,250,var(--tw-17cwy6m))}',
-    '.tw-1eqnqhy{font-size:3rem;line-height:1}',
-    '.tw-s71qpw{height:100vh}',
-    '.tw-1sv1rgs{display:flex}',
-    '.tw-6q7m7e{align-items:center}',
-    '.tw-1u5qtu{justify-content:center}',
-    '.tw-5693iz{text-align:center}',
-    '.tw-b13grf{font-weight:700}',
-    '@media (min-width:640px){.tw-1v0lbgq{--tw-dxr4o8:1;color:#1f2937;color:rgba(31,41,55,var(--tw-dxr4o8))}}',
-    '@media (min-width:768px){.tw-16puy3r{--tw-dxr4o8:1;color:#be185d;color:rgba(190,24,93,var(--tw-dxr4o8))}}',
+    '.tw-2aezhj{--tw-dxr4o8:1;color:#fff;color:rgba(255,255,255,var(--tw-dxr4o8))}',
+    '.tw-bi2ogn{--tw-17cwy6m:1;background-color:#a78bfa;background-color:rgba(167,139,250,var(--tw-17cwy6m))}',
+    '.tw-19q8ab7{font-size:3rem;line-height:1}',
+    '.tw-1kyz2p7{height:100vh}',
+    '.tw-bibj42{display:flex}',
+    '.tw-5swr3n{align-items:center}',
+    '.tw-1gttjin{justify-content:center}',
+    '.tw-10s9vuy{text-align:center}',
+    '.tw-9wyrdi{font-weight:700}',
+    '@media (min-width:640px){.tw-136otvb{--tw-dxr4o8:1;color:#1f2937;color:rgba(31,41,55,var(--tw-dxr4o8))}}',
+    '@media (min-width:768px){.tw-2jaq45{--tw-dxr4o8:1;color:#be185d;color:rgba(190,24,93,var(--tw-dxr4o8))}}',
   ])
 })
 

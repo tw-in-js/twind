@@ -39,19 +39,19 @@ test('create css', ({ tw, sheet }) => {
   // It is lazy
   assert.equal(sheet.target, [])
 
-  assert.is(tw(style), 'tw-af5k28')
+  assert.is(tw(style), 'tw-9qn0v0')
 
   assert.equal(sheet.target, [
-    '.tw-af5k28:hover{color:darkgreen}',
-    '.tw-af5k28{background-color:hotpink}',
+    '.tw-9qn0v0:hover{color:darkgreen}',
+    '.tw-9qn0v0{background-color:hotpink}',
   ])
 
   // it is cached
-  assert.is(tw(style), 'tw-af5k28')
+  assert.is(tw(style), 'tw-9qn0v0')
 
   assert.equal(sheet.target, [
-    '.tw-af5k28:hover{color:darkgreen}',
-    '.tw-af5k28{background-color:hotpink}',
+    '.tw-9qn0v0:hover{color:darkgreen}',
+    '.tw-9qn0v0{background-color:hotpink}',
   ])
 })
 
@@ -63,9 +63,9 @@ test('create with global css within custom tw', ({ tw, sheet }) => {
   // It is lazy
   assert.equal(sheet.target, [])
 
-  assert.is(tw(style), 'tw-1gewvs9')
+  assert.is(tw(style), 'tw-16fciia')
 
-  assert.equal(sheet.target, ['.tw-1gewvs9{background-color:darkgreen}'])
+  assert.equal(sheet.target, ['.tw-16fciia{background-color:darkgreen}'])
 })
 
 test('nested selectors', ({ tw, sheet }) => {
@@ -80,9 +80,9 @@ test('nested selectors', ({ tw, sheet }) => {
     },
   })
 
-  assert.is(tw(styles), 'tw-af4r5s')
+  assert.is(tw(styles), 'tw-i6imwz')
 
-  assert.equal(sheet.target, ['.tw-af4r5s a:hover{color:#1d4ed8}', '.tw-af4r5s a{color:#3b82f6}'])
+  assert.equal(sheet.target, ['.tw-i6imwz a:hover{color:#1d4ed8}', '.tw-i6imwz a{color:#3b82f6}'])
 })
 
 test('can be used with variants', ({ tw, sheet }) => {
@@ -93,13 +93,13 @@ test('can be used with variants', ({ tw, sheet }) => {
     },
   })
 
-  assert.is(tw`sm:${style} focus:${style}`, 'sm:tw-af5k28 focus:tw-af5k28')
+  assert.is(tw`sm:${style} focus:${style}`, 'tw-v12wc9 tw-13v6x9r')
 
   assert.equal(sheet.target, [
-    '.focus\\:tw-af5k28:focus:hover{color:darkgreen}',
-    '.focus\\:tw-af5k28:focus{background-color:hotpink}',
-    '@media (min-width:640px){.sm\\:tw-af5k28:hover{color:darkgreen}}',
-    '@media (min-width:640px){.sm\\:tw-af5k28{background-color:hotpink}}',
+    '.tw-13v6x9r:focus:hover{color:darkgreen}',
+    '.tw-13v6x9r:focus{background-color:hotpink}',
+    '@media (min-width:640px){.tw-v12wc9:hover{color:darkgreen}}',
+    '@media (min-width:640px){.tw-v12wc9{background-color:hotpink}}',
   ])
 })
 
@@ -128,10 +128,10 @@ test('keyframes', ({ tw, sheet }) => {
         animation: animation(`1s ease infinite`, bounce),
       }),
     ),
-    'tw-4l4ydd',
+    'tw-czqxx',
   )
   assert.equal(sheet.target, [
-    '.tw-4l4ydd animation{animation:1s ease infinite;animation-name:tw-cm8eaz}',
+    '.tw-czqxx animation{animation:1s ease infinite;animation-name:tw-cm8eaz}',
     '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
   ])
 })
@@ -160,11 +160,11 @@ test('keyframes lazy', ({ tw, sheet }) => {
   // Nothing applied yet
   assert.equal(sheet.target, [])
 
-  assert.is(tw(styles), 'tw-pflk76')
+  assert.is(tw(styles), 'tw-1w0nah9')
 
   assert.equal(sheet.target, [
     '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
-    '.tw-pflk76{animation:1s ease infinite;animation-name:tw-cm8eaz}',
+    '.tw-1w0nah9{animation:1s ease infinite;animation-name:tw-cm8eaz}',
   ])
 })
 
@@ -187,10 +187,10 @@ test('animation', ({ tw, sheet }) => {
   // Nothing applied yet
   assert.equal(sheet.target, [])
 
-  assert.is(tw(bounce), 'tw-pflk76')
+  assert.is(tw(bounce), 'tw-1w0nah9')
   assert.equal(sheet.target, [
     '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
-    '.tw-pflk76{animation:1s ease infinite;animation-name:tw-cm8eaz}',
+    '.tw-1w0nah9{animation:1s ease infinite;animation-name:tw-cm8eaz}',
   ])
 })
 
@@ -210,10 +210,10 @@ test('animation with callback', ({ tw, sheet }) => {
   // Nothing applied yet
   assert.equal(sheet.target, [])
 
-  assert.is(tw(slidein), 'tw-1om6vki')
+  assert.is(tw(slidein), 'tw-1jnb31o')
   assert.equal(sheet.target, [
     '@keyframes tw-nlnhc{from{transform:translateX(0%)}to{transform:translateX(100%)}}',
-    '.tw-1om6vki{animation:500ms cubic-bezier(0.4,0,0.2,1);animation-name:tw-nlnhc}',
+    '.tw-1jnb31o{animation:500ms cubic-bezier(0.4,0,0.2,1);animation-name:tw-nlnhc}',
   ])
 })
 
@@ -243,10 +243,10 @@ test('animation object notation', ({ tw, sheet }) => {
   // Nothing applied yet
   assert.equal(sheet.target, [])
 
-  assert.is(tw(bounce), 'tw-hduhmc')
+  assert.is(tw(bounce), 'tw-1dn509u')
   assert.equal(sheet.target, [
     '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
-    '.tw-hduhmc{animation-duration:1s;animation-timing-function:cubic-bezier(0.4,0,0.2,1);animation-iteration-count:infinite;animation-name:tw-cm8eaz}',
+    '.tw-1dn509u{animation-duration:1s;animation-timing-function:cubic-bezier(0.4,0,0.2,1);animation-iteration-count:infinite;animation-name:tw-cm8eaz}',
   ])
 })
 
@@ -269,10 +269,10 @@ test('animation with variant', ({ tw, sheet }) => {
   // Nothing applied yet
   assert.equal(sheet.target, [])
 
-  assert.is(tw`hover:${bounce}`, 'hover:tw-pflk76')
+  assert.is(tw`hover:${bounce}`, 'tw-k3rs7h')
   assert.equal(sheet.target, [
     '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
-    '.hover\\:tw-pflk76:hover{animation:1s ease infinite;animation-name:tw-cm8eaz}',
+    '.tw-k3rs7h:hover{animation:1s ease infinite;animation-name:tw-cm8eaz}',
   ])
 })
 
@@ -292,11 +292,11 @@ test('animation with template literal', ({ tw, sheet }) => {
     }
   `
 
-  assert.is(tw(style), 'tw-1qjz0n0')
+  assert.is(tw(style), 'tw-1imlmm3')
 
   assert.equal(sheet.target, [
     '@keyframes tw-1tx88h0{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}, 90%{transform:translate3d(0, -4px, 0)}}',
-    '.tw-1qjz0n0{animation:1s ease infinite;animation-name:tw-1tx88h0}',
+    '.tw-1imlmm3{animation:1s ease infinite;animation-name:tw-1tx88h0}',
   ])
 })
 
@@ -309,7 +309,7 @@ test('use :global with property callback', ({ tw, sheet }) => {
     },
   })
 
-  assert.is(tw(style), 'tw-mppuc2')
+  assert.is(tw(style), 'tw-m9gc8h')
 
   assert.equal(sheet.target, ['html{background-color:#111827}'])
 })
@@ -328,11 +328,11 @@ test('accepts arrays', ({ tw, sheet }) => {
     },
   ])
 
-  assert.is(tw(style), 'tw-185cesv')
+  assert.is(tw(style), 'tw-6csdir')
 
   assert.equal(sheet.target, [
-    '.tw-185cesv{background-color:hotpink;color:red}',
-    '.tw-185cesv:hover{color:darkgreen}',
+    '.tw-6csdir{background-color:hotpink;color:red}',
+    '.tw-6csdir:hover{color:darkgreen}',
   ])
 })
 
@@ -350,11 +350,11 @@ test('is variadic', ({ tw, sheet }) => {
     },
   )
 
-  assert.is(tw(style), 'tw-185cesv')
+  assert.is(tw(style), 'tw-6csdir')
 
   assert.equal(sheet.target, [
-    '.tw-185cesv{background-color:hotpink;color:red}',
-    '.tw-185cesv:hover{color:darkgreen}',
+    '.tw-6csdir{background-color:hotpink;color:red}',
+    '.tw-6csdir:hover{color:darkgreen}',
   ])
 })
 
@@ -366,11 +366,11 @@ test('can be nested', ({ tw, sheet }) => {
     }),
   })
 
-  assert.is(tw(style), 'tw-m78vn1')
+  assert.is(tw(style), 'tw-lbhbyt')
 
   assert.equal(sheet.target, [
-    '.tw-m78vn1:hover{color:darkgreen}',
-    '.tw-m78vn1{background-color:#6b7280}',
+    '.tw-lbhbyt:hover{color:darkgreen}',
+    '.tw-lbhbyt{background-color:#6b7280}',
   ])
 })
 
@@ -385,11 +385,11 @@ test('basic template literal', ({ tw, sheet }) => {
     }
   `
 
-  assert.is(tw(style), 'tw-u88iva')
+  assert.is(tw(style), 'tw-nn3mfj')
 
   assert.equal(sheet.target, [
-    '.tw-u88iva{color:rebeccapurple;background-color:#6b7280}',
-    '.tw-u88iva:hover{color:darkgreen}',
+    '.tw-nn3mfj{color:rebeccapurple;background-color:#6b7280}',
+    '.tw-nn3mfj:hover{color:darkgreen}',
   ])
 })
 
@@ -425,15 +425,15 @@ test('nesting in template literal', ({ tw, sheet }) => {
     }
   `
 
-  assert.is(tw(style), 'tw-1io884b')
+  assert.is(tw(style), 'tw-1ealgxm')
 
   assert.equal(sheet.target, [
-    '.tw-1io884b > p{text-decoration:underline}',
-    '.tw-1io884b{padding:2em 1em;background:papayawhip}',
-    '.tw-1io884b:hover{background:palevioletred}',
-    'html.test .tw-1io884b{display:none}',
-    '@media (max-width: 600px){.tw-1io884b:hover{background:yellow}}',
-    '@media (max-width: 600px){.tw-1io884b{background:tomato}}',
+    '.tw-1ealgxm > p{text-decoration:underline}',
+    '.tw-1ealgxm{padding:2em 1em;background:papayawhip}',
+    '.tw-1ealgxm:hover{background:palevioletred}',
+    'html.test .tw-1ealgxm{display:none}',
+    '@media (max-width: 600px){.tw-1ealgxm:hover{background:yellow}}',
+    '@media (max-width: 600px){.tw-1ealgxm{background:tomato}}',
   ])
 })
 
@@ -480,9 +480,9 @@ test('property fallbacks', ({ tw, sheet }) => {
     color: ${['#0000', 'rgba(0, 0, 0, 0)']};
   `
 
-  assert.is(tw(style), 'tw-11sfiw9')
+  assert.is(tw(style), 'tw-1y6n6fa')
 
-  assert.equal(sheet.target, ['.tw-11sfiw9{color:#0000;color:rgba(0, 0, 0, 0)}'])
+  assert.equal(sheet.target, ['.tw-1y6n6fa{color:#0000;color:rgba(0, 0, 0, 0)}'])
 })
 
 test('omit falsey values', ({ tw, sheet }) => {
@@ -494,7 +494,7 @@ test('omit falsey values', ({ tw, sheet }) => {
     e: ${undefined};
   `
 
-  assert.is(tw(style), 'tw-1dpp5mc')
+  assert.is(tw(style), 'tw-yviiib')
 
   assert.equal(sheet.target, [])
 })
@@ -518,7 +518,7 @@ test('omit falsey rules', ({ tw, sheet }) => {
     }
   `
 
-  assert.is(tw(style), 'tw-1dpp5mc')
+  assert.is(tw(style), 'tw-yviiib')
 
   assert.equal(sheet.target, [])
 })
@@ -565,11 +565,11 @@ test('keyframes with apply', ({ tw, sheet }) => {
     `,
   )
 
-  assert.is(tw(bounce), 'tw-1urc447')
+  assert.is(tw(bounce), 'tw-1pb2it5')
 
   assert.equal(sheet.target, [
     '@keyframes tw-p4d614{from, 20%, 53%, 80%, to{--tw-translate-x:0px;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translateX(0px);transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}40%, 43%{--tw-translate-x:calc(1.75rem * -1);--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translateX(calc(1.75rem * -1));transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}70%{--tw-translate-x:calc(0.875rem * -1);--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translateX(calc(0.875rem * -1));transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}, 90%{--tw-translate-x:calc(0.25rem * -1);--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translateX(calc(0.25rem * -1));transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}}',
-    '.tw-1urc447{animation:1s ease infinite;animation-name:tw-p4d614}',
+    '.tw-1pb2it5{animation:1s ease infinite;animation-name:tw-p4d614}',
   ])
 })
 
@@ -591,15 +591,15 @@ test('prose with tw-apply using variadic', ({ tw, sheet }) => {
     },
   )
 
-  assert.is(tw(prose), 'tw-k2lahq')
+  assert.is(tw(prose), 'tw-dsp9ob')
 
   assert.equal(sheet.target, [
-    '.tw-k2lahq h1{--tw-text-opacity:1;color:#000;color:rgba(0,0,0,var(--tw-text-opacity));font-weight:800;font-size:2.25em;margin-top:0;margin-bottom:0.8888889em;line-height:1.1111111}',
-    '.tw-k2lahq h1:hover{--tw-text-opacity:1;color:#8b5cf6;color:rgba(139,92,246,var(--tw-text-opacity))}',
-    '.tw-k2lahq p{margin-bottom:1.25rem;margin-top:1.25rem}',
-    '@media (prefers-color-scheme:dark){.tw-k2lahq h1{--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity))}}',
-    '.tw-k2lahq{--tw-text-opacity:1;color:#374151;color:rgba(55,65,81,var(--tw-text-opacity))}',
-    '@media (prefers-color-scheme:dark){.tw-k2lahq{--tw-text-opacity:1;color:#d1d5db;color:rgba(209,213,219,var(--tw-text-opacity))}}',
+    '.tw-dsp9ob h1{--tw-text-opacity:1;color:#000;color:rgba(0,0,0,var(--tw-text-opacity));font-weight:800;font-size:2.25em;margin-top:0;margin-bottom:0.8888889em;line-height:1.1111111}',
+    '.tw-dsp9ob h1:hover{--tw-text-opacity:1;color:#8b5cf6;color:rgba(139,92,246,var(--tw-text-opacity))}',
+    '.tw-dsp9ob p{margin-bottom:1.25rem;margin-top:1.25rem}',
+    '@media (prefers-color-scheme:dark){.tw-dsp9ob h1{--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity))}}',
+    '.tw-dsp9ob{--tw-text-opacity:1;color:#374151;color:rgba(55,65,81,var(--tw-text-opacity))}',
+    '@media (prefers-color-scheme:dark){.tw-dsp9ob{--tw-text-opacity:1;color:#d1d5db;color:rgba(209,213,219,var(--tw-text-opacity))}}',
   ])
 })
 
@@ -621,15 +621,15 @@ test('prose with apply using template literal', ({ tw, sheet }) => {
     }
   `
 
-  assert.is(tw(prose), 'tw-k2lahq')
+  assert.is(tw(prose), 'tw-dsp9ob')
 
   assert.equal(sheet.target, [
-    '.tw-k2lahq h1{--tw-text-opacity:1;color:#000;color:rgba(0,0,0,var(--tw-text-opacity));font-weight:800;font-size:2.25em;margin-top:0;margin-bottom:0.8888889em;line-height:1.1111111}',
-    '.tw-k2lahq h1:hover{--tw-text-opacity:1;color:#8b5cf6;color:rgba(139,92,246,var(--tw-text-opacity))}',
-    '.tw-k2lahq p{margin-bottom:1.25rem;margin-top:1.25rem}',
-    '@media (prefers-color-scheme:dark){.tw-k2lahq h1{--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity))}}',
-    '.tw-k2lahq{--tw-text-opacity:1;color:#374151;color:rgba(55,65,81,var(--tw-text-opacity))}',
-    '@media (prefers-color-scheme:dark){.tw-k2lahq{--tw-text-opacity:1;color:#d1d5db;color:rgba(209,213,219,var(--tw-text-opacity))}}',
+    '.tw-dsp9ob h1{--tw-text-opacity:1;color:#000;color:rgba(0,0,0,var(--tw-text-opacity));font-weight:800;font-size:2.25em;margin-top:0;margin-bottom:0.8888889em;line-height:1.1111111}',
+    '.tw-dsp9ob h1:hover{--tw-text-opacity:1;color:#8b5cf6;color:rgba(139,92,246,var(--tw-text-opacity))}',
+    '.tw-dsp9ob p{margin-bottom:1.25rem;margin-top:1.25rem}',
+    '@media (prefers-color-scheme:dark){.tw-dsp9ob h1{--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity))}}',
+    '.tw-dsp9ob{--tw-text-opacity:1;color:#374151;color:rgba(55,65,81,var(--tw-text-opacity))}',
+    '@media (prefers-color-scheme:dark){.tw-dsp9ob{--tw-text-opacity:1;color:#d1d5db;color:rgba(209,213,219,var(--tw-text-opacity))}}',
   ])
 })
 
@@ -642,7 +642,7 @@ test('use :global with property callback', ({ tw, sheet }) => {
     },
   })
 
-  assert.is(tw(style), 'tw-mppuc2')
+  assert.is(tw(style), 'tw-m9gc8h')
 
   assert.equal(sheet.target, ['html{background-color:#111827}'])
 })
@@ -692,13 +692,13 @@ test('screen directive (template literal)', ({ tw, sheet }) => {
 
   assert.equal(sheet.target, [])
 
-  assert.is(tw(style), 'tw-560pmr')
+  assert.is(tw(style), 'tw-r0u30')
   assert.equal(sheet.target, [
-    '@media (min-width: 640px){.tw-560pmr{match:sm}}',
-    '@media (min-width: 768px){.tw-560pmr{match:md}}',
-    '@media (min-width: 1024px){.tw-560pmr{match:md}}',
-    '@media (min-width: 1280px){.tw-560pmr{match:xl}}',
-    '@media (min-width: 1536px){.tw-560pmr{text-decoration:underline}}',
+    '@media (min-width: 640px){.tw-r0u30{match:sm}}',
+    '@media (min-width: 768px){.tw-r0u30{match:md}}',
+    '@media (min-width: 1024px){.tw-r0u30{match:md}}',
+    '@media (min-width: 1280px){.tw-r0u30{match:xl}}',
+    '@media (min-width: 1536px){.tw-r0u30{text-decoration:underline}}',
   ])
 })
 
@@ -717,12 +717,12 @@ test('screen directive (object notation)', ({ tw, sheet }) => {
 
   assert.equal(sheet.target, [])
 
-  assert.is(tw(style), 'tw-uorso7')
+  assert.is(tw(style), 'tw-1d9cztp')
   assert.equal(sheet.target, [
-    '@media (min-width: 768px){.tw-uorso7{match:md}}',
-    '@media (min-width: 1024px){.tw-uorso7{match:md}}',
-    '@media (min-width: 1280px){.tw-uorso7{match:xl}}',
-    '@media (min-width: 1536px){.tw-uorso7{text-decoration:underline}}',
+    '@media (min-width: 768px){.tw-1d9cztp{match:md}}',
+    '@media (min-width: 1024px){.tw-1d9cztp{match:md}}',
+    '@media (min-width: 1280px){.tw-1d9cztp{match:xl}}',
+    '@media (min-width: 1536px){.tw-1d9cztp{text-decoration:underline}}',
   ])
 })
 
