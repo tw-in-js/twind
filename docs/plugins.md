@@ -145,6 +145,19 @@ Plugins are passed three arguments:
 
 This means that the plugin above now covers more single part cases like `scroll-snap-x`, `scroll-snap-y` and `scroll-snap-none` etc. It is worth noting now that the whole of Twind is built upon this exact same premise, every rule outlined in the Tailwind docs has an equivalent plugin. We refer to these as _core plugins_.
 
+The above example could be written using the `css` helper:
+
+```js
+import { setup } from 'twind'
+import { css } from 'twind/css'
+
+setup({
+  plugins: {
+    'scroll-snap': (parts) => css`scroll-snap-type: ${parts[0]};`,
+  },
+})
+```
+
 > Core plugins cannot be deleted but they can be overwritten
 
 If we wanted to take this one step further and cover all scroll-snap cases then we could do something like:
