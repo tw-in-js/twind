@@ -1,0 +1,441 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Defining Components | twind - v0.14.2</title>
+	<meta name="description" content="Documentation for twind - v0.14.2">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../assets/css/main.css">
+	<link rel="stylesheet" href="../../assets/css/pages.css">
+	<script async src="../../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../../assets/js/search.json" data-base="../..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../../index.html" class="title">twind - v0.14.2</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../../index.html">Home</a>
+				</li>
+				<li>
+					<a href="../getting-started.html">Handbook</a>
+				</li>
+				<li>
+					<a href="../advanced.html">Advanced</a>
+				</li>
+				<li>
+					<a href="defining-components.html">Defining Components</a>
+				</li>
+			</ul>
+			<h1>Defining Components</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p>As a component author, one often wants to re-use Tailwind directive styles for defining a component and allow users of the component to override styles using Tailwind rules. The created component can be used as a base for child components and override or add some styles using Tailwind rules.</p>
+				<p><a href="../../modules/twind.html#apply-1">apply</a> generates one style object, e.g., one CSS class, combining all Tailwind rules by deep merging rules in order of declaration.</p>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">apply</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">btn</span><span style="color: #000000"> = </span><span style="color: #795E26">apply</span><span style="color: #A31515">`inline-block bg-gray-500 text-base`</span>
+<span style="color: #008000">// =&gt; generates on CSS class with all declarations of the above rules when used</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">btnBlock</span><span style="color: #000000"> = </span><span style="color: #795E26">apply</span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">btn</span><span style="color: #0000FF">}</span><span style="color: #A31515"> block`</span>
+<span style="color: #008000">// =&gt; generates on CSS class with all declarations of btn &amp; block</span>
+
+<span style="color: #800000">&lt;button</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #795E26">tw</span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">btn</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #0000FF">}</span><span style="color: #800000">&gt;</span><span style="color: #000000">gray-500</span><span style="color: #800000">&lt;/button&gt;</span>
+<span style="color: #008000">// =&gt; tw-XXXXX</span>
+
+<span style="color: #800000">&lt;button</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #795E26">tw</span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">btn</span><span style="color: #0000FF">}</span><span style="color: #A31515"> bg-red-500 text-lg`</span><span style="color: #0000FF">}</span><span style="color: #800000">&gt;</span><span style="color: #000000">red-500 large</span><span style="color: #800000">&lt;/button&gt;</span>
+<span style="color: #008000">// =&gt; tw-XXXX bg-red-500 text-lg</span>
+
+<span style="color: #800000">&lt;button</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #795E26">tw</span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">btnBlock</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #0000FF">}</span><span style="color: #800000">&gt;</span><span style="color: #000000">block button</span><span style="color: #800000">&lt;/button&gt;</span>
+<span style="color: #008000">// =&gt; tw-YYYY</span>
+</code></pre>
+				<blockquote>
+					<p>💡 Another way to extract common component styles is by <a href="plugins.html">using an alias plugin</a>.</p>
+				</blockquote>
+				<p>The component styles are added <strong>before</strong> the utility classes to the stylesheet which allows utilities to override component styles.</p>
+				<details><summary>Why can I not use <code>tw</code> for components?</summary>
+					<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #795E26">Button</span><span style="color: #000000"> = ({ </span><span style="color: #001080">className</span><span style="color: #000000">, </span><span style="color: #001080">children</span><span style="color: #000000">}) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #800000">&lt;button</span><span style="color: #000000"> </span><span style="color: #FF0000">className</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #795E26">tw</span><span style="color: #A31515">`inline-block bg-gray-500 text-base </span><span style="color: #0000FF">${</span><span style="color: #001080">className</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #0000FF">}</span><span style="color: #800000">&gt;</span><span style="color: #0000FF">{</span><span style="color: #001080">children</span><span style="color: #0000FF">}</span><span style="color: #800000">&lt;/button&gt;</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #795E26">ButtonBlock</span><span style="color: #000000"> = ({ </span><span style="color: #001080">className</span><span style="color: #000000">, </span><span style="color: #001080">children</span><span style="color: #000000">}) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #800000">&lt;</span><span style="color: #267F99">Button</span><span style="color: #000000"> </span><span style="color: #FF0000">className</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #A31515">`block </span><span style="color: #0000FF">${</span><span style="color: #001080">className</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #0000FF">}</span><span style="color: #800000">&gt;</span><span style="color: #0000FF">{</span><span style="color: #001080">children</span><span style="color: #0000FF">}</span><span style="color: #800000">&lt;/</span><span style="color: #267F99">Button</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #800000">&lt;</span><span style="color: #267F99">Button</span><span style="color: #800000">&gt;</span><span style="color: #000000">gray-500</span><span style="color: #800000">&lt;/</span><span style="color: #267F99">Button</span><span style="color: #800000">&gt;</span>
+<span style="color: #800000">&lt;</span><span style="color: #267F99">Button</span><span style="color: #000000"> </span><span style="color: #FF0000">className</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;bg-red-500 text-lg&quot;</span><span style="color: #800000">&gt;</span><span style="color: #000000">red-500 large</span><span style="color: #800000">&lt;/</span><span style="color: #267F99">Button</span><span style="color: #800000">&gt;</span>
+</code></pre>
+					<p>The example above does not reliably work because the injected CSS classes have all the same specificity and therefore the order in which they appear in the stylesheet determines which styles are applied.</p>
+					<p>It is really difficult to know which directive does override another. For now, let&#39;s stick with <code>bg-*</code> but there are others. The <code>bg</code> prefix and its plugin handle several CSS properties where <code>background-color</code> is only one of them.</p>
+					<ul>
+						<li><code>background-color</code>: <code>bg-current</code>, <code>bg-gray-50</code>, ... (see <a href="https://tailwindcss.com/docs/background-color">https://tailwindcss.com/docs/background-color</a>)</li>
+						<li><code>background-attachment</code>: <code>bg-local</code>, ... (see <a href="https://tailwindcss.com/docs/background-attachment">https://tailwindcss.com/docs/background-attachment</a>)</li>
+						<li><code>--tw-bg-opacity</code>: <code>bg-opacity-10</code>, ... (see <a href="https://tailwindcss.com/docs/background-opacity">https://tailwindcss.com/docs/background-opacity</a>)</li>
+						<li>and a lot more</li>
+						<li>not to forget about user plugins and inline directives</li>
+					</ul>
+					<p>This ambiguity makes class based composition really difficult. That was the reason we introduced the <code>override</code> variant.</p>
+					<p>Consider the following example:</p>
+					<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">Button</span><span style="color: #000000"> = </span><span style="color: #795E26">tw</span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  text(base blue-600)</span>
+<span style="color: #A31515">  rounded-sm</span>
+<span style="color: #A31515">  border(&amp; solid 2 blue-600)</span>
+<span style="color: #A31515">  m-4 py-1 px-4</span>
+<span style="color: #A31515">`</span>
+
+<span style="color: #008000">// Create a child component overriding some colors</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">PurpleButton</span><span style="color: #000000"> = </span><span style="color: #795E26">tw</span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  </span><span style="color: #0000FF">${</span><span style="color: #001080">Button</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  override:(text-purple-600 border-purple-600)</span>
+<span style="color: #A31515">`</span>
+</code></pre>
+					<p>As you see it is difficult to override certain utility classes on usage or when creating a child component. For this to work twind introduced the <code>override</code> variant which increases the specificity of the classes it is applied to. But what do you do for a grandchild component or if you want to override the <code>PurpleButton</code> styles? <code>override:override:...</code>? This is where <code>apply</code> should be used.</p>
+					<p>Tailwind has a component concept using <a href="https://tailwindcss.com/docs/extracting-components#extracting-component-classes-with-apply">@apply</a> which basically merges the CSS rules of several Tailwind classes into one class. twin.macro does the same.</p>
+					<details><summary>Details of Tailwind @apply</summary>
+						<p>Tailwind CSS provides <a href="https://tailwindcss.com/docs/extracting-components#extracting-component-classes-with-apply">@apply to extract component classes</a> which merges the underlying styles of the utility classes into a single CSS class.</p>
+						<pre><code class="language-css"><span style="color: #800000">.btn-indigo</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  @apply py-2 px-4 bg-indigo-500 text-white font-semibold rounded-lg shadow-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75;</span>
+<span style="color: #000000">}</span>
+</code></pre>
+						<p><a href="https://github.com/ben-rogerson/twin.macro">twin.macro</a> does the same during build time to generate CSS-in-JS objects which are evaluated with a runtime like Emotion or styled-components:</p>
+						<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">hoverStyles</span><span style="color: #000000"> = </span><span style="color: #795E26">css</span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  &amp;:hover {</span>
+<span style="color: #A31515">    border-color: black;</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #795E26">tw</span><span style="color: #A31515">`text-black`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  }</span>
+<span style="color: #A31515">`</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #795E26">Input</span><span style="color: #000000"> = ({ </span><span style="color: #001080">hasHover</span><span style="color: #000000"> }) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #800000">&lt;input</span><span style="color: #000000"> </span><span style="color: #FF0000">css</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #000000FF">[</span><span style="color: #795E26">tw</span><span style="color: #A31515">`border`</span><span style="color: #000000FF">, </span><span style="color: #001080">hasHover</span><span style="color: #000000FF"> </span><span style="color: #000000">&amp;&amp;</span><span style="color: #000000FF"> </span><span style="color: #001080">hoverStyles</span><span style="color: #000000FF">]</span><span style="color: #0000FF">}</span><span style="color: #000000"> </span><span style="color: #800000">/&gt;</span>
+</code></pre>
+						<blockquote>
+							<p>The <code>tw</code> function from <code>twin.macro</code> acts like the <code>@apply</code> helper from Tailwind CSS.</p>
+						</blockquote>
+					</details>
+				</details>
+				<a href="#api" id="api" style="color: inherit; text-decoration: none;">
+					<h2>API</h2>
+				</a>
+				<blockquote>
+					<p><code>apply</code> accepts the same arguments as <a href="../getting-started/styling-with-twind.html">tw</a>.</p>
+				</blockquote>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">tw</span><span style="color: #000000">, </span><span style="color: #001080">apply</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">btn</span><span style="color: #000000"> = </span><span style="color: #795E26">apply</span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  py-2 px-4</span>
+<span style="color: #A31515">  font-semibold</span>
+<span style="color: #A31515">  rounded-lg shadow-md</span>
+<span style="color: #A31515">  focus:(outline-none ring(2 indigo-400 opacity-75))</span>
+<span style="color: #A31515">`</span>
+
+<span style="color: #795E26">tw</span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">btn</span><span style="color: #0000FF">}</span><span style="color: #A31515"> font-bold`</span>
+<span style="color: #008000">// =&gt; .tw-btn .font-bold</span>
+<span style="color: #008000">// CSS:</span>
+<span style="color: #008000">// .tw-XXXX { padding-top: 0.5rem; padding-bottom: 0.5rem; padding-left: 1rem; padding-right: 1rem; font-weight: 600; ...}</span>
+<span style="color: #008000">// .font-bold { font-weight: 700; }</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">btnLarge</span><span style="color: #000000"> = </span><span style="color: #795E26">apply</span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">btn</span><span style="color: #0000FF">}</span><span style="color: #A31515"> py-4 px-8`</span>
+<span style="color: #008000">// Result: () =&gt; ({ paddingTop: &#039;1rem&#039;, paddingBottom: &#039;1rem&#039;, paddingLeft: &#039;2rem&#039;, paddingRight: &#039;2rem&#039;, fontWeight: &#039;600&#039;, ... })</span>
+
+<span style="color: #795E26">tw</span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">btnLarge</span><span style="color: #0000FF">}</span><span style="color: #A31515"> rounded-md`</span>
+<span style="color: #008000">// =&gt; .tw-btn-large .rounded-md</span>
+<span style="color: #008000">// CSS:</span>
+<span style="color: #008000">// .tw-btn-large { padding-top: 1rem; padding-bottom: 1rem; padding-left: 2rem; padding-right: 2rem; font-weight: 600; ... }</span>
+<span style="color: #008000">// .rounded-md { ... }</span>
+</code></pre>
+				<p>You can use this helper to use <code>apply</code> together with <code>tw</code>:</p>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">tw</span><span style="color: #000000">, </span><span style="color: #001080">apply</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
+
+<span style="color: #008000">// There is a better name out there somewhere</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #795E26">twind</span><span style="color: #000000"> = (...</span><span style="color: #001080">args</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> </span><span style="color: #795E26">tw</span><span style="color: #000000">(</span><span style="color: #795E26">apply</span><span style="color: #000000">(...</span><span style="color: #001080">args</span><span style="color: #000000">))</span>
+
+<span style="color: #800000">&lt;button</span><span style="color: #000000"> </span><span style="color: #FF0000">className</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #795E26">twind</span><span style="color: #A31515">`bg-red bg-blue`</span><span style="color: #0000FF">}</span><span style="color: #800000">&gt;</span><span style="color: #000000">blue</span><span style="color: #800000">&lt;/button&gt;</span>
+<span style="color: #008000">// =&gt; tw-red-blue</span>
+
+<span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">.</span><span style="color: #001080">className</span><span style="color: #000000"> = </span><span style="color: #795E26">twind</span><span style="color: #A31515">`bg-blue bg-red`</span>
+<span style="color: #008000">// =&gt; tw-blue-red</span>
+</code></pre>
+				<a href="#examples" id="examples" style="color: inherit; text-decoration: none;">
+					<h2>Examples</h2>
+				</a>
+				<details><summary>Using <code>apply</code> within <code>preflight</code></summary>
+					<p>Use Tailwind rules within <a href="setup.html">preflight</a>.</p>
+					<pre><code class="language-js"><span style="color: #795E26">setup</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">preflight:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">body:</span><span style="color: #000000"> </span><span style="color: #795E26">apply</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;bg-gray-900 text-white&#039;</span><span style="color: #000000">),</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">})</span>
+</code></pre>
+				</details>
+				<details><summary><code>CSS</code> can be used within <code>apply</code></summary>
+					<p><a href="../getting-started/css-in-js.html">twind/css</a> can be used to define additional styles.</p>
+					<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">btn</span><span style="color: #000000"> = </span><span style="color: #795E26">apply</span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  py-2 px-4</span>
+<span style="color: #A31515">  </span><span style="color: #0000FF">${</span><span style="color: #795E26">css</span><span style="color: #000000FF">({</span>
+<span style="color: #000000FF">    </span><span style="color: #001080">borderColor:</span><span style="color: #000000FF"> </span><span style="color: #A31515">&#039;black&#039;</span><span style="color: #000000FF">,</span>
+<span style="color: #000000FF">  })</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">`</span>
+</code></pre>
+				</details>
+				<details><summary>Using within <code>CSS</code></summary>
+					<p><code>apply</code> can be used with <a href="../../modules/twind_css.html">css</a>:</p>
+					<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">prose</span><span style="color: #000000"> = </span><span style="color: #795E26">css</span><span style="color: #000000">(</span>
+<span style="color: #000000">  </span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-gray-700 dark:text-gray-300`</span><span style="color: #000000">,</span>
+<span style="color: #000000">  {</span>
+<span style="color: #000000">    </span><span style="color: #001080">p:</span><span style="color: #000000"> </span><span style="color: #795E26">apply</span><span style="color: #A31515">`my-5`</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">h1:</span><span style="color: #000000"> </span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-black dark:text-white`</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">  {</span>
+<span style="color: #000000">    </span><span style="color: #001080">h1:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #001080">fontWeight:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;800&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">fontSize:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;2.25em&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">marginTop:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;0&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">marginBottom:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;0.8888889em&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #001080">lineHeight:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;1.1111111&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">)</span>
+</code></pre>
+					<p>Using template literal syntax:</p>
+					<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">prose</span><span style="color: #000000"> = </span><span style="color: #795E26">css</span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  </span><span style="color: #0000FF">${</span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-gray-700 dark:text-gray-300`</span><span style="color: #0000FF">}</span>
+
+<span style="color: #A31515">  p {</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #795E26">apply</span><span style="color: #A31515">`my-5`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  }</span>
+
+<span style="color: #A31515">  h1 {</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-black dark:text-white`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">    font-weight: 800;</span>
+<span style="color: #A31515">    font-size: 2.25em;</span>
+<span style="color: #A31515">    margin-top: 0;</span>
+<span style="color: #A31515">    margin-bottom: 0.8888889em;</span>
+<span style="color: #A31515">    line-height: 1.1111111;</span>
+<span style="color: #A31515">  }</span>
+<span style="color: #A31515">`</span>
+</code></pre>
+				</details>
+				<details><summary>Using Tailwind directives with <code>animation</code> from <code>twind/css</code></summary>
+					<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">motion</span><span style="color: #000000"> = </span><span style="color: #795E26">animation</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;.6s ease-in-out infinite&#039;</span><span style="color: #000000">, {</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;0%&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #795E26">apply</span><span style="color: #A31515">`scale-100`</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;50%&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #795E26">apply</span><span style="color: #A31515">`scale-125 rotate-45`</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;100%&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #795E26">apply</span><span style="color: #A31515">`scale-100 rotate-0`</span><span style="color: #000000">,</span>
+<span style="color: #000000">})</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">bounce</span><span style="color: #000000"> = </span><span style="color: #795E26">animation</span><span style="color: #000000">(</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;1s ease infinite&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #795E26">keyframes</span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  from, 20%, 53%, 80%, to {</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #795E26">apply</span><span style="color: #A31515">`transform-gpu translate-x-0`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  }</span>
+<span style="color: #A31515">  40%, 43% {</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #795E26">apply</span><span style="color: #A31515">`transform-gpu -translate-x-7`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  }</span>
+<span style="color: #A31515">  70% {</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #795E26">apply</span><span style="color: #A31515">`transform-gpu -translate-x-3.5`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  },</span>
+<span style="color: #A31515">  90% {</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #795E26">apply</span><span style="color: #A31515">`transform-gpu -translate-x-1`</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  }</span>
+<span style="color: #A31515">`</span><span style="color: #000000">,</span>
+<span style="color: #000000">)</span>
+</code></pre>
+				</details>
+				<details><summary>A React button component</summary>
+					<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">tw</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">variantMap</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">  </span><span style="color: #001080">success:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;green&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">primary:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;blue&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">warning:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;yellow&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">info:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;gray&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">danger:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;red&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">sizeMap</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">  </span><span style="color: #001080">sm:</span><span style="color: #000000"> </span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-xs py(2 md:1) px-2`</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">md:</span><span style="color: #000000"> </span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-sm py(3 md:2) px-2`</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">lg:</span><span style="color: #000000"> </span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-lg py-2 px-4`</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">xl:</span><span style="color: #000000"> </span><span style="color: #795E26">apply</span><span style="color: #A31515">`text-xl py-3 px-6`</span><span style="color: #000000">,</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">baseStyles</span><span style="color: #000000"> = </span><span style="color: #795E26">apply</span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  w(full md:auto)</span>
+<span style="color: #A31515">  text(sm white uppercase)</span>
+<span style="color: #A31515">  px-4</span>
+<span style="color: #A31515">  border-none</span>
+<span style="color: #A31515">  transition-colors</span>
+<span style="color: #A31515">  duration-300</span>
+<span style="color: #A31515">`</span>
+
+<span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">Button</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">size</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;md&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">variant</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;primary&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">round</span><span style="color: #000000"> = </span><span style="color: #0000FF">false</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">disabled</span><span style="color: #000000"> = </span><span style="color: #0000FF">false</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">className</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">children</span><span style="color: #000000">,</span>
+<span style="color: #000000">}) {</span>
+<span style="color: #000000">  </span><span style="color: #008000">// Collect all styles into one class</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">instanceStyles</span><span style="color: #000000"> = </span><span style="color: #795E26">apply</span><span style="color: #A31515">`</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #001080">baseStyles</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">    bg-</span><span style="color: #0000FF">${</span><span style="color: #001080">variantMap</span><span style="color: #000000FF">[</span><span style="color: #001080">variant</span><span style="color: #000000FF">]</span><span style="color: #0000FF">}</span><span style="color: #A31515">(600 700(hover:&amp; focus:&amp;)))</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #001080">sizeMap</span><span style="color: #000000FF">[</span><span style="color: #001080">size</span><span style="color: #000000FF">]</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">    rounded-</span><span style="color: #0000FF">${</span><span style="color: #001080">round</span><span style="color: #000000FF"> </span><span style="color: #000000">?</span><span style="color: #000000FF"> </span><span style="color: #A31515">&#039;full&#039;</span><span style="color: #000000FF"> </span><span style="color: #000000">:</span><span style="color: #000000FF"> </span><span style="color: #A31515">&#039;lg&#039;</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">    </span><span style="color: #0000FF">${</span><span style="color: #001080">disabled</span><span style="color: #000000FF"> </span><span style="color: #000000">&amp;&amp;</span><span style="color: #000000FF"> </span><span style="color: #A31515">&#039;bg-gray-400 text-gray-100 cursor-not-allowed&#039;</span><span style="color: #0000FF">}</span>
+<span style="color: #A31515">  `</span>
+
+<span style="color: #000000">  </span><span style="color: #008000">// Allow passed classNames to override instance styles</span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #800000">&lt;button</span><span style="color: #000000"> </span><span style="color: #FF0000">className</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #795E26">tw</span><span style="color: #000000FF">(</span><span style="color: #001080">instanceStyles</span><span style="color: #000000FF">, </span><span style="color: #001080">className</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span><span style="color: #800000">&gt;</span><span style="color: #0000FF">{</span><span style="color: #001080">children</span><span style="color: #0000FF">}</span><span style="color: #800000">&lt;/button&gt;</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #795E26">render</span><span style="color: #000000">(</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;</span><span style="color: #267F99">Button</span><span style="color: #000000"> </span><span style="color: #FF0000">variant</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;info&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">className</span><span style="color: #000000">=</span><span style="color: #A31515">&quot;text-lg rounded-md&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">    Click me</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;/</span><span style="color: #267F99">Button</span><span style="color: #800000">&gt;</span><span style="color: #000000">,</span>
+<span style="color: #000000">)</span>
+</code></pre>
+				</details>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="label pp-nav pp-group">
+						<span>Handbook</span>
+					</li>
+					<li class=" pp-nav pp-page pp-parent">
+						<a href="../getting-started.html">Getting <wbr>Started</a>
+					</li>
+					<li class=" pp-nav pp-page pp-parent">
+						<a href="../recipes.html">Recipes</a>
+					</li>
+					<li class=" pp-nav pp-page pp-parent pp-active">
+						<a href="../advanced.html">Advanced</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="setup.html">Setup</a>
+					</li>
+					<li class="current pp-nav pp-page pp-child">
+						<a href="defining-components.html">Defining <wbr>Components</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="plugins.html">Plugins</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="ssr.html">Extract <wbr>Styles aka SSR</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="contributing.html">Contributing</a>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="../faqs.html">FAQs</a>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="../release-notes.html">Release <wbr>Notes</a>
+					</li>
+					<li class="label pp-nav pp-group">
+						<span>API</span>
+					</li>
+					<li class=" ">
+						<a href="../../modules.html">Modules</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind.html">twind</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind_colors.html">twind/colors</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind_css.html">twind/css</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind_observe.html">twind/observe</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind_server.html">twind/server</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind_sheets.html">twind/sheets</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind_shim.html">twind/shim</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind_shim_server.html">twind/shim/server</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../../assets/js/main.js"></script>
+</body>
+</html>

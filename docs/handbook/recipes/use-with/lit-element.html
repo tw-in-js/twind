@@ -1,0 +1,221 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>LitElement | twind - v0.14.2</title>
+	<meta name="description" content="Documentation for twind - v0.14.2">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../../assets/css/main.css">
+	<link rel="stylesheet" href="../../../assets/css/pages.css">
+	<script async src="../../../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../../../assets/js/search.json" data-base="../../..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../../../index.html" class="title">twind - v0.14.2</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../../../index.html">Home</a>
+				</li>
+				<li>
+					<a href="../../getting-started.html">Handbook</a>
+				</li>
+				<li>
+					<a href="../../recipes.html">Recipes</a>
+				</li>
+				<li>
+					<a href="react.html">Use With</a>
+				</li>
+				<li>
+					<a href="react.html">Use With</a>
+				</li>
+				<li>
+					<a href="lit-element.html">LitElement</a>
+				</li>
+			</ul>
+			<h1>LitElement</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#litelement" id="litelement" style="color: inherit; text-decoration: none;">
+					<h2><a href="https://lit-element.polymer-project.org/">LitElement</a></h2>
+				</a>
+				<blockquote>
+					<p>❗ This example is using <a href="https://wicg.github.io/construct-stylesheets/">Constructable Stylesheet Objects</a> and <code>DocumentOrShadowRoot.adoptedStyleSheets</code> which have <a href="https://caniuse.com/mdn-api_documentorshadowroot_adoptedstylesheets">limited browser support</a> at the moment (December 2020).</p>
+				</blockquote>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">LitElement</span><span style="color: #000000">, </span><span style="color: #001080">html</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;lit-element&#039;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">create</span><span style="color: #000000">, </span><span style="color: #001080">cssomSheet</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
+
+<span style="color: #008000">// 1. Create separate CSSStyleSheet</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">sheet</span><span style="color: #000000"> = </span><span style="color: #795E26">cssomSheet</span><span style="color: #000000">({ </span><span style="color: #001080">target:</span><span style="color: #000000"> </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">CSSStyleSheet</span><span style="color: #000000">() })</span>
+
+<span style="color: #008000">// 2. Use that to create an own twind instance</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">tw</span><span style="color: #000000"> } = </span><span style="color: #795E26">create</span><span style="color: #000000">({ </span><span style="color: #001080">sheet</span><span style="color: #000000"> })</span>
+
+<span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">TwindElement</span><span style="color: #000000"> </span><span style="color: #0000FF">extends</span><span style="color: #000000"> </span><span style="color: #267F99">LitElement</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #008000">// 3. Apply the same style to each instance of this component</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">static</span><span style="color: #000000"> </span><span style="color: #001080">styles</span><span style="color: #000000"> = [</span><span style="color: #001080">sheet</span><span style="color: #000000">.</span><span style="color: #001080">target</span><span style="color: #000000">]</span>
+
+<span style="color: #000000">  </span><span style="color: #795E26">render</span><span style="color: #000000">() {</span>
+<span style="color: #000000">    </span><span style="color: #008000">// 4. Use &quot;own&quot; tw function</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #795E26">html</span><span style="color: #A31515">`</span>
+<span style="color: #A31515">      &lt;main class=&quot;</span><span style="color: #0000FF">${</span><span style="color: #795E26">tw</span><span style="color: #A31515">`h-screen bg-purple-400 flex items-center justify-center`</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot;&gt;</span>
+<span style="color: #A31515">        &lt;h1 class=&quot;</span><span style="color: #0000FF">${</span><span style="color: #795E26">tw</span><span style="color: #A31515">`font-bold text(center 5xl white sm:gray-800 md:pink-700)`</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot;&gt;</span>
+<span style="color: #A31515">          This is Twind!</span>
+<span style="color: #A31515">        &lt;/h1&gt;</span>
+<span style="color: #A31515">      &lt;/main&gt;</span>
+<span style="color: #A31515">    `</span>
+<span style="color: #000000">  }</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #001080">customElements</span><span style="color: #000000">.</span><span style="color: #795E26">define</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;twind-element&#039;</span><span style="color: #000000">, </span><span style="color: #001080">TwindElement</span><span style="color: #000000">)</span>
+
+<span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">.</span><span style="color: #001080">innerHTML</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;&lt;twind-element&gt;&lt;/twind-element&gt;&#039;</span>
+</code></pre>
+				<blockquote>
+					<p>🚀 <a href="https://esm.codes/#aW1wb3J0IHsgTGl0RWxlbWVudCwgaHRtbCB9IGZyb20gJ2h0dHBzOi8vY2RuLnNreXBhY2suZGV2L2xpdC1lbGVtZW50JwppbXBvcnQgeyBjcmVhdGUsIGNzc29tU2hlZXQgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZCcKCmNvbnN0IHNoZWV0ID0gY3Nzb21TaGVldCh7IHRhcmdldDogbmV3IENTU1N0eWxlU2hlZXQoKSB9KQoKY29uc3QgeyB0dyB9ID0gY3JlYXRlKHsgc2hlZXQgfSkKCmNsYXNzIFR3aW5kRWxlbWVudCBleHRlbmRzIExpdEVsZW1lbnQgewogIGNyZWF0ZVJlbmRlclJvb3QoKSB7CiAgICBjb25zdCBzaGFkb3cgPSBzdXBlci5jcmVhdGVSZW5kZXJSb290KCkKICAgIHNoYWRvdy5hZG9wdGVkU3R5bGVTaGVldHMgPSBbc2hlZXQudGFyZ2V0XQogICAgcmV0dXJuIHNoYWRvdwogIH0KCiAgcmVuZGVyKCkgewogICAgcmV0dXJuIGh0bWxgCiAgICAgIDxtYWluIGNsYXNzPSIke3R3YGgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJgfSI+CiAgICAgICAgPGgxIGNsYXNzPSIke3R3YGZvbnQtYm9sZCB0ZXh0KGNlbnRlciA1eGwgd2hpdGUgc206Z3JheS04MDAgbWQ6cGluay03MDApYH0iPgogICAgICAgICAgVGhpcyBpcyBUd2luZCEKICAgICAgICA8L2gxPgogICAgICA8L21haW4+CiAgICBgCiAgfQp9CgpjdXN0b21FbGVtZW50cy5kZWZpbmUoJ3R3aW5kLWVsZW1lbnQnLCBUd2luZEVsZW1lbnQpOwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSAnPHR3aW5kLWVsZW1lbnQ+PC90d2luZC1lbGVtZW50PicK">live and interactive demo</a></p>
+				</blockquote>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" pp-nav pp-back-btn">
+						<a href="../../recipes.html">🡠 <wbr>Back to <wbr>Recipes</a>
+					</li>
+					<li class="label pp-nav pp-group">
+						<span>Use <wbr>With</span>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="react.html">React</a>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="preact.html">Preact</a>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="svelte.html">Svelte</a>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="vue.html">Vue</a>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="web-components.html">Web <wbr>Components</a>
+					</li>
+					<li class="current pp-nav pp-page">
+						<a href="lit-element.html">Lit<wbr>Element</a>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="nextjs.html">Next.js</a>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="wmr.html">WMR</a>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="gatsby.html">Gatsby</a>
+					</li>
+					<li class="label pp-nav pp-group">
+						<span>API</span>
+					</li>
+					<li class=" ">
+						<a href="../../../modules.html">Modules</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../../modules/twind.html">twind</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../../modules/twind_colors.html">twind/colors</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../../modules/twind_css.html">twind/css</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../../modules/twind_observe.html">twind/observe</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../../modules/twind_server.html">twind/server</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../../modules/twind_sheets.html">twind/sheets</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../../modules/twind_shim.html">twind/shim</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../../modules/twind_shim_server.html">twind/shim/server</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../../../assets/js/main.js"></script>
+</body>
+</html>

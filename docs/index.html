@@ -1,0 +1,423 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>twind - v0.14.2</title>
+	<meta name="description" content="Documentation for twind - v0.14.2">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+	<link rel="stylesheet" href="assets/css/pages.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">twind - v0.14.2</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<h1>twind - v0.14.2</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<blockquote>
+					<p>the smallest, fastest, most feature complete Tailwind-in-JS solution in existence</p>
+				</blockquote>
+				<p><a href="https://github.com/tw-in-js/twind/blob/main/LICENSE"><img src="https://flat.badgen.net/github/license/tw-in-js/twind" alt="MIT License"></a>
+					<a href="https://www.npmjs.com/package/twind"><img src="https://flat.badgen.net/npm/v/twind?icon=npm&label&cache=10800&color=blue" alt="Latest Release"></a>
+					<a href="https://bundlephobia.com/result?p=twind" title="gzip bundle size (including dependencies)"><img src="https://flat.badgen.net/bundlephobia/minzip/twind?icon=packagephobia&label&color=blue&cache=10800" alt="Bundle Size"></a>
+					<a href="https://unpkg.com/twind/twind.js" title="brotli package size (without dependencies)"><img src="https://flat.badgen.net/badgesize/brotli/https:/unpkg.com/twind/twind.js?icon=jsdelivr&label&color=blue&cache=10800" alt="Package Size"></a>
+					<a href="https://twind.dev/docs"><img src="https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label" alt="Documentation"></a>
+					<a href="https://github.com/tw-in-js/twind"><img src="https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind?icon=github&label" alt="Github"></a>
+					<a href="https://discord.com/invite/2aP5NkszvD"><img src="https://flat.badgen.net/badge/icon/discord?icon=discord&label" alt="Discord"></a>
+					<a href="https://github.com/tw-in-js/twind/actions?query=workflow%3Aci"><img src="https://github.com/tw-in-js/twind/workflows/CI/badge.svg" alt="CI"></a>
+				<a href="https://coveralls.io/github/tw-in-js/twind?branch=main"><img src="https://flat.badgen.net/coveralls/c/github/tw-in-js/twind/main?icon=codecov&label&cache=10800" alt="Coverage Status"></a></p>
+				<ul>
+					<li><a href="#documentation">Documentation</a></li>
+					<li><a href="#quickstart">Quickstart</a></li>
+					<li><a href="#advantages">Advantages</a></li>
+					<li><a href="#rationale">Rationale</a></li>
+					<li><a href="#why-twind">Why Twind?</a></li>
+					<li><a href="#benchmarks">Benchmarks</a> - how does twind compare to other libraries</li>
+					<li><a href="#inspiration">Inspiration</a> - who inspired us</li>
+					<li><a href="https://twind.dev/docs/handbook/release-notes.html">Release Notes</a> &amp; <a href="https://github.com/tw-in-js/twind/releases">Changelog</a> - what is new</li>
+				</ul>
+				<hr>
+				<p>If you are here then the likelihood is that you are using Tailwind or a CSS-in-JS solution such as styled-components, Emotion or goober in order to style your web applications. These packages have proven overwhelmingly popular and revolutionized web development as we know it.</p>
+				<p>The purpose of this project is to unify these two approaches; embracing the flexibility of CSS-in-JS whilst conforming to the carefully considered constraints of the Tailwind API.</p>
+				<p>We hope to create a place for likeminded people to discuss issues, share ideas and collaborate.</p>
+				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
+					<h2><a href="https://twind.dev/docs">Documentation</a></h2>
+				</a>
+				<p>Frequently viewed docs:</p>
+				<ul>
+					<li><a href="https://twind.dev/docs/handbook/getting-started/installation.html">Installation</a> - how to install <code>twind</code></li>
+					<li><a href="https://twind.dev/docs/handbook/getting-started/styling-with-twind.html">Styling with Twind</a> - how to style with Twind</li>
+					<li><a href="https://twind.dev/docs/handbook/getting-started/using-the-shim.html">Shim</a> - seamless integration with existing Tailwind HTML</li>
+					<li><a href="https://twind.dev/docs/handbook/getting-started/thinking-in-groups.html">Grouping</a> - how to optimize rules size</li>
+					<li><a href="https://twind.dev/docs/handbook/getting-started/customize-the-theme.html">Theming</a> - how to apply your theme</li>
+					<li><a href="https://twind.dev/docs/handbook/getting-started/css-in-js.html">CSS-in-JS</a> - how to apply custom CSS</li>
+					<li><a href="https://twind.dev/docs/handbook/advanced/setup.html">Setup</a> - how to use <code>setup</code></li>
+					<li><a href="https://twind.dev/docs/handbook/advanced/defining-components.html">Components</a> - how to define component styles</li>
+					<li><a href="https://twind.dev/docs/handbook/getting-started/tailwind-extensions.html">Tailwind Extensions</a> - which additional features are available</li>
+					<li><a href="https://twind.dev/docs/handbook/advanced/extract.html">Static Extraction (SSR)</a> - how to extract the generated CSS on the server</li>
+					<li><a href="https://twind.dev/docs/handbook/recipes.html">Recipes</a> - how to use with framework X</li>
+					<li><a href="https://twind.dev/docs/handbook/getting-started/modules.html">Modules</a> - which modules are available</li>
+				</ul>
+				<a href="#quickstart" id="quickstart" style="color: inherit; text-decoration: none;">
+					<h2>Quickstart</h2>
+				</a>
+				<p>If you would like to get started with Twind right away then copy paste this code into your favorite sandbox:</p>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">tw</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;https://cdn.skypack.dev/twind&#039;</span>
+
+<span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">.</span><span style="color: #001080">innerHTML</span><span style="color: #000000"> = </span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  &lt;main class=&quot;</span><span style="color: #0000FF">${</span><span style="color: #795E26">tw</span><span style="color: #A31515">`h-screen bg-purple-400 flex items-center justify-center`</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot;&gt;</span>
+<span style="color: #A31515">    &lt;h1 class=&quot;</span><span style="color: #0000FF">${</span><span style="color: #795E26">tw</span><span style="color: #A31515">`font-bold text(center 5xl white sm:gray-800 md:pink-700)`</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot;&gt;This is Twind!&lt;/h1&gt;</span>
+<span style="color: #A31515">  &lt;/main&gt;</span>
+<span style="color: #A31515">`</span>
+</code></pre>
+				<p>Alternatively try the 🚀 <a href="https://esm.codes/#aW1wb3J0IHsgdHcgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZCcKCmRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gYAogIDxtYWluIGNsYXNzPSIke3R3YGgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJgfSI+CiAgICA8aDEgY2xhc3M9IiR7dHdgZm9udC1ib2xkIHRleHQoY2VudGVyIDV4bCB3aGl0ZSBzbTpncmF5LTgwMCBtZDpwaW5rLTcwMClgfSI+VGhpcyBpcyBUd2luZCE8L2gxPgogIDwvbWFpbj4KYA==">live and interactive demo</a> and take a look at the <a href="https://twind.dev/docs/handbook/getting-started/installation.html">installation guide</a>.</p>
+				<p>For seamless integration with existing Tailwind HTML you can use <a href="https://twind.dev/docs/handbook/getting-started/using-the-shim.html">twind/shim</a>:</p>
+				<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">type</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;module&quot;</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;https://cdn.skypack.dev/twind/shim&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+
+<span style="color: #800000">&lt;main</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;h-screen bg-purple-400 flex items-center justify-center&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;h1</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;font-bold text(center 5xl white sm:gray-800 md:pink-700)&quot;</span><span style="color: #800000">&gt;</span><span style="color: #000000">This is Twind!</span><span style="color: #800000">&lt;/h1&gt;</span>
+<span style="color: #800000">&lt;/main&gt;</span>
+</code></pre>
+				<p>Try <code>twind/shim</code> in the 🚀 <a href="https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPG1haW4gY2xhc3M9Imgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIiPgogICAgPGgxIGNsYXNzPSJmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKSI+CiAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICA8L2gxPgogIDwvbWFpbj4KYA==">live and interactive shim demo</a></p>
+				<blockquote>
+					<p>📚 For more detailed instruction on usage please <a href="https://twind.dev/docs/handbook/getting-started.html">read the documentation</a> and check out <a href="https://esm.codes/#aW1wb3J0IHsgdHcsIHNldHVwIH0gZnJvbSAnaHR0cHM6Ly9jZG4uc2t5cGFjay5kZXYvdHdpbmQnCgpzZXR1cCh7CiAgdGhlbWU6IHsKICAgIC8vIEV4YW1wbGUgb2YgZXh0ZW5kaW5nIHRoZSBkZWZhdWx0IHRoZW1lCiAgICBleHRlbmQ6IHsKICAgICAgY29sb3JzOiB7IGhvdHBpbms6ICcjRkYwMEZGJyB9LAogICAgICByb3RhdGU6IHsgNTogJzVkZWcnIH0KICAgIH0KICB9Cn0pCgpjb25zdCBhcHAgPSAoKSA9PiBgCiAgICA8ZGl2IGNsYXNzPScke3N0eWxlLmNvbnRhaW5lcn0nPgogICAgICA8aDEgY2xhc3M9JyR7CiAgICAgICAgLy8gRXhhbXBsZSBvZiBhbiBpbmxpbmUgc3R5bGUKICAgICAgICB0d2AKICAgICAgICAgIHRleHQod2hpdGUgNHhsKQogICAgICAgICAgZm9udChib2xkIHNhbnMpCiAgICAgICAgICB0cmFuc2l0aW9uLXRyYW5zZm9ybQogICAgICAgICAgaG92ZXI6KAogICAgICAgICAgICByb3RhdGUtNQogICAgICAgICAgICBzY2FsZS0xNTAKICAgICAgICAgICAgY3Vyc29yLXBvaW50ZXIKICAgICAgICAgICkKICAgICAgICBgCiAgICAgIH0nPkhlbGxvIFdvcmxkPC9oMT4KICAgIDwvZGl2PgogIGA7CiAgCiAgCmNvbnN0IHN0eWxlID0gewogIC8vIEV4YW1wbGUgb2YgYWJzdHJhY3RlZCBzdHlsZQogIGNvbnRhaW5lcjogdHdgCiAgICBoLWZ1bGwKICAgIGJnLWhvdHBpbmsKICAgIGZsZXgKICAgIGl0ZW1zLWNlbnRlcgogICAganVzdGlmeS1jZW50ZXIKICBgCn0KCmRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gYXBwKCk=">this extended demo</a></p>
+				</blockquote>
+				<a href="#advantages" id="advantages" style="color: inherit; text-decoration: none;">
+					<h2>Advantages</h2>
+				</a>
+				<blockquote>
+					<p>💡 You can click on each summary to show additional details.</p>
+				</blockquote>
+				<details><summary>⚡️ No build step</summary>
+					<p>In fact, there is no dependency on Tailwind or PostCSS at all. This makes it possible to use Twind without a development server. The various ways how to start using twind are described in the <a href="https://twind.dev/docs/handbook/getting-started/installation.html">installation guide</a>.</p>
+					<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">tw</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
+
+<span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">.</span><span style="color: #001080">innerHTML</span><span style="color: #000000"> = </span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  &lt;main class=&quot;</span><span style="color: #0000FF">${</span><span style="color: #795E26">tw</span><span style="color: #A31515">`h-screen bg-purple-400 flex items-center justify-center`</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot;&gt;</span>
+<span style="color: #A31515">    &lt;h1 class=&quot;</span><span style="color: #0000FF">${</span><span style="color: #795E26">tw</span><span style="color: #A31515">`font-bold text(center 5xl white sm:gray-800 md:pink-700)`</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot;&gt;</span>
+<span style="color: #A31515">      This is Twind!</span>
+<span style="color: #A31515">    &lt;/h1&gt;</span>
+<span style="color: #A31515">  &lt;/main&gt;</span>
+<span style="color: #A31515">`</span>
+</code></pre>
+					<blockquote>
+						<p>🚀 <a href="https://esm.codes/#aW1wb3J0IHsgdHcgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZCcKCmRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gYAogIDxtYWluIGNsYXNzPSIke3R3YGgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJgfSI+CiAgICA8aDEgY2xhc3M9IiR7dHdgZm9udC1ib2xkIHRleHQoY2VudGVyIDV4bCB3aGl0ZSBzbTpncmF5LTgwMCBtZDpwaW5rLTcwMClgfSI+CiAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICA8L2gxPgogIDwvbWFpbj4KYA==">live and interactive demo</a></p>
+					</blockquote>
+				</details>
+				<details><summary>🧪 Use plain Tailwind HTML markup</summary>
+					<p>It might not always be desirable to generate rules by invoking the compiler directly via function call. In this case you may use the <a href="https://twind.dev/docs/handbook/getting-started/using-the-shim.html">shim module</a> which finds and replaces class names within HTML, generating styles appropriately. This feature can be used together with your favorite framework without any additional setup. This is especially useful during development too; for example when editing classes in the inspector.</p>
+					<pre><code class="language-html"><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">type</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;module&quot;</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;https://cdn.skypack.dev/twind/shim&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+
+<span style="color: #800000">&lt;main</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;h-screen bg-purple-400 flex items-center justify-center&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;h1</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;font-bold text(center 5xl white sm:gray-800 md:pink-700)&quot;</span><span style="color: #800000">&gt;</span><span style="color: #000000">This is Twind!</span><span style="color: #800000">&lt;/h1&gt;</span>
+<span style="color: #800000">&lt;/main&gt;</span>
+</code></pre>
+					<blockquote>
+						<p>🚀 <a href="https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPG1haW4gY2xhc3M9Imgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIiPgogICAgPGgxIGNsYXNzPSJmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKSI+CiAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICA8L2gxPgogIDwvbWFpbj4KYA==">live and interactive shim demo</a></p>
+					</blockquote>
+				</details>
+				<details><summary>💸 Unlimited styles for a low fixed cost of ~12KB</summary>
+					<p>By shipping the compiler (rather than the resultant output) there is a known and fixed cost associated with styling. No matter how many styles you write or how many variants you use, all that your users will ever have to download is approximately 12KB of code (which is less than styled-components or your average purged Tailwind build).</p>
+				</details>
+				<details><summary>🎯 Extended syntax, variants and directives</summary>
+					<blockquote>
+						<p>💡 The following list is just an excerpt. Please take a look at the <a href="https://twind.dev/docs/handbook/getting-started/tailwind-extensions.html">Tailwind Extensions</a> documentation page.</p>
+					</blockquote>
+					<ul>
+						<li><p>Custom syntax for grouping directives and variants</p>
+							<p>Having control over the interpreter affords us the possibility of defining terse syntax for <a href="https://twind.dev/docs/handbook/getting-started/thinking-in-groups.html">grouping responsive and pseudo variants</a> as well as directives with common prefixes. This massively reduces repetition and improves comprehension.</p>
+							<pre><code class="language-js"><span style="color: #008000">// Before directive grouping</span>
+<span style="color: #795E26">tw</span><span style="color: #A31515">`border-2 border-black border-opacity-50 border-dashed`</span>
+<span style="color: #008000">// After directive grouping</span>
+<span style="color: #795E26">tw</span><span style="color: #A31515">`border(2 black opacity-50 dashed)`</span>
+
+<span style="color: #008000">// With variants</span>
+<span style="color: #795E26">tw</span><span style="color: #A31515">`sm:(border(2 black opacity-50 hover:dashed))`</span>
+<span style="color: #008000">// =&gt; sm:border-2 sm:border-black sm:border-opacity-50 sm:hover:border-dashed</span>
+
+<span style="color: #795E26">tw</span><span style="color: #A31515">`w(1/2 sm:1/3 lg:1/6) p-2`</span>
+<span style="color: #008000">// =&gt; w-1/2 sm:w-1/3 lg:w-1/6 p-2</span>
+</code></pre>
+						</li>
+						<li><p>Every variant can be applied to every directive</p>
+							<p>Because twind is generating CSS during runtime there is no restriction to which directives variants can be applied.</p>
+						</li>
+						<li><p>Most pseudo classes can be used as variant or <code>group-*</code> variant</p>
+							<p>Unknown variants (not listed in <a href="https://github.com/tw-in-js/twind/blob/main/src/twind/variants.ts">core variants</a>) are assumed to be <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">pseudo classes</a>.</p>
+						</li>
+						<li><p><code>siblings</code>, <code>sibling</code> and <code>children</code> variants</p>
+							<p>Allows to apply styling to different elements instead of repeating a directive on each one. This feature can be combined with other variants like <code>hover</code>.</p>
+						</li>
+						<li><p><code>override</code> variant to increase the specificity of rules</p>
+							<p>This can be used to ensure a rule has a higher <a href="https://specificity.keegan.st/">specificity</a> than others:</p>
+							<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">shared</span><span style="color: #000000"> = </span><span style="color: #795E26">tw</span><span style="color: #A31515">`text(xl center blue-600) underline`</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">special</span><span style="color: #000000"> = </span><span style="color: #795E26">tw</span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">shared</span><span style="color: #0000FF">}</span><span style="color: #A31515"> override:(text-purple-600 no-underline)`</span>
+</code></pre>
+						</li>
+						<li><p>Using exclamation point (<code>!</code>) after a directive to override any other declarations</p>
+							<p>Directives may end with exclamation point (<code>text-center!</code>) to be marked as <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity#The_!important_exception">important</a></p>
+						</li>
+						<li><p>Dark mode is always available</p>
+							<p>Please see <a href="https://twind.dev/docs/handbook/advanced/setup.html#dark-mode">Installation - Dark Mode</a> for details.</p>
+						</li>
+					</ul>
+				</details>
+				<details><summary>✈️ Includes a themed Tailwind preflight stylesheet by default</summary>
+					<p>The <a href="https://tailwindcss.com/docs/preflight">base reset</a> provided by Tailwind is instantiated with respect to your theme (values like fonts, colors etc.) and injected in the stylesheet during setup. This guarantees more consistent cross browser results out of the box.</p>
+					<blockquote>
+						<p>💡 It is possible to <a href="https://twind.dev/docs/handbook/advanced/setup.html#preflight">customize or disable the preflight</a>.</p>
+					</blockquote>
+				</details>
+				<details><summary>🎢 Familiar and Tailwind V2 compliant theming</summary>
+					<p>Theming is done exactly as <a href="https://tailwindcss.com/docs/theme">documented by the Tailwind</a> meaning that you can copy paste in your themes from existing projects. The only different here is that there is no need to rebuild anything after changing you theme. Just refresh the page!</p>
+					<blockquote>
+						<p>💡 For further details please read the <a href="https://twind.dev/docs/handbook/getting-started/customize-the-theme.html">theme guide</a>.</p>
+					</blockquote>
+				</details>
+				<details><summary>🚓 Escape hatch for writing arbitrary CSS</summary>
+					<p>The compiler <a href="https://twind.dev/docs/modules/twind.html#inline-plugins">accepts functions</a> that can return arbitrary CSS-in-JS objects. A convenient escape hatch for all those one-off rules which aren&#39;t supported by Tailwind. The <code>&amp;</code> keyword allows you to write complex rules (like pseudo elements <code>&amp;::before</code> and <code>&amp;::after</code>) that are beyond the scope of inline styles without having to add another dependency.</p>
+					<blockquote>
+						<p>💡 We provide a <a href="https://twind.dev/docs/handbook/getting-started/css-in-js.html">css helper</a> as a convenience for this case.</p>
+					</blockquote>
+				</details>
+				<details><summary>🤖 Built in support for conditionally combining rules</summary>
+					<p>Input is not limited to strings like with HTML classes. The <a href="https://twind.dev/docs/handbook/getting-started/styling-with-twind.html#the-tw-function"><code>tw</code> function</a> accept arrays, objects, template literals, functions, almost everything! The interpreter spec is inspired by and is very similar to <a href="https://github.com/lukeed/clsx">clsx</a> and offers a much more developer friendly API that handles null values gracefully.</p>
+				</details>
+				<details><summary>🌈 Improve readability by breaking rules over multiple lines</summary>
+					<p>Using template literals as input (<a href="https://twind.dev/docs/modules/twind.html#tw-function">the recommended method</a>) or even object syntax allows you to break rules over multiple lines, drastically improving readability and maintainability of complex rules.</p>
+				</details>
+				<details><summary>❄️ Optional hashing of class names ensuring no conflicts</summary>
+					<p>By default no hashing is enabled to aid debugging during development. However it is possible to configure Twind to <a href="https://twind.dev/docs/handbook/advanced/setup.html#hash">hash class names</a> before injecting them into the DOM. This may be useful in production as it can reduce the down-the-wire size of server-side rendered pages and eliminates any chance of class name conflicts with third party styles.</p>
+				</details>
+				<details><summary>🚅 Faster than all popular CSS-in-JS libraries</summary>
+					<p>Given the limited grammar that the compiler has to support there is a much higher chance of finding a rule and its variant in the cache. Because of this along with some other specialist optimizations we are able to compile and inject CSS <a href="#benchmarks">faster than all the popular</a> CSS-in-JS solutions.</p>
+				</details>
+				<details><summary>🔌 Language extension via plugins </summary>
+					<p>Extending the grammar is trivial and can be achieved by providing functions <em>inline</em> or by generalizing inline rules and defining them during setup under <a href="https://twind.dev/docs/handbook/advanced/plugins.html">the <em>plugins</em> key</a>.</p>
+				</details>
+				<details><summary>🎩 Remove all runtime overhead with static extraction</summary>
+					<p>The compiler itself is not reliant on the DOM at all which makes it an ideal candidate for static extraction which essentially removes all runtime overhead. This is possible during <a href="https://twind.dev/docs/handbook/advanced/ssr.md">SSR</a> or build time prepass.</p>
+				</details>
+				<a href="#rationale" id="rationale" style="color: inherit; text-decoration: none;">
+					<h2>Rationale</h2>
+				</a>
+				<p>This project was started by the authors of two similar libraries – <a href="https://github.com/lukejacksonn/oceanwind">oceanwind</a> and <a href="https://github.com/kenoxa/beamwind">beamwind</a> – who chose to collaborate rather than compete with each other in this space.</p>
+				<blockquote>
+					<p>Combining efforts has saved us time and resulted in a much more complete and production ready offering.</p>
+				</blockquote>
+				<p>Furthermore we were able to agree on and coin some standards for certain aspects of the implementation based on our collective learnings; things like parsing input, <a href="https://twind.dev/docs/handbook/getting-started/thinking-in-groups.html">grouping syntax</a>, precedence calculation and <a href="https://twind.dev/docs/handbook/advanced/plugins.html">plugin API</a>.</p>
+				<a href="#why-twind" id="why-twind" style="color: inherit; text-decoration: none;">
+					<h2>Why twind?</h2>
+				</a>
+				<p>A lot of developers ask <em>&quot;Why not just use Tailwind?&quot;</em> and our answer is always that you should use Tailwind, it is an absolutely incredible API with amazing documentation!</p>
+				<blockquote>
+					<p>I&#39;ve wanted to do a CSS-in-JS flavor of Tailwind for over 2 years because of all the neat benefits you get there so it&#39;s cool to see projects like this! – <a href="https://twitter.com/adamwathan/status/1320370489408225282">@adamwathan</a></p>
+				</blockquote>
+				<p>However, if like us you are already building your app in JS using a framework like React, Preact, Vue or Svelte, rather than just static HTML, then compiling Tailwind shorthands just in time (like twind does) rather than ahead of time like with Tailwind and PostCSS, comes with a lot of advantages.</p>
+				<a href="#challenges" id="challenges" style="color: inherit; text-decoration: none;">
+					<h3>Challenges</h3>
+				</a>
+				<p>The core problems we are trying to solve here are as follows:</p>
+				<ol>
+					<li>Parsing Input: taking input and normalizing it to create a comprehendable set of Tailwind rules</li>
+					<li>Compiling Rules: taking a set of Tailwind rules and translating them into appropriate CSS rules</li>
+					<li>Injecting Styles: taking CSS rules and generating classes that get append to a stylesheet in the DOM</li>
+					<li>Merging Themes: combining themes which configure and constrain the compiler</li>
+					<li>Custom Plugins: taking functions and using them to extend the capabilities of the compiler</li>
+				</ol>
+				<p>This has to happen in a performant way at runtime, whilst adhering to Tailwind V2 as a language specification. All grammars that exist in Tailwind should be covered by this implementation.</p>
+				<a href="#opportunities" id="opportunities" style="color: inherit; text-decoration: none;">
+					<h3>Opportunities</h3>
+				</a>
+				<p>Simply recreating a tailwind like experience at runtime might seem like a futile exercise but we&#39;d like to believe it opens up the doors to some exciting new possibilities. There is always going to be a tradeoff between compiling at ahead of time and compiling <em>just in time</em>, however we are confident the upsides here are significant enough to persue a runtime implementation and the results have been promising so far.</p>
+				<blockquote>
+					<p>Note it is still possible to remove all runtime overhead via a prepass either at serve or built time</p>
+				</blockquote>
+				<p>The flexible nature of a runtime first approach affords us possibilities like:</p>
+				<ul>
+					<li>Dynamic Theming: generating new themes on the fly without the need to rebuilding anything</li>
+					<li>Unlimited Variants: enabling every variant combination by default because unused rules are never generated</li>
+					<li>Enhanced Syntax: taking advantage of macros within template literals to create more terse rules</li>
+					<li>Error Handling: warning the developer about unknown directives and theme values</li>
+					<li>Hashing Classes: reducing the overall output size and eliminating conflicts via deterministic hashing</li>
+					<li><a href="https://twind.dev/docs/handbook/advanced/plugins.html#inline-plugins">Inline Plugins</a>: extending the capabilities of the compiler with simple functions at runtime</li>
+				</ul>
+				<p>Another big advantage we see of shipping the interpreter compiler itself (rather than pre-compiled output) is that the effective size of the CSS for your whole app is deterministic and fixed. The weight of the compiler itself along with your theme file is all that users will ever download, no matter how many styles you use.</p>
+				<p>Currently the compiler weighs around 12KB which is smaller than styled-components and the average tailwind output.</p>
+				<a href="#motivation" id="motivation" style="color: inherit; text-decoration: none;">
+					<h3>Motivation</h3>
+				</a>
+				<p>It goes without saying that the primary inspiration here comes from Tailwind. It is a revolutionary take on styling the web which has proven popular by designers and developers alike. All the core plugins here, abide by the rules painstakingly thought out, implemented and popularized by Adam Wathan et al. making us forever in his debt.</p>
+				<p>We hope one day we will get the chance to collaborate with Tailwind Labs to create an official implementation!</p>
+				<a href="#benchmarks" id="benchmarks" style="color: inherit; text-decoration: none;">
+					<h2>Benchmarks</h2>
+				</a>
+				<p>The implementation is tested for speed alongside several popular CSS-in-JS solutions that export general CSS functions. For those that only support a <em>styled component</em> approach an equivalent test has been setup. Currently Twind is the fastest in both scenarios in part due to optimal caching of static parts from template literals.</p>
+				<a href="#css-function-w-template-literal" id="css-function-w-template-literal" style="color: inherit; text-decoration: none;">
+					<h3>CSS Function w/ template literal</h3>
+				</a>
+				<pre><code><span style="color: #795E26">twind</span><span style="color: #000000"> (</span><span style="color: #001080">tw</span><span style="color: #000000">)                  </span><span style="color: #001080">x</span><span style="color: #000000"> </span><span style="color: #098658">262</span><span style="color: #000000">,</span><span style="color: #098658">054</span><span style="color: #000000"> </span><span style="color: #001080">ops</span><span style="color: #000000">/</span><span style="color: #001080">sec</span><span style="color: #000000"> ±</span><span style="color: #098658">1.15</span><span style="color: #000000">% (</span><span style="color: #098658">89</span><span style="color: #000000"> </span><span style="color: #001080">runs</span><span style="color: #000000"> </span><span style="color: #001080">sampled</span><span style="color: #000000">)</span>
+<span style="color: #795E26">twind</span><span style="color: #000000"> (</span><span style="color: #001080">apply</span><span style="color: #000000">)               </span><span style="color: #001080">x</span><span style="color: #000000"> </span><span style="color: #098658">118</span><span style="color: #000000">,</span><span style="color: #098658">972</span><span style="color: #000000"> </span><span style="color: #001080">ops</span><span style="color: #000000">/</span><span style="color: #001080">sec</span><span style="color: #000000"> ±</span><span style="color: #098658">1.16</span><span style="color: #000000">% (</span><span style="color: #098658">89</span><span style="color: #000000"> </span><span style="color: #001080">runs</span><span style="color: #000000"> </span><span style="color: #001080">sampled</span><span style="color: #000000">)</span>
+<span style="color: #795E26">twind</span><span style="color: #000000"> (</span><span style="color: #001080">css</span><span style="color: #000000">)                 </span><span style="color: #001080">x</span><span style="color: #000000"> </span><span style="color: #098658">110</span><span style="color: #000000">,</span><span style="color: #098658">865</span><span style="color: #000000"> </span><span style="color: #001080">ops</span><span style="color: #000000">/</span><span style="color: #001080">sec</span><span style="color: #000000"> ±</span><span style="color: #098658">0.91</span><span style="color: #000000">% (</span><span style="color: #098658">95</span><span style="color: #000000"> </span><span style="color: #001080">runs</span><span style="color: #000000"> </span><span style="color: #001080">sampled</span><span style="color: #000000">)</span>
+<span style="color: #001080">goober</span><span style="color: #000000">@</span><span style="color: #098658">2.0</span><span style="color: #000000">.</span><span style="color: #098658">18</span><span style="color: #000000">               </span><span style="color: #001080">x</span><span style="color: #000000"> </span><span style="color: #098658">143</span><span style="color: #000000">,</span><span style="color: #098658">256</span><span style="color: #000000"> </span><span style="color: #001080">ops</span><span style="color: #000000">/</span><span style="color: #001080">sec</span><span style="color: #000000"> ±</span><span style="color: #098658">0.49</span><span style="color: #000000">% (</span><span style="color: #098658">97</span><span style="color: #000000"> </span><span style="color: #001080">runs</span><span style="color: #000000"> </span><span style="color: #001080">sampled</span><span style="color: #000000">)</span>
+<span style="color: #001080">emotion</span><span style="color: #000000">@</span><span style="color: #098658">11.1</span><span style="color: #000000">.</span><span style="color: #098658">3</span><span style="color: #000000">              </span><span style="color: #001080">x</span><span style="color: #000000"> </span><span style="color: #098658">228</span><span style="color: #000000">,</span><span style="color: #098658">671</span><span style="color: #000000"> </span><span style="color: #001080">ops</span><span style="color: #000000">/</span><span style="color: #001080">sec</span><span style="color: #000000"> ±</span><span style="color: #098658">0.34</span><span style="color: #000000">% (</span><span style="color: #098658">93</span><span style="color: #000000"> </span><span style="color: #001080">runs</span><span style="color: #000000"> </span><span style="color: #001080">sampled</span><span style="color: #000000">)</span>
+</code></pre>
+				<a href="#styled-component-w-template-literal" id="styled-component-w-template-literal" style="color: inherit; text-decoration: none;">
+					<h3>Styled component w/ template literal</h3>
+				</a>
+				<pre><code><span style="color: #001080">twind</span><span style="color: #000000">                       </span><span style="color: #001080">x</span><span style="color: #000000"> </span><span style="color: #098658">51</span><span style="color: #000000">,</span><span style="color: #098658">628</span><span style="color: #000000"> </span><span style="color: #001080">ops</span><span style="color: #000000">/</span><span style="color: #001080">sec</span><span style="color: #000000"> ±</span><span style="color: #098658">0.63</span><span style="color: #000000">% (</span><span style="color: #098658">89</span><span style="color: #000000"> </span><span style="color: #001080">runs</span><span style="color: #000000"> </span><span style="color: #001080">sampled</span><span style="color: #000000">)</span>
+<span style="color: #001080">goober</span><span style="color: #000000">@</span><span style="color: #098658">2.0</span><span style="color: #000000">.</span><span style="color: #098658">18</span><span style="color: #000000">               </span><span style="color: #001080">x</span><span style="color: #000000"> </span><span style="color: #098658">40</span><span style="color: #000000">,</span><span style="color: #098658">069</span><span style="color: #000000"> </span><span style="color: #001080">ops</span><span style="color: #000000">/</span><span style="color: #001080">sec</span><span style="color: #000000"> ±</span><span style="color: #098658">0.43</span><span style="color: #000000">% (</span><span style="color: #098658">96</span><span style="color: #000000"> </span><span style="color: #001080">runs</span><span style="color: #000000"> </span><span style="color: #001080">sampled</span><span style="color: #000000">)</span>
+<span style="color: #001080">emotion</span><span style="color: #000000">@</span><span style="color: #098658">11.0</span><span style="color: #000000">.</span><span style="color: #098658">0</span><span style="color: #000000">              </span><span style="color: #001080">x</span><span style="color: #000000"> </span><span style="color: #098658">35</span><span style="color: #000000">,</span><span style="color: #098658">349</span><span style="color: #000000"> </span><span style="color: #001080">ops</span><span style="color: #000000">/</span><span style="color: #001080">sec</span><span style="color: #000000"> ±</span><span style="color: #098658">1.01</span><span style="color: #000000">% (</span><span style="color: #098658">93</span><span style="color: #000000"> </span><span style="color: #001080">runs</span><span style="color: #000000"> </span><span style="color: #001080">sampled</span><span style="color: #000000">)</span>
+<span style="color: #001080">styled</span><span style="color: #000000">-</span><span style="color: #001080">components</span><span style="color: #000000">@</span><span style="color: #098658">5.2</span><span style="color: #000000">.</span><span style="color: #098658">1</span><span style="color: #000000">     </span><span style="color: #001080">x</span><span style="color: #000000"> </span><span style="color: #098658">38</span><span style="color: #000000">,</span><span style="color: #098658">284</span><span style="color: #000000"> </span><span style="color: #001080">ops</span><span style="color: #000000">/</span><span style="color: #001080">sec</span><span style="color: #000000"> ±</span><span style="color: #098658">0.48</span><span style="color: #000000">% (</span><span style="color: #098658">93</span><span style="color: #000000"> </span><span style="color: #001080">runs</span><span style="color: #000000"> </span><span style="color: #001080">sampled</span><span style="color: #000000">)</span>
+</code></pre>
+				<p>For a more detailed testing summary please see the <a href="https://github.com/tw-in-js/twind/blob/main/benchmarks">benchmarks</a> directory.</p>
+				<a href="#inspiration" id="inspiration" style="color: inherit; text-decoration: none;">
+					<h2>Inspiration</h2>
+				</a>
+				<p>It would be untrue to suggest that the design here is totally original. Other than the founders&#39; initial attempts at implementing such a module (<a href="https://github.com/lukejacksonn/oceanwind">oceanwind</a> and <a href="https://github.com/kenoxa/beamwind">beamwind</a>) we are truly standing on the shoulders of giants.</p>
+				<ul>
+					<li><a href="https://tailwindcss.com/">Tailwind</a>: created a wonderfully thought out API on which the compiler&#39;s grammar was defined.</li>
+					<li><a href="https://styled-components.com/">styled-components</a>: implemented and popularized the advantages of doing CSS-in-JS.</li>
+					<li><a href="https://github.com/developit/htm">htm</a>: a JSX compiler that proved there is merit in doing runtime compilation of DSLs like JSX.</li>
+					<li><a href="https://github.com/cristianbote/goober">goober</a>: an impossibly small yet efficient CSS-in-JS implementation that defines critical module features.</li>
+					<li><a href="https://github.com/kripod/otion">otion</a>: the first CSS-in-JS solution specifically oriented around handling CSS in an atomic fashion.</li>
+					<li><a href="https://github.com/lukeed/clsx">clsx</a>: a tiny utility for constructing class name strings conditionally.</li>
+					<li><a href="https://github.com/kripod/style-vendorizer">style-vendorizer</a>: essential CSS prefixing helpers in less than 1KB of JavaScript.</li>
+					<li><a href="https://github.com/frenic/csstype">CSSType</a>: providing autocompletion and type checking for CSS properties and values.</li>
+				</ul>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h2>License</h2>
+				</a>
+				<p><a href="https://github.com/tw-in-js/twind/blob/main/LICENSE">MIT</a></p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="label pp-nav pp-group">
+						<span>Handbook</span>
+					</li>
+					<li class=" pp-nav pp-page pp-parent">
+						<a href="handbook/getting-started.html">Getting <wbr>Started</a>
+					</li>
+					<li class=" pp-nav pp-page pp-parent">
+						<a href="handbook/recipes.html">Recipes</a>
+					</li>
+					<li class=" pp-nav pp-page pp-parent">
+						<a href="handbook/advanced.html">Advanced</a>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="handbook/faqs.html">FAQs</a>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="handbook/release-notes.html">Release <wbr>Notes</a>
+					</li>
+					<li class="label pp-nav pp-group">
+						<span>API</span>
+					</li>
+					<li class=" ">
+						<a href="modules.html">Modules</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/twind.html">twind</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/twind_colors.html">twind/colors</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/twind_css.html">twind/css</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/twind_observe.html">twind/observe</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/twind_server.html">twind/server</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/twind_sheets.html">twind/sheets</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/twind_shim.html">twind/shim</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/twind_shim_server.html">twind/shim/server</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+</body>
+</html>

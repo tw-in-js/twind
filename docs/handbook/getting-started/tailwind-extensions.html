@@ -1,0 +1,447 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Tailwind Extensions | twind - v0.14.2</title>
+	<meta name="description" content="Documentation for twind - v0.14.2">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../assets/css/main.css">
+	<link rel="stylesheet" href="../../assets/css/pages.css">
+	<script async src="../../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../../assets/js/search.json" data-base="../..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../../index.html" class="title">twind - v0.14.2</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../../index.html">Home</a>
+				</li>
+				<li>
+					<a href="../getting-started.html">Handbook</a>
+				</li>
+				<li>
+					<a href="../getting-started.html">Getting Started</a>
+				</li>
+				<li>
+					<a href="tailwind-extensions.html">Tailwind Extensions</a>
+				</li>
+			</ul>
+			<h1>Tailwind Extensions</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<p>Tailwind provides a <a href="https://tailwindcss.com">comprehensive list of variants and directives</a>. We have added some additional features that we found useful to have.</p>
+				<blockquote>
+					<p>💡 You can click on each summary to reveal more details.</p>
+				</blockquote>
+				<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+				<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+				<ul>
+					<li><a href="#syntax">Syntax</a><ul>
+							<li><a href="#custom-syntax-for-grouping-directives-and-variants">Custom syntax for grouping directives and variants</a></li>
+							<li><a href="#using-exclamation-point--after-a-directive-to-override-any-other-declarations">Using exclamation point (<code>!</code>) after a directive to override any other declarations</a></li>
+						</ul>
+					</li>
+					<li><a href="#variants">Variants</a><ul>
+							<li><a href="#every-variant-can-be-applied-to-every-directive">Every variant can be applied to every directive</a></li>
+							<li><a href="#dark-mode-is-always-available">Dark mode is always available</a></li>
+							<li><a href="#most-pseudo-classes-can-be-uses-as-variant-or-group--variant">Most pseudo classes can be uses as variant or <code>group-*</code> variant</a></li>
+							<li><a href="#siblings---general-sibling-combinator---"><code>siblings:*</code> - General sibling combinator (<code>&amp; ~ *</code>)</a></li>
+							<li><a href="#sibling---adjacent-sibling-combinator---"><code>sibling:*</code> - Adjacent sibling combinator (<code>&amp; + *</code>)</a></li>
+							<li><a href="#children---child-combinator---"><code>children:*</code> - Child combinator (<code>&amp; &gt; *</code>)</a></li>
+							<li><a href="#override---increase-the-specificity-of-rules"><code>override:*</code> - Increase the specificity of rules</a></li>
+						</ul>
+					</li>
+					<li><a href="#directives">Directives</a><ul>
+							<li><a href="#some-directives-support-all-css-values">Some directives support all CSS values</a></li>
+							<li><a href="#text-underline-text-uppercase-"><code>text-underline</code>, <code>text-uppercase</code>, ...</a></li>
+							<li><a href="#font-italic-and-font-no-italic"><code>font-italic</code> and <code>font-no-italic</code></a></li>
+							<li><a href="#bg-gradient-to--is-built-in"><code>bg-gradient-to-*</code> is built-in</a></li>
+							<li><a href="#border-and-divide-allow-to-combine-positions"><code>border</code> and <code>divide</code> allow to combine positions</a></li>
+							<li><a href="#rotate-scale--skew-and-translate-provide-a-fallback-for-ie-11"><code>rotate</code>, <code>scale</code> , <code>skew</code> and <code>translate</code> provide a fallback for IE 11</a></li>
+							<li><a href="#theme-values-are-automatically-negated">Theme values are automatically negated</a></li>
+						</ul>
+					</li>
+				</ul>
+				<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+				<a href="#syntax" id="syntax" style="color: inherit; text-decoration: none;">
+					<h2>Syntax</h2>
+				</a>
+				<a href="#custom-syntax-for-grouping-directives-and-variants" id="custom-syntax-for-grouping-directives-and-variants" style="color: inherit; text-decoration: none;">
+					<h3>Custom syntax for grouping directives and variants</h3>
+				</a>
+				<p>Having control over the interpreter affords us the possibility of defining terse syntax for <a href="thinking-in-groups.html">grouping responsive and pseudo variants</a> as well as directives with common prefixes. This massively reduces repetition and improves comprehension.</p>
+				<pre><code class="language-js"><span style="color: #008000">// Before directive grouping</span>
+<span style="color: #795E26">tw</span><span style="color: #A31515">`border-2 border-black border-opacity-50 border-dashed`</span>
+<span style="color: #008000">// After directive grouping</span>
+<span style="color: #795E26">tw</span><span style="color: #A31515">`border(2 black opacity-50 dashed)`</span>
+
+<span style="color: #008000">// With variants</span>
+<span style="color: #795E26">tw</span><span style="color: #A31515">`sm:(border(2 black opacity-50 hover:dashed))`</span>
+<span style="color: #008000">// =&gt; sm:border-2 sm:border-black sm:border-opacity-50 sm:hover:border-dashed</span>
+
+<span style="color: #795E26">tw</span><span style="color: #A31515">`w(1/2 sm:1/3 lg:1/6) p-2`</span>
+<span style="color: #008000">// =&gt; w-1/2 sm:w-1/3 lg:w-1/6 p-2</span>
+</code></pre>
+				<a href="#using-exclamation-point--after-a-directive-to-override-any-other-declarations" id="using-exclamation-point--after-a-directive-to-override-any-other-declarations" style="color: inherit; text-decoration: none;">
+					<h3>Using exclamation point (<code>!</code>) after a directive to override any other declarations</h3>
+				</a>
+				<p>Directives may end with exclamation point (<code>text-center!</code>) to be marked as <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Specificity#The_!important_exception">important</a>:</p>
+				<pre><code class="language-html"><span style="color: #800000">&lt;div</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;children:text-red-500&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;p&gt;</span><span style="color: #000000">And here is a red paragraph!</span><span style="color: #800000">&lt;/p&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;p</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;text-purple-500&quot;</span><span style="color: #800000">&gt;</span><span style="color: #000000">And this is a red paragraph!</span><span style="color: #800000">&lt;/p&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;p</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;text-purple-500!&quot;</span><span style="color: #800000">&gt;</span><span style="color: #000000">This is not purple!</span><span style="color: #800000">&lt;/p&gt;</span>
+<span style="color: #800000">&lt;/div&gt;</span>
+</code></pre>
+				<blockquote>
+					<p>🚀 <a href="https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPGRpdiBjbGFzcz0iY2hpbGRyZW46dGV4dC1yZWQtNTAwIj4KICAgIDxwPkFuZCBoZXJlIGlzIGEgcmVkIHBhcmFncmFwaCE8L3A+CiAgICA8cCBjbGFzcz0idGV4dC1wdXJwbGUtNTAwIj5BbmQgdGhpcyBpcyBhIHJlZCBwYXJhZ3JhcGghPC9wPgogICAgPHAgY2xhc3M9InRleHQtcHVycGxlLTUwMCEiPlRoaXMgaXMgbm90IHB1cnBsZSE8L3A+CiAgPC9kaXY+CmAK">live and interactive demo</a></p>
+				</blockquote>
+				<a href="#variants" id="variants" style="color: inherit; text-decoration: none;">
+					<h2>Variants</h2>
+				</a>
+				<a href="#every-variant-can-be-applied-to-every-directive" id="every-variant-can-be-applied-to-every-directive" style="color: inherit; text-decoration: none;">
+					<h3>Every variant can be applied to every directive</h3>
+				</a>
+				<p>Because twind is generating CSS during runtime there is no to need restrict the usage of variants.</p>
+				<a href="#dark-mode-is-always-available" id="dark-mode-is-always-available" style="color: inherit; text-decoration: none;">
+					<h3>Dark mode is always available</h3>
+				</a>
+				<p>Please see <a href="../advanced/setup.html">Setup</a> for details.</p>
+				<a href="#most-pseudo-classes-can-be-uses-as-variant-or-group--variant" id="most-pseudo-classes-can-be-uses-as-variant-or-group--variant" style="color: inherit; text-decoration: none;">
+					<h3>Most pseudo classes can be uses as variant or <code>group-*</code> variant</h3>
+				</a>
+				<p>Unknown variants (not listed in <a href="https://github.com/tw-in-js/twind/blob/main/src/twind/variants.ts">core variants</a>) are assumed to be <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes">pseudo classes</a>.</p>
+				<p><em>Advanced</em> pseudo classes (those that take parameters like <code>:is(header)</code>) are not supported out of the box as they use <code>(...)</code> which is parsed as <a href="thinking-in-groups.html">a variant or directive grouping</a>. You can define an alias for those during <a href="../advanced/setup.html">setup</a>:</p>
+				<pre><code class="language-js"><span style="color: #795E26">setup</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">variants:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&#039;is-header&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;&amp;:is(header)&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">})</span>
+
+<span style="color: #795E26">tw</span><span style="color: #A31515">`is-header:font-bold`</span>
+<span style="color: #008000">// =&gt; .is-header\:font-bold:is(header) { ... }</span>
+</code></pre>
+				<blockquote>
+					<p>🙋 If you have an idea how we could support these within the parser please <a href="https://github.com/tw-in-js/twind/issues">open an issue</a> for discussions.</p>
+				</blockquote>
+				<a href="#siblings---general-sibling-combinator-amp--" id="siblings---general-sibling-combinator-amp--" style="color: inherit; text-decoration: none;">
+					<h3><code>siblings:*</code> - General sibling combinator (<code>&amp; ~ *</code>)</h3>
+				</a>
+				<p>Matches elements that are following the element this is applied on (though not necessarily immediately), and are children of the same parent element (<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/General_sibling_combinator">MDN - General sibling combinator</a>).</p>
+				<pre><code class="language-html"><span style="color: #800000">&lt;p&gt;</span><span style="color: #000000">This is not red.</span><span style="color: #800000">&lt;/p&gt;</span>
+<span style="color: #800000">&lt;p</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;siblings:text-red-500&quot;</span><span style="color: #800000">&gt;</span><span style="color: #000000">Here is a paragraph.</span><span style="color: #800000">&lt;/p&gt;</span>
+<span style="color: #800000">&lt;p&gt;</span><span style="color: #000000">And here is a red paragraph!</span><span style="color: #800000">&lt;/p&gt;</span>
+<span style="color: #800000">&lt;p&gt;</span><span style="color: #000000">And this is a red paragraph!</span><span style="color: #800000">&lt;/p&gt;</span>
+</code></pre>
+				<blockquote>
+					<p>🚀 <a href="https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPHA+VGhpcyBpcyBub3QgcmVkLjwvcD4KICA8cCBjbGFzcz0ic2libGluZ3M6dGV4dC1yZWQtNTAwIj5IZXJlIGlzIGEgcGFyYWdyYXBoLjwvcD4KICA8cD5BbmQgaGVyZSBpcyBhIHJlZCBwYXJhZ3JhcGghPC9wPgogIDxwPkFuZCB0aGlzIGlzIGEgcmVkIHBhcmFncmFwaCE8L3A+CmA=">live and interactive demo</a></p>
+				</blockquote>
+				<a href="#sibling---adjacent-sibling-combinator-amp--" id="sibling---adjacent-sibling-combinator-amp--" style="color: inherit; text-decoration: none;">
+					<h3><code>sibling:*</code> - Adjacent sibling combinator (<code>&amp; + *</code>)</h3>
+				</a>
+				<p>Matches the element that immediately follows the element this is applied on, and is a children of the same parent element (<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Adjacent_sibling_combinator">MDN - Adjacent sibling combinator</a>).</p>
+				<pre><code class="language-html"><span style="color: #800000">&lt;p&gt;</span><span style="color: #000000">This is not red.</span><span style="color: #800000">&lt;/p&gt;</span>
+<span style="color: #800000">&lt;p</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;sibling:text-red-500&quot;</span><span style="color: #800000">&gt;</span><span style="color: #000000">Here is a paragraph.</span><span style="color: #800000">&lt;/p&gt;</span>
+<span style="color: #800000">&lt;p&gt;</span><span style="color: #000000">And here is a red paragraph!</span><span style="color: #800000">&lt;/p&gt;</span>
+<span style="color: #800000">&lt;p&gt;</span><span style="color: #000000">This is not red!</span><span style="color: #800000">&lt;/p&gt;</span>
+</code></pre>
+				<blockquote>
+					<p>🚀 <a href="https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPHA+VGhpcyBpcyBub3QgcmVkLjwvcD4KICA8cCBjbGFzcz0ic2libGluZzp0ZXh0LXJlZC01MDAiPkhlcmUgaXMgYSBwYXJhZ3JhcGguPC9wPgogIDxwPkFuZCBoZXJlIGlzIGEgcmVkIHBhcmFncmFwaCE8L3A+CiAgPHA+VGhpcyBpcyBub3QgcmVkITwvcD4KYA==">live and interactive demo</a></p>
+				</blockquote>
+				<a href="#children---child-combinator-amp-gt-" id="children---child-combinator-amp-gt-" style="color: inherit; text-decoration: none;">
+					<h3><code>children:*</code> - Child combinator (<code>&amp; &gt; *</code>)</h3>
+				</a>
+				<p>Matches direct children of the element this is applied on (<a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Child_combinator">MDN - Child combinator</a>).</p>
+				<pre><code class="language-html"><span style="color: #800000">&lt;div</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;children:(border my-2)&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;p&gt;</span><span style="color: #000000">This paragraph has </span><span style="color: #800000">&lt;em&gt;</span><span style="color: #000000">emphasized text</span><span style="color: #800000">&lt;/em&gt;</span><span style="color: #000000"> in it.</span><span style="color: #800000">&lt;/p&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;p&gt;</span><span style="color: #000000">This paragraph has </span><span style="color: #800000">&lt;em&gt;</span><span style="color: #000000">emphasized text</span><span style="color: #800000">&lt;/em&gt;</span><span style="color: #000000"> in it.</span><span style="color: #800000">&lt;/p&gt;</span>
+<span style="color: #800000">&lt;/div&gt;</span>
+</code></pre>
+				<blockquote>
+					<p>🚀 <a href="https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPHA+VGhpcyBpcyBub3QgcmVkLjwvcD4KICA8cCBjbGFzcz0ic2libGluZ3M6dGV4dC1yZWQtNTAwIj5IZXJlIGlzIGEgcGFyYWdyYXBoLjwvcD4KICA8cD5BbmQgaGVyZSBpcyBhIHJlZCBzcGFuITwvcD4KICA8cD5BbmQgdGhpcyBpcyBhIHJlZCBzcGFuITwvcD4KYA==">live and interactive demo</a></p>
+				</blockquote>
+				<p>Please note that <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/inheritance">some CSS properties are inherited</a> and therefore all children will have those styles applied. Here is an (<em>incomplete</em>) list of directives that use <a href="https://stackoverflow.com/questions/5612302/which-css-properties-are-inherited">inherited CSS properties</a> where the style would be inherited by all children and not only the direct children:</p>
+				<ul>
+					<li><code>border-collapse</code></li>
+					<li><code>border-separate</code></li>
+					<li><code>cursor-*</code></li>
+					<li><code>font-*</code></li>
+					<li><code>invisible</code></li>
+					<li><code>leading-*</code></li>
+					<li><code>list-*</code></li>
+					<li><code>text-*</code></li>
+					<li><code>tracking-*</code></li>
+					<li><code>visible</code></li>
+					<li><code>whitespace-*</code></li>
+				</ul>
+				<blockquote>
+					<p>🙋 If you find any incorrect or missing directive then please <a href="https://github.com/tw-in-js/twind/issues">open an issue</a>.</p>
+				</blockquote>
+				<a href="#override---increase-the-specificity-of-rules" id="override---increase-the-specificity-of-rules" style="color: inherit; text-decoration: none;">
+					<h3><code>override:*</code> - Increase the specificity of rules</h3>
+				</a>
+				<p>When using components that have some default styles it happens that one wants to override a rule. Consider the following example:</p>
+				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">shared</span><span style="color: #000000"> = </span><span style="color: #795E26">tw</span><span style="color: #A31515">`text(xl center blue-600) underline`</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">special</span><span style="color: #000000"> = </span><span style="color: #795E26">tw</span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">shared</span><span style="color: #0000FF">}</span><span style="color: #A31515"> text-purple-600 no-underline`</span>
+<span style="color: #008000">// =&gt; text-xl text-center text-blue-600 underline text-purple-600 no-underline</span>
+</code></pre>
+				<p>One can not be sure that the <code>text-purple-600</code> would be correctly applied as the order of classes does not matter. Only the <a href="https://specificity.keegan.st/">specificity</a>.</p>
+				<p>To support these cases Twind includes the <code>override</code> variant which uses a little trick to increase the specificity: <code>.class-name.class-name</code> is more specific than just <code>.class-name</code></p>
+				<p>The above example should be re-written to:</p>
+				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">shared</span><span style="color: #000000"> = </span><span style="color: #795E26">tw</span><span style="color: #A31515">`text(xl center blue-600) underline`</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">special</span><span style="color: #000000"> = </span><span style="color: #795E26">tw</span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">shared</span><span style="color: #0000FF">}</span><span style="color: #A31515"> override:(text-purple-600 no-underline)`</span>
+</code></pre>
+				<blockquote>
+					<p>🚀 <a href="https://esm.codes/#aW1wb3J0IHsgdHcgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZCcKCmNvbnN0IHNoYXJlZCA9IHR3YHRleHQoeGwgY2VudGVyIGJsdWUtNjAwKSB1bmRlcmxpbmVgCmNvbnN0IHNwZWNpYWwgPSB0d2Ake3NoYXJlZH0gb3ZlcnJpZGU6KHRleHQtcHVycGxlLTYwMCBuby11bmRlcmxpbmUpYAoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPHAgY2xhc3M9IiR7c2hhcmVkfSI+Q29tbW9uIFN0eWxlczwvcD4KICA8cCBjbGFzcz0iJHtzcGVjaWFsfSI+U3BlY2lhbCBTdHlsZXM8L3A+CmAK">live and interactive demo</a></p>
+				</blockquote>
+				<a href="#directives" id="directives" style="color: inherit; text-decoration: none;">
+					<h2>Directives</h2>
+				</a>
+				<a href="#some-directives-support-all-css-values" id="some-directives-support-all-css-values" style="color: inherit; text-decoration: none;">
+					<h3>Some directives support all CSS values</h3>
+				</a>
+				<ul>
+					<li><code>align-*</code> - <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align">vertical-align</a></li>
+					<li><code>appearance-*</code> - <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/appearance">appearance</a></li>
+					<li><code>clear-*</code> - <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/clear">clear</a></li>
+					<li><code>cursor-*</code> - <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/cursor">cursor</a></li>
+					<li><code>float-*</code> - <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/float">float</a></li>
+					<li><code>list-*</code> - <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type">list-style-type</a></li>
+					<li><code>object-*</code> - <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/object-position">object-position</a>; using a dash as separator: <code>object-right-top</code></li>
+					<li><code>origin-*</code> - <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin">transform-origin</a>; using a dash as separator: <code>origin-top-left</code></li>
+					<li><code>overflow-*</code> - <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/overflow">overflow</a></li>
+					<li><code>pointer-events-*</code> - <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events">pointer-events</a></li>
+					<li><code>select-*</code> - <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/user-select">user-select</a></li>
+					<li><code>whitespace-*</code> - <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/white-space">white-space</a></li>
+				</ul>
+				<a href="#text-underline-text-uppercase-" id="text-underline-text-uppercase-" style="color: inherit; text-decoration: none;">
+					<h3><code>text-underline</code>, <code>text-uppercase</code>, ...</h3>
+				</a>
+				<p>This allows grouping of text directives: <code>text(lg red-500 capitalize underline)</code></p>
+				<ul>
+					<li><code>text-underline</code></li>
+					<li><code>text-no-underline</code></li>
+					<li><code>text-line-through</code></li>
+					<li><code>text-uppercase</code></li>
+					<li><code>text-lowercase</code></li>
+					<li><code>text-capitalize</code></li>
+				</ul>
+				<a href="#font-italic-and-font-no-italic" id="font-italic-and-font-no-italic" style="color: inherit; text-decoration: none;">
+					<h3><code>font-italic</code> and <code>font-no-italic</code></h3>
+				</a>
+				<p>This allows grouping of font directives: <code>font(sans italic bold)</code></p>
+				<ul>
+					<li><code>font-italic</code></li>
+					<li><code>font-no-italic</code></li>
+				</ul>
+				<a href="#bg-gradient-to--is-built-in" id="bg-gradient-to--is-built-in" style="color: inherit; text-decoration: none;">
+					<h3><code>bg-gradient-to-*</code> is built-in</h3>
+				</a>
+				<p>Every permutation of <code>t</code>op, <code>r</code>righ, <code>l</code>eft, and <code>b</code>ottom is handled by twind (like <code>bg-gradient-to-tr</code>). You can add new gradients but they should not use one of those keys:</p>
+				<pre><code class="language-js"><span style="color: #795E26">setup</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">theme:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">extend:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #795E26">backgroundImage</span><span style="color: #001080">:</span><span style="color: #000000"> (</span><span style="color: #001080">theme</span><span style="color: #000000">) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> ({</span>
+<span style="color: #000000">        </span><span style="color: #008000">// Use a own gradient</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&#039;gradient-radial&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">`radial-gradient(</span><span style="color: #0000FF">${</span><span style="color: #795E26">theme</span><span style="color: #000000FF">(</span><span style="color: #A31515">&#039;colors.blue.500&#039;</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span><span style="color: #A31515">, </span><span style="color: #0000FF">${</span><span style="color: #795E26">theme</span><span style="color: #000000FF">(</span>
+<span style="color: #000000FF">          </span><span style="color: #A31515">&#039;colors.red.500&#039;</span><span style="color: #000000FF">,</span>
+<span style="color: #000000FF">        )</span><span style="color: #0000FF">}</span><span style="color: #A31515">);`</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #008000">// Integrate with gradient colors stops (from-*, via-*, to-*)</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&#039;gradient-15&#039;</span><span style="color: #001080">:</span>
+<span style="color: #000000">          </span><span style="color: #A31515">&#039;linear-gradient(.15turn, var(--tw-gradient-stops,var(--tw-gradient-from,transparent),var(--tw-gradient-to,transparent)))&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      }),</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">})</span>
+
+<span style="color: #795E26">tw</span><span style="color: #A31515">`bg-gradient-radial`</span>
+
+<span style="color: #795E26">tw</span><span style="color: #A31515">`bg-gradient-15 from-green-400 to-blue-500`</span>
+</code></pre>
+				<blockquote>
+					<p>🚀 <a href="https://esm.codes/#aW1wb3J0IHsgc2V0dXAgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKc2V0dXAoewogIHRoZW1lOiB7CiAgICBleHRlbmQ6IHsKICAgICAgYmFja2dyb3VuZEltYWdlOiAodGhlbWUpID0+ICh7CiAgICAgICAgLy8gVXNlIGEgb3duIGdyYWRpZW50CiAgICAgICAgJ2dyYWRpZW50LXJhZGlhbCc6IGByYWRpYWwtZ3JhZGllbnQoJHt0aGVtZSgnY29sb3JzLmJsdWUuNTAwJyl9LCAke3RoZW1lKCdjb2xvcnMucmVkLjUwMCcpfSk7YCwKICAgICAgICAvLyBJbnRlZ3JhdGUgd2l0aCBncmFkaWVudCBjb2xvcnMgc3RvcHMgKGZyb20tKiwgdmlhLSosIHRvLSopCiAgICAgICAgJ2dyYWRpZW50LTE1JzogJ2xpbmVhci1ncmFkaWVudCguMTV0dXJuLCB2YXIoLS10dy1ncmFkaWVudC1zdG9wcyx2YXIoLS10dy1ncmFkaWVudC1mcm9tLHRyYW5zcGFyZW50KSx2YXIoLS10dy1ncmFkaWVudC10byx0cmFuc3BhcmVudCkpKScsCiAgICAgIH0pCiAgICB9LAogIH0sCn0pCmRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gYAogIDxkaXYgY2xhc3M9ImNoaWxkcmVuOihoLTMyIG15LTQpIj4KICAgIDxkaXYgY2xhc3M9ImJnLWdyYWRpZW50LXJhZGlhbCI+PC9kaXY+CiAgCiAgICA8ZGl2IGNsYXNzPSJiZy1ncmFkaWVudC0xNSBmcm9tLWdyZWVuLTQwMCB0by1ibHVlLTUwMCI+PC9kaXY+CiAgPC9kaXY+CmAK">live and interactive demo</a></p>
+				</blockquote>
+				<a href="#border-and-divide-allow-to-combine-positions" id="border-and-divide-allow-to-combine-positions" style="color: inherit; text-decoration: none;">
+					<h3><code>border</code> and <code>divide</code> allow to combine positions</h3>
+				</a>
+				<p>Every permutation of <code>t</code>op, <code>r</code>righ, <code>l</code>eft, and <code>b</code>ottom is allowed:</p>
+				<ul>
+					<li><code>tr</code> - <code>top</code> &amp; <code>right</code></li>
+					<li><code>brl</code> - <code>bottom</code>, <code>right</code> and <code>left</code></li>
+				</ul>
+				<blockquote>
+					<p>💡 <code>x</code> and <code>y</code> can not be combined.</p>
+				</blockquote>
+				<a href="#rotate-scale--skew-and-translate-provide-a-fallback-for-ie-11" id="rotate-scale--skew-and-translate-provide-a-fallback-for-ie-11" style="color: inherit; text-decoration: none;">
+					<h3><code>rotate</code>, <code>scale</code> , <code>skew</code> and <code>translate</code> provide a fallback for IE 11</h3>
+				</a>
+				<p>Please note that <code>transform rotate-45</code> works but when using <code>transform rotate-45 scale-150</code> only one of both is applied.</p>
+				<a href="#theme-values-are-automatically-negated" id="theme-values-are-automatically-negated" style="color: inherit; text-decoration: none;">
+					<h3>Theme values are automatically negated</h3>
+				</a>
+				<p>There is no need to provided negated values in the theme. As soon as twind detect a negated directive like <code>-mx-2</code> it negates the theme value.</p>
+				<hr/>
+				<p>Continue to <a href="css-in-js.html">CSS in JS</a></p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="label pp-nav pp-group">
+						<span>Handbook</span>
+					</li>
+					<li class=" pp-nav pp-page pp-parent pp-active">
+						<a href="../getting-started.html">Getting <wbr>Started</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="installation.html">Installation</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="styling-with-twind.html">Styling with <wbr>Twind</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="thinking-in-groups.html">Thinking in <wbr>Groups</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="using-the-shim.html">Using the <wbr>Shim</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="customize-the-theme.html">Customize the <wbr>Theme</a>
+					</li>
+					<li class="current pp-nav pp-page pp-child">
+						<a href="tailwind-extensions.html">Tailwind <wbr>Extensions</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="css-in-js.html">CSS in JS</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="best-practices.html">Best <wbr>Practices</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="quicksheet.html">Quicksheet</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="browser-support.html">Browser <wbr>Support</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="modules.html">Modules <wbr>Summary</a>
+					</li>
+					<li class=" pp-nav pp-page pp-parent">
+						<a href="../recipes.html">Recipes</a>
+					</li>
+					<li class=" pp-nav pp-page pp-parent">
+						<a href="../advanced.html">Advanced</a>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="../faqs.html">FAQs</a>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="../release-notes.html">Release <wbr>Notes</a>
+					</li>
+					<li class="label pp-nav pp-group">
+						<span>API</span>
+					</li>
+					<li class=" ">
+						<a href="../../modules.html">Modules</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind.html">twind</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind_colors.html">twind/colors</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind_css.html">twind/css</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind_observe.html">twind/observe</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind_server.html">twind/server</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind_sheets.html">twind/sheets</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind_shim.html">twind/shim</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind_shim_server.html">twind/shim/server</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../../assets/js/main.js"></script>
+</body>
+</html>

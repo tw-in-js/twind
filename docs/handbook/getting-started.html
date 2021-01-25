@@ -1,0 +1,251 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Getting Started | twind - v0.14.2</title>
+	<meta name="description" content="Documentation for twind - v0.14.2">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<link rel="stylesheet" href="../assets/css/pages.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">twind - v0.14.2</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../index.html">Home</a>
+				</li>
+				<li>
+					<a href="getting-started.html">Handbook</a>
+				</li>
+				<li>
+					<a href="getting-started.html">Getting Started</a>
+				</li>
+			</ul>
+			<h1>Getting Started</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<blockquote>
+					<p>🙋 If you find any incorrect or missing documentation then please <a href="https://github.com/tw-in-js/twind/issues">open an issue</a> for discussion.</p>
+				</blockquote>
+				<p>This is the user manual for the <code>twind</code> library. A small compiler that turns Tailwind short hand into CSS rules at run, build or serve time. If you have used Tailwind and/or a CSS-in-JS solution before then most of the API will feel very familiar.</p>
+				<p>We are confident that feature parity with Tailwind V2 has been achieved. We recommend you refer the Tailwind documentation site for anything non twind implementation specific; information around directives, variants, theming etc.</p>
+				<blockquote>
+					<p>📚 <strong><a href="https://tailwindcss.com">Tailwind Documentation</a></strong></p>
+				</blockquote>
+				<p>Despite being very flexible and powerful, it was our intention to keep the surface API as minimal as possible. We appreciate that Twind is likely to be used by developers &amp; designers alike and so we try provide sensible defaults out of the box, with little to no need for <a href="advanced/setup.html">customization</a>.</p>
+				<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+				<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+				<ul>
+					<li><a href="#quickstart">Quickstart</a></li>
+					<li><a href="#twindshim">twind/shim</a></li>
+				</ul>
+				<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+				<a href="#quickstart" id="quickstart" style="color: inherit; text-decoration: none;">
+					<h2>Quickstart</h2>
+				</a>
+				<blockquote>
+					<p>💡 Note that examples are given in vanilla JS but the module is compatible with all popular frameworks</p>
+				</blockquote>
+				<p>Getting started with the library requires no configuration, build step or even <a href="getting-started/installation.html">installation</a> if you use <a href="https://skypack.dev/">skypack</a>, <a href="https://unpkg.com/">unpkg</a> or <a href="https://jspm.dev/">jspm</a> – see the <a href="getting-started/installation.html">Installation</a> guide for more information.</p>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">tw</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;https://cdn.skypack.dev/twind&#039;</span>
+
+<span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">.</span><span style="color: #001080">innerHTML</span><span style="color: #000000"> = </span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  &lt;main class=&quot;</span><span style="color: #0000FF">${</span><span style="color: #795E26">tw</span><span style="color: #A31515">`bg-black text-white`</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot;&gt;</span>
+<span style="color: #A31515">    &lt;h1 class=&quot;</span><span style="color: #0000FF">${</span><span style="color: #795E26">tw</span><span style="color: #A31515">`text-xl`</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot;&gt;This is Tailwind in JS!&lt;/h1&gt;</span>
+<span style="color: #A31515">  &lt;/main&gt;</span>
+<span style="color: #A31515">`</span>
+</code></pre>
+				<blockquote>
+					<p>🚀 <a href="https://esm.codes/#aW1wb3J0IHsgdHcgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZCcKCmRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gYAogIDxtYWluIGNsYXNzPSIke3R3YGgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJgfSI+CiAgICA8aDEgY2xhc3M9IiR7dHdgZm9udC1ib2xkIHRleHQoY2VudGVyIDV4bCB3aGl0ZSBzbTpncmF5LTgwMCBtZDpwaW5rLTcwMClgfSI+CiAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICA8L2gxPgogIDwvbWFpbj4KYA==">live and interactive demo</a></p>
+				</blockquote>
+				<p>Using the exported <a href="getting-started/styling-with-twind.html">tw</a> function results in the compilation of the rules like <code>bg-black text-white</code> and <code>text-xl</code> exactly as specified in the <a href="https://tailwincss.com/docs">Tailwind documentation</a>. For convenience the default <a href="https://github.com/tailwindlabs/tailwindcss/blob/v1/stubs/defaultConfig.stub.js">tailwind theme</a> is used along with the preflight <a href="https://tailwindcss.com/docs/preflight">base styles</a> if neither are <a href="advanced/setup.html">provided by the developer</a>.</p>
+				<a href="#twindshim" id="twindshim" style="color: inherit; text-decoration: none;">
+					<h2>twind/shim</h2>
+				</a>
+				<blockquote>
+					<p>💡 Seamless integration with existing Tailwind HTML. This feature can be used together with your favorite framework without any additional setup.</p>
+				</blockquote>
+				<p>The <a href="getting-started/using-the-shim.html">twind/shim</a> module allows to use the <code>class</code> attribute for tailwind rules. If such a rule is detected the corresponding CSS rule is created and injected into the stylesheet. <em>No need for <code>tw</code></em> but it can be used on the same page as well (see example below).</p>
+				<pre><code class="language-html"><span style="color: #800000">&lt;!DOCTYPE</span><span style="color: #000000"> </span><span style="color: #FF0000">html</span><span style="color: #800000">&gt;</span>
+<span style="color: #800000">&lt;html</span><span style="color: #000000"> </span><span style="color: #FF0000">lang</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;en&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">hidden</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;head&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;script</span><span style="color: #000000FF"> </span><span style="color: #FF0000">type</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;module&quot;</span><span style="color: #000000FF"> </span><span style="color: #FF0000">src</span><span style="color: #000000FF">=</span><span style="color: #0000FF">&quot;https://cdn.skypack.dev/twind/shim&quot;</span><span style="color: #800000">&gt;&lt;/script&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;/head&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;body&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;main</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;h-screen bg-purple-400 flex items-center justify-center&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">      </span><span style="color: #800000">&lt;h1</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;font-bold text(center 5xl white sm:gray-800 md:pink-700)&quot;</span><span style="color: #800000">&gt;</span><span style="color: #000000">This is Twind!</span><span style="color: #800000">&lt;/h1&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;/main&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;/body&gt;</span>
+<span style="color: #800000">&lt;/html&gt;</span>
+</code></pre>
+				<blockquote>
+					<p>🚀 <a href="https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPG1haW4gY2xhc3M9Imgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIiPgogICAgPGgxIGNsYXNzPSJmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKSI+CiAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICA8L2gxPgogIDwvbWFpbj4KYA==">live and interactive shim demo</a></p>
+				</blockquote>
+				<hr/>
+				<p>Continue to <a href="getting-started/installation.html">Installation</a></p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="label pp-nav pp-group">
+						<span>Handbook</span>
+					</li>
+					<li class="current pp-nav pp-page pp-parent">
+						<a href="getting-started.html">Getting <wbr>Started</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="getting-started/installation.html">Installation</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="getting-started/styling-with-twind.html">Styling with <wbr>Twind</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="getting-started/thinking-in-groups.html">Thinking in <wbr>Groups</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="getting-started/using-the-shim.html">Using the <wbr>Shim</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="getting-started/customize-the-theme.html">Customize the <wbr>Theme</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="getting-started/tailwind-extensions.html">Tailwind <wbr>Extensions</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="getting-started/css-in-js.html">CSS in JS</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="getting-started/best-practices.html">Best <wbr>Practices</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="getting-started/quicksheet.html">Quicksheet</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="getting-started/browser-support.html">Browser <wbr>Support</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="getting-started/modules.html">Modules <wbr>Summary</a>
+					</li>
+					<li class=" pp-nav pp-page pp-parent">
+						<a href="recipes.html">Recipes</a>
+					</li>
+					<li class=" pp-nav pp-page pp-parent">
+						<a href="advanced.html">Advanced</a>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="faqs.html">FAQs</a>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="release-notes.html">Release <wbr>Notes</a>
+					</li>
+					<li class="label pp-nav pp-group">
+						<span>API</span>
+					</li>
+					<li class=" ">
+						<a href="../modules.html">Modules</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/twind.html">twind</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/twind_colors.html">twind/colors</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/twind_css.html">twind/css</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/twind_observe.html">twind/observe</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/twind_server.html">twind/server</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/twind_sheets.html">twind/sheets</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/twind_shim.html">twind/shim</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../modules/twind_shim_server.html">twind/shim/server</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>

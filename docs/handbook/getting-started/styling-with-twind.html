@@ -1,0 +1,295 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Styling with Twind | twind - v0.14.2</title>
+	<meta name="description" content="Documentation for twind - v0.14.2">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../../assets/css/main.css">
+	<link rel="stylesheet" href="../../assets/css/pages.css">
+	<script async src="../../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../../assets/js/search.json" data-base="../..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../../index.html" class="title">twind - v0.14.2</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../../index.html">Home</a>
+				</li>
+				<li>
+					<a href="../getting-started.html">Handbook</a>
+				</li>
+				<li>
+					<a href="../getting-started.html">Getting Started</a>
+				</li>
+				<li>
+					<a href="styling-with-twind.html">Styling with Twind</a>
+				</li>
+			</ul>
+			<h1>Styling with Twind</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<blockquote>
+					<p>💡 If you are unfamiliar with the Tailwind CSS shorthand syntax please read the <a href="https://tailwindcss.com/docs">Tailwind documentation</a> about <a href="https://tailwindcss.com/docs/utility-first">Utility-First</a>, <a href="https://tailwindcss.com/docs/responsive-design">Responsive Design</a> and <a href="https://tailwindcss.com/docs/hover-focus-and-other-states">Hover, Focus, &amp; Other States</a>.</p>
+				</blockquote>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">tw</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
+
+<span style="color: #001080">document</span><span style="color: #000000">.</span><span style="color: #001080">body</span><span style="color: #000000">.</span><span style="color: #001080">innerHTML</span><span style="color: #000000"> = </span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  &lt;main class=&quot;</span><span style="color: #0000FF">${</span><span style="color: #795E26">tw</span><span style="color: #A31515">`h-screen bg-purple-400 flex items-center justify-center`</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot;&gt;</span>
+<span style="color: #A31515">    &lt;h1 class=&quot;</span><span style="color: #0000FF">${</span><span style="color: #795E26">tw</span><span style="color: #A31515">`font-bold text(center 5xl white sm:gray-800 md:pink-700)`</span><span style="color: #0000FF">}</span><span style="color: #A31515">&quot;&gt;This is Twind!&lt;/h1&gt;</span>
+<span style="color: #A31515">  &lt;/main&gt;</span>
+<span style="color: #A31515">`</span>
+</code></pre>
+				<blockquote>
+					<p>🚀 <a href="https://esm.codes/#aW1wb3J0IHsgdHcgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZCcKCmRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gYAogIDxtYWluIGNsYXNzPSIke3R3YGgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJgfSI+CiAgICA8aDEgY2xhc3M9IiR7dHdgZm9udC1ib2xkIHRleHQoY2VudGVyIDV4bCB3aGl0ZSBzbTpncmF5LTgwMCBtZDpwaW5rLTcwMClgfSI+VGhpcyBpcyBUd2luZCE8L2gxPgogIDwvbWFpbj4KYA==">live and interactive demo</a></p>
+				</blockquote>
+				<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+				<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+				<ul>
+					<li><a href="#the-tw-function">The tw function</a></li>
+					<li><a href="#the-apply-function">The apply function</a></li>
+				</ul>
+				<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+				<a href="#the-tw-function" id="the-tw-function" style="color: inherit; text-decoration: none;">
+					<h2>The tw function</h2>
+				</a>
+				<p>Calling the <a href="../../modules/twind.html#tw-1">tw</a> function results in the shorthand rules to be interpreted, normalized and compiled into CSS rules which get added to a stylesheet in the head of the document. The function will return a string consisting of all the class names that were processed. These class names can then be applied to the element itself much like any other CSS-in-JS library.</p>
+				<pre><code class="language-js"><span style="color: #795E26">tw</span><span style="color: #A31515">`bg-gray-200 rounded`</span>
+<span style="color: #008000">//=&gt; bg-gray-200 rounded</span>
+<span style="color: #795E26">tw</span><span style="color: #A31515">`bg-gray-200 </span><span style="color: #0000FF">${</span><span style="color: #0000FF">false</span><span style="color: #000000FF"> </span><span style="color: #000000">&amp;&amp;</span><span style="color: #000000FF"> </span><span style="color: #A31515">&#039;rounded&#039;</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span>
+<span style="color: #008000">//=&gt; bg-gray-200</span>
+</code></pre>
+				<details><summary>Show me more examples</summary>
+					<pre><code class="language-js"><span style="color: #795E26">tw</span><span style="color: #A31515">`bg-gray-200 </span><span style="color: #0000FF">${</span><span style="color: #000000FF">[</span><span style="color: #0000FF">false</span><span style="color: #000000FF"> </span><span style="color: #000000">&amp;&amp;</span><span style="color: #000000FF"> </span><span style="color: #A31515">&#039;rounded&#039;</span><span style="color: #000000FF">, </span><span style="color: #A31515">&#039;block&#039;</span><span style="color: #000000FF">]</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span>
+<span style="color: #008000">//=&gt; bg-gray-200 block</span>
+<span style="color: #795E26">tw</span><span style="color: #A31515">`bg-gray-200 </span><span style="color: #0000FF">${</span><span style="color: #000000FF">{ </span><span style="color: #001080">rounded:</span><span style="color: #000000FF"> </span><span style="color: #0000FF">false</span><span style="color: #000000FF">, </span><span style="color: #001080">underline:</span><span style="color: #000000FF"> </span><span style="color: #795E26">isTrue</span><span style="color: #000000FF">() }</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span>
+<span style="color: #008000">//=&gt; bg-gray-200 underline</span>
+<span style="color: #795E26">tw</span><span style="color: #A31515">`bg-</span><span style="color: #0000FF">${</span><span style="color: #795E26">randomColor</span><span style="color: #000000FF">()</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span>
+<span style="color: #008000">//=&gt; bg-blue-500</span>
+<span style="color: #795E26">tw</span><span style="color: #A31515">`hover:</span><span style="color: #0000FF">${</span><span style="color: #000000FF">({ </span><span style="color: #001080">tw</span><span style="color: #000000FF"> }) </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000FF"> </span><span style="color: #795E26">tw</span><span style="color: #A31515">`underline`</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span>
+<span style="color: #008000">//=&gt; hover:underline</span>
+<span style="color: #795E26">tw</span><span style="color: #A31515">`bg-</span><span style="color: #0000FF">${</span><span style="color: #A31515">&#039;fuchsia&#039;</span><span style="color: #0000FF">}</span><span style="color: #A31515">) sm:</span><span style="color: #0000FF">${</span><span style="color: #A31515">&#039;underline&#039;</span><span style="color: #0000FF">}</span><span style="color: #A31515"> lg:</span><span style="color: #0000FF">${</span><span style="color: #0000FF">false</span><span style="color: #000000FF"> </span><span style="color: #000000">&amp;&amp;</span><span style="color: #000000FF"> </span><span style="color: #A31515">&#039;line-through&#039;</span><span style="color: #0000FF">}</span><span style="color: #A31515"> text-</span><span style="color: #0000FF">${</span><span style="color: #000000FF">[</span>
+<span style="color: #000000FF">  </span><span style="color: #A31515">&#039;underline&#039;</span><span style="color: #000000FF">,</span>
+<span style="color: #000000FF">  </span><span style="color: #A31515">&#039;center&#039;</span><span style="color: #000000FF">,</span>
+<span style="color: #000000FF">]</span><span style="color: #0000FF">}</span><span style="color: #A31515"> rounded-</span><span style="color: #0000FF">${</span><span style="color: #000000FF">{ </span><span style="color: #001080">lg:</span><span style="color: #000000FF"> </span><span style="color: #0000FF">false</span><span style="color: #000000FF">, </span><span style="color: #001080">xl:</span><span style="color: #000000FF"> </span><span style="color: #0000FF">true</span><span style="color: #000000FF"> }</span><span style="color: #0000FF">}</span><span style="color: #A31515">)`</span>
+<span style="color: #008000">// =&gt; bg-fuchsia sm:underline text-underline text-center rounded-xl</span>
+
+<span style="color: #795E26">tw</span><span style="color: #A31515">`text-</span><span style="color: #0000FF">${</span><span style="color: #A31515">&#039;gray&#039;</span><span style="color: #0000FF">}</span><span style="color: #A31515">-100 bg-</span><span style="color: #0000FF">${</span><span style="color: #A31515">&#039;red&#039;</span><span style="color: #0000FF">}</span><span style="color: #A31515">(600 hover:700 </span><span style="color: #0000FF">${</span><span style="color: #A31515">&#039;focus&#039;</span><span style="color: #0000FF">}</span><span style="color: #A31515">:800)`</span>
+<span style="color: #008000">// =&gt; text-gray-100 bg-red-600 hover:bg-red-700 focus:bg-red-800</span>
+</code></pre>
+				</details>
+				<p>It is possible to invoke the <a href="../../modules/twind.html#tw-1">tw</a> function in a multitude of different ways. It can take any number of arguments, each of which can be an Object, Array, Boolean, Number, String or Template Literal. This ability is inspired heavily by the <a href="https://npmjs.com/clsx">clsx</a> library by <a href="https://github.com/lukeed">Luke Edwards</a>.</p>
+				<blockquote>
+					<p>Note any falsey values are always discarded as well as standalone boolean and number values</p>
+				</blockquote>
+				<pre><code class="language-js"><span style="color: #008000">// Strings</span>
+<span style="color: #795E26">tw</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;bg-gray-200&#039;</span><span style="color: #000000">, </span><span style="color: #0000FF">true</span><span style="color: #000000"> &amp;&amp; </span><span style="color: #A31515">&#039;rounded&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;underline&#039;</span><span style="color: #000000">)</span>
+<span style="color: #008000">//=&gt; bg-gray-200 rounded underline</span>
+
+<span style="color: #008000">// Objects</span>
+<span style="color: #795E26">tw</span><span style="color: #000000">({ </span><span style="color: #A31515">&#039;bg-gray-200&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">, </span><span style="color: #001080">rounded:</span><span style="color: #000000"> </span><span style="color: #0000FF">false</span><span style="color: #000000">, </span><span style="color: #001080">underline:</span><span style="color: #000000"> </span><span style="color: #795E26">isTrue</span><span style="color: #000000">() })</span>
+<span style="color: #008000">//=&gt; bg-gray-200 underline</span>
+
+<span style="color: #008000">// Arrays</span>
+<span style="color: #795E26">tw</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;bg-gray-200&#039;</span><span style="color: #000000">, </span><span style="color: #098658">0</span><span style="color: #000000">, </span><span style="color: #0000FF">false</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;rounded&#039;</span><span style="color: #000000">])</span>
+<span style="color: #008000">//=&gt; bg-gray-200 rounded</span>
+
+<span style="color: #008000">// Mixed</span>
+<span style="color: #795E26">tw</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;bg-gray-200&#039;</span><span style="color: #000000">, [</span>
+<span style="color: #000000">  </span><span style="color: #098658">1</span><span style="color: #000000"> &amp;&amp; </span><span style="color: #A31515">&#039;rounded&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  { </span><span style="color: #001080">underline:</span><span style="color: #000000"> </span><span style="color: #0000FF">false</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;text-black&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #0000FF">null</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  [</span><span style="color: #A31515">&#039;text-lg&#039;</span><span style="color: #000000">, [</span><span style="color: #A31515">&#039;shadow-lg&#039;</span><span style="color: #000000">]],</span>
+<span style="color: #000000">])</span>
+<span style="color: #008000">//=&gt; bg-gray-200 rounded text-lg shadow-lg</span>
+</code></pre>
+				<details><summary>Show me more examples</summary>
+					<pre><code class="language-js"><span style="color: #795E26">tw</span><span style="color: #000000">({ </span><span style="color: #A31515">&#039;bg-gray-200&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000"> }, { </span><span style="color: #001080">rounded:</span><span style="color: #000000"> </span><span style="color: #0000FF">false</span><span style="color: #000000"> }, </span><span style="color: #0000FF">null</span><span style="color: #000000">, { </span><span style="color: #001080">underline:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000"> })</span>
+<span style="color: #008000">//=&gt; bg-gray-200 underline</span>
+
+<span style="color: #795E26">tw</span><span style="color: #000000">({ </span><span style="color: #001080">hover:</span><span style="color: #000000"> [</span><span style="color: #A31515">&#039;bg-red-500&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;p-3&#039;</span><span style="color: #000000">] }, </span><span style="color: #A31515">&#039;m-1&#039;</span><span style="color: #000000">)</span>
+<span style="color: #008000">// =&gt; hover:bg-red-500 hover:p-3 m-1</span>
+
+<span style="color: #795E26">tw</span><span style="color: #000000">([</span><span style="color: #A31515">&#039;bg-gray-200&#039;</span><span style="color: #000000">], [</span><span style="color: #A31515">&#039;&#039;</span><span style="color: #000000">, </span><span style="color: #098658">0</span><span style="color: #000000">, </span><span style="color: #0000FF">false</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;rounded&#039;</span><span style="color: #000000">], [[</span><span style="color: #A31515">&#039;underline&#039;</span><span style="color: #000000">]])</span>
+<span style="color: #008000">//=&gt; bg-gray-200 rounded underline</span>
+
+<span style="color: #795E26">tw</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #001080">sm:</span><span style="color: #000000"> [</span><span style="color: #A31515">&#039;hover:rounded&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;active:rounded-full&#039;</span><span style="color: #000000">],</span>
+<span style="color: #000000">  </span><span style="color: #001080">md:</span><span style="color: #000000"> { </span><span style="color: #001080">rounded:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">, </span><span style="color: #001080">hover:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;bg-white&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">  </span><span style="color: #001080">lg:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&#039;rounded-full&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #001080">hover:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;bg-white text-black active:(underline shadow)&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">})</span>
+<span style="color: #008000">// sm:hover:rounded sm:active:rounded-full md:rounded md:hover:bg-white lg:rounded-full lg:hover:bg-white lg:hover:text-black lg:hover:active:underline lg:hover:active:shadow</span>
+</code></pre>
+				</details>
+				<a href="#the-apply-function" id="the-apply-function" style="color: inherit; text-decoration: none;">
+					<h2>The apply function</h2>
+				</a>
+				<p>To be documented...</p>
+				<hr/>
+				<p>Continue to <a href="thinking-in-groups.html">Thinking in Groups</a></p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="label pp-nav pp-group">
+						<span>Handbook</span>
+					</li>
+					<li class=" pp-nav pp-page pp-parent pp-active">
+						<a href="../getting-started.html">Getting <wbr>Started</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="installation.html">Installation</a>
+					</li>
+					<li class="current pp-nav pp-page pp-child">
+						<a href="styling-with-twind.html">Styling with <wbr>Twind</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="thinking-in-groups.html">Thinking in <wbr>Groups</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="using-the-shim.html">Using the <wbr>Shim</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="customize-the-theme.html">Customize the <wbr>Theme</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="tailwind-extensions.html">Tailwind <wbr>Extensions</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="css-in-js.html">CSS in JS</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="best-practices.html">Best <wbr>Practices</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="quicksheet.html">Quicksheet</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="browser-support.html">Browser <wbr>Support</a>
+					</li>
+					<li class=" pp-nav pp-page pp-child">
+						<a href="modules.html">Modules <wbr>Summary</a>
+					</li>
+					<li class=" pp-nav pp-page pp-parent">
+						<a href="../recipes.html">Recipes</a>
+					</li>
+					<li class=" pp-nav pp-page pp-parent">
+						<a href="../advanced.html">Advanced</a>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="../faqs.html">FAQs</a>
+					</li>
+					<li class=" pp-nav pp-page">
+						<a href="../release-notes.html">Release <wbr>Notes</a>
+					</li>
+					<li class="label pp-nav pp-group">
+						<span>API</span>
+					</li>
+					<li class=" ">
+						<a href="../../modules.html">Modules</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind.html">twind</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind_colors.html">twind/colors</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind_css.html">twind/css</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind_observe.html">twind/observe</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind_server.html">twind/server</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind_sheets.html">twind/sheets</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind_shim.html">twind/shim</a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="../../modules/twind_shim_server.html">twind/shim/server</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+				<li class="tsd-kind-type-alias tsd-has-type-parameter"><span class="tsd-kind-icon">Type alias with type parameter</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../../assets/js/main.js"></script>
+</body>
+</html>
