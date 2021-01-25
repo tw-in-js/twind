@@ -69,7 +69,7 @@ const PurpleButton = tw`
 `
 ```
 
-As you see it is difficult to override certain utility classes on usage or when creating a child component. For this to work twind introduced the `override` variant which increases the specificity of the classes it is applied to. But what do you do for a grandchild component or if you want to override the `PurpleButton` styles? `override:override:...`? This is where `apply` should be used.
+As you see it is difficult to override certain utility classes on usage or when creating a child component. For this to work Twind introduced the `override` variant which increases the specificity of the classes it is applied to. But what do you do for a grandchild component or if you want to override the `PurpleButton` styles? `override:override:...`? This is where `apply` should be used.
 
 Tailwind has a component concept using [@apply](https://tailwindcss.com/docs/extracting-components#extracting-component-classes-with-apply) which basically merges the CSS rules of several Tailwind classes into one class. twin.macro does the same.
 

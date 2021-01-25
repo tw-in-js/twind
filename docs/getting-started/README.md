@@ -2,7 +2,7 @@
 
 This is the user manual for the `twind` library. A small compiler that turns Tailwind short hand into CSS rules at run, build or serve time. If you have used Tailwind and/or a CSS-in-JS solution before then most of the API will feel very familiar.
 
-We are confident that feature parity with Tailwind V2 has been achieved. We recommend you refer the Tailwind documentation site for anything non twind implementation specific; information around directives, variants, theming etc.
+We are confident that feature parity with Tailwind V2 has been achieved. We recommend you refer the Tailwind documentation site for anything non Twind implementation specific; information around directives, variants, theming etc.
 
 > 📚 **[Tailwind Documentation](https://tailwindcss.com)**
 

@@ -99,7 +99,7 @@ const style = css`
 `
 ```
 
-> Please note that the template literal syntax has a little performance impact as twind needs to parse the CSS. For optimal performance use the object notation.
+> ❗ Please note that the template literal syntax has a little performance impact as Twind needs to parse the CSS. For optimal performance use the object notation.
 
 Variadic arguments and arrays (nested as deep as you like) are supported as well:
 

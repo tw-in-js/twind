@@ -9,7 +9,7 @@ For static HTML processing (usually to provide SSR support for your javascript-p
 2. populate the provided sheet with the generated rules
 3. output the HTML string with the final element classes
 
-All twind syntax features like {@page Thinking in Groups | grouping} are supported within class attributes.
+All Twind syntax features like {@page Thinking in Groups | grouping} are supported within class attributes.
 
 The {@link shim} function also accepts an optional 2nd argument that can be a {@link twind.create | custom} `tw` instance or an {@link ShimOptions | options object} (including `tw` instance) for [node-html-parser](https://www.npmjs.com/package/node-html-parser).
 

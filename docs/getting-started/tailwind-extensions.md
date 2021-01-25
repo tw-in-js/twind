@@ -65,7 +65,7 @@ Directives may end with exclamation point (`text-center!`) to be marked as [impo
 
 ### Every variant can be applied to every directive
 
-Because twind is generating CSS during runtime there is no to need restrict the usage of variants.
+Because Twind is generating CSS during runtime there is no to need restrict the usage of variants.
 
 ### Dark mode is always available
 
@@ -246,7 +246,7 @@ Please note that `transform rotate-45` works but when using `transform rotate-45
 
 ### Theme values are automatically negated
 
-There is no need to provided negated values in the theme. As soon as twind detect a negated directive like `-mx-2` it negates the theme value.
+There is no need to provided negated values in the theme. As soon as Twind detects a negated directive like `-mx-2` it negates the theme value.
 
 <hr/>
 
