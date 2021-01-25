@@ -92,9 +92,10 @@
     "uvu": "^0.5.1",
     "watchlist": "^0.2.3"
   },
-  "// Tailwind requires Node v12, we support v10 => mark it as optional": "",
+  "// Some packages require Node v12, we support v10 => mark them as optional": "",
   "optionalDependencies": {
-    "tailwindcss": "^2.0.1"
+    "tailwindcss": "^2.0.1",
+    "typedoc-plugin-param-names": "^2.0.0"
   },
   "scripts": {
     "build": "distilt",
