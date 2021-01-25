@@ -65,15 +65,15 @@
 
 ---
 
-If you are here then the likelihood is that you using Tailwind or a CSS-in-JS solution such as styled-components, emotion or goober in order to style your web applications. These packages have proven overwhelmingly popular and revolutionized web development as we know it.
+If you are here then the likelihood is that you are using Tailwind or a CSS-in-JS solution such as styled-components, Emotion or goober in order to style your web applications. These packages have proven overwhelmingly popular and revolutionized web development as we know it.
 
-The purpose of this project is unify these two approaches; embracing the flexibility of CSS-in-JS whilst conforming to the carefully considered constraints of the Tailwind API.
+The purpose of this project is to unify these two approaches; embracing the flexibility of CSS-in-JS whilst conforming to the carefully considered constraints of the Tailwind API.
 
 We hope to create a place for likeminded people to discuss issues, share ideas and collaborate.
 
 ## Quickstart
 
-If you would like to get started with twind right away then copy paste this code into your favorite sandbox.
+If you would like to get started with twind right away then copy paste this code into your favorite sandbox:
 
 ```js
 import { tw } from 'https://cdn.skypack.dev/twind'
@@ -115,7 +115,7 @@ A lot of developers ask _"Why not just use Tailwind?"_ and our answer is always 
 
 > I've wanted to do a CSS-in-JS flavor of Tailwind for over 2 years because of all the neat benefits you get there so it's cool to see projects like this! – [@adamwathan](https://twitter.com/adamwathan/status/1320370489408225282)
 
-However, if like us you are already building your app in JS using a framework like react, preact, vue or svelte, rather than just static HTML, then compiling Tailwind shorthand just in time (like twind does) rather than ahead of time like with Tailwind and PostCSS, comes with a lot of advantages.
+However, if like us you are already building your app in JS using a framework like React, Preact, Vue or Svelte, rather than just static HTML, then compiling Tailwind shorthands just in time (like twind does) rather than ahead of time like with Tailwind and PostCSS, comes with a lot of advantages.
 
 ### Advantages
 
@@ -159,7 +159,7 @@ It might not always be desirable to generate rules by invoking the compiler dire
 
 <details><summary>💸 Unlimited styles for a low fixed cost of ~12KB</summary>
 
-By shipping the compiler (rather than the resultant output) there is a known and fixed cost associated with styling. No matter how many styles you write or how many variants you use, all that your users will ever have to download is approximately 12Kb of code (which is less than styled-components or your average purged Tailwind build).
+By shipping the compiler (rather than the resultant output) there is a known and fixed cost associated with styling. No matter how many styles you write or how many variants you use, all that your users will ever have to download is approximately 12KB of code (which is less than styled-components or your average purged Tailwind build).
 
 </details>
 
@@ -189,7 +189,7 @@ By shipping the compiler (rather than the resultant output) there is a known and
 
   Because twind is generating CSS during runtime there is no restriction to which directives variants can be applied.
 
-- Most pseudo classes can be uses as variant or `group-*` variant
+- Most pseudo classes can be used as variant or `group-*` variant
 
   Unknown variants (not listed in [core variants](https://github.com/tw-in-js/twind/blob/main/src/twind/variants.ts)) are assumed to be [pseudo classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes).
 
@@ -234,7 +234,7 @@ Theming is done exactly as [documented by the Tailwind](https://tailwindcss.com/
 
 <details><summary>🚓 Escape hatch for writing arbitrary CSS</summary>
 
-The compiler [accepts functions](https://github.com/tw-in-js/twind/blob/main/docs/tw.md#inline-plugins) that can return arbritary CSS-in-JS objects. A convenient a escape hatch for all those one off rules which aren't supported by tailwind. The `&` keyword allows you to write complex rules (like pseudo elements `&::before` and `&::after`) that are beyond the scope of inline styles without having to add another dependency.
+The compiler [accepts functions](https://github.com/tw-in-js/twind/blob/main/docs/tw.md#inline-plugins) that can return arbitrary CSS-in-JS objects. A convenient escape hatch for all those one-off rules which aren't supported by Tailwind. The `&` keyword allows you to write complex rules (like pseudo elements `&::before` and `&::after`) that are beyond the scope of inline styles without having to add another dependency.
 
 > We provide a [css helper](https://github.com/tw-in-js/twind/tree/main/docs/css-in-js.md) as a convenience for this case.
 
@@ -242,7 +242,7 @@ The compiler [accepts functions](https://github.com/tw-in-js/twind/blob/main/doc
 
 <details><summary>🤖 Built in support for conditionally combining rules</summary>
 
-Input is not limited to strings like with HTML classes. The [Twind function](https://github.com/tw-in-js/twind/tree/main/docs/tw.md) accept arrays, objects, template literals, functions, almost everything! The interpreter spec is inspired by and very similar to [clsx](https://github.com/lukeed/clsx) and offers a much more developer friendly API that handles null values gracefully.
+Input is not limited to strings like with HTML classes. The [`tw` function](https://github.com/tw-in-js/twind/tree/main/docs/tw.md) accept arrays, objects, template literals, functions, almost everything! The interpreter spec is inspired by and is very similar to [clsx](https://github.com/lukeed/clsx) and offers a much more developer friendly API that handles null values gracefully.
 
 </details>
 
@@ -254,13 +254,13 @@ Using template literals as input ([the recommended method](https://github.com/tw
 
 <details><summary>❄️ Optional hashing of class names ensuring no conflicts</summary>
 
-By default no hashing is enabled to aid debugging during development. However it is possible to configure Twind to [hash class names](https://github.com/tw-in-js/twind/blob/main/docs/setup.md#hash) before injecting them into the DOM. This may be useful in production as it can reduce the down the wire size of server side rendered pages pages and eliminates any chance of class name conflicts with third party styles.
+By default no hashing is enabled to aid debugging during development. However it is possible to configure twind to [hash class names](https://github.com/tw-in-js/twind/blob/main/docs/setup.md#hash) before injecting them into the DOM. This may be useful in production as it can reduce the down-the-wire size of server-side rendered pages and eliminates any chance of class name conflicts with third party styles.
 
 </details>
 
 <details><summary>🚅 Faster than all popular CSS-in-JS libraries</summary>
 
-Given the limited grammar that the compiler has to support there is a much higher chance of finding a rule and its variant in the cache, because of this along with some other specialist optimizations we are able to compile and inject CSS [faster than all the popular](#benchmarks) CSS-in-JS solutions.
+Given the limited grammar that the compiler has to support there is a much higher chance of finding a rule and its variant in the cache. Because of this along with some other specialist optimizations we are able to compile and inject CSS [faster than all the popular](#benchmarks) CSS-in-JS solutions.
 
 </details>
 
@@ -312,7 +312,7 @@ Try this example in the [live and interactive demo](https://esm.codes/#aW1wb3J0I
 
 ## Benchmarks
 
-The implementation is tested for speed alongside several popular CSS-in-JS solutions that export general css functions. For those that only support a _styled component_ approach an equivalent test has been setup. Currently Twind is the fastest in both scenarios in part due to optimal caching of static parts from template literals.
+The implementation is tested for speed alongside several popular CSS-in-JS solutions that export general CSS functions. For those that only support a _styled component_ approach an equivalent test has been setup. Currently twind is the fastest in both scenarios in part due to optimal caching of static parts from template literals.
 
 ### CSS Function w/ template literal
 
@@ -337,16 +337,16 @@ For a more detailed testing summary please see the [benchmarks](https://github.c
 
 ## Inspiration
 
-It would be untrue to suggest that the design here is totally original, other than the founders initial attempts at implementing such a module ([oceanwind](https://github.com/lukejacksonn/oceanwind) and [beamwind](https://github.com/kenoxa/beamwind)) we are truly standing on the shoulders of giants.
+It would be untrue to suggest that the design here is totally original. Other than the founders' initial attempts at implementing such a module ([oceanwind](https://github.com/lukejacksonn/oceanwind) and [beamwind](https://github.com/kenoxa/beamwind)) we are truly standing on the shoulders of giants.
 
-- [tailwind](https://tailwindcss.com/): created a wonderfully thought out API on which the compiler's grammar was defined.
+- [Tailwind](https://tailwindcss.com/): created a wonderfully thought out API on which the compiler's grammar was defined.
 - [styled-components](https://styled-components.com/): implemented and popularized the advantages of doing CSS-in-JS.
 - [htm](https://github.com/developit/htm): a JSX compiler that proved there is merit in doing runtime compilation of DSLs like JSX.
 - [goober](https://github.com/cristianbote/goober): an impossibly small yet efficient CSS-in-JS implementation that defines critical module features.
 - [otion](https://github.com/kripod/otion): the first CSS-in-JS solution specifically oriented around handling CSS in an atomic fashion.
 - [clsx](https://github.com/lukeed/clsx): a tiny utility for constructing class name strings conditionally.
-- [style-vendorizer](https://github.com/kripod/style-vendorizer): essentials CSS prefixing helpers in less than 1KB of JavaScript.
-- [csstype](https://github.com/frenic/csstype): providing autocompletion and type checking for CSS properties and values.
+- [style-vendorizer](https://github.com/kripod/style-vendorizer): essential CSS prefixing helpers in less than 1KB of JavaScript.
+- [CSSType](https://github.com/frenic/csstype): providing autocompletion and type checking for CSS properties and values.
 
 ## License
 
