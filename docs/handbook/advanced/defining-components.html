@@ -132,7 +132,7 @@
 <span style="color: #A31515">  override:(text-purple-600 border-purple-600)</span>
 <span style="color: #A31515">`</span>
 </code></pre>
-					<p>As you see it is difficult to override certain utility classes on usage or when creating a child component. For this to work twind introduced the <code>override</code> variant which increases the specificity of the classes it is applied to. But what do you do for a grandchild component or if you want to override the <code>PurpleButton</code> styles? <code>override:override:...</code>? This is where <code>apply</code> should be used.</p>
+					<p>As you see it is difficult to override certain utility classes on usage or when creating a child component. For this to work Twind introduced the <code>override</code> variant which increases the specificity of the classes it is applied to. But what do you do for a grandchild component or if you want to override the <code>PurpleButton</code> styles? <code>override:override:...</code>? This is where <code>apply</code> should be used.</p>
 					<p>Tailwind has a component concept using <a href="https://tailwindcss.com/docs/extracting-components#extracting-component-classes-with-apply">@apply</a> which basically merges the CSS rules of several Tailwind classes into one class. twin.macro does the same.</p>
 					<details><summary>Details of Tailwind @apply</summary>
 						<p>Tailwind CSS provides <a href="https://tailwindcss.com/docs/extracting-components#extracting-component-classes-with-apply">@apply to extract component classes</a> which merges the underlying styles of the utility classes into a single CSS class.</p>
