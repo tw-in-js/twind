@@ -4,14 +4,20 @@ import type { CSSProperties } from './css'
 import type { Theme, ThemeResolver, ThemeSectionType } from './theme'
 import type { Falsy } from './util'
 
-export interface TW {
+export interface TWCallable {
   (strings: TemplateStringsArray, ...interpolations: Token[]): string
   (...tokens: Token[]): string
 }
 
+export interface TW extends TWCallable {
+  theme: ThemeResolver
+  // css: Context['css']
+  // tag: Context['tag']
+}
+
 export interface Context {
   /** Allow composition */
-  readonly tw: TW
+  readonly tw: TWCallable
 
   /** Access to theme values */
   readonly theme: ThemeResolver

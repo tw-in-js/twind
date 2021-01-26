@@ -809,4 +809,9 @@ test('same style in different layers has different hash', ({ tw, sheet }) => {
   ])
 })
 
+test('tw.theme', ({ tw, sheet }) => {
+  assert.is(tw.theme('colors.red.500'), '#ef4444')
+  assert.equal(sheet.target, [])
+})
+
 test.run()
