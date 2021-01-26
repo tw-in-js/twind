@@ -1,4 +1,4 @@
-import type { Configuration, Instance } from '../types'
+import type { Configuration, Context, Instance } from '../types'
 
 import { configure } from './configure'
 
@@ -32,11 +32,35 @@ export const create = (config?: Configuration): Instance => {
   // If we got a config, start right away
   if (config) init(config)
 
+  let context: Context
+  const fromContext = <Key extends keyof Context>(key: Key) => (): Context[Key] => {
+    if (!context) {
+      process([
+        (_: Context) => {
+          context = _
+          return ''
+        },
+      ])
+    }
+
+    return context[key]
+  }
+
   // The instance methods delegate to the lazy ones.
   // This ensures that after setup we use the configured
   // `process` and `setup` fails.
   return {
-    tw: (...tokens: unknown[]) => process(tokens),
+    tw: Object.defineProperties((...tokens: unknown[]) => process(tokens), {
+      theme: {
+        get: fromContext('theme'),
+      },
+      // css: {
+      //   get: fromContext('css'),
+      // },
+      // tag: {
+      //   get: fromContext('tag'),
+      // },
+    }),
 
     setup: (config) => init(config),
   }
