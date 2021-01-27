@@ -71,6 +71,38 @@
           ]
         },
         {
+          "title": "Advanced",
+          "output": "advanced",
+          "source": "./docs/advanced/README.md",
+          "children": [
+            {
+              "title": "Setup",
+              "output": "setup",
+              "source": "./docs/advanced/setup.md"
+            },
+            {
+              "title": "Defining Components",
+              "output": "defining-components",
+              "source": "./docs/advanced/defining-components.md"
+            },
+            {
+              "title": "Plugins",
+              "output": "plugins",
+              "source": "./docs/advanced/plugins.md"
+            },
+            {
+              "title": "Extract Styles aka SSR",
+              "output": "ssr",
+              "source": "./docs/advanced/ssr.md"
+            },
+            {
+              "title": "Contributing",
+              "output": "contributing",
+              "source": "./docs/advanced/contributing.md"
+            }
+          ]
+        },
+        {
           "title": "Recipes",
           "output": "recipes",
           "source": "./docs/recipes/README.md",
@@ -153,39 +185,6 @@
                   ]
                 }
               ]
-            }
-          ]
-        },
-
-        {
-          "title": "Advanced",
-          "output": "advanced",
-          "source": "./docs/advanced/README.md",
-          "children": [
-            {
-              "title": "Setup",
-              "output": "setup",
-              "source": "./docs/advanced/setup.md"
-            },
-            {
-              "title": "Defining Components",
-              "output": "defining-components",
-              "source": "./docs/advanced/defining-components.md"
-            },
-            {
-              "title": "Plugins",
-              "output": "plugins",
-              "source": "./docs/advanced/plugins.md"
-            },
-            {
-              "title": "Extract Styles aka SSR",
-              "output": "ssr",
-              "source": "./docs/advanced/ssr.md"
-            },
-            {
-              "title": "Contributing",
-              "output": "contributing",
-              "source": "./docs/advanced/contributing.md"
             }
           ]
         },

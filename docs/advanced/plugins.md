@@ -271,3 +271,7 @@ setup({
   },
 })
 ```
+
+<hr/>
+
+Continue to {@page Extract Styles aka SSR}

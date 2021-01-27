@@ -8,3 +8,7 @@ Below is a list of Twind's modules and a summary of what it’s for.
 - {@link twind/sheets} - several additional sheet implementations that can be used with [setup({ sheet })](https://twind.dev/docs/handbook/advanced/setup.html#sheet).
 - {@link twind/shim} - allows to copy-paste tailwind examples
 - {@link twind/shim/server} - generate CSS from static HTML
+
+<hr/>
+
+Continue to {@page Advanced}

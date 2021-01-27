@@ -311,3 +311,7 @@ render(
 ```
 
 </details>
+
+<hr/>
+
+Continue to {@page Plugins}
