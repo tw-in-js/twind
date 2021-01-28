@@ -110,21 +110,23 @@ export const serialize = (
       const value = evalThunk(css[key], context)
 
       // string, number or Array => a property with a value
-      if ((includes('rg', (typeof value)[5]) && value !== '') || Array.isArray(value)) {
-        // It is a Property
-        const property = hyphenate(key)
+      if (includes('rg', (typeof value)[5]) || Array.isArray(value)) {
+        if (value !== '' && key.length > 1) {
+          // It is a Property
+          const property = hyphenate(key)
 
-        // Update presedence
-        numberOfDeclarations += 1
-        maxPropertyPresedence = Math.max(
-          maxPropertyPresedence,
-          declarationPropertyPrecedence(property),
-        )
+          // Update presedence
+          numberOfDeclarations += 1
+          maxPropertyPresedence = Math.max(
+            maxPropertyPresedence,
+            declarationPropertyPrecedence(property),
+          )
 
-        // Add to the declaration block with prefixer applied
-        declarations =
-          (declarations && declarations + ';') +
-          stringifyDeclaration(property, value as string | number | string[], important)
+          // Add to the declaration block with prefixer applied
+          declarations =
+            (declarations && declarations + ';') +
+            stringifyDeclaration(property, value as string | number | string[], important)
+        }
       } else if (value) {
         // If the value is an object this must be a nested block
         // like '@media ...', '@supports ... ', ':pseudo ...', '& > ...'
