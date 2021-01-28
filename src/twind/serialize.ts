@@ -169,6 +169,8 @@ export const serialize = (
               important,
             )
           }
+        } else if (key === ':global') {
+          stringify([], '', 0, value as CSSRules, important)
         } else {
           // A selector block: { '&:focus': { ... } }
           stringify(
@@ -187,8 +189,7 @@ export const serialize = (
                   ),
                 )
               : key,
-            // - propagate the presedence; if it is not nested we reset the presedence as it is most likely a global styles
-            selector && includes(key, '&') ? presedence : 0,
+            presedence,
             value as CSSRules,
             important,
           )

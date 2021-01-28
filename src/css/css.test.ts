@@ -125,14 +125,14 @@ test('keyframes', ({ tw, sheet }) => {
   assert.is(
     tw(
       css({
-        animation: animation(`1s ease infinite`, bounce),
+        '&': animation(`1s ease infinite`, bounce),
       }),
     ),
-    'tw-czqxx',
+    'tw-154rieb',
   )
   assert.equal(sheet.target, [
-    '.tw-czqxx animation{animation:1s ease infinite;animation-name:tw-cm8eaz}',
     '@keyframes tw-cm8eaz{from, 20%, 53%, 80%, to{transform:translate3d(0,0,0)}40%, 43%{transform:translate3d(0, -30px, 0)}70%{transform:translate3d(0, -15px, 0)}90%{transform:translate3d(0, -4px, 0)}}',
+    '.tw-154rieb{animation:1s ease infinite;animation-name:tw-cm8eaz}',
   ])
 })
 
@@ -428,10 +428,10 @@ test('nesting in template literal', ({ tw, sheet }) => {
   assert.is(tw(style), 'tw-1ealgxm')
 
   assert.equal(sheet.target, [
-    '.tw-1ealgxm > p{text-decoration:underline}',
     '.tw-1ealgxm{padding:2em 1em;background:papayawhip}',
     '.tw-1ealgxm:hover{background:palevioletred}',
     'html.test .tw-1ealgxm{display:none}',
+    '.tw-1ealgxm > p{text-decoration:underline}',
     '@media (max-width: 600px){.tw-1ealgxm:hover{background:yellow}}',
     '@media (max-width: 600px){.tw-1ealgxm{background:tomato}}',
   ])
@@ -469,9 +469,9 @@ test('interpolation values', ({ tw, sheet }) => {
 
   assert.equal(sheet.target, [
     'body{color:darkgreen}',
-    `.${className} .otherClass{margin:0}`,
     `.${className}{background:dodgerblue;color:white;border:${random}px solid white;animation:500ms cubic-bezier(0.4,0,0.2,1)}`,
     `.${className}:focus, .${className}:hover{padding:1em}`,
+    `.${className} .otherClass{margin:0}`,
   ])
 })
 
@@ -596,10 +596,10 @@ test('prose with tw-apply using variadic', ({ tw, sheet }) => {
   assert.equal(sheet.target, [
     '.tw-dsp9ob h1{--tw-text-opacity:1;color:#000;color:rgba(0,0,0,var(--tw-text-opacity));font-weight:800;font-size:2.25em;margin-top:0;margin-bottom:0.8888889em;line-height:1.1111111}',
     '.tw-dsp9ob h1:hover{--tw-text-opacity:1;color:#8b5cf6;color:rgba(139,92,246,var(--tw-text-opacity))}',
-    '.tw-dsp9ob p{margin-bottom:1.25rem;margin-top:1.25rem}',
-    '@media (prefers-color-scheme:dark){.tw-dsp9ob h1{--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity))}}',
     '.tw-dsp9ob{--tw-text-opacity:1;color:#374151;color:rgba(55,65,81,var(--tw-text-opacity))}',
+    '.tw-dsp9ob p{margin-bottom:1.25rem;margin-top:1.25rem}',
     '@media (prefers-color-scheme:dark){.tw-dsp9ob{--tw-text-opacity:1;color:#d1d5db;color:rgba(209,213,219,var(--tw-text-opacity))}}',
+    '@media (prefers-color-scheme:dark){.tw-dsp9ob h1{--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity))}}',
   ])
 })
 
@@ -626,10 +626,10 @@ test('prose with apply using template literal', ({ tw, sheet }) => {
   assert.equal(sheet.target, [
     '.tw-dsp9ob h1{--tw-text-opacity:1;color:#000;color:rgba(0,0,0,var(--tw-text-opacity));font-weight:800;font-size:2.25em;margin-top:0;margin-bottom:0.8888889em;line-height:1.1111111}',
     '.tw-dsp9ob h1:hover{--tw-text-opacity:1;color:#8b5cf6;color:rgba(139,92,246,var(--tw-text-opacity))}',
-    '.tw-dsp9ob p{margin-bottom:1.25rem;margin-top:1.25rem}',
-    '@media (prefers-color-scheme:dark){.tw-dsp9ob h1{--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity))}}',
     '.tw-dsp9ob{--tw-text-opacity:1;color:#374151;color:rgba(55,65,81,var(--tw-text-opacity))}',
+    '.tw-dsp9ob p{margin-bottom:1.25rem;margin-top:1.25rem}',
     '@media (prefers-color-scheme:dark){.tw-dsp9ob{--tw-text-opacity:1;color:#d1d5db;color:rgba(209,213,219,var(--tw-text-opacity))}}',
+    '@media (prefers-color-scheme:dark){.tw-dsp9ob h1{--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity))}}',
   ])
 })
 

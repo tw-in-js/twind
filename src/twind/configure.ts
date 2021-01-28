@@ -220,11 +220,6 @@ export const configure = (
       }
 
       if (is.object(translation)) {
-        // Allow global styles
-        if (translation[':global']) {
-          translation[':global'] = serialize(translation[':global'] as CSSRules).forEach(inject)
-        }
-
         // - components: layer.components = 1
         // - plugins: layer.utilities = 2
         // - inline directive: layer.css = 3

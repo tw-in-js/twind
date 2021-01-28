@@ -706,17 +706,19 @@ test('inject @font-face', ({ sheet, tw }) => {
 test('inject global styles', ({ sheet, tw }) => {
   assert.is(
     tw(() => ({
-      ':root': {
-        '--main-bg-color': 'brown',
+      ':global': {
+        ':root': {
+          '--main-bg-color': 'brown',
+        },
       },
       backgroundColor: 'var(--main-bg-color)',
     })),
-    'tw-h2hhry',
+    'tw-tmrj30',
   )
 
   assert.equal(sheet.target, [
-    '.tw-h2hhry :root{--main-bg-color:brown}',
-    '.tw-h2hhry{background-color:var(--main-bg-color)}',
+    ':root{--main-bg-color:brown}',
+    '.tw-tmrj30{background-color:var(--main-bg-color)}',
   ])
 })
 
