@@ -1,7 +1,7 @@
-import type { Context, Directive } from '../types'
+import type { Context, Directive, MaybeThunk } from '../types'
 
 import * as is from '../internal/is'
-import { ensureMaxSize } from '../internal/util'
+import { ensureMaxSize, evalThunk } from '../internal/util'
 
 const ensureNoFunctions = (key: string, value: unknown): unknown => {
   if (is.function(value)) {
@@ -36,7 +36,7 @@ const cacheByFactory = new WeakMap<
  * @param data to use
  */
 export const directive = <Data, T>(
-  factory: (data: Data, context: Context) => T,
+  factory: (data: Data, context: Context) => MaybeThunk<T>,
   data: Data,
 ): Directive<T> => {
   const key = stringify(data)
@@ -55,8 +55,10 @@ export const directive = <Data, T>(
 
   if (!directive) {
     directive = Object.defineProperty(
-      (params: string[] | Context, context: Context): T =>
-        factory(data, Array.isArray(params) ? context : params),
+      (params: string[] | Context, context: Context): T => {
+        context = Array.isArray(params) ? context : params
+        return evalThunk(factory(data, context), context)
+      },
       'toJSON',
       {
         // Allow twind to generate a unique id for this directive
