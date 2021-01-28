@@ -326,9 +326,15 @@ test('use apply with custom tw', ({ tw, sheet }) => {
   ])
 })
 
-test('same directive for same data ', () => {
+test('same directive for same data', () => {
   assert.is(apply`inline-block bg-gray-500 text-base`, apply`inline-block bg-gray-500 text-base`)
   assert.is.not(apply`inline-block`, apply`block`)
+})
+
+test('variants to no leak', ({ tw, sheet }) => {
+  const block = apply`block`
+  assert.is(tw`sm:${block}`, 'tw-10u01bv')
+  assert.equal(sheet.target, ['@media (min-width:640px){.tw-10u01bv{display:block}}'])
 })
 
 test('applied rules can be used alone after apply', ({ tw, sheet }) => {

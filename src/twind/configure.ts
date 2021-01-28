@@ -181,7 +181,7 @@ export const configure = (
   const convert = (rule: Rule): string | undefined | void => {
     // If there is a active rule this one is nested
     // we must add the variants and need to reset the id
-    if (activeRule.v.length) {
+    if (!translateDepth && activeRule.v.length) {
       rule = { ...rule, v: [...activeRule.v, ...rule.v], $: '' }
     }
 
