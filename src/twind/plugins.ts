@@ -242,7 +242,7 @@ const minMax: PluginHandler = (params, { theme }, id) =>
   }
 
 export const corePlugins: Plugins = {
-  group: (params, { tag }) => tag('group'),
+  group: (params, { tag }, id) => tag(join([id, ...params])),
 
   hidden: alias(display, 'none'),
   inline: display,

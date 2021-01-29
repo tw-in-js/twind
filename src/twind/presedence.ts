@@ -71,6 +71,7 @@ Ensure shorthand properties are inserted before longhand properties; eg longhand
 import type { ThemeResolver, ThemeScreen } from '../types'
 
 import { tail, includes, buildMediaQuery } from '../internal/util'
+import { GROUP_RE } from './decorate'
 
 // Shared variables
 let _: string | RegExpExecArray | null | number | ThemeScreen
@@ -157,7 +158,7 @@ const PRECEDENCES_BY_PSEUDO_CLASS = [
 
 const pseudoPrecedence = (pseudoClass: string): number =>
   1 <<
-  (~(_ = PRECEDENCES_BY_PSEUDO_CLASS.indexOf(pseudoClass.replace(/^:group-/, ':').slice(3, 8)))
+  (~(_ = PRECEDENCES_BY_PSEUDO_CLASS.indexOf(pseudoClass.replace(GROUP_RE, ':$2').slice(3, 8)))
     ? _
     : 17)
 

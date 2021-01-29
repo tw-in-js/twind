@@ -2,6 +2,9 @@ import type { Context, CSSRules, Rule, DarkMode } from '../types'
 
 import { tail, escape, buildMediaQuery } from '../internal/util'
 
+let match: RegExpExecArray | null
+export const GROUP_RE = /^:(group(?:(?!-focus).+?)*)-(.+)$/
+
 // Wraps a CSS rule object with variant at-rules and pseudo classes
 // { '.selector': {...} }
 // => { '&:hover': { '.selector': {...} } }
@@ -28,8 +31,8 @@ export const decorate = (
     // Groups classes like: group-focus and group-hover
     // these need to add a marker selector with the pseudo class
     // => '.group:focus .group-focus:selector'
-    if (variant.slice(1, 7) === 'group-') {
-      return { [`.${escape(tag('group'))}:${tail(variant, 7)} &`]: translation }
+    if ((match = GROUP_RE.exec(variant))) {
+      return { [`.${escape(tag(match[1]))}:${match[2]} &`]: translation }
     }
 
     // Check other well known variants

@@ -12,6 +12,7 @@ Tailwind provides a [comprehensive list of variants and directives](https://tail
   - [Every variant can be applied to every directive](#every-variant-can-be-applied-to-every-directive)
   - [Dark mode is always available](#dark-mode-is-always-available)
   - [Most pseudo classes can be uses as variant or `group-*` variant](#most-pseudo-classes-can-be-uses-as-variant-or-group--variant)
+  - [Named groups to support nested groups](#named-groups-to-support-nested-groups)
   - [`siblings:*` - General sibling combinator (`& ~ *`)](#siblings---general-sibling-combinator---)
   - [`sibling:*` - Adjacent sibling combinator (`& + *`)](#sibling---adjacent-sibling-combinator---)
   - [`children:*` - Child combinator (`& > *`)](#children---child-combinator---)
@@ -89,6 +90,23 @@ tw`is-header:font-bold`
 ```
 
 > 🙋 If you have an idea how we could support these within the parser please [open an issue](https://github.com/tw-in-js/twind/issues) for discussions.
+
+### Named groups to support nested groups
+
+Named groups allow to nest groups within each other and target specific groups by their name. The group names are ad-hoc meaning there is no special configuration required.
+
+Here is an example {@page Using the Shim | using the shim}:
+
+```html
+<div class="group-x bg-white hover:bg-blue-500 ...">
+  <p class="text-gray-900 group-x-hover:text-white ...">New Project</p>
+  <div class="group-y bg-gray-100 hover:bg-green-500 ...">
+    <p class="text-gray-500 group-y-hover:text-white ...">
+      Create a new project from a variety of starting templates.
+    </p>
+  </div>
+</div>
+```
 
 ### `siblings:*` - General sibling combinator (`& ~ *`)
 

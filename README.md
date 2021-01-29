@@ -150,6 +150,23 @@ By shipping the compiler (rather than the resultant output) there is a known and
 
   Unknown variants (not listed in [core variants](https://github.com/tw-in-js/twind/blob/main/src/twind/variants.ts)) are assumed to be [pseudo classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes).
 
+- Named groups to support nested groups
+
+  Named groups allow to nest groups within each other and target specific groups by their name. The group names are ad-hoc meaning there is no special configuration required.
+
+  Here is an example [using the shim](https://twind.dev/docs/handbook/getting-started/using-the-shim.html):
+
+  ```html
+  <div class="group-x bg-white hover:bg-blue-500 ...">
+    <p class="text-gray-900 group-x-hover:text-white ...">New Project</p>
+    <div class="group-y bg-gray-100 hover:bg-green-500 ...">
+      <p class="text-gray-500 group-y-hover:text-white ...">
+        Create a new project from a variety of starting templates.
+      </p>
+    </div>
+  </div>
+  ```
+
 - `siblings`, `sibling` and `children` variants
 
   Allows to apply styling to different elements instead of repeating a directive on each one. This feature can be combined with other variants like `hover`.
