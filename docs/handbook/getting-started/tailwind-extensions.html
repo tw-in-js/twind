@@ -89,6 +89,7 @@
 							<li><a href="#every-variant-can-be-applied-to-every-directive">Every variant can be applied to every directive</a></li>
 							<li><a href="#dark-mode-is-always-available">Dark mode is always available</a></li>
 							<li><a href="#most-pseudo-classes-can-be-uses-as-variant-or-group--variant">Most pseudo classes can be uses as variant or <code>group-*</code> variant</a></li>
+							<li><a href="#named-groups-to-support-nested-groups">Named groups to support nested groups</a></li>
 							<li><a href="#siblings---general-sibling-combinator---"><code>siblings:*</code> - General sibling combinator (<code>&amp; ~ *</code>)</a></li>
 							<li><a href="#sibling---adjacent-sibling-combinator---"><code>sibling:*</code> - Adjacent sibling combinator (<code>&amp; + *</code>)</a></li>
 							<li><a href="#children---child-combinator---"><code>children:*</code> - Child combinator (<code>&amp; &gt; *</code>)</a></li>
@@ -167,6 +168,20 @@
 				<blockquote>
 					<p>🙋 If you have an idea how we could support these within the parser please <a href="https://github.com/tw-in-js/twind/issues">open an issue</a> for discussions.</p>
 				</blockquote>
+				<a href="#named-groups-to-support-nested-groups" id="named-groups-to-support-nested-groups" style="color: inherit; text-decoration: none;">
+					<h3>Named groups to support nested groups</h3>
+				</a>
+				<p>Named groups allow to nest groups within each other and target specific groups by their name. The group names are ad-hoc meaning there is no special configuration required.</p>
+				<p>Here is an example <a href="using-the-shim.html">using the shim</a>:</p>
+				<pre><code class="language-html"><span style="color: #800000">&lt;div</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;group-x bg-white hover:bg-blue-500 ...&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;p</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;text-gray-900 group-x-hover:text-white ...&quot;</span><span style="color: #800000">&gt;</span><span style="color: #000000">New Project</span><span style="color: #800000">&lt;/p&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;div</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;group-y bg-gray-100 hover:bg-green-500 ...&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;p</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;text-gray-500 group-y-hover:text-white ...&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">      Create a new project from a variety of starting templates.</span>
+<span style="color: #000000">    </span><span style="color: #800000">&lt;/p&gt;</span>
+<span style="color: #000000">  </span><span style="color: #800000">&lt;/div&gt;</span>
+<span style="color: #800000">&lt;/div&gt;</span>
+</code></pre>
 				<a href="#siblings---general-sibling-combinator-amp--" id="siblings---general-sibling-combinator-amp--" style="color: inherit; text-decoration: none;">
 					<h3><code>siblings:*</code> - General sibling combinator (<code>&amp; ~ *</code>)</h3>
 				</a>
