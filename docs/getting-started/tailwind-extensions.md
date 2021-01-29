@@ -1,7 +1,5 @@
 Tailwind provides a [comprehensive list of variants and directives](https://tailwindcss.com). We have added some additional features that we found useful to have.
 
-> 💡 You can click on each summary to reveal more details.
-
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
