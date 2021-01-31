@@ -94,7 +94,10 @@ const parseString = (token: string, isVariant?: boolean): void => {
   for (let position = 0; position < token.length; ) {
     switch ((char = token[position++])) {
       case ':':
-        buffer = buffer && startGrouping(':' + buffer)
+        // Check if this is an pseudo element "after::"
+        buffer =
+          buffer &&
+          startGrouping(':' + (token[position] === char ? token[position++] : '') + buffer)
 
         break
 

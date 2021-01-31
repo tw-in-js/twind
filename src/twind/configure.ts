@@ -22,7 +22,7 @@ import { autoprefix, noprefix } from './prefix'
 import { makeThemeResolver } from './theme'
 
 import * as is from '../internal/is'
-import { cyrb32, identity, join, tail, merge, evalThunk, ensureMaxSize } from '../internal/util'
+import { cyrb32, identity, tail, merge, evalThunk, ensureMaxSize } from '../internal/util'
 
 import { parse } from './parse'
 import { translate as makeTranslate } from './translate'
@@ -41,15 +41,15 @@ const loadMode = (mode: Configuration['mode']): Mode =>
   (is.string(mode) ? ({ t: strict, a: warn, i: silent } as Record<string, Mode>)[mode[1]] : mode) ||
   warn
 
+const stringifyVariant = (selector: string, variant: string): string =>
+  selector + (variant[1] === ':' ? tail(variant, 2) + ':' : tail(variant)) + ':'
+
 // Creates rule id including variants, negate and directive
 // which is exactly like a tailwind rule
-const stringify = (rule: Rule, directive = rule.d): string => {
-  if (is.function(directive)) return ''
-
-  const base = join(rule.v, '')
-
-  return (base && tail(base) + ':') + (rule.n ? '-' : '') + directive + (rule.i ? '!' : '')
-}
+const stringify = (rule: Rule, directive = rule.d): string =>
+  is.function(directive)
+    ? ''
+    : rule.v.reduce(stringifyVariant, '') + (rule.n ? '-' : '') + directive + (rule.i ? '!' : '')
 
 // Use hidden '_' property to collect class names which have no css translation like hashed twind classes
 const COMPONENT_PROPS = { _: { value: '', writable: true } }
