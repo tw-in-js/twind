@@ -459,6 +459,14 @@
   "print:text-black": "@media print{.print\\:text-black{--tw-text-opacity:1;color:#000;color:rgba(0,0,0,var(--tw-text-opacity))}}",
   "portrait:text-black": "@media (orientation: portrait){.portrait\\:text-black{--tw-text-opacity:1;color:#000;color:rgba(0,0,0,var(--tw-text-opacity))}}",
   "standalone:text-black": "@media (display-mode:standalone){.standalone\\:text-black{--tw-text-opacity:1;color:#000;color:rgba(0,0,0,var(--tw-text-opacity))}}",
+  "after:block": ".after\\:block::after{display:block}",
+  "before:(block inset-0)": [
+    "before:block before:inset-0",
+    [
+      ".before\\:inset-0::before{top:0px;right:0px;bottom:0px;left:0px}",
+      ".before\\:block::before{display:block}"
+    ]
+  ],
   "(text(center 2xl) underline)": [
     "text-center text-2xl underline",
     [
