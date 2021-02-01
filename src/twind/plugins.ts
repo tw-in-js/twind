@@ -713,11 +713,13 @@ export const corePlugins: Plugins = {
       reversableEdge(params, context, id, 'divideWidth', 'border', 'width') ||
       border(params, context, id)) && {
       '&>:not([hidden])~:not([hidden])': _ as CSSRules,
+      '&>:not([hidden])~:not([hidden])::slotted(*)': _ as CSSRules,
     },
 
   space: (params, context, id) =>
     (_ = reversableEdge(params, context, id, 'space', 'margin')) && {
       '&>:not([hidden])~:not([hidden])': _,
+      '&>:not([hidden])~:not([hidden])::slotted(*)': _,
     },
 
   placeholder: (params, { theme }, id) =>
