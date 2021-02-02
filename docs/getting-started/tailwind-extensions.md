@@ -24,6 +24,7 @@ Tailwind provides a [comprehensive list of variants and directives](https://tail
   - [`border` and `divide` allow to combine positions](#border-and-divide-allow-to-combine-positions)
   - [`rotate`, `scale` , `skew` and `translate` provide a fallback for IE 11](#rotate-scale--skew-and-translate-provide-a-fallback-for-ie-11)
   - [Theme values are automatically negated](#theme-values-are-automatically-negated)
+- [Extension Packages](#extension-packages)
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
@@ -295,6 +296,14 @@ Please note that `transform rotate-45` works but when using `transform rotate-45
 ### Theme values are automatically negated
 
 There is no need to provided negated values in the theme. As soon as Twind detects a negated directive like `-mx-2` it negates the theme value.
+
+## Extension Packages
+
+- [@twind/aspect-ratio](https://github.com/tw-in-js/twind-aspect-ratio): a composable API for giving elements a fixed aspect ratio
+- [@twind/content](https://github.com/tw-in-js/twind-content): a [CSS content property](https://developer.mozilla.org/en-US/docs/Web/CSS/content) directive
+- [@twind/forms](https://github.com/tw-in-js/twind-forms): a basic reset for form styles that makes form elements easy to override with utilities
+- [@twind/line-clamp](https://github.com/tw-in-js/twind-line-clamp): utilities for visually truncating text after a fixed number of lines
+- [@twind/typography](https://github.com/tw-in-js/typography): a set of `prose` classes you can use to add beautiful typographic defaults to any vanilla HTML you don't control (like HTML rendered from Markdown, or pulled from a CMS).
 
 <hr/>
 
