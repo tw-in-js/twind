@@ -11,6 +11,7 @@ Tailwind provides a [comprehensive list of variants and directives](https://tail
   - [Dark mode is always available](#dark-mode-is-always-available)
   - [Most pseudo classes can be uses as variant or `group-*` variant](#most-pseudo-classes-can-be-uses-as-variant-or-group--variant)
   - [Named groups to support nested groups](#named-groups-to-support-nested-groups)
+  - [Pseudo Elements are supported using double colon](#pseudo-elements-are-supported-using-double-colon)
   - [`siblings:*` - General sibling combinator (`& ~ *`)](#siblings---general-sibling-combinator---)
   - [`sibling:*` - Adjacent sibling combinator (`& + *`)](#sibling---adjacent-sibling-combinator---)
   - [`children:*` - Child combinator (`& > *`)](#children---child-combinator---)
@@ -105,6 +106,37 @@ Here is an example {@page Using the Shim | using the shim}:
   </div>
 </div>
 ```
+
+### [Pseudo Elements](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements) are supported using double colon
+
+Pseudo Elements can be used and are identified by a double colon:
+
+```html
+<p class="first-line::(uppercase text-blue-500)">
+  Styles will only be applied to the first line of this paragraph. After that, all text will be
+  styled like normal. See what I mean?
+</p>
+```
+
+`::before` and `::after` are often used together with [content property](https://developer.mozilla.org/en-US/docs/Web/CSS/content). The [@twind/content](https://github.com/tw-in-js/twind-content) extension helps in these cases:
+
+```js
+import { content } from '@twind/content'
+
+tw`${content('"✅"')}`
+// => .tw-xxxx { content: "✅" }
+
+tw`before::${content('"✅"')}`
+// => .tw-xxxx::before { content: "✅" }
+
+tw`before::${content('attr(data-content)')}`
+// => .tw-xxxx::before { content: attr(data-content) }
+
+tw`after::${content('" (" attr(href) " )"')}`
+// => .tw-xxxx::after { content: " (" attr(href) " )" }
+```
+
+> 💡 Please a look at the documentation of [@twind/content](https://github.com/tw-in-js/twind-content) for more examples.
 
 ### `siblings:*` - General sibling combinator (`& ~ *`)
 
