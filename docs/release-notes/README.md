@@ -1,1 +1,3 @@
+> 💡 Please refer to [releases](https://github.com/tw-in-js/twind/releases) for now. We aim to provide detailed release information here in the future.
+
 To be written...
