@@ -87,6 +87,7 @@
 							<li><a href="#dark-mode-is-always-available">Dark mode is always available</a></li>
 							<li><a href="#most-pseudo-classes-can-be-uses-as-variant-or-group--variant">Most pseudo classes can be uses as variant or <code>group-*</code> variant</a></li>
 							<li><a href="#named-groups-to-support-nested-groups">Named groups to support nested groups</a></li>
+							<li><a href="#pseudo-elements-are-supported-using-double-colon">Pseudo Elements are supported using double colon</a></li>
 							<li><a href="#siblings---general-sibling-combinator---"><code>siblings:*</code> - General sibling combinator (<code>&amp; ~ *</code>)</a></li>
 							<li><a href="#sibling---adjacent-sibling-combinator---"><code>sibling:*</code> - Adjacent sibling combinator (<code>&amp; + *</code>)</a></li>
 							<li><a href="#children---child-combinator---"><code>children:*</code> - Child combinator (<code>&amp; &gt; *</code>)</a></li>
@@ -179,6 +180,33 @@
 <span style="color: #000000">  </span><span style="color: #800000">&lt;/div&gt;</span>
 <span style="color: #800000">&lt;/div&gt;</span>
 </code></pre>
+				<a href="#pseudo-elements-are-supported-using-double-colon" id="pseudo-elements-are-supported-using-double-colon" style="color: inherit; text-decoration: none;">
+					<h3><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements">Pseudo Elements</a> are supported using double colon</h3>
+				</a>
+				<p>Pseudo Elements can be used and are identified by a double colon:</p>
+				<pre><code class="language-html"><span style="color: #800000">&lt;p</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;first-line::(uppercase text-blue-500)&quot;</span><span style="color: #800000">&gt;</span>
+<span style="color: #000000">  Styles will only be applied to the first line of this paragraph. After that, all text will be</span>
+<span style="color: #000000">  styled like normal. See what I mean?</span>
+<span style="color: #800000">&lt;/p&gt;</span>
+</code></pre>
+				<p><code>::before</code> and <code>::after</code> are often used together with <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/content">content property</a>. The <a href="https://github.com/tw-in-js/twind-content">@twind/content</a> extension helps in these cases:</p>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">content</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@twind/content&#039;</span>
+
+<span style="color: #795E26">tw</span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #795E26">content</span><span style="color: #000000FF">(</span><span style="color: #A31515">&#039;&quot;✅&quot;&#039;</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span>
+<span style="color: #008000">// =&gt; .tw-xxxx { content: &quot;✅&quot; }</span>
+
+<span style="color: #795E26">tw</span><span style="color: #A31515">`before::</span><span style="color: #0000FF">${</span><span style="color: #795E26">content</span><span style="color: #000000FF">(</span><span style="color: #A31515">&#039;&quot;✅&quot;&#039;</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span>
+<span style="color: #008000">// =&gt; .tw-xxxx::before { content: &quot;✅&quot; }</span>
+
+<span style="color: #795E26">tw</span><span style="color: #A31515">`before::</span><span style="color: #0000FF">${</span><span style="color: #795E26">content</span><span style="color: #000000FF">(</span><span style="color: #A31515">&#039;attr(data-content)&#039;</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span>
+<span style="color: #008000">// =&gt; .tw-xxxx::before { content: attr(data-content) }</span>
+
+<span style="color: #795E26">tw</span><span style="color: #A31515">`after::</span><span style="color: #0000FF">${</span><span style="color: #795E26">content</span><span style="color: #000000FF">(</span><span style="color: #A31515">&#039;&quot; (&quot; attr(href) &quot; )&quot;&#039;</span><span style="color: #000000FF">)</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span>
+<span style="color: #008000">// =&gt; .tw-xxxx::after { content: &quot; (&quot; attr(href) &quot; )&quot; }</span>
+</code></pre>
+				<blockquote>
+					<p>💡 Please a look at the documentation of <a href="https://github.com/tw-in-js/twind-content">@twind/content</a> for more examples.</p>
+				</blockquote>
 				<a href="#siblings---general-sibling-combinator-amp--" id="siblings---general-sibling-combinator-amp--" style="color: inherit; text-decoration: none;">
 					<h3><code>siblings:*</code> - General sibling combinator (<code>&amp; ~ *</code>)</h3>
 				</a>
