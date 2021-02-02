@@ -1,8 +1,9 @@
-import type { Context, CSSRules, Rule, DarkMode } from '../types'
+import type { Context, CSSRules, Rule, DarkMode, ThemeScreenValue } from '../types'
 
 import { tail, escape, buildMediaQuery } from '../internal/util'
 
-let match: RegExpExecArray | null
+let _: RegExpExecArray | null | readonly ThemeScreenValue[] | string
+
 export const GROUP_RE = /^:(group(?:(?!-focus).+?)*)-(.+)$/
 
 // Wraps a CSS rule object with variant at-rules and pseudo classes
@@ -17,10 +18,8 @@ export const decorate = (
   // Select the wrapper for a variant
   const applyVariant = (translation: CSSRules, variant: string): CSSRules => {
     // Check responsive
-    const screen = theme('screens', tail(variant), '')
-
-    if (screen) {
-      return { [buildMediaQuery(screen)]: translation }
+    if ((_ = theme('screens', tail(variant), ''))) {
+      return { [buildMediaQuery(_)]: translation }
     }
 
     // Dark mode
@@ -31,8 +30,8 @@ export const decorate = (
     // Groups classes like: group-focus and group-hover
     // these need to add a marker selector with the pseudo class
     // => '.group:focus .group-focus:selector'
-    if ((match = GROUP_RE.exec(variant))) {
-      return { [`.${escape(tag(match[1]))}:${match[2]} &`]: translation }
+    if ((_ = GROUP_RE.exec(variant))) {
+      return { [`.${escape(tag((_ as RegExpExecArray)[1]))}:${_[2]} &`]: translation }
     }
 
     // Check other well known variants
