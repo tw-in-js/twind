@@ -35,7 +35,7 @@ export const decorate = (
     }
 
     // Check other well known variants
-    // and fallback to pseudo class
+    // and fallback to pseudo class or element
     return { [variants[tail(variant)] || '&' + variant]: translation }
   }
 

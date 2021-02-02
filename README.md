@@ -167,6 +167,15 @@ By shipping the compiler (rather than the resultant output) there is a known and
   </div>
   ```
 
+- [Pseudo Elements](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements) are supported using double colon
+
+  ```html
+  <p class="first-line::(uppercase text-blue-500)">
+    Styles will only be applied to the first line of this paragraph. After that, all text will be
+    styled like normal. See what I mean?
+  </p>
+  ```
+
 - `siblings`, `sibling` and `children` variants
 
   Allows to apply styling to different elements instead of repeating a directive on each one. This feature can be combined with other variants like `hover`.
