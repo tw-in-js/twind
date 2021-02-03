@@ -40,7 +40,7 @@ Frequently viewed docs:
 - [Setup](https://twind.dev/docs/handbook/advanced/setup.html) - how to use `setup`
 - [Components](https://twind.dev/docs/handbook/advanced/defining-components.html) - how to define component styles
 - [Tailwind Extensions](https://twind.dev/docs/handbook/getting-started/tailwind-extensions.html) - which additional features are available
-- [Static Extraction (SSR)](https://twind.dev/docs/handbook/advanced/extract.html) - how to extract the generated CSS on the server
+- [Static Extraction (SSR)](https://twind.dev/docs/handbook/advanced/ssr.html) - how to extract the generated CSS on the server
 - [Recipes](https://twind.dev/docs/handbook/recipes.html) - how to use with framework X
 - [Modules](https://twind.dev/docs/handbook/getting-started/modules.html) - which modules are available
 
