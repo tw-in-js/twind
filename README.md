@@ -243,7 +243,7 @@ By default no hashing is enabled to aid debugging during development. However it
 
 <details><summary>🚅 Faster than all popular CSS-in-JS libraries</summary>
 
-Given the limited grammar that the compiler has to support there is a much higher chance of finding a rule and its variant in the cache. Because of this along with some other specialist optimizations we are able to compile and inject CSS [faster than all the popular](#benchmarks) CSS-in-JS solutions.
+Given the limited grammar that the compiler has to support there is a much higher chance of finding a rule and its variant in the cache. Because of this along with some other specialist optimizations we are able to compile and inject CSS [faster than most](#benchmarks) CSS-in-JS solutions.
 
 </details>
 
@@ -314,16 +314,25 @@ We hope one day we will get the chance to collaborate with Tailwind Labs to crea
 
 ## Benchmarks
 
-The implementation is tested for speed alongside several popular CSS-in-JS solutions that export general CSS functions. For those that only support a _styled component_ approach an equivalent test has been setup. Currently Twind is the fastest in both scenarios in part due to optimal caching of static parts from template literals.
+The implementation is tested for speed alongside several popular CSS-in-JS solutions that export general CSS functions. For those that only support a _styled component_ approach an equivalent test has been setup. Currently Twind comes in on second place behind [goober](https://github.com/cristianbote/goober) – a less than 1KB css-in-js solution by Cristian Bote – an awesome library worth checking out.
 
 ### CSS Function w/ template literal
 
 ```
-twind (tw)                  x 262,054 ops/sec ±1.15% (89 runs sampled)
-twind (apply)               x 118,972 ops/sec ±1.16% (89 runs sampled)
-twind (css)                 x 110,865 ops/sec ±0.91% (95 runs sampled)
-goober@2.0.18               x 143,256 ops/sec ±0.49% (97 runs sampled)
-emotion@11.1.3              x 228,671 ops/sec ±0.34% (93 runs sampled)
+goober@2.0.30               x 632,419 ops/sec ±0.59% (95 runs sampled)
+twind (tw)                  x 400,438 ops/sec ±0.35% (84 runs sampled)
+twind (apply)               x 342,725 ops/sec ±0.37% (96 runs sampled)
+twind (css)                 x 270,020 ops/sec ±0.53% (95 runs sampled)
+emotion@11.1.3              x 229,990 ops/sec ±0.17% (99 runs sampled)
+```
+
+### CSS Function w/ object
+
+```
+goober@2.0.30               x 842,430 ops/sec ±1.10% (88 runs sampled)
+twind (css)                 x 203,990 ops/sec ±0.32% (94 runs sampled)
+emotion@11.1.3              x 162,460 ops/sec ±0.75% (90 runs sampled)
+otion@0.6.2                 x  53,592 ops/sec ±0.85% (96 runs sampled)
 ```
 
 ### Styled component w/ template literal

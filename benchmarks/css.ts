@@ -168,6 +168,7 @@ function templateLiteralStyles(): Promise<void> {
 
   return new Promise((resolve, reject) => {
     new Benchmark.Suite('Template Literal')
+      .add('twind (static)', () => tw(applied))
       .add(
         'twind (tw)',
         () =>
@@ -200,7 +201,6 @@ function templateLiteralStyles(): Promise<void> {
             text(sm md:base lg:lg)
           `),
       )
-      .add('twind (apply - static)', () => tw(applied))
       .add(`twind (css)`, () => styles(twind))
       .add(`goober@${gooberVersion}`, () => styles(goober))
       .add(`emotion@${emotionVersion}`, () => styles(emotion))
