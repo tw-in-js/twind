@@ -9,7 +9,6 @@ import type {
   ThemeHelper,
 } from '../types'
 
-import * as is from '../internal/is'
 import { join, tail, includes } from '../internal/util'
 import type { Context } from 'uvu'
 import { directive } from './directive'
@@ -730,7 +729,7 @@ const flattenColorPalette = (
     target[join(key)] = value
     target[join(key, '.')] = value
 
-    if (is.object(value)) {
+    if (value && typeof value === 'object') {
       flattenColorPalette(value, target, key)
     }
   }, target)
@@ -753,7 +752,7 @@ const resolveContext: ThemeSectionResolverContext = {
 
   breakpoints: (screens) =>
     Object.keys(screens)
-      .filter((key) => is.string(screens[key]))
+      .filter((key) => typeof screens[key] === 'string')
       .reduce((target, key) => {
         target['screen-' + key] = screens[key] as string
 
@@ -772,7 +771,7 @@ export const makeThemeResolver = (config?: ThemeConfiguration): ThemeResolver =>
   ): Record<string, unknown> | undefined => {
     const base = theme && theme[section]
 
-    const value = is.function(base) ? base(resolve, resolveContext) : base
+    const value = typeof base === 'function' ? base(resolve, resolveContext) : base
 
     return value && section === 'colors'
       ? flattenColorPalette(value as Record<string, ThemeColor>)

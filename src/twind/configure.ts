@@ -21,7 +21,6 @@ import { silent, strict, warn } from './modes'
 import { autoprefix, noprefix } from './prefix'
 import { makeThemeResolver } from './theme'
 
-import * as is from '../internal/is'
 import { cyrb32, identity, tail, merge, evalThunk, ensureMaxSize } from '../internal/util'
 
 import { parse } from './parse'
@@ -38,8 +37,9 @@ const sanitize = <T>(
 ): T => (value === false ? disabled : value === true ? enabled : value || defaultValue)
 
 const loadMode = (mode: Configuration['mode']): Mode =>
-  (is.string(mode) ? ({ t: strict, a: warn, i: silent } as Record<string, Mode>)[mode[1]] : mode) ||
-  warn
+  (typeof mode === 'string'
+    ? ({ t: strict, a: warn, i: silent } as Record<string, Mode>)[mode[1]]
+    : mode) || warn
 
 const stringifyVariant = (selector: string, variant: string): string =>
   selector + (variant[1] === ':' ? tail(variant, 2) + ':' : tail(variant)) + ':'
@@ -47,7 +47,7 @@ const stringifyVariant = (selector: string, variant: string): string =>
 // Creates rule id including variants, negate and directive
 // which is exactly like a tailwind rule
 const stringify = (rule: Rule, directive = rule.d): string =>
-  is.function(directive)
+  typeof directive === 'function'
     ? ''
     : rule.v.reduce(stringifyVariant, '') + (rule.n ? '-' : '') + directive + (rule.i ? '!' : '')
 
@@ -100,7 +100,7 @@ export const configure = (
         )
 
       // Add negate to theme value using calc to support complex values
-      return activeRule.n && value && is.string(value) ? `calc(${value} * -1)` : value
+      return activeRule.n && value && typeof value === 'string' ? `calc(${value} * -1)` : value
     }) as ThemeResolver,
 
     tag: (value) => (hash ? hash(value) : value),
@@ -111,17 +111,21 @@ export const configure = (
 
       try {
         // eslint-disable-next-line @typescript-eslint/no-extra-semi
-        ;(is.string(rules) ? parse([rules]) : rules).forEach(convert)
+        ;(typeof rules === 'string' ? parse([rules]) : rules).forEach(convert)
 
         const css = Object.create(null, COMPONENT_PROPS)
 
         for (let index = lastTranslationsIndex; index < lastTranslations.length; index++) {
           const translation = lastTranslations[index]
 
-          if (is.object(translation)) {
-            merge(css, translation, context)
-          } else if (translation && is.string(translation)) {
-            css._ += (css._ && ' ') + translation
+          if (translation) {
+            switch (typeof translation) {
+              case 'object':
+                merge(css, translation, context)
+                break
+              case 'string':
+                css._ += (css._ && ' ') + translation
+            }
           }
         }
 
@@ -175,7 +179,7 @@ export const configure = (
 
   // Used as replacer for JSON.stringify to calculate the hash for a inline function
   const evaluateFunctions = (key: string, value: unknown): unknown =>
-    is.function(value) ? JSON.stringify(value(context), evaluateFunctions) : value
+    typeof value === 'function' ? JSON.stringify(value(context), evaluateFunctions) : value
 
   // Responsible for converting (translate, decorate, serialize, inject) a rule
   const convert = (rule: Rule): string | undefined | void => {
@@ -191,8 +195,7 @@ export const configure = (
       // For inline directives (functions) `stringify` returns an empty string
       // in that case we check if we already have a name for the function
       // and use that one to generate the id
-      rule.$ =
-        stringify(rule) || stringify(rule, inlineDirectiveName.get(rule.d as InlineDirective))
+      rule.$ = stringify(rule, inlineDirectiveName.get(rule.d as InlineDirective))
     }
 
     // Check if we already have a class name for this rule id
@@ -219,20 +222,22 @@ export const configure = (
         rule.$ = stringify(rule, rule.$)
       }
 
-      if (is.object(translation)) {
-        // - components: layer.components = 1
-        // - plugins: layer.utilities = 2
-        // - inline directive: layer.css = 3
-        const layer = is.function(rule.d) ? (is.string(translation._) ? 1 : 3) : 2
-
-        className = hash || is.function(rule.d) ? (hash || cyrb32)(layer + rule.$) : rule.$
-
+      if (translation && typeof translation === 'object') {
         // 3. decorate: apply variants
         translation = decorate(translation, rule)
 
         if (translateDepth) {
           lastTranslations.push(translation)
         } else {
+          // - components: layer.components = 1
+          // - plugins: layer.utilities = 2
+          // - inline directive: layer.css = 3
+          const layer =
+            typeof rule.d === 'function' ? (typeof translation._ === 'string' ? 1 : 3) : 2
+
+          className =
+            hash || typeof rule.d === 'function' ? (hash || cyrb32)(layer + rule.$) : rule.$
+
           // 4. serialize: convert to css string with precedence
           // 5. inject: add to dom
           serialize(translation, className, rule, layer).forEach(inject)
@@ -243,7 +248,7 @@ export const configure = (
         }
       } else {
         // CSS class names have been returned
-        if (is.string(translation)) {
+        if (typeof translation === 'string') {
           // Use as is
           className = translation
         } else {
@@ -252,21 +257,21 @@ export const configure = (
           mode.report({ id: 'UNKNOWN_DIRECTIVE', rule: className }, context)
         }
 
-        if (translateDepth && !is.function(rule.d)) {
+        if (translateDepth && typeof rule.d !== 'function') {
           lastTranslations.push(className)
         }
       }
 
       if (!translateDepth) {
         // Remember the generated class name
-        idToClassName.set(rule.$, className)
+        idToClassName.set(rule.$, className as string)
 
         // Ensure the cache does not grow unlimited
         ensureMaxSize(idToClassName, 30000)
       }
     }
 
-    return className
+    return className as string
   }
 
   // This function is called from `tw(...)`
@@ -283,7 +288,7 @@ export const configure = (
 
     // Call the preflight handler, serialize and inject the result
     const styles = serialize(
-      is.function(preflight)
+      typeof preflight === 'function'
         ? evalThunk(preflight(css, context), context) || css
         : { ...css, ...preflight },
     )

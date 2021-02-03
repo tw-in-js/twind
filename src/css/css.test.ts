@@ -60,6 +60,13 @@ test('create with global css within custom tw', ({ tw, sheet }) => {
     backgroundColor: 'darkgreen',
   })
 
+  assert.is(
+    style,
+    css({
+      backgroundColor: 'darkgreen',
+    }),
+  )
+
   // It is lazy
   assert.equal(sheet.target, [])
 

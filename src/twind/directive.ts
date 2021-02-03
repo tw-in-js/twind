@@ -1,22 +1,22 @@
 import type { Context, Directive, MaybeThunk } from '../types'
 
-import * as is from '../internal/is'
 import { ensureMaxSize, evalThunk } from '../internal/util'
 
-const ensureNoFunctions = (key: string, value: unknown): unknown => {
-  if (is.function(value)) {
-    throw 0
+let isFunctionFree: boolean
+const detectFunction = (key: string, value: unknown): unknown => {
+  if (typeof value === 'function') {
+    isFunctionFree = false
   }
 
   return value
 }
 
-const stringify = (data: unknown): string | undefined => {
-  try {
-    return JSON.stringify(data, ensureNoFunctions)
-  } catch {
-    /* ignore */
-  }
+const stringify = (data: unknown): string | false => {
+  isFunctionFree = true
+
+  const key = JSON.stringify(data, detectFunction)
+
+  return isFunctionFree && key
 }
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -46,6 +46,7 @@ export const directive = <Data, T>(
   if (key) {
     // eslint-disable-next-line no-var
     var cache = cacheByFactory.get(factory)
+
     if (!cache) {
       cacheByFactory.set(factory, (cache = new Map()))
     }

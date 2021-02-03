@@ -13,8 +13,6 @@ interface Includes {
   <T>(value: readonly T[], search: T): boolean
 }
 
-import * as is from './is'
-
 export const includes: Includes = (value: string | readonly unknown[], search: unknown) =>
   // eslint-disable-next-line no-implicit-coercion
   !!~(value as string).indexOf(search as string)
@@ -38,8 +36,8 @@ export const capitalize = (value: string): string => value[0].toUpperCase() + ta
 export const hyphenate = (value: string): string => value.replace(/[A-Z]/g, '-$&').toLowerCase()
 
 export const evalThunk = <T>(value: MaybeThunk<T>, context: Context): T => {
-  while (is.function(value)) {
-    value = value(context)
+  while (typeof value === 'function') {
+    value = (value as (context: Context) => T)(context)
   }
 
   return value
@@ -57,13 +55,12 @@ export const merge = (target: CSSRules, source: CSSRules, context: Context): CSS
     ? Object.keys(source).reduce((target, key) => {
         const value = evalThunk(source[key], context)
 
-        // hyphenate target key only if key is property like (\w-)
-        const targetKey = /^[A-Z0-9-]+$/i.test(key) ? hyphenate(key) : key
-
-        target[targetKey] =
-          is.object(value) && !Array.isArray(value)
-            ? merge((target[targetKey] || {}) as CSSRules, value as CSSRules, context)
-            : value
+        if (value && typeof value === 'object' && !Array.isArray(value)) {
+          target[key] = merge((target[key] || {}) as CSSRules, value as CSSRules, context)
+        } else {
+          // hyphenate target key only if key is property like (\w-)
+          target[hyphenate(key)] = value
+        }
 
         return target
       }, target)
@@ -97,7 +94,7 @@ export const buildMediaQuery = (screen: ThemeScreen): string => {
     '@media ' +
     join(
       (screen as ThemeScreenValue[]).map((screen) => {
-        if (is.string(screen)) {
+        if (typeof screen === 'string') {
           screen = { min: screen }
         }
 

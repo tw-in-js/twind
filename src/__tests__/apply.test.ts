@@ -164,7 +164,7 @@ test('plugin with string', () => {
 
   const link = apply`group block blue text-center`
 
-  assert.is(tw`${link} text-justify`, 'tw-1y6ogf8 tw-1bk5mm5 tw-t5vtoy tw-17gtnyz tw-l89jgz')
+  assert.is(tw`${link} text-justify`, 'tw-1y6ogf8 tw-1bk5mm5 tw-l89jgz')
   assert.equal(sheet.target, [
     '.tw-1y6ogf8{display:block;--tw-dxr4o8:1;color:#3b82f6;color:rgba(59,130,246,var(--tw-dxr4o8));text-align:center}',
     '.tw-1y6ogf8:hover{--tw-dxr4o8:1;color:#1d4ed8;color:rgba(29,78,216,var(--tw-dxr4o8))}',
@@ -329,12 +329,42 @@ test('use apply with custom tw', ({ tw, sheet }) => {
 test('same directive for same data', () => {
   assert.is(apply`inline-block bg-gray-500 text-base`, apply`inline-block bg-gray-500 text-base`)
   assert.is.not(apply`inline-block`, apply`block`)
+
+  const color = 'black'
+  assert.is(
+    apply`
+      inline-block
+      rounded
+      py-2
+      my-2 mx-4
+      w-44
+      bg-transparent
+      text-white
+      border(2 solid white)
+      hover:text-${color}
+      focus:border(2 dashed black)
+      text(sm md:base lg:lg)
+    `,
+    apply`
+      inline-block
+      rounded
+      py-2
+      my-2 mx-4
+      w-44
+      bg-transparent
+      text-white
+      border(2 solid white)
+      hover:text-${color}
+      focus:border(2 dashed black)
+      text(sm md:base lg:lg)
+    `,
+  )
 })
 
 test('variants to no leak', ({ tw, sheet }) => {
   const block = apply`block`
-  assert.is(tw`sm:${block}`, 'tw-10u01bv')
-  assert.equal(sheet.target, ['@media (min-width:640px){.tw-10u01bv{display:block}}'])
+  assert.is(tw`sm:${block}`, 'tw-1j76vjo')
+  assert.equal(sheet.target, ['@media (min-width:640px){.tw-1j76vjo{display:block}}'])
 })
 
 test('applied rules can be used alone after apply', ({ tw, sheet }) => {

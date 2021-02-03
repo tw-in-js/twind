@@ -143,22 +143,21 @@ function templateLiteralStyles(): Promise<void> {
     `,
   )
 
-  console.log(
-    'twind (apply):',
-    tw(apply`
-      inline-block
-      rounded
-      py-2
-      my-2 mx-4
-      w-44
-      bg-transparent
-      text-white
-      border(2 solid white)
-      hover:text-${color}
-      focus:border(2 dashed black)
-      text(sm md:base lg:lg)
-    `),
-  )
+  const applied = apply`
+    inline-block
+    rounded
+    py-2
+    my-2 mx-4
+    w-44
+    bg-transparent
+    text-white
+    border(2 solid white)
+    hover:text-${color}
+    focus:border(2 dashed black)
+    text(sm md:base lg:lg)
+  `
+
+  console.log('twind (apply):', tw(applied))
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const twind = (...args: any[]): string => tw(css(...args))
@@ -201,6 +200,7 @@ function templateLiteralStyles(): Promise<void> {
             text(sm md:base lg:lg)
           `),
       )
+      .add('twind (apply - static)', () => tw(applied))
       .add(`twind (css)`, () => styles(twind))
       .add(`goober@${gooberVersion}`, () => styles(goober))
       .add(`emotion@${emotionVersion}`, () => styles(emotion))

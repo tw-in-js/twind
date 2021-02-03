@@ -1,7 +1,5 @@
 import type { Context, CSSRules, Plugins, Rule, Falsy, InlineDirective } from '../types'
 
-import * as is from '../internal/is'
-
 import { join, tail } from '../internal/util'
 
 export const translate = (
@@ -12,7 +10,7 @@ export const translate = (
   isTranslating,
 ) => {
   // If this is a inline directive - called it right away
-  if (is.function(rule.d)) {
+  if (typeof rule.d === 'function') {
     return rule.d(context)
   }
 
@@ -37,9 +35,9 @@ export const translate = (
     const plugin = plugins[id]
 
     if (plugin) {
-      return is.function(plugin)
+      return typeof plugin === 'function'
         ? plugin(tail(parameters, index), context, id)
-        : is.string(plugin)
+        : typeof plugin === 'string'
         ? context[isTranslating ? 'css' : 'tw'](plugin)
         : plugin
     }
