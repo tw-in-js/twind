@@ -27,7 +27,7 @@ Server Rendered Apps (SSR)- [https://twind.dev/docs/modules/twind_server.html](h
 </details>
 
 <details><summary>How is browser support for Twind?</summary>
-Twind works with all major browsers, but requires a polyfill for IE11 and some older browsers. We've put together a [Browser Support](https://twind.dev/docs/handbook/getting-started/browser-support.html) page in the docs with detailed information.
+Twind works with all major browsers but requires a polyfill for IE11 and some older browsers. We've put together a [Browser Support](https://twind.dev/docs/handbook/getting-started/browser-support.html) page in the docs with detailed information.
 </details>
 
 <details><summary>Does Twind support dark mode?</summary>
@@ -106,7 +106,7 @@ The purpose of the shim is to allow you to take advantage of Twind without the u
 - You are incrementally refactoring an existing Tailwind app.
 - You just want to get up and running quickly (prototyping)
 
-There could be performance implications of using the shim on large or highly dynamic apps due to it's requirement to parse entire class attributes. However, these differences should be negligable for most static sites.
+There could be performance implications of using the shim on large or highly dynamic apps due to a requirement to parse entire class attributes. However, these differences should be negligible for most static sites.
 
 [Learn more in the docs.](https://twind.dev/docs/modules/twind_shim.html)
 </details>
