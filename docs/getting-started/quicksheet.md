@@ -1,6 +1,7 @@
 # Quick Reference (Cheatsheet)
 
 ## Useful Links
+
 - Website: [https://twind.dev/](https://twind.dev/)
 - Website Docs: [https://twind.dev/docs/](https://twind.dev/docs/)
 - GitHub: [https://github.com/tw-in-js/twind](https://github.com/tw-in-js/twind)
@@ -8,6 +9,7 @@
 - All Twind Modules: [https://twind.dev/docs/handbook/getting-started/modules.html](https://twind.dev/docs/handbook/getting-started/modules.html)
 
 ## Installation
+
 [View in Docs](https://twind.dev/docs/handbook/getting-started/installation.html)
 
 ```tsx
@@ -50,6 +52,7 @@ setup({
 ```
 
 ## The Shim
+
 [View in Docs](https://twind.dev/docs/handbook/getting-started/using-the-shim.html)
 
 The shim allows you to use Twind syntax directly in a class attribute without the need of the `tw` function. It is useful for gradual refactoring or quick prototyping.
@@ -73,6 +76,7 @@ import 'twind/shim`;
 ```
 
 ## The `tw` function
+
 [View in Docs](https://twind.dev/docs/handbook/getting-started/styling-with-twind.html#the-tw-function)
 
 The `tw` function is responsible for composing styles and injecting the derived styles into the document.
@@ -115,7 +119,7 @@ The `tw` function is responsible for composing styles and injecting the derived 
 
 [View in Docs](https://twind.dev/docs/handbook/getting-started/thinking-in-groups.html)
 
-The Twind compiler provides a terse syntax for grouping related classes together in an untuitive way. 
+The Twind compiler provides a terse syntax for grouping related classes together in an intuitive way. 
 
 - Directive Grouping
 
@@ -188,7 +192,7 @@ const btn = apply`bg-gray-200`;
 
 [View in Docs](https://twind.dev/docs/handbook/getting-started/css-in-js.html)
 
-The `css` function allows you to write raw CSS in Twind, with support for pseudo selectors,global styles, directives, animations, grouping syntax, and more. 
+The `css` function allows you to write raw CSS in Twind, with support for pseudo-selectors,global styles, directives, animations, grouping syntax, and more. 
 
 ```tsx
 // All available exports
@@ -226,7 +230,7 @@ Twind includes several directives, variants, and utilities beyond Tailwind:
 - **VARIANTS**
     - Every variant can be applied to every directive
     - Dark mode is always available
-    - Most pseudo classes can be used as variant or `group-*` variant
+    - Most pseudo-classes can be used as variant or `group-*` variant
     - `siblings:*` - General sibling combinator (`& ~ *`)
 
         ```tsx
