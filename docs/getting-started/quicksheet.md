@@ -5,6 +5,7 @@
 - Website Docs: [https://twind.dev/docs/](https://twind.dev/docs/)
 - GitHub: [https://github.com/tw-in-js/twind](https://github.com/tw-in-js/twind)
 - GitHub Docs: [https://github.com/tw-in-js/twind#documentation](https://github.com/tw-in-js/twind#documentation)
+- All Twind Modules: [https://twind.dev/docs/handbook/getting-started/modules.html](https://twind.dev/docs/handbook/getting-started/modules.html)
 
 ## Installation
 [View in Docs](https://twind.dev/docs/handbook/getting-started/installation.html)
@@ -70,8 +71,6 @@ import 'twind/shim`;
   </body>
 </html>
 ```
-
-
 
 ## The `tw` function
 [View in Docs](https://twind.dev/docs/handbook/getting-started/styling-with-twind.html#the-tw-function)
@@ -170,7 +169,51 @@ The Twind compiler provides a terse syntax for grouping related classes together
     `
     ```
 
-## Tailwind Extensions
+## The `apply` function
+
+[View in Docs](https://twind.dev/docs/handbook/advanced/defining-components.html)
+
+The `apply` function is used to compose styles that can be later be overwritten in a `tw` call. Useful for component authors.
+
+```tsx
+import { apply, tw } from 'twind';
+
+const btn = apply`bg-gray-200`;
+
+<button class={tw`${btn}`}>bg-gray-200</button>
+<button class={tw`${btn} bg-blue-200`}>bg-blue-500</button>
+```
+
+## The `css` function (CSS-in-JS)
+
+[View in Docs](https://twind.dev/docs/handbook/getting-started/css-in-js.html)
+
+The `css` function allows you to write raw CSS in Twind, with support for pseudo selectors,global styles, directives, animations, grouping syntax, and more. 
+
+```tsx
+// All available exports
+import { tw, css, theme, apply, animation, bounce, keyframes } from 'twind/css'
+
+tw(
+  css({
+    '&::before': { content: '"🙁"' },
+    '&::after': { content: '"😊"' },
+  }),
+)
+
+tw`
+  sm:hover:${css({
+    '&::before': { content: '"🙁"' },
+    '&::after': { content: '"😊"' },
+  })}
+`
+```
+
+## Beyond Tailwind
+
+[View in Docs](https://twind.dev/docs/handbook/getting-started/tailwind-extensions.html)
+
+Twind includes several directives, variants, and utilities beyond Tailwind:
 
 - **SYNTAX**
     - Custom syntax for grouping directives and variants (see grouping above)
@@ -181,8 +224,8 @@ The Twind compiler provides a terse syntax for grouping related classes together
         ```
 
 - **VARIANTS**
-    - Every variant can be applied to every directive!
-    - Dark mode is always available!
+    - Every variant can be applied to every directive
+    - Dark mode is always available
     - Most pseudo classes can be used as variant or `group-*` variant
     - `siblings:*` - General sibling combinator (`& ~ *`)
 
@@ -237,45 +280,5 @@ The Twind compiler provides a terse syntax for grouping related classes together
     - IE11 support for `rotate`, `scale`, `skew`, and `translate`
     - `appearance-*` supports all values
 
-    EXAMPLE COMPONENT
-
-    ```tsx
-    import * as React from 'react';
-    import { tw } from 'twind';
-
-    export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
-      className?: string;
-      style?: React.CSSProperties;
-    }
-
-    export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-      (props, ref) => {
-        const { children, className, ...rest } = props;
-        return (
-          <button
-            ref={ref}
-            // BEFORE
-            // className="w-full md:w-auto bg-blue-500 text-sm text-white uppercase px-4 py-1 rounded-full border-none hover:bg-blue-600 focus:bg-blue-600 transition-colors duration-300 ring-blue-200"
-            // AFTER
-            className={tw`
-              w(full md:auto) 
-              bg(blue(500 600(hover:& focus:&))) 
-              text(sm white uppercase) 
-              px-4 
-              py-1 
-              rounded-full 
-              border-none 
-              transition-colors 
-              duration-300 
-              ring-blue-200
-            `}
-            {...rest}
-          >
-            {children}
-          </button>
-        );
-      },
-    );
-    ```
 
 Continue to {@page Browser Support}
