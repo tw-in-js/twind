@@ -11,7 +11,7 @@ For static HTML processing (usually to provide SSR support for your javascript-p
 
 All Twind syntax features like {@page Thinking in Groups | grouping} are supported within class attributes.
 
-The {@link shim} function also accepts an optional 2nd argument that can be a {@link twind.create | custom} `tw` instance or an {@link ShimOptions | options object} (including `tw` instance) for [node-html-parser](https://www.npmjs.com/package/node-html-parser).
+The {@link shim} function also accepts an optional 2nd argument that can be a {@link twind.create | custom} `tw` instance or an {@link ShimOptions | options object} (including `tw` instance).
 
 ```js
 import { create } from 'twind'
@@ -25,14 +25,6 @@ sheet.reset()
 
 const markup = shim(htmlString, {
   tw,                       // defaults to default `tw` instance
-  lowerCaseTagName: false,  // convert tag name to lower case (hurt performance heavily)
-  comment: false            // retrieve comments (hurt performance slightly)
-  blockTextElements: {
-    script: true,           // keep text content when parsing
-    noscript: true,         // keep text content when parsing
-    style: true,            // keep text content when parsing
-    pre: true,              // keep text content when parsing
-  }
 })
 
 const styleTag = getStyleTag(sheet)

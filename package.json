@@ -51,7 +51,7 @@
   ],
   "dependencies": {
     "csstype": "^3.0.5",
-    "node-html-parser": "^2.0.2",
+    "htmlparser2": "^6.0.0",
     "style-vendorizer": "^2.0.0"
   },
   "peerDependencies": {

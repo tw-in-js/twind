@@ -9,15 +9,14 @@
  */
 
 import type { TW } from '../../types'
-import type { Node, HTMLElement, Options as HTMLParserOptions } from 'node-html-parser'
-import * as HTMLParser from 'node-html-parser'
+import { Tokenizer } from 'htmlparser2'
 
 import { tw as defaultTW } from '../../index'
 
 /**
  * Options for {@link shim}.
  */
-export interface ShimOptions extends Partial<HTMLParserOptions> {
+export interface ShimOptions {
   /**
    * Custom {@link twind.tw | tw} instance to use (default: {@link twind.tw}).
    */
@@ -26,23 +25,12 @@ export interface ShimOptions extends Partial<HTMLParserOptions> {
 
 export { virtualSheet, getStyleTag, getStyleTagProperties } from '../../sheets/index'
 
-const isElementNode = (node: Node): node is HTMLElement =>
-  node && node.nodeType === HTMLParser.NodeType.ELEMENT_NODE
-
-function* traverse(node: Node): IterableIterator<HTMLElement> {
-  if (isElementNode(node) && node.getAttribute('class')) {
-    yield node
-  }
-
-  for (const childNode of node.childNodes) {
-    yield* traverse(childNode)
-  }
-}
+const noop = () => undefined
 
 /**
  * Shim the passed html.
  *
- * 1. parse the markup and process element classes with either the
+ * 1. tokenize the markup and process element classes with either the
  *    {@link twind.tw | default/global tw} instance or a {@link ShimOptions.tw | custom} instance
  * 2. populate the provided sheet with the generated rules
  * 3. output the HTML markup with the final element classes
@@ -55,12 +43,59 @@ export const shim = (markup: string, options: TW | ShimOptions = {}): string => 
   const { tw = defaultTW, ...parserOptions } =
     typeof options === 'function' ? { tw: options } : options
 
-  const root = HTMLParser.parse(markup, parserOptions)
+  let lastAttribName = ''
+  let lastChunkStart = 0
+  const chunks: string[] = []
 
-  // Traverse tree to find all element with classNames
-  for (const node of traverse(root)) {
-    node.setAttribute('class', tw(node.getAttribute('class')))
+  const tokenizer = new Tokenizer(
+    {
+      decodeEntities: false,
+      xmlMode: false,
+    },
+    {
+      onattribend: noop,
+      onattribdata: (value) => {
+        if (lastAttribName === 'class') {
+          const currentIndex = tokenizer.getAbsoluteIndex()
+          const startIndex = currentIndex - value.length
+          const parsedClassNames = tw(value)
+
+          // We only need to shift things around if we need to actually change the markup
+          if (parsedClassNames !== value) {
+            // We've hit another mutation boundary
+            chunks.push(markup.slice(lastChunkStart, startIndex))
+            chunks.push(parsedClassNames)
+            lastChunkStart = currentIndex
+          }
+        }
+        // This may not be strictly necessary
+        lastAttribName = ''
+      },
+      onattribname: (name) => {
+        lastAttribName = name
+      },
+      oncdata: noop,
+      onclosetag: noop,
+      oncomment: noop,
+      ondeclaration: noop,
+      onend: noop,
+      onerror: noop,
+      onopentagend: noop,
+      onopentagname: noop,
+      onprocessinginstruction: noop,
+      onselfclosingtag: noop,
+      ontext: noop,
+    },
+  )
+
+  tokenizer.end(markup)
+
+  // Avoid unnecessary array operations and string concatenation if we never
+  // needed to slice and dice things.
+  if (!chunks.length) {
+    return markup
   }
 
-  return root.toString()
+  // Combine the current set of chunks with the tail-end of the input
+  return chunks.join('') + markup.slice(lastChunkStart || 0, markup.length)
 }
