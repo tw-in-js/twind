@@ -40,8 +40,7 @@ const noop = () => undefined
  * @return the HTML markup with the final element classes
  */
 export const shim = (markup: string, options: TW | ShimOptions = {}): string => {
-  const { tw = defaultTW, ...parserOptions } =
-    typeof options === 'function' ? { tw: options } : options
+  const { tw = defaultTW } = typeof options === 'function' ? { tw: options } : options
 
   let lastAttribName = ''
   let lastChunkStart = 0
