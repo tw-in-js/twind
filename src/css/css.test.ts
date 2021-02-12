@@ -733,4 +733,38 @@ test('screen directive (object notation)', ({ tw, sheet }) => {
   ])
 })
 
+test('@screen (template literal)', ({ tw, sheet }) => {
+  const style = css`
+    @screen sm {
+      match: sm;
+    }
+    @screen 2xl {
+      @apply underline;
+    }
+  `
+
+  assert.equal(sheet.target, [])
+
+  assert.is(tw(style), 'tw-svjqbe')
+  assert.equal(sheet.target, [
+    '@media (min-width:640px){.tw-svjqbe{match:sm}}',
+    '@media (min-width:1536px){.tw-svjqbe{text-decoration:underline}}',
+  ])
+})
+
+test('@apply (template literal)', ({ tw, sheet }) => {
+  const style = css`
+    @apply font-bold py-2 px-4 underline;
+    color: fuchsia;
+    transform: translateY(-1px);
+  `
+
+  assert.equal(sheet.target, [])
+
+  assert.is(tw(style), 'tw-1dlm15h')
+  assert.equal(sheet.target, [
+    '.tw-1dlm15h{font-weight:700;padding-bottom:0.5rem;padding-top:0.5rem;padding-left:1rem;padding-right:1rem;text-decoration:underline;color:fuchsia;transform:translateY(-1px)}',
+  ])
+})
+
 test.run()
