@@ -85,13 +85,26 @@
 				<blockquote>
 					<p>💡 The <a href="https://github.com/tw-in-js/example-wmr">tw-in-js/example-wmr</a> repository uses this setup.</p>
 				</blockquote>
-				<pre><code class="language-js"><span style="color: #008000">/* public/twind.config.js */</span>
-<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> {</span>
+				<p>First we need to add <code>@rollup/plugin-json</code> to the dependencies.</p>
+				<pre><code class="language-sh"><span style="color: #000000">npm install -D @rollup/plugin-json</span>
+</code></pre>
+				<p>Next we create or modify the following files:</p>
+				<p><strong>wmr.config.mjs</strong></p>
+				<pre><code class="language-js"><span style="color: #008000">/** </span><span style="color: #0000FF">@param</span><span style="color: #008000"> </span><span style="color: #267F99">{import(&#039;wmr&#039;).Options}</span><span style="color: #008000"> </span><span style="color: #001080">config</span><span style="color: #008000"> */</span>
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> (</span><span style="color: #001080">config</span><span style="color: #000000">) {</span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #001080">config</span><span style="color: #000000">.</span><span style="color: #001080">mode</span><span style="color: #000000"> === </span><span style="color: #A31515">&#039;build&#039;</span><span style="color: #000000">) {</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #001080">default</span><span style="color: #000000">: </span><span style="color: #0070C1">json</span><span style="color: #000000"> } = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #0000FF">import</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;@rollup/plugin-json&#039;</span><span style="color: #000000">)</span>
+<span style="color: #000000">    </span><span style="color: #001080">config</span><span style="color: #000000">.</span><span style="color: #001080">plugins</span><span style="color: #000000">.</span><span style="color: #795E26">push</span><span style="color: #000000">(</span><span style="color: #795E26">json</span><span style="color: #000000">())</span>
+<span style="color: #000000">  }</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<p><strong>public/twind.config.js</strong></p>
+				<pre><code class="language-js"><span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> {</span>
 <span style="color: #000000">  </span><span style="color: #008000">/* Shared config */</span>
 <span style="color: #000000">}</span>
 </code></pre>
-				<pre><code class="language-js"><span style="color: #008000">/* public/index.js */</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">hydrate</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;preact-iso/hydrate&#039;</span>
+				<p><strong>public/index.js</strong></p>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">hydrate</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;preact-iso/hydrate&#039;</span>
 
 <span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">setup</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
 <span style="color: #008000">// Or if you are using twind/shim</span>
@@ -117,8 +130,8 @@
 <span style="color: #000000">  </span><span style="color: #008000">// return prerender(&lt;App {...data} /&gt;, { shim: true })</span>
 <span style="color: #000000">}</span>
 </code></pre>
-				<pre><code class="language-js"><span style="color: #008000">/* public/prerender.js */</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">prerender</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;preact-iso/prerender&#039;</span>
+				<p><strong>public/prerender.js</strong></p>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">prerender</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;preact-iso/prerender&#039;</span>
 
 <span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">setup</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
 <span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">asyncVirtualSheet</span><span style="color: #000000">, </span><span style="color: #001080">getStyleTagProperties</span><span style="color: #000000">, </span><span style="color: #001080">shim</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind/server&#039;</span>
