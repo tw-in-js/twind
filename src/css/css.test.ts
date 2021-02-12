@@ -699,13 +699,13 @@ test('screen directive (template literal)', ({ tw, sheet }) => {
 
   assert.equal(sheet.target, [])
 
-  assert.is(tw(style), 'tw-r0u30')
+  assert.is(tw(style), 'tw-1wbpegp')
   assert.equal(sheet.target, [
-    '@media (min-width: 640px){.tw-r0u30{match:sm}}',
-    '@media (min-width: 768px){.tw-r0u30{match:md}}',
-    '@media (min-width: 1024px){.tw-r0u30{match:md}}',
-    '@media (min-width: 1280px){.tw-r0u30{match:xl}}',
-    '@media (min-width: 1536px){.tw-r0u30{text-decoration:underline}}',
+    '@media (min-width:640px){.tw-1wbpegp{match:sm}}',
+    '@media (min-width:768px){.tw-1wbpegp{match:md}}',
+    '@media (min-width:1024px){.tw-1wbpegp{match:md}}',
+    '@media (min-width:1280px){.tw-1wbpegp{match:xl}}',
+    '@media (min-width:1536px){.tw-1wbpegp{text-decoration:underline}}',
   ])
 })
 
@@ -724,12 +724,12 @@ test('screen directive (object notation)', ({ tw, sheet }) => {
 
   assert.equal(sheet.target, [])
 
-  assert.is(tw(style), 'tw-1d9cztp')
+  assert.is(tw(style), 'tw-1ee73e9')
   assert.equal(sheet.target, [
-    '@media (min-width: 768px){.tw-1d9cztp{match:md}}',
-    '@media (min-width: 1024px){.tw-1d9cztp{match:md}}',
-    '@media (min-width: 1280px){.tw-1d9cztp{match:xl}}',
-    '@media (min-width: 1536px){.tw-1d9cztp{text-decoration:underline}}',
+    '@media (min-width:768px){.tw-1ee73e9{match:md}}',
+    '@media (min-width:1024px){.tw-1ee73e9{match:md}}',
+    '@media (min-width:1280px){.tw-1ee73e9{match:xl}}',
+    '@media (min-width:1536px){.tw-1ee73e9{text-decoration:underline}}',
   ])
 })
 

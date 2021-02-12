@@ -14,10 +14,11 @@ import type {
   Falsy,
   MaybeThunk,
   MaybeArray,
+  ThemeScreenValue,
 } from '../types'
 
 import { hash, directive } from '../index'
-import { evalThunk, merge } from '../internal/util'
+import { evalThunk, merge, buildMediaQuery } from '../internal/util'
 
 export { tw, apply, setup, theme } from '../index'
 
@@ -242,7 +243,7 @@ const screenFactory = (
   { size, rules }: { size: string; rules?: Directive<CSSRules> | MaybeArray<CSSRules | Falsy> },
   context: Context,
 ): string | CSSRules => {
-  const media = `@media (min-width: ${context.theme('screens', size)})`
+  const media = buildMediaQuery(context.theme('screens', size) as ThemeScreenValue)
 
   return rules === undefined
     ? media
