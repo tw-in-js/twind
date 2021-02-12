@@ -73,10 +73,7 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<p>The module will currently run in <a href="https://browserslist.dev/?q=PjAlLCBub3QgQ2hyb21lIDwzNiwgbm90IEVkZ2UgPDEyLCBub3QgRmlyZWZveCA8MjAsIG5vdCBPcGVyYSA8MjUsIG5vdCBTYWZhcmkgPDgsIG5vdCBpT1MgPDgsIG5vdCBPcGVyYU1vYmlsZSA8PSAxMi4xLCBub3QgaWUgPD0gMTEsIG5vdCBJRV9Nb2IgPD0gMTE%3D">all browsers</a> that support <a href="https://caniuse.com/mdn-javascript_builtins_math_imul">Math.imul</a>, <a href="https://caniuse.com/mdn-javascript_builtins_map">Map</a>, <a href="https://caniuse.com/mdn-javascript_builtins_set">Set</a> and <a href="https://caniuse.com/mdn-javascript_builtins_weakmap">WeakMap</a> (eg Chrome &gt;=36, Edge &gt;=12, Firefox &gt;=20, Opera &gt;=25, Safari &gt;=8, iOS &gt;=8) are supported. Additionally all LTS versions of Node.js are supported.</p>
-				<blockquote>
-					<p>❗ If you still have to support IE11 you need to provide a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/imul#Polyfill">polyfill</a> for <code>Math.imul</code>. IE 11 already supports <code>Map</code>, <code>Set</code> and <code>WeakMap</code> - no polyfills needed for these.</p>
-				</blockquote>
+				<p>The library will currently run in <a href="https://browserslist.dev/?q=PjAlLCBub3QgQ2hyb21lIDwzNiwgbm90IEVkZ2UgPDEyLCBub3QgRmlyZWZveCA8MjAsIG5vdCBPcGVyYSA8MjUsIG5vdCBTYWZhcmkgPDgsIG5vdCBpT1MgPDgsIG5vdCBPcGVyYU1vYmlsZSA8PSAxMi4xLCBub3QgaWUgPD0gMTEsIG5vdCBJRV9Nb2IgPD0gMTE%3D">all browsers</a> that support <a href="https://caniuse.com/mdn-javascript_builtins_math_imul">Math.imul</a>, <a href="https://caniuse.com/mdn-javascript_builtins_map">Map</a>, <a href="https://caniuse.com/mdn-javascript_builtins_set">Set</a> and <a href="https://caniuse.com/mdn-javascript_builtins_weakmap">WeakMap</a> (eg Chrome &gt;=36, Edge &gt;=12, Firefox &gt;=20, Opera &gt;=25, Safari &gt;=8, iOS &gt;=8). Additionally all LTS versions of Node.js are supported.</p>
 				<p>Some new tailwind features use <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties">CSS Variables (Custom Properties)</a> which are <a href="https://caniuse.com/css-variables"><strong>not</strong> available in legacy browsers</a> (Chrome &lt;49, IE, Edge &lt;16, Firefox &lt;31, Opera &lt;36, Safari &lt;9.1, iOS &lt;9.3). For IE 11 you can try the <a href="https://github.com/nuxodin/ie11CustomProperties">CSS Variables Polyfill</a>.</p>
 				<p>We included fallbacks for the following directives which mimic <a href="https://v1.tailwindcss.com/">Tailwind v1</a> behavior:</p>
 				<ul>
@@ -104,6 +101,11 @@
 				<ul>
 					<li><a href="https://tailwindcss.com/docs/ring-width">Ring</a></li>
 				</ul>
+				<a href="#supporting-ie11-and-obsolete-platforms" id="supporting-ie11-and-obsolete-platforms" style="color: inherit; text-decoration: none;">
+					<h2>Supporting IE11 and obsolete platforms</h2>
+				</a>
+				<p>This library uses features like destructuring assignment and const/let declarations and doesn&#39;t ship with ES5 transpiled sources. If you aim to support browsers like IE11 and below → make sure you configure your transpiler/bundler to include your <code>node_modules</code>.</p>
+				<p>Additionally you need to provide a <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/imul#Polyfill">polyfill</a> for <code>Math.imul</code>. IE 11 already supports <code>Map</code>, <code>Set</code> and <code>WeakMap</code> - no polyfills needed for these.</p>
 				<hr/>
 				<p>Continue to <a href="modules.html">Modules Summary</a></p>
 			</div>
