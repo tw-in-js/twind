@@ -2,15 +2,37 @@
 
 > 💡 The [tw-in-js/example-wmr](https://github.com/tw-in-js/example-wmr) repository uses this setup.
 
+First we need to add `@rollup/plugin-json` to the dependencies.
+
+```sh
+npm install -D @rollup/plugin-json
+```
+
+Next we create or modify the following files:
+
+**wmr.config.mjs**
+
 ```js
-/* public/twind.config.js */
+/** @param {import('wmr').Options} config */
+export default async function (config) {
+  if (config.mode === 'build') {
+    const { default: json } = await import('@rollup/plugin-json')
+    config.plugins.push(json())
+  }
+}
+```
+
+**public/twind.config.js**
+
+```js
 export default {
   /* Shared config */
 }
 ```
 
+**public/index.js**
+
 ```js
-/* public/index.js */
 import hydrate from 'preact-iso/hydrate'
 
 import { setup } from 'twind'
@@ -38,8 +60,9 @@ export async function prerender(data) {
 }
 ```
 
+**public/prerender.js**
+
 ```js
-/* public/prerender.js */
 import prerender from 'preact-iso/prerender'
 
 import { setup } from 'twind'

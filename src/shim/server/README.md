@@ -24,7 +24,7 @@ const { tw } = create({ ...sharedOptions, sheet })
 sheet.reset()
 
 const markup = shim(htmlString, {
-  tw,                       // defaults to default `tw` instance
+  tw, // defaults to default `tw` instance
 })
 
 const styleTag = getStyleTag(sheet)
