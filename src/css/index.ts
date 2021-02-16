@@ -17,7 +17,7 @@ import type {
   ThemeScreenValue,
 } from '../types'
 
-import { hash, directive } from '../index'
+import { hash, directive, apply } from '../index'
 import { evalThunk, merge, buildMediaQuery } from '../internal/util'
 
 export { tw, apply, setup, theme } from '../index'
@@ -68,7 +68,7 @@ const interleave = (
   for (let index = 0; index < interpolations.length; ) {
     const interpolation = evalThunk(interpolations[index], context)
 
-    if (interpolation && typeof interpolation === 'object') {
+    if (interpolation && typeof interpolation == 'object') {
       result.push(buffer, interpolation)
       buffer = strings[++index]
     } else {
@@ -93,7 +93,7 @@ const astish = (values: unknown[]): CSSRules[] => {
   for (let index = 0; index < values.length; index++) {
     const value = values[index]
 
-    if (typeof value === 'string') {
+    if (typeof value == 'string') {
       while ((match = newRule.exec(value.replace(ruleClean, ' ')))) {
         if (!match[0]) continue
 
@@ -230,8 +230,8 @@ export const animation = ((
         CSSRules
       >)
     : css({
-        ...(value && typeof value === 'object' ? value : { animation: value }),
-        animationName: typeof waypoints === 'function' ? waypoints : keyframes(waypoints),
+        ...(value && typeof value == 'object' ? value : { animation: value }),
+        animationName: typeof waypoints == 'function' ? waypoints : keyframes(waypoints),
       })) as Animation
 
 export interface Screen {
@@ -249,7 +249,7 @@ const screenFactory = (
     ? media
     : {
         [media]:
-          typeof rules === 'function' ? evalThunk(rules, context) : cssFactory([rules], context),
+          typeof rules == 'function' ? evalThunk(rules, context) : cssFactory([rules], context),
       }
 }
 

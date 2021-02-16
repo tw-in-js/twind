@@ -4,7 +4,7 @@ import { ensureMaxSize, evalThunk } from '../internal/util'
 
 let isFunctionFree: boolean
 const detectFunction = (key: string, value: unknown): unknown => {
-  if (typeof value === 'function') {
+  if (typeof value == 'function') {
     isFunctionFree = false
   }
 

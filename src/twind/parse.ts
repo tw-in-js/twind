@@ -232,7 +232,7 @@ const buildStatics = (strings: TemplateStringsArray): Static[] => {
           buffer += token
 
           // Join consecutive strings
-          if (typeof interpolation === 'string') {
+          if (typeof interpolation == 'string') {
             buffer += interpolation
           } else if (interpolation) {
             parseString(buffer)

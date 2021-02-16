@@ -10,7 +10,7 @@ export const translate = (
   isTranslating,
 ) => {
   // If this is a inline directive - called it right away
-  if (typeof rule.d === 'function') {
+  if (typeof rule.d == 'function') {
     return rule.d(context)
   }
 
@@ -35,9 +35,9 @@ export const translate = (
     const plugin = plugins[id]
 
     if (plugin) {
-      return typeof plugin === 'function'
+      return typeof plugin == 'function'
         ? plugin(tail(parameters, index), context, id)
-        : typeof plugin === 'string'
+        : typeof plugin == 'string'
         ? context[isTranslating ? 'css' : 'tw'](plugin)
         : plugin
     }

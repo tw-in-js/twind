@@ -729,7 +729,7 @@ const flattenColorPalette = (
     target[join(key)] = value
     target[join(key, '.')] = value
 
-    if (value && typeof value === 'object') {
+    if (value && typeof value == 'object') {
       flattenColorPalette(value, target, key)
     }
   }, target)
@@ -752,7 +752,7 @@ const resolveContext: ThemeSectionResolverContext = {
 
   breakpoints: (screens) =>
     Object.keys(screens)
-      .filter((key) => typeof screens[key] === 'string')
+      .filter((key) => typeof screens[key] == 'string')
       .reduce((target, key) => {
         target['screen-' + key] = screens[key] as string
 
@@ -771,7 +771,7 @@ export const makeThemeResolver = (config?: ThemeConfiguration): ThemeResolver =>
   ): Record<string, unknown> | undefined => {
     const base = theme && theme[section]
 
-    const value = typeof base === 'function' ? base(resolve, resolveContext) : base
+    const value = typeof base == 'function' ? base(resolve, resolveContext) : base
 
     return value && section === 'colors'
       ? flattenColorPalette(value as Record<string, ThemeColor>)

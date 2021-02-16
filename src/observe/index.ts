@@ -92,7 +92,7 @@ export const createObserver = ({ tw = defaultTW }: ShimConfiguration = {}): Twin
   const handleMutations = (mutations: MinimalMutationRecord[]): void =>
     mutations.forEach(handleMutation)
 
-  if (typeof MutationObserver === 'function') {
+  if (typeof MutationObserver == 'function') {
     const observer = new MutationObserver(handleMutations)
 
     return {

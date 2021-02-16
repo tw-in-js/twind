@@ -20,7 +20,7 @@ export interface ShimConfiguration extends Configuration {
   target?: HTMLElement
 }
 
-if (typeof document !== 'undefined' && typeof addEventListener === 'function') {
+if (typeof document !== 'undefined' && typeof addEventListener == 'function') {
   // eslint-disable-next-line no-var
   var onload = () => {
     const script = document.querySelector('script[type="twind-config"]')

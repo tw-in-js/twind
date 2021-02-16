@@ -612,11 +612,11 @@ export const corePlugins: Plugins = {
     const fontSize = theme('fontSize', params, '' /* Optional */)
 
     if (fontSize) {
-      return typeof fontSize === 'string'
+      return typeof fontSize == 'string'
         ? { fontSize }
         : {
             fontSize: fontSize[0],
-            ...(typeof fontSize[1] === 'string' ? { lineHeight: fontSize[1] } : fontSize[1]),
+            ...(typeof fontSize[1] == 'string' ? { lineHeight: fontSize[1] } : fontSize[1]),
           }
     }
 
@@ -876,7 +876,7 @@ export const corePlugins: Plugins = {
     const { screens = theme('screens'), center, padding } = theme('container') as ThemeContainer
 
     const paddingFor = (screen: string): CSSRules =>
-      (_ = padding && (typeof padding === 'string' ? padding : padding[screen] || padding.DEFAULT))
+      (_ = padding && (typeof padding == 'string' ? padding : padding[screen] || padding.DEFAULT))
         ? {
             paddingRight: _,
             paddingLeft: _,
@@ -885,7 +885,7 @@ export const corePlugins: Plugins = {
 
     return Object.keys(screens).reduce(
       (rules, screen) => {
-        if (($ = screens[screen]) && typeof $ === 'string') {
+        if (($ = screens[screen]) && typeof $ == 'string') {
           rules[buildMediaQuery($)] = {
             '&': {
               'max-width': $,

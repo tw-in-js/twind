@@ -29,7 +29,7 @@ export function processPlugins() {
       plugin = plugin()
     }
 
-    const handler = typeof plugin === 'function' ? plugin : dlv(plugin, 'handler', () => {})
+    const handler = typeof plugin == 'function' ? plugin : dlv(plugin, 'handler', () => {})
 
     handler({
       // Postcss,

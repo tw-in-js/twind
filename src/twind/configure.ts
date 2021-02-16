@@ -37,7 +37,7 @@ const sanitize = <T>(
 ): T => (value === false ? disabled : value === true ? enabled : value || defaultValue)
 
 const loadMode = (mode: Configuration['mode']): Mode =>
-  (typeof mode === 'string'
+  (typeof mode == 'string'
     ? ({ t: strict, a: warn, i: silent } as Record<string, Mode>)[mode[1]]
     : mode) || warn
 
@@ -47,7 +47,7 @@ const stringifyVariant = (selector: string, variant: string): string =>
 // Creates rule id including variants, negate and directive
 // which is exactly like a tailwind rule
 const stringify = (rule: Rule, directive = rule.d): string =>
-  typeof directive === 'function'
+  typeof directive == 'function'
     ? ''
     : rule.v.reduce(stringifyVariant, '') + (rule.n ? '-' : '') + directive + (rule.i ? '!' : '')
 
@@ -100,7 +100,7 @@ export const configure = (
         )
 
       // Add negate to theme value using calc to support complex values
-      return activeRule.n && value && typeof value === 'string' ? `calc(${value} * -1)` : value
+      return activeRule.n && value && typeof value == 'string' ? `calc(${value} * -1)` : value
     }) as ThemeResolver,
 
     tag: (value) => (hash ? hash(value) : value),
@@ -111,7 +111,7 @@ export const configure = (
 
       try {
         // eslint-disable-next-line @typescript-eslint/no-extra-semi
-        ;(typeof rules === 'string' ? parse([rules]) : rules).forEach(convert)
+        ;(typeof rules == 'string' ? parse([rules]) : rules).forEach(convert)
 
         const css = Object.create(null, COMPONENT_PROPS)
 
@@ -163,7 +163,7 @@ export const configure = (
   // Serialize a translation to css
   const serialize = makeSerialize(sanitize(config.prefix, autoprefix, noprefix), variants, context)
 
-  const sheet = config.sheet || (typeof window === 'undefined' ? voidSheet() : cssomSheet(config))
+  const sheet = config.sheet || (typeof window == 'undefined' ? voidSheet() : cssomSheet(config))
 
   const { init = (callback) => callback() } = sheet
 
@@ -179,7 +179,7 @@ export const configure = (
 
   // Used as replacer for JSON.stringify to calculate the hash for a inline function
   const evaluateFunctions = (key: string, value: unknown): unknown =>
-    typeof value === 'function' ? JSON.stringify(value(context), evaluateFunctions) : value
+    typeof value == 'function' ? JSON.stringify(value(context), evaluateFunctions) : value
 
   // Responsible for converting (translate, decorate, serialize, inject) a rule
   const convert = (rule: Rule): string | undefined | void => {
@@ -222,7 +222,7 @@ export const configure = (
         rule.$ = stringify(rule, rule.$)
       }
 
-      if (translation && typeof translation === 'object') {
+      if (translation && typeof translation == 'object') {
         // 3. decorate: apply variants
         translation = decorate(translation, rule)
 
@@ -233,10 +233,10 @@ export const configure = (
           // - plugins: layer.utilities = 2
           // - inline directive: layer.css = 3
           const layer =
-            typeof rule.d === 'function' ? (typeof translation._ === 'string' ? 1 : 3) : 2
+            typeof rule.d == 'function' ? (typeof translation._ == 'string' ? 1 : 3) : 2
 
           className =
-            hash || typeof rule.d === 'function' ? (hash || cyrb32)(layer + rule.$) : rule.$
+            hash || typeof rule.d == 'function' ? (hash || cyrb32)(layer + rule.$) : rule.$
 
           // 4. serialize: convert to css string with precedence
           // 5. inject: add to dom
@@ -248,7 +248,7 @@ export const configure = (
         }
       } else {
         // CSS class names have been returned
-        if (typeof translation === 'string') {
+        if (typeof translation == 'string') {
           // Use as is
           className = translation
         } else {
@@ -288,7 +288,7 @@ export const configure = (
 
     // Call the preflight handler, serialize and inject the result
     const styles = serialize(
-      typeof preflight === 'function'
+      typeof preflight == 'function'
         ? evalThunk(preflight(css, context), context) || css
         : { ...css, ...preflight },
     )

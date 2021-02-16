@@ -36,7 +36,7 @@ export const capitalize = (value: string): string => value[0].toUpperCase() + ta
 export const hyphenate = (value: string): string => value.replace(/[A-Z]/g, '-$&').toLowerCase()
 
 export const evalThunk = <T>(value: MaybeThunk<T>, context: Context): T => {
-  while (typeof value === 'function') {
+  while (typeof value == 'function') {
     value = (value as (context: Context) => T)(context)
   }
 
@@ -55,7 +55,7 @@ export const merge = (target: CSSRules, source: CSSRules, context: Context): CSS
     ? Object.keys(source).reduce((target, key) => {
         const value = evalThunk(source[key], context)
 
-        if (value && typeof value === 'object' && !Array.isArray(value)) {
+        if (value && typeof value == 'object' && !Array.isArray(value)) {
           target[key] = merge((target[key] || {}) as CSSRules, value as CSSRules, context)
         } else {
           // hyphenate target key only if key is property like (\w-)
@@ -94,7 +94,7 @@ export const buildMediaQuery = (screen: ThemeScreen): string => {
     '@media ' +
     join(
       (screen as ThemeScreenValue[]).map((screen) => {
-        if (typeof screen === 'string') {
+        if (typeof screen == 'string') {
           screen = { min: screen }
         }
 
