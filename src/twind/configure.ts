@@ -232,8 +232,7 @@ export const configure = (
           // - components: layer.components = 1
           // - plugins: layer.utilities = 2
           // - inline directive: layer.css = 3
-          const layer =
-            typeof rule.d == 'function' ? (typeof translation._ == 'string' ? 1 : 3) : 2
+          const layer = typeof rule.d == 'function' ? (typeof translation._ == 'string' ? 1 : 3) : 2
 
           className =
             hash || typeof rule.d == 'function' ? (hash || cyrb32)(layer + rule.$) : rule.$
