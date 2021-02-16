@@ -865,4 +865,22 @@ test('using @apply with array', ({ tw, sheet }) => {
   ])
 })
 
+test('using @apply with variant', ({ tw, sheet }) => {
+  const style = () => ({
+    '@apply': 'font-bold hover:underline',
+    color: 'fuchsia',
+    '&:hover': {
+      transform: 'translateY(-1px)',
+    },
+  })
+
+  assert.equal(sheet.target, [])
+
+  assert.is(tw(style), 'tw-1plavv4')
+  assert.equal(sheet.target, [
+    '.tw-1plavv4:hover{text-decoration:underline;transform:translateY(-1px)}',
+    '.tw-1plavv4{font-weight:700;color:fuchsia}',
+  ])
+})
+
 test.run()

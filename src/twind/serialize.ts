@@ -8,6 +8,7 @@ import {
   evalThunk,
   buildMediaQuery,
   tail,
+  merge,
 } from '../internal/util'
 import {
   responsivePrecedence,
@@ -113,8 +114,12 @@ export const serialize = (
     // more specfic utilities have less declarations and a higher presedence
     let numberOfDeclarations = 0
 
-    if (typeof css['@apply'] != 'undefined') {
-      css = { ...evalThunk(apply(css['@apply'] as Token), context), ...css, '@apply': undefined }
+    if ('@apply' in css) {
+      css = merge(
+        evalThunk(apply(css['@apply'] as Token), context),
+        { ...css, '@apply': undefined },
+        context,
+      )
     }
 
     // Walk through the object
