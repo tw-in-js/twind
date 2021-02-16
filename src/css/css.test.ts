@@ -745,10 +745,10 @@ test('@screen (template literal)', ({ tw, sheet }) => {
 
   assert.equal(sheet.target, [])
 
-  assert.is(tw(style), 'tw-svjqbe')
+  assert.is(tw(style), 'tw-qku2fp')
   assert.equal(sheet.target, [
-    '@media (min-width:640px){.tw-svjqbe{match:sm}}',
-    '@media (min-width:1536px){.tw-svjqbe{text-decoration:underline}}',
+    '@media (min-width:640px){.tw-qku2fp{match:sm}}',
+    '@media (min-width:1536px){.tw-qku2fp{text-decoration:underline}}',
   ])
 })
 
@@ -761,9 +761,39 @@ test('@apply (template literal)', ({ tw, sheet }) => {
 
   assert.equal(sheet.target, [])
 
-  assert.is(tw(style), 'tw-1dlm15h')
+  assert.is(tw(style), 'tw-jvkskb')
   assert.equal(sheet.target, [
-    '.tw-1dlm15h{font-weight:700;padding-bottom:0.5rem;padding-top:0.5rem;padding-left:1rem;padding-right:1rem;text-decoration:underline;color:fuchsia;transform:translateY(-1px)}',
+    '.tw-jvkskb{font-weight:700;padding-bottom:0.5rem;padding-top:0.5rem;padding-left:1rem;padding-right:1rem;text-decoration:underline;color:fuchsia;transform:translateY(-1px)}',
+  ])
+})
+
+test('using several @apply', ({ tw, sheet }) => {
+  const style = css`
+    @apply font-bold underline;
+    color: fuchsia;
+    @apply py-2 px-4;
+    transform: translateY(-1px);
+  `
+
+  assert.equal(sheet.target, [])
+
+  assert.is(tw(style), 'tw-3sz6jf')
+  assert.equal(sheet.target, [
+    '.tw-3sz6jf{font-weight:700;text-decoration:underline;color:fuchsia;padding-bottom:0.5rem;padding-top:0.5rem;padding-left:1rem;padding-right:1rem;transform:translateY(-1px)}',
+  ])
+})
+
+test('using @apply with array', ({ tw, sheet }) => {
+  const style = css`
+    @apply ${['font-bold', false && 'underline', 'py-2 px-4']};
+    color: fuchsia;
+  `
+
+  assert.equal(sheet.target, [])
+
+  assert.is(tw(style), 'tw-1lxwuho')
+  assert.equal(sheet.target, [
+    '.tw-1lxwuho{font-weight:700;padding-bottom:0.5rem;padding-top:0.5rem;padding-left:1rem;padding-right:1rem;color:fuchsia}',
   ])
 })
 

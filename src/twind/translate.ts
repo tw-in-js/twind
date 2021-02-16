@@ -1,14 +1,22 @@
-import type { Context, CSSRules, Plugins, Rule, Falsy, InlineDirective } from '../types'
+import type {
+  Context,
+  CSSRules,
+  Plugins,
+  Rule,
+  Falsy,
+  InlineDirective,
+  TypescriptCompat,
+} from '../types'
 
 import { join, tail } from '../internal/util'
 
 export const translate = (
   plugins: Plugins,
   context: Context,
-): ((rule: Rule, isTranslating?: boolean) => InlineDirective | CSSRules | string | Falsy) => (
-  rule,
-  isTranslating,
-) => {
+): ((
+  rule: Rule,
+  isTranslating?: boolean,
+) => InlineDirective | CSSRules | string | Falsy | TypescriptCompat) => (rule, isTranslating) => {
   // If this is a inline directive - called it right away
   if (typeof rule.d == 'function') {
     return rule.d(context)

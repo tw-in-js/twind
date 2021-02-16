@@ -1,4 +1,4 @@
-import type { Context, CSSRules, Prefixer, Rule } from '../types'
+import type { Context, CSSRules, Prefixer, Rule, Token } from '../types'
 
 import {
   join,
@@ -15,7 +15,7 @@ import {
   makeVariantPresedenceCalculator,
   atRulePresedence,
 } from './presedence'
-
+import { apply } from './apply'
 export interface RuleWithPresedence {
   r: string
   p: number
@@ -113,8 +113,8 @@ export const serialize = (
     // more specfic utilities have less declarations and a higher presedence
     let numberOfDeclarations = 0
 
-    if (typeof css['@apply'] == 'string') {
-      css = { ...context.css(css['@apply']), ...css, '@apply': undefined }
+    if (typeof css['@apply'] != 'undefined') {
+      css = { ...evalThunk(apply(css['@apply'] as Token), context), ...css, '@apply': undefined }
     }
 
     // Walk through the object

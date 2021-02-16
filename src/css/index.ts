@@ -82,7 +82,7 @@ const interleave = (
   return result
 }
 
-const astish = (values: unknown[]): CSSRules[] => {
+const astish = (values: unknown[], context: Context): CSSRules[] => {
   // Keep track of active selectors => these are the nested keys
   const selectors: string[] = []
   const rules: CSSRules[] = []
@@ -111,12 +111,15 @@ const astish = (values: unknown[]): CSSRules[] => {
         } else if (!match[4]) {
           if (!currentBlock) currentBlock = {}
 
-          if (match[2] && /\S/.test(match[2])) {
-            // a) property: value
-            currentBlock[match[1]] = match[2]
-          } else if (values[++index]) {
-            // b) property: ${interpolation}
-            currentBlock[match[1]] = values[index] as CSSRules
+          const value = match[2] && /\S/.test(match[2]) ? match[2] : (values[++index] as CSSRules)
+
+          if (value) {
+            if (match[1] == '@apply') {
+              merge(currentBlock, evalThunk(apply(value as string), context), context)
+            } else {
+              // a) property: value
+              currentBlock[match[1]] = value as CSSRules
+            }
           }
         }
       }
@@ -136,7 +139,7 @@ const cssFactory = (tokens: unknown[], context: Context): CSSRules =>
   translate(
     Array.isArray(tokens[0] as TemplateStringsArray) &&
       Array.isArray((tokens[0] as TemplateStringsArray).raw)
-      ? astish(interleave(tokens[0] as TemplateStringsArray, tokens.slice(1), context))
+      ? astish(interleave(tokens[0] as TemplateStringsArray, tokens.slice(1), context), context)
       : tokens,
     context,
   )
