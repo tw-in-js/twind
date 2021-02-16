@@ -75,7 +75,7 @@ import { setup, disconnect } from 'twind/shim'
 
 ## Static Extraction
 
-If you wish to remove Twind's runtime overhead or you're interested in using Twind in a universal or "isomorphic" web app, {@link wind/shim/server} exports the dedicated {@link wind/shim/server.shim} function for performant processing of static HTML.
+If you wish to remove Twind's runtime overhead or you're interested in using Twind in a universal or "isomorphic" web app, {@link twind/shim/server} exports the dedicated {@link twind/shim/server.shim} function for performant processing of static HTML.
 
 > 💡 You'll find more details and examples in the {@page Extract Styles aka SSR} guide.
 
