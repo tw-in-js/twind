@@ -155,7 +155,7 @@ css`
   @apply text-gray(700 dark:300);
 
   p {
-    @apply my-5';
+    @apply my-5;
   }
 
   h1 {

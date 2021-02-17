@@ -797,4 +797,29 @@ test('using @apply with array', ({ tw, sheet }) => {
   ])
 })
 
+test('@apply from docs', ({ tw, sheet }) => {
+  const style = css`
+    @apply text-gray(700 dark:300);
+
+    p {
+      @apply my-5;
+    }
+
+    h1 {
+      @apply text(black dark:white hover:purple-500);
+    }
+  `
+
+  assert.equal(sheet.target, [])
+
+  assert.is(tw(style), 'tw-ckdto4')
+  assert.equal(sheet.target, [
+    '.tw-ckdto4 h1:hover{--tw-text-opacity:1;color:#8b5cf6;color:rgba(139,92,246,var(--tw-text-opacity))}',
+    '.tw-ckdto4 h1{--tw-text-opacity:1;color:#000;color:rgba(0,0,0,var(--tw-text-opacity))}',
+    '.tw-ckdto4{--tw-text-opacity:1;color:#374151;color:rgba(55,65,81,var(--tw-text-opacity))}',
+    '.tw-ckdto4 p{margin-bottom:1.25rem;margin-top:1.25rem}',
+    '@media (prefers-color-scheme:dark){.tw-ckdto4{--tw-text-opacity:1;color:#d1d5db;color:rgba(209,213,219,var(--tw-text-opacity))}}',
+    '@media (prefers-color-scheme:dark){.tw-ckdto4 h1{--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity))}}',
+  ])
+})
 test.run()
