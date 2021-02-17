@@ -169,7 +169,7 @@ css`
 `
 ```
 
-`@apply can be use in the object notation as well:
+`@apply can be used in the object notation as well:
 
 ```js
 css({
