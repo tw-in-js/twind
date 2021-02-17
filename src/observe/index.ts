@@ -65,9 +65,10 @@ export const createObserver = ({ tw = defaultTW }: ShimConfiguration = {}): Twin
 
         // Remember the generated class name
         rulesToClassCache.set(rules, className)
+        rulesToClassCache.set(className, className)
 
         // Ensure the cache does not grow unlimited
-        ensureMaxSize(rulesToClassCache, 10000)
+        ensureMaxSize(rulesToClassCache, 30000)
       }
 
       if (rules !== className) {
