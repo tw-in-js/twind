@@ -107,7 +107,34 @@ tw({
 
 ## The apply function
 
-To be documented...
+Use {@link twind.apply | apply} to inline any existing utility classes into a single CSS class.
+
+This is useful when you find a common utility pattern in your HTML that you'd like to extract to a new component.
+
+```js
+import { apply } from 'twind'
+
+const btn = apply`inline-block bg-gray-500 text-base`
+// => generates on CSS class with all declarations of the above rules when used
+
+const btnBlock = apply`${btn} block`
+// => generates on CSS class with all declarations of btn & block
+
+<button class={tw`${btn}`}>gray-500</button>
+// => tw-XXXXX
+
+<button class={tw`${btn} bg-red-500 text-lg`}>red-500 large</button>
+// => tw-XXXX bg-red-500 text-lg
+
+<button class={tw`${btnBlock}`}>block button</button>
+// => tw-YYYY
+```
+
+The component styles are added **before** the utility classes to the stylesheet which allows utilities to override component styles.
+
+For more examples see the {@page Defining Components} guide.
+
+> 💡 Another way to extract common component styles is by {@page Plugins | using an alias plugin}.
 
 <hr/>
 
