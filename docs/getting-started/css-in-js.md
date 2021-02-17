@@ -247,7 +247,7 @@ css(
 `
 ```
 
-As a convenience Twind provides the `@screen` CSS rule:
+For convenience, Twind provides the `@screen` CSS rule:
 
 ```js
 import { css, screen, apply } from 'twind/css'
