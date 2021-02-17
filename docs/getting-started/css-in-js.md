@@ -148,7 +148,7 @@ css`
 `
 ```
 
-As a convenience Twind provides the `@apply` CSS rule:
+For convenience, Twind provides the `@apply` CSS rule:
 
 ```js
 css`
