@@ -45,6 +45,8 @@ const getCache = (tw: TW): Map<string, string> => {
   return rulesToClassCache
 }
 
+const uniq = <T>(value: T, index: number, values: T[]) => values.indexOf(value) == index
+
 /**
  * Creates a new {@link TwindObserver}.
  *
@@ -61,7 +63,7 @@ export const createObserver = ({ tw = defaultTW }: ShimConfiguration = {}): Twin
       let className = rulesToClassCache.get(rules)
 
       if (!className) {
-        className = tw(rules)
+        className = tw(rules).split(/ +/g).filter(uniq).join(' ')
 
         // Remember the generated class name
         rulesToClassCache.set(rules, className)
