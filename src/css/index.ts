@@ -17,7 +17,7 @@ import type {
   ThemeScreenValue,
 } from '../types'
 
-import { hash, directive, apply } from '../index'
+import { hash, directive } from '../index'
 import { evalThunk, merge, buildMediaQuery } from '../internal/util'
 
 export { tw, apply, setup, theme } from '../index'
