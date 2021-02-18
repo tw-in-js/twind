@@ -117,12 +117,15 @@
 					<h3>Packages / Modules</h3>
 				</a>
 				<ul>
-					<li>twind/styled - like styled components (<a href="https://github.com/cristianbote/goober/tree/master/benchmarks">https://github.com/cristianbote/goober/tree/master/benchmarks</a>)<ul>
+					<li><p>twind/styled - like styled components (<a href="https://github.com/cristianbote/goober/tree/master/benchmarks">https://github.com/cristianbote/goober/tree/master/benchmarks</a>)</p>
+						<ul>
 							<li>with variants like <a href="https://stitches.dev">https://stitches.dev</a></li>
 						</ul>
 					</li>
-					<li>twind/test - to simplify test setups</li>
-					<li>twind/play - play mode which infers number, sizes, and colors from rules<pre><code><span style="color: #001080">p</span><span style="color: #000000">-</span><span style="color: #098658">2.5</span><span style="color: #000000"> -&gt; padding: 0.625</span><span style="color: #001080">rem</span><span style="color: #000000">;</span>
+					<li><p>twind/test - to simplify test setups</p>
+					</li>
+					<li><p>twind/play - play mode which infers number, sizes, and colors from rules</p>
+						<pre><code><span style="color: #001080">p</span><span style="color: #000000">-</span><span style="color: #098658">2.5</span><span style="color: #000000"> -&gt; padding: 0.625</span><span style="color: #001080">rem</span><span style="color: #000000">;</span>
 <span style="color: #001080">p</span><span style="color: #000000">-</span><span style="color: #098658">3.2</span><span style="color: #000000"> -&gt; padding: 0.8</span><span style="color: #001080">rem</span><span style="color: #000000">;</span>
 <span style="color: #008000">// ${size} must end up with rem|em|px|vh|vw|ch|ex</span>
 <span style="color: #001080">p</span><span style="color: #000000">-3</span><span style="color: #001080">px</span><span style="color: #000000"> -&gt; padding: 3</span><span style="color: #001080">px</span><span style="color: #000000">;</span>
@@ -130,12 +133,16 @@
 <span style="color: #001080">w</span><span style="color: #000000">-</span><span style="color: #098658">9</span><span style="color: #000000">/</span><span style="color: #098658">12</span><span style="color: #000000"> -&gt; width: </span><span style="color: #098658">75</span><span style="color: #000000">%;</span>
 </code></pre>
 					</li>
-					<li>@twind/cli<pre><code><span style="color: #001080">twind</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;./**/*.html&#039;</span><span style="color: #000000"> --</span><span style="color: #001080">out</span><span style="color: #000000"> </span><span style="color: #001080">twind</span><span style="color: #000000">.</span><span style="color: #001080">css</span>
-<span style="color: #001080">twind</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;./**/*.html&#039;</span><span style="color: #000000"> --</span><span style="color: #001080">minify</span><span style="color: #000000"> --</span><span style="color: #001080">out</span><span style="color: #000000"> </span><span style="color: #001080">twind</span><span style="color: #000000">.</span><span style="color: #001080">min</span><span style="color: #000000">.</span><span style="color: #001080">css</span>
-<span style="color: #001080">twind</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;./**/*.html&#039;</span><span style="color: #000000"> --</span><span style="color: #001080">styletag</span>
+					<li><p>@twind/cli: <a href="https://github.com/tw-in-js/twind/discussions/121">https://github.com/tw-in-js/twind/discussions/121</a></p>
+						<pre><code><span style="color: #000000"># </span><span style="color: #001080">update</span><span style="color: #000000"> </span><span style="color: #001080">the</span><span style="color: #000000"> </span><span style="color: #0070C1">HTML</span><span style="color: #000000"> </span><span style="color: #0000FF">in</span><span style="color: #000000"> </span><span style="color: #001080">place</span><span style="color: #000000"> </span><span style="color: #001080">adding</span><span style="color: #000000"> </span><span style="color: #001080">a</span><span style="color: #000000"> </span><span style="color: #001080">style</span><span style="color: #000000"> </span><span style="color: #001080">tag</span><span style="color: #000000"> </span><span style="color: #001080">into</span><span style="color: #000000"> </span><span style="color: #001080">the</span><span style="color: #000000"> </span><span style="color: #001080">head</span>
+<span style="color: #001080">twind</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;./**/*.html&#039;</span>
+
+<span style="color: #000000"># </span><span style="color: #001080">generate</span><span style="color: #000000"> </span><span style="color: #001080">external</span><span style="color: #000000"> </span><span style="color: #001080">style</span><span style="color: #000000"> </span><span style="color: #001080">file</span>
+<span style="color: #001080">twind</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;./**/*.html&#039;</span><span style="color: #000000"> --</span><span style="color: #001080">out</span><span style="color: #000000"> </span><span style="color: #001080">twind</span><span style="color: #000000">.</span><span style="color: #001080">css</span>
 </code></pre>
 					</li>
-					<li>Framework specific integration packages<pre><code class="language-html"><span style="color: #800000">&lt;div</span><span style="color: #000000"> </span><span style="color: #FF0000">sm</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;bg-white font-bold&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">hover</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;bg-gray-200&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">dark</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;bg-gray-900&quot;</span><span style="color: #000000"> </span><span style="color: #CD3131">/</span><span style="color: #800000">&gt;</span>
+					<li><p>Framework specific integration packages</p>
+						<pre><code class="language-html"><span style="color: #800000">&lt;div</span><span style="color: #000000"> </span><span style="color: #FF0000">sm</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;bg-white font-bold&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">hover</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;bg-gray-200&quot;</span><span style="color: #000000"> </span><span style="color: #FF0000">dark</span><span style="color: #000000">=</span><span style="color: #0000FF">&quot;bg-gray-900&quot;</span><span style="color: #000000"> </span><span style="color: #CD3131">/</span><span style="color: #800000">&gt;</span>
 </code></pre>
 						<ul>
 							<li>@twind/svelte-preprocess</li>
@@ -144,7 +151,8 @@
 							<li>@twind/macro for jsx like frameworks</li>
 						</ul>
 					</li>
-					<li>@twind/extensions<ul>
+					<li><p>@twind/extensions</p>
+						<ul>
 							<li>border gradients: <a href="https://t.co/W7YVS7f0Jp">https://t.co/W7YVS7f0Jp</a></li>
 							<li>scroll snap: <a href="https://t.co/7xqvpFQ9Qu">https://t.co/7xqvpFQ9Qu</a></li>
 							<li>&quot;on&quot; colors: generate matching contrast color and use that one as text/background color</li>
@@ -153,8 +161,10 @@
 							<li>and others (see Plugins below)</li>
 						</ul>
 					</li>
-					<li>@twind/eslint-plugin - nice to have</li>
-					<li>@twind/prettier-plugin - nice to have</li>
+					<li><p>@twind/eslint-plugin - nice to have</p>
+					</li>
+					<li><p>@twind/prettier-plugin - nice to have</p>
+					</li>
 				</ul>
 				<a href="#features" id="features" style="color: inherit; text-decoration: none;">
 					<h3>Features</h3>
@@ -162,7 +172,7 @@
 				<ul>
 					<li><p>prevent feature creep: create a summary of existing APIs and evaluate what is needed</p>
 					</li>
-					<li><p>re-think extraction API</p>
+					<li><p>re-think extraction API: <a href="https://github.com/tw-in-js/twind/discussions/123">https://github.com/tw-in-js/twind/discussions/123</a></p>
 						<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">renderedApp</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">collectStyles</span><span style="color: #000000">(</span><span style="color: #0000FF">async</span><span style="color: #000000"> () </span><span style="color: #0000FF">=&gt;</span><span style="color: #000000"> {</span>
 <span style="color: #000000">  </span><span style="color: #008000">// render app</span>
 <span style="color: #000000">})</span>
