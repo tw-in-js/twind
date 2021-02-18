@@ -122,7 +122,7 @@
 						</ul>
 					</li>
 					<li>twind/test - to simplify test setups</li>
-					<li>twind/play - play mode, eq infers number, sizes, and colors from rules<pre><code><span style="color: #001080">p</span><span style="color: #000000">-</span><span style="color: #098658">2.5</span><span style="color: #000000"> -&gt; padding: 0.625</span><span style="color: #001080">rem</span><span style="color: #000000">;</span>
+					<li>twind/play - play mode which infers number, sizes, and colors from rules<pre><code><span style="color: #001080">p</span><span style="color: #000000">-</span><span style="color: #098658">2.5</span><span style="color: #000000"> -&gt; padding: 0.625</span><span style="color: #001080">rem</span><span style="color: #000000">;</span>
 <span style="color: #001080">p</span><span style="color: #000000">-</span><span style="color: #098658">3.2</span><span style="color: #000000"> -&gt; padding: 0.8</span><span style="color: #001080">rem</span><span style="color: #000000">;</span>
 <span style="color: #008000">// ${size} must end up with rem|em|px|vh|vw|ch|ex</span>
 <span style="color: #001080">p</span><span style="color: #000000">-3</span><span style="color: #001080">px</span><span style="color: #000000"> -&gt; padding: 3</span><span style="color: #001080">px</span><span style="color: #000000">;</span>
@@ -141,6 +141,7 @@
 							<li>@twind/svelte-preprocess</li>
 							<li>@twind/vite-plugin</li>
 							<li>@twind/vue-preprocess</li>
+							<li>@twind/macro for jsx like frameworks</li>
 						</ul>
 					</li>
 					<li>@twind/extensions<ul>
@@ -185,11 +186,11 @@
 					</li>
 					<li><p>instead of generating utility CSS generate component CSS (auto <code>apply</code>)</p>
 					</li>
-					<li><p>support hex colors</p>
+					<li><p>support hex colors - could be done as a plugin</p>
 						<pre><code><span style="color: #001080">bg</span><span style="color: #000000">-</span><span style="color: #001080">hex</span><span style="color: #000000">-1</span><span style="color: #001080">c1c1e</span><span style="color: #000000"> -&gt; </span><span style="color: #001080">background</span><span style="color: #000000">-color: </span><span style="color: #795E26">rgba</span><span style="color: #000000">(</span><span style="color: #098658">28</span><span style="color: #000000">, </span><span style="color: #098658">28</span><span style="color: #000000">, </span><span style="color: #098658">30</span><span style="color: #000000">, </span><span style="color: #795E26">var</span><span style="color: #000000">(--</span><span style="color: #001080">tw</span><span style="color: #000000">-</span><span style="color: #001080">bg</span><span style="color: #000000">-</span><span style="color: #001080">opacity</span><span style="color: #000000">));</span>
 </code></pre>
 					</li>
-					<li><p>support CSS variables</p>
+					<li><p>support CSS variables - could be done as a plugin when <code>bg-var-</code> is used</p>
 						<pre><code><span style="color: #001080">bg</span><span style="color: #000000">-</span><span style="color: #0000FF">var</span><span style="color: #000000">-</span><span style="color: #001080">test</span><span style="color: #000000">-variable -&gt; background-color: </span><span style="color: #267F99">rgba</span><span style="color: #000000">(</span><span style="color: #267F99">var</span><span style="color: #000000">(--</span><span style="color: #267F99">test</span><span style="color: #000000">-</span><span style="color: #267F99">variable</span><span style="color: #000000">), </span><span style="color: #267F99">var</span><span style="color: #000000">(--</span><span style="color: #267F99">tw</span><span style="color: #000000">-</span><span style="color: #267F99">bg</span><span style="color: #000000">-</span><span style="color: #267F99">opacity</span><span style="color: #000000">));</span>
 <span style="color: #001080">bg</span><span style="color: #000000">-</span><span style="color: #001080">$test</span><span style="color: #000000">-</span><span style="color: #001080">variable</span><span style="color: #000000"> -&gt; </span><span style="color: #001080">background</span><span style="color: #000000">-color: </span><span style="color: #795E26">rgba</span><span style="color: #000000">(</span><span style="color: #795E26">var</span><span style="color: #000000">(--</span><span style="color: #001080">test</span><span style="color: #000000">-</span><span style="color: #001080">variable</span><span style="color: #000000">), </span><span style="color: #795E26">var</span><span style="color: #000000">(--</span><span style="color: #001080">tw</span><span style="color: #000000">-</span><span style="color: #001080">bg</span><span style="color: #000000">-</span><span style="color: #001080">opacity</span><span style="color: #000000">));</span>
 </code></pre>
