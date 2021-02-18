@@ -174,7 +174,7 @@
 <span style="color: #001080">collectStyles</span><span style="color: #000000">.</span><span style="color: #795E26">toProperties</span><span style="color: #000000">()</span>
 <span style="color: #008000">// =&gt; { id, textContent }</span>
 </code></pre>
-						<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">markup</span><span style="color: #000000"> = </span><span style="color: #795E26">shim</span><span style="color: #000000">()</span>
+						<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">markup</span><span style="color: #000000"> = </span><span style="color: #795E26">shim</span><span style="color: #000000">(</span><span style="color: #008000">/* string or function returning string */</span><span style="color: #000000">)</span>
 
 <span style="color: #001080">shim</span><span style="color: #000000">.</span><span style="color: #795E26">toString</span><span style="color: #000000">()</span>
 <span style="color: #008000">// =&gt; the styles</span>
@@ -186,6 +186,12 @@
 					</li>
 					<li><p>instead of generating utility CSS generate component CSS (auto <code>apply</code>)</p>
 					</li>
+					<li><p>new core plugins</p>
+						<ul>
+							<li><code>z-{index}</code> or <code>z-auto</code></li>
+							<li>gap</li>
+						</ul>
+					</li>
 					<li><p>support hex colors - could be done as a plugin</p>
 						<pre><code><span style="color: #001080">bg</span><span style="color: #000000">-</span><span style="color: #001080">hex</span><span style="color: #000000">-1</span><span style="color: #001080">c1c1e</span><span style="color: #000000"> -&gt; </span><span style="color: #001080">background</span><span style="color: #000000">-color: </span><span style="color: #795E26">rgba</span><span style="color: #000000">(</span><span style="color: #098658">28</span><span style="color: #000000">, </span><span style="color: #098658">28</span><span style="color: #000000">, </span><span style="color: #098658">30</span><span style="color: #000000">, </span><span style="color: #795E26">var</span><span style="color: #000000">(--</span><span style="color: #001080">tw</span><span style="color: #000000">-</span><span style="color: #001080">bg</span><span style="color: #000000">-</span><span style="color: #001080">opacity</span><span style="color: #000000">));</span>
 </code></pre>
@@ -195,10 +201,11 @@
 <span style="color: #001080">bg</span><span style="color: #000000">-</span><span style="color: #001080">$test</span><span style="color: #000000">-</span><span style="color: #001080">variable</span><span style="color: #000000"> -&gt; </span><span style="color: #001080">background</span><span style="color: #000000">-color: </span><span style="color: #795E26">rgba</span><span style="color: #000000">(</span><span style="color: #795E26">var</span><span style="color: #000000">(--</span><span style="color: #001080">test</span><span style="color: #000000">-</span><span style="color: #001080">variable</span><span style="color: #000000">), </span><span style="color: #795E26">var</span><span style="color: #000000">(--</span><span style="color: #001080">tw</span><span style="color: #000000">-</span><span style="color: #001080">bg</span><span style="color: #000000">-</span><span style="color: #001080">opacity</span><span style="color: #000000">));</span>
 </code></pre>
 					</li>
-					<li><p>Screen Utilities - use <code>+</code> and <code>-</code> screen utilities, even for custom screen sizes.</p>
-						<pre><code><span style="color: #000000">sm: @</span><span style="color: #795E26">media</span><span style="color: #000000"> (</span><span style="color: #001080">min</span><span style="color: #000000">-</span><span style="color: #001080">width</span><span style="color: #000000">:640</span><span style="color: #001080">px</span><span style="color: #000000">);</span>
-<span style="color: #000000">+sm: @</span><span style="color: #795E26">media</span><span style="color: #000000"> (</span><span style="color: #001080">min</span><span style="color: #000000">-</span><span style="color: #001080">width</span><span style="color: #000000">:640</span><span style="color: #001080">px</span><span style="color: #000000">) </span><span style="color: #795E26">and</span><span style="color: #000000"> (</span><span style="color: #001080">max</span><span style="color: #000000">-</span><span style="color: #001080">width</span><span style="color: #000000">:768</span><span style="color: #001080">px</span><span style="color: #000000">);</span>
-<span style="color: #000000">-sm: @</span><span style="color: #795E26">media</span><span style="color: #000000"> (</span><span style="color: #001080">max</span><span style="color: #000000">-</span><span style="color: #001080">width</span><span style="color: #000000">:640</span><span style="color: #001080">px</span><span style="color: #000000">);</span>
+					<li><p>Screen Utilities - use <code>+</code> and <code>-</code> screen utilities, even for custom screen sizes.
+						<a href="https://github.com/windicss/windicss/discussions/28">https://github.com/windicss/windicss/discussions/28</a></p>
+						<pre><code><span style="color: #000000"> </span><span style="color: #001080">sm</span><span style="color: #000000"> -&gt; @</span><span style="color: #795E26">media</span><span style="color: #000000"> (</span><span style="color: #001080">min</span><span style="color: #000000">-</span><span style="color: #001080">width</span><span style="color: #000000">:640</span><span style="color: #001080">px</span><span style="color: #000000">);</span>
+<span style="color: #000000">~</span><span style="color: #001080">sm</span><span style="color: #000000"> -&gt; @</span><span style="color: #795E26">media</span><span style="color: #000000"> (</span><span style="color: #001080">max</span><span style="color: #000000">-</span><span style="color: #001080">width</span><span style="color: #000000">:640</span><span style="color: #001080">px</span><span style="color: #000000">)</span>
+<span style="color: #000000">@</span><span style="color: #001080">sm</span><span style="color: #000000"> -&gt; @</span><span style="color: #795E26">media</span><span style="color: #000000"> (</span><span style="color: #001080">min</span><span style="color: #000000">-</span><span style="color: #001080">width</span><span style="color: #000000">:640</span><span style="color: #001080">px</span><span style="color: #000000">) </span><span style="color: #795E26">and</span><span style="color: #000000"> (</span><span style="color: #001080">max</span><span style="color: #000000">-</span><span style="color: #001080">width</span><span style="color: #000000">:768</span><span style="color: #001080">px</span><span style="color: #000000">);</span>
 </code></pre>
 					</li>
 					<li><p>convert css to twind</p>
