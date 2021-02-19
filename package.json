@@ -110,7 +110,7 @@
     "test:coverage": "c8 --src src -x '**/__fixtures__/**' -x '**/__tests__/**' -x '**/*.test.ts' -x 'src/types/**' --all -r lcov -r text yarn test",
     "test:watch": "watchlist src -- yarn test",
     "version": "yarn build",
-    "typedoc": "typedoc"
+    "typedoc": "typedoc --options typedoc.json"
   },
   "prettier": {
     "printWidth": 100,
