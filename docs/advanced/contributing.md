@@ -172,3 +172,4 @@ Below is an outline of some todos, packages, plugins and ideas that we would lik
 
 - https://github.com/aniftyco/awesome-tailwindcss
 - https://nerdcave.com/tailwind-cheat-sheet
+- https://palettolithic.com - tailwind color scheme generator
