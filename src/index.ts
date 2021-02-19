@@ -1,5 +1,4 @@
 /**
- * [[include:src/README.md]]
  *
  * @packageDocumentation
  * @module twind

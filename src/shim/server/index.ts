@@ -2,7 +2,6 @@
 // ^^^^ This comment is need to prevent browser bundles of this file
 
 /**
- * [[include:src/shim/server/README.md]]
  *
  * @packageDocumentation
  * @module twind/shim/server
