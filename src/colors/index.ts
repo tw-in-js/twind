@@ -2,7 +2,6 @@
 // License: MIT
 
 /**
- * [[include:src/colors/README.md]]
  *
  * @packageDocumentation
  * @module twind/colors

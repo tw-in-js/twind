@@ -1,5 +1,4 @@
 /**
- * [[include:src/sheets/README.md]]
  *
  * @packageDocumentation
  * @module twind/sheets
