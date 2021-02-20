@@ -733,4 +733,93 @@ test('screen directive (object notation)', ({ tw, sheet }) => {
   ])
 })
 
+test('@screen (template literal)', ({ tw, sheet }) => {
+  const style = css`
+    @screen sm {
+      match: sm;
+    }
+    @screen 2xl {
+      @apply underline;
+    }
+  `
+
+  assert.equal(sheet.target, [])
+
+  assert.is(tw(style), 'tw-qku2fp')
+  assert.equal(sheet.target, [
+    '@media (min-width:640px){.tw-qku2fp{match:sm}}',
+    '@media (min-width:1536px){.tw-qku2fp{text-decoration:underline}}',
+  ])
+})
+
+test('@apply (template literal)', ({ tw, sheet }) => {
+  const style = css`
+    @apply font-bold py-2 px-4 underline;
+    color: fuchsia;
+    transform: translateY(-1px);
+  `
+
+  assert.equal(sheet.target, [])
+
+  assert.is(tw(style), 'tw-jvkskb')
+  assert.equal(sheet.target, [
+    '.tw-jvkskb{font-weight:700;padding-bottom:0.5rem;padding-top:0.5rem;padding-left:1rem;padding-right:1rem;text-decoration:underline;color:fuchsia;transform:translateY(-1px)}',
+  ])
+})
+
+test('using several @apply', ({ tw, sheet }) => {
+  const style = css`
+    @apply font-bold underline;
+    color: fuchsia;
+    @apply py-2 px-4;
+    transform: translateY(-1px);
+  `
+
+  assert.equal(sheet.target, [])
+
+  assert.is(tw(style), 'tw-3sz6jf')
+  assert.equal(sheet.target, [
+    '.tw-3sz6jf{font-weight:700;text-decoration:underline;color:fuchsia;padding-bottom:0.5rem;padding-top:0.5rem;padding-left:1rem;padding-right:1rem;transform:translateY(-1px)}',
+  ])
+})
+
+test('using @apply with array', ({ tw, sheet }) => {
+  const style = css`
+    @apply ${['font-bold', false && 'underline', 'py-2 px-4']};
+    color: fuchsia;
+  `
+
+  assert.equal(sheet.target, [])
+
+  assert.is(tw(style), 'tw-1lxwuho')
+  assert.equal(sheet.target, [
+    '.tw-1lxwuho{font-weight:700;padding-bottom:0.5rem;padding-top:0.5rem;padding-left:1rem;padding-right:1rem;color:fuchsia}',
+  ])
+})
+
+test('@apply from docs', ({ tw, sheet }) => {
+  const style = css`
+    @apply text-gray(700 dark:300);
+
+    p {
+      @apply my-5;
+    }
+
+    h1 {
+      @apply text(black dark:white hover:purple-500);
+    }
+  `
+
+  assert.equal(sheet.target, [])
+
+  assert.is(tw(style), 'tw-ckdto4')
+  assert.equal(sheet.target, [
+    '.tw-ckdto4 h1:hover{--tw-text-opacity:1;color:#8b5cf6;color:rgba(139,92,246,var(--tw-text-opacity))}',
+    '.tw-ckdto4 h1{--tw-text-opacity:1;color:#000;color:rgba(0,0,0,var(--tw-text-opacity))}',
+    '.tw-ckdto4{--tw-text-opacity:1;color:#374151;color:rgba(55,65,81,var(--tw-text-opacity))}',
+    '.tw-ckdto4 p{margin-bottom:1.25rem;margin-top:1.25rem}',
+    '@media (prefers-color-scheme:dark){.tw-ckdto4{--tw-text-opacity:1;color:#d1d5db;color:rgba(209,213,219,var(--tw-text-opacity))}}',
+    '@media (prefers-color-scheme:dark){.tw-ckdto4 h1{--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity))}}',
+  ])
+})
 test.run()

@@ -2,7 +2,7 @@ import type * as CSS from 'csstype'
 
 import type { CSSProperties } from './css'
 import type { Theme, ThemeResolver, ThemeSectionType } from './theme'
-import type { Falsy } from './util'
+import type { Falsy, MaybeArray } from './util'
 
 export interface TWCallable {
   (strings: TemplateStringsArray, ...interpolations: Token[]): string
@@ -190,7 +190,7 @@ export interface Directive<T> {
 }
 
 export interface InlineDirective {
-  (context: Context): CSSRules | string | Falsy
+  (context: Context): CSSRules | string | Falsy | TypescriptCompat
 }
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -250,6 +250,10 @@ export interface CSSRules {
   // ':root'?: CSSProperties
   // '*'?: CSSProperties
 
+  '@apply'?: MaybeArray<string | Falsy | TypescriptCompat>
+  global?: CSSRules | CSSRulesThunk
+  // [`@screen ${string}`]: MaybeArray<string | Falsy | TypescriptCompat>
+
   // TODO it would be great if we could use CSS Properties with mapped types to typechecked CSS rules
   [key: string]:
     | CSSProperties
@@ -257,9 +261,7 @@ export interface CSSRules {
     | CSSAtSupports
     | CSSAtKeyframes
     | CSSRules
-    | string
-    | string[]
-    | Falsy
+    | MaybeArray<string | Falsy | TypescriptCompat>
     | CSSRulesThunk
 }
 
@@ -271,7 +273,5 @@ export interface CSSRulesThunk {
     | CSSAtKeyframes
     | CSSRules
     | CSSRulesThunk
-    | string
-    | string[]
-    | Falsy
+    | MaybeArray<string | Falsy | TypescriptCompat>
 }

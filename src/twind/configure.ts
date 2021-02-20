@@ -10,6 +10,7 @@ import type {
   CSSRules,
   Mode,
   Falsy,
+  TypescriptCompat,
 } from '../types'
 
 import { corePlugins } from './plugins'
@@ -143,7 +144,7 @@ export const configure = (
   // Wrap `translate()` to keep track of the active rule
   // we need to use try-finally as mode.report may throw
   // and we must always reset the active rule
-  const doTranslate = (rule: Rule): CSSRules | string | Falsy => {
+  const doTranslate = (rule: Rule): CSSRules | string | Falsy | TypescriptCompat => {
     // Keep track of active variants for nested `tw` calls
     const parentRule = activeRule
     activeRule = rule

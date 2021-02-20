@@ -1,13 +1,22 @@
-import type { Context, CSSRules, Prefixer, Rule } from '../types'
+import type { Context, CSSRules, Prefixer, Rule, Token } from '../types'
 
-import { join, includes, escape, hyphenate, evalThunk } from '../internal/util'
+import {
+  join,
+  includes,
+  escape,
+  hyphenate,
+  evalThunk,
+  buildMediaQuery,
+  tail,
+  merge,
+} from '../internal/util'
 import {
   responsivePrecedence,
   declarationPropertyPrecedence,
   makeVariantPresedenceCalculator,
   atRulePresedence,
 } from './presedence'
-
+import { apply } from './apply'
 export interface RuleWithPresedence {
   r: string
   p: number
@@ -105,6 +114,14 @@ export const serialize = (
     // more specfic utilities have less declarations and a higher presedence
     let numberOfDeclarations = 0
 
+    if ('@apply' in css) {
+      css = merge(
+        evalThunk(apply(css['@apply'] as Token), context),
+        { ...css, '@apply': undefined },
+        context,
+      )
+    }
+
     // Walk through the object
     Object.keys(css).forEach((key) => {
       const value = evalThunk(css[key], context)
@@ -162,6 +179,10 @@ export const serialize = (
               p: waypoints.reduce((sum, p) => sum + p.p, 0),
             })
           } else {
+            if (key.slice(1, 8) == 'screen ') {
+              key = buildMediaQuery(context.theme('screens', tail(key, 8).trim()) as string)
+            }
+
             // Some nested block like @media, dive into it
             stringify(
               [...atRules, key],
