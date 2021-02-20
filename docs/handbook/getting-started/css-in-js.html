@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>CSS in JS | twind - v0.15.3</title>
-	<meta name="description" content="Documentation for twind - v0.15.3">
+	<title>CSS in JS | twind - v0.15.4</title>
+	<meta name="description" content="Documentation for twind - v0.15.4">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../../assets/css/main.css">
 	<link rel="stylesheet" href="../../assets/css/pages.css">
@@ -24,7 +24,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../../index.html" class="title">twind - v0.15.3</a>
+					<a href="../../index.html" class="title">twind - v0.15.4</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -201,6 +201,32 @@
 <span style="color: #A31515">  }</span>
 <span style="color: #A31515">`</span>
 </code></pre>
+				<p>For convenience, Twind provides the <code>@apply</code> CSS rule:</p>
+				<pre><code class="language-js"><span style="color: #795E26">css</span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  @apply text-gray(700 dark:300);</span>
+
+<span style="color: #A31515">  p {</span>
+<span style="color: #A31515">    @apply my-5;</span>
+<span style="color: #A31515">  }</span>
+
+<span style="color: #A31515">  h1 {</span>
+<span style="color: #A31515">    @apply text(black dark:white hover:purple-500);</span>
+<span style="color: #A31515">  }</span>
+<span style="color: #A31515">`</span>
+
+<span style="color: #795E26">css</span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  @apply </span><span style="color: #0000FF">${</span><span style="color: #000000FF">[</span><span style="color: #A31515">&#039;font-bold&#039;</span><span style="color: #000000FF">, </span><span style="color: #0000FF">false</span><span style="color: #000000FF"> </span><span style="color: #000000">&amp;&amp;</span><span style="color: #000000FF"> </span><span style="color: #A31515">&#039;underline&#039;</span><span style="color: #000000FF">, </span><span style="color: #A31515">&#039;py-2 px-4&#039;</span><span style="color: #000000FF">]</span><span style="color: #0000FF">}</span><span style="color: #A31515">;</span>
+<span style="color: #A31515">  color: fuchsia;</span>
+<span style="color: #A31515">`</span>
+</code></pre>
+				<p>`@apply can be used in the object notation as well:</p>
+				<pre><code class="language-js"><span style="color: #795E26">css</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;@apply&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;font-bold py-2 px-4 underline&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #008000">// &#039;@apply&#039;: [&#039;font-bold py-2 px-4&#039;, false &amp;&amp; underline&#039;],</span>
+<span style="color: #000000">  </span><span style="color: #001080">color:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;fuchsia&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">transform:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;translateY(-1px)&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">})</span>
+</code></pre>
 				<a href="#accessing-the-theme" id="accessing-the-theme" style="color: inherit; text-decoration: none;">
 					<h3>Accessing the theme</h3>
 				</a>
@@ -257,6 +283,24 @@
 <span style="color: #000000">  </span><span style="color: #795E26">screen</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;xl&#039;</span><span style="color: #000000">, { </span><span style="color: #008000">/* ... */</span><span style="color: #000000"> }),</span>
 <span style="color: #000000">  </span><span style="color: #795E26">screen</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;2xl&#039;</span><span style="color: #000000">, </span><span style="color: #795E26">apply</span><span style="color: #A31515">` ... `</span><span style="color: #000000">),</span>
 <span style="color: #000000">)</span>
+<span style="color: #A31515">`</span>
+</code></pre>
+				<p>For convenience, Twind provides the <code>@screen</code> CSS rule:</p>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">css</span><span style="color: #000000">, </span><span style="color: #001080">screen</span><span style="color: #000000">, </span><span style="color: #001080">apply</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind/css&#039;</span>
+
+<span style="color: #008000">// With template literal</span>
+<span style="color: #795E26">css</span><span style="color: #A31515">`</span>
+<span style="color: #A31515">  @screen sm {</span>
+<span style="color: #A31515">    /* ... */</span>
+<span style="color: #A31515">  }</span>
+<span style="color: #A31515">`</span>
+
+<span style="color: #008000">// With object notation</span>
+<span style="color: #795E26">css</span><span style="color: #000000">({</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&#039;@screen md&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #008000">/* ... */</span>
+<span style="color: #000000">  }</span>
+<span style="color: #000000">})</span>
 <span style="color: #A31515">`</span>
 </code></pre>
 				<a href="#animation-directive" id="animation-directive" style="color: inherit; text-decoration: none;">

@@ -3,8 +3,8 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Styling with Twind | twind - v0.15.3</title>
-	<meta name="description" content="Documentation for twind - v0.15.3">
+	<title>Styling with Twind | twind - v0.15.4</title>
+	<meta name="description" content="Documentation for twind - v0.15.4">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../../assets/css/main.css">
 	<link rel="stylesheet" href="../../assets/css/pages.css">
@@ -24,7 +24,7 @@
 						<li class="state loading">Preparing search index...</li>
 						<li class="state failure">The search index is not available</li>
 					</ul>
-					<a href="../../index.html" class="title">twind - v0.15.3</a>
+					<a href="../../index.html" class="title">twind - v0.15.4</a>
 				</div>
 				<div class="table-cell" id="tsd-widgets">
 					<div id="tsd-filter">
@@ -170,7 +170,30 @@
 				<a href="#the-apply-function" id="the-apply-function" style="color: inherit; text-decoration: none;">
 					<h2>The apply function</h2>
 				</a>
-				<p>To be documented...</p>
+				<p>Use <a href="../../modules/twind.html#apply-1">apply</a> to inline any existing utility classes into a single CSS class.</p>
+				<p>This is useful when you find a common utility pattern in your HTML that you&#39;d like to extract to a new component.</p>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">apply</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">btn</span><span style="color: #000000"> = </span><span style="color: #795E26">apply</span><span style="color: #A31515">`inline-block bg-gray-500 text-base`</span>
+<span style="color: #008000">// =&gt; generates on CSS class with all declarations of the above rules when used</span>
+
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">btnBlock</span><span style="color: #000000"> = </span><span style="color: #795E26">apply</span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">btn</span><span style="color: #0000FF">}</span><span style="color: #A31515"> block`</span>
+<span style="color: #008000">// =&gt; generates on CSS class with all declarations of btn &amp; block</span>
+
+<span style="color: #800000">&lt;button</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #795E26">tw</span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">btn</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #0000FF">}</span><span style="color: #800000">&gt;</span><span style="color: #000000">gray-500</span><span style="color: #800000">&lt;/button&gt;</span>
+<span style="color: #008000">// =&gt; tw-XXXXX</span>
+
+<span style="color: #800000">&lt;button</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #795E26">tw</span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">btn</span><span style="color: #0000FF">}</span><span style="color: #A31515"> bg-red-500 text-lg`</span><span style="color: #0000FF">}</span><span style="color: #800000">&gt;</span><span style="color: #000000">red-500 large</span><span style="color: #800000">&lt;/button&gt;</span>
+<span style="color: #008000">// =&gt; tw-XXXX bg-red-500 text-lg</span>
+
+<span style="color: #800000">&lt;button</span><span style="color: #000000"> </span><span style="color: #FF0000">class</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #795E26">tw</span><span style="color: #A31515">`</span><span style="color: #0000FF">${</span><span style="color: #001080">btnBlock</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #0000FF">}</span><span style="color: #800000">&gt;</span><span style="color: #000000">block button</span><span style="color: #800000">&lt;/button&gt;</span>
+<span style="color: #008000">// =&gt; tw-YYYY</span>
+</code></pre>
+				<p>The component styles are added <strong>before</strong> the utility classes to the stylesheet which allows utilities to override component styles.</p>
+				<p>For more examples see the <a href="../advanced/defining-components.html">Defining Components</a> guide.</p>
+				<blockquote>
+					<p>💡 Another way to extract common component styles is by <a href="../advanced/plugins.html">using an alias plugin</a>.</p>
+				</blockquote>
 				<hr/>
 				<p>Continue to <a href="thinking-in-groups.html">Thinking in Groups</a></p>
 			</div>
