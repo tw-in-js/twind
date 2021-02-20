@@ -14,6 +14,6 @@ defineProps({
 
 </script>
 <template ref="wrapper">
-<Quote>You are viewing an embedded Typedoc site. Please make sure to scroll the inner container to see all contents. </Quote>
+<Quote>Below is an embedded Typedoc site containing the type definitions for this module. Please make sure to scroll the inner container to see all contents. </Quote>
   <iframe :src="`/typedoc/modules/` + module + `.html`" alt="Twind API Reference" class="flex w-full min-h-screen border-none shadow-md flex-1"/>
 </template>
