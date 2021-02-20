@@ -70,7 +70,6 @@
     "c8": "^7.3.5",
     "distilt": "^0.9.4",
     "dlv": "^1.1.3",
-    "doctoc": "^2.0.0",
     "esbuild": "^0.8.31",
     "esbuild-register": "^2.0.0",
     "eslint": "^7.15.0",
@@ -99,7 +98,6 @@
   },
   "scripts": {
     "build": "distilt",
-    "preformat": "doctoc --update-only --notitle --maxlevel 3 docs src",
     "format": "prettier --write --ignore-path .gitignore .",
     "lint": "eslint --ext .js,.ts --ignore-path .gitignore .",
     "postlint": "tsc",
@@ -110,7 +108,7 @@
     "test:coverage": "c8 --src src -x '**/__fixtures__/**' -x '**/__tests__/**' -x '**/*.test.ts' -x 'src/types/**' --all -r lcov -r text yarn test",
     "test:watch": "watchlist src -- yarn test",
     "version": "yarn build",
-    "typedoc": "typedoc --options typedoc.json"
+    "typedoc": "typedoc"
   },
   "prettier": {
     "printWidth": 100,
