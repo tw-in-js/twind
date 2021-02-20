@@ -6,7 +6,6 @@ web_modules
 
 .cache
 dist
-website
 __generated__
 tsconfig.dist*.json
 
