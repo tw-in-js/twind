@@ -1,0 +1,18 @@
+{
+  "name": "twind-docs",
+  "description": "The official documentation site for Twind.",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "Twind Team",
+  "license": "MIT",
+  "devDependencies": {
+    "twind": "^0.15.3",
+    "vitepress": "^0.12.2"
+  },
+  "scripts": {
+    "start": "vitepress dev",
+    "build": "vitepress build",
+    "serve": "vitepress serve"
+  },
+  "dependencies": {}
+}
