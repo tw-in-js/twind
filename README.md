@@ -1,9 +1,11 @@
-<div style="text-align: center;">
+<div align="center">
 
 <img src="website/public/assets/logo.png" heigh="125" width="125" />
-<a href="https://www.twind.dev"><h1>Twind</h1></a>
+<a href="https://www.twind.dev" align="center"><h1>Twind</h1></a>
 
+<p align="center">
 The smallest, fastest, most feature complete Tailwind-in-JS solution in existence
+</p>
 
 [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE)
 [![Latest Release](https://flat.badgen.net/npm/v/twind?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/twind)
