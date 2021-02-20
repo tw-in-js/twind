@@ -1,8 +1,6 @@
 :root {
   --c-brand: #3b9188;
-
   --c-brand-light: #43a399;
-
   --bg-colored-light: #f3f6f7;
 }
 
@@ -22,56 +20,4 @@ img {
 
 .DocSearch.DocSearch {
   --docsearch-primary-color: var(--c-brand);
-}
-
-.home-hero .image.image {
-  max-height: 120px;
-}
-
-.nav-bar .logo {
-  height: 30px;
-  margin-right: 2px;
-}
-
-@media (min-width: 720px) {
-  .nav-links.nav-links.nav-links {
-    padding-top: 2px;
-  }
-}
-
-kbd {
-  box-sizing: border-box;
-  display: inline-block;
-  padding: 5px;
-  font-size: 0.9rem;
-  line-height: 10px;
-  vertical-align: middle;
-  background-color: #fafbfc;
-  border-bottom-color: #d1d5da;
-  border: 1px solid #d1d5da;
-  border-radius: 6px;
-  box-shadow: inset 0 -1px 0 #d1d5da;
-}
-
-code kbd {
-  font-size: 0.7rem;
-  padding: 2px 5px;
-}
-
-code .token.inserted.token.inserted {
-  color: var(--c-brand-light);
-}
-
-.footer .container {
-  border-top: 0 !important;
-}
-
-.home-hero + .home-features .wrapper {
-  border-bottom: 1px solid var(--c-divider);
-  padding-bottom: 3.25rem;
-}
-
-/* Utility classes should not wrap */
-.content tbody tr td:nth-child(1) {
-  white-space: nowrap;
 }
