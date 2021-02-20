@@ -558,16 +558,16 @@ test('keyframes with apply', ({ tw, sheet }) => {
     '1s ease infinite',
     keyframes`
       from, 20%, 53%, 80%, to {
-        ${apply`transform-gpu translate-x-0`}
+        @apply transform-gpu translate-x-0;
       }
       40%, 43% {
-        ${apply`transform-gpu -translate-x-7`}
+        @apply transform-gpu -translate-x-7;
       }
       70% {
-        ${apply`transform-gpu -translate-x-3.5`}
+        @apply transform-gpu -translate-x-3.5;
       },
       90% {
-        ${apply`transform-gpu -translate-x-1`}
+        @apply transform-gpu -translate-x-1;
       }
     `,
   )

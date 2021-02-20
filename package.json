@@ -102,6 +102,7 @@
     "preformat": "doctoc --update-only --notitle --maxlevel 3 docs src",
     "format": "prettier --write --ignore-path .gitignore .",
     "lint": "eslint --ext .js,.ts --ignore-path .gitignore .",
+    "postlint": "tsc",
     "lint:fix": "yarn lint -- --fix",
     "release": "npx np --contents dist",
     "start": "snowpack --config example/snowpack.config.js dev",
