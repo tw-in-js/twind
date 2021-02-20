@@ -110,7 +110,7 @@
     "test:coverage": "c8 --src src -x '**/__fixtures__/**' -x '**/__tests__/**' -x '**/*.test.ts' -x 'src/types/**' --all -r lcov -r text yarn test",
     "test:watch": "watchlist src -- yarn test",
     "version": "yarn build",
-    "typedoc": "typedoc --options typedoc.json"
+    "build:docs": "typedoc --options typedoc.json && cd website && yarn run build"
   },
   "prettier": {
     "printWidth": 100,
@@ -159,15 +159,5 @@
         ]
       }
     ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "docs/**/*.md": "doctoc --update-only --notitle --maxlevel 3",
-    "*.{js,jsx,cjs,mjs,ts,tsx}": "eslint --cache --fix",
-    "*.{json,js,jsx,cjs,mjs,ts,tsx,md,html,css,yml,yaml}": "prettier --write"
   }
 }
