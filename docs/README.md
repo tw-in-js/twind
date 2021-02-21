@@ -9,13 +9,13 @@ The official documentation site for Twind. Powered by [VitePress](https://vitepr
 Clone the source code
 
 ```
-git clone git@github.com:gojutin/twind.dev.git
+git clone git@github.com:tw-in-js/twind.dev.git
 ```
 
 Install the dependencies
 
 ```
-yarn
+yarn & cd docs && yarn
 ```
 
 Run the dev server
@@ -24,7 +24,7 @@ Run the dev server
 yarn run start
 ```
 
-Build the site (builds to `.vitepress/dist/`)
+Build the site (builds to `docs/.vitepress/dist/`)
 
 ```
 yarn run build
