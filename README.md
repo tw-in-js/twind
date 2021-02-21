@@ -11,7 +11,7 @@ The smallest, fastest, most feature complete Tailwind-in-JS solution in existenc
 [![Latest Release](https://flat.badgen.net/npm/v/twind?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/twind)
 [![Bundle Size](https://flat.badgen.net/bundlephobia/minzip/twind?icon=packagephobia&label&color=blue&cache=10800)](https://bundlephobia.com/result?p=twind 'gzip bundle size (including dependencies)')
 [![Package Size](https://flat.badgen.net/badgesize/brotli/https:/unpkg.com/twind/twind.js?icon=jsdelivr&label&color=blue&cache=10800)](https://unpkg.com/twind/twind.js 'brotli package size (without dependencies)')
-[![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.dev/docs)
+[![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.dev)
 [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind?icon=github&label)](https://github.com/tw-in-js/twind)
 [![Discord](https://flat.badgen.net/badge/icon/discord?icon=discord&label)](https://discord.com/invite/2aP5NkszvD)
 [![CI](https://github.com/tw-in-js/twind/workflows/CI/badge.svg)](https://github.com/tw-in-js/twind/actions?query=workflow%3Aci)
@@ -37,13 +37,13 @@ document.body.innerHTML = `
 `
 ```
 
-Twind is also available as an NPM package:
+Twind is also available as an [NPM package](https://www.npmjs.com/package/twind):
 
 ```
 npm i twind
 ```
 
-For seamless integration with existing Tailwind HTML you can use [twind/shim](https://twind.dev/docs/handbook/getting-started/using-the-shim.html):
+For seamless integration with existing Tailwind HTML you can use [twind/shim](https://twind.dev/handbook/the-shim.html):
 
 Try a [live and interactive demo 🚀](https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPG1haW4gY2xhc3M9Imgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIiPgogICAgPGgxIGNsYXNzPSJmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKSI+CiAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICA8L2gxPgogIDwvbWFpbj4KYA==)
 
@@ -55,11 +55,11 @@ Try a [live and interactive demo 🚀](https://esm.codes/#aW1wb3J0ICdodHRwczovL2
 </main>
 ```
 
-> 📚 For more detailed instruction on usage please [read the documentation](https://twind.dev/handbook.html).
+> 📚 For more detailed instruction on usage please [read the documentation](https://twind.dev/handbook/).
 
 ### 🤝 Contributing
 
-We are excited that you are interested in contributing to this project! We've put together an whole [contribution guide]("https://www.twind.dev/handbook/contributing.html) to get your started.
+We are excited that you are interested in contributing to this project! We've put together a whole [contribution guide](https://twind.dev/handbook/contributing.html) to get you started.
 
 ### ⚖️ License
 
