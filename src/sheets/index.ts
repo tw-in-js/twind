@@ -1,6 +1,5 @@
 /**
- *
- * @packageDocumentation
+ * [[include:src/sheets/README.md]]
  * @module twind/sheets
  */
 

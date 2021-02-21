@@ -1,18 +1,25 @@
 {
   "name": "twind-docs",
   "description": "The official documentation site for Twind.",
+  "private": true,
   "version": "0.0.1",
-  "main": "index.js",
+  "main": "index.md",
   "author": "Twind Team",
   "license": "MIT",
   "devDependencies": {
     "twind": "^0.15.3",
+    "typedoc": "^0.20.24",
+    "typedoc-plugin-markdown": "^3.5.0",
+    "typedoc-plugin-param-names": "^2.0.0",
     "vitepress": "^0.12.2"
   },
   "scripts": {
+    "prestart": "typedoc",
     "start": "vitepress dev",
+    "prebuild": "typedoc",
     "build": "vitepress build",
-    "serve": "vitepress serve"
+    "serve": "vitepress serve",
+    "typedoc": "typedoc"
   },
   "dependencies": {}
 }

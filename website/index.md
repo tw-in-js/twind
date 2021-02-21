@@ -18,5 +18,5 @@ features:
   - title: 😎 One low fixed cost
     details: Twind ships the compiler, not the CSS. This means unlimited styles and variants for one low fixed cost of ~12kB.
 
-footer: MIT Licensed |  2020-2021 Twind
+footer: MIT Licensed | 2020-2021 Twind
 ---

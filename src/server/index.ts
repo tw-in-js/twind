@@ -2,8 +2,7 @@
 // ^^^^ This comment is need to prevent browser bundles of this file
 
 /**
- *
- * @packageDocumentation
+ * [[include:src/server/README.md]]
  * @module twind/server
  */
 
