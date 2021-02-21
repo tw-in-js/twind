@@ -153,6 +153,38 @@ css`
 `
 ```
 
+For convenience, Twind provides the `@apply` CSS rule:
+
+```js
+css`
+  @apply text-gray(700 dark:300);
+
+  p {
+    @apply my-5;
+  }
+
+  h1 {
+    @apply text(black dark:white hover:purple-500);
+  }
+`
+
+css`
+  @apply ${['font-bold', false && 'underline', 'py-2 px-4']};
+  color: fuchsia;
+`
+```
+
+`@apply can be used in the object notation as well:
+
+```js
+css({
+  '@apply': 'font-bold py-2 px-4 underline',
+  // '@apply': ['font-bold py-2 px-4', false && underline'],
+  color: 'fuchsia',
+  transform: 'translateY(-1px)',
+})
+```
+
 ## Accessing the theme
 
 Values of the CSS object maybe functions that are passed the context and should return the value to be used:
@@ -217,6 +249,27 @@ css(
   screen('xl', { /* ... */ }),
   screen('2xl', apply` ... `),
 )
+`
+```
+
+For convenience, Twind provides the `@screen` CSS rule:
+
+```js
+import { css, screen, apply } from 'twind/css'
+
+// With template literal
+css`
+  @screen sm {
+    /* ... */
+  }
+`
+
+// With object notation
+css({
+  '@screen md': {
+    /* ... */
+  }
+})
 `
 ```
 
