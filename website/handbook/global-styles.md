@@ -17,18 +17,18 @@ head:
 The `css` function provided by the `twind/css` module provides an easy way to inject global styles into your app using the `:global` selector.
 
 ```js
-import { tw } from "twind";
-import { css } from "twind/css";
+import { tw } from 'twind'
+import { css } from 'twind/css'
 
 const globalStyles = css({
-  ":global": {
+  ':global': {
     a: {
-      color: "#333",
+      color: '#333',
     },
   },
-});
+})
 
-document.getElementById("app").innerHTML = `
+document.getElementById('app').innerHTML = `
 <div class=${tw(globalStyles)}>
 <h1>Hello Twind!</h1>
 <p>
@@ -37,25 +37,25 @@ document.getElementById("app").innerHTML = `
   for more info about Twind.
 </p>
 </div>
-`;
+`
 ```
 
 You can use the `theme` function to apply theme values, the `apply` function to apply Twind classes, and much more.
 
 ```js
-import { tw } from "twind";
-import { css, apply, theme } from "twind/css";
+import { tw } from 'twind'
+import { css, apply, theme } from 'twind/css'
 
 const globalStyles = css({
-  ":global": {
+  ':global': {
     a: {
-      color: theme("colors.blue.500"),
-      "&:hover": apply`text-blue-700`,
+      color: theme('colors.blue.500'),
+      '&:hover': apply`text-blue-700`,
     },
   },
-});
+})
 
-document.getElementById("app").innerHTML = `
+document.getElementById('app').innerHTML = `
 <div class=${tw(globalStyles)}>
 <h1>Hello Twind!</h1>
 <p>
@@ -64,7 +64,7 @@ document.getElementById("app").innerHTML = `
   for more info about Twind.
 </p>
 </div>
-`;
+`
 ```
 
 You have the full power of the `twind/css` module when writing global styles. This approach also allows you to inject global styles anywhere in your app, which is useful for multi-page apps.

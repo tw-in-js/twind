@@ -37,7 +37,7 @@ Here is a example of a Tailwind configuration file and it's Twind equivalent:
 Tailwind
 
 ```js
-const colors = require("tailwindcss/colors");
+const colors = require('tailwindcss/colors')
 
 module.exports = {
   theme: {
@@ -48,33 +48,33 @@ module.exports = {
       pink: colors.fuchsia,
     },
     fontFamily: {
-      sans: ["Graphik", "sans-serif"],
-      serif: ["Merriweather", "serif"],
+      sans: ['Graphik', 'sans-serif'],
+      serif: ['Merriweather', 'serif'],
     },
     extend: {
       spacing: {
-        128: "32rem",
-        144: "36rem",
+        128: '32rem',
+        144: '36rem',
       },
       borderRadius: {
-        "4xl": "2rem",
+        '4xl': '2rem',
       },
     },
   },
   variants: {
     extend: {
-      borderColor: ["focus-visible"],
-      opacity: ["disabled"],
+      borderColor: ['focus-visible'],
+      opacity: ['disabled'],
     },
   },
-};
+}
 ```
 
 Twind
 
 ```js
-import { setup } from "twind";
-import * as colors from "twind/colors";
+import { setup } from 'twind'
+import * as colors from 'twind/colors'
 
 setup({
   theme: {
@@ -85,21 +85,21 @@ setup({
       pink: colors.fuchsia,
     },
     fontFamily: {
-      sans: ["Graphik", "sans-serif"],
-      serif: ["Merriweather", "serif"],
+      sans: ['Graphik', 'sans-serif'],
+      serif: ['Merriweather', 'serif'],
     },
     extend: {
       spacing: {
-        128: "32rem",
-        144: "36rem",
+        128: '32rem',
+        144: '36rem',
       },
       borderRadius: {
-        "4xl": "2rem",
+        '4xl': '2rem',
       },
     },
   },
   // There is no need to include the variants section Twind supports all variants plus more with no additional configuration required
-});
+})
 ```
 
 [Check out the docs](https://twind.dev/docs/handbook/advanced/setup.html) on the `setup` function for more configuration options like preflight, dark mode, and hashing.

@@ -31,9 +31,9 @@ Next we create or modify the following files:
 ```js
 /** @param {import('wmr').Options} config */
 export default async function (config) {
-  if (config.mode === "build") {
-    const { default: json } = await import("@rollup/plugin-json");
-    config.plugins.push(json());
+  if (config.mode === 'build') {
+    const { default: json } = await import('@rollup/plugin-json')
+    config.plugins.push(json())
   }
 }
 ```
@@ -43,34 +43,34 @@ export default async function (config) {
 ```js
 export default {
   /* Shared config */
-};
+}
 ```
 
 **public/index.js**
 
 ```js
-import hydrate from "preact-iso/hydrate";
+import hydrate from 'preact-iso/hydrate'
 
-import { setup } from "twind";
+import { setup } from 'twind'
 // Or if you are using twind/shim
 // import { setup } from 'twind/shim'
 
-import twindConfig from "./twind.config";
+import twindConfig from './twind.config'
 
-if (typeof window !== "undefined") {
-  setup(twindConfig);
+if (typeof window !== 'undefined') {
+  setup(twindConfig)
 }
 
 export function App() {
   /* Your app */
 }
 
-hydrate(<App />);
+hydrate(<App />)
 
 export async function prerender(data) {
-  const { default: prerender } = await import("./prerender");
+  const { default: prerender } = await import('./prerender')
 
-  return prerender(<App {...data} />);
+  return prerender(<App {...data} />)
   // Or if you are using twind/shim
   // return prerender(<App {...data} />, { shim: true })
 }
@@ -79,30 +79,30 @@ export async function prerender(data) {
 **public/prerender.js**
 
 ```js
-import prerender from "preact-iso/prerender";
+import prerender from 'preact-iso/prerender'
 
-import { setup } from "twind";
-import { asyncVirtualSheet, getStyleTagProperties, shim } from "twind/server";
+import { setup } from 'twind'
+import { asyncVirtualSheet, getStyleTagProperties, shim } from 'twind/server'
 
-import twindConfig from "./twind.config";
+import twindConfig from './twind.config'
 
-const sheet = asyncVirtualSheet();
+const sheet = asyncVirtualSheet()
 
-setup({ ...twindConfig, sheet });
+setup({ ...twindConfig, sheet })
 
 export default async (app, options = {}) => {
-  sheet.reset();
+  sheet.reset()
 
-  const result = await prerender(app);
+  const result = await prerender(app)
 
   if (options.shim) {
-    result.html = shim(result.html);
+    result.html = shim(result.html)
   }
 
-  const { id, textContent } = getStyleTagProperties(sheet);
+  const { id, textContent } = getStyleTagProperties(sheet)
 
-  result.html = `<style id="${id}">${textContent}</style>${result.html}`;
+  result.html = `<style id="${id}">${textContent}</style>${result.html}`
 
-  return result;
-};
+  return result
+}
 ```

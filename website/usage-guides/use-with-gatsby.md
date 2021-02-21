@@ -17,36 +17,36 @@ head:
 ```js
 /* gatsby-ssr.js */
 
-const { setup } = require("twind");
-const { asyncVirtualSheet, getStyleTagProperties } = require("twind/server");
+const { setup } = require('twind')
+const { asyncVirtualSheet, getStyleTagProperties } = require('twind/server')
 
-const sheet = asyncVirtualSheet();
+const sheet = asyncVirtualSheet()
 
-setup({ ...sharedOptions, sheet });
+setup({ ...sharedOptions, sheet })
 
 exports.wrapPageElement = ({ element }) => {
-  sheet.reset();
+  sheet.reset()
 
-  return element;
-};
+  return element
+}
 
 exports.onRenderBody = ({ setHeadComponents, pathname }) => {
-  const { id, textContent } = getStyleTagProperties(sheet);
+  const { id, textContent } = getStyleTagProperties(sheet)
 
   const styleProps = {
     id,
     dangerouslySetInnerHTML: {
       __html: textContent,
     },
-  };
+  }
 
   setHeadComponents([
-    React.createElement("style", {
+    React.createElement('style', {
       id,
       dangerouslySetInnerHTML: {
         __html: textContent,
       },
     }),
-  ]);
-};
+  ])
+}
 ```

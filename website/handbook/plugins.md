@@ -40,7 +40,7 @@ Plugins are searched for by name using the longest prefix before a dash (`"-"'`)
 The simplest form of a plugin is one defines a list of tailwind rules to use – basically an alias for the rules:
 
 ```js
-import { tw, setup } from "twind";
+import { tw, setup } from 'twind'
 
 setup({
   plugins: {
@@ -50,21 +50,21 @@ setup({
       rounded-lg shadow-md
       focus:(outline-none ring(2 indigo-400 opacity-75))
    `,
-    "btn-indigo": `btn bg-indigo(500 hover:700) text-white`,
+    'btn-indigo': `btn bg-indigo(500 hover:700) text-white`,
   },
-});
+})
 
-tw`btn`;
+tw`btn`
 // => py-2 px-4 font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75
 
-tw`btn-indigo`;
+tw`btn-indigo`
 // => py-2 px-4 font-semibold rounded-lg shadow-md focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:ring-opacity-75 bg-indigo-500 hover:bg-indigo-700 text-white
 ```
 
 If you want to combine all CSS declarations of these rules into one class use `apply`:
 
 ```js
-import { tw, setup, apply } from "twind";
+import { tw, setup, apply } from 'twind'
 
 setup({
   plugins: {
@@ -75,9 +75,9 @@ setup({
       focus:(outline-none ring(2 indigo-400 opacity-75))
    `,
   },
-});
+})
 
-tw`btn`;
+tw`btn`
 // tw-XXXXX
 ```
 
@@ -90,13 +90,13 @@ For example, say you wanted to take advantage of the [scroll-snap API](https://d
 You could create a simple plugin like so:
 
 ```js
-import { setup } from "twind";
+import { setup } from 'twind'
 
 setup({
   plugins: {
-    "scroll-snap-x": { "scroll-snap-type": "x" },
+    'scroll-snap-x': { 'scroll-snap-type': 'x' },
   },
-});
+})
 ```
 
 The above code will result in the compiler returning `{ scroll-snap-type: x }` every time it encounters the directive `scroll-snap-x` within a set of rules.
@@ -123,13 +123,13 @@ The previous example is trivial to implement but it only accounts for one of the
 It is possible to generalize a plugins behavior by using a function:
 
 ```js
-import { setup } from "twind";
+import { setup } from 'twind'
 
 setup({
   plugins: {
-    "scroll-snap": (parts) => ({ "scroll-snap-type": parts[0] }),
+    'scroll-snap': (parts) => ({ 'scroll-snap-type': parts[0] }),
   },
-});
+})
 ```
 
 Plugins are passed three arguments:
@@ -148,17 +148,17 @@ This means that the plugin above now covers more single part cases like `scroll-
 The above example could be written using the `css` helper:
 
 ```js
-import { setup } from "twind";
-import { css } from "twind/css";
+import { setup } from 'twind'
+import { css } from 'twind/css'
 
 setup({
   plugins: {
-    "scroll-snap": (parts) =>
+    'scroll-snap': (parts) =>
       css`
         scroll-snap-type: ${parts[0]};
       `,
   },
-});
+})
 ```
 
 > Core plugins cannot be deleted but they can be overwritten
@@ -168,9 +168,9 @@ If we wanted to take this one step further and cover all scroll-snap cases then 
 ```js
 setup({
   plugins: {
-    "scroll-snap": (parts) => ({ "scroll-snap-type": parts.join(" ") }),
+    'scroll-snap': (parts) => ({ 'scroll-snap-type': parts.join(' ') }),
   },
-});
+})
 ```
 
 This would now work for multi-part rules like `scroll-snap-both-proximity` which would return `{ scroll-snap-type: both proximity; }` demonstrating how parts can be combined to produce output which adheres to whatever CSS specification they are trying to abstract over.
@@ -180,21 +180,21 @@ This would now work for multi-part rules like `scroll-snap-both-proximity` which
 The second named argument passed to a plugin is the configured theme that is being used by the compiler. This is not always required but is useful in circumstances where you might want to provide a default or configurable set of values for a given directive.
 
 ```js
-import { setup } from "twind";
+import { setup } from 'twind'
 
 setup({
   theme: {
     scroll: {
-      DEFAULT: "both",
-      proximity: "both proximity",
+      DEFAULT: 'both',
+      proximity: 'both proximity',
     },
   },
   plugins: {
-    "scroll-snap": (parts, { theme }) => ({
-      "scroll-snap-type": theme("scroll", parts[0]),
+    'scroll-snap': (parts, { theme }) => ({
+      'scroll-snap-type': theme('scroll', parts[0]),
     }),
   },
-});
+})
 ```
 
 In the above example, the directive `scroll-snap` with no arguments with result in the CSS rule `{ scroll-snap-type: both }` being returned (using the `DEFUALT` value from the theme). The `theme` that gets passed to plugins isn't an object but rather a function that takes a path and attempts to return a value from that location in the theme.
@@ -211,9 +211,9 @@ If you find yourself in this circumstance, use an inline plugin:
 
 ```js
 tw(() => ({
-  "&::before": { content: '"🙁"' },
-  "&::after": { content: '"😊"' },
-}));
+  '&::before': { content: '"🙁"' },
+  '&::after': { content: '"😊"' },
+}))
 // => tw-xxxx
 ```
 
@@ -224,10 +224,10 @@ Furthermore any variants or groupings that are active when the plugin is called,
 ```js
 tw`
   sm:hover:${() => ({
-    "&::before": { content: '"🙁"' },
-    "&::after": { content: '"😊"' },
+    '&::before': { content: '"🙁"' },
+    '&::after': { content: '"😊"' },
   })}
-`;
+`
 // => sm:hover:tw-xxxx
 ```
 
@@ -238,19 +238,19 @@ In the above example, the before and after styles are only applied on small scre
 > ```js
 > tw`
 >   sm:hover:${css({
->     "&::before": { content: '"🙁"' },
->     "&::after": { content: '"😊"' },
+>     '&::before': { content: '"🙁"' },
+>     '&::after': { content: '"😊"' },
 >   })}
-> `;
+> `
 > // => sm:hover:tw-xxxx
 > ```
 
 Additionally inline plugins allow to extract common definitions:
 
 ```js
-const link = ({ tw }) => tw`text-cyan-600 hover:text-cyan-700`;
+const link = ({ tw }) => tw`text-cyan-600 hover:text-cyan-700`
 
-tw`font-bold ${link}`;
+tw`font-bold ${link}`
 // => font-bold text-cyan-600 hover:text-cyan-700
 ```
 
@@ -264,7 +264,7 @@ If a plugin needs to define some global styles it can use the `:global` property
 setup({
   plugins: {
     link: {
-      ":global": {
+      ':global': {
         a: {
           /* global styles for anchors */
         },
@@ -272,5 +272,5 @@ setup({
       /* element styles */
     },
   },
-});
+})
 ```

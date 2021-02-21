@@ -18,13 +18,11 @@ head:
 
 ```html
 <script>
-  import { tw } from "twind";
+  import { tw } from 'twind'
 </script>
 
 <main class="{tw`h-screen bg-purple-400 flex items-center justify-center`}">
-  <h1 class="{tw`font-bold text(center 5xl white sm:gray-800 md:pink-700)`}">
-    This is Twind!
-  </h1>
+  <h1 class="{tw`font-bold text(center 5xl white sm:gray-800 md:pink-700)`}">This is Twind!</h1>
 </main>
 ```
 
@@ -33,30 +31,30 @@ head:
 ## Server Side Rendering
 
 ```js
-import { setup } from "twind";
-import { virtualSheet, getStyleTag } from "twind/sheets";
+import { setup } from 'twind'
+import { virtualSheet, getStyleTag } from 'twind/sheets'
 
-import App from "./app.svelte";
+import App from './app.svelte'
 
-const sheet = virtualSheet();
+const sheet = virtualSheet()
 
-setup({ ...sharedOptions, sheet });
+setup({ ...sharedOptions, sheet })
 
 function ssr() {
   // 1. Reset the sheet for a new rendering
-  sheet.reset();
+  sheet.reset()
 
   // 2. Render the app
-  const { head = "", html, css } = App.render({
+  const { head = '', html, css } = App.render({
     /* options */
-  });
+  })
 
   if (css && css.code) {
-    head += `<style>${css.code}</style>`;
+    head += `<style>${css.code}</style>`
   }
 
   // 3. Create the style tag with all generated CSS rules
-  head += getStyleTag(sheet);
+  head += getStyleTag(sheet)
 
   // 4. Generate the response html
   return `<!DOCTYPE html>
@@ -64,6 +62,6 @@ function ssr() {
       <head>${head}</head>
       <body>${html}</body>
     </html>
-  `;
+  `
 }
 ```

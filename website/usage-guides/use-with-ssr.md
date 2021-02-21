@@ -41,22 +41,22 @@ The following example assumes your app is using the `tw` named export from `twin
 but the same logic can be applied to custom instances.
 
 ```js
-import { setup } from "twind";
-import { virtualSheet, getStyleTag } from "twind/sheets";
+import { setup } from 'twind'
+import { virtualSheet, getStyleTag } from 'twind/sheets'
 
-const sheet = virtualSheet();
+const sheet = virtualSheet()
 
-setup({ ...sharedOptions, sheet });
+setup({ ...sharedOptions, sheet })
 
 function ssr() {
   // 1. Reset the sheet for a new rendering
-  sheet.reset();
+  sheet.reset()
 
   // 2. Render the app
-  const body = renderTheApp();
+  const body = renderTheApp()
 
   // 3. Create the style tag with all generated CSS rules
-  const styleTag = getStyleTag(sheet);
+  const styleTag = getStyleTag(sheet)
 
   // 4. Generate the response html
   return `<!DOCTYPE html>
@@ -64,7 +64,7 @@ function ssr() {
       <head>${styleTag}</head>
       <body>${body}</body>
     </html>
-  `;
+  `
 }
 ```
 
@@ -74,7 +74,7 @@ In order to prevent harmful code injection on the web, a [Content Security Polic
 // ... other code is the same as before ...
 
 // Usage with webpack: https://webpack.js.org/guides/csp/
-const styleTag = getStyleTag(sheet, { nonce: __webpack_nonce__ });
+const styleTag = getStyleTag(sheet, { nonce: __webpack_nonce__ })
 ```
 
 ## Asynchronous SSR
@@ -85,22 +85,22 @@ const styleTag = getStyleTag(sheet, { nonce: __webpack_nonce__ });
 > Async server side rendering is implemented using [async_hooks](https://nodejs.org/docs/latest-v14.x/api/async_hooks.html). Callback-based APIs and event emitters may not work or need special handling.
 
 ```js
-import { setup } from "twind";
-import { asyncVirtualSheet, getStyleTag } from "twind/server";
+import { setup } from 'twind'
+import { asyncVirtualSheet, getStyleTag } from 'twind/server'
 
-const sheet = asyncVirtualSheet();
+const sheet = asyncVirtualSheet()
 
-setup({ ...sharedOptions, sheet });
+setup({ ...sharedOptions, sheet })
 
 async function ssr() {
   // 1. Reset the sheet for a new rendering
-  sheet.reset();
+  sheet.reset()
 
   // 2. Render the app
-  const body = await renderTheApp();
+  const body = await renderTheApp()
 
   // 3. Create the style tag with all generated CSS rules
-  const styleTag = getStyleTag(sheet);
+  const styleTag = getStyleTag(sheet)
 
   // 4. Generate the response html
   return `<!DOCTYPE html>
@@ -108,7 +108,7 @@ async function ssr() {
       <head>${styleTag}</head>
       <body>${body}</body>
     </html>
-  `;
+  `
 }
 ```
 

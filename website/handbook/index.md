@@ -18,8 +18,8 @@ The smallest, fastest, most feature complete Tailwind-in-JS solution in existenc
 
 [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE)
 [![Latest Release](https://flat.badgen.net/npm/v/twind?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/twind)
-[![Bundle Size](https://flat.badgen.net/bundlephobia/minzip/twind?icon=packagephobia&label&color=blue&cache=10800)](https://bundlephobia.com/result?p=twind "gzip bundle size (including dependencies)")
-[![Package Size](https://flat.badgen.net/badgesize/brotli/https:/unpkg.com/twind/twind.js?icon=jsdelivr&label&color=blue&cache=10800)](https://unpkg.com/twind/twind.js "brotli package size (without dependencies)")
+[![Bundle Size](https://flat.badgen.net/bundlephobia/minzip/twind?icon=packagephobia&label&color=blue&cache=10800)](https://bundlephobia.com/result?p=twind 'gzip bundle size (including dependencies)')
+[![Package Size](https://flat.badgen.net/badgesize/brotli/https:/unpkg.com/twind/twind.js?icon=jsdelivr&label&color=blue&cache=10800)](https://unpkg.com/twind/twind.js 'brotli package size (without dependencies)')
 [![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.dev/docs)
 [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind?icon=github&label)](https://github.com/tw-in-js/twind)
 [![Discord](https://flat.badgen.net/badge/icon/discord?icon=discord&label)](https://discord.com/invite/2aP5NkszvD)
@@ -45,13 +45,13 @@ Try a [live and interactive demo 🚀 ](https://esm.codes/#aW1wb3J0IHsgdHcgfSBmc
 If you would like to get started with Twind right away then copy paste this code into your favorite sandbox:
 
 ```js
-import { tw } from "https://cdn.skypack.dev/twind";
+import { tw } from 'https://cdn.skypack.dev/twind'
 
 document.body.innerHTML = `
   <main class="${tw`h-screen bg-purple-400 flex items-center justify-center`}">
     <h1 class="${tw`font-bold text(center 5xl white sm:gray-800 md:pink-700)`}">This is Twind!</h1>
   </main>
-`;
+`
 ```
 
 Using the exported `tw` function results in the compilation of the rules like `bg-black text-white` and `text-xl` exactly as specified in the [Tailwind documentation](https://tailwincss.com/docs). For convenience, the default [Tailwind theme](https://github.com/tailwindlabs/tailwindcss/blob/v1/stubs/defaultConfig.stub.js) is used along with the preflight [base styles](https://tailwindcss.com/docs/preflight) unless you explicitly overwrite them.
@@ -64,9 +64,7 @@ Try a [live and interactive demo 🚀](https://esm.codes/#aW1wb3J0ICdodHRwczovL2
 <script type="module" src="https://cdn.skypack.dev/twind/shim"></script>
 
 <main class="h-screen bg-purple-400 flex items-center justify-center">
-  <h1 class="font-bold text(center 5xl white sm:gray-800 md:pink-700)">
-    This is Twind!
-  </h1>
+  <h1 class="font-bold text(center 5xl white sm:gray-800 md:pink-700)">This is Twind!</h1>
 </main>
 ```
 
@@ -92,9 +90,7 @@ It might not always be desirable to generate rules by invoking the compiler dire
 <script type="module" src="https://cdn.skypack.dev/twind/shim"></script>
 
 <main class="h-screen bg-purple-400 flex items-center justify-center">
-  <h1 class="font-bold text(center 5xl white sm:gray-800 md:pink-700)">
-    This is Twind!
-  </h1>
+  <h1 class="font-bold text(center 5xl white sm:gray-800 md:pink-700)">This is Twind!</h1>
 </main>
 ```
 

@@ -34,7 +34,7 @@ Twind is available as an ES Module on [skypack](https://skypack.dev/). Be sure t
 
 ```html
 <script type="module">
-  import { tw } from "https://cdn.skypack.dev/twind";
+  import { tw } from 'https://cdn.skypack.dev/twind'
 </script>
 ```
 
@@ -51,6 +51,6 @@ You may need to provide certain polyfills depending on your target browser.
 ```html
 <script src="https://unpkg.com/twind/twind.umd.js"></script>
 <script>
-  var tw = twind.tw;
+  var tw = twind.tw
 </script>
 ```

@@ -27,9 +27,9 @@ head:
 [View in Docs](https://twind.dev/docs/handbook/getting-started/installation.html)
 
 ```tsx
-import { tw } from "https://cdn.skypack.dev/twind"; // requires type="module"
+import { tw } from 'https://cdn.skypack.dev/twind' // requires type="module"
 // or
-import { tw } from "twind";
+import { tw } from 'twind'
 ```
 
 ## The `tw` function
@@ -41,35 +41,35 @@ The `tw` function is responsible for composing styles and injecting the derived 
 - Template Literal (recommended)
 
   ```tsx
-  tw`bg-gray-200 ${false && "rounded"}`;
+  tw`bg-gray-200 ${false && 'rounded'}`
   ```
 
 - Objects
 
   ```tsx
-  tw({ "bg-gray-200": true, rounded: false, underline: isTrue() });
+  tw({ 'bg-gray-200': true, rounded: false, underline: isTrue() })
   ```
 
 - Strings
 
   ```tsx
-  tw("bg-gray-200", true && "rounded", "underline");
+  tw('bg-gray-200', true && 'rounded', 'underline')
   ```
 
 - Arrays
 
   ```tsx
-  tw(["bg-gray-200"], ["", 0, false, "rounded"], [["underline"]]);
+  tw(['bg-gray-200'], ['', 0, false, 'rounded'], [['underline']])
   ```
 
 - Variadic (mixed)
 
   ```tsx
-  tw("bg-gray-200", [
-    1 && "rounded",
-    { underline: false, "text-black": null },
-    ["text-lg", ["shadow-lg"]],
-  ]);
+  tw('bg-gray-200', [
+    1 && 'rounded',
+    { underline: false, 'text-black': null },
+    ['text-lg', ['shadow-lg']],
+  ])
   ```
 
 ## Grouping
@@ -81,7 +81,7 @@ The Twind compiler provides a terse syntax for grouping related classes together
 - Directive Grouping
 
   ```tsx
-  tw`border(2 black opacity-50 dashed)`;
+  tw`border(2 black opacity-50 dashed)`
   ```
 
 - Variant Grouping
@@ -95,17 +95,17 @@ The Twind compiler provides a terse syntax for grouping related classes together
     )
     md:(bg-red-700 shadow)
     lg:(bg-red-800 shadow-xl)
-  `;
-  tw`w(1/2 sm:1/3 lg:1/6) p-2`;
+  `
+  tw`w(1/2 sm:1/3 lg:1/6) p-2`
   ```
 
 - Mixed Groupings
 
   ```tsx
-  tw`sm:(border(2 black opacity-50 hover:dashed))`;
-  tw`border(md:(2 black opacity-50 hover:dashed))`;
-  tw`divide(y-2 blue-500 opacity(75 md:50))`;
-  tw`rotate(-3 hover:6 md:(3 hover:-6))`; // (Negated value)
+  tw`sm:(border(2 black opacity-50 hover:dashed))`
+  tw`border(md:(2 black opacity-50 hover:dashed))`
+  tw`divide(y-2 blue-500 opacity(75 md:50))`
+  tw`rotate(-3 hover:6 md:(3 hover:-6))` // (Negated value)
   ```
 
 - Self Reference
@@ -119,15 +119,15 @@ The Twind compiler provides a terse syntax for grouping related classes together
 
   ```tsx
   tw`
-    hover:${css({ "&::after": { content: "🌈" } })}
+    hover:${css({ '&::after': { content: '🌈' } })}
   
     hover:${({ tw }) => ({
       sm: tw`underline`,
-      lg: "no-underline line-through",
+      lg: 'no-underline line-through',
     })}
   
-    sm:${["rounded"]}
-  `;
+    sm:${['rounded']}
+  `
   ```
 
 ## The Shim
@@ -148,9 +148,7 @@ import 'twind/shim`;
   </head>
   <body>
     <main class="h-screen bg-purple-400 flex items-center justify-center">
-      <h1 class="font-bold text(center 5xl white sm:gray-800 md:pink-700)">
-        This is Twind!
-      </h1>
+      <h1 class="font-bold text(center 5xl white sm:gray-800 md:pink-700)">This is Twind!</h1>
     </main>
   </body>
 </html>
@@ -179,21 +177,21 @@ The `css` function allows you to write raw CSS in Twind, with support for pseudo
 
 ```tsx
 // All available exports
-import { tw, css, theme, apply, animation, bounce, keyframes } from "twind/css";
+import { tw, css, theme, apply, animation, bounce, keyframes } from 'twind/css'
 
 tw(
   css({
-    "&::before": { content: '"🙁"' },
-    "&::after": { content: '"😊"' },
-  })
-);
+    '&::before': { content: '"🙁"' },
+    '&::after': { content: '"😊"' },
+  }),
+)
 
 tw`
   sm:hover:${css({
-    "&::before": { content: '"🙁"' },
-    "&::after": { content: '"😊"' },
+    '&::before': { content: '"🙁"' },
+    '&::after': { content: '"😊"' },
   })}
-`;
+`
 ```
 
 ## Configuration
@@ -203,18 +201,18 @@ tw`
 The `setup` function can optionally be used to configure and extend your theme.
 
 ```tsx
-import { setup, strict, voidSheet } from "twind";
-import * as colors from "twind/colors"; // Tailwind V2 colors
+import { setup, strict, voidSheet } from 'twind'
+import * as colors from 'twind/colors' // Tailwind V2 colors
 
 setup({
   theme: {
     extend: {
       gray: colors.trueGray,
-      colors: { hotpink: "#FF00FF" },
-      rotate: { 5: "5deg" },
+      colors: { hotpink: '#FF00FF' },
+      rotate: { 5: '5deg' },
     },
   },
-});
+})
 
 // Advanced
 setup({
@@ -222,9 +220,9 @@ setup({
   mode: strict, // throw errors for invalid rules: "strict", "warn" or "silent"- default is warn
   hash: true, // hash all generated class names (default: false)
   theme: {}, // define custom theme values (default: tailwind theme)
-  darkMode: "class", // use a different dark mode strategy (default: 'media')
+  darkMode: 'class', // use a different dark mode strategy (default: 'media')
   sheet: voidSheet, // use custom sheet (default: cssomSheet in a browser or no-op)
-});
+})
 ```
 
 ## Beyond Tailwind
