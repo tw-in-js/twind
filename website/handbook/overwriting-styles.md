@@ -16,27 +16,26 @@ head:
 
 Twind provides three primary ways to overwrite styles:
 
-
-  - [The `apply` function (recommended)](#the-apply-function-recommended)
-  - [The `override` directive](#the-override-directive)
-  - [The `!important` directive](#the-important-directive)
+- [The `apply` function (recommended)](#the-apply-function-recommended)
+- [The `override` directive](#the-override-directive)
+- [The `!important` directive](#the-important-directive)
 
 ## The `apply` function (recommended)
 
 The Twind module exposes an `apply` function, which can be used to define a collection of Twind classes that can later be overwritten in a `tw` call.
 
 ```js
-import { apply, tw } from "twind";
+import { apply, tw } from 'twind'
 
-const userSuppliedClassName = "text-blue-800";
-const appliedClassName = apply`text-gray-800`;
-const classNames = tw(appliedClassName, userSuppliedClassName);
+const userSuppliedClassName = 'text-blue-800'
+const appliedClassName = apply`text-gray-800`
+const classNames = tw(appliedClassName, userSuppliedClassName)
 
 document.body.innerHTML = `
   <p class="${classNames}">
     This text will be blue
   </p>
-`;
+`
 ```
 
 Any class names passed into the `apply` function will be merged into a single class name like `tw-****`. Once passed into a `tw` call, all of the styles will be merged and any styles defined outside of the `apply` call will take precedence. You can think of any classes inside of an `apply` function to be default values that can be overwritten at runtime.

@@ -152,5 +152,14 @@
         ]
       }
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,jsx,cjs,mjs,ts,tsx}": "eslint --cache --fix",
+    "*.{json,js,jsx,cjs,mjs,ts,tsx,md,html,css,yml,yaml}": "prettier --write"
   }
 }

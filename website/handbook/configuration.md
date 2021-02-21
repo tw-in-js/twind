@@ -23,16 +23,16 @@ The `setup` function is not required to use Twind
 The ` setup` function is a named export of the `twind` module and accepts an config object as an argument.
 
 ```js
-import { setup, strict, voidSheet } from "twind";
+import { setup, strict, voidSheet } from 'twind'
 
 setup({
   preflight: false, // do not include base style reset (default: use tailwind preflight)
   mode: strict, // throw errors for invalid rules (default: warn)
   hash: true, // hash all generated class names (default: false)
   theme: {}, // define custom theme values (default: tailwind theme)
-  darkMode: "class", // use a different dark mode strategy (default: 'media')
+  darkMode: 'class', // use a different dark mode strategy (default: 'media')
   sheet: voidSheet, // use custom sheet (default: cssomSheet in a browser or no-op)
-});
+})
 ```
 
 ## Theme
@@ -42,22 +42,22 @@ Applying a new theme or extending the default is probably the most common custom
 Here is an example of overriding and extending values in the theme:
 
 ```js
-import { setup } from "twind";
+import { setup } from 'twind'
 
 setup({
   theme: {
     fontFamily: {
-      sans: ["Helvetica", "sans-serif"],
-      serif: ["Times", "serif"],
+      sans: ['Helvetica', 'sans-serif'],
+      serif: ['Times', 'serif'],
     },
     extend: {
       spacing: {
-        128: "32rem",
-        144: "36rem",
+        128: '32rem',
+        144: '36rem',
       },
     },
   },
-});
+})
 ```
 
 ### Colors
@@ -65,7 +65,7 @@ setup({
 The Tailwind v2 [extended color palette](https://tailwindcss.com/docs/customizing-colors#color-palette-reference) is available as {@link twind/colors}:
 
 ```js
-import * as colors from "twind/colors";
+import * as colors from 'twind/colors'
 
 setup({
   theme: {
@@ -77,13 +77,13 @@ setup({
       yellow: colors.amber,
     },
   },
-});
+})
 ```
 
 To extend the existing color palette use `theme.extend`:
 
 ```js
-import * as colors from "twind/colors";
+import * as colors from 'twind/colors'
 
 setup({
   theme: {
@@ -91,7 +91,7 @@ setup({
       colors,
     },
   },
-});
+})
 ```
 
 ### Referencing other values
@@ -101,9 +101,9 @@ If you need to reference another value in your theme, you can do so by providing
 ```js
 setup({
   theme: {
-    fill: (theme) => theme("colors"),
+    fill: (theme) => theme('colors'),
   },
-});
+})
 ```
 
 ## Preflight
@@ -117,7 +117,7 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
   ```js
   setup({
     preflight: false,
-  });
+  })
   ```
 
 - If you would like to inject a custom reset instead then provide a function as a value.
@@ -127,7 +127,7 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
     // preflight: the default preflight CSS object
     // context: tw, theme and, tag functions
     preflight: (preflight, { theme }) => ({ ...preflight /* ... */ }),
-  });
+  })
   ```
 
 - You can provide additional CSS rules as an object which are merged with the default reset.
@@ -137,25 +137,25 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
     preflight: {
       /* ... */
     },
-  });
+  })
   ```
 
 - {@link twind.apply | apply} Tailwind rules
 
   ```js
-  import { apply, setup } from "twind";
+  import { apply, setup } from 'twind'
 
   setup({
     preflight: {
       body: apply`bg-gray-900 text-white`,
     },
-  });
+  })
   ```
 
 - use {@link twind/css.css | css} to merge rules
 
   ```js
-  import { css, theme, apply } from "twind/css";
+  import { css, theme, apply } from 'twind/css'
 
   setup({
     preflight: (preflight) =>
@@ -163,12 +163,12 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
         preflight,
         {
           body: {
-            backgroundColor: theme("colors.gray.900"),
+            backgroundColor: theme('colors.gray.900'),
           },
         },
-        { body: apply`text-gray-100` }
+        { body: apply`text-gray-100` },
       ),
-  });
+  })
 
   // Or using template literal:
 
@@ -176,11 +176,11 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
     preflight: (preflight) => css`
       ${preflight}
       body {
-        background-color: ${theme("colors.gray.900")};
+        background-color: ${theme('colors.gray.900')};
         ${apply`text-gray-100`}
       }
     `,
-  });
+  })
   ```
 
 ## Mode
@@ -197,21 +197,21 @@ However, sometimes throwing an error might be desirable; for example during test
 To force the program to error instead of warn set `mode` to `strict`:
 
 ```js
-import { setup, strict } from "twind";
+import { setup, strict } from 'twind'
 
 setup({
   mode: strict, // Throw errors for invalid rules instead of logging
-});
+})
 ```
 
 To ignore all warnings set the `mode` to `silent`:
 
 ```js
-import { setup, silent } from "twind";
+import { setup, silent } from 'twind'
 
 setup({
   mode: silent,
-});
+})
 ```
 
 > 💡 If you are using JSON configuration the modes can be set using strings: `"strict"`, `"warn"` or `"silent"`.
@@ -227,17 +227,17 @@ To enable hashing of class names set `hash` to `true`.
 ```js
 setup({
   hash: true,
-});
+})
 ```
 
 Alternatively a custom hash function can be provided:
 
 ```js
-import hash from "@emotion/hash";
+import hash from '@emotion/hash'
 
 setup({
-  hash: (string) => "tw-" + hash(string),
-});
+  hash: (string) => 'tw-' + hash(string),
+})
 ```
 
 ## Dark Mode
@@ -249,7 +249,7 @@ To make this as easy as possible, Twind includes a dark variant that lets you st
 ```js
 tw`
   bg-white text-black
-  dark:(bg-gray-800 text-white)`;
+  dark:(bg-gray-800 text-white)`
 ```
 
 > 💡 It's important to note that the dark mode variant is **always** enabled and available for all directives.
@@ -258,8 +258,8 @@ Now whenever dark mode is enabled on the user's operating system, `dark:{directi
 
 ```js
 setup({
-  darkMode: "class", // default is 'media'
-});
+  darkMode: 'class', // default is 'media'
+})
 ```
 
 For an example how to toggle dark mode manually read the [Tailwind Guide](https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually).
@@ -275,10 +275,10 @@ Twind collects generated CSS rules in sheet to make theme available to the envir
 If the `cssomSheet` is passed no `target` it looks for an style element with the id `__twind`. If no such element is found it will create one and append it to the `document.head`.
 
 ```js
-import { setup, cssomSheet } from "twind";
+import { setup, cssomSheet } from 'twind'
 
-const sheet = cssomSheet({ target: new CSSStyleSheet() });
-setup({ sheet });
+const sheet = cssomSheet({ target: new CSSStyleSheet() })
+setup({ sheet })
 ```
 
 > 💡 See [Examples - LitElement](./examples.md#litelement) how this can be used.
@@ -288,9 +288,9 @@ setup({ sheet });
 > 💡 This is the default implementation on server environments.
 
 ```js
-import { setup, voidSheet } from "twind";
+import { setup, voidSheet } from 'twind'
 
-setup({ sheet: voidSheet() });
+setup({ sheet: voidSheet() })
 ```
 
 ### DOM Sheet
@@ -300,10 +300,10 @@ A sheet implementation which inserts style rules through the Document Object Mod
 > 💡 This implementation is way slower than the default ([cssomSheet](#cssom-sheet)) but may be useful to see the generated CSS right in the DOM. Most modern browser display CSS rules from the speedy default sheet using their CSS inspector.
 
 ```js
-import { setup } from "twind";
-import { domSheet } from "twind/sheets";
+import { setup } from 'twind'
+import { domSheet } from 'twind/sheets'
 
-setup({ sheet: domSheet() });
+setup({ sheet: domSheet() })
 ```
 
 > 💡 See {@link twind/sheets} for details.
@@ -313,14 +313,14 @@ setup({ sheet: domSheet() });
 A sheet implementation which collects style rules into an array.
 
 ```js
-import { setup } from "twind";
-import { virtualSheet } from "twind/sheets";
+import { setup } from 'twind'
+import { virtualSheet } from 'twind/sheets'
 
-const sheet = virtualSheet();
-setup({ sheet });
+const sheet = virtualSheet()
+setup({ sheet })
 
 // An array of all inserted CSS rules
-sheet.target;
+sheet.target
 ```
 
 > 💡 See {@link twind/sheets} for details.
@@ -340,7 +340,7 @@ The `variants` property allows to define new variants or override {@page Tailwin
 ```js
 setup({
   variants: {
-    "not-checked": "&:not(:checked)",
+    'not-checked': '&:not(:checked)',
   },
-});
+})
 ```

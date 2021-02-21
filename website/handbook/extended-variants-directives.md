@@ -35,11 +35,11 @@ _Advanced_ pseudo classes (those that take parameters like `:is(header)`) are no
 ```js
 setup({
   variants: {
-    "is-header": "&:is(header)",
+    'is-header': '&:is(header)',
   },
-});
+})
 
-tw`is-header:font-bold`;
+tw`is-header:font-bold`
 // => .is-header\:font-bold:is(header) { ... }
 ```
 
@@ -68,26 +68,26 @@ Pseudo Elements can be used and are identified by a double colon:
 
 ```html
 <p class="first-line::(uppercase text-blue-500)">
-  Styles will only be applied to the first line of this paragraph. After that,
-  all text will be styled like normal. See what I mean?
+  Styles will only be applied to the first line of this paragraph. After that, all text will be
+  styled like normal. See what I mean?
 </p>
 ```
 
 `::before` and `::after` are often used together with [content property](https://developer.mozilla.org/en-US/docs/Web/CSS/content). The [@twind/content](https://github.com/tw-in-js/twind-content) extension helps in these cases:
 
 ```js
-import { content } from "@twind/content";
+import { content } from '@twind/content'
 
-tw`${content('"✅"')}`;
+tw`${content('"✅"')}`
 // => .tw-xxxx { content: "✅" }
 
-tw`before::${content('"✅"')}`;
+tw`before::${content('"✅"')}`
 // => .tw-xxxx::before { content: "✅" }
 
-tw`before::${content("attr(data-content)")}`;
+tw`before::${content('attr(data-content)')}`
 // => .tw-xxxx::before { content: attr(data-content) }
 
-tw`after::${content('" (" attr(href) " )"')}`;
+tw`after::${content('" (" attr(href) " )"')}`
 // => .tw-xxxx::after { content: " (" attr(href) " )" }
 ```
 
@@ -153,8 +153,8 @@ Please note that [some CSS properties are inherited](https://developer.mozilla.o
 When using components that have some default styles it happens that one wants to override a rule. Consider the following example:
 
 ```js
-const shared = tw`text(xl center blue-600) underline`;
-const special = tw`${shared} text-purple-600 no-underline`;
+const shared = tw`text(xl center blue-600) underline`
+const special = tw`${shared} text-purple-600 no-underline`
 // => text-xl text-center text-blue-600 underline text-purple-600 no-underline
 ```
 
@@ -165,8 +165,8 @@ To support these cases Twind includes the `override` variant which uses a little
 The above example should be re-written to:
 
 ```js
-const shared = tw`text(xl center blue-600) underline`;
-const special = tw`${shared} override:(text-purple-600 no-underline)`;
+const shared = tw`text(xl center blue-600) underline`
+const special = tw`${shared} override:(text-purple-600 no-underline)`
 ```
 
 > 🚀 [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgdHcgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZCcKCmNvbnN0IHNoYXJlZCA9IHR3YHRleHQoeGwgY2VudGVyIGJsdWUtNjAwKSB1bmRlcmxpbmVgCmNvbnN0IHNwZWNpYWwgPSB0d2Ake3NoYXJlZH0gb3ZlcnJpZGU6KHRleHQtcHVycGxlLTYwMCBuby11bmRlcmxpbmUpYAoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPHAgY2xhc3M9IiR7c2hhcmVkfSI+Q29tbW9uIFN0eWxlczwvcD4KICA8cCBjbGFzcz0iJHtzcGVjaWFsfSI+U3BlY2lhbCBTdHlsZXM8L3A+CmAK)
@@ -216,20 +216,20 @@ setup({
     extend: {
       backgroundImage: (theme) => ({
         // Use a own gradient
-        "gradient-radial": `radial-gradient(${theme(
-          "colors.blue.500"
-        )}, ${theme("colors.red.500")});`,
+        'gradient-radial': `radial-gradient(${theme('colors.blue.500')}, ${theme(
+          'colors.red.500',
+        )});`,
         // Integrate with gradient colors stops (from-*, via-*, to-*)
-        "gradient-15":
-          "linear-gradient(.15turn, var(--tw-gradient-stops,var(--tw-gradient-from,transparent),var(--tw-gradient-to,transparent)))",
+        'gradient-15':
+          'linear-gradient(.15turn, var(--tw-gradient-stops,var(--tw-gradient-from,transparent),var(--tw-gradient-to,transparent)))',
       }),
     },
   },
-});
+})
 
-tw`bg-gradient-radial`;
+tw`bg-gradient-radial`
 
-tw`bg-gradient-15 from-green-400 to-blue-500`;
+tw`bg-gradient-15 from-green-400 to-blue-500`
 ```
 
 > 🚀 [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgc2V0dXAgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKc2V0dXAoewogIHRoZW1lOiB7CiAgICBleHRlbmQ6IHsKICAgICAgYmFja2dyb3VuZEltYWdlOiAodGhlbWUpID0+ICh7CiAgICAgICAgLy8gVXNlIGEgb3duIGdyYWRpZW50CiAgICAgICAgJ2dyYWRpZW50LXJhZGlhbCc6IGByYWRpYWwtZ3JhZGllbnQoJHt0aGVtZSgnY29sb3JzLmJsdWUuNTAwJyl9LCAke3RoZW1lKCdjb2xvcnMucmVkLjUwMCcpfSk7YCwKICAgICAgICAvLyBJbnRlZ3JhdGUgd2l0aCBncmFkaWVudCBjb2xvcnMgc3RvcHMgKGZyb20tKiwgdmlhLSosIHRvLSopCiAgICAgICAgJ2dyYWRpZW50LTE1JzogJ2xpbmVhci1ncmFkaWVudCguMTV0dXJuLCB2YXIoLS10dy1ncmFkaWVudC1zdG9wcyx2YXIoLS10dy1ncmFkaWVudC1mcm9tLHRyYW5zcGFyZW50KSx2YXIoLS10dy1ncmFkaWVudC10byx0cmFuc3BhcmVudCkpKScsCiAgICAgIH0pCiAgICB9LAogIH0sCn0pCmRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gYAogIDxkaXYgY2xhc3M9ImNoaWxkcmVuOihoLTMyIG15LTQpIj4KICAgIDxkaXYgY2xhc3M9ImJnLWdyYWRpZW50LXJhZGlhbCI+PC9kaXY+CiAgCiAgICA8ZGl2IGNsYXNzPSJiZy1ncmFkaWVudC0xNSBmcm9tLWdyZWVuLTQwMCB0by1ibHVlLTUwMCI+PC9kaXY+CiAgPC9kaXY+CmAK)

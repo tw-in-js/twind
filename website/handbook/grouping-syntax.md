@@ -110,9 +110,9 @@ The first grouping syntax works by factoring out common directive prefixes. Belo
 
 ```js
 // Before directive grouping
-tw`border-2 border-black border-opacity-50 border-dashed`;
+tw`border-2 border-black border-opacity-50 border-dashed`
 // After directive grouping
-tw`border(2 black opacity-50 dashed)`;
+tw`border(2 black opacity-50 dashed)`
 ```
 
 This reduced repetition in this rule set by about 20% but the output is still the same!
@@ -125,7 +125,7 @@ The second grouping syntax works by factoring out common variants. Both responsi
 
 ```js
 // Before variant grouping
-tw`bg-red-500 shadow-xs sm:bg-red-600 sm:shadow-sm md:bg-red-700 md:shadow lg:bg-red-800 lg:shadow-xl`;
+tw`bg-red-500 shadow-xs sm:bg-red-600 sm:shadow-sm md:bg-red-700 md:shadow lg:bg-red-800 lg:shadow-xl`
 // After variant grouping
 tw`
   bg-red-500 shadow-xs
@@ -135,9 +135,9 @@ tw`
   )
   md:(bg-red-700 shadow)
   lg:(bg-red-800 shadow-xl)
-`;
+`
 
-tw`w(1/2 sm:1/3 lg:1/6) p-2`;
+tw`w(1/2 sm:1/3 lg:1/6) p-2`
 // => w-1/2 sm:w-1/3 lg:w-1/6 p-2
 ```
 
@@ -145,13 +145,13 @@ tw`w(1/2 sm:1/3 lg:1/6) p-2`;
 
 ```js
 // Grouping across string boundaries
-tw("hover:(", "bg-red-500", "p-3", ")", "m-1");
+tw('hover:(', 'bg-red-500', 'p-3', ')', 'm-1')
 // => hover:bg-red-500 hover:p-3 m-1
 
-tw("hover:(bg-red-500", "p-3)", "m-1");
+tw('hover:(bg-red-500', 'p-3)', 'm-1')
 // => hover:bg-red-500 hover:p-3 m-1
 
-tw`bg-${"red"}(600 700(hover:& focus:&))`;
+tw`bg-${'red'}(600 700(hover:& focus:&))`
 // => bg-red-600 hover:bg-red-700 focus:bg-red-700
 ```
 
@@ -162,16 +162,16 @@ tw`bg-${"red"}(600 700(hover:& focus:&))`;
 It is possible to nest directive groups inside of responsive groups and vice versa, however it is important to note that nesting responsive variants inside of responsive variants doesn't make sense and is not permitted.
 
 ```js
-tw`sm:(border(2 black opacity-50 hover:dashed))`;
+tw`sm:(border(2 black opacity-50 hover:dashed))`
 // => sm:border-2 sm:border-black sm:border-opacity-50 sm:hover:border-dashed
-tw`border(md:(2 black opacity-50 hover:dashed))`;
+tw`border(md:(2 black opacity-50 hover:dashed))`
 // => sm:border-2 sm:border-black sm:border-opacity-50 sm:hover:border-dashed
 
-tw`divide(y-2 blue-500 opacity(75 md:50))`;
+tw`divide(y-2 blue-500 opacity(75 md:50))`
 // => divide-y-2 divide-blue-500 divide-opacity-75 md:divide-opacity-50
 
 // Negated values can be used within the braces and will be applied to the directive:
-tw`rotate(-3 hover:6 md:(3 hover:-6))`;
+tw`rotate(-3 hover:6 md:(3 hover:-6))`
 // => -rotate-3 hover:rotate-6 md:rotate-3 md:hover:-rotate-6"
 ```
 

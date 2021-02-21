@@ -36,9 +36,7 @@ For runtime processing of your javascript-assisted HTML documents, simply includ
   </head>
   <body>
     <main class="h-screen bg-purple-400 flex items-center justify-center">
-      <h1 class="font-bold text(center 5xl white sm:gray-800 md:pink-700)">
-        This is Twind!
-      </h1>
+      <h1 class="font-bold text(center 5xl white sm:gray-800 md:pink-700)">This is Twind!</h1>
     </main>
   </body>
 </html>
@@ -62,11 +60,11 @@ To prevent FOUC (_flash of unstyled content_) it is advised to set the `hidden` 
 > Internally `twind/shim` uses `twind/observe`, which may be useful for advanced use cases.
 
 ```js
-import "twind/shim";
+import 'twind/shim'
 ```
 
 ```js
-import { setup, disconnect } from "twind/shim";
+import { setup, disconnect } from 'twind/shim'
 ```
 
 ### Support legacy browsers with UMD bundles
@@ -92,22 +90,22 @@ You'll find more details and examples in the [use-with-ssr](../usage-guides/use-
 :::
 
 ```js
-import { setup } from "twind";
-import { virtualSheet, getStyleTag, shim } from "twind/shim/server";
+import { setup } from 'twind'
+import { virtualSheet, getStyleTag, shim } from 'twind/shim/server'
 
-const sheet = virtualSheet();
+const sheet = virtualSheet()
 
-setup({ ...sharedOptions, sheet });
+setup({ ...sharedOptions, sheet })
 
 function ssr() {
   // 1. Reset the sheet for a new rendering
-  sheet.reset();
+  sheet.reset()
 
   // 2. Render the app to an html string and handle class attributes
-  const body = shim(renderTheApp());
+  const body = shim(renderTheApp())
 
   // 3. Create the style tag with all generated CSS rules
-  const styleTag = getStyleTag(sheet);
+  const styleTag = getStyleTag(sheet)
 
   // 4. Generate the response html
   return `<!DOCTYPE html>
@@ -115,7 +113,7 @@ function ssr() {
       <head>${styleTag}</head>
       <body>${body}</body>
     </html>
-  `;
+  `
 }
 ```
 
@@ -125,5 +123,5 @@ In order to prevent harmful code injection on the web, a [Content Security Polic
 // ... other code is the same as before ...
 
 // Usage with webpack: https://webpack.js.org/guides/csp/
-const styleTag = getStyleTag(sheet, { nonce: __webpack_nonce__ });
+const styleTag = getStyleTag(sheet, { nonce: __webpack_nonce__ })
 ```
