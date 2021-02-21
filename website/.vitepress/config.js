@@ -120,15 +120,15 @@ const apiSidebar = [
   {
     text: "API",
     children: [
-      // { text: "Modules Overview", link: "/api/m" },
-      { text: "twind", link: "/api/twind.html" },
-      { text: "twind/colors", link: "/api/twind-colors" },
-      { text: "twind/css", link: "/api/twind-css" },
-      { text: "twind/observe", link: "/api/twind-observe" },
-      { text: "twind/server", link: "/api/twind-server" },
-      { text: "twind/sheets", link: "/api/twind-sheets" },
-      { text: "twind/shim", link: "/api/twind-shim" },
-      { text: "twind/shim/server", link: "/api/twind-shim-server" },
+      // { text: "Modules Overview", link: "/api" },
+      { text: "twind", link: "/api/modules/twind.html" },
+      { text: "twind/colors", link: "/api/modules/twind_colors.html" },
+      { text: "twind/css", link: "/api/modules/twind_css.html" },
+      { text: "twind/observe", link: "/api/modules/twind_observe.html" },
+      { text: "twind/server", link: "/api/modules/twind_server.html" },
+      { text: "twind/sheets", link: "/api/modules/twind_sheets.html" },
+      { text: "twind/shim", link: "/api/modules/twind_shim.html" },
+      { text: "twind/shim/server", link: "/api/modules/twind_shim_server.html" },
     ],
   },
 ];
@@ -146,7 +146,7 @@ module.exports = {
     },
     nav: [
       { text: "Handbook", link: "/handbook/" },
-      { text: "API", link: "/api/" },
+      { text: "API", link: "/api/README.html" },
       { text: "GitHub", link: "https://github.com/tw-in-js/twind" },
       { text: "Discord", link: "https://discord.com/invite/2aP5NkszvD" },
     ],

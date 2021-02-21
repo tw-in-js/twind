@@ -1,6 +1,5 @@
 /**
- *
- * @packageDocumentation
+ * [[include:src/css/README.md]]
  * @module twind/css
  */
 

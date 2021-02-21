@@ -1,6 +1,5 @@
 /**
- *
- * @packageDocumentation
+ * [[include:src/observe/README.md]]
  * @module twind/observe
  */
 

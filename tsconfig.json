@@ -32,24 +32,5 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
-  },
-  "typedocOptions": {
-    "entryPoints": [
-      "./src/index.ts",
-      "./src/colors/index.ts",
-      "./src/css/index.ts",
-      "./src/observe/index.ts",
-      "./src/server/index.ts",
-      "./src/sheets/index.ts",
-      "./src/shim/index.ts",
-      "./src/shim/server/index.ts"
-    ],
-    "readme": "none",
-    "out": "./website/public/typedoc",
-    "includeVersion": true,
-    "excludePrivate": true,
-    "excludeInternal": true,
-    "includes": "./",
-    "plugin": "none"
   }
 }

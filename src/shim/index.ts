@@ -1,6 +1,5 @@
 /**
- *
- * @packageDocumentation
+ * [[include:src/shim/README.md]]
  * @module twind/shim
  */
 

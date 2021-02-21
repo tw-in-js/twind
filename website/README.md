@@ -29,7 +29,3 @@ Build the site (builds to `.vitepress/dist/`)
 ```
 yarn run build
 ```
-
-## TypeDoc
-
-When you run `yarn run typedoc` from the root of the project, TypeDoc creates a documentation site (collection of HTML files) of all the modules and places it in `website/public/typedoc`, where they are later accessed via iframes. This works because VitePress automatically exposes any files placed in the `public` folder, preventing us from having to separately deploy the Typedoc docs.
