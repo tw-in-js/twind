@@ -1,7 +1,7 @@
 <div align="center">
 
-<img src="website/public/assets/logo.png" heigh="125" width="125" />
-<a href="https://www.twind.dev" align="center"><h1>Twind</h1></a>
+<img src="docs/public/assets/logo.png" heigh="125" width="125" />
+<a href="https://twind.dev" align="center"><h1>Twind</h1></a>
 
 <p align="center">
 The smallest, fastest, most feature complete Tailwind-in-JS solution in existence
