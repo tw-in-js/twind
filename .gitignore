@@ -8,7 +8,7 @@ web_modules
 dist
 __generated__
 tsconfig.dist*.json
-website/api
+docs/api
 
 benchmarks/*.min.mjs
 

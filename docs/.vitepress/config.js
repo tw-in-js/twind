@@ -4,7 +4,7 @@ const title = 'Twind'
 const description =
   'The smallest, fastest, most feature complete tailwind-in-js solution in existence'
 
-const site = isProd ? 'https://www.twind.dev' : 'http://localhost:3000'
+const site = isProd ? 'https://twind.dev' : 'http://localhost:3000'
 const image = `${site}/assets/logo.png`
 
 const head = [
