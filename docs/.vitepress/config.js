@@ -146,8 +146,8 @@ const guideSidebar = [
         link: '/handbook/improving-performance',
       },
       {
-        text: 'Extended Variants and Directives',
-        link: '/handbook/extended-variants-directives',
+        text: 'Extended Functionality',
+        link: '/handbook/extended-functionality',
       },
       { text: 'Plugins', link: '/handbook/plugins' },
       { text: 'Authoring Components', link: '/handbook/authoring-components' },
