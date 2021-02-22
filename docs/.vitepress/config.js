@@ -5,30 +5,112 @@ const description =
   'The smallest, fastest, most feature complete tailwind-in-js solution in existence'
 
 const site = isProd ? 'https://twind.dev' : 'http://localhost:3000'
-const image = `${site}/assets/logo.png`
 
+function base(url) {
+  return `${site}/assets/${url}`
+}
+
+const image = base('twind-logo.png')
+
+// Icons provided by https://favicomatic.com/
 const head = [
   ['meta', { name: 'author', content: 'Twind Team' }],
   [
     'meta',
     {
       name: 'keywords',
-      content: 'twind, tailwind, tailwindcss, css-in-js',
+      content: 'twind, tailwind, tailwindcss, css-in-js, tw-in-js, tailwind-in-js',
     },
   ],
-
   ['link', { rel: 'icon', type: 'image/svg+xml', href: image }],
-
+  [
+    'link',
+    {
+      rel: 'apple-touch-icon-precomposed',
+      type: 'image/png',
+      sizes: '57x57',
+      href: base('apple-touch-icon-57x57.png'),
+    },
+  ],
+  [
+    'link',
+    {
+      rel: 'apple-touch-icon-precomposed',
+      type: 'image/png',
+      sizes: '114x114',
+      href: base('apple-touch-icon-57x57.png'),
+    },
+  ],
+  [
+    'link',
+    {
+      rel: 'apple-touch-icon-precomposed',
+      type: 'image/png',
+      sizes: '72x72',
+      href: base('apple-touch-icon-72x72.png'),
+    },
+  ],
+  [
+    'link',
+    {
+      rel: 'apple-touch-icon-precomposed',
+      type: 'image/png',
+      sizes: '144x144',
+      href: base('apple-touch-icon-144x144.png'),
+    },
+  ],
+  [
+    'link',
+    {
+      rel: 'apple-touch-icon-precomposed',
+      type: 'image/png',
+      sizes: '60x60',
+      href: base('apple-touch-icon-60x60.png'),
+    },
+  ],
+  [
+    'link',
+    {
+      rel: 'apple-touch-icon-precomposed',
+      type: 'image/png',
+      sizes: '120x120',
+      href: base('apple-touch-icon-120x120.png'),
+    },
+  ],
+  [
+    'link',
+    {
+      rel: 'apple-touch-icon-precomposed',
+      type: 'image/png',
+      sizes: '76x76',
+      href: base('apple-touch-icon-76x76.png'),
+    },
+  ],
+  [
+    'link',
+    {
+      rel: 'apple-touch-icon-precomposed',
+      type: 'image/png',
+      sizes: '152x152',
+      href: base('apple-touch-icon-152x152.png'),
+    },
+  ],
+  ['link', { rel: 'icon', type: 'image/png', sizes: '196x196', href: base('favicon-196x196.png') }],
+  ['link', { rel: 'icon', type: 'image/png', sizes: '96x96', href: base('favicon-96x96.png') }],
+  ['link', { rel: 'icon', type: 'image/png', sizes: '196x196', href: base('favicon-196x196.png') }],
+  ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: base('favicon-32x32.png') }],
+  ['link', { rel: 'icon', type: 'image/png', sizes: '16x16', href: base('favicon-16x16.png') }],
+  ['link', { rel: 'icon', type: 'image/png', sizes: '128x128', href: base('favicon-128.png') }],
   ['meta', { name: 'HandheldFriendly', content: 'True' }],
   ['meta', { name: 'MobileOptimized', content: '320' }],
   ['meta', { name: 'theme-color', content: '#3b9188' }],
-
+  // Twitter
   ['meta', { name: 'twitter:card', content: 'summary' }],
   ['meta', { name: 'twitter:site', content: site }],
   ['meta', { name: 'twitter:title', value: title }],
   ['meta', { name: 'twitter:description', value: description }],
   ['meta', { name: 'twitter:image', content: image }],
-
+  // Open Graph
   ['meta', { property: 'og:type', content: 'website' }],
   ['meta', { property: 'og:locale', content: 'en_US' }],
   ['meta', { property: 'og:site', content: site }],
@@ -36,6 +118,13 @@ const head = [
   ['meta', { property: 'og:title', content: title }],
   ['meta', { property: 'og:image', content: image }],
   ['meta', { property: 'og:description', content: description }],
+  // MS
+  ['meta', { name: 'msapplication-TileColor', content: '#3b9188' }],
+  ['meta', { name: 'msapplication-TileImage', content: base('mstile-144x144.png') }],
+  ['meta', { name: 'msapplication-square70x70logo', content: base('mstile-70x70.png') }],
+  ['meta', { name: 'msapplication-square150x150logo', content: base('mstile-150x150.png') }],
+  ['meta', { name: 'msapplication-wide310x150logo', content: base('mstile-310x150.png') }],
+  ['meta', { name: 'msapplication-square310x310logo', content: base('mstile-310x310.png') }],
 ]
 
 const guideSidebar = [
