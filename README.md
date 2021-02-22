@@ -19,13 +19,40 @@ The smallest, fastest, most feature complete Tailwind-in-JS solution in existenc
 
 </div>
 
-Twind is a small compiler (~12kb) that converts Tailwind classes into actual CSS rules at runtime. You can think of it as Tailwind without the build step or configuration, with some added features. If you have used Tailwind or other CSS-in-JS solutions, then most of the API should feel very familiar.
+Twind is a small compiler (~12kB) that converts Tailwind classes into actual CSS rules at runtime. If you have used Tailwind or other CSS-in-JS solutions, then most of the API should feel very familiar.
+
+## Features
+
+**⚡️ No build step**
+
+Get all the benefits of Tailwind without the need for Tailwind, PostCSS, configuration, purging, or autoprefixing.
+
+**🚀 Framework agnostic**
+
+If your app uses HTML and JavaScript, it should work with Twind. This goes for server-rendered apps too.
+
+**😎 One low fixed cost**
+
+Twind ships the compiler, not the CSS. This means unlimited styles and variants for one low fixed cost of ~12kB.
+
+Other features include:
+
+- 🚅 Faster than most CSS-in-JS libraries
+- 🎨 Seamless integration with Tailwind
+- 🎯 Extended variants, directives, and syntax
+- ✈️ Tailwind preflight by default
+- 🤝 Feature parity with Tailwind
+- 🚓 Escape hatch for arbitrary CSS
+- 🤖 Built in support for conditional rule combining
+- 🧐 Improved readability with multiline styles
+- ❄️ Optional hashing of class names ensuring no conflicts
+- 🔌 Language extension via plugins
+- 🎩 No runtime overhead with static extraction
+- and more!
 
 ## Quick Start
 
-Try a [live and interactive demo 🚀 ](https://esm.codes/#aW1wb3J0IHsgdHcgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZCcKCmRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gYAogIDxtYWluIGNsYXNzPSIke3R3YGgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJgfSI+CiAgICA8aDEgY2xhc3M9IiR7dHdgZm9udC1ib2xkIHRleHQoY2VudGVyIDV4bCB3aGl0ZSBzbTpncmF5LTgwMCBtZDpwaW5rLTcwMClgfSI+VGhpcyBpcyBUd2luZCE8L2gxPgogIDwvbWFpbj4KYA==)
-
-If you would like to get started with Twind right away then copy paste this code into your favorite sandbox:
+Copy and paste this code into your favorite sandbox to get started with Twind right away:
 
 ```js
 import { tw } from 'https://cdn.skypack.dev/twind'
@@ -37,6 +64,8 @@ document.body.innerHTML = `
 `
 ```
 
+or try a [live and interactive demo 🚀 ](https://esm.codes/#aW1wb3J0IHsgdHcgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZCcKCmRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gYAogIDxtYWluIGNsYXNzPSIke3R3YGgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJgfSI+CiAgICA8aDEgY2xhc3M9IiR7dHdgZm9udC1ib2xkIHRleHQoY2VudGVyIDV4bCB3aGl0ZSBzbTpncmF5LTgwMCBtZDpwaW5rLTcwMClgfSI+VGhpcyBpcyBUd2luZCE8L2gxPgogIDwvbWFpbj4KYA==)
+
 Twind is also available as an [NPM package](https://www.npmjs.com/package/twind):
 
 ```
@@ -44,8 +73,6 @@ npm i twind
 ```
 
 For seamless integration with existing Tailwind HTML you can use [twind/shim](https://twind.dev/handbook/the-shim.html):
-
-Try a [live and interactive demo 🚀](https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPG1haW4gY2xhc3M9Imgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIiPgogICAgPGgxIGNsYXNzPSJmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKSI+CiAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICA8L2gxPgogIDwvbWFpbj4KYA==)
 
 ```html
 <script type="module" src="https://cdn.skypack.dev/twind/shim"></script>
@@ -55,7 +82,9 @@ Try a [live and interactive demo 🚀](https://esm.codes/#aW1wb3J0ICdodHRwczovL2
 </main>
 ```
 
-> 📚 For more detailed instruction on usage please [read the documentation](https://twind.dev/handbook/).
+Try a [live and interactive shim demo 🚀](https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPG1haW4gY2xhc3M9Imgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIiPgogICAgPGgxIGNsYXNzPSJmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKSI+CiAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICA8L2gxPgogIDwvbWFpbj4KYA==)
+
+This is just the beginning of all the awesome things you can do with Twind. [Check out the handbook](https://twind.dev/handbook/) to learn more.
 
 ### 🤝 Contributing
 
