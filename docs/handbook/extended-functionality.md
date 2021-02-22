@@ -1,5 +1,5 @@
 ---
-title: Extended Variants and Directives
+title: Extended Functionality
 editLink: true
 navbar: true
 sidebar: true
@@ -14,9 +14,17 @@ head:
 
 # {{ $frontmatter.title }}
 
-Tailwind provides a comprehensive list of variants and directives which enable you to do things like target pseudo states and breakpoints without having to write any CSS. Twind supports all Tailwind variants/directives, and we've added a few more for your convenience.
+Tailwind provides a comprehensive list of variants and utility classes. Twind supports all Tailwind variants/classes, and we've added a few more for your convenience.
 
 ## Variants
+
+Variants are special keywords recognized by the compiler used to apply styles to HTML element(s) based on pseudo states, viewport sizes, dark mode, or other states. Variants are used by prefixing class names or groupings and are denoted with a trailing colon. (e.g. `md:text-blue-500` or `md:(text-blue-500)`)
+
+Tailwind provides a default configuration, and requires that you explicitly associate certain variants to styles as you need them. This is not the case with Twind. Twind support all Tailwind variants out of the box with no configuration required.
+
+```html
+<p class="text-blue-500 md:text-red-500">Hello Twind!</p>
+```
 
 ### Every variant can be applied to every directive
 
@@ -171,7 +179,7 @@ const special = tw`${shared} override:(text-purple-600 no-underline)`
 
 > 🚀 [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgdHcgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZCcKCmNvbnN0IHNoYXJlZCA9IHR3YHRleHQoeGwgY2VudGVyIGJsdWUtNjAwKSB1bmRlcmxpbmVgCmNvbnN0IHNwZWNpYWwgPSB0d2Ake3NoYXJlZH0gb3ZlcnJpZGU6KHRleHQtcHVycGxlLTYwMCBuby11bmRlcmxpbmUpYAoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPHAgY2xhc3M9IiR7c2hhcmVkfSI+Q29tbW9uIFN0eWxlczwvcD4KICA8cCBjbGFzcz0iJHtzcGVjaWFsfSI+U3BlY2lhbCBTdHlsZXM8L3A+CmAK)
 
-## Directives
+## Utilities
 
 ### Some directives support all CSS values
 
