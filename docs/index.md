@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /assets/logo.png
+heroImage: /assets/twind-logo-animated.svg
 heroAlt: Twind
 heroText: Twind
 tagline: The smallest, fastest, most feature complete tailwind-in-js solution in existence
