@@ -8,7 +8,7 @@ actionText: Read the Handbook
 actionLink: /handbook/
 navbar: true
 altActionText: View the API
-altActionLink: /api/
+altActionLink: /api/README
 
 features:
   - title: ⚡️ No build step
