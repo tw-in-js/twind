@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/public/assets/logo.png" heigh="125" width="125" />
+<img src="docs/public/assets/twind-logo-animated.svg" heigh="125" width="125" />
 <a href="https://twind.dev" align="center"><h1>Twind</h1></a>
 
 <p align="center">
