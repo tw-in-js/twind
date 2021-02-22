@@ -30,7 +30,7 @@ The smallest, fastest, most feature complete Tailwind-in-JS solution in existenc
 
 ## What is Twind?
 
-Twind is a small compiler (~12kB) that converts Tailwind classes into actual CSS rules at runtime. You can think of it as Tailwind without the build step or configuration, with some added features. If you have used Tailwind or other CSS-in-JS solutions, then most of the API should feel very familiar.
+Twind is a small compiler (~12kb) that converts Tailwind classes into actual CSS rules at runtime. If you have used Tailwind or other CSS-in-JS solutions, then most of the API should feel very familiar.
 
 The primary purpose of this project is to unify CSS-in-JS and TailwindCSS; embracing the flexibility of CSS-in-JS whilst conforming to the carefully considered constraints of the Tailwind API.
 
@@ -96,7 +96,7 @@ Twind's advanced caching and specialist optimizations enables it to compile and 
 
 </details>
 
-<details><summary>🎨 Bring your existing Tailwind styles</summary>
+<details><summary>🎨 Seamless integration with Tailwind</summary>
 
 Twind provides [a shim](/handbook/the-shim), which allows for seamless integration with your existing Tailwind styles with no configuration. The shim can improve the development experience and is useful for gradual migration.
 
@@ -144,9 +144,9 @@ For more information, check out the [configuration guide](/handbook/configuratio
 
 <details><summary>🚓 Escape hatch for arbitrary CSS</summary>
 
-The compiler [accepts functions](https://twind.dev/docs/modules/twind.html#inline-plugins) that can return arbitrary CSS-in-JS objects. A convenient escape hatch for all those one-off rules which aren't supported by Tailwind. The `&` keyword allows you to write complex rules (like pseudo elements `&::before` and `&::after`) that are beyond the scope of inline styles without having to add another dependency.
+The Twind compiler accepts functions that can return arbitrary CSS-in-JS objects, providing a convenient escape hatch for all those one-off rules which aren't supported by Tailwind. The `&` keyword allows you to write complex rules (like pseudo elements `&::before` and `&::after`) that are beyond the scope of inline styles without having to add another dependency.
 
-> 💡 We provide a [css helper](https://twind.dev/docs/handbook/getting-started/css-in-js.html) as a convenience for this case.
+Twind also provides a [css helper function](/handbook/css-in-twind) as a convenience for this case.
 
 </details>
 
@@ -168,7 +168,7 @@ You can optionally configure Twind to hash class names before injecting them int
 
 </details>
 
-<details><summary>🔌 Language extension via plugins </summary>
+<details><summary>🔌 Language extension via plugins</summary>
 
 You can effortlessly extend the Twind compiler's abilities by creating your own plugins in your Twind configuration.
 
