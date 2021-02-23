@@ -134,7 +134,7 @@ const guideSidebar = [
       { text: 'Introduction', link: '/handbook/' },
       { text: 'Installation', link: '/handbook/installation' },
 
-      { text: 'Styling with Twind', link: '/handbook/styling-with-tw' },
+      { text: 'Styling with Twind', link: '/handbook/styling-with-twind' },
       { text: 'Configuration and Theming', link: '/handbook/configuration' },
       { text: 'Grouping Syntax', link: '/handbook/grouping-syntax' },
       { text: 'CSS in Twind', link: '/handbook/css-in-twind' },
