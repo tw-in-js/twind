@@ -4,7 +4,8 @@ const title = 'Twind'
 const description =
   'The smallest, fastest, most feature complete tailwind-in-js solution in existence'
 
-const site = isProd ? 'https://twind.dev' : 'http://localhost:3000'
+// TODO: We need to make sure and change the URL once launched
+const site = isProd ? 'https://twind-dev.netlify.app' : 'http://localhost:3000'
 
 function base(url) {
   return `${site}/assets/${url}`
