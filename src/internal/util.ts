@@ -55,8 +55,14 @@ export const merge = (target: CSSRules, source: CSSRules, context: Context): CSS
     ? Object.keys(source).reduce((target, key) => {
         const value = evalThunk(source[key], context)
 
-        if (value && typeof value == 'object' && !Array.isArray(value)) {
-          target[key] = merge((target[key] || {}) as CSSRules, value as CSSRules, context)
+        if (value && typeof value == 'object' && !(Array.isArray(value) && !/[@:,(&]/.test(key))) {
+          // Keep all @font-face, @import, @global as is
+          if (/^@[fig]/.test(key)) {
+            // eslint-disable-next-line prettier/prettier
+            ((target[key] || (target[key] = [])) as CSSRules[]).push(value as CSSRules)
+          } else {
+            target[key] = merge((target[key] || {}) as CSSRules, value as CSSRules, context)
+          }
         } else {
           // hyphenate target key only if key is property like (\w-)
           target[hyphenate(key)] = value

@@ -883,4 +883,29 @@ test('using @apply with variant', ({ tw, sheet }) => {
   ])
 })
 
+test('using @font-face with array', ({ tw, sheet }) => {
+  const style = () => ({
+    '@font-face': [
+      {
+        fontFamily: 'Proxima Nova',
+        fontWeight: '400',
+        src: 'url(/fonts/proxima-nova/400-regular.woff) format("woff")',
+      },
+      {
+        fontFamily: 'Proxima Nova',
+        fontWeight: '500',
+        src: 'url(/fonts/proxima-nova/500-medium.woff) format("woff")',
+      },
+    ],
+  })
+
+  assert.equal(sheet.target, [])
+
+  tw(style)
+  assert.equal(sheet.target, [
+    '@font-face{font-family:Proxima Nova;font-weight:400;src:url(/fonts/proxima-nova/400-regular.woff) format("woff")}',
+    '@font-face{font-family:Proxima Nova;font-weight:500;src:url(/fonts/proxima-nova/500-medium.woff) format("woff")}',
+  ])
+})
+
 test.run()

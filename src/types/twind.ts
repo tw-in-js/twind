@@ -207,15 +207,17 @@ export type Token = string | TokenGrouping | InlineDirective | Token[] | Falsy |
  * watch out for ':root' - that could use '*' instead
  */
 // [`:${string}`]: CSSRules
-export type CSSSimplePseudos = { [K in CSS.SimplePseudos as `&${string & K}`]?: CSSRules }
+export type CSSSimplePseudos = {
+  [K in CSS.SimplePseudos as `&${string & K}`]?: CSSRulesThunk | MaybeArray<CSSRules>
+}
 
 export interface CSSPseudos extends CSSSimplePseudos {
   '&:nth-child(2n)'?: CSSRules
   '&:nth-child(odd)'?: CSSRules
 }
 
-export type CSSAtMedia = Record<string, CSSRules>
-export type CSSAtSupports = Record<string, CSSRules>
+export type CSSAtMedia = Record<string, MaybeArray<CSSRules>>
+export type CSSAtSupports = Record<string, MaybeArray<CSSRules>>
 export type CSSAtKeyframes = Record<string, CSSProperties | ((context: Context) => CSSProperties)>
 
 /**
@@ -250,8 +252,9 @@ export interface CSSRules {
   // ':root'?: CSSProperties
   // '*'?: CSSProperties
 
+  '@font-face'?: CSSRulesThunk | MaybeArray<CSSRules>
   '@apply'?: MaybeArray<string | Falsy | TypescriptCompat>
-  global?: CSSRules | CSSRulesThunk
+  ':global'?: CSSRulesThunk | MaybeArray<CSSRules>
   // [`@screen ${string}`]: MaybeArray<string | Falsy | TypescriptCompat>
 
   // TODO it would be great if we could use CSS Properties with mapped types to typechecked CSS rules
@@ -260,9 +263,8 @@ export interface CSSRules {
     | CSSAtMedia
     | CSSAtSupports
     | CSSAtKeyframes
-    | CSSRules
-    | MaybeArray<string | Falsy | TypescriptCompat>
     | CSSRulesThunk
+    | MaybeArray<CSSRules | string | Falsy | TypescriptCompat>
 }
 
 export interface CSSRulesThunk {
@@ -271,7 +273,6 @@ export interface CSSRulesThunk {
     | CSSAtMedia
     | CSSAtSupports
     | CSSAtKeyframes
-    | CSSRules
     | CSSRulesThunk
-    | MaybeArray<string | Falsy | TypescriptCompat>
+    | MaybeArray<CSSRules | string | Falsy | TypescriptCompat>
 }

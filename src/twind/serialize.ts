@@ -1,4 +1,4 @@
-import type { Context, CSSRules, Prefixer, Rule, Token } from '../types'
+import type { Context, CSSRules, Prefixer, Rule, Token, MaybeArray } from '../types'
 
 import {
   join,
@@ -94,9 +94,14 @@ export const serialize = (
     // The current presedence for determine the css position in the stylesheet
     presedence: number,
     // The rules object
-    css: CSSRules,
+    css: MaybeArray<CSSRules>,
     important: boolean | undefined,
   ): void => {
+    if (Array.isArray(css)) {
+      css.forEach((css) => stringify(atRules, selector, presedence, css, important))
+      return
+    }
+
     // 1. Properties
     // 3. *
     // 2. @...
@@ -123,11 +128,11 @@ export const serialize = (
     }
 
     // Walk through the object
-    Object.keys(css).forEach((key) => {
-      const value = evalThunk(css[key], context)
+    Object.keys(css as CSSRules).forEach((key) => {
+      const value = evalThunk((css as CSSRules)[key], context)
 
       // string, number or Array => a property with a value
-      if (includes('rg', (typeof value)[5]) || Array.isArray(value)) {
+      if (includes('rg', (typeof value)[5]) || (Array.isArray(value) && !/[@:,(&]/.test(key))) {
         if (value !== '' && key.length > 1) {
           // It is a Property
           const property = hyphenate(key)
@@ -151,7 +156,7 @@ export const serialize = (
         if (key[0] === '@') {
           if (key[1] === 'f') {
             // `@font-face` is never wrapped, eg always global/root
-            stringify([], key, 0, value as CSSRules, important)
+            stringify([], key, 0, value as MaybeArray<CSSRules>, important)
           } else if (key[1] === 'k') {
             // @keyframes handling
             // To prevent
@@ -163,7 +168,7 @@ export const serialize = (
             // => "@keyframes name{from{transform:rotate(0deg)}from{transform:rotate(0deg)}}"
             const currentSize = rules.length
 
-            stringify([], '', 0, value as CSSRules, important)
+            stringify([], '', 0, value as MaybeArray<CSSRules>, important)
 
             const waypoints = rules.splice(currentSize, rules.length - currentSize)
 
@@ -188,12 +193,12 @@ export const serialize = (
               [...atRules, key],
               selector,
               presedence | responsivePrecedence(key) | atRulePresedence(key),
-              value as CSSRules,
+              value as MaybeArray<CSSRules>,
               important,
             )
           }
         } else if (key === ':global') {
-          stringify([], '', 0, value as CSSRules, important)
+          stringify([], '', 0, value as MaybeArray<CSSRules>, important)
         } else {
           // A selector block: { '&:focus': { ... } }
           stringify(
@@ -213,7 +218,7 @@ export const serialize = (
                 )
               : key,
             presedence,
-            value as CSSRules,
+            value as MaybeArray<CSSRules>,
             important,
           )
         }

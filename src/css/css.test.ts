@@ -822,4 +822,28 @@ test('@apply from docs', ({ tw, sheet }) => {
     '@media (prefers-color-scheme:dark){.tw-ckdto4 h1{--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity))}}',
   ])
 })
+
+test('using @font-apply', ({ tw, sheet }) => {
+  const style = css`
+    @font-face {
+      font-family: Proxima Nova;
+      font-weight: 400;
+      src: url(/fonts/proxima-nova/400-regular.woff) format('woff');
+    }
+    @font-face {
+      font-family: Proxima Nova;
+      font-weight: 500;
+      src: url(/fonts/proxima-nova/500-medium.woff) format('woff');
+    }
+  `
+
+  assert.equal(sheet.target, [])
+
+  tw(style)
+  assert.equal(sheet.target, [
+    "@font-face{font-family:Proxima Nova;font-weight:400;src:url(/fonts/proxima-nova/400-regular.woff) format('woff')}",
+    "@font-face{font-family:Proxima Nova;font-weight:500;src:url(/fonts/proxima-nova/500-medium.woff) format('woff')}",
+  ])
+})
+
 test.run()
