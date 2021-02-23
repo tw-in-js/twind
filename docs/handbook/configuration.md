@@ -14,13 +14,11 @@ head:
 
 # {{ $frontmatter.title }}
 
-Understandably developers will more often than not want to customize the out of the box experience. It is possible to achieve this with the `setup` function. Doing so will ultimately change the behavior of calling the `tw` function, making it appropriate for your particular use case.
+Twind offers configuration and theming options via a `setup` function. The ` setup` function is a named export of the `twind` module and accepts a configuration object as an argument.
 
 :::tip
-The `setup` function is not required to use Twind
+The `setup` function is not required to use Twind.
 :::
-
-The ` setup` function is a named export of the `twind` module and accepts an config object as an argument.
 
 ```js
 import { setup, strict, voidSheet } from 'twind'
@@ -37,7 +35,7 @@ setup({
 
 ## Theme
 
-Applying a new theme or extending the default is probably the most common customization. For maximum compatibility and ease of adoption, theming in Twind works exactly the same as [theming in Tailwind](https://tailwindcss.com/docs/theme).
+For maximum compatibility and ease of adoption, theming in Twind works exactly the same as [theming in Tailwind](https://tailwindcss.com/docs/theme).
 
 Here is an example of overriding and extending values in the theme:
 
@@ -62,7 +60,7 @@ setup({
 
 ### Colors
 
-The Tailwind v2 [extended color palette](https://tailwindcss.com/docs/customizing-colors#color-palette-reference) is available as {@link twind/colors}:
+The Tailwind v2 [extended color palette](https://tailwindcss.com/docs/customizing-colors#color-palette-reference) is available in the [`twind/colors`](/api/modules/twind_colors) module.
 
 ```js
 import * as colors from 'twind/colors'
@@ -140,7 +138,7 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
   })
   ```
 
-- {@link twind.apply | apply} Tailwind rules
+- Use the [`apply`](/api/modules/twind#apply-function) function to apply Twind rules
 
   ```js
   import { apply, setup } from 'twind'
@@ -152,10 +150,10 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
   })
   ```
 
-- use {@link twind/css.css | css} to merge rules
+- Use the [`css`](/api/modules/twind_css#css-function) function to merge rules
 
   ```js
-  import { css, theme, apply } from 'twind/css'
+  import { css, theme, apply } from 'twind/css#css_directive'
 
   setup({
     preflight: (preflight) =>
@@ -188,11 +186,11 @@ To smooth over browser inconsistencies, Tailwind provide a [opinionated modern r
 One benefit of doing compilation at runtime is that it is possible to warn developers about errors such as:
 
 - Unknown directive: warn when an unrecognized rule is encountered
-- Missing theme value: warn when a unknown theme value is encountered
+- Missing theme values: warn when a unknown theme value is encountered
 
-By default these kind of warnings will be surfaced in the developer console but will not cause the program to throw an error and crash.
+By default, these kind of warnings will be surfaced in the developer console but will not cause the program to throw an error and crash.
 
-However, sometimes throwing an error might be desirable; for example during testing or continuous integrations.
+However, sometimes throwing an error might be desirable. For example, during testing or continuous integrations.
 
 To force the program to error instead of warn set `mode` to `strict`:
 
@@ -306,7 +304,7 @@ import { domSheet } from 'twind/sheets'
 setup({ sheet: domSheet() })
 ```
 
-> 💡 See {@link twind/sheets} for details.
+> 💡 See [twind/sheets](/api/modules/twind_sheets) for details.
 
 ### Virtual Sheet
 
@@ -323,19 +321,17 @@ setup({ sheet })
 sheet.target
 ```
 
-> 💡 See {@link twind/sheets} for details.
-
 ### Custom Sheet Implementation
 
-In case the builtin sheet implementations do not solve your use case, you can {@link twind/sheets | create your own}.
+In case the builtin sheet implementations do not solve your use case, you can create your own.
 
 ## Plugins
 
-The `plugins` property allows to define new plugins or override core plugins. See {@page Plugins} for details.
+The `plugins` property allows to define new plugins or override core plugins. See [plugins](/handbook/plugins) for details.
 
 ## Variants
 
-The `variants` property allows to define new variants or override {@page Tailwind Extensions | core variants}.
+The `variants` property allows to define new variants or override core variants.
 
 ```js
 setup({

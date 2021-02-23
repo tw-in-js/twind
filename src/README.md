@@ -74,7 +74,7 @@ tw({
 
 </details>
 
-> 💡 See {@page Styling with Twind} and {@page Thinking in Groups} for more syntax examples.
+> 💡 See [Styling With Twind](/handbook/styling_with_twind) and [Thinking in Groups](/handbook/thinking_in_groups) for more syntax examples.
 
 ### Inline Plugins
 
@@ -89,7 +89,7 @@ tw`
 
 In the above example a class is generate for an `::after` pseudo element. Something that isn't possible within the confides of the Tailwind API nor possible to denote using a style attribute on an element.
 
-> 💡 The above example is for exploratory purposes. Consider using {@link twind/css} for optimal performance.
+> 💡 The above example is for exploratory purposes. Consider using [`twind/css`](/handbook/css_in_twind) for optimal performance.
 >
 > ```js
 > tw`
@@ -106,9 +106,9 @@ For a further explanation on this mechanism see [Plugins](https://twind.dev/docs
 
 As a component author, one often wants to re-use Tailwind directive styles for defining a component and allow users of the component to override styles using Tailwind rules. The created component can be used as a base for child components and override or add some styles using Tailwind rules.
 
-{@link apply} generates one style object, e.g., one CSS class, combining all Tailwind rules by deep merging rules in order of declaration.
+The `apply` function generates one style object, e.g., one CSS class, combining all Tailwind rules by deep merging rules in order of declaration.
 
-> 💡 `apply` accepts the same arguments as [tw](#tw-function).
+> 💡 `apply` accepts the same arguments as the `tw` function
 
 ```js
 const btn = apply`inline-block bg-gray-500 text-base`
@@ -127,9 +127,7 @@ const btnBlock = apply`${btn} block`
 // => tw-YYYY
 ```
 
-<details><summary>Using <code>apply</code> within <code>preflight</code></summary>
-
-Use Tailwind rules within <code>{@link twind.setup | setup}({ {@link twind.Configuration.preflight | preflight} })</code>.
+The `apply` function allows you to use Twind rules and utility classes to define your preflight styles.
 
 ```js
 setup({
@@ -139,11 +137,7 @@ setup({
 })
 ```
 
-</details>
-
-<details><summary><code>CSS</code> can be used within <code>apply</code></summary>
-
-{@link twind/css} can be used to define additional styles.
+The `css` function can be used with the `apply` function to define additional styles.
 
 ```js
 const btn = apply`
@@ -154,11 +148,7 @@ const btn = apply`
 `
 ```
 
-</details>
-
-<details><summary>Using within <code>CSS</code></summary>
-
-`apply` can be used with `css`:
+The `apply` function can be used with `css` function:
 
 ```js
 const prose = css(
@@ -200,9 +190,7 @@ const prose = css`
 `
 ```
 
-</details>
-
-<details><summary>Using Tailwind directives with <code>animation</code> from <code>twind/css</code></summary>
+Using Tailwind directives with `animation` function from the `twind/css` module
 
 ```js
 const motion = animation('.6s ease-in-out infinite', {
@@ -230,9 +218,7 @@ const bounce = animation(
 )
 ```
 
-</details>
-
-<details><summary>A React button component</summary>
+A React button component
 
 ```js
 import { tw } from 'twind'
@@ -289,13 +275,9 @@ render(
 )
 ```
 
-</details>
-
-> 💡 The {@page Defining Components} guide explains how `apply` can be used.
-
 ## `setup` function
 
-Understandably developers will more often than not want to customize the out of the box experience. It is possible to achieve this with the {@link setup} function. Doing so will ultimately change the behavior of calling the `tw` function, making it appropriate for your particular use case.
+Understandably, developers will more often than not want to customize the out of the box experience. It is possible to achieve this with the `setup` function. Doing so will ultimately change the behavior of calling the `tw` function, making it appropriate for your particular use case.
 
 > 💡 To use `tw` you **do not** need to call `setup`.
 

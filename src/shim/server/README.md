@@ -3,7 +3,7 @@
 [![Module Size](https://flat.badgen.net/badgesize/brotli/https:/unpkg.com/twind/shim/server/server.js?icon=jsdelivr&label&color=blue&cache=10800)](https://unpkg.com/twind/shim/server/server.js 'brotli module size')
 [![Typescript](https://flat.badgen.net/badge/icon/included?icon=typescript&label)](https://unpkg.com/browse/twind/shim/server/server.d.ts)
 
-For static HTML processing (usually to provide SSR support for your javascript-powered web apps), `twind/shim/server` exports a dedicated {@link shim} function that accepts HTML string as input and will:
+For static HTML processing (usually to provide SSR support for your javascript-powered web apps), `twind/shim/server` exports a dedicated `shim` function that accepts HTML string as input and will:
 
 1. parse the markup and process element classes with either the {@link twind.tw | default/global tw} instance or a {@link ShimOptions.tw | custom} instance
 2. populate the provided sheet with the generated rules

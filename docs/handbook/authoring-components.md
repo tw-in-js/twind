@@ -129,7 +129,7 @@ const Input = ({ hasHover }) => <input css={[tw`border`, hasHover && hoverStyles
 
 ## API
 
-> `apply` accepts the same arguments as {@page Styling with Twind | tw}.
+> `apply` accepts the same arguments as [`tw`](/api/modules/twind/#tw-function).
 
 ```js
 import { tw, apply } from 'twind'
