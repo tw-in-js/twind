@@ -16,7 +16,7 @@ head:
 
 Sometimes you might find yourself wanting to write some arbitrary styles for an element. Some rule that isn't covered by Tailwind API but perhaps isn't general enough to warrant creating a real plugin for.
 
-## CSS directive
+## `CSS` function
 
 Essentially a CSS directive uses some CSS rules in object notation, array or template literal format. Here you can use the `&` selector to target the current element much like in other CSS-in-JS libraries.
 
@@ -410,7 +410,7 @@ The returned values can be used like this:
 // As second parameter for animation
 animation('1s ease infinite', bounce)
 
-// Within CSS directives
+// Within CSS functions
 css({
   animation: '1s ease infinite',
   animationName: bounce,

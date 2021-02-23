@@ -7,7 +7,7 @@ Sometimes you might find yourself wanting to write some arbitrary styles for an 
 
 ## CSS directive
 
-Essentially the {@link css} directive uses some CSS rules in object notation, array or template literal format to create a optimized [inline plugin](https://twind.dev/docs/handbook/advanced/plugins.html#inline-plugins). Here you can use the `&` selector to target the current element much like in other CSS-in-JS libraries. In this way, it is possible to write styles that cannot be described using an inline style attribute alone; things like specific children selectors.
+Essentially, [the `css` function](/handbook/css_in_twind) uses some CSS rules in object notation, array or template literal format to create a optimized [inline plugin](/handbook/plugins). Here you can use the `&` selector to target the current element much like in other CSS-in-JS libraries. In this way, it is possible to write styles that cannot be described using an inline style attribute alone; things like specific children selectors.
 
 ```js
 import { tw, css } from 'twind/css'
@@ -118,7 +118,7 @@ const style = css([
 ])
 ```
 
-{@page Defining Components | apply} can be used within `css`:
+The `apply` function can be used within `css`:
 
 ```js
 import { css, apply } from 'twind/css'
@@ -211,9 +211,9 @@ css(
 
 ## Animation Directive
 
-Custom animations are difficult to configure in Tailwind. During {@link twind.setup} you need to add to the `theme.animation` section and the `theme.keyframes` section. This means all animations must known before hand and you can not use "one-off" animations.
+Custom animations are difficult to configure in Tailwind. During [setup](/handbook/configuration), you need to add to the `theme.animation` section and the `theme.keyframes` section. This means all animations must known before hand and you can not use "one-off" animations.
 
-With the {@link animation} exports this task is greatly simplified:
+With the `animation` function, this task is greatly simplified:
 
 ```js
 import { animation } from 'twind/css'
@@ -300,7 +300,7 @@ css`
 
 ## Keyframes Helper
 
-The {@link keyframes} export helps to create custom [@keyframes](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes):
+The `keyframes` export helps to create custom [@keyframes](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes):
 
 ```js
 import { keyframes } from 'twind/css'
