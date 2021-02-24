@@ -9,6 +9,7 @@ import {
   buildMediaQuery,
   tail,
   merge,
+  isCSSProperty,
 } from '../internal/util'
 import {
   responsivePrecedence,
@@ -119,10 +120,10 @@ export const serialize = (
     // more specfic utilities have less declarations and a higher presedence
     let numberOfDeclarations = 0
 
-    if ('@apply' in css) {
+    if (css && (css as CSSRules)['@apply']) {
       css = merge(
-        evalThunk(apply(css['@apply'] as Token), context),
-        { ...css, '@apply': undefined },
+        evalThunk(apply((css as CSSRules)['@apply'] as Token), context),
+        { ...(css as CSSRules), '@apply': undefined },
         context,
       )
     }
@@ -131,8 +132,7 @@ export const serialize = (
     Object.keys(css as CSSRules).forEach((key) => {
       const value = evalThunk((css as CSSRules)[key], context)
 
-      // string, number or Array => a property with a value
-      if (includes('rg', (typeof value)[5]) || (Array.isArray(value) && !/[@:,(&]/.test(key))) {
+      if (isCSSProperty(key, value)) {
         if (value !== '' && key.length > 1) {
           // It is a Property
           const property = hyphenate(key)
@@ -150,11 +150,19 @@ export const serialize = (
             stringifyDeclaration(property, value as string | number | string[], important)
         }
       } else if (value) {
+        // TODO remove once moved from :global to @global
+        if (key == ':global') {
+          key = '@global'
+        }
+
         // If the value is an object this must be a nested block
         // like '@media ...', '@supports ... ', ':pseudo ...', '& > ...'
         // If this is a `@` rule
         if (key[0] === '@') {
-          if (key[1] === 'f') {
+          if (key[1] == 'g') {
+            // @global
+            stringify([], '', 0, value as MaybeArray<CSSRules>, important)
+          } else if (key[1] === 'f') {
             // `@font-face` is never wrapped, eg always global/root
             stringify([], key, 0, value as MaybeArray<CSSRules>, important)
           } else if (key[1] === 'k') {
@@ -183,8 +191,15 @@ export const serialize = (
               ),
               p: waypoints.reduce((sum, p) => sum + p.p, 0),
             })
+          } else if (key[1] == 'i') {
+            // @import
+            // eslint-disable-next-line @typescript-eslint/no-extra-semi
+            ;(Array.isArray(value) ? value : [value]).forEach(
+              (value) => value && rules.push({ p: 0, r: `${key} ${value};` }),
+            )
           } else {
-            if (key.slice(1, 8) == 'screen ') {
+            // @screen
+            if (key[2] == 'c') {
               key = buildMediaQuery(context.theme('screens', tail(key, 8).trim()) as string)
             }
 
@@ -197,8 +212,6 @@ export const serialize = (
               important,
             )
           }
-        } else if (key === ':global') {
-          stringify([], '', 0, value as MaybeArray<CSSRules>, important)
         } else {
           // A selector block: { '&:focus': { ... } }
           stringify(

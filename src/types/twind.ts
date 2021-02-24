@@ -1,6 +1,6 @@
 import type * as CSS from 'csstype'
 
-import type { CSSProperties } from './css'
+import type { CSSProperties, FontFace } from './css'
 import type { Theme, ThemeResolver, ThemeSectionType } from './theme'
 import type { Falsy, MaybeArray } from './util'
 
@@ -252,27 +252,26 @@ export interface CSSRules {
   // ':root'?: CSSProperties
   // '*'?: CSSProperties
 
-  '@font-face'?: CSSRulesThunk | MaybeArray<CSSRules>
+  '@import'?: CSSRulesThunk<MaybeArray<string>> | MaybeArray<string>
+  '@font-face'?: CSSRulesThunk<MaybeArray<FontFace>> | MaybeArray<FontFace>
+  '@keyframes'?: CSSRulesThunk<CSSAtKeyframes> | CSSAtKeyframes
   '@apply'?: MaybeArray<string | Falsy | TypescriptCompat>
-  ':global'?: CSSRulesThunk | MaybeArray<CSSRules>
+  ':global'?: CSSRulesThunk<MaybeArray<CSSRules>> | MaybeArray<CSSRules>
+
+  // [`@media ${string}`]: MaybeArray<CSSRules>
   // [`@screen ${string}`]: MaybeArray<string | Falsy | TypescriptCompat>
 
   // TODO it would be great if we could use CSS Properties with mapped types to typechecked CSS rules
-  [key: string]:
-    | CSSProperties
-    | CSSAtMedia
-    | CSSAtSupports
-    | CSSAtKeyframes
-    | CSSRulesThunk
-    | MaybeArray<CSSRules | string | Falsy | TypescriptCompat>
+  [key: string]: CSSRuleValue
 }
 
-export interface CSSRulesThunk {
-  (context: Context):
-    | CSSProperties
-    | CSSAtMedia
-    | CSSAtSupports
-    | CSSAtKeyframes
-    | CSSRulesThunk
-    | MaybeArray<CSSRules | string | Falsy | TypescriptCompat>
+export type CSSRuleValue =
+  | CSSAtMedia
+  | CSSAtSupports
+  | CSSAtKeyframes
+  | CSSRulesThunk
+  | MaybeArray<CSSProperties | CSSRules | FontFace | string | Falsy | TypescriptCompat>
+
+export interface CSSRulesThunk<Value = CSSRuleValue> {
+  (context: Context): Value
 }

@@ -6,6 +6,7 @@ import type {
   CSSRules,
   ThemeScreen,
   ThemeScreenValue,
+  CSSRuleValue,
 } from '../types'
 
 interface Includes {
@@ -50,22 +51,24 @@ export const ensureMaxSize = <K, V>(map: Map<K, V>, max: number): void => {
   }
 }
 
+// string, number or Array => a property with a value
+export const isCSSProperty = (key: string, value: CSSRuleValue): boolean =>
+  includes('rg', (typeof value)[5]) || (Array.isArray(value) && key[0] != '@')
+
 export const merge = (target: CSSRules, source: CSSRules, context: Context): CSSRules =>
   source
     ? Object.keys(source).reduce((target, key) => {
         const value = evalThunk(source[key], context)
 
-        if (value && typeof value == 'object' && !(Array.isArray(value) && !/[@:,(&]/.test(key))) {
-          // Keep all @font-face, @import, @global as is
-          if (/^@[fig]/.test(key)) {
-            // eslint-disable-next-line prettier/prettier
-            ((target[key] || (target[key] = [])) as CSSRules[]).push(value as CSSRules)
-          } else {
-            target[key] = merge((target[key] || {}) as CSSRules, value as CSSRules, context)
-          }
-        } else {
+        if (isCSSProperty(key, value)) {
           // hyphenate target key only if key is property like (\w-)
           target[hyphenate(key)] = value
+        } else {
+          // Keep all @font-face, @import, @global as is
+          target[key] =
+            key[0] == '@' && includes('fig', key[1])
+              ? ((target[key] || []) as CSSRules[]).concat(value as CSSRules)
+              : merge((target[key] || {}) as CSSRules, value as CSSRules, context)
         }
 
         return target

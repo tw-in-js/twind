@@ -284,6 +284,20 @@ test('use :global', ({ tw, sheet }) => {
   ])
 })
 
+test('use @global', ({ tw, sheet }) => {
+  const style = () => ({
+    '@global': {
+      html: apply('bg-gray-900 text-white'),
+    },
+  })
+
+  assert.is(tw(style), 'tw-z31ttt')
+
+  assert.equal(sheet.target, [
+    'html{--tw-17cwy6m:1;background-color:#111827;background-color:rgba(17,24,39,var(--tw-17cwy6m));--tw-dxr4o8:1;color:#fff;color:rgba(255,255,255,var(--tw-dxr4o8))}',
+  ])
+})
+
 test('use :global within css', ({ tw, sheet }) => {
   const style = css({
     ':global': {
@@ -298,6 +312,23 @@ test('use :global within css', ({ tw, sheet }) => {
     'body{--tw-17cwy6m:1;background-color:#111827;background-color:rgba(17,24,39,var(--tw-17cwy6m));--tw-dxr4o8:1;color:#fff;color:rgba(255,255,255,var(--tw-dxr4o8))}',
     '.tw-49gfd9 a:hover{--tw-dxr4o8:1;color:#1d4ed8;color:rgba(29,78,216,var(--tw-dxr4o8))}',
     '.tw-49gfd9 a{--tw-dxr4o8:1;color:#3b82f6;color:rgba(59,130,246,var(--tw-dxr4o8))}',
+  ])
+})
+
+test('use @global within css', ({ tw, sheet }) => {
+  const style = css({
+    '@global': {
+      body: apply('bg-gray-900 text-white'),
+    },
+    a: apply('text-blue(500 hover:700)'),
+  })
+
+  assert.is(tw(style), 'tw-efetv')
+
+  assert.equal(sheet.target, [
+    'body{--tw-17cwy6m:1;background-color:#111827;background-color:rgba(17,24,39,var(--tw-17cwy6m));--tw-dxr4o8:1;color:#fff;color:rgba(255,255,255,var(--tw-dxr4o8))}',
+    '.tw-efetv a:hover{--tw-dxr4o8:1;color:#1d4ed8;color:rgba(29,78,216,var(--tw-dxr4o8))}',
+    '.tw-efetv a{--tw-dxr4o8:1;color:#3b82f6;color:rgba(59,130,246,var(--tw-dxr4o8))}',
   ])
 })
 
