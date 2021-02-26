@@ -14,7 +14,7 @@ head:
 
 # {{ $frontmatter.title }}
 
-The smallest, fastest, most feature complete Tailwind-in-JS solution in existence
+> The smallest, fastest, most feature complete Tailwind-in-JS solution in existence
 
 [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE)
 [![Latest Release](https://flat.badgen.net/npm/v/twind?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/twind)
@@ -26,63 +26,26 @@ The smallest, fastest, most feature complete Tailwind-in-JS solution in existenc
 [![CI](https://github.com/tw-in-js/twind/workflows/CI/badge.svg)](https://github.com/tw-in-js/twind/actions?query=workflow%3Aci)
 [![Coverage Status](https://flat.badgen.net/coveralls/c/github/tw-in-js/twind/main?icon=codecov&label&cache=10800)](https://coveralls.io/github/tw-in-js/twind?branch=main)
 
-<Quote author="Adam Wathan (creator of Tailwind)">I've wanted to do a CSS-in-JS flavor of Tailwind for over 2 years because of all the neat benefits you get there so it's cool to see projects like this!</Quote>
+<!-- Hmmm?... -->
+<!-- <Quote author="Adam Wathan (creator of Tailwind)">I've wanted to do a CSS-in-JS flavor of Tailwind for over 2 years because of all the neat benefits you get there so it's cool to see projects like this!</Quote> -->
 
-## What is Twind?
+Twind is a small compiler (~12kB) that converts Tailwind utility classes into CSS at runtime. The goal of this project is to unify the flexibility of CSS-in-JS with the carefully considered constraints of the Tailwind API.
 
-Twind is a small compiler (~12kb) that converts Tailwind classes into actual CSS rules at runtime. If you have used Tailwind or other CSS-in-JS solutions, then most of the API should feel very familiar.
+### Features
 
-The primary purpose of this project is to unify CSS-in-JS and TailwindCSS; embracing the flexibility of CSS-in-JS whilst conforming to the carefully considered constraints of the Tailwind API.
+**<Emoji symbol="⚡️"/> No build step**
 
-While Twind comes with a few extra features, we've strived to maintain feature parity with Tailwind V2. In other words, if it works in Tailwind, it should work in Twind.
+Get all the benefits of Tailwind without the need for PostCSS, configuration, purging, or autoprefixing.
 
-Despite being very flexible and powerful, it was our intention to keep the surface API as minimal as possible. We appreciate that Twind is likely to be used by developers and designers alike, so we try provide sensible defaults out of the box, with little or no need for setup.
-
-## Quick Start
-
-Try a [live and interactive demo 🚀 ](https://esm.codes/#aW1wb3J0IHsgdHcgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZCcKCmRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gYAogIDxtYWluIGNsYXNzPSIke3R3YGgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXJgfSI+CiAgICA8aDEgY2xhc3M9IiR7dHdgZm9udC1ib2xkIHRleHQoY2VudGVyIDV4bCB3aGl0ZSBzbTpncmF5LTgwMCBtZDpwaW5rLTcwMClgfSI+VGhpcyBpcyBUd2luZCE8L2gxPgogIDwvbWFpbj4KYA==)
-
-If you would like to get started with Twind right away then copy paste this code into your favorite sandbox:
-
-```js
-import { tw } from 'https://cdn.skypack.dev/twind'
-
-document.body.innerHTML = `
-  <main class="${tw`h-screen bg-purple-400 flex items-center justify-center`}">
-    <h1 class="${tw`font-bold text(center 5xl white sm:gray-800 md:pink-700)`}">This is Twind!</h1>
-  </main>
-`
-```
-
-Using the exported `tw` function results in the compilation of the rules like `bg-black text-white` and `text-xl` exactly as specified in the [Tailwind documentation](https://tailwincss.com/docs). For convenience, the default [Tailwind theme](https://github.com/tailwindlabs/tailwindcss/blob/v1/stubs/defaultConfig.stub.js) is used along with the preflight [base styles](https://tailwindcss.com/docs/preflight) unless you explicitly overwrite them.
-
-For seamless integration with existing Tailwind HTML, you can use [the Shim](/docs/guide/the-shim.md):
-
-Try a [live and interactive demo 🚀](https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPG1haW4gY2xhc3M9Imgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIiPgogICAgPGgxIGNsYXNzPSJmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKSI+CiAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICA8L2gxPgogIDwvbWFpbj4KYA==)
-
-```html
-<script type="module" src="https://cdn.skypack.dev/twind/shim"></script>
-
-<main class="h-screen bg-purple-400 flex items-center justify-center">
-  <h1 class="font-bold text(center 5xl white sm:gray-800 md:pink-700)">This is Twind!</h1>
-</main>
-```
-
-> 📚 For more detailed instruction on usage please [read the documentation](https://twind.dev/docs/handbook/getting-started.html) and check out [this extended demo](https://esm.codes/#aW1wb3J0IHsgdHcsIHNldHVwIH0gZnJvbSAnaHR0cHM6Ly9jZG4uc2t5cGFjay5kZXYvdHdpbmQnCgpzZXR1cCh7CiAgdGhlbWU6IHsKICAgIC8vIEV4YW1wbGUgb2YgZXh0ZW5kaW5nIHRoZSBkZWZhdWx0IHRoZW1lCiAgICBleHRlbmQ6IHsKICAgICAgY29sb3JzOiB7IGhvdHBpbms6ICcjRkYwMEZGJyB9LAogICAgICByb3RhdGU6IHsgNTogJzVkZWcnIH0KICAgIH0KICB9Cn0pCgpjb25zdCBhcHAgPSAoKSA9PiBgCiAgICA8ZGl2IGNsYXNzPScke3N0eWxlLmNvbnRhaW5lcn0nPgogICAgICA8aDEgY2xhc3M9JyR7CiAgICAgICAgLy8gRXhhbXBsZSBvZiBhbiBpbmxpbmUgc3R5bGUKICAgICAgICB0d2AKICAgICAgICAgIHRleHQod2hpdGUgNHhsKQogICAgICAgICAgZm9udChib2xkIHNhbnMpCiAgICAgICAgICB0cmFuc2l0aW9uLXRyYW5zZm9ybQogICAgICAgICAgaG92ZXI6KAogICAgICAgICAgICByb3RhdGUtNQogICAgICAgICAgICBzY2FsZS0xNTAKICAgICAgICAgICAgY3Vyc29yLXBvaW50ZXIKICAgICAgICAgICkKICAgICAgICBgCiAgICAgIH0nPkhlbGxvIFdvcmxkPC9oMT4KICAgIDwvZGl2PgogIGA7CiAgCiAgCmNvbnN0IHN0eWxlID0gewogIC8vIEV4YW1wbGUgb2YgYWJzdHJhY3RlZCBzdHlsZQogIGNvbnRhaW5lcjogdHdgCiAgICBoLWZ1bGwKICAgIGJnLWhvdHBpbmsKICAgIGZsZXgKICAgIGl0ZW1zLWNlbnRlcgogICAganVzdGlmeS1jZW50ZXIKICBgCn0KCmRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gYXBwKCk=)
-
-## Features
-
-**⚡️ No build step**
-
-Get all the benefits of Tailwind without the need for Tailwind, PostCSS, configuration, purging, or autoprefixing.
-
-**🚀 Framework agnostic**
+**<Emoji symbol="🚀"/> Framework agnostic**
 
 If your app uses HTML and JavaScript, it should work with Twind. This goes for server-rendered apps too.
 
-**😎 One low fixed cost**
+**<Emoji symbol="😎"/> One low fixed cost**
 
 Twind ships the compiler, not the CSS. This means unlimited styles and variants for one low fixed cost of ~12kB.
+
+![Example showing how Twind injects styles at runtime](/assets/how-twind-works.gif 'How Twind works')
 
 **Other features include:**
 
@@ -90,31 +53,25 @@ Twind ships the compiler, not the CSS. This means unlimited styles and variants 
 Click on each summary to show additional details.
 :::
 
-<details><summary>🚅 Faster than most CSS-in-JS libraries</summary>
+<details><summary><Emoji symbol="🚅" /> Faster than most CSS-in-JS libraries</summary>
 
-Twind's advanced caching and specialist optimizations enables it to compile and inject CSS faster than most other CSS-in-JS solutions. [Check out the benchmarks](/handbook/benchmarks) to learn more.
-
-</details>
-
-<details><summary>🎨 Seamless integration with Tailwind</summary>
-
-Twind provides [a shim](/handbook/the-shim), which allows for seamless integration with your existing Tailwind styles with no configuration. The shim can improve the development experience and is useful for gradual migration.
-
-```html
-<script type="module" src="https://cdn.skypack.dev/twind/shim"></script>
-
-<main class="h-screen bg-purple-400 flex items-center justify-center">
-  <h1 class="font-bold text(center 5xl white sm:gray-800 md:pink-700)">This is Twind!</h1>
-</main>
-```
-
-[Live and interactive shim demo 🚀](https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPG1haW4gY2xhc3M9Imgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIiPgogICAgPGgxIGNsYXNzPSJmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKSI+CiAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICA8L2gxPgogIDwvbWFpbj4KYA==)
+Twind's advanced caching and specialized optimizations enable it to compile and inject CSS faster than most other CSS-in-JS solutions. [Check out the benchmarks](/handbook/benchmarks) to learn more.
 
 </details>
 
-<details><summary>🎯 Extended variants, directives, and syntax</summary>
+<details><summary><Emoji symbol="🎨" /> Seamless integration with Tailwind</summary>
 
-Twind provides additional variants, directives, and syntaxes to improve developer experience:
+If it works in Tailwind, it should work in Twind.
+
+Class names that are provided by Tailwind will always work with Twind. Further, Twind configuration and theming follow [Tailwind conventions](<(https://tailwindcss.com/docs/theme)>), meaning you can copy/paste your Tailwind config to the Twind `setup` function. The only difference here is that there is no need to rebuild after changing your theme. Just refresh the page! For more information, check out the [configuration guide](/handbook/configuration).
+
+Twind also provides [a shim](/handbook/the-shim), which allows for seamless integration with your existing Tailwind styles with no configuration. The shim can improve the development experience and is useful for incremental migration.
+
+</details>
+
+<details><summary><Emoji symbol="🎯" /> Extended variants, directives, and syntax</summary>
+
+Twind provides additional variants, directives, and syntaxes to give you even more ways to express your styles:
 
 - [Grouping syntax](/handbook/grouping-syntax.md) `class="text(black uppercase md:blue-400)"`
 - [Extended variants](/handbook/extended-functionality#variants) like `siblings`, `sibling`, `children`, and `override`
@@ -122,7 +79,7 @@ Twind provides additional variants, directives, and syntaxes to improve develope
 
 </details>
 
-<details><summary>✈️ Tailwind preflight by default</summary>
+<details><summary><Emoji symbol="✈️" /> Tailwind preflight by default</summary>
 
 The [base reset](https://tailwindcss.com/docs/preflight) provided by Tailwind is merged with your optional theme configuration and injected in the stylesheet during setup. This guarantees more consistent cross-browser styles out of the box.
 
@@ -132,17 +89,7 @@ It is possible to [customize or disable the preflight](/handbook/configuration#p
 
 </details>
 
-<details><summary>🤝 Feature parity with Tailwind</summary>
-
-If it works in Tailwind, it should work in Twind.
-
-Class names that are provided by Tailwind will always work with Twind. Further, Twind configuration and theming follow [Tailwind conventions](<(https://tailwindcss.com/docs/theme)>), meaning you can copy/paste your Tailwind config to the Twind `setup` function. The only difference here is that there is no need to rebuild after changing your theme. Just refresh the page!
-
-For more information, check out the [configuration guide](/handbook/configuration).
-
-</details>
-
-<details><summary>🚓 Escape hatch for arbitrary CSS</summary>
+<details><summary><Emoji symbol="🚓" /> Escape hatch for arbitrary CSS</summary>
 
 The Twind compiler accepts functions that can return arbitrary CSS-in-JS objects, providing a convenient escape hatch for all those one-off rules which aren't supported by Tailwind. The `&` keyword allows you to write complex rules (like pseudo elements `&::before` and `&::after`) that are beyond the scope of inline styles without having to add another dependency.
 
@@ -150,47 +97,41 @@ Twind also provides a [css helper function](/handbook/css-in-twind) as a conveni
 
 </details>
 
-<details><summary>🤖 Built in support for conditional rule combining</summary>
+<details><summary><Emoji symbol="🤖" /> Built in support for conditional rule combining</summary>
 
-Input is not limited to strings like with HTML classes. The [`tw` function](https://twind.dev/docs/handbook/getting-started/styling-with-twind.html#the-tw-function) accept arrays, objects, template literals, functions, almost everything! The interpreter spec is inspired by and is very similar to [clsx](https://github.com/lukeed/clsx) and offers a much more developer friendly API that handles null values gracefully.
+The [`tw` function](/handbook/styled-with-twind#the-tw-function) allows you to represent your styles in arrays, objects, template literals, functions, or any combination of these.The interpreter spec is inspired by and is very similar to [clsx](https://github.com/lukeed/clsx) and offers a much more developer friendly API that handles null values gracefully.
 
 </details>
 
-<details><summary>🧐 Improved readability with multiline styles</summary>
+<details><summary><Emoji symbol="🧐" /> Improved readability with multiline styles</summary>
 
 Using template literals, objects, and even arrays allows you to break rules over multiple lines, drastically improving readability and maintainability of complex rules.
 
 </details>
 
-<details><summary>❄️ Optional hashing of class names ensuring no conflicts</summary>
+<details><summary><Emoji symbol="❄️" /> Optional hashing of class names ensuring no conflicts</summary>
 
 You can optionally configure Twind to hash class names before injecting them into the document. This may be useful in production as it can reduce the down-the-wire size of server-side rendered pages and eliminates any chance of class name conflicts with third-party styles.
 
 </details>
 
-<details><summary>🔌 Language extension via plugins</summary>
+<details><summary><Emoji symbol="🔌" /> Language extension via plugins</summary>
 
 You can effortlessly extend the Twind compiler's abilities by creating your own plugins in your Twind configuration.
 
-[Check out the plugins guide](/handbook/plugins) for more information.
+Check out [the plugins guide](/handbook/plugins) for more information.
 
 </details>
 
-<details><summary>🎩 No runtime overhead with static extraction</summary>
+<details><summary><Emoji symbol="🎩" /> No runtime overhead with static extraction</summary>
 
 The compiler is not reliant on the DOM, which makes it an ideal candidate for static extraction and removing all runtime overhead. This is possible during [SSR](/usage-guides/use-with-ssr) or build-time prepass.
 
 </details>
 
-## About this project
-
-A lot of developers ask _"Why not just use Tailwind?"_ and our answer is always the same: You **should** use Tailwind. It is an absolutely incredible tool with amazing documentation!
-
-However, if like us you are already building your app in JS using a framework like React, Preact, Vue or Svelte, rather than just static HTML, then compiling Tailwind shorthands just in time (like twind does) rather than ahead of time like with Tailwind and PostCSS, comes with a lot of advantages.
-
 ### Rationale and Inspiration
 
-This project was started by the authors of two similar libraries – [oceanwind](https://github.com/lukejacksonn/oceanwind) and [beamwind](https://github.com/kenoxa/beamwind) – who chose to collaborate rather than compete with each other in this space.
+This project was started by the authors of two similar libraries – [oceanwind](https://github.com/lukejacksonn/oceanwind) and [beamwind](https://github.com/kenoxa/beamwind) – who chose to collaborate with each other in this space.
 
 > Combining efforts has saved us time and resulted in a much more complete and production ready offering.
 
@@ -221,7 +162,7 @@ This has to happen in a performant way at runtime, whilst adhering to Tailwind V
 
 ### Opportunities
 
-Simply recreating a tailwind like experience at runtime might seem like a futile exercise but we'd like to believe it opens up the doors to some exciting new possibilities. There is always going to be a tradeoff between compiling at ahead of time and compiling _just in time_, however we are confident the upsides here are significant enough to persue a runtime implementation and the results have been promising so far.
+Recreating the Tailwind experience at runtime might seem like a futile exercise, but we'd like to believe it opens up the doors to some exciting new possibilities. There is always going to be a tradeoff between compiling at ahead of time and compiling _just in time_, however we are confident that the upsides here are significant enough to pursue a runtime implementation. [The results](/handbook/benchmarks) have been promising so far.
 
 > Note it is still possible to remove all runtime overhead via a prepass either at serve or built time
 

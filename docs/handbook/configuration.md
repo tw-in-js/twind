@@ -17,7 +17,7 @@ head:
 Twind offers configuration and theming options via a `setup` function. The ` setup` function is a named export of the `twind` module and accepts a configuration object as an argument.
 
 :::tip
-The `setup` function is not required to use Twind.
+The `setup` function is not required to use Twind. If used, it must be called before any `tw` calls.
 :::
 
 ```js

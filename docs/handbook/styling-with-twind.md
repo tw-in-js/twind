@@ -22,8 +22,6 @@ At the heart of Twind is the `tw` function. This function works by:
 - Injecting those styles into the head of the document
 - Returning class name(s) that associate the injected styles to the element
 
-![How Twind Works](/assets/how-twind-works.gif 'How Twind works')
-
 Take this simple example:
 
 ```js
