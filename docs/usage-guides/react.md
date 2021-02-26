@@ -1,5 +1,5 @@
 ---
-title: Use with React
+title: React
 editLink: true
 navbar: true
 sidebar: true
@@ -14,7 +14,7 @@ head:
 
 # {{ $frontmatter.title }}
 
-## [React](https://reactjs.org/)
+[React site](https://reactjs.org/)
 
 ```js
 import ReactDOM from 'react-dom'
@@ -30,7 +30,7 @@ ReactDOM.render(
 )
 ```
 
-### htm/react - [React](https://reactjs.org/) with [htm](https://github.com/developit/htm)
+## htm/react - [React](https://reactjs.org/) with [htm](https://github.com/developit/htm)
 
 ```js
 import ReactDOM from 'react-dom'

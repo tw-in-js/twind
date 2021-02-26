@@ -1,5 +1,5 @@
 ---
-title: Use with Lit Element
+title: Lit Element
 editLink: true
 navbar: true
 sidebar: true
@@ -14,7 +14,7 @@ head:
 
 # {{ $frontmatter.title }}
 
-## [LitElement](https://lit-element.polymer-project.org/)
+[LitElement Site](https://lit-element.polymer-project.org/)
 
 > ❗ This example is using [Constructable Stylesheet Objects](https://wicg.github.io/construct-stylesheets/) and `DocumentOrShadowRoot.adoptedStyleSheets` which have [limited browser support](https://caniuse.com/mdn-api_documentorshadowroot_adoptedstylesheets) at the moment (December 2020).
 
