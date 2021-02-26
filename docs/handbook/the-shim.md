@@ -20,7 +20,7 @@ In simplest terms, the shim will detect any Tailwind classes names used in your 
 
 And best of all, the shim supports all of Twind's extending syntaxes, variants, and directives without any additional configuration. And, it can be used along side the `tw` function, which allows for gradual migration.
 
-We've also put together a [Tailwind migration guide](../migration-guides/migrate-from-tailwind.md) for more information.
+We've also put together a [Tailwind migration guide](../migration-guides/tailwind.md) for more information.
 
 <!-- The shim allows for the use of the `class` attribute for tailwind rules. If such a rule is detected, the corresponding CSS rule is created and injected into the stylesheet dynamically. The default `twind/shim` export is intended for client-side usage and, without configuration, utilizes the default/global `tw` instance. For server-side usage, [`twind/shim/server`](#) exports a dedicated `shim` function that will parse and update a static HTML string while collecting the style rules into a sheet for further usage in your respective framework. -->
 
@@ -86,7 +86,7 @@ import { setup, disconnect } from 'twind/shim'
 If you wish to remove Twind's runtime overhead or you're interested in using Twind in a universal or "isomorphic" web app, `twind/shim/server` exports the dedicated `twind/shim/server.shim` function for performant processing of static HTML.
 
 :::tip
-You'll find more details and examples in the [use-with-ssr](../usage-guides/use-with-ssr.md) guide.
+You'll find more details and examples in the [ssr](../usage-guides/ssr.md) guide.
 :::
 
 ```js
