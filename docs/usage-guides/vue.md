@@ -1,5 +1,5 @@
 ---
-title: Vue
+title: Use with Vue
 editLink: true
 navbar: true
 sidebar: true

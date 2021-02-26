@@ -1,5 +1,5 @@
 ---
-title: Web Components
+title: Use with Web Components
 editLink: true
 navbar: true
 sidebar: true

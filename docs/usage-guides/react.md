@@ -1,5 +1,5 @@
 ---
-title: React
+title: Use with React
 editLink: true
 navbar: true
 sidebar: true

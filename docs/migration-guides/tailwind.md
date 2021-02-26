@@ -1,5 +1,5 @@
 ---
-title: Tailwind
+title: Migrate from Tailwind
 editLink: true
 navbar: true
 sidebar: true

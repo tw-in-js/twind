@@ -1,5 +1,5 @@
 ---
-title: Svelte
+title: Use with Svelte
 editLink: true
 navbar: true
 sidebar: true
