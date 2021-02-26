@@ -1,5 +1,5 @@
 ---
-title: SSR
+title: Use with SSR
 editLink: true
 navbar: true
 sidebar: true

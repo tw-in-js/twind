@@ -1,5 +1,5 @@
 ---
-title: WMR
+title: Use with WMR
 editLink: true
 navbar: true
 sidebar: true

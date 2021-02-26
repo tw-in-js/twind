@@ -1,5 +1,5 @@
 ---
-title: NextJS
+title: Use with NextJS
 editLink: true
 navbar: true
 sidebar: true

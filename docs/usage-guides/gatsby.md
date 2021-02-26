@@ -1,5 +1,5 @@
 ---
-title: Gatsby
+title: Use with Gatsby
 editLink: true
 navbar: true
 sidebar: true

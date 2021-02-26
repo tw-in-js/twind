@@ -1,5 +1,5 @@
 ---
-title: Preact
+title: Use with Preact
 editLink: true
 navbar: true
 sidebar: true

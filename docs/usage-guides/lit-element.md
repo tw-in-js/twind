@@ -1,5 +1,5 @@
 ---
-title: Lit Element
+title: Use with Lit Element
 editLink: true
 navbar: true
 sidebar: true

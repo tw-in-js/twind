@@ -1,5 +1,5 @@
 ---
-title: twind.macro
+title: Migrate from twind.macro
 editLink: true
 navbar: true
 sidebar: true
