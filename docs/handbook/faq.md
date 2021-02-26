@@ -14,21 +14,23 @@ head:
 
 # {{ $frontmatter.title }}
 
-> 💡 Didn't found an answer? Try [GitHub discussions](https://github.com/tw-in-js/twind/discussions), our [issues tracker](https://github.com/tw-in-js/twind/issues) or ask the community in our [discord channel](https://discord.com/invite/2aP5NkszvD).
+> 💡 Didn't find your answer? Try [GitHub discussions](https://github.com/tw-in-js/twind/discussions), our [issues tracker](https://github.com/tw-in-js/twind/issues), or ask the community in our [discord channel](https://discord.com/invite/2aP5NkszvD).
 
 ### General
 
 <details><summary>Why not just TailwindCSS?</summary>
 
-You **should** use Tailwind. It is an absolutely incredible tool with amazing documentation!
+We, in no way, discourage the use of TailwindCSS. In fact, we think everyone **should** try Tailwind before they try Twind. It is an absolutely incredible tool with amazing documentation and the entire backbone of this project!
 
-However, if like us you are already building your app in JS using a framework like React, Preact, Vue or Svelte, rather than just static HTML, then compiling Tailwind shorthands just in time (like twind does) rather than ahead of time like with Tailwind and PostCSS, comes with a lot of advantages.
+Twind takes a different approach by removing the build step and generating the styles at run-time, which can be a useful approach for existing apps built on frameworks.
+
+We encourage you to try both and see which one is a better fit for you and your project.
 
 </details>
 
-<details><summary>What do you mean by CSS-in-JS?</summary>
+<details><summary>How is Twind different from TailwindCSS?</summary>
 
-Coming soon...
+Twind works with all existing Tailwind classes and configuration. However, Twind offers extended utilities, variants, and syntaxes which are all listed in the [Extended Functionality Guide](/handbook/extended-functionality).
 
 </details>
 
@@ -48,51 +50,37 @@ Coming soon...
 
 If your project uses JavaScript/TypeScript, it should work with Twind. This includes vanilla JavaScript/TypeScript, React, React Native, Vue, Angular, Solid, AlpineJS, NextJS, Gatsby, Nuxt, 11ty, and virtually any other JavaScript framework.
 
-Please note that usage with some frameworks, including SSR frameworks, requires additional configuration. We've put together several [recipes](#) and [example apps](#) to get you started:
-
-Server Rendered Apps (SSR)- [https://twind.dev/docs/modules/twind_server.html](https://twind.dev/docs/modules/twind_server.
+Please note that usage with some frameworks, including SSR frameworks, requires additional configuration. We've put together several usage guides to help get you started.
 
 </details>
 
 <details><summary>How is browser support for Twind?</summary>
 
-Twind works with all major browsers but requires a polyfill for IE11 and some older browsers. We've put together a [Browser Support](https://twind.dev/docs/handbook/getting-started/browser-support.html) page in the docs with detailed information.
+Twind works with all major browsers but requires a polyfill for IE11 and some older browsers. Please see the [Legacy Browsers guide](/handbook/getting-started#supporting-legacy-browsers) for more information.
 
 </details>
 
 <details><summary>Does Twind support dark mode?</summary>
 
-Coming soon...
+Yes! With Twind, dark mode is always available. Please see the [configuration guide](/handbook/configuration#dark-mode) for more info.
 
 </details>
 
 <details><summary>Does Twind support Tailwind V2 colors?</summary>
 
-Yes, but with a little extra configuration. You can find usage instructions [in the docs](https://twind.dev/docs/modules/twind_colors.html).
+Yes, but with a little extra configuration. With Twind, dark mode is always available! Please see the [configuration guide](/handbook/configuration#colors) for more info.
 
 </details>
 
 <details><summary>Does Twind support TypeScript?</summary>
 
-Coming soon...
+Yes, Twind is written in TypeScript and includes all type definitions with the modules. Please see the [TypeScript usage guide](/usage-guides/typescript) for more info on how to use Twind in your TypeScript app.
 
 </details>
 
-### Comparisons
+<!-- ### Comparisons -->
 
-<details><summary>How is Twind different from TailwindCSS?</summary>
-
-Coming soon...
-
-</details>
-
-<details><summary>Does Twind maintain feature parity with TailwindCSS?</summary>
-
-Coming soon...
-
-</details>
-
-<details><summary>How is Twind different from twin.macro? </summary>
+<!-- <details><summary>How is Twind different from twin.macro? </summary>
 
 Coming soon...
 
@@ -102,37 +90,41 @@ Coming soon...
 
 Coming soon...
 
-</details>
+</details> -->
 
 ### Usage
 
 <details><summary>How do I get started using Twind? </summary>
 
-We've put together a [Quickstart Guide](https://twind.dev/docs/handbook/getting-started.html#quickstart) and [Installation Guide](https://twind.dev/docs/handbook/getting-started/installation.html) guide to get you up in running in under a minute.
+We've put together a [Getting Started](/handbook/getting-started) guide to get you up in running in under a minute.
 
 </details>
 
 <details><summary>How do I migrate my existing project to Twind?</summary>
 
-Coming soon...
-
-</details>
-
-<details><summary>How do I write global styles in Twind?</summary>
-
-Coming soon...
+We've put together a [Tailwind Migration Guide](/migration-guides/tailwind) and are working on more.
 
 </details>
 
 <details><summary>How do I write raw CSS in Twind?</summary>
 
-Tailwind provides a `twind/css` package to help you incorporate raw CSS into your project. This package exposes a `css` function that lets you define your CSS using JavaScript object notation. [Learn more in the docs](https://twind.dev/docs/modules/twind_css.html).
+Tailwind provides a `twind/css` package to help you incorporate raw CSS into your project. This package exposes a `css` function that lets you define your CSS using JavaScript object notation. Please check out our [CSS-in-Twind Guide](/handbook/css-in-twind) for more information.
+
+</details>
+
+<details><summary>How do I write global styles in Twind?</summary>
+
+Twind provides a first-class approach to writing global styles via the `twind/css` module.
+
+We've put together a [Global Styles Guide](/handbook/css-in-twind#global-styles) for your convenience.
 
 </details>
 
 <details><summary>How do I override a style in Twind?</summary>
 
-Coming soon...
+Twind provides several ways to override styles, including an `!important` modifier, `apply` function, and `override` variant.
+
+Please see the [Overwriting Styles Guide](/handbook/overwriting-styles) for more information.
 
 </details>
 <details><summary>How do I access a theme value in Twind?</summary>
@@ -143,17 +135,17 @@ The `twind/css` package exposes a `theme` helper for use with the `css` function
 
 <details><summary>How do I use Twind with server-rendered (SSR) apps?</summary>
 
-Twind provides a `twind/server` package to assist with static extraction needed for SSR apps. [Learn more in the docs.](https://twind.dev/docs/modules/twind_server.html)
+Twind provides a `twind/server` package to assist with static extraction needed for SSR apps. Please the [SSR Usage Guide](/usage-guides/ssr) for more information.
 
 There is also a working [example Next App](https://github.com/tw-in-js/example-next) to get you up in running.
 
 </details>
 
-<details><summary>How do I cache my Twind styles?</summary>
+<!-- <details><summary>How do I cache my Twind styles?</summary>
 
 Coming soon...
 
-</details>
+</details> -->
 
 <details><summary>When should I use the shim and are there any downsides?</summary>
 
@@ -164,15 +156,15 @@ The purpose of the shim is to allow you to take advantage of Twind without the u
 
 There could be performance implications of using the shim on large or highly dynamic apps due to a requirement to parse entire class attributes. However, these differences should be negligible for most static sites.
 
-[Learn more in the docs.](https://twind.dev/docs/modules/twind_shim.html)
+Please check out [The Shim Guide](/handbook/the-shim) for more information.
 
 </details>
 
-<details><summary>How do I know when to use `tw` vs. `apply` vs. `lazy`?</summary>
+<!-- <details><summary>How do I know when to use `tw` vs. `apply` vs. `lazy`?</summary>
 
 Coming soon...
 
-</details>
+</details> -->
 
 ### Tooling
 
@@ -195,6 +187,6 @@ Yes, we are active both on Github Discussions and Discord.
 
 <details><summary>How can I contribute to this project?</summary>
 
-Do you love Twind and want to help make the project even better? There are several ways that you can contribute to this project from spreading the word to fixing bugs to creating new features. We've put together a [Contributing Guide](https://twind.dev/docs/handbook/advanced/contributing.html) to get you started.
+Hey, thanks for your interest! There are several ways that you can contribute to this project from spreading the word to fixing bugs to creating new features. We've put together a [Contributing Guide](https://github.com/tw-in-js/twind/blob/main/CONTRIBUTING.md) to get you started.
 
 </details>
