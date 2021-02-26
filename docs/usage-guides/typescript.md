@@ -1,5 +1,5 @@
 ---
-title: Use with TypeScript
+title: TypeScript
 editLink: true
 navbar: true
 sidebar: true

@@ -1,5 +1,5 @@
 ---
-title: Use with Preact
+title: Preact
 editLink: true
 navbar: true
 sidebar: true
@@ -14,7 +14,7 @@ head:
 
 # {{ $frontmatter.title }}
 
-## [Preact](https://preactjs.com/)
+[Preact site](https://preactjs.com/)
 
 ```js
 import { h, render } from 'preact'

@@ -1,5 +1,5 @@
 ---
-title: Use with Svelte
+title: Svelte
 editLink: true
 navbar: true
 sidebar: true
@@ -13,8 +13,6 @@ head:
 ---
 
 # {{ $frontmatter.title }}
-
-## [Svelte](https://svelte.dev/)
 
 ```html
 <script>

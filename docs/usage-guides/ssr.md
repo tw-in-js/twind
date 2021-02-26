@@ -1,5 +1,5 @@
 ---
-title: Use with SSR
+title: SSR
 editLink: true
 navbar: true
 sidebar: true
@@ -12,26 +12,9 @@ head:
       content: twind tailwind css-in-js
 ---
 
-# {{ $frontmatter.title }}---
-
-title: Use with Vue
-editLink: true
-navbar: true
-sidebar: true
-head:
-
-- - meta
-  - name: description
-    content: How to use Twind with Vue
-- - meta
-  - name: keywords
-    content: twind tailwind css-in-js
-
----
-
 # {{ $frontmatter.title }}
 
-# Static Extraction a.k.a. Server Side Rendering
+## Static Extraction a.k.a. Server Side Rendering
 
 Twind supports static extraction a.k.a. Server Side Rendering (SSR) out of the box.
 
@@ -80,7 +63,7 @@ const styleTag = getStyleTag(sheet, { nonce: __webpack_nonce__ })
 ## Asynchronous SSR
 
 > ❗ Please note the `twind/server` bundle is Node.JS only.
-> ❗ This is an experimental feature and only supported for Node.JS >=12. Use with care and please [report any issue](https://github.com/tw-in-js/twind/issues/new) you find.
+> ❗ This is an experimental feature and only supported for Node.JS >=12. care and please [report any issue](https://github.com/tw-in-js/twind/issues/new) you find.
 > Consider using the synchronous API when ever possible due to the relatively expensive nature of the [promise introspection API](https://docs.google.com/document/d/1rda3yKGHimKIhg5YeoAmCOtyURgsbTH_qaYR79FELlk/edit) provided by V8.
 > Async server side rendering is implemented using [async_hooks](https://nodejs.org/docs/latest-v14.x/api/async_hooks.html). Callback-based APIs and event emitters may not work or need special handling.
 

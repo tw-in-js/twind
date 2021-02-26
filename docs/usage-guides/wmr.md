@@ -1,5 +1,5 @@
 ---
-title: Use with WMR
+title: WMR
 editLink: true
 navbar: true
 sidebar: true
@@ -13,8 +13,6 @@ head:
 ---
 
 # {{ $frontmatter.title }}
-
-## [WMR](https://github.com/preactjs/wmr)
 
 > 💡 The [tw-in-js/example-wmr](https://github.com/tw-in-js/example-wmr) repository uses this setup.
 
