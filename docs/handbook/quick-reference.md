@@ -14,7 +14,7 @@ head:
 
 # {{ $frontmatter.title }}
 
-## Useful Links
+### Useful Links
 
 - Website: [https://twind.dev/](https://twind.dev/)
 - Website Docs: [https://twind.dev/docs/](https://twind.dev/docs/)
@@ -22,7 +22,7 @@ head:
 - GitHub Docs: [https://github.com/tw-in-js/twind#documentation](https://github.com/tw-in-js/twind#documentation)
 - All Twind Modules: [https://twind.dev/docs/handbook/getting-started/modules.html](https://twind.dev/docs/handbook/getting-started/modules.html)
 
-## Installation
+### Installation
 
 [View in Docs](https://twind.dev/docs/handbook/getting-started/installation.html)
 
@@ -32,7 +32,7 @@ import { tw } from 'https://cdn.skypack.dev/twind' // requires type="module"
 import { tw } from 'twind'
 ```
 
-## The `tw` function
+### The `tw` function
 
 [View in Docs](https://twind.dev/docs/handbook/getting-started/styling-with-twind.html#the-tw-function)
 
@@ -72,7 +72,7 @@ The `tw` function is responsible for composing styles and injecting the derived 
   ])
   ```
 
-## Grouping
+### Grouping
 
 [View in Docs](https://twind.dev/docs/handbook/getting-started/thinking-in-groups.html)
 
@@ -130,7 +130,7 @@ The Twind compiler provides a terse syntax for grouping related classes together
   `
   ```
 
-## The Shim
+### The Shim
 
 [View in Docs](https://twind.dev/docs/handbook/getting-started/using-the-shim.html)
 
@@ -154,7 +154,7 @@ import 'twind/shim`;
 </html>
 ```
 
-## The `apply` function
+### The `apply` function
 
 [View in Docs](https://twind.dev/docs/handbook/advanced/defining-components.html)
 
@@ -169,7 +169,7 @@ const btn = apply`bg-gray-200`;
 <button class={tw`${btn} bg-blue-200`}>bg-blue-500</button>
 ```
 
-## The `css` function (CSS-in-JS)
+### The `css` function (CSS-in-JS)
 
 [View in Docs](https://twind.dev/docs/handbook/getting-started/css-in-js.html)
 
@@ -194,7 +194,7 @@ tw`
 `
 ```
 
-## Configuration
+### Configuration
 
 [View in Docs](https://twind.dev/docs/handbook/getting-started/customize-the-theme.html)
 
@@ -225,7 +225,7 @@ setup({
 })
 ```
 
-## Beyond Tailwind
+### Beyond Tailwind
 
 [View in Docs](https://twind.dev/docs/handbook/getting-started/tailwind-extensions.html)
 

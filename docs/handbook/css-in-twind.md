@@ -210,7 +210,7 @@ css({
 })
 ```
 
-## Screen Directive
+## Screen directive
 
 The `screen` directive allows you to create media queries that reference your breakpoints by name instead of duplicating their values in your own CSS.
 
@@ -273,7 +273,7 @@ css({
 `
 ```
 
-## Animation Directive
+## Animation directive
 
 Custom animations are difficult to configure in Tailwind. During `setup` you need to add to the `theme.animation` section and the `theme.keyframes` section. This means all animations must known before hand and you can not use "one-off" animations.
 
@@ -362,7 +362,7 @@ css`
 `
 ```
 
-## Keyframes Helper
+## Keyframes helper
 
 The `keyframes` export helps to create custom [@keyframes](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes):
 
@@ -416,3 +416,60 @@ css({
   animationName: bounce,
 })
 ```
+
+## Global styles
+
+The `css` function provided by the `twind/css` module provides an easy way to inject global styles into your app using the `:global` selector.
+
+```js
+import { tw } from 'twind'
+import { css } from 'twind/css'
+
+const globalStyles = css({
+  ':global': {
+    a: {
+      color: '#333',
+    },
+  },
+})
+
+document.getElementById('app').innerHTML = `
+<div class=${tw(globalStyles)}>
+<h1>Hello Twind!</h1>
+<p>
+  Look
+  <a href="https://twind.dev">here</a>
+  for more info about Twind.
+</p>
+</div>
+`
+```
+
+You can use the `theme` function to apply theme values, the `apply` function to apply Twind classes, and much more.
+
+```js
+import { tw } from 'twind'
+import { css, apply, theme } from 'twind/css'
+
+const globalStyles = css({
+  ':global': {
+    a: {
+      color: theme('colors.blue.500'),
+      '&:hover': apply`text-blue-700`,
+    },
+  },
+})
+
+document.getElementById('app').innerHTML = `
+<div class=${tw(globalStyles)}>
+<h1>Hello Twind!</h1>
+<p>s
+  Look
+  <a href="https://twind.dev">here</a>
+  for more info about Twind.
+</p>
+</div>
+`
+```
+
+You have the full power of the `twind/css` module when writing global styles. This approach also allows you to inject global styles anywhere in your app, which is useful for multi-page apps.
