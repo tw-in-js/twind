@@ -240,6 +240,16 @@ export type CSSAtKeyframes = Record<string, CSSProperties | ((context: Context) 
  * ```
  */
 export interface CSSRules {
+  '@import'?: CSSRulesThunk<MaybeArray<string>> | MaybeArray<string>
+  '@font-face'?: CSSRulesThunk<MaybeArray<FontFace>> | MaybeArray<FontFace>
+  '@keyframes'?: CSSRulesThunk<CSSAtKeyframes> | CSSAtKeyframes
+  '@apply'?: MaybeArray<string | Falsy | TypescriptCompat>
+  '@global'?: CSSRulesThunk<MaybeArray<CSSRules>> | MaybeArray<CSSRules>
+  ':global'?: CSSRulesThunk<MaybeArray<CSSRules>> | MaybeArray<CSSRules>
+
+  // TODO add other at rules
+  // [`@media ${string}`]: MaybeArray<CSSRules>
+  // [`@screen ${string}`]: MaybeArray<string | Falsy | TypescriptCompat>
   // '@media (....)'?: CSSAtMedia
   // '@supports (...)'?: CSSAtSupports
   // '@keyframes name'?: CSSAtKeyframes
@@ -251,15 +261,6 @@ export interface CSSRules {
   /** Global defaults */
   // ':root'?: CSSProperties
   // '*'?: CSSProperties
-
-  '@import'?: CSSRulesThunk<MaybeArray<string>> | MaybeArray<string>
-  '@font-face'?: CSSRulesThunk<MaybeArray<FontFace>> | MaybeArray<FontFace>
-  '@keyframes'?: CSSRulesThunk<CSSAtKeyframes> | CSSAtKeyframes
-  '@apply'?: MaybeArray<string | Falsy | TypescriptCompat>
-  ':global'?: CSSRulesThunk<MaybeArray<CSSRules>> | MaybeArray<CSSRules>
-
-  // [`@media ${string}`]: MaybeArray<CSSRules>
-  // [`@screen ${string}`]: MaybeArray<string | Falsy | TypescriptCompat>
 
   // TODO it would be great if we could use CSS Properties with mapped types to typechecked CSS rules
   [key: string]: CSSRuleValue
