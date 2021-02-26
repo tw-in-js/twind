@@ -1,18 +1,4 @@
----
-title: Contributing to Twind
-editLink: true
-navbar: true
-sidebar: true
-head:
-  - - meta
-    - name: description
-      content: See how you can help make Twind even better!
-  - - meta
-    - name: keywords
-      content: twind tailwind css-in-js
----
-
-# {{ $frontmatter.title }}
+# Contributing to Twind
 
 Thanks for checking out Twind! Please read on to learn how you can help make this project even better.
 
