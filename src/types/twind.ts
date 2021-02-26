@@ -1,6 +1,6 @@
 import type * as CSS from 'csstype'
 
-import type { CSSProperties } from './css'
+import type { CSSProperties, FontFace } from './css'
 import type { Theme, ThemeResolver, ThemeSectionType } from './theme'
 import type { Falsy, MaybeArray } from './util'
 
@@ -207,15 +207,17 @@ export type Token = string | TokenGrouping | InlineDirective | Token[] | Falsy |
  * watch out for ':root' - that could use '*' instead
  */
 // [`:${string}`]: CSSRules
-export type CSSSimplePseudos = { [K in CSS.SimplePseudos as `&${string & K}`]?: CSSRules }
+export type CSSSimplePseudos = {
+  [K in CSS.SimplePseudos as `&${string & K}`]?: CSSRulesThunk | MaybeArray<CSSRules>
+}
 
 export interface CSSPseudos extends CSSSimplePseudos {
   '&:nth-child(2n)'?: CSSRules
   '&:nth-child(odd)'?: CSSRules
 }
 
-export type CSSAtMedia = Record<string, CSSRules>
-export type CSSAtSupports = Record<string, CSSRules>
+export type CSSAtMedia = Record<string, MaybeArray<CSSRules>>
+export type CSSAtSupports = Record<string, MaybeArray<CSSRules>>
 export type CSSAtKeyframes = Record<string, CSSProperties | ((context: Context) => CSSProperties)>
 
 /**
@@ -250,28 +252,26 @@ export interface CSSRules {
   // ':root'?: CSSProperties
   // '*'?: CSSProperties
 
+  '@import'?: CSSRulesThunk<MaybeArray<string>> | MaybeArray<string>
+  '@font-face'?: CSSRulesThunk<MaybeArray<FontFace>> | MaybeArray<FontFace>
+  '@keyframes'?: CSSRulesThunk<CSSAtKeyframes> | CSSAtKeyframes
   '@apply'?: MaybeArray<string | Falsy | TypescriptCompat>
-  global?: CSSRules | CSSRulesThunk
+  ':global'?: CSSRulesThunk<MaybeArray<CSSRules>> | MaybeArray<CSSRules>
+
+  // [`@media ${string}`]: MaybeArray<CSSRules>
   // [`@screen ${string}`]: MaybeArray<string | Falsy | TypescriptCompat>
 
   // TODO it would be great if we could use CSS Properties with mapped types to typechecked CSS rules
-  [key: string]:
-    | CSSProperties
-    | CSSAtMedia
-    | CSSAtSupports
-    | CSSAtKeyframes
-    | CSSRules
-    | MaybeArray<string | Falsy | TypescriptCompat>
-    | CSSRulesThunk
+  [key: string]: CSSRuleValue
 }
 
-export interface CSSRulesThunk {
-  (context: Context):
-    | CSSProperties
-    | CSSAtMedia
-    | CSSAtSupports
-    | CSSAtKeyframes
-    | CSSRules
-    | CSSRulesThunk
-    | MaybeArray<string | Falsy | TypescriptCompat>
+export type CSSRuleValue =
+  | CSSAtMedia
+  | CSSAtSupports
+  | CSSAtKeyframes
+  | CSSRulesThunk
+  | MaybeArray<CSSProperties | CSSRules | FontFace | string | Falsy | TypescriptCompat>
+
+export interface CSSRulesThunk<Value = CSSRuleValue> {
+  (context: Context): Value
 }

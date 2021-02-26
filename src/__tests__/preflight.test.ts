@@ -128,15 +128,32 @@ test('use custom preflight JSON style', () => {
   create({
     sheet,
     preflight: {
-      '@font-face': {
-        'font-family': 'Baloo',
-        src: 'url(./Baloo-Regular.ttf)',
-      },
+      '@font-face': [
+        {
+          fontFamily: 'Proxima Nova',
+          fontWeight: '400',
+          src: 'url(/fonts/proxima-nova/400-regular.woff) format("woff")',
+        },
+        {
+          fontFamily: 'Proxima Nova',
+          fontWeight: '500',
+          src: 'url(/fonts/proxima-nova/500-medium.woff) format("woff")',
+        },
+      ],
     },
   })
 
-  assert.is(sheet.target.length, 38)
-  assert.ok(sheet.target.includes('@font-face{font-family:Baloo;src:url(./Baloo-Regular.ttf)}'))
+  assert.is(sheet.target.length, 39)
+  assert.ok(
+    sheet.target.includes(
+      '@font-face{font-family:Proxima Nova;font-weight:400;src:url(/fonts/proxima-nova/400-regular.woff) format("woff")}',
+    ),
+  )
+  assert.ok(
+    sheet.target.includes(
+      '@font-face{font-family:Proxima Nova;font-weight:500;src:url(/fonts/proxima-nova/500-medium.woff) format("woff")}',
+    ),
+  )
 })
 
 test.run()

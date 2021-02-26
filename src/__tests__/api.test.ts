@@ -703,7 +703,7 @@ test('inject @font-face', ({ sheet, tw }) => {
   ])
 })
 
-test('inject global styles', ({ sheet, tw }) => {
+test('inject :global styles', ({ sheet, tw }) => {
   assert.is(
     tw(() => ({
       ':global': {
@@ -719,6 +719,25 @@ test('inject global styles', ({ sheet, tw }) => {
   assert.equal(sheet.target, [
     ':root{--main-bg-color:brown}',
     '.tw-tmrj30{background-color:var(--main-bg-color)}',
+  ])
+})
+
+test('inject @global styles', ({ sheet, tw }) => {
+  assert.is(
+    tw(() => ({
+      '@global': {
+        ':root': {
+          '--main-bg-color': 'brown',
+        },
+      },
+      backgroundColor: 'var(--main-bg-color)',
+    })),
+    'tw-1uumlz8',
+  )
+
+  assert.equal(sheet.target, [
+    ':root{--main-bg-color:brown}',
+    '.tw-1uumlz8{background-color:var(--main-bg-color)}',
   ])
 })
 
@@ -776,6 +795,20 @@ test('use :global', ({ tw, sheet }) => {
   })
 
   assert.is(tw(style), 'tw-1wz18eh')
+
+  assert.equal(sheet.target, ['html{background-color:#111827}'])
+})
+
+test('use @global', ({ tw, sheet }) => {
+  const style: InlineDirective = ({ theme }) => ({
+    '@global': {
+      html: {
+        backgroundColor: theme('colors.gray.900'),
+      },
+    },
+  })
+
+  assert.is(tw(style), 'tw-eqyrrl')
 
   assert.equal(sheet.target, ['html{background-color:#111827}'])
 })
@@ -880,6 +913,45 @@ test('using @apply with variant', ({ tw, sheet }) => {
   assert.equal(sheet.target, [
     '.tw-1plavv4:hover{text-decoration:underline;transform:translateY(-1px)}',
     '.tw-1plavv4{font-weight:700;color:fuchsia}',
+  ])
+})
+
+test('using @font-face with array', ({ tw, sheet }) => {
+  const style = () => ({
+    '@font-face': [
+      {
+        fontFamily: 'Proxima Nova',
+        fontWeight: '400',
+        src: 'url(/fonts/proxima-nova/400-regular.woff) format("woff")',
+      },
+      {
+        fontFamily: 'Proxima Nova',
+        fontWeight: '500',
+        src: 'url(/fonts/proxima-nova/500-medium.woff) format("woff")',
+      },
+    ],
+  })
+
+  assert.equal(sheet.target, [])
+
+  tw(style)
+  assert.equal(sheet.target, [
+    '@font-face{font-family:Proxima Nova;font-weight:400;src:url(/fonts/proxima-nova/400-regular.woff) format("woff")}',
+    '@font-face{font-family:Proxima Nova;font-weight:500;src:url(/fonts/proxima-nova/500-medium.woff) format("woff")}',
+  ])
+})
+
+test('using @import with array', ({ tw, sheet }) => {
+  const style = () => ({
+    '@import': [`'custom.css'`, `url('landscape.css') screen and (orientation:landscape)`],
+  })
+
+  assert.equal(sheet.target, [])
+
+  tw(style)
+  assert.equal(sheet.target, [
+    "@import 'custom.css';",
+    "@import url('landscape.css') screen and (orientation:landscape);",
   ])
 })
 
