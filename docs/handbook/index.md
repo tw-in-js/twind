@@ -125,7 +125,7 @@ Check out [the plugins guide](/handbook/plugins) for more information.
 
 <details><summary><Emoji symbol="🎩" /> No runtime overhead with static extraction</summary>
 
-The compiler is not reliant on the DOM, which makes it an ideal candidate for static extraction and removing all runtime overhead. This is possible during [SSR](/usage-guides/use-with-ssr) or build-time prepass.
+The compiler is not reliant on the DOM, which makes it an ideal candidate for static extraction and removing all runtime overhead. This is possible during [SSR](/usage-guides/ssr) or build-time prepass.
 
 </details>
 
