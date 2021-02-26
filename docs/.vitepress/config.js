@@ -7,11 +7,15 @@ const description =
 // TODO: We need to make sure and change the URL once launched
 const site = isProd ? 'https://twind-dev.netlify.app' : 'http://localhost:3000'
 
-function base(url) {
-  return `${site}/assets/${url}`
+function base(path) {
+  return `${site}/assets/${path}`
 }
 
 const image = base('twind-logo.png')
+
+/**
+ * HEAD
+ */
 
 // Icons provided by https://favicomatic.com/
 const head = [
@@ -126,55 +130,60 @@ const head = [
   ['meta', { name: 'msapplication-square150x150logo', content: base('mstile-150x150.png') }],
   ['meta', { name: 'msapplication-wide310x150logo', content: base('mstile-310x150.png') }],
   ['meta', { name: 'msapplication-square310x310logo', content: base('mstile-310x310.png') }],
+  ['script', { src: 'https://flems.io/flems.html', type: 'text/javascript', charset: 'utf-8' }],
 ]
 
+/**
+ * SIDEBARS
+ */
+
 const guideSidebar = [
+  // {
+  //   text: 'Overview',
+  //   children: [
+
+  //   ],
+  // },
   {
     text: 'Handbook',
     children: [
       { text: 'Introduction', link: '/handbook/' },
-      { text: 'Installation', link: '/handbook/installation' },
-
+      { text: 'Getting Started', link: '/handbook/getting-started' },
+      { text: 'The Shim', link: '/handbook/the-shim' },
       { text: 'Styling with Twind', link: '/handbook/styling-with-twind' },
-      { text: 'Configuration and Theming', link: '/handbook/configuration' },
       { text: 'Grouping Syntax', link: '/handbook/grouping-syntax' },
       { text: 'CSS in Twind', link: '/handbook/css-in-twind' },
-      { text: 'Global Styles', link: '/handbook/global-styles' },
+
+      // {
+      //   text: 'Improving Performance',
+      //   link: '/handbook/improving-performance',
+      // },
       { text: 'Overwriting Styles', link: '/handbook/overwriting-styles' },
-      { text: 'The Shim', link: '/handbook/the-shim' },
-      {
-        text: 'Improving Performance',
-        link: '/handbook/improving-performance',
-      },
       {
         text: 'Extended Functionality',
         link: '/handbook/extended-functionality',
       },
       { text: 'Plugins', link: '/handbook/plugins' },
-      { text: 'Authoring Components', link: '/handbook/authoring-components' },
-      {
-        text: 'Beyond Tailwind',
-        link: '/handbook/beyond-tailwind',
-      },
-      {
-        text: 'Frequently Asked Questions',
-        link: '/handbook/frequently-asked-questions',
-      },
+      // TODO: Move this content possibly into React usage guides
+      // { text: 'Authoring Components', link: '/handbook/authoring-components' },
+      { text: 'Configuration', link: '/handbook/configuration' },
+
       { text: 'Quick Reference', link: '/handbook/quick-reference' },
-      { text: 'Browser Support', link: '/handbook/browser-support' },
-      { text: 'Release Notes', link: '/handbook/release-notes' },
-      { text: 'Contributing', link: '/handbook/contributing' },
+      {
+        text: 'FAQ',
+        link: '/handbook/faq',
+      },
     ],
   },
   {
     text: 'Migration Guides',
     children: [
       {
-        text: 'Migrate from Tailwind',
+        text: 'Tailwind',
         link: '/migration-guides/migrate-from-tailwind',
       },
       {
-        text: 'Migrate from twin.macro',
+        text: 'twin.macro',
         link: '/migration-guides/migrate-from-twinmacro',
       },
     ],
@@ -182,26 +191,26 @@ const guideSidebar = [
   {
     text: 'Usage Guides',
     children: [
-      { text: 'Use with Gatsby', link: '/usage-guides/use-with-gatsby' },
+      { text: 'SSR', link: '/usage-guides/use-with-ssr' },
+      { text: 'React', link: '/usage-guides/use-with-react' },
+      { text: 'Preact', link: '/usage-guides/use-with-preact' },
+      { text: ' WMR', link: '/handbook/use-with-wmr' },
+      { text: 'NextJS', link: '/usage-guides/use-with-nextjs' },
+      { text: 'Gatsby', link: '/usage-guides/use-with-gatsby' },
+      { text: ' Vue', link: '/usage-guides/use-with-vue' },
+      { text: 'Svelte', link: '/usage-guides/use-with-svelte' },
       {
-        text: 'Use with Lit Element',
+        text: 'Lit Element',
         link: '/usage-guides/use-with-lit-element',
       },
-      { text: 'Use with NextJS', link: '/usage-guides/use-with-nextjs' },
-      { text: 'Use with Preact', link: '/usage-guides/use-with-preact' },
-      { text: 'Use with React', link: '/usage-guides/use-with-react' },
-      { text: 'Use with SSR', link: '/usage-guides/use-with-ssr' },
-      { text: 'Use with Svelte', link: '/usage-guides/use-with-svelte' },
       {
-        text: 'Use with Typescript',
-        link: '/usage-guides/use-with-typescript',
-      },
-      { text: 'Use with Vue', link: '/usage-guides/use-with-vue' },
-      {
-        text: 'Use with Web Components',
+        text: ' Web Components',
         link: '/handbook/use-with-web-components',
       },
-      { text: 'Use with WMR', link: '/handbook/use-with-wmr' },
+      {
+        text: 'Typescript',
+        link: '/usage-guides/use-with-typescript',
+      },
     ],
   },
 ]
@@ -230,12 +239,12 @@ module.exports = {
   docsDir: '.',
   lang: 'en-US',
   themeConfig: {
-    algolia: {
-      apiKey: 'your_api_key',
-      indexName: 'index_name',
-    },
+    // algolia: {
+    //   apiKey: 'your_api_key',
+    //   indexName: 'index_name',
+    // },
     nav: [
-      { text: 'Handbook', link: '/handbook/' },
+      { text: 'Guide', link: '/handbook/' },
       { text: 'API', link: '/api/README.html' },
       { text: 'GitHub', link: 'https://github.com/tw-in-js/twind' },
       { text: 'Discord', link: 'https://discord.com/invite/2aP5NkszvD' },
