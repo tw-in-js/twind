@@ -1,17 +1,3 @@
----
-title: Code of Conduct
-editLink: true
-navbar: true
-sidebar: true
-head:
-  - - meta
-    - name: description
-      content: Review the code of conduct policy for Twind.
-  - - meta
-    - name: keywords
-      content: twind tailwind css-in-js
----
-
 # Contributor Covenant Code of Conduct
 
 ## Our Pledge
