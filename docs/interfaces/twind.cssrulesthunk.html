@@ -62,13 +62,21 @@
 					<a href="twind.cssrulesthunk.html">CSSRulesThunk</a>
 				</li>
 			</ul>
-			<h1>Interface CSSRulesThunk</h1>
+			<h1>Interface CSSRulesThunk&lt;Value&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>Value = <a href="../modules/twind.html#cssrulevalue" class="tsd-signature-type" data-tsd-kind="Type alias">CSSRuleValue</a></h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -79,14 +87,14 @@
 			</section>
 			<section class="tsd-panel">
 				<h3 class="tsd-before-signature">Callable</h3>
-				<ul class="tsd-signatures tsd-kind-interface tsd-parent-kind-module">
-					<li class="tsd-signature tsd-kind-icon">CSSRules<wbr>Thunk<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><a href="twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol"> | </span><a href="twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="twind.cssrulesthunk.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRulesThunk</a></li>
+				<ul class="tsd-signatures tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
+					<li class="tsd-signature tsd-kind-icon">CSSRules<wbr>Thunk<span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Value</span></li>
 				</ul>
 				<ul class="tsd-descriptions">
 					<li class="tsd-description">
 						<aside class="tsd-sources">
 							<ul>
-								<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/d45ab1e/src/types/twind.ts#L268">src/types/twind.ts:268</a></li>
+								<li>Defined in <a href="https://github.com/tw-in-js/twind/blob/4fbf841/src/types/twind.ts#L275">src/types/twind.ts:275</a></li>
 							</ul>
 						</aside>
 						<h4 class="tsd-parameters-title">Parameters</h4>
@@ -95,7 +103,7 @@
 								<h5>context: <a href="twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a></h5>
 							</li>
 						</ul>
-						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol"> | </span><a href="twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol"> | </span><a href="twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">(</span>context<span class="tsd-signature-symbol">: </span><a href="twind.context.html" class="tsd-signature-type" data-tsd-kind="Interface">Context</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><a href="twind.cssproperties.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSProperties</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">Record</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">, </span><a href="twind.cssrules.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRules</a><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">readonly </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">void</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><a href="twind.cssrulesthunk.html" class="tsd-signature-type" data-tsd-kind="Interface">CSSRulesThunk</a></h4>
+						<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Value</span></h4>
 					</li>
 				</ul>
 			</section>
@@ -157,7 +165,7 @@
 				<ul class="before-current">
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface tsd-parent-kind-module">
+					<li class="current tsd-kind-interface tsd-parent-kind-module tsd-has-type-parameter">
 						<a href="twind.cssrulesthunk.html" class="tsd-kind-icon">CSSRules<wbr>Thunk</a>
 					</li>
 				</ul>
