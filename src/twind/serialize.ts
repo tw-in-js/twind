@@ -99,7 +99,7 @@ export const serialize = (
     important: boolean | undefined,
   ): void => {
     if (Array.isArray(css)) {
-      css.forEach((css) => stringify(atRules, selector, presedence, css, important))
+      css.forEach((css) => css && stringify(atRules, selector, presedence, css, important))
       return
     }
 
@@ -120,7 +120,7 @@ export const serialize = (
     // more specfic utilities have less declarations and a higher presedence
     let numberOfDeclarations = 0
 
-    if (css && (css as CSSRules)['@apply']) {
+    if ((css as CSSRules)['@apply']) {
       css = merge(
         evalThunk(apply((css as CSSRules)['@apply'] as Token), context),
         { ...(css as CSSRules), '@apply': undefined },

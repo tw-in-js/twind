@@ -53,7 +53,7 @@ export const ensureMaxSize = <K, V>(map: Map<K, V>, max: number): void => {
 
 // string, number or Array => a property with a value
 export const isCSSProperty = (key: string, value: CSSRuleValue): boolean =>
-  includes('rg', (typeof value)[5]) || (Array.isArray(value) && key[0] != '@')
+  !includes('@:&', key[0]) && (includes('rg', (typeof value)[5]) || Array.isArray(value))
 
 export const merge = (target: CSSRules, source: CSSRules, context: Context): CSSRules =>
   source
@@ -64,9 +64,9 @@ export const merge = (target: CSSRules, source: CSSRules, context: Context): CSS
           // hyphenate target key only if key is property like (\w-)
           target[hyphenate(key)] = value
         } else {
-          // Keep all @font-face, @import, @global as is
+          // Keep all @font-face, @import, @global, @apply as is
           target[key] =
-            key[0] == '@' && includes('fig', key[1])
+            key[0] == '@' && includes('figa', key[1])
               ? ((target[key] || []) as CSSRules[]).concat(value as CSSRules)
               : merge((target[key] || {}) as CSSRules, value as CSSRules, context)
         }
