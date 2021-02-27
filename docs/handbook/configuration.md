@@ -92,9 +92,9 @@ setup({
 })
 ```
 
-### Referencing other values
+### Referencing theme values
 
-If you need to reference another value in your theme, you can do so by providing a closure instead of a static value. The closure will receive a `theme()` function that you can use to look up other values in your theme.
+If you need to reference another theme value, you can do so by providing a function instead of a static value. The function will receive a `theme()` function as an argument that you can use to look up other values in your theme.
 
 ```js
 setup({
@@ -106,80 +106,117 @@ setup({
 
 ## Preflight
 
-To smooth over browser inconsistencies, Tailwind provide a [opinionated modern reset](https://tailwindcss.com/docs/preflight) stylesheet. By default the base reset styles will be injected into the head of the document before any other rules.
+To smooth over browser inconsistencies, Twind provides the same [opinionated modern reset](https://tailwindcss.com/docs/preflight) provided by Tailwind. By default, the base reset styles will be injected into the head of the document before any other rules.
 
-> 💡 This can be used to inject additional global styles.
+Preflight can be configured in the `setup` function.
 
-- In order to prevent this from happening set this attribute to `false`.
+Disable preflight:
 
-  ```js
-  setup({
-    preflight: false,
-  })
-  ```
+```js
+setup({
+  preflight: false,
+})
+```
 
-- If you would like to inject a custom reset instead then provide a function as a value.
+Customize preflight be providing a function that returns an object:
 
-  ```js
-  setup({
-    // preflight: the default preflight CSS object
-    // context: tw, theme and, tag functions
-    preflight: (preflight, { theme }) => ({ ...preflight /* ... */ }),
-  })
-  ```
-
-- You can provide additional CSS rules as an object which are merged with the default reset.
-
-  ```js
-  setup({
-    preflight: {
-      /* ... */
+```js
+setup({
+  // context: tw, theme and, tag functions
+  preflight: (preflight, { theme }) => ({
+    ...preflight,
+    h2: {
+      color: 'dodgerblue',
     },
-  })
-  ```
+  }),
+})
+```
 
-- Use the [`apply`](/api/modules/twind#apply-function) function to apply Twind rules
+You can also use the [`apply`](/api/modules/twind#apply-function) function to apply Twind rules:
 
-  ```js
-  import { apply, setup } from 'twind'
+```js
+import { apply, setup } from 'twind'
 
-  setup({
-    preflight: {
-      body: apply`bg-gray-900 text-white`,
-    },
-  })
-  ```
+setup({
+  preflight: {
+    body: apply`bg-gray-900 text-white`,
+    h1: apply`text(gray-800 uppercase)`, // Grouping syntax
+  },
+})
+```
 
-- Use the [`css`](/api/modules/twind_css#css-function) function to merge rules
+You can use the [`css`](/api/modules/twind_css#css-function) function to merge rules:
 
-  ```js
-  import { css, theme, apply } from 'twind/css#css_directive'
+```js
+import { css, theme, apply } from 'twind/css#css_directive'
 
-  setup({
-    preflight: (preflight) =>
-      css(
-        preflight,
-        {
-          body: {
-            backgroundColor: theme('colors.gray.900'),
-          },
+setup({
+  preflight: (preflight) =>
+    css(
+      preflight,
+      {
+        body: {
+          backgroundColor: theme('colors.gray.900'),
         },
-        { body: apply`text-gray-100` },
-      ),
-  })
+      },
+      { body: apply`text-gray-100` },
+    ),
+})
 
-  // Or using template literal:
+// Or using template literal:
 
-  setup({
-    preflight: (preflight) => css`
-      ${preflight}
-      body {
-        background-color: ${theme('colors.gray.900')};
-        ${apply`text-gray-100`}
-      }
-    `,
-  })
-  ```
+setup({
+  preflight: (preflight) => css`
+    ${preflight}
+    body {
+      background-color: ${theme('colors.gray.900')};
+      ${apply`text-gray-100`}
+    }
+  `,
+})
+```
+
+## Custom fonts and imports
+
+Preflight includes two special keys, `@font-face` and `@import`:
+
+`@import` allows you to import external style sheets.
+
+`@font-face` allows you to declare font faces.
+
+In the example below, we are using `@font-face` and `@import` together to import and declare font faces, which are used to extend the `sans` font family theme value:
+
+```js
+import { setup } from 'twind'
+
+setup({
+  theme: {
+    extend: {
+      fontFamily: {
+        sans: 'Roboto, sans-serif',
+        'proxima-nova': '"Proxima Nova"',
+      },
+    },
+  },
+  preflight: {
+    // Import external stylesheet
+    '@import': `url('https://fonts.googleapis.com/css2?amily=Roboto:ital,wght@0,400;0,700;1,400&display=swap')`,
+    // Declare font face
+    '@font-face': [
+      {
+        fontFamily: 'Proxima Nova',
+        fontWeight: '400',
+        src: 'url(/fonts/proxima-nova/400-regular.woff) format("woff")',
+      },
+      {
+        fontFamily: 'Proxima Nova',
+        fontWeight: '500',
+        src: 'url(/fonts/proxima-nova/500-medium.woff) format("woff")',
+      },
+    ],
+  },
+})
+```
 
 ## Mode
 
