@@ -81,6 +81,7 @@ export interface StyledFactory {
 export interface BaseStyledProps {
   tw?: Token
   css?: CSSRules
+  class?: string
   className?: string
 }
 
@@ -109,37 +110,32 @@ export interface Styled<Variants> {
    *   [button]: { boxShadow: "0 0 0 5px" }
    * })
    * ```
-   * <br />
    */
   toString(): string
 
   /**
    * CSS Class associated with the current component.
    *
-   * ```
-   *
-   * const Button = css({ color: "DarkSlateGray" })
+   * ```js
+   * const Button = styled({ color: "DarkSlateGray" })
    *
    * <div className={Button.className} />
    * ```
-   * <br />
    */
-  className: string
+  readonly className: string
 
   /**
    * CSS Selector associated with the current component.
    *
-   * ```
+   * ```js
+   * const Button = styled({ color: "DarkSlateGray" })
    *
-   * const Button = css({ color: "DarkSlateGray" })
-   *
-   * const Card = styled("article", {
+   * const Card = styled({
    *   [Button.selector]: { boxShadow: "0 0 0 5px" }
    * })
    * ```
-   * <br />
    */
-  selector: string
+  readonly selector: string
 }
 
 const styled$ = (
@@ -168,18 +164,26 @@ const createStyled = <Variants, BaseVariants>(
 ): Styled<BaseVariants & Variants> & string => {
   const { style, variants = {}, defaults, compounds = [] } = config
 
-  const id = hash(JSON.stringify(config))
+  const id = hash(JSON.stringify({ style, variants, defaults, compounds }))
   const className = (base ? base.className + ' ' : '') + id
   const selector = (base || '') + '.' + id
 
   return Object.defineProperties(
     (allProps?: StyledProps<BaseVariants & Variants>): Directive<CSSRules> => {
-      const { tw, css, className: localClassName, ...props } = { ...defaults, ...allProps }
+      const { tw, css, class: localClass, className: localClassName, ...props } = {
+        ...defaults,
+        ...allProps,
+      }
 
       const rules: (undefined | string | CSSRules | Directive<CSSRules>)[] = [
         base && base(props),
-        { _: className + (localClassName ? ' ' + localClassName : '') },
-        typeof style == 'string' ? apply(style) : style,
+        {
+          _:
+            className +
+            (localClassName ? ' ' + localClassName : '') +
+            (localClass ? ' ' + localClass : ''),
+        },
+        style,
       ]
 
       // Variants directives
@@ -197,6 +201,8 @@ const createStyled = <Variants, BaseVariants>(
               key == 'initial'
                 ? value
                 : {
+                    // Allow key to be an at-rule like @media
+                    // Fallback to a screen value
                     [key[0] == '@' ? key : `@screen ${key}`]:
                       typeof value == 'string' ? apply(value) : value,
                   },

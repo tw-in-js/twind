@@ -30,6 +30,158 @@ test.after.each(({ sheet }) => {
   sheet.reset()
 })
 
+test('The "tw" property is evaluated', ({ sheet, tw }) => {
+  const component = styled({
+    variants: {
+      size: {
+        sm: 'text-sm',
+        md: 'text-base',
+        lg: 'text-lg',
+      },
+    },
+    defaults: {
+      size: 'md',
+    },
+  })
+
+  assert.equal(sheet.target, [])
+
+  assert.is(tw(component({ tw: `underline` })), 'tw-17aav39 tw-1i159b5')
+  assert.equal(sheet.target, [
+    '.tw-17aav39{font-size:1rem;line-height:1.5rem;text-decoration:underline}',
+  ])
+
+  sheet.reset()
+
+  assert.is(tw(component({ tw: `text-xl` })), 'tw-nziaos tw-1i159b5')
+  assert.equal(sheet.target, ['.tw-nziaos{font-size:1.25rem;line-height:1.75rem}'])
+
+  sheet.reset()
+
+  assert.is(tw(component({ tw: apply`text-${'xl'}` })), 'tw-nziaos tw-1i159b5')
+  assert.equal(sheet.target, ['.tw-nziaos{font-size:1.25rem;line-height:1.75rem}'])
+
+  sheet.reset()
+})
+
+test('The "css" property is evaluated', ({ sheet, tw }) => {
+  const component = styled({
+    variants: {
+      size: {
+        sm: 'text-sm',
+        md: 'text-base',
+        lg: 'text-lg',
+      },
+    },
+    defaults: {
+      size: 'md',
+    },
+  })
+
+  assert.equal(sheet.target, [])
+
+  assert.is(tw(component({ css: { lineHeight: '1' } })), 'tw-vfrhza tw-1i159b5')
+  assert.equal(sheet.target, ['.tw-vfrhza{font-size:1rem;line-height:1}'])
+})
+
+test('The "className" property is passed through', ({ sheet, tw }) => {
+  const component = styled({
+    variants: {
+      size: {
+        sm: 'text-sm',
+        md: 'text-base',
+        lg: 'text-lg',
+      },
+    },
+    defaults: {
+      size: 'md',
+    },
+  })
+
+  assert.equal(sheet.target, [])
+
+  assert.is(tw(component({ className: 'xyz' })), 'tw-as3rz2 tw-1i159b5 xyz')
+  assert.equal(sheet.target, ['.tw-as3rz2{font-size:1rem;line-height:1.5rem}'])
+
+  assert.is(tw(component({ className: 'xyz', class: 'abc' })), 'tw-as3rz2 tw-1i159b5 xyz abc')
+  assert.equal(sheet.target, ['.tw-as3rz2{font-size:1rem;line-height:1.5rem}'])
+})
+
+test('The "class" property is passed through', ({ sheet, tw }) => {
+  const component = styled({
+    variants: {
+      size: {
+        sm: 'text-sm',
+        md: 'text-base',
+        lg: 'text-lg',
+      },
+    },
+    defaults: {
+      size: 'md',
+    },
+  })
+
+  assert.equal(sheet.target, [])
+
+  assert.is(tw(component({ class: 'abc' })), 'tw-as3rz2 tw-1i159b5 abc')
+  assert.equal(sheet.target, ['.tw-as3rz2{font-size:1rem;line-height:1.5rem}'])
+
+  assert.is(tw(component({ class: 'abc', className: 'x y z' })), 'tw-as3rz2 tw-1i159b5 x y z abc')
+  assert.equal(sheet.target, ['.tw-as3rz2{font-size:1rem;line-height:1.5rem}'])
+})
+
+test('Components can reference each other', ({ sheet, tw }) => {
+  const a = styled({
+    variants: {
+      variant: {
+        primary: 'text-purple-400',
+        secondary: 'text-indigo-400',
+      },
+    },
+    defaults: {
+      variant: 'primary',
+    },
+  })
+
+  const b = styled({
+    variants: {
+      size: {
+        md: {
+          [a]: apply`text-base`,
+        },
+        xl: {
+          [`&${a}`]: apply`text-xl`,
+        },
+      },
+    },
+    defaults: {
+      size: 'md',
+    },
+  })
+
+  assert.equal(sheet.target, [])
+
+  assert.is(a.className, 'tw-1o9ohh4')
+  assert.is(tw(a()), 'tw-ylq0if tw-1o9ohh4')
+  assert.equal(sheet.target, [
+    '.tw-ylq0if{--tw-text-opacity:1;color:#a78bfa;color:rgba(167,139,250,var(--tw-text-opacity))}',
+  ])
+
+  sheet.reset()
+
+  assert.is(b.className, 'tw-1ujx7s2')
+  assert.is(tw(b()), 'tw-10c4gem tw-1ujx7s2')
+  assert.equal(sheet.target, ['.tw-10c4gem .tw-1o9ohh4{font-size:1rem;line-height:1.5rem}'])
+
+  sheet.reset()
+
+  assert.is(tw(a(), b({ size: 'xl' })), 'tw-ylq0if tw-1o9ohh4 tw-368a9k tw-1ujx7s2')
+  assert.equal(sheet.target, [
+    '.tw-ylq0if{--tw-text-opacity:1;color:#a78bfa;color:rgba(167,139,250,var(--tw-text-opacity))}',
+    '.tw-368a9k.tw-1o9ohh4{font-size:1.25rem;line-height:1.75rem}',
+  ])
+})
+
 test('The "as" property is passed through', ({ sheet, tw }) => {
   const component = styled({
     variants: {
@@ -46,13 +198,13 @@ test('The "as" property is passed through', ({ sheet, tw }) => {
 
   assert.equal(sheet.target, [])
 
-  assert.is(tw(component({ as: 'button' })), 'tw-7e76a2 tw-1es5jbm')
-  assert.equal(sheet.target, ['.tw-7e76a2{color:dodgerblue}'])
+  assert.is(tw(component({ as: 'button' })), 'tw-1xx19ac tw-d1mvb7')
+  assert.equal(sheet.target, ['.tw-1xx19ac{color:dodgerblue}'])
 
   sheet.reset()
 
-  assert.is(tw(component({ as: 'a' })), 'tw-14ofitt tw-1es5jbm')
-  assert.equal(sheet.target, ['.tw-14ofitt{color:tomato}'])
+  assert.is(tw(component({ as: 'a' })), 'tw-10coynn tw-d1mvb7')
+  assert.equal(sheet.target, ['.tw-10coynn{color:tomato}'])
 })
 
 test('Variants', ({ sheet, tw }) => {
@@ -99,32 +251,32 @@ test('Variants', ({ sheet, tw }) => {
   assert.equal(sheet.target, [])
 
   // Renders a component without any initial styles
-  assert.is(tw(component()), 'tw-1d1derl tw-e5ryml')
+  assert.is(tw(component()), 'tw-1h4nwdw tw-e5ryml')
   assert.equal(sheet.target, [])
 
   sheet.reset()
 
   // Renders a component with 1 matching variant
-  assert.is(tw(component({ size: 'small' })), 'tw-yfvz3f tw-e5ryml')
-  assert.equal(sheet.target, ['.tw-yfvz3f{font-size:16px}'])
+  assert.is(tw(component({ size: 'small' })), 'tw-b751nw tw-e5ryml')
+  assert.equal(sheet.target, ['.tw-b751nw{font-size:16px}'])
 
   sheet.reset()
 
-  assert.is(tw(component({ color: 'blue' })), 'tw-pwx3rt tw-e5ryml')
-  assert.equal(sheet.target, ['.tw-pwx3rt{background-color:dodgerblue;color:white}'])
+  assert.is(tw(component({ color: 'blue' })), 'tw-v8pw09 tw-e5ryml')
+  assert.equal(sheet.target, ['.tw-v8pw09{background-color:dodgerblue;color:white}'])
 
   sheet.reset()
 
   // Renders a component with 2 matching variants
-  assert.is(tw(component({ size: 'small', level: 1 })), 'tw-1l8w0rz tw-e5ryml')
-  assert.equal(sheet.target, ['.tw-1l8w0rz{font-size:16px;padding:0.5em}'])
+  assert.is(tw(component({ size: 'small', level: 1 })), 'tw-1i8lxuk tw-e5ryml')
+  assert.equal(sheet.target, ['.tw-1i8lxuk{font-size:16px;padding:0.5em}'])
 
   sheet.reset()
 
   // Renders a component with a 2 matching variants and 1 matching compound
-  assert.is(tw(component({ size: 'small', color: 'blue' })), 'tw-1i6d39h tw-e5ryml')
+  assert.is(tw(component({ size: 'small', color: 'blue' })), 'tw-1md0ysu tw-e5ryml')
   assert.equal(sheet.target, [
-    '.tw-1i6d39h{background-color:dodgerblue;color:white;font-size:16px;transform:scale(1.2)}',
+    '.tw-1md0ysu{background-color:dodgerblue;color:white;font-size:16px;transform:scale(1.2)}',
   ])
 })
 
@@ -175,48 +327,48 @@ test('Variants with defaults', ({ sheet, tw }) => {
   assert.equal(sheet.target, [])
 
   // Renders a component with the default variant applied
-  assert.is(tw(component()), 'tw-59it4k tw-lg9y0a')
-  assert.equal(sheet.target, ['.tw-59it4k{font-size:16px}'])
+  assert.is(tw(component()), 'tw-b751nw tw-vemdia')
+  assert.equal(sheet.target, ['.tw-b751nw{font-size:16px}'])
 
   sheet.reset()
 
   // Renders a component with the default variant explicitly applied
-  assert.is(tw(component({ size: 'small' })), 'tw-59it4k tw-lg9y0a')
-  assert.equal(sheet.target, ['.tw-59it4k{font-size:16px}'])
+  assert.is(tw(component({ size: 'small' })), 'tw-b751nw tw-vemdia')
+  assert.equal(sheet.target, ['.tw-b751nw{font-size:16px}'])
 
   sheet.reset()
 
   // Renders a component with the non-default variant explicitly applied
-  assert.is(tw(component({ size: 'large' })), 'tw-47l5an tw-lg9y0a')
-  assert.equal(sheet.target, ['.tw-47l5an{font-size:24px}'])
+  assert.is(tw(component({ size: 'large' })), 'tw-kfmf2 tw-vemdia')
+  assert.equal(sheet.target, ['.tw-kfmf2{font-size:24px}'])
 
   sheet.reset()
 
   // Renders a component with the default variant applied and a different variant explicitly applied
-  assert.is(tw(component({ level: 1 })), 'tw-hgx8wy tw-lg9y0a')
-  assert.equal(sheet.target, ['.tw-hgx8wy{font-size:16px;padding:0.5em}'])
+  assert.is(tw(component({ level: 1 })), 'tw-1i8lxuk tw-vemdia')
+  assert.equal(sheet.target, ['.tw-1i8lxuk{font-size:16px;padding:0.5em}'])
 
   sheet.reset()
 
   // Renders a component with the default variant applied, a different variant explicitly applied, and a compound applied
-  assert.is(tw(component({ color: 'blue' })), 'tw-1l3b2m4 tw-lg9y0a')
+  assert.is(tw(component({ color: 'blue' })), 'tw-1md0ysu tw-vemdia')
   // explicit color:blue -> background-color:dodgerblue;color:white;
   // implicit size:small -> font-size:16px;
   // compound color:blue + size:small -> transform:scale(1.2);
   assert.equal(sheet.target, [
-    '.tw-1l3b2m4{background-color:dodgerblue;color:white;font-size:16px;transform:scale(1.2)}',
+    '.tw-1md0ysu{background-color:dodgerblue;color:white;font-size:16px;transform:scale(1.2)}',
   ])
 
   sheet.reset()
 
   // Returns a component selector without the default variant applied when toString is used
-  assert.is(component.toString(), '.tw-lg9y0a')
+  assert.is(component.toString(), '.tw-vemdia')
   assert.equal(sheet.target, [])
 
-  assert.is(component.selector, '.tw-lg9y0a')
+  assert.is(component.selector, '.tw-vemdia')
   assert.equal(sheet.target, [])
 
-  assert.is(component.className, 'tw-lg9y0a')
+  assert.is(component.className, 'tw-vemdia')
   assert.equal(sheet.target, [])
 
   sheet.reset()
@@ -267,40 +419,40 @@ test('Conditional variants', ({ sheet, tw }) => {
   assert.is(component.className, 'tw-e5ryml')
 
   // Renders a component with no variant applied
-  assert.is(tw(component()), 'tw-1d1derl tw-e5ryml')
+  assert.is(tw(component()), 'tw-1h4nwdw tw-e5ryml')
   assert.equal(sheet.target, [])
 
   sheet.reset()
 
   // Renders a component with one variant applied
-  assert.is(tw(component({ size: 'small' })), 'tw-yfvz3f tw-e5ryml')
-  assert.equal(sheet.target, ['.tw-yfvz3f{font-size:16px}'])
+  assert.is(tw(component({ size: 'small' })), 'tw-b751nw tw-e5ryml')
+  assert.equal(sheet.target, ['.tw-b751nw{font-size:16px}'])
 
   sheet.reset()
 
   // Renders a component with one conditional variant on one breakpoint applied
-  assert.is(tw(component({ size: { md: 'small' } })), 'tw-1fph079 tw-e5ryml')
-  assert.equal(sheet.target, ['@media (min-width:768px){.tw-1fph079{font-size:16px}}'])
+  assert.is(tw(component({ size: { md: 'small' } })), 'tw-1g29hvc tw-e5ryml')
+  assert.equal(sheet.target, ['@media (min-width:768px){.tw-1g29hvc{font-size:16px}}'])
 
   sheet.reset()
 
   // Renders a component with one conditional variant on two breakpoints applied
-  assert.is(tw(component({ size: { md: 'small', lg: 'large' } })), 'tw-81ymt4 tw-e5ryml')
+  assert.is(tw(component({ size: { md: 'small', lg: 'large' } })), 'tw-1ev3j2j tw-e5ryml')
   assert.equal(sheet.target, [
-    '@media (min-width:768px){.tw-81ymt4{font-size:16px}}',
-    '@media (min-width:1024px){.tw-81ymt4{font-size:24px}}',
+    '@media (min-width:768px){.tw-1ev3j2j{font-size:16px}}',
+    '@media (min-width:1024px){.tw-1ev3j2j{font-size:24px}}',
   ])
 
   sheet.reset()
 
   assert.is(
     tw(component({ size: { initial: 'large', md: 'small', lg: 'large' } })),
-    'tw-1hb7l8h tw-e5ryml',
+    'tw-1cl98ab tw-e5ryml',
   )
   assert.equal(sheet.target, [
-    '.tw-1hb7l8h{font-size:24px}',
-    '@media (min-width:768px){.tw-1hb7l8h{font-size:16px}}',
-    '@media (min-width:1024px){.tw-1hb7l8h{font-size:24px}}',
+    '.tw-1cl98ab{font-size:24px}',
+    '@media (min-width:768px){.tw-1cl98ab{font-size:16px}}',
+    '@media (min-width:1024px){.tw-1cl98ab{font-size:24px}}',
   ])
 
   sheet.reset()
@@ -316,10 +468,10 @@ test('Component Conditions', ({ sheet, tw }) => {
     },
   })
 
-  assert.is(tw(component()), 'tw-1pn76x8 tw-17lj1i4')
+  assert.is(tw(component()), 'tw-17smojb tw-zcdqn9')
   assert.equal(sheet.target, [
-    '.tw-1pn76x8{font-size:16px}',
-    '@media (min-width:768px){.tw-1pn76x8{font-size:24px}}',
+    '.tw-17smojb{font-size:16px}',
+    '@media (min-width:768px){.tw-17smojb{font-size:24px}}',
   ])
 })
 
@@ -370,20 +522,20 @@ test('Mixing string, apply, css and object', ({ sheet, tw }) => {
   // Nothing inserted yet
   assert.equal(sheet.target, [])
 
-  assert.is(tw(button()), 'tw-1c4ukmw tw-10iu5cz')
+  assert.is(tw(button()), 'tw-giv9a tw-10iu5cz')
   assert.equal(sheet.target, [
-    '.tw-1c4ukmw{border-radius:9999px;padding-left:0.625rem;padding-right:0.625rem;font-size:0.875rem;line-height:1.25rem;height:1.5rem;background-color:#9ca3af}',
-    '.tw-1c4ukmw:hover{background-color:#6b7280}',
+    '.tw-giv9a{border-radius:9999px;padding-left:0.625rem;padding-right:0.625rem;font-size:0.875rem;line-height:1.25rem;height:1.5rem;background-color:#9ca3af}',
+    '.tw-giv9a:hover{background-color:#6b7280}',
   ])
 
   sheet.reset()
 
-  assert.is(tw(button({ size: 'large', outlined: true })), 'tw-17ydchj tw-10iu5cz')
+  assert.is(tw(button({ size: 'large', outlined: true })), 'tw-ri8lhj tw-10iu5cz')
 
   assert.equal(sheet.target, [
     '*{--tw-ring-inset:var(--tw-empty,/*!*/ /*!*/);--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,var(--tw-ring-opacity,0.5));--tw-ring-offset-shadow:0 0 transparent;--tw-ring-shadow:0 0 transparent}',
-    '.tw-17ydchj{border-radius:9999px;padding-left:0.625rem;padding-right:0.625rem;font-size:3rem;height:3rem;background-color:transparent;--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 transparent);--tw-ring-opacity:1;--tw-ring-color:rgba(156,163,175,var(--tw-ring-opacity))}',
-    '.tw-17ydchj:hover{background-color:#6b7280}',
+    '.tw-ri8lhj{border-radius:9999px;padding-left:0.625rem;padding-right:0.625rem;font-size:3rem;height:3rem;background-color:transparent;--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 transparent);--tw-ring-opacity:1;--tw-ring-color:rgba(156,163,175,var(--tw-ring-opacity))}',
+    '.tw-ri8lhj:hover{background-color:#6b7280}',
   ])
 })
 
@@ -428,31 +580,31 @@ test('With a Base component', ({ sheet, tw }) => {
   // Nothing inserted yet
   assert.equal(sheet.target, [])
 
-  assert.is(tw(button()), 'tw-9e57zu tw-1htxdy9')
+  assert.is(tw(button()), 'tw-1pliije tw-1htxdy9')
   assert.equal(sheet.target, [
-    '.tw-9e57zu{border-radius:9999px;padding-left:0.625rem;padding-right:0.625rem;font-size:0.875rem;line-height:1.25rem;height:1.5rem;--tw-bg-opacity:1;background-color:#9ca3af;background-color:rgba(156,163,175,var(--tw-bg-opacity))}',
-    '.tw-9e57zu:hover{--tw-bg-opacity:1;background-color:#6b7280;background-color:rgba(107,114,128,var(--tw-bg-opacity))}',
+    '.tw-1pliije{border-radius:9999px;padding-left:0.625rem;padding-right:0.625rem;font-size:0.875rem;line-height:1.25rem;height:1.5rem;--tw-bg-opacity:1;background-color:#9ca3af;background-color:rgba(156,163,175,var(--tw-bg-opacity))}',
+    '.tw-1pliije:hover{--tw-bg-opacity:1;background-color:#6b7280;background-color:rgba(107,114,128,var(--tw-bg-opacity))}',
   ])
 
   sheet.reset()
 
-  assert.is(tw(button({ outlined: true })), 'tw-185cdjp tw-1htxdy9')
+  assert.is(tw(button({ outlined: true })), 'tw-1w4f9fn tw-1htxdy9')
 
   assert.equal(sheet.target, [
     '*{--tw-ring-inset:var(--tw-empty,/*!*/ /*!*/);--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,var(--tw-ring-opacity,0.5));--tw-ring-offset-shadow:0 0 transparent;--tw-ring-shadow:0 0 transparent}',
-    '.tw-185cdjp{border-radius:9999px;padding-left:0.625rem;padding-right:0.625rem;font-size:0.875rem;line-height:1.25rem;height:1.5rem;--tw-bg-opacity:1;background-color:transparent;--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 transparent);--tw-ring-opacity:1;--tw-ring-color:rgba(156,163,175,var(--tw-ring-opacity))}',
-    '.tw-185cdjp:hover{--tw-bg-opacity:1;background-color:#6b7280;background-color:rgba(107,114,128,var(--tw-bg-opacity))}',
+    '.tw-1w4f9fn{border-radius:9999px;padding-left:0.625rem;padding-right:0.625rem;font-size:0.875rem;line-height:1.25rem;height:1.5rem;--tw-bg-opacity:1;background-color:transparent;--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 transparent);--tw-ring-opacity:1;--tw-ring-color:rgba(156,163,175,var(--tw-ring-opacity))}',
+    '.tw-1w4f9fn:hover{--tw-bg-opacity:1;background-color:#6b7280;background-color:rgba(107,114,128,var(--tw-bg-opacity))}',
   ])
 
   sheet.reset()
 
-  assert.is(tw(button({ variant: 'gray', outlined: { sm: true } })), 'tw-rjssfd tw-1htxdy9')
+  assert.is(tw(button({ variant: 'gray', outlined: { sm: true } })), 'tw-r3irf3 tw-1htxdy9')
 
   assert.equal(sheet.target, [
     '*{--tw-ring-inset:var(--tw-empty,/*!*/ /*!*/);--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,var(--tw-ring-opacity,0.5));--tw-ring-offset-shadow:0 0 transparent;--tw-ring-shadow:0 0 transparent}',
-    '.tw-rjssfd{border-radius:9999px;padding-left:0.625rem;padding-right:0.625rem;font-size:0.875rem;line-height:1.25rem;height:1.5rem;--tw-bg-opacity:1;background-color:#9ca3af;background-color:rgba(156,163,175,var(--tw-bg-opacity));--tw-ring-opacity:1;--tw-ring-color:rgba(156,163,175,var(--tw-ring-opacity))}',
-    '.tw-rjssfd:hover{--tw-bg-opacity:1;background-color:#6b7280;background-color:rgba(107,114,128,var(--tw-bg-opacity))}',
-    '@media (min-width:640px){.tw-rjssfd{background-color:transparent;--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 transparent);--tw-ring-opacity:1;--tw-ring-color:rgba(156,163,175,var(--tw-ring-opacity))}}',
+    '.tw-r3irf3{border-radius:9999px;padding-left:0.625rem;padding-right:0.625rem;font-size:0.875rem;line-height:1.25rem;height:1.5rem;--tw-bg-opacity:1;background-color:#9ca3af;background-color:rgba(156,163,175,var(--tw-bg-opacity));--tw-ring-opacity:1;--tw-ring-color:rgba(156,163,175,var(--tw-ring-opacity))}',
+    '.tw-r3irf3:hover{--tw-bg-opacity:1;background-color:#6b7280;background-color:rgba(107,114,128,var(--tw-bg-opacity))}',
+    '@media (min-width:640px){.tw-r3irf3{background-color:transparent;--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 transparent);--tw-ring-opacity:1;--tw-ring-color:rgba(156,163,175,var(--tw-ring-opacity))}}',
   ])
 
   // // 1. bg-gray-400 hover:bg-gray-500
@@ -476,20 +628,20 @@ test('With a Base component', ({ sheet, tw }) => {
 
   sheet.reset()
 
-  assert.is(tw(extendedButton({ rounded: true, size: 'xl' })), 'tw-pdnmr7 tw-1htxdy9 tw-a38m4x')
+  assert.is(tw(extendedButton({ rounded: true, size: 'xl' })), 'tw-dvzbke tw-1htxdy9 tw-hmhdmo')
 
   assert.equal(sheet.target, [
-    '.tw-pdnmr7{border-radius:9999px;padding-left:0.625rem;padding-right:0.625rem;--tw-bg-opacity:1;background-color:#9ca3af;background-color:rgba(156,163,175,var(--tw-bg-opacity));font-size:1.25rem;line-height:1.75rem;height:3rem}',
-    '.tw-pdnmr7:hover{--tw-bg-opacity:1;background-color:#6b7280;background-color:rgba(107,114,128,var(--tw-bg-opacity))}',
+    '.tw-dvzbke{border-radius:9999px;padding-left:0.625rem;padding-right:0.625rem;--tw-bg-opacity:1;background-color:#9ca3af;background-color:rgba(156,163,175,var(--tw-bg-opacity));font-size:1.25rem;line-height:1.75rem;height:3rem}',
+    '.tw-dvzbke:hover{--tw-bg-opacity:1;background-color:#6b7280;background-color:rgba(107,114,128,var(--tw-bg-opacity))}',
   ])
 
   sheet.reset()
 
-  assert.is(tw(extendedButton({ rounded: 'sm' })), 'tw-7bukb2 tw-1htxdy9 tw-a38m4x')
+  assert.is(tw(extendedButton({ rounded: 'sm' })), 'tw-8wetu6 tw-1htxdy9 tw-hmhdmo')
 
   assert.equal(sheet.target, [
-    '.tw-7bukb2{border-radius:0.125rem;padding-left:0.625rem;padding-right:0.625rem;font-size:0.875rem;line-height:1.25rem;height:1.5rem;--tw-bg-opacity:1;background-color:#9ca3af;background-color:rgba(156,163,175,var(--tw-bg-opacity))}',
-    '.tw-7bukb2:hover{--tw-bg-opacity:1;background-color:#6b7280;background-color:rgba(107,114,128,var(--tw-bg-opacity))}',
+    '.tw-8wetu6{border-radius:0.125rem;padding-left:0.625rem;padding-right:0.625rem;font-size:0.875rem;line-height:1.25rem;height:1.5rem;--tw-bg-opacity:1;background-color:#9ca3af;background-color:rgba(156,163,175,var(--tw-bg-opacity))}',
+    '.tw-8wetu6:hover{--tw-bg-opacity:1;background-color:#6b7280;background-color:rgba(107,114,128,var(--tw-bg-opacity))}',
   ])
 })
 
