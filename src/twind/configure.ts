@@ -180,7 +180,11 @@ export const configure = (
 
   // Used as replacer for JSON.stringify to calculate the hash for a inline function
   const evaluateFunctions = (key: string, value: unknown): unknown =>
-    typeof value == 'function' ? JSON.stringify(value(context), evaluateFunctions) : value
+    key == '_' // Do not include passed classNames in the hash
+      ? undefined
+      : typeof value == 'function'
+      ? JSON.stringify(evalThunk(value, context), evaluateFunctions)
+      : value
 
   // Responsible for converting (translate, decorate, serialize, inject) a rule
   const convert = (rule: Rule): string | undefined | void => {
