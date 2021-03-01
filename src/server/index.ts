@@ -13,9 +13,7 @@ import { executionAsyncId, createHook } from 'async_hooks'
 import type { Sheet, SheetInit } from '../types'
 import { virtualSheet } from '../sheets/index'
 
-export type { Storage, StyleTagProperties, StyleTagSheet, VirtualSheet } from '../sheets/index'
-export { virtualSheet, getStyleTag, getStyleTagProperties } from '../sheets/index'
-export { shim } from '../shim/server/index'
+export * from '../shim/server/index'
 
 export interface AsyncVirtualSheet extends Sheet {
   readonly target: readonly string[]

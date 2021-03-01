@@ -20,7 +20,7 @@ import type {
 import { apply, hash, directive } from '../index'
 import { evalThunk, merge, buildMediaQuery } from '../internal/util'
 
-export { tw, apply, setup, theme } from '../index'
+export * from '../index'
 
 export interface CSSFactory<T, I, R> {
   (

@@ -43,6 +43,21 @@
       "path": "dist/twind.js",
       "gzip": true,
       "limit": "12.5kb"
+    },
+    {
+      "path": "dist/css/css.js",
+      "gzip": true,
+      "limit": "1.2kb"
+    },
+    {
+      "path": "dist/observe/observe.js",
+      "gzip": true,
+      "limit": "0.7kb"
+    },
+    {
+      "path": "dist/shim/shim.js",
+      "gzip": true,
+      "limit": "0.5kb"
     }
   ],
   "// These are ONLY bundled (eg included) in the umd builds": "",
