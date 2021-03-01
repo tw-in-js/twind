@@ -59,6 +59,11 @@
       "path": "dist/shim/shim.js",
       "gzip": true,
       "limit": "0.5kb"
+    },
+    {
+      "path": "dist/style/style.js",
+      "gzip": true,
+      "limit": "1kb"
     }
   ],
   "// These are ONLY bundled (eg included) in the umd builds": "",
