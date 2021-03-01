@@ -34,7 +34,7 @@ export type MorphVariant<T> = T extends number
   ? number | T
   : T
 
-export type Style = string | CSSRules | Directive<CSSRules>
+export type StyleToken = string | CSSRules | Directive<CSSRules>
 
 export type DefaultVariants<Variants> = {
   [key in keyof Variants]?:
@@ -52,62 +52,69 @@ export type VariantsProps<Variants> = {
       })
 }
 
-export type CompoundVariants<Variants> = {
+export type VariantMatchers<Variants> = {
   [key in keyof Variants]?: StrictMorphVariant<keyof Variants[key]>
 }
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-export interface StyledConfig<Variants, BaseVariants = {}> {
-  style?: Style
+export interface StyleConfig<Variants, BaseVariants = {}> {
+  base?: StyleToken
   variants?: Variants &
-    { [variant in keyof BaseVariants]?: { [key in keyof BaseVariants[variant]]?: Style } }
+    { [variant in keyof BaseVariants]?: { [key in keyof BaseVariants[variant]]?: StyleToken } }
   defaults?: DefaultVariants<Variants & BaseVariants>
-  compounds?: (CompoundVariants<Variants & BaseVariants> & {
-    style: Style
+  matches?: (VariantMatchers<Variants & BaseVariants> & {
+    use: StyleToken
   })[]
 }
 
-// TODO different name like
-// define declare
-// atom partial design motif
-export interface StyledFactory {
-  <Variants>(config?: StyledConfig<Variants>): Styled<Variants> & string
+export interface StyleFunction {
+  <Variants>(config?: StyleConfig<Variants>): Style<Variants> & string
   <Variants, BaseVariants>(
-    base: Styled<BaseVariants>,
-    config?: StyledConfig<Variants, BaseVariants>,
-  ): Styled<BaseVariants & Variants> & string
+    base: Style<BaseVariants>,
+    config?: StyleConfig<Variants, BaseVariants>,
+  ): Style<BaseVariants & Variants> & string
 }
 
-export interface BaseStyledProps {
+export interface BaseStyleProps {
   tw?: Token
   css?: CSSRules
   class?: string
   className?: string
 }
 
-export type StyledProps<Variants> = VariantsProps<Variants> & BaseStyledProps
+export type StyleProps<Variants> = VariantsProps<Variants> & BaseStyleProps
 
-export interface Styled<Variants> {
+export interface Style<Variants> {
   /**
    * CSS Class associated with the current component.
    *
    * ```jsx
-   * const button = styled({ color: "DarkSlateGray" })
+   * const button = style({
+   *   base: {
+   *     color: "DarkSlateGray"
+   *   }
+   * })
    *
    * <div className={tw(button())} />
    * ```
    * <br />
    */
-  (props?: StyledProps<Variants>): Directive<CSSRules>
+  (props?: StyleProps<Variants>): Directive<CSSRules>
 
   /**
    * CSS Selector associated with the current component.
    *
    * ```js
-   * const button = styled({ color: "DarkSlateGray" })
+   * const button = style({
+   *   base: {
+   *     color: "DarkSlateGray"
+   *   }
+   * })
    *
-   * const article = styled({
-   *   [button]: { boxShadow: "0 0 0 5px" }
+   * const article = style({
+   *   base: {
+   *     [button]: { boxShadow: "0 0 0 5px" }
+   *   }
    * })
    * ```
    */
@@ -117,9 +124,13 @@ export interface Styled<Variants> {
    * CSS Class associated with the current component.
    *
    * ```js
-   * const Button = styled({ color: "DarkSlateGray" })
+   * const button = style({
+   *   base: {
+   *     color: "DarkSlateGray"
+   *   }
+   * })
    *
-   * <div className={Button.className} />
+   * <div className={button.className} />
    * ```
    */
   readonly className: string
@@ -128,10 +139,16 @@ export interface Styled<Variants> {
    * CSS Selector associated with the current component.
    *
    * ```js
-   * const Button = styled({ color: "DarkSlateGray" })
+   * const button = style({
+   *   base: {
+   *     color: "DarkSlateGray"
+   *   }
+   * })
    *
    * const Card = styled({
-   *   [Button.selector]: { boxShadow: "0 0 0 5px" }
+   *   base: {
+   *     [Button.selector]: { boxShadow: "0 0 0 5px" }
+   *   }
    * })
    * ```
    */
@@ -158,18 +175,24 @@ const styled$ = (
     return result
   }, {})
 
-const createStyled = <Variants, BaseVariants>(
-  config: StyledConfig<Variants, BaseVariants> = {},
-  base?: Styled<BaseVariants>,
-): Styled<BaseVariants & Variants> & string => {
-  const { style, variants = {}, defaults, compounds = [] } = config
+const buildMediaRule = (key: string, value: undefined | StyleToken): CSSRules => ({
+  // Allow key to be an at-rule like @media
+  // Fallback to a screen value
+  [key[0] == '@' ? key : `@screen ${key}`]: typeof value == 'string' ? apply(value) : value,
+})
 
-  const id = hash(JSON.stringify({ style, variants, defaults, compounds }))
+const createStyle = <Variants, BaseVariants>(
+  config: StyleConfig<Variants, BaseVariants> = {},
+  base?: Style<BaseVariants>,
+): Style<BaseVariants & Variants> & string => {
+  const { base: baseStyle, variants = {}, defaults, matches = [] } = config
+
+  const id = hash(JSON.stringify([base?.className, baseStyle, variants, defaults, matches]))
   const className = (base ? base.className + ' ' : '') + id
   const selector = (base || '') + '.' + id
 
   return Object.defineProperties(
-    (allProps?: StyledProps<BaseVariants & Variants>): Directive<CSSRules> => {
+    (allProps?: StyleProps<BaseVariants & Variants>): Directive<CSSRules> => {
       const { tw, css, class: localClass, className: localClassName, ...props } = {
         ...defaults,
         ...allProps,
@@ -183,12 +206,12 @@ const createStyled = <Variants, BaseVariants>(
             (localClassName ? ' ' + localClassName : '') +
             (localClass ? ' ' + localClass : ''),
         },
-        style,
+        baseStyle,
       ]
 
       // Variants directives
       Object.keys(variants).forEach((variantKey) => {
-        const variant = (variants as Record<string, Record<string, Style>>)[variantKey]
+        const variant = (variants as Record<string, Record<string, StyleToken>>)[variantKey]
         const propsValue = (props as Record<string, unknown>)[variantKey]
 
         // propsValues: string, number, boolean, object
@@ -197,51 +220,39 @@ const createStyled = <Variants, BaseVariants>(
             const value = variant[(propsValue as Record<string, string>)[key]]
 
             // key: breakpoint like sm, or it is a at-rule like @media or @screen
-            rules.push(
-              key == 'initial'
-                ? value
-                : {
-                    // Allow key to be an at-rule like @media
-                    // Fallback to a screen value
-                    [key[0] == '@' ? key : `@screen ${key}`]:
-                      typeof value == 'string' ? apply(value) : value,
-                  },
-            )
+            rules.push(key == 'initial' ? value : buildMediaRule(key, value))
           })
         } else {
           rules.push(variant[propsValue as string])
         }
       })
 
-      compounds.forEach(({ style, ...compounds }) => {
-        const compoundRules: (undefined | string | CSSRules | Directive<CSSRules>)[] = [style]
+      matches.forEach((matcher) => {
+        const ruleIndex = rules.push(matcher.use) - 1
 
-        const matched = Object.keys(compounds).every((variantKey) => {
-          const propsValue = (props as Record<string, unknown>)[variantKey]
-          const compoundValue = String((compounds as Record<string, string>)[variantKey])
+        if (
+          !Object.keys(matcher).every((variantKey) => {
+            const propsValue = (props as Record<string, unknown>)[variantKey]
+            const compoundValue = String((matcher as Record<string, string>)[variantKey])
 
-          if (propsValue === Object(propsValue)) {
-            Object.keys(propsValue as Record<string, unknown>).forEach((key) => {
-              if (
-                key != 'initial' &&
-                compoundValue == String((propsValue as Record<string, unknown>)[key])
-              ) {
-                // key: breakpoint like sm, or it is a at-rule like @media or @screen
-                compoundRules.push({
-                  [key[0] == '@' ? key : `@screen ${key}`]:
-                    typeof style == 'string' ? apply(style) : style,
-                })
-              }
-            })
+            if (propsValue === Object(propsValue)) {
+              Object.keys(propsValue as Record<string, unknown>).forEach((key) => {
+                if (
+                  key != 'initial' &&
+                  compoundValue == String((propsValue as Record<string, unknown>)[key])
+                ) {
+                  // key: breakpoint like sm, or it is a at-rule like @media or @screen
+                  rules.push(buildMediaRule(key, rules[ruleIndex]))
+                }
+              })
 
-            return true
-          }
+              return true
+            }
 
-          return compoundValue == String(propsValue)
-        })
-
-        if (matched) {
-          rules.push(...compoundRules)
+            return variantKey == 'use' || compoundValue == String(propsValue)
+          })
+        ) {
+          rules.length = ruleIndex
         }
       })
 
@@ -263,11 +274,11 @@ const createStyled = <Variants, BaseVariants>(
   )
 }
 
-export const styled = (<Variants, BaseVariants>(
-  base: Styled<BaseVariants> | StyledConfig<Variants>,
-  config?: StyledConfig<Variants, BaseVariants>,
-): Styled<BaseVariants & Variants> & string =>
-  (typeof base == 'function' ? createStyled(config, base) : createStyled(base)) as Styled<
+export const style = (<Variants, BaseVariants>(
+  base: Style<BaseVariants> | StyleConfig<Variants>,
+  config?: StyleConfig<Variants, BaseVariants>,
+): Style<BaseVariants & Variants> & string =>
+  (typeof base == 'function' ? createStyle(config, base) : createStyle(base)) as Style<
     BaseVariants & Variants
   > &
-    string) as StyledFactory
+    string) as StyleFunction

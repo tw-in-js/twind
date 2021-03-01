@@ -32,7 +32,7 @@
     "./shim/server": "./src/shim/server/index.ts",
     "./server": "./src/server/index.ts",
     "./sheets": "./src/sheets/index.ts",
-    "./styled": "./src/styled/index.ts",
+    "./style": "./src/style/index.ts",
     "./package.json": "./package.json"
   },
   "// These are relative from within the dist/ folder": "",
