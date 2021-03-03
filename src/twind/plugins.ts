@@ -157,7 +157,11 @@ const contentPluginFor = (property: string) => (params: string[]): CSSRules =>
     ? { [property]: `flex-${params[0]}` }
     : placeHelper(property, params)
 
-const gridPlugin = (kind: string): PluginHandler => (params) => {
+const gridPlugin = (kind: 'column' | 'row'): PluginHandler => (params, { theme }) => {
+  if ((_ = theme(`grid${capitalize(kind)}` as 'gridRow', params, ''))) {
+    return { [`grid-${kind}`]: _ }
+  }
+
   switch (params[0]) {
     case 'auto':
       return { [`grid-${kind}`]: 'auto' }
@@ -284,7 +288,13 @@ export const corePlugins: Plugins = {
             [`grid-template-${params[0] === 'cols' ? 'columns' : params[0]}`]:
               params.length === 2 && Number(params[1])
                 ? `repeat(${params[1]},minmax(0,1fr))`
-                : join(tail(params), ' '),
+                : context.theme(
+                    `gridTemplate${capitalize(
+                      params[0] === 'cols' ? 'columns' : params[0],
+                    )}` as 'gridTemplateRows',
+                    tail(params),
+                    join(tail(params), ' '),
+                  ),
           }
         )
 

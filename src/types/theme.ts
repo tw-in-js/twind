@@ -131,6 +131,10 @@ export interface Theme {
   fontFamily: ThemeSection<string | string[]>
   fontSize: ThemeSection<ThemeFontSize>
   fontWeight: ThemeSection
+  gridTemplateColumns: ThemeSection
+  gridTemplateRows: ThemeSection
+  gridColumn: ThemeSection
+  gridRow: ThemeSection
   gap: ThemeSection
   gradientColorStops: ThemeSection<ThemeColor>
   height: ThemeSection

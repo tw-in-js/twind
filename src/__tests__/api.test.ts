@@ -41,6 +41,16 @@ test.before((context) => {
         backgroundImage: {
           'hero-pattern': "url('/img/hero-pattern.svg')",
         },
+        gridTemplateColumns: {
+          // Complex site-specific column configuration
+          footer: '200px minmax(900px, 1fr) 100px',
+        },
+        gridTemplateRows: {
+          // Complex site-specific row configuration
+          layout: '200px minmax(900px, 1fr) 100px',
+        },
+        gridColumn: {},
+        gridRow: {},
       },
     },
   })
