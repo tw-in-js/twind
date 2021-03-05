@@ -9,6 +9,8 @@ import type { TW } from '../types'
 import { tw as defaultTW } from '../index'
 import { ensureMaxSize } from '../internal/util'
 
+export * from '../index'
+
 /**
  * Options for {@link createObserver}.
  */
