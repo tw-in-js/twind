@@ -130,7 +130,6 @@ const head = [
   ['meta', { name: 'msapplication-square150x150logo', content: base('mstile-150x150.png') }],
   ['meta', { name: 'msapplication-wide310x150logo', content: base('mstile-310x150.png') }],
   ['meta', { name: 'msapplication-square310x310logo', content: base('mstile-310x310.png') }],
-  ['script', { src: 'https://flems.io/flems.html', type: 'text/javascript', charset: 'utf-8' }],
 ]
 
 /**
@@ -138,26 +137,15 @@ const head = [
  */
 
 const guideSidebar = [
-  // {
-  //   text: 'Overview',
-  //   children: [
-
-  //   ],
-  // },
   {
     text: 'Handbook',
     children: [
-      { text: 'Introduction', link: '/handbook/' },
+      { text: 'Introduction', link: '/handbook/introduction' },
       { text: 'Getting Started', link: '/handbook/getting-started' },
       { text: 'The Shim', link: '/handbook/the-shim' },
       { text: 'Styling with Twind', link: '/handbook/styling-with-twind' },
       { text: 'Grouping Syntax', link: '/handbook/grouping-syntax' },
       { text: 'CSS in Twind', link: '/handbook/css-in-twind' },
-
-      // {
-      //   text: 'Improving Performance',
-      //   link: '/handbook/improving-performance',
-      // },
       { text: 'Overwriting Styles', link: '/handbook/overwriting-styles' },
       {
         text: 'Extended Functionality',
@@ -244,7 +232,7 @@ module.exports = {
     //   indexName: 'index_name',
     // },
     nav: [
-      { text: 'Guide', link: '/handbook/' },
+      { text: 'Guide', link: '/handbook/introduction' },
       { text: 'API', link: '/api/README.html' },
       { text: 'GitHub', link: 'https://github.com/tw-in-js/twind' },
       { text: 'Discord', link: 'https://discord.com/invite/2aP5NkszvD' },

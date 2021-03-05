@@ -5,7 +5,7 @@ heroAlt: Twind
 heroText: Twind
 tagline: The smallest, fastest, most feature complete tailwind-in-js solution in existence
 actionText: Read the Handbook
-actionLink: /handbook/
+actionLink: /handbook/introduction
 navbar: true
 altActionText: View the API
 altActionLink: /api/README
