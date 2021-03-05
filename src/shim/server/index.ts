@@ -9,13 +9,14 @@
  */
 
 import type { TW } from '../../types'
-import * as htmlparser2 from 'htmlparser2'
+import * as htmlparser2Tokenizer from 'htmlparser2/lib/Tokenizer'
 import { tw as defaultTW } from '../../index'
 
 // htmlparser2 has no esm bundle =>
 // a little dance to work around different cjs loaders
-const { Tokenizer } =
-  ((htmlparser2 as unknown) as { default: typeof import('htmlparser2') }).default || htmlparser2
+const Tokenizer =
+  htmlparser2Tokenizer.default ||
+  (htmlparser2Tokenizer as typeof import('htmlparser2/lib/Tokenizer'))
 
 /**
  * Options for {@link shim}.
