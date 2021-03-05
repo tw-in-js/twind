@@ -32,6 +32,7 @@
     "./shim/server": "./src/shim/server/index.ts",
     "./server": "./src/server/index.ts",
     "./sheets": "./src/sheets/index.ts",
+    "./style": "./src/style/index.ts",
     "./package.json": "./package.json"
   },
   "// These are relative from within the dist/ folder": "",
@@ -58,6 +59,11 @@
       "path": "dist/shim/shim.js",
       "gzip": true,
       "limit": "0.5kb"
+    },
+    {
+      "path": "dist/style/style.js",
+      "gzip": true,
+      "limit": "1kb"
     }
   ],
   "// These are ONLY bundled (eg included) in the umd builds": "",
