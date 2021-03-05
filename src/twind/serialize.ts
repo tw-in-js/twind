@@ -158,14 +158,14 @@ export const serialize = (
         // If the value is an object this must be a nested block
         // like '@media ...', '@supports ... ', ':pseudo ...', '& > ...'
         // If this is a `@` rule
-        if (key[0] === '@') {
+        if (key[0] == '@') {
           if (key[1] == 'g') {
             // @global
             stringify([], '', 0, value as MaybeArray<CSSRules>, important)
-          } else if (key[1] === 'f') {
+          } else if (key[1] == 'f') {
             // `@font-face` is never wrapped, eg always global/root
             stringify([], key, 0, value as MaybeArray<CSSRules>, important)
-          } else if (key[1] === 'k') {
+          } else if (key[1] == 'k') {
             // @keyframes handling
             // To prevent
             // "@keyframes spin{from{transform:rotate(0deg)}}"

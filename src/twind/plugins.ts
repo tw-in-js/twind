@@ -82,7 +82,7 @@ const asRGBA = <T extends string | undefined>(
   opacityProperty: string,
   opacityDefault?: string,
 ): T | string => {
-  if (color && color[0] === '#') {
+  if (color && color[0] == '#') {
     return `rgba(${parseColorComponent(
       color.substr(1, (_ = (color.length - 1) / 3)),
       ($ = [17, 1, 0.062272][_ - 1]),
@@ -111,7 +111,7 @@ const withOpacityFallback = (
       }
     : { [property]: color }
 
-const transparentTo = (color: string) => (($ = asRGBA(color, '', '0')) === _ ? 'transparent' : $)
+const transparentTo = (color: string) => (($ = asRGBA(color, '', '0')) == _ ? 'transparent' : $)
 
 const reversableEdge = (
   params: string[],
@@ -125,7 +125,7 @@ const reversableEdge = (
   (_ = ({ x: ['right', 'left'], y: ['bottom', 'top'] } as Record<string, undefined | string[]>)[
     params[0]
   ]) && ($ = `--tw-${id}-${params[0]}-reverse`)
-    ? params[1] === 'reverse'
+    ? params[1] == 'reverse'
       ? {
           [$]: '1',
         }
@@ -168,7 +168,7 @@ const gridPlugin = (kind: 'column' | 'row'): PluginHandler => (params, { theme }
     case 'span':
       return {
         [`grid-${kind}`]:
-          params[1] === 'full' ? '1 / -1' : params[1] && `span ${params[1]} / span ${params[1]}`,
+          params[1] == 'full' ? '1 / -1' : params[1] && `span ${params[1]} / span ${params[1]}`,
       }
     case 'start':
     case 'end':
@@ -264,7 +264,7 @@ export const corePlugins: Plugins = {
       case 'row':
       case 'col':
         return {
-          flexDirection: join(params[0] === 'col' ? ['column', ...tail(params)] : params),
+          flexDirection: join(params[0] == 'col' ? ['column', ...tail(params)] : params),
         }
       case 'nowrap':
       case 'wrap':
@@ -285,12 +285,12 @@ export const corePlugins: Plugins = {
       case 'rows':
         return (
           params.length > 1 && {
-            [`grid-template-${params[0] === 'cols' ? 'columns' : params[0]}`]:
-              params.length === 2 && Number(params[1])
+            [`grid-template-${params[0] == 'cols' ? 'columns' : params[0]}`]:
+              params.length == 2 && Number(params[1])
                 ? `repeat(${params[1]},minmax(0,1fr))`
                 : context.theme(
                     `gridTemplate${capitalize(
-                      params[0] === 'cols' ? 'columns' : params[0],
+                      params[0] == 'cols' ? 'columns' : params[0],
                     )}` as 'gridTemplateRows',
                     tail(params),
                     join(tail(params), ' '),
@@ -302,7 +302,7 @@ export const corePlugins: Plugins = {
         return (
           params.length > 1 && {
             gridAutoFlow: join(
-              params[1] === 'col' ? ['column', ...tail(params, 2)] : tail(params),
+              params[1] == 'col' ? ['column', ...tail(params, 2)] : tail(params),
               ' ',
             ),
           }
@@ -315,7 +315,7 @@ export const corePlugins: Plugins = {
   auto: (params) =>
     includes(['cols', 'rows'], params[0]) &&
     (_ =
-      params.length === 2
+      params.length == 2
         ? ({
             auto: 'auto',
             min: 'min-content',
@@ -323,7 +323,7 @@ export const corePlugins: Plugins = {
             fr: 'minmax(0,1fr)',
           } as Record<string, undefined | string>)[params[1]] || `minmax(0,${params[1]})`
         : params.length > 2 && `minmax(${join(tail(params), ',')})`) && {
-      [`grid-auto-${params[0] === 'cols' ? 'columns' : 'rows'}`]: _,
+      [`grid-auto-${params[0] == 'cols' ? 'columns' : 'rows'}`]: _,
     },
 
   static: position,
@@ -541,7 +541,7 @@ export const corePlugins: Plugins = {
       : propertyValue()(params, context, id),
 
   transform: (params) =>
-    params[0] === 'none'
+    params[0] == 'none'
       ? { transform: 'none' }
       : {
           '--tw-translate-x': '0',
@@ -551,7 +551,7 @@ export const corePlugins: Plugins = {
           '--tw-skew-y': '0',
           '--tw-scale-x': '1',
           '--tw-scale-y': '1',
-          transform: transform(params[0] === 'gpu'),
+          transform: transform(params[0] == 'gpu'),
         },
 
   // .rotate-0	--transform-rotate: 0;
@@ -651,7 +651,7 @@ export const corePlugins: Plugins = {
         return propertyValue('backgroundPosition', ' ')(params)
 
       case 'no':
-        return params[1] === 'repeat' && propertyValue('backgroundRepeat')(params)
+        return params[1] == 'repeat' && propertyValue('backgroundRepeat')(params)
 
       case 'auto':
       case 'cover':
@@ -667,12 +667,12 @@ export const corePlugins: Plugins = {
         return opacityProperty(params, theme, id, 'background')
 
       case 'clip':
-        return { backgroundClip: params[1] + (params[1] === 'text' ? '' : '-box') }
+        return { backgroundClip: params[1] + (params[1] == 'text' ? '' : '-box') }
 
       // .bg-gradient-to-r => linear-gradient(to right, ...)
       // .bg-gradient-to-r => linear-gradient(to right, ...)
       case 'gradient':
-        if (params[1] === 'to' && (_ = expandEdges(params[2]))) {
+        if (params[1] == 'to' && (_ = expandEdges(params[2]))) {
           return {
             backgroundImage: `linear-gradient(to ${join(_, ' ')},var(--tw-gradient-stops))`,
           }
@@ -734,7 +734,7 @@ export const corePlugins: Plugins = {
 
   placeholder: (params, { theme }, id) =>
     (_ =
-      params[0] === 'opacity'
+      params[0] == 'opacity'
         ? opacityProperty(params, theme, id)
         : withOpacityFallback(
             'color',
@@ -754,7 +754,7 @@ export const corePlugins: Plugins = {
           '--tw-shadow': '0 0 transparent',
         },
       },
-      '--tw-shadow': _ === 'none' ? '0 0 transparent' : _,
+      '--tw-shadow': _ == 'none' ? '0 0 transparent' : _,
       // Fallback first, then modern with ring-* support
       boxShadow: [
         _,

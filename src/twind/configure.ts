@@ -43,7 +43,7 @@ const loadMode = (mode: Configuration['mode']): Mode =>
     : mode) || warn
 
 const stringifyVariant = (selector: string, variant: string): string =>
-  selector + (variant[1] === ':' ? tail(variant, 2) + ':' : tail(variant)) + ':'
+  selector + (variant[1] == ':' ? tail(variant, 2) + ':' : tail(variant)) + ':'
 
 // Creates rule id including variants, negate and directive
 // which is exactly like a tailwind rule

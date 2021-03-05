@@ -27,7 +27,7 @@ export const translate = (
   // Bail early for already hashed class names
   // Only if there are no variants and no negation
   // If there are variants or negation unknown directive will be reported
-  if (!isTranslating && parameters[0] === 'tw' && rule.$ === rule.d) {
+  if (!isTranslating && parameters[0] == 'tw' && rule.$ == rule.d) {
     return rule.$
   }
 

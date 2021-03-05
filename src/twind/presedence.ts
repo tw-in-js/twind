@@ -179,10 +179,10 @@ export const makeVariantPresedenceCalculator = (
       // Move into screens layer and adjust based on min-width
       (1 << 27) | responsivePrecedence(buildMediaQuery(_))
     : // 1: dark mode flag
-    variant === ':dark'
+    variant == ':dark'
     ? 1 << 30
     : // 4: precedence of other at-rules
-    (_ = variants[variant] || variant)[0] === '@'
+    (_ = variants[variant] || variant)[0] == '@'
     ? atRulePresedence(_)
     : // 17: pseudo and group variants
       pseudoPrecedence(variant))
@@ -222,7 +222,7 @@ export const makeVariantPresedenceCalculator = (
 // 0 - 15 => 4 bits
 // Ignore vendor prefixed and custom properties
 export const declarationPropertyPrecedence = (property: string): number =>
-  property[0] === '-'
+  property[0] == '-'
     ? 0
     : seperatorPrecedence(property) +
       ((_ = /^(?:(border-(?!w|c|sty)|[tlbr].{2,4}m?$|c.{7}$)|([fl].{5}l|g.{8}$|pl))/.exec(property))

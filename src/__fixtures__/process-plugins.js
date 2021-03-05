@@ -109,7 +109,7 @@ export function processPlugins() {
 
   for (const selector of Object.keys(utilities)) {
     // '@keyframes spin'
-    if (selector[0] === '@') {
+    if (selector[0] == '@') {
       continue
     }
 

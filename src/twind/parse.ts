@@ -53,8 +53,8 @@ const endGrouping = (isWhitespace?: boolean): void => {
   groupings.length = Math.max(groupings.lastIndexOf('') + ~~(isWhitespace as boolean), 0)
 }
 
-const onlyPrefixes = (s: string): '' | boolean => s && s[0] !== ':'
-const onlyVariants = (s: string): '' | boolean => s[0] === ':'
+const onlyPrefixes = (s: string): '' | boolean => s && s[0] != ':'
+const onlyVariants = (s: string): '' | boolean => s[0] == ':'
 
 const addRule = (directive: Rule['d'], negate?: boolean, important?: boolean): void => {
   rules.push({
@@ -67,13 +67,13 @@ const addRule = (directive: Rule['d'], negate?: boolean, important?: boolean): v
 }
 
 const saveRule = (buffer: string): '' => {
-  const negate = buffer[0] === '-'
+  const negate = buffer[0] == '-'
 
   if (negate) {
     buffer = tail(buffer)
   }
 
-  const important = buffer[buffer.length - 1] === '!'
+  const important = buffer[buffer.length - 1] == '!'
 
   if (important) {
     buffer = buffer.slice(0, -1)
@@ -81,7 +81,7 @@ const saveRule = (buffer: string): '' => {
 
   const prefix = join(groupings.filter(onlyPrefixes))
 
-  addRule(buffer === '&' ? prefix : (prefix && prefix + '-') + buffer, negate, important)
+  addRule(buffer == '&' ? prefix : (prefix && prefix + '-') + buffer, negate, important)
 
   return ''
 }
@@ -95,8 +95,7 @@ const parseString = (token: string, isVariant?: boolean): void => {
       case ':':
         // Check if this is an pseudo element "after::"
         buffer =
-          buffer &&
-          startGrouping(':' + (token[position] === char ? token[position++] : '') + buffer)
+          buffer && startGrouping(':' + (token[position] == char ? token[position++] : '') + buffer)
 
         break
 
@@ -126,7 +125,7 @@ const parseString = (token: string, isVariant?: boolean): void => {
   if (buffer) {
     if (isVariant) {
       startGrouping(':' + buffer)
-    } else if (buffer.slice(-1) === '-') {
+    } else if (buffer.slice(-1) == '-') {
       startGrouping(buffer.slice(0, -1))
     } else {
       saveRule(buffer)
@@ -225,7 +224,7 @@ const buildStatics = (strings: TemplateStringsArray): Static[] => {
       if (index >= slowModeIndex) {
         return (interpolation) => {
           // If first => reset bufferd tokens
-          if (index === slowModeIndex) {
+          if (index == slowModeIndex) {
             buffer = ''
           }
 
@@ -241,7 +240,7 @@ const buildStatics = (strings: TemplateStringsArray): Static[] => {
           }
 
           // If last => parse remaining buffered tokens
-          if (index === strings.length - 1) {
+          if (index == strings.length - 1) {
             parseString(buffer)
           }
         }

@@ -60,7 +60,7 @@ export const shim = (markup: string, options: TW | ShimOptions = {}): string => 
     {
       onattribend: noop,
       onattribdata: (value) => {
-        if (lastAttribName === 'class') {
+        if (lastAttribName == 'class') {
           const currentIndex = tokenizer.getAbsoluteIndex()
           const startIndex = currentIndex - value.length
           const parsedClassNames = tw(value)

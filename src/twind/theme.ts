@@ -724,7 +724,7 @@ const flattenColorPalette = (
   Object.keys(colors).forEach((property) => {
     const value = colors[property]
 
-    if (property === 'DEFAULT') {
+    if (property == 'DEFAULT') {
       target[join(prefix)] = value
       target[join(prefix, '.')] = value
     }
@@ -777,7 +777,7 @@ export const makeThemeResolver = (config?: ThemeConfiguration): ThemeResolver =>
 
     const value = typeof base == 'function' ? base(resolve, resolveContext) : base
 
-    return value && section === 'colors'
+    return value && section == 'colors'
       ? flattenColorPalette(value as Record<string, ThemeColor>)
       : (value as Record<string, unknown>)
   }

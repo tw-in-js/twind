@@ -142,7 +142,7 @@ export const sortedInsertionIndex = (array: readonly number[], element: number):
   let high = array.length
 
   // Theres only one option then
-  if (high === 0) return 0
+  if (high == 0) return 0
 
   // Find position by binary search
   for (let low = 0; low < high; ) {

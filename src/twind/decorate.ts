@@ -23,7 +23,7 @@ export const decorate = (
     }
 
     // Dark mode
-    if (variant === ':dark' && darkMode === 'class') {
+    if (variant == ':dark' && darkMode == 'class') {
       return { [`.dark &`]: translation }
     }
 
