@@ -47,8 +47,6 @@ Twind ships the compiler, not the CSS. This means unlimited styles and variants 
 
 ![Example showing how Twind injects styles at runtime](/assets/how-twind-works.gif 'How Twind works')
 
-<CodePen id="mdOxqBM" height="364"/>
-
 **Other features include:**
 
 :::tip
