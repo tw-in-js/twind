@@ -116,17 +116,20 @@ jobs:
 
             <details><summary>Configure your NPM client (click to expand)</summary>
 
-            Adjust you `.npmrc` to use `https://npm.pkg.github.com` for `@${{ github.repository_owner }}`
+            1. [Generate a personal access token](https://github.com/settings/tokens/new) with at least "read:packages" scope.
+            2. Adjust your `.npmrc` to use the token and define the regeistry for `@${{ github.repository_owner }}`:
 
-            ```
-            @${{ github.repository_owner }}:registry=https://npm.pkg.github.com
-            ```
+              ```
+              //npm.pkg.github.com/:_authToken=<READ_PACKAGES_TOKEN>
+              @${{ github.repository_owner }}:registry=https://npm.pkg.github.com
+              ```
 
-            Using the command line:
+              Using the command line:
 
-            ```sh
-            npm config set @${{ github.repository_owner }}:registry https://npm.pkg.github.com --global
-            ```
+              ```sh
+              npm config set //npm.pkg.github.com/:_authToken <READ_PACKAGES_TOKEN> --global
+              npm config set @${{ github.repository_owner }}:registry https://npm.pkg.github.com --global
+              ```
 
             </details>
 
