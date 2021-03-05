@@ -14,11 +14,17 @@ head:
 
 # {{ $frontmatter.title }}
 
-Sometimes you might find yourself wanting to write some arbitrary styles for an element. Some rule that isn't covered by Tailwind API but perhaps isn't general enough to warrant creating a real plugin for.
+`twind/css` provides a set of utilities that allow you to write arbitrary CSS within Twind with support for global styles, animations, and more.
 
-## `CSS` function
+:::tip
+It is recommended to try to stay within the constraints of the Twind rules when possible. Applying arbitrary CSS should be generally be viewed as an escape hatch.
+:::
 
-Essentially a CSS directive uses some CSS rules in object notation, array or template literal format. Here you can use the `&` selector to target the current element much like in other CSS-in-JS libraries.
+## The `css` function
+
+This function allows you to write CSS within Twind and provides support for global styling.
+
+You can use the `&` selector to target the current element much like in other CSS-in-JS libraries:
 
 ```js
 import { tw, css } from 'twind/css'
@@ -32,7 +38,7 @@ tw(
 // => tw-xxxx
 ```
 
-For best performance it is advised to extract CSS directive into a variable:
+For optimal performance, it is advised to extract your `css` function call into a variable:
 
 ```js
 const styles = css({
@@ -44,7 +50,7 @@ tw(styles)
 // => tw-xxxx
 ```
 
-Furthermore any variants or groupings that are active when the CSS directive is called, will be respected by the return value. Meaning that you can scope CSS directives with every variant:
+Any variants or groupings that are active when the `css` function is called will be respected by the return value. This means that you can scope a `css` call with every variant:
 
 ```js
 tw`
@@ -68,18 +74,6 @@ const styles = css({
     // .tw-xxx a:hover
     '&:hover': {
       color: theme('colors.blue.700'),
-    },
-  },
-})
-```
-
-`css` allows to define global styles using the `:global` selector:
-
-```js
-const styles = css({
-  ':global': {
-    a: {
-      color: theme('colors.blue.500'),
     },
   },
 })
@@ -174,7 +168,7 @@ css`
 `
 ```
 
-`@apply can be used in the object notation as well:
+`@apply` can be used in the object notation as well:
 
 ```js
 css({
@@ -185,9 +179,9 @@ css({
 })
 ```
 
-## Accessing the theme
+## The `theme` function
 
-Values of the CSS object maybe functions that are passed the context and should return the value to be used:
+This function can be used to access theme values inside of a `css` function call.
 
 ```js
 import { css, theme } from 'twind/css'
@@ -210,9 +204,9 @@ css({
 })
 ```
 
-## Screen directive
+## The `screen` function
 
-The `screen` directive allows you to create media queries that reference your breakpoints by name instead of duplicating their values in your own CSS.
+This function allows you to create media queries that reference your Twind breakpoints by name (`sm`,`md`, etc.).
 
 For example, say you have a `sm` breakpoint at `640px` and you need to write some custom CSS that references this breakpoint.
 
@@ -226,7 +220,7 @@ css`
 `
 ```
 
-...you can use the `screen` directive and reference the breakpoint by name:
+...you can use the `screen` function and reference the breakpoint by name:
 
 ```js
 import { css, screen, apply } from 'twind/css'
@@ -273,11 +267,13 @@ css({
 `
 ```
 
-## Animation directive
+## The `animation` function
+
+This function provides a simplified abstraction for creating custom animations within a `css` function call.
 
 Custom animations are difficult to configure in Tailwind. During `setup` you need to add to the `theme.animation` section and the `theme.keyframes` section. This means all animations must known before hand and you can not use "one-off" animations.
 
-With the `animation` exports this task is greatly simplified:
+With the `animation` exports, this task is greatly simplified:
 
 ```js
 import { animation } from 'twind/css'
@@ -362,9 +358,9 @@ css`
 `
 ```
 
-## Keyframes helper
+## The `keyframes` function
 
-The `keyframes` export helps to create custom [@keyframes](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes):
+This function provides a simple way to define [keyframes](https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes) for use within an `animation` function call.
 
 ```js
 import { keyframes } from 'twind/css'
