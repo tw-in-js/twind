@@ -31,8 +31,6 @@ head:
 
 Twind is a small compiler (~12kB) that converts Tailwind utility classes into CSS at runtime. The goal of this project is to unify the flexibility of CSS-in-JS with the carefully considered constraints of the Tailwind API.
 
-<es-play src="../public/examples/test.js"  height="400px" preview="true" resizable="true" wrap="true"></es-play>
-
 ### Features
 
 **<Emoji symbol="⚡️"/> No build step**
