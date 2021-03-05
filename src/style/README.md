@@ -5,6 +5,8 @@
 
 `twind/style` is a framework agnostic component API that is heavily inspired by [stitches](https://stitches.dev). It allows you to define composable components which are typed automatically.
 
+> For a preview of the React integration take a look at [@twind/react](https://github.com/tw-in-js/twind-react). Other framework integrations will follow.
+
 ```js
 import { tw, style } from 'twind/style'
 
