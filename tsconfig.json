@@ -10,7 +10,8 @@
       "./src/server/index.ts",
       "./src/sheets/index.ts",
       "./src/shim/index.ts",
-      "./src/shim/server/index.ts"
+      "./src/shim/server/index.ts",
+      "./src/style/index.ts"
     ],
     "out": "./website/docs",
     "includeVersion": true,

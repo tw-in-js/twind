@@ -1,8 +1,8 @@
 /**
- * [[include:src/styled/README.md]]
+ * [[include:src/style/README.md]]
  *
  * @packageDocumentation
- * @module twind/styled
+ * @module twind/style
  */
 
 // Based on https://github.com/modulz/stitches
