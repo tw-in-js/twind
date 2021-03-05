@@ -663,4 +663,18 @@ test('With a Base component', ({ sheet, tw }) => {
   ])
 })
 
+test('is added to component layer', ({ tw, sheet }) => {
+  const component = style({
+    base: 'top-2',
+  })
+
+  assert.equal(sheet.target, [])
+
+  assert.is(tw(component(), 'px-2', 'top-4'), 'tw-aouma7 tw-16qxmeo px-2 top-4')
+  assert.equal(sheet.target, [
+    '.tw-aouma7{top:0.5rem}',
+    '.px-2{padding-left:0.5rem;padding-right:0.5rem}',
+    '.top-4{top:1rem}',
+  ])
+})
 test.run()

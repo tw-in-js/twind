@@ -14,7 +14,7 @@ import { apply, directive, hash } from '../index'
 import { evalThunk, merge } from '../internal/util'
 import type { Token } from '../types'
 
-export * from '../index'
+export * from '../css/index'
 
 export type StrictMorphVariant<T> = T extends number
   ? `${T}` | T
