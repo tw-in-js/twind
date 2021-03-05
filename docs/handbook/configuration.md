@@ -62,6 +62,8 @@ setup({
 
 The Tailwind v2 [extended color palette](https://tailwindcss.com/docs/customizing-colors#color-palette-reference) is available in the [`twind/colors`](/api/modules/twind_colors) module.
 
+List of colors: `amber`,`black`,`blue`,`blueGray` ,`coolGray`,`cyan`,`emerald`,`fuchsia`,`gray`,`green`,`indigo`,`lightBlue`,`lime`,`orange`,`pink`,`purple`,`red`,`rose`,`teal`,`trueGray`,`violet`,`warmGray`,`white`, `yellow`
+
 ```js
 import * as colors from 'twind/colors'
 
