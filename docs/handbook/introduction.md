@@ -31,6 +31,8 @@ head:
 
 Twind is a small compiler (~12kB) that converts Tailwind utility classes into CSS at runtime. The goal of this project is to unify the flexibility of CSS-in-JS with the carefully considered constraints of the Tailwind API.
 
+<es-play src="../public/examples/test.js"  height="400px" preview="true" resizable="true" wrap="true"></es-play>
+
 ### Features
 
 **<Emoji symbol="⚡️"/> No build step**
@@ -46,6 +48,8 @@ If your app uses HTML and JavaScript, it should work with Twind. This goes for s
 Twind ships the compiler, not the CSS. This means unlimited styles and variants for one low fixed cost of ~12kB.
 
 ![Example showing how Twind injects styles at runtime](/assets/how-twind-works.gif 'How Twind works')
+
+<CodePen id="mdOxqBM" height="364"/>
 
 **Other features include:**
 
