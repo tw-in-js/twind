@@ -9,14 +9,17 @@
  */
 
 import type { TW } from '../../types'
-import * as htmlparser2Tokenizer from 'htmlparser2/lib/Tokenizer'
+import htmlparser2Tokenizer from 'htmlparser2/lib/Tokenizer'
 import { tw as defaultTW } from '../../index'
+
+export * from '../../index'
+export * from '../../sheets/index'
 
 // htmlparser2 has no esm bundle =>
 // a little dance to work around different cjs loaders
 const Tokenizer =
-  htmlparser2Tokenizer.default ||
-  (htmlparser2Tokenizer as typeof import('htmlparser2/lib/Tokenizer'))
+  ((htmlparser2Tokenizer as unknown) as typeof import('htmlparser2/lib/Tokenizer')).default ||
+  htmlparser2Tokenizer
 
 /**
  * Options for {@link shim}.
@@ -27,9 +30,6 @@ export interface ShimOptions {
    */
   tw?: TW
 }
-
-export * from '../../index'
-export * from '../../sheets/index'
 
 const noop = () => undefined
 
