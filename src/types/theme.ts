@@ -117,36 +117,49 @@ export interface Theme {
   backgroundColor: ThemeSection<ThemeColor>
   backgroundImage: ThemeSection<string | string[]>
   backgroundOpacity: ThemeSection
+  backgroundPosition: ThemeSection
+  backgroundSize: ThemeSection
   borderColor: ThemeSection<ThemeColor>
   borderOpacity: ThemeSection
   borderRadius: ThemeSection
   borderWidth: ThemeSection
   boxShadow: ThemeSection<string | string[]>
   container: ThemeContainer | ThemeSectionResolver<ThemeContainer>
+  cursor: ThemeSection
   divideColor: ThemeSection<ThemeColor>
   divideOpacity: ThemeSection
   divideWidth: ThemeSection
   fill: ThemeSection<ThemeColor>
   flex: ThemeSection
+  flexGrow: ThemeSection<number>
+  flexShrink: ThemeSection<number>
   fontFamily: ThemeSection<string | string[]>
   fontSize: ThemeSection<ThemeFontSize>
   fontWeight: ThemeSection
-  gridTemplateColumns: ThemeSection
-  gridTemplateRows: ThemeSection
-  gridColumn: ThemeSection
-  gridRow: ThemeSection
   gap: ThemeSection
   gradientColorStops: ThemeSection<ThemeColor>
+  gridAutoColumns: ThemeSection
+  gridAutoRows: ThemeSection
+  gridColumn: ThemeSection
+  gridColumnEnd: ThemeSection
+  gridColumnStart: ThemeSection
+  gridRow: ThemeSection
+  gridRowEnd: ThemeSection
+  gridRowStart: ThemeSection
+  gridTemplateColumns: ThemeSection
+  gridTemplateRows: ThemeSection
   height: ThemeSection
   inset: ThemeSection
   keyframes: ThemeSection<Record<string, CSSProperties>>
   letterSpacing: ThemeSection
   lineHeight: ThemeSection
+  listStyleType: ThemeSection
   margin: ThemeSection
   maxHeight: ThemeSection
   maxWidth: ThemeSection
   minHeight: ThemeSection
   minWidth: ThemeSection
+  objectPosition: ThemeSection
   opacity: ThemeSection
   order: ThemeSection
   outline: ThemeSection<ThemeOutline>
@@ -166,6 +179,7 @@ export interface Theme {
   strokeWidth: ThemeSection
   textColor: ThemeSection<ThemeColor>
   textOpacity: ThemeSection
+  transformOrigin: ThemeSection
   transitionDelay: ThemeSection<string | string[]>
   transitionDuration: ThemeSection<string | string[]>
   transitionProperty: ThemeSection<string | string[]>
