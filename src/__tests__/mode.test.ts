@@ -25,12 +25,14 @@ test('mode warn (default)', () => {
     assert.match(warn.lastCall.arguments[0], /UNKNOWN_DIRECTIVE/)
 
     assert.is(tw('rounded-t-xxx'), 'rounded-t-xxx')
-    assert.is(warn.callCount, 2)
-    assert.match(warn.lastCall.arguments[0], /UNKNOWN_THEME_VALUE/)
+    assert.is(warn.callCount, 3)
+    assert.match(warn.calls[1].arguments[0], /UNKNOWN_THEME_VALUE/)
+    assert.match(warn.calls[2].arguments[0], /UNKNOWN_DIRECTIVE/)
 
     assert.is(tw('gap'), 'gap')
-    assert.is(warn.callCount, 3)
-    assert.match(warn.lastCall.arguments[0], /UNKNOWN_THEME_VALUE/)
+    assert.is(warn.callCount, 5)
+    assert.match(warn.calls[3].arguments[0], /UNKNOWN_THEME_VALUE/)
+    assert.match(warn.calls[4].arguments[0], /UNKNOWN_DIRECTIVE/)
   } finally {
     console.warn = consoleWarn
   }

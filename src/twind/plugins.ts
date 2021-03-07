@@ -37,17 +37,15 @@ const propertyValue = (property?: string, separator?: string) => (
   params: string[],
   context?: Context,
   id?: string,
-): CSSRules => ({
-  [property || (id as string)]: join(params, separator),
-})
+): CSSRules | string =>
+  (_ = join(params, separator)) && {
+    [property || (id as string)]: _,
+  }
 
-const themeProperty = (section?: keyof Theme): PluginHandler => (
-  params: string[],
-  { theme },
-  id,
-) => ({
-  [section || id]: theme(section || (id as keyof Theme), params) as string,
-})
+const themeProperty = (section?: keyof Theme): PluginHandler => (params: string[], { theme }, id) =>
+  (_ = theme(section || (id as keyof Theme), params) as string) && {
+    [section || id]: _,
+  }
 
 const alias = (handler: PluginHandler, name: string): PluginHandler => (params, context) =>
   handler(params, context, name)
@@ -63,16 +61,17 @@ const fontVariantNumeric = (key: string): PluginHandler => (params, context, id)
     'var(--tw-ordinal,/*!*/ /*!*/) var(--tw-slashed-zero,/*!*/ /*!*/) var(--tw-numeric-figure,/*!*/ /*!*/) var(--tw-numeric-spacing,/*!*/ /*!*/) var(--tw-numeric-fraction,/*!*/ /*!*/)',
 })
 
-const inset: PluginHandler = (params, { theme }, id) => ({ [id]: theme('inset', params) })
+const inset: PluginHandler = (params, { theme }, id) => (_ = theme('inset', params)) && { [id]: _ }
 
 const opacityProperty = (
   params: string[],
   theme: ThemeResolver,
   id: string,
   section = id,
-): CSSRules => ({
-  [`--tw-${id}-opacity`]: theme((section + 'Opacity') as 'textOpacity', tail(params)),
-})
+): CSSRules | undefined =>
+  (_ = theme((section + 'Opacity') as 'textOpacity', tail(params)) as undefined) && {
+    [`--tw-${id}-opacity`]: _,
+  }
 
 const parseColorComponent = (chars: string, factor: number): number =>
   Math.round(parseInt(chars, 16) * factor)
@@ -138,47 +137,52 @@ const reversableEdge = (
         }
     : undefined
 
-const placeHelper = (property: string, params: string[]): CSSRules => ({
-  // 'auto'
-  // 'start'
-  // 'end'
-  // 'center'
-  // 'stretch'
-  // 'between'
-  // 'around'
-  // 'evenly'
-  // 'between', 'around', 'evenly' => space-$0
-  // 4th char is unique
-  [property]: params[0] && (includes('wun', (params[0] || '')[3]) ? 'space-' : '') + params[0],
-})
+const placeHelper = (property: string, params: string[]): CSSRules | string =>
+  params[0] && {
+    // 'auto'
+    // 'start'
+    // 'end'
+    // 'center'
+    // 'stretch'
+    // 'between'
+    // 'around'
+    // 'evenly'
+    // 'between', 'around', 'evenly' => space-$0
+    // 4th char is unique
+    [property]: (includes('wun', (params[0] || '')[3]) ? 'space-' : '') + params[0],
+  }
 
-const contentPluginFor = (property: string) => (params: string[]): CSSRules =>
+const contentPluginFor = (property: string) => (params: string[]): CSSRules | string =>
   includes(['start', 'end'], params[0])
-    ? { [property]: `flex-${params[0]}` }
+    ? { [property]: 'flex-' + params[0] }
     : placeHelper(property, params)
 
 const gridPlugin = (kind: 'column' | 'row'): PluginHandler => (params, { theme }) => {
   if ((_ = theme(`grid${capitalize(kind)}` as 'gridRow', params, ''))) {
-    return { [`grid-${kind}`]: _ }
+    return { ['grid-' + kind]: _ }
   }
 
   switch (params[0]) {
     case 'auto':
-      return { [`grid-${kind}`]: 'auto' }
+      return { ['grid-' + kind]: 'auto' }
     case 'span':
-      return {
-        [`grid-${kind}`]:
-          params[1] == 'full' ? '1 / -1' : params[1] && `span ${params[1]} / span ${params[1]}`,
-      }
+      return (
+        params[1] && {
+          ['grid-' + kind]:
+            params[1] == 'full' ? '1 / -1' : params[1] && `span ${params[1]} / span ${params[1]}`,
+        }
+      )
     case 'start':
     case 'end':
-      return {
-        [`grid-${kind}-${params[0]}`]: params[1],
-      }
+      return (
+        params[1] && {
+          [`grid-${kind}-${params[0]}`]: params[1],
+        }
+      )
   }
 }
 
-const border: PluginHandler = (params, { theme }, id): CSSRules | undefined => {
+const border: PluginHandler = (params, { theme }, id): CSSRules | string | undefined => {
   switch (params[0]) {
     case 'solid':
     case 'dashed':
@@ -271,7 +275,7 @@ export const corePlugins: Plugins = {
         return { flexWrap: join(params) }
       case 'grow':
       case 'shrink':
-        return { [`flex-${params[0]}`]: params[1] || '1' }
+        return { ['flex-' + params[0]]: params[1] || '1' }
     }
 
     return (_ = context.theme('flex', params, '' /* Optional */))
@@ -285,7 +289,7 @@ export const corePlugins: Plugins = {
       case 'rows':
         return (
           params.length > 1 && {
-            [`grid-template-${params[0] == 'cols' ? 'columns' : params[0]}`]:
+            ['grid-template-' + (params[0] == 'cols' ? 'columns' : params[0])]:
               params.length == 2 && Number(params[1])
                 ? `repeat(${params[1]},minmax(0,1fr))`
                 : context.theme(
@@ -381,7 +385,7 @@ export const corePlugins: Plugins = {
       'both',
   }),
 
-  box: (params) => ({ 'box-sizing': params[0] && `${params[0]}-box` }),
+  box: (params) => params[0] && { 'box-sizing': `${params[0]}-box` },
 
   // .appearance-none -> appearance: none;
   // .appearance-auto -> appearance: auto;
@@ -437,9 +441,10 @@ export const corePlugins: Plugins = {
       ? { fontFamily: _ }
       : themeProperty('fontWeight')(params, context, id),
 
-  items: (params) => ({
-    alignItems: includes(['start', 'end'], params[0]) ? `flex-${params[0]}` : join(params),
-  }),
+  items: (params) =>
+    params[0] && {
+      alignItems: includes(['start', 'end'], params[0]) ? 'flex-' + params[0] : join(params),
+    },
 
   'justify-self': propertyValue(),
   'justify-items': propertyValue(),
@@ -447,11 +452,12 @@ export const corePlugins: Plugins = {
   content: contentPluginFor('alignContent'),
   self: contentPluginFor('alignSelf'),
 
-  place: (params) => placeHelper('place-' + params[0], tail(params)),
+  place: (params) => params[0] && placeHelper('place-' + params[0], tail(params)),
 
-  overscroll: (params) => ({
-    ['overscrollBehavior' + (params[1] ? '-' + params[0] : '')]: params[1] || params[0],
-  }),
+  overscroll: (params) =>
+    params[0] && {
+      ['overscrollBehavior' + (params[1] ? '-' + params[0] : '')]: params[1] || params[0],
+    },
 
   col: gridPlugin('column'),
   row: gridPlugin('row'),
@@ -537,7 +543,7 @@ export const corePlugins: Plugins = {
     includes(['ellipsis', 'clip'], params[0])
       ? propertyValue('textOverflow')(params)
       : params[1]
-      ? { [`overflow-${params[0]}`]: params[1] }
+      ? { ['overflow-' + params[0]]: params[1] }
       : propertyValue()(params, context, id),
 
   transform: (params) =>
@@ -592,19 +598,12 @@ export const corePlugins: Plugins = {
       outlineOffset: _[1],
     },
 
-  break(params) {
-    switch (params[0]) {
-      case 'normal':
-        return {
-          wordBreak: 'normal',
-          overflowWrap: 'normal',
-        }
-      case 'words':
-        return { overflowWrap: 'break-word' }
-      case 'all':
-        return { wordBreak: 'break-all' }
-    }
+  'break-normal': {
+    wordBreak: 'normal',
+    overflowWrap: 'normal',
   },
+  'break-words': { overflowWrap: 'break-word' },
+  'break-all': { wordBreak: 'break-all' },
 
   text(params, { theme }, id) {
     switch (params[0]) {
@@ -667,7 +666,7 @@ export const corePlugins: Plugins = {
         return opacityProperty(params, theme, id, 'background')
 
       case 'clip':
-        return { backgroundClip: params[1] + (params[1] == 'text' ? '' : '-box') }
+        return params[1] && { backgroundClip: params[1] + (params[1] == 'text' ? '' : '-box') }
 
       // .bg-gradient-to-r => linear-gradient(to right, ...)
       // .bg-gradient-to-r => linear-gradient(to right, ...)
@@ -702,9 +701,10 @@ export const corePlugins: Plugins = {
     },
 
   // .to-red-500
-  to: (params, { theme }) => ({
-    '--tw-gradient-to': theme('gradientColorStops', params),
-  }),
+  to: (params, { theme }) =>
+    (_ = theme('gradientColorStops', params)) && {
+      '--tw-gradient-to': _,
+    },
 
   // .border	border-width: 1px;
   // .border-0	border-width: 0;
