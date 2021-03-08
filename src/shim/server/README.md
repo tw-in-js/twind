@@ -21,22 +21,16 @@
 
 Re-exported from `twind/shim` for convenience
 
-[📚 View Handbook Guide](/handbook/the-shim#server)
-
 [📓 View API Reference](#getstyletag)
 
 ### The `getStyleTagProperties` function
 
 Re-exported from `twind/shim` for convenience
 
-[📚 View Handbook Guide](/handbook/the-shim#server)
-
 [📓 View API Reference](#getstyletagproperties)
 
 ### The `virtualSheet` function
 
 Re-exported from `twind/shim` for convenience
-
-[📚 View Handbook Guide](/handbook/the-shim#server)
 
 [📓 View API Reference](#virtualsheet)
