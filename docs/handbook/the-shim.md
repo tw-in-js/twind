@@ -48,7 +48,7 @@ import { setup, disconnect } from 'twind/shim'
 
 <!-- > [live and interactive shim demo 🚀 ](https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPG1haW4gY2xhc3M9Imgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIiPgogICAgPGgxIGNsYXNzPSJmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKSI+CiAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICA8L2gxPgogIDwvbWFpbj4KYA==) -->
 
-### Prevent FOUC
+## Prevent FOUC
 
 To prevent FOUC (_flash of unstyled content_), set the `hidden` attribute on the target element. `twind/shim` will remove it once all styles have been generated.
 
@@ -63,7 +63,7 @@ To prevent FOUC (_flash of unstyled content_), set the `hidden` attribute on the
 Internally `twind/shim` uses `twind/observe`, which may be useful for advanced use cases.
 :::
 
-### Support legacy browsers with UMD bundles
+## Support legacy browsers with UMD bundles
 
 > You may need to provide certain [polyfills](./browser-support.md) depending on your target browser.
 
@@ -71,6 +71,77 @@ Internally `twind/shim` uses `twind/observe`, which may be useful for advanced u
 <script defer src="https://unpkg.com/twind/twind.umd.js"></script>
 <script defer src="https://unpkg.com/twind/observe/observe.umd.js"></script>
 <script defer src="https://unpkg.com/twind/shim/shim.umd.js"></script>
+```
+
+The `twind/shim` module utilizes the {@link twind/observe} module internally, but it provides its own {@link setup} function for customizing the used {@link tw} instance and setting the target node to be shimmed. It also provides a {@link disconnect} function to stop shimming/observing all nodes.
+
+```js
+import { setup, disconnect } from 'twind/shim'
+
+setup({
+  // node element to shim/observe (default: document.documentElement)
+  target: document.querySelector('#__twind'),
+
+  // All other setup options are supported
+})
+
+// stop shimming/observing all nodes
+disconnect()
+```
+
+## Custom `tw` instance
+
+You can provide a `<script type="twind-config">...</script>` within the document. The content must be valid JSON and all {@link twind.setup | twind setup options} (including {@link twind.Configuration.hash | hash}) are supported.
+
+```html
+<!DOCTYPE html>
+<html lang="en" hidden>
+  <head>
+    <script type="module" src="https://cdn.skypack.dev/twind/shim"></script>
+    <script type="twind-config">
+      {
+        "hash": true
+      }
+    </script>
+  </head>
+  <body>
+    <main class="h-screen bg-purple-400 flex items-center justify-center">
+      <h1 class="text(center 5xl white sm:gray-800 md:pink-700)">
+        This is <span class="font-bold">Twind</span>!
+      </h1>
+    </main>
+  </body>
+</html>
+```
+
+Alternatively the following works:
+
+```js
+import { setup } from "https://cdn.skypack.dev/twind/shim"
+
+setup({
+  target: document.body, // Default document.documentElement (eg html)
+  ... // All other twind setup options are supported
+})
+```
+
+It is possible to mix `twind/shim` with `tw`:
+
+```js
+import 'twind/shim'
+import { tw } from 'twind'
+
+const styles = {
+  center: tw`flex items-center justify-center`,
+}
+
+document.body.innerHTML = `
+  <main class="h-screen bg-purple-400 ${styles.center}">
+    <h1 class="font-bold ${tw`text(center 5xl white sm:gray-800 md:pink-700)`}">
+      This is Twind!
+    </h1>
+  </main>
+`
 ```
 
 ## Server
@@ -174,3 +245,5 @@ async function ssr() {
 ```
 
 <!-- The shim allows for the use of the `class` attribute for tailwind rules. If such a rule is detected, the corresponding CSS rule is created and injected into the stylesheet dynamically. The default `twind/shim` export is intended for client-side usage and, without configuration, utilizes the default/global `tw` instance. For server-side usage, [`twind/shim/server`](#) exports a dedicated `shim` function that will parse and update a static HTML string while collecting the style rules into a sheet for further usage in your respective framework. -->
+
+---
