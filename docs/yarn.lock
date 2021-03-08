@@ -1469,10 +1469,10 @@ trouter@^2.0.1:
   dependencies:
     matchit "^1.0.0"
 
-twind@^0.15.9:
-  version "0.15.9"
-  resolved "https://registry.npmjs.org/twind/-/twind-0.15.9.tgz#53e8f89e55dbf29ba4b7ef6e4af431a20b92b070"
-  integrity sha512-4tEjt0gC/eC0CMroHsXgsr04qX5Au6huJrbTkp3XFgoUYZzVbnfdr9PH+WzXpX0uG7MYAktd1+yr8JhBZQOHYA==
+twind@^0.15.10:
+  version "0.15.10"
+  resolved "https://registry.npmjs.org/twind/-/twind-0.15.10.tgz#2c3a90c7ff98c2041b013cfb00e661502d5e3723"
+  integrity sha512-o/2yfYUbsa5EV69Vu5De5oEwspOISPb/ZmuJ04+b4gKG9qom6qFJYY6r8ZuXoKNDFY7O03qCQZzlpD3UHYBF0A==
   dependencies:
     csstype "^3.0.5"
     htmlparser2 "^6.0.0"
@@ -1495,10 +1495,10 @@ typedoc-plugin-param-names@^2.0.0:
   resolved "https://registry.npmjs.org/typedoc-plugin-param-names/-/typedoc-plugin-param-names-2.0.0.tgz#9b116445d4fcb64208aa1e24935be4691344c5a6"
   integrity sha512-Uf9otc8n9U8J9R2edtNowehLWK4oBD17ckVX/c0uCky254k2vrvZ5CvpRBHwLm+EpMRK+IVzYbiLxNSG4JXRsA==
 
-typedoc@^0.20.29:
-  version "0.20.29"
-  resolved "https://registry.npmjs.org/typedoc/-/typedoc-0.20.29.tgz#696952beb78c37b3c132e86754d2cf0549189177"
-  integrity sha512-IyzrbtwNAXtylUJn41FbopQsNSQ1jcM6lUhDL/REOFo31G3Q9fsniZUQP+tIcTX5JaCntRdw3PTMZTQPV52low==
+typedoc@^0.20.30:
+  version "0.20.30"
+  resolved "https://registry.npmjs.org/typedoc/-/typedoc-0.20.30.tgz#a7e0e3902c08df9b3f9d66da0cc603eed716fad3"
+  integrity sha512-A4L6JDShPFwZDt9qp7FBsEpW7C6rA5fRv6ywgBuxGxZnT2wuF5afbWzmrwqHR3Xw38V1H2L4v/VJ0S/llBwV6Q==
   dependencies:
     colors "^1.4.0"
     fs-extra "^9.1.0"
