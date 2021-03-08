@@ -7,8 +7,8 @@
   "author": "Twind Team",
   "license": "MIT",
   "devDependencies": {
-    "twind": "^0.15.9",
-    "typedoc": "^0.20.29",
+    "twind": "^0.15.10",
+    "typedoc": "^0.20.30",
     "typedoc-plugin-markdown": "^3.6.0",
     "typedoc-plugin-param-names": "^2.0.0",
     "vitepress": "^0.12.2"
