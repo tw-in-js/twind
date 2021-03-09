@@ -80,7 +80,7 @@ import { setup, disconnect } from 'twind/shim'
 
 setup({
   // node element to shim/observe (default: document.documentElement)
-  target: document.querySelector('#__twind'),
+  target: document.querySelector('main'),
 
   // All other setup options are supported
 })
