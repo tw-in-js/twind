@@ -5,9 +5,9 @@
  * @module twind/shim
  */
 
-import type { Configuration } from '../types'
+import type { Configuration } from 'twind'
 
-import { setup as setupTW, createObserver } from '../observe/index'
+import { setup as setupTW, createObserver } from 'twind/observe'
 
 /**
  * Options for {@link setup}.

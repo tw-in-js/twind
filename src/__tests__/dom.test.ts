@@ -3,7 +3,7 @@ import * as assert from 'uvu/assert'
 
 import * as DOM from '../__fixtures__/dom-env'
 
-import { create, strict } from '..'
+import { create, strict } from 'twind'
 
 const test = DOM.configure(suite('dom'))
 

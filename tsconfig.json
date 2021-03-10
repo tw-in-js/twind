@@ -23,6 +23,18 @@
     "pages": "./docs/pages.json"
   },
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "twind": ["./src/index.ts"],
+      "twind/colors": ["./src/colors/index.ts"],
+      "twind/css": ["./src/css/index.ts"],
+      "twind/observe": ["./src/observe/index.ts"],
+      "twind/server": ["./src/server/index.ts"],
+      "twind/sheets": ["./src/sheets/index.ts"],
+      "twind/shim": ["./src/shim/index.ts"],
+      "twind/shim/server": ["./src/shim/server/index.ts"],
+      "twind/style": ["./src/style/index.ts"]
+    },
     // During development for Node v10.8 support
     "target": "es2018",
     "module": "ESNext",

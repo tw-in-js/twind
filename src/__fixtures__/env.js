@@ -1,5 +1,6 @@
 /* eslint-env node */
 
+require('tsconfig-paths/register')
 require('esbuild-register')
 
 // Node's error-message stack size is limited at 10, but it's pretty useful

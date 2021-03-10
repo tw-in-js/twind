@@ -1,7 +1,7 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import { tw } from '..'
+import { tw } from 'twind'
 
 const test = suite('ssr')
 

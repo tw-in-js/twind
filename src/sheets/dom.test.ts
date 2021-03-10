@@ -3,8 +3,8 @@ import * as assert from 'uvu/assert'
 
 import * as DOM from '../__fixtures__/dom-env'
 
-import { create, strict } from '../index'
-import { domSheet } from './index'
+import { create, strict } from 'twind'
+import { domSheet } from 'twind/sheets'
 
 const test = DOM.configure(suite('domSheet'))
 

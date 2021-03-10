@@ -3,9 +3,8 @@ import * as assert from 'uvu/assert'
 
 import { promisify } from 'util'
 
-import type { AsyncVirtualSheet } from '.'
-import { asyncVirtualSheet, getStyleTagProperties } from '.'
-import { create } from '..'
+import type { AsyncVirtualSheet } from 'twind/server'
+import { create, asyncVirtualSheet, getStyleTagProperties } from 'twind/server'
 
 const delay = promisify(setImmediate)
 

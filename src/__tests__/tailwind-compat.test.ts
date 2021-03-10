@@ -1,10 +1,12 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import { tw, setup, strict } from '..'
+import { tw, setup, strict } from 'twind'
 
 // Tailwind only supports Node.JS >=12.13.0
 // use feature detection
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 if (Object.entries && [].flatMap) {
   const test = suite('tailwind compat')
 

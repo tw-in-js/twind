@@ -1,8 +1,8 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import { virtualSheet } from '../sheets/index'
-import { create, strict } from '../index'
+import { virtualSheet } from 'twind/sheets'
+import { create, strict } from 'twind'
 
 const test = suite('preflight')
 

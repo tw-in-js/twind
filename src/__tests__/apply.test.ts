@@ -1,12 +1,11 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import type { CSSProperties, Directive, Instance } from '../types'
-import type { VirtualSheet } from '../sheets/index'
+import type { CSSProperties, Directive, Instance } from 'twind'
+import type { VirtualSheet } from 'twind/sheets'
 
-import { virtualSheet } from '../sheets/index'
-import { create, strict, apply } from '../index'
-import { animation, css } from '../css/index'
+import { virtualSheet } from 'twind/sheets'
+import { create, strict, apply, animation, css } from 'twind/css'
 
 const test = suite<{
   sheet: VirtualSheet

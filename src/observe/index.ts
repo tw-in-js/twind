@@ -5,11 +5,11 @@
  * @module twind/observe
  */
 
-import type { TW } from '../types'
-import { tw as defaultTW } from '../index'
+import type { TW } from 'twind'
+import { tw as defaultTW } from 'twind'
 import { ensureMaxSize } from '../internal/util'
 
-export * from '../index'
+export * from 'twind'
 
 /**
  * Options for {@link createObserver}.
@@ -142,7 +142,7 @@ export const createObserver = ({ tw = defaultTW }: ShimConfiguration = {}): Twin
 export function observe(
   this: ShimConfiguration | undefined | void,
   target: Node,
-  config: ShimConfiguration | undefined | void = this,
+  config: ShimConfiguration | undefined | void = typeof this == 'function' ? undefined : this,
 ): TwindObserver {
   return createObserver(config as ShimConfiguration | undefined).observe(target)
 }

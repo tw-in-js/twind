@@ -8,13 +8,12 @@
 // Based on https://github.com/modulz/stitches
 // License MIT
 
-import type { Context, CSSRules, Directive } from '../index'
+import type { Context, CSSRules, Directive, Token } from 'twind'
 
-import { apply, directive, hash } from '../index'
+import { apply, directive, hash } from 'twind'
 import { evalThunk, merge } from '../internal/util'
-import type { Token } from '../types'
 
-export * from '../css/index'
+export * from 'twind/css'
 
 export type StrictMorphVariant<T> = T extends number
   ? `${T}` | T

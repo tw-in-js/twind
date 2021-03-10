@@ -10,10 +10,11 @@
 
 import { executionAsyncId, createHook } from 'async_hooks'
 
-import type { Sheet, SheetInit } from '../types'
-import { virtualSheet } from '../sheets/index'
+import type { Sheet, SheetInit } from 'twind'
+import { virtualSheet } from 'twind/sheets'
 
-export * from '../shim/server/index'
+export * from 'twind'
+export * from 'twind/sheets'
 
 export interface AsyncVirtualSheet extends Sheet {
   readonly target: readonly string[]

@@ -1,9 +1,7 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import { virtualSheet } from '../../sheets/index'
-import { create, strict } from '../../index'
-import { shim } from './index'
+import { create, strict, shim, virtualSheet } from 'twind/shim/server'
 
 const test = suite('shim/server')
 
@@ -144,13 +142,13 @@ test('will preserve html comments', () => {
   })
 
   const html = shim(
-    `	
-    <!-- HTML Comment -->	
-    <main class="h-screen bg-purple-400 flex items-center justify-center">	
-      <h1 class="text(center 5xl white sm:gray-800 md:pink-700)">	
-        This is <span class="font-bold">Twind</span>!	
-      </h1>	
-    </main>	
+    `
+    <!-- HTML Comment -->
+    <main class="h-screen bg-purple-400 flex items-center justify-center">
+      <h1 class="text(center 5xl white sm:gray-800 md:pink-700)">
+        This is <span class="font-bold">Twind</span>!
+      </h1>
+    </main>
     `,
     {
       tw,
@@ -159,13 +157,13 @@ test('will preserve html comments', () => {
 
   assert.is(
     html,
-    `	
-    <!-- HTML Comment -->	
-    <main class="h-screen bg-purple-400 flex items-center justify-center">	
-      <h1 class="text-center text-5xl text-white sm:text-gray-800 md:text-pink-700">	
-        This is <span class="font-bold">Twind</span>!	
-      </h1>	
-    </main>	
+    `
+    <!-- HTML Comment -->
+    <main class="h-screen bg-purple-400 flex items-center justify-center">
+      <h1 class="text-center text-5xl text-white sm:text-gray-800 md:text-pink-700">
+        This is <span class="font-bold">Twind</span>!
+      </h1>
+    </main>
     `,
   )
   assert.equal(sheet.target, [

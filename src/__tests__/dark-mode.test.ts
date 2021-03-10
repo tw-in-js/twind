@@ -1,11 +1,11 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import type { Instance } from '../types'
-import type { VirtualSheet } from '../sheets/index'
+import type { Instance } from 'twind'
+import type { VirtualSheet } from 'twind/sheets'
 
-import { virtualSheet } from '../sheets/index'
-import { create, strict } from '../index'
+import { virtualSheet } from 'twind/sheets'
+import { create, strict } from 'twind'
 
 const test = suite<{
   sheet: VirtualSheet

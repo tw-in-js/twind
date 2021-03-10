@@ -15,12 +15,12 @@ import type {
   MaybeThunk,
   MaybeArray,
   ThemeScreenValue,
-} from '../types'
+} from 'twind'
 
-import { apply, hash, directive } from '../index'
+import { apply, hash, directive } from 'twind'
 import { evalThunk, merge, buildMediaQuery } from '../internal/util'
 
-export * from '../index'
+export * from 'twind'
 
 export interface CSSFactory<T, I, R> {
   (

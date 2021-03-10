@@ -8,7 +8,7 @@
  * @module twind/colors
  */
 
-import type { ThemeColor } from '../types'
+import type { ThemeColor } from 'twind'
 
 export const black = '#000'
 export const white = '#fff'

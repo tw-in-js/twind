@@ -111,9 +111,6 @@ Below is an outline of some todos, packages, plugins and ideas that we would lik
   ```
 
 - instead of generating utility CSS generate component CSS (auto `apply`)
-- new core plugins
-  - `z-{index}` or `z-auto`
-  - gap
 - support hex colors - could be done as a plugin
   ```
   bg-hex-1c1c1e -> background-color: rgba(28, 28, 30, var(--tw-bg-opacity));

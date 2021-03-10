@@ -3,7 +3,7 @@ import * as assert from 'uvu/assert'
 
 import * as DOM from '../__fixtures__/dom-env'
 
-import { voidSheet, cssomSheet } from '..'
+import { voidSheet, cssomSheet } from 'twind'
 
 const test = DOM.configure(suite('sheets'))
 

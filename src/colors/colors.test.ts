@@ -1,11 +1,11 @@
 import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 
-import { virtualSheet } from '../sheets/index'
+import type { ThemeResolver, TW } from 'twind'
+import { virtualSheet } from 'twind/sheets'
 
-import { create, strict } from '../index'
-import * as colors from './index'
-import type { ThemeResolver, TW } from '../types'
+import { create, strict } from 'twind'
+import * as colors from 'twind/colors'
 
 const test = suite('twind/colors')
 

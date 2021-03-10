@@ -2,8 +2,8 @@ import { suite } from 'uvu'
 import * as assert from 'uvu/assert'
 import { snoop } from 'snoop'
 
-import { virtualSheet } from '../sheets/index'
-import { create, strict, silent, mode } from '../index'
+import { virtualSheet } from 'twind/sheets'
+import { create, strict, silent, mode } from 'twind'
 
 const test = suite('mode')
 

@@ -5,7 +5,7 @@
  * @module twind/sheets
  */
 
-import type { SheetConfig, Sheet, SheetInit, SheetInitCallback } from '../types'
+import type { SheetConfig, Sheet, SheetInit, SheetInitCallback } from 'twind'
 import { getStyleElement, STYLE_ELEMENT_ID } from '../internal/dom'
 
 /**
