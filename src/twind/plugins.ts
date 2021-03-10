@@ -326,7 +326,17 @@ export const corePlugins: Plugins = {
             max: 'max-content',
             fr: 'minmax(0,1fr)',
           } as Record<string, undefined | string>)[params[1]] || `minmax(0,${params[1]})`
-        : params.length > 2 && `minmax(${join(tail(params), ',')})`) && {
+        : params.length == 3 &&
+          `minmax(${join(
+            tail(params).map(
+              (param) =>
+                (({
+                  min: 'min-content',
+                  max: 'max-content',
+                } as Record<string, undefined | string>)[param] || param),
+            ),
+            ',',
+          )})`) && {
       [`grid-auto-${params[0] == 'cols' ? 'columns' : 'rows'}`]: _,
     },
 
