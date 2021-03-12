@@ -43,7 +43,7 @@
     {
       "path": "dist/twind.js",
       "gzip": true,
-      "limit": "12.5kb"
+      "limit": "12.7kb"
     },
     {
       "path": "dist/css/css.js",

@@ -92,7 +92,7 @@ export const configure = (
       // If no theme value is found, notify 'mode', it may be able to resolve a value
       const value =
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        theme(section, key as string, defaultValue as any) ||
+        theme(section, key as string, defaultValue as any) ??
         mode.unknown(
           section,
           key == null || Array.isArray(key) ? key : key.split('.'),

@@ -48,8 +48,13 @@ test.before((context) => {
           // Complex site-specific row configuration
           layout: '200px minmax(900px, 1fr) 100px',
         },
-        gridColumn: {},
-        gridRow: {},
+        gridAutoColumns: {
+          '2fr': 'minmax(0,2fr)',
+          '100px-max': 'minmax(100px,max-content)',
+        },
+        gridAutoRows: {
+          '2fr': 'minmax(0,2fr)',
+        },
       },
     },
   })

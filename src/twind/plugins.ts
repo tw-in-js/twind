@@ -3,7 +3,7 @@ import type {
   Theme,
   CSSRules,
   CSSProperties,
-  Plugins,
+  Plugin,
   ThemeResolver,
   Context,
   Falsy,
@@ -25,6 +25,8 @@ let _: undefined | string | CSSRules | CSSProperties | string[] | boolean | Fals
 let __: undefined | string | CSSProperties
 let $: undefined | string | number | ThemeScreen
 
+const toColumnsOrRows = (x: string): 'columns' | 'rows' => (x == 'cols' ? 'columns' : 'rows')
+
 const property = (property: string) => (
   params: string[],
   context: unknown,
@@ -44,6 +46,15 @@ const propertyValue = (property?: string, separator?: string) => (
 
 const themeProperty = (section?: keyof Theme): PluginHandler => (params: string[], { theme }, id) =>
   (_ = theme(section || (id as keyof Theme), params) as string) && {
+    [section || id]: _,
+  }
+
+const themePropertyFallback = (section?: keyof Theme, separator?: string): PluginHandler => (
+  params: string[],
+  { theme },
+  id,
+) =>
+  (_ = theme(section || (id as keyof Theme), params, join(params, separator)) as string) && {
     [section || id]: _,
   }
 
@@ -158,25 +169,26 @@ const contentPluginFor = (property: string) => (params: string[]): CSSRules | st
     : placeHelper(property, params)
 
 const gridPlugin = (kind: 'column' | 'row'): PluginHandler => (params, { theme }) => {
-  if ((_ = theme(`grid${capitalize(kind)}` as 'gridRow', params, ''))) {
+  if ((_ = theme(('grid' + capitalize(kind)) as 'gridRow', params, ''))) {
     return { ['grid-' + kind]: _ }
   }
 
   switch (params[0]) {
-    case 'auto':
-      return { ['grid-' + kind]: 'auto' }
     case 'span':
       return (
         params[1] && {
-          ['grid-' + kind]:
-            params[1] == 'full' ? '1 / -1' : params[1] && `span ${params[1]} / span ${params[1]}`,
+          ['grid-' + kind]: `span ${params[1]} / span ${params[1]}`,
         }
       )
     case 'start':
     case 'end':
       return (
-        params[1] && {
-          [`grid-${kind}-${params[0]}`]: params[1],
+        (_ = theme(
+          ('grid' + capitalize(kind) + capitalize(params[0])) as 'gridRowStart',
+          tail(params),
+          join(tail(params)),
+        )) && {
+          [`grid-${kind}-${params[0]}`]: _,
         }
       )
   }
@@ -249,7 +261,7 @@ const minMax: PluginHandler = (params, { theme }, id) =>
     ),
   }
 
-export const corePlugins: Plugins = {
+export const corePlugins: Record<string, Plugin | undefined> = {
   group: (params, { tag }, id) => tag(join([id, ...params])),
 
   hidden: alias(display, 'none'),
@@ -275,7 +287,17 @@ export const corePlugins: Plugins = {
         return { flexWrap: join(params) }
       case 'grow':
       case 'shrink':
-        return { ['flex-' + params[0]]: params[1] || '1' }
+        _ = context.theme(
+          ('flex' + capitalize(params[0])) as 'flexGrow',
+          tail(params),
+          Number(params[1] || 1),
+        )
+
+        return (
+          _ != null && {
+            ['flex-' + params[0]]: '' + _,
+          }
+        )
     }
 
     return (_ = context.theme('flex', params, '' /* Optional */))
@@ -288,17 +310,14 @@ export const corePlugins: Plugins = {
       case 'cols':
       case 'rows':
         return (
-          params.length > 1 && {
-            ['grid-template-' + (params[0] == 'cols' ? 'columns' : params[0])]:
-              params.length == 2 && Number(params[1])
-                ? `repeat(${params[1]},minmax(0,1fr))`
-                : context.theme(
-                    `gridTemplate${capitalize(
-                      params[0] == 'cols' ? 'columns' : params[0],
-                    )}` as 'gridTemplateRows',
-                    tail(params),
-                    join(tail(params), ' '),
-                  ),
+          (_ = context.theme(
+            ('gridTemplate' + capitalize(toColumnsOrRows(params[0]))) as 'gridTemplateRows',
+            tail(params),
+            params.length == 2 && Number(params[1])
+              ? `repeat(${params[1]},minmax(0,1fr))`
+              : join(tail(params)),
+          )) && {
+            ['grid-template-' + toColumnsOrRows(params[0])]: _,
           }
         )
 
@@ -316,28 +335,14 @@ export const corePlugins: Plugins = {
     return display(params, context, id)
   },
 
-  auto: (params) =>
+  auto: (params, { theme }) =>
     includes(['cols', 'rows'], params[0]) &&
-    (_ =
-      params.length == 2
-        ? ({
-            auto: 'auto',
-            min: 'min-content',
-            max: 'max-content',
-            fr: 'minmax(0,1fr)',
-          } as Record<string, undefined | string>)[params[1]] || `minmax(0,${params[1]})`
-        : params.length == 3 &&
-          `minmax(${join(
-            tail(params).map(
-              (param) =>
-                (({
-                  min: 'min-content',
-                  max: 'max-content',
-                } as Record<string, undefined | string>)[param] || param),
-            ),
-            ',',
-          )})`) && {
-      [`grid-auto-${params[0] == 'cols' ? 'columns' : 'rows'}`]: _,
+    (_ = theme(
+      ('gridAuto' + capitalize(toColumnsOrRows(params[0]))) as 'gridAutoRows' | 'gridAutoColumns',
+      tail(params),
+      join(tail(params)),
+    )) && {
+      ['grid-auto-' + toColumnsOrRows(params[0])]: _,
     },
 
   static: position,
@@ -395,14 +400,14 @@ export const corePlugins: Plugins = {
       'both',
   }),
 
-  box: (params) => params[0] && { 'box-sizing': `${params[0]}-box` },
+  box: (params) => params[0] && { 'box-sizing': params[0] + '-box' },
 
   // .appearance-none -> appearance: none;
   // .appearance-auto -> appearance: auto;
   // .appearance-menulist-button; -> appearance: menulist-button;
   // .appearance-textfield -> appearance: textfield;
   appearance: propertyValue(),
-  cursor: propertyValue(),
+  cursor: themePropertyFallback(),
 
   float: propertyValue(),
   clear: propertyValue(),
@@ -527,7 +532,7 @@ export const corePlugins: Plugins = {
 
   order: themeProperty(),
 
-  origin: propertyValue('transformOrigin', ' '),
+  origin: themePropertyFallback('transformOrigin', ' '),
 
   select: propertyValue('userSelect'),
 
@@ -662,11 +667,6 @@ export const corePlugins: Plugins = {
       case 'no':
         return params[1] == 'repeat' && propertyValue('backgroundRepeat')(params)
 
-      case 'auto':
-      case 'cover':
-      case 'contain':
-        return propertyValue('backgroundSize')(params)
-
       case 'repeat':
         return includes('xy', params[1])
           ? propertyValue('backgroundRepeat')(params)
@@ -688,7 +688,11 @@ export const corePlugins: Plugins = {
         }
     }
 
-    return (_ = theme('backgroundImage', params, '' /* Optional */))
+    return (_ = theme('backgroundPosition', params, '' /* Optional */))
+      ? { backgroundPosition: _ }
+      : (_ = theme('backgroundSize', params, '' /* Optional */))
+      ? { backgroundSize: _ }
+      : (_ = theme('backgroundImage', params, '' /* Optional */))
       ? { backgroundImage: _ }
       : withOpacityFallback('backgroundColor', 'bg', theme('backgroundColor', params) as string)
   },
@@ -713,7 +717,7 @@ export const corePlugins: Plugins = {
   // .to-red-500
   to: (params, { theme }) =>
     (_ = theme('gradientColorStops', params)) && {
-      '--tw-gradient-to': _,
+      '--tw-gradient-to': _ as string,
     },
 
   // .border	border-width: 1px;
@@ -858,15 +862,15 @@ export const corePlugins: Plugins = {
         }
   },
 
-  object: (params) =>
-    includes(['contain', 'cover', 'fill', 'none', 'scale'], params[0])
-      ? propertyValue('objectFit')(params)
-      : propertyValue('objectPosition', ' ')(params),
+  object: (params, context, id) =>
+    includes(['contain', 'cover', 'fill', 'none', 'scale-down'], join(params))
+      ? { objectFit: join(params) }
+      : themePropertyFallback('objectPosition', ' ')(params, context, id),
 
-  list: (params) =>
-    propertyValue(
-      includes(['inside', 'outside'], params[0]) ? 'listStylePosition' : 'listStyleType',
-    )(params),
+  list: (params, context, id) =>
+    includes(['inside', 'outside'], join(params))
+      ? { listStylePosition: params[0] }
+      : themePropertyFallback('listStyleType')(params, context, id),
 
   // .rounded	border-radius: 0.25rem;
   // .rounded-5	border-radius: 5px;

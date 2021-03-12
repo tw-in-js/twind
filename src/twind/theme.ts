@@ -70,10 +70,9 @@ const linear = (
   divideBy = 1,
   start = 0,
   step = 1,
+  result: Record<string, string> = {},
   // eslint-disable-next-line max-params
 ): Record<string, string> => {
-  const result: Record<string, string> = {}
-
   for (; start <= stop; start += step) {
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     result[start] = start / divideBy + unit
@@ -91,7 +90,7 @@ const themeFactory = (args: Parameters<ThemeResolver>, { theme }: Context) => th
 export const theme = ((...args: Parameters<ThemeResolver>): ReturnType<ThemeHelper> =>
   directive(themeFactory, args)) as ThemeHelper
 
-export const defaultTheme: Theme = {
+const defaultTheme: Partial<Theme> = {
   screens: {
     sm: '640px',
     md: '768px',
@@ -296,6 +295,16 @@ export const defaultTheme: Theme = {
     // 'gradient-to-tl': 'linear-gradient(to top left, var(--tw-gradient-stops))',
   },
   backgroundOpacity: alias('opacity'),
+  // backgroundPosition: {
+  //   // The following are already handled by the plugin:
+  //   // center, right, left, bottom, top
+  //   // 'bottom-10px-right-20px' -> bottom 10px right 20px
+  // },
+  backgroundSize: {
+    auto: 'auto',
+    cover: 'cover',
+    contain: 'contain',
+  },
   borderColor: (theme) => ({
     ...theme('colors'),
     DEFAULT: theme('colors.gray.200', 'currentColor'),
@@ -330,7 +339,10 @@ export const defaultTheme: Theme = {
     inner: 'inset 0 2px 4px 0 rgba(0, 0, 0, 0.06)',
     none: 'none',
   },
-  container: {},
+  // container: {},
+  // cursor: {
+  //   // Default values are handled by plugin
+  // },
   divideColor: alias('borderColor'),
   divideOpacity: alias('borderOpacity'),
   divideWidth: alias('borderWidth'),
@@ -341,6 +353,12 @@ export const defaultTheme: Theme = {
     initial: '0 1 auto',
     none: 'none',
   },
+  // flexGrow: {
+  //   // Handled by plugin
+  // },
+  // flexShrink: {
+  //   // Handled by plugin
+  // },
   fontFamily: {
     sans: 'ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"'.split(
       ',',
@@ -376,10 +394,48 @@ export const defaultTheme: Theme = {
     extrabold: '800',
     black: '900',
   },
-  gridTemplateColumns: {},
-  gridTemplateRows: {},
-  gridColumn: {},
-  gridRow: {},
+  gridTemplateColumns: {
+    // numbers are handled by the plugin: 1 -> repeat(1, minmax(0, 1fr))
+    // none: 'none', // handled by plugin
+  },
+  gridTemplateRows: {
+    // numbers are handled by the plugin: 1 -> repeat(1, minmax(0, 1fr))
+    // none: 'none', // handled by plugin
+  },
+  gridAutoColumns: {
+    // auto: 'auto', // handled by plugin
+    min: 'min-content',
+    max: 'max-content',
+    fr: 'minmax(0,1fr)',
+  },
+  gridAutoRows: {
+    // auto: 'auto', handled by plugin
+    min: 'min-content',
+    max: 'max-content',
+    fr: 'minmax(0,1fr)',
+  },
+  // gridColumnStart: {
+  //   // Defaults handled by plugin
+  // },
+  // gridRowStart: {
+  //   // Defaults handled by plugin
+  // },
+  // gridColumnEnd: {
+  //   // Defaults handled by plugin
+  // },
+  // gridRowEnd: {
+  //   // Defaults handled by plugin
+  // },
+  gridColumn: {
+    // span-X is handled by the plugin: span-1 -> span 1 / span 1
+    auto: 'auto',
+    'span-full': '1 / -1',
+  },
+  gridRow: {
+    // span-X is handled by the plugin: span-1 -> span 1 / span 1
+    auto: 'auto',
+    'span-full': '1 / -1',
+  },
   gap: alias('spacing'),
   gradientColorStops: alias('colors'),
   height: (theme) => ({
@@ -479,6 +535,9 @@ export const defaultTheme: Theme = {
     // 9: '2.25rem',
     // 10: '2.5rem',
   },
+  // listStyleType: {
+  //   // Defaults handled by plugin
+  // },
   margin: (theme) => ({
     auto: 'auto',
     ...theme('spacing'),
@@ -519,6 +578,9 @@ export const defaultTheme: Theme = {
     min: 'min-content',
     max: 'max-content',
   },
+  // objectPosition: {
+  //   // The plugins joins all arguments by default
+  // },
   opacity: {
     ...linear(100, '', 100, 0, 10),
     // 0: '0',
@@ -633,6 +695,11 @@ export const defaultTheme: Theme = {
   // 2: '2',,
   textColor: alias('colors'),
   textOpacity: alias('opacity'),
+  // transformOrigin: {
+  //   // The following are already handled by the plugin:
+  //   // center, right, left, bottom, top
+  //   // 'bottom-10px-right-20px' -> bottom 10px right 20px
+  // },
   transitionDuration: (theme) => ({
     DEFAULT: '150ms',
     ...theme('durations'),

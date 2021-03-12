@@ -32,7 +32,8 @@ export const noop = (): void => {
   /* no-op */
 }
 
-export const capitalize = (value: string): string => value[0].toUpperCase() + tail(value)
+export const capitalize = <T extends string>(value: T): Capitalize<T> =>
+  (value[0].toUpperCase() + tail(value)) as Capitalize<T>
 
 export const hyphenate = (value: string): string => value.replace(/[A-Z]/g, '-$&').toLowerCase()
 

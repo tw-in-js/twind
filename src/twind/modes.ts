@@ -6,7 +6,7 @@ export const mode = (report: (message: string) => void): Mode => ({
   unknown(section, key = [], optional, context) {
     if (!optional) {
       // TODO hint about possible values, did you mean ...
-      this.report({ id: 'UNKNOWN_THEME_VALUE', key: join([section, ...key], '.') }, context)
+      this.report({ id: 'UNKNOWN_THEME_VALUE', key: section + '.' + join(key) }, context)
     }
   },
 
