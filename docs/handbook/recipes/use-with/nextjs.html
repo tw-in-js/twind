@@ -79,80 +79,254 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<a href="#nextjs" id="nextjs" style="color: inherit; text-decoration: none;">
-					<h2><a href="https://nextjs.org/">Next.js</a></h2>
-				</a>
-				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">tw</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
-
-<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">IndexPage</span><span style="color: #000000">() {</span>
-<span style="color: #000000">  </span><span style="color: #AF00DB">return</span><span style="color: #000000"> (</span>
-<span style="color: #000000">    </span><span style="color: #800000">&lt;main</span><span style="color: #000000"> </span><span style="color: #FF0000">className</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #795E26">tw</span><span style="color: #A31515">`h-screen bg-purple-400 flex items-center justify-center`</span><span style="color: #0000FF">}</span><span style="color: #800000">&gt;</span>
-<span style="color: #000000">      </span><span style="color: #800000">&lt;h1</span><span style="color: #000000"> </span><span style="color: #FF0000">className</span><span style="color: #000000">=</span><span style="color: #0000FF">{</span><span style="color: #795E26">tw</span><span style="color: #A31515">`font-bold text(center 5xl white sm:gray-800 md:pink-700)`</span><span style="color: #0000FF">}</span><span style="color: #800000">&gt;</span>
-<span style="color: #000000">        This is Twind!</span>
-<span style="color: #000000">      </span><span style="color: #800000">&lt;/h1&gt;</span>
-<span style="color: #000000">    </span><span style="color: #800000">&lt;/main&gt;</span>
-<span style="color: #000000">  )</span>
-<span style="color: #000000">}</span>
-</code></pre>
-				<a href="#server-side-rendering" id="server-side-rendering" style="color: inherit; text-decoration: none;">
-					<h2>Server Side Rendering</h2>
+				<a href="#twindnext-" id="twindnext-" style="color: inherit; text-decoration: none;">
+					<h1><a href="https://github.com/tw-in-js/use-twind-with/tree/main/packages/next#readme">@twind/next</a> <a href="https://www.npmjs.com/package/@twind/next"><img src="https://flat.badgen.net/npm/v/twind?icon=npm&label&cache=10800&color=blue" alt="Latest Release"></a></h1>
 				</a>
 				<blockquote>
-					<p>💡 The <a href="https://github.com/tw-in-js/example-next">tw-in-js/example-next</a> repository uses this setup.</p>
+					<p><a href="https://twind.dev">Twind</a> integration for <a href="https://nextjs.org">Next.js</a></p>
 				</blockquote>
-				<pre><code class="language-js"><span style="color: #008000">/* twind.config.js */</span>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<pre><code class="language-sh"><span style="color: #000000">npm install @twind/next</span>
+</code></pre>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<p><a href="https://codesandbox.io/s/priceless-hill-1lkv3?fontsize=14&amp;hidenavigation=1&amp;theme=dark"><img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="Edit twind-nextjs"></a></p>
+				<ol start="0">
+					<li>Create a <code>twind.config.js</code> (optional)</li>
+				</ol>
+				<pre><code class="language-js"><span style="color: #008000">/** </span><span style="color: #0000FF">@type</span><span style="color: #008000"> </span><span style="color: #267F99">{import(&#039;twind&#039;).Configuration}</span><span style="color: #008000"> */</span>
 <span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> {</span>
-<span style="color: #000000">  </span><span style="color: #008000">/* Shared config */</span>
-<span style="color: #000000">}</span>
-</code></pre>
-				<pre><code class="language-js"><span style="color: #008000">/* pages/_app.js */</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">App</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;next/app&#039;</span>
-
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">setup</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">twindConfig</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;../twind.config&#039;</span>
-
-<span style="color: #AF00DB">if</span><span style="color: #000000"> (</span><span style="color: #0000FF">typeof</span><span style="color: #000000"> </span><span style="color: #001080">window</span><span style="color: #000000"> !== </span><span style="color: #A31515">&#039;undefined&#039;</span><span style="color: #000000">) {</span>
-<span style="color: #000000">  </span><span style="color: #795E26">setup</span><span style="color: #000000">(</span><span style="color: #001080">twindConfig</span><span style="color: #000000">)</span>
-<span style="color: #000000">}</span>
-
-<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #001080">App</span>
-</code></pre>
-				<pre><code class="language-js"><span style="color: #008000">/* pages/_document.js */</span>
-
-<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">Document</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;next/document&#039;</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #0000FF">*</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #001080">React</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;react&#039;</span>
-
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">setup</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind&#039;</span>
-<span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">asyncVirtualSheet</span><span style="color: #000000">, </span><span style="color: #001080">getStyleTagProperties</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;twind/server&#039;</span>
-
-<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">twindConfig</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;../twind.config&#039;</span>
-
-<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">sheet</span><span style="color: #000000"> = </span><span style="color: #795E26">asyncVirtualSheet</span><span style="color: #000000">()</span>
-
-<span style="color: #795E26">setup</span><span style="color: #000000">({ ...</span><span style="color: #001080">twindConfig</span><span style="color: #000000">, </span><span style="color: #001080">sheet</span><span style="color: #000000"> })</span>
-
-<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">MyDocument</span><span style="color: #000000"> </span><span style="color: #0000FF">extends</span><span style="color: #000000"> </span><span style="color: #267F99">Document</span><span style="color: #000000"> {</span>
-<span style="color: #000000">  </span><span style="color: #0000FF">static</span><span style="color: #000000"> </span><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #795E26">getInitialProps</span><span style="color: #000000">(</span><span style="color: #001080">ctx</span><span style="color: #000000">) {</span>
-<span style="color: #000000">    </span><span style="color: #001080">sheet</span><span style="color: #000000">.</span><span style="color: #795E26">reset</span><span style="color: #000000">()</span>
-
-<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">initialProps</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">Document</span><span style="color: #000000">.</span><span style="color: #795E26">getInitialProps</span><span style="color: #000000">(</span><span style="color: #001080">ctx</span><span style="color: #000000">)</span>
-
-<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">id</span><span style="color: #000000">, </span><span style="color: #0070C1">textContent</span><span style="color: #000000"> } = </span><span style="color: #795E26">getStyleTagProperties</span><span style="color: #000000">(</span><span style="color: #001080">sheet</span><span style="color: #000000">)</span>
-
-<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">styleProps</span><span style="color: #000000"> = {</span>
-<span style="color: #000000">      </span><span style="color: #001080">id</span><span style="color: #000000">,</span>
-<span style="color: #000000">      </span><span style="color: #001080">key:</span><span style="color: #000000"> </span><span style="color: #001080">id</span><span style="color: #000000">,</span>
-<span style="color: #000000">      </span><span style="color: #001080">dangerouslySetInnerHTML:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">        </span><span style="color: #001080">__html:</span><span style="color: #000000"> </span><span style="color: #001080">textContent</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #001080">theme:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">extend:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #001080">screens:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">standalone:</span><span style="color: #000000"> { </span><span style="color: #001080">raw:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;(display-mode:standalone)&#039;</span><span style="color: #000000"> },</span>
 <span style="color: #000000">      },</span>
-<span style="color: #000000">    }</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<ol>
+					<li>Create/Update your <code>pages/_app.js</code></li>
+				</ol>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">withTwindApp</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@twind/next/app&#039;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">twindConfig</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;../twind.config&#039;</span>
 
-<span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> {</span>
-<span style="color: #000000">      ...</span><span style="color: #001080">initialProps</span><span style="color: #000000">,</span>
-<span style="color: #000000">      </span><span style="color: #001080">styles:</span><span style="color: #000000"> [...</span><span style="color: #001080">initialProps</span><span style="color: #000000">.</span><span style="color: #001080">styles</span><span style="color: #000000">, </span><span style="color: #001080">React</span><span style="color: #000000">.</span><span style="color: #795E26">createElement</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;style&#039;</span><span style="color: #000000">, </span><span style="color: #001080">styleProps</span><span style="color: #000000">)],</span>
-<span style="color: #000000">    }</span>
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #795E26">withTwindApp</span><span style="color: #000000">(</span><span style="color: #001080">twindConfig</span><span style="color: #000000">)</span>
+</code></pre>
+				<details><summary>Without a custom twind config</summary>
+					<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">withTwindApp</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@twind/next/app&#039;</span>
+
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #795E26">withTwindApp</span><span style="color: #000000">()</span>
+</code></pre>
+				</details>
+				<details><summary>With a custom App component</summary>
+					<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">withTwindApp</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@twind/next/app&#039;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">twindConfig</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;../twind.config&#039;</span>
+
+<span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">MyApp</span><span style="color: #000000">({ </span><span style="color: #001080">Component</span><span style="color: #000000">, </span><span style="color: #001080">pageProps</span><span style="color: #000000"> }) {</span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #800000">&lt;</span><span style="color: #267F99">Component</span><span style="color: #000000"> </span><span style="color: #0000FF">{</span><span style="color: #000000">...</span><span style="color: #001080">pageProps</span><span style="color: #0000FF">}</span><span style="color: #000000"> </span><span style="color: #800000">/&gt;</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #795E26">withTwindApp</span><span style="color: #000000">(</span><span style="color: #001080">twindConfig</span><span style="color: #000000">, </span><span style="color: #001080">MyApp</span><span style="color: #000000">)</span>
+</code></pre>
+				</details>
+				<details><summary>With a custom App component and no twind config</summary>
+					<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">withTwindApp</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@twind/next/app&#039;</span>
+
+<span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">MyApp</span><span style="color: #000000">({ </span><span style="color: #001080">Component</span><span style="color: #000000">, </span><span style="color: #001080">pageProps</span><span style="color: #000000"> }) {</span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #800000">&lt;</span><span style="color: #267F99">Component</span><span style="color: #000000"> </span><span style="color: #0000FF">{</span><span style="color: #000000">...</span><span style="color: #001080">pageProps</span><span style="color: #0000FF">}</span><span style="color: #000000"> </span><span style="color: #800000">/&gt;</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #795E26">withTwindApp</span><span style="color: #000000">(</span><span style="color: #001080">MyApp</span><span style="color: #000000">)</span>
+</code></pre>
+				</details>
+				<ol start="3">
+					<li>Create/Update your <code>pages/_document.js</code></li>
+				</ol>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">withTwindDocument</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@twind/next/document&#039;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">twindConfig</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;../twind.config&#039;</span>
+
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #795E26">withTwindDocument</span><span style="color: #000000">(</span><span style="color: #001080">twindConfig</span><span style="color: #000000">)</span>
+</code></pre>
+				<details><summary>Without a custom twind config</summary>
+					<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">withTwindDocument</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@twind/next/document&#039;</span>
+
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #795E26">withTwindDocument</span><span style="color: #000000">()</span>
+</code></pre>
+				</details>
+				<details><summary>With a custom Document component</summary>
+					<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">withTwindDocument</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@twind/next/document&#039;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">twindConfig</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;../twind.config&#039;</span>
+
+<span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">MyDocument</span><span style="color: #000000"> </span><span style="color: #0000FF">extends</span><span style="color: #000000"> </span><span style="color: #267F99">Document</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">static</span><span style="color: #000000"> </span><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #795E26">getInitialProps</span><span style="color: #000000">(</span><span style="color: #001080">ctx</span><span style="color: #000000">) {</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">initialProps</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">Document</span><span style="color: #000000">.</span><span style="color: #795E26">getInitialProps</span><span style="color: #000000">(</span><span style="color: #001080">ctx</span><span style="color: #000000">)</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> { ...</span><span style="color: #001080">initialProps</span><span style="color: #000000"> }</span>
 <span style="color: #000000">  }</span>
 <span style="color: #000000">}</span>
+
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #795E26">withTwindDocument</span><span style="color: #000000">(</span><span style="color: #001080">twindConfig</span><span style="color: #000000">, </span><span style="color: #001080">MyDocument</span><span style="color: #000000">)</span>
+</code></pre>
+				</details>
+				<details><summary>With a custom App component and no twind config</summary>
+					<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">withTwindDocument</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@twind/next/document&#039;</span>
+
+<span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">MyDocument</span><span style="color: #000000"> </span><span style="color: #0000FF">extends</span><span style="color: #000000"> </span><span style="color: #267F99">Document</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">static</span><span style="color: #000000"> </span><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #795E26">getInitialProps</span><span style="color: #000000">(</span><span style="color: #001080">ctx</span><span style="color: #000000">) {</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">initialProps</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">Document</span><span style="color: #000000">.</span><span style="color: #795E26">getInitialProps</span><span style="color: #000000">(</span><span style="color: #001080">ctx</span><span style="color: #000000">)</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> { ...</span><span style="color: #001080">initialProps</span><span style="color: #000000"> }</span>
+<span style="color: #000000">  }</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #795E26">withTwindDocument</span><span style="color: #000000">(</span><span style="color: #001080">MyDocument</span><span style="color: #000000">)</span>
+</code></pre>
+				</details>
+				<ol start="4">
+					<li>Use twind</li>
+				</ol>
+				<pre><code class="language-jsx"><span style="color: #000000">import NextHead from &#039;next/head&#039;</span>
+<span style="color: #000000">import * as React from &#039;react&#039;</span>
+<span style="color: #000000">import { tw } from &#039;twind&#039;</span>
+
+<span style="color: #000000">const Home = () =&gt; (</span>
+<span style="color: #000000">  &lt;&gt;</span>
+<span style="color: #000000">    &lt;NextHead&gt;</span>
+<span style="color: #000000">      &lt;meta charSet=&quot;UTF-8&quot; /&gt;</span>
+<span style="color: #000000">      &lt;title&gt;Twind Next.js Example&lt;/title&gt;</span>
+<span style="color: #000000">      &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;</span>
+<span style="color: #000000">    &lt;/NextHead&gt;</span>
+
+<span style="color: #000000">    &lt;main className={tw`h-screen bg-purple-400 flex items-center justify-center`}&gt;</span>
+<span style="color: #000000">      &lt;h1 className={tw`font-bold text(center 5xl white sm:gray-800 md:pink-700)`}&gt;</span>
+<span style="color: #000000">        This is Twind!</span>
+<span style="color: #000000">      &lt;/h1&gt;</span>
+<span style="color: #000000">    &lt;/main&gt;</span>
+<span style="color: #000000">  &lt;/&gt;</span>
+<span style="color: #000000">)</span>
+
+<span style="color: #000000">export default Home</span>
+</code></pre>
+				<a href="#usage-with-the-shim" id="usage-with-the-shim" style="color: inherit; text-decoration: none;">
+					<h2>Usage with the shim</h2>
+				</a>
+				<blockquote>
+					<p>TLDR; replace <code>@twind/next/app</code> with <code>@twind/next/shim/app</code> and <code>@twind/next/document</code> with <code>@twind/next/shim/document</code></p>
+				</blockquote>
+				<p><a href="https://codesandbox.io/s/twind-shim-nextjs-53y61?fontsize=14&amp;hidenavigation=1&amp;theme=dark"><img src="https://codesandbox.io/static/img/play-codesandbox.svg" alt="Edit twind-shim-nextjs"></a></p>
+				<ol start="0">
+					<li>Create a <code>twind.config.js</code> (optional)</li>
+				</ol>
+				<pre><code class="language-js"><span style="color: #008000">/** </span><span style="color: #0000FF">@type</span><span style="color: #008000"> </span><span style="color: #267F99">{import(&#039;twind&#039;).Configuration}</span><span style="color: #008000"> */</span>
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #001080">theme:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #001080">extend:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">      </span><span style="color: #001080">screens:</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #001080">standalone:</span><span style="color: #000000"> { </span><span style="color: #001080">raw:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;(display-mode:standalone)&#039;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">      },</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">  },</span>
+<span style="color: #000000">}</span>
+</code></pre>
+				<ol>
+					<li>Create/Update your <code>pages/_app.js</code></li>
+				</ol>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">withTwindApp</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@twind/next/shim/app&#039;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">twindConfig</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;../twind.config&#039;</span>
+
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #795E26">withTwindApp</span><span style="color: #000000">(</span><span style="color: #001080">twindConfig</span><span style="color: #000000">)</span>
+</code></pre>
+				<details><summary>Without a custom twind config</summary>
+					<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">withTwindApp</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@twind/next/shim/app&#039;</span>
+
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #795E26">withTwindApp</span><span style="color: #000000">()</span>
+</code></pre>
+				</details>
+				<details><summary>With a custom App component</summary>
+					<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">withTwindApp</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@twind/next/shim/app&#039;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">twindConfig</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;../twind.config&#039;</span>
+
+<span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">MyApp</span><span style="color: #000000">({ </span><span style="color: #001080">Component</span><span style="color: #000000">, </span><span style="color: #001080">pageProps</span><span style="color: #000000"> }) {</span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #800000">&lt;</span><span style="color: #267F99">Component</span><span style="color: #000000"> </span><span style="color: #0000FF">{</span><span style="color: #000000">...</span><span style="color: #001080">pageProps</span><span style="color: #0000FF">}</span><span style="color: #000000"> </span><span style="color: #800000">/&gt;</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #795E26">withTwindApp</span><span style="color: #000000">(</span><span style="color: #001080">twindConfig</span><span style="color: #000000">, </span><span style="color: #001080">MyApp</span><span style="color: #000000">)</span>
+</code></pre>
+				</details>
+				<details><summary>With a custom App component and no twind config</summary>
+					<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">withTwindApp</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@twind/next/shim/app&#039;</span>
+
+<span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">MyApp</span><span style="color: #000000">({ </span><span style="color: #001080">Component</span><span style="color: #000000">, </span><span style="color: #001080">pageProps</span><span style="color: #000000"> }) {</span>
+<span style="color: #000000">  </span><span style="color: #AF00DB">return</span><span style="color: #000000"> </span><span style="color: #800000">&lt;</span><span style="color: #267F99">Component</span><span style="color: #000000"> </span><span style="color: #0000FF">{</span><span style="color: #000000">...</span><span style="color: #001080">pageProps</span><span style="color: #0000FF">}</span><span style="color: #000000"> </span><span style="color: #800000">/&gt;</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #795E26">withTwindApp</span><span style="color: #000000">(</span><span style="color: #001080">MyApp</span><span style="color: #000000">)</span>
+</code></pre>
+				</details>
+				<ol start="3">
+					<li>Create/Update your <code>pages/_document.js</code></li>
+				</ol>
+				<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">withTwindDocument</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@twind/next/shim/document&#039;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">twindConfig</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;../twind.config&#039;</span>
+
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #795E26">withTwindDocument</span><span style="color: #000000">(</span><span style="color: #001080">twindConfig</span><span style="color: #000000">)</span>
+</code></pre>
+				<details><summary>Without a custom twind config</summary>
+					<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">withTwindDocument</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@twind/next/shim/document&#039;</span>
+
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #795E26">withTwindDocument</span><span style="color: #000000">()</span>
+</code></pre>
+				</details>
+				<details><summary>With a custom Document component</summary>
+					<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">withTwindDocument</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@twind/next/shim/document&#039;</span>
+<span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">twindConfig</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;../twind.config&#039;</span>
+
+<span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">MyDocument</span><span style="color: #000000"> </span><span style="color: #0000FF">extends</span><span style="color: #000000"> </span><span style="color: #267F99">Document</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">static</span><span style="color: #000000"> </span><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #795E26">getInitialProps</span><span style="color: #000000">(</span><span style="color: #001080">ctx</span><span style="color: #000000">) {</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">initialProps</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">Document</span><span style="color: #000000">.</span><span style="color: #795E26">getInitialProps</span><span style="color: #000000">(</span><span style="color: #001080">ctx</span><span style="color: #000000">)</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> { ...</span><span style="color: #001080">initialProps</span><span style="color: #000000"> }</span>
+<span style="color: #000000">  }</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #795E26">withTwindDocument</span><span style="color: #000000">(</span><span style="color: #001080">twindConfig</span><span style="color: #000000">, </span><span style="color: #001080">MyDocument</span><span style="color: #000000">)</span>
+</code></pre>
+				</details>
+				<details><summary>With a custom App component and no twind config</summary>
+					<pre><code class="language-js"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #001080">withTwindDocument</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;@twind/next/shim/document&#039;</span>
+
+<span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">MyDocument</span><span style="color: #000000"> </span><span style="color: #0000FF">extends</span><span style="color: #000000"> </span><span style="color: #267F99">Document</span><span style="color: #000000"> {</span>
+<span style="color: #000000">  </span><span style="color: #0000FF">static</span><span style="color: #000000"> </span><span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #795E26">getInitialProps</span><span style="color: #000000">(</span><span style="color: #001080">ctx</span><span style="color: #000000">) {</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">initialProps</span><span style="color: #000000"> = </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">Document</span><span style="color: #000000">.</span><span style="color: #795E26">getInitialProps</span><span style="color: #000000">(</span><span style="color: #001080">ctx</span><span style="color: #000000">)</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">return</span><span style="color: #000000"> { ...</span><span style="color: #001080">initialProps</span><span style="color: #000000"> }</span>
+<span style="color: #000000">  }</span>
+<span style="color: #000000">}</span>
+
+<span style="color: #AF00DB">export</span><span style="color: #000000"> </span><span style="color: #AF00DB">default</span><span style="color: #000000"> </span><span style="color: #795E26">withTwindDocument</span><span style="color: #000000">(</span><span style="color: #001080">MyDocument</span><span style="color: #000000">)</span>
+</code></pre>
+				</details>
+				<ol start="4">
+					<li>Use twind</li>
+				</ol>
+				<pre><code class="language-jsx"><span style="color: #000000">import NextHead from &#039;next/head&#039;</span>
+<span style="color: #000000">import * as React from &#039;react&#039;</span>
+
+<span style="color: #000000">const Home = () =&gt; (</span>
+<span style="color: #000000">  &lt;&gt;</span>
+<span style="color: #000000">    &lt;NextHead&gt;</span>
+<span style="color: #000000">      &lt;meta charSet=&quot;UTF-8&quot; /&gt;</span>
+<span style="color: #000000">      &lt;title&gt;Twind Next.js Example&lt;/title&gt;</span>
+<span style="color: #000000">      &lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1&quot; /&gt;</span>
+<span style="color: #000000">    &lt;/NextHead&gt;</span>
+
+<span style="color: #000000">    &lt;main className=&quot;h-screen bg-purple-400 flex items-center justify-center&quot;&gt;</span>
+<span style="color: #000000">      &lt;h1 className=&quot;font-bold text(center 5xl white sm:gray-800 md:pink-700)&quot;&gt;This is Twind!&lt;/h1&gt;</span>
+<span style="color: #000000">    &lt;/main&gt;</span>
+<span style="color: #000000">  &lt;/&gt;</span>
+<span style="color: #000000">)</span>
+
+<span style="color: #000000">export default Home</span>
 </code></pre>
 			</div>
 		</div>
