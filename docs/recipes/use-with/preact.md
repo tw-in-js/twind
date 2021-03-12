@@ -1,5 +1,7 @@
 ## [Preact](https://preactjs.com/)
 
+> Take a look at the brand new [@twind/preact package](https://github.com/tw-in-js/use-twind-with/tree/main/packages/preact#readme) which provides a deep integration into preact.
+
 ```js
 import { h, render } from 'preact'
 

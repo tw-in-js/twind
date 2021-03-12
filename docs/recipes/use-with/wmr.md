@@ -1,92 +1,55 @@
-## [WMR](https://github.com/preactjs/wmr)
+# [@twind/wmr](https://github.com/tw-in-js/use-twind-with/tree/main/packages/wmr#readme) [![Latest Release](https://flat.badgen.net/npm/v/twind?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/wmr)
 
-> 💡 The [tw-in-js/example-wmr](https://github.com/tw-in-js/example-wmr) repository uses this setup.
+> [Twind](https://twind.dev) integration for [WMR](https://github.com/preactjs/wmr/tree/main/packages/wmr) utilizing [@twind/preact](https://www.npmjs.com/package/@twind/preact).
 
-First we need to add `@rollup/plugin-json` to the dependencies.
+## Installation
 
 ```sh
-npm install -D @rollup/plugin-json
+npm install @twind/wmr
 ```
 
-Next we create or modify the following files:
+## Usage
 
-**wmr.config.mjs**
+[![Edit twind-wmr](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/twind-wmr-orudp?fontsize=14&hidenavigation=1&theme=dark)
 
-```js
-/** @param {import('wmr').Options} config */
-export default async function (config) {
-  if (config.mode === 'build') {
-    const { default: json } = await import('@rollup/plugin-json')
-    config.plugins.push(json())
-  }
-}
-```
+```diff
+-import hydrate from 'preact-iso/hydrate';
++import withTwind from '@twind/wmr';
 
-**public/twind.config.js**
-
-```js
-export default {
-  /* Shared config */
-}
-```
-
-**public/index.js**
-
-```js
-import hydrate from 'preact-iso/hydrate'
-
-import { setup } from 'twind'
-// Or if you are using twind/shim
-// import { setup } from 'twind/shim'
-
-import twindConfig from './twind.config'
-
-if (typeof window !== 'undefined') {
-  setup(twindConfig)
-}
-
-export function App() {
-  /* Your app */
-}
++const { hydrate, prerender } = withTwind((data) => <App {...data} />)
 
 hydrate(<App />)
 
-export async function prerender(data) {
-  const { default: prerender } = await import('./prerender')
-
-  return prerender(<App {...data} />)
-  // Or if you are using twind/shim
-  // return prerender(<App {...data} />, { shim: true })
-}
+-export async function prerender(data) {
+-  // we use dynamic import to prevent this from being loaded in the browser:
+-  return (await import('preact-iso/prerender')).default(<App {...data} />);
+-}
++export { prerender }
 ```
 
-**public/prerender.js**
+## Shim-like usage but without the [shim](https://twind.dev/docs/handbook/getting-started/using-the-shim.html)
 
-```js
-import prerender from 'preact-iso/prerender'
+> 💡 The [tw-in-js/example-wmr](https://github.com/tw-in-js/example-wmr) repository uses this setup.
 
-import { setup } from 'twind'
-import { asyncVirtualSheet, getStyleTagProperties, shim } from 'twind/server'
+[![Edit twind-shim-wmr](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/twind-shim-wmr-nu61v?fontsize=14&hidenavigation=1&theme=dark)
 
-import twindConfig from './twind.config'
+```diff
+-import hydrate from 'preact-iso/hydrate';
++import withTwind from '@twind/wmr';
 
-const sheet = asyncVirtualSheet()
++const { hydrate, prerender } = withTwind({
++  // Options for @twind/preact
++  props: {
++    className: true, // Shim like experience without the shim
++  },
++  /* other twind configuration options */
++}, (data) => <App {...data} />)
 
-setup({ ...twindConfig, sheet })
+hydrate(<App />)
 
-export default async (app, options = {}) => {
-  sheet.reset()
-
-  const result = await prerender(app)
-
-  if (options.shim) {
-    result.html = shim(result.html)
-  }
-
-  const { id, textContent } = getStyleTagProperties(sheet)
-
-  result.html = `<style id="${id}">${textContent}</style>${result.html}`
-
-  return result
-}
+-export async function prerender(data) {
+-  // we use dynamic import to prevent this from being loaded in the browser:
+-  return (await import('preact-iso/prerender')).default(<App {...data} />);
+-}
++export { prerender }
 ```
