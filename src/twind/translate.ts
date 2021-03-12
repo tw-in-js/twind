@@ -1,7 +1,7 @@
 import type {
   Context,
   CSSRules,
-  Plugins,
+  Plugin,
   Rule,
   Falsy,
   InlineDirective,
@@ -11,7 +11,7 @@ import type {
 import { join, tail } from '../internal/util'
 
 export const translate = (
-  plugins: Plugins,
+  plugins: Record<string, Plugin | undefined>,
   context: Context,
 ): ((
   rule: Rule,

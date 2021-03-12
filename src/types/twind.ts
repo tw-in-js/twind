@@ -86,7 +86,7 @@ export interface Configuration {
 
   theme?: ThemeConfiguration
 
-  plugins?: Plugins
+  plugins?: Record<string, Plugin | undefined>
 
   /**
    * ```js
@@ -144,8 +144,6 @@ export interface Mode {
 }
 
 export type Plugin = string | CSSRules | DirectiveHandler
-
-export type Plugins = Record<string, Plugin | undefined>
 
 export interface DirectiveHandler {
   /**
@@ -276,3 +274,50 @@ export type CSSRuleValue =
 export interface CSSRulesThunk<Value = CSSRuleValue> {
   (context: Context): Value
 }
+
+// export type MaybeThunkCSSProperties = {
+//   [key in keyof CSSProperties]?: MaybeThunk<CSSProperties[key]>
+// }
+
+// // TODO ResolvedCSSRules eg no thunks
+// // eslint-disable-next-line @typescript-eslint/no-empty-interface
+// export interface ExtendedCSSRules {}
+
+// export type CSSRules = MaybeThunkCSSProperties & {
+//   '@import'?: MaybeThunk<MaybeArray<string | Falsy>>
+//   '@font-face'?: MaybeThunk<MaybeArray<FontFace>>
+//   // | "@counter-style": CounterStyle
+//   // | "@document"
+//   // | "@font-feature-values"
+//   // | "@namespace"
+//   // | "@page"
+//   // | "@property"
+//   // | "@viewport";
+
+//   '@apply'?: MaybeThunk<MaybeArray<string | Falsy>>
+//   '@global'?: MaybeThunk<MaybeArray<CSSRules | Falsy>>
+//   ':global'?: MaybeThunk<MaybeArray<CSSRules | Falsy>>
+//   ':root'?: MaybeThunkCSSProperties
+//   '*'?: MaybeThunkCSSProperties
+// } & {
+//     [key in `${'' | '&'}${CSS.Pseudos}`]?: MaybeThunk<MaybeArray<CSSRules | Falsy>>
+//   } &
+//   {
+//     [key in string]?: MaybeThunk<MaybeArray<CSSRules | string | Falsy>>
+//   } &
+//   ExtendedCSSRules
+
+// const x: CSSRules = {
+//   visibility: 'collapse',
+//   fontFamily: '',
+//   listStylePosition: 'inside',
+//   // border: ({theme}) => theme('colors', 'white') as string,
+//   // ':focus': {},
+//   // '@keyframes x': {
+//   //   '': {},
+//   // },
+//   // button: {
+//   //   color: ['ActiveCaption', 'AppWorkspace'],
+//   // },
+// }
+// console.log(x)
