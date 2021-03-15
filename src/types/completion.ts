@@ -18,9 +18,9 @@ import type { Theme } from './theme'
 export type InterpolateKind =
   | `theme(${keyof Theme})`
   | `range(${number},${number},${number})`
-  | 'percentage' // `${NonNegativeNumber}%`
-  | `length` // `${NonNegativeNumber}${LengthUnit}`
-  | `length-percentage`
+  // | 'percentage' // `${NonNegativeNumber}%`
+  // | `length` // `${NonNegativeNumber}${LengthUnit}`
+  // | `length-percentage`
   | `string` // NonEmptyString
   | `number` // NonNegativeNumber
   | `nonzero` // PositiveNumber
@@ -181,8 +181,8 @@ export interface CorePlugins {
     | ''
     | 'nowrap'
     | Join<'row' | 'col' | 'wrap', '' | 'reverse'>
-    | Join<'grow', '' | FromTheme<'flexGrow'> | Interpolate<'number'>>
-    | Join<'shrink', '' | FromTheme<'flexShrink'> | Interpolate<'number'>>
+    | Join<'grow', '' | '0' | FromTheme<'flexGrow'> | Interpolate<'number'>>
+    | Join<'shrink', '' | '0' | FromTheme<'flexShrink'> | Interpolate<'number'>>
     | FromTheme<'flex'>
 
   order: FromTheme<'order'>
@@ -412,9 +412,9 @@ export interface CorePlugins {
   transform: '' | 'gpu' | 'none'
   origin: 'center' | Join<'' | 'top' | 'bottom', '' | 'right' | 'left'>
   scale: FromTheme<'scale'>
-  rotate: FromTheme<'rotate'>
-  translate: FromTheme<'translate'>
-  skew: FromTheme<'skew'>
+  rotate: Negatable<FromTheme<'rotate'>>
+  translate: Negatable<FromTheme<'translate'>>
+  skew: Negatable<FromTheme<'skew'>>
 
   // INTERACTIVITY
   // -------------
@@ -498,5 +498,5 @@ export type CompletionTokens =
   | { [K in keyof Variants]: `${ToString<K>}:` }[keyof Variants]
   | JoinFromObject<CorePlugins & Plugins>
 
-// const x: CompletionTokens = 'grid-cols-none'
+// const x: CompletionTokens = ''
 // console.log(x)
