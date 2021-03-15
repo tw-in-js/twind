@@ -114,12 +114,14 @@ const withOpacityFallback = (
   kind: string,
   color: string | undefined,
 ): CSSRules | undefined =>
-  color && (_ = asRGBA(color, kind + '-opacity')) && _ !== color
-    ? {
-        [`--tw-${kind}-opacity`]: '1',
-        [property]: [color, _],
-      }
-    : { [property]: color }
+  color && typeof color == 'string'
+    ? (_ = asRGBA(color, kind + '-opacity')) && _ !== color
+      ? {
+          [`--tw-${kind}-opacity`]: '1',
+          [property]: [color, _],
+        }
+      : { [property]: color }
+    : undefined
 
 const transparentTo = (color: string) => (($ = asRGBA(color, '', '0')) == _ ? 'transparent' : $)
 
@@ -290,7 +292,7 @@ export const corePlugins: Record<string, Plugin | undefined> = {
         _ = context.theme(
           ('flex' + capitalize(params[0])) as 'flexGrow',
           tail(params),
-          Number(params[1] || 1),
+          (params[1] || 1) as number,
         )
 
         return (
