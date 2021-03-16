@@ -411,10 +411,10 @@ export interface CorePlugins {
   // ----------
   transform: '' | 'gpu' | 'none'
   origin: 'center' | Join<'' | 'top' | 'bottom', '' | 'right' | 'left'>
-  scale: FromTheme<'scale'>
   rotate: Negatable<FromTheme<'rotate'>>
-  translate: Negatable<FromTheme<'translate'>>
-  skew: Negatable<FromTheme<'skew'>>
+  scale: Join<'' | 'x' | 'y', FromTheme<'scale'>>
+  skew: Negatable<Join<'' | 'x' | 'y', FromTheme<'skew'>>>
+  translate: Negatable<Join<'' | 'x' | 'y', FromTheme<'translate'>>>
 
   // INTERACTIVITY
   // -------------
@@ -493,6 +493,7 @@ export type CompletionTokens =
   | `${FromTheme<'screens'>}:`
   // TODO | `${'' | 'not-'}${SimplePseudoClasses}:`
   | `${SimplePseudoClasses}:`
+  | `group-${SimplePseudoClasses}:`
   | `${SimplePseudoElements}::`
   | `${CoreVariants}:`
   | { [K in keyof Variants]: `${ToString<K>}:` }[keyof Variants]
