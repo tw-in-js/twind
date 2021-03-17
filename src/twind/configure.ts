@@ -22,7 +22,7 @@ import { silent, strict, warn } from './modes'
 import { autoprefix, noprefix } from './prefix'
 import { makeThemeResolver } from './theme'
 
-import { cyrb32, identity, tail, merge, evalThunk, ensureMaxSize } from '../internal/util'
+import { cyrb32, identity, join, tail, merge, evalThunk, ensureMaxSize } from '../internal/util'
 
 import { parse } from './parse'
 import { translate as makeTranslate } from './translate'
@@ -80,6 +80,11 @@ export const configure = (
   let translateDepth = 0
   const lastTranslations: (CSSRules | string | Falsy)[] = []
 
+  const handleDynamic = (key: string | string[]): string | undefined => {
+    const value = Array.isArray(key) ? join(key) : key
+    return value[0] == '[' || value[value.length - 1] == ']' ? value.slice(1, -1) : undefined
+  }
+
   // The context that is passed to functions to access the theme, ...
   const context: Context = {
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
@@ -91,16 +96,17 @@ export const configure = (
         key = 'DEFAULT'
       }
 
-      // If no theme value is found, notify 'mode', it may be able to resolve a value
       const value =
+        (key && defaultValue != '' && handleDynamic(key)) ||
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        theme(section, key as string, defaultValue as any) ??
-        mode.unknown(
-          section,
-          key == null || Array.isArray(key) ? key : key.split('.'),
-          defaultValue != null,
-          context,
-        )
+        (theme(section, key as string, defaultValue as any) ??
+          // If no theme value is found, notify 'mode', it may be able to resolve a value
+          mode.unknown(
+            section,
+            key == null || Array.isArray(key) ? key : key.split('.'),
+            defaultValue != null,
+            context,
+          ))
 
       // Add negate to theme value using calc to support complex values
       return activeRule.n && value && typeof value == 'string' ? `calc(${value} * -1)` : value

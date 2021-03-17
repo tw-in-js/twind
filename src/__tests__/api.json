@@ -794,5 +794,14 @@
   "invalid:not-focus:border-red-500": ".invalid\\:not-focus\\:border-red-500:invalid:not(:focus){--tw-border-opacity:1;border-color:#ef4444;border-color:rgba(239,68,68,var(--tw-border-opacity))}",
   "not-disabled:focus:font-bold": ".not-disabled\\:focus\\:font-bold:not(:disabled):focus{font-weight:700}",
   "not-logged-in:hidden": "body:not(.logged-in) .not-logged-in\\:hidden{display:none}",
-  "not-last-child:mb-5": ".not-last-child\\:mb-5:not(:last-child){margin-bottom:1.25rem}"
+  "not-last-child:mb-5": ".not-last-child\\:mb-5:not(:last-child){margin-bottom:1.25rem}",
+  "top-[123px]": ".top-\\[123px\\]{top:123px}",
+  "top-[-123px]": ".top-\\[-123px\\]{top:-123px}",
+  "grid-cols-[minmax(100px,max-content)repeat(auto-fill,200px)20%]": ".grid-cols-\\[minmax\\(100px\\,max-content\\)repeat\\(auto-fill\\,200px\\)20\\%\\]{grid-template-columns:minmax(100px,max-content)repeat(auto-fill,200px)20%}",
+  "grid-cols-[repeat(auto-fit,minmax(150px,1fr))]": ".grid-cols-\\[repeat\\(auto-fit\\,minmax\\(150px\\,1fr\\)\\)\\]{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}",
+  "grid-rows-auto-1fr-auto": ".grid-rows-auto-1fr-auto{grid-template-rows:auto-1fr-auto}",
+  "w-[clamp(23ch,50%,46ch)]": ".w-\\[clamp\\(23ch\\,50\\%\\,46ch\\)\\]{width:clamp(23ch,50%,46ch)}",
+  "bg-[#1da1f2]": ".bg-\\[\\#1da1f2\\]{--tw-bg-opacity:1;background-color:#1da1f2;background-color:rgba(29,161,242,var(--tw-bg-opacity))}",
+  "translate-x-[-650px]": ".translate-x-\\[-650px\\]{--tw-translate-x:-650px;transform:translateX(-650px);transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}",
+  "text-[#1da1f2]": ".text-\\[\\#1da1f2\\]{--tw-text-opacity:1;color:#1da1f2;color:rgba(29,161,242,var(--tw-text-opacity))}"
 }

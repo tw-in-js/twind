@@ -87,11 +87,16 @@ const saveRule = (buffer: string): '' => {
 }
 
 const parseString = (token: string, isVariant?: boolean): void => {
-  let char: string
   let buffer = ''
 
-  for (let position = 0; position < token.length; ) {
-    switch ((char = token[position++])) {
+  for (let char: string, dynamic = false, position = 0; (char = token[position++]); ) {
+    if (dynamic || char == '[') {
+      buffer += char
+      dynamic = char != ']'
+      continue
+    }
+
+    switch (char) {
       case ':':
         // Check if this is an pseudo element "after::"
         buffer =

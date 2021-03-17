@@ -92,7 +92,7 @@ export const escape =
     }
 
     // Simplifed escape testing only for chars that we know happen to be in tailwind directives
-    return firstChar + className.replace(/[!./:#]/g, '\\$&')
+    return firstChar + className.replace(/[!.,;/+*:#()[\]%"']/g, '\\$&')
   })
 
 export const buildMediaQuery = (screen: ThemeScreen): string => {
