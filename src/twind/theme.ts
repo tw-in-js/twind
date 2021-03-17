@@ -319,6 +319,7 @@ const defaultTheme: Partial<Theme> = {
     xl: '0.75rem',
     '2xl': '1rem',
     '3xl': '1.5rem',
+    '1/2': '50%',
     full: '9999px',
   },
   borderWidth: {
@@ -863,13 +864,10 @@ export const makeThemeResolver = (config?: ThemeConfiguration): ThemeResolver =>
     let base = cache.get(section)
 
     if (!base) {
-      cache.set(
-        section,
-        (base = {
-          ...deref(theme, section),
-          ...deref(theme.extend, section),
-        }),
-      )
+      // Stacked resolution to allow referencing the same section from core theme with extend
+      cache.set(section, (base = { ...deref(theme, section) }))
+
+      Object.assign(base, deref(theme.extend, section))
     }
 
     if (key != null) {

@@ -97,4 +97,19 @@ test('negative is available and no-op', () => {
   assert.is(theme('spacing', 'px'), '1px')
 })
 
+test('reference the default theme', () => {
+  const theme = makeThemeResolver({
+    extend: {
+      fontFamily: (theme) => ({
+        sans: ['"Inter var"', theme('fontFamily.sans') as string],
+      }),
+    },
+  })
+
+  assert.is(
+    theme('fontFamily', 'sans'),
+    '"Inter var",ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"',
+  )
+})
+
 test.run()
