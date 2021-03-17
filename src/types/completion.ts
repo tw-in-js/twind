@@ -489,15 +489,19 @@ export interface Plugins {}
 
 /* eslint-enable @typescript-eslint/no-empty-interface */
 
-export type CompletionTokens =
+export type CoreCompletionTokens =
   | `${FromTheme<'screens'>}:`
   // TODO | `${'' | 'not-'}${SimplePseudoClasses}:`
   | `${SimplePseudoClasses}:`
-  | `group-${SimplePseudoClasses}:`
+  | `${Join<'group', '' | Interpolate<'string'>>}-${SimplePseudoClasses}:`
   | `${SimplePseudoElements}::`
   | `${CoreVariants}:`
+
+export type UserCompletionTokens =
   | { [K in keyof Variants]: `${ToString<K>}:` }[keyof Variants]
   | JoinFromObject<CorePlugins & Plugins>
+
+export type CompletionTokens = CoreCompletionTokens | UserCompletionTokens
 
 // const x: CompletionTokens = ''
 // console.log(x)
