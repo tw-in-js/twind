@@ -67,6 +67,8 @@ export const configure = (
 
   const hash = sanitize<Hasher | false>(config.hash, false, false, cyrb32)
 
+  const important = config.important
+
   // Track the active rule
   // 1. to detect if a theme value should be negated
   // 2. for nested `tw()` calls
@@ -244,6 +246,8 @@ export const configure = (
 
           // 4. serialize: convert to css string with precedence
           // 5. inject: add to dom
+          if (important) rule.i = important
+
           serialize(translation, className, rule, layer).forEach(inject)
 
           if (translation._) {

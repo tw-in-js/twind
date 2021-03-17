@@ -4,6 +4,7 @@ import * as assert from 'uvu/assert'
 import { virtualSheet } from 'twind/sheets'
 
 import { create, strict } from 'twind'
+import { apply, css } from 'twind/css'
 
 const test = suite('setup')
 
@@ -61,6 +62,27 @@ test('theme extend value callback', () => {
 
   assert.is(tw`fill-red-500`, 'fill-red-500')
   assert.equal(sheet.target, ['.fill-red-500{fill:#ef4444}'])
+})
+
+test('important', () => {
+  const sheet = virtualSheet()
+  const { tw } = create({
+    sheet,
+    mode: strict,
+    preflight: false,
+    prefix: false,
+    important: true,
+  })
+
+  assert.is(
+    tw`underline ${apply(`text-xl`)} ${css({ color: '#ef4444' })}`,
+    'underline tw-nziaos tw-yinfv4',
+  )
+  assert.equal(sheet.target, [
+    '.tw-nziaos{font-size:1.25rem !important;line-height:1.75rem !important}',
+    '.underline{text-decoration:underline !important}',
+    '.tw-yinfv4{color:#ef4444 !important}',
+  ])
 })
 
 test.run()

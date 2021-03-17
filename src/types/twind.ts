@@ -116,6 +116,11 @@ export interface Configuration {
   hash?: Hasher | boolean
 
   mode?: Mode | 'strict' | 'warn' | 'silent'
+
+  /**
+   * Control whether or not utilities should be marked with `!important`
+   */
+  important?: boolean
 }
 
 export type ReportInfo =
