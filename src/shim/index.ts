@@ -9,6 +9,8 @@ import type { Configuration } from 'twind'
 
 import { setup as setupTW, createObserver } from 'twind/observe'
 
+export * from 'twind'
+
 /**
  * Options for {@link setup}.
  */
