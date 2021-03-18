@@ -32,7 +32,7 @@ Because Twind is generating CSS during runtime there is no to need restrict the 
 
 ### Dark mode is always available
 
-[View docs for dark mode](#)
+[View docs for dark mode](/handbook/configuration#dark-mode)
 
 ### Most pseudo classes can be uses as variant or `group-*` variant
 

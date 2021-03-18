@@ -101,6 +101,8 @@ tw('bg-gray-200', [
 
 The `apply` function is used to compose styles that can be later be overwritten in a `tw` call. It's a companion to the `tw` function and useful for composition.
 
+> 💡 `apply` accepts the same arguments as the `tw` function
+
 :::warning
 The `apply` function returns a function that must be passed to a `tw` call before those styles are applied to the document. In other words, the function does nothing outside of a `tw` call.
 :::
@@ -127,3 +129,151 @@ const btnBlock = apply`${btn} block`
 :::tip
 Another way to extract common component styles is by using [plugins](/handbook/plugins).
 :::
+
+The `apply` function allows you to use Twind rules and utility classes to define your preflight styles:
+
+```js
+setup({
+  preflight: {
+    body: apply('bg-gray-900 text-white'),
+  },
+})
+```
+
+The `css` function can be used with the `apply` function to define additional styles:
+
+```js
+const btn = apply`
+  py-2 px-4
+  ${css({
+    borderColor: 'black',
+  })}
+`
+```
+
+The `apply` function can be used within the `css` function:
+
+```js
+const prose = css(
+  apply`text-gray-700 dark:text-gray-300`,
+  {
+    p: apply`my-5`,
+    h1: apply`text-black dark:text-white`,
+  },
+  {
+    h1: {
+      fontWeight: '800',
+      fontSize: '2.25em',
+      marginTop: '0',
+      marginBottom: '0.8888889em',
+      lineHeight: '1.1111111',
+    },
+  },
+)
+```
+
+Using template literal syntax:
+
+```js
+const prose = css`
+  ${apply`text-gray-700 dark:text-gray-300`}
+
+  p {
+    ${apply`my-5`}
+  }
+
+  h1 {
+    ${apply`text-black dark:text-white`}
+    font-weight: 800;
+    font-size: 2.25em;
+    margin-top: 0;
+    margin-bottom: 0.8888889em;
+    line-height: 1.1111111;
+  }
+`
+```
+
+Using Tailwind directives with `animation` function from the `twind/css` module:
+
+```js
+const motion = animation('.6s ease-in-out infinite', {
+  '0%': apply`scale-100`,
+  '50%': apply`scale-125 rotate-45`,
+  '100%': apply`scale-100 rotate-0`,
+})
+
+const bounce = animation(
+  '1s ease infinite',
+  keyframes`
+  from, 20%, 53%, 80%, to {
+    ${apply`transform-gpu translate-x-0`}
+  }
+  40%, 43% {
+    ${apply`transform-gpu -translate-x-7`}
+  }
+  70% {
+    ${apply`transform-gpu -translate-x-3.5`}
+  },
+  90% {
+    ${apply`transform-gpu -translate-x-1`}
+  }
+`,
+)
+```
+
+A React button component
+
+```js
+import { tw } from 'twind'
+
+const variantMap = {
+  success: 'green',
+  primary: 'blue',
+  warning: 'yellow',
+  info: 'gray',
+  danger: 'red',
+}
+
+const sizeMap = {
+  sm: apply`text-xs py(2 md:1) px-2`,
+  md: apply`text-sm py(3 md:2) px-2`,
+  lg: apply`text-lg py-2 px-4`,
+  xl: apply`text-xl py-3 px-6`,
+}
+
+const baseStyles = apply`
+  w(full md:auto)
+  text(sm white uppercase)
+  px-4
+  border-none
+  transition-colors
+  duration-300
+`
+
+function Button({
+  size = 'md',
+  variant = 'primary',
+  round = false,
+  disabled = false,
+  className,
+  children,
+}) {
+  // Collect all styles into one class
+  const instanceStyles = apply`
+    ${baseStyles}
+    bg-${variantMap[variant]}(600 700(hover:& focus:&)))
+    ${sizeMap[size]}
+    rounded-${round ? 'full' : 'lg'}
+    ${disabled && 'bg-gray-400 text-gray-100 cursor-not-allowed'}
+  `
+
+  // Allow passed classNames to override instance styles
+  return <button className={tw(instanceStyles, className)}>{children}</button>
+}
+
+render(
+  <Button variant="info" className="text-lg rounded-md">
+    Click me
+  </Button>,
+)
+```
