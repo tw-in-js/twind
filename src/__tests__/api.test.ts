@@ -22,6 +22,9 @@ test.before((context) => {
     mode: strict,
     preflight: false,
     prefix: false,
+    variants: {
+      'not-logged-in': 'body:not(.logged-in) &',
+    },
     theme: {
       extend: {
         screens: {

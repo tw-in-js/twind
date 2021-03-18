@@ -71,7 +71,7 @@ Ensure shorthand properties are inserted before longhand properties; eg longhand
 import type { ThemeResolver, ThemeScreen } from '../types'
 
 import { tail, includes, buildMediaQuery } from '../internal/util'
-import { GROUP_RE } from './decorate'
+import { GROUP_RE, NOT_PREFIX_RE } from './decorate'
 
 // Shared variables
 let _: string | RegExpExecArray | null | number | ThemeScreen
@@ -182,7 +182,7 @@ export const makeVariantPresedenceCalculator = (
     variant == ':dark'
     ? 1 << 30
     : // 4: precedence of other at-rules
-    (_ = variants[variant] || variant)[0] == '@'
+    (_ = variants[variant] || variant.replace(NOT_PREFIX_RE, ':$2'))[0] == '@'
     ? atRulePresedence(_)
     : // 17: pseudo and group variants
       pseudoPrecedence(variant))
