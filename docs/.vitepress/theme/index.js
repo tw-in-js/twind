@@ -10,7 +10,7 @@ import Emoji from '../components/Emoji.vue'
 import Quote from '../components/Quote.vue'
 import UnderConstruction from '../components/UnderConstruction.vue'
 
-setup({ preflight: false })
+setup({ preflight: false, mode: 'silent' })
 
 export default {
   ...Theme,
