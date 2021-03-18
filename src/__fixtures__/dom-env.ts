@@ -2,7 +2,14 @@ import type { Test } from 'uvu'
 
 import { JSDOM, VirtualConsole } from 'jsdom'
 
-const GLOBAL_PROPERTIES = ['window', 'self', 'document', 'navigator', 'getComputedStyle'] as const
+const GLOBAL_PROPERTIES = [
+  'window',
+  'self',
+  'document',
+  'navigator',
+  'getComputedStyle',
+  'MutationObserver',
+] as const
 
 const kDefaultView = Symbol('kDefaultView')
 
