@@ -227,10 +227,10 @@ module.exports = {
   docsDir: '.',
   lang: 'en-US',
   themeConfig: {
-    // algolia: {
-    //   apiKey: 'your_api_key',
-    //   indexName: 'index_name',
-    // },
+    algolia: {
+      apiKey: 'your_api_key',
+      indexName: 'index_name',
+    },
     nav: [
       { text: 'Guide', link: '/handbook/introduction' },
       { text: 'API', link: '/api/README.html' },
