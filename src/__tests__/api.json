@@ -375,6 +375,7 @@
   "grid-rows-1": ".grid-rows-1{grid-template-rows:repeat(1,minmax(0,1fr))}",
   "grid-rows-none": ".grid-rows-none{grid-template-rows:none}",
   "grid-rows-layout": ".grid-rows-layout{grid-template-rows:200px minmax(900px, 1fr) 100px}",
+  "grid-rows-auto-1fr-auto": ".grid-rows-auto-1fr-auto{grid-template-rows:auto-1fr-auto}",
   "grid-flow-row": ".grid-flow-row{grid-auto-flow:row}",
   "grid-flow-col": ".grid-flow-col{grid-auto-flow:column}",
   "auto-rows-auto": ".auto-rows-auto{grid-auto-rows:auto}",
@@ -788,5 +789,10 @@
   "siblings:underline": ".siblings\\:underline~*{text-decoration:underline}",
   "sibling:underline": ".sibling\\:underline+*{text-decoration:underline}",
   "text-center!": ".text-center\\!{text-align:center !important}",
-  "override:text-center": ".override\\:text-center.override\\:text-center{text-align:center}"
+  "override:text-center": ".override\\:text-center.override\\:text-center{text-align:center}",
+  "not-focus:invalid:border-red-500": ".not-focus\\:invalid\\:border-red-500:not(:focus):invalid{--tw-border-opacity:1;border-color:#ef4444;border-color:rgba(239,68,68,var(--tw-border-opacity))}",
+  "invalid:not-focus:border-red-500": ".invalid\\:not-focus\\:border-red-500:invalid:not(:focus){--tw-border-opacity:1;border-color:#ef4444;border-color:rgba(239,68,68,var(--tw-border-opacity))}",
+  "not-disabled:focus:font-bold": ".not-disabled\\:focus\\:font-bold:not(:disabled):focus{font-weight:700}",
+  "not-logged-in:hidden": "body:not(.logged-in) .not-logged-in\\:hidden{display:none}",
+  "not-last-child:mb-5": ".not-last-child\\:mb-5:not(:last-child){margin-bottom:1.25rem}"
 }

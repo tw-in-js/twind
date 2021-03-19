@@ -5,6 +5,7 @@ import { tail, escape, buildMediaQuery } from '../internal/util'
 let _: RegExpExecArray | null | readonly ThemeScreenValue[] | string
 
 export const GROUP_RE = /^:(group(?:(?!-focus).+?)*)-(.+)$/
+export const NOT_PREFIX_RE = /^(:not)-(.+)/
 
 // Wraps a CSS rule object with variant at-rules and pseudo classes
 // { '.selector': {...} }
@@ -36,7 +37,9 @@ export const decorate = (
 
     // Check other well known variants
     // and fallback to pseudo class or element
-    return { [variants[tail(variant)] || '&' + variant]: translation }
+    return {
+      [variants[tail(variant)] || '&' + variant.replace(NOT_PREFIX_RE, '$1(:$2)')]: translation,
+    }
   }
 
   // Apply variants depth-first
