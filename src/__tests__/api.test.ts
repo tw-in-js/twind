@@ -972,4 +972,17 @@ test('using @import with array', ({ tw, sheet }) => {
   ])
 })
 
+test('using interpolated arbitrary value', ({ tw, sheet }) => {
+  assert.is(tw`py-[${0}px] my-[${5}px]`, 'py-[0px] my-[5px]')
+  assert.equal(sheet.target, [
+    '.py-\\[0px\\]{padding-bottom:0px;padding-top:0px}',
+    '.my-\\[5px\\]{margin-bottom:5px;margin-top:5px}',
+  ])
+
+  sheet.reset()
+
+  assert.is(tw`p-${'[3px]'}`, 'p-[3px]')
+  assert.equal(sheet.target, ['.p-\\[3px\\]{padding:3px}'])
+})
+
 test.run()

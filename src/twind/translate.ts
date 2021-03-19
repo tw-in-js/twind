@@ -22,7 +22,7 @@ export const translate = (
     return rule.d(context)
   }
 
-  const parameters = rule.d.split('-')
+  const parameters = rule.d.split(/-(?![^[]*])/g)
 
   // Bail early for already hashed class names
   // Only if there are no variants and no negation

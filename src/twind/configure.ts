@@ -22,7 +22,7 @@ import { silent, strict, warn } from './modes'
 import { autoprefix, noprefix } from './prefix'
 import { makeThemeResolver } from './theme'
 
-import { cyrb32, identity, tail, merge, evalThunk, ensureMaxSize } from '../internal/util'
+import { cyrb32, identity, tail, merge, evalThunk, ensureMaxSize, includes } from '../internal/util'
 
 import { parse } from './parse'
 import { translate as makeTranslate } from './translate'
@@ -86,15 +86,10 @@ export const configure = (
     tw: (...tokens: unknown[]) => process(tokens),
 
     theme: ((section: keyof Theme, key?: string | string[], defaultValue?: unknown): unknown => {
-      // Empty key use the standard tailwind default key
-      if (key != null && !key.length) {
-        key = 'DEFAULT'
-      }
-
-      // If no theme value is found, notify 'mode', it may be able to resolve a value
       const value =
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         theme(section, key as string, defaultValue as any) ??
+        // If no theme value is found, notify 'mode', it may be able to resolve a value
         mode.unknown(
           section,
           key == null || Array.isArray(key) ? key : key.split('.'),
@@ -103,7 +98,9 @@ export const configure = (
         )
 
       // Add negate to theme value using calc to support complex values
-      return activeRule.n && value && typeof value == 'string' ? `calc(${value} * -1)` : value
+      return activeRule.n && value && includes('rg', (typeof value)[5])
+        ? `calc(${value} * -1)`
+        : value
     }) as ThemeResolver,
 
     tag: (value) => (hash ? hash(value) : value),

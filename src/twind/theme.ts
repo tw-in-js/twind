@@ -832,6 +832,11 @@ const resolveContext: ThemeSectionResolverContext = {
       }, {} as Record<string, string | undefined>),
 }
 
+const handleArbitraryValues = (section: keyof Theme, key: string): string | false =>
+  (key = (key[0] == '[' && key.slice(-1) == ']' && key.slice(1, -1)) as string) &&
+  includes(section, 'olor') == (key[0] == '#' || /^(?:#|(?:hsl|rgb)a?\()/.test(key)) &&
+  key
+
 export const makeThemeResolver = (config?: ThemeConfiguration): ThemeResolver => {
   const cache = new Map<keyof Theme, Record<string, unknown>>()
 
@@ -871,7 +876,9 @@ export const makeThemeResolver = (config?: ThemeConfiguration): ThemeResolver =>
     }
 
     if (key != null) {
-      const value: unknown = base[(Array.isArray(key) ? join(key) : (key as string)) || 'DEFAULT']
+      key = (Array.isArray(key) ? join(key) : (key as string)) || 'DEFAULT'
+
+      const value: unknown = handleArbitraryValues(section, key as string) || base[key as string]
 
       return value == null
         ? defaultValue

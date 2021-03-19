@@ -80,20 +80,13 @@ export const escape =
   (typeof CSS !== 'undefined' && CSS.escape) ||
   // Simplified: escaping only special characters
   // Needed for NodeJS and Edge <79 (https://caniuse.com/mdn-api_css_escape)
-  ((className: string): string => {
-    const firstCodeUnit = className.charCodeAt(0)
-    let firstChar = ''
-
-    // If the character is the first character and is in the range [0-9] (2xl, ...)
-    if (firstCodeUnit >= 0x0030 && firstCodeUnit <= 0x0039) {
+  ((className: string): string =>
+    className
+      // Simplifed escape testing only for chars that we know happen to be in tailwind directives
+      .replace(/[!"'`*+.,;:\\/<=>?@#$%&^|~()[\]{}]/g, '\\$&')
+      // If the character is the first character and is in the range [0-9] (2xl, ...)
       // https://drafts.csswg.org/cssom/#escape-a-character-as-code-point
-      firstChar = '\\' + firstCodeUnit.toString(16) + ' '
-      className = tail(className)
-    }
-
-    // Simplifed escape testing only for chars that we know happen to be in tailwind directives
-    return firstChar + className.replace(/[!./:#]/g, '\\$&')
-  })
+      .replace(/^\d/, '\\3$& '))
 
 export const buildMediaQuery = (screen: ThemeScreen): string => {
   if (!Array.isArray(screen)) {

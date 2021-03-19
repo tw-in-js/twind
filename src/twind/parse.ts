@@ -73,7 +73,7 @@ const saveRule = (buffer: string): '' => {
     buffer = tail(buffer)
   }
 
-  const important = buffer[buffer.length - 1] == '!'
+  const important = buffer.slice(-1) == '!'
 
   if (important) {
     buffer = buffer.slice(0, -1)
@@ -87,11 +87,16 @@ const saveRule = (buffer: string): '' => {
 }
 
 const parseString = (token: string, isVariant?: boolean): void => {
-  let char: string
   let buffer = ''
 
-  for (let position = 0; position < token.length; ) {
-    switch ((char = token[position++])) {
+  for (let char: string, dynamic = false, position = 0; (char = token[position++]); ) {
+    if (dynamic || char == '[') {
+      buffer += char
+      dynamic = char != ']'
+      continue
+    }
+
+    switch (char) {
       case ':':
         // Check if this is an pseudo element "after::"
         buffer =
@@ -214,7 +219,10 @@ const buildStatics = (strings: TemplateStringsArray): Static[] => {
     let buffer = ''
 
     statics = strings.map((token, index) => {
-      if (slowModeIndex !== slowModeIndex && includes(':-(', (strings[index + 1] || '')[0])) {
+      if (
+        slowModeIndex !== slowModeIndex &&
+        (token.slice(-1) == '[' || includes(':-(', (strings[index + 1] || '')[0]))
+      ) {
         // If the the string after the upcoming interpolation
         // would start a grouping we switch to slow mode now
         slowModeIndex = index
@@ -230,8 +238,8 @@ const buildStatics = (strings: TemplateStringsArray): Static[] => {
 
           buffer += token
 
-          // Join consecutive strings
-          if (typeof interpolation == 'string') {
+          // Join consecutive strings and numbers
+          if (includes('rg', (typeof interpolation)[5])) {
             buffer += interpolation
           } else if (interpolation) {
             parseString(buffer)
