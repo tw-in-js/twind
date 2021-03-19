@@ -73,7 +73,7 @@ const saveRule = (buffer: string): '' => {
     buffer = tail(buffer)
   }
 
-  const important = buffer[buffer.length - 1] == '!'
+  const important = buffer.slice(-1) == '!'
 
   if (important) {
     buffer = buffer.slice(0, -1)
@@ -219,7 +219,10 @@ const buildStatics = (strings: TemplateStringsArray): Static[] => {
     let buffer = ''
 
     statics = strings.map((token, index) => {
-      if (slowModeIndex !== slowModeIndex && includes(':-(', (strings[index + 1] || '')[0])) {
+      if (
+        slowModeIndex !== slowModeIndex &&
+        (token.slice(-1) == '[' || includes(':-(', (strings[index + 1] || '')[0]))
+      ) {
         // If the the string after the upcoming interpolation
         // would start a grouping we switch to slow mode now
         slowModeIndex = index
@@ -235,8 +238,8 @@ const buildStatics = (strings: TemplateStringsArray): Static[] => {
 
           buffer += token
 
-          // Join consecutive strings
-          if (typeof interpolation == 'string') {
+          // Join consecutive strings and numbers
+          if (includes('rg', (typeof interpolation)[5])) {
             buffer += interpolation
           } else if (interpolation) {
             parseString(buffer)
