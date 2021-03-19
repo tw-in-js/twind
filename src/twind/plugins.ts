@@ -92,14 +92,11 @@ const asRGBA = <T extends string | undefined>(
   opacityProperty: string,
   opacityDefault?: string,
 ): T | string => {
-  if (color && color[0] == '#') {
-    return `rgba(${parseColorComponent(
-      color.substr(1, (_ = (color.length - 1) / 3)),
-      ($ = [17, 1, 0.062272][_ - 1]),
-    )},${parseColorComponent(color.substr(1 + _, _), $)},${parseColorComponent(
-      color.substr(1 + 2 * _, _),
+  if (color && color[0] == '#' && (_ = (color.length - 1) / 3) && ($ = [17, 1, 0.062272][_ - 1])) {
+    return `rgba(${parseColorComponent(color.substr(1, _), $)},${parseColorComponent(
+      color.substr(1 + _, _),
       $,
-    )},${
+    )},${parseColorComponent(color.substr(1 + 2 * _, _), $)},${
       opacityProperty
         ? `var(--tw-${opacityProperty}${opacityDefault ? ',' + opacityDefault : ''})`
         : opacityDefault || 1
