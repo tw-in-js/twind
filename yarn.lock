@@ -822,10 +822,10 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
-distilt@^0.10.2:
-  version "0.10.2"
-  resolved "https://registry.npmjs.org/distilt/-/distilt-0.10.2.tgz#40e3c6bb45c9495e44857e0c37ea120380926c05"
-  integrity sha512-m+d3aWg6OnpnzWttFsEaXakcauXFw5tQhxf3Hzh0JDMKtfqRBHezKbf/3+gucLz39583yA6EiDJYmUMC4b98AA==
+distilt@^0.10.3:
+  version "0.10.3"
+  resolved "https://registry.npmjs.org/distilt/-/distilt-0.10.3.tgz#24bba0228a7df163522bc00444775a61ef8a4d8f"
+  integrity sha512-ieyPdDJSUQ0fOAiXwnPIfv4jRjhP3v6zzC544RjD2gMhnV/MVMY62fQkHkDh7b4zmU88vahvINaIXLA9wDv31A==
   dependencies:
     es-module-lexer "^0.3.26"
     esbuild "^0.9.3"
