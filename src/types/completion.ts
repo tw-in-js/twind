@@ -491,8 +491,7 @@ export interface Plugins {}
 
 export type CoreCompletionTokens =
   | `${FromTheme<'screens'>}:`
-  // TODO | `${'' | 'not-'}${SimplePseudoClasses}:`
-  | `${SimplePseudoClasses}:`
+  | `${'' | 'not-'}${SimplePseudoClasses}:`
   | `${Join<'group', '' | Interpolate<'string'>>}-${SimplePseudoClasses}:`
   | `${SimplePseudoElements}::`
   | `${CoreVariants}:`
