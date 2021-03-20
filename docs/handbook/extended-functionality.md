@@ -34,7 +34,7 @@ Because Twind is generating CSS during runtime there is no to need restrict the 
 
 [View docs for dark mode](/handbook/configuration#dark-mode)
 
-### Most pseudo classes can be uses as variant or `group-*` variant
+### Most pseudo classes can be used as variant or `group-*` variant
 
 Unknown variants (not listed in [core variants](https://github.com/tw-in-js/twind/blob/main/src/twind/variants.ts)) are assumed to be [pseudo classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes).
 
@@ -52,6 +52,32 @@ tw`is-header:font-bold`
 ```
 
 > 🙋 If you have an idea how we could support these within the parser please [open an issue](https://github.com/tw-in-js/twind/issues) for discussions.
+
+### Negating styles with the `not-` pseudo-class prefix.
+
+Most Twind rules can be prefixed with the `not-`prefix, which represents a non-match to the rule. For instance, `not-hover:uppercase` would apply the uppercase style any time the element is not being hovered.
+
+Here are some other examples using the `not-` prefix, with the derived CSS selector:
+
+| Class name                       | Selector                                                  |
+| -------------------------------- | --------------------------------------------------------- |
+| not-focus:invalid:border-red-500 | .not-focus\\:invalid\\:border-red-500:not(:focus):invalid |
+| invalid:not-focus:border-red-500 | .invalid\\:not-focus\\:border-red-500:invalid:not(:focus) |
+| not-disabled:focus:font-bold     | .not-disabled\\:focus\\:font-bold:not(:disabled):focus    |
+| not-last-child:mb-5              | .not-last-child\\:mb-5:not(:last-child)                   |
+
+Core and user defined variants are not expanded and stay as is:
+
+```js
+setup({
+  variants: {
+    'not-logged-in': 'body:not(.logged-in) &',
+  },
+})
+
+tw`not-logged-in:hidden`
+// => `body:not(.logged-in) .not-logged-in\\:hidden`
+```
 
 ### Named groups to support nested groups
 
@@ -181,6 +207,66 @@ const special = tw`${shared} override:(text-purple-600 no-underline)`
 
 ## Utilities
 
+### Arbitrary style values using square bracket syntax
+
+While not generally recommended, there are times when you will need to break out of the Twind constraints for one-off styles like a slight rotation, relative positioning, custom font size, etc. Twind provides a square bracket syntax, which allows you to define these arbitrary styles without ever leaving your HTML:
+
+```html
+<p class="relative -top-[-8px]">Hello Twind!</p>
+```
+
+:::tip
+Square bracket syntax will work almost anywhere that you could apply a theme value, including with variants: `md:top-[-80px]`
+:::
+
+Here are some other examples of using the square bracket syntax to provide arbitrary CSS values:
+
+```
+bg-[#0f0]
+bg-[#ff0000]
+bg-[#0000ffcc]
+bg-[hsl(0,100%,50%)]
+bg-[hsla(0,100%,50%,0.3)]
+bg-[rgb(123,123,123)]
+bg-[rgba(123,123,123,var(--tw-bg-opacity))]
+bg-opacity-[0.11]
+border-[#f00]
+border-[2.5px]
+duration-[2s]
+grid-cols-[200px,repeat(auto-fill,minmax(15%,100px)),300px]
+grid-cols-[minmax(100px,max-content)repeat(auto-fill,200px)20%]
+grid-cols-[repeat(auto-fit,minmax(150px,1fr))]
+flex-[30%]
+ring-[#1da1f2]
+ring-[7px]
+ring-offset-[#1da1f2]
+ring-offset-[7px]
+rotate-[0.5turn]
+rotate-[23deg]
+rotate-[2.3rad]
+rotate-[401grad]
+rotate-[1.5turn]
+rounded-[33%]
+scale-[2]
+scale-x-[1.15]
+skew-[30deg]
+skew-x-[1.07rad]
+space-x-[20cm]
+space-x-[calc(20%-1cm)]
+text-[#1da1f2]
+text-[2.23rem]
+text-[6px]
+text-[calc(1vw+1vh+.5vmin)]
+top-[-123px]
+top-[123px]
+transition-[font-size,color,width]
+translate-[3in]
+translate-y-[2px]
+w-[3.23rem]
+w-[calc(100%+1rem)]
+w-[clamp(23ch,50%,46ch)]
+```
+
 ### Some directives support all CSS values
 
 - `align-*` - [vertical-align](https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align)
@@ -273,51 +359,6 @@ While Twind strives to maintain feature parity with Tailwind, we've added severa
 
 - Custom grouping syntax for directives and variants [View Docs](grouping-syntax)
 - Overwrite styles with the `important!` directive [View Docs](overwriting-styles)
-
-## Variants
-
-[View docs on extended variants and directives](extended-variants-directives.md)
-
-- Every variant can be applied to every directive
-- Dark mode is always available
-- Most pseudo classes can be uses as variant or `group-*` variant
-- Unknown variants (not listed in [core variants](https://github.com/tw-in-js/twind/blob/main/src/twind/variants.ts)) are assumed to be [pseudo classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes)
-- Advanced\_ pseudo classes (those that take parameters like `:is(header)`) are not supported out of the box as they use `(...)` which is parsed as a variant or directive.
-- Nested groups are supported by named groups
-- [Pseudo Elements](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements) are supported using double colon
-- `siblings:*` - General sibling combinator (`& ~ *`)
-- `sibling:*` - Adjacent sibling combinator (`& + *`)
-- `children:*` - Child combinator (`& > *`)
-- `override:*` - Increase the specificity of rules
-
-## Directives
-
-- Some directives support all CSS values
-- `align-*` - [vertical-align](https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align)
-- `appearance-*` - [appearance](https://developer.mozilla.org/en-US/docs/Web/CSS/appearance)
-- `clear-*` - [clear](https://developer.mozilla.org/en-US/docs/Web/CSS/clear)
-- `cursor-*` - [cursor](https://developer.mozilla.org/en-US/docs/Web/CSS/cursor)
-- `float-*` - [float](https://developer.mozilla.org/en-US/docs/Web/CSS/float)
-- `list-*` - [list-style-type](https://developer.mozilla.org/en-US/docs/Web/CSS/list-style-type)
-- `object-*` - [object-position](https://developer.mozilla.org/en-US/docs/Web/CSS/object-position); using a dash as separator: `object-right-top`
-- `origin-*` - [transform-origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin); using a dash as separator: `origin-top-left`
-- `overflow-*` - [overflow](https://developer.mozilla.org/en-US/docs/Web/CSS/overflow)
-- `pointer-events-*` - [pointer-events](https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events)
-- `select-*` - [user-select](https://developer.mozilla.org/en-US/docs/Web/CSS/user-select)
-- `whitespace-*` - [white-space](https://developer.mozilla.org/en-US/docs/Web/CSS/white-space)
-- `text-underline`
-- `text-no-underline`
-- `text-line-through`
-- `text-uppercase`
-- `text-lowercase`
-- `text-capitalize`
-- `font-italic`
-- `font-no-italic`
-- `bg-gradient-to-*` is built-in
-- `border` and `divide` allow to combine positions
-- Every permutation of `t`op, `r`righ, `l`eft, and `b`ottom is allowed (`x` and `y` can not be combined)
-- `rotate`, `scale` , `skew` and `translate` provide a fallback for IE 11
-- Theme values are automatically negated
 
 ## Extension Packages
 
