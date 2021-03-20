@@ -359,6 +359,24 @@ It would be untrue to suggest that the design here is totally original. Other th
 - [style-vendorizer](https://github.com/kripod/style-vendorizer): essential CSS prefixing helpers in less than 1KB of JavaScript.
 - [CSSType](https://github.com/frenic/csstype): providing autocompletion and type checking for CSS properties and values.
 
+---
+
+## Backers
+
+Support us with a monthly donation and help us continue our activities. [[Become a backer](https://opencollective.com/twind#backer)]
+
+<a href="https://opencollective.com/twind/backer/0/website" target="_blank"><img src="https://opencollective.com/twind/backer/0/avatar.svg"></a>
+<a href="https://opencollective.com/twind/backer/1/website" target="_blank"><img src="https://opencollective.com/twind/backer/1/avatar.svg"></a>
+<a href="https://opencollective.com/twind/backer/2/website" target="_blank"><img src="https://opencollective.com/twind/backer/2/avatar.svg"></a>
+
+## Sponsors
+
+Become a sponsor and get your logo on our README on GitHub with a link to your site. [[Become a sponsor](https://opencollective.com/twind#sponsor)]
+
+<a href="https://opencollective.com/twind/sponsor/0/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/0/avatar.svg"></a>
+
+---
+
 ## License
 
 [MIT](https://github.com/tw-in-js/twind/blob/main/LICENSE)
