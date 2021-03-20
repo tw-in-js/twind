@@ -868,5 +868,6 @@
   ],
   "duration-[2s]": ".duration-\\[2s\\]{transition-duration:2s}",
   "text-[2.23rem]": ".text-\\[2\\.23rem\\]{font-size:2.23rem}",
+  "hover:text-[rgba(23,83,43,.8)]": ".hover\\:text-\\[rgba\\(23\\,83\\,43\\,\\.8\\)\\]:hover{color:rgba(23,83,43,.8)}",
   "text-[tomato]": ".text-\\[tomato\\]{color:tomato}"
 }
