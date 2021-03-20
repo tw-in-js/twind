@@ -22,11 +22,20 @@ import { silent, strict, warn } from './modes'
 import { autoprefix, noprefix } from './prefix'
 import { makeThemeResolver } from './theme'
 
-import { cyrb32, identity, tail, merge, evalThunk, ensureMaxSize, includes } from '../internal/util'
+import {
+  cyrb32,
+  identity,
+  tail,
+  merge,
+  evalThunk,
+  ensureMaxSize,
+  includes,
+  join,
+} from '../internal/util'
 
 import { parse } from './parse'
 import { translate as makeTranslate } from './translate'
-import { decorate as makeDecorate } from './decorate'
+import { decorate as makeDecorate, prepareVariantSelector } from './decorate'
 import { serialize as makeSerialize } from './serialize'
 import { inject as makeInject } from './inject'
 
@@ -51,9 +60,6 @@ const stringify = (rule: Rule, directive = rule.d): string =>
   typeof directive == 'function'
     ? ''
     : rule.v.reduce(stringifyVariant, '') + (rule.n ? '-' : '') + directive + (rule.i ? '!' : '')
-
-const prepareVariantSelector = (variant: string): string =>
-  variant[1] == '[' ? tail(variant) : variant
 
 // Use hidden '_' property to collect class names which have no css translation like hashed twind classes
 const COMPONENT_PROPS = { _: { value: '', writable: true } }
@@ -286,7 +292,7 @@ export const configure = (
   // This function is called from `tw(...)`
   // it parses, translates, decorates, serializes and injects the tokens
   const process = (tokens: unknown[]): string =>
-    parse(tokens).map(convert).filter(Boolean).join(' ')
+    join(parse(tokens).map(convert).filter(Boolean) as string[], ' ')
 
   // Determine if we should inject the preflight (browser normalize)
   const preflight = sanitize<Preflight | false | CSSRules>(config.preflight, identity, false)

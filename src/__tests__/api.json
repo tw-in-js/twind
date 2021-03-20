@@ -876,7 +876,7 @@
   "[href$='.org']:bg-red-400": ".\\[href\\$\\=\\'\\.org\\'\\]\\:bg-red-400[href$='.org']{--tw-bg-opacity:1;background-color:#f87171;background-color:rgba(248,113,113,var(--tw-bg-opacity))}",
   "[href^='https'][href$='.org']:bg-green-400": ".\\[href\\^\\=\\'https\\'\\]\\[href\\$\\=\\'\\.org\\'\\]\\:bg-green-400[href^='https'][href$='.org']{--tw-bg-opacity:1;background-color:#34d399;background-color:rgba(52,211,153,var(--tw-bg-opacity))}",
   "[lang]:font-bold": ".\\[lang\\]\\:font-bold[lang]{font-weight:700}",
-  "not-[lang]:italic": ".not-\\[lang\\]\\:italic:not(:[lang]){font-style:italic}",
+  "not-[lang]:italic": ".not-\\[lang\\]\\:italic:not([lang]){font-style:italic}",
   "[lang~='en-us']:text-blue-400": ".\\[lang\\~\\=\\'en-us\\'\\]\\:text-blue-400[lang~='en-us']{--tw-text-opacity:1;color:#60a5fa;color:rgba(96,165,250,var(--tw-text-opacity))}",
   "[lang|='zh']:text-red-400": ".\\[lang\\|\\=\\'zh\\'\\]\\:text-red-400[lang|='zh']{--tw-text-opacity:1;color:#f87171;color:rgba(248,113,113,var(--tw-text-opacity))}",
   "[data-lang='zh-TW']:text-purple-400": ".\\[data-lang\\=\\'zh-TW\\'\\]\\:text-purple-400[data-lang='zh-TW']{--tw-text-opacity:1;color:#a78bfa;color:rgba(167,139,250,var(--tw-text-opacity))}"
