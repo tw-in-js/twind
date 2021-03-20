@@ -7,6 +7,9 @@ let _: RegExpExecArray | null | readonly ThemeScreenValue[] | string
 export const GROUP_RE = /^:(group(?:(?!-focus).+?)*)-(.+)$/
 export const NOT_PREFIX_RE = /^(:not)-(.+)/
 
+export const prepareVariantSelector = (variant: string): string =>
+  variant[1] == '[' ? tail(variant) : variant
+
 // Wraps a CSS rule object with variant at-rules and pseudo classes
 // { '.selector': {...} }
 // => { '&:hover': { '.selector': {...} } }
@@ -25,7 +28,7 @@ export const decorate = (
 
     // Dark mode
     if (variant == ':dark' && darkMode == 'class') {
-      return { [`.dark &`]: translation }
+      return { '.dark &': translation }
     }
 
     // Groups classes like: group-focus and group-hover
@@ -38,7 +41,12 @@ export const decorate = (
     // Check other well known variants
     // and fallback to pseudo class or element
     return {
-      [variants[tail(variant)] || '&' + variant.replace(NOT_PREFIX_RE, '$1(:$2)')]: translation,
+      [variants[tail(variant)] ||
+      '&' +
+        variant.replace(
+          NOT_PREFIX_RE,
+          (_, not, variant) => not + '(' + prepareVariantSelector(':' + variant) + ')',
+        )]: translation,
     }
   }
 

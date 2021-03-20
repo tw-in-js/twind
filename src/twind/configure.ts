@@ -22,11 +22,20 @@ import { silent, strict, warn } from './modes'
 import { autoprefix, noprefix } from './prefix'
 import { makeThemeResolver } from './theme'
 
-import { cyrb32, identity, tail, merge, evalThunk, ensureMaxSize, includes } from '../internal/util'
+import {
+  cyrb32,
+  identity,
+  tail,
+  merge,
+  evalThunk,
+  ensureMaxSize,
+  includes,
+  join,
+} from '../internal/util'
 
 import { parse } from './parse'
 import { translate as makeTranslate } from './translate'
-import { decorate as makeDecorate } from './decorate'
+import { decorate as makeDecorate, prepareVariantSelector } from './decorate'
 import { serialize as makeSerialize } from './serialize'
 import { inject as makeInject } from './inject'
 
@@ -227,6 +236,9 @@ export const configure = (
       }
 
       if (translation && typeof translation == 'object') {
+        rule.v = rule.v.map(prepareVariantSelector)
+        if (important) rule.i = important
+
         // 3. decorate: apply variants
         translation = decorate(translation, rule)
 
@@ -243,8 +255,6 @@ export const configure = (
 
           // 4. serialize: convert to css string with precedence
           // 5. inject: add to dom
-          if (important) rule.i = important
-
           serialize(translation, className, rule, layer).forEach(inject)
 
           if (translation._) {
@@ -282,7 +292,7 @@ export const configure = (
   // This function is called from `tw(...)`
   // it parses, translates, decorates, serializes and injects the tokens
   const process = (tokens: unknown[]): string =>
-    parse(tokens).map(convert).filter(Boolean).join(' ')
+    join(parse(tokens).map(convert).filter(Boolean) as string[], ' ')
 
   // Determine if we should inject the preflight (browser normalize)
   const preflight = sanitize<Preflight | false | CSSRules>(config.preflight, identity, false)
