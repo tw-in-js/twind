@@ -128,15 +128,47 @@ test('use custom preflight JSON style', () => {
   create({
     sheet,
     preflight: {
-      '@font-face': {
-        'font-family': 'Baloo',
-        src: 'url(./Baloo-Regular.ttf)',
-      },
+      '@font-face': [
+        {
+          fontFamily: 'Proxima Nova',
+          fontWeight: '400',
+          src: 'url(/fonts/proxima-nova/400-regular.woff) format("woff")',
+        },
+        {
+          fontFamily: 'Proxima Nova',
+          fontWeight: '500',
+          src: 'url(/fonts/proxima-nova/500-medium.woff) format("woff")',
+        },
+      ],
+    },
+  })
+
+  assert.is(sheet.target.length, 39)
+  assert.equal(
+    sheet.target.filter((rule) => rule.startsWith('@font-face')),
+    [
+      '@font-face{font-family:Proxima Nova;font-weight:400;src:url(/fonts/proxima-nova/400-regular.woff) format("woff")}',
+      '@font-face{font-family:Proxima Nova;font-weight:500;src:url(/fonts/proxima-nova/500-medium.woff) format("woff")}',
+    ],
+  )
+})
+
+test('use custom preflight JSON style', () => {
+  const sheet = virtualSheet()
+  create({
+    sheet,
+    preflight: {
+      '@import': `url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap')`,
     },
   })
 
   assert.is(sheet.target.length, 38)
-  assert.ok(sheet.target.includes('@font-face{font-family:Baloo;src:url(./Baloo-Regular.ttf)}'))
+  assert.equal(
+    sheet.target.filter((rule) => rule.startsWith('@import')),
+    [
+      `@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap');`,
+    ],
+  )
 })
 
 test.run()

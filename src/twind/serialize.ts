@@ -1,4 +1,4 @@
-import type { Context, CSSRules, Prefixer, Rule, Token } from '../types'
+import type { Context, CSSRules, Prefixer, Rule, Token, MaybeArray } from '../types'
 
 import {
   join,
@@ -9,6 +9,7 @@ import {
   buildMediaQuery,
   tail,
   merge,
+  isCSSProperty,
 } from '../internal/util'
 import {
   responsivePrecedence,
@@ -94,9 +95,14 @@ export const serialize = (
     // The current presedence for determine the css position in the stylesheet
     presedence: number,
     // The rules object
-    css: CSSRules,
+    css: MaybeArray<CSSRules>,
     important: boolean | undefined,
   ): void => {
+    if (Array.isArray(css)) {
+      css.forEach((css) => css && stringify(atRules, selector, presedence, css, important))
+      return
+    }
+
     // 1. Properties
     // 3. *
     // 2. @...
@@ -114,20 +120,19 @@ export const serialize = (
     // more specfic utilities have less declarations and a higher presedence
     let numberOfDeclarations = 0
 
-    if ('@apply' in css) {
+    if ((css as CSSRules)['@apply']) {
       css = merge(
-        evalThunk(apply(css['@apply'] as Token), context),
-        { ...css, '@apply': undefined },
+        evalThunk(apply((css as CSSRules)['@apply'] as Token), context),
+        { ...(css as CSSRules), '@apply': undefined },
         context,
       )
     }
 
     // Walk through the object
-    Object.keys(css).forEach((key) => {
-      const value = evalThunk(css[key], context)
+    Object.keys(css as CSSRules).forEach((key) => {
+      const value = evalThunk((css as CSSRules)[key], context)
 
-      // string, number or Array => a property with a value
-      if (includes('rg', (typeof value)[5]) || Array.isArray(value)) {
+      if (isCSSProperty(key, value)) {
         if (value !== '' && key.length > 1) {
           // It is a Property
           const property = hyphenate(key)
@@ -145,13 +150,21 @@ export const serialize = (
             stringifyDeclaration(property, value as string | number | string[], important)
         }
       } else if (value) {
+        // TODO remove once moved from :global to @global
+        if (key == ':global') {
+          key = '@global'
+        }
+
         // If the value is an object this must be a nested block
         // like '@media ...', '@supports ... ', ':pseudo ...', '& > ...'
         // If this is a `@` rule
         if (key[0] === '@') {
-          if (key[1] === 'f') {
+          if (key[1] == 'g') {
+            // @global
+            stringify([], '', 0, value as MaybeArray<CSSRules>, important)
+          } else if (key[1] === 'f') {
             // `@font-face` is never wrapped, eg always global/root
-            stringify([], key, 0, value as CSSRules, important)
+            stringify([], key, 0, value as MaybeArray<CSSRules>, important)
           } else if (key[1] === 'k') {
             // @keyframes handling
             // To prevent
@@ -163,7 +176,7 @@ export const serialize = (
             // => "@keyframes name{from{transform:rotate(0deg)}from{transform:rotate(0deg)}}"
             const currentSize = rules.length
 
-            stringify([], '', 0, value as CSSRules, important)
+            stringify([], '', 0, value as MaybeArray<CSSRules>, important)
 
             const waypoints = rules.splice(currentSize, rules.length - currentSize)
 
@@ -178,8 +191,15 @@ export const serialize = (
               ),
               p: waypoints.reduce((sum, p) => sum + p.p, 0),
             })
+          } else if (key[1] == 'i') {
+            // @import
+            // eslint-disable-next-line @typescript-eslint/no-extra-semi
+            ;(Array.isArray(value) ? value : [value]).forEach(
+              (value) => value && rules.push({ p: 0, r: `${key} ${value};` }),
+            )
           } else {
-            if (key.slice(1, 8) == 'screen ') {
+            // @screen
+            if (key[2] == 'c') {
               key = buildMediaQuery(context.theme('screens', tail(key, 8).trim()) as string)
             }
 
@@ -188,12 +208,10 @@ export const serialize = (
               [...atRules, key],
               selector,
               presedence | responsivePrecedence(key) | atRulePresedence(key),
-              value as CSSRules,
+              value as MaybeArray<CSSRules>,
               important,
             )
           }
-        } else if (key === ':global') {
-          stringify([], '', 0, value as CSSRules, important)
         } else {
           // A selector block: { '&:focus': { ... } }
           stringify(
@@ -213,7 +231,7 @@ export const serialize = (
                 )
               : key,
             presedence,
-            value as CSSRules,
+            value as MaybeArray<CSSRules>,
             important,
           )
         }

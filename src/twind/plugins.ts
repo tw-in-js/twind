@@ -149,7 +149,7 @@ const placeHelper = (property: string, params: string[]): CSSRules => ({
   // 'evenly'
   // 'between', 'around', 'evenly' => space-$0
   // 4th char is unique
-  [property]: (includes('wun', (params[0] || '')[3]) ? 'space-' : '') + params[0],
+  [property]: params[0] && (includes('wun', (params[0] || '')[3]) ? 'space-' : '') + params[0],
 })
 
 const contentPluginFor = (property: string) => (params: string[]): CSSRules =>
@@ -157,13 +157,18 @@ const contentPluginFor = (property: string) => (params: string[]): CSSRules =>
     ? { [property]: `flex-${params[0]}` }
     : placeHelper(property, params)
 
-const gridPlugin = (kind: string): PluginHandler => (params) => {
+const gridPlugin = (kind: 'column' | 'row'): PluginHandler => (params, { theme }) => {
+  if ((_ = theme(`grid${capitalize(kind)}` as 'gridRow', params, ''))) {
+    return { [`grid-${kind}`]: _ }
+  }
+
   switch (params[0]) {
     case 'auto':
       return { [`grid-${kind}`]: 'auto' }
     case 'span':
       return {
-        [`grid-${kind}`]: params[1] === 'full' ? '1 / -1' : `span ${params[1]} / span ${params[1]}`,
+        [`grid-${kind}`]:
+          params[1] === 'full' ? '1 / -1' : params[1] && `span ${params[1]} / span ${params[1]}`,
       }
     case 'start':
     case 'end':
@@ -214,6 +219,7 @@ const transform = (gpu?: boolean): string =>
 // .skew-y-0	--skew-y: 0;
 // .skew-y-1	--skew-y: 1deg;
 const transformXYFunction: PluginHandler = (params, context, id) =>
+  params[0] &&
   (_ = context.theme(id as 'scale' | 'skew' | 'translate', params[1] || params[0])) && {
     [`--tw-${id}-x`]: params[0] !== 'y' && _,
     [`--tw-${id}-y`]: params[0] !== 'x' && _,
@@ -282,7 +288,13 @@ export const corePlugins: Plugins = {
             [`grid-template-${params[0] === 'cols' ? 'columns' : params[0]}`]:
               params.length === 2 && Number(params[1])
                 ? `repeat(${params[1]},minmax(0,1fr))`
-                : join(tail(params), ' '),
+                : context.theme(
+                    `gridTemplate${capitalize(
+                      params[0] === 'cols' ? 'columns' : params[0],
+                    )}` as 'gridTemplateRows',
+                    tail(params),
+                    join(tail(params), ' '),
+                  ),
           }
         )
 
@@ -369,7 +381,7 @@ export const corePlugins: Plugins = {
       'both',
   }),
 
-  box: (params) => ({ 'box-sizing': `${params[0]}-box` }),
+  box: (params) => ({ 'box-sizing': params[0] && `${params[0]}-box` }),
 
   // .appearance-none -> appearance: none;
   // .appearance-auto -> appearance: auto;

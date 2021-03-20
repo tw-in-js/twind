@@ -117,10 +117,10 @@ test('with animation', ({ tw, sheet }) => {
 
   assert.equal(sheet.target, [])
 
-  assert.is(tw(motion), 'tw-111zyc2')
+  assert.is(tw(motion), 'tw-1q5uh1z')
   assert.equal(sheet.target, [
-    '@keyframes tw-1r072fi{0%{--tw-vkgkf8:1;--tw-1lff04g:1;transform:scale(1);transform:translateX(var(--tw-1e4pbj4,0)) translateY(var(--tw-142admc,0)) rotate(var(--tw-9ouawy,0)) skewX(var(--tw-wnlb2r,0)) skewY(var(--tw-o4ir2d,0)) scaleX(var(--tw-vkgkf8,1)) scaleY(var(--tw-1lff04g,1))}50%{--tw-vkgkf8:1.25;--tw-1lff04g:1.25;transform:rotate(45deg);transform:translateX(var(--tw-1e4pbj4,0)) translateY(var(--tw-142admc,0)) rotate(var(--tw-9ouawy,0)) skewX(var(--tw-wnlb2r,0)) skewY(var(--tw-o4ir2d,0)) scaleX(var(--tw-vkgkf8,1)) scaleY(var(--tw-1lff04g,1));--tw-9ouawy:45deg}100%{--tw-vkgkf8:1;--tw-1lff04g:1;transform:rotate(0deg);transform:translateX(var(--tw-1e4pbj4,0)) translateY(var(--tw-142admc,0)) rotate(var(--tw-9ouawy,0)) skewX(var(--tw-wnlb2r,0)) skewY(var(--tw-o4ir2d,0)) scaleX(var(--tw-vkgkf8,1)) scaleY(var(--tw-1lff04g,1));--tw-9ouawy:0deg}}',
-    '.tw-111zyc2{animation:.6s ease-in-out infinite;animation-name:tw-1r072fi}',
+    '@keyframes tw-jjltxe{0%{--tw-vkgkf8:1;--tw-1lff04g:1;transform:scale(1);transform:translateX(var(--tw-1e4pbj4,0)) translateY(var(--tw-142admc,0)) rotate(var(--tw-9ouawy,0)) skewX(var(--tw-wnlb2r,0)) skewY(var(--tw-o4ir2d,0)) scaleX(var(--tw-vkgkf8,1)) scaleY(var(--tw-1lff04g,1))}50%{--tw-vkgkf8:1.25;--tw-1lff04g:1.25;transform:rotate(45deg);transform:translateX(var(--tw-1e4pbj4,0)) translateY(var(--tw-142admc,0)) rotate(var(--tw-9ouawy,0)) skewX(var(--tw-wnlb2r,0)) skewY(var(--tw-o4ir2d,0)) scaleX(var(--tw-vkgkf8,1)) scaleY(var(--tw-1lff04g,1));--tw-9ouawy:45deg}100%{--tw-vkgkf8:1;--tw-1lff04g:1;transform:rotate(0deg);transform:translateX(var(--tw-1e4pbj4,0)) translateY(var(--tw-142admc,0)) rotate(var(--tw-9ouawy,0)) skewX(var(--tw-wnlb2r,0)) skewY(var(--tw-o4ir2d,0)) scaleX(var(--tw-vkgkf8,1)) scaleY(var(--tw-1lff04g,1));--tw-9ouawy:0deg}}',
+    '.tw-1q5uh1z{animation:.6s ease-in-out infinite;animation-name:tw-jjltxe}',
   ])
 })
 
@@ -284,6 +284,20 @@ test('use :global', ({ tw, sheet }) => {
   ])
 })
 
+test('use @global', ({ tw, sheet }) => {
+  const style = () => ({
+    '@global': {
+      html: apply('bg-gray-900 text-white'),
+    },
+  })
+
+  assert.is(tw(style), 'tw-z31ttt')
+
+  assert.equal(sheet.target, [
+    'html{--tw-17cwy6m:1;background-color:#111827;background-color:rgba(17,24,39,var(--tw-17cwy6m));--tw-dxr4o8:1;color:#fff;color:rgba(255,255,255,var(--tw-dxr4o8))}',
+  ])
+})
+
 test('use :global within css', ({ tw, sheet }) => {
   const style = css({
     ':global': {
@@ -298,6 +312,23 @@ test('use :global within css', ({ tw, sheet }) => {
     'body{--tw-17cwy6m:1;background-color:#111827;background-color:rgba(17,24,39,var(--tw-17cwy6m));--tw-dxr4o8:1;color:#fff;color:rgba(255,255,255,var(--tw-dxr4o8))}',
     '.tw-49gfd9 a:hover{--tw-dxr4o8:1;color:#1d4ed8;color:rgba(29,78,216,var(--tw-dxr4o8))}',
     '.tw-49gfd9 a{--tw-dxr4o8:1;color:#3b82f6;color:rgba(59,130,246,var(--tw-dxr4o8))}',
+  ])
+})
+
+test('use @global within css', ({ tw, sheet }) => {
+  const style = css({
+    '@global': {
+      body: apply('bg-gray-900 text-white'),
+    },
+    a: apply('text-blue(500 hover:700)'),
+  })
+
+  assert.is(tw(style), 'tw-efetv')
+
+  assert.equal(sheet.target, [
+    'body{--tw-17cwy6m:1;background-color:#111827;background-color:rgba(17,24,39,var(--tw-17cwy6m));--tw-dxr4o8:1;color:#fff;color:rgba(255,255,255,var(--tw-dxr4o8))}',
+    '.tw-efetv a:hover{--tw-dxr4o8:1;color:#1d4ed8;color:rgba(29,78,216,var(--tw-dxr4o8))}',
+    '.tw-efetv a{--tw-dxr4o8:1;color:#3b82f6;color:rgba(59,130,246,var(--tw-dxr4o8))}',
   ])
 })
 

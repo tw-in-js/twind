@@ -9,3 +9,7 @@ export interface CSSProperties
   extends CSS.PropertiesFallback<string, string>,
     CSS.PropertiesHyphenFallback<string, string>,
     CSSCustomProperties {}
+
+export interface FontFace
+  extends CSS.AtRule.FontFaceFallback<string, string>,
+    CSS.AtRule.FontFaceHyphenFallback<string, string> {}

@@ -376,6 +376,10 @@ export const defaultTheme: Theme = {
     extrabold: '800',
     black: '900',
   },
+  gridTemplateColumns: {},
+  gridTemplateRows: {},
+  gridColumn: {},
+  gridRow: {},
   gap: alias('spacing'),
   gradientColorStops: alias('colors'),
   height: (theme) => ({

@@ -25,7 +25,8 @@ export interface ShimOptions {
   tw?: TW
 }
 
-export { virtualSheet, getStyleTag, getStyleTagProperties } from '../../sheets/index'
+export * from '../../index'
+export * from '../../sheets/index'
 
 const noop = () => undefined
 
