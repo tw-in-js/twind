@@ -52,6 +52,9 @@ const stringify = (rule: Rule, directive = rule.d): string =>
     ? ''
     : rule.v.reduce(stringifyVariant, '') + (rule.n ? '-' : '') + directive + (rule.i ? '!' : '')
 
+const prepareVariantSelector = (variant: string): string =>
+  variant[1] == '[' ? tail(variant) : variant
+
 // Use hidden '_' property to collect class names which have no css translation like hashed twind classes
 const COMPONENT_PROPS = { _: { value: '', writable: true } }
 
@@ -227,6 +230,9 @@ export const configure = (
       }
 
       if (translation && typeof translation == 'object') {
+        rule.v = rule.v.map(prepareVariantSelector)
+        if (important) rule.i = important
+
         // 3. decorate: apply variants
         translation = decorate(translation, rule)
 
@@ -243,8 +249,6 @@ export const configure = (
 
           // 4. serialize: convert to css string with precedence
           // 5. inject: add to dom
-          if (important) rule.i = important
-
           serialize(translation, className, rule, layer).forEach(inject)
 
           if (translation._) {
