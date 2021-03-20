@@ -26,7 +26,7 @@ export const mode = (report: (message: string) => void): Mode => ({
     }
 
     // Put it back together
-    return report(stack.join('at '))
+    return report(join(stack, 'at '))
   },
 })
 

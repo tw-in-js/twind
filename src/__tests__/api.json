@@ -867,5 +867,6 @@
     ".rotate-\\[1\\.5turn\\]{--tw-rotate:1.5turn;transform:rotate(1.5turn);transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}"
   ],
   "duration-[2s]": ".duration-\\[2s\\]{transition-duration:2s}",
-  "text-[2.23rem]": ".text-\\[2\\.23rem\\]{font-size:2.23rem}"
+  "text-[2.23rem]": ".text-\\[2\\.23rem\\]{font-size:2.23rem}",
+  "text-[tomato]": ".text-\\[tomato\\]{color:tomato}"
 }

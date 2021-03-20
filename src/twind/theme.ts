@@ -834,7 +834,7 @@ const resolveContext: ThemeSectionResolverContext = {
 
 const handleArbitraryValues = (section: keyof Theme, key: string): string | false =>
   (key = (key[0] == '[' && key.slice(-1) == ']' && key.slice(1, -1)) as string) &&
-  includes(section, 'olor') == (key[0] == '#' || /^(?:#|(?:hsl|rgb)a?\()/.test(key)) &&
+  includes(section, 'olor') == /^(#|(hsl|rgb)a?\(|[a-z]+$)/.test(key) &&
   key
 
 export const makeThemeResolver = (config?: ThemeConfiguration): ThemeResolver => {
