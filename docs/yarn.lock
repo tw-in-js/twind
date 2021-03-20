@@ -1469,10 +1469,10 @@ trouter@^2.0.1:
   dependencies:
     matchit "^1.0.0"
 
-twind@^0.16.3:
-  version "0.16.3"
-  resolved "https://registry.npmjs.org/twind/-/twind-0.16.3.tgz#8deadbfb7a4f354dc81635c3252fd1ea09bcbe9c"
-  integrity sha512-zTL1oBNEar0CvuWU4/Bkrw/DAAirpTVirfpMMPvLSThuYI7fQzXyFE0u1vR6wM/JmRrajOgZT6I60mqvbDWoUA==
+twind@^0.16.6:
+  version "0.16.6"
+  resolved "https://registry.npmjs.org/twind/-/twind-0.16.6.tgz#2da593cc390311cb6284252cd169518f6c524a70"
+  integrity sha512-YQ6d3KPfqwyytY/TGXuKquNagbAfyOKITP40i/4PHRwNvcQU+z56ralLp0aRW0ydVUVQZC+vR/2UFU9i0xc+/w==
   dependencies:
     csstype "^3.0.5"
     htmlparser2 "^6.0.0"

@@ -7,7 +7,7 @@
   "author": "Twind Team",
   "license": "MIT",
   "devDependencies": {
-    "twind": "^0.16.3",
+    "twind": "^0.16.6",
     "typedoc": "^0.20.32",
     "typedoc-plugin-markdown": "^3.6.0",
     "typedoc-plugin-param-names": "^2.0.0",
