@@ -237,23 +237,23 @@ export interface CorePlugins {
 
   // SPACING
   // -------
-  p: FromTheme<'spacing'>
-  py: FromTheme<'spacing'>
-  px: FromTheme<'spacing'>
-  pt: FromTheme<'spacing'>
-  pr: FromTheme<'spacing'>
-  pb: FromTheme<'spacing'>
-  pl: FromTheme<'spacing'>
+  p: FromTheme<'padding'>
+  py: FromTheme<'padding'>
+  px: FromTheme<'padding'>
+  pt: FromTheme<'padding'>
+  pr: FromTheme<'padding'>
+  pb: FromTheme<'padding'>
+  pl: FromTheme<'padding'>
 
-  m: Negatable<FromTheme<'spacing'>>
-  my: Negatable<FromTheme<'spacing'>>
-  mx: Negatable<FromTheme<'spacing'>>
-  mt: Negatable<FromTheme<'spacing'>>
-  mr: Negatable<FromTheme<'spacing'>>
-  mb: Negatable<FromTheme<'spacing'>>
-  ml: Negatable<FromTheme<'spacing'>>
+  m: Negatable<FromTheme<'margin'>>
+  my: Negatable<FromTheme<'margin'>>
+  mx: Negatable<FromTheme<'margin'>>
+  mt: Negatable<FromTheme<'margin'>>
+  mr: Negatable<FromTheme<'margin'>>
+  mb: Negatable<FromTheme<'margin'>>
+  ml: Negatable<FromTheme<'margin'>>
 
-  space: Negatable<Join<'x' | 'y', FromTheme<'spacing'>>> | Join<'x' | 'y', 'reverse'>
+  space: Negatable<Join<'x' | 'y', FromTheme<'space'>>> | Join<'x' | 'y', 'reverse'>
 
   // SIZING
   // ------
@@ -264,7 +264,7 @@ export interface CorePlugins {
 
   // TYPOGRAPHY
   // ----------
-  font: FromTheme<'fontFamily'> | FromTheme<'fontWeight'> // | 'italic' | 'not-italic'
+  font: FromTheme<'fontFamily'> | FromTheme<'fontWeight'> | 'italic' | 'not-italic'
   text:
     | FromTheme<'fontSize'>
     | 'left'
@@ -273,13 +273,13 @@ export interface CorePlugins {
     | 'justify'
     | FromTheme<'textColor'>
     | Join<'opacity', FromTheme<'textOpacity'>>
-  // | 'underline'
-  // | 'no-underline'
-  // | 'line-through'
-  // | 'uppercase'
-  // | 'lowercase'
-  // | 'capitalize'
-  // | 'normal-case'
+    | 'underline'
+    | 'no-underline'
+    | 'line-through'
+    | 'uppercase'
+    | 'lowercase'
+    | 'capitalize'
+    | 'normal-case'
   antialiased: ''
   'subpixel-antialiased': ''
   italic: ''
