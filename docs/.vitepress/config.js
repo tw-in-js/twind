@@ -146,7 +146,7 @@ const guideSidebar = [
       { text: 'Styling with Twind', link: '/handbook/styling-with-twind' },
       { text: 'Grouping Syntax', link: '/handbook/grouping-syntax' },
       { text: 'CSS in Twind', link: '/handbook/css-in-twind' },
-      { text: 'Overwriting Styles', link: '/handbook/overwriting-styles' },
+      { text: 'Overriding Styles', link: '/handbook/overriding-styles' },
       {
         text: 'Extended Functionality',
         link: '/handbook/extended-functionality',

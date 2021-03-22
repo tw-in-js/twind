@@ -89,9 +89,9 @@ setup({
 disconnect()
 ```
 
-## Custom `tw` instance
+## Custom Configuration
 
-You can provide a `<script type="twind-config">...</script>` within the document. The content must be valid JSON and all {@link twind.setup | twind setup options} (including {@link twind.Configuration.hash | hash}) are supported.
+You can provide a `<script type="twind-config">...</script>` within the document. The content must be valid JSON and all [configuration options](/api/interfaces/twind.configuration.html) are supported.
 
 ```html
 <!DOCTYPE html>
@@ -147,6 +147,8 @@ document.body.innerHTML = `
 ## Server
 
 If you wish to remove Twind's runtime overhead or you're interested in using Twind in a universal or "isomorphic" web app, `twind/shim/server` exports the dedicated `twind/shim/server.shim` function for performant processing of static HTML.
+
+As an alternative for extraction of styles into a CSS file you can use [@twind/cli](https://github.com/tw-in-js/twind-cli).
 
 :::tip
 You'll find more details and examples in the [ssr](../usage-guides/ssr.md) guide.

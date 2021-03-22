@@ -14,8 +14,6 @@ head:
 
 # {{ $frontmatter.title }}
 
-Components - start with utilities and extract them
-
 Theming and customization lets you specify how core plugins and the compiler behave. This is usually ample for most use cases but sometimes more flexibility is required. Sometimes you might want to extend the abilities of the compiler. When this is the case then most likely you are going to need to write a plugin.
 
 ## Introduction

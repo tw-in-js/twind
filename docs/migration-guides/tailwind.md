@@ -21,12 +21,14 @@ The easiest way to migrate your existing Tailwind app to Twind is by using [the 
 The Shim will automagically convert all of your Tailwind classes to Twind, and even pick up on your custom Tailwind theme configuration simply by importing the shim into your project:
 
 ```js
-import twind/shim
+import 'twind/shim'
 ```
 
-Example: `class="text-blue-500 font-bold"` becomes `` class=`${tw`text-blue-500 font-bold"`} ``
+or reference it in your HTML
 
-While the shim is a good starting point, it is recommended that you eventually move your project away from using the shim. In order to do so, you will need to do a few things:
+```html
+<script type="module" src="https://cdn.skypack.dev/twind/shim"></script>
+```
 
 ### Migrate your Tailwind theme configuration
 
@@ -103,10 +105,6 @@ setup({
 ```
 
 [Check out the docs](https://twind.dev/docs/handbook/advanced/setup.html) on the `setup` function for more configuration options like preflight, dark mode, and hashing.
-
-### Wrap your classes in `tw` calls
-
-Example: `class="text-blue-500 font-bold"` becomes `` class=`${tw`text-blue-500 font-bold"`} ``
 
 ### Move away from PostCSS
 

@@ -62,8 +62,6 @@ setup({
 
 The Tailwind v2 [extended color palette](https://tailwindcss.com/docs/customizing-colors#color-palette-reference) is available in the [`twind/colors`](/api/modules/twind_colors) module.
 
-List of colors: `amber`,`black`,`blue`,`blueGray` ,`coolGray`,`cyan`,`emerald`,`fuchsia`,`gray`,`green`,`indigo`,`lightBlue`,`lime`,`orange`,`pink`,`purple`,`red`,`rose`,`teal`,`trueGray`,`violet`,`warmGray`,`white`, `yellow`
-
 ```js
 import * as colors from 'twind/colors'
 
@@ -220,6 +218,46 @@ setup({
 })
 ```
 
+## Plugins
+
+The `plugins` property allows to define new plugins or override core plugins. See [plugins](/handbook/plugins) for details.
+
+## Variants
+
+The `variants` property allows to define new variants or override core variants.
+
+```js
+setup({
+  variants: {
+    'not-checked': '&:not(:checked)',
+  },
+})
+```
+
+## Dark Mode
+
+Now that dark mode is a first-class feature of many operating systems, it's becoming more and more common to design a dark version of your website to go along with the default design.
+
+To make this as easy as possible, Twind includes a dark variant that lets you style your site differently when dark mode is enabled:
+
+```js
+tw`
+  bg-white text-black
+  dark:(bg-gray-800 text-white)`
+```
+
+> 💡 It's important to note that the dark mode variant is **always** enabled and available for all directives.
+
+Now whenever dark mode is enabled on the user's operating system, `dark:{directive}` rules will take precedence over unprefixed rules. The `media` strategy uses the [prefers-color-scheme media feature](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) under the hood, but if you'd like to support toggling dark mode manually, you can also use the `class` strategy which uses adds a `.dark` class selector for more control:
+
+```js
+setup({
+  darkMode: 'class', // default is 'media'
+})
+```
+
+For an example how to toggle dark mode manually read the [Tailwind Guide](https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually).
+
 ## Mode
 
 One benefit of doing compilation at runtime is that it is possible to warn developers about errors such as:
@@ -276,30 +314,6 @@ setup({
   hash: (string) => 'tw-' + hash(string),
 })
 ```
-
-## Dark Mode
-
-Now that dark mode is a first-class feature of many operating systems, it's becoming more and more common to design a dark version of your website to go along with the default design.
-
-To make this as easy as possible, Twind includes a dark variant that lets you style your site differently when dark mode is enabled:
-
-```js
-tw`
-  bg-white text-black
-  dark:(bg-gray-800 text-white)`
-```
-
-> 💡 It's important to note that the dark mode variant is **always** enabled and available for all directives.
-
-Now whenever dark mode is enabled on the user's operating system, `dark:{directive}` rules will take precedence over unprefixed rules. The `media` strategy uses the [prefers-color-scheme media feature](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme) under the hood, but if you'd like to support toggling dark mode manually, you can also use the `class` strategy which uses adds a `.dark` class selector for more control:
-
-```js
-setup({
-  darkMode: 'class', // default is 'media'
-})
-```
-
-For an example how to toggle dark mode manually read the [Tailwind Guide](https://tailwindcss.com/docs/dark-mode#toggling-dark-mode-manually).
 
 ## Sheet
 
@@ -363,19 +377,3 @@ sheet.target
 #### Custom Sheet Implementation
 
 In case the builtin sheet implementations do not solve your use case, you can create your own.
-
-## Plugins
-
-The `plugins` property allows to define new plugins or override core plugins. See [plugins](/handbook/plugins) for details.
-
-## Variants
-
-The `variants` property allows to define new variants or override core variants.
-
-```js
-setup({
-  variants: {
-    'not-checked': '&:not(:checked)',
-  },
-})
-```

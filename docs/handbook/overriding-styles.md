@@ -1,5 +1,5 @@
 ---
-title: Overwriting Styles
+title: Overriding Styles
 editLink: true
 navbar: true
 sidebar: true

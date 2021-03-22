@@ -34,24 +34,21 @@ Because Twind is generating CSS during runtime there is no to need restrict the 
 
 [View docs for dark mode](/handbook/configuration#dark-mode)
 
-#### Most pseudo classes can be used as variant or `group-*` variant
+#### [Attribute selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors) are supported as variants
 
-Unknown variants (not listed in [core variants](https://github.com/tw-in-js/twind/blob/main/src/twind/variants.ts)) are assumed to be [pseudo classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes).
-
-_Advanced_ pseudo classes (those that take parameters like `:is(header)`) are not supported out of the box as they use `(...)` which is parsed as a variant or directive. You can define an alias for those in your [configuration](configuration):
-
-```js
-setup({
-  variants: {
-    'is-header': '&:is(header)',
-  },
-})
-
-tw`is-header:font-bold`
-// => .is-header\:font-bold:is(header) { ... }
-```
-
-> 🙋 If you have an idea how we could support these within the parser please [open an issue](https://github.com/tw-in-js/twind/issues) for discussions.
+| Class Name                                         | Selector                                                                                     |
+| -------------------------------------------------- | -------------------------------------------------------------------------------------------- | --------- | -------------------------------------- |
+| `[lang]:font-bold`                                 | `\[lang\]\:font-bold[lang]`                                                                  |
+| `not-[lang]:italic`                                | `.not-\[lang\]\:italic:not([lang])`                                                          |
+| `[aria-expanded='true']:font-bold`                 | `\[aria-expanded\=\'true\'\]\:font-bold[aria-expanded='true']`                               |
+| `[data-reach-menu-item][data-selected]:bg-red-300` | `\[data-reach-menu-item\]\[data-selected\]\:bg-red-300[data-reach-menu-item][data-selected]` |
+| `[href^='#']:bg-yellow-400`                        | `\[href\^\=\'\#\'\]\:bg-yellow-400[href^='#']`                                               |
+| `[href*='example']:bg-gray-300`                    | `\[href\*\=\'example\'\]\:bg-gray-300[href*='example']`                                      |
+| `[href$='.org']:bg-red-400`                        | `\[href\$\=\'\.org\'\]\:bg-red-400[href$='.org']`                                            |
+| `[href^='https'][href$='.org']:bg-green-400`       | `\[href\^\=\'https\'\]\[href\$\=\'\.org\'\]\:bg-green-400[href^='https'][href$='.org']`      |
+| `[lang~='en-us']:text-blue-400`                    | `\[lang\~\=\'en-us\'\]\:text-blue-400[lang~='en-us']`                                        |
+| `[lang                                             | ='zh']:text-red-400`                                                                         | `\[lang\\ | \=\'zh\'\]\:text-red-400[lang\|='zh']` |
+| `[data-lang='zh-TW']:text-purple-400`              | `\[data-lang\=\'zh-TW\'\]\:text-purple-400[data-lang='zh-TW']`                               |
 
 #### Negating styles with the `not-` pseudo-class prefix.
 
@@ -78,6 +75,25 @@ setup({
 tw`not-logged-in:hidden`
 // => `body:not(.logged-in) .not-logged-in\\:hidden`
 ```
+
+#### Most pseudo classes can be used as variant or `group-*` variant
+
+Unknown variants (not listed in [core variants](https://github.com/tw-in-js/twind/blob/main/src/twind/variants.ts)) are assumed to be [pseudo classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes).
+
+_Advanced_ pseudo classes (those that take parameters like `:is(header)`) are not supported out of the box as they use `(...)` which is parsed as a variant or directive. You can define an alias for those in your [configuration](configuration):
+
+```js
+setup({
+  variants: {
+    'is-header': '&:is(header)',
+  },
+})
+
+tw`is-header:font-bold`
+// => .is-header\:font-bold:is(header) { ... }
+```
+
+> 🙋 If you have an idea how we could support these within the parser please [open an issue](https://github.com/tw-in-js/twind/issues) for discussions.
 
 #### Named groups to support nested groups
 
@@ -344,21 +360,6 @@ Please note that `transform rotate-45` works but when using `transform rotate-45
 #### Theme values are automatically negated
 
 There is no need to provided negated values in the theme. As soon as Twind detects a negated directive like `-mx-2` it negates the theme value.
-
-## Extension Packages
-
-- [@twind/aspect-ratio](https://github.com/tw-in-js/twind-aspect-ratio): a composable API for giving elements a fixed aspect ratio
-- [@twind/content](https://github.com/tw-in-js/twind-content): a [CSS content property](https://developer.mozilla.org/en-US/docs/Web/CSS/content) directive
-- [@twind/forms](https://github.com/tw-in-js/twind-forms): a basic reset for form styles that makes form elements easy to override with utilities
-- [@twind/line-clamp](https://github.com/tw-in-js/twind-line-clamp): utilities for visually truncating text after a fixed number of lines
-- [@twind/typography](https://github.com/tw-in-js/typography): a set of `prose` classes you can use to add beautiful typographic defaults to any vanilla HTML you don't control (like HTML rendered from Markdown, or pulled from a CMS).
-
-While Twind strives to maintain feature parity with Tailwind, we've added several variants, directives, and utilities for your convenience. This document includes a complete list of all features beyond Tailwind that Twind has to offer with links to the corresponding documentation.
-
-## Syntax
-
-- Custom grouping syntax for directives and variants [View Docs](grouping-syntax)
-- Overwrite styles with the `important!` directive [View Docs](overwriting-styles)
 
 ## Extension Packages
 
