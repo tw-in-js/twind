@@ -16,7 +16,7 @@ head:
 
 To be written...
 
-## Server Side Rendering
+#### Server Side Rendering
 
 ```js
 // createBundleRenderer works the same

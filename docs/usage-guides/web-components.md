@@ -14,7 +14,7 @@ head:
 
 # {{ $frontmatter.title }}
 
-## [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) and [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM)
+#### [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) and [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM)
 
 This example shows how Custom Element can have its styles separated without having the side effect of polluting the root document's styles.
 

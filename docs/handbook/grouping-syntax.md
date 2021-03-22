@@ -14,7 +14,7 @@ head:
 
 # {{ $frontmatter.title }}
 
-Twind, unlike Tailwind, is not limited to strings as class names. Twind ships a compiler that runs when your app runs. This is unlike Tailwind, which generates CSS in a build step that is required before you run your app. This compiler is a function that is designed to interpret almost any form: strings, arrays, objects, template literals, or a mix of any of these.
+Twind is not limited to strings as class names. Twind ships a compiler that runs when your app runs. This is unlike Tailwind, which generates CSS in a build step that is required before you run your app. This compiler is a function that is designed to interpret almost any form: strings, arrays, objects, template literals, or a mix of any of these.
 
 On common complain of Tailwind (and utility classes) is long and unwieldy class names in markup:
 
@@ -50,7 +50,7 @@ After: `w(full sm:auto)`
 
 **The text classes**
 
-Twind convienently provides a `text-uppercase` class, which allows us to group all of the text-related classes together also using directive grouping:
+Twind conveniently provides a `text-uppercase` class, which allows us to group all of the text-related classes together also using directive grouping:
 
 Before: `text-lg uppercase text-gray-100`
 

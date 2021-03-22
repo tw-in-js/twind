@@ -26,7 +26,7 @@ head:
 
 > 🚀 [live and interactive demo](https://svelte.dev/repl/f0026dd2e9a44beaa14839d65117b852?version=3)
 
-## Server Side Rendering
+#### Server Side Rendering
 
 ```js
 import { setup } from 'twind'

@@ -26,15 +26,15 @@ Tailwind provides a default configuration, and requires that you explicitly asso
 <p class="text-blue-500 md:text-red-500">Hello Twind!</p>
 ```
 
-### Every variant can be applied to every directive
+#### Every variant can be applied to every directive
 
 Because Twind is generating CSS during runtime there is no to need restrict the usage of variants.
 
-### Dark mode is always available
+#### Dark mode is always available
 
 [View docs for dark mode](/handbook/configuration#dark-mode)
 
-### Most pseudo classes can be used as variant or `group-*` variant
+#### Most pseudo classes can be used as variant or `group-*` variant
 
 Unknown variants (not listed in [core variants](https://github.com/tw-in-js/twind/blob/main/src/twind/variants.ts)) are assumed to be [pseudo classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes).
 
@@ -53,7 +53,7 @@ tw`is-header:font-bold`
 
 > 🙋 If you have an idea how we could support these within the parser please [open an issue](https://github.com/tw-in-js/twind/issues) for discussions.
 
-### Negating styles with the `not-` pseudo-class prefix.
+#### Negating styles with the `not-` pseudo-class prefix.
 
 Most Twind rules can be prefixed with the `not-`prefix, which represents a non-match to the rule. For instance, `not-hover:uppercase` would apply the uppercase style any time the element is not being hovered.
 
@@ -79,7 +79,7 @@ tw`not-logged-in:hidden`
 // => `body:not(.logged-in) .not-logged-in\\:hidden`
 ```
 
-### Named groups to support nested groups
+#### Named groups to support nested groups
 
 Named groups allow to nest groups within each other and target specific groups by their name. The group names are ad-hoc meaning there is no special configuration required.
 
@@ -96,7 +96,7 @@ Here is an example using the shim
 </div>
 ```
 
-### [Pseudo Elements](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements) are supported using double colon
+#### [Pseudo Elements](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-elements) are supported using double colon
 
 Pseudo Elements can be used and are identified by a double colon:
 
@@ -127,7 +127,7 @@ tw`after::${content('" (" attr(href) " )"')}`
 
 > 💡 Please a look at the documentation of [@twind/content](https://github.com/tw-in-js/twind-content) for more examples.
 
-### `siblings:*` - General sibling combinator (`& ~ *`)
+#### `siblings:*` - General sibling combinator (`& ~ *`)
 
 Matches elements that are following the element this is applied on (though not necessarily immediately), and are children of the same parent element ([MDN - General sibling combinator](https://developer.mozilla.org/en-US/docs/Web/CSS/General_sibling_combinator)).
 
@@ -140,7 +140,7 @@ Matches elements that are following the element this is applied on (though not n
 
 <DemoLink href="https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPHA+VGhpcyBpcyBub3QgcmVkLjwvcD4KICA8cCBjbGFzcz0ic2libGluZ3M6dGV4dC1yZWQtNTAwIj5IZXJlIGlzIGEgcGFyYWdyYXBoLjwvcD4KICA8cD5BbmQgaGVyZSBpcyBhIHJlZCBwYXJhZ3JhcGghPC9wPgogIDxwPkFuZCB0aGlzIGlzIGEgcmVkIHBhcmFncmFwaCE8L3A+CmA=" />
 
-### `sibling:*` - Adjacent sibling combinator (`& + *`)
+#### `sibling:*` - Adjacent sibling combinator (`& + *`)
 
 Matches the element that immediately follows the element this is applied on, and is a children of the same parent element ([MDN - Adjacent sibling combinator](https://developer.mozilla.org/en-US/docs/Web/CSS/Adjacent_sibling_combinator)).
 
@@ -153,7 +153,7 @@ Matches the element that immediately follows the element this is applied on, and
 
 <DemoLink href="https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPHA+VGhpcyBpcyBub3QgcmVkLjwvcD4KICA8cCBjbGFzcz0ic2libGluZzp0ZXh0LXJlZC01MDAiPkhlcmUgaXMgYSBwYXJhZ3JhcGguPC9wPgogIDxwPkFuZCBoZXJlIGlzIGEgcmVkIHBhcmFncmFwaCE8L3A+CiAgPHA+VGhpcyBpcyBub3QgcmVkITwvcD4KYA==" />
 
-### `children:*` - Child combinator (`& > *`)
+#### `children:*` - Child combinator (`& > *`)
 
 Matches direct children of the element this is applied on ([MDN - Child combinator](https://developer.mozilla.org/en-US/docs/Web/CSS/Child_combinator)).
 
@@ -182,7 +182,7 @@ Please note that [some CSS properties are inherited](https://developer.mozilla.o
 
 > 🙋 If you find any incorrect or missing directive then please [open an issue](https://github.com/tw-in-js/twind/issues).
 
-### `override:*` - Increase the specificity of rules
+#### `override:*` - Increase the specificity of rules
 
 When using components that have some default styles it happens that one wants to override a rule. Consider the following example:
 
@@ -207,7 +207,7 @@ const special = tw`${shared} override:(text-purple-600 no-underline)`
 
 ## Utilities
 
-### Arbitrary style values using square bracket syntax
+#### Arbitrary style values using square bracket syntax
 
 While not generally recommended, there are times when you will need to break out of the Twind constraints for one-off styles like a slight rotation, relative positioning, custom font size, etc. Twind provides a square bracket syntax, which allows you to define these arbitrary styles without ever leaving your HTML:
 
@@ -267,7 +267,7 @@ w-[calc(100%+1rem)]
 w-[clamp(23ch,50%,46ch)]
 ```
 
-### Some directives support all CSS values
+#### Some directives support all CSS values
 
 - `align-*` - [vertical-align](https://developer.mozilla.org/en-US/docs/Web/CSS/vertical-align)
 - `appearance-*` - [appearance](https://developer.mozilla.org/en-US/docs/Web/CSS/appearance)
@@ -282,7 +282,7 @@ w-[clamp(23ch,50%,46ch)]
 - `select-*` - [user-select](https://developer.mozilla.org/en-US/docs/Web/CSS/user-select)
 - `whitespace-*` - [white-space](https://developer.mozilla.org/en-US/docs/Web/CSS/white-space)
 
-### `text-underline`, `text-uppercase`, ...
+#### `text-underline`, `text-uppercase`, ...
 
 This allows grouping of text directives: `text(lg red-500 capitalize underline)`
 
@@ -293,14 +293,14 @@ This allows grouping of text directives: `text(lg red-500 capitalize underline)`
 - `text-lowercase`
 - `text-capitalize`
 
-### `font-italic` and `font-no-italic`
+#### `font-italic` and `font-no-italic`
 
 This allows grouping of font directives: `font(sans italic bold)`
 
 - `font-italic`
 - `font-no-italic`
 
-### `bg-gradient-to-*` is built-in
+#### `bg-gradient-to-*` is built-in
 
 Every permutation of `t`op, `r`ight, `l`eft, and `b`ottom is handled by twind (like `bg-gradient-to-tr`). You can add new gradients but they should not use one of those keys:
 
@@ -328,7 +328,7 @@ tw`bg-gradient-15 from-green-400 to-blue-500`
 
 <DemoLink href="https://esm.codes/#aW1wb3J0IHsgc2V0dXAgfSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKc2V0dXAoewogIHRoZW1lOiB7CiAgICBleHRlbmQ6IHsKICAgICAgYmFja2dyb3VuZEltYWdlOiAodGhlbWUpID0+ICh7CiAgICAgICAgLy8gVXNlIGEgb3duIGdyYWRpZW50CiAgICAgICAgJ2dyYWRpZW50LXJhZGlhbCc6IGByYWRpYWwtZ3JhZGllbnQoJHt0aGVtZSgnY29sb3JzLmJsdWUuNTAwJyl9LCAke3RoZW1lKCdjb2xvcnMucmVkLjUwMCcpfSk7YCwKICAgICAgICAvLyBJbnRlZ3JhdGUgd2l0aCBncmFkaWVudCBjb2xvcnMgc3RvcHMgKGZyb20tKiwgdmlhLSosIHRvLSopCiAgICAgICAgJ2dyYWRpZW50LTE1JzogJ2xpbmVhci1ncmFkaWVudCguMTV0dXJuLCB2YXIoLS10dy1ncmFkaWVudC1zdG9wcyx2YXIoLS10dy1ncmFkaWVudC1mcm9tLHRyYW5zcGFyZW50KSx2YXIoLS10dy1ncmFkaWVudC10byx0cmFuc3BhcmVudCkpKScsCiAgICAgIH0pCiAgICB9LAogIH0sCn0pCmRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0gYAogIDxkaXYgY2xhc3M9ImNoaWxkcmVuOihoLTMyIG15LTQpIj4KICAgIDxkaXYgY2xhc3M9ImJnLWdyYWRpZW50LXJhZGlhbCI+PC9kaXY+CiAgCiAgICA8ZGl2IGNsYXNzPSJiZy1ncmFkaWVudC0xNSBmcm9tLWdyZWVuLTQwMCB0by1ibHVlLTUwMCI+PC9kaXY+CiAgPC9kaXY+CmAK" />
 
-### `border` and `divide` allow to combine positions
+#### `border` and `divide` allow to combine positions
 
 Every permutation of `t`op, `r`righ, `l`eft, and `b`ottom is allowed:
 
@@ -337,11 +337,11 @@ Every permutation of `t`op, `r`righ, `l`eft, and `b`ottom is allowed:
 
 > 💡 `x` and `y` can not be combined.
 
-### `rotate`, `scale` , `skew` and `translate` provide a fallback for IE 11
+#### `rotate`, `scale` , `skew` and `translate` provide a fallback for IE 11
 
 Please note that `transform rotate-45` works but when using `transform rotate-45 scale-150` only one of both is applied.
 
-### Theme values are automatically negated
+#### Theme values are automatically negated
 
 There is no need to provided negated values in the theme. As soon as Twind detects a negated directive like `-mx-2` it negates the theme value.
 

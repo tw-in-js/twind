@@ -14,11 +14,11 @@ head:
 
 # {{ $frontmatter.title }}
 
-## Static Extraction a.k.a. Server Side Rendering
+#### Static Extraction a.k.a. Server Side Rendering
 
 Twind supports static extraction a.k.a. Server Side Rendering (SSR) out of the box.
 
-## Synchronous SSR
+#### Synchronous SSR
 
 The following example assumes your app is using the `tw` named export from `twind`
 but the same logic can be applied to custom instances.
@@ -60,7 +60,7 @@ In order to prevent harmful code injection on the web, a [Content Security Polic
 const styleTag = getStyleTag(sheet, { nonce: __webpack_nonce__ })
 ```
 
-## Asynchronous SSR
+#### Asynchronous SSR
 
 > ❗ Please note the `twind/server` bundle is Node.JS only.
 > ❗ This is an experimental feature and only supported for Node.JS >=12. care and please [report any issue](https://github.com/tw-in-js/twind/issues/new) you find.
@@ -95,6 +95,6 @@ async function ssr() {
 }
 ```
 
-## Streaming SSR
+#### Streaming SSR
 
 > Supporting ReactDOM.renderToNodeStream and Vue.renderToStream is still on the roadmap...

@@ -30,7 +30,7 @@ ReactDOM.render(
 )
 ```
 
-## htm/react - [React](https://reactjs.org/) with [htm](https://github.com/developit/htm)
+#### htm/react - [React](https://reactjs.org/) with [htm](https://github.com/developit/htm)
 
 ```js
 import ReactDOM from 'react-dom'
@@ -52,7 +52,7 @@ ReactDOM.render(
 
 > 🚀 [live and interactive demo](https://esm.codes/#aW1wb3J0IHsgcmVuZGVyIH0gZnJvbSAnaHR0cHM6Ly9jZG4uc2t5cGFjay5kZXYvcmVhY3QtZG9tJwppbXBvcnQgKiBhcyBSZWFjdCBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi9yZWFjdCcKaW1wb3J0IGh0bSBmcm9tICdodHRwczovL2Nkbi5za3lwYWNrLmRldi9odG0nCgppbXBvcnQgeyB0dyB9IGZyb20gJ2h0dHBzOi8vY2RuLnNreXBhY2suZGV2L3R3aW5kJwoKY29uc3QgaHRtbCA9IGh0bS5iaW5kKFJlYWN0LmNyZWF0ZUVsZW1lbnQpCgpyZW5kZXIoCiAgaHRtbGAKICAgIDxtYWluIGNsYXNzTmFtZT0iJHt0d2BoLXNjcmVlbiBiZy1wdXJwbGUtNDAwIGZsZXggaXRlbXMtY2VudGVyIGp1c3RpZnktY2VudGVyYH0iPgogICAgICA8aDEgY2xhc3NOYW1lPSIke3R3YGZvbnQtYm9sZCB0ZXh0KGNlbnRlciA1eGwgd2hpdGUgc206Z3JheS04MDAgbWQ6cGluay03MDApYH0iPgogICAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICAgIDwvaDE+CiAgICA8L21haW4+CiAgYCwKICBkb2N1bWVudC5ib2R5LAopCg==)
 
-## Server Side Rendering
+#### Server Side Rendering
 
 ```js
 import { renderToString } from 'react-dom/server'

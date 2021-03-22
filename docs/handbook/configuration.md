@@ -58,7 +58,7 @@ setup({
 })
 ```
 
-### Colors
+#### Colors
 
 The Tailwind v2 [extended color palette](https://tailwindcss.com/docs/customizing-colors#color-palette-reference) is available in the [`twind/colors`](/api/modules/twind_colors) module.
 
@@ -94,7 +94,7 @@ setup({
 })
 ```
 
-### Referencing theme values
+#### Referencing theme values
 
 If you need to reference another theme value, you can do so by providing a function instead of a static value. The function will receive a `theme()` function as an argument that you can use to look up other values in your theme.
 
@@ -305,7 +305,7 @@ For an example how to toggle dark mode manually read the [Tailwind Guide](https:
 
 Twind collects generated CSS rules in sheet to make theme available to the environment. By default Twind uses a speedy (CSSOM) implementation when running in the browser. On the server a no-op implementation is used.
 
-### CSSOM Sheet
+#### CSSOM Sheet
 
 > 💡 This is the default implementation in browser environments.
 
@@ -320,7 +320,7 @@ setup({ sheet })
 
 > 💡 See [Examples - LitElement](./examples.md#litelement) how this can be used.
 
-### Void Sheet
+#### Void Sheet
 
 > 💡 This is the default implementation on server environments.
 
@@ -330,7 +330,7 @@ import { setup, voidSheet } from 'twind'
 setup({ sheet: voidSheet() })
 ```
 
-### DOM Sheet
+#### DOM Sheet
 
 A sheet implementation which inserts style rules through the Document Object Model.
 
@@ -345,7 +345,7 @@ setup({ sheet: domSheet() })
 
 > 💡 See [twind/sheets](/api/modules/twind_sheets) for details.
 
-### Virtual Sheet
+#### Virtual Sheet
 
 A sheet implementation which collects style rules into an array.
 
@@ -360,7 +360,7 @@ setup({ sheet })
 sheet.target
 ```
 
-### Custom Sheet Implementation
+#### Custom Sheet Implementation
 
 In case the builtin sheet implementations do not solve your use case, you can create your own.
 
