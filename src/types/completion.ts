@@ -375,12 +375,7 @@ export interface CorePlugins {
     | FromTheme<'ringWidth'>
     | FromTheme<'ringColor'>
     | Join<'opacity', FromTheme<'ringOpacity'>>
-    | Join<
-        'offset',
-        | FromTheme<'ringOffsetWidth'>
-        | FromTheme<'ringOffsetColor'>
-        | Join<'opacity', FromTheme<'ringOffsetWidth'>>
-      >
+    | Join<'offset', FromTheme<'ringOffsetWidth'> | FromTheme<'ringOffsetColor'>>
 
   // EFFECTS
   // -------
