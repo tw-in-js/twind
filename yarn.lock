@@ -822,10 +822,10 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
-distilt@^0.10.3:
-  version "0.10.3"
-  resolved "https://registry.npmjs.org/distilt/-/distilt-0.10.3.tgz#24bba0228a7df163522bc00444775a61ef8a4d8f"
-  integrity sha512-ieyPdDJSUQ0fOAiXwnPIfv4jRjhP3v6zzC544RjD2gMhnV/MVMY62fQkHkDh7b4zmU88vahvINaIXLA9wDv31A==
+distilt@^0.10.4:
+  version "0.10.4"
+  resolved "https://registry.npmjs.org/distilt/-/distilt-0.10.4.tgz#814211450ead65619bc79f917dc6b93820fc1e11"
+  integrity sha512-+F1cpyQ53YgxLffA2PIqgWO6QH1HB9uQhfXJHhohxmH06ilWbVxuZiYuFenv2aVrPBIBfq0TVubHJnnr4Y7ydQ==
   dependencies:
     es-module-lexer "^0.3.26"
     esbuild "^0.9.3"
@@ -954,17 +954,23 @@ es-module-lexer@^0.3.26:
   resolved "https://registry.npmjs.org/es-module-lexer/-/es-module-lexer-0.3.26.tgz#7b507044e97d5b03b01d4392c74ffeb9c177a83b"
   integrity sha512-Va0Q/xqtrss45hWzP8CZJwzGSZJjDM5/MJRE3IXXnUCcVLElR9BRaE9F62BopysASyc4nM3uwhSW7FFB9nlWAA==
 
-esbuild-register@~2.2.1:
-  version "2.2.1"
-  resolved "https://registry.npmjs.org/esbuild-register/-/esbuild-register-2.2.1.tgz#ba7fe04221d4789a33fc1956c68663196e90632c"
-  integrity sha512-kNFpH+W7eY1MN2v0qS7zjlV7zWKsWjX9Di0luPcuPdC6Q/8Xm2tWjxSVaNBbYRjOgQm5q+cciCvszICJYzgmOA==
+esbuild-register@^2.3.0:
+  version "2.3.0"
+  resolved "https://registry.npmjs.org/esbuild-register/-/esbuild-register-2.3.0.tgz#c7c6e2cabdce0e7aa5f30be774302d3fc1ebd02e"
+  integrity sha512-uT3WXEQGAqzrI0SLy1Jz39BzIBiLWd5La9zFZ+FUSCPGqJbE+ZJHUTE8yHP1GVfyHKrrAFCZqLieaHkSprIRDQ==
   dependencies:
+    esbuild "^0.9.2"
     jsonc-parser "^3.0.0"
 
 esbuild@^0.8.7:
   version "0.8.44"
   resolved "https://registry.npmjs.org/esbuild/-/esbuild-0.8.44.tgz#2a74f48fe20579081c9d8fe99be6fb8d2848c887"
   integrity sha512-m9yyBZMgWuAB7e7tA2g9L4PovoLa5Xb73+Yg9uBBR2w3Fe4P9/nxqj/HLrw1k/rjdjF1eX1kNJRytboqOtRCCQ==
+
+esbuild@^0.9.2:
+  version "0.9.6"
+  resolved "https://registry.npmjs.org/esbuild/-/esbuild-0.9.6.tgz#2cae519e7ce2328ecf57ae738090d07ce7245850"
+  integrity sha512-F6vASxU0wT/Davt9aj2qtDwDNSkQxh9VbyO56M7PDWD+D/Vgq/rmUDGDQo7te76W5auauVojjnQr/wTu3vpaUA==
 
 esbuild@^0.9.3:
   version "0.9.4"
