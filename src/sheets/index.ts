@@ -75,13 +75,15 @@ export const virtualSheet = (): VirtualSheet => {
   let target: string[]
   storage.init<string[]>((value = []) => (target = value))
 
-  return {
-    ...storage,
-    get target() {
-      return [...target]
+  return Object.defineProperties(
+    {
+      get target() {
+        return [...target]
+      },
+      insert: (rule: string, index: number) => target.splice(index, 0, rule),
     },
-    insert: (rule, index) => target.splice(index, 0, rule),
-  }
+    Object.getOwnPropertyDescriptors(storage),
+  )
 }
 
 export interface StyleTagProperties {
