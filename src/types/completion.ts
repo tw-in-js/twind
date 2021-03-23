@@ -490,10 +490,11 @@ export type CoreCompletionTokens =
   | `${Join<'group', '' | Interpolate<'string'>>}-${SimplePseudoClasses}:`
   | `${SimplePseudoElements}::`
   | `${CoreVariants}:`
+  | JoinFromObject<CorePlugins>
 
 export type UserCompletionTokens =
   | { [K in keyof Variants]: `${ToString<K>}:` }[keyof Variants]
-  | JoinFromObject<CorePlugins & Plugins>
+  | JoinFromObject<Plugins>
 
 export type CompletionTokens = CoreCompletionTokens | UserCompletionTokens
 
