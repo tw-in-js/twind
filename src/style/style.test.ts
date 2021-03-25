@@ -675,4 +675,66 @@ test('is added to component layer', ({ tw, sheet }) => {
   ])
 })
 
+test('component can be used as plugin', ({ sheet }) => {
+  const button = style({
+    base: `
+      px-3 py-1 rounded-md
+      text-white bg-gray-500 hover:bg-gray-400
+    `,
+    variants: {
+      variant: {
+        primary: 'bg-blue-500 hover:bg-blue-400',
+        warn: 'bg-red-500 hover:bg-red-400',
+      },
+      outline: { true: `border-2 border-black` },
+    },
+  })
+
+  const { tw } = create({
+    sheet,
+    mode: strict,
+    preflight: false,
+    prefix: false,
+    plugins: {
+      btn: button,
+    },
+  })
+
+  assert.equal(sheet.target, [])
+
+  assert.is(button.className, 'tw-1fg076q')
+  assert.is('' + button, '.tw-1fg076q')
+  assert.is(button.selector, '.tw-1fg076q')
+
+  assert.is(tw`btn`, 'btn tw-1fg076q')
+  assert.equal(sheet.target, [
+    '.btn{padding-left:0.75rem;padding-right:0.75rem;padding-bottom:0.25rem;padding-top:0.25rem;border-radius:0.375rem;--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:#6b7280;background-color:rgba(107,114,128,var(--tw-bg-opacity))}',
+    '.btn:hover{--tw-bg-opacity:1;background-color:#9ca3af;background-color:rgba(156,163,175,var(--tw-bg-opacity))}',
+  ])
+
+  sheet.reset()
+
+  assert.is(tw`btn-outline`, 'btn-outline tw-1fg076q')
+  assert.equal(sheet.target, [
+    '.btn-outline{padding-left:0.75rem;padding-right:0.75rem;padding-bottom:0.25rem;padding-top:0.25rem;border-radius:0.375rem;--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:#6b7280;background-color:rgba(107,114,128,var(--tw-bg-opacity));border-width:2px;--tw-border-opacity:1;border-color:#000;border-color:rgba(0,0,0,var(--tw-border-opacity))}',
+    '.btn-outline:hover{--tw-bg-opacity:1;background-color:#9ca3af;background-color:rgba(156,163,175,var(--tw-bg-opacity))}',
+  ])
+
+  sheet.reset()
+
+  assert.is(tw`btn-variant=primary`, 'btn-variant=primary tw-1fg076q')
+  assert.equal(sheet.target, [
+    '.btn-variant\\=primary{padding-left:0.75rem;padding-right:0.75rem;padding-bottom:0.25rem;padding-top:0.25rem;border-radius:0.375rem;--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:#3b82f6;background-color:rgba(59,130,246,var(--tw-bg-opacity))}',
+    '.btn-variant\\=primary:hover{--tw-bg-opacity:1;background-color:#60a5fa;background-color:rgba(96,165,250,var(--tw-bg-opacity))}',
+  ])
+
+  sheet.reset()
+
+  assert.is(tw`btn-variant=warn-outline`, 'btn-variant=warn-outline tw-1fg076q')
+  assert.equal(sheet.target, [
+    '.btn-variant\\=warn-outline{padding-left:0.75rem;padding-right:0.75rem;padding-bottom:0.25rem;padding-top:0.25rem;border-radius:0.375rem;--tw-text-opacity:1;color:#fff;color:rgba(255,255,255,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:#ef4444;background-color:rgba(239,68,68,var(--tw-bg-opacity));border-width:2px;--tw-border-opacity:1;border-color:#000;border-color:rgba(0,0,0,var(--tw-border-opacity))}',
+    '.btn-variant\\=warn-outline:hover{--tw-bg-opacity:1;background-color:#f87171;background-color:rgba(248,113,113,var(--tw-bg-opacity))}',
+  ])
+})
+
 test.run()

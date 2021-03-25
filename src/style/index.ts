@@ -98,7 +98,7 @@ export interface Style<Variants> {
    * ```
    * <br />
    */
-  (props?: StyleProps<Variants>): Directive<CSSRules>
+  (props?: string | string[] | StyleProps<Variants>): Directive<CSSRules>
 
   /**
    * CSS Selector associated with the current component.
@@ -180,6 +180,21 @@ const buildMediaRule = (key: string, value: undefined | StyleToken): CSSRules =>
   [key[0] == '@' ? key : `@screen ${key}`]: typeof value == 'string' ? apply(value) : value,
 })
 
+/**
+ * Convert parts array into valid props for a twind/style function
+ * - Kebab Case (tailwind like): x-foo=bar-camelCase
+ * - Snake Case: x-foo=bar_camelCase & x-foo=bar_camel-case
+ * - BEM modifer: x-foo=bar--camelCase & x-foo=bar--camel-case
+ * - URL like: x-foo=bar&camelCase & x-foo=bar&camel-case
+ * e.g. foo=bar--baz  -->  { foo: 'bar', 'baz': true }
+ */
+const makeProps = (parts: string[]): Record<string, unknown> =>
+  parts.reduce((props, part) => {
+    const [key, value = true] = part.split('=', 2)
+    props[key] = value
+    return props
+  }, {} as Record<string, unknown>)
+
 const createStyle = <Variants, BaseVariants>(
   config: StyleConfig<Variants, BaseVariants> = {},
   base?: Style<BaseVariants>,
@@ -191,7 +206,15 @@ const createStyle = <Variants, BaseVariants>(
   const selector = (base || '') + '.' + id
 
   return Object.defineProperties(
-    (allProps?: StyleProps<BaseVariants & Variants>): Directive<CSSRules> => {
+    (allProps?: string | string[] | StyleProps<BaseVariants & Variants>): Directive<CSSRules> => {
+      if (typeof allProps == 'string') {
+        allProps = allProps.split('-')
+      }
+
+      if (Array.isArray(allProps)) {
+        allProps = makeProps(allProps) as StyleProps<BaseVariants & Variants>
+      }
+
       const { tw, css, class: localClass, className: localClassName, ...props } = {
         ...defaults,
         ...allProps,
@@ -269,6 +292,14 @@ const createStyle = <Variants, BaseVariants>(
       selector: {
         value: selector,
       },
+      // ['size=sm', 'size=md', 'outline', 'outline=false']
+      // ['size=sm', 'size=sm-outline', 'size=sm-outline=false']
+      // ['size=md', 'size=md-outline', 'size=md-outline=false']
+      // tokens: {
+      //   value: Object.keys(variants).map((key) =>
+      //     Object.keys((variants as Record<string, Record<string, unknown>>)[key]),
+      //   ),
+      // },
     },
   )
 }
