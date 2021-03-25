@@ -25,6 +25,30 @@ test('new colors are available', () => {
   ])
 })
 
+test('select some colors', () => {
+  const sheet = virtualSheet()
+  const { tw } = create({
+    sheet,
+    mode: strict,
+    preflight: false,
+    prefix: false,
+    theme: {
+      extend: {
+        colors: {
+          gray: colors.blueGray,
+          blue: colors.lightBlue,
+        },
+      },
+    },
+  })
+
+  assert.is(tw('bg-gray-100 text-blue-600'), 'bg-gray-100 text-blue-600')
+  assert.equal(sheet.target, [
+    '.text-blue-600{--tw-text-opacity:1;color:#0284c7;color:rgba(2,132,199,var(--tw-text-opacity))}',
+    '.bg-gray-100{--tw-bg-opacity:1;background-color:#f1f5f9;background-color:rgba(241,245,249,var(--tw-bg-opacity))}',
+  ])
+})
+
 const getTheme = (tw: TW): ThemeResolver => {
   let theme: ThemeResolver
 

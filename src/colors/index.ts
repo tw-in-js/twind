@@ -8,12 +8,10 @@
  * @module twind/colors
  */
 
-import type { ThemeColor } from 'twind'
-
 export const black = '#000'
 export const white = '#fff'
 
-export const rose: ThemeColor = {
+export const rose = {
   50: '#fff1f2',
   100: '#ffe4e6',
   200: '#fecdd3',
@@ -24,9 +22,9 @@ export const rose: ThemeColor = {
   700: '#be123c',
   800: '#9f1239',
   900: '#881337',
-}
+} as const
 
-export const pink: ThemeColor = {
+export const pink = {
   50: '#fdf2f8',
   100: '#fce7f3',
   200: '#fbcfe8',
@@ -37,9 +35,9 @@ export const pink: ThemeColor = {
   700: '#be185d',
   800: '#9d174d',
   900: '#831843',
-}
+} as const
 
-export const fuchsia: ThemeColor = {
+export const fuchsia = {
   50: '#fdf4ff',
   100: '#fae8ff',
   200: '#f5d0fe',
@@ -50,9 +48,9 @@ export const fuchsia: ThemeColor = {
   700: '#a21caf',
   800: '#86198f',
   900: '#701a75',
-}
+} as const
 
-export const purple: ThemeColor = {
+export const purple = {
   50: '#faf5ff',
   100: '#f3e8ff',
   200: '#e9d5ff',
@@ -63,9 +61,9 @@ export const purple: ThemeColor = {
   700: '#7e22ce',
   800: '#6b21a8',
   900: '#581c87',
-}
+} as const
 
-export const violet: ThemeColor = {
+export const violet = {
   50: '#f5f3ff',
   100: '#ede9fe',
   200: '#ddd6fe',
@@ -76,9 +74,9 @@ export const violet: ThemeColor = {
   700: '#6d28d9',
   800: '#5b21b6',
   900: '#4c1d95',
-}
+} as const
 
-export const indigo: ThemeColor = {
+export const indigo = {
   50: '#eef2ff',
   100: '#e0e7ff',
   200: '#c7d2fe',
@@ -89,9 +87,9 @@ export const indigo: ThemeColor = {
   700: '#4338ca',
   800: '#3730a3',
   900: '#312e81',
-}
+} as const
 
-export const blue: ThemeColor = {
+export const blue = {
   50: '#eff6ff',
   100: '#dbeafe',
   200: '#bfdbfe',
@@ -102,9 +100,9 @@ export const blue: ThemeColor = {
   700: '#1d4ed8',
   800: '#1e40af',
   900: '#1e3a8a',
-}
+} as const
 
-export const lightBlue: ThemeColor = {
+export const lightBlue = {
   50: '#f0f9ff',
   100: '#e0f2fe',
   200: '#bae6fd',
@@ -115,9 +113,9 @@ export const lightBlue: ThemeColor = {
   700: '#0369a1',
   800: '#075985',
   900: '#0c4a6e',
-}
+} as const
 
-export const cyan: ThemeColor = {
+export const cyan = {
   50: '#ecfeff',
   100: '#cffafe',
   200: '#a5f3fc',
@@ -128,9 +126,9 @@ export const cyan: ThemeColor = {
   700: '#0e7490',
   800: '#155e75',
   900: '#164e63',
-}
+} as const
 
-export const teal: ThemeColor = {
+export const teal = {
   50: '#f0fdfa',
   100: '#ccfbf1',
   200: '#99f6e4',
@@ -141,9 +139,9 @@ export const teal: ThemeColor = {
   700: '#0f766e',
   800: '#115e59',
   900: '#134e4a',
-}
+} as const
 
-export const emerald: ThemeColor = {
+export const emerald = {
   50: '#ecfdf5',
   100: '#d1fae5',
   200: '#a7f3d0',
@@ -154,9 +152,9 @@ export const emerald: ThemeColor = {
   700: '#047857',
   800: '#065f46',
   900: '#064e3b',
-}
+} as const
 
-export const green: ThemeColor = {
+export const green = {
   50: '#f0fdf4',
   100: '#dcfce7',
   200: '#bbf7d0',
@@ -167,9 +165,9 @@ export const green: ThemeColor = {
   700: '#15803d',
   800: '#166534',
   900: '#14532d',
-}
+} as const
 
-export const lime: ThemeColor = {
+export const lime = {
   50: '#f7fee7',
   100: '#ecfccb',
   200: '#d9f99d',
@@ -180,9 +178,9 @@ export const lime: ThemeColor = {
   700: '#4d7c0f',
   800: '#3f6212',
   900: '#365314',
-}
+} as const
 
-export const yellow: ThemeColor = {
+export const yellow = {
   50: '#fefce8',
   100: '#fef9c3',
   200: '#fef08a',
@@ -193,9 +191,9 @@ export const yellow: ThemeColor = {
   700: '#a16207',
   800: '#854d0e',
   900: '#713f12',
-}
+} as const
 
-export const amber: ThemeColor = {
+export const amber = {
   50: '#fffbeb',
   100: '#fef3c7',
   200: '#fde68a',
@@ -206,9 +204,9 @@ export const amber: ThemeColor = {
   700: '#b45309',
   800: '#92400e',
   900: '#78350f',
-}
+} as const
 
-export const orange: ThemeColor = {
+export const orange = {
   50: '#fff7ed',
   100: '#ffedd5',
   200: '#fed7aa',
@@ -219,9 +217,9 @@ export const orange: ThemeColor = {
   700: '#c2410c',
   800: '#9a3412',
   900: '#7c2d12',
-}
+} as const
 
-export const red: ThemeColor = {
+export const red = {
   50: '#fef2f2',
   100: '#fee2e2',
   200: '#fecaca',
@@ -232,9 +230,9 @@ export const red: ThemeColor = {
   700: '#b91c1c',
   800: '#991b1b',
   900: '#7f1d1d',
-}
+} as const
 
-export const warmGray: ThemeColor = {
+export const warmGray = {
   50: '#fafaf9',
   100: '#f5f5f4',
   200: '#e7e5e4',
@@ -245,9 +243,9 @@ export const warmGray: ThemeColor = {
   700: '#44403c',
   800: '#292524',
   900: '#1c1917',
-}
+} as const
 
-export const trueGray: ThemeColor = {
+export const trueGray = {
   50: '#fafafa',
   100: '#f5f5f5',
   200: '#e5e5e5',
@@ -258,9 +256,9 @@ export const trueGray: ThemeColor = {
   700: '#404040',
   800: '#262626',
   900: '#171717',
-}
+} as const
 
-export const gray: ThemeColor = {
+export const gray = {
   50: '#fafafa',
   100: '#f4f4f5',
   200: '#e4e4e7',
@@ -271,9 +269,9 @@ export const gray: ThemeColor = {
   700: '#3f3f46',
   800: '#27272a',
   900: '#18181b',
-}
+} as const
 
-export const coolGray: ThemeColor = {
+export const coolGray = {
   50: '#f9fafb',
   100: '#f3f4f6',
   200: '#e5e7eb',
@@ -284,9 +282,9 @@ export const coolGray: ThemeColor = {
   700: '#374151',
   800: '#1f2937',
   900: '#111827',
-}
+} as const
 
-export const blueGray: ThemeColor = {
+export const blueGray = {
   50: '#f8fafc',
   100: '#f1f5f9',
   200: '#e2e8f0',
@@ -297,4 +295,4 @@ export const blueGray: ThemeColor = {
   700: '#334155',
   800: '#1e293b',
   900: '#0f172a',
-}
+} as const
