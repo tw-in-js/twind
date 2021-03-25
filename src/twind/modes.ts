@@ -30,10 +30,10 @@ export const mode = (report: (message: string) => void): Mode => ({
   },
 })
 
-export const warn = mode((message) => console.warn(message))
+export const warn = /*#__PURE__*/ mode((message) => console.warn(message))
 
-export const strict = mode((message) => {
+export const strict = /*#__PURE__*/ mode((message) => {
   throw new Error(message)
 })
 
-export const silent = mode(noop)
+export const silent = /*#__PURE__*/ mode(noop)

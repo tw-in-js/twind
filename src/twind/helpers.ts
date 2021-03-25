@@ -21,7 +21,7 @@ const positions = (resolve: (position: string) => undefined | string[] | void) =
   }
 }
 
-export const corners = positions(
+export const corners = /*#__PURE__*/ positions(
   (key) =>
     (({
       t: ['top-left', 'top-right'],
@@ -59,5 +59,5 @@ export const expandEdges = (key: string): string[] | undefined => {
 // 'x' and 'y' can not be combined with others because size 'xl'
 // Every char must be a edge position
 // Sort to have consistent declaration ordering
-export const edges = positions(expandEdges)
+export const edges = /*#__PURE__*/ positions(expandEdges)
 /* eslint-enable @typescript-eslint/consistent-type-assertions */

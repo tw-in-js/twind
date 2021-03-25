@@ -25,32 +25,55 @@ export interface RuleWithPresedence {
 
 const stringifyBlock = (body: string, selector: string): string => selector + '{' + body + '}'
 
+// Not using const enums as they get transpiled to a lot of code
+// /**
+//  * Determines the default order of styles.
+//  *
+//  * For example: screens have a higher presedence (eg override) utilities
+//  */
+// const enum Layer {
+//   /**
+//    * The preflight styles and any base styles registered by plugins.
+//    */
+//   base = 0,
+
+//   /**
+//    * Component classes and any component classes registered by plugins.
+//    */
+//   components = 1,
+
+//   /**
+//    * Utility classes and any utility classes registered by plugins.
+//    */
+//   utilities = 2,
+
+//   /**
+//    * Inline directives
+//    */
+//   css = 3,
+// }
+
 /**
- * Determines the default order of styles.
- *
- * For example: screens have a higher presedence (eg override) utilities
+ * The preflight styles and any base styles registered by plugins.
  */
-const enum Layer {
-  /**
-   * The preflight styles and any base styles registered by plugins.
-   */
-  base = 0,
+export type LayerBase = 0
 
-  /**
-   * Component classes and any component classes registered by plugins.
-   */
-  components = 1,
+/**
+ * Component classes and any component classes registered by plugins.
+ */
+export type LayerComponents = 1
 
-  /**
-   * Utility classes and any utility classes registered by plugins.
-   */
-  utilities = 2,
+/**
+ * Utility classes and any utility classes registered by plugins.
+ */
+export type LayerUtilities = 2
 
-  /**
-   * Inline directives
-   */
-  css = 3,
-}
+/**
+ * Inline directives
+ */
+export type LayerCss = 3
+
+export type Layer = LayerBase | LayerComponents | LayerUtilities | LayerCss
 
 export const serialize = (
   prefix: Prefixer,
@@ -270,7 +293,7 @@ export const serialize = (
 
   const variantPresedence = makeVariantPresedenceCalculator(theme, variants)
 
-  return (css, className, rule, layer = Layer.base) => {
+  return (css, className, rule, layer = 0 /* Layerbase */) => {
     // Initial presedence based on layer (base = 0, components = 1, utilities = 2, css = 3)
     layer <<= 28
 
