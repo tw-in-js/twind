@@ -90,7 +90,7 @@ const themeFactory = (args: Parameters<ThemeResolver>, { theme }: Context) => th
 export const theme = ((...args: Parameters<ThemeResolver>): ReturnType<ThemeHelper> =>
   directive(themeFactory, args)) as ThemeHelper
 
-const defaultTheme: Partial<Theme> = {
+const defaultTheme: Partial<Theme> = /*#__PURE__*/ {
   screens: {
     sm: '640px',
     md: '768px',
@@ -224,7 +224,7 @@ const defaultTheme: Partial<Theme> = {
   spacing: {
     px: '1px',
     0: '0px',
-    ...linear(4, 'rem', 4, 0.5, 0.5),
+    .../*#__PURE__*/ linear(4, 'rem', 4, 0.5, 0.5),
     // 0.5: '0.125rem',
     // 1: '0.25rem',
     // 1.5: '0.375rem',
@@ -233,7 +233,7 @@ const defaultTheme: Partial<Theme> = {
     // 3: '0.75rem',
     // 3.5: '0.875rem',
     // 4: '1rem',
-    ...linear(12, 'rem', 4, 5),
+    .../*#__PURE__*/ linear(12, 'rem', 4, 5),
     // 5: '1.25rem',
     // 6: '1.5rem',
     // 7: '1.75rem',
@@ -243,7 +243,7 @@ const defaultTheme: Partial<Theme> = {
     // 11: '2.75rem',
     // 12: '3rem',
     14: '3.5rem',
-    ...linear(64, 'rem', 4, 16, 4),
+    .../*#__PURE__*/ linear(64, 'rem', 4, 16, 4),
     // 16: '4rem',
     // 20: '5rem',
     // 24: '6rem',
@@ -281,7 +281,7 @@ const defaultTheme: Partial<Theme> = {
     bounce: 'bounce 1s infinite',
   },
 
-  backgroundColor: alias('colors'),
+  backgroundColor: /*#__PURE__*/ alias('colors'),
   backgroundImage: {
     none: 'none',
     // These are built-in
@@ -294,7 +294,7 @@ const defaultTheme: Partial<Theme> = {
     // 'gradient-to-l': 'linear-gradient(to left, var(--tw-gradient-stops))',
     // 'gradient-to-tl': 'linear-gradient(to top left, var(--tw-gradient-stops))',
   },
-  backgroundOpacity: alias('opacity'),
+  backgroundOpacity: /*#__PURE__*/ alias('opacity'),
   // backgroundPosition: {
   //   // The following are already handled by the plugin:
   //   // center, right, left, bottom, top
@@ -309,7 +309,7 @@ const defaultTheme: Partial<Theme> = {
     ...theme('colors'),
     DEFAULT: theme('colors.gray.200', 'currentColor'),
   }),
-  borderOpacity: alias('opacity'),
+  borderOpacity: /*#__PURE__*/ alias('opacity'),
   borderRadius: {
     none: '0px',
     sm: '0.125rem',
@@ -324,7 +324,7 @@ const defaultTheme: Partial<Theme> = {
   },
   borderWidth: {
     DEFAULT: '1px',
-    ...exponential(8, 'px'),
+    .../*#__PURE__*/ exponential(8, 'px'),
     // 0: '0px',
     // 2: '2px',
     // 4: '4px',
@@ -344,9 +344,9 @@ const defaultTheme: Partial<Theme> = {
   // cursor: {
   //   // Default values are handled by plugin
   // },
-  divideColor: alias('borderColor'),
-  divideOpacity: alias('borderOpacity'),
-  divideWidth: alias('borderWidth'),
+  divideColor: /*#__PURE__*/ alias('borderColor'),
+  divideOpacity: /*#__PURE__*/ alias('borderOpacity'),
+  divideWidth: /*#__PURE__*/ alias('borderWidth'),
   fill: { current: 'currentColor' },
   flex: {
     1: '1 1 0%',
@@ -437,8 +437,8 @@ const defaultTheme: Partial<Theme> = {
     auto: 'auto',
     'span-full': '1 / -1',
   },
-  gap: alias('spacing'),
-  gradientColorStops: alias('colors'),
+  gap: /*#__PURE__*/ alias('spacing'),
+  gradientColorStops: /*#__PURE__*/ alias('colors'),
   height: (theme) => ({
     auto: 'auto',
     ...theme('spacing'),
@@ -526,7 +526,7 @@ const defaultTheme: Partial<Theme> = {
     normal: '1.5',
     relaxed: '1.625',
     loose: '2',
-    ...linear(10, 'rem', 4, 3),
+    .../*#__PURE__*/ linear(10, 'rem', 4, 3),
     // 3: '.75rem',
     // 4: '1rem',
     // 5: '1.25rem',
@@ -583,7 +583,7 @@ const defaultTheme: Partial<Theme> = {
   //   // The plugins joins all arguments by default
   // },
   opacity: {
-    ...linear(100, '', 100, 0, 10),
+    .../*#__PURE__*/ linear(100, '', 100, 0, 10),
     // 0: '0',
     // 10: '0.1',
     // 20: '0.2',
@@ -603,7 +603,7 @@ const defaultTheme: Partial<Theme> = {
     first: '-9999',
     last: '9999',
     none: '0',
-    ...linear(12, '', 1, 1),
+    .../*#__PURE__*/ linear(12, '', 1, 1),
     // 1: '1',
     // 2: '2',
     // 3: '3',
@@ -622,15 +622,15 @@ const defaultTheme: Partial<Theme> = {
     white: ['2px dotted white', '2px'],
     black: ['2px dotted black', '2px'],
   },
-  padding: alias('spacing'),
-  placeholderColor: alias('colors'),
-  placeholderOpacity: alias('opacity'),
+  padding: /*#__PURE__*/ alias('spacing'),
+  placeholderColor: /*#__PURE__*/ alias('colors'),
+  placeholderOpacity: /*#__PURE__*/ alias('opacity'),
   ringColor: (theme) => ({
     DEFAULT: theme('colors.blue.500', '#3b82f6'),
     ...theme('colors'),
   }),
-  ringOffsetColor: alias('colors'),
-  ringOffsetWidth: exponential(8, 'px'),
+  ringOffsetColor: /*#__PURE__*/ alias('colors'),
+  ringOffsetWidth: /*#__PURE__*/ exponential(8, 'px'),
   // 0: '0px',
   // 1: '1px',
   // 2: '2px',
@@ -642,7 +642,7 @@ const defaultTheme: Partial<Theme> = {
   }),
   ringWidth: {
     DEFAULT: '3px',
-    ...exponential(8, 'px'),
+    .../*#__PURE__*/ exponential(8, 'px'),
     // 0: '0px',
     // 1: '1px',
     // 2: '2px',
@@ -650,15 +650,15 @@ const defaultTheme: Partial<Theme> = {
     // 8: '8px',
   },
   rotate: {
-    ...exponential(2, 'deg'),
+    .../*#__PURE__*/ exponential(2, 'deg'),
     // 0: '0deg',
     // 1: '1deg',
     // 2: '2deg',
-    ...exponential(12, 'deg', 3),
+    .../*#__PURE__*/ exponential(12, 'deg', 3),
     // 3: '3deg',
     // 6: '6deg',
     // 12: '12deg',
-    ...exponential(180, 'deg', 45),
+    .../*#__PURE__*/ exponential(180, 'deg', 45),
     // 45: '45deg',
     // 90: '90deg',
     // 180: '180deg',
@@ -667,7 +667,7 @@ const defaultTheme: Partial<Theme> = {
     0: '0',
     50: '.5',
     75: '.75',
-    ...linear(110, '', 100, 90, 5),
+    .../*#__PURE__*/ linear(110, '', 100, 90, 5),
     // 90: '.9',
     // 95: '.95',
     // 100: '1',
@@ -677,25 +677,25 @@ const defaultTheme: Partial<Theme> = {
     150: '1.5',
   },
   skew: {
-    ...exponential(2, 'deg'),
+    .../*#__PURE__*/ exponential(2, 'deg'),
     // 0: '0deg',
     // 1: '1deg',
     // 2: '2deg',
-    ...exponential(12, 'deg', 3),
+    .../*#__PURE__*/ exponential(12, 'deg', 3),
     // 3: '3deg',
     // 6: '6deg',
     // 12: '12deg',
   },
-  space: alias('spacing'),
+  space: /*#__PURE__*/ alias('spacing'),
   stroke: {
     current: 'currentColor',
   },
-  strokeWidth: linear(2),
+  strokeWidth: /*#__PURE__*/ linear(2),
   // 0: '0',
   // 1: '1',
   // 2: '2',,
-  textColor: alias('colors'),
-  textOpacity: alias('opacity'),
+  textColor: /*#__PURE__*/ alias('colors'),
+  textOpacity: /*#__PURE__*/ alias('opacity'),
   // transformOrigin: {
   //   // The following are already handled by the plugin:
   //   // center, right, left, bottom, top
@@ -705,7 +705,7 @@ const defaultTheme: Partial<Theme> = {
     DEFAULT: '150ms',
     ...theme('durations'),
   }),
-  transitionDelay: alias('durations'),
+  transitionDelay: /*#__PURE__*/ alias('durations'),
   transitionProperty: {
     none: 'none',
     all: 'all',
@@ -773,7 +773,7 @@ const defaultTheme: Partial<Theme> = {
   }),
   zIndex: {
     auto: 'auto',
-    ...linear(50, '', 1, 0, 10),
+    .../*#__PURE__*/ linear(50, '', 1, 0, 10),
     // 0: '0',
     // 10: '10',
     // 20: '20',
