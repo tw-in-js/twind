@@ -41,29 +41,45 @@
   ],
   "size-limit": [
     {
+      "name": "twind",
       "path": "dist/twind.js",
-      "gzip": true,
-      "limit": "12.8kb"
+      "brotli": true,
+      "limit": "12kb"
     },
     {
+      "name": "twind/colors",
+      "path": "dist/colors/colors.js",
+      "brotli": true,
+      "limit": "1kb",
+      "ignore": ["twind"]
+    },
+    {
+      "name": "twind/css",
       "path": "dist/css/css.js",
-      "gzip": true,
-      "limit": "1.2kb"
+      "brotli": true,
+      "limit": "1kb",
+      "ignore": ["twind"]
     },
     {
+      "name": "twind/observe",
       "path": "dist/observe/observe.js",
-      "gzip": true,
-      "limit": "0.7kb"
+      "brotli": true,
+      "limit": "0.7kb",
+      "ignore": ["twind"]
     },
     {
+      "name": "twind/shim",
       "path": "dist/shim/shim.js",
-      "gzip": true,
-      "limit": "0.5kb"
+      "brotli": true,
+      "limit": "0.3kb",
+      "ignore": ["twind"]
     },
     {
+      "name": "twind/style",
       "path": "dist/style/style.js",
-      "gzip": true,
-      "limit": "1kb"
+      "brotli": true,
+      "limit": "0.8kb",
+      "ignore": ["twind"]
     }
   ],
   "// These are ONLY bundled (eg included) in the umd builds": "",
@@ -84,7 +100,7 @@
     }
   },
   "devDependencies": {
-    "@size-limit/file": "^4.9.1",
+    "@size-limit/preset-big-lib": "^4.10.1",
     "@types/jsdom": "^16.2.5",
     "@typescript-eslint/eslint-plugin": "^4.9.1",
     "@typescript-eslint/parser": "^4.9.1",
@@ -101,7 +117,7 @@
     "jsdom": "^16.5.1",
     "lint-staged": ">=10",
     "prettier": "^2.0.5",
-    "size-limit": "^4.9.1",
+    "size-limit": "^4.10.1",
     "snoop": "^1.0.2",
     "snowpack": "^3.0.11",
     "tailwindcss": "^2.0.1",
