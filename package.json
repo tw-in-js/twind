@@ -51,35 +51,45 @@
       "path": "dist/colors/colors.js",
       "brotli": true,
       "limit": "1kb",
-      "ignore": ["twind"]
+      "ignore": [
+        "twind"
+      ]
     },
     {
       "name": "twind/css",
       "path": "dist/css/css.js",
       "brotli": true,
       "limit": "1kb",
-      "ignore": ["twind"]
+      "ignore": [
+        "twind"
+      ]
     },
     {
       "name": "twind/observe",
       "path": "dist/observe/observe.js",
       "brotli": true,
       "limit": "0.7kb",
-      "ignore": ["twind"]
+      "ignore": [
+        "twind"
+      ]
     },
     {
       "name": "twind/shim",
       "path": "dist/shim/shim.js",
       "brotli": true,
       "limit": "0.3kb",
-      "ignore": ["twind"]
+      "ignore": [
+        "twind"
+      ]
     },
     {
       "name": "twind/style",
       "path": "dist/style/style.js",
       "brotli": true,
       "limit": "0.8kb",
-      "ignore": ["twind"]
+      "ignore": [
+        "twind"
+      ]
     }
   ],
   "// These are ONLY bundled (eg included) in the umd builds": "",

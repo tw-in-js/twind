@@ -44,13 +44,13 @@ test('add prefix', ({ sheet, instance }) => {
 
 test('add prefix with important', ({ sheet, instance }) => {
   assert.is(
-    instance.tw('sticky! scroll-snap-x! appearance-menulist-button!'),
-    'sticky! scroll-snap-x! appearance-menulist-button!',
+    instance.tw('sticky! !scroll-snap-x appearance-menulist-button!'),
+    '!sticky !scroll-snap-x !appearance-menulist-button',
   )
   assert.equal(sheet.target, [
-    '.sticky\\!{position:-webkit-sticky !important;position:sticky !important}',
-    '.appearance-menulist-button\\!{-webkit-appearance:menulist-button !important;-moz-appearance:menulist-button !important;appearance:menulist-button !important}',
-    '.scroll-snap-x\\!{scroll-snap-type:x !important}',
+    '.\\!sticky{position:-webkit-sticky !important;position:sticky !important}',
+    '.\\!appearance-menulist-button{-webkit-appearance:menulist-button !important;-moz-appearance:menulist-button !important;appearance:menulist-button !important}',
+    '.\\!scroll-snap-x{scroll-snap-type:x !important}',
   ])
 })
 
