@@ -35,8 +35,8 @@ let rules: Rule[]
 
 // A new group has been found
 // this maybe a value (':variant' or 'prefix') or an empty marker string
-const startGrouping = (value?: string | false): '' => {
-  groupings.push(value || '')
+const startGrouping = (value = ''): '' => {
+  groupings.push(value)
   return ''
 }
 
