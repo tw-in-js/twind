@@ -815,6 +815,14 @@
       ".hover\\:focus\\:\\!font-bold:hover:focus{font-weight:700 !important}"
     ]
   ],
+  "text!(xl underline)": [
+    "!text-xl !text-underline",
+    [
+      ".\\!text-xl{font-size:1.25rem !important;line-height:1.75rem !important}",
+      ".\\!text-underline{text-decoration:underline !important}"
+    ]
+  ],
+  "!-m-8": ".\\!-m-8{margin:calc(2rem * -1) !important}",
   "!text(xl underline) md:!m(-8)": [
     "!text-xl !text-underline md:!-m-8",
     [
