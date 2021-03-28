@@ -788,7 +788,41 @@
   "children:underline": ".children\\:underline>*{text-decoration:underline}",
   "siblings:underline": ".siblings\\:underline~*{text-decoration:underline}",
   "sibling:underline": ".sibling\\:underline+*{text-decoration:underline}",
-  "text-center!": ".text-center\\!{text-align:center !important}",
+  "!text-center": ".\\!text-center{text-align:center !important}",
+  "text-center!": ["!text-center", [".\\!text-center{text-align:center !important}"]],
+  "!(text-center font-bold)": [
+    "!text-center !font-bold",
+    [".\\!text-center{text-align:center !important}", ".\\!font-bold{font-weight:700 !important}"]
+  ],
+  "hover:!(text-center font-bold)": [
+    "hover:!text-center hover:!font-bold",
+    [
+      ".hover\\:\\!text-center:hover{text-align:center !important}",
+      ".hover\\:\\!font-bold:hover{font-weight:700 !important}"
+    ]
+  ],
+  "hover:!(text-center focus:font-bold)": [
+    "hover:!text-center hover:focus:!font-bold",
+    [
+      ".hover\\:\\!text-center:hover{text-align:center !important}",
+      ".hover\\:focus\\:\\!font-bold:hover:focus{font-weight:700 !important}"
+    ]
+  ],
+  "!hover:(text-center focus:font-bold)": [
+    "hover:!text-center hover:focus:!font-bold",
+    [
+      ".hover\\:\\!text-center:hover{text-align:center !important}",
+      ".hover\\:focus\\:\\!font-bold:hover:focus{font-weight:700 !important}"
+    ]
+  ],
+  "!text(xl underline) md:!m(-8)": [
+    "!text-xl !text-underline md:!-m-8",
+    [
+      ".\\!text-xl{font-size:1.25rem !important;line-height:1.75rem !important}",
+      ".\\!text-underline{text-decoration:underline !important}",
+      "@media (min-width:768px){.md\\:\\!-m-8{margin:calc(2rem * -1) !important}}"
+    ]
+  ],
   "override:text-center": ".override\\:text-center.override\\:text-center{text-align:center}",
   "not-focus:invalid:border-red-500": ".not-focus\\:invalid\\:border-red-500:not(:focus):invalid{--tw-border-opacity:1;border-color:#ef4444;border-color:rgba(239,68,68,var(--tw-border-opacity))}",
   "invalid:not-focus:border-red-500": ".invalid\\:not-focus\\:border-red-500:invalid:not(:focus){--tw-border-opacity:1;border-color:#ef4444;border-color:rgba(239,68,68,var(--tw-border-opacity))}",

@@ -59,7 +59,7 @@ const stringifyVariant = (selector: string, variant: string): string =>
 const stringify = (rule: Rule, directive = rule.d): string =>
   typeof directive == 'function'
     ? ''
-    : rule.v.reduce(stringifyVariant, '') + (rule.n ? '-' : '') + directive + (rule.i ? '!' : '')
+    : rule.v.reduce(stringifyVariant, '') + (rule.i ? '!' : '') + (rule.n ? '-' : '') + directive
 
 // Use hidden '_' property to collect class names which have no css translation like hashed twind classes
 const COMPONENT_PROPS = { _: { value: '', writable: true } }

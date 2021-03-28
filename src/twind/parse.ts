@@ -10,7 +10,7 @@ import { join, tail, includes } from '../internal/util'
 // we add an empty marker string `""` into `groupings` to mark the group start
 // if we find a variant or prefix we push it onto `groupings`
 // once the group ends (whitespace or ')') we drop all entries until the last marker
-// This way we can filter `groupings` for trithy values which are either
+// This way we can filter `groupings` for truthy values which are either
 // a variant (starting with ':') or a prefix
 
 // Shared variables used during parsing
@@ -35,8 +35,8 @@ let rules: Rule[]
 
 // A new group has been found
 // this maybe a value (':variant' or 'prefix') or an empty marker string
-const startGrouping = (value = ''): '' => {
-  groupings.push(value)
+const startGrouping = (value?: string | false): '' => {
+  groupings.push(value || '')
   return ''
 }
 
@@ -53,15 +53,15 @@ const endGrouping = (isWhitespace?: boolean): void => {
   groupings.length = Math.max(groupings.lastIndexOf('') + ~~(isWhitespace as boolean), 0)
 }
 
-const onlyPrefixes = (s: string): '' | boolean => s && s[0] != ':'
+const onlyPrefixes = (s: string): '' | boolean => s && !includes('!:', s[0])
 const onlyVariants = (s: string): '' | boolean => s[0] == ':'
 
-const addRule = (directive: Rule['d'], negate?: boolean, important?: boolean): void => {
+const addRule = (directive: Rule['d'], negate?: boolean): void => {
   rules.push({
     v: groupings.filter(onlyVariants),
     d: directive,
     n: negate,
-    i: important,
+    i: includes(groupings, '!'),
     $: '',
   })
 }
@@ -73,15 +73,9 @@ const saveRule = (buffer: string): '' => {
     buffer = tail(buffer)
   }
 
-  const important = buffer.slice(-1) == '!'
-
-  if (important) {
-    buffer = buffer.slice(0, -1)
-  }
-
   const prefix = join(groupings.filter(onlyPrefixes))
 
-  addRule(buffer == '&' ? prefix : (prefix && prefix + '-') + buffer, negate, important)
+  addRule(buffer == '&' ? prefix : (prefix && prefix + '-') + buffer, negate)
 
   return ''
 }
@@ -109,6 +103,11 @@ const parseString = (token: string, isVariant?: boolean): void => {
         buffer = buffer && startGrouping(buffer)
 
         startGrouping()
+
+        break
+
+      case '!':
+        startGrouping(char)
 
         break
 

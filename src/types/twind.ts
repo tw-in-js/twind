@@ -171,7 +171,7 @@ export interface Rule {
   /** Is this rule negated: `"-rotate-45"` =\> `true` */
   n: boolean | undefined
 
-  /** Is this rule marked as important: `"stroke-4!"` =\> `true` */
+  /** Is this rule marked as important: `"!stroke-4"` =\> `true` */
   i: boolean | undefined
 
   /**
