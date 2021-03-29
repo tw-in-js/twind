@@ -23,7 +23,7 @@ jobs:
           mkdir website
           yarn typedoc
 
-          sed 's% src="/_src_/index.js"% src="https://cdn.skypack.dev/twind?min"%g;s% src="/_src_/shim/index.js"% src="https://cdn.skypack.dev/twind/shim?min"%g' < example/landing.html > website/index.html
+          sed 's%<html lang="en" hidden>%<html lang="en">%g;s%<script type="module" src="/_src_/shim/index.js"></script>%twindObserve.observe(document.documentElement)</script>%g;s%<script type="twind-config">%<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/combine/npm/twind/twind.umd.min.js,npm/twind/observe/observe.umd.min.js"></script><script>twind.setup(%g;s% </script>% );%g' < example/landing.html > website/index.html
 
           echo '<meta http-equiv="Refresh" content="0; url=https://twind.dev/docs/handbook/getting-started/modules.html" />' > website/docs/modules.html
 
