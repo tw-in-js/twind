@@ -1,0 +1,23 @@
+:root {
+  --c-brand: #3b9188;
+  --c-brand-light: #43a399;
+  --bg-colored-light: #f3f6f7;
+}
+
+.custom-block.custom-block.tip {
+  background-color: var(--bg-colored-light);
+  border-color: var(--c-brand);
+}
+
+.custom-block.custom-block.tip a {
+  color: #3b9188;
+}
+
+img {
+  display: inline-block;
+  margin: 0px 2px;
+}
+
+.DocSearch.DocSearch {
+  --docsearch-primary-color: var(--c-brand);
+}
