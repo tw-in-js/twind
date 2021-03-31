@@ -146,7 +146,6 @@
   },
   "scripts": {
     "build": "distilt",
-    "preformat": "doctoc --update-only --notitle --maxlevel 3 docs src",
     "format": "prettier --write --ignore-path .gitignore .",
     "lint": "eslint --ext .js,.ts --ignore-path .gitignore .",
     "postlint": "tsc",
@@ -213,7 +212,6 @@
     }
   },
   "lint-staged": {
-    "docs/**/*.md": "doctoc --update-only --notitle --maxlevel 3",
     "*.{js,jsx,cjs,mjs,ts,tsx}": "eslint --cache --fix",
     "*.{json,js,jsx,cjs,mjs,ts,tsx,md,html,css,yml,yaml}": "prettier --write"
   }
