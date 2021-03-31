@@ -1,20 +1,9 @@
 [![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.dev/docs/modules/twind_sheets.html)
 [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%2Fsrc%2Fsheets?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/src/sheets)
-[![Module Size](https://flat.badgen.net/badgesize/brotli/https://cdn.jsdelivr.net/npm/twind/sheets/sheets.min.js?icon=jsdelivr&label&color=blue&cache=10800)](https://unpkg.com/twind/sheets/sheets.js 'brotli module size')
+[![Module Size](https://flat.badgen.net/badgesize/brotli/https:/unpkg.com/twind/sheets/sheets.js?icon=jsdelivr&label&color=blue&cache=10800)](https://unpkg.com/twind/sheets/sheets.js 'brotli module size')
 [![Typescript](https://flat.badgen.net/badge/icon/included?icon=typescript&label)](https://unpkg.com/browse/twind/sheets/sheets.d.ts)
 
 This module provides [virtualSheet](#virtual-sheet) and [domSheet](#dom-sheet) which can be used with <code>{@link twind.setup | setup}({ {@link twind.Configuration.sheet | sheet} })</code>.
-
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [Virtual Sheet](#virtual-sheet)
-  - [Using for Static Extraction a.k.a. Server Side Rendering (SSR)](#using-for-static-extraction-aka-server-side-rendering-ssr)
-  - [Using in tests](#using-in-tests)
-- [DOM Sheet](#dom-sheet)
-- [Custom Sheet Implementation](#custom-sheet-implementation)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Virtual Sheet
 

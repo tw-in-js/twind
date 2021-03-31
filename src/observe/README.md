@@ -1,6 +1,6 @@
 [![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.dev/docs/modules/twind_observe.html)
 [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%2Fsrc%2Fobserve?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/src/observe)
-[![Module Size](https://flat.badgen.net/badgesize/brotli/https://cdn.jsdelivr.net/npm/twind/observe/observe.min.js?icon=jsdelivr&label&color=blue&cache=10800)](https://unpkg.com/twind/observe/observe.js 'brotli module size')
+[![Module Size](https://flat.badgen.net/badgesize/brotli/https:/unpkg.com/twind/observe/observe.js?icon=jsdelivr&label&color=blue&cache=10800)](https://unpkg.com/twind/observe/observe.js 'brotli module size')
 [![Typescript](https://flat.badgen.net/badge/icon/included?icon=typescript&label)](https://unpkg.com/browse/twind/observe/observe.d.ts)
 
 > Allows to copy-paste tailwind examples. This feature can be used together with your favorite framework without any additional setup.
@@ -8,17 +8,6 @@
 The `twind/observe` modules allows to use the `class` attribute for tailwind rules. If such a rule is detected the corresponding CSS rule is created and injected into the stylesheet. _No need for `tw`_ but it can be used on the same elements as well.
 
 > This is meant for advanced use cases. Most of the time you may want to use {@link twind/shim}.
-
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [Usage](#usage)
-- [Customization](#customization)
-- [API](#api)
-- [Example](#example)
-- [Implementation Details](#implementation-details)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
 ## Usage
 
