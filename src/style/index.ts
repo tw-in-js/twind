@@ -35,6 +35,12 @@ export type MorphVariant<T> = T extends number
 
 export type StyleToken = string | CSSRules | Directive<CSSRules>
 
+export type VariantsOf<T> = T extends Style<infer Variants>
+  ? {
+      [key in keyof Variants]: MorphVariant<keyof Variants[key]>
+    }
+  : never
+
 export type DefaultVariants<Variants> = {
   [key in keyof Variants]?:
     | StrictMorphVariant<keyof Variants[key]>
