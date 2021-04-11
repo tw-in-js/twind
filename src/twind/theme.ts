@@ -281,6 +281,16 @@ const defaultTheme: Partial<Theme> = /*#__PURE__*/ {
     bounce: 'bounce 1s infinite',
   },
 
+  backdropBlur: /*#__PURE__*/ alias('blur'),
+  backdropBrightness: /*#__PURE__*/ alias('brightness'),
+  backdropContrast: /*#__PURE__*/ alias('contrast'),
+  backdropGrayscale: /*#__PURE__*/ alias('grayscale'),
+  backdropHueRotate: /*#__PURE__*/ alias('hueRotate'),
+  backdropInvert: /*#__PURE__*/ alias('invert'),
+  backdropOpacity: /*#__PURE__*/ alias('opacity'),
+  backdropSaturate: /*#__PURE__*/ alias('saturate'),
+  backdropSepia: /*#__PURE__*/ alias('sepia'),
+
   backgroundColor: /*#__PURE__*/ alias('colors'),
   backgroundImage: {
     none: 'none',
@@ -304,6 +314,32 @@ const defaultTheme: Partial<Theme> = /*#__PURE__*/ {
     auto: 'auto',
     cover: 'cover',
     contain: 'contain',
+  },
+  blur: {
+    0: '0',
+    sm: '4px',
+    DEFAULT: '8px',
+    md: '12px',
+    lg: '16px',
+    xl: '24px',
+    '2xl': '40px',
+    '3xl': '64px',
+  },
+  brightness: {
+    .../*#__PURE__*/ linear(200, '', 100, 0, 50),
+    // 0: '0',
+    // 50: '.5',
+    // 150: '1.5',
+    // 200: '2',
+
+    .../*#__PURE__*/ linear(110, '', 100, 90, 5),
+    // 90: '.9',
+    // 95: '.95',
+    // 100: '1',
+    // 105: '1.05',
+    // 110: '1.1',
+    75: '0.75',
+    125: '1.25',
   },
   borderColor: (theme) => ({
     ...theme('colors'),
@@ -344,10 +380,44 @@ const defaultTheme: Partial<Theme> = /*#__PURE__*/ {
   // cursor: {
   //   // Default values are handled by plugin
   // },
+  contrast: {
+    .../*#__PURE__*/ linear(200, '', 100, 0, 50),
+    // 0: '0',
+    // 50: '.5',
+    // 150: '1.5',
+    // 200: '2',
+    75: '0.75',
+    125: '1.25',
+  },
   divideColor: /*#__PURE__*/ alias('borderColor'),
   divideOpacity: /*#__PURE__*/ alias('borderOpacity'),
   divideWidth: /*#__PURE__*/ alias('borderWidth'),
+  dropShadow: {
+    sm: '0 1px 1px rgba(0,0,0,0.05)',
+    DEFAULT: ['0 1px 2px rgba(0, 0, 0, 0.1)', '0 1px 1px rgba(0, 0, 0, 0.06)'],
+    md: ['0 4px 3px rgba(0, 0, 0, 0.07)', '0 2px 2px rgba(0, 0, 0, 0.06)'],
+    lg: ['0 10px 8px rgba(0, 0, 0, 0.04)', '0 4px 3px rgba(0, 0, 0, 0.1)'],
+    xl: ['0 20px 13px rgba(0, 0, 0, 0.03)', '0 8px 5px rgba(0, 0, 0, 0.08)'],
+    '2xl': '0 25px 25px rgba(0, 0, 0, 0.15)',
+    none: '0 0 #0000',
+  },
   fill: { current: 'currentColor' },
+  grayscale: {
+    0: '0',
+    DEFAULT: '100%',
+  },
+  hueRotate: {
+    0: '0deg',
+    15: '15deg',
+    30: '30deg',
+    60: '60deg',
+    90: '90deg',
+    180: '180deg',
+  },
+  invert: {
+    0: '0',
+    DEFAULT: '100%',
+  },
   flex: {
     1: '1 1 0%',
     auto: '1 1 auto',
@@ -663,18 +733,29 @@ const defaultTheme: Partial<Theme> = /*#__PURE__*/ {
     // 90: '90deg',
     // 180: '180deg',
   },
+  saturate: /*#__PURE__*/ linear(200, '', 100, 0, 50),
+  // 0: '0',
+  // 50: '.5',
+  // 100: '1',
+  // 150: '1.5',
+  // 200: '2',
   scale: {
-    0: '0',
-    50: '.5',
-    75: '.75',
+    .../*#__PURE__*/ linear(150, '', 100, 0, 50),
+    // 0: '0',
+    // 50: '.5',
+    // 150: '1.5',
     .../*#__PURE__*/ linear(110, '', 100, 90, 5),
     // 90: '.9',
     // 95: '.95',
     // 100: '1',
     // 105: '1.05',
     // 110: '1.1',
+    75: '0.75',
     125: '1.25',
-    150: '1.5',
+  },
+  sepia: {
+    0: '0',
+    DEFAULT: '100%',
   },
   skew: {
     .../*#__PURE__*/ exponential(2, 'deg'),
@@ -885,7 +966,7 @@ export const makeThemeResolver = (config?: ThemeConfiguration): ThemeResolver =>
         : Array.isArray(value) &&
           // https://github.com/tailwindlabs/tailwindcss/blob/master/src/util/transformThemeValue.js
           // only testing for sections that uses an array for values
-          !includes(['fontSize', 'outline'], section)
+          !includes(['fontSize', 'outline', 'dropShadow'], section)
         ? join(value, ',')
         : value
     }

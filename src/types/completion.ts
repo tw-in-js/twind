@@ -125,23 +125,49 @@ export type Corners = 't' | 'r' | 'b' | 'l' | 'tl' | 'tr' | 'bl' | 'br'
 export type Edges = 'x' | 'y' | 't' | 'r' | 'b' | 'l' | 'tl' | 'tr' | 'tb' | 'bl' | 'br' | 'lr'
 export type BorderStyle = 'solid' | 'dashed' | 'dotted' | 'double' | 'none'
 
+export type GlobalValue = 'inherit' | 'initial' | 'unset'
+
+export type BlendMode =
+  | 'normal'
+  | 'multiply'
+  | 'screen'
+  | 'overlay'
+  | 'darken'
+  | 'lighten'
+  | 'color-dodge'
+  | 'color-burn'
+  | 'hard-light'
+  | 'soft-light'
+  | 'difference'
+  | 'exclusion'
+  | 'hue'
+  | 'saturation'
+  | 'color'
+  | 'luminosity'
+
 export interface CorePlugins {
   group: '' | NonEmptyString
 
   // LAYOUT
   // ------
   container: ''
+  decoration: 'slice' | 'clone' | GlobalValue
+
   box: 'border' | 'content'
 
   // Display
   block: ''
-  inline: '' | 'block' | 'flex' | 'grid'
+  inline: '' | 'block' | 'flex' | 'grid' | 'table'
   flow: 'root'
   contents: ''
   hidden: ''
 
   float: 'right' | 'left' | 'none'
   clear: 'right' | 'left' | 'both' | 'none'
+
+  isolate: ''
+  isolation: 'auto' | 'isolate' | GlobalValue
+
   object: // ObjectFit
   | 'contain'
     | 'cover'
@@ -296,6 +322,7 @@ export interface CorePlugins {
   tracking: FromTheme<'letterSpacing'>
   leading: FromTheme<'lineHeight'>
   list:
+    | 'item'
     | 'inside'
     | 'outside'
     | 'none'
@@ -466,6 +493,35 @@ export interface CorePlugins {
   // -------------
   'sr-only': ''
   'not-sr-only': ''
+
+  // Filters
+  // -------------------------
+  filter: '' | 'none'
+  blur: FromTheme<'blur'>
+  brightness: FromTheme<'brightness'>
+  contrast: FromTheme<'contrast'>
+  grayscale: FromTheme<'grayscale'>
+  'hue-rotate': Negatable<FromTheme<'hueRotate'>>
+  invert: FromTheme<'invert'>
+  saturate: FromTheme<'saturate'>
+  sepia: FromTheme<'sepia'>
+  'drop-shadow': FromTheme<'dropShadow'>
+  backdrop:
+    | Join<'filter', '' | 'none'>
+    | Join<'blur', FromTheme<'backdropBlur'>>
+    | Join<'brightness', FromTheme<'backdropBrightness'>>
+    | Join<'contrast', FromTheme<'backdropContrast'>>
+    | Join<'grayscale', FromTheme<'backdropGrayscale'>>
+    | Join<'hue-rotate', Negatable<FromTheme<'backdropHueRotate'>>>
+    | Join<'invert', FromTheme<'backdropInvert'>>
+    | Join<'opacity', FromTheme<'backdropOpacity'>>
+    | Join<'saturate', FromTheme<'backdropSaturate'>>
+    | Join<'sepia', FromTheme<'backdropSepia'>>
+
+  // Blend
+  // -------------------------
+  'mix-blend': BlendMode
+  'bg-blend': BlendMode
 }
 
 export type ToString<T> = T extends string ? T : T extends number ? `${T}` : never

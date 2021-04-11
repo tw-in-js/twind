@@ -11,7 +11,15 @@ import type {
   ThemeScreen,
 } from '../types'
 
-import { includes, join, joinTruthy, tail, capitalize, buildMediaQuery } from '../internal/util'
+import {
+  includes,
+  join,
+  joinTruthy,
+  tail,
+  capitalize,
+  hyphenate,
+  buildMediaQuery,
+} from '../internal/util'
 import { corners, expandEdges, edges } from './helpers'
 
 type PluginHandler = (
@@ -260,6 +268,53 @@ const minMax: PluginHandler = (params, { theme }, id) =>
     ),
   }
 
+const filter: Plugin = (params, { theme }, id) => {
+  const parts = id.split('-')
+  const prefix = parts[0] == 'backdrop' ? parts[0] + '-' : ''
+  if (!prefix) {
+    params.unshift(...parts)
+  }
+
+  if (params[0] == 'filter') {
+    const filters = [
+      'blur',
+      'brightness',
+      'contrast',
+      'grayscale',
+      'hue-rotate',
+      'invert',
+      prefix && 'opacity',
+      'saturate',
+      'sepia',
+      !prefix && 'drop-shadow',
+    ].filter(Boolean)
+
+    return params[1] == 'none'
+      ? { filter: 'none' }
+      : filters.reduce(
+          (css, key) => {
+            css['--tw-' + prefix + key] = 'var(--tw-empty,/*!*/ /*!*/)'
+            return css
+          },
+          {
+            filter: filters.map((key) => `var(--tw-${prefix}${key})`).join(' '),
+          } as CSSRules,
+        )
+  }
+
+  $ = params.shift()
+  // hue-rotate, drop-shadow
+  if (includes(['hue', 'drop'], $)) $ += capitalize(params.shift() as string)
+
+  return (
+    (_ = theme((prefix ? 'backdrop' + capitalize($ as string) : $) as 'blur', params)) && {
+      ['--tw-' + prefix + $]: (Array.isArray(_) ? (_ as string[]) : [_])
+        .map((_) => `${hyphenate($ as string)}(${_})`)
+        .join(' '),
+    }
+  )
+}
+
 export const corePlugins: Record<string, Plugin | undefined> = {
   group: (params, { tag }, id) => tag(join([id, ...params])),
 
@@ -410,6 +465,12 @@ export const corePlugins: Record<string, Plugin | undefined> = {
 
   float: propertyValue(),
   clear: propertyValue(),
+  decoration: propertyValue('boxDecorationBreak'),
+
+  isolate: { isolation: 'isolate' },
+  isolation: propertyValue(),
+
+  'mix-blend': propertyValue('mixBlendMode'),
 
   top: inset,
   right: inset,
@@ -677,6 +738,9 @@ export const corePlugins: Record<string, Plugin | undefined> = {
       case 'clip':
         return params[1] && { backgroundClip: params[1] + (params[1] == 'text' ? '' : '-box') }
 
+      case 'blend':
+        return propertyValue('background-blend-mode')(tail(params))
+
       // .bg-gradient-to-r => linear-gradient(to right, ...)
       // .bg-gradient-to-r => linear-gradient(to right, ...)
       case 'gradient':
@@ -867,7 +931,9 @@ export const corePlugins: Record<string, Plugin | undefined> = {
       : themePropertyFallback('objectPosition', ' ')(params, context, id),
 
   list: (params, context, id) =>
-    includes(['inside', 'outside'], join(params))
+    join(params) == 'item'
+      ? display(params, context, id)
+      : includes(['inside', 'outside'], join(params))
       ? { listStylePosition: params[0] }
       : themePropertyFallback('listStyleType')(params, context, id),
 
@@ -928,5 +994,18 @@ export const corePlugins: Record<string, Plugin | undefined> = {
       } as CSSRules,
     )
   },
+
+  filter,
+  blur: filter,
+  brightness: filter,
+  contrast: filter,
+  grayscale: filter,
+  'hue-rotate': filter,
+  invert: filter,
+  saturate: filter,
+  sepia: filter,
+  'drop-shadow': filter,
+  backdrop: filter,
 }
+
 /* eslint-enable no-return-assign, no-cond-assign, @typescript-eslint/consistent-type-assertions */

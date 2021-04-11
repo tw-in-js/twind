@@ -114,21 +114,34 @@ export interface Theme {
   screens: ThemeSection<ThemeScreen>
 
   animation: ThemeSection<string | string[]>
+  backdropBlur: ThemeSection
+  backdropBrightness: ThemeSection
+  backdropContrast: ThemeSection
+  backdropGrayscale: ThemeSection
+  backdropHueRotate: ThemeSection
+  backdropInvert: ThemeSection
+  backdropOpacity: ThemeSection
+  backdropSaturate: ThemeSection
+  backdropSepia: ThemeSection
   backgroundColor: ThemeSection<ThemeColor>
   backgroundImage: ThemeSection<string | string[]>
   backgroundOpacity: ThemeSection
   backgroundPosition: ThemeSection
   backgroundSize: ThemeSection
+  blur: ThemeSection
   borderColor: ThemeSection<ThemeColor>
   borderOpacity: ThemeSection
   borderRadius: ThemeSection
   borderWidth: ThemeSection
   boxShadow: ThemeSection<string | string[]>
+  brightness: ThemeSection
   container: ThemeContainer | ThemeSectionResolver<ThemeContainer>
+  contrast: ThemeSection
   cursor: ThemeSection
   divideColor: ThemeSection<ThemeColor>
   divideOpacity: ThemeSection
   divideWidth: ThemeSection
+  dropShadow: ThemeSection<string | string[]>
   fill: ThemeSection<ThemeColor>
   flex: ThemeSection
   flexGrow: ThemeSection<number>
@@ -136,20 +149,23 @@ export interface Theme {
   fontFamily: ThemeSection<string | string[]>
   fontSize: ThemeSection<ThemeFontSize>
   fontWeight: ThemeSection
-  gridTemplateColumns: ThemeSection
-  gridTemplateRows: ThemeSection
-  gridAutoColumns: ThemeSection
-  gridAutoRows: ThemeSection
-  gridColumnStart: ThemeSection
-  gridRowStart: ThemeSection
-  gridColumnEnd: ThemeSection
-  gridRowEnd: ThemeSection
-  gridColumn: ThemeSection
-  gridRow: ThemeSection
   gap: ThemeSection
   gradientColorStops: ThemeSection<ThemeColor>
+  grayscale: ThemeSection
+  gridAutoColumns: ThemeSection
+  gridAutoRows: ThemeSection
+  gridColumn: ThemeSection
+  gridColumnEnd: ThemeSection
+  gridColumnStart: ThemeSection
+  gridRow: ThemeSection
+  gridRowEnd: ThemeSection
+  gridRowStart: ThemeSection
+  gridTemplateColumns: ThemeSection
+  gridTemplateRows: ThemeSection
   height: ThemeSection
+  hueRotate: ThemeSection
   inset: ThemeSection
+  invert: ThemeSection
   keyframes: ThemeSection<Record<string, CSSProperties>>
   letterSpacing: ThemeSection
   lineHeight: ThemeSection
@@ -172,7 +188,9 @@ export interface Theme {
   ringOpacity: ThemeSection
   ringWidth: ThemeSection
   rotate: ThemeSection
+  saturate: ThemeSection
   scale: ThemeSection
+  sepia: ThemeSection
   skew: ThemeSection
   space: ThemeSection
   stroke: ThemeSection<ThemeColor>
