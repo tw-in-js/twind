@@ -1,0 +1,26 @@
+diff --git a/node_modules/typedoc-plugin-markdown/dist/resources/helpers/escape.js b/node_modules/typedoc-plugin-markdown/dist/resources/helpers/escape.js
+index a33949a..5b88517 100644
+--- a/node_modules/typedoc-plugin-markdown/dist/resources/helpers/escape.js
++++ b/node_modules/typedoc-plugin-markdown/dist/resources/helpers/escape.js
+@@ -6,6 +6,8 @@ function escape(str) {
+         .replace(/>/g, '\\>')
+         .replace(/_/g, '\\_')
+         .replace(/`/g, '\\`')
++        .replace(/\{\{/g, '{\u200B{')
++        .replace(/\}\}/g, '}\u200B}')
+         .replace(/\|/g, '\\|');
+ }
+ exports.escape = escape;
+diff --git a/node_modules/typedoc-plugin-markdown/dist/resources/helpers/type.js b/node_modules/typedoc-plugin-markdown/dist/resources/helpers/type.js
+index 8a834cd..4f4e63b 100644
+--- a/node_modules/typedoc-plugin-markdown/dist/resources/helpers/type.js
++++ b/node_modules/typedoc-plugin-markdown/dist/resources/helpers/type.js
+@@ -61,7 +61,7 @@ function getLiteralType(model) {
+     if (typeof model.value === 'bigint') {
+         return `*${model.value}n*`;
+     }
+-    return `*${model.value}*`;
++    return `*${escape_1.escape(String(model.value))}*`;
+ }
+ function getReflectionType(model, collapse) {
+     if (model.signatures) {

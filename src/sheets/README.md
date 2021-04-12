@@ -5,17 +5,6 @@
 
 This module provides [virtualSheet](#virtual-sheet) and [domSheet](#dom-sheet) which can be used with <code>{@link twind.setup | setup}({ {@link twind.Configuration.sheet | sheet} })</code>.
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [Virtual Sheet](#virtual-sheet)
-  - [Using for Static Extraction a.k.a. Server Side Rendering (SSR)](#using-for-static-extraction-aka-server-side-rendering-ssr)
-  - [Using in tests](#using-in-tests)
-- [DOM Sheet](#dom-sheet)
-- [Custom Sheet Implementation](#custom-sheet-implementation)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ## Virtual Sheet
 
 The virtual sheet collects style rules into an array. This is most useful during testing and {@page Extract Styles aka SSR | server side rendering (SSR)}.

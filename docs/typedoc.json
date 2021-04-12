@@ -1,0 +1,22 @@
+{
+  "entryPoints": [
+    "../src/index.ts",
+    "../src/colors/index.ts",
+    "../src/css/index.ts",
+    "../src/observe/index.ts",
+    "../src/server/index.ts",
+    "../src/sheets/index.ts",
+    "../src/shim/index.ts",
+    "../src/shim/server/index.ts",
+    "../src/style/index.ts"
+],
+  "readme": "none",
+  "out": "./api",
+  "includeVersion": true,
+  "excludePrivate": true,
+  "excludeInternal": true,
+  "includes": "../",
+  "hideBreadcrumbs": true,
+  "hideInPageTOC": true,
+  "namedAnchors": true
+}

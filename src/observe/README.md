@@ -9,17 +9,6 @@ The `twind/observe` modules allows to use the `class` attribute for tailwind rul
 
 > This is meant for advanced use cases. Most of the time you may want to use {@link twind/shim}.
 
-<!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
-
-- [Usage](#usage)
-- [Customization](#customization)
-- [API](#api)
-- [Example](#example)
-- [Implementation Details](#implementation-details)
-
-<!-- END doctoc generated TOC please keep comment here to allow auto update -->
-
 ## Usage
 
 ```js

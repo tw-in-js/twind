@@ -3,34 +3,6 @@
 [![Module Size](https://flat.badgen.net/badgesize/brotli/https://cdn.jsdelivr.net/npm/twind/colors/colors.min.js?icon=jsdelivr&label&color=blue&cache=10800)](https://unpkg.com/twind/colors/colors.js 'brotli module size')
 [![Typescript](https://flat.badgen.net/badge/icon/included?icon=typescript&label)](https://unpkg.com/browse/twind/colors/colors.d.ts)
 
-`twind/colors` exposes all [Taiwlind v2 colors](https://tailwindcss.com/docs/customizing-colors#color-palette-reference) as named exports.
+`twind/colors` exposes all [Tailwind v2 colors](https://tailwindcss.com/docs/customizing-colors#color-palette-reference) as named exports.
 
-```js
-import * as colors from 'twind/colors'
-
-setup({
-  theme: {
-    colors: {
-      // Build your palette here
-      gray: colors.trueGray,
-      red: colors.red,
-      blue: colors.lightBlue,
-      yellow: colors.amber,
-    },
-  },
-})
-```
-
-To extend the existing color palette use `theme.extend`:
-
-```js
-import * as colors from 'twind/colors'
-
-setup({
-  theme: {
-    extend: {
-      colors,
-    },
-  },
-})
-```
+[📚 View Handbook Guide](/handbook/configuration#colors)
