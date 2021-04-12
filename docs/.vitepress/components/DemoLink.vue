@@ -10,11 +10,11 @@ defineProps({
     :href="href"
     target="_blank"
     rel="noreferrer noopener"
-    :class="demo-link"
+    class="demo-link"
   >
     Live Demo
     <svg
-      :class="demo-icon"
+      class="demo-icon"
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
       data-icon="external-link"

@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="docs/public/assets/twind-logo-animated.svg" height="125" width="125" />
+<img src="https://twind.dev/assets/twind-logo-animated.svg" height="125" width="125" />
 <a href="https://twind.dev" align="center"><h1>Twind</h1></a>
 
 <p align="center">
@@ -25,7 +25,7 @@ Twind is a small compiler (~13kB) that converts Tailwind classes into actual CSS
 
 Frequently viewed docs:
 
-- [Quick Reference](https://twind.dev//handbook/quick-reference.html) – fast overview
+- [Quick Reference](https://twind.dev/handbook/quick-reference.html) – fast overview
 - [Getting Started](https://twind.dev/handbook/getting-started.html) – how to install `twind`
 - [Shim](https://twind.dev/handbook/the-shim.html) – seamless integration with existing Tailwind HTML
 - [Styling with Twind](https://twind.dev/handbook/styling-with-twind.html) – how to style with Twind
@@ -63,7 +63,7 @@ Other features include:
 - 🚅 Faster than most CSS-in-JS libraries
 - and more!
 
-## Quick Start
+## ⚡️ [Quick Start](http://twind.dev/handbook/getting-started.html)
 
 Copy and paste this code into your favorite sandbox to get started with Twind right away:
 
@@ -97,9 +97,9 @@ For seamless integration with existing Tailwind HTML you can use [twind/shim](ht
 
 Try `twind/shim` in the 🚀 [live and interactive shim demo](https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPG1haW4gY2xhc3M9Imgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIiPgogICAgPGgxIGNsYXNzPSJmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKSI+CiAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICA8L2gxPgogIDwvbWFpbj4KYA==)
 
-This is just the beginning of all the awesome things you can do with Twind. [Check out the handbook](https://twind.dev/handbook/) to learn more.
+This is just the beginning of all the awesome things you can do with Twind. [Check out the handbook](https://twind.dev/handbook/introduction.html) to learn more.
 
-## Inspiration
+## 💡 Inspiration
 
 It would be untrue to suggest that the design here is totally original. Other than the founders' initial attempts at implementing such a module ([oceanwind](https://github.com/lukejacksonn/oceanwind) and [beamwind](https://github.com/kenoxa/beamwind)) we are truly standing on the shoulders of giants.
 
@@ -112,17 +112,15 @@ It would be untrue to suggest that the design here is totally original. Other th
 - [style-vendorizer](https://github.com/kripod/style-vendorizer): essential CSS prefixing helpers in less than 1KB of JavaScript.
 - [CSSType](https://github.com/frenic/csstype): providing autocompletion and type checking for CSS properties and values.
 
----
-
 ## 🙏🏾 Sponsors
 
 Support us with a monthly donation and help us continue our activities.
 
 [[GitHub Sponsor](https://github.com/sponsors/tw-in-js) | [Open Collective](https://opencollective.com/twind)]
 
-<a href="https://github.com/jordwalke" target="_blank"><img class="avatar-user" src="https://avatars.githubusercontent.com/u/977348?v=4" width="64" height="64" alt="@jordwalke"></a>
-<a href="https://github.com/tylerforesthauser" target="_blank"><img class=" avatar-user" src="https://avatars.githubusercontent.com/u/1226786?v=4" width="64" height="64" alt="@tylerforesthauser"></a>
-<a href="https://github.com/holic" target="_blank"><img class=" avatar-user" src="https://avatars.githubusercontent.com/u/508855?v=4" width="64" height="64" alt="@holic"></a>
+<a href="https://github.com/jordwalke" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/977348?v=4" width="64" height="64" alt="@jordwalke"></a>
+<a href="https://github.com/tylerforesthauser" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/1226786?v=4" width="64" height="64" alt="@tylerforesthauser"></a>
+<a href="https://github.com/holic" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/508855?v=4" width="64" height="64" alt="@holic"></a>
 <a href="https://opencollective.com/twind/backer/0/website" target="_blank"><img src="https://opencollective.com/twind/backer/0/avatar.svg"></a>
 <a href="https://opencollective.com/twind/backer/1/website" target="_blank"><img src="https://opencollective.com/twind/backer/1/avatar.svg"></a>
 <a href="https://opencollective.com/twind/backer/2/website" target="_blank"><img src="https://opencollective.com/twind/backer/2/avatar.svg"></a>
@@ -133,8 +131,6 @@ Support us with a monthly donation and help us continue our activities.
 ## 🤝 Contributing
 
 We are excited that you are interested in contributing to this project! We've put together a whole [contribution guide](https://twind.dev/handbook/contributing.html) to get you started.
-
----
 
 ## ⚖️ License
 

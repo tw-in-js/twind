@@ -16,7 +16,7 @@ features:
   - title: 🚀 Framework agnostic
     details: If your app uses HTML and JavaScript, it should work with Twind. This goes for server-rendered apps too.
   - title: 😎 One low fixed cost
-    details: Twind ships the compiler, not the CSS. This means unlimited styles and variants for one low fixed cost of ~12kB.
+    details: Twind ships the compiler, not the CSS. This means unlimited styles and variants for one low fixed cost of ~13kB.
 
 footer: MIT Licensed | 2020-2021 Twind
 ---

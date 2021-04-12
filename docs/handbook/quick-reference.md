@@ -17,14 +17,12 @@ head:
 ### Useful Links
 
 - Website: [https://twind.dev/](https://twind.dev/)
-- Website Docs: [https://twind.dev/docs/](https://twind.dev/docs/)
 - GitHub: [https://github.com/tw-in-js/twind](https://github.com/tw-in-js/twind)
-- GitHub Docs: [https://github.com/tw-in-js/twind#documentation](https://github.com/tw-in-js/twind#documentation)
-- All Twind Modules: [https://twind.dev/docs/handbook/getting-started/modules.html](https://twind.dev/docs/handbook/getting-started/modules.html)
+- All Twind Modules: [https://twind.dev/api/README.html](https://twind.dev/api/README.html)
 
 ### Installation
 
-[View in Docs](https://twind.dev/docs/handbook/getting-started/installation.html)
+[View in Docs](./getting-started.md)
 
 ```tsx
 import { tw } from 'https://cdn.skypack.dev/twind' // requires type="module"
@@ -34,7 +32,7 @@ import { tw } from 'twind'
 
 ### The `tw` function
 
-[View in Docs](https://twind.dev/docs/handbook/getting-started/styling-with-twind.html#the-tw-function)
+[View in Docs](./styling-with-twind.md#the-tw-function)
 
 The `tw` function is responsible for composing styles and injecting the derived styles into the document.
 
@@ -74,7 +72,7 @@ The `tw` function is responsible for composing styles and injecting the derived 
 
 ### Grouping
 
-[View in Docs](https://twind.dev/docs/handbook/getting-started/thinking-in-groups.html)
+[View in Docs](./grouping-syntax.md)
 
 The Twind compiler provides a terse syntax for grouping related classes together in an intuitive way.
 
@@ -132,7 +130,7 @@ The Twind compiler provides a terse syntax for grouping related classes together
 
 ### The Shim
 
-[View in Docs](https://twind.dev/docs/handbook/getting-started/using-the-shim.html)
+[View in Docs](./the-shim.md)
 
 The shim allows you to use Twind syntax directly in a class attribute without the need of the `tw` function. It is useful for gradual refactoring or quick prototyping.
 
@@ -156,7 +154,7 @@ import 'twind/shim`;
 
 ### The `apply` function
 
-[View in Docs](https://twind.dev/docs/handbook/advanced/defining-components.html)
+[View in Docs](./styling-with-twind.html#the-apply-function)
 
 The `apply` function is used to compose styles that can be later be overwritten in a `tw` call. Useful for component authors.
 
@@ -171,9 +169,9 @@ const btn = apply`bg-gray-200`;
 
 ### The `css` function (CSS-in-JS)
 
-[View in Docs](https://twind.dev/docs/handbook/getting-started/css-in-js.html)
+[View in Docs](./css-in-twind.md)
 
-The `css` function allows you to write raw CSS in Twind, with support for pseudo-selectors,global styles, directives, animations, grouping syntax, and more.
+The `css` function allows you to write raw CSS in Twind, with support for pseudo-selectors, global styles, directives, animations, grouping syntax, and more.
 
 ```tsx
 // All available exports
@@ -196,7 +194,7 @@ tw`
 
 ### Configuration
 
-[View in Docs](https://twind.dev/docs/handbook/getting-started/customize-the-theme.html)
+[View in Docs](./configuration.md#theme)
 
 The `setup` function can optionally be used to configure and extend your theme.
 
@@ -227,7 +225,7 @@ setup({
 
 ### Beyond Tailwind
 
-[View in Docs](https://twind.dev/docs/handbook/getting-started/tailwind-extensions.html)
+[View in Docs](./extended-functionality.md)
 
 Twind includes several directives, variants, and utilities beyond Tailwind:
 

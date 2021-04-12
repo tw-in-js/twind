@@ -43,7 +43,7 @@ If your app uses HTML and JavaScript, it should work with Twind. This goes for s
 
 **<Emoji symbol="😎"/> One low fixed cost**
 
-Twind ships the compiler, not the CSS. This means unlimited styles and variants for one low fixed cost of ~12kB.
+Twind ships the compiler, not the CSS. This means unlimited styles and variants for one low fixed cost of ~13kB.
 
 ![Example showing how Twind injects styles at runtime](/assets/how-twind-works.gif 'How Twind works')
 
@@ -129,22 +129,6 @@ The compiler is not reliant on the DOM, which makes it an ideal candidate for st
 
 </details>
 
-## <Emoji symbol="🙏🏾" /> Sponsors
-
-Support us with a monthly donation and help us continue our activities.
-
-[[GitHub Sponsor](https://github.com/sponsors/tw-in-js) | [Open Collective](https://opencollective.com/twind)]
-
-<a href="https://github.com/jordwalke" target="_blank"><img class="avatar-user" src="https://avatars.githubusercontent.com/u/977348?v=4" width="64" height="64" alt="@jordwalke"></a>
-<a href="https://github.com/tylerforesthauser" target="_blank"><img class="avatar-user" src="https://avatars.githubusercontent.com/u/1226786?v=4" width="64" height="64" alt="@tylerforesthauser"></a>
-<a href="https://github.com/holic" target="_blank"><img class="avatar-user" src="https://avatars.githubusercontent.com/u/508855?v=4" width="64" height="64" alt="@holic"></a>
-<a href="https://opencollective.com/twind/backer/0/website" target="_blank"><img src="https://opencollective.com/twind/backer/0/avatar.svg" alt=""></a>
-<a href="https://opencollective.com/twind/backer/1/website" target="_blank"><img src="https://opencollective.com/twind/backer/1/avatar.svg" alt=""></a>
-<a href="https://opencollective.com/twind/backer/2/website" target="_blank"><img src="https://opencollective.com/twind/backer/2/avatar.svg" alt=""></a>
-
-<a href="https://opencollective.com/twind/sponsor/0/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/0/avatar.svg" alt=""></a>
-<a href="https://opencollective.com/twind/sponsor/1/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/1/avatar.svg" alt=""></a>
-
 ## Rationale and Inspiration
 
 This project was started by the authors of two similar libraries – [oceanwind](https://github.com/lukejacksonn/oceanwind) and [beamwind](https://github.com/kenoxa/beamwind) – who chose to collaborate with each other in this space.
@@ -228,3 +212,19 @@ The implementation is tested for speed alongside several popular CSS-in-JS solut
 | styled-components@5.2.1 | x 38,284 ops/sec ±0.48% (93 runs sampled) |
 
 For a more detailed testing summary please see the [benchmarks](https://github.com/tw-in-js/twind/blob/main/benchmarks) directory.
+
+## <Emoji symbol="🙏🏾" /> Sponsors
+
+Support us with a monthly donation and help us continue our activities.
+
+[[GitHub Sponsor](https://github.com/sponsors/tw-in-js) | [Open Collective](https://opencollective.com/twind)]
+
+<a href="https://github.com/jordwalke" target="_blank"><img class="avatar-user" src="https://avatars.githubusercontent.com/u/977348?v=4" width="64" height="64" alt="@jordwalke"></a>
+<a href="https://github.com/tylerforesthauser" target="_blank"><img class="avatar-user" src="https://avatars.githubusercontent.com/u/1226786?v=4" width="64" height="64" alt="@tylerforesthauser"></a>
+<a href="https://github.com/holic" target="_blank"><img class="avatar-user" src="https://avatars.githubusercontent.com/u/508855?v=4" width="64" height="64" alt="@holic"></a>
+<a href="https://opencollective.com/twind/backer/0/website" target="_blank"><img src="https://opencollective.com/twind/backer/0/avatar.svg" alt=""></a>
+<a href="https://opencollective.com/twind/backer/1/website" target="_blank"><img src="https://opencollective.com/twind/backer/1/avatar.svg" alt=""></a>
+<a href="https://opencollective.com/twind/backer/2/website" target="_blank"><img src="https://opencollective.com/twind/backer/2/avatar.svg" alt=""></a>
+
+<a href="https://opencollective.com/twind/sponsor/0/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/0/avatar.svg" alt=""></a>
+<a href="https://opencollective.com/twind/sponsor/1/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/1/avatar.svg" alt=""></a>
