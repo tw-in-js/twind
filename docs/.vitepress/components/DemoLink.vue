@@ -1,7 +1,5 @@
 <script setup>
-import { tw } from 'twind'
 import { defineProps } from 'vue'
-import Emoji from './Emoji.vue'
 defineProps({
   href: { type: String, default: null },
 })
@@ -12,13 +10,11 @@ defineProps({
     :href="href"
     target="_blank"
     rel="noreferrer noopener"
-    :class="
-      tw`p-2 rounded-md bg-gray-100 hover:bg-gray-200 transition-colors duration-100 inline-flex items-end`
-    "
+    :class="demo-link"
   >
     Live Demo
     <svg
-      :class="tw`h-5 w-5 fill-current ml-1`"
+      :class="demo-icon"
       xmlns="http://www.w3.org/2000/svg"
       version="1.1"
       data-icon="external-link"

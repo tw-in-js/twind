@@ -21,3 +21,23 @@ img {
 .DocSearch.DocSearch {
   --docsearch-primary-color: var(--c-brand);
 }
+
+.demo-link {
+  transition-duration: 100ms;
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 150ms;
+  padding: 0.5rem;
+  align-items: flex-end;
+  display: inline-flex;
+  border-radius: 0.375rem;
+  --tw-bg-opacity: 1;
+  background-color: rgba(243, 244, 246, var(--tw-bg-opacity));
+}
+
+.demo-icon {
+  width: 1.25rem;
+  fill: currentColor;
+  margin-left: 0.25rem;
+  height: 1.25rem;
+}
