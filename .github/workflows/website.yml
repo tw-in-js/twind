@@ -17,18 +17,15 @@ jobs:
 
       - name: Install
         uses: bahmutov/npm-install@v1
+        with:
+          working-directory: |
+            .
+            docs
 
       - name: Build 🔧
         run: |
-          mkdir website
-          yarn typedoc
-
-          sed 's%<html lang="en" hidden>%<html lang="en">%g;s%<script type="module" src="/_src_/shim/index.js"></script>%twindObserve.observe(document.documentElement)</script>%g;s%<script type="twind-config">%<script crossorigin="anonymous" src="https://cdn.jsdelivr.net/combine/npm/twind/twind.umd.min.js,npm/twind/observe/observe.umd.min.js"></script><script>twind.setup(%g;s% </script>% );%g' < example/landing.html > website/index.html
-
-          echo '<meta http-equiv="Refresh" content="0; url=https://twind.dev/docs/handbook/getting-started/modules.html" />' > website/docs/modules.html
-
-          mkdir website/api
-          echo '<meta http-equiv="Refresh" content="0; url=https://twind.dev/docs" />' > website/api/index.html
+          cd docs
+          yarn build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@3.7.1
@@ -36,6 +33,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BASE_BRANCH: main
           BRANCH: gh-pages # The branch the action should deploy to.
-          FOLDER: website # The folder the action should deploy.
+          FOLDER: docs/.vitepress/dist # The folder the action should deploy.
           CLEAN: true # Automatically remove deleted files from the deploy branch
           CLEAN_EXCLUDE: '["CNAME", ".nojekyll"]'
