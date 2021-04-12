@@ -5,7 +5,7 @@ const description =
   'The smallest, fastest, most feature complete tailwind-in-js solution in existence'
 
 // TODO: We need to make sure and change the URL once launched
-const site = isProd ? 'https://twind-dev.netlify.app' : 'http://localhost:3000'
+const site = isProd ? 'https://twind.dev' : 'http://localhost:3000'
 
 function base(path) {
   return `${site}/assets/${path}`
@@ -216,6 +216,7 @@ const apiSidebar = [
       { text: 'twind/sheets', link: '/api/modules/twind_sheets.html' },
       { text: 'twind/shim', link: '/api/modules/twind_shim.html' },
       { text: 'twind/shim/server', link: '/api/modules/twind_shim_server.html' },
+      { text: 'twind/style', link: '/api/modules/twind_style.html' },
     ],
   },
 ]
@@ -243,5 +244,5 @@ module.exports = {
       '/migration-guides/': guideSidebar,
       '/api/': apiSidebar,
     },
-  },
+  }
 }

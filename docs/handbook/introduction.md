@@ -63,7 +63,7 @@ Twind's advanced caching and specialized optimizations enable it to compile and 
 
 If it works in Tailwind, it should work in Twind.
 
-Class names that are provided by Tailwind will always work with Twind. Further, Twind configuration and theming follow [Tailwind conventions](<(https://tailwindcss.com/docs/theme)>), meaning you can copy/paste your Tailwind config to the Twind `setup` function. The only difference here is that there is no need to rebuild after changing your theme. Just refresh the page! For more information, check out the [configuration guide](/handbook/configuration).
+Class names that are provided by Tailwind will always work with Twind. Further, Twind configuration and theming follow [Tailwind conventions](https://tailwindcss.com/docs/theme), meaning you can copy/paste your Tailwind config to the Twind `setup` function. The only difference here is that there is no need to rebuild after changing your theme. Just refresh the page! For more information, check out the [configuration guide](/handbook/configuration).
 
 Twind also provides [a shim](/handbook/the-shim), which allows for seamless integration with your existing Tailwind styles with no configuration. The shim can improve the development experience and is useful for incremental migration.
 
@@ -99,7 +99,7 @@ Twind also provides a [css helper function](/handbook/css-in-twind) as a conveni
 
 <details><summary><Emoji symbol="🤖" /> Built in support for conditional rule combining</summary>
 
-The [`tw` function](/handbook/styled-with-twind#the-tw-function) allows you to represent your styles in arrays, objects, template literals, functions, or any combination of these.The interpreter spec is inspired by and is very similar to [clsx](https://github.com/lukeed/clsx) and offers a much more developer friendly API that handles null values gracefully.
+The [`tw` function](./styling-with-twind.md#the-tw-function) allows you to represent your styles in arrays, objects, template literals, functions, or any combination of these.The interpreter spec is inspired by and is very similar to [clsx](https://github.com/lukeed/clsx) and offers a much more developer friendly API that handles null values gracefully.
 
 </details>
 

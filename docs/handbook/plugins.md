@@ -233,7 +233,7 @@ tw`
 
 In the above example, the before and after styles are only applied on small screens and when the user is hovering over the element.
 
-> **Note**: The above examples are for exploratory purposes. Consider using [twind/css](./css.md) for optimal performance.
+> **Note**: The above examples are for exploratory purposes. Consider using [twind/css](./css-in-twind.md) for optimal performance.
 >
 > ```js
 > tw`

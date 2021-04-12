@@ -21,7 +21,7 @@ The easiest way to migrate your existing Tailwind app to Twind is by using [the 
 The Shim will automagically convert all of your Tailwind classes to Twind, and even pick up on your custom Tailwind theme configuration simply by importing the shim into your project:
 
 ```js
-import twind/shim
+import 'twind/shim'
 ```
 
 Example: `class="text-blue-500 font-bold"` becomes `` class=`${tw`text-blue-500 font-bold"`} ``

@@ -65,7 +65,7 @@ Internally `twind/shim` uses `twind/observe`, which may be useful for advanced u
 
 ## Support legacy browsers with UMD bundles
 
-> You may need to provide certain [polyfills](./browser-support.md) depending on your target browser.
+> You may need to provide certain [polyfills](./getting-started.md#supporting-legacy-browsers) depending on your target browser.
 
 ```html
 <script defer src="https://unpkg.com/twind/twind.umd.js"></script>
@@ -73,7 +73,7 @@ Internally `twind/shim` uses `twind/observe`, which may be useful for advanced u
 <script defer src="https://unpkg.com/twind/shim/shim.umd.js"></script>
 ```
 
-The `twind/shim` module utilizes the {@link twind/observe} module internally, but it provides its own {@link setup} function for customizing the used {@link tw} instance and setting the target node to be shimmed. It also provides a {@link disconnect} function to stop shimming/observing all nodes.
+The `twind/shim` module utilizes the [twind/observe](../api/modules/twind_observe.md) module internally, but it provides its own [setup](../api/modules/twind_shim.md#setup) function for customizing the used tw instance and setting the target node to be shimmed. It also provides a [disconnect](../api/modules/twind_shim.md#disconnect) function to stop shimming/observing all nodes.
 
 ```js
 import { setup, disconnect } from 'twind/shim'
@@ -91,7 +91,7 @@ disconnect()
 
 ## Custom `tw` instance
 
-You can provide a `<script type="twind-config">...</script>` within the document. The content must be valid JSON and all {@link twind.setup | twind setup options} (including {@link twind.Configuration.hash | hash}) are supported.
+You can provide a `<script type="twind-config">...</script>` within the document. The content must be valid JSON and all [twind setup options](./configuration.md) (including [hash](./configuration.md#hash)) are supported.
 
 ```html
 <!DOCTYPE html>

@@ -318,7 +318,7 @@ const sheet = cssomSheet({ target: new CSSStyleSheet() })
 setup({ sheet })
 ```
 
-> 💡 See [Examples - LitElement](./examples.md#litelement) how this can be used.
+> 💡 See [Examples - LitElement](../usage-guides/lit-element.md) how this can be used.
 
 #### Void Sheet
 

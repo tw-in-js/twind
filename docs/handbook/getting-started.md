@@ -38,7 +38,7 @@ document.body.innerHTML = `
 
 Using the exported `tw` function results in the compilation of the rules like `bg-black text-white` and `text-xl` exactly as specified in the [Tailwind documentation](https://tailwincss.com/docs). For convenience, the default [Tailwind theme](https://github.com/tailwindlabs/tailwindcss/blob/v1/stubs/defaultConfig.stub.js) is used along with the preflight [base styles](https://tailwindcss.com/docs/preflight) unless you explicitly overwrite them.
 
-For seamless integration with existing Tailwind HTML, you can use [the Shim](/docs/guide/the-shim.md):
+For seamless integration with existing Tailwind HTML, you can use [the Shim](./the-shim.md):
 
 ```html
 <script type="module" src="https://cdn.skypack.dev/twind/shim"></script>
