@@ -1,27 +1,6 @@
 {
   "$schema": "http://json.schemastore.org/tsconfig",
   "include": ["src"],
-  "typedocOptions": {
-    "entryPoints": [
-      "./src/index.ts",
-      "./src/colors/index.ts",
-      "./src/css/index.ts",
-      "./src/observe/index.ts",
-      "./src/server/index.ts",
-      "./src/sheets/index.ts",
-      "./src/shim/index.ts",
-      "./src/shim/server/index.ts",
-      "./src/style/index.ts"
-    ],
-    "out": "./website/docs",
-    "includeVersion": true,
-    "readme": "./README.md",
-    "excludePrivate": true,
-    "excludeInternal": true,
-    "includes": "./",
-    "theme": "pages-plugin",
-    "pages": "./docs/pages.json"
-  },
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
