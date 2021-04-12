@@ -41,3 +41,7 @@ img {
   margin-left: 0.25rem;
   height: 1.25rem;
 }
+
+.avatar-user {
+  border-radius: 50%!important;
+}
