@@ -229,8 +229,8 @@ module.exports = {
   lang: 'en-US',
   themeConfig: {
     algolia: {
-      apiKey: 'your_api_key',
-      indexName: 'index_name',
+      apiKey: '2755c9a0c60b75484bbc33bf9f6fe505',
+      indexName: 'twind',
     },
     nav: [
       { text: 'Guide', link: '/handbook/introduction' },
