@@ -14,4 +14,4 @@ head:
 
 # {{ $frontmatter.title }}
 
-Please see [@twind/wrm](https://github.com/tw-in-js/use-twind-with/tree/main/packages/wmr).
+Please see [@twind/wmr](https://github.com/tw-in-js/use-twind-with/tree/main/packages/wmr).
