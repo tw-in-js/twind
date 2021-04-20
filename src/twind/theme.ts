@@ -916,7 +916,9 @@ const resolveContext: ThemeSectionResolverContext = {
 const handleArbitraryValues = (section: keyof Theme, key: string): string | false =>
   (key = (key[0] == '[' && key.slice(-1) == ']' && key.slice(1, -1)) as string) &&
   includes(section, 'olor') == /^(#|(hsl|rgb)a?\(|[a-z]+$)/.test(key) &&
-  (includes(key, 'calc(') ? key.replace(/(-?\d*\.?\d(?:%|[a-z]+)?|\))([+\-/*])/g, '$1 $2 ') : key)
+  (includes(key, 'calc(')
+    ? key.replace(/(-?\d*\.?\d(?!\b-.+[,)](?![^+\-/*])\D)(?:%|[a-z]+)?|\))([+\-/*])/g, '$1 $2 ')
+    : key)
 
 export const makeThemeResolver = (config?: ThemeConfiguration): ThemeResolver => {
   const cache = new Map<keyof Theme, Record<string, unknown>>()

@@ -44,7 +44,7 @@
       "name": "twind",
       "path": "dist/twind.js",
       "brotli": true,
-      "limit": "12kb"
+      "limit": "12.1kb"
     },
     {
       "name": "twind/colors",
