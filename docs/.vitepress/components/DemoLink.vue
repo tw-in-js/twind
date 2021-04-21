@@ -6,12 +6,7 @@ defineProps({
 </script>
 
 <template>
-  <a
-    :href="href"
-    target="_blank"
-    rel="noreferrer noopener"
-    class="demo-link"
-  >
+  <a :href="href" target="_blank" rel="noreferrer noopener" class="demo-link">
     Live Demo
     <svg
       class="demo-icon"

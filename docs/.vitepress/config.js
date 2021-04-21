@@ -244,5 +244,5 @@ module.exports = {
       '/migration-guides/': guideSidebar,
       '/api/': apiSidebar,
     },
-  }
+  },
 }

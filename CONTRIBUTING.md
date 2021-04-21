@@ -56,10 +56,9 @@ If you think anything here sounds like a good idea and/or would like to make it 
 
 ### Packages / Modules
 
-- twind/styled - like styled components (https://github.com/cristianbote/goober/tree/master/benchmarks)
-  - with variants like https://stitches.dev
 - twind/test - to simplify test setups
 - twind/play - play mode which infers number, sizes, and colors from rules
+
   ```
   p-2.5 -> padding: 0.625rem;
   p-3.2 -> padding: 0.8rem;
@@ -67,15 +66,7 @@ If you think anything here sounds like a good idea and/or would like to make it 
   p-3px -> padding: 3px;
   p-4rem -> padding: 4rem;
   w-9/12 -> width: 75%;
-  ```
-- @twind/cli: https://github.com/tw-in-js/twind/discussions/121
-
-  ```
-  # update the HTML in place adding a style tag into the head
-  twind './**/*.html'
-
-  # generate external style file
-  twind './**/*.html' --out twind.css
+  bg-#1c1c1e -> background-color: rgba(28, 28, 30, var(--tw-bg-opacity));
   ```
 
 - Framework specific integration packages
@@ -126,23 +117,16 @@ If you think anything here sounds like a good idea and/or would like to make it 
   ```
 
 - instead of generating utility CSS generate component CSS (auto `apply`)
-- new core plugins
-  - `z-{index}` or `z-auto`
-  - gap
-- support hex colors - could be done as a plugin
-  ```
-  bg-hex-1c1c1e -> background-color: rgba(28, 28, 30, var(--tw-bg-opacity));
-  ```
 - support CSS variables - could be done as a plugin when `bg-var-` is used
   ```
   bg-var-test-variable -> background-color: rgba(var(--test-variable), var(--tw-bg-opacity));
   bg-$test-variable -> background-color: rgba(var(--test-variable), var(--tw-bg-opacity));
   ```
-- Screen Utilities - use `+` and `-` screen utilities, even for custom screen sizes.
+- Screen Utilities
   https://github.com/windicss/windicss/discussions/28
   ```
    sm -> @media (min-width:640px);
-  ~sm -> @media (max-width:640px)
+  <sm -> @media (max-width:639px)
   @sm -> @media (min-width:640px) and (max-width:768px);
   ```
 - convert css to twind
@@ -161,7 +145,6 @@ If you think anything here sounds like a good idea and/or would like to make it 
   - track used theme values and re-translate
 - errors as links to wind.dev/errors/[id] where we provide additional infos
 - comments in template literals
-- `not-` prefix for variants: `not-focus:invalid:border-red-500`
 
 ### Documentation
 

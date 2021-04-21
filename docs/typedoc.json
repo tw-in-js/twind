@@ -9,7 +9,7 @@
     "../src/shim/index.ts",
     "../src/shim/server/index.ts",
     "../src/style/index.ts"
-],
+  ],
   "readme": "none",
   "out": "./api",
   "includeVersion": true,
