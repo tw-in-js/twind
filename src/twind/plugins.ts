@@ -371,7 +371,7 @@ export const corePlugins: Record<string, Plugin | undefined> = {
               ? `repeat(${params[1]},minmax(0,1fr))`
               : join(tail(params)),
           )) && {
-            ['grid-template-' + toColumnsOrRows(params[0])]: _,
+            ['gridTemplate-' + toColumnsOrRows(params[0])]: _,
           }
         )
 
@@ -396,7 +396,7 @@ export const corePlugins: Record<string, Plugin | undefined> = {
       tail(params),
       join(tail(params)),
     )) && {
-      ['grid-auto-' + toColumnsOrRows(params[0])]: _,
+      ['gridAuto-' + toColumnsOrRows(params[0])]: _,
     },
 
   static: position,
@@ -454,7 +454,7 @@ export const corePlugins: Record<string, Plugin | undefined> = {
       'both',
   }),
 
-  box: (params) => params[0] && { 'box-sizing': params[0] + '-box' },
+  box: (params) => params[0] && { boxSizing: params[0] + '-box' },
 
   // .appearance-none -> appearance: none;
   // .appearance-auto -> appearance: auto;
@@ -730,7 +730,7 @@ export const corePlugins: Record<string, Plugin | undefined> = {
       case 'repeat':
         return includes('xy', params[1])
           ? propertyValue('backgroundRepeat')(params)
-          : { 'background-repeat': params[1] || params[0] }
+          : { backgroundRepeat: params[1] || params[0] }
 
       case 'opacity':
         return opacityProperty(params, theme, id, 'background')
@@ -906,7 +906,7 @@ export const corePlugins: Record<string, Plugin | undefined> = {
           // A width
           '--tw-ring-offset-shadow': `var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)`,
           '--tw-ring-shadow': `var(--tw-ring-inset) 0 0 0 calc(${_} + var(--tw-ring-offset-width)) var(--tw-ring-color)`,
-          'box-shadow': `var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 transparent)`,
+          boxShadow: `var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 transparent)`,
 
           ':global': {
             '*': {
@@ -960,7 +960,7 @@ export const corePlugins: Record<string, Plugin | undefined> = {
       'radius',
     ) || themeProperty('borderRadius')(params, context, id),
 
-  'transition-none': { 'transition-property': 'none' },
+  'transition-none': { transitionProperty: 'none' },
 
   transition: (params, { theme }) => ({
     transitionProperty: theme('transitionProperty', params),
