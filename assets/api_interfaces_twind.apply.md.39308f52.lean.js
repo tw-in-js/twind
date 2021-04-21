@@ -1,1 +1,0 @@
-import{o as e,c as t,d as a}from"./app.4ddadaaa.js";const r='{"title":"Interface: Apply","description":"","frontmatter":{},"headers":[{"level":2,"title":"Callable","slug":"callable"}],"relativePath":"api/interfaces/twind.apply.md","lastUpdated":1618986834581}',l={},d=a('',13);l.render=function(a,r,l,n,i,s){return e(),t("div",null,[d])};export default l;export{r as __pageData};
