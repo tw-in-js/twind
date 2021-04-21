@@ -736,7 +736,12 @@ export const corePlugins: Record<string, Plugin | undefined> = {
         return opacityProperty(params, theme, id, 'background')
 
       case 'clip':
-        return params[1] && { backgroundClip: params[1] + (params[1] == 'text' ? '' : '-box') }
+      case 'origin':
+        return (
+          params[1] && {
+            ['background-' + params[0]]: params[1] + (params[1] == 'text' ? '' : '-box'),
+          }
+        )
 
       case 'blend':
         return propertyValue('background-blend-mode')(tail(params))
