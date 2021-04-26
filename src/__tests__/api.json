@@ -249,7 +249,7 @@
   "object-left-bottom": ".object-left-bottom{object-position:left bottom}",
   "object-right-top": ".object-right-top{object-position:right top}",
   "object-left-top": ".object-left-top{object-position:left top}",
-  "transition": ".transition{transition-property:background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}",
+  "transition": ".transition{transition-property:background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}",
   "transition-none": ".transition-none{transition-property:none}",
   "transition-colors": ".transition-colors{transition-property:background-color,border-color,color,fill,stroke;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}",
   "transition-shadow": ".transition-shadow{transition-property:box-shadow;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}",
@@ -667,7 +667,7 @@
   "\n  text(4xl underline)\n  font(bold sans)\n  transition\n  hover:(transform rotate-6 scale-125 cursor-pointer)\n  active:(transform -rotate-12 scale-150)\n": [
     "text-4xl text-underline font-bold font-sans transition hover:transform hover:rotate-6 hover:scale-125 hover:cursor-pointer active:transform active:-rotate-12 active:scale-150",
     [
-      ".transition{transition-property:background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}",
+      ".transition{transition-property:background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}",
       ".text-4xl{font-size:2.25rem;line-height:2.5rem}",
       ".text-underline{text-decoration:underline}",
       ".font-bold{font-weight:700}",
@@ -684,7 +684,7 @@
   "transition duration-500 ease-in-out": [
     "transition duration-500 ease-in-out",
     [
-      ".transition{transition-property:background-color,border-color,color,fill,stroke,opacity,box-shadow,transform;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}",
+      ".transition{transition-property:background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}",
       ".duration-500{transition-duration:500ms}",
       ".ease-in-out{transition-timing-function:cubic-bezier(0.4,0,0.2,1)}"
     ]
