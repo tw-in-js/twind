@@ -55,49 +55,54 @@ const uniq = <T>(value: T, index: number, values: T[]) => values.indexOf(value) 
  * @param options to use
  */
 export const createObserver = ({ tw = defaultTW }: ShimConfiguration = {}): TwindObserver => {
-  const rulesToClassCache = getCache(tw)
-
-  const handleMutation = ({ target, addedNodes }: MinimalMutationRecord): void => {
-    // Not using target.classList.value (not supported in all browsers) or target.class (this is an SVGAnimatedString for svg)
-    const rules = (target as Element).getAttribute?.('class')
-
-    if (rules) {
-      let className = rulesToClassCache.get(rules)
-
-      if (!className) {
-        className = tw(rules).split(/ +/g).filter(uniq).join(' ')
-
-        // Remember the generated class name
-        rulesToClassCache.set(rules, className)
-        rulesToClassCache.set(className, className)
-
-        // Ensure the cache does not grow unlimited
-        ensureMaxSize(rulesToClassCache, 30000)
-      }
-
-      if (rules !== className) {
-        // Not using `target.className = ...` as that is read-only for SVGElements
-        // eslint-disable-next-line @typescript-eslint/no-extra-semi
-        ;(target as Element).setAttribute('class', className)
-      }
-    }
-
-    for (let index = addedNodes.length; index--; ) {
-      const node = addedNodes[index]
-
-      handleMutations([
-        {
-          target: node,
-          addedNodes: (node as Element).children || [],
-        },
-      ])
-    }
-  }
-
-  const handleMutations = (mutations: MinimalMutationRecord[]): void =>
-    mutations.forEach(handleMutation)
-
   if (typeof MutationObserver == 'function') {
+    const rulesToClassCache = getCache(tw)
+
+    const handleMutation = ({ target, addedNodes }: MinimalMutationRecord): void => {
+      // Not using target.classList.value (not supported in all browsers) or target.class (this is an SVGAnimatedString for svg)
+      const rules = (target as Element).getAttribute?.('class')
+
+      if (rules) {
+        let className = rulesToClassCache.get(rules)
+
+        if (!className) {
+          className = tw(rules).split(/ +/g).filter(uniq).join(' ')
+
+          // Remember the generated class name
+          rulesToClassCache.set(rules, className)
+          rulesToClassCache.set(className, className)
+
+          // Ensure the cache does not grow unlimited
+          ensureMaxSize(rulesToClassCache, 30000)
+        }
+
+        if (rules !== className) {
+          // Not using `target.className = ...` as that is read-only for SVGElements
+          // eslint-disable-next-line @typescript-eslint/no-extra-semi
+          ;(target as Element).setAttribute('class', className)
+        }
+      }
+
+      for (let index = addedNodes.length; index--; ) {
+        const node = addedNodes[index]
+
+        handleMutations([
+          {
+            target: node,
+            addedNodes: (node as Element).children || [],
+          },
+        ])
+      }
+    }
+
+    const handleMutations = (mutations: MinimalMutationRecord[]): void => {
+      mutations.forEach(handleMutation)
+
+      // handle any still-pending mutations
+      mutations = observer.takeRecords()
+      if (mutations) mutations.forEach(handleMutation)
+    }
+
     const observer = new MutationObserver(handleMutations)
 
     return {
@@ -148,7 +153,7 @@ export function observe(
 }
 
 /**
- * Simplified MutationRecord which allows use to pass an
+ * Simplified MutationRecord which allows us to pass an
  * ArrayLike (compatible with Array and NodeList) `addedNodes` and
  * omit other properties we are not interested in.
  */
