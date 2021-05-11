@@ -449,7 +449,7 @@ export const corePlugins: Record<string, Plugin | undefined> = {
 
   resize: (params) => ({
     resize:
-      ({ x: 'vertical', y: 'horizontal' } as Record<string, string | undefined>)[params[0]] ||
+      ({ x: 'horizontal', y: 'vertical' } as Record<string, string | undefined>)[params[0]] ||
       params[0] ||
       'both',
   }),
