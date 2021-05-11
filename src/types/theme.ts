@@ -104,7 +104,7 @@ export type ThemeFontSize =
   | [size: string, lineHeight: string]
   | [size: string, options: { lineHeight?: string; letterSpacing?: string }]
 
-export type ThemeOutline = [outline: string, offset: string]
+export type ThemeOutline = [outline: string, offset: string] | string[]
 
 export interface Theme {
   colors: ThemeSection<ThemeColor>
