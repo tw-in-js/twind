@@ -290,14 +290,14 @@ const filter: Plugin = (params, { theme }, id) => {
     ].filter(Boolean)
 
     return params[1] == 'none'
-      ? { filter: 'none' }
+      ? { [prefix + 'filter']: 'none' }
       : filters.reduce(
           (css, key) => {
             css['--tw-' + prefix + key] = 'var(--tw-empty,/*!*/ /*!*/)'
             return css
           },
           {
-            filter: filters.map((key) => `var(--tw-${prefix}${key})`).join(' '),
+            [prefix + 'filter']: filters.map((key) => `var(--tw-${prefix}${key})`).join(' '),
           } as CSSRules,
         )
   }
