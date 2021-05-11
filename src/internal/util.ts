@@ -133,6 +133,7 @@ export const cyrb32: Hasher = (value: string): string => {
  */
 export const sortedInsertionIndex = (array: readonly number[], element: number): number => {
   // Find position by binary search
+  // eslint-disable-next-line no-var
   for (var low = 0, high = array.length; low < high; ) {
     const pivot = (high + low) >> 1
 
