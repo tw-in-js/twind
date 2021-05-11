@@ -13,7 +13,7 @@ export const prepareVariantSelector = (variant: string): string =>
 // Wraps a CSS rule object with variant at-rules and pseudo classes
 // { '.selector': {...} }
 // => { '&:hover': { '.selector': {...} } }
-// => { '@media (mind-width: ...)': { '&:hover': { '.selector': {...} } } }
+// => { '@media (min-width: ...)': { '&:hover': { '.selector': {...} } } }
 export const decorate = (
   darkMode: DarkMode,
   variants: Record<string, string>,

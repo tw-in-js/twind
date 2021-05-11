@@ -111,7 +111,7 @@ export const serialize = (
   // Responsible for converting the css into one or more css strings
   // which will be injected into the page
   const stringify = (
-    // Upper at-rules, selctoer that should wrap each generated css block
+    // Upper at-rules, selector that should wrap each generated css block
     atRules: string[],
     // The current css selector
     selector: string,
@@ -140,7 +140,7 @@ export const serialize = (
     // this ensures that 'border-top-width' has a higer presedence than 'border-top'
     let maxPropertyPresedence = 0
 
-    // more specfic utilities have less declarations and a higher presedence
+    // more specific utilities have less declarations and a higher presedence
     let numberOfDeclarations = 0
 
     if ((css as CSSRules)['@apply']) {

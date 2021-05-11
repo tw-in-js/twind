@@ -7,10 +7,10 @@ import type {
   ThemeSectionResolver,
   ThemeSectionResolverContext,
   ThemeHelper,
+  Context,
 } from '../types'
 
 import { join, tail, includes } from '../internal/util'
-import type { Context } from 'uvu'
 import { directive } from './directive'
 
 // '1/2': '50%',

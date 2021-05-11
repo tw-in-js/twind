@@ -132,13 +132,8 @@ export const cyrb32: Hasher = (value: string): string => {
  * @returns The insertion index
  */
 export const sortedInsertionIndex = (array: readonly number[], element: number): number => {
-  let high = array.length
-
-  // Theres only one option then
-  if (high == 0) return 0
-
   // Find position by binary search
-  for (let low = 0; low < high; ) {
+  for (var low = 0, high = array.length; low < high; ) {
     const pivot = (high + low) >> 1
 
     // Less-Then-Equal to add new equal element after all existing equal elements (stable sort)
