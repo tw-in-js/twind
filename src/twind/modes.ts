@@ -11,22 +11,7 @@ export const mode = (report: (message: string) => void): Mode => ({
   },
 
   report({ id, ...info }) {
-    const message = `[${id}] ${JSON.stringify(info)}`
-    // Generate a stacktrace that starts at callee site
-    const stack = (new Error(message).stack || message).split('at ')
-
-    // Drop all frames until we hit the first `tw` or `setup` call
-    // We are using splice(1, 1) to keep the message header - this includes line break and "at " indentation
-    for (
-      let frame: string | undefined;
-      (frame = stack.splice(1, 1)[0]) && !/(^|\.)(tw|setup) /.test(frame);
-
-    ) {
-      /* no-op */
-    }
-
-    // Put it back together
-    return report(join(stack, 'at '))
+    return report(`[${id}] ${JSON.stringify(info)}`)
   },
 })
 
