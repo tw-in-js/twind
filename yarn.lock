@@ -1673,10 +1673,10 @@ dir-glob@^3.0.1:
   dependencies:
     path-type "^4.0.0"
 
-distilt@^0.10.5:
-  version "0.10.5"
-  resolved "https://registry.npmjs.org/distilt/-/distilt-0.10.5.tgz#277cf80e69e354599800a8a1a835a50c3b787608"
-  integrity sha512-Yx73DXhwD5iJNEfaXnAIeqDfvRtgqSFYibasYmTBXAce2rMRx3fKO5znAomazxFemytf0N2H6jRdCivaBzCLzw==
+distilt@^0.10.7:
+  version "0.10.7"
+  resolved "https://registry.npmjs.org/distilt/-/distilt-0.10.7.tgz#8ce9bae38b17a7f254019b9b008f90876dad471c"
+  integrity sha512-h0zmneEbj4MFvrrwN4f6Tt/M89J2Hu+lV0ieBCsqTG18JmiBQOs8U3CWRleDpP/P6M4DNySiGhCunh740Rq8ng==
   dependencies:
     es-module-lexer "^0.3.26"
     esbuild "^0.9.3"
