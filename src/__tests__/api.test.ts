@@ -988,7 +988,7 @@ test('using interpolated arbitrary value', ({ tw, sheet }) => {
   assert.equal(sheet.target, ['.p-\\[3px\\]{padding:3px}'])
 })
 
-test('#185 - max-w-... look into width instead on maxWidth in theme in safari', ({tw, sheet}) => {
+test('#185 - max-w-... look into width instead on maxWidth in theme in safari', ({ tw, sheet }) => {
   assert.throws(() => {
     tw('w-xl')
   }, /\{"key":"width\.xl"\}/)
