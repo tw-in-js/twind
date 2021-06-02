@@ -58,6 +58,9 @@ test.before((context) => {
         gridAutoRows: {
           '2fr': 'minmax(0,2fr)',
         },
+        maxWidth: {
+          large: '123rem',
+        },
       },
     },
   })
@@ -983,6 +986,14 @@ test('using interpolated arbitrary value', ({ tw, sheet }) => {
 
   assert.is(tw`p-${'[3px]'}`, 'p-[3px]')
   assert.equal(sheet.target, ['.p-\\[3px\\]{padding:3px}'])
+})
+
+test('#185 - max-w-... look into width instead on maxWidth in theme in safari', ({tw, sheet}) => {
+  assert.throws(() => {
+    tw('w-xl')
+  }, /\{"key":"width\.xl"\}/)
+
+  assert.equal(sheet.target, [])
 })
 
 test.run()
