@@ -102,7 +102,7 @@ setup({
 })
 ```
 
-[Check out the docs](https://twind.dev/docs/handbook/advanced/setup.html) on the `setup` function for more configuration options like preflight, dark mode, and hashing.
+[Check out the docs](https://twind.dev/handbook/configuration.html) on the `setup` function for more configuration options like preflight, dark mode, and hashing.
 
 ### Wrap your classes in `tw` calls
 
