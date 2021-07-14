@@ -131,7 +131,7 @@ tw`
   bg-red-500 shadow-xs
   sm:(
     bg-red-600
-    shadow-md
+    shadow-sm
   )
   md:(bg-red-700 shadow)
   lg:(bg-red-800 shadow-xl)
