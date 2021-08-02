@@ -42,7 +42,7 @@ const translate = (tokens: unknown[], context: Context): CSSRules => {
 
 // Based on https://github.com/cristianbote/goober/blob/master/src/core/astish.js
 const newRule = /\s*(?:([\w-%@]+)\s*:?\s*([^{;]+?)\s*(?:;|$|})|([^;}{]*?)\s*{)|(})/gi
-const ruleClean = /\/\*[\s\S]*?\*\/|\s+|\n/gm
+const ruleClean = /(\s*)\/\/.*;|\/\*[\s\S]*?\*\/|\s+|\n/gm
 
 const decorate = (selectors: string[], currentBlock: CSSRules): CSSRules =>
   selectors.reduceRight((rules, selector) => ({ [selector]: rules }), currentBlock)
