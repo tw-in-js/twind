@@ -131,7 +131,7 @@ Support us with a monthly donation and help us continue our activities.
 
 ## 🤝 Contributing
 
-We are excited that you are interested in contributing to this project! We've put together a whole [contribution guide](https://twind.dev/handbook/contributing.html) to get you started.
+We are excited that you are interested in contributing to this project! We've put together a whole [contribution guide](https://github.com/tw-in-js/twind/blob/main/CONTRIBUTING.md) to get you started.
 
 ## ⚖️ License
 
