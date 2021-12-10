@@ -194,7 +194,7 @@ tw`
 
 ### Configuration
 
-[View in Docs](./configuration.md#theme)
+[View in Docs](./configuration.md)
 
 The `setup` function can optionally be used to configure and extend your theme.
 
