@@ -128,7 +128,6 @@ export const cyan = {
   900: '#164e63',
 } as const
 
-
 export const sky = {
   50: '#f0f9ff',
   100: '#e0f2fe',
