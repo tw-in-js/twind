@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/consistent-type-assertions */
-import type { CSSRules } from '../types'
+import type { CSSRules, Rule } from '../types'
 
-import { joinTruthy } from '../internal/util'
+import { joinTruthy, tail } from '../internal/util'
 
 const positions = (resolve: (position: string) => undefined | string[] | void) => (
   value: string | string[] | undefined,
@@ -60,4 +60,14 @@ export const expandEdges = (key: string): string[] | undefined => {
 // Every char must be a edge position
 // Sort to have consistent declaration ordering
 export const edges = /*#__PURE__*/ positions(expandEdges)
+
+const stringifyVariant = (selector: string, variant: string): string =>
+  selector + (variant[1] == ':' ? tail(variant, 2) + ':' : tail(variant)) + ':'
+
+// Creates rule id including variants, negate and directive
+// which is exactly like a tailwind rule
+export const stringifyRule = (rule: Rule, directive = rule.d): string =>
+  typeof directive == 'function'
+    ? ''
+    : rule.v.reduce(stringifyVariant, '') + (rule.i ? '!' : '') + (rule.n ? '-' : '') + directive
 /* eslint-enable @typescript-eslint/consistent-type-assertions */

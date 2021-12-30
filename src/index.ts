@@ -8,6 +8,7 @@
 export * from './twind/apply'
 export * from './twind/default'
 export * from './twind/directive'
+export * from './twind/expand'
 export * from './twind/instance'
 export * from './twind/modes'
 export * from './twind/prefix'
