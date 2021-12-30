@@ -281,7 +281,7 @@ const buildStatics = (strings: TemplateStringsArray): Static[] => {
   return statics
 }
 
-export const parse = (tokens: unknown[]): Rule[] => {
+export const parse = (tokens: string | unknown[]): Rule[] => {
   groupings = []
   rules = []
 

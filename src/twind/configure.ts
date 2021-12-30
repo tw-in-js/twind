@@ -22,22 +22,14 @@ import { silent, strict, warn } from './modes'
 import { autoprefix, noprefix } from './prefix'
 import { makeThemeResolver } from './theme'
 
-import {
-  cyrb32,
-  identity,
-  tail,
-  merge,
-  evalThunk,
-  ensureMaxSize,
-  includes,
-  join,
-} from '../internal/util'
+import { cyrb32, identity, merge, evalThunk, ensureMaxSize, includes, join } from '../internal/util'
 
 import { parse } from './parse'
 import { translate as makeTranslate } from './translate'
 import { decorate as makeDecorate, prepareVariantSelector } from './decorate'
 import { serialize as makeSerialize } from './serialize'
 import { inject as makeInject } from './inject'
+import { stringifyRule } from './helpers'
 
 const sanitize = <T>(
   value: T | boolean | undefined,
@@ -50,16 +42,6 @@ const loadMode = (mode: Configuration['mode']): Mode =>
   (typeof mode == 'string'
     ? ({ t: strict, a: warn, i: silent } as Record<string, Mode>)[mode[1]]
     : mode) || warn
-
-const stringifyVariant = (selector: string, variant: string): string =>
-  selector + (variant[1] == ':' ? tail(variant, 2) + ':' : tail(variant)) + ':'
-
-// Creates rule id including variants, negate and directive
-// which is exactly like a tailwind rule
-const stringify = (rule: Rule, directive = rule.d): string =>
-  typeof directive == 'function'
-    ? ''
-    : rule.v.reduce(stringifyVariant, '') + (rule.i ? '!' : '') + (rule.n ? '-' : '') + directive
 
 // Use hidden '_' property to collect class names which have no css translation like hashed twind classes
 const COMPONENT_PROPS = { _: { value: '', writable: true } }
@@ -205,10 +187,10 @@ export const configure = (
     // Static rules (from template literals) can cache their id
     // this greatly improves performance
     if (!rule.$) {
-      // For inline directives (functions) `stringify` returns an empty string
+      // For inline directives (functions) `stringifyRule` returns an empty string
       // in that case we check if we already have a name for the function
       // and use that one to generate the id
-      rule.$ = stringify(rule, inlineDirectiveName.get(rule.d as InlineDirective))
+      rule.$ = stringifyRule(rule, inlineDirectiveName.get(rule.d as InlineDirective))
     }
 
     // Check if we already have a class name for this rule id
@@ -232,7 +214,7 @@ export const configure = (
         inlineDirectiveName.set(rule.d as InlineDirective, rule.$)
 
         // Generate an id including the current variants
-        rule.$ = stringify(rule, rule.$)
+        rule.$ = stringifyRule(rule, rule.$)
       }
 
       if (translation && typeof translation == 'object') {
