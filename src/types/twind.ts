@@ -4,6 +4,9 @@ import type { CSSProperties, FontFace } from './css'
 import type { Theme, ThemeResolver, ThemeSectionType } from './theme'
 import type { Falsy, MaybeArray } from './util'
 
+export type MaybeObjInterpolationGeneric<T> = T[] | [TemplateStringsArray, ...T[]]
+export type MaybeTokenInterpolation = MaybeObjInterpolationGeneric<Token>
+
 export interface TWCallable {
   (strings: TemplateStringsArray, ...interpolations: Token[]): string
   (...tokens: Token[]): string
@@ -203,7 +206,7 @@ export interface TokenGrouping extends Record<string, Token> {
 
 export type TypescriptCompat = boolean | number
 
-export type Token = string | TokenGrouping | InlineDirective | Token[] | Falsy | TypescriptCompat
+export type Token = Token[] | TokenGrouping | InlineDirective | string | Falsy | TypescriptCompat
 
 /**
  * Pseudo class

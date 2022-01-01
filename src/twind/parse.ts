@@ -1,4 +1,4 @@
-import type { Rule, Token } from '../types'
+import type { Rule, Token, TokenGrouping, MaybeTokenInterpolation } from '../types'
 
 import { join, tail, includes } from '../internal/util'
 
@@ -175,17 +175,21 @@ const parseGroup = (key: string, token: Token): void => {
 const parseToken = (token: Token): void => {
   switch (typeof token) {
     case 'string':
+      // string (inferred)
       parseString(token)
       break
     case 'function':
+      // InlineDirective (inferred)
       addRule(token)
       break
     case 'object':
       if (Array.isArray(token)) {
+        // Token[] (inferred)
         token.forEach(parseGroupedToken)
       } else if (token) {
+        // TokenGrouping (coerced, see parseGroup() call below)
         Object.keys(token).forEach((key) => {
-          parseGroup(key, token[key])
+          parseGroup(key, (token as TokenGrouping)[key])
         })
       }
   }
@@ -281,7 +285,7 @@ const buildStatics = (strings: TemplateStringsArray): Static[] => {
   return statics
 }
 
-export const parse = (tokens: string | unknown[]): Rule[] => {
+export const parse = (tokens: string | MaybeTokenInterpolation): Rule[] => {
   groupings = []
   rules = []
 
@@ -294,6 +298,7 @@ export const parse = (tokens: string | unknown[]): Rule[] => {
       apply(tokens[index + 1] as Token),
     )
   } else {
+    // Token includes string type
     parseToken(tokens as Token)
   }
 
