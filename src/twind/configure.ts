@@ -11,6 +11,7 @@ import type {
   Mode,
   Falsy,
   TypescriptCompat,
+  MaybeTokenInterpolation,
 } from '../types'
 
 import { corePlugins } from './plugins'
@@ -50,7 +51,7 @@ export const configure = (
   config: Configuration = {},
 ): {
   init: () => void
-  process: (tokens: unknown[]) => string
+  process: (tokens: MaybeTokenInterpolation) => string
 } => {
   const theme = makeThemeResolver(config.theme)
 
@@ -74,7 +75,7 @@ export const configure = (
   // The context that is passed to functions to access the theme, ...
   const context: Context = {
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
-    tw: (...tokens: unknown[]) => process(tokens),
+    tw: (...tokens: MaybeTokenInterpolation) => process(tokens),
 
     theme: ((section: keyof Theme, key?: string | string[], defaultValue?: unknown): unknown => {
       const value =
@@ -273,7 +274,7 @@ export const configure = (
 
   // This function is called from `tw(...)`
   // it parses, translates, decorates, serializes and injects the tokens
-  const process = (tokens: unknown[]): string =>
+  const process = (tokens: MaybeTokenInterpolation): string =>
     join(parse(tokens).map(convert).filter(Boolean) as string[], ' ')
 
   // Determine if we should inject the preflight (browser normalize)

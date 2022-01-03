@@ -1,4 +1,4 @@
-import type { Configuration, Context, Instance } from '../types'
+import type { Configuration, Context, Instance, MaybeTokenInterpolation, TW } from '../types'
 
 import { configure } from './configure'
 
@@ -14,7 +14,7 @@ export const create = (config?: Configuration): Instance => {
   // This allows the error stacktrace to start at the call site.
 
   // Used by `tw`
-  let process = (tokens: unknown[]): string => {
+  let process = (tokens: MaybeTokenInterpolation): string => {
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     init()
     return process(tokens)
@@ -50,7 +50,7 @@ export const create = (config?: Configuration): Instance => {
   // This ensures that after setup we use the configured
   // `process` and `setup` fails.
   return {
-    tw: Object.defineProperties((...tokens: unknown[]) => process(tokens), {
+    tw: Object.defineProperties(((...tokens: MaybeTokenInterpolation) => process(tokens)) as TW, {
       theme: {
         get: fromContext('theme'),
       },
