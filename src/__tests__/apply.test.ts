@@ -69,12 +69,12 @@ test('with variants', ({ tw, sheet }) => {
     focus:(outline-none ring(2 indigo-400 opacity-75))
   `
 
-  assert.is(tw(btn), 'tw-gj8iiy')
+  assert.is(tw(btn), 'tw-g390xg')
   assert.equal(sheet.target, [
     '*{--tw-1m9cmzd:var(--tw-rz3pvs,/*!*/ /*!*/);--tw-iljcf6:0px;--tw-1q9ryqm:#fff;--tw-g5efu5:rgba(59,130,246,var(--tw-mo52hn,0.5));--tw-1s0t3ke:0 0 transparent;--tw-zxn4nw:0 0 transparent}',
     '*{--tw-1qg7wmx:0 0 transparent}',
-    '.tw-gj8iiy{padding-bottom:0.5rem;padding-top:0.5rem;padding-left:1rem;padding-right:1rem;font-weight:600;border-radius:0.5rem;--tw-1qg7wmx:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);box-shadow:0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);box-shadow:var(--tw-1s0t3ke,0 0 transparent),var(--tw-zxn4nw,0 0 transparent),var(--tw-1qg7wmx)}',
-    '.tw-gj8iiy:focus{outline:2px solid transparent;outline-offset:2px;--tw-1s0t3ke:var(--tw-1m9cmzd) 0 0 0 var(--tw-iljcf6) var(--tw-1q9ryqm);--tw-zxn4nw:var(--tw-1m9cmzd) 0 0 0 calc(2px + var(--tw-iljcf6)) var(--tw-g5efu5);box-shadow:var(--tw-1s0t3ke),var(--tw-zxn4nw),var(--tw-1qg7wmx,0 0 transparent);--tw-mo52hn:0.75;--tw-g5efu5:rgba(129,140,248,var(--tw-mo52hn))}',
+    '.tw-g390xg{padding-bottom:0.5rem;padding-top:0.5rem;padding-left:1rem;padding-right:1rem;font-weight:600;border-radius:0.5rem;--tw-1qg7wmx:0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);box-shadow:0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);box-shadow:var(--tw-1s0t3ke,0 0 transparent),var(--tw-zxn4nw,0 0 transparent),var(--tw-1qg7wmx)}',
+    '.tw-g390xg:focus{outline:2px solid transparent;outline-offset:2px;--tw-1s0t3ke:var(--tw-1m9cmzd) 0 0 0 var(--tw-iljcf6) var(--tw-1q9ryqm);--tw-zxn4nw:var(--tw-1m9cmzd) 0 0 0 calc(2px + var(--tw-iljcf6)) var(--tw-g5efu5);box-shadow:var(--tw-1s0t3ke),var(--tw-zxn4nw),var(--tw-1qg7wmx,0 0 transparent);--tw-mo52hn:0.75;--tw-g5efu5:rgba(129,140,248,var(--tw-mo52hn))}',
   ])
 })
 
