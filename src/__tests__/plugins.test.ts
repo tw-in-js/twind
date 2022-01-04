@@ -138,4 +138,13 @@ test('value can be an apply directive', ({ setup, sheet }) => {
   ])
 })
 
+// See https://github.com/tw-in-js/twind/issues/189
+test('Object.prototype method names are not plugin names', ({ setup }) => {
+  const { tw } = setup()
+
+  assert.throws(() => {
+    tw('toLocaleString')
+  }, /UNKNOWN_DIRECTIVE/)
+})
+
 test.run()

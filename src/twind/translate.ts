@@ -40,9 +40,8 @@ export const translate = (
   for (let index = parameters.length; index; index--) {
     const id = join(parameters.slice(0, index))
 
-    const plugin = plugins[id]
-
-    if (plugin) {
+    if (Object.prototype.hasOwnProperty.call(plugins, id)) {
+      const plugin = plugins[id]
       return typeof plugin == 'function'
         ? plugin(tail(parameters, index), context, id)
         : typeof plugin == 'string'
