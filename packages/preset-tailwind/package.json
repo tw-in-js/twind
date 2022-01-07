@@ -1,0 +1,65 @@
+{
+  "name": "@twind/preset-tailwind",
+  "version": "1.0.0-next.0",
+  "description": "tailwindcss preset for twind",
+  "keywords": [
+    "twind-preset",
+    "preset"
+  ],
+  "type": "module",
+  "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
+  "main": "src/index.ts",
+  "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
+  "exports": {
+    ".": "./src/index.ts",
+    "./colors": "./src/colors.ts",
+    "./defaultTheme": "./src/defaultTheme.ts",
+    "./package.json": "./package.json"
+  },
+  "// These are relative from within the dist/ folder": "",
+  "sideEffects": false,
+  "size-limit": [
+    {
+      "name": "@twind/preset-tailwind",
+      "path": "dist/preset-tailwind.esnext.js",
+      "brotli": true,
+      "limit": "9.2kb",
+      "ignore": [
+        "@twind/core"
+      ]
+    },
+    {
+      "name": "@twind/preset-tailwind/colors",
+      "path": "dist/colors.esnext.js",
+      "brotli": true,
+      "limit": "1kb"
+    },
+    {
+      "name": "@twind/preset-tailwind/defaultTheme",
+      "path": "dist/defaultTheme.esnext.js",
+      "brotli": true,
+      "limit": "3.5kb"
+    }
+  ],
+  "peerDependencies": {
+    "@twind/core": "workspace:^",
+    "typescript": "^4.4.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@twind/core": "workspace:^"
+  },
+  "scripts": {
+    "build": "distilt",
+    "prepublishOnly": "npm build"
+  },
+  "publishConfig": {
+    "tag": "next",
+    "access": "public",
+    "directory": "dist"
+  }
+}

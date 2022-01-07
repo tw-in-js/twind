@@ -1,0 +1,106 @@
+{
+  "name": "twind-monorepo",
+  "version": "1.0.0-next.0",
+  "description": "twind monorepo",
+  "private": true,
+  "homepage": "https://twind.dev",
+  "bugs": "https://github.com/tw-in-js/twind/issues",
+  "repository": "github:tw-in-js/twind",
+  "keywords": [
+    "twind",
+    "tw-in-js",
+    "tailwind",
+    "tailwindcss",
+    "tailwind-in-js"
+  ],
+  "license": "MIT",
+  "author": "Sascha Tandel (https://github.com/sastan)",
+  "engines": {
+    "node": ">=12.4",
+    "pnpm": "6.x"
+  },
+  "packageManager": "pnpm@6.24.2",
+  "scripts": {
+    "build": "pnpm run build --recursive --if-present",
+    "format": "prettier --write --ignore-path .gitignore . '!pnpm-lock.yaml'",
+    "check": "eslint --ext .js,.jsx,.cjs,.mjs,.ts,.tsx --ignore-path .gitignore .",
+    "check:fix": "npm run check -- --fix",
+    "test": "vitest --reporter dot",
+    "test:ui": "npm test -- --open",
+    "test:coverage": "npm test -- --coverage",
+    "preinstall": "npx only-allow pnpm",
+    "prepare": "husky install"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.19.0",
+    "@changesets/get-github-info": "^0.5.0",
+    "@size-limit/esbuild": "^7.0.5",
+    "@size-limit/file": "^7.0.5",
+    "@typescript-eslint/eslint-plugin": "^5.9.0",
+    "@typescript-eslint/parser": "^5.9.0",
+    "@vitest/ui": "^0.0.134",
+    "distilt": "^0.11.0",
+    "dotenv": "^10.0.0",
+    "eslint": "^8.6.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.5",
+    "only-allow": "^1.0.0",
+    "prettier": "^2.5.1",
+    "size-limit": "^7.0.5",
+    "tslib": "^2.3.1",
+    "typescript": "^4.5.4",
+    "vitest": "^0.0.134"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "all",
+    "bracketSpacing": true
+  },
+  "eslintConfig": {
+    "root": true,
+    "parserOptions": {
+      "ecmaVersion": 2021,
+      "sourceType": "module"
+    },
+    "env": {
+      "es6": true,
+      "shared-node-browser": true
+    },
+    "ignorePatterns": [
+      "dist",
+      "node_modules"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:prettier/recommended"
+    ],
+    "overrides": [
+      {
+        "files": [
+          "**/*.ts",
+          "**/*.tsx"
+        ],
+        "parser": "@typescript-eslint/parser",
+        "parserOptions": {
+          "project": "./packages/**/tsconfig.json"
+        },
+        "plugins": [
+          "@typescript-eslint"
+        ],
+        "extends": [
+          "eslint:recommended",
+          "plugin:@typescript-eslint/recommended",
+          "plugin:@typescript-eslint/recommended-requiring-type-checking"
+        ]
+      }
+    ]
+  },
+  "lint-staged": {
+    "*.{js,jsx,cjs,mjs,ts,tsx}": "eslint --cache --fix",
+    "!(pnpm-lock.yaml)*": "prettier --ignore-unknown --write"
+  }
+}

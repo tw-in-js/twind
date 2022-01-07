@@ -1,0 +1,78 @@
+{
+  "name": "@twind/core",
+  "version": "1.0.0-next.0",
+  "description": "compiles tailwind like shorthand syntax into CSS",
+  "publishConfig": {
+    "tag": "next",
+    "access": "public",
+    "directory": "dist"
+  },
+  "keywords": [
+    "twind",
+    "tailwind",
+    "tw-in-js",
+    "tailwind-in-js"
+  ],
+  "homepage": "https://twind.dev",
+  "bugs": "https://github.com/tw-in-js/twind/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tw-in-js/twind.git",
+    "directory": "packages/core"
+  },
+  "license": "MIT",
+  "contributors": [
+    "Luke Jackson (lukejacksonn.github.io)",
+    "Sascha Tandel (https://github.com/sastan)"
+  ],
+  "engines": {
+    "node": ">=12.4"
+  },
+  "type": "module",
+  "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
+  "main": "src/index.ts",
+  "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
+  "// These are relative from within the dist/ folder": "",
+  "sideEffects": false,
+  "size-limit": [
+    {
+      "name": "@twind/core (full)",
+      "path": "dist/core.esnext.js",
+      "brotli": true,
+      "limit": "5.5kb"
+    },
+    {
+      "name": "@twind/core (shim)",
+      "path": "dist/core.esnext.js",
+      "import": "{ twind, observe, cssom }",
+      "brotli": true,
+      "limit": "4kb"
+    },
+    {
+      "name": "@twind/core (minimal)",
+      "path": "dist/core.esnext.js",
+      "import": "{ twind }",
+      "brotli": true,
+      "limit": "3.5kb"
+    }
+  ],
+  "dependencies": {
+    "csstype": "^3.0.10"
+  },
+  "peerDependencies": {
+    "typescript": "^4.4.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "build": "distilt",
+    "prepublishOnly": "npm build"
+  }
+}

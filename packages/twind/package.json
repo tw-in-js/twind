@@ -1,0 +1,74 @@
+{
+  "name": "twind",
+  "version": "1.0.0-next.0",
+  "description": "tailwindcss compat based on twind",
+  "publishConfig": {
+    "tag": "next",
+    "access": "public",
+    "directory": "dist"
+  },
+  "keywords": [
+    "twind",
+    "tailwind",
+    "tailwindcss",
+    "tw-in-js",
+    "tailwind-in-js"
+  ],
+  "homepage": "https://twind.dev",
+  "bugs": "https://github.com/tw-in-js/twind/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tw-in-js/twind.git",
+    "directory": "packages/twind"
+  },
+  "license": "MIT",
+  "contributors": [
+    "Luke Jackson (lukejacksonn.github.io)",
+    "Sascha Tandel (https://github.com/sastan)"
+  ],
+  "engines": {
+    "node": ">=12.4"
+  },
+  "type": "module",
+  "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
+  "main": "src/index.ts",
+  "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
+  "exports": {
+    ".": "./src/index.ts",
+    "./colors": "./src/colors.ts",
+    "./package.json": "./package.json"
+  },
+  "// These are relative from within the dist/ folder": "",
+  "sideEffects": true,
+  "size-limit": [
+    {
+      "name": "twind",
+      "path": "dist/twind.esnext.js",
+      "brotli": true,
+      "limit": "14.5kb"
+    }
+  ],
+  "// These are ONLY bundled (eg included) in the umd builds": "",
+  "bundledDependencies": [
+    "@twind/core",
+    "@twind/preset-autoprefix",
+    "@twind/preset-tailwind"
+  ],
+  "dependencies": {
+    "@twind/core": "workspace:^",
+    "@twind/preset-autoprefix": "workspace:^",
+    "@twind/preset-tailwind": "workspace:^"
+  },
+  "peerDependencies": {
+    "typescript": "^4.4.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "scripts": {
+    "build": "distilt",
+    "prepublishOnly": "npm build"
+  }
+}
