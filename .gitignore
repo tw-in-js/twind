@@ -3,6 +3,7 @@ build
 node_modules
 web_modules
 .DS_Store
+.env
 
 .cache
 dist
