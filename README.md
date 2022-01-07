@@ -32,7 +32,7 @@ import 'twind'
 Or using a CDNs:
 
 ```html
-<script src="https://cdn.skypack.dev/npm/twind@next/twind.umd.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/twind@next"></script>
 ```
 
 From now on styles for tailwindcss v3 classes are automatically inserted.
