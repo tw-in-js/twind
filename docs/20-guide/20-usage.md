@@ -15,14 +15,9 @@ minify: via `?min`
 browser specific build using `User-Agent` or `?dist=es2020`
 resolve access: yes
 direct file access: yes
-
 other features: TypeScript Declarations `?dts`
 
-script
-direct access
-https://cdn.skypack.dev/npm/twind/twind.umd.js
-https://cdn.skypack.dev/npm/@twind/preset-tailwind/preset-tailwind.umd.js
-https://cdn.skypack.dev/npm/@twind/preset-tailwind/colors.umd.js
+script: no
 
 type="module"
 package.json: exports

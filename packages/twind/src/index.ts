@@ -3,6 +3,8 @@ import { defineConfig, twind, cssom, observe } from '@twind/core'
 import autoprefix from '@twind/preset-autoprefix'
 import tailwind from '@twind/preset-tailwind'
 
+export * from '@twind/core'
+
 // This would be in twind.config.js
 const config = defineConfig({
   presets: [
