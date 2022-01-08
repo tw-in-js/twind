@@ -11,7 +11,7 @@ importers:
       '@typescript-eslint/eslint-plugin': ^5.9.0
       '@typescript-eslint/parser': ^5.9.0
       '@vitest/ui': ^0.0.134
-      distilt: ^0.11.0
+      distilt: ^0.12.0
       dotenv: ^10.0.0
       eslint: ^8.6.0
       eslint-config-prettier: ^8.3.0
@@ -32,7 +32,7 @@ importers:
       '@typescript-eslint/eslint-plugin': 5.9.0_bd2fd93dbcc607ad2f21b784bccfe0c8
       '@typescript-eslint/parser': 5.9.0_eslint@8.6.0+typescript@4.5.4
       '@vitest/ui': 0.0.134
-      distilt: 0.11.0_typescript@4.5.4
+      distilt: 0.12.0_typescript@4.5.4
       dotenv: 10.0.0
       eslint: 8.6.0
       eslint-config-prettier: 8.3.0_eslint@8.6.0
@@ -54,7 +54,7 @@ importers:
 
   packages/preset-autoprefix:
     specifiers:
-      '@twind/core': workspace:^
+      '@twind/core': workspace:*
       style-vendorizer: ^2.1.1
     dependencies:
       style-vendorizer: 2.1.1
@@ -63,24 +63,26 @@ importers:
 
   packages/preset-mini:
     specifiers:
-      '@twind/core': workspace:^
+      '@twind/core': workspace:*
     devDependencies:
       '@twind/core': link:../core
 
   packages/preset-tailwind:
     specifiers:
-      '@twind/core': workspace:^
+      '@twind/core': workspace:*
     devDependencies:
       '@twind/core': link:../core
 
   packages/twind:
     specifiers:
-      '@twind/core': workspace:^
-      '@twind/preset-autoprefix': workspace:^
-      '@twind/preset-tailwind': workspace:^
+      '@twind/core': workspace:*
+      '@twind/preset-autoprefix': workspace:*
+      '@twind/preset-mini': workspace:*
+      '@twind/preset-tailwind': workspace:*
     dependencies:
       '@twind/core': link:../core
       '@twind/preset-autoprefix': link:../preset-autoprefix
+      '@twind/preset-mini': link:../preset-mini
       '@twind/preset-tailwind': link:../preset-tailwind
 
 packages:
@@ -1048,8 +1050,8 @@ packages:
       path-type: 4.0.0
     dev: true
 
-  /distilt/0.11.0_typescript@4.5.4:
-    resolution: {integrity: sha512-I0oYLSfXPmVj7llEEDxoHf8Fv9/Lktr/xocCe1Z+kst8FHXWLM2Ht+K9sVeDNUuqrNEOyZgxWwg4+OnqLWf98A==}
+  /distilt/0.12.0_typescript@4.5.4:
+    resolution: {integrity: sha512-yC6a3HikuJHcN7vspiIiIq8Hbf7CVWzK3tDqhaMqtI7CFbLWTxq+AHGzXHzeft0G/8fia6CMpKfYHvq2K67r3g==}
     engines: {node: '>=14.6'}
     hasBin: true
     requiresBuild: true
@@ -1671,9 +1673,9 @@ packages:
       picomatch: 2.2.3
     dev: true
 
-  /fast-glob/3.2.8:
-    resolution: {integrity: sha512-UsiHHXoDbC3iS7vBOFvld7Q9XqBu318xztdHiL10Fjov3AK5GI5bek2ZJkxZcjPguOYH39UL1W4A6w+l7tpNtw==}
-    engines: {node: '>=8'}
+  /fast-glob/3.2.9:
+    resolution: {integrity: sha512-MBwILhhD92sziIrMQwpqcuGERF+BH99ei2a3XsGJuqEKcSycAL+w0HWokFenZXona+kjFr82Lf71eTxNRC06XQ==}
+    engines: {node: '>=8.6.0'}
     dependencies:
       '@nodelib/fs.stat': 2.0.4
       '@nodelib/fs.walk': 1.2.6
@@ -1867,7 +1869,7 @@ packages:
     dependencies:
       array-union: 3.0.1
       dir-glob: 3.0.1
-      fast-glob: 3.2.8
+      fast-glob: 3.2.9
       ignore: 5.1.8
       merge2: 1.4.1
       slash: 4.0.0

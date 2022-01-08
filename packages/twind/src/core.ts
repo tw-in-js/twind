@@ -1,16 +1,13 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
+import type {
   Twind,
   BaseTheme,
   TwindConfig,
   TwindUserConfig,
   Preset,
   ExtractThemes,
-  defineConfig,
 } from '@twind/core'
-
-import autoprefix from '@twind/preset-autoprefix'
-import tailwind from '@twind/preset-tailwind'
 
 import { runtime } from './runtime'
 
@@ -40,11 +37,5 @@ export function setup(
 ): Twind {
   clearTimeout(autoSetupTimeoutRef)
 
-  return runtime(
-    defineConfig({
-      ...config,
-      presets: [autoprefix(), ...((config as TwindUserConfig<any>).presets || []), tailwind()],
-    } as TwindUserConfig<any>),
-    target,
-  )
+  return runtime(config as TwindConfig<any>, target)
 }

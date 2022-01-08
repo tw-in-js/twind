@@ -10,26 +10,120 @@ Twind v1 is a complete rewrite aiming to be compatible with Tailwind v3 classes
 
 ---
 
-## Installation
+Tailwind right in the browser without any build step.
 
-Install from npm:
+## CDN Usage
 
-```sh
-# Using npm
-npm install twind@next
-
-# Using Yarn
-yarn add twind@next
-```
-
-## Usage
-
-```js
-import 'twind'
-```
-
-Or using a CDNs:
+Add this line to your `index.html`:
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/twind@next"></script>
 ```
+
+To configure Twind (optional):
+
+```html
+<script>
+  twind.setup({
+    presets: [
+      // custom presets...
+    ],
+    theme: {
+      extend: {
+        colors: {
+          clifford: '#da373d',
+        }
+      }
+    }
+    rules: [
+      // custom rules...
+    ],
+    // ...
+  })
+</script>
+```
+
+By default, [@twind/autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix) and [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind) will be applied.
+
+### CDN Builds
+
+#### Core
+
+Without any preset:
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/twind@next/core.global.js"></script>
+```
+
+#### Tailwind
+
+With [@twind/autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix) and [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind):
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/twind@next"></script>
+```
+
+#### Mini
+
+With [@twind/autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix) and [@twind/preset-mini](https://www.npmjs.com/package/@twind/preset-mini):
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/twind@next/mini.global.js"></script>
+```
+
+## Bundler Usage
+
+```sh
+npm i twind
+```
+
+```js
+import { setup } from 'twind'
+
+setup({
+  /* options */
+})
+```
+
+## API
+
+Everything from [@twind/core](https://www.npmjs.com/package/@twind/core) is available.
+
+### setup
+
+Can be called as many times as you want.
+
+### cx (from [@twind/core](https://www.npmjs.com/package/@twind/core))
+
+```js
+import { cx } from 'twind'
+
+// Set a className
+element.className = cx`
+  underline
+  /* multi
+    line
+    comment
+  */
+  hover:focus:!{
+    sm:{italic why}
+    lg:-{px}
+    -mx-1
+  }
+  // Position
+  !top-1 !-bottom-2
+  text-{xl black}
+`
+```
+
+### tw
+
+TDB
+
+### apply
+
+TDB
+
+### theme
+
+TDB

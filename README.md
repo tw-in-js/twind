@@ -21,58 +21,21 @@ Twind v1 is a complete rewrite aiming to be compatible with Tailwind v3 classes.
 
 ## Quickstart
 
-Install: `npm install twind@next`
-
-Import `twind` within your bundle:
-
-```js
-import 'twind'
-```
-
-Or using a CDNs:
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/twind@next"></script>
-```
-
-From now on styles for tailwindcss v3 classes are automatically inserted.
-
-See [twind/src](./packages/twind/src/index.ts) for its implementation.
+See [twind](./packages/twind/README.md) for a quick intro.
 
 ## Notable Changes
 
 - [@twind/core](./packages/core) — without any rules to have a clean start
 - [@twind/preset-tailwind](./packages/preset-tailwind) — a tailwindcss v3 compatible preset
 - [twind](./packages/twind) — shim-first implementation using [@twind/preset-tailwind](./packages/preset-tailwind) and [@twind/preset-autoprefixer](./packages/preset-autoprefixer)
+  - `setup` can be called as many times as you want.
+  - `tw`, `apply` and `theme` as known from twind v0.16.
 - new grouping syntax:
   - use `{...}` for grouping to not interfere with variants and arbitrary values like `where(...):underline` and `w-[theme(width[1.5])]`:
     - `border{md:{2 black opacity-50 hover:dashed}}`
   - allow trailing dash before bracket for utilities -> `border-{md:{2 black opacity-50 hover:dashed}}`
   - support comma-separated group values — this would prevent different classNames errors during hydration:
     - `hover:~{!text-{3xl,center},!underline,italic,focus:not-italic}`
-- no more `tw`, `setup` or `apply` — instead `twind` and `cx`
-
-  ```js
-  import { tw, cx } from 'twind'
-
-  // Set a className
-  element.className = cx`
-    underline
-    /* multi
-      line
-      comment
-    */
-    hover:focus:!{
-      sm:{italic why}
-      lg:-{px}
-      -mx-1
-    }
-    // Position
-    !top-1 !-bottom-2
-    text-{xl black}
-  `
-  ```
-
 - rules and shortcuts based on ideas from [UnoCSS](https://github.com/antfu/unocss)
 
   ```js

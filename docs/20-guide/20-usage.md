@@ -40,7 +40,7 @@ script
 package.json: jsdelivr, browser, main
 https://cdn.jsdelivr.net/npm/twind
 https://cdn.jsdelivr.net/npm/@twind/preset-tailwind
-https://cdn.jsdelivr.net/npm/@twind/preset-tailwind/colors.umd.js
+https://cdn.jsdelivr.net/npm/@twind/preset-tailwind/colors.global.js
 
 type="module"
 package.json: ??? module, exports
@@ -80,7 +80,7 @@ script
 package.json: unpkg, browser
 https://unpkg.com/twind
 https://unpkg.com/@twind/preset-tailwind
-https://unpkg.com/@twind/preset-tailwind/colors.umd.js
+https://unpkg.com/@twind/preset-tailwind/colors.global.js
 
 type="module" - not minified
 package.json: module, main
@@ -99,8 +99,8 @@ resolve access: yes
 direct file access: yes
 
 script
-https://cdnjs.cloudflare.com/ajax/libs/twind/0.16.16/twind.umd.js
-https://cdnjs.cloudflare.com/ajax/libs/@twind/preset-tailwind/0.16.16/colors.umd.js
+https://cdnjs.cloudflare.com/ajax/libs/twind/0.16.16/twind.global.js
+https://cdnjs.cloudflare.com/ajax/libs/@twind/preset-tailwind/0.16.16/colors.global.js
 
 type="module"
 https://cdnjs.cloudflare.com/ajax/libs/twind/0.16.16/twind.min.js

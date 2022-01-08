@@ -1,5 +1,7 @@
 import type { Preflight } from '@twind/core'
 
+import defaultTheme from './defaultTheme'
+
 const preflight: Preflight = {
   /*
     1. Prevent padding and border from affecting element width. (https://github.com/mozdevs/cssremedy/issues/4)
@@ -25,8 +27,9 @@ const preflight: Preflight = {
     WebkitTextSizeAdjust: '100%' /* 2 */,
     MozTabSize: '4' /* 3 */,
     tabSize: 4 /* 3 */,
-    fontFamily:
-      'theme(fontFamily.sans, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji")' /* 4 */,
+    fontFamily: `theme(fontFamily.sans, ${
+      (defaultTheme.fontFamily as Record<string, string>).sans
+    })` /* 4 */,
   },
 
   /*
@@ -67,8 +70,9 @@ const preflight: Preflight = {
     2. Correct the odd `em` font sizing in all browsers.
     */
   'code,kbd,samp,pre': {
-    fontFamily:
-      'theme(fontFamily.mono, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace)',
+    fontFamily: `theme(fontFamily.mono, ${
+      (defaultTheme.fontFamily as Record<string, string>).mono
+    })`,
     fontSize: '1em',
   },
 

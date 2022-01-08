@@ -60,7 +60,7 @@
     "style-vendorizer": "^2.1.1"
   },
   "peerDependencies": {
-    "@twind/core": "^1.0.0-next.1",
+    "@twind/core": "workspace:*",
     "typescript": "^4.4.0"
   },
   "peerDependenciesMeta": {
@@ -69,7 +69,7 @@
     }
   },
   "devDependencies": {
-    "@twind/core": "^1.0.0-next.1"
+    "@twind/core": "workspace:*"
   },
   "scripts": {
     "build": "distilt",

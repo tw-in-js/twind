@@ -39,7 +39,7 @@
     "@typescript-eslint/eslint-plugin": "^5.9.0",
     "@typescript-eslint/parser": "^5.9.0",
     "@vitest/ui": "^0.0.134",
-    "distilt": "^0.11.0",
+    "distilt": "^0.12.0",
     "dotenv": "^10.0.0",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",

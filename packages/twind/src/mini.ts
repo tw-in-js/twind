@@ -10,7 +10,7 @@ import {
 } from '@twind/core'
 
 import autoprefix from '@twind/preset-autoprefix'
-import tailwind from '@twind/preset-tailwind'
+import mini from '@twind/preset-mini'
 
 import { runtime } from './runtime'
 
@@ -43,7 +43,7 @@ export function setup(
   return runtime(
     defineConfig({
       ...config,
-      presets: [autoprefix(), ...((config as TwindUserConfig<any>).presets || []), tailwind()],
+      presets: [autoprefix(), ...((config as TwindUserConfig<any>).presets || []), mini()],
     } as TwindUserConfig<any>),
     target,
   )

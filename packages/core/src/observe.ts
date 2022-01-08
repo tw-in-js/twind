@@ -8,7 +8,7 @@ export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
 
   const observer = new MutationObserver(handleMutations)
 
-  handleMutations([{ target, addedNodes: [target] }])
+  handleMutations([{ target, addedNodes: document.querySelectorAll('[class]') }])
 
   observer.observe(target, {
     attributes: true,
@@ -16,6 +16,8 @@ export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
     subtree: true,
     childList: true,
   })
+
+  target.hidden = false
 
   return Object.create(tw, {
     destroy: {
