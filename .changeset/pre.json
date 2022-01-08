@@ -8,5 +8,10 @@
     "@twind/preset-tailwind": "1.0.0-next.0",
     "twind": "1.0.0-next.0"
   },
-  "changesets": ["lemon-cherries-know"]
+  "changesets": [
+    "hot-flowers-smile",
+    "lemon-cherries-know",
+    "unlucky-pants-press",
+    "weak-otters-sort"
+  ]
 }
