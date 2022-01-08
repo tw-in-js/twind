@@ -1,5 +1,17 @@
 # twind
 
+## 1.0.0-next.4
+
+### Patch Changes
+
+- ensure there is config object when called from setTimeout
+
+- Updated dependencies []:
+  - @twind/core@1.0.0-next.3
+  - @twind/preset-autoprefix@1.0.0-next.3
+  - @twind/preset-mini@1.0.0-next.3
+  - @twind/preset-tailwind@1.0.0-next.3
+
 ## 1.0.0-next.3
 
 ### Patch Changes

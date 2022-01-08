@@ -1,5 +1,12 @@
 # @twind/preset-mini
 
+## 1.0.0-next.3
+
+### Patch Changes
+
+- Updated dependencies []:
+  - @twind/core@1.0.0-next.3
+
 ## 1.0.0-next.2
 
 ### Patch Changes

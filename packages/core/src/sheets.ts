@@ -18,9 +18,6 @@ function createStyleElement(parent: Node = document.head): HTMLStyleElement {
 export function cssom(sheet?: CSSStyleSheet): Sheet<CSSStyleSheet> {
   let offset = sheet?.cssRules.length || 0
 
-  // Number of failed insertion to adjust index for new rules
-  let failed = 0
-
   return {
     get target(): CSSStyleSheet {
       if (!sheet) {
@@ -38,8 +35,6 @@ export function cssom(sheet?: CSSStyleSheet): Sheet<CSSStyleSheet> {
           sheet.deleteRule(offset)
         }
       }
-
-      failed = 0
     },
 
     destroy() {
@@ -53,9 +48,10 @@ export function cssom(sheet?: CSSStyleSheet): Sheet<CSSStyleSheet> {
     insert(css, index) {
       try {
         // Insert
-        this.target.insertRule(css, offset + index - failed)
+        this.target.insertRule(css, offset + index)
       } catch (error) {
-        failed++
+        // Empty rule to keep index valid
+        this.target.insertRule('*{}', offset + index)
 
         // Some thrown errors are because of specific pseudo classes
         // lets filter them to prevent unnecessary warnings

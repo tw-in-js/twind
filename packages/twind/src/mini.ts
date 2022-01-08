@@ -21,7 +21,7 @@ if (typeof document != 'undefined' && document.currentScript) {
   // running as global script eg non module
   // invoke on next tick to allow other setup methods to run
   // eslint-disable-next-line no-var
-  var autoSetupTimeoutRef = setTimeout(runtime, 0, {})
+  var autoSetupTimeoutRef = setTimeout(setup)
 }
 
 export function setup<Theme extends BaseTheme = BaseTheme>(
@@ -35,7 +35,7 @@ export function setup<Theme = BaseTheme, Presets extends Preset<any>[] = Preset[
 ): Twind<BaseTheme & ExtractThemes<Theme, Presets>, CSSStyleSheet>
 
 export function setup(
-  config: TwindConfig<any> | TwindUserConfig<any>,
+  config: TwindConfig<any> | TwindUserConfig<any> = {},
   target?: HTMLElement,
 ): Twind {
   clearTimeout(autoSetupTimeoutRef)

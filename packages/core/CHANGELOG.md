@@ -1,5 +1,11 @@
 # @twind/core
 
+## 1.0.0-next.3
+
+### Patch Changes
+
+- fix invalid offset calculation for cssom sheet if rules failed to insert
+
 ## 1.0.0-next.2
 
 ### Patch Changes
