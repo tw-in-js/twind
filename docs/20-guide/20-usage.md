@@ -1,9 +1,7 @@
 ## Editors
 
-- https://codesandbox.io
 - https://stackblitz.com
-- https://codepen.io
-- https://jsfiddle.net
+- https://codesandbox.io
 
 ## CDNs
 

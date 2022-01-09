@@ -32,9 +32,9 @@ To configure Twind (optional):
       extend: {
         colors: {
           clifford: '#da373d',
-        }
-      }
-    }
+        },
+      },
+    },
     rules: [
       // custom rules...
     ],
@@ -44,6 +44,8 @@ To configure Twind (optional):
 ```
 
 By default, [@twind/autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix) and [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind) will be applied.
+
+[Try it live](https://stackblitz.com/edit/twind-v1-example?file=index.html)
 
 ### CDN Builds
 

@@ -88,6 +88,17 @@ See [twind](./packages/twind/README.md) for a quick intro.
 - styles (the generated CSS rules) are sorted predictably and stable — no matter in which order the rules are injected
 - no implicit ordering within preflight
 - the css helper supports `@label` for a more readable classname
+- config [theme section function](https://tailwindcss.com/docs/theme#referencing-other-values) has a changed signature
+
+  ```diff
+   theme: {
+  -  fill: (theme) => ({
+  +  fill: ({ theme }) => ({
+       gray: theme('colors.gray')
+     })
+   }
+  ```
+
 - support [theme(...)](https://tailwindcss.com/docs/functions-and-directives#theme) in property and arbitrary values
 - no more `@screen sm` -> use the [tailwindcss syntax](https://tailwindcss.com/docs/functions-and-directives#screen) `@media screen(sm)`
 - [@apply](https://tailwindcss.com/docs/functions-and-directives#apply) finally works as expected
@@ -103,9 +114,9 @@ See [twind](./packages/twind/README.md) for a quick intro.
   The following layer exist in the given order: `defaults`, `preflight`, `base`, `components`, `shortcuts`, `utilities`, `css`, `overrides`
 
   ```js
-  import { css } from '@twind/core'
+  import { css } from 'twind'
 
-  tw.inject(css`
+  element.className = css`
     @layer base {
       h1 {
         @apply text-2xl;
@@ -128,10 +139,18 @@ See [twind](./packages/twind/README.md) for a quick intro.
       }
       /* ... */
     }
-  `)
+  `
   ```
 
 - drop IE 11 support
+
+## TODO
+
+- [ ] postcss plugin like tailwindcss for SSR
+
+  ```css
+  @twind;
+  ```
 
 ## ⚖️ License
 
