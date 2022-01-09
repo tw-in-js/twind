@@ -18,6 +18,9 @@ export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
   })
 
   target.hidden = false
+  if (target === document.documentElement) {
+    document.body.hidden = false
+  }
 
   return Object.create(tw, {
     destroy: {
