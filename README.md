@@ -26,6 +26,8 @@ See [twind](./packages/twind/README.md) for a quick intro.
 ## Notable Changes
 
 - [@twind/core](./packages/core) — without any rules to have a clean start
+  - new `cx` function to create class names
+    - grouped rules are ungrouped
 - [@twind/preset-tailwind](./packages/preset-tailwind) — a tailwindcss v3 compatible preset
 - [twind](./packages/twind) — shim-first implementation using [@twind/preset-tailwind](./packages/preset-tailwind) and [@twind/preset-autoprefixer](./packages/preset-autoprefixer)
   - `setup` can be called as many times as you want.

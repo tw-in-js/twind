@@ -190,7 +190,7 @@ test('interpolation values', () => {
       className,
     )}{background:dodgerblue;color:white;border:${random}px solid white;margin:2rem}`,
     `.${escape(className)} .otherClass{padding:0.5rem}`,
-    `.${escape(className)}:focus,.${escape(className)}:hover{color:#4b5563}`,
+    `.${escape(className)}:focus, .${escape(className)}:hover{color:#4b5563}`,
     'body{color:darkgreen}',
   ])
 })

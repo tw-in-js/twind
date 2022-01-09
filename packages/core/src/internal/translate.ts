@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 import type { ParsedRule, SingleParsedRule, TwindRule, Context, BaseTheme } from '../types'
+import { format } from './format'
 import { merge } from './merge'
 import { parse } from './parse'
 import { convert, Layer, moveToLayer } from './precedence'
@@ -32,7 +33,7 @@ export function translate<Theme extends BaseTheme = BaseTheme>(
             conditions,
             important,
           ),
-          name || '~{' + toShortcutClassName(rule) + '}',
+          name || format([rule]),
         )
       : translate$(rule, context, precedence, conditions, important)) {
       result.splice(sortedInsertionIndex(result, cssRule), 0, cssRule)
@@ -40,23 +41,6 @@ export function translate<Theme extends BaseTheme = BaseTheme>(
   }
 
   return result
-}
-
-function toShortcutClassName(rules: ParsedRule[]): string[] {
-  // hover:~{!text-{3xl center} !underline italic focus:not-italic}
-  // TODO generate minified shortcut name:
-  // current:  ~{hover:!text-3xl,hover:!text-center,hover:!underline,hover:italic,hover:focus:not-italic}
-  // minified: hover:~{!text-{3xl,center},!underline,italic,focus:not-italic}
-  // const input = [
-  //   {name: 'text-3xl', variants: ['hover'], important: true},
-  //   {name: 'text-center', variants: ['hover'], important: true},
-  //   {name: 'underline', variants: ['hover'], important: true},
-  //   {name: 'italic', variants: ['hover'], important: false},
-  //   {name: 'not-italic', variants: ['hover', 'focus'], important: false},
-  // ]
-  return rules.map((rule) =>
-    Array.isArray(rule) ? '' + toShortcutClassName(rule) : toClassName(rule),
-  )
 }
 
 function translate$<Theme extends BaseTheme = BaseTheme>(

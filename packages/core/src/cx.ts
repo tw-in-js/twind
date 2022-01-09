@@ -1,6 +1,7 @@
 import type { Falsey } from './types'
 import { interleave } from './internal/interleave'
-import { collapse, replace } from './internal/parse'
+import { parse } from './internal/parse'
+import { format } from './internal/format'
 
 export interface ClassObject {
   [key: string]: boolean | number | unknown
@@ -8,23 +9,22 @@ export interface ClassObject {
 
 export type Class = string | number | boolean | Falsey | ClassObject | Class[]
 
-// TODO expand groups
 // based on https://github.com/lukeed/clsx and https://github.com/jorgebucaran/classcat
 export function cx(strings: TemplateStringsArray | Class, ...interpolations: Class[]): string {
-  return (
-    Array.isArray(strings) && Array.isArray((strings as unknown as TemplateStringsArray).raw)
-      ? interleave(strings as unknown as TemplateStringsArray, interpolations, (value) =>
-          toString(value).trim(),
-        )
-      : interpolations
-          .filter(Boolean)
-          .reduce(
-            (result: string, value) => result + toString(value),
-            strings ? toString(strings as Class) : '',
+  return format(
+    parse(
+      Array.isArray(strings) && Array.isArray((strings as unknown as TemplateStringsArray).raw)
+        ? interleave(strings as unknown as TemplateStringsArray, interpolations, (value) =>
+            toString(value).trim(),
           )
+        : interpolations
+            .filter(Boolean)
+            .reduce(
+              (result: string, value) => result + toString(value),
+              strings ? toString(strings as Class) : '',
+            ),
+    ),
   )
-    .replace(collapse, replace)
-    .trim()
 }
 
 function toString(value: Class): string {
