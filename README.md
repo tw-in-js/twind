@@ -30,12 +30,10 @@ See [twind](./packages/twind/README.md) for a quick intro.
 - [twind](./packages/twind) — shim-first implementation using [@twind/preset-tailwind](./packages/preset-tailwind) and [@twind/preset-autoprefixer](./packages/preset-autoprefixer)
   - `setup` can be called as many times as you want.
   - `tw`, `apply` and `theme` as known from twind v0.16.
-- new grouping syntax:
-  - use `{...}` for grouping to not interfere with variants and arbitrary values like `where(...):underline` and `w-[theme(width[1.5])]`:
-    - `border{md:{2 black opacity-50 hover:dashed}}`
-  - allow trailing dash before bracket for utilities -> `border-{md:{2 black opacity-50 hover:dashed}}`
+- grouping syntax:
+  - allow trailing dash before parentheses for utilities -> `border-(md:{2 black opacity-50 hover:dashed}}`
   - support comma-separated group values — this would prevent different classNames errors during hydration:
-    - `hover:~{!text-{3xl,center},!underline,italic,focus:not-italic}`
+    - `hover:~(!text-(3xl,center),!underline,italic,focus:not-italic)`
 - rules and shortcuts based on ideas from [UnoCSS](https://github.com/antfu/unocss)
 
   ```js

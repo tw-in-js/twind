@@ -1,4 +1,5 @@
 import { assert, test } from 'vitest'
+import { format } from './format'
 
 import { parse } from './parse'
 
@@ -10,14 +11,14 @@ test('comments', () => {
         line
         comment
       */
-      hover:focus:!{
-        sm:{italic why}
-        lg:-{px}
+      hover:focus:!(
+        sm:(italic why)
+        lg:-(px)
         -mx-1
-      }
+      )
       // Position
       !top-1 !-bottom-2
-      text-{xl black}
+      text-(xl black)
     `),
     [
       { name: 'underline', variants: [], important: false },
@@ -34,14 +35,14 @@ test('comments', () => {
 })
 
 test('group with comma', () => {
-  assert.deepEqual(parse(`hover:{!underline,focus:italic}`), [
+  assert.deepEqual(parse(`hover:(!underline,focus:italic)`), [
     { name: 'underline', variants: ['hover'], important: true },
     { name: 'italic', variants: ['hover', 'focus'], important: false },
   ])
 })
 
 test('nested', () => {
-  assert.deepEqual(parse(`hover:~{!underline focus:italic}`), [
+  assert.deepEqual(parse(`hover:~(!underline focus:italic)`), [
     [
       { name: 'underline', variants: ['hover'], important: true },
       { name: 'italic', variants: ['hover', 'focus'], important: false },
@@ -50,7 +51,7 @@ test('nested', () => {
 })
 
 test('nested with comma', () => {
-  assert.deepEqual(parse(`hover:~{!underline,focus:italic,w-[1,2,theme(x[1.2])]}`), [
+  assert.deepEqual(parse(`hover:~(!underline,focus:italic,w-[1,2,theme(x[1.2])])`), [
     [
       { name: 'underline', variants: ['hover'], important: true },
       { name: 'italic', variants: ['hover', 'focus'], important: false },
@@ -60,7 +61,7 @@ test('nested with comma', () => {
 })
 
 test('nested and negative', () => {
-  assert.deepEqual(parse(`rotate{-3 hover:6 md:{3,hover:-6}}`), [
+  assert.deepEqual(parse(`rotate(-3 hover:6 md:(3,hover:-6))`), [
     { name: '-rotate-3', variants: [], important: false },
     { name: 'rotate-6', variants: ['hover'], important: false },
     { name: 'rotate-3', variants: ['md'], important: false },

@@ -1,14 +1,14 @@
 import type { ParsedRule } from '../types'
 
 function createRule(active: string[], current: ParsedRule[][]): void {
-  if (active[active.length - 1] != '{') {
+  if (active[active.length - 1] != '(') {
     const variants: string[] = []
     let important = false
     let negated = false
     let name = ''
 
     for (let value of active) {
-      if (value == '{' || value == '~') continue
+      if (value == '(' || value == '~') continue
 
       if (value[0] == '!') {
         value = value.slice(1)
@@ -42,18 +42,13 @@ function createRule(active: string[], current: ParsedRule[][]): void {
   }
 }
 
-// Remove comments (multiline and single line) and collapse whitespace
-export const collapse = /({)?\s*(?:\/\*[^]*?\*\/|\/\/[^]*?$|\s+|$)\s*(})?/gm
-
-export function replace(
-  _: string,
-  opening: string | undefined,
-  closing: string | undefined,
-): string {
-  return opening || closing || ' '
+// Remove comments (multiline and single line)
+export function removeComments(tokens: string): string {
+  return tokens.replace(/\/\*[^]*?\*\/|\/\/[^]*?$|\s\s+|\n/gm, ' ')
 }
 
-const parts = /([ ,}])|\{|[^ ,}{[:]*(?:\[[^ ]+(?![^(]*\))])*:?/g
+// (?=[ ,)(:[]|$)
+const parts = /([ ,)])|\(|[^ ,)(:[]*(?:\[[^ ]+])?:?/g
 
 const cache = new Map<string, ParsedRule[]>()
 
@@ -61,7 +56,7 @@ export function parse(token: string): ParsedRule[] {
   let parsed = cache.get(token)
 
   if (!parsed) {
-    token = token.replace(collapse, replace)
+    token = removeComments(token)
 
     // Stack of active groupings (`(`), variants, or nested (`~`)
     const active: string[] = []
@@ -75,17 +70,17 @@ export function parse(token: string): ParsedRule[] {
     parts.lastIndex = 0
     while ((match = parts.exec(token)) && match[0]) {
       if (match[1]) {
-        // whitespace or closing brace
+        // whitespace, comma or closing brace
         // create rule
         createRule(active, current)
-        let lastGroup = active.lastIndexOf('{')
+        let lastGroup = active.lastIndexOf('(')
 
-        if (match[1] == '}') {
+        if (match[1] == ')') {
           // Close nested block
           if (active[lastGroup - 1] == '~') {
             current.shift()
           }
-          lastGroup = active.lastIndexOf('{', lastGroup - 1)
+          lastGroup = active.lastIndexOf('(', lastGroup - 1)
         }
 
         active.length = lastGroup + 1

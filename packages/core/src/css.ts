@@ -5,6 +5,7 @@ import { serialize } from './internal/serialize'
 import { hash } from './utils'
 import { Layer } from './internal/precedence'
 import { interleave } from './internal/interleave'
+import { removeComments } from './internal/parse'
 
 export type CSSValue = string | number | Falsey
 
@@ -34,14 +35,13 @@ export function css(
 }
 
 // Based on https://github.com/cristianbote/goober/blob/master/src/core/astish.js
-const newRule = /(?:([A-Z0-9-%@]+) *:? *([^{;]+?);|([^;}{]*?) *{)|(})/gi
-const ruleClean = /\/\*[^]*?\*\/|\s\s+|\n/g
+const newRule = / *(?:(?:([\u0080-\uFFFF\w-%@]+) *:? *([^{;]+?);|([^;}{]*?) *{)|(}))/g
 
 /**
  * Convert a css style string into a object
  */
 function astish(css: string): CSSObject {
-  css = css.replace(ruleClean, '')
+  css = removeComments(css)
 
   const tree: CSSObject[] = [{}]
   let block: RegExpExecArray | null

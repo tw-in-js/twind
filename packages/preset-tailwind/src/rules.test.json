@@ -589,7 +589,7 @@
   "print:text-black": "@media print{.print\\:text-black{--tw-text-opacity:1;color:rgba(0,0,0,var(--tw-text-opacity))}}",
   "portrait:text-black": "@media (orientation:portrait){.portrait\\:text-black{--tw-text-opacity:1;color:rgba(0,0,0,var(--tw-text-opacity))}}",
   "standalone:text-black": "@media (display-mode:standalone){.standalone\\:text-black{--tw-text-opacity:1;color:rgba(0,0,0,var(--tw-text-opacity))}}",
-  "{text-{center 2xl} underline}": [
+  "(text-(center 2xl) underline)": [
     "text-2xl text-center underline",
     [
       ".text-2xl{font-size:1.5rem;line-height:2rem}",
@@ -597,7 +597,7 @@
       ".underline{text-decoration:underline}"
     ]
   ],
-  "{{underline} {text-{center 2xl}} {{{font-{bold}}}}}": [
+  "((underline) (text-(center 2xl)) (((font-(bold)))))": [
     "text-2xl font-bold text-center underline",
     [
       ".text-2xl{font-size:1.5rem;line-height:2rem}",
@@ -606,42 +606,42 @@
       ".underline{text-decoration:underline}"
     ]
   ],
-  "text-{indigo-700 opacity-70}": [
+  "text-(indigo-700 opacity-70)": [
     "text-indigo-700 text-opacity-70",
     [
       ".text-indigo-700{--tw-text-opacity:1;color:rgba(67,56,202,var(--tw-text-opacity))}",
       ".text-opacity-70{--tw-text-opacity:0.7}"
     ]
   ],
-  "bg-{red-800 opacity-80}": [
+  "bg-(red-800 opacity-80)": [
     "bg-red-800 bg-opacity-80",
     [
       ".bg-red-800{--tw-bg-opacity:1;background-color:rgba(153,27,27,var(--tw-bg-opacity))}",
       ".bg-opacity-80{--tw-bg-opacity:0.8}"
     ]
   ],
-  "border-{indigo-700 opacity-80}": [
+  "border-(indigo-700 opacity-80)": [
     "border-indigo-700 border-opacity-80",
     [
       ".border-indigo-700{--tw-border-opacity:1;border-color:rgba(67,56,202,var(--tw-border-opacity))}",
       ".border-opacity-80{--tw-border-opacity:0.8}"
     ]
   ],
-  "divide-{indigo-700 opacity-95}": [
+  "divide-(indigo-700 opacity-95)": [
     "divide-indigo-700 divide-opacity-95",
     [
       ".divide-indigo-700>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(67,56,202,var(--tw-divide-opacity))}",
       ".divide-opacity-95>:not([hidden])~:not([hidden]){--tw-divide-opacity:0.95}"
     ]
   ],
-  "placeholder-{gray-400 opacity-50}": [
+  "placeholder-(gray-400 opacity-50)": [
     "placeholder-gray-400 placeholder-opacity-50",
     [
       ".placeholder-gray-400::placeholder{--tw-placeholder-opacity:1;color:rgba(156,163,175,var(--tw-placeholder-opacity))}",
       ".placeholder-opacity-50::placeholder{--tw-placeholder-opacity:0.5}"
     ]
   ],
-  "my-2 text-{center gray-500} underline font-bold px-5": [
+  "my-2 text-(center gray-500) underline font-bold px-5": [
     "my-2 px-5 text-gray-500 font-bold text-center underline",
     [
       ".my-2{margin-top:0.5rem;margin-bottom:0.5rem}",
@@ -726,7 +726,7 @@
       ".ring-purple-400{--tw-ring-opacity:0.5;--tw-ring-color:rgba(192,132,252,var(--tw-ring-opacity))}"
     ]
   ],
-  "ring-{8 opacity-75 purple-400}": [
+  "ring-(8 opacity-75 purple-400)": [
     "ring-8 ring-purple-400 ring-opacity-75",
     [
       "*{--tw-ring-inset:var(--tw-empty,/*!*/ /*!*/);--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,var(--tw-ring-opacity));--tw-ring-opacity:0.5}",
@@ -736,7 +736,7 @@
       ".ring-opacity-75{--tw-ring-opacity:0.75}"
     ]
   ],
-  "ring-{& green-700 offset{2 green-500}} shadow-md": [
+  "ring-(& green-700 offset(2 green-500)) shadow-md": [
     "ring shadow-md ring-green-700 ring-offset-2 ring-offset-green-500",
     [
       "*{--tw-ring-inset:var(--tw-empty,/*!*/ /*!*/);--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,var(--tw-ring-opacity));--tw-ring-opacity:0.5}",
@@ -748,7 +748,7 @@
       ".ring-offset-green-500{--tw-ring-offset-color:#22c55e}"
     ]
   ],
-  "text{lg purple-500} capitalize underline": [
+  "text(lg purple-500) capitalize underline": [
     "text-lg text-purple-500 capitalize underline",
     [
       ".text-lg{font-size:1.125rem;line-height:1.75rem}",
@@ -757,7 +757,7 @@
       ".underline{text-decoration:underline}"
     ]
   ],
-  "font{sans bold} italic": [
+  "font(sans bold) italic": [
     "font-bold font-sans italic",
     [
       ".font-bold{font-weight:700}",
@@ -765,7 +765,7 @@
       ".italic{font-style:italic}"
     ]
   ],
-  "divide-{y-2 green-600 opacity{80 md:50}": [
+  "divide-(y-2 green-600 opacity(80 md:50)": [
     "divide-y-2 divide-green-600 divide-opacity-80 md:divide-opacity-50",
     [
       ".divide-y-2>:not([hidden])~:not([hidden]){--tw-divide-y-reverse:0;border-top-width:calc(2px * calc(1 - var(--tw-divide-y-reverse)));border-bottom-width:calc(2px * var(--tw-divide-y-reverse))}",
@@ -774,7 +774,7 @@
       "@media (min-width:768px){.md\\:divide-opacity-50>:not([hidden])~:not([hidden]){--tw-divide-opacity:0.5}}"
     ]
   ],
-  "active:hover:text-lg hover:{text-{center purple-500} active:{underline}} hover:active:ring{& opacity-5} font-{bold}": [
+  "active:hover:text-lg hover:(text-(center purple-500) active:(underline)) hover:active:ring(& opacity-5) font-(bold)": [
     "font-bold hover:text-purple-500 hover:text-center hover:active:ring active:hover:text-lg hover:active:ring-opacity-5 hover:active:underline",
     [
       "*{--tw-ring-inset:var(--tw-empty,/*!*/ /*!*/);--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,var(--tw-ring-opacity));--tw-ring-opacity:0.5}",
@@ -788,7 +788,7 @@
       ".hover\\:active\\:underline:hover:active{text-decoration:underline}"
     ]
   ],
-  "\n  text-4xl underline\n  font-{bold sans}\n  transition\n  hover:{rotate-6 scale-125 cursor-pointer}\n  active:{-rotate-12 scale-150}\n": [
+  "\n  text-4xl underline\n  font-(bold sans)\n  transition\n  hover:(rotate-6 scale-125 cursor-pointer)\n  active:(-rotate-12 scale-150)\n": [
     "transition text-4xl font-bold font-sans underline hover:scale-125 hover:rotate-6 hover:cursor-pointer active:scale-150 active:-rotate-12",
     [
       "*{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-transform:translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}",
@@ -855,7 +855,7 @@
     "*{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-transform:translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}",
     ".transform{transform:var(--tw-transform)}"
   ],
-  "rotate-{-3,hover:6,md:{3 hover:-6}}": [
+  "rotate-(-3,hover:6,md:(3 hover:-6))": [
     "-rotate-3 hover:rotate-6 md:rotate-3 md:hover:-rotate-6",
     [
       "*{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-transform:translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}",
@@ -888,7 +888,7 @@
       "@media (min-width:768px){.md\\:max-w-md{max-width:28rem}}"
     ]
   ],
-  "md:{container mx-auto}": [
+  "md:(container mx-auto)": [
     "md:mx-auto md:container",
     [
       "@media (min-width:768px){.md\\:mx-auto{margin-left:auto;margin-right:auto}}",
@@ -950,32 +950,32 @@
     ]
   ],
   "!text-center": ".\\!text-center{text-align:center !important}",
-  "!{text-center font-bold}": [
+  "!(text-center font-bold)": [
     "!font-bold !text-center",
     [".\\!font-bold{font-weight:700 !important}", ".\\!text-center{text-align:center !important}"]
   ],
-  "hover:!{text-center font-bold}": [
+  "hover:!(text-center font-bold)": [
     "hover:!font-bold hover:!text-center",
     [
       ".hover\\:\\!font-bold:hover{font-weight:700 !important}",
       ".hover\\:\\!text-center:hover{text-align:center !important}"
     ]
   ],
-  "hover:!{text-center focus:font-bold}": [
+  "hover:!(text-center focus:font-bold)": [
     "hover:!text-center hover:focus:!font-bold",
     [
       ".hover\\:\\!text-center:hover{text-align:center !important}",
       ".hover\\:focus\\:\\!font-bold:hover:focus{font-weight:700 !important}"
     ]
   ],
-  "!hover:{text-center focus:font-bold}": [
+  "!hover:(text-center focus:font-bold)": [
     "hover:!text-center hover:focus:!font-bold",
     [
       ".hover\\:\\!text-center:hover{text-align:center !important}",
       ".hover\\:focus\\:\\!font-bold:hover:focus{font-weight:700 !important}"
     ]
   ],
-  "!{text-xl underline}": [
+  "!(text-xl underline)": [
     "!text-xl !underline",
     [
       ".\\!text-xl{font-size:1.25rem !important;line-height:1.75rem !important}",
@@ -983,7 +983,7 @@
     ]
   ],
   "!-m-8": ".\\!-m-8{margin:calc(2rem * -1) !important}",
-  "!{text-xl underline} md:!-m-{8}": [
+  "!(text-xl underline) md:!-m-(8)": [
     "!text-xl !underline md:!-m-8",
     [
       ".\\!text-xl{font-size:1.25rem !important;line-height:1.75rem !important}",
@@ -1304,23 +1304,23 @@
     "cursor bg-red-500",
     [".bg-red-500{--tw-bg-opacity:1;background-color:rgba(239,68,68,var(--tw-bg-opacity))}"]
   ],
-  "~{text-{center 2xl} underline}": [
-    "~{text-center,text-2xl,underline}",
+  "~(text-(center 2xl) underline)": [
+    "~(text-center,text-2xl,underline)",
     [
-      ".\\~\\{text-center\\,text-2xl\\,underline\\}{font-size:1.5rem;line-height:2rem;text-align:center;text-decoration:underline}"
+      ".\\~\\(text-center\\,text-2xl\\,underline\\){font-size:1.5rem;line-height:2rem;text-align:center;text-decoration:underline}"
     ]
   ],
-  "hover:~{!text-{3xl center} !underline italic focus:not-italic}": [
-    "~{hover:!text-3xl,hover:!text-center,hover:!underline,hover:italic,hover:focus:not-italic}",
+  "hover:~(!text-(3xl center) !underline italic focus:not-italic)": [
+    "~(hover:!text-3xl,hover:!text-center,hover:!underline,hover:italic,hover:focus:not-italic)",
     [
-      ".\\~\\{hover\\:\\!text-3xl\\:hover,hover\\:\\!text-center\\:hover,hover\\:\\!underline\\:hover,hover\\:italic\\:hover,hover\\:focus\\:not-italic\\}:hover{font-size:1.875rem !important;line-height:2.25rem !important;text-align:center !important;text-decoration:underline !important;font-style:italic}",
-      ".\\~\\{hover\\:\\!text-3xl\\:hover:focus,hover\\:\\!text-center\\:hover:focus,hover\\:\\!underline\\:hover:focus,hover\\:italic\\:hover:focus,hover\\:focus\\:not-italic\\}:hover:focus{font-style:normal}"
+      ".\\~\\(hover\\:\\!text-3xl\\:hover,hover\\:\\!text-center\\:hover,hover\\:\\!underline\\:hover,hover\\:italic\\:hover,hover\\:focus\\:not-italic\\):hover{font-size:1.875rem !important;line-height:2.25rem !important;text-align:center !important;text-decoration:underline !important;font-style:italic}",
+      ".\\~\\(hover\\:\\!text-3xl\\:hover:focus,hover\\:\\!text-center\\:hover:focus,hover\\:\\!underline\\:hover:focus,hover\\:italic\\:hover:focus,hover\\:focus\\:not-italic\\):hover:focus{font-style:normal}"
     ]
   ],
-  "text-center ~{text-5xl} text-3xl": [
-    "~{text-5xl} text-3xl text-center",
+  "text-center ~(text-5xl) text-3xl": [
+    "~(text-5xl) text-3xl text-center",
     [
-      ".\\~\\{text-5xl\\}{font-size:3rem;line-height:1}",
+      ".\\~\\(text-5xl\\){font-size:3rem;line-height:1}",
       ".text-3xl{font-size:1.875rem;line-height:2.25rem}",
       ".text-center{text-align:center}"
     ]
