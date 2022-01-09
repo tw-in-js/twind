@@ -1,5 +1,12 @@
 # @twind/preset-mini
 
+## 1.0.0-next.5
+
+### Patch Changes
+
+- Updated dependencies [[`d68ce341`](https://github.com/tw-in-js/twind/commit/d68ce3413ae29b6ea7cd88d3c094e59876d7e5d5), [`2c5792f9`](https://github.com/tw-in-js/twind/commit/2c5792f9c2c1295a7d0aac094e9aa760999f5cc0)]:
+  - @twind/core@1.0.0-next.5
+
 ## 1.0.0-next.4
 
 ### Patch Changes

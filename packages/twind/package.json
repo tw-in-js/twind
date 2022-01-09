@@ -1,6 +1,6 @@
 {
   "name": "twind",
-  "version": "1.0.0-next.5",
+  "version": "1.0.0-next.6",
   "description": "tailwindcss compat based on twind",
   "publishConfig": {
     "tag": "next",
@@ -66,7 +66,7 @@
       "path": "dist/core.esnext.js",
       "import": "{ setup }",
       "brotli": true,
-      "limit": "4kb"
+      "limit": "4.2kb"
     },
     {
       "name": "twind/mini",
@@ -90,10 +90,10 @@
     "@twind/preset-tailwind"
   ],
   "dependencies": {
-    "@twind/core": "1.0.0-next.4",
-    "@twind/preset-autoprefix": "1.0.0-next.4",
-    "@twind/preset-mini": "1.0.0-next.4",
-    "@twind/preset-tailwind": "1.0.0-next.4"
+    "@twind/core": "1.0.0-next.5",
+    "@twind/preset-autoprefix": "1.0.0-next.5",
+    "@twind/preset-mini": "1.0.0-next.5",
+    "@twind/preset-tailwind": "1.0.0-next.5"
   },
   "peerDependencies": {
     "typescript": "^4.4.0"

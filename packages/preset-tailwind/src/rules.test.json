@@ -150,6 +150,8 @@
   "order-none": ".order-none{order:0}",
   "order-last": ".order-last{order:9999}",
   "order-first": ".order-first{order:-9999}",
+  "-order-last": ".-order-last{order:calc(9999 * -1)}",
+  "-order-first": ".-order-first{order:calc(-9999 * -1)}",
   "order-1": ".order-1{order:1}",
   "order-10": ".order-10{order:10}",
   "-order-1": ".-order-1{order:calc(1 * -1)}",
