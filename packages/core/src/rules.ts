@@ -15,6 +15,7 @@ import type {
 
 import { toColorValue } from './colors'
 import { resolveThemeFunction } from './internal/serialize'
+import { negate } from './internal/negate'
 
 export function fromTheme<
   Theme extends BaseTheme = BaseTheme,
@@ -54,8 +55,8 @@ export function fromTheme<
       value = arbitrary(match.$$, themeSection, context) as ThemeValue<Theme[Section]>
     }
 
-    if ((typeof value == 'string' || typeof value == 'number') && match.$_[0] == '-') {
-      value = `calc(${value} * -1)` as ThemeValue<Theme[Section]>
+    if (match.$_[0] == '-' && (typeof value == 'string' || typeof value == 'number')) {
+      value = negate(value) as ThemeValue<Theme[Section]>
     }
 
     if (value != null) {

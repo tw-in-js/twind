@@ -19,6 +19,7 @@ import type {
 
 import { makeThemeFunction } from './theme'
 import { asArray, hash } from '../utils'
+import { negate } from './negate'
 
 export function createContext<Theme extends BaseTheme = BaseTheme>({
   theme,
@@ -149,19 +150,23 @@ function createResolveFunction<Theme extends BaseTheme = BaseTheme>(
     !resolve
       ? (match) =>
           ({
-            [match.$1]: match.$2 || match.$3 || match.$$ || match.$_,
+            [match.$1]: maybeNegate(match.$_, match.$2 || match.$3 || match.$$ || match.$_),
           } as CSSObject)
       : typeof resolve == 'string'
       ? (match, context) =>
           ({
             [resolve]: convert
               ? convert(match, context)
-              : match.$1 || match.$2 || match.$3 || match.$$ || match.$_,
+              : maybeNegate(match.$_, match.$1 || match.$2 || match.$3 || match.$$ || match.$_),
           } as CSSObject)
       : typeof resolve == 'function'
       ? resolve
       : () => resolve,
   )
+}
+
+function maybeNegate($_: string, value: string): string {
+  return $_[0] == '-' ? negate(value) : value
 }
 
 function createResolve<Result, Theme extends BaseTheme = BaseTheme>(
@@ -184,6 +189,7 @@ function exec<Result, Theme extends BaseTheme = BaseTheme>(
   if (match) {
     MATCH.$_ = value
     MATCH.$$ = value.slice(match[0].length)
+    MATCH._ = undefined as never
 
     // break early for conditions that require a substring after the match
     // like `auto-rows-` and did not have a substring

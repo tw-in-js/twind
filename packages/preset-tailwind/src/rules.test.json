@@ -152,6 +152,8 @@
   "order-first": ".order-first{order:-9999}",
   "order-1": ".order-1{order:1}",
   "order-10": ".order-10{order:10}",
+  "-order-1": ".-order-1{order:calc(1 * -1)}",
+  "-order-10": ".-order-10{order:calc(10 * -1)}",
   "row-auto": ".row-auto{grid-row:auto}",
   "col-auto": ".col-auto{grid-column:auto}",
   "w-full": ".w-full{width:100%}",

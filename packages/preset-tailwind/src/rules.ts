@@ -165,8 +165,8 @@ export const rules: Rule<TailwindTheme>[] = [
   ['shrink(?:-|$)', fromTheme('flexShrink')],
   ['basis-', fromTheme('flexBasis')],
 
-  ['(order)-', fromTheme(/* 'order' */)],
-  '(order)-(\\d+)',
+  ['-?(order)-', fromTheme(/* 'order' */)],
+  '-?(order)-(\\d+)',
 
   /* GRID */
   // Grid Template Columns
