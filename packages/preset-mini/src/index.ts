@@ -11,6 +11,8 @@ export default function presetMini(): Preset {
       /^([-\w]+)\[(.+)]$/,
     ],
     variants: [
+      ['hocus', '&:focus,&:hover'],
+
       // - `dir-rtl` -> `:dir(rtl)`
       // - `lang-en` -> `:lang(en)`
       ['(dir|lang)-', ({ $1, $$ }) => `&:${$1}(${$$})`],
