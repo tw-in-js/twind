@@ -1,6 +1,6 @@
 {
   "name": "twind",
-  "version": "1.0.0-next.4",
+  "version": "1.0.0-next.5",
   "description": "tailwindcss compat based on twind",
   "publishConfig": {
     "tag": "next",
@@ -90,10 +90,10 @@
     "@twind/preset-tailwind"
   ],
   "dependencies": {
-    "@twind/core": "1.0.0-next.3",
-    "@twind/preset-autoprefix": "1.0.0-next.3",
-    "@twind/preset-mini": "1.0.0-next.3",
-    "@twind/preset-tailwind": "1.0.0-next.3"
+    "@twind/core": "1.0.0-next.4",
+    "@twind/preset-autoprefix": "1.0.0-next.4",
+    "@twind/preset-mini": "1.0.0-next.4",
+    "@twind/preset-tailwind": "1.0.0-next.4"
   },
   "peerDependencies": {
     "typescript": "^4.4.0"
