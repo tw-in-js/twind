@@ -404,3 +404,9 @@ export interface RuleFactory<Theme extends BaseTheme = BaseTheme> {
 export interface Preset<Theme = BaseTheme> {
   (config: TwindConfig<Theme & BaseTheme>): TwindConfig<Theme & BaseTheme>
 }
+
+export interface ClassObject {
+  [key: string]: boolean | number | unknown
+}
+
+export type Class = string | number | boolean | Falsey | ClassObject | Class[]

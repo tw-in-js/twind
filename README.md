@@ -26,6 +26,7 @@ See [twind](./packages/twind/README.md) for a quick intro.
 ## Notable Changes
 
 - [@twind/core](./packages/core) — without any rules to have a clean start
+  - `apply` and `css` as known from twind v0.16.
   - new `cx` function to create class names
     - grouped rules are ungrouped
 - [@twind/preset-tailwind](./packages/preset-tailwind) — a tailwindcss v3 compatible preset

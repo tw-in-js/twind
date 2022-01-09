@@ -15,7 +15,7 @@ import mini from '@twind/preset-mini'
 import { runtime } from './runtime'
 
 export * from '@twind/core'
-export { apply, tw, theme } from './runtime'
+export { tw, theme } from './runtime'
 
 if (typeof document != 'undefined' && document.currentScript) {
   // running as global script eg non module

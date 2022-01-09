@@ -37,7 +37,6 @@
     ".": "./src/index.ts",
     "./core": "./src/core.ts",
     "./mini": "./src/mini.ts",
-    "./colors": "./src/colors.ts",
     "./package.json": "./package.json"
   },
   "// These are relative from within the dist/ folder": "",

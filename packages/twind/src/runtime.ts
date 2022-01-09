@@ -12,10 +12,6 @@ export function runtime<Theme extends BaseTheme = BaseTheme>(
   return (active = observe(twind(config, cssom()), target))
 }
 
-export function apply(strings: TemplateStringsArray | Class, ...interpolations: Class[]): string {
-  return '~{' + cx(strings, ...interpolations) + '}'
-}
-
 export function tw(strings: TemplateStringsArray | Class, ...interpolations: Class[]): string {
   const tokens = cx(strings, ...interpolations)
   return active ? active.inject(tokens) : tokens
