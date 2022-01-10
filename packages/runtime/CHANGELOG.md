@@ -1,5 +1,14 @@
 # @twind/runtime
 
+## 1.0.0-next.7
+
+### Patch Changes
+
+- re-order args for setup to simplify providing an alternative sheet like `dom()` for enhanced debugging ([`a7b25242`](https://github.com/tw-in-js/twind/commit/a7b252425e3f38ce2b5d2097e63d23cca5c6c4f2))
+
+- Updated dependencies [[`2a9f1685`](https://github.com/tw-in-js/twind/commit/2a9f1685843b50b741dbe0338f4cf068603411c8), [`a7b25242`](https://github.com/tw-in-js/twind/commit/a7b252425e3f38ce2b5d2097e63d23cca5c6c4f2)]:
+  - @twind/core@1.0.0-next.7
+
 ## 1.0.0-next.6
 
 ### Patch Changes
