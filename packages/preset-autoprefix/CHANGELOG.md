@@ -1,5 +1,14 @@
 # @twind/preset-autoprefix
 
+## 1.0.0-next.6
+
+### Patch Changes
+
+- extract runtime into own package with re-worked autoinit using MutationObserver ([`aa96aef4`](https://github.com/tw-in-js/twind/commit/aa96aef4037d773c1880bfed0c07a7952a668412))
+
+- Updated dependencies [[`184d96ff`](https://github.com/tw-in-js/twind/commit/184d96ffb934e621bb07f8ccbf809a6a14675298), [`a3d09cf4`](https://github.com/tw-in-js/twind/commit/a3d09cf40db55fb980441500121bf1820ea2a3ae)]:
+  - @twind/core@1.0.0-next.6
+
 ## 1.0.0-next.5
 
 ### Patch Changes

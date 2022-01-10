@@ -1,5 +1,4 @@
 import { assert, test } from 'vitest'
-import { format } from './format'
 
 import { parse } from './parse'
 

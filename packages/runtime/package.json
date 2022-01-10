@@ -1,6 +1,6 @@
 {
   "name": "@twind/runtime",
-  "version": "1.0.0-next.5",
+  "version": "1.0.0-next.6",
   "description": "CSS-in-JS Runtime for Twind",
   "publishConfig": {
     "tag": "next",
@@ -51,7 +51,7 @@
     }
   ],
   "peerDependencies": {
-    "@twind/core": "1.0.0-next.5",
+    "@twind/core": "1.0.0-next.6",
     "typescript": "^4.4.0"
   },
   "peerDependenciesMeta": {
@@ -60,7 +60,7 @@
     }
   },
   "devDependencies": {
-    "@twind/core": "workspace:1.0.0-next.5"
+    "@twind/core": "workspace:1.0.0-next.6"
   },
   "scripts": {
     "build": "distilt",

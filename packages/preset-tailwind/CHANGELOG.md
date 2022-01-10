@@ -1,5 +1,14 @@
 # @twind/preset-tailwind
 
+## 1.0.0-next.6
+
+### Patch Changes
+
+- fix selector generation ([`a3d09cf4`](https://github.com/tw-in-js/twind/commit/a3d09cf40db55fb980441500121bf1820ea2a3ae))
+
+- Updated dependencies [[`184d96ff`](https://github.com/tw-in-js/twind/commit/184d96ffb934e621bb07f8ccbf809a6a14675298), [`a3d09cf4`](https://github.com/tw-in-js/twind/commit/a3d09cf40db55fb980441500121bf1820ea2a3ae)]:
+  - @twind/core@1.0.0-next.6
+
 ## 1.0.0-next.5
 
 ### Patch Changes

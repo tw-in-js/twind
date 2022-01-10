@@ -1,5 +1,13 @@
 # @twind/core
 
+## 1.0.0-next.6
+
+### Patch Changes
+
+- observe document.body instead of document.documentElement (fixes [#172](https://github.com/tw-in-js/twind/issues/172)) ([`184d96ff`](https://github.com/tw-in-js/twind/commit/184d96ffb934e621bb07f8ccbf809a6a14675298))
+
+* fix selector generation ([`a3d09cf4`](https://github.com/tw-in-js/twind/commit/a3d09cf40db55fb980441500121bf1820ea2a3ae))
+
 ## 1.0.0-next.5
 
 ### Patch Changes
