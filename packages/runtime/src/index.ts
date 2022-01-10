@@ -34,10 +34,10 @@ let active: Twind | undefined
 
 export function init<Theme extends BaseTheme = BaseTheme, SheetTarget = CSSStyleSheet | string[]>(
   config: TwindConfig<Theme>,
-  target?: HTMLElement,
   sheet: Sheet<SheetTarget> = (typeof document != undefined
     ? cssom()
     : virtual()) as unknown as Sheet<SheetTarget>,
+  target?: HTMLElement,
 ): Twind<Theme, SheetTarget> {
   active?.destroy()
 

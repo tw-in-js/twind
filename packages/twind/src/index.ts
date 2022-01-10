@@ -22,8 +22,8 @@ const cancelAutoInit = autoInit(setup)
 
 export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = CSSStyleSheet | string[]>(
   config?: TwindConfig<Theme>,
-  target?: HTMLElement,
   sheet?: Sheet<SheetTarget>,
+  target?: HTMLElement,
 ): Twind<Theme, SheetTarget>
 
 export function setup<
@@ -32,14 +32,14 @@ export function setup<
   SheetTarget = CSSStyleSheet | string[],
 >(
   config?: TwindUserConfig<Theme, Presets>,
-  target?: HTMLElement,
   sheet?: Sheet<SheetTarget>,
+  target?: HTMLElement,
 ): Twind<BaseTheme & ExtractThemes<Theme, Presets>, SheetTarget>
 
 export function setup(
   config: TwindConfig<any> | TwindUserConfig<any> = {},
-  target?: HTMLElement,
   sheet?: Sheet,
+  target?: HTMLElement,
 ): Twind {
   cancelAutoInit()
 
@@ -48,7 +48,7 @@ export function setup(
       ...config,
       presets: [autoprefix(), ...((config as TwindUserConfig<any>).presets || []), tailwind()],
     } as TwindUserConfig<any>),
-    target,
     sheet,
+    target,
   )
 }
