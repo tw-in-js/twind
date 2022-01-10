@@ -5,13 +5,15 @@
 
 ## CDNs
 
+- TODO note about pinned urls
+
 ```
 https://www.skypack.dev/view/twind
 
 version range / dist tag: optional
 minify: via `?min`
 browser specific build using `User-Agent` or `?dist=es2020`
-resolve access: yes
+bare access: yes
 direct file access: yes
 other features: TypeScript Declarations `?dts`
 
@@ -31,7 +33,7 @@ https://www.jsdelivr.com/package/npm/twind
 version range / dist tag: optional
 minify: by using `.min` extension prefix
 browser specific build: no
-resolve access: yes
+bare access: yes
 direct file access: yes
 
 script
@@ -51,7 +53,7 @@ https://esm.sh
 
 minify: enabled, to disable use `?dev`
 browser specific build using `User-Agent` or `?target=es2020`
-resolve access: yes
+bare access: yes
 direct file access: no
 version range / dist tag: optional
 other features: Bundle mode `?bundle`, Development mode `?dev`, Aliasing dependencies `?alias=react:preact/compat`, Web Worker `?worker`
@@ -66,12 +68,43 @@ https://esm.sh/twind/@twind/preset-tailwind/colors
 
 
 
+https://jspm.dev
+
+minify: no
+browser specific build: no
+bare access: yes
+direct file access: no
+version range / dist tag: optional
+
+script: no
+
+type="module"
+package.json: exports
+https://jspm.dev/twind@next
+
+
+https://jspm.org
+
+minify: yes
+browser specific build: no
+bare access: yes
+direct file access: no
+version range / dist tag: optional
+other features: SystemJS, [import-maps](https://generator.jspm.io/#U2NhYGBkDM0rySzJSU1hKCnPzEtxMNQz0DPQzUutKNEzAwB45bqFIQA)
+
+script: no
+
+type="module"
+package.json: exports
+One must use [JSPM:GENERATOR](https://generator.jspm.io/#U2NhYGBkDM0rySzJSU1hKCnPzEtxMNQz0DPQzUutKNEzAwB45bqFIQA)
+
+
 https://unpkg.com/
 
 version range / dist tag: optional
 minify: no
 browser specific build: no
-resolve access: yes
+bare access: yes
 direct file access: yes
 
 script
@@ -93,7 +126,7 @@ https://cdnjs.com/libraries/twind
 version range / dist tag: required
 minify: by using `.min` extension prefix
 browser specific build: no
-resolve access: yes
+bare access: yes
 direct file access: yes
 
 script

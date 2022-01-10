@@ -83,7 +83,7 @@ See [twind](./packages/twind/README.md) for a quick intro.
   ```
 
 - comments (single and multiline)
-- inline shortcut: `~` to apply/merge utilities -> `~{text{5xl red-700} bg-red-100}`
+- inline shortcut: `~` to apply/merge utilities -> `~(text(5xl,red-700),bg-red-100)`
 - no more important suffix: `rule!` -> `!rule`
 - styles (the generated CSS rules) are sorted predictably and stable — no matter in which order the rules are injected
 - no implicit ordering within preflight
