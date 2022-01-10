@@ -2,35 +2,15 @@ import type { Twind, BaseTheme, TwindConfig, Class, Sheet } from '@twind/core'
 import { twind, cssom, virtual, observe, cx } from '@twind/core'
 
 export function autoInit(setup: () => void): () => void {
-  // If we run in the browser we try to auto call `setup`
-  // this works if used as _normal_ script: `<script src="..."></script>`
+  // If we run in the browser we call setup at latest when the body is inserted
   // This algorith works well for _normal_ script but not for modules: `<script src="..."></script>`
-  // because those are executed __after__ the DOM is ready and we would have FLOUC
-  // as we can not know if the user wished to call `twind.setup()`
-  // we simply enforce that the user must call `twind.setup()`
+  // because those are executed __after__ the DOM is ready and we would have FOUC
   if (typeof document !== 'undefined' && document.currentScript) {
     const cancelAutoInit = () => observer.disconnect()
 
-    let runAutoSetup = false
-
-    // eslint-disable-next-line no-var
-    var observer: MutationObserver = new MutationObserver((mutationsList) => {
-      if (runAutoSetup) {
-        setup()
-        return cancelAutoInit()
-      }
-
+    const observer: MutationObserver = new MutationObserver((mutationsList) => {
       for (const { target } of mutationsList) {
-        // Found a script tag, it may be the custom `twind.setup()`
-        // after it has finished, eg we get notified about the next DOM change
-        // we run setup() unless the script has run `twind.setup()`
-        // then this observer has been disconnected already
-        if ((runAutoSetup = target.nodeName === 'SCRIPT' || target === document.body)) {
-          break
-        }
-
-        // If we reach the body then there was no custom script
-        // run the setup immediately to prevent FLOC
+        // If we reach the body we immediately run the setup to prevent FLOC
         if (target === document.body) {
           setup()
           return cancelAutoInit()
