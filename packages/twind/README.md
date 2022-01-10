@@ -27,6 +27,14 @@ setup({
 })
 ```
 
+Incase you are not using SSR to inject the pre-computed styles apply the following pattern to prevent FOUC:
+
+```html
+<body class="!block" style="display: none">
+  <!-- ... -->
+</body>
+```
+
 ## CDN Usage
 
 Add this line to your `index.html`:
