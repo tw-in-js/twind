@@ -12,6 +12,21 @@ Twind v1 is a complete rewrite aiming to be compatible with Tailwind v3 classes
 
 Tailwind right in the browser without any build step.
 
+## Bundler Usage
+
+```sh
+npm i twind@next
+```
+
+```js
+import { setup } from 'twind'
+
+// You must call setup atleast once, but can call it multiple times
+setup({
+  /* options */
+})
+```
+
 ## CDN Usage
 
 Add this line to your `index.html`:
@@ -73,20 +88,6 @@ With [@twind/autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix)
 <script src="https://cdn.jsdelivr.net/npm/twind@next/mini.global.js"></script>
 ```
 
-## Bundler Usage
-
-```sh
-npm i twind
-```
-
-```js
-import { setup } from 'twind'
-
-setup({
-  /* options */
-})
-```
-
 ## API
 
 Everything from [@twind/core](https://www.npmjs.com/package/@twind/core) is available.
@@ -118,14 +119,14 @@ element.className = cx`
 `
 ```
 
-### tw
+### `apply` (from [@twind/core](https://www.npmjs.com/package/@twind/core))
 
 TDB
 
-### apply
+### `tw` (from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime))
 
 TDB
 
-### theme
+### `theme` (from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime))
 
 TDB

@@ -40,7 +40,7 @@
     "./package.json": "./package.json"
   },
   "// These are relative from within the dist/ folder": "",
-  "sideEffects": true,
+  "sideEffects": false,
   "size-limit": [
     {
       "name": "twind",
@@ -79,18 +79,20 @@
       "path": "dist/mini.esnext.js",
       "import": "{ setup }",
       "brotli": true,
-      "limit": "5kb"
+      "limit": "5.2kb"
     }
   ],
-  "// These are ONLY bundled (eg included) in the umd builds": "",
+  "// These are ONLY bundled (eg included) in the global builds": "",
   "bundledDependencies": [
     "@twind/core",
+    "@twind/runtime",
     "@twind/preset-autoprefix",
     "@twind/preset-mini",
     "@twind/preset-tailwind"
   ],
   "dependencies": {
     "@twind/core": "1.0.0-next.5",
+    "@twind/runtime": "1.0.0-next.5",
     "@twind/preset-autoprefix": "1.0.0-next.5",
     "@twind/preset-mini": "1.0.0-next.5",
     "@twind/preset-tailwind": "1.0.0-next.5"

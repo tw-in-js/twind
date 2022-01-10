@@ -1,7 +1,7 @@
 {
-  "name": "@twind/preset-autoprefix",
+  "name": "@twind/runtime",
   "version": "1.0.0-next.5",
-  "description": "CSS vendor prefixer and property alias mapper preset for twind",
+  "description": "CSS-in-JS Runtime for Twind",
   "publishConfig": {
     "tag": "next",
     "access": "public",
@@ -12,16 +12,14 @@
     "tailwind",
     "tailwindcss",
     "tw-in-js",
-    "tailwind-in-js",
-    "twind-preset",
-    "preset"
+    "tailwind-in-js"
   ],
   "homepage": "https://twind.dev",
   "bugs": "https://github.com/tw-in-js/twind/issues",
   "repository": {
     "type": "git",
     "url": "https://github.com/tw-in-js/twind.git",
-    "directory": "packages/preset-autoprefix"
+    "directory": "packages/runtime"
   },
   "license": "MIT",
   "contributors": [
@@ -43,22 +41,15 @@
   "sideEffects": false,
   "size-limit": [
     {
-      "name": "@twind/preset-autoprefix",
-      "path": "dist/preset-autoprefix.esnext.js",
+      "name": "@twind/runtime",
+      "path": "dist/runtime.esnext.js",
       "brotli": true,
-      "limit": "1kb",
+      "limit": "400b",
       "ignore": [
         "@twind/core"
       ]
     }
   ],
-  "// These are ONLY bundled (eg included) in the global builds": "",
-  "bundledDependencies": [
-    "style-vendorizer"
-  ],
-  "dependencies": {
-    "style-vendorizer": "^2.1.1"
-  },
   "peerDependencies": {
     "@twind/core": "1.0.0-next.5",
     "typescript": "^4.4.0"

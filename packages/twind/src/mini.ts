@@ -7,44 +7,48 @@ import {
   Preset,
   ExtractThemes,
   defineConfig,
+  Sheet,
 } from '@twind/core'
+
+import { init, autoInit } from '@twind/runtime'
 
 import autoprefix from '@twind/preset-autoprefix'
 import mini from '@twind/preset-mini'
 
-import { runtime } from './runtime'
-
 export * from '@twind/core'
-export { tw, theme } from './runtime'
+export { tw, theme } from '@twind/runtime'
 
-if (typeof document != 'undefined' && document.currentScript) {
-  // running as global script eg non module
-  // invoke on next tick to allow other setup methods to run
-  // eslint-disable-next-line no-var
-  var autoSetupTimeoutRef = setTimeout(setup)
-}
+const cancelAutoInit = autoInit(setup)
 
-export function setup<Theme extends BaseTheme = BaseTheme>(
-  config: TwindConfig<Theme>,
+export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = CSSStyleSheet>(
+  config?: TwindConfig<Theme>,
   target?: HTMLElement,
+  sheet?: Sheet<SheetTarget>,
 ): Twind<Theme, CSSStyleSheet>
 
-export function setup<Theme = BaseTheme, Presets extends Preset<any>[] = Preset[]>(
-  config: TwindUserConfig<Theme, Presets>,
+export function setup<
+  Theme = BaseTheme,
+  Presets extends Preset<any>[] = Preset[],
+  SheetTarget = CSSStyleSheet,
+>(
+  config?: TwindUserConfig<Theme, Presets>,
   target?: HTMLElement,
+  sheet?: Sheet<SheetTarget>,
 ): Twind<BaseTheme & ExtractThemes<Theme, Presets>, CSSStyleSheet>
 
 export function setup(
   config: TwindConfig<any> | TwindUserConfig<any> = {},
   target?: HTMLElement,
+  sheet?: Sheet,
 ): Twind {
-  clearTimeout(autoSetupTimeoutRef)
+  cancelAutoInit()
 
-  return runtime(
+  return init(
     defineConfig({
       ...config,
       presets: [autoprefix(), ...((config as TwindUserConfig<any>).presets || []), mini()],
     } as TwindUserConfig<any>),
     target,
+    sheet,
   )
 }
