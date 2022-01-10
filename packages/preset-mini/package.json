@@ -62,7 +62,8 @@
     }
   },
   "devDependencies": {
-    "@twind/core": "1.0.0-next.5"
+    "@twind/core": "1.0.0-next.5",
+    "@twind/preset-tailwind": "1.0.0-next.5"
   },
   "scripts": {
     "build": "distilt",

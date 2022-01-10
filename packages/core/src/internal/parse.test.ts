@@ -115,3 +115,13 @@ test('arbitrary properties', () => {
     },
   ])
 })
+
+test('pseudo element selector', () => {
+  assert.deepEqual(parse('after::underline'), [
+    {
+      name: 'underline',
+      variants: ['after:'],
+      important: false,
+    },
+  ])
+})

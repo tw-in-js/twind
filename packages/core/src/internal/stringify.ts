@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 import type { TwindRule } from '../types'
 import { escape } from '../utils'
 
@@ -11,25 +12,36 @@ export function stringify(rule: TwindRule): string | undefined {
   if (rule.declarations) {
     const groups: string[] = []
 
-    let selector = rule.name && '.' + escape(rule.name)
-
-    for (const condition of rule.conditions) {
+    const selector = rule.conditions.reduceRight((selector, condition) => {
       if (condition[0] == '@') {
-        groups.push(condition)
-      } else {
-        selector = selector
-          ? selector
-              .split(/,(?![^[]*])/g)
-              .map((selectorPart) =>
-                condition.split(/,(?![^[]*])/g).map((conditionPart) =>
-                  // If the current part has a nested selector replace it
-                  conditionPart.replace(/&/g, selectorPart),
-                ),
-              )
-              .join(',')
-          : condition
+        groups.unshift(condition)
+        return selector
       }
-    }
+
+      return selector
+        ? // Go over the selector and replace the matching multiple selectors if any
+          selector.replace(
+            / *((?:\\,|\(.+?\)|\[.+?\]|[^,])+) *(,|$)/g,
+            (_, selectorPart: string, comma = '') =>
+              // Return the current selector with the key matching multiple selectors if any
+              condition.replace(
+                / *((?:\\,|\(.+?\)|\[.+?\]|[^,])+) *(,|$)/g,
+                // If the current condition has a nested selector replace it
+                (_, conditionPart: string, comma = '') =>
+                  conditionPart.replace(/&/g, selectorPart) + comma,
+              ) + comma,
+          )
+        : // selector
+          //     .split(/,(?![^[(]*])/g)
+          //     .map((selectorPart) =>
+          //       condition.split(/,(?![^[(]*])/g).map((conditionPart) =>
+          //         // If the current part has a nested selector replace it
+          //         conditionPart.replace(/&/g, selectorPart),
+          //       ),
+          //     )
+          //     .join(',')
+          condition
+    }, rule.name && '.' + escape(rule.name))
 
     if (selector) groups.push(selector)
 

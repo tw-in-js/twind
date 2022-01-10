@@ -1,4 +1,4 @@
-import type { Preset } from '@twind/core'
+import { escape, Preset } from '@twind/core'
 import { preset } from '@twind/core'
 
 export default function presetMini(): Preset {
@@ -19,7 +19,7 @@ export default function presetMini(): Preset {
 
       // - `not-hover` -> `:not(:hover)`
       // - `not-[lang]` -> `:not([lang])`
-      ['not-([a-z-]+|\\[[.+])', ({ $1 }) => `&:not(${($1[0] == '[' ? '' : ':') + $1})`],
+      ['not-([a-z-]+|\\[.+\\])', ({ $1 }) => `&:not(${($1[0] == '[' ? '' : ':') + $1})`],
 
       // Selectors
       // - `children:underline` -> `children:underline > *`
@@ -34,12 +34,17 @@ export default function presetMini(): Preset {
       // - `&>*:underline`
       ['&[&~+>*a-z]+', ({ $_ }) => $_],
 
+      [
+        '((group|peer)(-[^-]+)?)-hocus',
+        ({ $1 }, { tag }) => `.${escape(tag($1))}:is(:hover,:focus-visible) &`,
+      ],
+
       // Attribute selector
       // `[lang]:underline` -> `[lang]:underline[lang]`
       ['\\[.+]', ({ $_ }) => '&' + $_],
 
       // Pseudo Elements using double colon (`first-letter::underline`) as well
-      ['([a-z-]+):', ({ $_ }) => '&::' + $_],
+      ['([a-z-]+):', ({ $1 }) => '&::' + $1],
     ],
   })
 }

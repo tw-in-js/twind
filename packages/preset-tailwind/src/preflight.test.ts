@@ -60,4 +60,4 @@ test('preflight on first inject', () => {
   ])
 })
 
-test.skip('custom preflight')
+test.todo('custom preflight')

@@ -19,7 +19,6 @@ import type {
 
 import { makeThemeFunction } from './theme'
 import { asArray, hash } from '../utils'
-import { negate } from './negate'
 
 export function createContext<Theme extends BaseTheme = BaseTheme>({
   theme,
@@ -166,7 +165,7 @@ function createResolveFunction<Theme extends BaseTheme = BaseTheme>(
 }
 
 function maybeNegate($_: string, value: string): string {
-  return $_[0] == '-' ? negate(value) : value
+  return $_[0] == '-' ? `calc(${value} * -1)` : value
 }
 
 function createResolve<Result, Theme extends BaseTheme = BaseTheme>(

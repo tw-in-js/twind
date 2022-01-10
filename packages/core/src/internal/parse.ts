@@ -48,7 +48,7 @@ export function removeComments(tokens: string): string {
 }
 
 // (?=[ ,)(:[]|$)
-const parts = /([ ,)])|\(|[^ ,)(:[]*(?:\[[^ ]+])?:?/g
+const parts = /([ ,)])|\(|[^ ,)(:[]*(?:\[[^ ]+])?:*/g
 
 const cache = new Map<string, ParsedRule[]>()
 

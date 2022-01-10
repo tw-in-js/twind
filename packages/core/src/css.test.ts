@@ -79,7 +79,7 @@ test('can be used with variants', () => {
 
   assert.deepEqual(tw.target, [
     '.focus\\:css\\#1u5fwom:focus{background-color:hotpink}',
-    '.focus\\:css\\#1u5fwom:focus:hover{background-color:darkgreen}',
+    '.focus\\:css\\#1u5fwom:hover:focus{background-color:darkgreen}',
     '@media (min-width:640px){.sm\\:css\\#1u5fwom{background-color:hotpink}}',
     '@media (min-width:640px){.sm\\:css\\#1u5fwom:hover{background-color:darkgreen}}',
   ])
@@ -190,7 +190,7 @@ test('interpolation values', () => {
       className,
     )}{background:dodgerblue;color:white;border:${random}px solid white;margin:2rem}`,
     `.${escape(className)} .otherClass{padding:0.5rem}`,
-    `.${escape(className)}:focus, .${escape(className)}:hover{color:#4b5563}`,
+    `.${escape(className)}:focus,.${escape(className)}:hover{color:#4b5563}`,
     'body{color:darkgreen}',
   ])
 })

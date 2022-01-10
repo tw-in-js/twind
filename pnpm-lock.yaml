@@ -64,8 +64,10 @@ importers:
   packages/preset-mini:
     specifiers:
       '@twind/core': 1.0.0-next.5
+      '@twind/preset-tailwind': 1.0.0-next.5
     devDependencies:
       '@twind/core': link:../core
+      '@twind/preset-tailwind': link:../preset-tailwind
 
   packages/preset-tailwind:
     specifiers:

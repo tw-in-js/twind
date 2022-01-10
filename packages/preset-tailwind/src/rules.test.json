@@ -786,10 +786,10 @@
       ".font-bold{font-weight:700}",
       ".hover\\:text-purple-500:hover{--tw-text-opacity:1;color:rgba(168,85,247,var(--tw-text-opacity))}",
       ".hover\\:text-center:hover{text-align:center}",
-      ".hover\\:active\\:ring:hover:active{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}",
-      ".active\\:hover\\:text-lg:active:hover{font-size:1.125rem;line-height:1.75rem}",
-      ".hover\\:active\\:ring-opacity-5:hover:active{--tw-ring-opacity:0.05}",
-      ".hover\\:active\\:underline:hover:active{text-decoration:underline}"
+      ".hover\\:active\\:ring:active:hover{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}",
+      ".active\\:hover\\:text-lg:hover:active{font-size:1.125rem;line-height:1.75rem}",
+      ".hover\\:active\\:ring-opacity-5:active:hover{--tw-ring-opacity:0.05}",
+      ".hover\\:active\\:underline:active:hover{text-decoration:underline}"
     ]
   ],
   "\n  text-4xl underline\n  font-(bold sans)\n  transition\n  hover:(rotate-6 scale-125 cursor-pointer)\n  active:(-rotate-12 scale-150)\n": [
@@ -969,14 +969,14 @@
     "hover:!text-center hover:focus:!font-bold",
     [
       ".hover\\:\\!text-center:hover{text-align:center !important}",
-      ".hover\\:focus\\:\\!font-bold:hover:focus{font-weight:700 !important}"
+      ".hover\\:focus\\:\\!font-bold:focus:hover{font-weight:700 !important}"
     ]
   ],
   "!hover:(text-center focus:font-bold)": [
     "hover:!text-center hover:focus:!font-bold",
     [
       ".hover\\:\\!text-center:hover{text-align:center !important}",
-      ".hover\\:focus\\:\\!font-bold:hover:focus{font-weight:700 !important}"
+      ".hover\\:focus\\:\\!font-bold:focus:hover{font-weight:700 !important}"
     ]
   ],
   "!(text-xl underline)": [
@@ -1317,8 +1317,8 @@
   "hover:~(!text-(3xl center) !underline italic focus:not-italic)": [
     "~(hover:!text-3xl,hover:!text-center,hover:!underline,hover:italic,hover:focus:not-italic)",
     [
-      ".\\~\\(hover\\:\\!text-3xl\\:hover,hover\\:\\!text-center\\:hover,hover\\:\\!underline\\:hover,hover\\:italic\\:hover,hover\\:focus\\:not-italic\\):hover{font-size:1.875rem !important;line-height:2.25rem !important;text-align:center !important;text-decoration:underline !important;font-style:italic}",
-      ".\\~\\(hover\\:\\!text-3xl\\:hover:focus,hover\\:\\!text-center\\:hover:focus,hover\\:\\!underline\\:hover:focus,hover\\:italic\\:hover:focus,hover\\:focus\\:not-italic\\):hover:focus{font-style:normal}"
+      ".\\~\\(hover\\:\\!text-3xl\\,hover\\:\\!text-center\\,hover\\:\\!underline\\,hover\\:italic\\,hover\\:focus\\:not-italic\\):hover{font-size:1.875rem !important;line-height:2.25rem !important;text-align:center !important;text-decoration:underline !important;font-style:italic}",
+      ".\\~\\(hover\\:\\!text-3xl\\,hover\\:\\!text-center\\,hover\\:\\!underline\\,hover\\:italic\\,hover\\:focus\\:not-italic\\):focus:hover{font-style:normal}"
     ]
   ],
   "text-center ~(text-5xl) text-3xl": [

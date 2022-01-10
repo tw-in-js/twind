@@ -2,12 +2,17 @@ import { assert, test, afterEach } from 'vitest'
 
 import { twind, virtual } from '@twind/core'
 
+import presetTailwind from '@twind/preset-tailwind'
 import presetMini from '.'
 import data from './preset-mini.test.json'
 
 const tw = twind(
   {
-    presets: [presetMini()],
+    presets: [presetMini(), presetTailwind({ preflight: false })],
+    variants: [
+      ['as-dark', '.dark &'],
+      ['not-logged-in', 'body:not(.logged-in) &'],
+    ],
   },
   virtual(),
 )
@@ -25,7 +30,7 @@ Object.entries(data)
     return [tokens, tokens, [declarations]]
   })
   .forEach(([tokens, classNames, rules]) =>
-    test.todo(`${JSON.stringify(tokens)} => ${classNames}`, () => {
+    test(`${JSON.stringify(tokens)} => ${classNames}`, () => {
       assert.strictEqual(tw.inject(tokens), classNames)
       assert.deepEqual(tw.target, rules)
 
