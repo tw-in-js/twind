@@ -1,5 +1,5 @@
 import type { Twind, BaseTheme, TwindConfig, Class, Sheet } from '@twind/core'
-import { twind, cssom, observe, cx } from '@twind/core'
+import { twind, cssom, virtual, observe, cx } from '@twind/core'
 
 export function autoInit(setup: () => void): () => void {
   // If we run in the browser we try to auto call `setup`
@@ -52,10 +52,12 @@ export function autoInit(setup: () => void): () => void {
 
 let active: Twind | undefined
 
-export function init<Theme extends BaseTheme = BaseTheme, SheetTarget = CSSStyleSheet>(
+export function init<Theme extends BaseTheme = BaseTheme, SheetTarget = CSSStyleSheet | string[]>(
   config: TwindConfig<Theme>,
   target?: HTMLElement,
-  sheet: Sheet<SheetTarget> = cssom() as unknown as Sheet<SheetTarget>,
+  sheet: Sheet<SheetTarget> = (typeof document != undefined
+    ? cssom()
+    : virtual()) as unknown as Sheet<SheetTarget>,
 ): Twind<Theme, SheetTarget> {
   active?.destroy()
 
