@@ -2,7 +2,7 @@ import type { BaseTheme, Twind } from './types'
 
 export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
   tw: Twind<Theme, Target>,
-  target = typeof document != 'undefined' && document.documentElement,
+  target = typeof document != 'undefined' && document.body,
 ): Twind<Theme, Target> {
   if (!target) return tw
 
@@ -18,9 +18,6 @@ export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
   })
 
   target.hidden = false
-  if (target === document.documentElement) {
-    document.body.hidden = false
-  }
 
   return Object.create(tw, {
     destroy: {
