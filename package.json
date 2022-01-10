@@ -25,9 +25,9 @@
     "format": "prettier --write --ignore-path .gitignore . '!pnpm-lock.yaml'",
     "check": "eslint --ext .js,.jsx,.cjs,.mjs,.ts,.tsx --ignore-path .gitignore .",
     "check:fix": "npm run check -- --fix",
-    "test": "vitest --reporter dot",
+    "test": "vitest",
     "test:ui": "npm test -- --open",
-    "test:coverage": "npm test -- --coverage",
+    "test:coverage": "vitest run --coverage",
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky install"
   },
@@ -36,22 +36,23 @@
     "@changesets/get-github-info": "^0.5.0",
     "@size-limit/esbuild": "^7.0.5",
     "@size-limit/file": "^7.0.5",
-    "@typescript-eslint/eslint-plugin": "^5.9.0",
-    "@typescript-eslint/parser": "^5.9.0",
-    "@vitest/ui": "^0.0.134",
+    "@typescript-eslint/eslint-plugin": "^5.9.1",
+    "@typescript-eslint/parser": "^5.9.1",
+    "@vitest/ui": "^0.0.139",
+    "c8": "^7.11.0",
     "distilt": "^0.12.0",
     "dotenv": "^10.0.0",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
-    "lint-staged": "^12.1.5",
+    "lint-staged": "^12.1.7",
     "only-allow": "^1.0.0",
     "prettier": "^2.5.1",
     "size-limit": "^7.0.5",
     "tslib": "^2.3.1",
     "typescript": "^4.5.4",
-    "vitest": "^0.0.134"
+    "vitest": "^0.0.139"
   },
   "prettier": {
     "printWidth": 100,
@@ -100,7 +101,10 @@
     ]
   },
   "lint-staged": {
-    "*.{js,jsx,cjs,mjs,ts,tsx}": "eslint --cache --fix",
+    "*.{js,jsx,cjs,mjs,ts,tsx}": [
+      "eslint --cache --fix",
+      "vitest related --run --silent"
+    ],
     "!(pnpm-lock.yaml)*": "prettier --ignore-unknown --write"
   }
 }

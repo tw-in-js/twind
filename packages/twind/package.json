@@ -91,11 +91,11 @@
     "@twind/preset-tailwind"
   ],
   "dependencies": {
-    "@twind/core": "1.0.0-next.5",
-    "@twind/runtime": "1.0.0-next.5",
-    "@twind/preset-autoprefix": "1.0.0-next.5",
-    "@twind/preset-mini": "1.0.0-next.5",
-    "@twind/preset-tailwind": "1.0.0-next.5"
+    "@twind/core": "workspace:1.0.0-next.5",
+    "@twind/preset-autoprefix": "workspace:1.0.0-next.5",
+    "@twind/preset-mini": "workspace:1.0.0-next.5",
+    "@twind/preset-tailwind": "workspace:1.0.0-next.5",
+    "@twind/runtime": "workspace:1.0.0-next.5"
   },
   "peerDependencies": {
     "typescript": "^4.4.0"
