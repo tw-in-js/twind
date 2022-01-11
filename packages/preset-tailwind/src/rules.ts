@@ -5,6 +5,7 @@ import type {
   MaybeArray,
   CSSProperties,
   CSSObject,
+  CSSBase,
 } from '@twind/core'
 
 import { mql, fromTheme, colorFromTheme, toColorValue, asArray, arbitrary } from '@twind/core'
@@ -782,13 +783,13 @@ export const rules: Rule<TailwindTheme>[] = [
 
       // Try to auto inject keyframes
       const parts = animation.split(' ')
-      const keyframeValues = theme('keyframes', parts[0])
+      const keyframeValues = theme('keyframes', parts[0]) as CSSBase
 
       if (keyframeValues) {
         return {
           [('@keyframes ' + (parts[0] = tag(parts[0]))) as '@keyframes xxx']: keyframeValues,
           animation: parts.join(' '),
-        } as CSSObject
+        }
       }
 
       return { animation }

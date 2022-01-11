@@ -1,4 +1,4 @@
-import type { ParsedRule } from '../types'
+import type { ParsedRule } from './parse'
 import { toClassName } from './to-class-name'
 
 export function format(rules: ParsedRule[], space = ' '): string {

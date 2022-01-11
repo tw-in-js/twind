@@ -1,5 +1,7 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
-import type { ParsedRule, SingleParsedRule, TwindRule, Context, BaseTheme } from '../types'
+import type { TwindRule, Context, BaseTheme } from '../types'
+import type { ParsedRule, SingleParsedRule } from './parse'
+
 import { format } from './format'
 import { merge } from './merge'
 import { parse } from './parse'

@@ -1,9 +1,12 @@
-import type { BaseTheme, Context, SingleParsedRule } from '../types'
+import { BaseTheme, Context, Shifts, Layer } from '../types'
+import type { SingleParsedRule } from './parse'
 import { mql } from '../utils'
 import { toClassName } from './to-class-name'
 
 // Based on https://github.com/kripod/otion
 // License MIT
+
+export { Shifts, Layer }
 
 /*
 To have a predictable styling the styles must be ordered.
@@ -73,29 +76,6 @@ Allows single declaration styles to overwrite styles from multi declaration styl
 Ensure shorthand properties are inserted before longhand properties; eg longhand override shorthand
 */
 
-export const enum Shifts {
-  darkMode = 30,
-  layer = 27,
-  screens = 26,
-  responsive = 22,
-  atRules = 18,
-  variants = 0,
-}
-
-export const Layer = {
-  defaults: 0 << Shifts.layer,
-  preflight: 1 << Shifts.layer,
-  /** layer is for things like reset rules or default styles applied to plain HTML elements. */
-  base: 2 << Shifts.layer,
-  /** layer is for class-based styles that you want to be able to override with utilities. */
-  components: 3 << Shifts.layer,
-  shortcuts: 4 << Shifts.layer,
-  /** layer is for small, single-purpose classes that should always take precedence over any other styles. */
-  utilities: 5 << Shifts.layer,
-  css: 6 << Shifts.layer,
-  overrides: 7 << Shifts.layer,
-} as const
-
 export function moveToLayer(precedence: number, layer: number): number {
   // Set layer (first reset, than set)
   return (precedence & ~Layer.overrides) | layer
@@ -120,9 +100,9 @@ Bit shifts for the primary bits:
 Layer: 0 - 7: 3 bits
   - defaults = 0
   - preflight = 1
-  - global = 2
-  - components = 3
-  - merged = 4
+  - components = 2
+  - matches = 3
+  - shortcuts = 4
   - utilities = 5
   - css = 6
   - overrides = 7

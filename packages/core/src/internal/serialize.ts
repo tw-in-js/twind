@@ -1,5 +1,5 @@
-import type { CSSObject, Falsey, SingleParsedRule, Context, TwindRule, BaseTheme } from '../types'
-
+import type { CSSObject, Falsey, Context, TwindRule, BaseTheme } from '../types'
+import type { SingleParsedRule } from './parse'
 import type { ConvertedRule } from './precedence'
 import { Layer, moveToLayer, Shifts } from './precedence'
 import { mql, hash, asArray } from '../utils'
@@ -59,27 +59,20 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
           continue
         }
 
-        // @label or @layer
+        // @layer <layer>
         case 'l': {
-          if (key[3] == 'b') {
-            // @label ...;
-            name =
-              (value as string) + '#' + hash(JSON.stringify([name, precedence, important, style]))
-          } else {
-            // @layer <layer>
-            rules.push(
-              ...serialize$(
-                value as CSSObject,
-                {
-                  name,
-                  precedence: moveToLayer(precedence, Layer[key.slice(7) as 'base']),
-                  conditions,
-                  important,
-                },
-                context,
-              ),
-            )
-          }
+          rules.push(
+            ...serialize$(
+              value as CSSObject,
+              {
+                name,
+                precedence: moveToLayer(precedence, Layer[key.slice(7) as 'base']),
+                conditions,
+                important,
+              },
+              context,
+            ),
+          )
 
           continue
         }
@@ -158,6 +151,8 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
         // global selector
         rules.push(...serialize$(value as CSSObject, { precedence, conditions: [key] }, context))
       }
+    } else if (key == 'label' && value) {
+      name = (value as string) + '#' + hash(JSON.stringify([precedence, important, style]))
     } else if (value || value === 0) {
       // property -> hyphenate
       key = key.replace(/[A-Z]/g, '-$&').toLowerCase()
@@ -168,8 +163,7 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
 
       // support theme(...) function in values
       // calc(100vh - theme('spacing.12'))
-      // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-      value = resolveThemeFunction('' + value, context) + (important ? ' !important' : '')
+      value = resolveThemeFunction(String(value), context) + (important ? ' !important' : '')
 
       declarations +=
         (declarations ? ';' : '') +

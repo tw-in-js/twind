@@ -8,27 +8,48 @@ export type MaybeThunk<T, Theme extends BaseTheme = BaseTheme> =
   | T
   | ((context: Context<Theme>) => T)
 
-export interface BaseProperties {
-  '@import'?: MaybeArray<string | Falsey>
-  '@font-face'?: CSSFontFace
-  // defaults = 0, preflight = 1, base = 2, components = 3, shortcuts = 4, utilities = 5, css = 6, overrides = 7
-  '@layer defaults'?: CSSBase
-  '@layer preflight'?: CSSBase
-  '@layer base'?: CSSBase
-  '@layer components'?: CSSBase
-  '@layer shortcuts'?: CSSBase
-  '@layer utilities'?: CSSBase
-  '@layer css'?: CSSBase
-  '@layer overrides'?: CSSBase
-  // TODO read possible screen values from theme
-  [screen: `@media screen(${string})`]: CSSBase
-  // TODO read possible keyframes values from theme
-  [keyframes: `@keyframes ${string}`]: Record<string, CSSProperties>
+// TODO move to internal types
+export const enum Shifts {
+  darkMode = 30,
+  layer = 27,
+  screens = 26,
+  responsive = 22,
+  atRules = 18,
+  variants = 0,
 }
 
+export const Layer = {
+  defaults: 0 << Shifts.layer,
+  /** layer is for things like reset rules or default styles applied to plain HTML elements. */
+  base: 1 << Shifts.layer,
+  /** layer is for class-based styles that you want to be able to override with utilities. */
+  components: 2 << Shifts.layer,
+  /** layer is for class-based styles that you want to be able to override with utilities. */
+  matches: 3 << Shifts.layer,
+  shortcuts: 4 << Shifts.layer,
+  /** layer is for small, single-purpose classes that should always take precedence over any other styles. */
+  utilities: 5 << Shifts.layer,
+  css: 6 << Shifts.layer,
+  overrides: 7 << Shifts.layer,
+} as const
+
+// TODO read possible screen values from theme
+// TODO read possible keyframes values from theme
+type TypedAtRulesKeys =
+  | `@layer ${keyof typeof Layer}`
+  | `@media screen(${string})`
+  | `@media ${string}`
+  | `@keyframes ${string}`
+
+export type TypedAtRules = { [key in TypedAtRulesKeys]?: CSSBase }
+
+export interface BaseProperties extends TypedAtRules {
+  '@import'?: MaybeArray<string | Falsey>
+  '@font-face'?: CSSFontFace
+}
 export interface CustomProperties {
+  label?: string
   '@apply'?: MaybeArray<string | Falsey>
-  '@label'?: string
 }
 
 export type CSSProperties = CSS.PropertiesFallback<string | Falsey, string | Falsey> &
@@ -45,25 +66,6 @@ export type CSSBase = BaseProperties & CSSNested
 export type CSSObject = CSSProperties & CSSBase
 
 export type Preflight = CSSBase
-
-export interface SingleParsedRule {
-  /**
-   * The utility name including `-` if set, but without `!` and variants
-   */
-  readonly name: string
-
-  /**
-   * All variants without trailing colon: `hover`, `after:`, `[...]`
-   */
-  readonly variants: string[]
-
-  /**
-   * Something like `!underline` or `!bg-red-500` or `!red-500`
-   */
-  readonly important?: boolean
-}
-
-export type ParsedRule = SingleParsedRule | ParsedRule[]
 
 export interface TwindRule {
   /** 'defaults', 'preflight', 'base', 'components', 'shortcuts', 'utilities', 'css', 'overrides' */
@@ -120,9 +122,6 @@ export type KebabCase<S> = S extends `${infer C}${infer T}`
     : never
   : S
 
-export type CamelCase<S extends string> = S extends `${infer P1}_${infer P2}${infer P3}`
-  ? `${Lowercase<P1>}${Uppercase<P2>}${CamelCase<P3>}`
-  : Lowercase<S>
 export interface ThemeFunction<Theme extends BaseTheme = BaseTheme> {
   (): Theme
 
@@ -165,11 +164,6 @@ export interface ThemeFunction<Theme extends BaseTheme = BaseTheme> {
 
 export type RuleResult = string | CSSObject | Falsey | Partial<TwindRule>[]
 
-export type ResolveFunction<Theme extends BaseTheme = BaseTheme> = (
-  className: string,
-  context: Context<Theme>,
-) => RuleResult
-
 export type RuleResolver<Theme extends BaseTheme = BaseTheme, Value = never> = (
   match: MatchResult<Value>,
   context: Context<Theme>,
@@ -200,11 +194,6 @@ export type Rule<Theme extends BaseTheme = BaseTheme> =
     ]
 
 export type VariantResult = string | Falsey
-
-export type VariantFunction<Theme extends BaseTheme = BaseTheme> = (
-  variant: string,
-  context: Context<Theme>,
-) => VariantResult
 
 export type VariantResolver<Theme extends BaseTheme = BaseTheme, Value = never> = (
   match: MatchResult<Value>,
@@ -385,21 +374,6 @@ export type MatchConverter<Theme extends BaseTheme = BaseTheme, Value = never> =
   context: Context<Theme>,
 ) => string
 
-export interface RuleFactory<Theme extends BaseTheme = BaseTheme> {
-  (condition: MaybeArray<string | RegExp>): Rule<Theme>
-
-  (
-    condition: MaybeArray<string | RegExp>,
-    resolve: keyof CSSProperties | CSSObject | RuleResolver<Theme, never>,
-  ): Rule<Theme>
-
-  (
-    condition: MaybeArray<string | RegExp>,
-    property: keyof CSSProperties,
-    // Default to first matched group
-    convert?: MatchConverter<Theme, never>,
-  ): Rule<Theme>
-}
 
 export interface Preset<Theme = BaseTheme> {
   (config: TwindConfig<Theme & BaseTheme>): TwindConfig<Theme & BaseTheme>

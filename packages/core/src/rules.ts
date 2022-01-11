@@ -149,6 +149,11 @@ export function colorFromTheme<
       opacityValue: opacityValue || undefined,
     })
 
+    if (typeof color != 'string') {
+      console.warn(`Invalid color ${colorMatch} (from ${match.$_}):`, color)
+      return
+    }
+
     if (resolve) {
       match._ = {
         value: color,
@@ -208,8 +213,8 @@ export function arbitrary<Theme extends BaseTheme = BaseTheme>(
       return value
         .replace(
           /(^|[^\\])_+(?![^(]*\))/g,
-          // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-          (fullMatch, characterBefore) => characterBefore + ' '.repeat(fullMatch.length - 1),
+          (fullMatch, characterBefore: string) =>
+            characterBefore + ' '.repeat(fullMatch.length - 1),
         )
         .replace(/\\_(?![^(]*\))/g, '_')
     }

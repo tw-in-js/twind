@@ -87,7 +87,7 @@ test('can be used with variants', () => {
 
 test('using custom label', () => {
   const style = css({
-    '@label': 'link',
+    label: 'link',
     color: 'hotpink',
     '&:hover': {
       color: 'darkgreen',

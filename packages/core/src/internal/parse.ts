@@ -1,4 +1,22 @@
-import type { ParsedRule } from '../types'
+export interface SingleParsedRule {
+  /**
+   * The utility name including `-` if set, but without `!` and variants
+   */
+  readonly name: string
+
+  /**
+   * All variants without trailing colon: `hover`, `after:`, `[...]`
+   */
+  readonly variants: string[]
+
+  /**
+   * Something like `!underline` or `!bg-red-500` or `!red-500`
+   */
+  readonly important?: boolean
+}
+
+export type ParsedRule = SingleParsedRule | ParsedRule[]
+
 
 function createRule(active: string[], current: ParsedRule[][]): void {
   if (active[active.length - 1] != '(') {

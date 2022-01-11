@@ -17,7 +17,7 @@ export function css(
   strings: CSSObject | string | TemplateStringsArray,
   ...interpolations: readonly CSSValue[]
 ): string {
-  const { '@label': label = 'css', ...ast } = Array.isArray(strings)
+  const { label = 'css', ...ast } = Array.isArray(strings)
     ? astish(
         interleave(strings as TemplateStringsArray, interpolations, (interpolation) =>
           typeof interpolation == 'string' || typeof interpolation == 'number'

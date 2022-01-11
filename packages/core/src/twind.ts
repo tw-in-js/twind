@@ -96,7 +96,7 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
           }
 
           if (preflight) {
-            serialize(preflight, {}, context, Layer.preflight).forEach(insert)
+            serialize(preflight, {}, context, Layer.base).forEach(insert)
           }
         })
       }

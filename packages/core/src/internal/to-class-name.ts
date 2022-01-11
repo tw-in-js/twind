@@ -1,5 +1,5 @@
-import type { SingleParsedRule } from '../types'
+import type { SingleParsedRule } from './parse'
 
-export function toClassName({ name, important, variants }: SingleParsedRule): string {
-  return [...variants, (important ? '!' : '') + name].join(':')
+export function toClassName(rule: SingleParsedRule): string {
+  return [...rule.variants, (rule.important ? '!' : '') + rule.name].join(':')
 }

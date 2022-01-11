@@ -1,7 +1,6 @@
 import type {
   BaseTheme,
   Context,
-  ResolveFunction,
   RuleResult,
   TwindConfig,
   CSSProperties,
@@ -12,13 +11,24 @@ import type {
   Rule,
   CSSObject,
   Variant,
-  VariantFunction,
+  VariantResult,
   VariantResolver,
   Shortcuts,
 } from '../types'
 
 import { makeThemeFunction } from './theme'
 import { asArray, hash } from '../utils'
+
+type ResolveFunction<Theme extends BaseTheme = BaseTheme> = (
+  className: string,
+  context: Context<Theme>,
+) => RuleResult
+
+
+type VariantFunction<Theme extends BaseTheme = BaseTheme> = (
+  variant: string,
+  context: Context<Theme>,
+) => VariantResult
 
 export function createContext<Theme extends BaseTheme = BaseTheme>({
   theme,

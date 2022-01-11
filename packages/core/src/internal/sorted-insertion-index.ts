@@ -28,12 +28,10 @@ export function sortedInsertionIndex(array: readonly TwindRule[], element: Twind
 export function compareTwindRules(a: TwindRule, b: TwindRule): number {
   return (
     a.precedence - b.precedence ||
-    (a.precedence == Layer.preflight
+    (a.precedence == Layer.base
       ? 0
       : a.priority - b.priority ||
-        // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-        collator.compare('' + a.conditions, '' + b.conditions) ||
-        // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-        collator.compare('' + a.name, '' + b.name))
+        collator.compare(String(a.conditions), String(b.conditions)) ||
+        collator.compare(String(a.name), String(b.name)))
   )
 }

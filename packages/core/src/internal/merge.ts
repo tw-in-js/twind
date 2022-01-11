@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
 import type { TwindRule } from '../types'
 
 export function merge(rules: TwindRule[], name: string): TwindRule[] {
