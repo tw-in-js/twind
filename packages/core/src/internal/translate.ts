@@ -11,6 +11,7 @@ import { resolve } from './registry'
 import { serialize } from './serialize'
 import { sortedInsertionIndex } from './sorted-insertion-index'
 import { toClassName } from './to-class-name'
+import { asArray } from '../utils'
 
 export function translate<Theme extends BaseTheme = BaseTheme>(
   rules: readonly ParsedRule[],
@@ -74,7 +75,7 @@ function translate$<Theme extends BaseTheme = BaseTheme>(
     return resolved.map((rule) => ({
       priority: 0,
       ...rule,
-      conditions: [...(conditions || []), ...(rule.conditions || [])],
+      conditions: [...asArray(conditions), ...asArray(rule.conditions)],
       precedence: moveToLayer(precedence, rule.precedence || precedence),
     }))
   }

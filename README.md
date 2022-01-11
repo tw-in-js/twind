@@ -113,7 +113,7 @@ See [twind](./packages/twind/README.md) for a quick intro.
 - no more `@global` — you must use `&` for nested selectors (this follows the [CSS Nesting Module](https://tabatkins.github.io/specs/css-nesting/))
 - new `@layer` directive following the [Cascade Layers (CSS @layer) spec](https://www.bram.us/2021/09/15/the-future-of-css-cascade-layers-css-at-layer/)
 
-  The following layer exist in the given order: `defaults`, `base`, `components`, `matches`, `shortcuts`, `utilities`, `css`, `overrides`
+  The following layer exist in the given order: `defaults`, `base`, `style`, `when`, `shortcut`, `utility`, `css`, `override`
 
   ```js
   import { css } from 'twind'

@@ -49,7 +49,7 @@ export interface BaseProperties extends TypedAtRules {
 }
 export interface CustomProperties {
   label?: string
-  '@apply'?: MaybeArray<string | Falsey>
+  '@apply'?: string | Falsey
 }
 
 export type CSSProperties = CSS.PropertiesFallback<string | Falsey, string | Falsey> &
@@ -373,7 +373,6 @@ export type MatchConverter<Theme extends BaseTheme = BaseTheme, Value = never> =
   match: MatchResult<Value>,
   context: Context<Theme>,
 ) => string
-
 
 export interface Preset<Theme = BaseTheme> {
   (config: TwindConfig<Theme & BaseTheme>): TwindConfig<Theme & BaseTheme>

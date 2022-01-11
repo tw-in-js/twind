@@ -49,7 +49,7 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
           rules.push(
             ...translate(
               // @apply rules are always merged
-              [parse(asArray(value).join(' '))],
+              [parse(value as string)],
               context,
               precedence,
               conditions,

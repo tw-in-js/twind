@@ -8,6 +8,7 @@ import {
   ExtractThemes,
   defineConfig,
   Sheet,
+  asArray,
 } from '@twind/core'
 
 import { init, autoInit } from '@twind/runtime'
@@ -46,7 +47,7 @@ export function setup(
   return init(
     defineConfig({
       ...config,
-      presets: [autoprefix(), ...((config as TwindUserConfig<any>).presets || []), tailwind()],
+      presets: [autoprefix(), ...asArray((config as TwindUserConfig<any>).presets), tailwind()],
     } as TwindUserConfig<any>),
     sheet,
     target,

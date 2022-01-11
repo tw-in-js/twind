@@ -2,8 +2,7 @@
   "$schema": "http://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "baseUrl": "./",
-    // During development for Node v12.4 support
-    "target": "es2019",
+    "target": "ESNext",
     "module": "nodenext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     // Search under node_modules for non-relative imports.
