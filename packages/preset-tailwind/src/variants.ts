@@ -34,7 +34,8 @@ export const variants: Variant<TailwindTheme>[] = [
   // => '.group:focus .group-focus:selector'
   [
     '((group|peer)((?!-focus)-[^-]+)?)-([a-z-]+|\\[.+])',
-    ({ $1, $4 }, { tag }) => `.${escape(tag($1))}${($4[0] == '[' ? '' : ':') + $4} &`,
+    ({ $1, $2, $4 }, { tag }) =>
+      `.${escape(tag($1))}${($4[0] == '[' ? '' : ':') + $4}${$2[0] == 'p' ? '~' : ' '}&`,
   ],
 
   // direction variants

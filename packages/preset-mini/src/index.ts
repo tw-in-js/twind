@@ -11,7 +11,12 @@ export default function presetMini(): Preset {
       /^([-\w]+)\[(.+)]$/,
     ],
     variants: [
-      ['hocus', '&:focus,&:hover'],
+      ['hocus', '&:hover,&:focus-visible'],
+      [
+        '((group|peer)(-[^-]+)?)-hocus',
+        ({ $1, $2 }, { tag }) =>
+          `.${escape(tag($1))}:is(:hover,:focus-visible)${$2[0] == 'p' ? '~' : ' '}&`,
+      ],
 
       // - `dir-rtl` -> `:dir(rtl)`
       // - `lang-en` -> `:lang(en)`
@@ -33,11 +38,6 @@ export default function presetMini(): Preset {
       // - `&>span:underline`
       // - `&>*:underline`
       ['&[&~+>*a-z]+', ({ $_ }) => $_],
-
-      [
-        '((group|peer)(-[^-]+)?)-hocus',
-        ({ $1 }, { tag }) => `.${escape(tag($1))}:is(:hover,:focus-visible) &`,
-      ],
 
       // Attribute selector
       // `[lang]:underline` -> `[lang]:underline[lang]`

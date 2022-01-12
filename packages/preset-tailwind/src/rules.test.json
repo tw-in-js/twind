@@ -678,6 +678,9 @@
       ".group:focus .group-focus\\:text-red-500{--tw-text-opacity:1;color:rgba(239,68,68,var(--tw-text-opacity))}"
     ]
   ],
+  "peer-invalid:visible": ".peer:invalid~.peer-invalid\\:visible{visibility:visible}",
+  "peer-focus:visible": ".peer:focus~.peer-focus\\:visible{visibility:visible}",
+  "peer-xxx-focus:visible": ".peer-xxx:focus~.peer-xxx-focus\\:visible{visibility:visible}",
   "rotate-3 scale-125": [
     "scale-125 rotate-3",
     [
