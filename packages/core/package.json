@@ -43,7 +43,7 @@
       "name": "@twind/core (full)",
       "path": "dist/core.esnext.js",
       "brotli": true,
-      "limit": "5.5kb"
+      "limit": "5.8kb"
     },
     {
       "name": "@twind/core (shim)",
@@ -58,6 +58,27 @@
       "import": "{ twind }",
       "brotli": true,
       "limit": "3.5kb"
+    },
+    {
+      "name": "@twind/core (cx)",
+      "path": "dist/core.esnext.js",
+      "import": "{ cx }",
+      "brotli": true,
+      "limit": "1kb"
+    },
+    {
+      "name": "@twind/core (css)",
+      "path": "dist/core.esnext.js",
+      "import": "{ css }",
+      "brotli": true,
+      "limit": "2.6kb"
+    },
+    {
+      "name": "@twind/core (style)",
+      "path": "dist/core.esnext.js",
+      "import": "{ style }",
+      "brotli": true,
+      "limit": "2.8kb"
     }
   ],
   "dependencies": {

@@ -22,15 +22,15 @@ export const Layer = {
   defaults: 0 << Shifts.layer,
   /** layer is for things like reset rules or default styles applied to plain HTML elements. */
   base: 1 << Shifts.layer,
-  /** layer is for class-based styles that you want to be able to override with utilities. */
+  /** layers is for class-based styles that you want to be able to override with utilities. */
   components: 2 << Shifts.layer,
-  /** layer is for class-based styles that you want to be able to override with utilities. */
-  matches: 3 << Shifts.layer,
-  shortcuts: 4 << Shifts.layer,
-  /** layer is for small, single-purpose classes that should always take precedence over any other styles. */
-  utilities: 5 << Shifts.layer,
-  css: 6 << Shifts.layer,
-  overrides: 7 << Shifts.layer,
+  variants: 3 << Shifts.layer,
+  compounds: 4 << Shifts.layer,
+  /* shortcuts: `~(...)` */
+  shortcuts: 5 << Shifts.layer,
+  /** layer is for small, single-purpose classes */
+  utilities: 6 << Shifts.layer,
+  css: 7 << Shifts.layer,
 } as const
 
 // TODO read possible screen values from theme

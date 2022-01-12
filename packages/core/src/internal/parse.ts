@@ -17,7 +17,6 @@ export interface SingleParsedRule {
 
 export type ParsedRule = SingleParsedRule | ParsedRule[]
 
-
 function createRule(active: string[], current: ParsedRule[][]): void {
   if (active[active.length - 1] != '(') {
     const variants: string[] = []

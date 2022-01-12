@@ -30,7 +30,7 @@ export function translate<Theme extends BaseTheme = BaseTheme>(
           translate(
             rule,
             context,
-            (precedence & Layer.overrides) == Layer.utilities
+            (precedence & Layer.css) == Layer.utilities
               ? moveToLayer(precedence, Layer.shortcuts)
               : precedence,
             conditions,

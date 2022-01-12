@@ -24,7 +24,6 @@ type ResolveFunction<Theme extends BaseTheme = BaseTheme> = (
   context: Context<Theme>,
 ) => RuleResult
 
-
 type VariantFunction<Theme extends BaseTheme = BaseTheme> = (
   variant: string,
   context: Context<Theme>,

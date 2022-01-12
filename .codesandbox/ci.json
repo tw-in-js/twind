@@ -7,13 +7,17 @@
   "buildCommand": "build",
   // If you have a monorepo, put the paths of the packages here. We'll infer the package names.
   // Globs are supported.
-  "packages": ["packages/react", "packages/react-dom"],
+  "packages": ["packages/*"],
   // If you don't publish from the package directory, specify per dependency
   // where the contents of the built dependency are. These files will be uploaded
   // to our registry.
   "publishDirectory": {
-    "react": "build/node_modules/react",
-    "react-dom": "build/node_modules/react-dom"
+    "@twind/core": "packages/core/dist",
+    "@twind/preset-autoprefix": "packages/preset-autoprefix/dist",
+    "@twind/preset-mini": "packages/preset-mini/dist",
+    "@twind/preset-tailwind": "packages/preset-tailwind/dist",
+    "@twind/runtime": "packages/runtime/dist",
+    "twind": "packages/twind/dist"
   },
   // A list of sandboxes that you want generated for a PR, if this list
   // is not set we will default to `vanilla`. The built library will automatically

@@ -1,9 +1,9 @@
-import type { BaseTheme, Context, RuleResult, TwindRule } from '../types'
+import type { BaseTheme, Context, Falsey, RuleResult, TwindRule } from '../types'
 import type { SingleParsedRule } from './parse'
 
 const registry = new Map<string, RegisterCallback>()
 
-export type RegisterCallback = (rule: SingleParsedRule, context: Context) => TwindRule[]
+export type RegisterCallback = (rule: SingleParsedRule, context: Context) => Falsey | TwindRule[]
 
 export function register(className: string, factory: RegisterCallback): string {
   registry.set(className, factory)

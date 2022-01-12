@@ -18,7 +18,7 @@ export function merge(rules: TwindRule[], name: string): TwindRule[] {
         declarations: [current.declarations, rule.declarations].filter(Boolean).join(';'),
       })
     } else {
-      // only set name for named rules eg not for global rules
+      // only set name for named rules eg not for global or className propagation rules
       result.push((current = { ...rule, name: rule.name && name }))
     }
   }

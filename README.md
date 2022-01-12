@@ -29,6 +29,11 @@ See [twind](./packages/twind/README.md) for a quick intro.
   - `apply` and `css` as known from twind v0.16.
   - new `cx` function to create class names
     - grouped rules are ungrouped
+  - `style` — stitches like component definitions
+    - creates _readable_ class names like
+      - `style#1hvn013 style--variant-gray#1hvn013 style--size-sm#1hvn013 style--outlined-@sm-true#1hvn013`
+    - with label: `style({ label: 'button', ... })`
+      - `button#p8xtwh button--color-orange#p8xtwh button--size-small#p8xtwh button--color-orange_outlined-true$0#p8xtwh`
 - [@twind/preset-tailwind](./packages/preset-tailwind) — a tailwindcss v3 compatible preset
 - [twind](./packages/twind) — shim-first implementation using [@twind/preset-tailwind](./packages/preset-tailwind) and [@twind/preset-autoprefixer](./packages/preset-autoprefixer)
   - `setup` can be called as many times as you want.
@@ -113,12 +118,13 @@ See [twind](./packages/twind/README.md) for a quick intro.
 - no more `@global` — you must use `&` for nested selectors (this follows the [CSS Nesting Module](https://tabatkins.github.io/specs/css-nesting/))
 - new `@layer` directive following the [Cascade Layers (CSS @layer) spec](https://www.bram.us/2021/09/15/the-future-of-css-cascade-layers-css-at-layer/)
 
-  The following layer exist in the given order: `defaults`, `base`, `style`, `when`, `shortcut`, `utility`, `css`, `override`
+  The following layer exist in the given order: `defaults`, `base`, `components`, `variants`, `compounds`, `shortcuts`, `utilities`, `css`
 
   ```js
   import { css } from 'twind'
 
   element.className = css`
+    /* rules with base are not sorted */
     @layer base {
       h1 {
         @apply text-2xl;
