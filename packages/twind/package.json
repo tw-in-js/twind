@@ -106,7 +106,6 @@
     }
   },
   "scripts": {
-    "build": "distilt",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "distilt"
   }
 }

@@ -53,8 +53,8 @@ function translate$<Theme extends BaseTheme = BaseTheme>(
   conditions?: string[],
   important?: boolean,
 ): TwindRule[] {
-  if (important && !rule.important) {
-    rule = { ...rule, important }
+  if (important && !rule.i) {
+    rule = { ...rule, i: important }
   }
 
   const resolved = resolve(rule, context)
@@ -68,7 +68,7 @@ function translate$<Theme extends BaseTheme = BaseTheme>(
     // eslint-disable-next-line @typescript-eslint/no-extra-semi
     ;({ conditions, precedence } = convert(rule, context, precedence, conditions))
 
-    return translate([parse(resolved)], context, precedence, conditions, rule.important, rule.name)
+    return translate([parse(resolved)], context, precedence, conditions, rule.i, rule.n)
   }
 
   if (Array.isArray(resolved)) {

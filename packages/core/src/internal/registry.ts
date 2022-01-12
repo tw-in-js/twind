@@ -14,8 +14,8 @@ export function resolve<Theme extends BaseTheme = BaseTheme>(
   rule: SingleParsedRule,
   context: Context<Theme>,
 ): RuleResult | TwindRule[] {
-  const factory = registry.get(rule.name)
+  const factory = registry.get(rule.n)
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument
-  return factory ? factory(rule, context as any) : context.rule(rule.name)
+  return factory ? factory(rule, context as any) : context.rule(rule.n)
 }

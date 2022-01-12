@@ -20,31 +20,31 @@ test('comments', () => {
       text-(xl black)
     `),
     [
-      { name: 'underline', variants: [], important: false },
-      { name: 'italic', variants: ['hover', 'focus', 'sm'], important: true },
-      { name: 'why', variants: ['hover', 'focus', 'sm'], important: true },
-      { name: '-px', variants: ['hover', 'focus', 'lg'], important: true },
-      { name: '-mx-1', variants: ['hover', 'focus'], important: true },
-      { name: 'top-1', variants: [], important: true },
-      { name: '-bottom-2', variants: [], important: true },
-      { name: 'text-xl', variants: [], important: false },
-      { name: 'text-black', variants: [], important: false },
+      { n: 'underline', v: [], i: false },
+      { n: 'italic', v: ['hover', 'focus', 'sm'], i: true },
+      { n: 'why', v: ['hover', 'focus', 'sm'], i: true },
+      { n: '-px', v: ['hover', 'focus', 'lg'], i: true },
+      { n: '-mx-1', v: ['hover', 'focus'], i: true },
+      { n: 'top-1', v: [], i: true },
+      { n: '-bottom-2', v: [], i: true },
+      { n: 'text-xl', v: [], i: false },
+      { n: 'text-black', v: [], i: false },
     ],
   )
 })
 
 test('group with comma', () => {
   assert.deepEqual(parse(`hover:(!underline,focus:italic)`), [
-    { name: 'underline', variants: ['hover'], important: true },
-    { name: 'italic', variants: ['hover', 'focus'], important: false },
+    { n: 'underline', v: ['hover'], i: true },
+    { n: 'italic', v: ['hover', 'focus'], i: false },
   ])
 })
 
 test('nested', () => {
   assert.deepEqual(parse(`hover:~(!underline focus:italic)`), [
     [
-      { name: 'underline', variants: ['hover'], important: true },
-      { name: 'italic', variants: ['hover', 'focus'], important: false },
+      { n: 'underline', v: ['hover'], i: true },
+      { n: 'italic', v: ['hover', 'focus'], i: false },
     ],
   ])
 })
@@ -52,19 +52,19 @@ test('nested', () => {
 test('nested with comma', () => {
   assert.deepEqual(parse(`hover:~(!underline,focus:italic,w-[1,2,theme(x[1.2])])`), [
     [
-      { name: 'underline', variants: ['hover'], important: true },
-      { name: 'italic', variants: ['hover', 'focus'], important: false },
-      { name: 'w-[1,2,theme(x[1.2])]', variants: ['hover'], important: false },
+      { n: 'underline', v: ['hover'], i: true },
+      { n: 'italic', v: ['hover', 'focus'], i: false },
+      { n: 'w-[1,2,theme(x[1.2])]', v: ['hover'], i: false },
     ],
   ])
 })
 
 test('nested and negative', () => {
   assert.deepEqual(parse(`rotate(-3 hover:6 md:(3,hover:-6))`), [
-    { name: '-rotate-3', variants: [], important: false },
-    { name: 'rotate-6', variants: ['hover'], important: false },
-    { name: 'rotate-3', variants: ['md'], important: false },
-    { name: '-rotate-6', variants: ['md', 'hover'], important: false },
+    { n: '-rotate-3', v: [], i: false },
+    { n: 'rotate-6', v: ['hover'], i: false },
+    { n: 'rotate-3', v: ['md'], i: false },
+    { n: '-rotate-6', v: ['md', 'hover'], i: false },
   ])
 })
 
@@ -74,9 +74,9 @@ test('arbitray valiue', () => {
       `grid-cols-[repeat(auto-fit,minmax(150px,1fr))] background-color[#1da1f1] content["whoa"]`,
     ),
     [
-      { name: 'grid-cols-[repeat(auto-fit,minmax(150px,1fr))]', variants: [], important: false },
-      { name: 'background-color[#1da1f1]', variants: [], important: false },
-      { name: 'content["whoa"]', variants: [], important: false },
+      { n: 'grid-cols-[repeat(auto-fit,minmax(150px,1fr))]', v: [], i: false },
+      { n: 'background-color[#1da1f1]', v: [], i: false },
+      { n: 'content["whoa"]', v: [], i: false },
     ],
   )
 })
@@ -89,16 +89,16 @@ test('attribute selector', () => {
       [href^='https'][href$='.org']:hover:bg-green-400
     `),
     [
-      { name: 'italic', variants: ['not-[lang]'], important: false },
+      { n: 'italic', v: ['not-[lang]'], i: false },
       {
-        name: 'bg-red-300',
-        variants: ['[data-reach-menu-item][data-selected]'],
-        important: false,
+        n: 'bg-red-300',
+        v: ['[data-reach-menu-item][data-selected]'],
+        i: false,
       },
       {
-        name: 'bg-green-400',
-        variants: [`[href^='https'][href$='.org']`, 'hover'],
-        important: false,
+        n: 'bg-green-400',
+        v: [`[href^='https'][href$='.org']`, 'hover'],
+        i: false,
       },
     ],
   )
@@ -106,11 +106,11 @@ test('attribute selector', () => {
 
 test('arbitrary properties', () => {
   assert.deepEqual(parse('![mask-type:luminance] hover:[mask-type:alpha]'), [
-    { name: '[mask-type:luminance]', variants: [], important: true },
+    { n: '[mask-type:luminance]', v: [], i: true },
     {
-      name: '[mask-type:alpha]',
-      variants: ['hover'],
-      important: false,
+      n: '[mask-type:alpha]',
+      v: ['hover'],
+      i: false,
     },
   ])
 })
@@ -118,9 +118,9 @@ test('arbitrary properties', () => {
 test('pseudo element selector', () => {
   assert.deepEqual(parse('after::underline'), [
     {
-      name: 'underline',
-      variants: ['after:'],
-      important: false,
+      n: 'underline',
+      v: ['after:'],
+      i: false,
     },
   ])
 })

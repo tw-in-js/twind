@@ -1,7 +1,7 @@
 import type { CSSObject, Falsey, Context, TwindRule, BaseTheme } from '../types'
 import type { SingleParsedRule } from './parse'
 import type { ConvertedRule } from './precedence'
-import { Layer, moveToLayer, Shifts } from './precedence'
+import { Layer, moveToLayer } from './precedence'
 import { mql, hash, asArray } from '../utils'
 
 import { atRulePrecedence, declarationPropertyPrecedence, convert } from './precedence'
@@ -125,7 +125,7 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
             const screen = context.theme('screens', screenKey)
 
             if (screen) {
-              rulePrecedence |= 1 << Shifts.screens
+              rulePrecedence |= 1 << 26 /* Shifts.screens */
               return mql(screen, '')
             }
 

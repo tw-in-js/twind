@@ -1,4 +1,4 @@
-import { BaseTheme, Context, Shifts, Layer } from '../types'
+import { BaseTheme, Context, Layer } from '../types'
 import type { SingleParsedRule } from './parse'
 import { mql } from '../utils'
 import { toClassName } from './to-class-name'
@@ -6,7 +6,7 @@ import { toClassName } from './to-class-name'
 // Based on https://github.com/kripod/otion
 // License MIT
 
-export { Shifts, Layer }
+export { Layer }
 
 /*
 To have a predictable styling the styles must be ordered.
@@ -138,8 +138,8 @@ export function atRulePrecedence(css: string): number {
       /(?:^|width[^\d]+)(\d+(?:.\d+)?)(p)?/.test(css) ? +RegExp.$1 / (RegExp.$2 ? 15 : 1) / 10 : 0,
       15,
     ) <<
-      Shifts.responsive) |
-    (Math.min(seperatorPrecedence(css), 15) << Shifts.atRules)
+      22) /* Shifts.responsive */ |
+    (Math.min(seperatorPrecedence(css), 15) << 18) /* Shifts.atRules */
   )
 }
 
@@ -240,13 +240,13 @@ export interface ConvertedRule {
 }
 
 export function convert<Theme extends BaseTheme = BaseTheme>(
-  { name, important, variants = [] }: Partial<SingleParsedRule>,
+  { n: name, i: important, v: variants = [] }: Partial<SingleParsedRule>,
   context: Context<Theme>,
   precedence: number,
   conditions: string[] = [],
 ): ConvertedRule {
   if (name) {
-    name = toClassName({ name, important, variants })
+    name = toClassName({ n: name, i: important, v: variants })
   }
 
   for (const variant of variants) {
@@ -257,9 +257,9 @@ export function convert<Theme extends BaseTheme = BaseTheme>(
     conditions = [...conditions, condition]
 
     precedence |= screen
-      ? (1 << Shifts.screens) | atRulePrecedence(condition)
+      ? (1 << 26) /* Shifts.screens */ | atRulePrecedence(condition)
       : variant == 'dark'
-      ? 1 << Shifts.darkMode
+      ? 1 << 30 /* Shifts.darkMode */
       : condition[0] == '@'
       ? atRulePrecedence(condition)
       : pseudoPrecedence(condition)

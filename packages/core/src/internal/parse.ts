@@ -2,17 +2,17 @@ export interface SingleParsedRule {
   /**
    * The utility name including `-` if set, but without `!` and variants
    */
-  readonly name: string
+  readonly n: string
 
   /**
    * All variants without trailing colon: `hover`, `after:`, `[...]`
    */
-  readonly variants: string[]
+  readonly v: string[]
 
   /**
    * Something like `!underline` or `!bg-red-500` or `!red-500`
    */
-  readonly important?: boolean
+  readonly i?: boolean
 }
 
 export type ParsedRule = SingleParsedRule | ParsedRule[]
@@ -54,7 +54,7 @@ function createRule(active: string[], current: ParsedRule[][]): void {
     if (name) {
       if (negated) name = '-' + name
 
-      current[0].push({ name, variants, important })
+      current[0].push({ n: name, v: variants, i: important })
     }
   }
 }
