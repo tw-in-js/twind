@@ -1,5 +1,13 @@
 # @twind/core
 
+## 1.0.0-next.8
+
+### Patch Changes
+
+- adding stitches like style helper ([`7360f15a`](https://github.com/tw-in-js/twind/commit/7360f15a828ccd136a0eb40bbe6ccd629b145361))
+
+* reduce exported types, rename `@label` to `label`, rename some layers ([`be5def30`](https://github.com/tw-in-js/twind/commit/be5def30416835d8100f6c0c3e88b38ab8171487))
+
 ## 1.0.0-next.7
 
 ### Patch Changes
