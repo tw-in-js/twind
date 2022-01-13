@@ -11,6 +11,14 @@ The smallest, fastest, most feature complete Tailwind-in-JS solution in existenc
 
 ---
 
+[![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE)
+[![Latest Release](https://flat.badgen.net/npm/v/twind/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/twind)
+[![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.dev)
+[![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind?icon=github&label)](https://github.com/tw-in-js/twind/tree/next)
+[![Discord](https://img.shields.io/discord/798324011980423188?label=chat&logo=discord)](https://discord.com/invite/2aP5NkszvD)
+[![CI](https://github.com/tw-in-js/twind/actions/workflows/ci.yml/badge.svg?branch=next)](https://github.com/tw-in-js/twind/actions/workflows/ci.yml)
+[![Coverage Status](https://flat.badgen.net/coveralls/c/github/tw-in-js/twind/next?icon=codecov&label&cache=10800)](https://coveralls.io/github/tw-in-js/twind?branch=next)
+
 ## READ THIS FIRST!
 
 **Twind v1 is still in beta. Expect bugs!**
@@ -19,9 +27,26 @@ Twind v1 is a complete rewrite aiming to be compatible with Tailwind v3 classes.
 
 ---
 
-## Quickstart
+## 🚀 Features
+
+- 🎪 Interactive docs & demos
+- 🕶 Seamless migration: Works for both Vue 3 and 2
+- ⚡ Fully tree shakeable: Only take what you want
+- 🦾 Type Strong: Written in Typescript
+- 🔋 SSR Friendly
+- 🌎 No bundler required: Usable via CDN
+- 🔩 Flexible: Configurable theme, rules and varaints
+- 🔌 Optional presets: Router, Firebase, RxJS, etc.
+
+## 🦄 Quickstart
 
 See [twind](./packages/twind/README.md) for a quick intro.
+
+## 📦 Install
+
+### CDN
+
+### Demos
 
 ## Notable Changes
 
@@ -159,6 +184,41 @@ See [twind](./packages/twind/README.md) for a quick intro.
   ```css
   @twind;
   ```
+
+## 🧱 Contribute
+
+See the [Contributing Guide](./CONTRIBUTING.md)
+
+## 🌸 Credits
+
+### Contributors
+
+Thank you to all the people who have already contributed to twind!
+
+<a href="https://github.com/tw-in-js/twind/graphs/contributors"><img src="https://opencollective.com/twind/contributors.svg?width=890" /></a>
+
+### Backers
+
+Thank you to all our backers! [[Become a backer](https://opencollective.com/twind#backer)]
+
+<a href="https://opencollective.com/twind#backers" target="_blank"><img src="https://opencollective.com/twind/backers.svg?width=890"></a>
+
+### Sponsors
+
+Thank you to all our sponsors! (please ask your company to also support this open source project by [becoming a sponsor](https://opencollective.com/twind#sponsor))
+
+<a href="https://opencollective.com/twind/sponsor/0/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/0/avatar.svg"></a>
+<a href="https://opencollective.com/twind/sponsor/1/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/1/avatar.svg"></a>
+<a href="https://opencollective.com/twind/sponsor/2/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/2/avatar.svg"></a>
+<a href="https://opencollective.com/twind/sponsor/3/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/3/avatar.svg"></a>
+<a href="https://opencollective.com/twind/sponsor/4/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/4/avatar.svg"></a>
+<a href="https://opencollective.com/twind/sponsor/5/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/5/avatar.svg"></a>
+<a href="https://opencollective.com/twind/sponsor/6/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/6/avatar.svg"></a>
+<a href="https://opencollective.com/twind/sponsor/7/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/7/avatar.svg"></a>
+<a href="https://opencollective.com/twind/sponsor/8/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/8/avatar.svg"></a>
+<a href="https://opencollective.com/twind/sponsor/9/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/9/avatar.svg"></a>
+
+<!-- This `CONTRIBUTING.md` is based on @nayafia's template https://github.com/nayafia/contributing-template -->
 
 ## ⚖️ License
 

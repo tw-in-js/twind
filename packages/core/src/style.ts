@@ -9,7 +9,6 @@ import { register } from './internal/registry'
 import { translate } from './internal/translate'
 
 import { escape, hash } from './utils'
-import { toClassName } from './internal/to-class-name'
 
 export type StrictMorphVariant<T> = T extends number
   ? `${T}` | T

@@ -1,0 +1,116 @@
+name: CI
+
+on:
+  push:
+    branches:
+      # Push events on next branch
+      - next
+    paths-ignore:
+      # Do not run for docs changes
+      - 'documentation/**'
+      - '**/*.md'
+
+  pull_request:
+    paths-ignore:
+      # Do not run for docs changes
+      - 'documentation/**'
+      - '**/*.md'
+
+env:
+  CI: true
+
+jobs:
+  build:
+    timeout-minutes: 15
+    name: Node v${{ matrix.node }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: ['14.x', '16.x']
+        # os: [ubuntu-20.04]
+        # Maybe add those later again
+        # os: [ubuntu-20.04, macos-11, windows-2022]
+
+    steps:
+      - name: 📥  Checkout
+        uses: actions/checkout@v2
+
+      - name: 🔧  Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 6.24.3
+
+      - name: 🔧  Use Node ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
+          cache: pnpm
+
+      - name: 💡  Environment Info
+        run: |
+          echo branch `git branch --show-current`;
+          echo node `node --version`;
+          echo pnpm `pnpm --version`
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+      - run: pnpm test:coverage --reporter dot
+      - run: pnpm build
+
+      - name: 📖  Coveralls
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          flag-name: build-${{ matrix.node }}
+          parallel: true
+          path-to-lcov: ./coverage/lcov.info
+
+  size-pr:
+    name: Size Limit
+    runs-on: ubuntu-latest
+    # Run only for PRs
+    if: ${{ github.event.pull_request }}
+    needs: build
+    env:
+      CI_JOB_NUMBER: 1
+    steps:
+      - name: 📥  Checkout
+        uses: actions/checkout@v2
+
+      - name: 🔧  Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 6.24.3
+
+      - name: 🔧  Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+          cache: pnpm
+
+      - name: 💡  Environment Info
+        run: |
+          echo branch: `git branch --show-current`;
+          echo node: `node --version`;
+          echo pnpm: v`pnpm --version`
+
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+
+      # Uses the root package.json['size-limit'] config
+      - name: 📨  Report Size Limit
+        uses: andresz1/size-limit-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          skip_step: install
+
+  coveralls:
+    name: Collect Coverage
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: 📖  Coveralls Finished
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          parallel-finished: true

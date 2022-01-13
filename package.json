@@ -3,6 +3,7 @@
   "version": "1.0.0-next.0",
   "description": "twind monorepo",
   "private": true,
+  "type": "module",
   "homepage": "https://twind.dev",
   "bugs": "https://github.com/tw-in-js/twind/issues",
   "repository": "github:tw-in-js/twind",
@@ -17,17 +18,49 @@
   "author": "Sascha Tandel (https://github.com/sastan)",
   "engines": {
     "node": ">=12.4",
-    "pnpm": "6.x"
+    "pnpm": "^6.10.0"
   },
-  "packageManager": "pnpm@6.24.2",
+  "packageManager": "pnpm@6.24.3",
+  "size-limit": [
+    {
+      "name": "@twind/core (full)",
+      "path": "packages/core/dist/core.esnext.js",
+      "brotli": true,
+      "limit": "5.8kb"
+    },
+    {
+      "name": "@twind/core (shim)",
+      "path": "packages/core/dist/core.esnext.js",
+      "import": "{ twind, observe, cssom }",
+      "brotli": true,
+      "limit": "4kb"
+    },
+    {
+      "name": "@twind/core (mini)",
+      "path": "packages/core/dist/core.esnext.js",
+      "import": "{ twind }",
+      "brotli": true,
+      "limit": "3.5kb"
+    },
+    {
+      "name": "twind (tailwindcss)",
+      "path": "packages/twind/dist/twind.esnext.js",
+      "import": "{ setup }",
+      "brotli": true,
+      "limit": "14.3kb"
+    }
+  ],
   "scripts": {
-    "build": "pnpm run prepublishOnly --recursive --if-present",
-    "format": "prettier --write --ignore-path .gitignore . '!pnpm-lock.yaml'",
+    "build": "pnpm prepublishOnly --recursive --if-present",
     "check": "eslint --ext .js,.jsx,.cjs,.mjs,.ts,.tsx --ignore-path .gitignore .",
-    "check:fix": "npm run check -- --fix",
+    "check:fix": "pnpm check -- --fix",
+    "size": "pnpm build && pnpm size-limit",
+    "format": "prettier --write --ignore-path .gitignore . '!pnpm-lock.yaml'",
     "test": "vitest",
-    "test:ui": "npm test -- --open",
+    "test:ui": "pnpm test -- --open",
     "test:coverage": "vitest run --coverage",
+    "release": "pnpm publish -r",
+    "changeset:version": "changeset version && pnpm i --lockfile-only",
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky install"
   },
@@ -36,23 +69,25 @@
     "@changesets/get-github-info": "^0.5.0",
     "@size-limit/esbuild": "^7.0.5",
     "@size-limit/file": "^7.0.5",
+    "@size-limit/time": "^7.0.5",
     "@typescript-eslint/eslint-plugin": "^5.9.1",
     "@typescript-eslint/parser": "^5.9.1",
-    "@vitest/ui": "^0.0.139",
+    "@vitest/ui": "^0.1.12",
     "c8": "^7.11.0",
-    "distilt": "^0.13.0",
+    "distilt": "^0.13.1",
     "dotenv": "^10.0.0",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
     "husky": "^7.0.4",
+    "is-ci": "^3.0.1",
     "lint-staged": "^12.1.7",
     "only-allow": "^1.0.0",
     "prettier": "^2.5.1",
     "size-limit": "^7.0.5",
     "tslib": "^2.3.1",
     "typescript": "^4.5.4",
-    "vitest": "^0.0.139"
+    "vitest": "^0.1.12"
   },
   "prettier": {
     "printWidth": 100,

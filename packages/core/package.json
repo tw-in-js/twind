@@ -53,7 +53,7 @@
       "limit": "4kb"
     },
     {
-      "name": "@twind/core (minimal)",
+      "name": "@twind/core (mini)",
       "path": "dist/core.esnext.js",
       "import": "{ twind }",
       "brotli": true,

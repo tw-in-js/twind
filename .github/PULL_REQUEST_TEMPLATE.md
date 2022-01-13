@@ -1,3 +1,5 @@
+You might find our contributing section about [Submitting Pull Requests](https://github.com/tw-in-js/twind/blob/next/CONTRIBUTING.md#submitting-pull-requests) helpful.
+
 ### Please don't delete this checklist! Before submitting the PR, please make sure you do the following:
 
 - [ ] It's really useful if your PR references an issue where it is discussed ahead of time. In many cases, features are absent for a reason.
@@ -6,7 +8,7 @@
 
 ### Tests
 
-- [ ] Run the tests with `pnpm test` and lint the project with `pnpm lint`
+- [ ] Run the tests with `pnpm test` and verify the project with `pnpm check`
 
 ### Changesets
 

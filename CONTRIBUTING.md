@@ -23,6 +23,11 @@ Regardless of your experience level, there are ways that you can help:
 - Report bugs or provide feedback by [creating issues](https://github.com/tw-in-js/twind)
 - Contribute to the source code by fixing bugs/issues or helping us build new features
 
+## Financial contributions
+
+We also welcome financial contributions in full transparency on our [open collective](https://opencollective.com/twind).
+Anyone can file an expense. If the expense makes sense for the development of the community, it will be "merged" in the ledger of our open collective by the core contributors and the person who filed the expense will be reimbursed.
+
 ## How to create a good bug report
 
 To be able to fix issues we need to see them on our machine. This is only possible when we can reproduce the error. The easiest way to do that is narrow down the problem to specific components or combination of them. This can be done by removing as much unrelated code as possible.

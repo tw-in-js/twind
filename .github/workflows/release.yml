@@ -1,0 +1,57 @@
+name: Release
+
+on:
+  push:
+    branches:
+      - next
+
+jobs:
+  release:
+    # prevents this action from running on forks
+    if: github.repository == 'tw-in-js/twind'
+
+    name: Release
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥  Checkout
+        uses: actions/checkout@v2
+        with:
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetch-depth: 0
+
+      - name: 🔧  Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 6.24.3
+
+      - name: 🔧  Setup Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: 16.x
+          cache: pnpm
+
+      - name: 💡  Environment Info
+        run: |
+          echo branch: `git branch --show-current`;
+          echo node: `node --version`;
+          echo pnpm: v`pnpm --version`
+
+      - run: pnpm install --frozen-lockfile
+
+      # if a .npmrc file is found, the GitHub Action does not recreate the file.
+      - name: 📝  Updating .npmrc
+        run: |
+          npm config set email release-workflow@twind.dev --global
+          npm config set "//registry.npmjs.org/:_authToken" "${NPM_TOKEN}" --global
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: 📦  Create Release Pull Request or Publish to npm
+        id: changesets
+        uses: changesets/action@v1
+        with:
+          version: pnpm changeset:version
+          publish: pnpm release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
