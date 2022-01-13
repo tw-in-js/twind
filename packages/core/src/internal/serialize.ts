@@ -22,7 +22,7 @@ export function serialize<Theme extends BaseTheme = BaseTheme>(
 
 function serialize$<Theme extends BaseTheme = BaseTheme>(
   style: CSSObject | Falsey,
-  { name, precedence, conditions = [], important }: ConvertedRule,
+  { n: name, p: precedence, c: conditions = [], i: important }: ConvertedRule,
   context: Context<Theme>,
 ): TwindRule[] {
   const rules: TwindRule[] = []
@@ -65,10 +65,10 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
             ...serialize$(
               value as CSSObject,
               {
-                name,
-                precedence: moveToLayer(precedence, Layer[key.slice(7) as 'base']),
-                conditions,
-                important,
+                n: name,
+                p: moveToLayer(precedence, Layer[key.slice(7) as 'base']),
+                c: conditions,
+                i: important,
               },
               context,
             ),
@@ -102,7 +102,7 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
             precedence: Layer.defaults,
             priority: 0,
             conditions: [key],
-            declarations: serialize$(value as CSSObject, { precedence: Layer.defaults }, context)
+            declarations: serialize$(value as CSSObject, { p: Layer.defaults }, context)
               .map(stringify)
               .join(''),
           })
@@ -139,17 +139,17 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
           ...serialize$(
             value as CSSObject,
             {
-              name,
-              precedence: rulePrecedence,
-              conditions: [...conditions, key],
-              important,
+              n: name,
+              p: rulePrecedence,
+              c: [...conditions, key],
+              i: important,
             },
             context,
           ),
         )
       } else {
         // global selector
-        rules.push(...serialize$(value as CSSObject, { precedence, conditions: [key] }, context))
+        rules.push(...serialize$(value as CSSObject, { p: precedence, c: [key] }, context))
       }
     } else if (key == 'label' && value) {
       name = (value as string) + '#' + hash(JSON.stringify([precedence, important, style]))

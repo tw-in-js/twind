@@ -66,7 +66,7 @@ function translate$<Theme extends BaseTheme = BaseTheme>(
 
   if (typeof resolved == 'string') {
     // eslint-disable-next-line @typescript-eslint/no-extra-semi
-    ;({ conditions, precedence } = convert(rule, context, precedence, conditions))
+    ;({ c: conditions, p: precedence } = convert(rule, context, precedence, conditions))
 
     return translate([parse(resolved)], context, precedence, conditions, rule.i, rule.n)
   }

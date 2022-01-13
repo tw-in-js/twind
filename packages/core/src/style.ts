@@ -186,7 +186,12 @@ function createStyle<Variants, BaseVariants>(
     return register(
       (label + (mq && '--' + mq) + '#' + id).replace(/[: ,()[\]]/, ''),
       (rule, context) => {
-        const { name, precedence, conditions, important } = convert(rule, context, layer)
+        const {
+          n: name,
+          p: precedence,
+          c: conditions,
+          i: important,
+        } = convert(rule, context, layer)
 
         return token && translate([parse(token)], context, precedence, conditions, important, name)
       },

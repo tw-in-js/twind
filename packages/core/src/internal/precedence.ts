@@ -233,10 +233,10 @@ export function declarationPropertyPrecedence(property: string): number {
 }
 
 export interface ConvertedRule {
-  name?: string | undefined
-  precedence: number
-  conditions?: string[]
-  important?: boolean | undefined
+  n?: string | undefined
+  p: number
+  c?: string[]
+  i?: boolean | undefined
 }
 
 export function convert<Theme extends BaseTheme = BaseTheme>(
@@ -265,5 +265,5 @@ export function convert<Theme extends BaseTheme = BaseTheme>(
       : pseudoPrecedence(condition)
   }
 
-  return { name, precedence, conditions, important }
+  return { n: name, p: precedence, c: conditions, i: important }
 }
