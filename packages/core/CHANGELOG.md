@@ -1,5 +1,19 @@
 # @twind/core
 
+## 1.0.0-next.9
+
+### Patch Changes
+
+- BREAKING: a twind instance is now callable `tw('...')` instead of `tw.inject('...')` ([#239](https://github.com/tw-in-js/twind/pull/239))
+
+* if `config.tag` is `true` or a custom `tag` function is provided the generated class names are tagged ([#239](https://github.com/tw-in-js/twind/pull/239))
+
+- setup github actions for auto release ([#239](https://github.com/tw-in-js/twind/pull/239))
+
+* align `tw` with `cx` and `apply`; it now accepts any number of arguments ans can be used as tagged template literal ([`37164d82`](https://github.com/tw-in-js/twind/commit/37164d822506a9d201f9d463f5c867368fddc89e))
+
+- golf: short properties in ConvertedRule ([#239](https://github.com/tw-in-js/twind/pull/239))
+
 ## 1.0.0-next.8
 
 ### Patch Changes
