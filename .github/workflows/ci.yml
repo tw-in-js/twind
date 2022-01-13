@@ -48,6 +48,7 @@ jobs:
 
       - name: 💡  Environment Info
         run: |
+          echo cwd: `pwd`;
           echo branch `git branch --show-current`;
           echo node `node --version`;
           echo pnpm `pnpm --version`
@@ -90,6 +91,7 @@ jobs:
 
       - name: 💡  Environment Info
         run: |
+          echo cwd: `pwd`;
           echo branch: `git branch --show-current`;
           echo node: `node --version`;
           echo pnpm: v`pnpm --version`

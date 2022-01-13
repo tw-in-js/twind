@@ -33,6 +33,7 @@ jobs:
 
       - name: 💡  Environment Info
         run: |
+          echo cwd: `pwd`;
           echo branch: `git branch --show-current`;
           echo node: `node --version`;
           echo pnpm: v`pnpm --version`
@@ -42,8 +43,10 @@ jobs:
       # if a .npmrc file is found, the GitHub Action does not recreate the file.
       - name: 📝  Updating .npmrc
         run: |
-          npm config set email release-workflow@twind.dev --global
-          npm config set "//registry.npmjs.org/:_authToken" "${NPM_TOKEN}" --global
+          cat << EOF > "$HOME/.npmrc"
+            email=release-workflow@twind.dev
+            //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          EOF
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
