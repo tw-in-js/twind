@@ -152,7 +152,7 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
         rules.push(...serialize$(value as CSSObject, { p: precedence, c: [key] }, context))
       }
     } else if (key == 'label' && value) {
-      name = (value as string) + '#' + hash(JSON.stringify([precedence, important, style]))
+      name = (value as string) + hash(JSON.stringify([precedence, important, style]))
     } else if (value || value === 0) {
       // property -> hyphenate
       key = key.replace(/[A-Z]/g, '-$&').toLowerCase()

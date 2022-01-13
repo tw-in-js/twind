@@ -20,7 +20,7 @@ export function hash(value: string): string {
     h = Math.imul(h ^ value.charCodeAt(index), 0x5f356495)
   }
 
-  return ((h ^ (h >>> 9)) >>> 0).toString(36)
+  return '#' + ((h ^ (h >>> 9)) >>> 0).toString(36)
 }
 
 export function mql(screen: MaybeArray<ScreenValue>, prefix = '@media '): string {

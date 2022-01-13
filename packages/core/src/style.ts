@@ -183,19 +183,11 @@ function createStyle<Variants, BaseVariants>(
   const selector = (parent || '') + '.' + escape(className)
 
   function define(mq: string, token: string, layer = Layer.variants): string {
-    return register(
-      (label + (mq && '--' + mq) + '#' + id).replace(/[: ,()[\]]/, ''),
-      (rule, context) => {
-        const {
-          n: name,
-          p: precedence,
-          c: conditions,
-          i: important,
-        } = convert(rule, context, layer)
+    return register((label + (mq && '--' + mq) + id).replace(/[: ,()[\]]/, ''), (rule, context) => {
+      const { n: name, p: precedence, c: conditions, i: important } = convert(rule, context, layer)
 
-        return token && translate([parse(token)], context, precedence, conditions, important, name)
-      },
-    )
+      return token && translate([parse(token)], context, precedence, conditions, important, name)
+    })
   }
   return Object.defineProperties(
     (allProps?: StyleProps<Variants & BaseVariants>): string => {

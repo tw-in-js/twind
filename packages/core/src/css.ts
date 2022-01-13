@@ -29,7 +29,7 @@ export function css(
     ? astish(strings)
     : (strings as CSSObject)
 
-  const className = label + '#' + hash(JSON.stringify(ast))
+  const className = label + hash(JSON.stringify(ast))
 
   return register(className, (rule, context) => serialize(ast, rule, context, Layer.css))
 }

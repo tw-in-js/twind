@@ -50,7 +50,11 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
   // to prevent double insertions
   const insertedRules = new Set<string>()
 
-  function insert(rule: TwindRule): void {
+  function insert(rule: TwindRule): string | undefined {
+    if (rule.name) {
+      rule = { ...rule, name: context.tag(rule.name) }
+    }
+
     const css = stringify(rule)
 
     // If not already inserted
@@ -67,6 +71,8 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
       // Update sorted index
       sortedPrecedences.splice(index, 0, rule)
     }
+
+    return rule.name
   }
 
   return {
@@ -107,13 +113,13 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
         const classNames = new Set<string>()
 
         for (const rule of translate(parse(tokens), context)) {
-          insert(rule)
+          const name = insert(rule)
 
           if (rule.className) {
             rule.className.split(' ').forEach((x) => classNames.add(x))
           }
 
-          if (rule.name) classNames.add(rule.name)
+          if (name) classNames.add(name)
         }
 
         // TODO try do keep classNames unmodified or same order
