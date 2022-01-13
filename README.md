@@ -196,6 +196,9 @@ See [twind](./packages/twind/README.md) for a quick intro.
 
 ## TODO
 
+- style: ensure composition works as expected -> need to call parent styles
+- style: pass class and className through
+- style: extract additional props and values from `when` for type inference
 - PrimaryButton~(bg-red-500 text-white ...) -> PrimaryButton#asdadf
 - rename preset-mini to preset-ext
 - @twind/inject — parse HTML string for classNames, replace and inject CSS

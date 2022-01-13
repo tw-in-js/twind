@@ -1,16 +1,14 @@
 import type { Sheet } from './types'
 
-function createStyleElement(parent: Node = document.head): HTMLStyleElement {
-  // Create a new one otherwise
-  const element = parent.appendChild(document.createElement('style'))
+function createStyleElement(parent: Element = document.head): HTMLStyleElement {
+  // Find existing or create a new one
+  const element =
+    (parent.querySelector('#tw') as HTMLStyleElement) || document.createElement('style')
 
-  // TODO mark as twind stylesheet?
-  // element.dataset.twind = ''
+  // mark as twind stylesheet
+  element.id = 'tw'
 
-  // TODO nonce && (element.nonce = nonce)
-
-  // Avoid Edge bug where empty style elements doesn't create sheets
-  element.appendChild(document.createTextNode(''))
+  parent.append(element)
 
   return element
 }
@@ -97,7 +95,10 @@ export function dom(element?: HTMLStyleElement): Sheet<HTMLStyleElement> {
     },
 
     insert(css, index) {
-      this.target.insertBefore(document.createTextNode(css), this.target.childNodes[offset + index])
+      this.target.insertBefore(
+        document.createTextNode(css),
+        this.target.childNodes[offset + index] || null,
+      )
     },
   }
 }

@@ -65,6 +65,7 @@
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "happy-dom": "^2.25.2",
     "husky": "^7.0.4",
     "is-ci": "^3.0.1",
     "lint-staged": "^12.1.7",

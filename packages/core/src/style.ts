@@ -189,10 +189,12 @@ function createStyle<Variants, BaseVariants>(
       return token && translate([parse(token)], context, precedence, conditions, important, name)
     })
   }
+
   return Object.defineProperties(
-    (allProps?: StyleProps<Variants & BaseVariants>): string => {
+    function style(allProps) {
       const props = { ...defaults, ...allProps }
 
+      // TODO need to call parent()
       let classNames = baseClassName
       let token: StyleToken
 
@@ -252,7 +254,7 @@ function createStyle<Variants, BaseVariants>(
       })
 
       return classNames
-    },
+    } as Style<Variants & BaseVariants> & string,
     {
       toString: {
         value: (): string => selector,
@@ -264,5 +266,5 @@ function createStyle<Variants, BaseVariants>(
         value: selector,
       },
     },
-  ) as Style<Variants & BaseVariants> & string
+  )
 }
