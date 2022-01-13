@@ -46,27 +46,27 @@
       "name": "twind (full)",
       "path": "dist/twind.esnext.js",
       "brotli": true,
-      "limit": "15.3kb"
+      "limit": "15.1kb"
     },
     {
       "name": "twind (only setup)",
       "path": "dist/twind.esnext.js",
       "import": "{ setup }",
       "brotli": true,
-      "limit": "14.3kb"
+      "limit": "14.4kb"
     },
     {
       "name": "twind/core (full)",
       "path": "dist/core.esnext.js",
       "brotli": true,
-      "limit": "6kb"
+      "limit": "5.8kb"
     },
     {
       "name": "twind/core (only setup)",
       "path": "dist/core.esnext.js",
       "import": "{ setup }",
       "brotli": true,
-      "limit": "4.2kb"
+      "limit": "4.3kb"
     },
     {
       "name": "twind/mini (full)",
@@ -79,7 +79,7 @@
       "path": "dist/mini.esnext.js",
       "import": "{ setup }",
       "brotli": true,
-      "limit": "5.1kb"
+      "limit": "5.2kb"
     }
   ],
   "// These are ONLY bundled (eg included) in the global builds": "",

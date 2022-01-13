@@ -77,7 +77,7 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
   }
 
   return Object.defineProperties(
-    function tw(tokens) {
+    function tw(strings, ...interpolations) {
       if (!cache.size) {
         asArray(config.preflight).forEach((preflight) => {
           if (typeof preflight == 'function') {
@@ -89,6 +89,8 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
           }
         })
       }
+
+      const tokens = interpolate(strings, interpolations)
 
       let className = cache.get(tokens)
 
@@ -109,8 +111,7 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
         className = [...classNames].join(' ')
 
         // Remember the generated class name
-        cache.set(tokens, className)
-        cache.set(className, className)
+        cache.set(tokens, className).set(className, className)
       }
 
       return className

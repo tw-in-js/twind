@@ -51,6 +51,11 @@ See [twind](./packages/twind/README.md) for a quick intro.
 ## Notable Changes
 
 - [@twind/core](./packages/core) — without any rules to have a clean start
+  - the `twind` factory returns `tw` as known from twind v0.16
+    - additional it can be used to access the theme: `tw.theme(...)`
+    - the target: `tw.target`
+    - allows to reset twind (start clean): `tw.clear()`
+    - allows to remove twind (remove the associated style element): `tw.destroy`
   - `apply` and `css` as known from twind v0.16.
   - new `cx` function to create class names
     - grouped rules are ungrouped
@@ -191,9 +196,10 @@ See [twind](./packages/twind/README.md) for a quick intro.
 
 ## TODO
 
-- support `cx` like invocation of `tw` (tagged template, objects, arrays, falsy value)?
 - PrimaryButton~(bg-red-500 text-white ...) -> PrimaryButton#asdadf
-- preset-ext
+- rename preset-mini to preset-ext
+- @twind/inject — parse HTML string for classNames, replace and inject CSS
+- @twind/completions — provide autocompletion for classNames
 
 - [ ] postcss plugin like tailwindcss for SSR
 
