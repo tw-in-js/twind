@@ -1,5 +1,20 @@
 # twind
 
+## 1.0.0-next.10
+
+### Patch Changes
+
+- BREAKING: a twind instance is now callable `tw('...')` instead of `tw.inject('...')` ([#239](https://github.com/tw-in-js/twind/pull/239))
+
+* setup github actions for auto release ([#239](https://github.com/tw-in-js/twind/pull/239))
+
+* Updated dependencies [[`56b9adef`](https://github.com/tw-in-js/twind/commit/56b9adef3f8779ad649d89fc69db321a9b8ee71e), [`f618afd7`](https://github.com/tw-in-js/twind/commit/f618afd7c82e372dd64da03eda8ee6f86d70d174), [`bec4218d`](https://github.com/tw-in-js/twind/commit/bec4218d9fe6f8c214aea5100379454c6b11583f), [`37164d82`](https://github.com/tw-in-js/twind/commit/37164d822506a9d201f9d463f5c867368fddc89e), [`e284b0f4`](https://github.com/tw-in-js/twind/commit/e284b0f43c97d53a81fee15ac15406c8db0e694e)]:
+  - @twind/core@1.0.0-next.9
+  - @twind/preset-mini@1.0.0-next.9
+  - @twind/preset-tailwind@1.0.0-next.9
+  - @twind/runtime@1.0.0-next.9
+  - @twind/preset-autoprefix@1.0.0-next.9
+
 ## 1.0.0-next.9
 
 ### Patch Changes

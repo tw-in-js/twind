@@ -1,6 +1,6 @@
 {
   "name": "twind",
-  "version": "1.0.0-next.9",
+  "version": "1.0.0-next.10",
   "description": "tailwindcss compat based on twind",
   "publishConfig": {
     "tag": "next",
@@ -91,11 +91,11 @@
     "@twind/preset-tailwind"
   ],
   "dependencies": {
-    "@twind/core": "workspace:1.0.0-next.8",
-    "@twind/preset-autoprefix": "workspace:1.0.0-next.8",
-    "@twind/preset-mini": "workspace:1.0.0-next.8",
-    "@twind/preset-tailwind": "workspace:1.0.0-next.8",
-    "@twind/runtime": "workspace:1.0.0-next.8"
+    "@twind/core": "workspace:1.0.0-next.9",
+    "@twind/preset-autoprefix": "workspace:1.0.0-next.9",
+    "@twind/preset-mini": "workspace:1.0.0-next.9",
+    "@twind/preset-tailwind": "workspace:1.0.0-next.9",
+    "@twind/runtime": "workspace:1.0.0-next.9"
   },
   "peerDependencies": {
     "typescript": "^4.4.0"
