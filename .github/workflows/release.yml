@@ -16,9 +16,6 @@ jobs:
     steps:
       - name: 📥  Checkout
         uses: actions/checkout@v2
-        with:
-          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
-          fetch-depth: 0
 
       - name: 🔧  Setup pnpm
         uses: pnpm/action-setup@v2
