@@ -103,7 +103,7 @@ test('basic style', () => {
   assert.deepEqual(tw.target, [])
 
   // Renders a component with the default variant applied
-  assert.strictEqual(tw.inject(component()), 'button#p8xtwh button--color-orange#p8xtwh')
+  assert.strictEqual(tw(component()), 'button#p8xtwh button--color-orange#p8xtwh')
   assert.deepEqual(tw.target, [
     '.button--color-orange\\#p8xtwh{--tw-bg-opacity:1;background-color:rgba(124,45,18,var(--tw-bg-opacity));--tw-text-opacity:1;color:rgba(255,237,213,var(--tw-text-opacity))}',
     '.button--color-orange\\#p8xtwh:hover{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}',
@@ -111,7 +111,7 @@ test('basic style', () => {
   tw.clear()
 
   assert.strictEqual(
-    tw.inject(component({ color: 'gray', size: 'large', outlined: true })),
+    tw(component({ color: 'gray', size: 'large', outlined: true })),
     'button#p8xtwh button--color-gray#p8xtwh button--size-large#p8xtwh button--color-gray_outlined-true$1#p8xtwh',
   )
   assert.deepEqual(tw.target, [
@@ -124,7 +124,7 @@ test('basic style', () => {
   tw.clear()
 
   assert.strictEqual(
-    tw.inject(component({ color: 'orange', size: 'small', outlined: true })),
+    tw(component({ color: 'orange', size: 'small', outlined: true })),
     'button#p8xtwh button--color-orange#p8xtwh button--size-small#p8xtwh button--color-orange_outlined-true$0#p8xtwh',
   )
   assert.deepEqual(tw.target, [
@@ -137,7 +137,7 @@ test('basic style', () => {
   tw.clear()
 
   assert.strictEqual(
-    tw.inject(component({ color: 'orange', size: 'small', outlined: false })),
+    tw(component({ color: 'orange', size: 'small', outlined: false })),
     'button#p8xtwh button--color-orange#p8xtwh button--size-small#p8xtwh',
   )
   assert.deepEqual(tw.target, [
@@ -148,7 +148,7 @@ test('basic style', () => {
   tw.clear()
 
   assert.strictEqual(
-    tw.inject(component({ color: { _: 'gray', lg: 'orange' } })),
+    tw(component({ color: { _: 'gray', lg: 'orange' } })),
     'button#p8xtwh button--color-@_-gray@lg-orange#p8xtwh',
   )
   assert.deepEqual(tw.target, [
@@ -161,7 +161,7 @@ test('basic style', () => {
 
   // ignore inline responsive breakpoints for now
   assert.strictEqual(
-    tw.inject(component({ color: { _: 'gray', lg: 'orange' }, outlined: true })),
+    tw(component({ color: { _: 'gray', lg: 'orange' }, outlined: true })),
     'button#p8xtwh button--color-@_-gray@lg-orange#p8xtwh',
   )
   assert.deepEqual(tw.target, [
@@ -220,7 +220,7 @@ test('Mixing string, apply, css and object', () => {
   })
 
   assert.strictEqual(
-    tw.inject(button()),
+    tw(button()),
     'style#1uuq3sz style--size-sm#1uuq3sz style--variant-gray#1uuq3sz',
   )
   assert.deepEqual(tw.target, [
@@ -232,7 +232,7 @@ test('Mixing string, apply, css and object', () => {
   tw.clear()
 
   assert.strictEqual(
-    tw.inject(button({ size: 'large', outlined: true })),
+    tw(button({ size: 'large', outlined: true })),
     'style#1uuq3sz style--outlined-true#1uuq3sz style--variant-gray_outlined-true$0#1uuq3sz style--size-large#1uuq3sz style--variant-gray#1uuq3sz',
   )
 
@@ -286,7 +286,7 @@ test('With a Base component', () => {
   })
 
   assert.strictEqual(
-    tw.inject(button()),
+    tw(button()),
     'style#1hvn013 style--variant-gray#1hvn013 style--size-sm#1hvn013',
   )
   assert.deepEqual(tw.target, [
@@ -299,7 +299,7 @@ test('With a Base component', () => {
   tw.clear()
 
   assert.strictEqual(
-    tw.inject(button({ outlined: true })),
+    tw(button({ outlined: true })),
     'style#1hvn013 style--outlined-true#1hvn013 style--variant-gray#1hvn013 style--size-sm#1hvn013 style--variant-gray_outlined-true$0#1hvn013',
   )
 
@@ -315,7 +315,7 @@ test('With a Base component', () => {
   tw.clear()
 
   assert.strictEqual(
-    tw.inject(button({ variant: 'gray', outlined: { sm: true } })),
+    tw(button({ variant: 'gray', outlined: { sm: true } })),
     'style#1hvn013 style--variant-gray#1hvn013 style--size-sm#1hvn013 style--outlined-@sm-true#1hvn013',
   )
 
@@ -349,7 +349,7 @@ test('With a Base component', () => {
   tw.clear()
 
   assert.strictEqual(
-    tw.inject(extendedButton({ rounded: true, size: 'xl' })),
+    tw(extendedButton({ rounded: true, size: 'xl' })),
     'style#1rarrns style#1hvn013 style--rounded-true#1rarrns style--size-xl#1rarrns',
   )
 
@@ -362,7 +362,7 @@ test('With a Base component', () => {
   tw.clear()
 
   assert.strictEqual(
-    tw.inject(extendedButton({ rounded: 'sm' })),
+    tw(extendedButton({ rounded: 'sm' })),
     'style#1rarrns style#1hvn013 style--rounded-sm#1rarrns',
   )
 
@@ -379,7 +379,7 @@ test('is added to component layer', () => {
 
   assert.deepEqual(tw.target, [])
 
-  assert.strictEqual(tw.inject(`p-2 ${component()} top-1`), 'style#9tmjoq p-2 top-1')
+  assert.strictEqual(tw(`p-2 ${component()} top-1`), 'style#9tmjoq p-2 top-1')
   assert.deepEqual(tw.target, [
     '.style\\#9tmjoq{top:1rem}',
     '.p-2{padding:1rem}',

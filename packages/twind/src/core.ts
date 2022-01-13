@@ -13,7 +13,7 @@ import type {
 import { init, autoInit } from '@twind/runtime'
 
 export * from '@twind/core'
-export { tw, theme } from '@twind/runtime'
+export { tw } from '@twind/runtime'
 
 const cancelAutoInit = autoInit(setup)
 

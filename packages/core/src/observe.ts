@@ -31,7 +31,7 @@ export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
     // Not using target.classList.value (not supported in all browsers) or target.class (this is an SVGAnimatedString for svg)
     const tokens = (target as Element).getAttribute?.('class')
 
-    const className = tokens && tw.inject(tokens)
+    const className = tokens && tw(tokens)
 
     if (tokens !== className) {
       // TODO try do keep classNames unmodified or same order

@@ -17,7 +17,7 @@ import autoprefix from '@twind/preset-autoprefix'
 import mini from '@twind/preset-mini'
 
 export * from '@twind/core'
-export { tw, theme } from '@twind/runtime'
+export { tw } from '@twind/runtime'
 
 const cancelAutoInit = autoInit(setup)
 

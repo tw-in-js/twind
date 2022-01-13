@@ -31,11 +31,11 @@ Object.entries(data)
   })
   .forEach(([tokens, classNames, rules]) =>
     test(`${JSON.stringify(tokens)} => ${classNames}`, () => {
-      assert.strictEqual(tw.inject(tokens), classNames)
+      assert.strictEqual(tw(tokens), classNames)
       assert.deepEqual(tw.target, rules)
 
       // Cached access
-      assert.strictEqual(tw.inject(tokens), classNames)
+      assert.strictEqual(tw(tokens), classNames)
       assert.deepEqual(tw.target, rules)
     }),
   )

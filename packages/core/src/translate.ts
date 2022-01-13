@@ -7,9 +7,9 @@ export interface TranslateResult<Target = unknown> {
 
 export function translate<Theme extends BaseTheme = BaseTheme, Target = unknown>(
   tokens: string,
-  twind: Twind<Theme, Target>,
+  tw: Twind<Theme, Target>,
 ): TranslateResult {
-  twind.clear()
+  tw.clear()
 
-  return { className: twind.inject(tokens), css: twind.target }
+  return { className: tw(tokens), css: tw.target }
 }

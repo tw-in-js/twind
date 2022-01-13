@@ -30,7 +30,7 @@ export function autoInit(setup: () => void): () => void {
   }
 }
 
-let active: Twind | undefined
+export let tw: Twind
 
 export function init<Theme extends BaseTheme = BaseTheme, SheetTarget = CSSStyleSheet | string[]>(
   config: TwindConfig<Theme>,
@@ -39,17 +39,7 @@ export function init<Theme extends BaseTheme = BaseTheme, SheetTarget = CSSStyle
     : virtual()) as unknown as Sheet<SheetTarget>,
   target?: HTMLElement,
 ): Twind<Theme, SheetTarget> {
-  active?.destroy()
+  tw?.destroy()
 
-  return (active = observe(twind(config, sheet), target))
-}
-
-export function tw(strings: TemplateStringsArray | Class, ...interpolations: Class[]): string {
-  const tokens = cx(strings, ...interpolations)
-  return active ? active.inject(tokens) : tokens
-}
-
-// TODO theme function
-export function theme() {
-  // return active?.theme(...args)
+  return (tw = observe(twind(config, sheet), target))
 }

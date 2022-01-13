@@ -87,11 +87,12 @@ export interface TwindRule {
 }
 
 export interface Twind<Theme extends BaseTheme = BaseTheme, Target = unknown> {
+  // TODO should this work: (strings: TemplateStringsArray | Class, ...interpolations: Class[]): string
+  (tokens: string): string
+
   readonly target: Target
 
   theme: ThemeFunction<Theme>
-
-  inject(tokens: string): string
 
   /** Clears all CSS rules from the sheet. */
   clear(): void

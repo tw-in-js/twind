@@ -51,7 +51,7 @@ test('create css', () => {
   // It is lazy
   assert.deepEqual(tw.target, [])
 
-  assert.strictEqual(tw.inject(style), 'css#5fqnnd')
+  assert.strictEqual(tw(style), 'css#5fqnnd')
 
   assert.deepEqual(tw.target, [
     '.css\\#5fqnnd{background-color:hotpink}',
@@ -59,7 +59,7 @@ test('create css', () => {
   ])
 
   // it is cached
-  assert.strictEqual(tw.inject(style), 'css#5fqnnd')
+  assert.strictEqual(tw(style), 'css#5fqnnd')
 
   assert.deepEqual(tw.target, [
     '.css\\#5fqnnd{background-color:hotpink}',
@@ -75,7 +75,7 @@ test('can be used with variants', () => {
     },
   })
 
-  assert.strictEqual(tw.inject(`sm:${style} focus:${style}`), 'focus:css#1u5fwom sm:css#1u5fwom')
+  assert.strictEqual(tw(`sm:${style} focus:${style}`), 'focus:css#1u5fwom sm:css#1u5fwom')
 
   assert.deepEqual(tw.target, [
     '.focus\\:css\\#1u5fwom:focus{background-color:hotpink}',
@@ -94,7 +94,7 @@ test('using custom label', () => {
     },
   })
 
-  assert.strictEqual(tw.inject(style), 'link#9hfd9w')
+  assert.strictEqual(tw(style), 'link#9hfd9w')
 
   assert.deepEqual(tw.target, [
     '.link\\#9hfd9w{color:hotpink}',
@@ -136,7 +136,7 @@ test('nesting in template literal', () => {
     }
   `
 
-  assert.strictEqual(tw.inject(style), 'css#sc2il9')
+  assert.strictEqual(tw(style), 'css#sc2il9')
 
   assert.deepEqual(tw.target, [
     '.css\\#sc2il9{padding:2em 1em;background:papayawhip}',
@@ -182,7 +182,7 @@ test('interpolation values', () => {
   `
 
   // No assert because of random
-  const className = tw.inject(style)
+  const className = tw(style)
 
   assert.deepEqual(tw.target, [
     'body{--tw-bg-opacity:1;background-color:rgba(243,244,246,var(--tw-bg-opacity));--tw-text-opacity:1;color:rgba(55,65,81,var(--tw-text-opacity))}',

@@ -16,7 +16,7 @@ afterEach(() => tw.clear())
 test('preflight on first inject', () => {
   assert.deepEqual(tw.target, [])
 
-  assert.strictEqual(tw.inject('underline'), 'underline')
+  assert.strictEqual(tw('underline'), 'underline')
 
   assert.deepEqual(tw.target, [
     '*,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:currentColor}',

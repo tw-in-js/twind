@@ -19,6 +19,7 @@ import { defineConfig } from './define-config'
 import { asArray } from './utils'
 import { serialize } from './internal/serialize'
 import { Layer } from './internal/precedence'
+import { interpolate } from './internal/interpolate'
 
 export function twind<Theme extends BaseTheme = BaseTheme, Target = unknown>(
   config: TwindConfig<Theme>,
@@ -75,26 +76,8 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
     return rule.name
   }
 
-  return {
-    get target() {
-      return sheet.target
-    },
-
-    theme: context.theme,
-
-    clear() {
-      sheet.clear()
-      insertedRules.clear()
-      cache.clear()
-      sortedPrecedences.length = 0
-    },
-
-    destroy() {
-      this.clear()
-      sheet.destroy()
-    },
-
-    inject(tokens) {
+  return Object.defineProperties(
+    function tw(tokens) {
       if (!cache.size) {
         asArray(config.preflight).forEach((preflight) => {
           if (typeof preflight == 'function') {
@@ -131,6 +114,25 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
       }
 
       return className
-    },
-  }
+    } as Twind,
+    Object.getOwnPropertyDescriptors({
+      get target() {
+        return sheet.target
+      },
+
+      theme: context.theme,
+
+      clear() {
+        sheet.clear()
+        insertedRules.clear()
+        cache.clear()
+        sortedPrecedences.length = 0
+      },
+
+      destroy() {
+        this.clear()
+        sheet.destroy()
+      },
+    }),
+  )
 }
