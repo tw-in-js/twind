@@ -1,6 +1,6 @@
 import { assert, test, afterEach } from 'vitest'
 
-import { twind, virtual, fromTheme, apply, css } from '..'
+import { twind, virtual, fromTheme, shortcut, css } from '..'
 
 const tw = twind(
   {
@@ -46,7 +46,7 @@ test('different variant produce different hashes', () => {
 
 test('same style in different layers has different hash', () => {
   assert.strictEqual(
-    tw(`w-0 ${css({ width: '0px' })} ${apply(`w-0`)}`),
+    tw(`w-0 ${css({ width: '0px' })} ${shortcut(`w-0`)}`),
     '#1wdxrmr #xs3c6s #1hg5x5u',
   )
   assert.deepEqual(tw.target, [

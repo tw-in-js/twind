@@ -56,7 +56,7 @@ See [twind](./packages/twind/README.md) for a quick intro.
     - the target sheet: `tw.target`
     - allows to reset twind (start clean): `tw.clear()`
     - allows to remove twind (remove the associated style element): `tw.destroy()`
-  - `apply` and `css` as known from twind v0.16.
+  - `shortcut` (previously known as `apply`) and `css` as known from twind v0.16.
   - new `cx` function to create class names
     - grouped rules are ungrouped
   - `style` — stitches like component definitions

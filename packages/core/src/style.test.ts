@@ -1,6 +1,6 @@
 import { assert, test, afterEach } from 'vitest'
 
-import { twind, virtual, style, colorFromTheme, fromTheme, apply, css } from '.'
+import { twind, virtual, style, colorFromTheme, fromTheme, shortcut, css } from '.'
 
 const tw = twind(
   {
@@ -193,7 +193,7 @@ test('Mixing string, apply, css and object', () => {
     props: {
       size: {
         sm: 'text-sm h-6',
-        base: apply`text-base h-9`,
+        base: shortcut`text-base h-9`,
         large: css`
           font-size: 3rem;
           height: theme('spacing.12');
@@ -227,7 +227,7 @@ test('Mixing string, apply, css and object', () => {
           variant: 'gray',
           outlined: true,
         },
-        apply`border-gray-500`,
+        shortcut`border-gray-500`,
       ],
     ],
   })
@@ -252,7 +252,7 @@ test('Mixing string, apply, css and object', () => {
       `,
       button({ outlined: true }),
       'text-sm',
-      apply('text-6'),
+      shortcut('text-6'),
     ),
     'style#1uuq3sz style--outlined-true#1uuq3sz style--size-sm#1uuq3sz style--variant-gray#1uuq3sz style-0--variant-gray_outlined-true#1uuq3sz ~(text-6) text-sm css#8vi6gz',
   )

@@ -1,10 +1,10 @@
 import { assert, test } from 'vitest'
 
-import { apply } from '.'
+import { shortcut } from '.'
 
 test('comments', () => {
   assert.strictEqual(
-    apply`
+    shortcut`
       underline
       /* multi
         line

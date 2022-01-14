@@ -104,6 +104,10 @@ Everything from [@twind/core](https://www.npmjs.com/package/@twind/core) is avai
 
 Can be called as many times as you want.
 
+### `tw` (from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime))
+
+TDB
+
 ### cx (from [@twind/core](https://www.npmjs.com/package/@twind/core))
 
 ```js
@@ -127,14 +131,10 @@ element.className = cx`
 `
 ```
 
-### `apply` (from [@twind/core](https://www.npmjs.com/package/@twind/core))
+### `shortcut` (from [@twind/core](https://www.npmjs.com/package/@twind/core))
 
 TDB
 
-### `tw` (from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime))
-
-TDB
-
-### `theme` (from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime))
+### `style` (from [@twind/core](https://www.npmjs.com/package/@twind/core))
 
 TDB
