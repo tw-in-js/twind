@@ -124,3 +124,21 @@ test('pseudo element selector', () => {
     },
   ])
 })
+
+test('named shortcuts', () => {
+  assert.deepEqual(parse('PrimaryButton~(bg-red-500 text-white)'), [
+    {
+      n: 'PrimaryButton#140ikvd',
+      v: [],
+      i: false,
+    },
+  ])
+
+  assert.deepEqual(parse('hover:PrimaryButton~(bg-red-500 text-white)'), [
+    {
+      n: 'PrimaryButton#112cs7x',
+      v: [],
+      i: false,
+    },
+  ])
+})

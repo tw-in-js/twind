@@ -40,7 +40,7 @@
     "build": "pnpm prepublishOnly --recursive --if-present",
     "check": "eslint --ext .js,.jsx,.cjs,.mjs,.ts,.tsx --ignore-path .gitignore .",
     "check:fix": "pnpm check -- --fix",
-    "size-limit": "pnpm build && size-limit",
+    "size-limit": "size-limit",
     "format": "prettier --write --ignore-path .gitignore . '!pnpm-lock.yaml'",
     "test": "vitest --reporter dot",
     "test:ui": "pnpm test -- --open",

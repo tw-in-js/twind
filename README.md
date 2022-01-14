@@ -197,8 +197,9 @@ See [twind](./packages/twind/README.md) for a quick intro.
 ## TODO
 
 - style: should it pass `class` and `className` through? alternatives: string concat, `cx`
-- `PrimaryButton~(bg-red-500 text-white ...)` -> `PrimaryButton#asdadf`
 - rename preset-mini to preset-ext
+- @twind/preset-\* from tailwind core
+- @twind/react
 - @twind/inject — parse HTML string for classNames, replace and inject CSS
 - @twind/completions — provide autocompletion for classNames
 - a package to make it easy to create lightweight versions of presets (like https://lodash.com/custom-builds)

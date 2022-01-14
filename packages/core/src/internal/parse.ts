@@ -1,3 +1,7 @@
+import { hash } from '../utils'
+import { define } from './define'
+import { Layer } from './precedence'
+
 export interface SingleParsedRule {
   /**
    * The utility name including `-` if set, but without `!` and variants
@@ -25,14 +29,14 @@ function createRule(active: string[], current: ParsedRule[][]): void {
     let name = ''
 
     for (let value of active) {
-      if (value == '(' || value == '~') continue
+      if (value == '(' || value.endsWith('~')) continue
 
       if (value[0] == '!') {
         value = value.slice(1)
         important = !important
       }
 
-      if (value[value.length - 1] == ':') {
+      if (value.endsWith(':')) {
         variants.push(value.slice(0, -1))
         continue
       }
@@ -42,7 +46,7 @@ function createRule(active: string[], current: ParsedRule[][]): void {
         negated = !negated
       }
 
-      if (value[value.length - 1] == '-') {
+      if (value.endsWith('-')) {
         value = value.slice(0, -1)
       }
 
@@ -90,24 +94,51 @@ export function parse(token: string): ParsedRule[] {
         // whitespace, comma or closing brace
         // create rule
         createRule(active, current)
+
         let lastGroup = active.lastIndexOf('(')
+        let shortcut: string | undefined
+        let rules: ParsedRule[] | undefined
 
         if (match[1] == ')') {
           // Close nested block
-          if (active[lastGroup - 1] == '~') {
-            current.shift()
+          shortcut = active[lastGroup - 1]
+
+          if (shortcut?.endsWith('~')) {
+            rules = current.shift()
           }
+
           lastGroup = active.lastIndexOf('(', lastGroup - 1)
         }
 
         active.length = lastGroup + 1
+
+        if (rules && shortcut != '~') {
+          // Create named shortcut
+
+          // remove existing anonymous shortcut
+          current[0].pop()
+
+          // ... and replace with new named shortcut
+          createRule(
+            [
+              ...active,
+              define(
+                (shortcut as string).slice(0, -1) + hash(JSON.stringify(rules)),
+                Layer.s,
+                rules,
+              ),
+            ],
+            current,
+          )
+        }
       } else {
         // - open brace
         // - new variant: `focus:`, `after::`, `[...]:`
         // - new rule
 
         // Start nested block
-        if (match[0] == '~') {
+        // ~(...) or button~(...)
+        if (match[0].endsWith('~')) {
           rule = []
           current[0].push(rule)
           current.unshift(rule)

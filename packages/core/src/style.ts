@@ -4,12 +4,10 @@
 
 import type { Falsey } from './types'
 import { parse } from './internal/parse'
-import { Layer, convert, moveToLayer } from './internal/precedence'
-import { register } from './internal/registry'
-import { translate } from './internal/translate'
+import { Layer } from './internal/precedence'
 
 import { escape, hash } from './utils'
-import { merge } from './internal/merge'
+import { define } from './internal/define'
 
 export type StrictMorphVariant<T> = T extends number
   ? `${T}` | T
@@ -185,33 +183,17 @@ function createStyle<Variants, BaseVariants>(
   // props: 0b011
   // when: 0b100
 
-  const className = define('', base || '', Layer.c)
+  const className = register('', base || '', Layer.c)
 
-  function define(mq: string, token: string, layer: number): string {
-    return register(
+  function register(mq: string, token: string, layer: number): string {
+    return define(
       // `<name>#<id>` or `<parent>~<name>#<id>`
       ((parent ? parent.className.replace(/#.+$/, '~') : '') + label + mq + id).replace(
         /[: ,()[\]]/,
         '',
       ),
-      (rule, context) => {
-        const {
-          n: name,
-          p: precedence,
-          r: conditions,
-          i: important,
-        } = convert(rule, context, layer)
-
-        return (
-          token &&
-          merge(
-            translate([parse(token)], context, precedence, conditions, important, name).map(
-              (rule) => (rule.n ? { ...rule, p: moveToLayer(rule.p, layer), o: 0 } : rule),
-            ),
-            name as string,
-          )
-        )
-      },
+      layer,
+      token && parse(token),
     )
   }
 
@@ -246,12 +228,12 @@ function createStyle<Variants, BaseVariants>(
 
           if (token) {
             classNames +=
-              ' ' + define('--' + variantKey + '-' + mq, token, 0b011 << 27 /* Shifts.layer */)
+              ' ' + register('--' + variantKey + '-' + mq, token, 0b011 << 27 /* Shifts.layer */)
           }
         } else if ((token = variant[propsValue as string])) {
           classNames +=
             ' ' +
-            define(
+            register(
               '--' + variantKey + '-' + (propsValue as string),
               token,
               0b011 << 27 /* Shifts.layer */,
@@ -278,7 +260,8 @@ function createStyle<Variants, BaseVariants>(
         }
 
         if (mq && (token = match[1])) {
-          classNames += ' ' + define('-' + index + '--' + mq, token, 0b101 << 27 /* Shifts.layer */)
+          classNames +=
+            ' ' + register('-' + index + '--' + mq, token, 0b101 << 27 /* Shifts.layer */)
         }
       })
 

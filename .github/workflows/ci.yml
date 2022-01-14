@@ -57,6 +57,7 @@ jobs:
       - run: pnpm check
       - run: pnpm test:coverage
       - run: pnpm build
+      - run: pnpm size-limit
 
       - name: 📖  Coveralls
         uses: coverallsapp/github-action@master
