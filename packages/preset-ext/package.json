@@ -1,7 +1,7 @@
 {
-  "name": "@twind/preset-mini",
+  "name": "@twind/preset-ext",
   "version": "1.0.0-next.9",
-  "description": "mini preset for twind",
+  "description": "extension preset for twind",
   "publishConfig": {
     "tag": "next",
     "access": "public",
@@ -21,7 +21,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/tw-in-js/twind.git",
-    "directory": "packages/preset-mini"
+    "directory": "packages/preset-ext"
   },
   "license": "MIT",
   "contributors": [
@@ -43,10 +43,10 @@
   "sideEffects": false,
   "size-limit": [
     {
-      "name": "@twind/preset-mini",
-      "path": "dist/preset-mini.esnext.js",
+      "name": "@twind/preset-ext",
+      "path": "dist/preset-ext.esnext.js",
       "brotli": true,
-      "limit": "1kb",
+      "limit": "0.5kb",
       "ignore": [
         "@twind/core"
       ]

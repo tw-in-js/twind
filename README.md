@@ -203,7 +203,6 @@ See [twind](./packages/twind/README.md) for a quick intro.
 ## TODO
 
 - style: should it pass `class` and `className` through? alternatives: string concat, `cx`
-- rename preset-mini to preset-ext
 - @twind/preset-\* from tailwind core
 - @twind/react
 - @twind/inject — parse HTML string for classNames, replace and inject CSS

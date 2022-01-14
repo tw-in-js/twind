@@ -36,7 +36,7 @@
   "exports": {
     ".": "./src/index.ts",
     "./core": "./src/core.ts",
-    "./mini": "./src/mini.ts",
+    "./ext": "./src/ext.ts",
     "./package.json": "./package.json"
   },
   "// These are relative from within the dist/ folder": "",
@@ -69,14 +69,14 @@
       "limit": "4.3kb"
     },
     {
-      "name": "twind/mini (full)",
-      "path": "dist/mini.esnext.js",
+      "name": "twind/ext (full)",
+      "path": "dist/ext.esnext.js",
       "brotli": true,
       "limit": "6.8kb"
     },
     {
-      "name": "twind/mini (only setup)",
-      "path": "dist/mini.esnext.js",
+      "name": "twind/ext (only setup)",
+      "path": "dist/ext.esnext.js",
       "import": "{ setup }",
       "brotli": true,
       "limit": "5.3kb"
@@ -87,13 +87,13 @@
     "@twind/core",
     "@twind/runtime",
     "@twind/preset-autoprefix",
-    "@twind/preset-mini",
+    "@twind/preset-ext",
     "@twind/preset-tailwind"
   ],
   "dependencies": {
     "@twind/core": "workspace:1.0.0-next.9",
     "@twind/preset-autoprefix": "workspace:1.0.0-next.9",
-    "@twind/preset-mini": "workspace:1.0.0-next.9",
+    "@twind/preset-ext": "workspace:1.0.0-next.9",
     "@twind/preset-tailwind": "workspace:1.0.0-next.9",
     "@twind/runtime": "workspace:1.0.0-next.9"
   },

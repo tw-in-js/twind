@@ -14,7 +14,7 @@ import {
 import { init, autoInit } from '@twind/runtime'
 
 import autoprefix from '@twind/preset-autoprefix'
-import mini from '@twind/preset-mini'
+import ext from '@twind/preset-ext'
 
 export * from '@twind/core'
 export { tw } from '@twind/runtime'
@@ -47,7 +47,7 @@ export function setup(
   return init(
     defineConfig({
       ...config,
-      presets: [autoprefix(), ...asArray((config as TwindUserConfig<any>).presets), mini()],
+      presets: [autoprefix(), ...asArray((config as TwindUserConfig<any>).presets), ext()],
     } as TwindUserConfig<any>),
     sheet,
     target,

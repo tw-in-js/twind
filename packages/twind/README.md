@@ -88,12 +88,12 @@ With [@twind/autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix)
 <script src="https://cdn.jsdelivr.net/npm/twind@next"></script>
 ```
 
-#### Mini
+#### Ext
 
-With [@twind/autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix) and [@twind/preset-mini](https://www.npmjs.com/package/@twind/preset-mini):
+With [@twind/autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix) and [@twind/preset-ext](https://www.npmjs.com/package/@twind/preset-ext):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/twind@next/mini.global.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/twind@next/ext.global.js"></script>
 ```
 
 ## API

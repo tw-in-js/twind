@@ -1,4 +1,4 @@
-# @twind/preset-mini
+# @twind/preset-ext
 
 ## 1.0.0-next.9
 

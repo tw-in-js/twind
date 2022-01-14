@@ -1,4 +1,4 @@
-# @twind/preset-mini
+# @twind/preset-ext
 
 ---
 
@@ -14,20 +14,20 @@ Install from npm:
 
 ```sh
 # Using npm
-npm install @twind/preset-mini@next
+npm install @twind/preset-ext@next
 
 # Using Yarn
-yarn add @twind/preset-mini@next
+yarn add @twind/preset-ext@next
 ```
 
 ## Usage
 
 ```js
 import { defineConfig, twind, cssom, observe } from '@twind/core'
-import mini from '@twind/preset-mini'
+import ext from '@twind/preset-ext'
 
 const config = defineConfig({
-  presets: [mini()],
+  presets: [ext()],
 })
 
 const tw = observe(twind(config, cssom()))
