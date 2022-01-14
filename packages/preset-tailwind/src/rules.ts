@@ -26,7 +26,7 @@ export const rules: Rule<TailwindTheme>[] = [
   ],
 
   /* Styling based on parent and peer state */
-  ['((group|peer)((?!-focus)-[^-]+)?)', ({ $_ }, { tag }) => [{ className: tag($_) }]],
+  ['((group|peer)((?!-focus)-[^-]+)?)', ({ $_ }, { tag }) => [{ c: tag($_) }]],
 
   /* LAYOUT */
   ['aspect-', fromTheme('aspectRatio')],

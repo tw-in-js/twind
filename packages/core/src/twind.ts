@@ -52,8 +52,8 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
   const insertedRules = new Set<string>()
 
   function insert(rule: TwindRule): string | undefined {
-    if (rule.name) {
-      rule = { ...rule, name: context.tag(rule.name) }
+    if (rule.n) {
+      rule = { ...rule, n: context.tag(rule.n) }
     }
 
     const css = stringify(rule)
@@ -73,7 +73,7 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
       sortedPrecedences.splice(index, 0, rule)
     }
 
-    return rule.name
+    return rule.n
   }
 
   return Object.defineProperties(
@@ -100,8 +100,8 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
         for (const rule of translate(parse(tokens), context)) {
           const name = insert(rule)
 
-          if (rule.className) {
-            rule.className.split(' ').forEach((x) => classNames.add(x))
+          if (rule.c) {
+            rule.c.split(' ').forEach((x) => classNames.add(x))
           }
 
           if (name) classNames.add(name)

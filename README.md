@@ -196,9 +196,7 @@ See [twind](./packages/twind/README.md) for a quick intro.
 
 ## TODO
 
-- style: pass class and className through
-- style: extract additional props and values from `when` for type inference
-- style: merge all rules into one? maybe as option for `style({ merge: true })`
+- style: should it pass `class` and `className` through? alternatives: string concat, `cx`
 - `PrimaryButton~(bg-red-500 text-white ...)` -> `PrimaryButton#asdadf`
 - rename preset-mini to preset-ext
 - @twind/inject — parse HTML string for classNames, replace and inject CSS

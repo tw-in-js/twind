@@ -13,14 +13,14 @@ export function merge(rules: TwindRule[], name: string): TwindRule[] {
   let current: TwindRule | undefined
 
   for (const rule of rules) {
-    if (current?.precedence == rule.precedence && '' + current.conditions == '' + rule.conditions) {
+    if (current?.p == rule.p && '' + current.r == '' + rule.r) {
       Object.assign(current, {
-        className: [current.className, rule.className].filter(Boolean).join(' '),
-        declarations: [current.declarations, rule.declarations].filter(Boolean).join(';'),
+        c: [current.c, rule.c].filter(Boolean).join(' '),
+        d: [current.d, rule.d].filter(Boolean).join(';'),
       })
     } else {
       // only set name for named rules eg not for global or className propagation rules
-      result.push((current = { ...rule, name: rule.name && name }))
+      result.push((current = { ...rule, n: rule.n && name }))
     }
   }
 

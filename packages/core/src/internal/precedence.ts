@@ -275,9 +275,16 @@ export function declarationPropertyPrecedence(property: string): number {
 }
 
 export interface ConvertedRule {
+  /** The name to use for `&` expansion in selectors. Maybe empty for at-rules like `@import`, `@font-face`, `@media`, ... */
   n?: string | undefined
+
+  /** The calculated precedence taking all variants into account. */
   p: number
-  c?: string[]
+
+  /** The rulesets (selectors and at-rules). expanded variants `@media ...`, `@supports ...`, `&:focus`, `.dark &` */
+  r?: string[]
+
+  /** Is this rule `!important` eg something like `!underline` or `!bg-red-500` or `!red-500` */
   i?: boolean | undefined
 }
 
@@ -307,5 +314,5 @@ export function convert<Theme extends BaseTheme = BaseTheme>(
       : pseudoPrecedence(condition)
   }
 
-  return { n: name, p: precedence, c: conditions, i: important }
+  return { n: name, p: precedence, r: conditions, i: important }
 }

@@ -10,7 +10,7 @@ test('uses DOM nodes', () => {
   // lazy injected
   assert.isNull(document.querySelector('#tw'))
 
-  sheet.insert('*{}', 0, { conditions: ['*'], precedence: 0, priority: 0 })
+  sheet.insert('*{}', 0, { r: ['*'], p: 0, o: 0 })
 
   assert.isDefined(sheet.target)
 

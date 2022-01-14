@@ -9,10 +9,10 @@ export function stringify(rule: TwindRule): string | undefined {
   // vendor prefix to throw out the whole rule
   //  let selectorGroupName = selector.includes(':-') || selector.includes('::-') ? selector : '__DEFAULT__'
 
-  if (rule.declarations) {
+  if (rule.d) {
     const groups: string[] = []
 
-    const selector = rule.conditions.reduceRight((selector, condition) => {
+    const selector = rule.r.reduceRight((selector, condition) => {
       if (condition[0] == '@') {
         groups.unshift(condition)
         return selector
@@ -41,10 +41,10 @@ export function stringify(rule: TwindRule): string | undefined {
           //     )
           //     .join(',')
           condition
-    }, rule.name && '.' + escape(rule.name))
+    }, rule.n && '.' + escape(rule.n))
 
     if (selector) groups.push(selector)
 
-    return groups.reduceRight((body, grouping) => grouping + '{' + body + '}', rule.declarations)
+    return groups.reduceRight((body, grouping) => grouping + '{' + body + '}', rule.d)
   }
 }

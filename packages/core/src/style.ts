@@ -198,7 +198,7 @@ function createStyle<Variants, BaseVariants>(
         const {
           n: name,
           p: precedence,
-          c: conditions,
+          r: conditions,
           i: important,
         } = convert(rule, context, layer)
 
@@ -206,10 +206,7 @@ function createStyle<Variants, BaseVariants>(
           token &&
           merge(
             translate([parse(token)], context, precedence, conditions, important, name).map(
-              (rule) =>
-                rule.name
-                  ? { ...rule, precedence: moveToLayer(rule.precedence, layer), priority: 0 }
-                  : rule,
+              (rule) => (rule.n ? { ...rule, p: moveToLayer(rule.p, layer), o: 0 } : rule),
             ),
             name as string,
           )

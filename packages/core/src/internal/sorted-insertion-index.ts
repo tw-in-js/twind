@@ -28,11 +28,11 @@ export function sortedInsertionIndex(array: readonly TwindRule[], element: Twind
 
 export function compareTwindRules(a: TwindRule, b: TwindRule): number {
   return (
-    a.precedence - b.precedence ||
-    ((a.precedence & Layer.o) == Layer.b
+    a.p - b.p ||
+    ((a.p & Layer.o) == Layer.b
       ? 0
-      : a.priority - b.priority ||
-        collator.compare('' + a.conditions, '' + b.conditions) ||
-        collator.compare(a.name as string, b.name as string))
+      : a.o - b.o ||
+        collator.compare('' + a.r, '' + b.r) ||
+        collator.compare(a.n as string, b.n as string))
   )
 }

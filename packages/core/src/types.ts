@@ -43,23 +43,23 @@ export type CSSObject = CSSProperties & CSSBase
 export type Preflight = CSSBase
 
 export interface TwindRule {
-  /** 'defaults', 'preflight', 'base', 'components', 'shortcuts', 'utilities', 'css', 'overrides' */
-  precedence: number
+  /** The calculated precedence taking all variants into account. */
+  p: number
 
-  /* precedence of declarations */
-  priority: number
+  /* The precedence of the properties within {@link d}. */
+  o: number
 
-  /** additional classNames to propagate, does not include name */
-  className?: string
+  /** Additional classNames to propagate, does not include name */
+  c?: string
 
-  /** expanded variants `@media ...`, `@supports ...`, `&:focus`, `.dark &` */
-  conditions: string[]
+  /** The rulesets (selectors and at-rules). expanded variants `@media ...`, `@supports ...`, `&:focus`, `.dark &` */
+  r: string[]
 
-  /** used for & expansion in selector, maybe empty for at-rules like `@import`, `@font-face`, `@media`, ... */
-  name?: string
+  /** The name to use for `&` expansion in selectors. Maybe empty for at-rules like `@import`, `@font-face`, `@media`, ... */
+  n?: string
 
-  /** stringified declarations */
-  declarations?: string
+  /** The stringified declarations. */
+  d?: string
 }
 
 export interface Twind<Theme extends BaseTheme = BaseTheme, Target = unknown> {

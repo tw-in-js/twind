@@ -60,22 +60,22 @@ function translate$<Theme extends BaseTheme = BaseTheme>(
 
   if (!resolved) {
     // propagate className as is
-    return [{ className: toClassName(rule), precedence: 0, priority: 0, conditions: [] }]
+    return [{ c: toClassName(rule), p: 0, o: 0, r: [] }]
   }
 
   if (typeof resolved == 'string') {
     // eslint-disable-next-line @typescript-eslint/no-extra-semi
-    ;({ c: conditions, p: precedence } = convert(rule, context, precedence, conditions))
+    ;({ r: conditions, p: precedence } = convert(rule, context, precedence, conditions))
 
     return translate([parse(resolved)], context, precedence, conditions, rule.i, rule.n)
   }
 
   if (Array.isArray(resolved)) {
     return resolved.map((rule) => ({
-      priority: 0,
+      o: 0,
       ...rule,
-      conditions: [...asArray(conditions), ...asArray(rule.conditions)],
-      precedence: moveToLayer(precedence, rule.precedence || precedence),
+      r: [...asArray(conditions), ...asArray(rule.r)],
+      p: moveToLayer(precedence, rule.p || precedence),
     }))
   }
 

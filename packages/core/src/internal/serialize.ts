@@ -22,7 +22,7 @@ export function serialize<Theme extends BaseTheme = BaseTheme>(
 
 function serialize$<Theme extends BaseTheme = BaseTheme>(
   style: CSSObject | Falsey,
-  { n: name, p: precedence, c: conditions = [], i: important }: ConvertedRule,
+  { n: name, p: precedence, r: conditions = [], i: important }: ConvertedRule,
   context: Context<Theme>,
 ): TwindRule[] {
   const rules: TwindRule[] = []
@@ -54,7 +54,7 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
               precedence,
               conditions,
               important,
-            ).map((rule) => ({ ...rule, name })),
+            ).map((rule) => ({ ...rule, n: name })),
           )
           continue
         }
@@ -67,7 +67,7 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
               {
                 n: name,
                 p: moveToLayer(precedence, Layer[key[7] as 'b']),
-                c: conditions,
+                r: conditions,
                 i: important,
               },
               context,
@@ -81,10 +81,10 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
         case 'i': {
           rules.push({
             // before all layers
-            precedence: -1,
-            priority: 0,
-            conditions: [],
-            declarations: asArray(value)
+            p: -1,
+            o: 0,
+            r: [],
+            d: asArray(value)
               .filter(Boolean)
               .map((value) => key + ' ' + (value as string))
               .join(';'),
@@ -99,10 +99,10 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
         case 'f': {
           // Use base layer
           rules.push({
-            precedence: Layer.d,
-            priority: 0,
-            conditions: [key],
-            declarations: serialize$(value as CSSObject, { p: Layer.d }, context)
+            p: Layer.d,
+            o: 0,
+            r: [key],
+            d: serialize$(value as CSSObject, { p: Layer.d }, context)
               .map(stringify)
               .join(''),
           })
@@ -141,7 +141,7 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
             {
               n: name,
               p: rulePrecedence,
-              c: [...conditions, key],
+              r: [...conditions, key],
               i: important,
             },
             context,
@@ -149,7 +149,7 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
         )
       } else {
         // global selector
-        rules.push(...serialize$(value as CSSObject, { p: precedence, c: [key] }, context))
+        rules.push(...serialize$(value as CSSObject, { p: precedence, r: [key] }, context))
       }
     } else if (key == 'label' && value) {
       name = (value as string) + hash(JSON.stringify([precedence, important, style]))
@@ -181,12 +181,12 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
     }
 
     rules.push({
-      name,
+      n: name,
 
-      precedence,
+      p: precedence,
 
       // Declarations: 8 bits = 256
-      priority:
+      o:
         // 4: number of declarations (descending)
         (Math.max(0, 15 - numberOfDeclarations) << 4) |
         // 4: greatest precedence of properties
@@ -194,10 +194,10 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
         // these have the highest precedence
         (Math.min(maxPropertyPrecedence || 15), 15),
 
-      conditions,
+      r: conditions,
 
       // stringified declarations
-      declarations,
+      d: declarations,
     })
   }
 
