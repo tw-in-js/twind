@@ -1,54 +1,159 @@
 [
-  { "name": "💩 template incomplete", "color": "#4E342E" },
-  { "name": "💩 template removed", "color": "#4E342E" },
+  {
+    "name": "🐞 Bug",
+    "color": "ee0701",
+    "description": "Bug or Bug fixes",
+    "aliases": ["bug"]
+  },
 
-  { "name": "b¹ 🐞 tailwindcss compatibilty", "color": "#F44336" },
-  { "name": "b² 🐞 runtime", "color": "#F44336" },
-  { "name": "b³ 🐞 extraction", "color": "#F44336" },
+  {
+    "name": "🌬  Tailwind CSS compatibilty",
+    "color": "f44336",
+    "description": "Some feature of Tailwind CSS is missing or not working as expected",
+    "aliases": ["compat"]
+  },
 
-  { "name": "c¹ ⋅ discussion", "color": "#1976D2" },
-  { "name": "c² ⋅ feedback wanted", "color": "#F9A825" },
-  { "name": "c³ ⋅ PR welcome", "color": "#1B5E20" },
-  { "name": "c⁴ ⋅ need more info", "color": "#6A1B9A" },
-  { "name": "c⁵ ⋅ question", "color": "#C2185B" },
-  { "name": "c⁶ ⋅ request for comments", "color": "#BBDEFB" },
+  {
+    "name": "🎭 duplicate",
+    "color": "ededed",
+    "description": "This issue or Pull Request already exists"
+  },
 
-  { "name": "p¹ ⋅ browser", "color": "#B2DFDB" },
-  { "name": "p² ⋅ linux", "color": "#B2DFDB" },
-  { "name": "p³ ⋅ mac", "color": "#B2DFDB" },
-  { "name": "p⁴ ⋅ windows", "color": "#B2DFDB" },
+  {
+    "name": "🙋 help wanted",
+    "color": "e99695",
+    "description": "Extra attention is needed"
+  },
 
-  { "name": "pr¹ 🔧 chore", "color": "#D7CCC8" },
-  { "name": "pr² 🔧 docs", "color": "#D7CCC8" },
-  { "name": "pr³ 🔧 feature", "color": "#D7CCC8" },
-  { "name": "pr⁴ 🔧 fix", "color": "#D7CCC8" },
-  { "name": "pr⁵ 🔧 performance", "color": "#D7CCC8" },
-  { "name": "pr⁶ 🔧 refactor", "color": "#D7CCC8" },
-  { "name": "pr⁷ 🔧 style", "color": "#D7CCC8" },
-  { "name": "pr⁸ 🔧 test", "color": "#D7CCC8" },
+  {
+    "name": "🧚 good first issue",
+    "color": "7057ff",
+    "description": "Good for newcomers",
+    "aliases": [
+      "beginner-friendly",
+      "beginner",
+      "good-starter-issue",
+      "good for beginner",
+      "Good for beginners",
+      "starter-issue",
+      "starter"
+    ]
+  },
 
-  { "name": "s¹ 🔥🔥🔥 critical", "color": "#E53935" },
-  { "name": "s² 🔥🔥 important", "color": "#FB8C00" },
-  { "name": "s³ 🔥 nice to have", "color": "#FDD835" },
-  { "name": "s⁴ 💧 low", "color": "#039BE5" },
-  { "name": "s⁵ 💧💧 inconvenient", "color": "#c0e0f7" },
+  {
+    "name": "❓ Question",
+    "color": "cc317c",
+    "description": "Further information is requested",
+    "aliases": ["question"]
+  },
 
-  { "name": "t¹ 🐞 bug", "color": "#F44336" },
-  { "name": "t² 📚 documentation", "color": "#FDD835" },
-  { "name": "t³ ✨ enhancement", "color": "#03a9f4" },
-  { "name": "t⁴ ⋅ regression", "color": "#0052cc" },
-  { "name": "t⁵ ⋅ todo", "color": "#311B92" },
-  { "name": "t⁶ ⋅ waiting on upstream", "color": "#0D47A1" },
+  {
+    "name": "🧨 Security",
+    "color": "ee0701",
+    "description": "Vulnerability disclosure or Fixing security issue",
+    "aliases": ["security"]
+  },
 
-  { "name": "v¹ ⋅ major", "color": "#CDDC39" },
-  { "name": "v² ⋅ minor", "color": "#FF9800" },
-  { "name": "v³ ⋅ minor", "color": "#FFC107" },
+  {
+    "name": "🙇 In Progress",
+    "description": "Work in Progress",
+    "color": "cccccc",
+    "aliases": ["in progress", "wip", "WIP"]
+  },
+  {
+    "name": "🙅 Hold",
+    "color": "ee0701",
+    "description": "Progress on the issue is stopped",
+    "aliases": ["blocked", "on hold"]
+  },
+  {
+    "name": "💡 Proposal",
+    "color": "d4c5f9",
+    "description": "Request for comments",
+    "aliases": ["idea", "Idea", "proposal", "Proposal", "discussion"]
+  },
 
-  { "name": "x¹ ⋅ abandoned", "color": "#CFD8DC" },
-  { "name": "x² ⋅ could not reproduce", "color": "#CFD8DC" },
-  { "name": "x³ ⋅ duplicate", "color": "#CFD8DC" },
-  { "name": "x⁴ ⋅ hold", "color": "#CFD8DC" },
-  { "name": "x⁵ ⋅ in progress", "color": "#4CAF50" },
-  { "name": "x⁶ ⋅ invalid", "color": "#CFD8DC" },
-  { "name": "x⁷ ⋅ wontfix", "color": "#CFD8DC" }
+  { "name": "s¹ 🔥🔥🔥 critical", "color": "e53935" },
+  { "name": "s² 🔥🔥 important", "color": "fb8c00" },
+  { "name": "s³ 🔥 nice to have", "color": "fdd835" },
+  { "name": "s⁴ 💧 low", "color": "039be5" },
+  { "name": "s⁵ 💧💧 inconvenient", "color": "c0e0f7" },
+
+  {
+    "name": "🙋 PR Welcome",
+    "color": "2e7733",
+    "description": "Welcome to Pull Request",
+    "aliases": ["Patch Welcome", "PR Welcome", "Ready for PR"]
+  },
+
+  {
+    "name": "🙋 Review Needed",
+    "color": "fbca04",
+    "description": "Request for review comments",
+    "aliases": ["review needed", "feedback wanted"]
+  },
+
+  {
+    "name": "🤷 Need More Info",
+    "color": "f9c90a",
+    "description": "Lacks enough info to make progress",
+    "aliases": ["need more info"]
+  },
+
+  {
+    "name": "🛑 Abandoned",
+    "color": "cfd8dc",
+    "description": "The issue or Pull Request will not be worked on",
+    "aliases": ["wontfix", "invalid"]
+  },
+
+  {
+    "name": "pr¹ 🚨 Breaking Change",
+    "color": "b60205",
+    "description": "Includes breaking changes",
+    "aliases": ["breaking", "breaking-change"]
+  },
+  {
+    "name": "pr² 📚 Documentation",
+    "color": "0e8a16",
+    "description": "Documentation only changes",
+    "aliases": ["documents", "document"]
+  },
+  {
+    "name": "pr³ ✨ Feature",
+    "color": "1d76db",
+    "description": "New Feature",
+    "aliases": ["enhancement", "Type: ✨ Feature"]
+  },
+  {
+    "name": "pr⁴ 🔧 Refactoring",
+    "color": "fbca04",
+    "description": "A code change that neither fixes a bug nor adds a feature",
+    "aliases": ["refactor"]
+  },
+  {
+    "name": "pr⁵ 🕵  Testing",
+    "color": "257759",
+    "description": "Adding missing tests or correcting existing tests",
+    "aliases": ["test", "testing"]
+  },
+  {
+    "name": "pr⁶ 💅 Maintenance",
+    "color": "abd406",
+    "description": "Repository Maintenance",
+    "aliases": ["greenkeeper", "maintenance"]
+  },
+  {
+    "name": "pr⁷ 🪄  CI",
+    "color": "ffd412",
+    "description": "Changes to CI configuration files and scripts",
+    "aliases": ["travis", "ci", "circleci"]
+  },
+
+  {
+    "name": "pr⁸ 🧱 Dependencies",
+    "color": "0366d6",
+    "description": "Dependency issues or Changes to dependency files",
+    "aliases": ["dependencies"]
+  }
 ]

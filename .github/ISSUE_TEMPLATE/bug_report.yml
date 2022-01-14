@@ -38,7 +38,7 @@ body:
         - annoyance
         - serious, but I can work around it
         - blocking an upgrade
-        - blocking all usage of SvelteKit
+        - blocking all usage of Twind
     validations:
       required: true
   - type: textarea
