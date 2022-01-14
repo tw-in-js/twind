@@ -1,5 +1,19 @@
 # @twind/core
 
+## 1.0.0-next.10
+
+### Patch Changes
+
+- support inline named shortcuts (`PrimaryButton~(bg-red-500 text-white ...)` -> `PrimaryButton#asdadf`) ([#240](https://github.com/tw-in-js/twind/pull/240))
+
+* BREAKING: renamed `apply` to `shortcut` as it better reflect what it does ([#240](https://github.com/tw-in-js/twind/pull/240))
+
+- simplify creation of named shortcuts: `shortcut.PrimaryButton\`bg-red-500 text-white\``or`shortcut.PrimaryButton('...', [...], {...})` ([#240](https://github.com/tw-in-js/twind/pull/240))
+
+* golf: shave of some bytes by using short property names within `TwindRule` ([#240](https://github.com/tw-in-js/twind/pull/240))
+
+- fix: style inherits styles from parent ([#240](https://github.com/tw-in-js/twind/pull/240))
+
 ## 1.0.0-next.9
 
 ### Patch Changes

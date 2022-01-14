@@ -1,5 +1,12 @@
 # @twind/runtime
 
+## 1.0.0-next.10
+
+### Patch Changes
+
+- Updated dependencies [[`8d846cf2`](https://github.com/tw-in-js/twind/commit/8d846cf2b8c5e4d8042c41ab1079109230c92612), [`b2c7f824`](https://github.com/tw-in-js/twind/commit/b2c7f8249a15acc434601c55b0b0b0af2bc5dfa9), [`3e76ea1b`](https://github.com/tw-in-js/twind/commit/3e76ea1ba46b076920ae4029272d64c3a3b21e6b), [`9ac89873`](https://github.com/tw-in-js/twind/commit/9ac89873517e03960f7af8784efe441172b3cbb1), [`a5f112fa`](https://github.com/tw-in-js/twind/commit/a5f112fa4c3dd2ce63334d5111ba04468750911b)]:
+  - @twind/core@1.0.0-next.10
+
 ## 1.0.0-next.9
 
 ### Patch Changes
