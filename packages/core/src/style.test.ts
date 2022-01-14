@@ -112,27 +112,27 @@ test('basic style', () => {
 
   assert.strictEqual(
     tw(component({ color: 'gray', size: 'large', outlined: true })),
-    'button#p8xtwh button--color-gray#p8xtwh button--size-large#p8xtwh button--color-gray_outlined-true$1#p8xtwh',
+    'button#p8xtwh button--color-gray#p8xtwh button--size-large#p8xtwh button-1--color-gray_outlined-true#p8xtwh',
   )
   assert.deepEqual(tw.target, [
     '.button--color-gray\\#p8xtwh{--tw-bg-opacity:1;background-color:rgba(17,24,39,var(--tw-bg-opacity));--tw-text-opacity:1;color:rgba(243,244,246,var(--tw-text-opacity))}',
     '.button--size-large\\#p8xtwh{height:2rem;padding:2rem;font-size:2rem}',
     '.button--color-gray\\#p8xtwh:hover{--tw-bg-opacity:1;background-color:rgba(107,114,128,var(--tw-bg-opacity))}',
-    '.button--color-gray_outlined-true\\$1\\#p8xtwh{--tw-bg-opacity:1;background-color:rgba(243,244,246,var(--tw-bg-opacity));--tw-border-opacity:1;border-color:rgba(107,114,128,var(--tw-border-opacity));--tw-text-opacity:1;color:rgba(107,114,128,var(--tw-text-opacity))}',
-    '.button--color-gray_outlined-true\\$1\\#p8xtwh:hover{--tw-text-opacity:1;color:rgba(17,24,39,var(--tw-text-opacity))}',
+    '.button-1--color-gray_outlined-true\\#p8xtwh{--tw-bg-opacity:1;background-color:rgba(243,244,246,var(--tw-bg-opacity));--tw-border-opacity:1;border-color:rgba(107,114,128,var(--tw-border-opacity));--tw-text-opacity:1;color:rgba(107,114,128,var(--tw-text-opacity))}',
+    '.button-1--color-gray_outlined-true\\#p8xtwh:hover{--tw-text-opacity:1;color:rgba(17,24,39,var(--tw-text-opacity))}',
   ])
   tw.clear()
 
   assert.strictEqual(
     tw(component({ color: 'orange', size: 'small', outlined: true })),
-    'button#p8xtwh button--color-orange#p8xtwh button--size-small#p8xtwh button--color-orange_outlined-true$0#p8xtwh',
+    'button#p8xtwh button--color-orange#p8xtwh button--size-small#p8xtwh button-0--color-orange_outlined-true#p8xtwh',
   )
   assert.deepEqual(tw.target, [
     '.button--color-orange\\#p8xtwh{--tw-bg-opacity:1;background-color:rgba(124,45,18,var(--tw-bg-opacity));--tw-text-opacity:1;color:rgba(255,237,213,var(--tw-text-opacity))}',
     '.button--size-small\\#p8xtwh{height:1rem;padding:1rem;font-size:1rem}',
     '.button--color-orange\\#p8xtwh:hover{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}',
-    '.button--color-orange_outlined-true\\$0\\#p8xtwh{--tw-bg-opacity:1;background-color:rgba(255,237,213,var(--tw-bg-opacity));--tw-border-opacity:1;border-color:rgba(249,115,22,var(--tw-border-opacity));--tw-text-opacity:1;color:rgba(249,115,22,var(--tw-text-opacity))}',
-    '.button--color-orange_outlined-true\\$0\\#p8xtwh:hover{--tw-text-opacity:1;color:rgba(124,45,18,var(--tw-text-opacity))}',
+    '.button-0--color-orange_outlined-true\\#p8xtwh{--tw-bg-opacity:1;background-color:rgba(255,237,213,var(--tw-bg-opacity));--tw-border-opacity:1;border-color:rgba(249,115,22,var(--tw-border-opacity));--tw-text-opacity:1;color:rgba(249,115,22,var(--tw-text-opacity))}',
+    '.button-0--color-orange_outlined-true\\#p8xtwh:hover{--tw-text-opacity:1;color:rgba(124,45,18,var(--tw-text-opacity))}',
   ])
   tw.clear()
 
@@ -170,6 +170,19 @@ test('basic style', () => {
     '@media (min-width:1024px){.button--color-\\@_-gray\\@lg-orange\\#p8xtwh{--tw-bg-opacity:1;background-color:rgba(124,45,18,var(--tw-bg-opacity));--tw-text-opacity:1;color:rgba(255,237,213,var(--tw-text-opacity))}}',
     '@media (min-width:1024px){.button--color-\\@_-gray\\@lg-orange\\#p8xtwh:hover{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}}',
   ])
+  tw.clear()
+
+  assert.strictEqual(
+    tw(`sm:(${component({ outlined: true })})`),
+    'sm:button#p8xtwh sm:button--color-orange#p8xtwh sm:button-0--color-orange_outlined-true#p8xtwh',
+  )
+  assert.deepEqual(tw.target, [
+    '@media (min-width:640px){.sm\\:button--color-orange\\#p8xtwh{--tw-bg-opacity:1;background-color:rgba(124,45,18,var(--tw-bg-opacity));--tw-text-opacity:1;color:rgba(255,237,213,var(--tw-text-opacity))}}',
+    '@media (min-width:640px){.sm\\:button--color-orange\\#p8xtwh:hover{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}}',
+    '@media (min-width:640px){.sm\\:button-0--color-orange_outlined-true\\#p8xtwh{--tw-bg-opacity:1;background-color:rgba(255,237,213,var(--tw-bg-opacity));--tw-border-opacity:1;border-color:rgba(249,115,22,var(--tw-border-opacity));--tw-text-opacity:1;color:rgba(249,115,22,var(--tw-text-opacity))}}',
+    '@media (min-width:640px){.sm\\:button-0--color-orange_outlined-true\\#p8xtwh:hover{--tw-text-opacity:1;color:rgba(124,45,18,var(--tw-text-opacity))}}',
+  ])
+
   tw.clear()
 })
 
@@ -226,27 +239,40 @@ test('Mixing string, apply, css and object', () => {
   assert.deepEqual(tw.target, [
     '.style\\#1uuq3sz{padding:1rem}',
     '.style--size-sm\\#1uuq3sz{height:1.5rem;font-size:1rem}',
-    '.style--variant-gray\\#1uuq3sz{background-color:#6b7280;background-color:#111827}',
+    '.style--variant-gray\\#1uuq3sz{background-color:#6b7280}',
+    '.style--variant-gray\\#1uuq3sz:hover{background-color:#111827}',
   ])
 
   tw.clear()
 
   assert.strictEqual(
-    tw(button({ size: 'large', outlined: true })),
-    'style#1uuq3sz style--outlined-true#1uuq3sz style--variant-gray_outlined-true$0#1uuq3sz style--size-large#1uuq3sz style--variant-gray#1uuq3sz',
+    tw(
+      css`
+        color: darkgreen;
+      `,
+      button({ outlined: true }),
+      'text-sm',
+      apply('text-6'),
+    ),
+    'style#1uuq3sz style--outlined-true#1uuq3sz style--size-sm#1uuq3sz style--variant-gray#1uuq3sz style-0--variant-gray_outlined-true#1uuq3sz ~(text-6) text-sm css#8vi6gz',
   )
 
   assert.deepEqual(tw.target, [
     '.style\\#1uuq3sz{padding:1rem}',
     '.style--outlined-true\\#1uuq3sz{--tw-border-opacity:1;border-color:rgba(243,244,246,var(--tw-border-opacity))}',
-    '.style--variant-gray_outlined-true\\$0\\#1uuq3sz{--tw-border-opacity:1;border-color:rgba(107,114,128,var(--tw-border-opacity))}',
-    '.style--size-large\\#1uuq3sz{font-size:3rem;height:3rem}',
-    '.style--variant-gray\\#1uuq3sz{background-color:#6b7280;background-color:#111827}',
+    '.style--size-sm\\#1uuq3sz{height:1.5rem;font-size:1rem}',
+    '.style--variant-gray\\#1uuq3sz{background-color:#6b7280}',
+    '.style--variant-gray\\#1uuq3sz:hover{background-color:#111827}',
+    '.style-0--variant-gray_outlined-true\\#1uuq3sz{--tw-border-opacity:1;border-color:rgba(107,114,128,var(--tw-border-opacity))}',
+    '.\\~\\(text-6\\){font-size:1.5rem}',
+    '.text-sm{font-size:1rem}',
+    '.css\\#8vi6gz{color:darkgreen}',
   ])
 })
 
 test('With a Base component', () => {
   const button = style({
+    label: 'button',
     base: `p-2.5`,
 
     defaults: {
@@ -285,53 +311,12 @@ test('With a Base component', () => {
     ],
   })
 
-  assert.strictEqual(
-    tw(button()),
-    'style#1hvn013 style--variant-gray#1hvn013 style--size-sm#1hvn013',
-  )
-  assert.deepEqual(tw.target, [
-    '.style\\#1hvn013{padding:1.125rem}',
-    '.style--variant-gray\\#1hvn013{--tw-bg-opacity:1;background-color:rgba(107,114,128,var(--tw-bg-opacity))}',
-    '.style--size-sm\\#1hvn013{height:1.5rem;font-size:1rem}',
-    '.style--variant-gray\\#1hvn013:hover{--tw-bg-opacity:1;background-color:rgba(17,24,39,var(--tw-bg-opacity))}',
-  ])
-
-  tw.clear()
-
-  assert.strictEqual(
-    tw(button({ outlined: true })),
-    'style#1hvn013 style--outlined-true#1hvn013 style--variant-gray#1hvn013 style--size-sm#1hvn013 style--variant-gray_outlined-true$0#1hvn013',
-  )
-
-  assert.deepEqual(tw.target, [
-    '.style\\#1hvn013{padding:1.125rem}',
-    '.style--outlined-true\\#1hvn013{--tw-border-opacity:1;border-color:rgba(107,114,128,var(--tw-border-opacity));background-color:transparent}',
-    '.style--variant-gray\\#1hvn013{--tw-bg-opacity:1;background-color:rgba(107,114,128,var(--tw-bg-opacity))}',
-    '.style--size-sm\\#1hvn013{height:1.5rem;font-size:1rem}',
-    '.style--variant-gray\\#1hvn013:hover{--tw-bg-opacity:1;background-color:rgba(17,24,39,var(--tw-bg-opacity))}',
-    '.style--variant-gray_outlined-true\\$0\\#1hvn013{--tw-border-opacity:1;border-color:rgba(17,24,39,var(--tw-border-opacity))}',
-  ])
-
-  tw.clear()
-
-  assert.strictEqual(
-    tw(button({ variant: 'gray', outlined: { sm: true } })),
-    'style#1hvn013 style--variant-gray#1hvn013 style--size-sm#1hvn013 style--outlined-@sm-true#1hvn013',
-  )
-
-  assert.deepEqual(tw.target, [
-    '.style\\#1hvn013{padding:1.125rem}',
-    '.style--variant-gray\\#1hvn013{--tw-bg-opacity:1;background-color:rgba(107,114,128,var(--tw-bg-opacity))}',
-    '.style--size-sm\\#1hvn013{height:1.5rem;font-size:1rem}',
-    '.style--variant-gray\\#1hvn013:hover{--tw-bg-opacity:1;background-color:rgba(17,24,39,var(--tw-bg-opacity))}',
-    '@media (min-width:640px){.style--outlined-\\@sm-true\\#1hvn013{--tw-border-opacity:1;border-color:rgba(107,114,128,var(--tw-border-opacity));background-color:transparent}}',
-  ])
-
-  // // 1. bg-gray-400 hover:bg-gray-500
-  // // 2. @screen sm { `bg-transparent ring-1` }
   const extendedButton = style(button, {
+    label: 'extended',
+    base: `p-1`,
     props: {
       size: {
+        base: `text-md`,
         xl: `text-xl h-12`,
       },
       rounded: {
@@ -342,33 +327,70 @@ test('With a Base component', () => {
       },
     },
     defaults: {
+      size: 'base',
       rounded: true,
     },
+    when: [
+      [
+        {
+          variant: 'gray',
+          rounded: true,
+        },
+        `border-gray-500`,
+      ],
+    ],
   })
+
+  assert.strictEqual(
+    tw(extendedButton({ rounded: true, size: 'xl' })),
+    'button#yog38i button~extended#1abui02 button--variant-gray#yog38i button~extended--rounded-true#1abui02 button~extended--size-xl#1abui02 button~extended-0--variant-gray_rounded-true#1abui02',
+  )
+
+  assert.deepEqual(tw.target, [
+    '.button\\#yog38i{padding:1.125rem}',
+    '.button\\~extended\\#1abui02{padding:.25rem}',
+    '.button--variant-gray\\#yog38i{--tw-bg-opacity:1;background-color:rgba(107,114,128,var(--tw-bg-opacity))}',
+    '.button\\~extended--rounded-true\\#1abui02{border-radius:100%}',
+    '.button\\~extended--size-xl\\#1abui02{height:3rem;font-size:3rem}',
+    '.button--variant-gray\\#yog38i:hover{--tw-bg-opacity:1;background-color:rgba(17,24,39,var(--tw-bg-opacity))}',
+    '.button\\~extended-0--variant-gray_rounded-true\\#1abui02{--tw-border-opacity:1;border-color:rgba(107,114,128,var(--tw-border-opacity))}',
+  ])
 
   tw.clear()
 
   assert.strictEqual(
-    tw(extendedButton({ rounded: true, size: 'xl' })),
-    'style#1rarrns style#1hvn013 style--rounded-true#1rarrns style--size-xl#1rarrns',
+    tw(extendedButton({ rounded: true, outlined: true })),
+    'button#yog38i button~extended#1abui02 button--outlined-true#yog38i button--size-base#yog38i button--variant-gray#yog38i button~extended--rounded-true#1abui02 button~extended--size-base#1abui02 button-0--variant-gray_outlined-true#yog38i button~extended-0--variant-gray_rounded-true#1abui02',
   )
 
   assert.deepEqual(tw.target, [
-    '.style\\#1hvn013{padding:1.125rem}',
-    '.style--rounded-true\\#1rarrns{border-radius:100%}',
-    '.style--size-xl\\#1rarrns{height:3rem;font-size:3rem}',
+    '.button\\#yog38i{padding:1.125rem}',
+    '.button\\~extended\\#1abui02{padding:.25rem}',
+    '.button--outlined-true\\#yog38i{--tw-border-opacity:1;border-color:rgba(107,114,128,var(--tw-border-opacity));background-color:transparent}',
+    '.button--size-base\\#yog38i{height:2.5rem;font-size:1.2rem}',
+    '.button--variant-gray\\#yog38i{--tw-bg-opacity:1;background-color:rgba(107,114,128,var(--tw-bg-opacity))}',
+    '.button\\~extended--rounded-true\\#1abui02{border-radius:100%}',
+    '.button\\~extended--size-base\\#1abui02{font-size:1.5rem}',
+    '.button--variant-gray\\#yog38i:hover{--tw-bg-opacity:1;background-color:rgba(17,24,39,var(--tw-bg-opacity))}',
+    '.button-0--variant-gray_outlined-true\\#yog38i{--tw-border-opacity:1;border-color:rgba(17,24,39,var(--tw-border-opacity))}',
+    '.button\\~extended-0--variant-gray_rounded-true\\#1abui02{--tw-border-opacity:1;border-color:rgba(107,114,128,var(--tw-border-opacity))}',
   ])
 
   tw.clear()
 
   assert.strictEqual(
     tw(extendedButton({ rounded: 'sm' })),
-    'style#1rarrns style#1hvn013 style--rounded-sm#1rarrns',
+    'button#yog38i button~extended#1abui02 button--size-base#yog38i button--variant-gray#yog38i button~extended--rounded-sm#1abui02 button~extended--size-base#1abui02',
   )
 
   assert.deepEqual(tw.target, [
-    '.style\\#1hvn013{padding:1.125rem}',
-    '.style--rounded-sm\\#1rarrns{border-radius:1rem}',
+    '.button\\#yog38i{padding:1.125rem}',
+    '.button\\~extended\\#1abui02{padding:.25rem}',
+    '.button--size-base\\#yog38i{height:2.5rem;font-size:1.2rem}',
+    '.button--variant-gray\\#yog38i{--tw-bg-opacity:1;background-color:rgba(107,114,128,var(--tw-bg-opacity))}',
+    '.button\\~extended--rounded-sm\\#1abui02{border-radius:1rem}',
+    '.button\\~extended--size-base\\#1abui02{font-size:1.5rem}',
+    '.button--variant-gray\\#yog38i:hover{--tw-bg-opacity:1;background-color:rgba(17,24,39,var(--tw-bg-opacity))}',
   ])
 })
 
@@ -379,9 +401,9 @@ test('is added to component layer', () => {
 
   assert.deepEqual(tw.target, [])
 
-  assert.strictEqual(tw(`p-2 ${component()} top-1`), 'style#9tmjoq p-2 top-1')
+  assert.strictEqual(tw(`p-2 ${component()} top-1`), 'style#1lg9g8g p-2 top-1')
   assert.deepEqual(tw.target, [
-    '.style\\#9tmjoq{top:1rem}',
+    '.style\\#1lg9g8g{top:1rem}',
     '.p-2{padding:1rem}',
     '.top-1{top:.25rem}',
   ])

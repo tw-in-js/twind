@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 import type { TwindRule } from '../types'
 
 export function merge(rules: TwindRule[], name: string): TwindRule[] {
@@ -12,7 +13,7 @@ export function merge(rules: TwindRule[], name: string): TwindRule[] {
   let current: TwindRule | undefined
 
   for (const rule of rules) {
-    if (current?.precedence == rule.precedence) {
+    if (current?.precedence == rule.precedence && '' + current.conditions == '' + rule.conditions) {
       Object.assign(current, {
         className: [current.className, rule.className].filter(Boolean).join(' '),
         declarations: [current.declarations, rule.declarations].filter(Boolean).join(';'),

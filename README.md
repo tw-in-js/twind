@@ -160,7 +160,7 @@ See [twind](./packages/twind/README.md) for a quick intro.
 - no more `@global` — you must use `&` for nested selectors (this follows the [CSS Nesting Module](https://tabatkins.github.io/specs/css-nesting/))
 - new `@layer` directive following the [Cascade Layers (CSS @layer) spec](https://www.bram.us/2021/09/15/the-future-of-css-cascade-layers-css-at-layer/)
 
-  The following layer exist in the given order: `defaults`, `base`, `components`, `variants`, `compounds`, `shortcuts`, `utilities`, `css`
+  The following layer exist in the given order: `defaults`, `base`, `components`, `shortcuts`, `utilities`, `overrides`
 
   ```js
   import { css } from 'twind'
@@ -196,9 +196,9 @@ See [twind](./packages/twind/README.md) for a quick intro.
 
 ## TODO
 
-- style: ensure composition works as expected -> need to call parent styles
 - style: pass class and className through
 - style: extract additional props and values from `when` for type inference
+- style: merge all rules into one? maybe as option for `style({ merge: true })`
 - `PrimaryButton~(bg-red-500 text-white ...)` -> `PrimaryButton#asdadf`
 - rename preset-mini to preset-ext
 - @twind/inject — parse HTML string for classNames, replace and inject CSS

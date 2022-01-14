@@ -8,34 +8,10 @@ export type MaybeThunk<T, Theme extends BaseTheme = BaseTheme> =
   | T
   | ((context: Context<Theme>) => T)
 
-// export const enum Shifts {
-//   darkMode = 30,
-//   layer = 27,
-//   screens = 26,
-//   responsive = 22,
-//   atRules = 18,
-//   variants = 0,
-// }
-
-export const Layer = {
-  defaults: 0 << 27 /* Shifts.layer */,
-  /** layer is for things like reset rules or default styles applied to plain HTML elements. */
-  base: 1 << 27 /* Shifts.layer */,
-  /** layers is for class-based styles that you want to be able to override with utilities. */
-  components: 2 << 27 /* Shifts.layer */,
-  variants: 3 << 27 /* Shifts.layer */,
-  compounds: 4 << 27 /* Shifts.layer */,
-  /* shortcuts: `~(...)` */
-  shortcuts: 5 << 27 /* Shifts.layer */,
-  /** layer is for small, single-purpose classes */
-  utilities: 6 << 27 /* Shifts.layer */,
-  css: 7 << 27 /* Shifts.layer */,
-} as const
-
 // TODO read possible screen values from theme
 // TODO read possible keyframes values from theme
 type TypedAtRulesKeys =
-  | `@layer ${keyof typeof Layer}`
+  | `@layer ${'defaults' | 'base' | 'components' | 'shortcuts' | 'utilities' | 'overrides'}`
   | `@media screen(${string})`
   | `@media ${string}`
   | `@keyframes ${string}`

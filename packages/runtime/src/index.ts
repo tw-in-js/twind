@@ -1,5 +1,5 @@
-import type { Twind, BaseTheme, TwindConfig, Class, Sheet } from '@twind/core'
-import { twind, cssom, virtual, observe, cx } from '@twind/core'
+import type { Twind, BaseTheme, TwindConfig, Sheet } from '@twind/core'
+import { twind, cssom, virtual, observe } from '@twind/core'
 
 export function autoInit(setup: () => void): () => void {
   // If we run in the browser we call setup at latest when the body is inserted

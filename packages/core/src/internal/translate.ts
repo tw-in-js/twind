@@ -16,7 +16,7 @@ import { asArray } from '../utils'
 export function translate<Theme extends BaseTheme = BaseTheme>(
   rules: readonly ParsedRule[],
   context: Context<Theme>,
-  precedence = Layer.utilities,
+  precedence = Layer.u,
   conditions?: string[],
   important?: boolean,
   name?: string,
@@ -30,9 +30,8 @@ export function translate<Theme extends BaseTheme = BaseTheme>(
           translate(
             rule,
             context,
-            (precedence & Layer.css) == Layer.utilities
-              ? moveToLayer(precedence, Layer.shortcuts)
-              : precedence,
+            // TODO handle shortcuts and `apply()` by moving them into shortcuts layer
+            (precedence & Layer.o) == Layer.u ? moveToLayer(precedence, Layer.s) : precedence,
             conditions,
             important,
           ),

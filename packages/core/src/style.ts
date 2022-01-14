@@ -4,11 +4,12 @@
 
 import type { Falsey } from './types'
 import { parse } from './internal/parse'
-import { Layer, convert } from './internal/precedence'
+import { Layer, convert, moveToLayer } from './internal/precedence'
 import { register } from './internal/registry'
 import { translate } from './internal/translate'
 
 import { escape, hash } from './utils'
+import { merge } from './internal/merge'
 
 export type StrictMorphVariant<T> = T extends number
   ? `${T}` | T
@@ -104,6 +105,8 @@ export interface Style<Variants> {
    */
   (props?: StyleProps<Variants>): string
 
+  readonly defaults: StyleProps<Variants>
+
   /**
    * CSS Selector associated with the current component.
    *
@@ -171,35 +174,58 @@ function createStyle<Variants, BaseVariants>(
   config: StyleConfig<Variants, BaseVariants> = {},
   parent?: Style<BaseVariants>,
 ): Style<Variants & BaseVariants> & string {
-  const { label = 'style', base: baseStyle, props: variants = {}, defaults, when = [] } = config
+  const { label = 'style', base, props: variants = {}, defaults: localDefaults, when = [] } = config
 
-  const id = hash(JSON.stringify([label, parent?.className, baseStyle, variants, defaults, when]))
+  const defaults = { ...parent?.defaults, ...localDefaults }
 
-  const className = define('', baseStyle || '', Layer.components)
+  const id = hash(JSON.stringify([label, parent?.className, base, variants, defaults, when]))
 
-  const baseClassName = (parent ? parent.className + ' ' : '') + className
+  // Layers:
+  // component: 0b010
+  // props: 0b011
+  // when: 0b100
 
-  // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-  const selector = (parent || '') + '.' + escape(className)
+  const className = define('', base || '', Layer.c)
 
-  function define(mq: string, token: string, layer = Layer.variants): string {
-    return register((label + (mq && '--' + mq) + id).replace(/[: ,()[\]]/, ''), (rule, context) => {
-      const { n: name, p: precedence, c: conditions, i: important } = convert(rule, context, layer)
+  function define(mq: string, token: string, layer: number): string {
+    return register(
+      // `<name>#<id>` or `<parent>~<name>#<id>`
+      ((parent ? parent.className.replace(/#.+$/, '~') : '') + label + mq + id).replace(
+        /[: ,()[\]]/,
+        '',
+      ),
+      (rule, context) => {
+        const {
+          n: name,
+          p: precedence,
+          c: conditions,
+          i: important,
+        } = convert(rule, context, layer)
 
-      return token && translate([parse(token)], context, precedence, conditions, important, name)
-    })
+        return (
+          token &&
+          merge(
+            translate([parse(token)], context, precedence, conditions, important, name).map(
+              (rule) =>
+                rule.name
+                  ? { ...rule, precedence: moveToLayer(rule.precedence, layer), priority: 0 }
+                  : rule,
+            ),
+            name as string,
+          )
+        )
+      },
+    )
   }
 
   return Object.defineProperties(
     function style(allProps) {
       const props = { ...defaults, ...allProps }
 
-      // TODO need to call parent()
-      let classNames = baseClassName
+      let classNames = (parent ? parent(props) + ' ' : '') + className
+
       let token: StyleToken
 
-      // <key>-<value>
-      // <key>-<initial>~<breakpoint>-<value>
       for (const variantKey in variants) {
         const variant = (variants as Record<string, Record<string, StyleToken>>)[variantKey]
         const propsValue = (props as Record<string, unknown>)[variantKey]
@@ -222,14 +248,20 @@ function createStyle<Variants, BaseVariants>(
           }
 
           if (token) {
-            classNames += ' ' + define(variantKey + '-' + mq, token)
+            classNames +=
+              ' ' + define('--' + variantKey + '-' + mq, token, 0b011 << 27 /* Shifts.layer */)
           }
         } else if ((token = variant[propsValue as string])) {
-          classNames += ' ' + define(variantKey + '-' + (propsValue as string), token)
+          classNames +=
+            ' ' +
+            define(
+              '--' + variantKey + '-' + (propsValue as string),
+              token,
+              0b011 << 27 /* Shifts.layer */,
+            )
         }
       }
 
-      // <key>-<value>_<key>-<value>$<index>
       when.forEach((match, index) => {
         let mq = ''
 
@@ -239,7 +271,7 @@ function createStyle<Variants, BaseVariants>(
           // TODO we ignore inline responsive breakpoints for now — what be the result??
           if (
             propsValue !== Object(propsValue) &&
-            String(propsValue) == String((match[0] as Record<string, string>)[variantKey])
+            '' + propsValue == '' + (match[0] as Record<string, string>)[variantKey]
           ) {
             mq += (mq && '_') + variantKey + '-' + (propsValue as string)
           } else {
@@ -249,22 +281,19 @@ function createStyle<Variants, BaseVariants>(
         }
 
         if (mq && (token = match[1])) {
-          classNames += ' ' + define(mq + '$' + index, token, Layer.compounds)
+          classNames += ' ' + define('-' + index + '--' + mq, token, 0b101 << 27 /* Shifts.layer */)
         }
       })
 
       return classNames
     } as Style<Variants & BaseVariants> & string,
-    {
-      toString: {
-        value: (): string => selector,
+    Object.getOwnPropertyDescriptors({
+      toString() {
+        return this.selector
       },
-      className: {
-        value: baseClassName,
-      },
-      selector: {
-        value: selector,
-      },
-    },
+      defaults,
+      className,
+      selector: '.' + escape(className),
+    }),
   )
 }

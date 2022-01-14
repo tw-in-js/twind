@@ -59,7 +59,7 @@
       "name": "twind/core (full)",
       "path": "dist/core.esnext.js",
       "brotli": true,
-      "limit": "5.8kb"
+      "limit": "5.9kb"
     },
     {
       "name": "twind/core (only setup)",

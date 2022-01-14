@@ -55,7 +55,7 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm check
-      - run: pnpm test:coverage --reporter dot
+      - run: pnpm test:coverage
       - run: pnpm build
 
       - name: 📖  Coveralls

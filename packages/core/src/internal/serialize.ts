@@ -66,7 +66,7 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
               value as CSSObject,
               {
                 n: name,
-                p: moveToLayer(precedence, Layer[key.slice(7) as 'base']),
+                p: moveToLayer(precedence, Layer[key[7] as 'b']),
                 c: conditions,
                 i: important,
               },
@@ -99,10 +99,10 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
         case 'f': {
           // Use base layer
           rules.push({
-            precedence: Layer.defaults,
+            precedence: Layer.d,
             priority: 0,
             conditions: [key],
-            declarations: serialize$(value as CSSObject, { p: Layer.defaults }, context)
+            declarations: serialize$(value as CSSObject, { p: Layer.d }, context)
               .map(stringify)
               .join(''),
           })

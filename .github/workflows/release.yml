@@ -36,6 +36,8 @@ jobs:
           echo pnpm: v`pnpm --version`
 
       - run: pnpm install --frozen-lockfile
+      - run: pnpm check
+      - run: pnpm test
 
       # if a .npmrc file is found, the GitHub Action does not recreate the file.
       - name: 📝  Updating .npmrc

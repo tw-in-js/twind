@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 import type { TwindRule } from '../types'
 import { Layer } from './precedence'
 
@@ -28,10 +29,10 @@ export function sortedInsertionIndex(array: readonly TwindRule[], element: Twind
 export function compareTwindRules(a: TwindRule, b: TwindRule): number {
   return (
     a.precedence - b.precedence ||
-    (a.precedence == Layer.base
+    ((a.precedence & Layer.o) == Layer.b
       ? 0
       : a.priority - b.priority ||
-        collator.compare(String(a.conditions), String(b.conditions)) ||
-        collator.compare(String(a.name), String(b.name)))
+        collator.compare('' + a.conditions, '' + b.conditions) ||
+        collator.compare(a.name as string, b.name as string))
   )
 }

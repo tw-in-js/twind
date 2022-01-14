@@ -31,7 +31,7 @@ export function css(
 
   const className = label + hash(JSON.stringify(ast))
 
-  return register(className, (rule, context) => serialize(ast, rule, context, Layer.css))
+  return register(className, (rule, context) => serialize(ast, rule, context, Layer.o))
 }
 
 // Based on https://github.com/cristianbote/goober/blob/master/src/core/astish.js

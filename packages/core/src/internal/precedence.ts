@@ -1,4 +1,4 @@
-import { BaseTheme, Context, Layer } from '../types'
+import type { BaseTheme, Context } from '../types'
 import type { SingleParsedRule } from './parse'
 import { mql } from '../utils'
 import { toClassName } from './to-class-name'
@@ -6,7 +6,49 @@ import { toClassName } from './to-class-name'
 // Based on https://github.com/kripod/otion
 // License MIT
 
-export { Layer }
+// export const enum Shifts {
+//   darkMode = 30,
+//   layer = 27,
+//   screens = 26,
+//   responsive = 22,
+//   atRules = 18,
+//   variants = 0,
+// }
+
+export const Layer = {
+  /**
+   * 1. `default` (public)
+   */
+  d /* efaults */: 0b000 << 27 /* Shifts.layer */,
+
+  /**
+   * 2. `base` (public) —for things like reset rules or default styles applied to plain HTML elements.
+   */
+  b /* ase */: 0b001 << 27 /* Shifts.layer */,
+
+  /**
+   * 3. `components` (public, used by `style()`) — is for class-based styles that you want to be able to override with utilities.
+   */
+  c /* omponents */: 0b010 << 27 /* Shifts.layer */,
+  // reserved for style():
+  // - props: 0b011
+  // - when: 0b100
+
+  /**
+   * 6. `shortcuts` (public, used by `apply()`) — `~(...)`
+   */
+  s /* hortcuts */: 0b101 << 27 /* Shifts.layer */,
+
+  /**
+   * 6. `utilities` (public) — for small, single-purpose classes
+   */
+  u /* tilities */: 0b110 << 27 /* Shifts.layer */,
+
+  /**
+   * 7. `overrides` (public, used by `css()`)
+   */
+  o /* verrides */: 0b111 << 27 /* Shifts.layer */,
+} as const
 
 /*
 To have a predictable styling the styles must be ordered.
@@ -80,7 +122,7 @@ Ensure shorthand properties are inserted before longhand properties; eg longhand
 
 export function moveToLayer(precedence: number, layer: number): number {
   // Set layer (first reset, than set)
-  return (precedence & ~Layer.css) | layer
+  return (precedence & ~Layer.o) | layer
 }
 
 /*
@@ -100,14 +142,14 @@ Bit shifts for the primary bits:
 | 18   | pseudo and group variants                               | 0     |
 
 Layer: 0 - 7: 3 bits
-  - defaults = 0
-  - preflight = 1
-  - components = 2
-  - matches = 3
-  - shortcuts = 4
-  - utilities = 5
-  - css = 6
-  - overrides = 7
+  - defaults: 0 << 27
+  - base: 1 << 27
+  - components: 2 << 27
+  - variants: 3 << 27
+  - joints: 4 << 27
+  - shortcuts: 5 << 27
+  - utilities: 6 << 27
+  - overrides: 7 << 27
 
 These are calculated by serialize and added afterwards:
 
