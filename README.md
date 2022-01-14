@@ -27,16 +27,40 @@ Twind v1 is a complete rewrite aiming to be compatible with Tailwind v3 classes.
 
 ---
 
+Twind is a small compiler that converts Tailwind classes into actual CSS rules at runtime. If you have used Tailwind or other CSS-in-JS solutions, then most of the API should feel very familiar.
+
 ## 🚀 Features
 
-- 🎪 Interactive docs & demos
-- 🕶 Seamless migration: Works for both Vue 3 and 2
+**⚡️ No build step**
+
+Get all the benefits of Tailwind without the need for Tailwind, PostCSS, configuration, purging, or autoprefixing.
+
+**🚀 Framework agnostic**
+
+If your app uses HTML and JavaScript, it should work with Twind. This goes for server-rendered apps too.
+
+**😎 One low fixed cost**
+
+Twind ships the compiler, not the CSS. This means unlimited styles and variants for one low fixed cost.
+
+Other features include:
+
+- 🌎 No bundler required: Usable via CDN
+- 🎨 Seamless integration with Tailwind
+- 🤝 Feature parity with Tailwind v3
+- ✈️ Tailwind preflight by default
+- 🎯 Extended variants, rules, and syntax
+- 🚓 Escape hatch for arbitrary CSS
+- 🤖 Built in support for conditional rule combining
+- 🧐 Improved readability with multiline styles and comments
+- ❄️ Optional hashing of class names ensuring no conflicts
+- 🔩 Flexible: configurable theme, rules and variants
+- 🔌 Language extension via presets
+- 🎩 No runtime overhead with static extraction
+- 🚅 Faster than most CSS-in-JS libraries
 - ⚡ Fully tree shakeable: Only take what you want
 - 🦾 Type Strong: Written in Typescript
-- 🔋 SSR Friendly
-- 🌎 No bundler required: Usable via CDN
-- 🔩 Flexible: Configurable theme, rules and varaints
-- 🔌 Optional presets: Router, Firebase, RxJS, etc.
+- and more!
 
 ## 🦄 Quickstart
 
@@ -218,21 +242,29 @@ See [twind](./packages/twind/README.md) for a quick intro.
 
 See the [Contributing Guide](./CONTRIBUTING.md)
 
+## 💡 Inspiration
+
+It would be untrue to suggest that the design here is totally original. Other than the founders' initial attempts at implementing such a module ([oceanwind](https://github.com/lukejacksonn/oceanwind) and [beamwind](https://github.com/kenoxa/beamwind)) we are truly standing on the shoulders of giants.
+
+- [Tailwind](https://tailwindcss.com/): created a wonderfully thought out API on which the compiler's grammar was defined.
+- [styled-components](https://styled-components.com/): implemented and popularized the advantages of doing CSS-in-JS.
+- [htm](https://github.com/developit/htm): a JSX compiler that proved there is merit in doing runtime compilation of DSLs like JSX.
+- [goober](https://github.com/cristianbote/goober): an impossibly small yet efficient CSS-in-JS implementation that defines critical module features.
+- [otion](https://github.com/kripod/otion): the first CSS-in-JS solution specifically oriented around handling CSS in an atomic fashion.
+- [clsx](https://github.com/lukeed/clsx): a tiny utility for constructing class name strings conditionally.
+- [style-vendorizer](https://github.com/kripod/style-vendorizer): essential CSS prefixing helpers in less than 1KB of JavaScript.
+- [UnoCSS](https://github.com/antfu/unocss): for the configuration syntax.
+- [CSSType](https://github.com/frenic/csstype): providing autocompletion and type checking for CSS properties and values.
+
 ## 🌸 Credits
 
-### Contributors
+### 🤝 Contributors
 
 Thank you to all the people who have already contributed to twind!
 
 <a href="https://github.com/tw-in-js/twind/graphs/contributors"><img src="https://opencollective.com/twind/contributors.svg?width=890" /></a>
 
-### Backers
-
-Thank you to all our backers! [[Become a backer](https://opencollective.com/twind#backer)]
-
-<a href="https://opencollective.com/twind#backers" target="_blank"><img src="https://opencollective.com/twind/backers.svg?width=890"></a>
-
-### Sponsors
+### 🙏🏾 Sponsors
 
 Thank you to all our sponsors! (please ask your company to also support this open source project by [becoming a sponsor](https://opencollective.com/twind#sponsor))
 
@@ -247,7 +279,12 @@ Thank you to all our sponsors! (please ask your company to also support this ope
 <a href="https://opencollective.com/twind/sponsor/8/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/8/avatar.svg"></a>
 <a href="https://opencollective.com/twind/sponsor/9/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/9/avatar.svg"></a>
 
-<!-- This `CONTRIBUTING.md` is based on @nayafia's template https://github.com/nayafia/contributing-template -->
+<a href="https://opencollective.com/twind#backers" target="_blank"><img src="https://opencollective.com/twind/backers.svg?width=890"></a>
+
+<a href="https://github.com/OnurGvnc" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/1294640?v=4" width="64" height="64" alt="@OnurGvnc"></a>
+<a href="https://github.com/tylerforesthauser" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/1226786?v=4" width="64" height="64" alt="@tylerforesthauser"></a>
+<a href="https://github.com/mtsknn" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/2226144?v=4" width="64" height="64" alt="@mtsknn"></a>
+[[Become a GitHub Sponsor](https://github.com/sponsors/tw-in-js)]
 
 ## ⚖️ License
 
