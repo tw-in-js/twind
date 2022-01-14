@@ -57,6 +57,7 @@ See [twind](./packages/twind/README.md) for a quick intro.
     - allows to reset twind (start clean): `tw.clear()`
     - allows to remove twind (remove the associated style element): `tw.destroy()`
   - `shortcut` (previously known as `apply`) and `css` as known from twind v0.16.
+    - with support for creating named shortcuts: `shortcut.PrimaryButton\`bg-red-500 text-white\``->`PrimaryButton#<hash>`
   - new `cx` function to create class names
     - grouped rules are ungrouped
   - `style` — stitches like component definitions
@@ -70,8 +71,13 @@ See [twind](./packages/twind/README.md) for a quick intro.
   - `tw`, `apply` and `theme` as known from twind v0.16.
 - grouping syntax:
   - allow trailing dash before parentheses for utilities -> `border-(md:{2 black opacity-50 hover:dashed}}`
-  - support comma-separated group values — this would prevent different classNames errors during hydration:
-    - `hover:~(!text-(3xl,center),!underline,italic,focus:not-italic)`
+  - shortcuts:
+    - anonymous shortcuts: `~(!text-(3xl center) !underline italic focus:not-italic)`
+      - support comma-separated shortcuts — this would prevent different classNames errors during hydration:
+        - `hover:~(!text-(3xl,center),!underline,italic,focus:not-italic)`
+        - `cx()` converts these to comma-separated group
+    - named shortcuts: `PrimaryButton~(bg-red-500 text-white)` -> `PrimaryButton#<hash>`
+      - `shortcut()` is an helper to simplify creation of shortcuts (works like `apply()` in twind v0.16); it supports creating named shortcuts: `shortcut.PrimaryButton\`bg-red-500 text-white\``->`PrimaryButton#<hash>`
 - rules and shortcuts based on ideas from [UnoCSS](https://github.com/antfu/unocss)
 
   ```js
