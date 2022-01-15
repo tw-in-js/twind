@@ -28,7 +28,7 @@ afterEach(() => tw.clear())
 
 test('class names are hashed', () => {
   assert.strictEqual(tw('flex text-center'), '#e9txhd #1vaw68m')
-  assert.deepEqual(tw.target, ['.\\#1vaw68m{text-align:center}', '.\\#e9txhd{display:flex}'])
+  assert.deepEqual(tw.target, ['.\\#e9txhd{display:flex}', '.\\#1vaw68m{text-align:center}'])
 })
 
 test('accept already hashed rules', () => {

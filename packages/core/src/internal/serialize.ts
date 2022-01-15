@@ -185,14 +185,13 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
 
       p: precedence,
 
-      // Declarations: 8 bits = 256
       o:
-        // 4: number of declarations (descending)
-        (Math.max(0, 15 - numberOfDeclarations) << 4) |
-        // 4: greatest precedence of properties
+        // number of declarations (descending)
+        Math.max(0, 15 - numberOfDeclarations) +
+        // greatest precedence of properties
         // if there is no property precedence this is most likely a custom property only declaration
         // these have the highest precedence
-        (Math.min(maxPropertyPrecedence || 15), 15),
+        Math.min(maxPropertyPrecedence || 15, 15) * 1.5,
 
       r: conditions,
 

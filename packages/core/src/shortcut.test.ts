@@ -93,7 +93,7 @@ test('named shortcuts', () => {
   )
 
   assert.deepEqual(tw.target, [
-    '.PrimaryButton\\#1nckg2k{--tw-bg-opacity:1;background-color:rgba(249,115,22,var(--tw-bg-opacity));--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}',
+    '.PrimaryButton\\#1nckg2k{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:rgba(249,115,22,var(--tw-bg-opacity))}',
     '.text-sm{font-size:1rem}',
   ])
 
@@ -105,7 +105,7 @@ test('named shortcuts', () => {
   )
 
   assert.deepEqual(tw.target, [
-    '.hover\\:PrimaryButton\\#1nckg2k:hover{--tw-bg-opacity:1;background-color:rgba(249,115,22,var(--tw-bg-opacity));--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}',
+    '.hover\\:PrimaryButton\\#1nckg2k:hover{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:rgba(249,115,22,var(--tw-bg-opacity))}',
     '.text-sm{font-size:1rem}',
   ])
 
@@ -117,7 +117,7 @@ test('named shortcuts', () => {
   )
 
   assert.deepEqual(tw.target, [
-    '.PrimaryButton\\#hlo461:hover{--tw-bg-opacity:1;background-color:rgba(249,115,22,var(--tw-bg-opacity));--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}',
+    '.PrimaryButton\\#hlo461:hover{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:rgba(249,115,22,var(--tw-bg-opacity))}',
     '.text-sm{font-size:1rem}',
   ])
 })

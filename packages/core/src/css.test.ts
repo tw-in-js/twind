@@ -54,16 +54,16 @@ test('create css', () => {
   assert.strictEqual(tw(style), 'css#5fqnnd')
 
   assert.deepEqual(tw.target, [
-    '.css\\#5fqnnd{background-color:hotpink}',
     '.css\\#5fqnnd:hover{color:darkgreen}',
+    '.css\\#5fqnnd{background-color:hotpink}',
   ])
 
   // it is cached
   assert.strictEqual(tw(style), 'css#5fqnnd')
 
   assert.deepEqual(tw.target, [
-    '.css\\#5fqnnd{background-color:hotpink}',
     '.css\\#5fqnnd:hover{color:darkgreen}',
+    '.css\\#5fqnnd{background-color:hotpink}',
   ])
 })
 
@@ -140,9 +140,9 @@ test('nesting in template literal', () => {
 
   assert.deepEqual(tw.target, [
     '.css\\#sc2il9{padding:2em 1em;background:papayawhip}',
-    '.css\\#sc2il9 > p{text-decoration:underline}',
     '.css\\#sc2il9:hover{background:palevioletred}',
     'html.test .css\\#sc2il9{display:none}',
+    '.css\\#sc2il9 > p{text-decoration:underline}',
     '@media (max-width: 600px){.css\\#sc2il9{background:tomato}}',
     '@media (min-width:640px){.css\\#sc2il9:hover{background:yellow}}',
   ])
