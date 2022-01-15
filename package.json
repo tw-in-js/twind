@@ -26,14 +26,14 @@
       "name": "@twind/core (full)",
       "path": "packages/core/dist/core.esnext.js",
       "brotli": true,
-      "limit": "5.7kb"
+      "limit": "5.8kb"
     },
     {
       "name": "twind (tailwindcss)",
       "path": "packages/twind/dist/twind.esnext.js",
       "import": "{ setup }",
       "brotli": true,
-      "limit": "14.4kb"
+      "limit": "14.6kb"
     }
   ],
   "scripts": {
