@@ -34,12 +34,12 @@ const variants: Variant<TailwindTheme>[] = [
   // => '.group:focus .group-focus:selector'
   [
     '((group|peer)((?!-focus)-[^-]+)?)-([a-z-]+|\\[.+])',
-    ({ $1, $2, $4 }, { e, h }) =>
+    ({ 1: $1, 2: $2, 4: $4 }, { e, h }) =>
       `.${e(h($1))}${($4[0] == '[' ? '' : ':') + $4}${$2[0] == 'p' ? '~' : ' '}&`,
   ],
 
   // direction variants
-  ['(ltr|rtl)', ({ $1 }) => `[dir="${$1}"] &`],
+  ['(ltr|rtl)', ({ 1: $1 }) => `[dir="${$1}"] &`],
 ]
 
 export default variants

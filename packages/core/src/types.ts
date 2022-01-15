@@ -149,8 +149,8 @@ export interface ThemeFunction<Theme extends BaseTheme = BaseTheme> {
 
 export type RuleResult = string | CSSObject | Falsey | Partial<TwindRule>[]
 
-export type RuleResolver<Theme extends BaseTheme = BaseTheme, Value = never> = (
-  match: MatchResult<Value>,
+export type RuleResolver<Theme extends BaseTheme = BaseTheme> = (
+  match: MatchResult,
   context: Context<Theme>,
 ) => RuleResult
 
@@ -180,8 +180,8 @@ export type Rule<Theme extends BaseTheme = BaseTheme> =
 
 export type VariantResult = string | Falsey
 
-export type VariantResolver<Theme extends BaseTheme = BaseTheme, Value = never> = (
-  match: MatchResult<Value>,
+export type VariantResolver<Theme extends BaseTheme = BaseTheme> = (
+  match: MatchResult,
   context: Context<Theme>,
 ) => VariantResult
 
@@ -192,45 +192,45 @@ export type Variant<Theme extends BaseTheme = BaseTheme> = [
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/n
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export interface MatchResult<Value = never> {
-  /** The input string */
-  $_: string
+export type MatchResult = RegExpExecArray & {
+  // /** The input string */
+  // $_: string
 
-  /** The matched string */
-  $0: string
+  // /** The matched string */
+  // $0: string
 
-  /** The first matched group */
-  $1: string
+  // /** The first matched group */
+  // $1: string
 
-  /** The second matched group */
-  $2: string
+  // /** The second matched group */
+  // $2: string
 
-  /** The third matched group */
-  $3: string
+  // /** The third matched group */
+  // $3: string
 
-  /** The fourth matched group */
-  $4: string
+  // /** The fourth matched group */
+  // $4: string
 
-  /** The fifth matched group */
-  $5: string
+  // /** The fifth matched group */
+  // $5: string
 
-  /** The sixth matched group */
-  $6: string
+  // /** The sixth matched group */
+  // $6: string
 
-  /** The seventh matched group */
-  $7: string
+  // /** The seventh matched group */
+  // $7: string
 
-  /** The eigth matched group */
-  $8: string
+  // /** The eigth matched group */
+  // $8: string
 
-  /** The nineth matched group */
-  $9: string
+  // /** The nineth matched group */
+  // $9: string
 
   /** The substring following the most recent match */
   $$: string
 
   /** Can be used to propagate a value like a theme value */
-  _: Value
+  // _: Value
 }
 
 export interface Sheet<Target = unknown> {
@@ -354,8 +354,8 @@ export type ThemeConfig<Theme extends BaseTheme = BaseTheme> = PartialTheme<Them
   extend?: PartialTheme<Theme>
 }
 
-export type MatchConverter<Theme extends BaseTheme = BaseTheme, Value = never> = (
-  match: MatchResult<Value>,
+export type MatchConverter<Theme extends BaseTheme = BaseTheme> = (
+  match: MatchResult,
   context: Context<Theme>,
 ) => string
 

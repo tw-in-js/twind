@@ -109,8 +109,6 @@ function find<Value, Config, Result, Theme extends BaseTheme = BaseTheme>(
   }
 }
 
-const MATCH = {} as MatchResult
-
 function getVariantResolver<Theme extends BaseTheme = BaseTheme>(
   variant: Variant<Theme>,
 ): VariantFunction<Theme> {
@@ -160,14 +158,17 @@ function createResolveFunction<Theme extends BaseTheme = BaseTheme>(
     !resolve
       ? (match) =>
           ({
-            [match.$1]: maybeNegate(match.$_, match.$2 || match.$3 || match.$$ || match.$_),
+            [match[1]]: maybeNegate(
+              match.input,
+              match.slice(2).find(Boolean) || match.$$ || match.input,
+            ),
           } as CSSObject)
       : typeof resolve == 'string'
       ? (match, context) =>
           ({
             [resolve]: convert
               ? convert(match, context)
-              : maybeNegate(match.$_, match.$1 || match.$2 || match.$3 || match.$$ || match.$_),
+              : maybeNegate(match.input, match.slice(1).find(Boolean) || match.$$ || match.input),
           } as CSSObject)
       : typeof resolve == 'function'
       ? resolve
@@ -194,24 +195,13 @@ function exec<Result, Theme extends BaseTheme = BaseTheme>(
   resolve: (match: MatchResult, context: Context<Theme>) => Result,
   context: Context<Theme>,
 ): Result | undefined {
-  const match = condition.exec(value)
+  const match = condition.exec(value) as MatchResult | null
 
   if (match) {
-    MATCH.$_ = value
-    MATCH.$$ = value.slice(match[0].length)
-    MATCH._ = undefined as never
+    // MATCH.$_ = value
+    match.$$ = value.slice(match[0].length)
 
-    // break early for conditions that require a substring after the match
-    // like `auto-rows-` and did not have a substring
-    if (!MATCH.$$ && condition.source.slice(-1) == '-') return
-
-    // Copy matched groups
-    for (let index = 10; index--; ) {
-      // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-      MATCH[('$' + index) as '$1'] = match[index] || ''
-    }
-
-    return resolve(MATCH, context)
+    return resolve(match, context)
   }
 }
 

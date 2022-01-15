@@ -1,11 +1,13 @@
+/* eslint-disable @typescript-eslint/restrict-plus-operands */
 import type {
   MatchResult,
   Rule,
-  RuleResolver,
   MaybeArray,
   CSSProperties,
   CSSObject,
   CSSBase,
+  ThemeMatchResult,
+  ThemeRuleResolver,
 } from '@twind/core'
 
 import { mql, fromTheme, colorFromTheme, toColorValue, asArray, arbitrary } from '@twind/core'
@@ -16,7 +18,7 @@ const rules: Rule<TailwindTheme>[] = [
   /* arbitrary properties: [paint-order:markers] */
   [
     '\\[([-\\w]+):(.+)]',
-    ({ $1, $2 }, context) => ({
+    ({ 1: $1, 2: $2 }, context) => ({
       '@layer overrides': {
         '&': {
           [$1]: arbitrary(`[${$2}]`, $1, context),
@@ -26,7 +28,7 @@ const rules: Rule<TailwindTheme>[] = [
   ],
 
   /* Styling based on parent and peer state */
-  ['((group|peer)((?!-focus)-[^-]+)?)', ({ $_ }, { h }) => [{ c: h($_) }]],
+  ['((group|peer)((?!-focus)-[^-]+)?)', ({ input }, { h }) => [{ c: h(input) }]],
 
   /* LAYOUT */
   ['aspect-', fromTheme('aspectRatio')],
@@ -85,7 +87,7 @@ const rules: Rule<TailwindTheme>[] = [
   ['(?:box-)?decoration-(slice|clone)', 'boxDecorationBreak'],
 
   // Box Sizing
-  ['box-(border|content)', 'boxSizing', ({ $1 }) => $1 + '-box'],
+  ['box-(border|content)', 'boxSizing', ({ 1: $1 }) => $1 + '-box'],
 
   // Display
   ['hidden', { display: 'none' }],
@@ -127,7 +129,7 @@ const rules: Rule<TailwindTheme>[] = [
   // Overscroll Behavior
   [
     'overscroll(-[xy])?-(auto|contain|none)',
-    ({ $1, $2 }) => ({
+    ({ 1: $1 = '', 2: $2 }) => ({
       [('overscroll-behavior' + $1) as 'overscroll-behavior-x']: $2 as 'auto',
     }),
   ],
@@ -138,7 +140,7 @@ const rules: Rule<TailwindTheme>[] = [
   // Top / Right / Bottom / Left
   [
     '-?inset(-[xy])?(?:-|$)',
-    fromTheme('inset', ({ $1, _ }) => ({
+    fromTheme('inset', ({ 1: $1, _ }) => ({
       top: $1 != '-x' && _,
       right: $1 != '-y' && _,
       bottom: $1 != '-x' && _,
@@ -226,7 +228,7 @@ const rules: Rule<TailwindTheme>[] = [
   [
     '(content|items|self)-',
     (match) => ({
-      [('align-' + match.$1) as 'align-content']: convertContentValue(match),
+      [('align-' + match[1]) as 'align-content']: convertContentValue(match),
     }),
   ],
 
@@ -235,7 +237,7 @@ const rules: Rule<TailwindTheme>[] = [
   // Place Self
   [
     '(place-(content|items|self))-',
-    ({ $1, $$ }) => ({
+    ({ 1: $1, $$ }) => ({
       [$1 as 'place-content']: ('wun'.includes($$[3]) ? 'space-' : '') + $$,
     }),
   ],
@@ -250,7 +252,7 @@ const rules: Rule<TailwindTheme>[] = [
   // Space Between
   [
     '-?space-(x|y)(?:-|$)',
-    fromTheme('space', ({ $1, _ }) => ({
+    fromTheme('space', ({ 1: $1, _ }) => ({
       '&>:not([hidden])~:not([hidden])': {
         [`--tw-space-${$1}-reverse`]: '0',
         ['margin-' +
@@ -265,7 +267,7 @@ const rules: Rule<TailwindTheme>[] = [
 
   [
     'space-(x|y)-reverse',
-    ({ $1 }) => ({
+    ({ 1: $1 }) => ({
       '&>:not([hidden])~:not([hidden])': {
         [`--tw-space-${$1}-reverse`]: '1',
       },
@@ -322,7 +324,7 @@ const rules: Rule<TailwindTheme>[] = [
   // Font Variant Numeric
   [
     '(ordinal|slashed-zero|(normal|lining|oldstyle|proportional|tabular)-nums|(diagonal|stacked)-fractions)',
-    ({ $1, $2, $3 }) =>
+    ({ 1: $1, 2: $2 = '', 3: $3 }) =>
       // normal-nums
       $2 == 'normal'
         ? { fontVariantNumeric: 'normal' }
@@ -474,7 +476,7 @@ const rules: Rule<TailwindTheme>[] = [
   [
     'bg-gradient-to-([trbl]{1,2})',
     'backgroundImage',
-    ({ $1 }) => `linear-gradient(to ${position($1, ' ')},var(--tw-gradient-stops))`,
+    ({ 1: $1 }) => `linear-gradient(to ${position($1, ' ')},var(--tw-gradient-stops))`,
   ],
 
   [
@@ -521,7 +523,7 @@ const rules: Rule<TailwindTheme>[] = [
   ['bg-(fixed|local|scroll)', 'backgroundAttachment'],
 
   // Background Origin
-  ['bg-origin-(border|padding|content)', 'backgroundOrigin', ({ $1 }) => $1 + '-box'],
+  ['bg-origin-(border|padding|content)', 'backgroundOrigin', ({ 1: $1 }) => $1 + '-box'],
 
   // Background Repeat
   [['bg-(no-repeat|repeat(-[xy])?)', 'bg-repeat-(round|space)'], 'backgroundRepeat'],
@@ -533,7 +535,7 @@ const rules: Rule<TailwindTheme>[] = [
   [
     'bg-clip-(border|padding|content|text)',
     'backgroundClip',
-    ({ $1 }) => $1 + ($1 == 'text' ? '' : '-box'),
+    ({ 1: $1 }) => $1 + ($1 == 'text' ? '' : '-box'),
   ],
 
   // Background Opacity
@@ -559,7 +561,7 @@ const rules: Rule<TailwindTheme>[] = [
   ['rounded(?:-|$)', fromTheme('borderRadius')],
   [
     'rounded-([trbl]{1,2})(?:-|$)',
-    fromTheme('borderRadius', ({ $1, _ }) => {
+    fromTheme('borderRadius', ({ 1: $1, _ }) => {
       const corners = {
         t: ['tl', 'tr'],
         r: ['tr', 'br'],
@@ -601,7 +603,7 @@ const rules: Rule<TailwindTheme>[] = [
   // Divide Style
   [
     'divide-(solid|dashed|dotted|double|none)',
-    ({ $1 }) => ({
+    ({ 1: $1 }) => ({
       '&>:not([hidden])~:not([hidden])': { borderStyle: $1 },
     }),
   ],
@@ -609,14 +611,14 @@ const rules: Rule<TailwindTheme>[] = [
   // Divide Width
   [
     'divide-([xy]-reverse)',
-    ({ $1 }) => ({
+    ({ 1: $1 }) => ({
       '&>:not([hidden])~:not([hidden])': { ['--tw-divide-' + $1]: '1' },
     }),
   ],
 
   [
     'divide-([xy])(?:-|$)',
-    fromTheme('divideWidth', ({ $1, _ }) => {
+    fromTheme('divideWidth', ({ 1: $1, _ }) => {
       const edges = {
         x: 'lr',
         y: 'tb',
@@ -802,7 +804,7 @@ const rules: Rule<TailwindTheme>[] = [
   ['transform', tranformDefaults],
   [
     'transform-(cpu|gpu)',
-    ({ $1 }) => ({
+    ({ 1: $1 }) => ({
       '--tw-transform': transformValue($1 == 'gpu'),
     }),
   ],
@@ -812,7 +814,7 @@ const rules: Rule<TailwindTheme>[] = [
     'scale(-[xy])?-',
     fromTheme(
       'scale',
-      ({ $1, _ }) =>
+      ({ 1: $1, _ }) =>
         ({
           [('--tw-scale' + ($1 || '-x')) as '--tw-scale-x']: _,
           [('--tw-scale' + ($1 || '-y')) as '--tw-scale-y']: _,
@@ -852,7 +854,7 @@ const rules: Rule<TailwindTheme>[] = [
   ['snap-(none)', 'scroll-snap-type'],
   [
     'snap-(x|y|both)',
-    ({ $1 }) => ({
+    ({ 1: $1 }) => ({
       'scroll-snap-type': $1 + ' var(--tw-scroll-snap-strictness)',
       '@layer defaults': {
         '*': {
@@ -885,7 +887,7 @@ const rules: Rule<TailwindTheme>[] = [
   ['touch-(auto|none|manipulation)', 'touch-action'],
   [
     'touch-(pinch-zoom|pan-(?:(x|left|right)|(y|up|down)))',
-    ({ $1, $2, $3 }) => ({
+    ({ 1: $1, 2: $2, 3: $3 }) => ({
       // x, left, right -> pan-x
       // y, up, down -> pan-y
       // -> pinch-zoom
@@ -940,7 +942,7 @@ const rules: Rule<TailwindTheme>[] = [
   [
     'resize(?:-(none|x|y))?',
     'resize',
-    ({ $1 }) => ({ x: 'horizontal', y: 'vertical' }[$1] || $1 || 'both'),
+    ({ 1: $1 }) => ({ x: 'horizontal', y: 'vertical' }[$1] || $1 || 'both'),
   ],
 
   // User Select
@@ -988,11 +990,11 @@ const rules: Rule<TailwindTheme>[] = [
 export default rules
 
 function spacify(value: string | MatchResult): string {
-  return (typeof value == 'string' ? value : value.$1).replace(/-/g, ' ').trim()
+  return (typeof value == 'string' ? value : value[1]).replace(/-/g, ' ').trim()
 }
 
 function columnify(value: string | MatchResult): string {
-  return (typeof value == 'string' ? value : value.$1).replace('col', 'column')
+  return (typeof value == 'string' ? value : value[1]).replace('col', 'column')
 }
 
 function position(shorthand: string, separator = '-'): string {
@@ -1005,17 +1007,13 @@ function position(shorthand: string, separator = '-'): string {
   return longhand.join(separator)
 }
 
-function join(match: MatchResult<MaybeArray<string>>): string
+function join(match: ThemeMatchResult<MaybeArray<string>>): string
 function join(value: MaybeArray<string> | undefined): string | undefined
 
 function join(
-  value: MatchResult<MaybeArray<string>> | MaybeArray<string> | undefined,
+  value: ThemeMatchResult<MaybeArray<string>> | MaybeArray<string> | undefined,
 ): string | undefined {
-  return Array.isArray(value)
-    ? value.join(',')
-    : typeof value == 'string'
-    ? value
-    : value && join(value._)
+  return value && '' + ((value as ThemeMatchResult<MaybeArray<string>>)._ || value)
 }
 
 function convertContentValue({ $$ }: MatchResult) {
@@ -1034,8 +1032,11 @@ function convertContentValue({ $$ }: MatchResult) {
   )
 }
 
-function edge(propertyPrefix: string, propertySuffix = ''): RuleResolver<TailwindTheme, string> {
-  return ({ $1, _ }) => {
+function edge(
+  propertyPrefix: string,
+  propertySuffix = '',
+): ThemeRuleResolver<string, TailwindTheme> {
+  return ({ 1: $1, _ }) => {
     const edges =
       {
         x: 'lr',
@@ -1092,7 +1093,7 @@ function filter(prefix = ''): Rule<TailwindTheme>[] {
           `${key[0] == 'h' ? '-?' : ''}(${prefix}${key})(?:-|$)`,
           fromTheme<TailwindTheme, 'hueRotate'>(
             key as 'hueRotate',
-            ({ $1, _ }) =>
+            ({ 1: $1, _ }) =>
               ({
                 [`--tw-${$1}`]: asArray(_)
                   .map((value) => `${key}(${value})`)
@@ -1104,7 +1105,7 @@ function filter(prefix = ''): Rule<TailwindTheme>[] {
   ]
 }
 
-function transform({ $1, _ }: MatchResult<string>): CSSObject {
+function transform({ 1: $1, _ }: ThemeMatchResult<string>): CSSObject {
   return {
     ['--tw-' + $1]: _,
     ...tranformDefaults(),
@@ -1141,10 +1142,10 @@ function transformValue(gpu?: boolean): string {
     'scaleY(var(--tw-scale-y))',
   ].join(' ')
 }
-function span({ $1, $2 }: MatchResult) {
+function span({ 1: $1, 2: $2 }: MatchResult) {
   return `${$1} ${$2} / ${$1} ${$2}`
 }
 
-function gridTemplate({ $1 }: MatchResult) {
+function gridTemplate({ 1: $1 }: MatchResult) {
   return `repeat(${$1},minmax(0,1fr))`
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-extra-semi */
 import type {
   Context,
   ColorValue,
@@ -7,7 +8,6 @@ import type {
   RuleResolver,
   CSSProperties,
   CSSObject,
-  MatchConverter,
   RuleResult,
   ThemeValue,
   KebabCase,
@@ -15,6 +15,21 @@ import type {
 
 import { toColorValue } from './colors'
 import { resolveThemeFunction } from './internal/serialize'
+
+export type ThemeMatchResult<Value> = MatchResult & {
+  /** The found theme value */
+  _: Value
+}
+
+export type ThemeRuleResolver<Value, Theme extends BaseTheme = BaseTheme> = (
+  match: ThemeMatchResult<Value>,
+  context: Context<Theme>,
+) => RuleResult
+
+export type ThemeMatchConverter<Value, Theme extends BaseTheme = BaseTheme> = (
+  match: ThemeMatchResult<Value>,
+  context: Context<Theme>,
+) => string
 
 export function fromTheme<
   Theme extends BaseTheme = BaseTheme,
@@ -24,23 +39,23 @@ export function fromTheme<
   section?: '' | Section | KebabCase<Section>,
 
   /** The css property (default: value of {@link section}) */
-  resolve?: keyof CSSProperties | RuleResolver<Theme, ThemeValue<Theme[Section]>>,
+  resolve?: keyof CSSProperties | ThemeRuleResolver<ThemeValue<Theme[Section]>, Theme>,
 
-  convert?: MatchConverter<Theme, ThemeValue<Theme[Section]>>,
-): RuleResolver<Theme, ThemeValue<Theme[Section]>> {
+  convert?: ThemeMatchConverter<ThemeValue<Theme[Section]>, Theme>,
+): RuleResolver<Theme> {
   const factory: (
-    match: MatchResult<ThemeValue<Theme[Section]>>,
+    match: ThemeMatchResult<ThemeValue<Theme[Section]>>,
     context: Context<Theme>,
     section: Section,
   ) => RuleResult = !resolve
-    ? ({ $1, _ }, context, section) => ({ [$1 || section]: _ } as CSSObject)
+    ? ({ 1: $1, _ }, context, section) => ({ [$1 || section]: _ } as CSSObject)
     : typeof resolve == 'string'
     ? (match, context) => ({ [resolve]: convert ? convert(match, context) : match._ } as CSSObject)
     : resolve
 
   return (match, context) => {
     const themeSection = camelize(
-      section || (match.$1[0] == '-' ? match.$1.slice(1) : match.$1),
+      section || (match[1][0] == '-' ? match[1].slice(1) : match[1]),
     ) as Section
 
     let value = context.theme(themeSection, match.$$)
@@ -54,13 +69,13 @@ export function fromTheme<
       value = arbitrary(match.$$, themeSection, context) as ThemeValue<Theme[Section]>
     }
 
-    if (match.$_[0] == '-' && (typeof value == 'string' || typeof value == 'number')) {
+    if (match.input[0] == '-' && (typeof value == 'string' || typeof value == 'number')) {
       value = `calc(${value} * -1)` as ThemeValue<Theme[Section]>
     }
 
     if (value != null) {
-      match._ = value
-      return factory(match, context, themeSection)
+      ;(match as ThemeMatchResult<ThemeValue<Theme[Section]>>)._ = value
+      return factory(match as ThemeMatchResult<ThemeValue<Theme[Section]>>, context, themeSection)
     }
   }
 }
@@ -108,12 +123,12 @@ export function colorFromTheme<
   >,
 >(
   options: ColorFromThemeOptions<Theme, Section, OpacitySection> = {},
-  resolve?: RuleResolver<Theme, ColorFromThemeValue>,
-): RuleResolver<Theme, ColorFromThemeValue> {
+  resolve?: ThemeRuleResolver<ColorFromThemeValue, Theme>,
+): RuleResolver<Theme> {
   return (match, context) => {
     // text- -> textColor
     // ring-offset(?:-|$) -> ringOffsetColor
-    const { section = (camelize(match.$0).replace('-', '') + 'Color') as Section } = options
+    const { section = (camelize(match[0]).replace('-', '') + 'Color') as Section } = options
 
     // extract color and opacity
     // rose-500                  -> ['rose-500']
@@ -134,7 +149,7 @@ export function colorFromTheme<
       // text- -> --tw-text-opacity
       // ring-offset(?:-|$) -> --tw-ring-offset-opacity
       // TODO move this default into preset-tailwind?
-      opacityVariable = `--tw-${match.$0.replace(/-$/, '')}-opacity`,
+      opacityVariable = `--tw-${match[0].replace(/-$/, '')}-opacity`,
       opacitySection = section.replace('Color', 'Opacity') as OpacitySection,
       property = section,
       selector,
@@ -150,17 +165,17 @@ export function colorFromTheme<
     })
 
     if (typeof color != 'string') {
-      console.warn(`Invalid color ${colorMatch} (from ${match.$_}):`, color)
+      console.warn(`Invalid color ${colorMatch} (from ${match.input}):`, color)
       return
     }
 
     if (resolve) {
-      match._ = {
+      ;(match as ThemeMatchResult<ColorFromThemeValue>)._ = {
         value: color,
         color: (options) => toColorValue(colorValue, options),
       }
 
-      return resolve(match, context)
+      return resolve(match as ThemeMatchResult<ColorFromThemeValue>, context)
     }
 
     const properties = {} as Record<string, string>
