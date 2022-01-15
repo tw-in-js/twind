@@ -1,5 +1,16 @@
 # twind
 
+## 1.0.0-next.12
+
+### Patch Changes
+
+- Updated dependencies [[`c595b348`](https://github.com/tw-in-js/twind/commit/c595b348dc06ce3061322bcc8235463d2f27d488), [`dc778be0`](https://github.com/tw-in-js/twind/commit/dc778be038180c8f0409adc044305d565d35493f), [`2ba630a3`](https://github.com/tw-in-js/twind/commit/2ba630a36237bdeb428976ab959268e8faee2128), [`5848d13f`](https://github.com/tw-in-js/twind/commit/5848d13f70037c237364b08195a71fe8f8049e1f), [`f41e367f`](https://github.com/tw-in-js/twind/commit/f41e367fa03bb335c2d1226d954d68b725707740), [`bea09c04`](https://github.com/tw-in-js/twind/commit/bea09c040bbe3a6cd4df3530d6090441a1e40535), [`123fb7f8`](https://github.com/tw-in-js/twind/commit/123fb7f897cc2d7999c446c896c622cb4df4712c)]:
+  - @twind/core@1.0.0-next.11
+  - @twind/preset-ext@1.0.0-next.11
+  - @twind/preset-tailwind@1.0.0-next.11
+  - @twind/preset-autoprefix@1.0.0-next.11
+  - @twind/runtime@1.0.0-next.11
+
 ## 1.0.0-next.11
 
 ### Patch Changes

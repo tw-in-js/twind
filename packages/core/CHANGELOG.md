@@ -1,5 +1,19 @@
 # @twind/core
 
+## 1.0.0-next.11
+
+### Patch Changes
+
+- adjust rule ordering to fix `m-5 mr-3 mx-1` (previously generated `mx-1 m-5 mr-3`) ([#241](https://github.com/tw-in-js/twind/pull/241))
+
+* BREAKING: the match object passed to rules and variants is now a RegExpExecArray with one additional property ([`dc778be0`](https://github.com/tw-in-js/twind/commit/dc778be038180c8f0409adc044305d565d35493f))
+
+- golf: short names within `context`; should not affect most users ([#241](https://github.com/tw-in-js/twind/pull/241))
+
+* fix: ensure proper pseudo-class ordering ([#241](https://github.com/tw-in-js/twind/pull/241))
+
+- ensure base and overrides (css) layers are kept in the order the rules are declared ([#241](https://github.com/tw-in-js/twind/pull/241))
+
 ## 1.0.0-next.10
 
 ### Patch Changes

@@ -1,5 +1,18 @@
 # @twind/preset-ext
 
+## 1.0.0-next.11
+
+### Patch Changes
+
+- BREAKING: the match object passed to rules and variants is now a RegExpExecArray with one additional property ([`dc778be0`](https://github.com/tw-in-js/twind/commit/dc778be038180c8f0409adc044305d565d35493f))
+
+* golf: short names within `context`; should not affect most users ([#241](https://github.com/tw-in-js/twind/pull/241))
+
+- presets: expose `rules` and `variants` as own entryPoint eg `@twind/preset-tailwind/rules` ([#241](https://github.com/tw-in-js/twind/pull/241))
+
+- Updated dependencies [[`c595b348`](https://github.com/tw-in-js/twind/commit/c595b348dc06ce3061322bcc8235463d2f27d488), [`dc778be0`](https://github.com/tw-in-js/twind/commit/dc778be038180c8f0409adc044305d565d35493f), [`2ba630a3`](https://github.com/tw-in-js/twind/commit/2ba630a36237bdeb428976ab959268e8faee2128), [`f41e367f`](https://github.com/tw-in-js/twind/commit/f41e367fa03bb335c2d1226d954d68b725707740), [`123fb7f8`](https://github.com/tw-in-js/twind/commit/123fb7f897cc2d7999c446c896c622cb4df4712c)]:
+  - @twind/core@1.0.0-next.11
+
 ## 1.0.0-next.10
 
 ### Patch Changes
