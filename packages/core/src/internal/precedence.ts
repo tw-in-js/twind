@@ -196,30 +196,32 @@ export function atRulePrecedence(css: string): number {
 // Sources:
 // - https://bitsofco.de/when-do-the-hover-focus-and-active-pseudo-classes-apply/#orderofstyleshoverthenfocusthenactive
 // - https://developer.mozilla.org/docs/Web/CSS/:active#Active_links
-// - https://github.com/tailwindlabs/tailwindcss/blob/master/stubs/defaultConfig.stub.js#L718
+// - https://github.com/tailwindlabs/tailwindcss/blob/master/stubs/defaultConfig.stub.js#L931
 
 const PRECEDENCES_BY_PSEUDO_CLASS = [
-  /* fi */ 'rst' /* : 0 */,
-  /* la */ 'st' /* : 1 */,
-  /* ev */ 'en' /* : 2 */,
-  /* od */ 'd' /* : 3 */,
+  /* fi */ 'rst-c' /* hild: 0 */,
+  /* la */ 'st-ch' /* ild: 1 */,
+  // even and odd use: nth-child
+  /* nt */ 'h-chi' /* ld: 2 */,
+  /* an */ 'y-lin' /* k: 3 */,
   /* li */ 'nk' /* : 4 */,
   /* vi */ 'sited' /* : 5 */,
-  /* em */ 'pty' /* : 6 */,
-  /* ch */ 'ecked' /* : 7 */,
-  /* fo */ 'cus-w' /* ithin : 8 */,
-  /* ho */ 'ver' /* : 9 */,
-  /* fo */ 'cus' /* : 10 */,
-  /* fo */ 'cus-v' /* isible : 11 */,
-  /* ac */ 'tive' /* : 12 */,
-  /* di */ 'sable' /* d : 13 */,
-  /* re */ 'ad-on' /* ly: 14 */,
+  /* ch */ 'ecked' /* : 6 */,
+  /* em */ 'pty' /* : 7 */,
+  /* re */ 'ad-on' /* ly: 8 */,
+  /* fo */ 'cus-w' /* ithin : 9 */,
+  /* ho */ 'ver' /* : 10 */,
+  /* fo */ 'cus' /* : 11 */,
+  /* fo */ 'cus-v' /* isible : 12 */,
+  /* ac */ 'tive' /* : 13 */,
+  /* di */ 'sable' /* d : 14 */,
   /* op */ 'tiona' /* l: 15 */,
   /* re */ 'quire' /* d: 16 */,
 ]
 
-export function pseudoPrecedence(selector: string): number {
+function pseudoPrecedence(selector: string): number {
   // use first found pseudo-class
+
   return (
     1 <<
     ~(

@@ -1532,5 +1532,30 @@
     ".scroll-p-2{scroll-padding:0.5rem}",
     ".scroll-px-3{scroll-padding-left:0.75rem;scroll-padding-right:0.75rem}",
     ".scroll-pl-1{scroll-padding-left:0.25rem}"
+  ],
+  "hover:m-10 visited:m-5 odd:m-3 focus:m-11 disabled:m-20 any-link:m-4 last:m-1 active:m-16 required:m-28 even:m-2 focus-visible:m-14 valid:m-32 focus-within:m-9 hover:focus:m-12 empty:m-7 link:m-4 optional:m-24 read-only:m-8 checked:m-6 first:m-0": [
+    "first:m-0 last:m-1 even:m-2 odd:m-3 any-link:m-4 link:m-4 visited:m-5 checked:m-6 empty:m-7 read-only:m-8 focus-within:m-9 hover:m-10 focus:m-11 hover:focus:m-12 focus-visible:m-14 active:m-16 disabled:m-20 optional:m-24 required:m-28 valid:m-32",
+    [
+      ".first\\:m-0:first-child{margin:0px}",
+      ".last\\:m-1:last-child{margin:0.25rem}",
+      ".even\\:m-2:nth-child(2n){margin:0.5rem}",
+      ".odd\\:m-3:nth-child(odd){margin:0.75rem}",
+      ".any-link\\:m-4:any-link{margin:1rem}",
+      ".link\\:m-4:link{margin:1rem}",
+      ".visited\\:m-5:visited{margin:1.25rem}",
+      ".checked\\:m-6:checked{margin:1.5rem}",
+      ".empty\\:m-7:empty{margin:1.75rem}",
+      ".read-only\\:m-8:read-only{margin:2rem}",
+      ".focus-within\\:m-9:focus-within{margin:2.25rem}",
+      ".hover\\:m-10:hover{margin:2.5rem}",
+      ".focus\\:m-11:focus{margin:2.75rem}",
+      ".hover\\:focus\\:m-12:focus:hover{margin:3rem}",
+      ".focus-visible\\:m-14:focus-visible{margin:3.5rem}",
+      ".active\\:m-16:active{margin:4rem}",
+      ".disabled\\:m-20:disabled{margin:5rem}",
+      ".optional\\:m-24:optional{margin:6rem}",
+      ".required\\:m-28:required{margin:7rem}",
+      ".valid\\:m-32:valid{margin:8rem}"
+    ]
   ]
 }
