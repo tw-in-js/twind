@@ -54,16 +54,16 @@ test('create css', () => {
   assert.strictEqual(tw(style), 'css#5fqnnd')
 
   assert.deepEqual(tw.target, [
-    '.css\\#5fqnnd:hover{color:darkgreen}',
     '.css\\#5fqnnd{background-color:hotpink}',
+    '.css\\#5fqnnd:hover{color:darkgreen}',
   ])
 
   // it is cached
   assert.strictEqual(tw(style), 'css#5fqnnd')
 
   assert.deepEqual(tw.target, [
-    '.css\\#5fqnnd:hover{color:darkgreen}',
     '.css\\#5fqnnd{background-color:hotpink}',
+    '.css\\#5fqnnd:hover{color:darkgreen}',
   ])
 })
 
@@ -75,13 +75,13 @@ test('can be used with variants', () => {
     },
   })
 
-  assert.strictEqual(tw(`sm:${style} focus:${style}`), 'focus:css#1u5fwom sm:css#1u5fwom')
+  assert.strictEqual(tw(`sm:${style} focus:${style}`), 'sm:css#1u5fwom focus:css#1u5fwom')
 
   assert.deepEqual(tw.target, [
-    '.focus\\:css\\#1u5fwom:focus{background-color:hotpink}',
-    '.focus\\:css\\#1u5fwom:hover:focus{background-color:darkgreen}',
     '@media (min-width:640px){.sm\\:css\\#1u5fwom{background-color:hotpink}}',
     '@media (min-width:640px){.sm\\:css\\#1u5fwom:hover{background-color:darkgreen}}',
+    '.focus\\:css\\#1u5fwom:focus{background-color:hotpink}',
+    '.focus\\:css\\#1u5fwom:hover:focus{background-color:darkgreen}',
   ])
 })
 
@@ -141,10 +141,10 @@ test('nesting in template literal', () => {
   assert.deepEqual(tw.target, [
     '.css\\#sc2il9{padding:2em 1em;background:papayawhip}',
     '.css\\#sc2il9:hover{background:palevioletred}',
-    'html.test .css\\#sc2il9{display:none}',
-    '.css\\#sc2il9 > p{text-decoration:underline}',
     '@media (max-width: 600px){.css\\#sc2il9{background:tomato}}',
     '@media (min-width:640px){.css\\#sc2il9:hover{background:yellow}}',
+    '.css\\#sc2il9 > p{text-decoration:underline}',
+    'html.test .css\\#sc2il9{display:none}',
   ])
 })
 
@@ -189,8 +189,8 @@ test('interpolation values', () => {
     `.${escape(
       className,
     )}{background:dodgerblue;color:white;border:${random}px solid white;margin:2rem}`,
-    `.${escape(className)} .otherClass{padding:0.5rem}`,
     `.${escape(className)}:focus,.${escape(className)}:hover{color:#4b5563}`,
+    `.${escape(className)} .otherClass{padding:0.5rem}`,
     'body{color:darkgreen}',
   ])
 })

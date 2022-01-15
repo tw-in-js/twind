@@ -27,12 +27,17 @@ export function sortedInsertionIndex(array: readonly TwindRule[], element: Twind
 }
 
 export function compareTwindRules(a: TwindRule, b: TwindRule): number {
+  // base and overrides (css) layers are kept in order they are declared
+  const layer = a.p & Layer.o
+
+  if (layer == (b.p & Layer.o) && (layer == Layer.b || layer == Layer.o)) {
+    return 0
+  }
+
   return (
     a.p - b.p ||
-    ((a.p & Layer.o) == Layer.b
-      ? 0
-      : a.o - b.o ||
-        collator.compare('' + a.r, '' + b.r) ||
-        collator.compare(a.n as string, b.n as string))
+    a.o - b.o ||
+    collator.compare('' + a.r, '' + b.r) ||
+    collator.compare(a.n as string, b.n as string)
   )
 }

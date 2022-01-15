@@ -180,7 +180,7 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
       name = context.h(name)
     }
 
-    rules.push({
+    rules.unshift({
       n: name,
 
       p: precedence,
