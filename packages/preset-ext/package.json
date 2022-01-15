@@ -37,6 +37,8 @@
   "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
   "exports": {
     ".": "./src/index.ts",
+    "./rules": "./src/rules.ts",
+    "./variants": "./src/variants.ts",
     "./package.json": "./package.json"
   },
   "// These are relative from within the dist/ folder": "",

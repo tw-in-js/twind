@@ -14,6 +14,9 @@
     ".": "./src/index.ts",
     "./colors": "./src/colors.ts",
     "./defaultTheme": "./src/defaultTheme.ts",
+    "./preflight": "./src/preflight.ts",
+    "./rules": "./src/rules.ts",
+    "./variants": "./src/variants.ts",
     "./package.json": "./package.json"
   },
   "// These are relative from within the dist/ folder": "",

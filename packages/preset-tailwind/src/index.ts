@@ -5,8 +5,8 @@ import { preset } from '@twind/core'
 
 import theme from './defaultTheme'
 import preflight from './preflight'
-import { rules } from './rules'
-import { variants } from './variants'
+import rules from './rules'
+import variants from './variants'
 
 export * from './types'
 
@@ -29,11 +29,11 @@ export default function presetTailwind({
     rules,
     // Hash/Tag tailwind custom properties during serialization
     stringify(property, value, context) {
-      return stringify(tagVars(property, context), tagVars(value, context), context)
+      return stringify(hashVars(property, context), hashVars(value, context), context)
     },
   }))
 }
 
-function tagVars(value: string, context: Context<TailwindTheme>): string {
-  return value.replace(/--(tw-[\w-]+)\b/g, (_, property: string) => '--' + context.tag(property))
+function hashVars(value: string, { h }: Context<TailwindTheme>): string {
+  return value.replace(/--(tw-[\w-]+)\b/g, (_, property: string) => '--' + h(property))
 }

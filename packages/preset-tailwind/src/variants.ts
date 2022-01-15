@@ -1,7 +1,7 @@
-import { escape, Variant } from '@twind/core'
+import type { Variant } from '@twind/core'
 import type { TailwindTheme } from './types'
 
-export const variants: Variant<TailwindTheme>[] = [
+const variants: Variant<TailwindTheme>[] = [
   ['sticky', '@supports ((position: -webkit-sticky) or (position:sticky))'],
   ['motion-reduce', '@media (prefers-reduced-motion:reduce)'],
   ['motion-safe', '@media (prefers-reduced-motion:no-preference)'],
@@ -34,10 +34,12 @@ export const variants: Variant<TailwindTheme>[] = [
   // => '.group:focus .group-focus:selector'
   [
     '((group|peer)((?!-focus)-[^-]+)?)-([a-z-]+|\\[.+])',
-    ({ $1, $2, $4 }, { tag }) =>
-      `.${escape(tag($1))}${($4[0] == '[' ? '' : ':') + $4}${$2[0] == 'p' ? '~' : ' '}&`,
+    ({ $1, $2, $4 }, { e, h }) =>
+      `.${e(h($1))}${($4[0] == '[' ? '' : ':') + $4}${$2[0] == 'p' ? '~' : ' '}&`,
   ],
 
   // direction variants
   ['(ltr|rtl)', ({ $1 }) => `[dir="${$1}"] &`],
 ]
+
+export default variants

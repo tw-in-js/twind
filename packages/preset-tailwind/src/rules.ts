@@ -12,7 +12,7 @@ import { mql, fromTheme, colorFromTheme, toColorValue, asArray, arbitrary } from
 
 import type { TailwindTheme } from './types'
 
-export const rules: Rule<TailwindTheme>[] = [
+const rules: Rule<TailwindTheme>[] = [
   /* arbitrary properties: [paint-order:markers] */
   [
     '\\[([-\\w]+):(.+)]',
@@ -26,7 +26,7 @@ export const rules: Rule<TailwindTheme>[] = [
   ],
 
   /* Styling based on parent and peer state */
-  ['((group|peer)((?!-focus)-[^-]+)?)', ({ $_ }, { tag }) => [{ c: tag($_) }]],
+  ['((group|peer)((?!-focus)-[^-]+)?)', ({ $_ }, { h }) => [{ c: h($_) }]],
 
   /* LAYOUT */
   ['aspect-', fromTheme('aspectRatio')],
@@ -778,7 +778,7 @@ export const rules: Rule<TailwindTheme>[] = [
 
   [
     'animate(?:-|$)',
-    fromTheme('animation', (match, { theme, tag }) => {
+    fromTheme('animation', (match, { theme, h }) => {
       const animation = join(match)
 
       // Try to auto inject keyframes
@@ -787,7 +787,7 @@ export const rules: Rule<TailwindTheme>[] = [
 
       if (keyframeValues) {
         return {
-          [('@keyframes ' + (parts[0] = tag(parts[0]))) as '@keyframes xxx']: keyframeValues,
+          [('@keyframes ' + (parts[0] = h(parts[0]))) as '@keyframes xxx']: keyframeValues,
           animation: parts.join(' '),
         }
       }
@@ -984,6 +984,8 @@ export const rules: Rule<TailwindTheme>[] = [
     },
   ],
 ]
+
+export default rules
 
 function spacify(value: string | MatchResult): string {
   return (typeof value == 'string' ? value : value.$1).replace(/-/g, ' ').trim()
