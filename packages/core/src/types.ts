@@ -75,13 +75,23 @@ export interface Twind<Theme extends BaseTheme = BaseTheme, Target = unknown> {
 }
 
 export interface Context<Theme extends BaseTheme = BaseTheme> {
+  /** Allows to resolve theme values. */
   theme: ThemeFunction<Theme>
-  tag: (value: string) => string
 
-  variant(value: string): string
-  rule(value: string): RuleResult
+  /** escapes given string for use in a CSS selector */
+  e: (value: string) => string
 
-  stringify(property: string, value: string): string
+  /** create hash of given string — may be no-op eg returning the same input */
+  h: (value: string) => string
+
+  /** resolves a variant */
+  v(value: string): string
+
+  /** resolves a rule */
+  r(value: string): RuleResult
+
+  /** stringifies a CSS property and value to a declaration */
+  s(property: string, value: string): string
 }
 
 // Get the leaf theme value and omit nested records like for colors

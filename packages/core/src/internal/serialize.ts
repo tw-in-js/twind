@@ -168,7 +168,7 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
       declarations +=
         (declarations ? ';' : '') +
         asArray(value)
-          .map((value) => context.stringify(key, value as string))
+          .map((value) => context.s(key, value as string))
           .join(';')
     }
   }
@@ -177,7 +177,7 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
   // if there have been some we need to create a css rule
   if (numberOfDeclarations) {
     if (name) {
-      name = context.tag(name)
+      name = context.h(name)
     }
 
     rules.push({

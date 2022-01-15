@@ -17,7 +17,7 @@ import type {
 } from '../types'
 
 import { makeThemeFunction } from './theme'
-import { asArray, hash } from '../utils'
+import { asArray, escape, hash } from '../utils'
 
 type ResolveFunction<Theme extends BaseTheme = BaseTheme> = (
   className: string,
@@ -53,15 +53,17 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
   const ignored = createRegExpExecutor(ignorelist, (value, condition) => condition.test(value))
 
   return {
-    tag: typeof tag == 'function' ? tag : tag === true ? hash : (value: string): string => value,
+    h: typeof tag == 'function' ? tag : tag === true ? hash : (value: string): string => value,
 
     theme: makeThemeFunction(theme),
 
-    stringify(property, value) {
+    e: escape,
+
+    s(property, value) {
       return stringify(property, value, this)
     },
 
-    variant(value) {
+    v(value) {
       if (!ruleCache.has(value)) {
         variantCache.set(
           value,
@@ -72,7 +74,7 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
       return variantCache.get(value) as string
     },
 
-    rule(value) {
+    r(value) {
       if (!ruleCache.has(value)) {
         ruleCache.set(
           value,

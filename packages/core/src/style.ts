@@ -34,7 +34,21 @@ export type StyleTokenValue = string | Falsey
 // and may therefore override each other
 export type StyleToken = StyleTokenValue // | StyleTokenThunk<Variants>
 
-export type VariantsOf<T> = T extends Style<infer Variants>
+/**
+ * Allows to extract the supported properties of a style function.
+ *
+ * Here is an example for `react`
+ * ```js
+ * import { HTMLAttributes } from "react";
+ * import { style, PropsOf } from "twind";
+ * const button = style({ ... })
+ * type ButtonProps = PropsOf<typeof button>
+ * export const Button = (props: ButtonProps & HTMLAttributes<HTMLButtonElement>) => {
+ *   return <button className={style(props)} {...rest} />
+ * }
+ * ```
+ */
+export type PropsOf<T> = T extends Style<infer Variants>
   ? {
       [key in keyof Variants]: MorphVariant<keyof Variants[key]>
     }

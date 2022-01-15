@@ -301,7 +301,7 @@ export function convert<Theme extends BaseTheme = BaseTheme>(
   for (const variant of variants) {
     const screen = context.theme('screens', variant)
 
-    const condition = (screen && mql(screen)) || context.variant(variant)
+    const condition = (screen && mql(screen)) || context.v(variant)
 
     conditions = [...conditions, condition]
 

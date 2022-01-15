@@ -53,7 +53,7 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
 
   function insert(rule: TwindRule): string | undefined {
     if (rule.n) {
-      rule = { ...rule, n: context.tag(rule.n) }
+      rule = { ...rule, n: context.h(rule.n) }
     }
 
     const css = stringify(rule)

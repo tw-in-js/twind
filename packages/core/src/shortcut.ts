@@ -18,7 +18,10 @@ export const shortcut = /* @__PURE__ */ new Proxy(
   } as Shortcut,
   {
     get: function (target, prop) {
-      return function (strings: TemplateStringsArray | Class, ...interpolations: Class[]): string {
+      return function namedShortcut(
+        strings: TemplateStringsArray | Class,
+        ...interpolations: Class[]
+      ): string {
         return format(parse((prop as string) + '~(' + interpolate(strings, interpolations) + ')'))
       }
     },
