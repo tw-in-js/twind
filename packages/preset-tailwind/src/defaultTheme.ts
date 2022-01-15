@@ -1,7 +1,7 @@
 import type { PartialTheme, ThemeSectionResolver } from '@twind/core'
 import type { TailwindTheme } from '.'
 
-import colors from './colors'
+import * as colors from './colors'
 
 const theme: PartialTheme<TailwindTheme> = {
   screens: {
