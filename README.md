@@ -75,6 +75,7 @@ See [twind](./packages/twind/README.md) for a quick intro.
 ## Notable Changes
 
 - [@twind/core](./packages/core) — without any rules to have a clean start
+  - classes are returned in order they are applied by the browser - last one wins
   - the `twind` factory returns `tw` as known from twind v0.16; additional it can be used to access:
     - the theme: `tw.theme(...)`
     - the target sheet: `tw.target`
@@ -95,7 +96,7 @@ See [twind](./packages/twind/README.md) for a quick intro.
   - `tw`, `apply` and `theme` as known from twind v0.16.
 - grouping syntax:
   - allow trailing dash before parentheses for utilities -> `border-(md:{2 black opacity-50 hover:dashed}}`
-  - shortcuts:
+  - shortcuts: `~` to apply/merge utilities -> `~(text(5xl,red-700),bg-red-100)`
     - anonymous shortcuts: `~(!text-(3xl center) !underline italic focus:not-italic)`
       - support comma-separated shortcuts — this would prevent different classNames errors during hydration:
         - `hover:~(!text-(3xl,center),!underline,italic,focus:not-italic)`
@@ -174,7 +175,6 @@ See [twind](./packages/twind/README.md) for a quick intro.
   - no implicit ordering within preflight
 
 - comments (single and multiline)
-- inline shortcut: `~` to apply/merge utilities -> `~(text(5xl,red-700),bg-red-100)`
 - no more important suffix: `rule!` -> `!rule`
 - styles (the generated CSS rules) are sorted predictably and stable — no matter in which order the rules are injected
 - support `label` for a more readable class names (https://emotion.sh/docs/labels)
@@ -226,7 +226,12 @@ See [twind](./packages/twind/README.md) for a quick intro.
 
 ## TODO
 
+- support `is(:hover,:focus-visible):underline`?
 - style: should it pass `class` and `className` through? alternatives: string concat, `cx`
+- remove `dom` sheet?
+- docs: explain and examples of both modes (observe/shim vs library)
+- docs: common patterns
+- auto support dark mode in theme helpers (`<section>.dark.<key>` or `dark.<section>.<key>`)
 - @twind/preset-\* from tailwind core
 - @twind/react
 - @twind/inject — parse HTML string for classNames, replace and inject CSS
