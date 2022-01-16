@@ -35,51 +35,30 @@
   "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
   "exports": {
     ".": "./src/index.ts",
+    "./cdn": "./src/cdn.ts",
     "./core": "./src/core.ts",
-    "./ext": "./src/ext.ts",
     "./package.json": "./package.json"
   },
   "// These are relative from within the dist/ folder": "",
   "sideEffects": false,
   "size-limit": [
     {
+      "name": "twind/cdn",
+      "path": "dist/cdn.esnext.js",
+      "brotli": true,
+      "limit": "14.6kb"
+    },
+    {
       "name": "twind (full)",
       "path": "dist/twind.esnext.js",
       "brotli": true,
-      "limit": "15.3kb"
-    },
-    {
-      "name": "twind (only setup)",
-      "path": "dist/twind.esnext.js",
-      "import": "{ setup }",
-      "brotli": true,
-      "limit": "14.6kb"
+      "limit": "15.2kb"
     },
     {
       "name": "twind/core (full)",
       "path": "dist/core.esnext.js",
       "brotli": true,
-      "limit": "5.9kb"
-    },
-    {
-      "name": "twind/core (only setup)",
-      "path": "dist/core.esnext.js",
-      "import": "{ setup }",
-      "brotli": true,
-      "limit": "4.3kb"
-    },
-    {
-      "name": "twind/ext (full)",
-      "path": "dist/ext.esnext.js",
-      "brotli": true,
-      "limit": "6.8kb"
-    },
-    {
-      "name": "twind/ext (only setup)",
-      "path": "dist/ext.esnext.js",
-      "import": "{ setup }",
-      "brotli": true,
-      "limit": "5.3kb"
+      "limit": "5.8kb"
     }
   ],
   "// These are ONLY bundled (eg included) in the global builds": "",
@@ -87,13 +66,11 @@
     "@twind/core",
     "@twind/runtime",
     "@twind/preset-autoprefix",
-    "@twind/preset-ext",
     "@twind/preset-tailwind"
   ],
   "dependencies": {
     "@twind/core": "workspace:1.0.0-next.11",
     "@twind/preset-autoprefix": "workspace:1.0.0-next.11",
-    "@twind/preset-ext": "workspace:1.0.0-next.11",
     "@twind/preset-tailwind": "workspace:1.0.0-next.11",
     "@twind/runtime": "workspace:1.0.0-next.11"
   },

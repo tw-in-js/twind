@@ -14,10 +14,7 @@ import {
 import { init, autoInit } from '@twind/runtime'
 
 import autoprefix from '@twind/preset-autoprefix'
-import ext from '@twind/preset-ext'
-
-export * from '@twind/core'
-export { tw } from '@twind/runtime'
+import tailwind from '@twind/preset-tailwind'
 
 const cancelAutoInit = autoInit(setup)
 
@@ -47,7 +44,7 @@ export function setup(
   return init(
     defineConfig({
       ...config,
-      presets: [autoprefix(), ...asArray((config as TwindUserConfig<any>).presets), ext()],
+      presets: [autoprefix(), ...asArray((config as TwindUserConfig<any>).presets), tailwind()],
     } as TwindUserConfig<any>),
     sheet,
     target,

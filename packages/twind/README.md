@@ -66,11 +66,29 @@ To configure Twind (optional):
 </script>
 ```
 
-By default, [@twind/autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix) and [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind) will be applied.
+By default, [@twind/preset.autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix) and [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind) will be applied.
 
 [Try it live](https://stackblitz.com/edit/twind-v1-example?file=index.html)
 
 ### CDN Builds
+
+#### Tailwind CDN
+
+With [@twind/preset.autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix) and [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind):
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/twind@next/cdn.global.js"></script>
+```
+
+> Please note: This build does not export any helper functions like `cx`, `style`, or `css`. It is meant as a replacement for Tailwindcss CDN.
+
+#### Tailwind
+
+With all core exports and the presets [@twind/preset.autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix) and [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind):
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/twind@next"></script>
+```
 
 #### Core
 
@@ -78,22 +96,6 @@ Without any preset:
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/twind@next/core.global.js"></script>
-```
-
-#### Tailwind
-
-With [@twind/autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix) and [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind):
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/twind@next"></script>
-```
-
-#### Ext
-
-With [@twind/autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix) and [@twind/preset-ext](https://www.npmjs.com/package/@twind/preset-ext):
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/twind@next/ext.global.js"></script>
 ```
 
 ## API

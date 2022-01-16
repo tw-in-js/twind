@@ -23,15 +23,14 @@
   "packageManager": "pnpm@6.24.3",
   "size-limit": [
     {
-      "name": "@twind/core (full)",
+      "name": "@twind/core",
       "path": "packages/core/dist/core.esnext.js",
       "brotli": true,
-      "limit": "5.8kb"
+      "limit": "5.7kb"
     },
     {
-      "name": "twind (tailwindcss)",
-      "path": "packages/twind/dist/twind.esnext.js",
-      "import": "{ setup }",
+      "name": "twind/cdn",
+      "path": "packages/twind/dist/cdn.esnext.js",
       "brotli": true,
       "limit": "14.6kb"
     }
