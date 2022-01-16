@@ -1,5 +1,12 @@
 # twind
 
+## 1.0.0-next.14
+
+### Patch Changes
+
+- Updated dependencies [[`eb875119`](https://github.com/tw-in-js/twind/commit/eb8751194b21ec0941483e9a72d61a36d90e73da)]:
+  - @twind/preset-tailwind@1.0.0-next.13
+
 ## 1.0.0-next.13
 
 ### Patch Changes
