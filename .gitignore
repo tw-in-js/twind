@@ -6,6 +6,7 @@ web_modules
 .env
 
 .cache
+.swc
 dist
 website
 __generated__

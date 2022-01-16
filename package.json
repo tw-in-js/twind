@@ -50,6 +50,11 @@
     "preinstall": "npx only-allow pnpm",
     "prepare": "husky install"
   },
+  "// these are added as dependencies to all packages": "",
+  "// @swc/helpers: common helper used by code generated from swc (distilt)": "",
+  "dependencies": {
+    "@swc/helpers": "^0.3.2"
+  },
   "devDependencies": {
     "@changesets/cli": "^2.19.0",
     "@changesets/get-github-info": "^0.5.0",
@@ -60,7 +65,7 @@
     "@typescript-eslint/parser": "^5.9.1",
     "@vitest/ui": "^0.1.12",
     "c8": "^7.11.0",
-    "distilt": "^0.13.1",
+    "distilt": "^0.14.0",
     "dotenv": "^10.0.0",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",
