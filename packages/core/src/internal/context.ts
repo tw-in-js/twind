@@ -78,6 +78,7 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
       if (!ruleCache.has(value)) {
         ruleCache.set(
           value,
+          // TODO console.warn(`[twind] unknown rule "${value}"`),
           !ignored(value, this) && find(value, rules, ruleResolvers, getRuleResolver, this),
         )
       }

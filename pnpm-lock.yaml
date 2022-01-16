@@ -96,13 +96,11 @@ importers:
     specifiers:
       '@twind/core': workspace:1.0.0-next.11
       '@twind/preset-autoprefix': workspace:1.0.0-next.11
-      '@twind/preset-ext': workspace:1.0.0-next.11
       '@twind/preset-tailwind': workspace:1.0.0-next.11
       '@twind/runtime': workspace:1.0.0-next.11
     dependencies:
       '@twind/core': link:../core
       '@twind/preset-autoprefix': link:../preset-autoprefix
-      '@twind/preset-ext': link:../preset-ext
       '@twind/preset-tailwind': link:../preset-tailwind
       '@twind/runtime': link:../runtime
 

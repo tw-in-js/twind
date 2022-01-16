@@ -230,6 +230,7 @@ See [twind](./packages/twind/README.md) for a quick intro.
 - support `is(:hover,:focus-visible):underline`?
 - style: should it pass `class` and `className` through? alternatives: string concat, `cx`
 - remove `dom` sheet?
+- console.warn(`[twind] unknown rule "${value}"`)
 - docs: explain and examples of both modes (observe/shim vs library)
 - docs: common patterns
 - auto support dark mode in theme helpers (`<section>.dark.<key>` or `dark.<section>.<key>`)
