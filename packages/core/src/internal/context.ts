@@ -53,7 +53,7 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
   const ignored = createRegExpExecutor(ignorelist, (value, condition) => condition.test(value))
 
   return {
-    h: typeof tag == 'function' ? tag : tag === true ? hash : (value: string): string => value,
+    h: typeof tag == 'function' ? tag : tag === true ? hash : (value) => value,
 
     theme: makeThemeFunction(theme),
 

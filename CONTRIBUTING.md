@@ -153,12 +153,6 @@ The [Changesets GitHub action](https://github.com/changesets/action#with-publish
 
 > It uses `pnpm publish` rather than `pnpx changeset publish` so that we can use the `--filter` and (while in beta) `--tag` flags — though perhaps they work with `pnpx changeset publish`?
 
-New packages will need to be published manually the first time if they are scoped to the `@twind` organisation, by running this from the package directory:
-
-```bash
-pnpm publish
-```
-
 ## TODO
 
 - how to contribute
