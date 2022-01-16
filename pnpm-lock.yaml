@@ -75,7 +75,7 @@ importers:
   packages/preset-ext:
     specifiers:
       '@twind/core': workspace:1.0.0-next.12
-      '@twind/preset-tailwind': workspace:1.0.0-next.12
+      '@twind/preset-tailwind': workspace:1.0.0-next.13
     devDependencies:
       '@twind/core': link:../core
       '@twind/preset-tailwind': link:../preset-tailwind
@@ -96,7 +96,7 @@ importers:
     specifiers:
       '@twind/core': workspace:1.0.0-next.12
       '@twind/preset-autoprefix': workspace:1.0.0-next.12
-      '@twind/preset-tailwind': workspace:1.0.0-next.12
+      '@twind/preset-tailwind': workspace:1.0.0-next.13
       '@twind/runtime': workspace:1.0.0-next.12
     dependencies:
       '@twind/core': link:../core
