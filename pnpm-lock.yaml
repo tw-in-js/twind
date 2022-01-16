@@ -65,7 +65,7 @@ importers:
 
   packages/preset-autoprefix:
     specifiers:
-      '@twind/core': workspace:1.0.0-next.11
+      '@twind/core': workspace:1.0.0-next.12
       style-vendorizer: ^2.1.1
     dependencies:
       style-vendorizer: 2.1.1
@@ -74,30 +74,30 @@ importers:
 
   packages/preset-ext:
     specifiers:
-      '@twind/core': workspace:1.0.0-next.11
-      '@twind/preset-tailwind': workspace:1.0.0-next.11
+      '@twind/core': workspace:1.0.0-next.12
+      '@twind/preset-tailwind': workspace:1.0.0-next.12
     devDependencies:
       '@twind/core': link:../core
       '@twind/preset-tailwind': link:../preset-tailwind
 
   packages/preset-tailwind:
     specifiers:
-      '@twind/core': workspace:1.0.0-next.11
+      '@twind/core': workspace:1.0.0-next.12
     devDependencies:
       '@twind/core': link:../core
 
   packages/runtime:
     specifiers:
-      '@twind/core': workspace:1.0.0-next.11
+      '@twind/core': workspace:1.0.0-next.12
     devDependencies:
       '@twind/core': link:../core
 
   packages/twind:
     specifiers:
-      '@twind/core': workspace:1.0.0-next.11
-      '@twind/preset-autoprefix': workspace:1.0.0-next.11
-      '@twind/preset-tailwind': workspace:1.0.0-next.11
-      '@twind/runtime': workspace:1.0.0-next.11
+      '@twind/core': workspace:1.0.0-next.12
+      '@twind/preset-autoprefix': workspace:1.0.0-next.12
+      '@twind/preset-tailwind': workspace:1.0.0-next.12
+      '@twind/runtime': workspace:1.0.0-next.12
     dependencies:
       '@twind/core': link:../core
       '@twind/preset-autoprefix': link:../preset-autoprefix

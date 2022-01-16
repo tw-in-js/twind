@@ -1,5 +1,17 @@
 # twind
 
+## 1.0.0-next.13
+
+### Patch Changes
+
+- introduce `twind/cdn`: a bore bones Tailwind CSS replacement — no additional exports like (`cx`, `style` or `css`) ([`9bc26949`](https://github.com/tw-in-js/twind/commit/9bc26949dd729b7002bc27032bb2f999e766546d))
+
+- Updated dependencies [[`9bc26949`](https://github.com/tw-in-js/twind/commit/9bc26949dd729b7002bc27032bb2f999e766546d)]:
+  - @twind/core@1.0.0-next.12
+  - @twind/preset-autoprefix@1.0.0-next.12
+  - @twind/preset-tailwind@1.0.0-next.12
+  - @twind/runtime@1.0.0-next.12
+
 ## 1.0.0-next.12
 
 ### Patch Changes
