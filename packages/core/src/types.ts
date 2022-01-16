@@ -78,19 +78,31 @@ export interface Context<Theme extends BaseTheme = BaseTheme> {
   /** Allows to resolve theme values. */
   theme: ThemeFunction<Theme>
 
-  /** escapes given string for use in a CSS selector */
+  /** escapes given string for use in a CSS selector or variable */
   e: (value: string) => string
 
   /** create hash of given string — may be no-op eg returning the same input */
   h: (value: string) => string
 
-  /** resolves a variant */
+  /**
+   * resolves a variant
+   *
+   * @private
+   */
   v(value: string): string
 
-  /** resolves a rule */
+  /**
+   * resolves a rule
+   *
+   * @private
+   */
   r(value: string): RuleResult
 
-  /** stringifies a CSS property and value to a declaration */
+  /**
+   * stringifies a CSS property and value to a declaration
+   *
+   * @private
+   */
   s(property: string, value: string): string
 }
 
