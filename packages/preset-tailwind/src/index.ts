@@ -34,6 +34,6 @@ export default function presetTailwind({
   }))
 }
 
-function hashVars(value: string, { h }: Context<TailwindTheme>): string {
-  return value.replace(/--(tw-[\w-]+)\b/g, (_, property: string) => '--' + h(property))
+function hashVars(value: string, { e, h }: Context<TailwindTheme>): string {
+  return value.replace(/--(tw-[\w-]+)\b/g, (_, property: string) => '--' + e(h(property)))
 }
