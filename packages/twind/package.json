@@ -43,19 +43,19 @@
   "sideEffects": false,
   "size-limit": [
     {
+      "name": "twind",
+      "path": "dist/twind.esnext.js",
+      "brotli": true,
+      "limit": "15.3kb"
+    },
+    {
       "name": "twind/cdn",
       "path": "dist/cdn.esnext.js",
       "brotli": true,
       "limit": "14.6kb"
     },
     {
-      "name": "twind (full)",
-      "path": "dist/twind.esnext.js",
-      "brotli": true,
-      "limit": "15.3kb"
-    },
-    {
-      "name": "twind/core (full)",
+      "name": "twind/core",
       "path": "dist/core.esnext.js",
       "brotli": true,
       "limit": "5.8kb"
