@@ -61,13 +61,6 @@
       "limit": "5.8kb"
     }
   ],
-  "// These are ONLY bundled (eg included) in the global builds": "",
-  "bundledDependencies": [
-    "@twind/core",
-    "@twind/runtime",
-    "@twind/preset-autoprefix",
-    "@twind/preset-tailwind"
-  ],
   "dependencies": {
     "@twind/core": "1.0.0-next.12",
     "@twind/preset-autoprefix": "1.0.0-next.12",

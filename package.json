@@ -41,8 +41,9 @@
       "limit": "14.6kb"
     }
   ],
+  "// start — use 'BROWSER=none' to prevent vite to open a browser if within codesandbox or stackblitz": "",
   "scripts": {
-    "start": "npm run test:ui",
+    "start": "BROWSER=none npm run test:ui",
     "build": "pnpm prepublishOnly --recursive --if-present --filter=./packages",
     "check": "eslint --ext .js,.jsx,.cjs,.mjs,.ts,.tsx --ignore-path .gitignore .",
     "check:fix": "npm run check -- --fix",
@@ -70,7 +71,7 @@
     "@typescript-eslint/parser": "^5.9.1",
     "@vitest/ui": "^0.1.12",
     "c8": "^7.11.0",
-    "distilt": "^0.14.0",
+    "distilt": "^0.15.0",
     "dotenv": "^10.0.0",
     "eslint": "^8.6.0",
     "eslint-config-prettier": "^8.3.0",

@@ -52,10 +52,6 @@
       ]
     }
   ],
-  "// These are ONLY bundled (eg included) in the global builds": "",
-  "bundledDependencies": [
-    "style-vendorizer"
-  ],
   "dependencies": {
     "style-vendorizer": "^2.1.1"
   },

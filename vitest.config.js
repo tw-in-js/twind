@@ -5,5 +5,6 @@ export default {
     coverage: {
       reporter: isCI ? 'lcovonly' : 'html',
     },
+    uiBase: '/',
   },
 }
