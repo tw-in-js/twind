@@ -12,7 +12,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "twind": "workspace:*"
+    "twind": "1.0.0-next.14"
   },
   "devDependencies": {
     "vite": "^2.7.2"
