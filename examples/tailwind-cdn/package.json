@@ -1,0 +1,16 @@
+{
+  "name": "@example/tailwind-cdn",
+  "description": "tailwind-cdn twind example",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.html",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "serve",
+    "build": "echo This is a static template, there is no bundler or bundling involved!"
+  },
+  "devDependencies": {
+    "serve": "^13.0.2"
+  }
+}

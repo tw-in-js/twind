@@ -6,5 +6,5 @@
   "access": "public",
   "baseBranch": "next",
   "updateInternalDependencies": "patch",
-  "ignore": []
+  "ignore": ["documentation", "examples/*"]
 }

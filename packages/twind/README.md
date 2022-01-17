@@ -40,7 +40,7 @@ Incase you are not using SSR to inject the pre-computed styles apply the followi
 Add this line to your `index.html`:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/twind@next"></script>
+<script src="https://cdn.jsdelivr.net/npm/twind@next" crossorigin></script>
 ```
 
 To configure Twind (optional):
@@ -77,7 +77,7 @@ By default, [@twind/preset.autoprefix](https://www.npmjs.com/package/@twind/pres
 With [@twind/preset.autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix) and [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/twind@next/cdn.global.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/twind@next/cdn.global.js" crossorigin></script>
 ```
 
 > Please note: This build does not export any helper functions like `cx`, `style`, or `css`. It is meant as a replacement for Tailwindcss CDN.
@@ -87,7 +87,7 @@ With [@twind/preset.autoprefix](https://www.npmjs.com/package/@twind/preset-auto
 With all core exports and the presets [@twind/preset.autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix) and [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind):
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/twind@next"></script>
+<script src="https://cdn.jsdelivr.net/npm/twind@next" crossorigin></script>
 ```
 
 #### Core
@@ -95,7 +95,7 @@ With all core exports and the presets [@twind/preset.autoprefix](https://www.npm
 Without any preset:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/twind@next/core.global.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/twind@next/core.global.js" crossorigin></script>
 ```
 
 ## API

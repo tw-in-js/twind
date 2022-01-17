@@ -20,7 +20,13 @@
     "node": ">=12.4",
     "pnpm": "^6.10.0"
   },
+  "// https://nodejs.org/dist/latest-v16.x/docs/api/corepack.html": "",
   "packageManager": "pnpm@6.24.3",
+  "// for npm/yarn within codesandbox — same as in pnpm-workspace.yml": "",
+  "workspaces": [
+    "examples/*",
+    "packages/*"
+  ],
   "size-limit": [
     {
       "name": "@twind/core",
@@ -36,17 +42,17 @@
     }
   ],
   "scripts": {
-    "build": "pnpm prepublishOnly --recursive --if-present",
+    "start": "npm run test:ui",
+    "build": "pnpm prepublishOnly --recursive --if-present --filter=./packages",
     "check": "eslint --ext .js,.jsx,.cjs,.mjs,.ts,.tsx --ignore-path .gitignore .",
-    "check:fix": "pnpm check -- --fix",
+    "check:fix": "npm run check -- --fix",
     "size-limit": "size-limit",
     "format": "prettier --write --ignore-path .gitignore . '!pnpm-lock.yaml'",
     "test": "vitest --reporter dot",
-    "test:ui": "pnpm test -- --open",
+    "test:ui": "npm test -- --ui",
     "test:coverage": "vitest run --coverage",
     "release": "pnpm publish -r",
     "changeset:version": "changeset version && pnpm i --lockfile-only",
-    "preinstall": "npx only-allow pnpm",
     "prepare": "husky install"
   },
   "// these are added as dependencies to all packages": "",
@@ -73,7 +79,6 @@
     "husky": "^7.0.4",
     "is-ci": "^3.0.1",
     "lint-staged": "^12.1.7",
-    "only-allow": "^1.0.0",
     "prettier": "^2.5.1",
     "size-limit": "^7.0.5",
     "tslib": "^2.3.1",

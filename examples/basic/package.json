@@ -1,0 +1,20 @@
+{
+  "name": "@example/basic",
+  "description": "basic twind example",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "twind": "workspace:*"
+  },
+  "devDependencies": {
+    "vite": "^2.7.2"
+  }
+}
