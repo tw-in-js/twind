@@ -54,7 +54,7 @@
     }
   },
   "devDependencies": {
-    "@twind/core": "workspace:1.0.0-next.12"
+    "@twind/core": "1.0.0-next.12"
   },
   "scripts": {
     "prepublishOnly": "distilt"
