@@ -30,6 +30,19 @@ import { init } from '@twind/runtime'
 init({
   /* twind config */
 })
+// -> returns a Twind instance eg `tw`
 ```
 
-> Documentation missing: Look at the [source](./src/index.ts) for now.
+## API
+
+### `init`
+
+TBD
+
+### `autoInit`
+
+TBD
+
+### `tw`
+
+TBD

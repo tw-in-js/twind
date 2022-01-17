@@ -1,15 +1,19 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import {
+
+// Fix exported global variable from `twindCdn` to `twind`
+/* @distilt-global-name twind */
+
+import type {
   Twind,
   BaseTheme,
   TwindConfig,
   TwindUserConfig,
   Preset,
   ExtractThemes,
-  defineConfig,
   Sheet,
-  asArray,
 } from '@twind/core'
+
+import { defineConfig, asArray } from '@twind/core'
 
 import { init, autoInit } from '@twind/runtime'
 

@@ -43,3 +43,40 @@ const tw = observe(
   ),
 )
 ```
+
+## API
+
+### `twind`
+
+TDB
+
+### `cx`
+
+```js
+import { cx } from '@twind/twind'
+
+// Set a className
+element.className = cx`
+  underline
+  /* multi
+    line
+    comment
+  */
+  hover:focus:!{
+    sm:{italic why}
+    lg:-{px}
+    -mx-1
+  }
+  // Position
+  !top-1 !-bottom-2
+  text-{xl black}
+`
+```
+
+### `shortcut`
+
+TDB
+
+### `style`
+
+TDB
