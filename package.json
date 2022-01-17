@@ -54,7 +54,7 @@
     "test:coverage": "vitest run --coverage",
     "release": "pnpm publish -r",
     "changeset:version": "changeset version && pnpm i --lockfile-only",
-    "prepare": "husky install"
+    "prepare": "node ./.husky/prepare.cjs"
   },
   "// these are added as dependencies to all packages": "",
   "// @swc/helpers: common helper used by code generated from swc (distilt)": "",
@@ -80,6 +80,7 @@
     "husky": "^7.0.4",
     "is-ci": "^3.0.1",
     "lint-staged": "^12.1.7",
+    "local-pkg": "^0.4.1",
     "prettier": "^2.5.1",
     "size-limit": "^7.0.5",
     "tslib": "^2.3.1",
