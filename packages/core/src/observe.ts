@@ -1,3 +1,4 @@
+import { changed } from './internal/changed'
 import type { BaseTheme, Twind } from './types'
 
 export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
@@ -33,8 +34,8 @@ export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
 
     const className = tokens && tw(tokens)
 
-    if (tokens !== className) {
-      // TODO try do keep classNames unmodified or same order
+    // try do keep classNames unmodified
+    if (tokens && changed(tokens, className as string)) {
       // Not using `target.className = ...` as that is read-only for SVGElements
       // eslint-disable-next-line @typescript-eslint/no-extra-semi
       ;(target as Element).setAttribute('class', className as string)
