@@ -4,7 +4,7 @@ import { assert, test } from 'vitest'
 
 import { cssom } from '..'
 
-test.todo('use happy-dom in this test file', () => {
+test.todo('until https://github.com/capricorn86/happy-dom/pull/333', () => {
   const sheet = cssom()
 
   // lazy injected
@@ -14,17 +14,11 @@ test.todo('use happy-dom in this test file', () => {
 
   assert.isDefined(sheet.target)
 
-  console.log(document.documentElement.innerHTML)
-  console.log([...sheet.target.cssRules].map((rule) => rule.cssText))
-  console.log(
-    [...((document.querySelector('#tw') as HTMLStyleElement).sheet?.cssRules || [])].map(
-      (rule) => rule.cssText,
-    ),
-  )
+  assert.strictEqual(document.styleSheets[0], sheet.target)
+  assert.strictEqual((document.querySelector('#tw') as HTMLStyleElement).sheet, sheet.target)
+
   assert.deepEqual(
-    [...((document.querySelector('#tw') as HTMLStyleElement).sheet?.cssRules || [])].map(
-      (rule) => rule.cssText,
-    ),
+    [...(document.styleSheets[0]?.cssRules || [])].map((rule) => rule.cssText),
     ['*{}'],
   )
 })

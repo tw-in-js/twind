@@ -30,7 +30,7 @@ export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
 
   function handleMutation({ target, addedNodes }: MinimalMutationRecord): void {
     // Not using target.classList.value (not supported in all browsers) or target.class (this is an SVGAnimatedString for svg)
-    const tokens = (target as Element).getAttribute?.('class')
+    const tokens = (target as Element)?.getAttribute?.('class')
 
     const className = tokens && tw(tokens)
 
