@@ -91,11 +91,11 @@ export interface StyleConfig<Variants, BaseVariants = {}> {
   when?: [match: When<Variants & BaseVariants>, then: StyleToken][]
 }
 export interface StyleFunction {
-  <Variants>(config?: StyleConfig<Variants>): Style<Variants> & string
+  <Variants>(config?: StyleConfig<Variants>): Style<Variants>
   <Variants, BaseVariants>(
     base: Style<BaseVariants>,
     config?: StyleConfig<Variants, BaseVariants>,
-  ): Style<Variants & BaseVariants> & string
+  ): Style<Variants & BaseVariants>
 }
 
 export type StyleProps<Variants> = VariantsProps<Variants>
@@ -106,9 +106,9 @@ export interface Style<Variants> {
    *
    * ```jsx
    * const button = style({
-   *   base: {
+   *   base: css({
    *     color: "DarkSlateGray"
-   *   }
+   *   })
    * })
    *
    * <div className={button()} />
@@ -120,32 +120,13 @@ export interface Style<Variants> {
   readonly defaults: StyleProps<Variants>
 
   /**
-   * CSS Selector associated with the current component.
-   *
-   * ```js
-   * const button = style({
-   *   base: {
-   *     color: "DarkSlateGray"
-   *   }
-   * })
-   *
-   * const article = style({
-   *   base: {
-   *     [button]: { boxShadow: "0 0 0 5px" }
-   *   }
-   * })
-   * ```
-   */
-  toString(): string
-
-  /**
    * CSS Class associated with the current component.
    *
    * ```js
    * const button = style({
-   *   base: {
+   *   base: css`
    *     color: "DarkSlateGray"
-   *   }
+   *   `
    * })
    *
    * <div className={button.className} />
@@ -158,15 +139,17 @@ export interface Style<Variants> {
    *
    * ```js
    * const button = style({
-   *   base: {
+   *   base: css({
    *     color: "DarkSlateGray"
-   *   }
+   *   })
    * })
    *
    * const Card = styled({
-   *   base: {
-   *     [button.selector]: { boxShadow: "0 0 0 5px" }
-   *   }
+   *   base: css`
+   *     & ${button.selector} {
+   *       boxShadow: "0 0 0 5px"
+   *     }
+   *   `
    * })
    * ```
    */
@@ -176,7 +159,7 @@ export interface Style<Variants> {
 export const style = (<Variants, BaseVariants>(
   base: Style<BaseVariants> | StyleConfig<Variants>,
   config?: StyleConfig<Variants, BaseVariants>,
-): Style<Variants & BaseVariants> & string =>
+): Style<Variants & BaseVariants> =>
   (typeof base == 'function' ? createStyle(config, base) : createStyle(base)) as Style<
     Variants & BaseVariants
   > &
@@ -185,7 +168,7 @@ export const style = (<Variants, BaseVariants>(
 function createStyle<Variants, BaseVariants>(
   config: StyleConfig<Variants, BaseVariants> = {},
   parent?: Style<BaseVariants>,
-): Style<Variants & BaseVariants> & string {
+): Style<Variants & BaseVariants> {
   const { label = 'style', base, props: variants = {}, defaults: localDefaults, when = [] } = config
 
   const defaults = { ...parent?.defaults, ...localDefaults }
@@ -280,13 +263,10 @@ function createStyle<Variants, BaseVariants>(
       })
 
       return classNames
-    } as Style<Variants & BaseVariants> & string,
+    } as Style<Variants & BaseVariants>,
     Object.getOwnPropertyDescriptors({
-      toString() {
-        return this.selector
-      },
-      defaults,
       className,
+      defaults,
       selector: '.' + escape(className),
     }),
   )

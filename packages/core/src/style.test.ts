@@ -96,8 +96,6 @@ test('basic style', () => {
     ],
   })
 
-  // Returns a component selector without the default variant applied when toString is used
-  assert.strictEqual(component.toString(), '.button\\#p8xtwh')
   assert.strictEqual(component.selector, '.button\\#p8xtwh')
   assert.strictEqual(component.className, 'button#p8xtwh')
   assert.deepEqual(tw.target, [])
