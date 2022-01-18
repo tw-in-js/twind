@@ -1,4 +1,4 @@
-import type { CSSObject, Falsey, Context, TwindRule, BaseTheme } from '../types'
+import type { CSSObject, Falsey, Context, TwindRule, BaseTheme, MaybeArray } from '../types'
 import type { SingleParsedRule } from './parse'
 import type { ConvertedRule } from './precedence'
 import { Layer, moveToLayer } from './precedence'
@@ -37,7 +37,7 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
   let numberOfDeclarations = 0
 
   for (let key in style || {}) {
-    let value = (style as Record<string, unknown>)[key]
+    const value = (style as Record<string, unknown>)[key]
 
     if (key[0] == '@') {
       if (!value) continue
@@ -161,44 +161,44 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
       numberOfDeclarations += 1
       maxPropertyPrecedence = Math.max(maxPropertyPrecedence, declarationPropertyPrecedence(key))
 
-      // support theme(...) function in values
-      // calc(100vh - theme('spacing.12'))
-      value = resolveThemeFunction(String(value), context) + (important ? ' !important' : '')
-
       declarations +=
         (declarations ? ';' : '') +
         asArray(value)
-          .map((value) => context.s(key, value as string))
+          .map((value) =>
+            context.s(
+              key,
+              // support theme(...) function in values
+              // calc(100vh - theme('spacing.12'))
+              // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+              resolveThemeFunction('' + value, context) + (important ? ' !important' : ''),
+            ),
+          )
           .join(';')
     }
   }
 
-  // We have collected all properties
-  // if there have been some we need to create a css rule
-  if (numberOfDeclarations) {
-    if (name) {
-      name = context.h(name)
-    }
-
-    rules.unshift({
-      n: name,
-
-      p: precedence,
-
-      o:
-        // number of declarations (descending)
-        Math.max(0, 15 - numberOfDeclarations) +
-        // greatest precedence of properties
-        // if there is no property precedence this is most likely a custom property only declaration
-        // these have the highest precedence
-        Math.min(maxPropertyPrecedence || 15, 15) * 1.5,
-
-      r: conditions,
-
-      // stringified declarations
-      d: declarations,
-    })
+  if (name) {
+    name = context.h(name)
   }
+
+  rules.unshift({
+    n: name,
+
+    p: precedence,
+
+    o:
+      // number of declarations (descending)
+      Math.max(0, 15 - numberOfDeclarations) +
+      // greatest precedence of properties
+      // if there is no property precedence this is most likely a custom property only declaration
+      // these have the highest precedence
+      Math.min(maxPropertyPrecedence || 15, 15) * 1.5,
+
+    r: conditions,
+
+    // stringified declarations
+    d: declarations,
+  })
 
   // only keep layer bits for merging
   return rules.sort(compareTwindRules)
