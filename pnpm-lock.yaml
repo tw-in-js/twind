@@ -72,6 +72,17 @@ importers:
     devDependencies:
       serve: 13.0.2
 
+  examples/tailwind-forms:
+    specifiers:
+      '@twind/preset-tailwind-forms': 1.0.0-next.13
+      twind: 1.0.0-next.14
+      vite: ^2.7.2
+    dependencies:
+      '@twind/preset-tailwind-forms': link:../../packages/preset-tailwind-forms
+      twind: link:../../packages/twind
+    devDependencies:
+      vite: 2.7.12
+
   packages/core:
     specifiers:
       '@twind/preset-tailwind': 1.0.0-next.13

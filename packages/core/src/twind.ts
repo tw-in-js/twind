@@ -78,8 +78,8 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
 
   return Object.defineProperties(
     function tw(strings, ...interpolations) {
-      if (!cache.size) {
-        for (let preflight of asArray(config.preflight)) {
+      if (!cache.size && config.preflight) {
+        for (let preflight of config.preflight) {
           if (typeof preflight == 'function') {
             preflight = preflight(context)
           }

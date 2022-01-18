@@ -44,7 +44,8 @@ export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = 
 
     config = {
       // values defined by user or previous presets take precedence
-      preflight: config.preflight && preflight !== false && [...config.preflight, preflight],
+      preflight: config.preflight !== false &&
+        preflight !== false && [...config.preflight, ...asArray(preflight)],
 
       theme: {
         ...config.theme,
