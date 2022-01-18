@@ -1,5 +1,29 @@
 # @twind/core
 
+## 1.0.0-next.13
+
+### Patch Changes
+
+- BREAKING(preset authors): removed `preset()` helper to simplify config merging — What needs to change? instead calling preset, return your preset ([#244](https://github.com/tw-in-js/twind/pull/244))
+
+* remove auto string conversion for style selector; this wouldn't have worked with `css()` anyway ([#244](https://github.com/tw-in-js/twind/pull/244))
+
+- add `comsume(html, tw)` to process static HTML ([#244](https://github.com/tw-in-js/twind/pull/244))
+
+* BREAKING: rename `config.tag` to `config.hash` as it better reflects what it does ([#244](https://github.com/tw-in-js/twind/pull/244))
+
+- feat: support array property value which act as fallbacks for browser taht do not support a specific syntax or value ([#244](https://github.com/tw-in-js/twind/pull/244))
+
+* only update class attributes if the class names within are different (ignore order) ([#244](https://github.com/tw-in-js/twind/pull/244))
+
+- fix: ensure nullish values are not converted to array with one nullish element ([#244](https://github.com/tw-in-js/twind/pull/244))
+
+* feat: `@layer ...` values can be arrays; this allows the same selector several times ([#244](https://github.com/tw-in-js/twind/pull/244))
+
+- add `extract(html, tw)` to simplify SSR use case ([#244](https://github.com/tw-in-js/twind/pull/244))
+
+* fix: for unnamed rules apply the condition in normal order; otherwise `&..` is applied before there is a selector ([#244](https://github.com/tw-in-js/twind/pull/244))
+
 ## 1.0.0-next.12
 
 ### Patch Changes
