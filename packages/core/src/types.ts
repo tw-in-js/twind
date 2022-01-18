@@ -16,7 +16,9 @@ type TypedAtRulesKeys =
   | `@media ${string}`
   | `@keyframes ${string}`
 
-export type TypedAtRules = { [key in TypedAtRulesKeys]?: CSSBase }
+export type TypedAtRules = {
+  [key in TypedAtRulesKeys]?: key extends `@layer ${string}` ? MaybeArray<CSSBase> : CSSBase
+}
 
 export interface BaseProperties extends TypedAtRules {
   '@import'?: MaybeArray<string | Falsey>

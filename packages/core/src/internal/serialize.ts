@@ -61,18 +61,20 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
 
         // @layer <layer>
         case 'l': {
-          rules.push(
-            ...serialize$(
-              value as CSSObject,
-              {
-                n: name,
-                p: moveToLayer(precedence, Layer[key[7] as 'b']),
-                r: conditions,
-                i: important,
-              },
-              context,
-            ),
-          )
+          for (const css of asArray(value as MaybeArray<CSSObject>)) {
+            rules.push(
+              ...serialize$(
+                css,
+                {
+                  n: name,
+                  p: moveToLayer(precedence, Layer[key[7] as 'b']),
+                  r: conditions,
+                  i: important,
+                },
+                context,
+              ),
+            )
+          }
 
           continue
         }
