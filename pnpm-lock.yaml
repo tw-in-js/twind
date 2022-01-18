@@ -59,7 +59,7 @@ importers:
 
   examples/basic:
     specifiers:
-      twind: 1.0.0-next.14
+      twind: 1.0.0-next.15
       vite: ^2.7.2
     dependencies:
       twind: link:../../packages/twind
@@ -74,8 +74,8 @@ importers:
 
   examples/tailwind-forms:
     specifiers:
-      '@twind/preset-tailwind-forms': 1.0.0-next.13
-      twind: 1.0.0-next.14
+      '@twind/preset-tailwind-forms': 1.0.0-next.14
+      twind: 1.0.0-next.15
       vite: ^2.7.2
     dependencies:
       '@twind/preset-tailwind-forms': link:../../packages/preset-tailwind-forms
@@ -85,7 +85,7 @@ importers:
 
   packages/core:
     specifiers:
-      '@twind/preset-tailwind': 1.0.0-next.13
+      '@twind/preset-tailwind': 1.0.0-next.14
       csstype: ^3.0.10
     dependencies:
       csstype: 3.0.10
@@ -94,7 +94,7 @@ importers:
 
   packages/preset-autoprefix:
     specifiers:
-      '@twind/core': 1.0.0-next.12
+      '@twind/core': 1.0.0-next.13
       style-vendorizer: ^2.1.1
     dependencies:
       style-vendorizer: 2.1.1
@@ -103,38 +103,38 @@ importers:
 
   packages/preset-ext:
     specifiers:
-      '@twind/core': 1.0.0-next.12
-      '@twind/preset-tailwind': 1.0.0-next.13
+      '@twind/core': 1.0.0-next.13
+      '@twind/preset-tailwind': 1.0.0-next.14
     devDependencies:
       '@twind/core': link:../core
       '@twind/preset-tailwind': link:../preset-tailwind
 
   packages/preset-tailwind:
     specifiers:
-      '@twind/core': 1.0.0-next.12
+      '@twind/core': 1.0.0-next.13
     devDependencies:
       '@twind/core': link:../core
 
   packages/preset-tailwind-forms:
     specifiers:
-      '@twind/core': 1.0.0-next.12
-      '@twind/preset-tailwind': 1.0.0-next.13
+      '@twind/core': 1.0.0-next.13
+      '@twind/preset-tailwind': 1.0.0-next.14
     devDependencies:
       '@twind/core': link:../core
       '@twind/preset-tailwind': link:../preset-tailwind
 
   packages/runtime:
     specifiers:
-      '@twind/core': 1.0.0-next.12
+      '@twind/core': 1.0.0-next.13
     devDependencies:
       '@twind/core': link:../core
 
   packages/twind:
     specifiers:
-      '@twind/core': 1.0.0-next.12
-      '@twind/preset-autoprefix': 1.0.0-next.12
-      '@twind/preset-tailwind': 1.0.0-next.13
-      '@twind/runtime': 1.0.0-next.12
+      '@twind/core': 1.0.0-next.13
+      '@twind/preset-autoprefix': 1.0.0-next.13
+      '@twind/preset-tailwind': 1.0.0-next.14
+      '@twind/runtime': 1.0.0-next.13
     dependencies:
       '@twind/core': link:../core
       '@twind/preset-autoprefix': link:../preset-autoprefix
