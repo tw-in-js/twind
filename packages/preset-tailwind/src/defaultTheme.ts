@@ -1,9 +1,63 @@
-import type { PartialTheme, ThemeSectionResolver } from '@twind/core'
+import type { ThemeSection, ThemeSectionResolver } from '@twind/core'
 import type { TailwindTheme } from '.'
 
 import * as colors from './colors'
 
-const theme: PartialTheme<TailwindTheme> = {
+type OmitedSections =
+  | 'backgroundPosition'
+  | 'container'
+  | 'cursor'
+  | 'gridColumnEnd'
+  | 'gridColumnStart'
+  | 'gridRowEnd'
+  | 'gridRowStart'
+  | 'listStyleType'
+  | 'objectPosition'
+  | 'transformOrigin'
+  | 'willChange'
+
+type StableSections =
+  | 'screens'
+  | 'columns'
+  | 'spacing'
+  | 'durations'
+  | 'borderRadius'
+  | 'borderWidth'
+  | 'boxShadow'
+  | 'fontFamily'
+  | 'fontSize'
+
+export type DefaultTheme = {
+  colors: typeof colors
+} & {
+  [Section in StableSections]: Section extends 'fontSize'
+    ? {
+        xs: [size: string, lineHeight: string]
+        sm: [size: string, lineHeight: string]
+        base: [size: string, lineHeight: string]
+        lg: [size: string, lineHeight: string]
+        xl: [size: string, lineHeight: string]
+        '2xl': [size: string, lineHeight: string]
+        '3xl': [size: string, lineHeight: string]
+        '4xl': [size: string, lineHeight: string]
+        '5xl': [size: string, lineHeight: string]
+        '6xl': [size: string, lineHeight: string]
+        '7xl': [size: string, lineHeight: string]
+        '8xl': [size: string, lineHeight: string]
+        '9xl': [size: string, lineHeight: string]
+      }
+    : TailwindTheme[Section]
+} & {
+  [Section in Exclude<
+    keyof TailwindTheme,
+    'colors' | StableSections | OmitedSections
+  >]: ThemeSection<TailwindTheme[Section], TailwindTheme>
+} & {
+  [Section in OmitedSections]?: ThemeSection<TailwindTheme[Section], TailwindTheme>
+}
+
+// TODO use named exports
+const theme: DefaultTheme = {
   screens: {
     sm: '640px',
     md: '768px',

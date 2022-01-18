@@ -1,3 +1,3 @@
 // ONLY FOR TYPESCRIPT TO FIND @twind/preset-tailwind/defaultTheme
 
-export * from './src/preflight'
+export { default } from './src/preflight'
