@@ -26,12 +26,12 @@ yarn add @twind/preset-tailwind@next
 
 ```js
 import { twind, cssom, observe } from '@twind/core'
-import tailwind from '@twind/preset-tailwind'
+import presetTailwind from '@twind/preset-tailwind'
 
 const tw = observe(
   twind(
     {
-      presets: [autoprefix()],
+      presets: [presetTailwind()],
       theme: {
         colors: {
           primary: '#f00',

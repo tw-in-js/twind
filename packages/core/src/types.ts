@@ -272,7 +272,7 @@ export interface TwindConfig<Theme extends BaseTheme = BaseTheme> {
   variants: Variant<Theme>[]
   rules: Rule<Theme>[]
 
-  hash: boolean | undefined | HashFunction
+  hash?: boolean | undefined | HashFunction
   stringify: StringifyDeclaration<Theme>
   ignorelist: (string | RegExp)[]
 }
@@ -287,15 +287,15 @@ export type ExtractThemes<Theme, Presets extends Preset<any>[]> = UnionToInterse
   ExtractTheme<Omit<Theme, 'extend'> | BaseTheme | ArrayType<Presets>>
 >
 
-export interface TwindPresetConfig<Theme extends BaseTheme = BaseTheme> {
-  theme?: ThemeConfig<Theme>
+export interface TwindPresetConfig<Theme = BaseTheme> {
+  theme?: ThemeConfig<Theme & BaseTheme>
 
-  preflight?: false | Preflight | PreflightThunk<Theme>
-  variants?: Variant<Theme>[]
-  rules?: Rule<Theme>[]
+  preflight?: false | Preflight | PreflightThunk<Theme & BaseTheme>
+  variants?: Variant<Theme & BaseTheme>[]
+  rules?: Rule<Theme & BaseTheme>[]
 
   hash?: boolean | undefined | HashFunction
-  stringify?: StringifyDeclaration<Theme>
+  stringify?: StringifyDeclaration<Theme & BaseTheme>
   ignorelist?: (string | RegExp)[]
 }
 
@@ -371,9 +371,11 @@ export type MatchConverter<Theme extends BaseTheme = BaseTheme> = (
   context: Context<Theme>,
 ) => string
 
-export interface Preset<Theme = BaseTheme> {
-  (config: TwindConfig<Theme & BaseTheme>): TwindConfig<Theme & BaseTheme>
+export interface PresetThunk<Theme = BaseTheme> {
+  (config: TwindConfig<Theme & BaseTheme>): TwindPresetConfig<Theme>
 }
+
+export type Preset<Theme = BaseTheme> = TwindPresetConfig<Theme> | PresetThunk<Theme>
 
 export interface ClassObject {
   [key: string]: boolean | number | unknown

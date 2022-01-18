@@ -1,8 +1,6 @@
 import type { Context, Preset } from '@twind/core'
 import type { TailwindTheme } from './types'
 
-import { preset } from '@twind/core'
-
 import theme from './defaultTheme'
 import preflight from './preflight'
 import rules from './rules'
@@ -19,8 +17,9 @@ export default function presetTailwind({
   preflight: enablePreflight = true,
   darkMode = 'media',
 }: TailwindPresetOptions = {}): Preset<TailwindTheme> {
-  return preset(({ stringify }) => ({
-    preflight: enablePreflight && preflight,
+  return ({ stringify }) => ({
+    // allow other preflight to run
+    preflight: enablePreflight ? preflight : undefined,
     theme,
     variants: [
       ['dark', darkMode == 'class' ? '.dark &' : '@media (prefers-color-scheme:dark)'],
@@ -31,12 +30,12 @@ export default function presetTailwind({
     stringify(property, value, context) {
       return stringify(hashVars(property, context), hashVars(value, context), context)
     },
-  }))
+  })
 }
 
 function hashVars(value: string, { h }: Context<TailwindTheme>): string {
   return value.replace(
     /--(tw-[\w-]+)\b/g,
-    (_, property: string) => '--' + h(property).replace('#', '_'),
+    (_, property: string) => '--' + h(property).replace('#', ''),
   )
 }

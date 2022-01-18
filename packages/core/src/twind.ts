@@ -79,7 +79,7 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
   return Object.defineProperties(
     function tw(strings, ...interpolations) {
       if (!cache.size) {
-        asArray(config.preflight).forEach((preflight) => {
+        for (let preflight of asArray(config.preflight)) {
           if (typeof preflight == 'function') {
             preflight = preflight(context)
           }
@@ -87,7 +87,7 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
           if (preflight) {
             serialize(preflight, {}, context, Layer.b).forEach(insert)
           }
-        })
+        }
       }
 
       const tokens = interpolate(strings, interpolations)

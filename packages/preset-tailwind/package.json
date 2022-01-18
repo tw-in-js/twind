@@ -3,6 +3,11 @@
   "version": "1.0.0-next.13",
   "description": "tailwindcss preset for twind",
   "keywords": [
+    "twind",
+    "tailwind",
+    "tailwindcss",
+    "tw-in-js",
+    "tailwind-in-js",
     "twind-preset",
     "preset"
   ],

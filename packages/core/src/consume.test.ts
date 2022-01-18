@@ -71,17 +71,17 @@ test('hash class names', () => {
     `,
   )
   assert.deepEqual(tw.target, [
-    '.\\#366evo{--_dxr4o8:1;color:rgba(255,255,255,var(--_dxr4o8))}',
+    '.\\#366evo{--dxr4o8:1;color:rgba(255,255,255,var(--dxr4o8))}',
     '.\\#13zmkow{height:100vh}',
     '.\\#e9txhd{display:flex}',
     '.\\#awuz9m{font-size:3rem;line-height:1}',
-    '.\\#c7xh85{--_17cwy6m:1;background-color:rgba(192,132,252,var(--_17cwy6m))}',
+    '.\\#c7xh85{--17cwy6m:1;background-color:rgba(192,132,252,var(--17cwy6m))}',
     '.\\#1vaw68m{text-align:center}',
     '.\\#eh6hfv{justify-content:center}',
     '.\\#tl02vf{align-items:center}',
     '.\\#wd565q{font-weight:700}',
-    '@media (min-width:640px){.\\#qvvf3j{--_dxr4o8:1;color:rgba(31,41,55,var(--_dxr4o8))}}',
-    '@media (min-width:768px){.\\#15z8gvd{--_dxr4o8:1;color:rgba(190,24,93,var(--_dxr4o8))}}',
+    '@media (min-width:640px){.\\#qvvf3j{--dxr4o8:1;color:rgba(31,41,55,var(--dxr4o8))}}',
+    '@media (min-width:768px){.\\#15z8gvd{--dxr4o8:1;color:rgba(190,24,93,var(--dxr4o8))}}',
   ])
 })
 

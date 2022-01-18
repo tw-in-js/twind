@@ -1,5 +1,4 @@
 import type { Preset } from '@twind/core'
-import { preset } from '@twind/core'
 
 import { cssPropertyAlias, cssPropertyPrefixFlags, cssValuePrefixFlags } from 'style-vendorizer'
 
@@ -10,7 +9,7 @@ const CSSPrefixFlags = [
 ] as const
 
 export default function presetAutoprefix(): Preset {
-  return preset(({ stringify }) => ({
+  return ({ stringify }) => ({
     stringify(property, value, context) {
       let cssText = ''
 
@@ -36,5 +35,5 @@ export default function presetAutoprefix(): Preset {
       /* https://css-tricks.com/ordering-css3-properties/ */
       return cssText + stringify(property, value, context)
     },
-  }))
+  })
 }
