@@ -58,7 +58,7 @@
       "name": "twind/cdn",
       "path": "dist/cdn.esnext.js",
       "brotli": true,
-      "limit": "14.6kb"
+      "limit": "14.7kb"
     },
     {
       "name": "twind/core",

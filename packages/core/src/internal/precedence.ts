@@ -1,6 +1,6 @@
 import type { BaseTheme, Context } from '../types'
 import type { SingleParsedRule } from './parse'
-import { mql } from '../utils'
+import { asArray, mql } from '../utils'
 import { toClassName } from './to-class-name'
 
 // Based on https://github.com/kripod/otion
@@ -294,18 +294,20 @@ export function convert<Theme extends BaseTheme = BaseTheme>(
   { n: name, i: important, v: variants = [] }: Partial<SingleParsedRule>,
   context: Context<Theme>,
   precedence: number,
-  conditions: string[] = [],
+  conditions?: string[],
 ): ConvertedRule {
   if (name) {
     name = toClassName({ n: name, i: important, v: variants })
   }
+
+  conditions = [...asArray(conditions)]
 
   for (const variant of variants) {
     const screen = context.theme('screens', variant)
 
     const condition = (screen && mql(screen)) || context.v(variant)
 
-    conditions = [...conditions, condition]
+    conditions.push(condition)
 
     precedence |= screen
       ? (1 << 26) /* Shifts.screens */ | atRulePrecedence(condition)

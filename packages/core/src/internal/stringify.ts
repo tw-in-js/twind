@@ -22,7 +22,7 @@ export function stringify(rule: TwindRule): string | undefined {
               / *((?:\\,|\(.+?\)|\[.+?\]|[^,])+) *(,|$)/g,
               // If the current condition has a nested selector replace it
               (_, conditionPart: string, comma = '') =>
-                conditionPart.replace(/&/g, selectorPart) + comma,
+                conditionPart.replace(/&/g, selectorPart as string) + comma,
             ) + comma,
         )
       },

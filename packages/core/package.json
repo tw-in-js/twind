@@ -40,24 +40,24 @@
   "sideEffects": false,
   "size-limit": [
     {
-      "name": "@twind/core (full)",
+      "name": "@twind/core",
       "path": "dist/core.esnext.js",
       "brotli": true,
-      "limit": "6kb"
+      "limit": "6.1kb"
     },
     {
       "name": "@twind/core (shim)",
       "path": "dist/core.esnext.js",
       "import": "{ twind, observe, cssom }",
       "brotli": true,
-      "limit": "4.1kb"
+      "limit": "4.3kb"
     },
     {
       "name": "@twind/core (twind)",
       "path": "dist/core.esnext.js",
       "import": "{ twind }",
       "brotli": true,
-      "limit": "3.7kb"
+      "limit": "3.8kb"
     }
   ],
   "dependencies": {

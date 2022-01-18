@@ -44,5 +44,7 @@ export function mql(screen: MaybeArray<ScreenValue>, prefix = '@media '): string
 }
 
 export function asArray<T>(value: T = [] as unknown as T): T extends Array<any> ? T : T[] {
-  return (Array.isArray(value) ? value : [value]) as T extends Array<any> ? T : T[]
+  return (Array.isArray(value) ? value : value == null ? [] : [value]) as T extends Array<any>
+    ? T
+    : T[]
 }
