@@ -1,15 +1,48 @@
 import type { BaseTheme, Twind } from './types'
 
+import { consume } from './consume'
+
+/**
+ * Result of {@link extract}
+ */
 export interface ExtractResult {
+  /** The possibly modified HTML */
   html: string
+
+  /** The generated CSS */
   css: string
 }
 
+/**
+ * Used for static HTML processing (usually to provide SSR support for your javascript-powered web apps)
+ *
+ * 1. parse the markup and process element classes with the provided Twind instance
+ * 2. update the class attributes _if_ necessary
+ * 3. return the HTML string with the final element classes
+ *
+ * ```js
+ * import { twind, virtual, extract } from '@twind/core'
+ *
+ * // can be re-used
+ * const tw = twind(config, virtual()}
+ *
+ * function render() {
+ *   const { html, css } = extract(app(), tw)
+ *
+ *   // inject as last element into the head
+ *   return html.replace('</head>', `<style id="tw">${css}</style></head>`)
+ * }
+ * ```
+ *
+ * @param markup HTML to process
+ * @param tw a {@link Twind} instance
+ * @returns the possibly modified html and css
+ */
 export function extract<Theme extends BaseTheme = BaseTheme>(
   html: string,
-  twind: Twind<Theme, string[]>,
+  tw: Twind<Theme, string[]>,
 ): ExtractResult {
-  twind.clear()
+  tw.clear()
 
-  return { html /* shim(html, twind)*/, css: twind.target.join('') }
+  return { html: consume(html, tw), css: tw.target.join('') }
 }

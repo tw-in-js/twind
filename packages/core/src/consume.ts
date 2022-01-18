@@ -8,7 +8,7 @@ import { changed } from './internal/changed'
  * 3. return the HTML string with the final element classes
  *
  * ```js
- * import { twind, virtual, consume} from '@twind/core'
+ * import { twind, virtual, consume } from '@twind/core'
  *
  * // can be re-used
  * const tw = twind(config, virtual()}
