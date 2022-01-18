@@ -145,3 +145,76 @@ None
 ### `setup(config [, sheet [, target]])`
 
 Can be called as many times as you want.
+
+```js
+import { setup } from 'twind'
+
+// can be called as many times as you want.
+const tw = setup({
+  /* config */
+})
+```
+
+### `tw(...tokens)` — the current Twind instance
+
+```js
+import { tw } from 'twind'
+
+tw`underline`
+tw({ underline: true })
+
+tw.theme('colors.blue.500', 'blue')
+```
+
+### `extract(html, tw)`
+
+Used for static HTML processing (usually to provide SSR support for your javascript-powered web apps) — powered by [consume(html, tw)](#consumehtml-tw)
+
+```js
+import { setup, extract } from 'twind'
+
+// can be re-used
+const tw = setup({
+  /* config */
+})
+
+function render() {
+  const { html, css } = extract(app(), tw)
+
+  // inject as last element into the head
+  return html.replace('</head>', `<style id="tw">${css}</style></head>`)
+}
+```
+
+### `consume(html, tw)`
+
+Used for static HTML processing (usually to provide SSR support for your javascript-powered web apps)
+
+1. parse the markup and process element classes with the provided Twind instance
+2. update the class attributes _if_ necessary
+3. return the HTML string with the final element classes
+
+```js
+import { setup, consume } from 'twind'
+
+// can be re-used
+const tw = setup({
+  /* config */
+})
+
+function render() {
+  const html = app()
+
+  // clear all styles
+  tw.clear()
+
+  // generated markup
+  const markup = comsume(html, tw)
+
+  // create CSS
+  const css = tw.target.join('')
+
+  // inject as last element into the head
+  return markup.replace('</head>', `<style id="tw">${css}</style></head>`)
+}
+```

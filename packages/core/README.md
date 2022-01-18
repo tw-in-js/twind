@@ -83,13 +83,18 @@ TDB
 
 ### `extract(html, tw)`
 
-Used for static HTML processing (usually to provide SSR support for your javascript-powered web apps) — powered by [consume(html, tw)](#consume-html-tw)
+Used for static HTML processing (usually to provide SSR support for your javascript-powered web apps) — powered by [consume(html, tw)](#consumehtml-tw)
 
 ```js
 import { twind, virtual, extract } from '@twind/core'
 
 // can be re-used
-const tw = twind({ /* config */, virtual()}
+const tw = twind(
+  {
+    /* config */
+  },
+  virtual(),
+)
 
 function render() {
   const { html, css } = extract(app(), tw)
@@ -111,7 +116,12 @@ Used for static HTML processing (usually to provide SSR support for your javascr
 import { twind, virtual, consume } from '@twind/core'
 
 // can be re-used
-const tw = twind({ /* config */, virtual()}
+const tw = twind(
+  {
+    /* config */
+  },
+  virtual(),
+)
 
 function render() {
   const html = app()
