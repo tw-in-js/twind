@@ -72,14 +72,31 @@ To configure Twind add a script block _after_ the previous one (optional):
 
 **Presets**
 
-- [@twind/preset.autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix)
+- [@twind/preset-autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix)
 - [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind)
 
-**API**
+To add another preset add its script after the current one:
 
-- everything from [@twind/core](https://www.npmjs.com/package/@twind/core#api)
-- `tw` from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime#tw)
+```html
+<head>
+  <!-- ... -->
+  <script src="https://cdn.jsdelivr.net/npm/twind@next" crossorigin></script>
+  <script src="https://cdn.jsdelivr.net/npm/@twind/preset-ext@next" crossorigin></script>
+  <script>
+    twind.setup({
+      presets: [twind_presetExt()],
+      // ...
+    })
+  </script>
+  <!-- ... -->
+</head>
+```
+
+**API**: accessible through the global `twind` variable
+
 - [`twind.setup`](#setupconfig--sheet--target)
+- `twind.tw` — from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime#tw)
+- `twind.*` — everything from [@twind/core](https://www.npmjs.com/package/@twind/core#api)
 
 ### `twind/cdn`
 
@@ -95,13 +112,13 @@ import { setup } from 'twind/play-cdn'
 
 **Presets**
 
-- [@twind/preset.autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix)
+- [@twind/preset-autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix)
 - [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind)
 
-**API**
+**API** — accessible through the global `twind` variable
 
-- `tw` from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime#tw)
 - [`twind.setup`](#setupconfig--sheet--target)
+- `twind.tw` — from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime#tw)
 
 ### `twind/core`
 
@@ -117,11 +134,11 @@ import { setup } from 'twind/core'
 
 None
 
-**API**
+**API** — accessible through the global `twind` variable
 
-- everything from [@twind/core](https://www.npmjs.com/package/@twind/core#api)
-- `tw` from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime#tw)
 - [`twind.setup`](#setupconfig--sheet--target)
+- `twind.tw` — from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime#tw)
+- `twind.*` — everything from [@twind/core](https://www.npmjs.com/package/@twind/core#api)
 
 ## API
 

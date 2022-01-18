@@ -24,10 +24,10 @@ yarn add @twind/preset-ext@next
 
 ```js
 import { defineConfig, twind, cssom, observe } from '@twind/core'
-import ext from '@twind/preset-ext'
+import presetExt from '@twind/preset-ext'
 
 const config = defineConfig({
-  presets: [ext()],
+  presets: [presetExt()],
 })
 
 const tw = observe(twind(config, cssom()))

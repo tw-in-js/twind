@@ -1,9 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-// Fix exported global variable from `twindCdn` to `twind`
-/* @distilt-global-name twind */
-
 import type {
   Twind,
   BaseTheme,
@@ -14,12 +11,12 @@ import type {
   Sheet,
 } from '@twind/core'
 
-import { init, autoInit } from '@twind/runtime'
-
 export * from '@twind/core'
 export { tw } from '@twind/runtime'
 
-const cancelAutoInit = autoInit(setup)
+import { init, auto } from '@twind/runtime'
+
+const cancelAutoSetup = auto(setup)
 
 export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = CSSStyleSheet | string[]>(
   config?: TwindConfig<Theme>,
@@ -42,7 +39,7 @@ export function setup(
   sheet?: Sheet,
   target?: HTMLElement,
 ): Twind {
-  cancelAutoInit()
+  cancelAutoSetup()
 
   return init(config as TwindConfig<any>, sheet, target)
 }

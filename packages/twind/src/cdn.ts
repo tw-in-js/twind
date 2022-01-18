@@ -15,12 +15,12 @@ import type {
 
 import { defineConfig, asArray } from '@twind/core'
 
-import { init, autoInit } from '@twind/runtime'
+import { init, auto } from '@twind/runtime'
 
 import autoprefix from '@twind/preset-autoprefix'
 import tailwind from '@twind/preset-tailwind'
 
-const cancelAutoInit = autoInit(setup)
+const cancelAutoSetup = auto(setup)
 
 export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = CSSStyleSheet | string[]>(
   config?: TwindConfig<Theme>,
@@ -43,7 +43,7 @@ export function setup(
   sheet?: Sheet,
   target?: HTMLElement,
 ): Twind {
-  cancelAutoInit()
+  cancelAutoSetup()
 
   return init(
     defineConfig({

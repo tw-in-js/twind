@@ -34,9 +34,15 @@
   "main": "src/index.ts",
   "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
   "exports": {
-    ".": "./src/index.ts",
+    ".": {
+      "browser": "./src/index.global.ts",
+      "default": "./src/index.ts"
+    },
     "./cdn": "./src/cdn.ts",
-    "./core": "./src/core.ts",
+    "./core": {
+      "browser": "./src/core.global.ts",
+      "default": "./src/core.ts"
+    },
     "./package.json": "./package.json"
   },
   "// These are relative from within the dist/ folder": "",

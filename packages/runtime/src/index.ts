@@ -1,19 +1,19 @@
 import type { Twind, BaseTheme, TwindConfig, Sheet } from '@twind/core'
 import { twind, cssom, virtual, observe } from '@twind/core'
 
-export function autoInit(setup: () => void): () => void {
+export function auto(setup: () => void): () => void {
   // If we run in the browser we call setup at latest when the body is inserted
   // This algorith works well for _normal_ script but not for modules: `<script src="..."></script>`
   // because those are executed __after__ the DOM is ready and we would have FOUC
-  if (typeof document !== 'undefined' && document.currentScript) {
-    const cancelAutoInit = () => observer.disconnect()
+  if (typeof document != 'undefined' && document.currentScript) {
+    const cancelAutoSetup = () => observer.disconnect()
 
     const observer: MutationObserver = new MutationObserver((mutationsList) => {
       for (const { target } of mutationsList) {
-        // If we reach the body we immediately run the setup to prevent FLOC
+        // If we reach the body we immediately run the setup to prevent FOUC
         if (target === document.body) {
           setup()
-          return cancelAutoInit()
+          return cancelAutoSetup()
         }
       }
     })
@@ -23,11 +23,11 @@ export function autoInit(setup: () => void): () => void {
       subtree: true,
     })
 
-    return cancelAutoInit
-  } else {
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    return () => {}
+    return cancelAutoSetup
   }
+
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  return () => {}
 }
 
 export let tw: Twind
