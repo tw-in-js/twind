@@ -1,0 +1,58 @@
+{
+  "name": "@twind/preset-tailwind-forms",
+  "version": "1.0.0-next.13",
+  "description": "twind preset that provides a basic reset for form styles that makes form elements easy to override with utilities",
+  "keywords": [
+    "twind",
+    "tailwind",
+    "tailwindcss",
+    "tw-in-js",
+    "tailwind-in-js",
+    "twind-preset",
+    "preset"
+  ],
+  "type": "module",
+  "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
+  "main": "src/preset-tailwind-forms.ts",
+  "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
+  "exports": {
+    ".": "./src/preset-tailwind-forms.ts",
+    "./package.json": "./package.json"
+  },
+  "// These are relative from within the dist/ folder": "",
+  "sideEffects": false,
+  "size-limit": [
+    {
+      "name": "@twind/preset-tailwind-forms",
+      "path": "dist/preset-tailwind-forms.esnext.js",
+      "brotli": true,
+      "limit": "1.8kb",
+      "ignore": [
+        "@twind/core",
+        "@twind/preset-tailwind"
+      ]
+    }
+  ],
+  "peerDependencies": {
+    "@twind/core": "1.0.0-next.12",
+    "@twind/preset-tailwind": "1.0.0-next.13",
+    "typescript": "^4.4.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@twind/core": "1.0.0-next.12",
+    "@twind/preset-tailwind": "1.0.0-next.13"
+  },
+  "scripts": {
+    "prepublishOnly": "distilt"
+  },
+  "publishConfig": {
+    "tag": "next",
+    "access": "public",
+    "directory": "dist"
+  }
+}

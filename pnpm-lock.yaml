@@ -14,7 +14,7 @@ importers:
       '@typescript-eslint/parser': ^5.9.1
       '@vitest/ui': ^0.1.20
       c8: ^7.11.0
-      distilt: ^0.15.0
+      distilt: ^0.15.1
       dotenv: ^10.0.0
       eslint: ^8.6.0
       eslint-config-prettier: ^8.3.0
@@ -41,7 +41,7 @@ importers:
       '@typescript-eslint/parser': 5.9.1_eslint@8.6.0+typescript@4.5.4
       '@vitest/ui': 0.1.20
       c8: 7.11.0
-      distilt: 0.15.0_typescript@4.5.4
+      distilt: 0.15.1_typescript@4.5.4
       dotenv: 10.0.0
       eslint: 8.6.0
       eslint-config-prettier: 8.3.0_eslint@8.6.0
@@ -103,6 +103,14 @@ importers:
       '@twind/core': 1.0.0-next.12
     devDependencies:
       '@twind/core': link:../core
+
+  packages/preset-tailwind-forms:
+    specifiers:
+      '@twind/core': 1.0.0-next.12
+      '@twind/preset-tailwind': 1.0.0-next.13
+    devDependencies:
+      '@twind/core': link:../core
+      '@twind/preset-tailwind': link:../preset-tailwind
 
   packages/runtime:
     specifiers:
@@ -396,8 +404,8 @@ packages:
     resolution: {integrity: sha512-XQr74QaLeMiqhStEhLn1im9EOMnkypp7MZOwQhGzqp2Weu5eQJbpPxWxixxlYRKWPOmJjsk6qYfYH9kq43yc2w==}
     dev: true
 
-  /@node-rs/helper/1.3.2:
-    resolution: {integrity: sha512-cjP3xk/x8YQP4bsg9CdzxC86olR2lLkTUR1LB9UtOZElMht3SzE/+X3ZYJfIeOzxfKcDA4uABg+/1JRgkx/Puw==}
+  /@node-rs/helper/1.3.3:
+    resolution: {integrity: sha512-p4OdfQObGN9YFy5WZaGwlPYICQSe7xZYyXB0sxREmvj1HzGKp5bPg2PlfgfMZEfnjIA882B9ZrnagYzZihIwjA==}
     dependencies:
       '@napi-rs/triples': 1.1.0
     dev: true
@@ -671,7 +679,7 @@ packages:
     resolution: {integrity: sha512-Lv5nXiCFq+X1JDdwIkmBvx4cGJUdzmKCQ69OG6Zot1ArpEr3Smcfcc5oPcuKqQ7su2ATfP0tjMYbkM0CVO94cg==}
     engines: {node: '>=10'}
     dependencies:
-      '@node-rs/helper': 1.3.2
+      '@node-rs/helper': 1.3.3
     optionalDependencies:
       '@swc/core-android-arm-eabi': 1.2.130
       '@swc/core-android-arm64': 1.2.130
@@ -1634,8 +1642,8 @@ packages:
       path-type: 4.0.0
     dev: true
 
-  /distilt/0.15.0_typescript@4.5.4:
-    resolution: {integrity: sha512-un2cbu2KDOybA8sfBty6ymmxwTmKc8waFqGjUhcFAqLAD19JBPGKPRE3Y3I0f32l8O3HTEg0Zr/PoFUnju/6Pg==}
+  /distilt/0.15.1_typescript@4.5.4:
+    resolution: {integrity: sha512-R+Ok3rp54bCk+63q0jhIQXnQ5oOH3gdjw7zFNpdEX/zOUhv35DKgyes57uHu5b0uP13gCHOli5b08apdpQx8zA==}
     engines: {node: '>=14.6'}
     hasBin: true
     peerDependenciesMeta:
