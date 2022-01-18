@@ -48,7 +48,7 @@ export function setup(
   return init(
     defineConfig({
       ...config,
-      presets: [autoprefix(), ...asArray((config as TwindUserConfig<any>).presets), tailwind()],
+      presets: [autoprefix(), tailwind(), ...asArray((config as TwindUserConfig<any>).presets)],
     } as TwindUserConfig<any>),
     sheet,
     target,

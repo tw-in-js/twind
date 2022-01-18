@@ -228,6 +228,7 @@ See [twind](./packages/twind/README.md) for a quick intro.
 
 ## TODO
 
+- `const acx = cx'aaa~(text-blue-500)'` works, but `const bcx = 'bbb~(text-red-500 ${acx})'` not
 - support `is(:hover,:focus-visible):underline`?
 - style: should it pass `class` and `className` through? alternatives: string concat, `cx`
 - remove `dom` sheet?
