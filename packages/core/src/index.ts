@@ -1,4 +1,5 @@
 export * from './colors'
+export * from './consume'
 export * from './css'
 export * from './cx'
 export * from './define-config'

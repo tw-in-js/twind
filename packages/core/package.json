@@ -43,7 +43,7 @@
       "name": "@twind/core (full)",
       "path": "dist/core.esnext.js",
       "brotli": true,
-      "limit": "5.7kb"
+      "limit": "6kb"
     },
     {
       "name": "@twind/core (shim)",
@@ -70,6 +70,9 @@
     "typescript": {
       "optional": true
     }
+  },
+  "devDependencies": {
+    "@twind/preset-tailwind": "1.0.0-next.13"
   },
   "scripts": {
     "prepublishOnly": "distilt"

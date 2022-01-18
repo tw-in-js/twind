@@ -232,12 +232,15 @@ See [twind](./packages/twind/README.md) for a quick intro.
 - style: should it pass `class` and `className` through? alternatives: string concat, `cx`
 - remove `dom` sheet?
 - console.warn(`[twind] unknown rule "${value}"`)
+- ci: post on discord after release
+- twind/cdn: parse style elements like tailwind
+- cdn.twind.dev -> https://cdn.jsdelivr.net/npm/twind@next/cdn.global.js
+- docs: remix run, wmr, astro, next??? — must be react based for codehike
 - docs: explain and examples of both modes (observe/shim vs library)
 - docs: common patterns
 - auto support dark mode in theme helpers (`<section>.dark.<key>` or `dark.<section>.<key>`)
 - @twind/preset-\* from tailwind core
 - @twind/react
-- @twind/inject — parse HTML string for classNames, replace and inject CSS
 - @twind/completions — provide autocompletion for classNames
 - a package to make it easy to create lightweight versions of presets (like https://lodash.com/custom-builds)
 - postcss plugin like tailwindcss for SSR

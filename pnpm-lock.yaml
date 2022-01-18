@@ -74,9 +74,12 @@ importers:
 
   packages/core:
     specifiers:
+      '@twind/preset-tailwind': 1.0.0-next.13
       csstype: ^3.0.10
     dependencies:
       csstype: 3.0.10
+    devDependencies:
+      '@twind/preset-tailwind': link:../preset-tailwind
 
   packages/preset-autoprefix:
     specifiers:

@@ -32,7 +32,7 @@
       "name": "@twind/core",
       "path": "packages/core/dist/core.esnext.js",
       "brotli": true,
-      "limit": "5.7kb"
+      "limit": "6kb"
     },
     {
       "name": "twind/cdn",
