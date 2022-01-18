@@ -4,7 +4,7 @@ import { twind, virtual, fromTheme, shortcut, css } from '..'
 
 const tw = twind(
   {
-    tag: true,
+    hash: true,
     theme: {
       screens: {
         sm: '640px',

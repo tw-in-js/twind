@@ -17,7 +17,7 @@ import type {
 } from '../types'
 
 import { makeThemeFunction } from './theme'
-import { asArray, escape, hash } from '../utils'
+import { asArray, escape, hash as defaultHash } from '../utils'
 
 type ResolveFunction<Theme extends BaseTheme = BaseTheme> = (
   className: string,
@@ -33,7 +33,7 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
   theme,
   variants,
   rules,
-  tag,
+  hash,
   stringify,
   ignorelist,
 }: TwindConfig<Theme>): Context<Theme> {
@@ -53,11 +53,11 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
   const ignored = createRegExpExecutor(ignorelist, (value, condition) => condition.test(value))
 
   return {
-    h: typeof tag == 'function' ? tag : tag === true ? hash : (value) => value,
-
     theme: makeThemeFunction(theme),
 
     e: escape,
+
+    h: typeof hash == 'function' ? hash : hash === true ? defaultHash : (value) => value,
 
     s(property, value) {
       return stringify(property, value, this)

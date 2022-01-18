@@ -8,7 +8,7 @@ export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = 
   theme = {} as TwindUserConfig<Theme, Presets>['theme'],
   variants = [],
   rules = [],
-  tag,
+  hash,
   ignorelist = [],
   stringify = noprefix,
 }: TwindUserConfig<Theme, Presets>): TwindConfig<BaseTheme & ExtractThemes<Theme, Presets>> {
@@ -17,8 +17,8 @@ export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = 
     theme: theme as TwindConfig<BaseTheme & ExtractThemes<Theme, Presets>>['theme'],
     variants,
     rules,
-    tag,
     ignorelist: asArray(ignorelist),
+    hash,
     stringify,
   }
 

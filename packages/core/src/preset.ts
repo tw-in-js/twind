@@ -11,7 +11,7 @@ export function preset<Theme extends BaseTheme = BaseTheme>(
       theme,
       variants = [],
       rules = [],
-      tag = config.tag,
+      hash = config.hash,
       ignorelist = [],
       stringify = config.stringify,
     } = typeof presetConfig == 'function' ? presetConfig(config) : presetConfig
@@ -30,8 +30,9 @@ export function preset<Theme extends BaseTheme = BaseTheme>(
       variants: [...config.variants, ...variants],
       rules: [...config.rules, ...rules],
 
-      tag,
       ignorelist: [...config.ignorelist, ...ignorelist],
+
+      hash,
       stringify,
     }
   }

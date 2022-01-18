@@ -263,7 +263,7 @@ export type PreflightThunk<Theme extends BaseTheme = BaseTheme> = (
   context: Context<Theme>,
 ) => Preflight | Falsey
 
-export type TagFunction = (value: string) => string
+export type HashFunction = (value: string) => string
 
 export interface TwindConfig<Theme extends BaseTheme = BaseTheme> {
   theme: ThemeConfig<Theme>
@@ -272,7 +272,7 @@ export interface TwindConfig<Theme extends BaseTheme = BaseTheme> {
   variants: Variant<Theme>[]
   rules: Rule<Theme>[]
 
-  tag: boolean | undefined | TagFunction
+  hash: boolean | undefined | HashFunction
   stringify: StringifyDeclaration<Theme>
   ignorelist: (string | RegExp)[]
 }
@@ -294,7 +294,7 @@ export interface TwindPresetConfig<Theme extends BaseTheme = BaseTheme> {
   variants?: Variant<Theme>[]
   rules?: Rule<Theme>[]
 
-  tag?: boolean | undefined | TagFunction
+  hash?: boolean | undefined | HashFunction
   stringify?: StringifyDeclaration<Theme>
   ignorelist?: (string | RegExp)[]
 }
@@ -308,7 +308,7 @@ export interface TwindUserConfig<Theme = BaseTheme, Presets extends Preset<any>[
   variants?: Variant<BaseTheme & ExtractThemes<Theme, Presets>>[]
   rules?: Rule<BaseTheme & ExtractThemes<Theme, Presets>>[]
 
-  tag?: boolean | undefined | TagFunction
+  hash?: boolean | undefined | HashFunction
   stringify?: StringifyDeclaration<BaseTheme & ExtractThemes<Theme, Presets>>
   ignorelist?: MaybeArray<string | RegExp>
 }

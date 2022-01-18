@@ -47,7 +47,7 @@ test('expand class names', () => {
 })
 
 test('hash class names', () => {
-  const tw = twind({ presets: [presetTailwind({ preflight: false })], tag: true }, virtual())
+  const tw = twind({ presets: [presetTailwind({ preflight: false })], hash: true }, virtual())
 
   const html = consume(
     `
