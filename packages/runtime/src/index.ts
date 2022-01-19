@@ -60,7 +60,7 @@ export const tw = /* @__PURE__ */ Object.defineProperties(
 
 let active: Twind
 
-export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = CSSStyleSheet | string[]>(
+export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown>(
   config: TwindConfig<Theme>,
   sheet: Sheet<SheetTarget> = (typeof document != 'undefined'
     ? cssom()

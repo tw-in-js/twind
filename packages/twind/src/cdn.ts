@@ -20,7 +20,7 @@ import tailwind from '@twind/preset-tailwind'
 
 const cancelAutoSetup = auto(setup)
 
-export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = CSSStyleSheet | string[]>(
+export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown>(
   config?: TwindConfig<Theme>,
   sheet?: Sheet<SheetTarget>,
   target?: HTMLElement,
@@ -29,7 +29,7 @@ export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = CSSStyl
 export function setup<
   Theme = BaseTheme,
   Presets extends Preset<any>[] = Preset[],
-  SheetTarget = CSSStyleSheet | string[],
+  SheetTarget = unknown,
 >(
   config?: TwindUserConfig<Theme, Presets>,
   sheet?: Sheet<SheetTarget>,
