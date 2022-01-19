@@ -32,13 +32,13 @@ export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
     // Not using target.classList.value (not supported in all browsers) or target.class (this is an SVGAnimatedString for svg)
     const tokens = (target as Element)?.getAttribute?.('class')
 
-    const className = tokens && tw(tokens)
+    let className: string
 
     // try do keep classNames unmodified
-    if (tokens && changed(tokens, className as string)) {
+    if (tokens && changed(tokens, (className = tw(tokens)))) {
       // Not using `target.className = ...` as that is read-only for SVGElements
       // eslint-disable-next-line @typescript-eslint/no-extra-semi
-      ;(target as Element).setAttribute('class', className as string)
+      ;(target as Element).setAttribute('class', className)
     }
 
     for (let index = addedNodes.length; index--; ) {

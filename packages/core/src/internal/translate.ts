@@ -52,9 +52,7 @@ function translate$<Theme extends BaseTheme = BaseTheme>(
   conditions?: string[],
   important?: boolean,
 ): TwindRule[] {
-  if (important && !rule.i) {
-    rule = { ...rule, i: important }
-  }
+  rule = { ...rule, i: rule.i || important }
 
   const resolved = resolve(rule, context)
 

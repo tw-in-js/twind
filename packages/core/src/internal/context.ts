@@ -57,7 +57,7 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
 
     e: escape,
 
-    h: typeof hash == 'function' ? hash : hash === true ? defaultHash : (value) => value,
+    h: typeof hash == 'function' ? hash : hash ? defaultHash : (value) => value,
 
     s(property, value) {
       return stringify(property, value, this)
@@ -104,9 +104,7 @@ function find<Value, Config, Result, Theme extends BaseTheme = BaseTheme>(
 
     const resolved = resolver(value, context)
 
-    if (resolved) {
-      return resolved
-    }
+    if (resolved) return resolved
   }
 }
 

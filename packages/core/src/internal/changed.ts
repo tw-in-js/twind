@@ -7,5 +7,5 @@
  */
 export function changed(a: string, b: string): boolean {
   // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-  return a !== b && '' + a.split(' ').sort() !== '' + b.split(' ').sort()
+  return a != b && '' + a.split(' ').sort() != '' + b.split(' ').sort()
 }

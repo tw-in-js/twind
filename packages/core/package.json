@@ -43,14 +43,14 @@
       "name": "@twind/core",
       "path": "dist/core.esnext.js",
       "brotli": true,
-      "limit": "6.1kb"
+      "limit": "6kb"
     },
     {
       "name": "@twind/core (shim)",
       "path": "dist/core.esnext.js",
       "import": "{ twind, observe, cssom }",
       "brotli": true,
-      "limit": "4.3kb"
+      "limit": "4.2kb"
     },
     {
       "name": "@twind/core (twind)",

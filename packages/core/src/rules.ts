@@ -54,27 +54,22 @@ export function fromTheme<
     : resolve
 
   return (match, context) => {
-    const themeSection = camelize(
-      section || (match[1][0] == '-' ? match[1].slice(1) : match[1]),
-    ) as Section
-
-    let value = context.theme(themeSection, match.$$)
+    const themeSection = camelize(section || match[1]) as Section
 
     // TODO suppport https://github.com/tailwindlabs/tailwindcss/pull/4348
-
-    if (value == null) {
+    const value =
+      context.theme(themeSection, match.$$) ??
       /** Arbitrary lookup type */
       // https://github.com/tailwindlabs/tailwindcss/blob/875c850b37a57bc651e1fed91e3d89af11bdc79f/src/util/pluginUtils.js#L163
       // type?: 'lookup' | 'color' | 'line-width' | 'length' | 'any' | 'shadow'
-      value = arbitrary(match.$$, themeSection, context) as ThemeValue<Theme[Section]>
-    }
-
-    if (match.input[0] == '-' && (typeof value == 'string' || typeof value == 'number')) {
-      value = `calc(${value} * -1)` as ThemeValue<Theme[Section]>
-    }
+      (arbitrary(match.$$, themeSection, context) as ThemeValue<Theme[Section]>)
 
     if (value != null) {
-      ;(match as ThemeMatchResult<ThemeValue<Theme[Section]>>)._ = value
+      ;(match as ThemeMatchResult<ThemeValue<Theme[Section]>>)._ =
+        match.input[0] == '-'
+          ? (`calc(${value as string} * -1)` as ThemeValue<Theme[Section]>)
+          : value
+
       return factory(match as ThemeMatchResult<ThemeValue<Theme[Section]>>, context, themeSection)
     }
   }
@@ -164,10 +159,10 @@ export function colorFromTheme<
       opacityValue: opacityValue || undefined,
     })
 
-    if (typeof color != 'string') {
-      console.warn(`Invalid color ${colorMatch} (from ${match.input}):`, color)
-      return
-    }
+    // if (typeof color != 'string') {
+    //   console.warn(`Invalid color ${colorMatch} (from ${match.input}):`, color)
+    //   return
+    // }
 
     if (resolve) {
       ;(match as ThemeMatchResult<ColorFromThemeValue>)._ = {

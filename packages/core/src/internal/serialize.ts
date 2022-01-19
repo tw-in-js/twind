@@ -179,12 +179,8 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
     }
   }
 
-  if (name) {
-    name = context.h(name)
-  }
-
   rules.unshift({
-    n: name,
+    n: name && context.h(name),
 
     p: precedence,
 

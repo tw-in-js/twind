@@ -52,9 +52,7 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
   const insertedRules = new Set<string>()
 
   function insert(rule: TwindRule): string | undefined {
-    if (rule.n) {
-      rule = { ...rule, n: context.h(rule.n) }
-    }
+    rule = { ...rule, n: rule.n && context.h(rule.n) }
 
     const css = stringify(rule)
 
@@ -78,8 +76,8 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
 
   return Object.defineProperties(
     function tw(strings, ...interpolations) {
-      if (!cache.size && config.preflight) {
-        for (let preflight of config.preflight) {
+      if (!cache.size) {
+        for (let preflight of asArray(config.preflight)) {
           if (typeof preflight == 'function') {
             preflight = preflight(context)
           }
@@ -95,20 +93,14 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
       let className = cache.get(tokens)
 
       if (!className) {
-        const classNames = new Set<string>()
+        const classNames = new Set<string | undefined>()
 
         for (const rule of translate(parse(tokens), context)) {
-          const name = insert(rule)
-
-          if (rule.c) {
-            rule.c.split(' ').forEach((x) => classNames.add(x))
-          }
-
-          if (name) classNames.add(name)
+          classNames.add(rule.c).add(insert(rule))
         }
 
         // TODO try do keep classNames unmodified or same order
-        className = [...classNames].join(' ')
+        className = [...classNames].filter(Boolean).join(' ')
 
         // Remember the generated class name
         cache.set(tokens, className).set(className, className)

@@ -37,7 +37,7 @@ export function compareTwindRules(a: TwindRule, b: TwindRule): number {
   return (
     a.p - b.p ||
     a.o - b.o ||
-    collator.compare('' + a.r, '' + b.r) ||
+    collator.compare(a.r as unknown as string, b.r as unknown as string) ||
     collator.compare(a.n as string, b.n as string)
   )
 }
