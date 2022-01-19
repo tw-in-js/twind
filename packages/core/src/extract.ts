@@ -1,6 +1,7 @@
 import type { BaseTheme, Twind } from './types'
 
 import { consume } from './consume'
+import { stringify } from './sheets'
 
 /**
  * Result of {@link extract}
@@ -16,6 +17,8 @@ export interface ExtractResult {
 /**
  * Used for static HTML processing (usually to provide SSR support for your javascript-powered web apps)
  *
+ * **Note**:This {@link Twind.clear clears} the Twind instance before processing the HTML.
+ *
  * 1. parse the markup and process element classes with the provided Twind instance
  * 2. update the class attributes _if_ necessary
  * 3. return the HTML string with the final element classes
@@ -27,7 +30,7 @@ export interface ExtractResult {
  * const tw = twind(config, virtual()}
  *
  * function render() {
- *   const { html, css } = extract(app(), tw)
+ *   const { html, css } = extract(renderApp(), tw)
  *
  *   // inject as last element into the head
  *   return html.replace('</head>', `<style id="tw">${css}</style></head>`)
@@ -40,9 +43,8 @@ export interface ExtractResult {
  */
 export function extract<Theme extends BaseTheme = BaseTheme>(
   html: string,
-  tw: Twind<Theme, string[]>,
+  tw: Twind<Theme, string[] | CSSStyleSheet | HTMLStyleElement>,
 ): ExtractResult {
   tw.clear()
-
-  return { html: consume(html, tw), css: tw.target.join('') }
+  return { html: consume(html, tw), css: stringify(tw.target) }
 }

@@ -92,3 +92,11 @@ export function virtual(target: string[] = []): Sheet<string[]> {
     },
   }
 }
+
+export function stringify(target: string[] | CSSStyleSheet | HTMLStyleElement): string {
+  if ('cssRules' in target) {
+    target = Array.from(target.cssRules, (rule) => rule.cssText)
+  }
+
+  return (target as HTMLStyleElement).innerHTML ?? (target as string[]).join('')
+}

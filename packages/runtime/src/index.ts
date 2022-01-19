@@ -3,8 +3,9 @@ import { twind, cssom, virtual, observe } from '@twind/core'
 
 export function auto(setup: () => void): () => void {
   // If we run in the browser we call setup at latest when the body is inserted
-  // This algorith works well for _normal_ script but not for modules: `<script src="..."></script>`
-  // because those are executed __after__ the DOM is ready and we would have FOUC
+  // This algorith works well for _normal_ scripts (`<script src="..."></script>`)
+  // but not for modules because those are executed __after__ the DOM is ready
+  // and we would have FOUC
   if (typeof document != 'undefined' && document.currentScript) {
     const cancelAutoSetup = () => observer.disconnect()
 

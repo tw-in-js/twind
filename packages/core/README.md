@@ -85,6 +85,8 @@ TDB
 
 Used for static HTML processing (usually to provide SSR support for your javascript-powered web apps) — powered by [consume(html, tw)](#consumehtml-tw)
 
+**Note**:This clears the Twind instance before processing the HTML.
+
 ```js
 import { twind, virtual, extract } from '@twind/core'
 
@@ -97,7 +99,7 @@ const tw = twind(
 )
 
 function render() {
-  const { html, css } = extract(app(), tw)
+  const { html, css } = extract(renderApp(), tw)
 
   // inject as last element into the head
   return html.replace('</head>', `<style id="tw">${css}</style></head>`)
@@ -113,7 +115,7 @@ Used for static HTML processing (usually to provide SSR support for your javascr
 3. return the HTML string with the final element classes
 
 ```js
-import { twind, virtual, consume } from '@twind/core'
+import { twind, virtual, consume, stringify } from '@twind/core'
 
 // can be re-used
 const tw = twind(
@@ -124,7 +126,7 @@ const tw = twind(
 )
 
 function render() {
-  const html = app()
+  const html = renderApp()
 
   // clear all styles
   tw.clear()
@@ -133,7 +135,7 @@ function render() {
   const markup = comsume(html, tw)
 
   // create CSS
-  const css = tw.target.join('')
+  const css = stringify(tw.target)
 
   // inject as last element into the head
   return markup.replace('</head>', `<style id="tw">${css}</style></head>`)

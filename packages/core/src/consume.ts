@@ -8,13 +8,13 @@ import { changed } from './internal/changed'
  * 3. return the HTML string with the final element classes
  *
  * ```js
- * import { twind, virtual, consume } from '@twind/core'
+ * import { twind, virtual, consume, stringify } from '@twind/core'
  *
  * // can be re-used
  * const tw = twind(config, virtual()}
  *
  * function render() {
- *   const html = app()
+ *   const html = renderApp()
  *
  *   // clear all styles
  *   tw.clear()
@@ -23,7 +23,7 @@ import { changed } from './internal/changed'
  *   const markup = consume(html, tw)
  *
  *   // create CSS
- *   const css = tw.target.join('')
+ *   const css = stringify(tw.target)
  *
  *   // inject as last element into the head
  *   return markup.replace('</head>', `<style id="tw">${css}</style></head>`)
