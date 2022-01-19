@@ -8,7 +8,7 @@
 
 ---
 
-Manages a single Twind instance which observes the DOM.
+Seamless integration of Twind into [SvelteKit](https://kit.svelte.dev/)
 
 ## Installation
 
@@ -16,13 +16,17 @@ Install from npm:
 
 ```sh
 # Using npm
-npm install @twind/runtime@next
+npm install @twind/sveltekit@next
 
 # Using Yarn
-yarn add @twind/runtime@next
+yarn add @twind/sveltekit@next
 ```
 
 ## Usage
+
+Please see [examples/sveltekit](https://github.com/tw-in-js/twind/tree/next/examples/sveltekit) for detailed usage example.
+
+**`src/hooks`**
 
 ```js
 import { withTwind } from '@twind/sveltekit'
@@ -38,6 +42,33 @@ export const handle = withTwind(tw)
 // import { sequence } from '@sveltejs/kit/hooks';
 // export const handle = sequence(withTwind(tw), ...otherHandles)
 ```
+
+**`src/routes/__layout.svelte`**
+
+when using with [twind](https://www.npmjs.com/package/twind) or [@twind/runtime](https://www.npmjs.com/package/@twind/runtime):
+
+```html
+<script type="module">
+  import { browser } from '$app/env'
+
+  import { setup } from 'twind'
+  // import { setup } from '@twind/runtime'
+
+  import twindConfig from '../twind.config'
+
+  setup(twindConfig)
+
+  // optional — remove server-side generated style element
+  // after `setup` twind has taken over and the SSR styles are no longer used
+  if (browser) {
+    document.querySelector('style[data-twind]')?.remove()
+  }
+</script>
+```
+
+when using with [@twind/core](https://www.npmjs.com/package/@twind/core):
+
+TBD
 
 ## API
 
