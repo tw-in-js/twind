@@ -44,7 +44,7 @@
       "name": "@twind/runtime",
       "path": "dist/runtime.esnext.js",
       "brotli": true,
-      "limit": "600b",
+      "limit": "700b",
       "ignore": [
         "@twind/core"
       ]

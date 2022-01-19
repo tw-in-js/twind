@@ -81,6 +81,12 @@ export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown
     // remove server-side generated style element
     // after `observe` twind has taken over and the SSR styles are no longer used
     document.querySelector('style[data-twind]')?.remove()
+
+    // If they body was hidden autofocus the first element
+    if (!document.activeElement) {
+      // eslint-disable-next-line @typescript-eslint/no-extra-semi, @typescript-eslint/no-unnecessary-type-assertion
+      ;(document.querySelector('[autofocus]') as HTMLElement | null)?.focus()
+    }
   }
 
   return active as Twind<Theme, SheetTarget>
