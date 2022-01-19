@@ -8,7 +8,7 @@
 
 ---
 
-Manages a single Twind instance which observes the DOM.
+Manages a single Twind instance — works in browser and server.
 
 ## Installation
 
