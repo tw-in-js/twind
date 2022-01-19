@@ -66,6 +66,19 @@ importers:
     devDependencies:
       vite: 2.7.11
 
+  examples/playground:
+    specifiers:
+      '@twind/preset-ext': 1.0.0-next.13
+      '@twind/preset-tailwind-forms': 1.0.0-next.14
+      twind: 1.0.0-next.15
+      vite: ^2.7.2
+    dependencies:
+      '@twind/preset-ext': link:../../packages/preset-ext
+      '@twind/preset-tailwind-forms': link:../../packages/preset-tailwind-forms
+      twind: link:../../packages/twind
+    devDependencies:
+      vite: 2.7.12
+
   examples/tailwind-cdn:
     specifiers:
       serve: ^13.0.2

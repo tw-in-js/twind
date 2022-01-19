@@ -1,9 +1,8 @@
 # @example/tailwind-forms
 
 ## 0.0.1-next.0
+
 ### Patch Changes
-
-
 
 - add example for @twind/preset-tailwind-forms ([`1d81ca46`](https://github.com/tw-in-js/twind/commit/1d81ca46ccfec74e8264a463fb17dca8fd078c5e))
 

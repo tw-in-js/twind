@@ -1,6 +1,6 @@
-# Example: tailwind-forms
+# Playground
 
-> Try it live at [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/tailwind-forms) or [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/tailwind-forms).
+> Try it live at [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/playground) or [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/playground).
 
 This example uses
 
@@ -8,3 +8,4 @@ This example uses
   - [@twind/preset-autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix)
   - [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind)
 - [@twind/preset-tailwind-forms](https://www.npmjs.com/package/@twind/preset-tailwind-forms)
+- [@twind/preset-ext](https://www.npmjs.com/package/@twind/preset-ext)
