@@ -14,7 +14,7 @@ import type {
 export * from '@twind/core'
 export { tw } from '@twind/runtime'
 
-import { init, auto } from '@twind/runtime'
+import { setup as init, auto } from '@twind/runtime'
 
 const cancelAutoSetup = auto(setup)
 

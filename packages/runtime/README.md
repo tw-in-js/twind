@@ -25,9 +25,10 @@ yarn add @twind/runtime@next
 ## Usage
 
 ```js
-import { init } from '@twind/runtime'
+import { setup } from '@twind/runtime'
 
-init({
+// can be called multiple times
+setup({
   /* twind config */
 })
 // -> returns a Twind instance eg `tw`
@@ -35,11 +36,17 @@ init({
 
 ## API
 
-### `init`
+everything from [@twind/core](https://www.npmjs.com/package/@twind/core#api) is re-exported
+
+### `setup`
 
 TBD
 
-### `autoInit`
+### `tw`
+
+TBD
+
+### `auto`
 
 TBD
 

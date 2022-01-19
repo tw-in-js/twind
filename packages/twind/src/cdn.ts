@@ -13,9 +13,7 @@ import type {
   Sheet,
 } from '@twind/core'
 
-import { defineConfig, asArray } from '@twind/core'
-
-import { init, auto } from '@twind/runtime'
+import { setup as init, auto, defineConfig, asArray } from '@twind/runtime'
 
 import autoprefix from '@twind/preset-autoprefix'
 import tailwind from '@twind/preset-tailwind'
