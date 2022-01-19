@@ -9,7 +9,7 @@ declare global {
 function createStyleElement(
   // 1. look for existing style element — usually from SSR
   // 2. append to document.head — this assumes that document.head has at least one child node
-  referenceNode = self.tw || (document.head.lastChild as Node),
+  referenceNode = document.querySelector('style[data-twind]') || (document.head.lastChild as Node),
 ): HTMLStyleElement {
   // insert new style element after existing element which allows to override styles
   return (referenceNode.parentNode as Node).insertBefore(

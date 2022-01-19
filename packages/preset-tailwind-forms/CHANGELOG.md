@@ -1,9 +1,8 @@
 # @twind/preset-tailwind-forms
 
 ## 1.0.0-next.14
+
 ### Patch Changes
-
-
 
 - preset that provides a basic reset for form styles that makes form elements easy to override with utilities ([#244](https://github.com/tw-in-js/twind/pull/244))
 

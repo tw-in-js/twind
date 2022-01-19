@@ -102,7 +102,7 @@ function render() {
   const { html, css } = extract(renderApp(), tw)
 
   // inject as last element into the head
-  return html.replace('</head>', `<style id="tw">${css}</style></head>`)
+  return html.replace('</head>', `<style data-twind>${css}</style></head>`)
 }
 ```
 
@@ -138,6 +138,6 @@ function render() {
   const css = stringify(tw.target)
 
   // inject as last element into the head
-  return markup.replace('</head>', `<style id="tw">${css}</style></head>`)
+  return markup.replace('</head>', `<style data-twind>${css}</style></head>`)
 }
 ```

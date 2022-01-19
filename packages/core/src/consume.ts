@@ -26,7 +26,7 @@ import { changed } from './internal/changed'
  *   const css = stringify(tw.target)
  *
  *   // inject as last element into the head
- *   return markup.replace('</head>', `<style id="tw">${css}</style></head>`)
+ *   return markup.replace('</head>', `<style data-twind>${css}</style></head>`)
  * }
  * ```
  *
