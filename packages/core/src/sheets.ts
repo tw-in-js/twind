@@ -1,116 +1,86 @@
 import type { Sheet } from './types'
 
-function createStyleElement(parent: Element = document.head): HTMLStyleElement {
-  // Find existing or create a new one
-  const element =
-    (parent.querySelector('#tw') as HTMLStyleElement) || document.createElement('style')
-
-  // mark as twind stylesheet
-  element.id = 'tw'
-
-  parent.append(element)
-
-  return element
+declare global {
+  interface Window {
+    tw?: HTMLStyleElement
+  }
 }
 
-export function cssom(sheet?: CSSStyleSheet): Sheet<CSSStyleSheet> {
-  let offset = sheet?.cssRules.length || 0
+function createStyleElement(
+  // 1. look for existing style element — usually from SSR
+  // 2. append to document.head — this assumes that document.head has at least one child node
+  referenceNode = self.tw || (document.head.lastChild as Node),
+): HTMLStyleElement {
+  // insert new style element after existing element which allows to override styles
+  return (referenceNode.parentNode as Node).insertBefore(
+    document.createElement('style'),
+    referenceNode.nextSibling,
+  )
+}
 
+export function cssom(target = createStyleElement().sheet as CSSStyleSheet): Sheet<CSSStyleSheet> {
   return {
-    get target(): CSSStyleSheet {
-      if (!sheet) {
-        sheet = createStyleElement().sheet as CSSStyleSheet
-        offset = 0
-      }
-
-      return sheet
-    },
+    target,
 
     clear() {
       // remove all added rules
-      if (sheet) {
-        while (sheet.cssRules.length > offset) {
-          sheet.deleteRule(offset)
-        }
+      for (let index = target.cssRules.length; index--; ) {
+        target.deleteRule(index)
       }
     },
 
     destroy() {
-      if (offset) {
-        this.clear()
-      } else {
-        sheet?.ownerNode?.remove()
-      }
+      // eslint-disable-next-line @typescript-eslint/no-extra-semi
+      ;(target.ownerNode as Element).remove()
     },
 
     insert(css, index) {
       try {
         // Insert
-        this.target.insertRule(css, offset + index)
+        target.insertRule(css, index)
       } catch (error) {
         // Empty rule to keep index valid
-        this.target.insertRule('*{}', offset + index)
+        target.insertRule('*{}', index)
 
         // Some thrown errors are because of specific pseudo classes
         // lets filter them to prevent unnecessary warnings
         // ::-moz-focus-inner
         // :-moz-focusring
         if (!/:-[mwo]/.test(css)) {
-          // TODO log css
-          console.warn(error)
+          console.warn(error, css)
         }
       }
     },
   }
 }
 
-export function dom(element?: HTMLStyleElement): Sheet<HTMLStyleElement> {
-  let offset = element?.childNodes.length || 0
-
+export function dom(target = createStyleElement()): Sheet<HTMLStyleElement> {
   return {
-    get target(): HTMLStyleElement {
-      if (!element) {
-        element = createStyleElement()
-        offset = 0
-      }
-
-      return element
-    },
+    target,
 
     clear() {
       // remove all added nodes
-      if (element) {
-        while (element.childNodes.length > offset) {
-          element.removeChild(element.lastChild as Node)
-        }
+      while (target.childNodes.length) {
+        target.removeChild(target.lastChild as Node)
       }
     },
 
     destroy() {
-      if (offset) {
-        this.clear()
-      } else {
-        element?.remove()
-      }
+      target.remove()
     },
 
     insert(css, index) {
-      this.target.insertBefore(
-        document.createTextNode(css),
-        this.target.childNodes[offset + index] || null,
-      )
+      target.insertBefore(document.createTextNode(css), target.childNodes[index] || null)
     },
   }
 }
 
 export function virtual(target: string[] = []): Sheet<string[]> {
-  const offset = target.length
-
   return {
     target,
 
     clear() {
-      target.length = offset
+      target.length = 0
     },
 
     destroy() {
@@ -118,7 +88,7 @@ export function virtual(target: string[] = []): Sheet<string[]> {
     },
 
     insert(css, index) {
-      target.splice(offset + index, 0, css)
+      target.splice(index, 0, css)
     },
   }
 }
