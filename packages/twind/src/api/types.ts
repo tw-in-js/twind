@@ -292,7 +292,7 @@ export type ExtractThemes<Theme, Presets extends Preset<any>[]> = UnionToInterse
 export interface TwindPresetConfig<Theme = BaseTheme> {
   theme?: ThemeConfig<Theme & BaseTheme>
 
-  preflight?: false | Preflight | PreflightThunk<Theme & BaseTheme>
+  preflight?: false | MaybeArray<Preflight | PreflightThunk<Theme & BaseTheme>>
   variants?: Variant<Theme & BaseTheme>[]
   rules?: Rule<Theme & BaseTheme>[]
 
@@ -306,7 +306,9 @@ export interface TwindUserConfig<Theme = BaseTheme, Presets extends Preset<any>[
 
   theme?: Theme & ThemeConfig<BaseTheme & ExtractThemes<Theme, Presets>>
 
-  preflight?: false | Preflight | PreflightThunk<BaseTheme & ExtractThemes<Theme, Presets>>
+  preflight?:
+    | false
+    | MaybeArray<Preflight | PreflightThunk<BaseTheme & ExtractThemes<Theme, Presets>>>
   variants?: Variant<BaseTheme & ExtractThemes<Theme, Presets>>[]
   rules?: Rule<BaseTheme & ExtractThemes<Theme, Presets>>[]
 
