@@ -1,6 +1,8 @@
 import type { Twind, BaseTheme, TwindConfig, Sheet } from '@twind/core'
 import { twind, cssom, virtual, observe } from '@twind/core'
 
+export * from '@twind/core'
+
 export function auto(setup: () => void): () => void {
   // If we run in the browser we call setup at latest when the body is inserted
   // This algorith works well for _normal_ scripts (`<script src="..."></script>`)
@@ -34,7 +36,7 @@ export function auto(setup: () => void): () => void {
 /**
  * A proxy to the currently active Twind instance.
  */
-export const tw = Object.defineProperties(
+export const tw = /* @__PURE__ */ Object.defineProperties(
   function tw(...args) {
     return active(...args)
   } as Twind,
@@ -58,7 +60,7 @@ export const tw = Object.defineProperties(
 
 let active: Twind
 
-export function init<Theme extends BaseTheme = BaseTheme, SheetTarget = CSSStyleSheet | string[]>(
+export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = CSSStyleSheet | string[]>(
   config: TwindConfig<Theme>,
   sheet: Sheet<SheetTarget> = (typeof document != 'undefined'
     ? cssom()

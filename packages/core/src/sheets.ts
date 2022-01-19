@@ -39,8 +39,8 @@ export function cssom(target = createStyleElement().sheet as CSSStyleSheet): She
         // Insert
         target.insertRule(css, index)
       } catch (error) {
-        // Empty rule to keep index valid
-        target.insertRule('*{}', index)
+        // Empty rule to keep index valid — not using `*{}` as that would show up in all rules (DX)
+        target.insertRule(':root{}', index)
 
         // Some thrown errors are because of specific pseudo classes
         // lets filter them to prevent unnecessary warnings
