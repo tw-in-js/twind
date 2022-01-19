@@ -1,6 +1,6 @@
 {
   "name": "@twind/sveltekit",
-  "version": "1.0.0-next.13",
+  "version": "1.0.0-next.14",
   "description": "sveltekit integration for Twind",
   "publishConfig": {
     "tag": "next",
@@ -55,7 +55,7 @@
     }
   ],
   "dependencies": {
-    "@twind/core": "1.0.0-next.13"
+    "@twind/core": "1.0.0-next.14"
   },
   "peerDependencies": {
     "@sveltejs/kit": "next",

@@ -1,6 +1,6 @@
 {
   "name": "@twind/preset-tailwind-forms",
-  "version": "1.0.0-next.14",
+  "version": "1.0.0-next.15",
   "description": "twind preset that provides a basic reset for form styles that makes form elements easy to override with utilities",
   "keywords": [
     "twind",
@@ -34,8 +34,8 @@
     }
   ],
   "peerDependencies": {
-    "@twind/core": "1.0.0-next.13",
-    "@twind/preset-tailwind": "1.0.0-next.14",
+    "@twind/core": "1.0.0-next.14",
+    "@twind/preset-tailwind": "1.0.0-next.15",
     "typescript": "^4.4.0"
   },
   "peerDependenciesMeta": {
@@ -44,8 +44,8 @@
     }
   },
   "devDependencies": {
-    "@twind/core": "1.0.0-next.13",
-    "@twind/preset-tailwind": "1.0.0-next.14"
+    "@twind/core": "1.0.0-next.14",
+    "@twind/preset-tailwind": "1.0.0-next.15"
   },
   "scripts": {
     "prepublishOnly": "distilt"

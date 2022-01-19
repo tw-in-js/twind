@@ -1,6 +1,6 @@
 {
   "name": "@twind/core",
-  "version": "1.0.0-next.13",
+  "version": "1.0.0-next.14",
   "description": "compiles tailwind like shorthand syntax into CSS",
   "publishConfig": {
     "tag": "next",
@@ -72,7 +72,7 @@
     }
   },
   "devDependencies": {
-    "@twind/preset-tailwind": "1.0.0-next.14"
+    "@twind/preset-tailwind": "1.0.0-next.15"
   },
   "scripts": {
     "prepublishOnly": "distilt"

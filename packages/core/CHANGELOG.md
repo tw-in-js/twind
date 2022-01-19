@@ -1,5 +1,19 @@
 # @twind/core
 
+## 1.0.0-next.14
+
+### Patch Changes
+
+- be less strict about interpolations values ([#245](https://github.com/tw-in-js/twind/pull/245))
+
+* golf: refactor sheets — always use a dedicated style element ([#245](https://github.com/tw-in-js/twind/pull/245))
+
+- support any target for stringify ([#245](https://github.com/tw-in-js/twind/pull/245))
+
+* add `stringify` helper to convert as `sheet.target` to a string; this makes `extract` isomorphic ([#245](https://github.com/tw-in-js/twind/pull/245))
+
+- use `data-twind` to locate SSR style element ([#245](https://github.com/tw-in-js/twind/pull/245))
+
 ## 1.0.0-next.13
 
 ### Patch Changes

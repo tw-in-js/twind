@@ -1,7 +1,7 @@
 {
   "name": "@example/tailwind-forms",
   "description": "tailwind-forms example",
-  "version": "0.0.1-next.0",
+  "version": "0.0.1-next.1",
   "private": true,
   "main": "index.js",
   "license": "MIT",
@@ -12,8 +12,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@twind/preset-tailwind-forms": "1.0.0-next.14",
-    "twind": "1.0.0-next.15"
+    "@twind/preset-tailwind-forms": "1.0.0-next.15",
+    "twind": "1.0.0-next.16"
   },
   "devDependencies": {
     "vite": "^2.7.2"

@@ -1,7 +1,7 @@
 {
   "name": "@example/sveltekit",
   "description": "sveltekit with twind example",
-  "version": "0.0.1-next.0",
+  "version": "0.0.1-next.1",
   "private": true,
   "main": "index.js",
   "license": "MIT",
@@ -19,16 +19,16 @@
   "devDependencies": {
     "@sveltejs/adapter-node": "next",
     "@sveltejs/kit": "next",
-    "@twind/preset-ext": "1.0.0-next.13",
-    "@twind/preset-tailwind-forms": "1.0.0-next.14",
-    "@twind/sveltekit": "1.0.0-next.13",
+    "@twind/preset-ext": "1.0.0-next.14",
+    "@twind/preset-tailwind-forms": "1.0.0-next.15",
+    "@twind/sveltekit": "1.0.0-next.14",
     "prettier": "^2.4.1",
     "prettier-plugin-svelte": "^2.4.0",
     "style-vendorizer": "^2.1.1",
     "svelte": "^3.44.0",
     "svelte-check": "^2.2.6",
     "tslib": "^2.3.1",
-    "twind": "1.0.0-next.15",
+    "twind": "1.0.0-next.16",
     "typescript": "^4.4.3"
   }
 }
