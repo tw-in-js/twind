@@ -13,15 +13,17 @@ import type {
   Sheet,
 } from './api'
 
-import { init, auto, defineConfig, asArray } from './api'
+import type { TailwindPresetOptions } from '@twind/preset-tailwind'
 
-import autoprefix from '@twind/preset-autoprefix'
-import tailwind from '@twind/preset-tailwind'
+import presetAutoprefix from '@twind/preset-autoprefix'
+import presetTailwind from '@twind/preset-tailwind'
+
+import { init, auto, defineConfig, asArray } from './api'
 
 const cancelAutoSetup = /* @__PURE__ */ auto(setup)
 
 export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown>(
-  config?: TwindConfig<Theme>,
+  config?: TwindConfig<Theme> & TailwindPresetOptions,
   sheet?: Sheet<SheetTarget>,
   target?: HTMLElement,
 ): Twind<Theme, SheetTarget>
@@ -31,13 +33,17 @@ export function setup<
   Presets extends Preset<any>[] = Preset[],
   SheetTarget = unknown,
 >(
-  config?: TwindUserConfig<Theme, Presets>,
+  config?: TwindUserConfig<Theme, Presets> & TailwindPresetOptions,
   sheet?: Sheet<SheetTarget>,
   target?: HTMLElement,
 ): Twind<BaseTheme & ExtractThemes<Theme, Presets>, SheetTarget>
 
 export function setup(
-  config: TwindConfig<any> | TwindUserConfig<any> = {},
+  {
+    darkMode,
+    enablePreflight,
+    ...config
+  }: (TwindConfig<any> | TwindUserConfig<any>) & TailwindPresetOptions = {},
   sheet?: Sheet,
   target?: HTMLElement,
 ): Twind {
@@ -46,7 +52,11 @@ export function setup(
   return init(
     defineConfig({
       ...config,
-      presets: [autoprefix(), tailwind(), ...asArray((config as TwindUserConfig<any>).presets)],
+      presets: [
+        presetAutoprefix(),
+        presetTailwind({ darkMode, enablePreflight }),
+        ...asArray((config as TwindUserConfig<any>).presets),
+      ],
     } as TwindUserConfig<any>),
     sheet,
     target,

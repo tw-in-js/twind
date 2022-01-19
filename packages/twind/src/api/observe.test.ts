@@ -23,7 +23,7 @@ test('use happy-dom in this test file', () => {
     </html>
     `
 
-  const tw = observe(twind({ presets: [presetTailwind({ preflight: false })] }, virtual()))
+  const tw = observe(twind({ presets: [presetTailwind({ enablePreflight: false })] }, virtual()))
 
   assert.deepEqual(tw.target, [
     '.text-white{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}',

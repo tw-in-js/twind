@@ -1,9 +1,8 @@
 # @example/playground
 
 ## 0.0.1-next.1
+
 ### Patch Changes
-
-
 
 - add examples/playground ([#245](https://github.com/tw-in-js/twind/pull/245))
 

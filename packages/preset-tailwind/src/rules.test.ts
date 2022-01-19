@@ -7,7 +7,7 @@ import data from './rules.test.json'
 
 const tw = twind(
   {
-    presets: [tailwind({ preflight: false })],
+    presets: [tailwind({ enablePreflight: false })],
     variants: [['not-logged-in', 'body:not(.logged-in) &']],
     theme: {
       extend: {

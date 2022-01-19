@@ -9,13 +9,13 @@ import variants from './variants'
 export * from './types'
 
 export interface TailwindPresetOptions {
-  preflight?: boolean | undefined
   darkMode?: 'media' | 'class' | boolean | undefined
+  enablePreflight?: boolean | undefined
 }
 
 export default function presetTailwind({
-  preflight: enablePreflight = true,
   darkMode = 'media',
+  enablePreflight = true,
 }: TailwindPresetOptions = {}): Preset<TailwindTheme> {
   return ({ stringify }) => ({
     // allow other preflight to run

@@ -5,7 +5,7 @@ import presetTailwind from '@twind/preset-tailwind'
 import { twind, virtual, consume } from '.'
 
 test('expand class names', () => {
-  const tw = twind({ presets: [presetTailwind({ preflight: false })] }, virtual())
+  const tw = twind({ presets: [presetTailwind({ enablePreflight: false })] }, virtual())
 
   const html = consume(
     `
@@ -47,7 +47,7 @@ test('expand class names', () => {
 })
 
 test('hash class names', () => {
-  const tw = twind({ presets: [presetTailwind({ preflight: false })], hash: true }, virtual())
+  const tw = twind({ presets: [presetTailwind({ enablePreflight: false })], hash: true }, virtual())
 
   const html = consume(
     `
@@ -86,7 +86,7 @@ test('hash class names', () => {
 })
 
 test('will preserve html comments', () => {
-  const tw = twind({ presets: [presetTailwind({ preflight: false })] }, virtual())
+  const tw = twind({ presets: [presetTailwind({ enablePreflight: false })] }, virtual())
 
   const html = consume(
     `
