@@ -31,16 +31,41 @@ export function auto(setup: () => void): () => void {
   return () => {}
 }
 
-export let tw: Twind
+/**
+ * A proxy to the currently active Twind instance.
+ */
+export const tw = Object.defineProperties(
+  function tw(...args) {
+    return active(...args)
+  } as Twind,
+  Object.getOwnPropertyDescriptors({
+    get target() {
+      return active.target
+    },
+    theme(...args: unknown[]) {
+      return active.theme(...(args as []))
+    },
+
+    clear() {
+      return active.clear()
+    },
+
+    destroy() {
+      return active.destroy()
+    },
+  }),
+)
+
+let active: Twind
 
 export function init<Theme extends BaseTheme = BaseTheme, SheetTarget = CSSStyleSheet | string[]>(
   config: TwindConfig<Theme>,
-  sheet: Sheet<SheetTarget> = (typeof document != undefined
+  sheet: Sheet<SheetTarget> = (typeof document != 'undefined'
     ? cssom()
     : virtual()) as unknown as Sheet<SheetTarget>,
   target?: HTMLElement,
 ): Twind<Theme, SheetTarget> {
-  tw?.destroy()
+  active?.destroy()
 
-  return (tw = observe(twind(config, sheet), target))
+  return (active = observe(twind(config, sheet), target))
 }
