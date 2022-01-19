@@ -2,8 +2,7 @@ import { withTwind } from '@twind/sveltekit'
 
 /* import twind instance */
 import { tw } from 'twind'
-// import { tw } from '@twind/runtime'
-// import { tw } from './your/twind'
+// import { tw } from 'twind/core'
 
 export const handle = withTwind(tw)
 

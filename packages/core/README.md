@@ -12,16 +12,14 @@ Minimal implementation of a tailwind-compatible CSS-in-JS framework.
 
 ---
 
+> **Note**: Please consider using [twind](https://www.npmjs.com/package/twind) instead.
+
 ## Installation
 
 Install from npm:
 
 ```sh
-# Using npm
 npm install @twind/core@next
-
-# Using Yarn
-yarn add @twind/core@next
 ```
 
 ## Usage

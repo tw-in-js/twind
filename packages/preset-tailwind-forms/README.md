@@ -19,16 +19,12 @@ Twind v1 is a complete rewrite aiming to be compatible with Tailwind v3 classes.
 Install from npm:
 
 ```sh
-# Using npm
 npm install @twind/preset-tailwind-forms@next
-
-# Using Yarn
-yarn add @twind/preset-tailwind-forms@next
 ```
 
 Then add the preset to your twind config:
 
-**with [twind](https://www.npmjs.com/package/twind)** — ready to use tailwindcss
+**with [twind](https://www.npmjs.com/package/twind)** — ready to use Tailwind CSS
 
 ```js
 import { setup } from 'twind'
@@ -40,7 +36,20 @@ setup({
 })
 ```
 
-or using the Twind CDN:
+**with [twind/core](https://github.com/tw-in-js/twind/tree/next/packages/twind#twindcore)**
+
+```js
+import { setup } from 'twind/core'
+import presetTailwind from '@twind/preset-tailwind'
+import presetTailwindForms from '@twind/preset-tailwind-forms'
+
+setup({
+  presets: [presetTailwind(), presetTailwindForms()],
+  // ... additional config
+})
+```
+
+**with [Twind CDN](https://github.com/tw-in-js/twind/tree/next/packages/twind#twindcdn)**:
 
 ```html
 <head>
@@ -55,24 +64,6 @@ or using the Twind CDN:
   </script>
   <!-- ... -->
 </head>
-```
-
-**with [@twind/core](https://www.npmjs.com/package/@twind/core)**
-
-```js
-import { twind, cssom, observe } from '@twind/core'
-import presetTailwind from '@twind/preset-tailwind'
-import presetTailwindForms from '@twind/preset-tailwind-forms'
-
-const tw = observe(
-  twind(
-    {
-      presets: [presetTailwind(), presetTailwindForms()],
-      // ... additional config
-    },
-    cssom(),
-  ),
-)
 ```
 
 ## Usage

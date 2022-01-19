@@ -8,18 +8,16 @@
 
 ---
 
-Manages a single Twind instance — works in browser and server.
+Manages a single Twind instance — works in browser, Node.js, Deno, workers...
+
+> **Note**: Please consider using [twind](https://www.npmjs.com/package/twind) instead.
 
 ## Installation
 
 Install from npm:
 
 ```sh
-# Using npm
 npm install @twind/runtime@next
-
-# Using Yarn
-yarn add @twind/runtime@next
 ```
 
 ## Usage

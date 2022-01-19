@@ -10,12 +10,12 @@ Twind v1 is a complete rewrite aiming to be compatible with Tailwind v3 classes
 
 ---
 
-Tailwind right in the browser without any build step.
+Tailwind without any build step right in the browser or any other environment like Node.js, deno, workers, ...
 
 ## Usage
 
 ```sh
-npm i twind@next
+npm install twind@next
 ```
 
 ```js
@@ -94,20 +94,25 @@ To add another preset add its script after the current one:
 
 **API**: accessible through the global `twind` variable
 
-- [`twind.setup`](#setupconfig--sheet--target)
-- `twind.tw` — from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime#tw)
-- `twind.*` — everything from [@twind/core](https://www.npmjs.com/package/@twind/core#api)
+- [`setup`](#setupconfig--sheet--target)
+- `tw` — from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime#tw)
+- `*` — everything from [@twind/core](https://www.npmjs.com/package/@twind/core#api)
 
 ### `twind/cdn`
 
 A drop-in replacement for Tailwind CSS Play CDN that is almost 6 times smaller (96.4kb vs 16.9kB).
 
 ```js
-import { setup } from 'twind/play-cdn'
+import /* ... */ 'twind/cdn'
 ```
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/twind@next/cdn.global.js" crossorigin></script>
+<script>
+  const {
+    /* ... */
+  } = twind
+</script>
 ```
 
 **Presets**
@@ -117,17 +122,22 @@ import { setup } from 'twind/play-cdn'
 
 **API** — accessible through the global `twind` variable
 
-- [`twind.setup`](#setupconfig--sheet--target)
-- `twind.tw` — from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime#tw)
+- [`setup`](#setupconfig--sheet--target)
+- `tw` — from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime#tw)
 
 ### `twind/core`
 
 ```js
-import { setup } from 'twind/core'
+import /* ... */ 'twind/core'
 ```
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/twind@next/core.global.js" crossorigin></script>
+<script>
+  const {
+    /* ... */
+  } = twind
+</script>
 ```
 
 **Presets**
@@ -136,13 +146,17 @@ None
 
 **API** — accessible through the global `twind` variable
 
-- [`twind.setup`](#setupconfig--sheet--target)
-- `twind.tw` — from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime#tw)
-- `twind.*` — everything from [@twind/core](https://www.npmjs.com/package/@twind/core#api)
+- [`setup`](#setupconfig--sheet--target)
+- `tw` — from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime#tw)
+- everything from [@twind/core](https://www.npmjs.com/package/@twind/core#api)
 
 ## API
 
+We are using `twind` in the following examples, but these work the same for `twind/core`.
+
 ### `setup(config [, sheet [, target]])`
+
+_Available in: `twind`, `twind/core`, `twind/cdn`_
 
 Can be called as many times as you want.
 
@@ -157,6 +171,8 @@ const tw = setup({
 
 ### `tw(...tokens)` — the current Twind instance
 
+_Available in: `twind`, `twind/core`_
+
 ```js
 import { tw } from 'twind'
 
@@ -167,6 +183,8 @@ tw.theme('colors.blue.500', 'blue')
 ```
 
 ### `extract(html, tw)`
+
+_Available in: `twind`, `twind/core`_
 
 Used for static HTML processing (usually to provide SSR support for your javascript-powered web apps) — powered by [consume(html, tw)](#consumehtml-tw)
 
@@ -189,6 +207,8 @@ function render() {
 ```
 
 ### `consume(html, tw)`
+
+_Available in: `twind`, `twind/core`_
 
 Used for static HTML processing (usually to provide SSR support for your javascript-powered web apps)
 
