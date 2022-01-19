@@ -16,6 +16,10 @@
   ],
   "license": "MIT",
   "author": "Sascha Tandel (https://github.com/sastan)",
+  "funding": {
+    "type": "opencollective",
+    "url": "https://opencollective.com/twind"
+  },
   "engines": {
     "node": ">=12.4",
     "pnpm": "^6.10.0"
