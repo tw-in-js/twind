@@ -166,13 +166,6 @@ test('arrays (no `push` escape)', () => {
   assert.strictEqual(cx('hello', { world: 1, push: true }), 'hello world push')
 })
 
-test('functions', () => {
-  const foo = () => {}
-  assert.strictEqual(cx(foo as any, 'hello'), 'hello')
-  assert.strictEqual(cx(foo as any, 'hello', cx as any), 'hello')
-  assert.strictEqual(cx(foo as any, 'hello', [[cx as any], 'world']), 'hello world')
-})
-
 test('(compat) keeps object keys with truthy values', () => {
   const out = cx({ a: true, b: false, c: 0, d: null, e: undefined, f: 1 })
   assert.strictEqual(out, 'a f')

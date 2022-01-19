@@ -7,7 +7,7 @@ import { Layer } from './internal/precedence'
 import { interleave } from './internal/interleave'
 import { removeComments } from './internal/parse'
 
-export type CSSValue = string | number | Falsey
+export type CSSValue = string | number | bigint | Falsey
 
 export function css(strings: TemplateStringsArray, ...interpolations: readonly CSSValue[]): string
 
@@ -20,7 +20,7 @@ export function css(
   const { label = 'css', ...ast } = Array.isArray(strings)
     ? astish(
         interleave(strings as TemplateStringsArray, interpolations, (interpolation) =>
-          typeof interpolation == 'string' || typeof interpolation == 'number'
+          interpolation != null && typeof interpolation != 'boolean'
             ? (interpolation as unknown as string)
             : '',
         ),
