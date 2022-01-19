@@ -17,7 +17,7 @@ export interface ExtractResult {
 /**
  * Used for static HTML processing (usually to provide SSR support for your javascript-powered web apps)
  *
- * **Note**:This {@link Twind.clear clears} the Twind instance before processing the HTML.
+ * **Note**: This {@link Twind.clear clears} the Twind instance before processing the HTML.
  *
  * 1. parse the markup and process element classes with the provided Twind instance
  * 2. update the class attributes _if_ necessary

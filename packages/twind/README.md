@@ -170,7 +170,7 @@ tw.theme('colors.blue.500', 'blue')
 
 Used for static HTML processing (usually to provide SSR support for your javascript-powered web apps) — powered by [consume(html, tw)](#consumehtml-tw)
 
-**Note**:This clears the Twind instance before processing the HTML.
+**Note**: This clears the Twind instance before processing the HTML.
 
 ```js
 import { setup, extract, tw } from 'twind'
