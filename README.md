@@ -133,22 +133,30 @@ See [twind](./packages/twind/README.md) for a quick intro.
   })
   ```
 
-  There are lot of things possible. See [preset-tailwind/rules](./packages/preset-tailwind/src/rules.ts) for more examples.
+  There are lots of things possible. See [preset-tailwind/rules](./packages/preset-tailwind/src/rules.ts) for more examples.
 
-- config (`defineConfig()` and `preset()`)
+- config
 
   - presets are executed in order they are defined
   - presets can currently not contain other presets — a work-around may by to use `defineConfig()` within the preset (not tested)
-  - presets should use the `preset()` function for predictable merging
-  - merging:
+  - `defineConfig() helper for typing
+  - preset merging:
 
-    - the config from a preset is appended to `preflight`, `rules`, `variants`, and `ignorelist`
-    - `theme` and `theme.extend` are shallow merged (first one wins — this allows users to override preset values)
-    - `hash` and `stringify` are overridden if defined by the preset (last one wins)
+    - `preflight` — last one wins
+    - `theme` and `theme.extend` are shallow merged — last one wins
+    - `rules`, `variants`, and `ignorelist` — first one wins
+    - `hash` and `stringify` are overridden if defined by the preset — last one wins
+
+  - user config merging
+
+    - `preflight` — applied last
+    - `theme` and `theme.extend` are shallow merged — applied last
+    - `rules`, `variants`, and `ignorelist` — applied first
+    - `hash` and `stringify` are overridden if defined by the preset — applied first
 
   - ignorelist: can be used ignore certain rules
 
-    This following example matches class names from common CSS-in-JS libraries:
+    This following example matches class names from common libraries:
 
     ```js
     defineConfig({
