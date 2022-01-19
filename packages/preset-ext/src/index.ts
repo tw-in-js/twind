@@ -1,4 +1,4 @@
-import type { Preset } from '@twind/core'
+import type { Preset } from 'twind'
 
 import rules from './rules'
 import variants from './variants'

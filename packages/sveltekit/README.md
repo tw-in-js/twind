@@ -37,14 +37,12 @@ Please see [examples/sveltekit](https://github.com/tw-in-js/twind/tree/next/exam
 
 **`src/hooks`** — [SvelteKit › Hooks](https://kit.svelte.dev/docs#hooks)
 
-enable for server-side rendering of twind styles
+enable for server-side rendering of Twind styles
 
 ```js
 import { withTwind } from '@twind/sveltekit'
-import { tw } from 'twind'
-// import { tw } from 'twind/core'
 
-export const handle = withTwind(tw)
+export const handle = withTwind()
 ```
 
 If your have other handles use the [`sequence` helper](https://kit.svelte.dev/docs#modules-sveltejs-kit-hooks):
@@ -52,7 +50,16 @@ If your have other handles use the [`sequence` helper](https://kit.svelte.dev/do
 ```js
 import { sequence } from '@sveltejs/kit/hooks'
 
-export const handle = sequence(withTwind(tw), ...otherHandles)
+export const handle = sequence(withTwind(), ...otherHandles)
+```
+
+Using a custom Twind instance:
+
+```js
+import { withTwind } from '@twind/sveltekit'
+import { tw } from './custom/twind/instance'
+
+export const handle = withTwind(tw)
 ```
 
 ## API

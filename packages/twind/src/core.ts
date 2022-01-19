@@ -1,6 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+// Fix exported global variable from `twindCore` to `twind`
+/* @distilt-global-name twind */
+
 import type {
   Twind,
   BaseTheme,
@@ -9,14 +12,13 @@ import type {
   Preset,
   ExtractThemes,
   Sheet,
-} from '@twind/core'
+} from './api'
 
-export * from '@twind/core'
-export { tw } from '@twind/runtime'
+export * from './api'
 
-import { setup as init, auto } from '@twind/runtime'
+import { init, auto } from './api'
 
-const cancelAutoSetup = auto(setup)
+const cancelAutoSetup = /* @__PURE__ */ auto(setup)
 
 export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown>(
   config?: TwindConfig<Theme>,

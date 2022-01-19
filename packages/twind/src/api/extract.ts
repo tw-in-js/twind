@@ -24,10 +24,7 @@ export interface ExtractResult {
  * 3. return the HTML string with the final element classes
  *
  * ```js
- * import { twind, virtual, extract } from '@twind/core'
- *
- * // can be re-used
- * const tw = twind(config, virtual()}
+ * import { tw, extract } from 'twind'
  *
  * function render() {
  *   const { html, css } = extract(renderApp(), tw)

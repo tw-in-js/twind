@@ -1,7 +1,8 @@
-import type { Twind, BaseTheme, TwindConfig, Sheet } from '@twind/core'
-import { twind, cssom, virtual, observe } from '@twind/core'
+import type { Twind, BaseTheme, TwindConfig, Sheet } from './types'
 
-export * from '@twind/core'
+import { twind } from './twind'
+import { observe } from './observe'
+import { cssom, virtual } from './sheets'
 
 export function auto(setup: () => void): () => void {
   // If we run in the browser we call setup at latest when the body is inserted
@@ -60,7 +61,15 @@ export const tw = /* @__PURE__ */ Object.defineProperties(
 
 let active: Twind
 
-export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown>(
+/**
+ * Manages a single Twind instance — works in browser, Node.js, Deno, workers...
+ *
+ * @param config
+ * @param sheet
+ * @param target
+ * @returns
+ */
+export function init<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown>(
   config: TwindConfig<Theme>,
   sheet: Sheet<SheetTarget> = (typeof document != 'undefined'
     ? cssom()
@@ -69,7 +78,7 @@ export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown
 ): Twind<Theme, SheetTarget> {
   const firstRun = !active
 
-  if (firstRun) {
+  if (!firstRun) {
     active.destroy()
   }
 

@@ -1,4 +1,4 @@
-import type { Variant } from '@twind/core'
+import type { Variant } from 'twind'
 import type { TailwindTheme } from './types'
 
 const variants: Variant<TailwindTheme>[] = [
@@ -26,7 +26,7 @@ const variants: Variant<TailwindTheme>[] = [
 
   ['open', '[open]'],
 
-  // All other pseudo classes are already supported by @twind/core
+  // All other pseudo classes are already supported by twind
 
   /* Styling based on parent and peer state */
   // Groups classes like: group-focus and group-hover

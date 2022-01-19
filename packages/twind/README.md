@@ -21,7 +21,7 @@ npm install twind@next
 ```js
 import { setup } from 'twind'
 
-// You must call setup atleast once, but can call it multiple times
+// You must call setup at least once, but can call it multiple times
 setup({
   /* options */
 })
@@ -34,6 +34,8 @@ Incase you are not using SSR to inject the pre-computed styles apply the followi
   <!-- ... -->
 </body>
 ```
+
+If any element has the `autofocus` attribute, Twind will focus it after all styles are injected.
 
 **Script tag without a build step**
 
@@ -52,20 +54,7 @@ To configure Twind add a script block _after_ the previous one (optional):
 ```html
 <script>
   twind.setup({
-    presets: [
-      // custom presets...
-    ],
-    theme: {
-      extend: {
-        colors: {
-          clifford: '#da373d',
-        },
-      },
-    },
-    rules: [
-      // custom rules...
-    ],
-    // ...
+    /* options */
   })
 </script>
 ```
@@ -92,26 +81,22 @@ To add another preset add its script after the current one:
 </head>
 ```
 
-**API**: accessible through the global `twind` variable
-
-- [`setup`](#setupconfig--sheet--target)
-- `tw` — from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime#tw)
-- `*` — everything from [@twind/core](https://www.npmjs.com/package/@twind/core#api)
-
 ### `twind/cdn`
 
 A drop-in replacement for Tailwind CSS Play CDN that is almost 6 times smaller (96.4kb vs 16.9kB).
 
+**Note**: Only [`setup`](#setupconfig--sheet--target) is available.
+
 ```js
-import /* ... */ 'twind/cdn'
+import { setup } from 'twind/cdn'
 ```
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/twind@next/cdn.global.js" crossorigin></script>
 <script>
-  const {
+  twind.setup({
     /* ... */
-  } = twind
+  })
 </script>
 ```
 
@@ -120,15 +105,10 @@ import /* ... */ 'twind/cdn'
 - [@twind/preset-autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix)
 - [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind)
 
-**API** — accessible through the global `twind` variable
-
-- [`setup`](#setupconfig--sheet--target)
-- `tw` — from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime#tw)
-
 ### `twind/core`
 
 ```js
-import /* ... */ 'twind/core'
+import /* ... */ from 'twind/core'
 ```
 
 ```html
@@ -144,19 +124,11 @@ import /* ... */ 'twind/core'
 
 None
 
-**API** — accessible through the global `twind` variable
-
-- [`setup`](#setupconfig--sheet--target)
-- `tw` — from [@twind/runtime](https://www.npmjs.com/package/@twind/runtime#tw)
-- everything from [@twind/core](https://www.npmjs.com/package/@twind/core#api)
-
-## API
+## Common API
 
 We are using `twind` in the following examples, but these work the same for `twind/core`.
 
 ### `setup(config [, sheet [, target]])`
-
-_Available in: `twind`, `twind/core`, `twind/cdn`_
 
 Can be called as many times as you want.
 
@@ -167,11 +139,10 @@ import { setup } from 'twind'
 const tw = setup({
   /* config */
 })
+// -> tw === import { tw } from 'twind'
 ```
 
 ### `tw(...tokens)` — the current Twind instance
-
-_Available in: `twind`, `twind/core`_
 
 ```js
 import { tw } from 'twind'
@@ -182,9 +153,42 @@ tw({ underline: true })
 tw.theme('colors.blue.500', 'blue')
 ```
 
-### `extract(html, tw)`
+### `cx`
 
-_Available in: `twind`, `twind/core`_
+```js
+import { cx } from 'twind'
+
+// Set a className
+element.className = cx`
+  underline
+  /* multi
+    line
+    comment
+  */
+  hover:focus:!{
+    sm:{italic why}
+    lg:-{px}
+    -mx-1
+  }
+  // Position
+  !top-1 !-bottom-2
+  text-{xl black}
+`
+```
+
+### `shortcut`
+
+TDB
+
+### `css`
+
+TDB
+
+### `style`
+
+TDB
+
+### `extract(html, tw)`
 
 Used for static HTML processing (usually to provide SSR support for your javascript-powered web apps) — powered by [consume(html, tw)](#consumehtml-tw)
 
@@ -206,9 +210,13 @@ function render() {
 }
 ```
 
-### `consume(html, tw)`
+### Low-Level API
 
-_Available in: `twind`, `twind/core`_
+### `twind`
+
+TDB
+
+### `consume(html, tw)`
 
 Used for static HTML processing (usually to provide SSR support for your javascript-powered web apps)
 

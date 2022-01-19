@@ -46,9 +46,9 @@
       "name": "@twind/preset-autoprefix",
       "path": "dist/preset-autoprefix.esnext.js",
       "brotli": true,
-      "limit": "1kb",
+      "limit": "0.7kb",
       "ignore": [
-        "@twind/core"
+        "twind"
       ]
     }
   ],
@@ -56,7 +56,7 @@
     "style-vendorizer": "^2.1.1"
   },
   "peerDependencies": {
-    "@twind/core": "1.0.0-next.14",
+    "twind": "1.0.0-next.16",
     "typescript": "^4.4.0"
   },
   "peerDependenciesMeta": {
@@ -65,7 +65,7 @@
     }
   },
   "devDependencies": {
-    "@twind/core": "1.0.0-next.14"
+    "twind": "1.0.0-next.16"
   },
   "scripts": {
     "prepublishOnly": "distilt"

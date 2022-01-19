@@ -12,11 +12,11 @@
   // where the contents of the built dependency are. These files will be uploaded
   // to our registry.
   "publishDirectory": {
-    "@twind/core": "packages/core/dist",
     "@twind/preset-autoprefix": "packages/preset-autoprefix/dist",
     "@twind/preset-ext": "packages/preset-ext/dist",
     "@twind/preset-tailwind": "packages/preset-tailwind/dist",
-    "@twind/runtime": "packages/runtime/dist",
+    "@twind/preset-tailwind-forms": "packages/preset-tailwind-forms/dist",
+    "@twind/sveltekit": "packages/sveltekit/dist",
     "twind": "packages/twind/dist"
   },
   // A list of sandboxes that you want generated for a PR, if this list
@@ -26,7 +26,7 @@
   // replace `lodash` with the built version.
   // You can also set absolute paths to a directory in your repository. We will make sure
   // to generate a sandbox from the contents of that directory.
-  "sandboxes": ["/examples/basic"],
+  "sandboxes": ["/examples/basic", "/examples/playground", "/examples/sveltekit"],
   // Node.js version to use for building the PR.
   // Supported versions are '10' (10.24.1, default), '12' (12.22.7), '14' (14.18.1) and '16' (16.13.0).
   "node": "16"

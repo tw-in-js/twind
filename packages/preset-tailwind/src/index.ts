@@ -1,4 +1,4 @@
-import type { Context, Preset } from '@twind/core'
+import type { Context, Preset } from 'twind'
 import type { TailwindTheme } from './types'
 
 import theme from './defaultTheme'

@@ -1,6 +1,6 @@
 import { assert, test, afterEach } from 'vitest'
 
-import { twind, virtual } from '@twind/core'
+import { twind, virtual } from 'twind'
 
 import tailwind from '.'
 

@@ -95,8 +95,8 @@ importers:
       twind: 1.0.0-next.16
       typescript: ^4.4.3
     devDependencies:
-      '@sveltejs/adapter-node': 1.0.0-next.62
-      '@sveltejs/kit': 1.0.0-next.232_svelte@3.46.2
+      '@sveltejs/adapter-node': 1.0.0-next.63
+      '@sveltejs/kit': 1.0.0-next.233_svelte@3.46.2
       '@twind/preset-ext': link:../../packages/preset-ext
       '@twind/preset-tailwind-forms': link:../../packages/preset-tailwind-forms
       '@twind/sveltekit': link:../../packages/sveltekit
@@ -126,74 +126,56 @@ importers:
     devDependencies:
       vite: 2.7.12
 
-  packages/core:
-    specifiers:
-      '@twind/preset-tailwind': 1.0.0-next.15
-      csstype: ^3.0.10
-    dependencies:
-      csstype: 3.0.10
-    devDependencies:
-      '@twind/preset-tailwind': link:../preset-tailwind
-
   packages/preset-autoprefix:
     specifiers:
-      '@twind/core': 1.0.0-next.14
       style-vendorizer: ^2.1.1
+      twind: 1.0.0-next.16
     dependencies:
       style-vendorizer: 2.1.1
     devDependencies:
-      '@twind/core': link:../core
+      twind: link:../twind
 
   packages/preset-ext:
     specifiers:
-      '@twind/core': 1.0.0-next.14
       '@twind/preset-tailwind': 1.0.0-next.15
+      twind: 1.0.0-next.16
     devDependencies:
-      '@twind/core': link:../core
       '@twind/preset-tailwind': link:../preset-tailwind
+      twind: link:../twind
 
   packages/preset-tailwind:
     specifiers:
-      '@twind/core': 1.0.0-next.14
+      twind: 1.0.0-next.16
     devDependencies:
-      '@twind/core': link:../core
+      twind: link:../twind
 
   packages/preset-tailwind-forms:
     specifiers:
-      '@twind/core': 1.0.0-next.14
       '@twind/preset-tailwind': 1.0.0-next.15
+      twind: 1.0.0-next.16
     devDependencies:
-      '@twind/core': link:../core
       '@twind/preset-tailwind': link:../preset-tailwind
-
-  packages/runtime:
-    specifiers:
-      '@twind/core': 1.0.0-next.14
-    devDependencies:
-      '@twind/core': link:../core
+      twind: link:../twind
 
   packages/sveltekit:
     specifiers:
       '@sveltejs/kit': next
-      '@twind/core': 1.0.0-next.14
       svelte: ^3.44.0
-    dependencies:
-      '@twind/core': link:../core
+      twind: 1.0.0-next.16
     devDependencies:
-      '@sveltejs/kit': 1.0.0-next.232_svelte@3.46.2
+      '@sveltejs/kit': 1.0.0-next.233_svelte@3.46.2
       svelte: 3.46.2
+      twind: link:../twind
 
   packages/twind:
     specifiers:
-      '@twind/core': 1.0.0-next.14
       '@twind/preset-autoprefix': 1.0.0-next.14
       '@twind/preset-tailwind': 1.0.0-next.15
-      '@twind/runtime': 1.0.0-next.14
+      csstype: ^3.0.10
     dependencies:
-      '@twind/core': link:../core
       '@twind/preset-autoprefix': link:../preset-autoprefix
       '@twind/preset-tailwind': link:../preset-tailwind
-      '@twind/runtime': link:../runtime
+      csstype: 3.0.10
 
 packages:
 
@@ -623,14 +605,14 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@sveltejs/adapter-node/1.0.0-next.62:
-    resolution: {integrity: sha512-mq/IOgQos0ps3efi4JTuEXdhQaoUwdWZ4RTgP2DeVL5VsWqm0T+GZJod/RDSwzwDdq4QqUHjfnpk+mKuO5QnWQ==}
+  /@sveltejs/adapter-node/1.0.0-next.63:
+    resolution: {integrity: sha512-WsbGyGrX4eZpNN6KUzz+wrRa9WS9kuKphOJ+ONNcAP1OTg8nmiLhuEY59QpmdmPVZdOtyYwXGFhNDcgVGDRBDg==}
     dependencies:
       tiny-glob: 0.2.9
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.232_svelte@3.46.2:
-    resolution: {integrity: sha512-STQ0hnJozIop8k9I313nwVasBIQ45Z2K1pUOkDVjCSOGijgsj+De5q0prQBtL1ZlqqisfkYlOf8W9gvDSyTLEA==}
+  /@sveltejs/kit/1.0.0-next.233_svelte@3.46.2:
+    resolution: {integrity: sha512-3sIxD6f+Qa53TaWVvTjeNar/l2PEDAjyd19SUfFWHsSPwQmTBQFDopSf8LUm/JpHDBN5PV6U6W55UJrPVMH+KQ==}
     engines: {node: '>=14.13'}
     hasBin: true
     peerDependencies:

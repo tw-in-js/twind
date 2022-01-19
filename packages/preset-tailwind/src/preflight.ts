@@ -1,4 +1,4 @@
-import type { Preflight } from '@twind/core'
+import type { Preflight } from 'twind'
 
 import defaultTheme from './defaultTheme'
 

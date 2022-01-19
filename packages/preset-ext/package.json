@@ -50,12 +50,12 @@
       "brotli": true,
       "limit": "0.5kb",
       "ignore": [
-        "@twind/core"
+        "twind"
       ]
     }
   ],
   "peerDependencies": {
-    "@twind/core": "1.0.0-next.14",
+    "twind": "1.0.0-next.16",
     "typescript": "^4.4.0"
   },
   "peerDependenciesMeta": {
@@ -64,8 +64,8 @@
     }
   },
   "devDependencies": {
-    "@twind/core": "1.0.0-next.14",
-    "@twind/preset-tailwind": "1.0.0-next.15"
+    "@twind/preset-tailwind": "1.0.0-next.15",
+    "twind": "1.0.0-next.16"
   },
   "scripts": {
     "prepublishOnly": "distilt"

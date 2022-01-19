@@ -8,9 +8,9 @@ import type {
   CSSBase,
   ThemeMatchResult,
   ThemeRuleResolver,
-} from '@twind/core'
+} from 'twind'
 
-import { mql, fromTheme, colorFromTheme, toColorValue, asArray, arbitrary } from '@twind/core'
+import { mql, fromTheme, colorFromTheme, toColorValue, asArray, arbitrary } from 'twind'
 
 import type { TailwindTheme } from './types'
 

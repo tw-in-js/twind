@@ -1,5 +1,5 @@
-import type { ThemeSection, ThemeSectionResolver } from '@twind/core'
-import type { TailwindTheme } from '.'
+import type { ThemeSection, ThemeSectionResolver } from 'twind'
+import type { TailwindTheme } from './types'
 
 import * as colors from './colors'
 

@@ -11,6 +11,7 @@
     "twind-preset",
     "preset"
   ],
+  "license": "MIT",
   "type": "module",
   "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
   "main": "src/preset-tailwind-forms.ts",
@@ -28,14 +29,14 @@
       "brotli": true,
       "limit": "1.8kb",
       "ignore": [
-        "@twind/core",
-        "@twind/preset-tailwind"
+        "@twind/preset-tailwind",
+        "twind"
       ]
     }
   ],
   "peerDependencies": {
-    "@twind/core": "1.0.0-next.14",
     "@twind/preset-tailwind": "1.0.0-next.15",
+    "twind": "1.0.0-next.16",
     "typescript": "^4.4.0"
   },
   "peerDependenciesMeta": {
@@ -44,8 +45,8 @@
     }
   },
   "devDependencies": {
-    "@twind/core": "1.0.0-next.14",
-    "@twind/preset-tailwind": "1.0.0-next.15"
+    "@twind/preset-tailwind": "1.0.0-next.15",
+    "twind": "1.0.0-next.16"
   },
   "scripts": {
     "prepublishOnly": "distilt"

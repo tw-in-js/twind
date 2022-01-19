@@ -74,9 +74,12 @@ See [twind](./packages/twind/README.md) for a quick intro.
 
 ## Notable Changes
 
-- [@twind/core](./packages/core) — without any rules to have a clean start
+- [twind](./packages/twind) — shim-first implementation using [@twind/preset-tailwind](./packages/preset-tailwind) and [@twind/preset-autoprefixer](./packages/preset-autoprefixer)
+- [twind/core](./packages/twind#twindcore) — shim-first implementation without any presets to have a clean start
+- API
+  - `setup` can be called as many times as you want.
   - classes are returned in order they are applied by the browser - last one wins
-  - the `twind` factory returns `tw` as known from twind v0.16; additional it can be used to access:
+  - `tw` as known from twind v0.16; additional it can be used to access:
     - the theme: `tw.theme(...)`
     - the target sheet: `tw.target`
     - allows to reset twind (start clean): `tw.clear()`
@@ -91,9 +94,6 @@ See [twind](./packages/twind/README.md) for a quick intro.
     - with label: `style({ label: 'button', ... })`
       - `button#p8xtwh button--color-orange#p8xtwh button--size-small#p8xtwh button--color-orange_outlined-true$0#p8xtwh`
 - [@twind/preset-tailwind](./packages/preset-tailwind) — a tailwindcss v3 compatible preset
-- [twind](./packages/twind) — shim-first implementation using [@twind/preset-tailwind](./packages/preset-tailwind) and [@twind/preset-autoprefixer](./packages/preset-autoprefixer)
-  - `setup` can be called as many times as you want.
-  - `tw`, `apply` and `theme` as known from twind v0.16.
 - grouping syntax:
   - allow trailing dash before parentheses for utilities -> `border-(md:{2 black opacity-50 hover:dashed}}`
   - shortcuts: `~` to apply/merge utilities -> `~(text(5xl,red-700),bg-red-100)`
@@ -242,7 +242,7 @@ See [twind](./packages/twind/README.md) for a quick intro.
 - remove `dom` sheet?
 - console.warn(`[twind] unknown rule "${value}"`)
 - ci: post on discord after release
-- twind/cdn: parse style elements like tailwind
+- twind/cdn: parse style elements like tailwind?
 - cdn.twind.dev -> https://cdn.jsdelivr.net/npm/twind@next/cdn.global.js
 - docs: remix run, wmr, astro, next??? — must be react based for codehike
 - docs: explain and examples of both modes (observe/shim vs library)

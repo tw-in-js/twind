@@ -1,9 +1,9 @@
 import type { Handle } from '@sveltejs/kit'
-import type { Twind } from '@twind/core'
+import type { Twind } from 'twind'
 
-import { extract } from '@twind/core'
+import { extract, tw as defaultTw } from 'twind'
 
-export function withTwind(tw: Twind): Handle {
+export function withTwind(tw: Twind = defaultTw): Handle {
   return async function withTwind$({ request, resolve }) {
     const response = await resolve(request)
 

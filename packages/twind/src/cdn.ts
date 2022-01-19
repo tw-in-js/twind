@@ -11,14 +11,14 @@ import type {
   Preset,
   ExtractThemes,
   Sheet,
-} from '@twind/core'
+} from './api'
 
-import { setup as init, auto, defineConfig, asArray } from '@twind/runtime'
+import { init, auto, defineConfig, asArray } from './api'
 
 import autoprefix from '@twind/preset-autoprefix'
 import tailwind from '@twind/preset-tailwind'
 
-const cancelAutoSetup = auto(setup)
+const cancelAutoSetup = /* @__PURE__ */ auto(setup)
 
 export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown>(
   config?: TwindConfig<Theme>,
