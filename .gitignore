@@ -5,6 +5,7 @@ web_modules
 .DS_Store
 .env
 
+.svelte-kit
 .cache
 .swc
 dist
