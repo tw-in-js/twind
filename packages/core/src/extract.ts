@@ -1,4 +1,4 @@
-import type { BaseTheme, Twind } from './types'
+import type { Twind } from './types'
 
 import { consume } from './consume'
 import { stringify } from './sheets'
@@ -41,10 +41,7 @@ export interface ExtractResult {
  * @param tw a {@link Twind} instance
  * @returns the possibly modified html and css
  */
-export function extract<Theme extends BaseTheme = BaseTheme>(
-  html: string,
-  tw: Twind<Theme, string[] | CSSStyleSheet | HTMLStyleElement>,
-): ExtractResult {
+export function extract(html: string, tw: Twind): ExtractResult {
   tw.clear()
   return { html: consume(html, tw), css: stringify(tw.target) }
 }

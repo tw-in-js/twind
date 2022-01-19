@@ -93,10 +93,15 @@ export function virtual(target: string[] = []): Sheet<string[]> {
   }
 }
 
-export function stringify(target: string[] | CSSStyleSheet | HTMLStyleElement): string {
-  if ('cssRules' in target) {
-    target = Array.from(target.cssRules, (rule) => rule.cssText)
+export function stringify(target: unknown): string {
+  // string[] | CSSStyleSheet | HTMLStyleElement
+  if ((target as CSSStyleSheet).cssRules) {
+    target = Array.from((target as CSSStyleSheet).cssRules, (rule) => rule.cssText)
   }
 
-  return (target as HTMLStyleElement).innerHTML ?? (target as string[]).join('')
+  return (
+    (target as HTMLStyleElement).innerHTML ??
+    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+    (Array.isArray(target) ? target.join('') : '' + target)
+  )
 }
