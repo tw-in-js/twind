@@ -2,23 +2,21 @@
 
 import { assert, test } from 'vitest'
 
-import { cssom } from '..'
+import { cssom, stringify } from '..'
 
-test.todo('until https://github.com/capricorn86/happy-dom/pull/333', () => {
+test('uses CSSOM', () => {
+  // we need at least one node within head
+  document.head.append(document.createTextNode(''))
+
+  assert.lengthOf(document.styleSheets, 0)
+
   const sheet = cssom()
 
-  // lazy injected
-  assert.isNull(document.querySelector('#tw'))
+  // is already injected
+  assert.lengthOf(document.styleSheets, 1)
 
   sheet.insert('*{}', 0, { r: ['*'], p: 0, o: 0 })
 
-  assert.isDefined(sheet.target)
-
   assert.strictEqual(document.styleSheets[0], sheet.target)
-  assert.strictEqual((document.querySelector('#tw') as HTMLStyleElement).sheet, sheet.target)
-
-  assert.deepEqual(
-    [...(document.styleSheets[0]?.cssRules || [])].map((rule) => rule.cssText),
-    ['*{}'],
-  )
+  assert.strictEqual(stringify(sheet.target).replace(/ /g, ''), '*{}')
 })

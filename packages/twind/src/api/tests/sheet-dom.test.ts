@@ -18,5 +18,4 @@ test('uses DOM nodes', () => {
   sheet.insert('*{}', 0, { r: ['*'], p: 0, o: 0 })
 
   assert.strictEqual(stringify(sheet.target), '*{}')
-  assert.strictEqual(stringify(document.styleSheets[0]).replace(/ /g, ''), '*{}')
 })

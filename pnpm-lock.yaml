@@ -19,7 +19,7 @@ importers:
       eslint: ^8.6.0
       eslint-config-prettier: ^8.3.0
       eslint-plugin-prettier: ^4.0.0
-      happy-dom: ^2.27.0
+      happy-dom: ^2.27.2
       husky: ^7.0.4
       is-ci: ^3.0.1
       lint-staged: ^12.1.7
@@ -46,7 +46,7 @@ importers:
       eslint: 8.6.0
       eslint-config-prettier: 8.3.0_eslint@8.6.0
       eslint-plugin-prettier: 4.0.0_1c588f61426b1faf18812943f1678311
-      happy-dom: 2.27.0
+      happy-dom: 2.27.2
       husky: 7.0.4
       is-ci: 3.0.1
       lint-staged: 12.1.7
@@ -55,7 +55,7 @@ importers:
       size-limit: 7.0.5
       tslib: 2.3.1
       typescript: 4.5.4
-      vitest: 0.1.20_ad9e5c96e7831315810100b13dd00f0d
+      vitest: 0.1.20_7fcf6c8d2da70defdff4acef0c012e85
 
   examples/basic:
     specifiers:
@@ -95,8 +95,8 @@ importers:
       twind: 1.0.0-next.16
       typescript: ^4.4.3
     devDependencies:
-      '@sveltejs/adapter-node': 1.0.0-next.63
-      '@sveltejs/kit': 1.0.0-next.233_svelte@3.46.2
+      '@sveltejs/adapter-node': 1.0.0-next.64
+      '@sveltejs/kit': 1.0.0-next.234_svelte@3.46.2
       '@twind/preset-ext': link:../../packages/preset-ext
       '@twind/preset-tailwind-forms': link:../../packages/preset-tailwind-forms
       '@twind/sveltekit': link:../../packages/sveltekit
@@ -163,7 +163,7 @@ importers:
       svelte: ^3.44.0
       twind: 1.0.0-next.16
     devDependencies:
-      '@sveltejs/kit': 1.0.0-next.233_svelte@3.46.2
+      '@sveltejs/kit': 1.0.0-next.234_svelte@3.46.2
       svelte: 3.46.2
       twind: link:../twind
 
@@ -605,14 +605,14 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@sveltejs/adapter-node/1.0.0-next.63:
-    resolution: {integrity: sha512-WsbGyGrX4eZpNN6KUzz+wrRa9WS9kuKphOJ+ONNcAP1OTg8nmiLhuEY59QpmdmPVZdOtyYwXGFhNDcgVGDRBDg==}
+  /@sveltejs/adapter-node/1.0.0-next.64:
+    resolution: {integrity: sha512-p5Dv2vNdpeep8nYWY4lIefDyHWlgLmTO3BB9IhFCQRv5++RyMkQHtfAbv1rtwShXAEQeecT8/qDKp971vpUs8g==}
     dependencies:
       tiny-glob: 0.2.9
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.233_svelte@3.46.2:
-    resolution: {integrity: sha512-3sIxD6f+Qa53TaWVvTjeNar/l2PEDAjyd19SUfFWHsSPwQmTBQFDopSf8LUm/JpHDBN5PV6U6W55UJrPVMH+KQ==}
+  /@sveltejs/kit/1.0.0-next.234_svelte@3.46.2:
+    resolution: {integrity: sha512-vnXLkk4GakytCM+TxFVVXfvJaXq/vY6AWpaUAKr1ZsQD2LSKteoaBlca1qI7fCRwccaPSkI+DOc+bNdgGiBBSQ==}
     engines: {node: '>=14.13'}
     hasBin: true
     peerDependencies:
@@ -2710,8 +2710,8 @@ packages:
     resolution: {integrity: sha512-bzh50DW9kTPM00T8y4o8vQg89Di9oLJVLW/KaOGIXJWP/iqCN6WKYkbNOF04vFLJhwcpYUh9ydh/+5vpOqV4YQ==}
     dev: true
 
-  /happy-dom/2.27.0:
-    resolution: {integrity: sha512-VucqmIeKeeVtxrTVGfrLR6dskVIk0F3/ZlHE3vL1C7Owaqodfxz+qNzpsGY0EBtTjsb4xhcS8wjp5X8/prI+2g==}
+  /happy-dom/2.27.2:
+    resolution: {integrity: sha512-JOVjQIA+YzxJLVbrpSqWZLHDDPTcjLCqPJ5wlT+IMkoY5LKp4NVU9yWmXc8yKooU8tzKHN0VK+alj4msohqsDg==}
     dependencies:
       he: 1.2.0
       node-fetch: 2.6.6
@@ -4778,7 +4778,7 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitest/0.1.20_ad9e5c96e7831315810100b13dd00f0d:
+  /vitest/0.1.20_7fcf6c8d2da70defdff4acef0c012e85:
     resolution: {integrity: sha512-UhbBDhQOVNHapOI+OcyEtryRWFmTTy3zSiyMZYtsrGuS+ARiGz/pDlHJdS1CK7ef3/5oyYd0jzsVcqVowd7Img==}
     engines: {node: '>=14.14.0'}
     hasBin: true
@@ -4802,7 +4802,7 @@ packages:
       '@vitest/ui': 0.1.20
       c8: 7.11.0
       chai: 4.3.4
-      happy-dom: 2.27.0
+      happy-dom: 2.27.2
       local-pkg: 0.4.1
       tinypool: 0.1.1
       tinyspy: 0.2.8
