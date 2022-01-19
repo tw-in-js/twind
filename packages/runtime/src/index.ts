@@ -67,7 +67,21 @@ export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown
     : virtual()) as unknown as Sheet<SheetTarget>,
   target?: HTMLElement,
 ): Twind<Theme, SheetTarget> {
-  active?.destroy()
+  const firstRun = !active
 
-  return (active = observe(twind(config, sheet), target))
+  if (firstRun) {
+    active.destroy()
+  }
+
+  active = observe(twind(config, sheet), target)
+
+  if (firstRun && typeof document != 'undefined') {
+    // first run in browser
+
+    // remove server-side generated style element
+    // after `observe` twind has taken over and the SSR styles are no longer used
+    document.querySelector('style[data-twind]')?.remove()
+  }
+
+  return active as Twind<Theme, SheetTarget>
 }
