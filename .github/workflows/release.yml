@@ -35,7 +35,7 @@ jobs:
           echo node: `node --version`;
           echo pnpm: v`pnpm --version`
 
-      - run: pnpm install --frozen-lockfile --filter=./packages
+      - run: pnpm install --frozen-lockfile
       - run: pnpm check
       - run: pnpm test
 

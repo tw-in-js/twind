@@ -53,7 +53,7 @@ jobs:
           echo node `node --version`;
           echo pnpm `pnpm --version`
 
-      - run: pnpm install --frozen-lockfile --filter=./packages
+      - run: pnpm install --frozen-lockfile
       - run: pnpm check
       - run: pnpm test:coverage
       - run: pnpm build
@@ -97,7 +97,7 @@ jobs:
           echo node: `node --version`;
           echo pnpm: v`pnpm --version`
 
-      - run: pnpm install --frozen-lockfile --filter=./packages
+      - run: pnpm install --frozen-lockfile
       - run: pnpm build
 
       # Uses the root package.json['size-limit'] config
