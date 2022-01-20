@@ -249,6 +249,7 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
 ## TODO
 
 - `const acx = cx'aaa~(text-blue-500)'` works, but `const bcx = 'bbb~(text-red-500 ${acx})'` not
+- rewrite https://github.com/TanStack/tanstack.com
 - support `is(:hover,:focus-visible):underline`?
 - style: should it pass `class` and `className` through? alternatives: string concat, `cx`
 - console.warn(`[twind] unknown rule "${value}"`)
@@ -258,6 +259,7 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
 - docs: remix run, wmr, astro, next??? — must be react based for codehike
 - docs: explain and examples of both modes (observe/shim vs library)
 - docs: common patterns
+- docs: debugging the generated CSS in the browser (cssom sheet)
 - auto support dark mode in theme helpers (`<section>.dark.<key>` or `dark.<section>.<key>`)
 - @twind/preset-\* from tailwind core
 - @twind/react
