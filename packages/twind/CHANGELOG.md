@@ -1,5 +1,11 @@
 # twind
 
+## 1.0.0-next.19
+
+### Patch Changes
+
+- fix variant cache condition ([`1f578c9e`](https://github.com/tw-in-js/twind/commit/1f578c9ede1882ee714db249a6bed48c0e1e3059))
+
 ## 1.0.0-next.18
 
 ### Patch Changes
