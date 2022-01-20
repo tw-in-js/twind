@@ -59,8 +59,8 @@ importers:
 
   examples/basic:
     specifiers:
-      '@twind/tailwind': 1.0.0-next.16
-      twind: 1.0.0-next.16
+      '@twind/tailwind': 1.0.0-next.17
+      twind: 1.0.0-next.17
       vite: ^2.7.13
     dependencies:
       '@twind/tailwind': link:../../packages/tailwind
@@ -70,11 +70,11 @@ importers:
 
   examples/playground:
     specifiers:
-      '@twind/preset-autoprefix': 1.0.0-next.16
-      '@twind/preset-ext': 1.0.0-next.16
-      '@twind/preset-tailwind': 1.0.0-next.16
-      '@twind/preset-tailwind-forms': 1.0.0-next.16
-      twind: 1.0.0-next.16
+      '@twind/preset-autoprefix': 1.0.0-next.17
+      '@twind/preset-ext': 1.0.0-next.17
+      '@twind/preset-tailwind': 1.0.0-next.17
+      '@twind/preset-tailwind-forms': 1.0.0-next.17
+      twind: 1.0.0-next.17
       vite: ^2.7.13
     dependencies:
       '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
@@ -88,10 +88,10 @@ importers:
   examples/sveltekit:
     specifiers:
       '@sveltejs/kit': ^1.0.0-next.234
-      '@twind/sveltekit': 1.0.0-next.16
-      '@twind/tailwind': 1.0.0-next.16
+      '@twind/sveltekit': 1.0.0-next.17
+      '@twind/tailwind': 1.0.0-next.17
       svelte: ^3.44.0
-      twind: 1.0.0-next.16
+      twind: 1.0.0-next.17
       typescript: ^4.4.3
     devDependencies:
       '@sveltejs/kit': 1.0.0-next.234_svelte@3.46.2
@@ -103,9 +103,9 @@ importers:
 
   examples/tailwind-forms:
     specifiers:
-      '@twind/preset-tailwind-forms': 1.0.0-next.16
-      '@twind/tailwind': 1.0.0-next.16
-      twind: 1.0.0-next.16
+      '@twind/preset-tailwind-forms': 1.0.0-next.17
+      '@twind/tailwind': 1.0.0-next.17
+      twind: 1.0.0-next.17
       vite: ^2.7.13
     dependencies:
       '@twind/preset-tailwind-forms': link:../../packages/preset-tailwind-forms
@@ -122,8 +122,8 @@ importers:
 
   packages/cdn:
     specifiers:
-      '@twind/tailwind': 1.0.0-next.16
-      twind: 1.0.0-next.16
+      '@twind/tailwind': 1.0.0-next.17
+      twind: 1.0.0-next.17
     dependencies:
       '@twind/tailwind': link:../tailwind
       twind: link:../twind
@@ -131,7 +131,7 @@ importers:
   packages/preset-autoprefix:
     specifiers:
       style-vendorizer: ^2.1.1
-      twind: 1.0.0-next.16
+      twind: 1.0.0-next.17
     dependencies:
       style-vendorizer: 2.1.1
     devDependencies:
@@ -139,22 +139,22 @@ importers:
 
   packages/preset-ext:
     specifiers:
-      '@twind/preset-tailwind': 1.0.0-next.16
-      twind: 1.0.0-next.16
+      '@twind/preset-tailwind': 1.0.0-next.17
+      twind: 1.0.0-next.17
     devDependencies:
       '@twind/preset-tailwind': link:../preset-tailwind
       twind: link:../twind
 
   packages/preset-tailwind:
     specifiers:
-      twind: 1.0.0-next.16
+      twind: 1.0.0-next.17
     devDependencies:
       twind: link:../twind
 
   packages/preset-tailwind-forms:
     specifiers:
-      '@twind/preset-tailwind': 1.0.0-next.16
-      twind: 1.0.0-next.16
+      '@twind/preset-tailwind': 1.0.0-next.17
+      twind: 1.0.0-next.17
     devDependencies:
       '@twind/preset-tailwind': link:../preset-tailwind
       twind: link:../twind
@@ -163,7 +163,7 @@ importers:
     specifiers:
       '@sveltejs/kit': ^1.0.0-next.234
       svelte: ^3.44.0
-      twind: 1.0.0-next.16
+      twind: 1.0.0-next.17
     devDependencies:
       '@sveltejs/kit': 1.0.0-next.234_svelte@3.46.2
       svelte: 3.46.2
@@ -171,9 +171,9 @@ importers:
 
   packages/tailwind:
     specifiers:
-      '@twind/preset-autoprefix': 1.0.0-next.16
-      '@twind/preset-tailwind': 1.0.0-next.16
-      twind: 1.0.0-next.16
+      '@twind/preset-autoprefix': 1.0.0-next.17
+      '@twind/preset-tailwind': 1.0.0-next.17
+      twind: 1.0.0-next.17
     dependencies:
       '@twind/preset-autoprefix': link:../preset-autoprefix
       '@twind/preset-tailwind': link:../preset-tailwind
@@ -182,7 +182,7 @@ importers:
 
   packages/twind:
     specifiers:
-      '@twind/preset-tailwind': 1.0.0-next.16
+      '@twind/preset-tailwind': 1.0.0-next.17
       csstype: ^3.0.10
     dependencies:
       csstype: 3.0.10
