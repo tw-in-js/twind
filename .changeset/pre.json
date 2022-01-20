@@ -18,7 +18,8 @@
     "@twind/sveltekit": "1.0.0-next.13",
     "@example/twind-cdn": "0.0.1-next.0",
     "@twind/cdn": "1.0.0-next.16",
-    "@twind/tailwind": "1.0.0-next.16"
+    "@twind/tailwind": "1.0.0-next.16",
+    "@twind/website": "1.0.0-next.17"
   },
   "changesets": [
     "afraid-buttons-pull",
@@ -31,6 +32,7 @@
     "cyan-dingos-train",
     "cyan-files-promise",
     "cyan-mayflies-fix",
+    "dirty-bikes-call",
     "dirty-experts-bathe",
     "dirty-moons-tan",
     "dry-vans-perform",
@@ -57,6 +59,7 @@
     "nice-tools-yell",
     "odd-badgers-shout",
     "odd-needles-carry",
+    "olive-cobras-repair",
     "orange-windows-look",
     "perfect-dodos-complain",
     "pink-rockets-look",
