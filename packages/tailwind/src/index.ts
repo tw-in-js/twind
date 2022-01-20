@@ -78,7 +78,7 @@ export function setup(
 }
 
 // If we run in the browser as `<script src="..."></script>` patch twind to use our setup and defineConfig
-if (typeof document != 'undefined' && document.currentScript) {
+if (typeof document != 'undefined' && document.currentScript && self.twind) {
   self.twind.setup = setup
   self.twind.defineConfig = defineConfig
 }
