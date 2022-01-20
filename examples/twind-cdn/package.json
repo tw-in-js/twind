@@ -1,7 +1,7 @@
 {
-  "name": "@example/tailwind-cdn",
-  "description": "tailwind-cdn twind example",
   "version": "0.0.1-next.0",
+  "name": "@example/twind-cdn",
+  "description": "twind cdn twind example",
   "private": true,
   "main": "index.html",
   "license": "MIT",

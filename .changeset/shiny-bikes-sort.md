@@ -1,5 +1,5 @@
 ---
-'@twind/runtime': patch
+'twind': patch
 ---
 
 if they body was hidden autofocus the first element

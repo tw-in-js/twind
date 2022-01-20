@@ -1,6 +1,8 @@
-# Example: Tailwind CDN
+# Example: Twind CDN
 
 > Try it live at [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/tailwind-cdn) or [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/tailwind-cdn).
+
+Twind CDN is a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn) that is almost 6 times smaller (96.4kb vs 16.9kB) without any build step right in the browser or any other environment like Node.js, deno, workers, ...
 
 This example uses
 

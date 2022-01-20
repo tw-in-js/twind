@@ -2,7 +2,7 @@
 '@example/basic': patch
 '@example/playground': patch
 '@example/sveltekit': patch
-'@example/tailwind-cdn': patch
+'@example/twind-cdn': patch
 '@example/tailwind-forms': patch
 '@twind/preset-autoprefix': patch
 '@twind/preset-ext': patch

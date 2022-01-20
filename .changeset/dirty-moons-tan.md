@@ -1,6 +1,6 @@
 ---
 '@example/sveltekit': patch
-'@twind/runtime': patch
+'twind': patch
 ---
 
 always remove SSR stylesheet within runtime setup
