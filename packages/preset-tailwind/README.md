@@ -6,35 +6,72 @@
 
 **Twind v1 is still in beta. Expect bugs!**
 
-Twind v1 is a complete rewrite aiming to be compatible with Tailwind v3 classes.
-
 ---
+
+The full [Tailwind CSS](https://tailwindcss.com) experience without any build step right in the browser or any other environment like Node.js, deno, workers, ...
+
+This preset is included out-of-the-box in
+
+- [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind) — ready to use Tailwind CSS
+- [@twind/cdn](https://www.npmjs.com/package/@twind/cdn) — a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn)
+
+Used within the following [examples](https://github.com/tw-in-js/twind/tree/next/examples):
+
+- [Playground](https://github.com/tw-in-js/twind/tree/next/examples/playground)
 
 ## Installation
 
 Install from npm:
 
 ```sh
-npm install @twind/preset-tailwind@next
+npm install twind@next @twind/preset-tailwind@next
 ```
 
-## Usage
+## Installation
 
-**with [twind](https://www.npmjs.com/package/twind)** — ready to use Tailwind CSS
-
-_Already included in `twind`_
-
-**with [twind/core](https://github.com/tw-in-js/twind/tree/next/packages/twind#twindcore)**
+**with [twind](https://www.npmjs.com/package/twind)**
 
 ```js
 import { setup } from 'twind/core'
 import presetTailwind from '@twind/preset-tailwind'
 
 setup({
-  presets: [presetTailwind(), presetTailwindForms()],
+  presets: [presetTailwind(/* options */)],
+  /* config */
 })
 ```
 
-**with [Twind CDN](https://github.com/tw-in-js/twind/tree/next/packages/twind#twindcdn)**:
+<details><summary>Usage with a script tag</summary>
 
-_Already included in `twind/cdn`_
+```html
+<head>
+  <script
+    src="https://cdn.jsdelivr.net/combine/npm/twind@next,npm/@twind/preset-tailwind@next"
+    crossorigin
+  ></script>
+  <script>
+    twind.setup({
+      presets: [twind.presetTailwind(/* options */)],
+      /* config */
+    })
+  </script>
+</head>
+```
+
+</details>
+
+**with [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind)** — ready to use Tailwind CSS
+
+_Already included in `@twind/tailwind`_
+
+**with [Twind CDN](https://www.npmjs.com/package/@twind/cdn)** — a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn)
+
+_Already included in `@twind/cdn`_
+
+## Usage
+
+This preset can be configured with the following options:
+
+- `darkMode: 'media' | 'class' = 'media'` — whether to use dark mode media queries or class names
+
+- `enablePreflight: boolean = true` — whether to enable the [preflight](https://tailwindcss.com/docs/preflight)

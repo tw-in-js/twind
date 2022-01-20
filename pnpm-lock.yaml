@@ -59,21 +59,27 @@ importers:
 
   examples/basic:
     specifiers:
+      '@twind/tailwind': 1.0.0-next.16
       twind: 1.0.0-next.16
       vite: ^2.7.2
     dependencies:
+      '@twind/tailwind': link:../../packages/tailwind
       twind: link:../../packages/twind
     devDependencies:
       vite: 2.7.11
 
   examples/playground:
     specifiers:
-      '@twind/preset-ext': 1.0.0-next.14
-      '@twind/preset-tailwind-forms': 1.0.0-next.15
+      '@twind/preset-autoprefix': 1.0.0-next.16
+      '@twind/preset-ext': 1.0.0-next.16
+      '@twind/preset-tailwind': 1.0.0-next.16
+      '@twind/preset-tailwind-forms': 1.0.0-next.16
       twind: 1.0.0-next.16
       vite: ^2.7.2
     dependencies:
+      '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
       '@twind/preset-ext': link:../../packages/preset-ext
+      '@twind/preset-tailwind': link:../../packages/preset-tailwind
       '@twind/preset-tailwind-forms': link:../../packages/preset-tailwind-forms
       twind: link:../../packages/twind
     devDependencies:
@@ -81,50 +87,46 @@ importers:
 
   examples/sveltekit:
     specifiers:
-      '@sveltejs/adapter-node': next
-      '@sveltejs/kit': next
-      '@twind/preset-ext': 1.0.0-next.14
-      '@twind/preset-tailwind-forms': 1.0.0-next.15
-      '@twind/sveltekit': 1.0.0-next.14
-      prettier: ^2.4.1
-      prettier-plugin-svelte: ^2.4.0
-      style-vendorizer: ^2.1.1
+      '@sveltejs/kit': ^1.0.0-next.234
+      '@twind/sveltekit': 1.0.0-next.16
+      '@twind/tailwind': 1.0.0-next.16
       svelte: ^3.44.0
-      svelte-check: ^2.2.6
-      tslib: ^2.3.1
       twind: 1.0.0-next.16
       typescript: ^4.4.3
     devDependencies:
-      '@sveltejs/adapter-node': 1.0.0-next.64
       '@sveltejs/kit': 1.0.0-next.234_svelte@3.46.2
-      '@twind/preset-ext': link:../../packages/preset-ext
-      '@twind/preset-tailwind-forms': link:../../packages/preset-tailwind-forms
       '@twind/sveltekit': link:../../packages/sveltekit
-      prettier: 2.5.1
-      prettier-plugin-svelte: 2.6.0_prettier@2.5.1+svelte@3.46.2
-      style-vendorizer: 2.1.1
+      '@twind/tailwind': link:../../packages/tailwind
       svelte: 3.46.2
-      svelte-check: 2.3.0_svelte@3.46.2
-      tslib: 2.3.1
       twind: link:../../packages/twind
       typescript: 4.5.4
 
-  examples/tailwind-cdn:
+  examples/tailwind-forms:
+    specifiers:
+      '@twind/preset-tailwind-forms': 1.0.0-next.16
+      '@twind/tailwind': 1.0.0-next.16
+      twind: 1.0.0-next.16
+      vite: ^2.7.2
+    dependencies:
+      '@twind/preset-tailwind-forms': link:../../packages/preset-tailwind-forms
+      '@twind/tailwind': link:../../packages/tailwind
+      twind: link:../../packages/twind
+    devDependencies:
+      vite: 2.7.12
+
+  examples/twind-cdn:
     specifiers:
       serve: ^13.0.2
     devDependencies:
       serve: 13.0.2
 
-  examples/tailwind-forms:
+  packages/cdn:
     specifiers:
-      '@twind/preset-tailwind-forms': 1.0.0-next.15
+      '@twind/tailwind': 1.0.0-next.16
       twind: 1.0.0-next.16
-      vite: ^2.7.2
     dependencies:
-      '@twind/preset-tailwind-forms': link:../../packages/preset-tailwind-forms
-      twind: link:../../packages/twind
-    devDependencies:
-      vite: 2.7.12
+      '@twind/tailwind': link:../tailwind
+      twind: link:../twind
 
   packages/preset-autoprefix:
     specifiers:
@@ -137,7 +139,7 @@ importers:
 
   packages/preset-ext:
     specifiers:
-      '@twind/preset-tailwind': 1.0.0-next.15
+      '@twind/preset-tailwind': 1.0.0-next.16
       twind: 1.0.0-next.16
     devDependencies:
       '@twind/preset-tailwind': link:../preset-tailwind
@@ -151,7 +153,7 @@ importers:
 
   packages/preset-tailwind-forms:
     specifiers:
-      '@twind/preset-tailwind': 1.0.0-next.15
+      '@twind/preset-tailwind': 1.0.0-next.16
       twind: 1.0.0-next.16
     devDependencies:
       '@twind/preset-tailwind': link:../preset-tailwind
@@ -159,7 +161,7 @@ importers:
 
   packages/sveltekit:
     specifiers:
-      '@sveltejs/kit': next
+      '@sveltejs/kit': ^1.0.0-next.234
       svelte: ^3.44.0
       twind: 1.0.0-next.16
     devDependencies:
@@ -167,15 +169,25 @@ importers:
       svelte: 3.46.2
       twind: link:../twind
 
-  packages/twind:
+  packages/tailwind:
     specifiers:
-      '@twind/preset-autoprefix': 1.0.0-next.14
-      '@twind/preset-tailwind': 1.0.0-next.15
-      csstype: ^3.0.10
+      '@twind/preset-autoprefix': 1.0.0-next.16
+      '@twind/preset-tailwind': 1.0.0-next.16
+      twind: 1.0.0-next.16
     dependencies:
       '@twind/preset-autoprefix': link:../preset-autoprefix
       '@twind/preset-tailwind': link:../preset-tailwind
+    devDependencies:
+      twind: link:../twind
+
+  packages/twind:
+    specifiers:
+      '@twind/preset-tailwind': 1.0.0-next.16
+      csstype: ^3.0.10
+    dependencies:
       csstype: 3.0.10
+    devDependencies:
+      '@twind/preset-tailwind': link:../preset-tailwind
 
 packages:
 
@@ -605,12 +617,6 @@ packages:
       - utf-8-validate
     dev: true
 
-  /@sveltejs/adapter-node/1.0.0-next.64:
-    resolution: {integrity: sha512-p5Dv2vNdpeep8nYWY4lIefDyHWlgLmTO3BB9IhFCQRv5++RyMkQHtfAbv1rtwShXAEQeecT8/qDKp971vpUs8g==}
-    dependencies:
-      tiny-glob: 0.2.9
-    dev: true
-
   /@sveltejs/kit/1.0.0-next.234_svelte@3.46.2:
     resolution: {integrity: sha512-vnXLkk4GakytCM+TxFVVXfvJaXq/vY6AWpaUAKr1ZsQD2LSKteoaBlca1qI7fCRwccaPSkI+DOc+bNdgGiBBSQ==}
     engines: {node: '>=14.13'}
@@ -854,22 +860,12 @@ packages:
     resolution: {integrity: sha512-Gj7cI7z+98M282Tqmp2K5EIsoouUEzbBJhQQzDE3jSIRk6r9gsz0oUokqIUR4u1R3dMHo0pDHM7sNOHyhulypw==}
     dev: true
 
-  /@types/pug/2.0.6:
-    resolution: {integrity: sha512-SnHmG9wN1UVmagJOnyo/qkk0Z7gejYxOYYmaAwr5u2yFYfsupN3sg10kyzN8Hep/2zbHxCnsumxOoRIRMBwKCg==}
-    dev: true
-
   /@types/qs/6.9.7:
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
     dev: true
 
   /@types/resolve/1.17.1:
     resolution: {integrity: sha512-yy7HuzQhj0dhGpD8RLXSZWEkLsV9ibvxvi6EiJ3bkqLAO1RGo0WbkWQiwpRlSFymTJRz0d3k5LM3kkx8ArDbLw==}
-    dependencies:
-      '@types/node': 12.20.41
-    dev: true
-
-  /@types/sass/1.43.1:
-    resolution: {integrity: sha512-BPdoIt1lfJ6B7rw35ncdwBZrAssjcwzI5LByIrYs+tpXlj/CAkuVdRsgZDdP4lq5EjyWzwxZCqAoFyHKFwp32g==}
     dependencies:
       '@types/node': 12.20.41
     dev: true
@@ -1817,10 +1813,6 @@ packages:
       is-arrayish: 0.2.1
     dev: true
 
-  /es6-promise/3.3.1:
-    resolution: {integrity: sha1-oIzd6EzNvzTQJ6FFG8kdS80ophM=}
-    dev: true
-
   /esbuild-android-arm64/0.13.15:
     resolution: {integrity: sha512-m602nft/XXeO8YQPUDVoHfjyRVPdPgjyyXOxZ44MK/agewFFkPa8tUo6lAzSWh5Ui5PB4KR9UIFTSBKh/RrCmg==}
     cpu: [arm64]
@@ -2670,10 +2662,6 @@ packages:
       type-fest: 0.20.2
     dev: true
 
-  /globalyzer/0.1.0:
-    resolution: {integrity: sha512-40oNTM9UfG6aBmuKxk/giHn5nQ8RVz/SS4Ir6zgzOv9/qC3kKZ9v4etGTcJbEl/NyVQH7FGU7d+X1egr57Md2Q==}
-    dev: true
-
   /globby/11.1.0:
     resolution: {integrity: sha512-jhIXaOzy1sb8IyocaruWSn1TjmnBVs8Ayhcy83rmxNJ8q2uWKCAj3CnJY+KpGSXCueAPc0i05kVvVKtP1t9S3g==}
     engines: {node: '>=10'}
@@ -2696,10 +2684,6 @@ packages:
       ignore: 5.2.0
       merge2: 1.4.1
       slash: 4.0.0
-    dev: true
-
-  /globrex/0.1.2:
-    resolution: {integrity: sha512-uHJgbwAMwNFf5mLst7IWLNg14x1CkeqglJb/K3doi4dw6q2IvAAmM/Y81kevy83wP+Sst+nutFTYOGg3d1lsxg==}
     dev: true
 
   /graceful-fs/4.2.9:
@@ -3307,13 +3291,6 @@ packages:
     resolution: {integrity: sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==}
     dev: true
 
-  /mkdirp/0.5.5:
-    resolution: {integrity: sha512-NKmAlESf6jMGym1++R0Ra7wvhV+wFW63FaSOFPwRahvea0gMUcGUhVeAg/0BC0wiv9ih5NYPB1Wn1UEI1/L+xQ==}
-    hasBin: true
-    dependencies:
-      minimist: 1.2.5
-    dev: true
-
   /mkdirp/1.0.4:
     resolution: {integrity: sha512-vVqVZQyf3WLx2Shd0qJ9xuvqgAyKPLAiqITEtqW0oIUjzo3PePDd6fW9iFz30ef7Ysp/oiWqbhszeGWW2T6Gzw==}
     engines: {node: '>=10'}
@@ -3676,16 +3653,6 @@ packages:
       fast-diff: 1.2.0
     dev: true
 
-  /prettier-plugin-svelte/2.6.0_prettier@2.5.1+svelte@3.46.2:
-    resolution: {integrity: sha512-NPSRf6Y5rufRlBleok/pqg4+1FyGsL0zYhkYP6hnueeL1J/uCm3OfOZPsLX4zqD9VAdcXfyEL2PYqGv8ZoOSfA==}
-    peerDependencies:
-      prettier: ^1.16.4 || ^2.0.0
-      svelte: ^3.2.0
-    dependencies:
-      prettier: 2.5.1
-      svelte: 3.46.2
-    dev: true
-
   /prettier/1.19.1:
     resolution: {integrity: sha512-s7PoyDv/II1ObgQunCbB9PdLmUcBZcnWOcxDh7O0N/UwDEsHyqkW+Qh28jW+mVuCdx7gLB0BotYI1Y6uI9iyew==}
     engines: {node: '>=4'}
@@ -3935,13 +3902,6 @@ packages:
     resolution: {integrity: sha512-V2hovdzFbOi77/WajaSMXk2OLm+xNIeQdMMuB7icj7bk6zi2F8GGAxigcnDFpJHbNyNcgyJDiP+8nOrY5cZGrA==}
     dev: true
 
-  /rimraf/2.7.1:
-    resolution: {integrity: sha512-uWjbaKIK3T1OSVptzX7Nl6PvQ3qAGtKEtVRjRuazjfL3Bx5eI409VZSqgND+4UNnmzLVdPj9FqFJNPqBZFve4w==}
-    hasBin: true
-    dependencies:
-      glob: 7.2.0
-    dev: true
-
   /rimraf/3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
     hasBin: true
@@ -4011,15 +3971,6 @@ packages:
 
   /safer-buffer/2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
-    dev: true
-
-  /sander/0.5.1:
-    resolution: {integrity: sha1-dB4kXiMfB8r7b98PEzrfohalAq0=}
-    dependencies:
-      es6-promise: 3.3.1
-      graceful-fs: 4.2.9
-      mkdirp: 0.5.5
-      rimraf: 2.7.1
     dev: true
 
   /semver/5.7.1:
@@ -4180,16 +4131,6 @@ packages:
       yargs: 15.4.1
     dev: true
 
-  /sorcery/0.10.0:
-    resolution: {integrity: sha1-iukK19fLBfxZ8asMY3hF1cFaUrc=}
-    hasBin: true
-    dependencies:
-      buffer-crc32: 0.2.13
-      minimist: 1.2.5
-      sander: 0.5.1
-      sourcemap-codec: 1.4.8
-    dev: true
-
   /source-map-js/1.0.1:
     resolution: {integrity: sha512-4+TN2b3tqOCd/kaGRJ/sTYA0tR0mdXx26ipdolxcwtJVqEnqNYvlCAt1q3ypy4QMlYus+Zh34RNtYLoq2oQ4IA==}
     engines: {node: '>=0.10.0'}
@@ -4346,6 +4287,7 @@ packages:
 
   /style-vendorizer/2.1.1:
     resolution: {integrity: sha512-gVO6Cwxtg8iX0X1W4xMhSc5WbQpiIBQDkhq3JkwebMRRgyhCfuvMrnPlTAGTRjfQPGRmzgjCOZ4drehTnLahHA==}
+    dev: false
 
   /supports-color/5.5.0:
     resolution: {integrity: sha512-QjVjwdXIt408MIiAqCX4oUKsgU2EqAGzs2Ppkm4aQYbjm+ZEWEcW4SfFNTr4uMNZma0ey4f5lgLrkB0aX0QMow==}
@@ -4371,92 +4313,12 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /svelte-check/2.3.0_svelte@3.46.2:
-    resolution: {integrity: sha512-SBKdJyUmxzPmJf/ZPqDSQOoa9JzOcgEpV7u3UaYcgVn7fA0veZ3FA5JgLU8KYtf84Gp6guBVcrC7XKLjJa5SXQ==}
-    hasBin: true
-    peerDependencies:
-      svelte: ^3.24.0
-    dependencies:
-      chokidar: 3.5.2
-      fast-glob: 3.2.10
-      import-fresh: 3.3.0
-      minimist: 1.2.5
-      picocolors: 1.0.0
-      sade: 1.8.1
-      source-map: 0.7.3
-      svelte: 3.46.2
-      svelte-preprocess: 4.10.2_svelte@3.46.2+typescript@4.5.4
-      typescript: 4.5.4
-    transitivePeerDependencies:
-      - '@babel/core'
-      - coffeescript
-      - less
-      - node-sass
-      - postcss
-      - postcss-load-config
-      - pug
-      - sass
-      - stylus
-      - sugarss
-    dev: true
-
   /svelte-hmr/0.14.9_svelte@3.46.2:
     resolution: {integrity: sha512-bKE9+4qb4sAnA+TKHiYurUl970rjA0XmlP9TEP7K/ncyWz3m81kA4HOgmlZK/7irGK7gzZlaPDI3cmf8fp/+tg==}
     peerDependencies:
       svelte: '>=3.19.0'
     dependencies:
       svelte: 3.46.2
-    dev: true
-
-  /svelte-preprocess/4.10.2_svelte@3.46.2+typescript@4.5.4:
-    resolution: {integrity: sha512-aPpkCreSo8EL/y8kJSa1trhiX0oyAtTjlNNM7BNjRAsMJ8Yy2LtqHt0zyd4pQPXt+D4PzbO3qTjjio3kwOxDlA==}
-    engines: {node: '>= 9.11.2'}
-    requiresBuild: true
-    peerDependencies:
-      '@babel/core': ^7.10.2
-      coffeescript: ^2.5.1
-      less: ^3.11.3 || ^4.0.0
-      node-sass: '*'
-      postcss: ^7 || ^8
-      postcss-load-config: ^2.1.0 || ^3.0.0
-      pug: ^3.0.0
-      sass: ^1.26.8
-      stylus: ^0.55.0
-      sugarss: ^2.0.0
-      svelte: ^3.23.0
-      typescript: ^4.5.2
-    peerDependenciesMeta:
-      '@babel/core':
-        optional: true
-      coffeescript:
-        optional: true
-      less:
-        optional: true
-      node-sass:
-        optional: true
-      postcss:
-        optional: true
-      postcss-load-config:
-        optional: true
-      pug:
-        optional: true
-      sass:
-        optional: true
-      stylus:
-        optional: true
-      sugarss:
-        optional: true
-      typescript:
-        optional: true
-    dependencies:
-      '@types/pug': 2.0.6
-      '@types/sass': 1.43.1
-      detect-indent: 6.1.0
-      magic-string: 0.25.7
-      sorcery: 0.10.0
-      strip-indent: 3.0.0
-      svelte: 3.46.2
-      typescript: 4.5.4
     dev: true
 
   /svelte/3.46.2:
@@ -4543,13 +4405,6 @@ packages:
 
   /through/2.3.8:
     resolution: {integrity: sha1-DdTJ/6q8NXlgsbckEV1+Doai4fU=}
-    dev: true
-
-  /tiny-glob/0.2.9:
-    resolution: {integrity: sha512-g/55ssRPUjShh+xkfx9UPDXqhckHEsHr4Vd9zX55oSdGZc/MD0m3sferOkwWtp98bv+kcVfEHtRJgBVJzelrzg==}
-    dependencies:
-      globalyzer: 0.1.0
-      globrex: 0.1.2
     dev: true
 
   /tinypool/0.1.1:

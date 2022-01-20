@@ -1,7 +1,7 @@
 {
-  "name": "@twind/sveltekit",
+  "name": "@twind/tailwind",
   "version": "1.0.0-next.16",
-  "description": "sveltekit integration for Twind",
+  "description": "tailwindcss compat based on twind",
   "publishConfig": {
     "tag": "next",
     "access": "public",
@@ -12,16 +12,14 @@
     "tailwind",
     "tailwindcss",
     "tw-in-js",
-    "tailwind-in-js",
-    "svelte",
-    "sveltekit"
+    "tailwind-in-js"
   ],
   "homepage": "https://twind.dev",
   "bugs": "https://github.com/tw-in-js/twind/issues",
   "repository": {
     "type": "git",
     "url": "https://github.com/tw-in-js/twind.git",
-    "directory": "packages/sveltekit"
+    "directory": "packages/tailwind"
   },
   "license": "MIT",
   "contributors": [
@@ -36,26 +34,24 @@
   "main": "src/index.ts",
   "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
   "exports": {
-    ".": {
-      "node": "./src/index.ts"
-    },
+    ".": "./src/index.ts",
     "./package.json": "./package.json"
   },
   "// These are relative from within the dist/ folder": "",
   "sideEffects": false,
   "size-limit": [
     {
-      "name": "@twind/sveltekit",
-      "path": "dist/sveltekit.esnext.js",
+      "name": "@twind/tailwind",
+      "path": "dist/tailwind.esnext.js",
       "brotli": true,
-      "limit": "400b",
-      "ignore": [
-        "twind"
-      ]
+      "limit": "9.9kb"
     }
   ],
+  "dependencies": {
+    "@twind/preset-autoprefix": "1.0.0-next.16",
+    "@twind/preset-tailwind": "1.0.0-next.16"
+  },
   "peerDependencies": {
-    "@sveltejs/kit": "^1.0.0-next.234",
     "twind": "1.0.0-next.16",
     "typescript": "^4.4.0"
   },
@@ -65,8 +61,6 @@
     }
   },
   "devDependencies": {
-    "@sveltejs/kit": "^1.0.0-next.234",
-    "svelte": "^3.44.0",
     "twind": "1.0.0-next.16"
   },
   "scripts": {

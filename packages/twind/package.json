@@ -1,7 +1,7 @@
 {
   "name": "twind",
   "version": "1.0.0-next.16",
-  "description": "tailwindcss compat based on twind",
+  "description": "The core engine without any presets.",
   "publishConfig": {
     "tag": "next",
     "access": "public",
@@ -35,8 +35,6 @@
   "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
   "exports": {
     ".": "./src/index.ts",
-    "./cdn": "./src/cdn.ts",
-    "./core": "./src/core.ts",
     "./package.json": "./package.json"
   },
   "// These are relative from within the dist/ folder": "",
@@ -46,24 +44,10 @@
       "name": "twind",
       "path": "dist/twind.esnext.js",
       "brotli": true,
-      "limit": "15.7kb"
-    },
-    {
-      "name": "twind/cdn",
-      "path": "dist/cdn.esnext.js",
-      "brotli": true,
-      "limit": "14.6kb"
-    },
-    {
-      "name": "twind/core",
-      "path": "dist/core.esnext.js",
-      "brotli": true,
-      "limit": "6.2kb"
+      "limit": "6.1kb"
     }
   ],
   "dependencies": {
-    "@twind/preset-autoprefix": "1.0.0-next.14",
-    "@twind/preset-tailwind": "1.0.0-next.15",
     "csstype": "^3.0.10"
   },
   "peerDependencies": {
@@ -73,6 +57,9 @@
     "typescript": {
       "optional": true
     }
+  },
+  "devDependencies": {
+    "@twind/preset-tailwind": "1.0.0-next.16"
   },
   "scripts": {
     "prepublishOnly": "distilt"

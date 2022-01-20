@@ -1,17 +1,20 @@
 import type { Handle } from '@sveltejs/kit'
-import type { Twind } from 'twind'
 
-import { extract, tw as defaultTw } from 'twind'
+import { extract, tw as tw$ } from 'twind'
 
-export function withTwind(tw: Twind = defaultTw): Handle {
-  return async function withTwind$({ request, resolve }) {
-    const response = await resolve(request)
+export function withTwind(tw = tw$): Handle {
+  return async function withTwind$({ event, resolve }) {
+    const response = await resolve(event)
 
-    if (response.headers['content-type'] === 'text/html' && typeof response.body === 'string') {
-      const { html, css } = extract(response.body, tw)
+    if (response.headers?.get('content-type')?.startsWith('text/html')) {
+      const body = await response.text()
 
-      // TODO create file and link to that (inmemory, build/server/stylesheets, kit: inlineStyleThreshold, )
-      response.body = html.replace('</head>', `<style data-twind>${css}</style></head>`)
+      const { html, css } = extract(body, tw)
+
+      return new Response(
+        html.replace('</head>', `<style data-twind>${css}</style></head>`),
+        response,
+      )
     }
 
     return response

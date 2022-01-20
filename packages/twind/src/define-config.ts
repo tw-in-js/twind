@@ -7,6 +7,7 @@ import type {
   ExtractThemes,
   TwindPresetConfig,
 } from './types'
+
 import { asArray } from './utils'
 
 export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = Preset[]>({

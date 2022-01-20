@@ -19,15 +19,17 @@ The smallest, fastest, most feature complete Tailwind-in-JS solution in existenc
 [![CI](https://github.com/tw-in-js/twind/actions/workflows/ci.yml/badge.svg?branch=next)](https://github.com/tw-in-js/twind/actions/workflows/ci.yml)
 [![Coverage Status](https://flat.badgen.net/coveralls/c/github/tw-in-js/twind/next?icon=codecov&label&cache=10800)](https://coveralls.io/github/tw-in-js/twind?branch=next)
 
+---
+
 ## READ THIS FIRST!
 
 **Twind v1 is still in beta. Expect bugs!**
 
-Twind v1 is a complete rewrite aiming to be compatible with Tailwind v3 classes.
-
 ---
 
-Twind is a small compiler that converts Tailwind classes into actual CSS rules at runtime. If you have used Tailwind or other CSS-in-JS solutions, then most of the API should feel very familiar.
+Twind is a small compiler that converts utility-classes into actual CSS rules without any build step right in the browser or any other environment like Node.js, deno, workers, ...
+
+If you have used Tailwind or other CSS-in-JS solutions, then most of the API should feel very familiar.
 
 ## 🚀 Features
 
@@ -64,18 +66,27 @@ Other features include:
 
 ## 🦄 Quickstart
 
-See [twind](./packages/twind/README.md) for a quick intro.
+[twind](https://www.npmjs.com/package/twind) does **not** include any core utilities — use one of the existing presets:
 
-## 📦 Install
+- [@twind/preset-autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix)
+- [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind) to get a full Tailwind v3 experience
+- [@twind/preset-tailwind-forms](https://www.npmjs.com/package/@twind/preset-tailwind-forms) to get Tailwind v3 and Tailwind Forms.
+- [@twind/preset-ext](https://www.npmjs.com/package/@twind/preset-ext)
 
-### CDN
+For the full [Tailwind CSS](https://tailwindcss.com) experience try [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind) or start with [Twind CDN](https://www.npmjs.com/package/@twind/cdn) a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn) that is almost 6 times smaller (96.4kb vs 16.9kB).
 
-### Demos
+We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/examples) to get you started:
+
+- [Basic](https://github.com/tw-in-js/twind/tree/next/examples/basic)
+- [Playground](https://github.com/tw-in-js/twind/tree/next/examples/playground)
+- [SvelteKit](https://github.com/tw-in-js/twind/tree/next/examples/sveltekit)
+- [Tailwind Forms](https://github.com/tw-in-js/twind/tree/next/examples/tailwind-forms)
+- [Twind CDN](https://github.com/tw-in-js/twind/tree/next/examples/twind-cdn)
 
 ## Notable Changes
 
-- [twind](./packages/twind) — shim-first implementation using [@twind/preset-tailwind](./packages/preset-tailwind) and [@twind/preset-autoprefixer](./packages/preset-autoprefixer)
-- [twind/core](./packages/twind#twindcore) — shim-first implementation without any presets to have a clean start
+- [twind](./packages/twind) — shim-first implementation without any presets to have a clean start
+- [@twind/tailwind](./packages/tailwind) — shim-first implementation using [@twind/preset-tailwind](./packages/preset-tailwind) and [@twind/preset-autoprefixer](./packages/preset-autoprefixer)
 - API
   - `setup` can be called as many times as you want.
   - classes are returned in order they are applied by the browser - last one wins
@@ -93,7 +104,6 @@ See [twind](./packages/twind/README.md) for a quick intro.
       - `style#1hvn013 style--variant-gray#1hvn013 style--size-sm#1hvn013 style--outlined-@sm-true#1hvn013`
     - with label: `style({ label: 'button', ... })`
       - `button#p8xtwh button--color-orange#p8xtwh button--size-small#p8xtwh button--color-orange_outlined-true$0#p8xtwh`
-- [@twind/preset-tailwind](./packages/preset-tailwind) — a tailwindcss v3 compatible preset
 - grouping syntax:
   - allow trailing dash before parentheses for utilities -> `border-(md:{2 black opacity-50 hover:dashed}}`
   - shortcuts: `~` to apply/merge utilities -> `~(text(5xl,red-700),bg-red-100)`
@@ -103,38 +113,6 @@ See [twind](./packages/twind/README.md) for a quick intro.
         - `cx()` converts these to comma-separated group
     - named shortcuts: `PrimaryButton~(bg-red-500 text-white)` -> `PrimaryButton#<hash>`
       - `shortcut()` is an helper to simplify creation of shortcuts (works like `apply()` in twind v0.16); it supports creating named shortcuts: `shortcut.PrimaryButton\`bg-red-500 text-white\``->`PrimaryButton#<hash>`
-- rules and shortcuts based on ideas from [UnoCSS](https://github.com/antfu/unocss)
-
-  ```js
-  // defineConfig is optional but helps with type inference
-  defineConfig({
-    rules: [
-      // Some rules
-      ['hidden', { display: 'none' }],
-
-      // Table Layout
-      // .table-auto { table-layout: auto }
-      // .table-fixed { table-layout: fixed }
-      ['table-(auto|fixed)', 'tableLayout'],
-
-      // Some shortcuts
-      {
-        // single utility alias
-        red: 'text-red-100',
-
-        // shortcuts to multiple utilities
-        btn: 'py-2 px-4 font-semibold rounded-lg shadow-md',
-        'btn-green': 'text-white bg-green-500 hover:bg-green-700',
-
-        // dynamic shortcut — could be a rule as well
-        'btn-': ({ $$ }) => `bg-${$$}-400 text-${$$}-100 py-2 px-4 rounded-lg`,
-      },
-    ],
-  })
-  ```
-
-  There are lots of things possible. See [preset-tailwind/rules](./packages/preset-tailwind/src/rules.ts) for more examples.
-
 - config
 
   - presets are executed in order they are defined
@@ -153,6 +131,38 @@ See [twind](./packages/twind/README.md) for a quick intro.
     - `theme` and `theme.extend` are shallow merged — applied last
     - `rules`, `variants`, and `ignorelist` — applied first
     - `hash` and `stringify` are overridden if defined by the preset — applied first
+
+  - rules and shortcuts based on ideas from [UnoCSS](https://github.com/antfu/unocss)
+
+    ```js
+    // defineConfig is optional but helps with type inference
+    defineConfig({
+      rules: [
+        // Some rules
+        ['hidden', { display: 'none' }],
+
+        // Table Layout
+        // .table-auto { table-layout: auto }
+        // .table-fixed { table-layout: fixed }
+        ['table-(auto|fixed)', 'tableLayout'],
+
+        // Some shortcuts
+        {
+          // single utility alias
+          red: 'text-red-100',
+
+          // shortcuts to multiple utilities
+          btn: 'py-2 px-4 font-semibold rounded-lg shadow-md',
+          'btn-green': 'text-white bg-green-500 hover:bg-green-700',
+
+          // dynamic shortcut — could be a rule as well
+          'btn-': ({ $$ }) => `bg-${$$}-400 text-${$$}-100 py-2 px-4 rounded-lg`,
+        },
+      ],
+    })
+    ```
+
+    There are lots of things possible. See [preset-tailwind/rules](./packages/preset-tailwind/src/rules.ts) and [preset-ext/rules](./packages/preset-ext/src/rules.ts) for more examples.
 
   - ignorelist: can be used ignore certain rules
 
@@ -242,7 +252,7 @@ See [twind](./packages/twind/README.md) for a quick intro.
 - remove `dom` sheet?
 - console.warn(`[twind] unknown rule "${value}"`)
 - ci: post on discord after release
-- twind/cdn: parse style elements like tailwind?
+- @twind/tailwind: parse style elements like tailwind?
 - cdn.twind.dev -> https://cdn.jsdelivr.net/npm/twind@next/cdn.global.js
 - docs: remix run, wmr, astro, next??? — must be react based for codehike
 - docs: explain and examples of both modes (observe/shim vs library)
@@ -288,6 +298,7 @@ Thank you to all the people who have already contributed to twind!
 
 Thank you to all our sponsors! (please ask your company to also support this open source project by [becoming a sponsor](https://opencollective.com/twind#sponsor))
 
+<a href="https://www.kenoxa.com" target="_blank"><img src="https://images.opencollective.com/kenoxa/9c25796/logo/68.png"></a>
 <a href="https://opencollective.com/twind/sponsor/0/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/0/avatar.svg"></a>
 <a href="https://opencollective.com/twind/sponsor/1/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/1/avatar.svg"></a>
 <a href="https://opencollective.com/twind/sponsor/2/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/2/avatar.svg"></a>

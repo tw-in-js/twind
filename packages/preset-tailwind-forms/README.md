@@ -1,70 +1,96 @@
 # @twind/preset-tailwind-forms
 
-A [Twind](https://twind.dev) preset that provides a basic reset for form styles that makes form elements easy to override with utilities.
-
-> Based on [@tailwindcss/forms](https://github.com/tailwindlabs/tailwindcss-forms).
-
 ---
 
 ## READ THIS FIRST!
 
 **Twind v1 is still in beta. Expect bugs!**
 
-Twind v1 is a complete rewrite aiming to be compatible with Tailwind v3 classes.
-
 ---
+
+A [twind](https://www.npmjs.com/package/twind) preset that provides a basic reset for form styles that makes form elements easy to override with utilities.
+
+> Based on [@tailwindcss/forms](https://github.com/tailwindlabs/tailwindcss-forms).
 
 ## Installation
 
 Install from npm:
 
 ```sh
-npm install @twind/preset-tailwind-forms@next
+npm install twind@next @twind/preset-tailwind@next @twind/preset-tailwind-forms@next
+
+# or when using @twind/tailwind
+npm install twind@next @twind/tailwind@next @twind/preset-tailwind-forms@next
 ```
 
 Then add the preset to your twind config:
 
-**with [twind](https://www.npmjs.com/package/twind)** — ready to use Tailwind CSS
+**with [twind](https://www.npmjs.com/package/twind)**
 
 ```js
 import { setup } from 'twind'
-import presetTailwindForm from '@twind/preset-tailwind-forms'
-
-setup({
-  presets: [presetTailwindForms()],
-  // ... additional config
-})
-```
-
-**with [twind/core](https://github.com/tw-in-js/twind/tree/next/packages/twind#twindcore)**
-
-```js
-import { setup } from 'twind/core'
 import presetTailwind from '@twind/preset-tailwind'
 import presetTailwindForms from '@twind/preset-tailwind-forms'
 
 setup({
-  presets: [presetTailwind(), presetTailwindForms()],
-  // ... additional config
+  presets: [presetTailwind(/* options */), presetTailwindForms(/* options */)],
+  /* config */
 })
 ```
 
-**with [Twind CDN](https://github.com/tw-in-js/twind/tree/next/packages/twind#twindcdn)**:
+<details><summary>Usage with a script tag</summary>
 
 ```html
 <head>
-  <!-- ... -->
-  <script src="https://cdn.jsdelivr.net/npm/twind@next/cdn.global.js" crossorigin></script>
-  <script src="https://cdn.jsdelivr.net/npm/@twind/preset-tailwind-forms@next" crossorigin></script>
+  <script
+    src="https://cdn.jsdelivr.net/combine/npm/twind@next,npm/@twind/preset-tailwind@next,npm/@twind/preset-tailwind-forms@next"
+    crossorigin
+  ></script>
   <script>
     twind.setup({
-      presets: [twind_presetTailwindForms()],
-      // ...
+      presets: [twind.presetTailwind(/* options */), twind.presetTailwindForms(/* options */)],
+      /* config */
     })
   </script>
-  <!-- ... -->
 </head>
 ```
+
+</details>
+
+**with [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind)** — ready to use Tailwind CSS
+
+```js
+import { setup } from '@twind/tailwind'
+import presetTailwindForms from '@twind/preset-tailwind-forms'
+
+setup({
+  presets: [presetTailwindForms(/* options */)],
+  /* config */
+})
+```
+
+<details><summary>Usage with a script tag</summary>
+
+```html
+<head>
+  <script
+    src="https://cdn.jsdelivr.net/combine/npm/twind@next,npm/@twind/tailwind@next,npm/@twind/preset-tailwind-forms@next"
+    crossorigin
+  ></script>
+  <script>
+    twind.setup({
+      presets: [twind.presetTailwindForms(/* options */)],
+      /* config */
+    })
+  </script>
+</head>
+```
+
+</details>
+
+**with [Twind CDN](https://www.npmjs.com/package/@twind/cdn)** — a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn)
+
+_Currently not possible_
 
 ## Usage
 
@@ -82,7 +108,7 @@ For situations where the default strategy doesn't work well with your project, y
 
 ```js
 setup({
-  presets: [presetTailwind(), presetTailwindForms({ strategy: 'class' })],
+  presets: [presetTailwindForms({ strategy: 'class' })],
   // ... additional config
 })
 ```

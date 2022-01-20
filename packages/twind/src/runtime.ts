@@ -1,4 +1,13 @@
-import type { Twind, BaseTheme, TwindConfig, Sheet } from './types'
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import type {
+  Twind,
+  BaseTheme,
+  TwindConfig,
+  Sheet,
+  TwindUserConfig,
+  ExtractThemes,
+  Preset,
+} from './types'
 
 import { twind } from './twind'
 import { observe } from './observe'
@@ -69,8 +78,24 @@ let active: Twind
  * @param target
  * @returns
  */
-export function init<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown>(
-  config: TwindConfig<Theme>,
+export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown>(
+  config?: TwindConfig<Theme>,
+  sheet?: Sheet<SheetTarget>,
+  target?: HTMLElement,
+): Twind<Theme, SheetTarget>
+
+export function setup<
+  Theme = BaseTheme,
+  Presets extends Preset<any>[] = Preset[],
+  SheetTarget = unknown,
+>(
+  config?: TwindUserConfig<Theme, Presets>,
+  sheet?: Sheet<SheetTarget>,
+  target?: HTMLElement,
+): Twind<BaseTheme & ExtractThemes<Theme, Presets>, SheetTarget>
+
+export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown>(
+  config: TwindConfig<any> | TwindUserConfig<any> = {},
   sheet: Sheet<SheetTarget> = (typeof document != 'undefined'
     ? cssom()
     : virtual()) as unknown as Sheet<SheetTarget>,
@@ -82,7 +107,7 @@ export function init<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown>
     active.destroy()
   }
 
-  active = observe(twind(config, sheet), target)
+  active = observe(twind(config as TwindUserConfig<Theme>, sheet), target)
 
   if (firstRun && typeof document != 'undefined') {
     // first run in browser

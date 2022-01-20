@@ -1,7 +1,5 @@
 # @twind/preset-autoprefix
 
-Vendor prefixer and property alias mapper for Twind.
-
 ---
 
 ## READ THIS FIRST!
@@ -10,21 +8,25 @@ Vendor prefixer and property alias mapper for Twind.
 
 ---
 
+CSS vendor prefixer and property alias mapper preset for [twind](https://www.npmjs.com/package/twind).
+
+This preset is included out-of-the-box in [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind).
+
+Used within the following [examples](https://github.com/tw-in-js/twind/tree/next/examples):
+
+- [Playground](https://github.com/tw-in-js/twind/tree/next/examples/playground)
+
 ## Installation
 
 Install from npm:
 
 ```sh
-npm install @twind/preset-autoprefix@next
+npm install twind@next @twind/preset-autoprefix@next
 ```
 
 Then add the preset to your twind config:
 
-**with [twind](https://www.npmjs.com/package/twind)** — ready to use Tailwind CSS
-
-_Already included in `twind`_
-
-**with [twind/core](https://github.com/tw-in-js/twind/tree/next/packages/twind#twindcore)**
+**with [twind](https://www.npmjs.com/package/twind)**
 
 ```js
 import { setup } from 'twind/core'
@@ -32,14 +34,33 @@ import presetAutoprefix from '@twind/preset-autoprefix'
 
 setup({
   presets: [presetAutoprefix()],
-  // ... additional config
+  /* config */
 })
 ```
 
-**with [Twind CDN](https://github.com/tw-in-js/twind/tree/next/packages/twind#twindcdn)**:
+<details><summary>Usage with a script tag</summary>
 
-_Already included in `twind/cdn`_
+```html
+<head>
+  <script
+    src="https://cdn.jsdelivr.net/combine/npm/twind@next,npm/@twind/preset-autoprefix@next"
+    crossorigin
+  ></script>
+  <script>
+    twind.setup({
+      presets: [twind.presetAutoprefix()],
+      /* config */
+    })
+  </script>
+</head>
+```
 
-## Usage
+</details>
 
-TBD
+**with [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind)** — ready to use Tailwind CSS
+
+_Already included in `@twind/tailwind`_
+
+**with [Twind CDN](https://www.npmjs.com/package/@twind/cdn)** — a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn)
+
+_Already included in `@twind/cdn`_

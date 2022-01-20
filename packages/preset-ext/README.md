@@ -8,17 +8,21 @@
 
 ---
 
+Used within the following [examples](https://github.com/tw-in-js/twind/tree/next/examples):
+
+- [Playground](https://github.com/tw-in-js/twind/tree/next/examples/playground)
+
 ## Installation
 
 Install from npm:
 
 ```sh
-npm install @twind/preset-ext@next
+npm install twind@next @twind/preset-ext@next
 ```
 
 Then add the preset to your twind config:
 
-**with [twind](https://www.npmjs.com/package/twind)** — ready to use Tailwind CSS
+**with [twind](https://www.npmjs.com/package/twind)**
 
 ```js
 import { setup } from 'twind'
@@ -30,33 +34,70 @@ setup({
 })
 ```
 
-**with [twind/core](https://github.com/tw-in-js/twind/tree/next/packages/twind#twindcore)**
-
-```js
-import { setup } from 'twind/core'
-import presetExt from '@twind/preset-ext'
-import presetTailwindForms from '@twind/preset-tailwind-forms'
-
-setup({
-  presets: [presetExt()],
-  // ... additional config
-})
-```
-
-**with [Twind CDN](https://github.com/tw-in-js/twind/tree/next/packages/twind#twindcdn)**:
+<details><summary>Usage with a script tag</summary>
 
 ```html
 <head>
-  <!-- ... -->
-  <script src="https://cdn.jsdelivr.net/npm/twind@next/cdn.global.js" crossorigin></script>
-  <script src="https://cdn.jsdelivr.net/npm/@twind/preset-ext@next" crossorigin></script>
+  <script
+    src="https://cdn.jsdelivr.net/combine/npm/twind@next,npm/@twind/preset-ext@next"
+    crossorigin
+  ></script>
   <script>
     twind.setup({
-      presets: [twind_presetExt()],
+      presets: [twind.presetExt()],
       // ...
     })
   </script>
-  <!-- ... -->
+</head>
+```
+
+</details>
+
+**with [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind)** — ready to use Tailwind CSS
+
+```js
+import { setup } from '@twind/tailwind'
+import presetExt from '@twind/preset-ext'
+
+setup({
+  presets: [presetExt()],
+  /* config */
+})
+```
+
+<details><summary>Usage with a script tag</summary>
+
+```html
+<head>
+  <script
+    src="https://cdn.jsdelivr.net/combine/npm/twind@next,npm/@twind/tailwind@next,npm/@twind/preset-ext@next"
+    crossorigin
+  ></script>
+  <script>
+    twind.setup({
+      presets: [twind.presetExt()],
+      /* config */
+    })
+  </script>
+</head>
+```
+
+</details>
+
+**with [Twind CDN](https://www.npmjs.com/package/@twind/cdn)** — a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn)
+
+```html
+<head>
+  <script
+    src="https://cdn.jsdelivr.net/combine/npm/@twind/cdn@next,npm/@twind/preset-ext@next"
+    crossorigin
+  ></script>
+  <script>
+    twind.setup({
+      presets: [twind.presetExt()],
+      /* config */
+    })
+  </script>
 </head>
 ```
 

@@ -1,6 +1,6 @@
 {
   "name": "@twind/preset-tailwind",
-  "version": "1.0.0-next.15",
+  "version": "1.0.0-next.16",
   "description": "tailwindcss preset for twind",
   "keywords": [
     "twind",
@@ -32,7 +32,7 @@
       "name": "@twind/preset-tailwind",
       "path": "dist/preset-tailwind.esnext.js",
       "brotli": true,
-      "limit": "9.2kb",
+      "limit": "9.1kb",
       "ignore": [
         "twind"
       ]

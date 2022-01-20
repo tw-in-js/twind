@@ -4,6 +4,7 @@
 
 This example uses
 
-- [twind](https://www.npmjs.com/package/twind) — which includes
+- [twind](https://www.npmjs.com/package/twind)
+- [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind) — which includes
   - [@twind/preset-autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix)
   - [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind)

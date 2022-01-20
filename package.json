@@ -36,19 +36,26 @@
       "name": "twind",
       "path": "packages/twind/dist/twind.esnext.js",
       "brotli": true,
-      "limit": "15.7kb"
+      "limit": "6.1kb"
     },
     {
-      "name": "twind/cdn",
-      "path": "packages/twind/dist/cdn.esnext.js",
+      "name": "twind (setup)",
+      "path": "packages/twind/dist/twind.esnext.js",
+      "import": "{ setup }",
+      "brotli": true,
+      "limit": "4.3kb"
+    },
+    {
+      "name": "@twind/cdn",
+      "path": "packages/cdn/dist/cdn.esnext.js",
       "brotli": true,
       "limit": "14.6kb"
     },
     {
-      "name": "twind/core",
-      "path": "packages/twind/dist/core.esnext.js",
+      "name": "@twind/tailwind",
+      "path": "packages/tailwind/dist/tailwind.esnext.js",
       "brotli": true,
-      "limit": "6.2kb"
+      "limit": "14.6kb"
     }
   ],
   "// start — use 'BROWSER=none' to prevent vite to open a browser if within codesandbox or stackblitz": "",

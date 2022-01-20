@@ -9,7 +9,10 @@ import variants from './variants'
 export * from './types'
 
 export interface TailwindPresetOptions {
+  /** Allows to change how the `dark` variant is used (default: `"media"`) */
   darkMode?: 'media' | 'class' | boolean | undefined
+
+  /** Allows to disable to tailwind preflight (default: `true`) */
   enablePreflight?: boolean | undefined
 }
 

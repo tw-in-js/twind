@@ -12,7 +12,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@twind/preset-tailwind-forms": "1.0.0-next.15",
+    "@twind/preset-tailwind-forms": "1.0.0-next.16",
+    "@twind/tailwind": "1.0.0-next.16",
     "twind": "1.0.0-next.16"
   },
   "devDependencies": {

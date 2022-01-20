@@ -6,11 +6,27 @@
 
 **Twind v1 is still in beta. Expect bugs!**
 
-Twind v1 is a complete rewrite aiming to be compatible with Tailwind v3 classes
-
 ---
 
-Tailwind without any build step right in the browser or any other environment like Node.js, deno, workers, ...
+Utility-first CSS without any build step right in the browser or any other environment like Node.js, deno, workers, ...
+
+Twind does **not** include any core utilities — use one of the existing presets:
+
+- [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind) to get a full Tailwind v3 experience. It includes the following presets:
+
+  - [@twind/preset-autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix)
+  - [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind)
+
+- [@twind/preset-tailwind-forms](https://www.npmjs.com/package/@twind/preset-tailwind-forms) to get Tailwind v3 and Tailwind Forms.
+- [@twind/preset-ext](https://www.npmjs.com/package/@twind/preset-ext)
+
+Or write your own variants and rules.
+
+Take a look at [examples](https://github.com/tw-in-js/twind/tree/next/examples).
+
+Additionally we provides several integrations:
+
+- [@twind/sveltekit](https://www.npmjs.com/package/@twind/sveltekit) — [SvelteKit](https://kit.svelte.dev)
 
 ## Usage
 
@@ -37,43 +53,33 @@ Incase you are not using SSR to inject the pre-computed styles apply the followi
 
 If any element has the `autofocus` attribute, Twind will focus it after all styles are injected.
 
-**Script tag without a build step**
+<details><summary>Usage with a script tag</summary>
 
 Add this line to your `index.html`:
 
 ```html
 <head>
-  <!-- ... -->
   <script src="https://cdn.jsdelivr.net/npm/twind@next" crossorigin></script>
-  <!-- ... -->
+  <script>
+    twind.setup({
+      /* options */
+    })
+  </script>
 </head>
 ```
 
-To configure Twind add a script block _after_ the previous one (optional):
-
-```html
-<script>
-  twind.setup({
-    /* options */
-  })
-</script>
-```
-
-**Presets**
-
-- [@twind/preset-autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix)
-- [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind)
-
-To add another preset add its script after the current one:
+To add presets add their ids to the script `src` attribute:
 
 ```html
 <head>
   <!-- ... -->
-  <script src="https://cdn.jsdelivr.net/npm/twind@next" crossorigin></script>
-  <script src="https://cdn.jsdelivr.net/npm/@twind/preset-ext@next" crossorigin></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/twind@next,npm/@twind/preset-tailwind@next"
+    crossorigin
+  ></script>
   <script>
     twind.setup({
-      presets: [twind_presetExt()],
+      presets: [twind.presetTailwind()],
       // ...
     })
   </script>
@@ -81,56 +87,15 @@ To add another preset add its script after the current one:
 </head>
 ```
 
-### `twind/cdn`
+</details>
 
-A drop-in replacement for Tailwind CSS Play CDN that is almost 6 times smaller (96.4kb vs 16.9kB).
+## API
 
-**Note**: Only [`setup`](#setupconfig--sheet--target) is available.
-
-```js
-import { setup } from 'twind/cdn'
-```
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/twind@next/cdn.global.js" crossorigin></script>
-<script>
-  twind.setup({
-    /* ... */
-  })
-</script>
-```
-
-**Presets**
-
-- [@twind/preset-autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix)
-- [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind)
-
-### `twind/core`
-
-```js
-import /* ... */ from 'twind/core'
-```
-
-```html
-<script src="https://cdn.jsdelivr.net/npm/twind@next/core.global.js" crossorigin></script>
-<script>
-  const {
-    /* ... */
-  } = twind
-</script>
-```
-
-**Presets**
-
-None
-
-## Common API
-
-We are using `twind` in the following examples, but these work the same for `twind/core`.
+> If you are using the `script` tag these methods are available via the `twind` global object (eg `twind.setup`).
 
 ### `setup(config [, sheet [, target]])`
 
-Can be called as many times as you want.
+Initializes Twind and can be called as many times as you want.
 
 ```js
 import { setup } from 'twind'
@@ -210,7 +175,7 @@ function render() {
 }
 ```
 
-### Low-Level API
+## Low-Level API
 
 ### `twind`
 

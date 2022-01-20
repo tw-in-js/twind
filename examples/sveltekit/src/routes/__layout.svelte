@@ -1,8 +1,8 @@
 <script type="module">
   import { setup } from 'twind'
-  import twindConfig from '../twind.config'
+  import config from '../twind.config'
 
-  setup(twindConfig)
+  setup(config)
 </script>
 
 <slot />

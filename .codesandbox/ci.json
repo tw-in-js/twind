@@ -12,11 +12,13 @@
   // where the contents of the built dependency are. These files will be uploaded
   // to our registry.
   "publishDirectory": {
+    "@twind/cdn": "packages/cdn/dist",
     "@twind/preset-autoprefix": "packages/preset-autoprefix/dist",
     "@twind/preset-ext": "packages/preset-ext/dist",
     "@twind/preset-tailwind": "packages/preset-tailwind/dist",
     "@twind/preset-tailwind-forms": "packages/preset-tailwind-forms/dist",
     "@twind/sveltekit": "packages/sveltekit/dist",
+    "@twind/tailwind": "packages/tailwind/dist",
     "twind": "packages/twind/dist"
   },
   // A list of sandboxes that you want generated for a PR, if this list

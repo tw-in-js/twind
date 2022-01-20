@@ -10,10 +10,9 @@
 
 ## What is included?
 
-- [sveltekit](https://www.npmjs.com/package/@sveltejs/kit)
-- [@twind/sveltekit](https://www.npmjs.com/package/@twind/sveltekit)
-- [twind](https://www.npmjs.com/package/twind) — which includes
+- [twind](https://www.npmjs.com/package/twind)
+- [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind) — which includes
   - [@twind/preset-autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix)
   - [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind)
-- [@twind/preset-tailwind-forms](https://www.npmjs.com/package/@twind/preset-tailwind-forms)
-- [@twind/preset-ext](https://www.npmjs.com/package/@twind/preset-ext)
+- [sveltekit](https://www.npmjs.com/package/@sveltejs/kit)
+- [@twind/sveltekit](https://www.npmjs.com/package/@twind/sveltekit)
