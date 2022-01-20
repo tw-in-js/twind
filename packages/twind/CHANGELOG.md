@@ -1,5 +1,11 @@
 # twind
 
+## 1.0.0-next.18
+
+### Patch Changes
+
+- add inject(html) helper to simplify extracting CSS and injecting it into the head element ([#247](https://github.com/tw-in-js/twind/pull/247))
+
 ## 1.0.0-next.17
 
 ### Patch Changes

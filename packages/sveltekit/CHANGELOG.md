@@ -1,5 +1,14 @@
 # @twind/sveltekit
 
+## 1.0.0-next.18
+
+### Patch Changes
+
+- add inject(html) helper to simplify extracting CSS and injecting it into the head element ([#247](https://github.com/tw-in-js/twind/pull/247))
+
+- Updated dependencies [[`d3728a92`](https://github.com/tw-in-js/twind/commit/d3728a92bcfd86ca83cb14d10d8dc29fdc181b03)]:
+  - twind@1.0.0-next.18
+
 ## 1.0.0-next.17
 
 ### Patch Changes

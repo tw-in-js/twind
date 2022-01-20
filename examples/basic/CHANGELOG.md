@@ -1,5 +1,13 @@
 # @example/basic
 
+## 0.0.1-next.3
+
+### Patch Changes
+
+- Updated dependencies [[`d3728a92`](https://github.com/tw-in-js/twind/commit/d3728a92bcfd86ca83cb14d10d8dc29fdc181b03)]:
+  - twind@1.0.0-next.18
+  - @twind/tailwind@1.0.0-next.18
+
 ## 0.0.1-next.2
 
 ### Patch Changes
