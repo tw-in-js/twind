@@ -64,7 +64,7 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
     },
 
     v(value) {
-      if (!ruleCache.has(value)) {
+      if (!variantCache.has(value)) {
         variantCache.set(
           value,
           find(value, variants, variantResolvers, getVariantResolver, this) || '&:' + value,

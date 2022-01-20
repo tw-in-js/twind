@@ -4,7 +4,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { assert, test } from 'vitest'
 
-import { cx } from '.'
+import { cx } from '..'
 
 test('comments', () => {
   assert.strictEqual(
