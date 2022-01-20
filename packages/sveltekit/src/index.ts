@@ -1,3 +1,10 @@
+/**
+ * [[include:packages/preset-sveltekit/README.md]]
+ *
+ * @packageDocumentation
+ * @module
+ */
+
 import type { Handle } from '@sveltejs/kit'
 
 import { inject, tw as tw$ } from 'twind'

@@ -1,3 +1,10 @@
+/**
+ * [[include:packages/tailwind/README.md]]
+ *
+ * @packageDocumentation
+ * @module
+ */
+
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 

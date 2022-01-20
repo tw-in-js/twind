@@ -1,0 +1,18 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "out": "./30-api",
+  "entryPoints": ["../packages/*"],
+  "entryPointStrategy": "Packages",
+  "name": "Twind API",
+  "readme": "none",
+  "includes": "..",
+  "namedAnchors": true,
+  "hideBreadcrumbs": true,
+  "hideInPageTOC": false,
+  "includeVersion": false,
+  "categorizeByGroup": true,
+  "defaultCategory": "Other",
+  "categoryOrder": ["Category Name", "Other Category", "*"],
+  "sort": ["required-first", "visibility", "alphabetical"],
+  "githubPages": false
+}

@@ -3,7 +3,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "target": "ESNext",
-    "module": "nodenext",
+    "module": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     // Search under node_modules for non-relative imports.
     "moduleResolution": "node",

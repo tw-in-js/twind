@@ -4,6 +4,15 @@
   "description": "twind cdn twind example",
   "private": true,
   "main": "index.html",
+  "bugs": "https://github.com/tw-in-js/twind/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tw-in-js/twind.git",
+    "directory": "examples/twind-cdn"
+  },
+  "engines": {
+    "node": ">=14"
+  },
   "license": "MIT",
   "type": "module",
   "scripts": {

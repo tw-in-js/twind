@@ -28,6 +28,7 @@
   "packageManager": "pnpm@6.24.3",
   "// for npm/yarn within codesandbox — same as in pnpm-workspace.yml": "",
   "workspaces": [
+    "documentation",
     "examples/*",
     "packages/*"
   ],

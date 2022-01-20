@@ -3,8 +3,16 @@
   "description": "sveltekit with twind example",
   "version": "0.0.1-next.1",
   "private": true,
-  "main": "index.js",
   "license": "MIT",
+  "bugs": "https://github.com/tw-in-js/twind/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tw-in-js/twind.git",
+    "directory": "examples/sveltekit"
+  },
+  "engines": {
+    "node": ">=14"
+  },
   "type": "module",
   "scripts": {
     "start": "npm run dev",

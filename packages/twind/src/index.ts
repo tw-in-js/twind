@@ -1,3 +1,10 @@
+/**
+ * [[include:packages/twind/README.md]]
+ *
+ * @packageDocumentation
+ * @module
+ */
+
 export * from './colors'
 export * from './consume'
 export * from './css'

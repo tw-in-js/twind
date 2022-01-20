@@ -251,7 +251,6 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
 - `const acx = cx'aaa~(text-blue-500)'` works, but `const bcx = 'bbb~(text-red-500 ${acx})'` not
 - support `is(:hover,:focus-visible):underline`?
 - style: should it pass `class` and `className` through? alternatives: string concat, `cx`
-- remove `dom` sheet?
 - console.warn(`[twind] unknown rule "${value}"`)
 - ci: post on discord after release
 - @twind/tailwind: parse style elements like tailwind?
