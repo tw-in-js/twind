@@ -1,23 +1,49 @@
 import { changed } from './internal/changed'
+import { tw as tw$ } from './runtime'
 
 /**
  * Used for static HTML processing (usually to provide SSR support for your javascript-powered web apps)
+ *
+ * **Note**: Consider using {@link inject} or {@link extract} instead.
  *
  * 1. parse the markup and process element classes with the provided Twind instance
  * 2. update the class attributes _if_ necessary
  * 3. return the HTML string with the final element classes
  *
  * ```js
- * import { tw, consume, stringify } from 'twind'
+ * import { consume, stringify, tw } from 'twind'
  *
  * function render() {
  *   const html = renderApp()
  *
- *   // clear all styles
+ *   // clear all styles — optional
  *   tw.clear()
  *
  *   // generated markup
- *   const markup = consume(html, tw)
+ *   const markup = consume(html)
+ *
+ *   // create CSS
+ *   const css = stringify(tw.target)
+ *
+ *   // inject as last element into the head
+ *   return markup.replace('</head>', `<style data-twind>${css}</style></head>`)
+ * }
+ * ```
+ *
+ * You can provide your own Twind instance:
+ *
+ * ```js
+ * import { consume, stringify } from 'twind'
+ * import { tw } from './custom/twind/instance'
+ *
+ * function render() {
+ *   const html = renderApp()
+ *
+ *   // clear all styles — optional
+ *   tw.clear()
+ *
+ *   // generated markup
+ *   const markup = consume(html)
  *
  *   // create CSS
  *   const css = stringify(tw.target)
@@ -31,7 +57,7 @@ import { changed } from './internal/changed'
  * @param tw a {@link Twind} instance
  * @returns possibly modified HTML
  */
-export function consume(markup: string, tw: (className: string) => string): string {
+export function consume(markup: string, tw: (className: string) => string = tw$): string {
   let result = ''
   let lastChunkStart = 0
 
