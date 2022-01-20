@@ -44,7 +44,7 @@
       "path": "packages/twind/dist/twind.esnext.js",
       "import": "{ setup }",
       "brotli": true,
-      "limit": "4.3kb"
+      "limit": "4.35kb"
     },
     {
       "name": "@twind/cdn",
