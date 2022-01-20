@@ -142,3 +142,10 @@ test('named shortcuts', () => {
     },
   ])
 })
+
+test('primary-foreground-(light dark:dark)', () => {
+  assert.deepEqual(parse('primary-foreground-(light dark:dark)'), [
+    { n: 'primary-foreground-light', v: [], i: false },
+    { n: 'primary-foreground-dark', v: ['dark'], i: false },
+  ])
+})

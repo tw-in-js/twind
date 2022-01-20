@@ -17,7 +17,7 @@ body:
     id: reproduction
     attributes:
       label: Reproduction
-      description: A fork of [codesandbox.io/twind-bug-report](https://codesandbox.io/s/yfxpx) or [stackblitz.com/twind-bug-report](https://stackblitz.com/fork/twind-bug-report-template), that reproduces the issue. Explaining how to reproduce is generally not enough. It pushes the burden of creating a reproduction project onto a small set of volunteer maintainers and isn't scalable. If no reproduction is provided, the issue will be closed.
+      description: A fork on Stackblitz or Codesandbox of an [example](https://github.com/tw-in-js/twind/tree/next/examples#readme) that reproduces the issue. Explaining how to reproduce is generally not enough. It pushes the burden of creating a reproduction project onto a small set of volunteer maintainers and isn't scalable. If no reproduction is provided, the issue will be closed.
       placeholder: Reproduction
     validations:
       required: true
