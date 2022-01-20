@@ -1,10 +1,5 @@
 import type { Sheet } from './types'
-
-declare global {
-  interface Window {
-    tw?: HTMLStyleElement
-  }
-}
+import { asArray } from './utils'
 
 function createStyleElement(
   // 1. look for existing style element — usually from SSR
@@ -54,27 +49,6 @@ export function cssom(target = createStyleElement().sheet as CSSStyleSheet): She
   }
 }
 
-export function dom(target = createStyleElement()): Sheet<HTMLStyleElement> {
-  return {
-    target,
-
-    clear() {
-      // remove all added nodes
-      while (target.childNodes.length) {
-        target.removeChild(target.lastChild as Node)
-      }
-    },
-
-    destroy() {
-      target.remove()
-    },
-
-    insert(css, index) {
-      target.insertBefore(document.createTextNode(css), target.childNodes[index] || null)
-    },
-  }
-}
-
 export function virtual(target: string[] = []): Sheet<string[]> {
   return {
     target,
@@ -94,14 +68,11 @@ export function virtual(target: string[] = []): Sheet<string[]> {
 }
 
 export function stringify(target: unknown): string {
-  // string[] | CSSStyleSheet | HTMLStyleElement
-  if ((target as CSSStyleSheet).cssRules) {
-    target = Array.from((target as CSSStyleSheet).cssRules, (rule) => rule.cssText)
-  }
+  // string[] | CSSStyleSheet
 
   return (
-    (target as HTMLStyleElement).innerHTML ??
-    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-    (Array.isArray(target) ? target.join('') : '' + target)
-  )
+    (target as CSSStyleSheet).cssRules
+      ? Array.from((target as CSSStyleSheet).cssRules, (rule) => rule.cssText)
+      : asArray(target)
+  ).join('')
 }
