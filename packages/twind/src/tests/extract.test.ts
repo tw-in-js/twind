@@ -2,7 +2,7 @@ import { assert, test } from 'vitest'
 
 import presetTailwind from '@twind/preset-tailwind'
 
-import { twind, virtual, extract } from '.'
+import { twind, virtual, extract } from '..'
 
 test('expand class names', () => {
   const tw = twind({ presets: [presetTailwind({ enablePreflight: false })] }, virtual())

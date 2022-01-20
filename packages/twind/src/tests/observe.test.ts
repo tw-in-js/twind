@@ -2,7 +2,7 @@
 
 import { assert, test } from 'vitest'
 import presetTailwind from '@twind/preset-tailwind'
-import { twind, virtual, observe } from '.'
+import { twind, virtual, observe } from '..'
 
 test('use happy-dom in this test file', () => {
   document.documentElement.innerHTML = `

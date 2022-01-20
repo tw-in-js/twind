@@ -1,6 +1,6 @@
 import { assert, test, afterEach } from 'vitest'
 
-import { twind, virtual, style, colorFromTheme, fromTheme, shortcut, css } from '.'
+import { twind, virtual, style, colorFromTheme, fromTheme, shortcut, css } from '..'
 
 const tw = twind(
   {

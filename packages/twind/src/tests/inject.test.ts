@@ -2,9 +2,9 @@ import { assert, test } from 'vitest'
 
 import presetTailwind from '@twind/preset-tailwind'
 
-import { twind, virtual, setup, inject } from '.'
+import { setup, inject } from '..'
 
-setup({ presets: [presetTailwind({ enablePreflight: false })] }, virtual())
+setup({ presets: [presetTailwind({ enablePreflight: false })] })
 
 test('expand class names', () => {
   const html = inject(
