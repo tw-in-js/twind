@@ -1,5 +1,11 @@
 # twind
 
+## 1.0.0-next.20
+
+### Patch Changes
+
+- revert: remove dom sheet ([`6d50cf5f`](https://github.com/tw-in-js/twind/commit/6d50cf5f7bd8fb79caf02a81c30060c8abf2382e))
+
 ## 1.0.0-next.19
 
 ### Patch Changes
