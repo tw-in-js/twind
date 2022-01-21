@@ -1,22 +1,26 @@
-import { changed } from './internal/changed'
 import type { BaseTheme, Twind } from './types'
 
+import { changed } from './internal/changed'
+import { tw as tw$ } from './runtime'
+
 export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
-  tw: Twind<Theme, Target>,
+  tw: Twind<Theme, Target> = tw$ as Twind<Theme, Target>,
   target = typeof document != 'undefined' && document.documentElement,
 ): Twind<Theme, Target> {
   if (!target) return tw
 
-  const observer = new MutationObserver(handleMutations)
-
-  handleMutations([{ target, addedNodes: document.querySelectorAll('[class]') }])
+  const observer = new MutationObserver(handleMutationRecords)
 
   observer.observe(target, {
-    attributes: true,
     attributeFilter: ['class'],
     subtree: true,
     childList: true,
   })
+
+  // handle class attribute on target
+  handleClassAttributeChange(target)
+  // handle children of target
+  handleMutationRecords([{ target, type: '' }])
 
   return Object.create(tw, {
     destroy: {
@@ -28,36 +32,36 @@ export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
     },
   }) as Twind<Theme, Target>
 
-  function handleMutation({ target, addedNodes }: MinimalMutationRecord): void {
+  function handleMutationRecords(records: MinimalMutationRecord[]): void {
+    for (const { type, target } of records) {
+      if (type[0] == 'a' /* attribute */) {
+        // class attribute has been changed
+        handleClassAttributeChange(target as Element)
+      } else {
+        /* childList */
+        // some nodes have been added — find all with a class attribute
+        // eslint-disable-next-line @typescript-eslint/no-extra-semi
+        ;(target as Element).querySelectorAll('[class]').forEach(handleClassAttributeChange)
+      }
+    }
+
+    // remove pending mutations — these are triggered by updating the class attributes
+    observer.takeRecords()
+    // XXX maybe we need to handle all pending mutations
+    // observer.takeRecords().forEach(handleMutation)
+  }
+
+  function handleClassAttributeChange(target: Element): void {
     // Not using target.classList.value (not supported in all browsers) or target.class (this is an SVGAnimatedString for svg)
-    const tokens = (target as Element)?.getAttribute?.('class')
+    const tokens = target.getAttribute('class')
 
     let className: string
 
     // try do keep classNames unmodified
     if (tokens && changed(tokens, (className = tw(tokens)))) {
       // Not using `target.className = ...` as that is read-only for SVGElements
-      // eslint-disable-next-line @typescript-eslint/no-extra-semi
-      ;(target as Element).setAttribute('class', className)
+      target.setAttribute('class', className)
     }
-
-    for (let index = addedNodes.length; index--; ) {
-      const node = addedNodes[index]
-
-      handleMutations([
-        {
-          target: node,
-          addedNodes: (node as Element).children || [],
-        },
-      ])
-    }
-  }
-
-  function handleMutations(mutations: MinimalMutationRecord[]): void {
-    mutations.forEach(handleMutation)
-
-    // handle any still-pending mutations
-    observer.takeRecords().forEach(handleMutation)
   }
 }
 
@@ -67,6 +71,6 @@ export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
  * omit other properties we are not interested in.
  */
 interface MinimalMutationRecord {
-  readonly addedNodes: ArrayLike<Node>
+  readonly type: string
   readonly target: Node
 }

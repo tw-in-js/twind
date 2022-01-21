@@ -37,7 +37,7 @@
       "name": "twind",
       "path": "packages/twind/dist/twind.esnext.js",
       "brotli": true,
-      "limit": "6.1kb"
+      "limit": "6.15kb"
     },
     {
       "name": "twind (setup)",
@@ -56,7 +56,7 @@
       "name": "@twind/tailwind",
       "path": "packages/tailwind/dist/tailwind.esnext.js",
       "brotli": true,
-      "limit": "14.6kb"
+      "limit": "14.65kb"
     }
   ],
   "// start — use 'BROWSER=none' to prevent vite to open a browser if within codesandbox or stackblitz": "",

@@ -1,4 +1,5 @@
 import type { Sheet } from './types'
+import { asArray } from './utils'
 
 declare global {
   interface Window {
@@ -95,13 +96,12 @@ export function virtual(target: string[] = []): Sheet<string[]> {
 
 export function stringify(target: unknown): string {
   // string[] | CSSStyleSheet | HTMLStyleElement
-  if ((target as CSSStyleSheet).cssRules) {
-    target = Array.from((target as CSSStyleSheet).cssRules, (rule) => rule.cssText)
-  }
-
   return (
-    (target as HTMLStyleElement).innerHTML ??
+    (target as HTMLStyleElement).innerHTML ||
     // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
-    (Array.isArray(target) ? target.join('') : '' + target)
+    ((target as CSSStyleSheet).cssRules
+      ? Array.from((target as CSSStyleSheet).cssRules, (rule) => rule.cssText)
+      : asArray(target)
+    ).join('')
   )
 }
