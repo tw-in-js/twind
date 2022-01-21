@@ -1,6 +1,6 @@
 {
   "name": "twind",
-  "version": "1.0.0-next.19",
+  "version": "1.0.0-next.20",
   "description": "The core engine without any presets.",
   "publishConfig": {
     "tag": "next",
@@ -73,7 +73,7 @@
     }
   },
   "devDependencies": {
-    "@twind/preset-tailwind": "1.0.0-next.19"
+    "@twind/preset-tailwind": "1.0.0-next.20"
   },
   "scripts": {
     "prepublishOnly": "distilt"
