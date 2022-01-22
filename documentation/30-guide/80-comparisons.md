@@ -2,6 +2,10 @@
 
 CDN: 96.4kB (brotli) vs 16.9kB (brotli) -> almost 6 times smaller (5.7)
 
+- no implicit ordering of utilities: https://play.tailwindcss.com/EsRtpBotox
+  - if two utilities use the same CSS property, the one used first anywhere in the document will be used
+  - twind ensures that the order of the utilities is always predictable, no matter which one is used first
+
 ## twind v0.x
 
 ### New Features

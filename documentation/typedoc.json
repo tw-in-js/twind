@@ -1,6 +1,6 @@
 {
   "$schema": "https://typedoc.org/schema.json",
-  "out": "./30-api",
+  "out": "./70-api",
   "entryPoints": ["../packages/*"],
   "entryPointStrategy": "Packages",
   "name": "Twind API",
