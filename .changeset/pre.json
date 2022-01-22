@@ -19,12 +19,14 @@
     "@example/twind-cdn": "0.0.1-next.0",
     "@twind/cdn": "1.0.0-next.16",
     "@twind/tailwind": "1.0.0-next.16",
-    "@twind/website": "1.0.0-next.17"
+    "@twind/website": "1.0.0-next.17",
+    "@twind/gatsby-plugin": "1.0.0-next.20"
   },
   "changesets": [
     "afraid-buttons-pull",
     "afraid-donuts-teach",
     "angry-trees-scream",
+    "brave-houses-nail",
     "breezy-cycles-greet",
     "brown-geckos-drive",
     "calm-dogs-check",
@@ -39,6 +41,8 @@
     "dry-vans-perform",
     "early-boats-repair",
     "eleven-papayas-run",
+    "empty-berries-thank",
+    "fifty-moles-taste",
     "forty-teachers-grab",
     "forty-wolves-worry",
     "gentle-readers-suffer",
@@ -46,6 +50,7 @@
     "gorgeous-drinks-reflect",
     "great-beers-relate",
     "great-cows-carry",
+    "green-crabs-pull",
     "healthy-zebras-appear",
     "hot-flowers-smile",
     "kind-fireants-shop",
