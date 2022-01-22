@@ -2,12 +2,12 @@ import { assert, test } from 'vitest'
 
 import presetTailwind from '@twind/preset-tailwind'
 
-import { setup, inject } from '..'
+import { setup, inline } from '..'
 
 setup({ presets: [presetTailwind({ enablePreflight: false })] })
 
 test('expand class names', () => {
-  const html = inject(
+  const html = inline(
     `
     <!DOCTYPE html>
     <html lang="en">

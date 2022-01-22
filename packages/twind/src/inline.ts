@@ -12,21 +12,21 @@ import { tw as tw$ } from './runtime'
  * 4. return the HTML string with the final element classes
  *
  * ```js
- * import { inject } from 'twind'
+ * import { inline } from 'twind'
  *
  * function render() {
- *   return inject(renderApp())
+ *   return inline(renderApp())
  * }
  * ```
  *
  * You can provide your own Twind instance:
  *
  * ```js
- * import { extract } from 'twind'
+ * import { inline } from 'twind'
  * import { tw } from './custom/twind/instance'
  *
  * function render() {
- *   return inject(renderApp(), tw)
+ *   return inline(renderApp(), tw)
  * }
  * ```
  *
@@ -34,7 +34,7 @@ import { tw as tw$ } from './runtime'
  * @param tw a {@link Twind} instance
  * @returns the resulting HTML
  */
-export function inject(markup: string, tw = tw$): string {
+export function inline(markup: string, tw = tw$): string {
   const { html, css } = extract(markup, tw)
 
   // inject as last element into the head

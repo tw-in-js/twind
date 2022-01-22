@@ -7,7 +7,7 @@
 
 import type { Handle } from '@sveltejs/kit'
 
-import { inject, tw as tw$ } from 'twind'
+import { inline, tw as tw$ } from 'twind'
 
 export function withTwind(tw = tw$): Handle {
   return async function withTwind$({ event, resolve }) {
@@ -16,7 +16,7 @@ export function withTwind(tw = tw$): Handle {
     if (response.headers?.get('content-type')?.startsWith('text/html')) {
       const body = await response.text()
 
-      return new Response(inject(body, tw), response)
+      return new Response(inline(body, tw), response)
     }
 
     return response
