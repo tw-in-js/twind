@@ -63,7 +63,7 @@ If any element has the `autofocus` attribute, Twind will focus it after all styl
 
 > If you are not using any Twind API (like `cx`, `css`, ...) you can use the optimized [@twind/cdn](https://www.npmjs.com/package/@twind/cdn) package.
 
-Add this line to your `index.html`:
+Add this to your `index.html`:
 
 ```html
 <head>
@@ -71,18 +71,13 @@ Add this line to your `index.html`:
     src="https://cdn.jsdelivr.net/combine/npm/twind@next,npm/@twind/tailwind@next"
     crossorigin
   ></script>
+  <script>
+    // Must be called at least once — options may be empty or even omitted
+    twind.setup({
+      /* options */
+      /* config */
+    })
 </head>
-```
-
-To configure Twind add a script block _after_ the previous one (optional):
-
-```html
-<script>
-  twind.setup({
-    /* options */
-    /* config */
-  })
-</script>
 ```
 
 To add other presets add their ids to the script `src` attribute:

@@ -20,10 +20,13 @@ import type {
 
 import type { TailwindPresetOptions, TailwindTheme } from '@twind/preset-tailwind'
 
-import { defineConfig as defineConfig$, setup as setup$, auto, asArray } from 'twind'
+import { defineConfig as defineConfig$, setup as setup$, asArray } from 'twind'
 
 import presetAutoprefix from '@twind/preset-autoprefix'
 import presetTailwind from '@twind/preset-tailwind'
+
+// Re-export types
+export * from '@twind/preset-tailwind'
 
 export function defineConfig<Theme extends BaseTheme = TailwindTheme>(
   config?: TwindConfig<Theme> & TailwindPresetOptions,
@@ -48,9 +51,6 @@ export function defineConfig<Theme = TailwindTheme, Presets extends Preset<any>[
   } as TwindUserConfig)
 }
 
-// If we run in the browser as `<script src="..."></script>` auto call setup once the body starts rendering
-const cancelAutoSetup = /* @__PURE__ */ auto(setup)
-
 export function setup<Theme extends BaseTheme = TailwindTheme, SheetTarget = unknown>(
   config?: TwindConfig<Theme> & TailwindPresetOptions,
   sheet?: Sheet<SheetTarget>,
@@ -72,8 +72,6 @@ export function setup(
   sheet?: Sheet,
   target?: HTMLElement,
 ): Twind {
-  cancelAutoSetup()
-
   return setup$(defineConfig(config as TwindUserConfig), sheet, target)
 }
 
