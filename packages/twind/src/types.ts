@@ -265,7 +265,7 @@ export type PreflightThunk<Theme extends BaseTheme = BaseTheme> = (
   context: Context<Theme>,
 ) => Preflight | Falsey
 
-export type HashFunction = (value: string) => string
+export type HashFunction = (value: string, defaultHash: (value: string) => string) => string
 
 export interface TwindConfig<Theme extends BaseTheme = BaseTheme> {
   theme: ThemeConfig<Theme>
@@ -312,7 +312,25 @@ export interface TwindUserConfig<Theme = BaseTheme, Presets extends Preset<any>[
   variants?: Variant<BaseTheme & ExtractThemes<Theme, Presets>>[]
   rules?: Rule<BaseTheme & ExtractThemes<Theme, Presets>>[]
 
+  /**
+   * Enables hashing of all classes (default: `false`).
+   *
+   * If a function is given it can be used to hash only certain classes:
+   *
+   * ```js
+   * {
+   *   hash(className, defaultHash) {
+   *     if (/^[\w-]*~\(/.test(className)) {
+   *       // a shortcut like `~(...)` or `Button~(...)`
+   *       return defaultHash(className)
+   *     }
+   *     return className
+   *   }
+   * }
+   *```
+   */
   hash?: boolean | undefined | HashFunction
+
   stringify?: StringifyDeclaration<BaseTheme & ExtractThemes<Theme, Presets>>
   ignorelist?: MaybeArray<string | RegExp>
 }

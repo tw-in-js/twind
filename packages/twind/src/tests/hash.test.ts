@@ -58,3 +58,38 @@ test('same style in different layers has different hash', () => {
     '.\\#1hg5x5u{width:0px}',
   ])
 })
+
+test('hash shortcut only', () => {
+  const tw = twind(
+    {
+      hash(className, defaultHash) {
+        if (/^[\w-]*~\(/.test(className)) {
+          // a shortcut like `~(...)` or `Button~(...)`
+          return defaultHash(className)
+        }
+
+        return className
+      },
+      theme: {
+        spacing: {
+          0: '0px',
+        },
+      },
+      rules: [['w-', fromTheme('spacing', 'width')]],
+    },
+    virtual(),
+  )
+
+  assert.strictEqual(
+    tw(`w-0 ${css({ width: '0px' })} ${shortcut(`w-0`)}`),
+    '#1wdxrmr w-0 css#1adeaiv',
+  )
+  assert.deepEqual(tw.target, [
+    // apply(`w-0`)
+    '.\\#1wdxrmr{width:0px}',
+    // w-0
+    '.w-0{width:0px}',
+    // css({ width: '0px' })
+    '.css\\#1adeaiv{width:0px}',
+  ])
+})

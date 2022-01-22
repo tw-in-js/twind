@@ -256,8 +256,9 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
 - console.warn(`[twind] unknown rule "${value}"`)
 - ci: post on discord after release
 - @twind/tailwind: parse style elements like tailwind?
+- zero runtime
 - cdn.twind.dev -> https://cdn.jsdelivr.net/npm/twind@next/cdn.global.js
-- docs: remix run, wmr, astro, next??? — must be react based for codehike
+- docs: wmr + codehike + cloudflare pages
 - docs: explain and examples of both modes (observe/shim vs library)
 - docs: common patterns
 - docs: debugging the generated CSS in the browser (cssom sheet)

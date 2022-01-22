@@ -57,7 +57,12 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
 
     e: escape,
 
-    h: typeof hash == 'function' ? hash : hash ? defaultHash : (value) => value,
+    h:
+      typeof hash == 'function'
+        ? (value) => hash(value, defaultHash)
+        : hash
+        ? defaultHash
+        : (value) => value,
 
     s(property, value) {
       return stringify(property, value, this)
