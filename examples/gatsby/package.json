@@ -1,0 +1,38 @@
+{
+  "name": "@example/gatsby",
+  "description": "gatsby with twind example",
+  "version": "0.0.1-next.1",
+  "private": true,
+  "license": "MIT",
+  "bugs": "https://github.com/tw-in-js/twind/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tw-in-js/twind.git",
+    "directory": "examples/gatsby"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "build": "gatsby build",
+    "develop": "gatsby develop",
+    "start": "npm run develop",
+    "serve": "gatsby serve",
+    "clean": "gatsby clean",
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+  },
+  "dependencies": {
+    "@twind/gatsby-plugin": "1.0.0-next.20",
+    "@twind/preset-tailwind-forms": "1.0.0-next.20",
+    "@twind/tailwind": "1.0.0-next.20",
+    "esbuild-register": "^3.3.2",
+    "gatsby": "^4.5.3",
+    "gatsby-plugin-manifest": "^4.5.2",
+    "gatsby-plugin-offline": "^5.5.2",
+    "gatsby-plugin-react-helmet": "^5.5.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-helmet": "^6.1.0",
+    "twind": "1.0.0-next.20"
+  }
+}

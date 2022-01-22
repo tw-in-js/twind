@@ -61,6 +61,8 @@ If any element has the `autofocus` attribute, Twind will focus it after all styl
 
 <details><summary>Usage with a script tag</summary>
 
+> If you are not using any Twind API (like `cx`, `css`, ...) you can use the optimized [@twind/cdn](https://www.npmjs.com/package/@twind/cdn) package.
+
 Add this line to your `index.html`:
 
 ```html
@@ -82,8 +84,6 @@ To configure Twind add a script block _after_ the previous one (optional):
   })
 </script>
 ```
-
-> If you are not using any Twind API (like `cx`, `css`, ...) you can use the optimized [@twind/cdn](https://www.npmjs.com/package/@twind/cdn) package.
 
 To add other presets add their ids to the script `src` attribute:
 

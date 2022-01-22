@@ -2,3 +2,4 @@ packages:
   - documentation
   - examples/*
   - packages/*
+  - '!examples/gatsby'

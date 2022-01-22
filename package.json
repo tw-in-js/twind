@@ -30,7 +30,8 @@
   "workspaces": [
     "documentation",
     "examples/*",
-    "packages/*"
+    "packages/*",
+    "!examples/gatsby"
   ],
   "size-limit": [
     {
@@ -89,7 +90,7 @@
     "@typescript-eslint/parser": "^5.10.0",
     "@vitest/ui": "^0.1.24",
     "c8": "^7.11.0",
-    "distilt": "^0.16.0",
+    "distilt": "^0.16.3",
     "dotenv": "^10.0.0",
     "eslint": "^8.7.0",
     "eslint-config-prettier": "^8.3.0",
@@ -115,7 +116,7 @@
   "eslintConfig": {
     "root": true,
     "parserOptions": {
-      "ecmaVersion": 2021,
+      "ecmaVersion": 2022,
       "sourceType": "module"
     },
     "env": {
@@ -131,6 +132,23 @@
       "plugin:prettier/recommended"
     ],
     "overrides": [
+      {
+        "files": [
+          "**/*.cjs"
+        ],
+        "env": {
+          "node": true
+        }
+      },
+      {
+        "files": [
+          "**/*.jsx"
+        ],
+        "parser": "@typescript-eslint/parser",
+        "extends": [
+          "eslint:recommended"
+        ]
+      },
       {
         "files": [
           "**/*.ts",

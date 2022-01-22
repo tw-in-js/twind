@@ -5,13 +5,13 @@ daysUntilClose: 5
 exemptAssignees: true
 # use this property to disable stale bot when we apply the wontfix label, prevents users from playing stale bot ping pong and keeping an issue open with no intent of action
 exemptLabels:
-  - x⁸ ⋅ wontfix
-  - x⁴ ⋅ hold
+  - 🛑 Abandoned
+  - 🙅 Hold
 only: issues
-staleLabel: x⁷ ⋅ stale
+staleLabel: 🛑 Abandoned
 markComment: false
 closeComment: >
-  Hey folks. This issue hasn't received any traction for 60 days, so we're going to close this for housekeeping.
+  Hey folks. This issue hasn't received any traction for 90 days, so we're going to close this for housekeeping.
   If this is still an ongoing issue, please do consider contributing a Pull Request to resolve it. Further
   discussion is always welcome even with the issue closed. If anything actionable is posted in the comments,
   we'll consider reopening it.  [ⓘ](https://github.com/probot/stale#is-closing-stale-issues-really-a-good-idea)

@@ -1,6 +1,6 @@
 import { assert, test, afterEach } from 'vitest'
 
-import { twind, virtual, css, colorFromTheme, escape } from '..'
+import { twind, virtual, css, shortcut, colorFromTheme, escape } from '..'
 
 const tw = twind(
   {
@@ -192,5 +192,16 @@ test('interpolation values', () => {
     `.${escape(className)}:focus,.${escape(className)}:hover{color:#4b5563}`,
     `.${escape(className)} .otherClass{padding:0.5rem}`,
     'body{color:darkgreen}',
+  ])
+})
+
+test.todo('with shortcut', () => {
+  const className = tw('underline', shortcut(css({ lineHeight: '1' }), 'font-bold'))
+
+  assert.strictEqual(className, 'underline ~(css#1kek6c3,font-bold)')
+
+  assert.deepEqual(tw.target, [
+    '.\\~\\(css\\#1kek6c3\\,font-bold\\){line-height:1;font-weight:bold}',
+    '.underline{text-decoration:underline}',
   ])
 })
