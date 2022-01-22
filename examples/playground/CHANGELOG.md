@@ -1,5 +1,16 @@
 # @example/playground
 
+## 0.0.1-next.6
+
+### Patch Changes
+
+- Updated dependencies [[`0a2daf0f`](https://github.com/tw-in-js/twind/commit/0a2daf0f3daf7ebfde103407b5c0e914625c17c9), [`762c5153`](https://github.com/tw-in-js/twind/commit/762c515362f09e13e93ea8c10aa84109b65f13b3)]:
+  - twind@1.0.0-next.21
+  - @twind/preset-autoprefix@1.0.0-next.21
+  - @twind/preset-ext@1.0.0-next.21
+  - @twind/preset-tailwind@1.0.0-next.21
+  - @twind/preset-tailwind-forms@1.0.0-next.21
+
 ## 0.0.1-next.5
 
 ### Patch Changes
