@@ -22,10 +22,10 @@
   },
   "engines": {
     "node": ">=12.4",
-    "pnpm": "^6.10.0"
+    "pnpm": "^6.26.0"
   },
   "// https://nodejs.org/dist/latest-v16.x/docs/api/corepack.html": "",
-  "packageManager": "pnpm@6.24.3",
+  "packageManager": "pnpm@6.27.1",
   "// for npm/yarn within codesandbox — same as in pnpm-workspace.yml": "",
   "workspaces": [
     "documentation",
