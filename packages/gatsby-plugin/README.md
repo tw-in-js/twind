@@ -1,5 +1,7 @@
 # @twind/gatsby-plugin
 
+**NOT WORKING AT THE MOMENT** See the [gatsby](https://github.com/tw-in-js/twind/tree/next/examples/gatsby) example of working configuration. Looking for help to make the plugin work.
+
 ---
 
 ## READ THIS FIRST!

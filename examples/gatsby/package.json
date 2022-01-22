@@ -25,6 +25,7 @@
     "@twind/gatsby-plugin": "1.0.0-next.20",
     "@twind/preset-tailwind-forms": "1.0.0-next.20",
     "@twind/tailwind": "1.0.0-next.20",
+    "esbuild": "^0.14.3",
     "esbuild-register": "^3.3.2",
     "gatsby": "^4.5.3",
     "gatsby-plugin-manifest": "^4.5.2",

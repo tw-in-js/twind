@@ -29,12 +29,12 @@ module.exports = {
         icon: `src/images/favicon.png`,
       },
     },
-    {
-      resolve: `@twind/gatsby-plugin`,
-      options: {
-        config: twindConfig,
-      },
-    },
+    // {
+    //   resolve: `@twind/gatsby-plugin`,
+    //   options: {
+    //     config: twindConfig,
+    //   },
+    // },
     `gatsby-plugin-offline`,
   ],
 }
