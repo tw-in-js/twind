@@ -20,7 +20,8 @@
     "@twind/cdn": "1.0.0-next.16",
     "@twind/tailwind": "1.0.0-next.16",
     "@twind/website": "1.0.0-next.17",
-    "@twind/gatsby-plugin": "1.0.0-next.20"
+    "@twind/gatsby-plugin": "1.0.0-next.20",
+    "@example/gatsby": "0.0.1-next.1"
   },
   "changesets": [
     "afraid-buttons-pull",
@@ -40,6 +41,7 @@
     "dirty-moons-tan",
     "dry-vans-perform",
     "early-boats-repair",
+    "eighty-emus-explain",
     "eleven-papayas-run",
     "empty-berries-thank",
     "fifty-moles-taste",
@@ -63,8 +65,10 @@
     "neat-teachers-repeat",
     "new-olives-complain",
     "nice-tools-yell",
+    "nine-radios-speak",
     "odd-badgers-shout",
     "odd-needles-carry",
+    "old-stingrays-reflect",
     "olive-cobras-repair",
     "orange-windows-look",
     "perfect-dodos-complain",
@@ -90,7 +94,9 @@
     "stupid-bottles-heal",
     "swift-walls-own",
     "ten-roses-perform",
+    "thin-rules-cover",
     "thirty-brooms-give",
+    "tough-wombats-compare",
     "tricky-dolphins-punch",
     "tricky-hotels-move",
     "tricky-sloths-build",
@@ -103,6 +109,7 @@
     "wild-rats-flash",
     "wise-fireants-wink",
     "witty-impalas-wait",
+    "young-pumpkins-serve",
     "young-rats-whisper"
   ]
 }

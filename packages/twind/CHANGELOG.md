@@ -1,5 +1,19 @@
 # twind
 
+## 1.0.0-next.22
+
+### Patch Changes
+
+- add `tx` as convenient helper for `tw(cx(...))` ([`877152d1`](https://github.com/tw-in-js/twind/commit/877152d1401287aaeaa3f5405ce3d4c9673f7bf0))
+
+* BREAKING: `tw` accepts only a single string argument (use `cx` for more feature) this reduces the bundle size for the shim mode by 0.25kb ([#251](https://github.com/tw-in-js/twind/pull/251))
+
+- ensure that `dark` variant is always applied first ([#251](https://github.com/tw-in-js/twind/pull/251))
+
+* BREAKING: move `darkMode` into twind core ([#251](https://github.com/tw-in-js/twind/pull/251))
+
+- `inline` can accept an options object with a `minify` to minify the resulting CSS before injecting it ([#251](https://github.com/tw-in-js/twind/pull/251))
+
 ## 1.0.0-next.21
 
 ### Patch Changes

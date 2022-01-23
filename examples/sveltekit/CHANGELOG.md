@@ -1,5 +1,11 @@
 # @example/sveltekit
 
+## 0.0.1-next.3
+
+### Patch Changes
+
+- `inline` can accept an options object with a `minify` to minify the resulting CSS before injecting it ([#251](https://github.com/tw-in-js/twind/pull/251))
+
 ## 0.0.1-next.2
 
 ### Patch Changes
