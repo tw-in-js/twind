@@ -19,7 +19,6 @@ import { defineConfig } from './define-config'
 import { asArray } from './utils'
 import { serialize } from './internal/serialize'
 import { Layer } from './internal/precedence'
-import { interpolate } from './internal/interpolate'
 
 export function twind<Theme extends BaseTheme = BaseTheme, Target = unknown>(
   config: TwindConfig<Theme>,
@@ -75,7 +74,7 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
   }
 
   return Object.defineProperties(
-    function tw(strings, ...interpolations) {
+    function tw(tokens) {
       if (!cache.size) {
         for (let preflight of asArray(config.preflight)) {
           if (typeof preflight == 'function') {
@@ -87,8 +86,6 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
           }
         }
       }
-
-      const tokens = interpolate(strings, interpolations)
 
       let className = cache.get(tokens)
 

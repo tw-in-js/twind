@@ -65,7 +65,7 @@ export interface TwindRule {
 }
 
 export interface Twind<Theme extends BaseTheme = BaseTheme, Target = unknown> {
-  (strings: TemplateStringsArray | Class, ...interpolations: Class[]): string
+  (tokens: string): string
 
   readonly target: Target
 

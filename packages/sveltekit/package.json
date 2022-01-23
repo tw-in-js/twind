@@ -43,17 +43,6 @@
   },
   "// These are relative from within the dist/ folder": "",
   "sideEffects": false,
-  "size-limit": [
-    {
-      "name": "@twind/sveltekit",
-      "path": "dist/sveltekit.esnext.js",
-      "brotli": true,
-      "limit": "400b",
-      "ignore": [
-        "twind"
-      ]
-    }
-  ],
   "peerDependencies": {
     "@sveltejs/kit": "^1.0.0-next.234",
     "twind": "1.0.0-next.21",

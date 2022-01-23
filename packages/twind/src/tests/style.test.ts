@@ -1,6 +1,6 @@
 import { assert, test, afterEach } from 'vitest'
 
-import { twind, virtual, style, colorFromTheme, fromTheme, shortcut, css } from '..'
+import { twind, virtual, style, colorFromTheme, fromTheme, shortcut, cx, css } from '..'
 
 const tw = twind(
   {
@@ -245,12 +245,14 @@ test('Mixing string, apply, css and object', () => {
 
   assert.strictEqual(
     tw(
-      css`
-        color: darkgreen;
-      `,
-      button({ outlined: true }),
-      'text-sm',
-      shortcut('text-6'),
+      cx(
+        css`
+          color: darkgreen;
+        `,
+        button({ outlined: true }),
+        'text-sm',
+        shortcut('text-6'),
+      ),
     ),
     'style#1uuq3sz style--outlined-true#1uuq3sz style--size-sm#1uuq3sz style--variant-gray#1uuq3sz style-0--variant-gray_outlined-true#1uuq3sz ~(text-6) text-sm css#8vi6gz',
   )

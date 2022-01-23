@@ -1,6 +1,6 @@
 import { assert, test, afterEach } from 'vitest'
 
-import { twind, virtual, colorFromTheme, fromTheme, shortcut } from '..'
+import { twind, virtual, colorFromTheme, fromTheme, shortcut, cx } from '..'
 
 const tw = twind(
   {
@@ -88,7 +88,7 @@ test('named shortcuts', () => {
   assert.deepEqual(tw.target, [])
 
   assert.strictEqual(
-    tw(shortcut.PrimaryButton`bg-orange-500 text-white`, 'text-sm'),
+    tw(cx(shortcut.PrimaryButton`bg-orange-500 text-white`, 'text-sm')),
     'PrimaryButton#1nckg2k text-sm',
   )
 
@@ -100,7 +100,7 @@ test('named shortcuts', () => {
   tw.clear()
 
   assert.strictEqual(
-    tw`text-sm hover:${shortcut.PrimaryButton`bg-orange-500 text-white`}`,
+    tw(`text-sm hover:${shortcut.PrimaryButton`bg-orange-500 text-white`}`),
     'hover:PrimaryButton#1nckg2k text-sm',
   )
 
@@ -112,7 +112,7 @@ test('named shortcuts', () => {
   tw.clear()
 
   assert.strictEqual(
-    tw`text-sm hover:PrimaryButton~(bg-orange-500 text-white)`,
+    tw(`text-sm hover:PrimaryButton~(bg-orange-500 text-white)`),
     'PrimaryButton#hlo461 text-sm',
   )
 
