@@ -1558,5 +1558,12 @@
       ".valid\\:m-32:valid{margin:8rem}"
     ]
   ],
-  "dark:divide-gray-800": "@media (prefers-color-scheme:dark){.dark\\:divide-gray-800>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(31,41,55,var(--tw-divide-opacity))}}"
+  "dark:divide-gray-800": "@media (prefers-color-scheme:dark){.dark\\:divide-gray-800>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(31,41,55,var(--tw-divide-opacity))}}",
+  "peer-hover:bg-blue-(500 dark:200)": [
+    "peer-hover:bg-blue-500 dark:peer-hover:bg-blue-200",
+    [
+      ".peer:hover~.peer-hover\\:bg-blue-500{--tw-bg-opacity:1;background-color:rgba(59,130,246,var(--tw-bg-opacity))}",
+      "@media (prefers-color-scheme:dark){.peer:hover~.dark\\:peer-hover\\:bg-blue-200{--tw-bg-opacity:1;background-color:rgba(191,219,254,var(--tw-bg-opacity))}}"
+    ]
+  ]
 }

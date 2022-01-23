@@ -37,7 +37,7 @@ function createRule(active: string[], current: ParsedRule[][]): void {
       }
 
       if (value.endsWith(':')) {
-        variants.push(value.slice(0, -1))
+        variants[value == 'dark:' ? 'unshift' : 'push'](value.slice(0, -1))
         continue
       }
 
