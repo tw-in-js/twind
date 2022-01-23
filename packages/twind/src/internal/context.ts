@@ -17,7 +17,7 @@ import type {
 } from '../types'
 
 import { makeThemeFunction } from './theme'
-import { asArray, escape, hash as defaultHash } from '../utils'
+import { asArray, escape, hash as defaultHash, identity } from '../utils'
 
 type ResolveFunction<Theme extends BaseTheme = BaseTheme> = (
   className: string,
@@ -62,7 +62,7 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
         ? (value) => hash(value, defaultHash)
         : hash
         ? defaultHash
-        : (value) => value,
+        : identity,
 
     s(property, value) {
       return stringify(property, value, this)

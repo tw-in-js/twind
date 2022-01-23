@@ -48,3 +48,11 @@ export function asArray<T>(value: T = [] as unknown as T): T extends Array<any> 
     ? T
     : T[]
 }
+
+export function identity<T>(value: T): T {
+  return value
+}
+
+export function noop(): void {
+  // no-op
+}

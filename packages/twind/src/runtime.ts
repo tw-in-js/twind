@@ -12,6 +12,7 @@ import type {
 import { twind } from './twind'
 import { observe } from './observe'
 import { cssom, virtual } from './sheets'
+import { noop } from './utils'
 
 export function auto(setup: () => void): () => void {
   // If we run in the browser we call setup at latest when the body is inserted
@@ -39,8 +40,7 @@ export function auto(setup: () => void): () => void {
     return cancelAutoSetup
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  return () => {}
+  return noop
 }
 
 /**

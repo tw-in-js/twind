@@ -8,4 +8,4 @@ export const handle = withTwind()
 
 /* Using a custom Twind instance */
 // import { tw } from './custom/twind/instance'
-// export const handle = withTwind(tw)
+// export const handle = withTwind({ tw })
