@@ -32,16 +32,15 @@
   "engines": {
     "node": ">=12.4"
   },
-  "type": "module",
+  "type": "commonjs",
   "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
-  "main": "src/index.ts",
   "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
   "exports": {
-    ".": {
-      "node": "./src/index.ts"
-    },
     "./gatsby-browser": {
       "node": "./src/gatsby-browser.ts"
+    },
+    "./gatsby-node": {
+      "node": "./src/gatsby-node.ts"
     },
     "./gatsby-ssr": {
       "node": "./src/gatsby-ssr.ts"
@@ -49,7 +48,7 @@
     "./package.json": "./package.json"
   },
   "// These are relative from within the dist/ folder": "",
-  "sideEffects": false,
+  "sideEffects": true,
   "peerDependencies": {
     "gatsby": "2.x || 3.x || 4.x",
     "react": "16.x || 17.x || 18.x",

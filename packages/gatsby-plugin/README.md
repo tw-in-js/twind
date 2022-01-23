@@ -1,9 +1,5 @@
 # @twind/gatsby-plugin
 
-**NOT WORKING AT THE MOMENT** See the [gatsby](https://github.com/tw-in-js/twind/tree/next/examples/gatsby) example of working configuration. Looking for help to make the plugin work.
-
----
-
 ## READ THIS FIRST!
 
 **Twind v1 is still in beta. Expect bugs!**
@@ -30,7 +26,46 @@ Please see [examples/gatsby](https://github.com/tw-in-js/twind/tree/next/example
 
 **`gatsby-config.js`**
 
-```html
-const twindConfig = require('./twind.config') module.exports = { plugins: [ { resolve:
-`@twind/gatsby-plugin`, options: { config: twindConfig, }, }, ], }
+```js
+module.exports = {
+  plugins: [
+    `@twind/gatsby-plugin`,
+    // {
+    //   resolve: `@twind/gatsby-plugin`,
+    //   options: {
+    //     config: `./path/to/twind.config`
+    //   }
+    // },
+  ],
+}
+```
+
+**`twind.config.js`**
+
+```js
+import { defineConfig } from 'twind'
+// import { defineConfig } from '@twind/tailwind'
+
+export default defineConfig({
+  /* config */
+)
+```
+
+## Options
+
+This plugin assumes a `twind.config.js` file in the root of your project.
+
+You can use the `config` option to specify a different path to a twind config file:
+
+```js
+module.exports = {
+  plugins: [
+    {
+      resolve: `@twind/gatsby-plugin`,
+      options: {
+        config: `./path/to/twind.config`,
+      },
+    },
+  ],
+}
 ```

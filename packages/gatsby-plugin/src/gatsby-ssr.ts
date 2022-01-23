@@ -1,11 +1,15 @@
+/* eslint-env node */
+
 import type { ReactElement } from 'react'
 import type { ReplaceRendererArgs } from 'gatsby'
 
 import { renderToString } from 'react-dom/server'
 import { createElement } from 'react'
-import { extract } from 'twind'
+import { setup, virtual, extract } from 'twind'
 
-export { wrapRootElement } from './wrap-root-element'
+import config from '@twind/gatsby-plugin/config'
+
+setup(config, virtual())
 
 export function replaceRenderer({
   bodyComponent,
@@ -19,7 +23,7 @@ export function replaceRenderer({
   setHeadComponents([
     // <style data-twind>{css}</style>
     createElement('style', {
-      'data-twind': '',
+      'data-twind': true,
       dangerouslySetInnerHTML: {
         __html: css,
       },

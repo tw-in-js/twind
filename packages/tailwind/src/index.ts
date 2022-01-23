@@ -25,9 +25,6 @@ import { defineConfig as defineConfig$, setup as setup$, asArray } from 'twind'
 import presetAutoprefix from '@twind/preset-autoprefix'
 import presetTailwind from '@twind/preset-tailwind'
 
-// Re-export types
-export * from '@twind/preset-tailwind'
-
 export function defineConfig<Theme extends BaseTheme = TailwindTheme>(
   config?: TwindConfig<Theme> & TailwindPresetOptions,
 ): TwindConfig<Theme & TailwindTheme>

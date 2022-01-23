@@ -4,7 +4,7 @@ import presetExt from '@twind/preset-ext'
 import presetTailwind from '@twind/preset-tailwind'
 import presetTailwindForms from '@twind/preset-tailwind-forms'
 
-// `defineConfig` is no required, but adds types
+// `defineConfig` is not required, but adds types
 export default defineConfig({
   presets: [presetAutoprefix(), presetExt(), presetTailwind(), presetTailwindForms()],
 })

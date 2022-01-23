@@ -5,8 +5,3 @@
  */
 
 // You can delete this file if you're not using it
-
-import { setup } from 'twind'
-import config from './twind.config'
-
-setup(config)

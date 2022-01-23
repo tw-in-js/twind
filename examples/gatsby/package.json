@@ -22,11 +22,8 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "dependencies": {
-    "@twind/gatsby-plugin": "1.0.0-next.20",
-    "@twind/preset-tailwind-forms": "1.0.0-next.20",
-    "@twind/tailwind": "1.0.0-next.20",
-    "esbuild": "^0.14.3",
-    "esbuild-register": "^3.3.2",
+    "@twind/gatsby-plugin": "1.0.0-next.21",
+    "@twind/tailwind": "1.0.0-next.21",
     "gatsby": "^4.5.3",
     "gatsby-plugin-manifest": "^4.5.2",
     "gatsby-plugin-offline": "^5.5.2",
@@ -34,6 +31,14 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
-    "twind": "1.0.0-next.20"
+    "twind": "1.0.0-next.21"
+  },
+  "// Only used within the twind monorepo": "",
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "babel-eslint"
+      ]
+    }
   }
 }
