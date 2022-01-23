@@ -1,6 +1,6 @@
 import { assert, test, afterEach } from 'vitest'
 
-import { twind, virtual, css, shortcut, colorFromTheme, escape } from '..'
+import { twind, virtual, css, cx, shortcut, colorFromTheme, escape } from '..'
 
 const tw = twind(
   {
@@ -196,7 +196,7 @@ test('interpolation values', () => {
 })
 
 test.todo('with shortcut', () => {
-  const className = tw('underline', shortcut(css({ lineHeight: '1' }), 'font-bold'))
+  const className = tw(cx('underline', shortcut(css({ lineHeight: '1' }), 'font-bold')))
 
   assert.strictEqual(className, 'underline ~(css#1kek6c3,font-bold)')
 
