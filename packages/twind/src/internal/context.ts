@@ -31,6 +31,7 @@ type VariantFunction<Theme extends BaseTheme = BaseTheme> = (
 
 export function createContext<Theme extends BaseTheme = BaseTheme>({
   theme,
+  darkMode,
   variants,
   rules,
   hash,
@@ -51,6 +52,17 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const ignored = createRegExpExecutor(ignorelist, (value, condition) => condition.test(value))
+
+  // add dark as last variant to allow user to override it
+  // we can modify variants as it has been passed through defineConfig which already made a copy
+  variants.push([
+    'dark',
+    darkMode === 'class'
+      ? '.dark &'
+      : typeof darkMode === 'string' && darkMode != 'media'
+      ? darkMode // a custom selector
+      : '@media (prefers-color-scheme:dark)',
+  ])
 
   return {
     theme: makeThemeFunction(theme),

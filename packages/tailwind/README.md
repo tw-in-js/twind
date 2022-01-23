@@ -106,8 +106,6 @@ To add other presets add their ids to the script `src` attribute:
 
 The following options from [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind) are available:
 
-- `darkMode: 'media' | 'class' = 'media'` — whether to use dark mode media queries or class names
-
 - `enablePreflight: boolean = true` — whether to enable the [preflight](https://tailwindcss.com/docs/preflight)
 
 ### `setup([config [, sheet [, target]]])`
@@ -119,7 +117,6 @@ import { setup } from '@twind/tailwind'
 
 const tw = setup({
   // this are the defaults
-  darkMode: 'media',
   enablePreflight: true,
   /* config */
 })
@@ -135,7 +132,6 @@ import { defineConfig } from '@twind/tailwind'
 
 export default defineConfig({
   // this are the defaults
-  darkMode: 'media',
   enablePreflight: true,
   /* config */
 })

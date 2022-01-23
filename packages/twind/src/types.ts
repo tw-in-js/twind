@@ -267,7 +267,12 @@ export type PreflightThunk<Theme extends BaseTheme = BaseTheme> = (
 
 export type HashFunction = (value: string, defaultHash: (value: string) => string) => string
 
+export type DarkModeConfig = 'media' | 'class' | string | boolean | undefined
+
 export interface TwindConfig<Theme extends BaseTheme = BaseTheme> {
+  /** Allows to change how the `dark` variant is used (default: `"media"`) */
+  darkMode?: DarkModeConfig
+
   theme: ThemeConfig<Theme>
 
   preflight: false | MaybeThunk<Preflight | Falsey, Theme>[]
@@ -290,6 +295,9 @@ export type ExtractThemes<Theme, Presets extends Preset<any>[]> = UnionToInterse
 >
 
 export interface TwindPresetConfig<Theme = BaseTheme> {
+  /** Allows to change how the `dark` variant is used (default: `"media"`) */
+  darkMode?: DarkModeConfig
+
   theme?: ThemeConfig<Theme & BaseTheme>
 
   preflight?: false | MaybeArray<Preflight | PreflightThunk<Theme & BaseTheme>>
@@ -303,6 +311,9 @@ export interface TwindPresetConfig<Theme = BaseTheme> {
 
 export interface TwindUserConfig<Theme = BaseTheme, Presets extends Preset<any>[] = Preset[]> {
   presets?: Presets
+
+  /** Allows to change how the `dark` variant is used (default: `"media"`) */
+  darkMode?: DarkModeConfig
 
   theme?: Theme & ThemeConfig<BaseTheme & ExtractThemes<Theme, Presets>>
 

@@ -36,7 +36,6 @@ export function defineConfig<Theme = TailwindTheme, Presets extends Preset<any>[
 ): TwindConfig<TailwindTheme & ExtractThemes<Theme, Presets>>
 
 export function defineConfig<Theme = TailwindTheme, Presets extends Preset<any>[] = Preset[]>({
-  darkMode,
   enablePreflight,
   ...config
 }: (TwindConfig | TwindUserConfig) & TailwindPresetOptions = {}): TwindConfig {
@@ -44,7 +43,7 @@ export function defineConfig<Theme = TailwindTheme, Presets extends Preset<any>[
     ...config,
     presets: [
       presetAutoprefix(),
-      presetTailwind({ darkMode, enablePreflight }),
+      presetTailwind({ enablePreflight }),
       ...asArray((config as TwindUserConfig<Theme, Presets>).presets),
     ],
   } as TwindUserConfig)

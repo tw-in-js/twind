@@ -18,6 +18,7 @@ export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = 
   // only `preflight` and `theme` are applied as last preset to override all presets
   let config: TwindConfig<BaseTheme & ExtractThemes<Theme, Presets>> = {
     preflight: userConfig.preflight !== false && [],
+    darkMode: undefined,
     theme: {},
     variants: asArray(userConfig.variants),
     rules: asArray(userConfig.rules),
@@ -29,12 +30,14 @@ export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = 
   for (const preset of asArray([
     ...presets,
     {
+      darkMode: userConfig.darkMode,
       preflight: userConfig.preflight !== false && asArray(userConfig.preflight),
       theme: userConfig.theme as TwindConfig<BaseTheme & ExtractThemes<Theme, Presets>>['theme'],
     } as TwindPresetConfig<Theme>,
   ])) {
     const {
       preflight,
+      darkMode = config.darkMode,
       theme,
       variants,
       rules,
@@ -47,6 +50,8 @@ export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = 
       // values defined by user or previous presets take precedence
       preflight: config.preflight !== false &&
         preflight !== false && [...config.preflight, ...asArray(preflight)],
+
+      darkMode,
 
       theme: {
         ...config.theme,

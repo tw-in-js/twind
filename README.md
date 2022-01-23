@@ -126,14 +126,16 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
     - `preflight` — last one wins
     - `theme` and `theme.extend` are shallow merged — last one wins
     - `rules`, `variants`, and `ignorelist` — first one wins
-    - `hash` and `stringify` are overridden if defined by the preset — last one wins
+    - `darkMode`, `hash` and `stringify` are overridden if defined by the preset — last one wins
 
   - user config merging
 
     - `preflight` — applied last
     - `theme` and `theme.extend` are shallow merged — applied last
     - `rules`, `variants`, and `ignorelist` — applied first
-    - `hash` and `stringify` are overridden if defined by the preset — applied first
+    - `darkMode`, `hash` and `stringify` are overridden if defined by the preset — applied first
+
+  - darkMode can be selector string `{ darkMode: '.dark-mode' }`
 
   - rules and shortcuts based on ideas from [UnoCSS](https://github.com/antfu/unocss)
 
