@@ -9,7 +9,14 @@ import { setup, virtual, extract } from 'twind'
 
 import config from '@twind/gatsby-plugin/config'
 
-setup(config, virtual())
+setup(
+  {
+    // in production use short hashed class names
+    hash: process.env.NODE_ENV == 'production',
+    ...config,
+  },
+  virtual(),
+)
 
 export function replaceRenderer({
   bodyComponent,

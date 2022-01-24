@@ -51,6 +51,15 @@ export default defineConfig({
 )
 ```
 
+`gatsby-plugin-twind` will use hashed class names in production by default. If you don't want this, you can use the `hash` config option:
+
+```js
+export default defineConfig({
+  hash: false,
+  /* config */
+})
+```
+
 ## Options
 
 This plugin assumes a `twind.config.js` file in the root of your project.
