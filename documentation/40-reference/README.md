@@ -95,9 +95,9 @@ Used to update an html string with styles.
   ```js
   setup({
     hash(className, defaultHash) {
-      if (/^[\w-]*[~@]\(/.test(className)) {
-        // a shortcut like `~(...)` or `Button~(...)`
-        // an apply like `@(...)` or `Button@(...)`
+      if (/^[~@]\(/.test(className)) {
+        // a shortcut like `~(...)`
+        // an apply like `@(...)`
         return defaultHash(className)
       }
 
