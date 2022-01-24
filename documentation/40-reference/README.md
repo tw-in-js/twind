@@ -57,3 +57,21 @@
   - `cssom()`: uses a fast DOM sheet — bad for debugging
   - `dom()`: uses a slow DOM sheet — great for debugging
   - `stringify(target)`: returns the CSS string of a sheet target
+
+## Config
+
+- hash all shortcuts and apply
+
+  ```js
+  setup({
+    hash(className, defaultHash) {
+      if (/^[\w-]*[~@]\(/.test(className)) {
+        // a shortcut like `~(...)` or `Button~(...)`
+        // an apply like `@(...)` or `Button@(...)`
+        return defaultHash(className)
+      }
+
+      return className
+    },
+  })
+  ```
