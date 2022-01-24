@@ -1,5 +1,38 @@
 # twind
 
+## 1.0.0-next.23
+
+### Patch Changes
+
+- allow CSS to be used in preflight and rules ([#252](https://github.com/tw-in-js/twind/pull/252))
+
+  ```js
+  setup({
+    preflight: css`
+      body {
+        background: theme(colors.gray.100);
+      }
+    `,
+
+    rules: [
+      [
+        // bg-red, bg-#ccc, bg-transparent
+        'bg-',
+        ({ $ }) =>
+          css`
+            background-color: ${$};
+          `,
+      ],
+    ],
+  })
+  ```
+
+* refactor: handling of nested (shortcuts atm) groups ([#252](https://github.com/tw-in-js/twind/pull/252))
+
+- add `apply` and `@(...)` that uses the given order ([#252](https://github.com/tw-in-js/twind/pull/252))
+
+* inline: pass html to minify function — allows to only include above-the-fold CSS ([#252](https://github.com/tw-in-js/twind/pull/252))
+
 ## 1.0.0-next.22
 
 ### Patch Changes

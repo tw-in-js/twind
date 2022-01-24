@@ -1,9 +1,19 @@
 # @example/gatsby
 
-## 0.0.1-next.2
+## 0.0.1-next.3
+
 ### Patch Changes
 
+- BREAKING: use gatsby naming convention for plugins ([#252](https://github.com/tw-in-js/twind/pull/252))
 
+- Updated dependencies [[`0478b45f`](https://github.com/tw-in-js/twind/commit/0478b45fd3dcd4aff85502d7b60dbebed950ac11), [`83a0195d`](https://github.com/tw-in-js/twind/commit/83a0195d8da69bf9437256e484f3f4c3eb4262d7), [`8a4e6ddb`](https://github.com/tw-in-js/twind/commit/8a4e6ddb7284f80d94b9a032d97084eaca44d59f), [`1fad2b2a`](https://github.com/tw-in-js/twind/commit/1fad2b2aeb5846be13e3210d9b449838de76e61d), [`42fae01a`](https://github.com/tw-in-js/twind/commit/42fae01ad4762d5cf72d5d03453c102a63d8b089), [`3c0e3f72`](https://github.com/tw-in-js/twind/commit/3c0e3f72902fd2568a3ca1847038db7f9eb0b073)]:
+  - twind@1.0.0-next.23
+  - gatsby-plugin-twind@1.0.0-next.23
+  - @twind/tailwind@1.0.0-next.23
+
+## 0.0.1-next.2
+
+### Patch Changes
 
 - working gatsby plugin and example ([#251](https://github.com/tw-in-js/twind/pull/251))
 

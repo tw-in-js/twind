@@ -1,7 +1,7 @@
 {
   "name": "@example/sveltekit",
   "description": "sveltekit with twind example",
-  "version": "0.0.1-next.3",
+  "version": "0.0.1-next.4",
   "private": true,
   "license": "MIT",
   "bugs": "https://github.com/tw-in-js/twind/issues",
@@ -23,10 +23,10 @@
   "devDependencies": {
     "@sveltejs/adapter-node": "^1.0.0-next.66",
     "@sveltejs/kit": "^1.0.0-next.240",
-    "@twind/sveltekit": "1.0.0-next.22",
-    "@twind/tailwind": "1.0.0-next.22",
+    "@twind/sveltekit": "1.0.0-next.23",
+    "@twind/tailwind": "1.0.0-next.23",
     "svelte": "^3.44.0",
-    "twind": "1.0.0-next.22",
+    "twind": "1.0.0-next.23",
     "typescript": "^4.4.3"
   }
 }

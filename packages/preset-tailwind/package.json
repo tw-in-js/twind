@@ -1,6 +1,6 @@
 {
   "name": "@twind/preset-tailwind",
-  "version": "1.0.0-next.22",
+  "version": "1.0.0-next.23",
   "description": "tailwindcss preset for twind",
   "keywords": [
     "twind",
@@ -51,7 +51,7 @@
     }
   ],
   "peerDependencies": {
-    "twind": "1.0.0-next.22",
+    "twind": "1.0.0-next.23",
     "typescript": "^4.4.0"
   },
   "peerDependenciesMeta": {
@@ -60,7 +60,7 @@
     }
   },
   "devDependencies": {
-    "twind": "1.0.0-next.22"
+    "twind": "1.0.0-next.23"
   },
   "scripts": {
     "prepublishOnly": "distilt"
