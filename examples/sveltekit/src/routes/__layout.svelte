@@ -1,5 +1,5 @@
 <script type="module">
-  import { setup } from 'twind'
+  import { setup } from '@twind/sveltekit'
   import config from '../twind.config'
 
   setup(config)

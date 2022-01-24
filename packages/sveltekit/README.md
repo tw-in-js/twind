@@ -30,13 +30,30 @@ Please see [examples/sveltekit](https://github.com/tw-in-js/twind/tree/next/exam
 
 ```html
 <script type="module">
-  import { setup } from 'twind'
-  // import { setup } from '@twind/tailwind'
-
+  import { setup } from '@twind/sveltekit'
   import twindConfig from '../twind.config'
-
   setup(twindConfig)
 </script>
+```
+
+**`src/twind.config.js`**
+
+```js
+import { defineConfig } from 'twind'
+// import { defineConfig } from '@twind/tailwind'
+
+export default defineConfig({
+  /* config */
+})
+```
+
+`@twind/sveltekit` will use hashed class names in production by default. If you don't want this, you can use the `hash` config option:
+
+```js
+export default defineConfig({
+  hash: false,
+  /* config */
+})
 ```
 
 **`src/hooks`** — [SvelteKit › Hooks](https://kit.svelte.dev/docs#hooks)
@@ -44,7 +61,7 @@ Please see [examples/sveltekit](https://github.com/tw-in-js/twind/tree/next/exam
 enable for server-side rendering of Twind styles
 
 ```js
-import { withTwind } from '@twind/sveltekit'
+import { withTwind } from '@twind/sveltekit/hooks'
 
 export const handle = withTwind()
 ```

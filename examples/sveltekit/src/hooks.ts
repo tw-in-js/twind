@@ -1,4 +1,4 @@
-import { withTwind } from '@twind/sveltekit'
+import { withTwind } from '@twind/sveltekit/hooks'
 
 export const handle = withTwind()
 

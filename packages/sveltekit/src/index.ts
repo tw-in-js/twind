@@ -1,28 +1,59 @@
 /**
- * [[include:packages/preset-sveltekit/README.md]]
+ * [[include:packages/sveltekit/README.md]]
  *
  * @packageDocumentation
  * @module
  */
 
-import type { Handle } from '@sveltejs/kit'
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
-import type { InlineOptions } from 'twind'
+import type {
+  Twind,
+  BaseTheme,
+  TwindConfig,
+  TwindUserConfig,
+  Preset,
+  ExtractThemes,
+  Sheet,
+} from 'twind'
 
-import { inline } from 'twind'
+import { defineConfig as defineConfig$, setup as setup$, virtual, cssom, dom } from 'twind'
 
-export type { InlineOptions }
+import { dev, browser } from '$app/env'
 
-export function withTwind(options?: InlineOptions['tw'] | InlineOptions): Handle {
-  return async function withTwind$({ event, resolve }) {
-    const response = await resolve(event)
+export function defineConfig<Theme extends BaseTheme = BaseTheme>(
+  config?: TwindConfig<Theme>,
+): TwindConfig<Theme & BaseTheme>
 
-    if (response.headers?.get('content-type')?.startsWith('text/html')) {
-      const body = await response.text()
+export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = Preset[]>(
+  config?: TwindUserConfig<Theme, Presets>,
+): TwindConfig<BaseTheme & ExtractThemes<Theme, Presets>>
 
-      return new Response(inline(body, options), response)
-    }
+export function defineConfig(config: TwindConfig | TwindUserConfig = {}): TwindConfig {
+  return defineConfig$({ hash: !dev, ...config } as TwindUserConfig)
+}
 
-    return response
-  }
+export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown>(
+  config?: TwindConfig<Theme>,
+  sheet?: Sheet<SheetTarget>,
+  target?: HTMLElement,
+): Twind<Theme & BaseTheme, SheetTarget>
+
+export function setup<
+  Theme = BaseTheme,
+  Presets extends Preset<any>[] = Preset[],
+  SheetTarget = unknown,
+>(
+  config?: TwindUserConfig<Theme, Presets>,
+  sheet?: Sheet<SheetTarget>,
+  target?: HTMLElement,
+): Twind<BaseTheme & ExtractThemes<Theme, Presets>, SheetTarget>
+
+export function setup(
+  config: TwindConfig | TwindUserConfig = {} as TwindUserConfig,
+  sheet: Sheet = browser ? (dev ? dom() : cssom()) : virtual(),
+  target?: HTMLElement,
+): Twind {
+  return setup$(defineConfig(config as TwindUserConfig), sheet, target)
 }
