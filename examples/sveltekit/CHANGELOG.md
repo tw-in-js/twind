@@ -1,5 +1,11 @@
 # @example/sveltekit
 
+## 0.0.1-next.4
+
+### Patch Changes
+
+- follow sveltkit hooks convention for importing; use dom sheet during development and hash class names in production ([#252](https://github.com/tw-in-js/twind/pull/252))
+
 ## 0.0.1-next.3
 
 ### Patch Changes
