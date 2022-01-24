@@ -19,7 +19,7 @@ Used within the following [examples](https://github.com/tw-in-js/twind/tree/next
 Install from npm:
 
 ```sh
-npm install twind @twind/sveltekit@next
+npm install twind@next @twind/sveltekit@next
 ```
 
 ## Usage

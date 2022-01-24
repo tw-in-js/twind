@@ -17,7 +17,7 @@ Used within the following [examples](https://github.com/tw-in-js/twind/tree/next
 Install from npm:
 
 ```sh
-npm install twind gatsby-plugin-twind@next
+npm install twind@next gatsby-plugin-twind@next
 ```
 
 ## Usage
