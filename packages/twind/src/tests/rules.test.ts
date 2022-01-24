@@ -1,6 +1,6 @@
 import { assert, test, afterEach } from 'vitest'
 
-import { twind, virtual, style, colorFromTheme, fromTheme, shortcut, css, tx as tx$ } from '..'
+import { twind, virtual, css } from '..'
 
 const tw = twind(
   {
@@ -22,5 +22,5 @@ afterEach(() => tw.clear())
 test('css in rule', () => {
   assert.strictEqual(tw('bg-red'), 'bg-red')
 
-  assert.deepEqual(tw.target, [])
+  assert.deepEqual(tw.target, ['.bg-red{background-color:red}'])
 })
