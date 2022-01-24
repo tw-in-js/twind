@@ -42,20 +42,13 @@ test('group with comma', () => {
 
 test('nested', () => {
   assert.deepEqual(parse(`hover:~(!underline focus:italic)`), [
-    [
-      { n: 'underline', v: ['hover'], i: true },
-      { n: 'italic', v: ['hover', 'focus'], i: false },
-    ],
+    { n: '~(!underline,focus:italic)', v: ['hover'], i: false },
   ])
 })
 
 test('nested with comma', () => {
   assert.deepEqual(parse(`hover:~(!underline,focus:italic,w-[1,2,theme(x[1.2])])`), [
-    [
-      { n: 'underline', v: ['hover'], i: true },
-      { n: 'italic', v: ['hover', 'focus'], i: false },
-      { n: 'w-[1,2,theme(x[1.2])]', v: ['hover'], i: false },
-    ],
+    { n: '~(!underline,focus:italic,w-[1,2,theme(x[1.2])])', v: ['hover'], i: false },
   ])
 })
 
@@ -136,8 +129,8 @@ test('named shortcuts', () => {
 
   assert.deepEqual(parse('hover:PrimaryButton~(bg-red-500 text-white)'), [
     {
-      n: 'PrimaryButton#112cs7x',
-      v: [],
+      n: 'PrimaryButton#140ikvd',
+      v: ['hover'],
       i: false,
     },
   ])

@@ -195,13 +195,13 @@ test('interpolation values', () => {
   ])
 })
 
-test.todo('with shortcut', () => {
-  const className = tw(cx('underline', shortcut(css({ lineHeight: '1' }), 'font-bold')))
+test('with shortcut', () => {
+  const className = tw(cx('bg-gray-900', shortcut(css({ lineHeight: '1' }), 'text-gray-300')))
 
-  assert.strictEqual(className, 'underline ~(css#1kek6c3,font-bold)')
+  assert.strictEqual(className, '~(css#1kek6c3,text-gray-300) bg-gray-900')
 
   assert.deepEqual(tw.target, [
-    '.\\~\\(css\\#1kek6c3\\,font-bold\\){line-height:1;font-weight:bold}',
-    '.underline{text-decoration:underline}',
+    '.\\~\\(css\\#1kek6c3\\,text-gray-300\\){--tw-text-opacity:1;color:rgba(209,213,219,var(--tw-text-opacity));line-height:1}',
+    '.bg-gray-900{--tw-bg-opacity:1;background-color:rgba(17,24,39,var(--tw-bg-opacity))}',
   ])
 })

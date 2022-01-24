@@ -14,16 +14,24 @@ export type Shortcut = ShortcutFunction & {
 
 export const shortcut = /* @__PURE__ */ new Proxy(
   function shortcut(strings: TemplateStringsArray | Class, ...interpolations: Class[]): string {
-    return format([parse(interpolate(strings, interpolations))])
+    return shortcut$('', strings, interpolations)
   } as Shortcut,
   {
-    get: function (target, prop) {
+    get: function (target, name) {
       return function namedShortcut(
         strings: TemplateStringsArray | Class,
         ...interpolations: Class[]
       ): string {
-        return format(parse((prop as string) + '~(' + interpolate(strings, interpolations) + ')'))
+        return shortcut$(name as string, strings, interpolations)
       }
     },
   },
 )
+
+function shortcut$(
+  name: string,
+  strings: TemplateStringsArray | Class,
+  interpolations: Class[],
+): string {
+  return format(parse(name + '~(' + interpolate(strings, interpolations) + ')'))
+}

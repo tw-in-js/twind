@@ -14,10 +14,12 @@ import type {
   VariantResult,
   VariantResolver,
   Shortcuts,
+  Falsey,
 } from '../types'
 
 import { makeThemeFunction } from './theme'
 import { asArray, escape, hash as defaultHash, identity } from '../utils'
+import { Layer } from './precedence'
 
 type ResolveFunction<Theme extends BaseTheme = BaseTheme> = (
   className: string,
@@ -165,7 +167,19 @@ function createResolveFunction<Theme extends BaseTheme = BaseTheme>(
         const value = (condition as Shortcuts<Theme>)[key]
         return createResolveFunction(key, typeof value == 'function' ? value : () => value)
       }),
-      (value, resolver, context) => resolver(value, context),
+      (value, resolver, context) => {
+        // We need to move the result into the shortcuts layer
+        const resolved = resolver(value, context) as string | Falsey
+
+        // return resolved
+        return (
+          resolved && {
+            '@layer shortcuts': {
+              '@apply': resolved,
+            },
+          }
+        )
+      },
     )
   }
 

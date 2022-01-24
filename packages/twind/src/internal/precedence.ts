@@ -1,5 +1,5 @@
 import type { BaseTheme, Context } from '../types'
-import type { SingleParsedRule } from './parse'
+import type { ParsedRule } from './parse'
 import { asArray, mql } from '../utils'
 import { toClassName } from './to-class-name'
 
@@ -291,7 +291,7 @@ export interface ConvertedRule {
 }
 
 export function convert<Theme extends BaseTheme = BaseTheme>(
-  { n: name, i: important, v: variants = [] }: Partial<SingleParsedRule>,
+  { n: name, i: important, v: variants = [] }: Partial<ParsedRule>,
   context: Context<Theme>,
   precedence: number,
   conditions?: string[],

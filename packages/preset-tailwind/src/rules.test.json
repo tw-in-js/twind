@@ -1318,10 +1318,10 @@
     ]
   ],
   "hover:~(!text-(3xl center) !underline italic focus:not-italic)": [
-    "~(hover:!text-3xl,hover:!text-center,hover:!underline,hover:italic,hover:focus:not-italic)",
+    "hover:~(!text-3xl,!text-center,!underline,italic,focus:not-italic)",
     [
-      ".\\~\\(hover\\:\\!text-3xl\\,hover\\:\\!text-center\\,hover\\:\\!underline\\,hover\\:italic\\,hover\\:focus\\:not-italic\\):hover{font-size:1.875rem !important;line-height:2.25rem !important;text-align:center !important;text-decoration:underline !important;font-style:italic}",
-      ".\\~\\(hover\\:\\!text-3xl\\,hover\\:\\!text-center\\,hover\\:\\!underline\\,hover\\:italic\\,hover\\:focus\\:not-italic\\):focus:hover{font-style:normal}"
+      ".hover\\:\\~\\(\\!text-3xl\\,\\!text-center\\,\\!underline\\,italic\\,focus\\:not-italic\\):hover{font-size:1.875rem !important;line-height:2.25rem !important;text-align:center !important;text-decoration:underline !important;font-style:italic}",
+      ".hover\\:\\~\\(\\!text-3xl\\,\\!text-center\\,\\!underline\\,italic\\,focus\\:not-italic\\):focus:hover{font-style:normal}"
     ]
   ],
   "text-center ~(text-5xl) text-3xl": [

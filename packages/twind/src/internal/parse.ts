@@ -1,8 +1,10 @@
+import type { MaybeArray } from '../types'
 import { hash } from '../utils'
 import { define } from './define'
+import { format } from './format'
 import { Layer } from './precedence'
 
-export interface SingleParsedRule {
+export interface ParsedRule {
   /**
    * The utility name including `-` if set, but without `!` and variants
    */
@@ -19,8 +21,6 @@ export interface SingleParsedRule {
   readonly i?: boolean
 }
 
-export type ParsedRule = SingleParsedRule | ParsedRule[]
-
 function createRule(active: string[], current: ParsedRule[][]): void {
   if (active[active.length - 1] != '(') {
     const variants: string[] = []
@@ -29,7 +29,7 @@ function createRule(active: string[], current: ParsedRule[][]): void {
     let name = ''
 
     for (let value of active) {
-      if (value == '(' || value.endsWith('~')) continue
+      if (value == '(' || /[~@]$/.test(value)) continue
 
       if (value[0] == '!') {
         value = value.slice(1)
@@ -79,14 +79,13 @@ export function parse(token: string): ParsedRule[] {
   if (!parsed) {
     token = removeComments(token)
 
-    // Stack of active groupings (`(`), variants, or nested (`~`)
+    // Stack of active groupings (`(`), variants, or nested (`~` or `@`)
     const active: string[] = []
 
     // Stack of current rule list to put new rules in
     // the first `0` element is the current list
     const current: ParsedRule[][] = [[]]
 
-    let rule: ParsedRule
     let match: RegExpExecArray | null
     parts.lastIndex = 0
     while ((match = parts.exec(token)) && match[0]) {
@@ -96,41 +95,43 @@ export function parse(token: string): ParsedRule[] {
         createRule(active, current)
 
         let lastGroup = active.lastIndexOf('(')
-        let shortcut: string | undefined
-        let rules: ParsedRule[] | undefined
 
         if (match[1] == ')') {
           // Close nested block
-          shortcut = active[lastGroup - 1]
+          const nested = active[lastGroup - 1]
 
-          if (shortcut?.endsWith('~')) {
-            rules = current.shift()
+          if (/[~@]$/.test(nested)) {
+            const rules = current.shift() as ParsedRule[]
+
+            active.length = lastGroup
+
+            // remove variants that are already applied through active
+            createRule([...active, '#'], current)
+            const { length } = (current[0].pop() as ParsedRule).v
+            for (const rule of rules) {
+              rule.v.splice(0, length)
+            }
+
+            createRule(
+              [
+                ...active,
+                define(
+                  // named nested
+                  nested.length > 1
+                    ? nested.slice(0, -1) + hash(JSON.stringify(rules))
+                    : nested + '(' + format(rules, ',') + ')',
+                  Layer.s,
+                  rules,
+                ),
+              ],
+              current,
+            )
           }
 
           lastGroup = active.lastIndexOf('(', lastGroup - 1)
         }
 
         active.length = lastGroup + 1
-
-        if (rules && shortcut != '~') {
-          // Create named shortcut
-
-          // remove existing anonymous shortcut
-          current[0].pop()
-
-          // ... and replace with new named shortcut
-          createRule(
-            [
-              ...active,
-              define(
-                (shortcut as string).slice(0, -1) + hash(JSON.stringify(rules)),
-                Layer.s,
-                rules,
-              ),
-            ],
-            current,
-          )
-        }
       } else {
         // - open brace
         // - new variant: `focus:`, `after::`, `[...]:`
@@ -138,10 +139,9 @@ export function parse(token: string): ParsedRule[] {
 
         // Start nested block
         // ~(...) or button~(...)
-        if (match[0].endsWith('~')) {
-          rule = []
-          current[0].push(rule)
-          current.unshift(rule)
+        // @(...) or button@(...)
+        if (/[~@]$/.test(match[0])) {
+          current.unshift([])
         }
 
         active.push(match[0])

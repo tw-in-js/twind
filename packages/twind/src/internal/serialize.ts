@@ -1,5 +1,5 @@
 import type { CSSObject, Falsey, Context, TwindRule, BaseTheme, MaybeArray } from '../types'
-import type { SingleParsedRule } from './parse'
+import type { ParsedRule } from './parse'
 import type { ConvertedRule } from './precedence'
 import { Layer, moveToLayer } from './precedence'
 import { mql, hash, asArray } from '../utils'
@@ -9,10 +9,11 @@ import { stringify } from './stringify'
 import { translate } from './translate'
 import { parse } from './parse'
 import { compareTwindRules } from './sorted-insertion-index'
+import { merge } from './merge'
 
 export function serialize<Theme extends BaseTheme = BaseTheme>(
   style: CSSObject | Falsey,
-  rule: Partial<SingleParsedRule>,
+  rule: Partial<ParsedRule>,
   context: Context<Theme>,
   precedence: number,
   conditions: string[] = [],
@@ -47,14 +48,17 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
         // @apply ...;
         case 'a': {
           rules.push(
-            ...translate(
-              // @apply rules are always merged
-              [parse(value as string)],
-              context,
-              precedence,
-              conditions,
-              important,
-            ).map((rule) => ({ ...rule, n: name })),
+            ...merge(
+              translate(
+                // @apply rules are always merged
+                parse(value as string),
+                context,
+                precedence,
+                conditions,
+                important,
+              ),
+              name as string,
+            ),
           )
           continue
         }

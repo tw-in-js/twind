@@ -1,9 +1,7 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
 import type { TwindRule, Context, BaseTheme } from '../types'
-import type { ParsedRule, SingleParsedRule } from './parse'
+import type { ParsedRule } from './parse'
 
-import { format } from './format'
-import { merge } from './merge'
 import { parse } from './parse'
 import { convert, Layer, moveToLayer } from './precedence'
 
@@ -12,6 +10,7 @@ import { serialize } from './serialize'
 import { sortedInsertionIndex } from './sorted-insertion-index'
 import { toClassName } from './to-class-name'
 import { asArray } from '../utils'
+import { merge } from './merge'
 
 export function translate<Theme extends BaseTheme = BaseTheme>(
   rules: readonly ParsedRule[],
@@ -19,25 +18,12 @@ export function translate<Theme extends BaseTheme = BaseTheme>(
   precedence = Layer.u,
   conditions?: string[],
   important?: boolean,
-  name?: string,
 ): TwindRule[] {
   // Sorted by precedence
   const result: TwindRule[] = []
 
   for (const rule of rules) {
-    for (const cssRule of Array.isArray(rule)
-      ? merge(
-          translate(
-            rule,
-            context,
-            // TODO handle shortcuts and `apply()` by moving them into shortcuts layer
-            (precedence & Layer.o) == Layer.u ? moveToLayer(precedence, Layer.s) : precedence,
-            conditions,
-            important,
-          ),
-          name || format([rule]),
-        )
-      : translate$(rule, context, precedence, conditions, important)) {
+    for (const cssRule of translate$(rule, context, precedence, conditions, important)) {
       result.splice(sortedInsertionIndex(result, cssRule), 0, cssRule)
     }
   }
@@ -46,7 +32,7 @@ export function translate<Theme extends BaseTheme = BaseTheme>(
 }
 
 function translate$<Theme extends BaseTheme = BaseTheme>(
-  rule: SingleParsedRule,
+  rule: ParsedRule,
   context: Context<Theme>,
   precedence: number,
   conditions?: string[],
@@ -61,11 +47,12 @@ function translate$<Theme extends BaseTheme = BaseTheme>(
     return [{ c: toClassName(rule), p: 0, o: 0, r: [] }]
   }
 
+  // a list of class names
   if (typeof resolved == 'string') {
     // eslint-disable-next-line @typescript-eslint/no-extra-semi
     ;({ r: conditions, p: precedence } = convert(rule, context, precedence, conditions))
 
-    return translate([parse(resolved)], context, precedence, conditions, rule.i, rule.n)
+    return merge(translate(parse(resolved), context, precedence, conditions, rule.i), rule.n)
   }
 
   if (Array.isArray(resolved)) {
@@ -73,7 +60,7 @@ function translate$<Theme extends BaseTheme = BaseTheme>(
       o: 0,
       ...rule,
       r: [...asArray(conditions), ...asArray(rule.r)],
-      p: moveToLayer(precedence, rule.p || precedence),
+      p: moveToLayer(precedence, rule.p ?? precedence),
     }))
   }
 

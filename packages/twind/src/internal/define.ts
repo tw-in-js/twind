@@ -12,7 +12,7 @@ export function define(className: string, layer: number, rules: Falsey | ParsedR
     return (
       rules &&
       merge(
-        translate(rules, context, precedence, conditions, important, name).map((rule) =>
+        translate(rules, context, precedence, conditions, important).map((rule) =>
           rule.n ? { ...rule, p: moveToLayer(rule.p, layer), o: 0 } : rule,
         ),
         name as string,

@@ -258,7 +258,7 @@ function createStyle<Variants, BaseVariants>(
 
         if (mq && (token = match[1])) {
           classNames +=
-            ' ' + register('-' + index + '--' + mq, token, 0b101 << 27 /* Shifts.layer */)
+            ' ' + register('-' + index + '--' + mq, token, 0b100 << 27 /* Shifts.layer */)
         }
       })
 
