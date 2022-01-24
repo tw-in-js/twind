@@ -789,10 +789,10 @@
       ".font-bold{font-weight:700}",
       ".hover\\:text-purple-500:hover{--tw-text-opacity:1;color:rgba(168,85,247,var(--tw-text-opacity))}",
       ".hover\\:text-center:hover{text-align:center}",
-      ".hover\\:active\\:ring:active:hover{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}",
-      ".active\\:hover\\:text-lg:hover:active{font-size:1.125rem;line-height:1.75rem}",
-      ".hover\\:active\\:underline:active:hover{text-decoration:underline}",
-      ".hover\\:active\\:ring-opacity-5:active:hover{--tw-ring-opacity:0.05}"
+      ".hover\\:active\\:ring:hover:active{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}",
+      ".active\\:hover\\:text-lg:active:hover{font-size:1.125rem;line-height:1.75rem}",
+      ".hover\\:active\\:underline:hover:active{text-decoration:underline}",
+      ".hover\\:active\\:ring-opacity-5:hover:active{--tw-ring-opacity:0.05}"
     ]
   ],
   "\n  text-4xl underline\n  font-(bold sans)\n  transition\n  hover:(rotate-6 scale-125 cursor-pointer)\n  active:(-rotate-12 scale-150)\n": [
@@ -900,11 +900,11 @@
     [
       "@media (min-width:768px){.md\\:container{width:100%}}",
       "@media (min-width:768px){.md\\:mx-auto{margin-left:auto;margin-right:auto}}",
-      "@media (min-width:768px){@media (min-width:640px){.md\\:container{max-width:640px}}}",
+      "@media (min-width:640px){@media (min-width:768px){.md\\:container{max-width:640px}}}",
       "@media (min-width:768px){@media (min-width:768px){.md\\:container{max-width:768px}}}",
-      "@media (min-width:768px){@media (min-width:1024px){.md\\:container{max-width:1024px}}}",
-      "@media (min-width:768px){@media (min-width:1280px){.md\\:container{max-width:1280px}}}",
-      "@media (min-width:768px){@media (min-width:1536px){.md\\:container{max-width:1536px}}}"
+      "@media (min-width:1024px){@media (min-width:768px){.md\\:container{max-width:1024px}}}",
+      "@media (min-width:1280px){@media (min-width:768px){.md\\:container{max-width:1280px}}}",
+      "@media (min-width:1536px){@media (min-width:768px){.md\\:container{max-width:1536px}}}"
     ]
   ],
   "hover:md:text-center": [
@@ -972,14 +972,14 @@
     "hover:!text-center hover:focus:!font-bold",
     [
       ".hover\\:\\!text-center:hover{text-align:center !important}",
-      ".hover\\:focus\\:\\!font-bold:focus:hover{font-weight:700 !important}"
+      ".hover\\:focus\\:\\!font-bold:hover:focus{font-weight:700 !important}"
     ]
   ],
   "!hover:(text-center focus:font-bold)": [
     "hover:!text-center hover:focus:!font-bold",
     [
       ".hover\\:\\!text-center:hover{text-align:center !important}",
-      ".hover\\:focus\\:\\!font-bold:focus:hover{font-weight:700 !important}"
+      ".hover\\:focus\\:\\!font-bold:hover:focus{font-weight:700 !important}"
     ]
   ],
   "!(text-xl underline)": [
@@ -1321,7 +1321,7 @@
     "hover:~(!text-3xl,!text-center,!underline,italic,focus:not-italic)",
     [
       ".hover\\:\\~\\(\\!text-3xl\\,\\!text-center\\,\\!underline\\,italic\\,focus\\:not-italic\\):hover{font-size:1.875rem !important;line-height:2.25rem !important;text-align:center !important;text-decoration:underline !important;font-style:italic}",
-      ".hover\\:\\~\\(\\!text-3xl\\,\\!text-center\\,\\!underline\\,italic\\,focus\\:not-italic\\):focus:hover{font-style:normal}"
+      ".hover\\:\\~\\(\\!text-3xl\\,\\!text-center\\,\\!underline\\,italic\\,focus\\:not-italic\\):hover:focus{font-style:normal}"
     ]
   ],
   "text-center ~(text-5xl) text-3xl": [
@@ -1550,7 +1550,7 @@
       ".focus-within\\:m-9:focus-within{margin:2.25rem}",
       ".hover\\:m-10:hover{margin:2.5rem}",
       ".focus\\:m-11:focus{margin:2.75rem}",
-      ".hover\\:focus\\:m-12:focus:hover{margin:3rem}",
+      ".hover\\:focus\\:m-12:hover:focus{margin:3rem}",
       ".focus-visible\\:m-14:focus-visible{margin:3.5rem}",
       ".active\\:m-16:active{margin:4rem}",
       ".disabled\\:m-20:disabled{margin:5rem}",

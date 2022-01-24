@@ -9,10 +9,7 @@ import data from './preset-ext.test.json'
 const tw = twind(
   {
     presets: [presetExt(), presetTailwind({ enablePreflight: false })],
-    variants: [
-      ['as-dark', '.dark &'],
-      ['not-logged-in', 'body:not(.logged-in) &'],
-    ],
+    variants: [['not-logged-in', 'body:not(.logged-in) &']],
   },
   virtual(),
 )

@@ -230,15 +230,12 @@ test('Mixing string, apply, css and object', () => {
     ],
   })
 
-  assert.strictEqual(
-    tw(button()),
-    'style#1uuq3sz style--size-sm#1uuq3sz style--variant-gray#1uuq3sz',
-  )
+  assert.strictEqual(tw(button()), 'style#q2fi2f style--size-sm#q2fi2f style--variant-gray#q2fi2f')
   assert.deepEqual(tw.target, [
-    '.style\\#1uuq3sz{padding:1rem}',
-    '.style--size-sm\\#1uuq3sz{height:1.5rem;font-size:1rem}',
-    '.style--variant-gray\\#1uuq3sz{background-color:#6b7280}',
-    '.style--variant-gray\\#1uuq3sz:hover{background-color:#111827}',
+    '.style\\#q2fi2f{padding:1rem}',
+    '.style--size-sm\\#q2fi2f{height:1.5rem;font-size:1rem}',
+    '.style--variant-gray\\#q2fi2f{background-color:#6b7280}',
+    '.style--variant-gray\\#q2fi2f:hover{background-color:#111827}',
   ])
 
   tw.clear()
@@ -254,19 +251,19 @@ test('Mixing string, apply, css and object', () => {
       'text-sm',
       shortcut('text-6'),
     ),
-    'style#1uuq3sz style--outlined-true#1uuq3sz style--size-sm#1uuq3sz style--variant-gray#1uuq3sz style-0--variant-gray_outlined-true#1uuq3sz ~(text-6) text-sm css#8vi6gz',
+    'style#q2fi2f style--outlined-true#q2fi2f style--size-sm#q2fi2f style--variant-gray#q2fi2f style-0--variant-gray_outlined-true#q2fi2f ~(text-6) text-sm css#wvzpmg',
   )
 
   assert.deepEqual(tw.target, [
-    '.style\\#1uuq3sz{padding:1rem}',
-    '.style--outlined-true\\#1uuq3sz{--tw-border-opacity:1;border-color:rgba(243,244,246,var(--tw-border-opacity))}',
-    '.style--size-sm\\#1uuq3sz{height:1.5rem;font-size:1rem}',
-    '.style--variant-gray\\#1uuq3sz{background-color:#6b7280}',
-    '.style--variant-gray\\#1uuq3sz:hover{background-color:#111827}',
-    '.style-0--variant-gray_outlined-true\\#1uuq3sz{--tw-border-opacity:1;border-color:rgba(107,114,128,var(--tw-border-opacity))}',
+    '.style\\#q2fi2f{padding:1rem}',
+    '.style--outlined-true\\#q2fi2f{--tw-border-opacity:1;border-color:rgba(243,244,246,var(--tw-border-opacity))}',
+    '.style--size-sm\\#q2fi2f{height:1.5rem;font-size:1rem}',
+    '.style--variant-gray\\#q2fi2f{background-color:#6b7280}',
+    '.style--variant-gray\\#q2fi2f:hover{background-color:#111827}',
+    '.style-0--variant-gray_outlined-true\\#q2fi2f{--tw-border-opacity:1;border-color:rgba(107,114,128,var(--tw-border-opacity))}',
     '.\\~\\(text-6\\){font-size:1.5rem}',
     '.text-sm{font-size:1rem}',
-    '.css\\#8vi6gz{color:darkgreen}',
+    '.css\\#wvzpmg{color:darkgreen}',
   ])
 })
 

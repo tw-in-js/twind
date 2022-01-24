@@ -77,17 +77,18 @@ export function translateWith<Theme extends BaseTheme = BaseTheme>(
   important?: boolean | undefined,
   useOrderOfRules?: boolean,
 ) {
+  // console.log(rules)
   return merge(
     (useOrderOfRules
-      ? rules.reduce(
-          // TODO could use flatMap here — supported in all browsers?
-          (rules: TwindRule[], rule) => (
-            rules.push(...translate([rule], context, precedence, conditions, important)), rules
-          ),
-          [],
-        )
+      ? rules.flatMap((rule) => translate([rule], context, precedence, conditions, important))
       : translate(rules, context, precedence, conditions, important)
-    ).map((rule) => (rule.n ? { ...rule, p: moveToLayer(rule.p, layer), o: 0 } : rule)),
+    ).map((rule) =>
+      // do not move defaults
+      // move only rules with a name unless they are in the base layer
+      rule.p & Layer.o && (rule.n || layer == Layer.b)
+        ? { ...rule, p: moveToLayer(rule.p, layer), o: 0 }
+        : rule,
+    ),
     name,
   )
 }

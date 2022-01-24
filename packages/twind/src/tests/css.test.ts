@@ -46,24 +46,24 @@ test('create css', () => {
       color: 'darkgreen',
     },
   })
-  assert.strictEqual(style, 'css#5fqnnd')
+  assert.strictEqual(style, 'css#a22z42')
 
   // It is lazy
   assert.deepEqual(tw.target, [])
 
-  assert.strictEqual(tw(style), 'css#5fqnnd')
+  assert.strictEqual(tw(style), 'css#a22z42')
 
   assert.deepEqual(tw.target, [
-    '.css\\#5fqnnd{background-color:hotpink}',
-    '.css\\#5fqnnd:hover{color:darkgreen}',
+    '.css\\#a22z42{background-color:hotpink}',
+    '.css\\#a22z42:hover{color:darkgreen}',
   ])
 
   // it is cached
-  assert.strictEqual(tw(style), 'css#5fqnnd')
+  assert.strictEqual(tw(style), 'css#a22z42')
 
   assert.deepEqual(tw.target, [
-    '.css\\#5fqnnd{background-color:hotpink}',
-    '.css\\#5fqnnd:hover{color:darkgreen}',
+    '.css\\#a22z42{background-color:hotpink}',
+    '.css\\#a22z42:hover{color:darkgreen}',
   ])
 })
 
@@ -75,13 +75,13 @@ test('can be used with variants', () => {
     },
   })
 
-  assert.strictEqual(tw(`sm:${style} focus:${style}`), 'sm:css#1u5fwom focus:css#1u5fwom')
+  assert.strictEqual(tw(`sm:${style} focus:${style}`), 'css#hxclon')
 
   assert.deepEqual(tw.target, [
-    '@media (min-width:640px){.sm\\:css\\#1u5fwom{background-color:hotpink}}',
-    '@media (min-width:640px){.sm\\:css\\#1u5fwom:hover{background-color:darkgreen}}',
-    '.focus\\:css\\#1u5fwom:focus{background-color:hotpink}',
-    '.focus\\:css\\#1u5fwom:hover:focus{background-color:darkgreen}',
+    '@media (min-width:640px){.css\\#hxclon{background-color:hotpink}}',
+    '@media (min-width:640px){.css\\#hxclon:hover{background-color:darkgreen}}',
+    '.css\\#hxclon:focus{background-color:hotpink}',
+    '.css\\#hxclon:focus:hover{background-color:darkgreen}',
   ])
 })
 
@@ -94,11 +94,11 @@ test('using custom label', () => {
     },
   })
 
-  assert.strictEqual(tw(style), 'link#9hfd9w')
+  assert.strictEqual(tw(style), 'link#1xpxeti')
 
   assert.deepEqual(tw.target, [
-    '.link\\#9hfd9w{color:hotpink}',
-    '.link\\#9hfd9w:hover{color:darkgreen}',
+    '.link\\#1xpxeti{color:hotpink}',
+    '.link\\#1xpxeti:hover{color:darkgreen}',
   ])
 })
 
@@ -136,15 +136,15 @@ test('nesting in template literal', () => {
     }
   `
 
-  assert.strictEqual(tw(style), 'css#sc2il9')
+  assert.strictEqual(tw(style), 'css#1ffqhov')
 
   assert.deepEqual(tw.target, [
-    '.css\\#sc2il9{padding:2em 1em;background:papayawhip}',
-    '.css\\#sc2il9:hover{background:palevioletred}',
-    '@media (max-width: 600px){.css\\#sc2il9{background:tomato}}',
-    '@media (min-width:640px){.css\\#sc2il9:hover{background:yellow}}',
-    '.css\\#sc2il9 > p{text-decoration:underline}',
-    'html.test .css\\#sc2il9{display:none}',
+    '.css\\#1ffqhov{padding:2em 1em;background:papayawhip}',
+    '.css\\#1ffqhov:hover{background:palevioletred}',
+    '@media (max-width: 600px){.css\\#1ffqhov{background:tomato}}',
+    '@media (min-width:640px){.css\\#1ffqhov:hover{background:yellow}}',
+    '.css\\#1ffqhov > p{text-decoration:underline}',
+    'html.test .css\\#1ffqhov{display:none}',
   ])
 })
 
@@ -198,10 +198,10 @@ test('interpolation values', () => {
 test('with shortcut', () => {
   const className = tw(cx('bg-gray-900', shortcut(css({ lineHeight: '1' }), 'text-gray-300')))
 
-  assert.strictEqual(className, '~(css#1kek6c3,text-gray-300) bg-gray-900')
+  assert.strictEqual(className, '~(css#185oa3u,text-gray-300) bg-gray-900')
 
   assert.deepEqual(tw.target, [
-    '.\\~\\(css\\#1kek6c3\\,text-gray-300\\){--tw-text-opacity:1;color:rgba(209,213,219,var(--tw-text-opacity));line-height:1}',
+    '.\\~\\(css\\#185oa3u\\,text-gray-300\\){--tw-text-opacity:1;color:rgba(209,213,219,var(--tw-text-opacity));line-height:1}',
     '.bg-gray-900{--tw-bg-opacity:1;background-color:rgba(17,24,39,var(--tw-bg-opacity))}',
   ])
 })
@@ -209,10 +209,28 @@ test('with shortcut', () => {
 test('with apply', () => {
   const className = tw(cx('bg-gray-900', apply(css({ lineHeight: '1' }), 'text-gray-300')))
 
-  assert.strictEqual(className, '@(css#1kek6c3,text-gray-300) bg-gray-900')
+  assert.strictEqual(className, '@(css#185oa3u,text-gray-300) bg-gray-900')
 
   assert.deepEqual(tw.target, [
-    '.\\@\\(css\\#1kek6c3\\,text-gray-300\\){line-height:1;--tw-text-opacity:1;color:rgba(209,213,219,var(--tw-text-opacity))}',
+    '.\\@\\(css\\#185oa3u\\,text-gray-300\\){line-height:1;--tw-text-opacity:1;color:rgba(209,213,219,var(--tw-text-opacity))}',
     '.bg-gray-900{--tw-bg-opacity:1;background-color:rgba(17,24,39,var(--tw-bg-opacity))}',
+  ])
+})
+
+test('css within apply and nested selectors', () => {
+  const nestedListItems = css`
+    & > li::before {
+      @apply text-gray-500;
+    }
+  `
+  const prose = css`
+    & ul {
+      @apply ${nestedListItems};
+    }
+  `
+
+  assert.strictEqual(tw(prose), 'css#idc0fv')
+  assert.deepEqual(tw.target, [
+    '.css\\#idc0fv ul > li::before{--tw-text-opacity:1;color:rgba(107,114,128,var(--tw-text-opacity))}',
   ])
 })

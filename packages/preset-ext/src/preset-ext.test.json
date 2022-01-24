@@ -12,9 +12,9 @@
   "siblings:underline": ".siblings\\:underline~*{text-decoration:underline}",
   "sibling:underline": ".sibling\\:underline+*{text-decoration:underline}",
   "override:text-center": ".override\\:text-center.override\\:text-center{text-align:center}",
-  "not-focus:invalid:border-red-500": ".not-focus\\:invalid\\:border-red-500:invalid:not(:focus){--tw-border-opacity:1;border-color:rgba(239,68,68,var(--tw-border-opacity))}",
-  "invalid:not-focus:border-red-500": ".invalid\\:not-focus\\:border-red-500:not(:focus):invalid{--tw-border-opacity:1;border-color:rgba(239,68,68,var(--tw-border-opacity))}",
-  "not-disabled:focus:font-bold": ".not-disabled\\:focus\\:font-bold:focus:not(:disabled){font-weight:700}",
+  "not-focus:invalid:border-red-500": ".not-focus\\:invalid\\:border-red-500:not(:focus):invalid{--tw-border-opacity:1;border-color:rgba(239,68,68,var(--tw-border-opacity))}",
+  "invalid:not-focus:border-red-500": ".invalid\\:not-focus\\:border-red-500:invalid:not(:focus){--tw-border-opacity:1;border-color:rgba(239,68,68,var(--tw-border-opacity))}",
+  "not-disabled:focus:font-bold": ".not-disabled\\:focus\\:font-bold:not(:disabled):focus{font-weight:700}",
   "not-logged-in:hidden": "body:not(.logged-in) .not-logged-in\\:hidden{display:none}",
   "not-last-child:mb-5": ".not-last-child\\:mb-5:not(:last-child){margin-bottom:1.25rem}",
   "[aria-expanded='true']:font-bold": ".\\[aria-expanded\\=\\'true\\'\\]\\:font-bold[aria-expanded='true']{font-weight:700}",
@@ -30,8 +30,18 @@
   "[data-lang='zh-TW']:text-purple-400": ".\\[data-lang\\=\\'zh-TW\\'\\]\\:text-purple-400[data-lang='zh-TW']{--tw-text-opacity:1;color:rgba(192,132,252,var(--tw-text-opacity))}",
   "group-hocus:underline": ".group:is(:hover,:focus-visible) .group-hocus\\:underline{text-decoration:underline}",
   "dark:group-hocus:underline": "@media (prefers-color-scheme:dark){.group:is(:hover,:focus-visible) .dark\\:group-hocus\\:underline{text-decoration:underline}}",
-  "as-dark:group-hocus:underline": ".dark .group:is(:hover,:focus-visible) .as-dark\\:group-hocus\\:underline{text-decoration:underline}",
+  "group-hocus:dark:underline": [
+    "dark:group-hocus:underline",
+    [
+      "@media (prefers-color-scheme:dark){.group:is(:hover,:focus-visible) .dark\\:group-hocus\\:underline{text-decoration:underline}}"
+    ]
+  ],
   "group-xxx-hocus:underline": ".group-xxx:is(:hover,:focus-visible) .group-xxx-hocus\\:underline{text-decoration:underline}",
   "dark:group-xxx-hocus:underline": "@media (prefers-color-scheme:dark){.group-xxx:is(:hover,:focus-visible) .dark\\:group-xxx-hocus\\:underline{text-decoration:underline}}",
-  "as-dark:group-xxx-hocus:underline": ".dark .group-xxx:is(:hover,:focus-visible) .as-dark\\:group-xxx-hocus\\:underline{text-decoration:underline}"
+  "group-xxx-hocus:dark:underline": [
+    "dark:group-xxx-hocus:underline",
+    [
+      "@media (prefers-color-scheme:dark){.group-xxx:is(:hover,:focus-visible) .dark\\:group-xxx-hocus\\:underline{text-decoration:underline}}"
+    ]
+  ]
 }

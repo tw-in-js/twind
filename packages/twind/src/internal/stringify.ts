@@ -6,7 +6,7 @@ export function stringify(rule: TwindRule): string | undefined {
   if (rule.d) {
     const groups: string[] = []
 
-    const selector = rule.r[('reduce' + (rule.n ? 'Right' : '')) as 'reduceRight'](
+    const selector = rule.r.reduce(
       (selector, condition) => {
         if (condition[0] == '@') {
           groups.unshift(condition)

@@ -1,7 +1,6 @@
-import type { Falsey, TwindRule } from '../types'
+import type { Falsey } from '../types'
 import type { ParsedRule } from './parse'
-import { merge } from './merge'
-import { convert, moveToLayer } from './precedence'
+import { convert } from './precedence'
 import { register } from './registry'
 import { translateWith } from './translate'
 

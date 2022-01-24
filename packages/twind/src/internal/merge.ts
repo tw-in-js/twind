@@ -13,7 +13,9 @@ export function merge(rules: TwindRule[], name: string): TwindRule[] {
   let current: TwindRule | undefined
 
   for (const rule of rules) {
-    if (current?.p == rule.p && '' + current.r == '' + rule.r) {
+    if (!rule.d) {
+      result.push({ ...rule, n: rule.n && name })
+    } else if (current?.p == rule.p && '' + current.r == '' + rule.r) {
       current.c = [current.c, rule.c].filter(Boolean).join(' ')
       current.d = [current.d, rule.d].filter(Boolean).join(';')
     } else {

@@ -42,7 +42,7 @@ export type CSSBase = BaseProperties & CSSNested
 
 export type CSSObject = CSSProperties & CSSBase
 
-export type Preflight = CSSBase
+export type Preflight = CSSBase | string
 
 export interface TwindRule {
   /** The calculated precedence taking all variants into account. */

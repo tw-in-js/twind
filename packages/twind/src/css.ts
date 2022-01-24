@@ -6,6 +6,7 @@ import { hash } from './utils'
 import { Layer } from './internal/precedence'
 import { interleave } from './internal/interleave'
 import { removeComments } from './internal/parse'
+import { merge } from './internal/merge'
 
 export type CSSValue = string | number | bigint | Falsey
 
@@ -17,7 +18,7 @@ export function css(
   strings: CSSObject | string | TemplateStringsArray,
   ...interpolations: readonly CSSValue[]
 ): string {
-  const { label = 'css', ...ast } = Array.isArray(strings)
+  const ast = Array.isArray(strings)
     ? astish(
         interleave(strings as TemplateStringsArray, interpolations, (interpolation) =>
           interpolation != null && typeof interpolation != 'boolean'
@@ -27,11 +28,16 @@ export function css(
       )
     : typeof strings == 'string'
     ? astish(strings)
-    : (strings as CSSObject)
+    : [strings as CSSObject]
 
-  const className = label + hash(JSON.stringify(ast))
+  const className = (ast.find((o) => o.label)?.label || 'css') + hash(JSON.stringify(ast))
 
-  return register(className, (rule, context) => serialize(ast, rule, context, Layer.o))
+  return register(className, (rule, context) =>
+    merge(
+      ast.flatMap((css) => serialize(css, rule, context, Layer.o)),
+      className,
+    ),
+  )
 }
 
 // Based on https://github.com/cristianbote/goober/blob/master/src/core/astish.js
@@ -40,22 +46,28 @@ const newRule = / *(?:(?:([\u0080-\uFFFF\w-%@]+) *:? *([^{;]+?);|([^;}{]*?) *{)|
 /**
  * Convert a css style string into a object
  */
-function astish(css: string): CSSObject {
+function astish(css: string): CSSObject[] {
   css = removeComments(css)
 
-  const tree: CSSObject[] = [{}]
+  const rules: CSSObject[] = []
+  const tree: string[] = []
   let block: RegExpExecArray | null
 
   while ((block = newRule.exec(css))) {
     // Remove the current entry
-    if (block[4]) tree.shift()
+    if (block[4]) tree.pop()
 
     if (block[3]) {
-      tree.unshift((tree[0][block[3]] = (tree[0][block[3]] as CSSObject) || {}))
+      // new nested
+      tree.push(block[3])
     } else if (!block[4]) {
-      tree[0][block[1]] = block[2]
+      rules.push(
+        tree.reduceRight((css, block) => ({ [block]: css }), {
+          [block[1]]: block[2],
+        } as CSSObject),
+      )
     }
   }
 
-  return tree[0]
+  return rules
 }

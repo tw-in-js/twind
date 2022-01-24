@@ -13,7 +13,7 @@ import type {
 import { sortedInsertionIndex } from './internal/sorted-insertion-index'
 import { stringify } from './internal/stringify'
 import { createContext } from './internal/context'
-import { translate } from './internal/translate'
+import { translate, translateWith } from './internal/translate'
 import { parse } from './internal/parse'
 import { defineConfig } from './define-config'
 import { asArray } from './utils'
@@ -82,7 +82,11 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
           }
 
           if (preflight) {
-            serialize(preflight, {}, context, Layer.b).forEach(insert)
+            // eslint-disable-next-line @typescript-eslint/no-extra-semi
+            ;(typeof preflight == 'string'
+              ? translateWith('', Layer.b, parse(preflight), context, Layer.b, [], false, true)
+              : serialize(preflight, {}, context, Layer.b)
+            ).forEach(insert)
           }
         }
       }

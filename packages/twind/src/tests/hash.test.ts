@@ -47,7 +47,7 @@ test('different variant produce different hashes', () => {
 test('same style in different layers has different hash', () => {
   assert.strictEqual(
     tw(`w-0 ${css({ width: '0px' })} ${shortcut(`w-0`)}`),
-    '#1wdxrmr #xs3c6s #1hg5x5u',
+    '#1wdxrmr #xs3c6s #q8j53i',
   )
   assert.deepEqual(tw.target, [
     // apply(`w-0`)
@@ -55,7 +55,7 @@ test('same style in different layers has different hash', () => {
     // w-0
     '.\\#xs3c6s{width:0px}',
     // css({ width: '0px' })
-    '.\\#1hg5x5u{width:0px}',
+    '.\\#q8j53i{width:0px}',
   ])
 })
 
@@ -82,7 +82,7 @@ test('hash shortcut only', () => {
 
   assert.strictEqual(
     tw(`w-0 ${css({ width: '0px' })} ${shortcut(`w-0`)}`),
-    '#1wdxrmr w-0 css#1adeaiv',
+    '#1wdxrmr w-0 css#1qxe0w9',
   )
   assert.deepEqual(tw.target, [
     // apply(`w-0`)
@@ -90,6 +90,6 @@ test('hash shortcut only', () => {
     // w-0
     '.w-0{width:0px}',
     // css({ width: '0px' })
-    '.css\\#1adeaiv{width:0px}',
+    '.css\\#1qxe0w9{width:0px}',
   ])
 })
