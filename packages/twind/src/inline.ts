@@ -14,9 +14,19 @@ export interface InlineOptions {
   /**
    * Allows to minify the resulting CSS.
    */
-  minify?: (css: string) => string
+  minify?: InlineMinify
 }
 
+export interface InlineMinify {
+  /**
+   * Called to minify the CSS.
+   *
+   * @param css the CSS to minify
+   * @param html the HTML that will be used — allows to only include above-the-fold CSS
+   * @return the resulting CSS
+   */
+  (css: string, html: string): string
+}
 /**
  * Used for static HTML processing (usually to provide SSR support for your javascript-powered web apps)
  *
@@ -68,5 +78,5 @@ export function inline(markup: string, options: InlineOptions['tw'] | InlineOpti
   const { html, css } = extract(markup, tw)
 
   // inject as last element into the head
-  return html.replace('</head>', `<style data-twind>${minify(css)}</style></head>`)
+  return html.replace('</head>', `<style data-twind>${minify(css, html)}</style></head>`)
 }
