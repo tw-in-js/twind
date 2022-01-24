@@ -16,10 +16,13 @@
   "type": "module",
   "scripts": {
     "start": "npm run dev",
-    "dev": "svelte-kit dev"
+    "dev": "svelte-kit dev",
+    "build": "svelte-kit build",
+    "preview": "svelte-kit preview"
   },
   "devDependencies": {
-    "@sveltejs/kit": "^1.0.0-next.234",
+    "@sveltejs/adapter-node": "^1.0.0-next.66",
+    "@sveltejs/kit": "^1.0.0-next.240",
     "@twind/sveltekit": "1.0.0-next.22",
     "@twind/tailwind": "1.0.0-next.22",
     "svelte": "^3.44.0",

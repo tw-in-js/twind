@@ -30,8 +30,11 @@ export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = 
   config?: TwindUserConfig<Theme, Presets>,
 ): TwindConfig<BaseTheme & ExtractThemes<Theme, Presets>>
 
-export function defineConfig(config: TwindConfig | TwindUserConfig = {}): TwindConfig {
-  return defineConfig$({ hash: !dev, ...config } as TwindUserConfig)
+export function defineConfig({
+  hash = !dev,
+  ...config
+}: TwindConfig | TwindUserConfig = {}): TwindConfig {
+  return defineConfig$({ ...config, hash } as TwindUserConfig)
 }
 
 export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown>(

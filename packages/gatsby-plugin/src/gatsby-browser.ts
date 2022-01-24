@@ -5,9 +5,9 @@ import config from '@twind/gatsby-plugin/config'
 
 setup(
   {
-    // in production use short hashed class names
-    hash: process.env.NODE_ENV == 'production',
     ...config,
+    // in production use short hashed class names
+    hash: config.hash ?? process.env.NODE_ENV == 'production',
   },
   (process.env.NODE_ENV == 'development' ? dom() : cssom()) as Sheet<HTMLStyleElement>,
 )
