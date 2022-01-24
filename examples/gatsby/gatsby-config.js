@@ -22,9 +22,9 @@ module.exports = {
         icon: `src/images/favicon.png`,
       },
     },
-    `@twind/gatsby-plugin`,
+    `gatsby-plugin-twind`,
     // {
-    //   resolve: `@twind/gatsby-plugin`,
+    //   resolve: `gatsby-plugin-twind`,
     //   options: {
     //     config: `./path/to/twind.config`
     //   }

@@ -111,7 +111,7 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
   - allow trailing dash before parentheses for utilities -> `border-(md:{2 black opacity-50 hover:dashed}}`
   - shortcuts: `~` to apply/merge utilities -> `~(text(5xl,red-700),bg-red-100)`
     - anonymous shortcuts: `~(!text-(3xl center) !underline italic focus:not-italic)`
-      - support comma-separated shortcuts — this would prevent different classNames errors during hydration:
+      - support comma-separated shortcuts — this prevents different classNames errors during hydration:
         - `hover:~(!text-(3xl,center),!underline,italic,focus:not-italic)`
         - `cx()` converts these to comma-separated group
     - named shortcuts: `PrimaryButton~(bg-red-500 text-white)` -> `PrimaryButton#<hash>`

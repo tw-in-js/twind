@@ -1,5 +1,5 @@
 {
-  "name": "@twind/gatsby-plugin",
+  "name": "gatsby-plugin-twind",
   "version": "1.0.0-next.22",
   "description": "gatsby integration for Twind",
   "publishConfig": {
@@ -36,9 +36,7 @@
   "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
   "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
   "exports": {
-    "./gatsby-browser": {
-      "node": "./src/gatsby-browser.ts"
-    },
+    "./gatsby-browser": "./src/gatsby-browser.ts",
     "./gatsby-node": {
       "node": "./src/gatsby-node.ts"
     },

@@ -1,4 +1,4 @@
-# @twind/gatsby-plugin
+# gatsby-plugin-twind
 
 ## READ THIS FIRST!
 
@@ -17,7 +17,7 @@ Used within the following [examples](https://github.com/tw-in-js/twind/tree/next
 Install from npm:
 
 ```sh
-npm install twind @twind/gatsby-plugin@next
+npm install twind gatsby-plugin-twind@next
 ```
 
 ## Usage
@@ -29,9 +29,9 @@ Please see [examples/gatsby](https://github.com/tw-in-js/twind/tree/next/example
 ```js
 module.exports = {
   plugins: [
-    `@twind/gatsby-plugin`,
+    `gatsby-plugin-twind`,
     // {
-    //   resolve: `@twind/gatsby-plugin`,
+    //   resolve: `gatsby-plugin-twind`,
     //   options: {
     //     config: `./path/to/twind.config`
     //   }
@@ -61,7 +61,7 @@ You can use the `config` option to specify a different path to a twind config fi
 module.exports = {
   plugins: [
     {
-      resolve: `@twind/gatsby-plugin`,
+      resolve: `gatsby-plugin-twind`,
       options: {
         config: `./path/to/twind.config`,
       },

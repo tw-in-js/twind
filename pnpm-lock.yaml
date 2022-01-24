@@ -82,23 +82,23 @@ importers:
 
   examples/gatsby:
     specifiers:
-      '@twind/gatsby-plugin': 1.0.0-next.22
       '@twind/tailwind': 1.0.0-next.22
       gatsby: ^4.5.3
       gatsby-plugin-manifest: ^4.5.2
       gatsby-plugin-offline: ^5.5.2
       gatsby-plugin-react-helmet: ^5.5.0
+      gatsby-plugin-twind: 1.0.0-next.22
       react: ^17.0.2
       react-dom: ^17.0.2
       react-helmet: ^6.1.0
       twind: 1.0.0-next.22
     dependencies:
-      '@twind/gatsby-plugin': link:../../packages/gatsby-plugin
       '@twind/tailwind': link:../../packages/tailwind
       gatsby: 4.5.4_3e110919350e0ee2e64d1a654bd03c09
       gatsby-plugin-manifest: 4.5.2_gatsby@4.5.4
       gatsby-plugin-offline: 5.5.2_f34df581228ea98e349e7f8b5b8e1778
       gatsby-plugin-react-helmet: 5.5.0_gatsby@4.5.4+react-helmet@6.1.0
+      gatsby-plugin-twind: link:../../packages/gatsby-plugin
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-helmet: 6.1.0_react@17.0.2

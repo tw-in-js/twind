@@ -4,7 +4,7 @@
 
 ## How does this work?
 
-1. configure [@twind/gatsby-plugin](https://www.npmjs.com/package/@twind/gatsby-plugin) in [gatsby-config.js](./gatsby-config.js) — to enable server-side rendering (SSR) and injecting of twind styles in the browser
+1. configure [gatsby-plugin-twind](https://www.npmjs.com/package/gatsby-plugin-twind) in [gatsby-config.js](./gatsby-config.js) — to enable server-side rendering (SSR) and injecting of twind styles in the browser
 2. a dedicated [twind.config](./twind.config.js)
 
 ## What is included?
@@ -14,7 +14,7 @@
   - [@twind/preset-autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix)
   - [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind)
 - [gatsby](https://www.npmjs.com/package/gatsby)
-- [@twind/gatsby-plugin](https://www.npmjs.com/package/@twind/gatsby-plugin)
+- [gatsby-plugin-twind](https://www.npmjs.com/package/gatsby-plugin-twind)
 
 ## Credits
 
