@@ -415,3 +415,12 @@ export interface ClassObject {
 }
 
 export type Class = string | number | boolean | Falsey | ClassObject | Class[]
+
+export type NestedFunction = (
+  strings: TemplateStringsArray | Class,
+  ...interpolations: Class[]
+) => string
+
+export type Nested = NestedFunction & {
+  [label: string]: NestedFunction
+}

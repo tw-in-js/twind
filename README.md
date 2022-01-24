@@ -251,7 +251,6 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
 
 ## TODO
 
-- `const acx = cx'aaa~(text-blue-500)'` works, but `const bcx = 'bbb~(text-red-500 ${acx})'` not
 - support `css()` in preflight and rules
 - fix @apply, add @shortcut, add apply function
 - `inject` for global styles (CSS string and objects) — always base layer

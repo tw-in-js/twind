@@ -19,7 +19,6 @@ import type {
 
 import { makeThemeFunction } from './theme'
 import { asArray, escape, hash as defaultHash, identity } from '../utils'
-import { Layer } from './precedence'
 
 type ResolveFunction<Theme extends BaseTheme = BaseTheme> = (
   className: string,

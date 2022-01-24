@@ -37,6 +37,12 @@
   - `cx(...args)`: creates a class name from the given arguments; no styles injected
   - `css(...args)`: creates a class name from the given arguments; no styles injected
   - `shortcut(...args)`: creates a class name from the given arguments; order of styles determined by twind; no styles injected
+    - `shortcut.Button(...args): creates a named class name from the given arguments; order of styles determined by twind; no styles injected
+    - `~(...)` or `Button~(...)`: within a token
+  - `apply(...args)`: creates a class name from the given arguments; order of styles determined by order in args; no styles injected
+    - `apply.Button(...args): creates a named class name from the given arguments; order of styles determined by order in args; no styles injected
+    - `@(...)` or `Button@(...)`: within a token
+    - `@apply ...` or `{ '@apply': '...' }`: within CSS string or object
   - `style(options)`: creates a stitches like helper; returns a `style` function
     - `style(props)`: creates a class name from the given props; no styles injected
 

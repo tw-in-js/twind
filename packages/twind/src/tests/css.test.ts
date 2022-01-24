@@ -1,6 +1,6 @@
 import { assert, test, afterEach } from 'vitest'
 
-import { twind, virtual, css, cx, shortcut, colorFromTheme, escape } from '..'
+import { twind, virtual, css, cx, shortcut, apply, colorFromTheme, escape } from '..'
 
 const tw = twind(
   {
@@ -176,7 +176,7 @@ test('interpolation values', () => {
     /* Explictily add to base layer */
     @layer base {
       body {
-        @apply bg-gray-100 text-gray-700;
+        @apply text-gray-700 bg-gray-100;
       }
     }
   `
@@ -185,7 +185,7 @@ test('interpolation values', () => {
   const className = tw(style)
 
   assert.deepEqual(tw.target, [
-    'body{--tw-bg-opacity:1;background-color:rgba(243,244,246,var(--tw-bg-opacity));--tw-text-opacity:1;color:rgba(55,65,81,var(--tw-text-opacity))}',
+    'body{--tw-text-opacity:1;color:rgba(55,65,81,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:rgba(243,244,246,var(--tw-bg-opacity))}',
     `.${escape(
       className,
     )}{background:dodgerblue;color:white;border:${random}px solid white;margin:2rem}`,
@@ -202,6 +202,17 @@ test('with shortcut', () => {
 
   assert.deepEqual(tw.target, [
     '.\\~\\(css\\#1kek6c3\\,text-gray-300\\){--tw-text-opacity:1;color:rgba(209,213,219,var(--tw-text-opacity));line-height:1}',
+    '.bg-gray-900{--tw-bg-opacity:1;background-color:rgba(17,24,39,var(--tw-bg-opacity))}',
+  ])
+})
+
+test('with apply', () => {
+  const className = tw(cx('bg-gray-900', apply(css({ lineHeight: '1' }), 'text-gray-300')))
+
+  assert.strictEqual(className, '@(css#1kek6c3,text-gray-300) bg-gray-900')
+
+  assert.deepEqual(tw.target, [
+    '.\\@\\(css\\#1kek6c3\\,text-gray-300\\){line-height:1;--tw-text-opacity:1;color:rgba(209,213,219,var(--tw-text-opacity))}',
     '.bg-gray-900{--tw-bg-opacity:1;background-color:rgba(17,24,39,var(--tw-bg-opacity))}',
   ])
 })

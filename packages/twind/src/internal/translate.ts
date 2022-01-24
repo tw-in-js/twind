@@ -66,3 +66,28 @@ function translate$<Theme extends BaseTheme = BaseTheme>(
 
   return serialize(resolved, rule, context, precedence, conditions)
 }
+
+export function translateWith<Theme extends BaseTheme = BaseTheme>(
+  name: string,
+  layer: number,
+  rules: ParsedRule[],
+  context: Context<Theme>,
+  precedence: number,
+  conditions?: string[] | undefined,
+  important?: boolean | undefined,
+  useOrderOfRules?: boolean,
+) {
+  return merge(
+    (useOrderOfRules
+      ? rules.reduce(
+          // TODO could use flatMap here — supported in all browsers?
+          (rules: TwindRule[], rule) => (
+            rules.push(...translate([rule], context, precedence, conditions, important)), rules
+          ),
+          [],
+        )
+      : translate(rules, context, precedence, conditions, important)
+    ).map((rule) => (rule.n ? { ...rule, p: moveToLayer(rule.p, layer), o: 0 } : rule)),
+    name,
+  )
+}

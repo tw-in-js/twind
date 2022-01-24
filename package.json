@@ -44,19 +44,19 @@
       "path": "packages/twind/dist/twind.esnext.js",
       "import": "{ setup }",
       "brotli": true,
-      "limit": "4.25kb"
+      "limit": "4.3kb"
     },
     {
       "name": "@twind/cdn",
       "path": "packages/cdn/dist/cdn.esnext.js",
       "brotli": true,
-      "limit": "14.5kb"
+      "limit": "14.55kb"
     },
     {
       "name": "@twind/tailwind",
       "path": "packages/tailwind/dist/tailwind.esnext.js",
       "brotli": true,
-      "limit": "14.4kb"
+      "limit": "14.45kb"
     }
   ],
   "// start — use 'BROWSER=none' to prevent vite to open a browser if within codesandbox or stackblitz": "",
@@ -67,7 +67,7 @@
     "check:fix": "npm run check -- --fix",
     "size-limit": "size-limit",
     "format": "prettier --write --ignore-path .gitignore . '!pnpm-lock.yaml'",
-    "test": "vitest --reporter dot",
+    "test": "vitest",
     "test:ui": "npm test -- --ui",
     "test:coverage": "vitest run --coverage",
     "release": "pnpm publish -r",

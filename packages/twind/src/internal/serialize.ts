@@ -6,10 +6,11 @@ import { mql, hash, asArray } from '../utils'
 
 import { atRulePrecedence, declarationPropertyPrecedence, convert } from './precedence'
 import { stringify } from './stringify'
-import { translate } from './translate'
+import { translate, translateWith } from './translate'
 import { parse } from './parse'
 import { compareTwindRules } from './sorted-insertion-index'
 import { merge } from './merge'
+import { define } from './define'
 
 export function serialize<Theme extends BaseTheme = BaseTheme>(
   style: CSSObject | Falsey,
@@ -48,16 +49,15 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
         // @apply ...;
         case 'a': {
           rules.push(
-            ...merge(
-              translate(
-                // @apply rules are always merged
-                parse(value as string),
-                context,
-                precedence,
-                conditions,
-                important,
-              ),
+            ...translateWith(
               name as string,
+              precedence,
+              parse(value as string),
+              context,
+              precedence,
+              conditions,
+              important,
+              true /* useOrderOfRules */,
             ),
           )
           continue

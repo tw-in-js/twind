@@ -1,4 +1,3 @@
-import type { MaybeArray } from '../types'
 import { hash } from '../utils'
 import { define } from './define'
 import { format } from './format'
@@ -118,10 +117,11 @@ export function parse(token: string): ParsedRule[] {
                 define(
                   // named nested
                   nested.length > 1
-                    ? nested.slice(0, -1) + hash(JSON.stringify(rules))
+                    ? nested.slice(0, -1) + hash(JSON.stringify([nested, rules]))
                     : nested + '(' + format(rules, ',') + ')',
                   Layer.s,
                   rules,
+                  /@$/.test(nested),
                 ),
               ],
               current,

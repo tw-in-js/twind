@@ -1,6 +1,6 @@
 import { assert, test, afterEach } from 'vitest'
 
-import { twind, virtual, colorFromTheme, fromTheme, shortcut, cx } from '..'
+import { twind, virtual, colorFromTheme, fromTheme, apply, cx } from '..'
 
 const tw = twind(
   {
@@ -58,54 +58,47 @@ const tw = twind(
 
 afterEach(() => tw.clear())
 
-test('comments', () => {
-  assert.strictEqual(
-    shortcut`
-      underline
-      /* multi
-        line
-        comment
-      */
-      hover:focus:!(
-        sm:(italic why)
-        lg:-(px)
-        -mx-1
-      )
-      ${false} ${undefined} ${null} ${''}
-      // Position
-      !top-1 !-bottom-${2} mx-${0}
-      text-(xl black)
-    `,
-    '~(underline,hover:focus:sm:!italic,hover:focus:sm:!why,hover:focus:lg:!-px,hover:focus:!-mx-1,!top-1,!-bottom-2,mx-0,text-xl,text-black)',
-  )
+test('keeps order as declared', () => {
+  // reference using shortcut
+  assert.strictEqual(tw('~(text-2 text-0 h-1)'), '~(text-2,text-0,h-1)')
+  assert.deepEqual(tw.target, [
+    '.\\~\\(text-2\\,text-0\\,h-1\\){height:.25rem;font-size:0px;font-size:1rem}',
+  ])
+  tw.clear()
+
+  assert.strictEqual(tw('@(text-2 text-0 h-1)'), '@(text-2,text-0,h-1)')
+  assert.deepEqual(tw.target, [
+    '.\\@\\(text-2\\,text-0\\,h-1\\){font-size:1rem;font-size:0px;height:.25rem}',
+  ])
+  tw.clear()
 })
 
-test('named shortcuts', () => {
-  assert.strictEqual(shortcut.PrimaryButton`bg-red-500 text-white`, 'PrimaryButton#1wkjmel')
+test('named apply', () => {
+  assert.strictEqual(apply.PrimaryButton`bg-red-500 text-white`, 'PrimaryButton#1athxj9')
 
-  assert.strictEqual(shortcut['red-link']`bg-red-500 text-white`, 'red-link#1me8bge')
+  assert.strictEqual(apply['red-link']`bg-red-500 text-white`, 'red-link#pribq7')
 
   assert.deepEqual(tw.target, [])
 
   assert.strictEqual(
-    tw(cx(shortcut.PrimaryButton`bg-orange-500 text-white`, 'text-sm')),
-    'PrimaryButton#12852aj text-sm',
+    tw(cx(apply.PrimaryButton`bg-orange-500 text-white`, 'text-sm')),
+    'PrimaryButton#176yabo text-sm',
   )
 
   assert.deepEqual(tw.target, [
-    '.PrimaryButton\\#12852aj{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:rgba(249,115,22,var(--tw-bg-opacity))}',
+    '.PrimaryButton\\#176yabo{--tw-bg-opacity:1;background-color:rgba(249,115,22,var(--tw-bg-opacity));--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}',
     '.text-sm{font-size:1rem}',
   ])
 
   tw.clear()
 
   assert.strictEqual(
-    tw(`text-sm hover:${shortcut.PrimaryButton`bg-orange-500 text-white`}`),
-    'hover:PrimaryButton#12852aj text-sm',
+    tw(`text-sm hover:${apply.PrimaryButton`bg-orange-500 text-white`}`),
+    'hover:PrimaryButton#176yabo text-sm',
   )
 
   assert.deepEqual(tw.target, [
-    '.hover\\:PrimaryButton\\#12852aj:hover{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:rgba(249,115,22,var(--tw-bg-opacity))}',
+    '.hover\\:PrimaryButton\\#176yabo:hover{--tw-bg-opacity:1;background-color:rgba(249,115,22,var(--tw-bg-opacity));--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}',
     '.text-sm{font-size:1rem}',
   ])
 
