@@ -1,5 +1,16 @@
 # @twind/sveltekit
 
+## 1.0.0-next.25
+
+### Patch Changes
+
+- switch to process.env.NODE_ENV and typeof document; these seam to work reliable ([`e82b1630`](https://github.com/tw-in-js/twind/commit/e82b1630eee8489c16ccfcb7b83c4f3939016f84))
+
+* update package badges ([`4527aa91`](https://github.com/tw-in-js/twind/commit/4527aa919f853d613c89df9dde2587173cb91a3a))
+
+* Updated dependencies [[`4527aa91`](https://github.com/tw-in-js/twind/commit/4527aa919f853d613c89df9dde2587173cb91a3a)]:
+  - twind@1.0.0-next.25
+
 ## 1.0.0-next.24
 
 ### Patch Changes
