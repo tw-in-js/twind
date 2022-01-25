@@ -136,6 +136,60 @@ test('named shortcuts', () => {
   ])
 })
 
+test('named apply', () => {
+  assert.deepEqual(parse('PrimaryButton@(bg-red-500 text-white)'), [
+    {
+      n: 'PrimaryButton#1athxj9',
+      v: [],
+      i: false,
+    },
+  ])
+
+  assert.deepEqual(parse('hover:PrimaryButton@(bg-red-500 text-white)'), [
+    {
+      n: 'PrimaryButton#1athxj9',
+      v: ['hover'],
+      i: false,
+    },
+  ])
+})
+
+test('anonymous apply', () => {
+  assert.deepEqual(parse('@(bg-red-500 text-white)'), [
+    {
+      n: '@(bg-red-500,text-white)',
+      v: [],
+      i: false,
+    },
+  ])
+
+  assert.deepEqual(parse('hover:@(bg-red-500 text-white)'), [
+    {
+      n: '@(bg-red-500,text-white)',
+      v: ['hover'],
+      i: false,
+    },
+  ])
+})
+
+test('apply with dark in nested with grouping', () => {
+  assert.deepEqual(parse('hover:@(text-blue-400 focus:(text-blue-(600 dark:100)))'), [
+    {
+      n: '@(text-blue-400,focus:text-blue-600,dark:focus:text-blue-100)',
+      v: ['hover'],
+      i: false,
+    },
+  ])
+
+  assert.deepEqual(parse('hover:dark:@(text-blue-400 focus:(text-blue-(600 dark:100)))'), [
+    {
+      n: '@(text-blue-400,focus:text-blue-600,focus:text-blue-100)',
+      v: ['dark', 'hover'],
+      i: false,
+    },
+  ])
+})
+
 test('primary-foreground-(light dark:dark)', () => {
   assert.deepEqual(parse('primary-foreground-(light dark:dark)'), [
     { n: 'primary-foreground-light', v: [], i: false },

@@ -165,7 +165,7 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
           btn: 'py-2 px-4 font-semibold rounded-lg shadow-md',
           'btn-green': 'text-white bg-green-500 hover:bg-green-700',
 
-          // dynamic shortcut — could be a rule as well
+          // dynamic shortcut
           'btn-': ({ $$ }) => `bg-${$$}-400 text-${$$}-100 py-2 px-4 rounded-lg`,
         },
       ],

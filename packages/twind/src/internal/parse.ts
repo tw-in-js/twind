@@ -106,9 +106,11 @@ export function parse(token: string): ParsedRule[] {
 
             // remove variants that are already applied through active
             createRule([...active, '#'], current)
-            const { length } = (current[0].pop() as ParsedRule).v
+            const { v } = current[0].pop() as ParsedRule
+
             for (const rule of rules) {
-              rule.v.splice(0, length)
+              // if a rule has dark we need to splice after the first entry eg dark
+              rule.v.splice(+(rule.v[0] == 'dark') - +(v[0] == 'dark'), v.length)
             }
 
             createRule(
