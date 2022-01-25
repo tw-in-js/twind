@@ -1,4 +1,4 @@
-import type { CSSObject, CSSValue } from './types'
+import type { CSSNested, CSSObject, CSSValue } from './types'
 
 import { tw as tw$ } from './runtime'
 import { astish } from './internal/astish'
@@ -11,7 +11,7 @@ import { css } from './css'
  */
 export function injectGlobal(
   this: ((tokens: string) => string) | undefined | void,
-  style: CSSObject | string,
+  style: CSSNested | string,
 ): void
 
 export function injectGlobal(
@@ -22,14 +22,14 @@ export function injectGlobal(
 
 export function injectGlobal(
   this: ((tokens: string) => string) | undefined | void,
-  strings: CSSObject | string | TemplateStringsArray,
+  strings: CSSNested | string | TemplateStringsArray,
   ...interpolations: readonly CSSValue[]
 ): void {
   const tw = typeof this == 'function' ? this : tw$
 
   tw(
     css({
-      '@layer base': astish(strings, interpolations),
+      '@layer base': astish(strings as CSSObject, interpolations),
     } as CSSObject),
   )
 }

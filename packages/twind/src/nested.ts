@@ -12,7 +12,7 @@ function nested(marker: string): Nested {
       return nested$('', strings, interpolations)
     } as Nested,
     {
-      get: function (target, name) {
+      get(target, name) {
         return function namedNested(
           strings: TemplateStringsArray | Class,
           ...interpolations: Class[]

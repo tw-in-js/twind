@@ -42,7 +42,9 @@ export type CSSBase = BaseProperties & CSSNested
 
 export type CSSObject = CSSProperties & CSSBase
 
-export type CSSValue = string | number | bigint | Falsey
+export type CSSValue = string | number | bigint | Falsey | StringLike
+
+export type StringLike = { toString(): string } & string
 
 export type Preflight = CSSBase | string
 

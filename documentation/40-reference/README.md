@@ -14,6 +14,19 @@
 - inline shortcut: style are generated as defined by twind — same as if they where used alone
   - `~(underline font-bold)` -> `~(underline,font-bold)`
   - `Link~(underline font-bold)` -> `Link#abcdef`
+- comments
+  - multi line: `/* .. */`
+  - single line: `//` — should **not** be used directly in a class attribute, use `cx` to _clear_ the class names before
+
+## CSS (strings and objects)
+
+- `&`: for nested selectors ([CSS Nesting Module](https://tabatkins.github.io/specs/css-nesting/))
+- `label`: for a more readable class names [Emotion › Labels](https://emotion.sh/docs/labels)
+- `theme(...)`: access theme values using dot notation; can be used in arbitrary values as well ([Tailwind CSS › Functions & Directives › theme()](https://tailwindcss.com/docs/functions-and-directives#theme))
+- `@layer ...`: tell Twind which _bucket_ a set of custom styles belong to ([Tailwind CSS › Functions & Directives › layer](https://tailwindcss.com/docs/functions-and-directives#layer) & [Cascade Layers (CSS @layer) spec](https://www.bram.us/2021/09/15/the-future-of-css-cascade-layers-css-at-layer/))
+  - The following layer exist in the given order: `defaults`, `base`, `components`, `shortcuts`, `utilities`, `overrides`
+- `@apply`: inline any existing utility classes ([Tailwind CSS › Functions & Directives › apply](https://tailwindcss.com/docs/functions-and-directives#apply))
+- `@media screen(...)`: create media queries that reference breakpoints by name instead of duplicating their values ([Tailwind CSS › Functions & Directives › screen()](https://tailwindcss.com/docs/functions-and-directives#screen))
 
 ## API
 
@@ -28,10 +41,37 @@ Observe class attributes to inject styles
 
 ### _Library Mode_
 
-use `tw` to inject styles
+use `tw` or `tx` to inject styles
 
 - `twind(config, sheet?): Twind`: creates a custom twind instance (`tw`)
-- `observe(tw, target?)`: observes all class attributes and inject there styles into the DOM
+
+  Recommended custom twind pattern:
+
+  ```js
+  import {
+    twind,
+    cssom,
+    virtual,
+    tx as tx$,
+    injectGlobal as injectGlobal$,
+    keyframes as keyframes$,
+  } from 'twind'
+
+  import config from './twind.config'
+
+  export const tw = /* @__PURE__ */ twind(
+    config,
+    // IS_SSR: `typeof document == 'undefined'` or `import.meta.env.SSR` (vite)
+    // IS_PROD: `proces.env.NODE_ENV == 'production'` or `import.meta.env.PROD` (vite)
+    IS_SSR ? virtual() : IS_PROD ? cssom() : dom(),
+  )
+
+  export const tx = /* @__PURE__ */ tx$.bind(tw)
+  export const injectGlobal = /* @__PURE__ */ injectGlobal$.bind(tw)
+  export const keyframes = /* @__PURE__ */ keyframes$.bind(tw)
+  ```
+
+- `observe(tw, target?)`: observes all class attributes and injects the styles into the DOM
 
 ### Twind instance — `tw`
 
@@ -50,7 +90,64 @@ use `tw` to inject styles
 
 - `defineConfig(config)`: define a configuration object for `setup` or `twind`
 - `tx(...args)`: creates a class name from the given arguments and injects the styles (like `tw(cx(...args))`)
+
   - `tx.bind(tw)`: binds the `tx` function to a custom twind instance; returns a new `tx` function
+
+  ```js
+  import { tx } from 'twind'
+
+  const className = tx`
+    color: red;
+    font-size: 12px;
+  `
+  ```
+
+- `injectGlobal(...args)`: injects the given styles into the base layer
+
+  - `injectGlobal.bind(tw)`: binds the `injectGlobal` function to a custom twind instance; returns a new `injectGlobal` function
+
+  ```js
+  import { injectGlobal } from 'twind'
+
+  injectGlobal`
+    @font-face {
+      font-family: "Operator Mono";
+      src: url("../fonts/Operator-Mono.ttf");
+    }
+  
+    body {
+      margin: 0;
+    }
+  `
+  ```
+
+- `keyframes(...args)`: lazily injects the keyframes into the sheet and return a unique name
+
+  - `keyframes.Name(tw)`: lazily injects the named keyframes into the sheet and return a unique name
+  - `keyframes.bind(tw)`: binds the `keyframes` function to a custom twind instance; returns a new `keyframes` function
+
+  ```js
+  import { keyframes, css, tx } from 'twind'
+
+  const fadeIn = keyframes`
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  `
+
+  // if in _Shim Mode_
+  const fadeInClass = css`
+    animation: 1s ${fadeIn} ease-out;
+  `
+
+  // if in _Library Mode_
+  const fadeInClass = tx`
+    animation: 1s ${fadeIn} ease-out;
+  `
+  ```
 
 ### Helper functions
 
@@ -105,3 +202,20 @@ Used to update an html string with styles.
     },
   })
   ```
+
+## Browser Support
+
+In general, Twind is designed for and tested on the latest stable versions of Chrome, Firefox, Edge, and Safari. It does not support any version of IE, including IE 11.
+
+For automatic vendor prefixing include the [@twind/preset-autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix) preset.
+
+For more details see [Tailwind CSS › Browser Support](https://tailwindcss.com/docs/browser-support).
+
+The following JS APIs may need polyfills:
+
+- [Array.flatMap](https://caniuse.com/mdn-javascript_builtins_array_flatmap)
+  - Edge<79, Firefox<62, Chrome<69, Safari<12, Opera<56
+  - [polyfill](https://www.npmjs.com/package/array-flat-polyfill)
+- [Math.imul](https://caniuse.com/mdn-javascript_builtins_math_imul)
+  - Firefox<20, Chrome<28, Safari<7, Opera<16
+  - [polyfill](https://www.npmjs.com/package/math.imul)
