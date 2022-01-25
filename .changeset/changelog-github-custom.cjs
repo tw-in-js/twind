@@ -107,7 +107,11 @@ const changelogFunctions = {
             user: null,
           }
         }
-        return links
+
+        return {
+          ...links,
+          user: links.user?.replace('[@sastan](https://github.com/sastan)', ''),
+        }
       }
       return {
         commit: null,
