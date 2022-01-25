@@ -20,8 +20,6 @@ import type {
 
 import { defineConfig as defineConfig$, setup as setup$, virtual, cssom, dom } from 'twind'
 
-import { dev, browser } from '$app/env'
-
 export function defineConfig<Theme extends BaseTheme = BaseTheme>(
   config?: TwindConfig<Theme>,
 ): TwindConfig<Theme & BaseTheme>
@@ -31,7 +29,7 @@ export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = 
 ): TwindConfig<BaseTheme & ExtractThemes<Theme, Presets>>
 
 export function defineConfig({
-  hash = !dev,
+  hash = !import.meta.env.DEV,
   ...config
 }: TwindConfig | TwindUserConfig = {}): TwindConfig {
   return defineConfig$({ ...config, hash } as TwindUserConfig)
@@ -55,7 +53,7 @@ export function setup<
 
 export function setup(
   config: TwindConfig | TwindUserConfig = {} as TwindUserConfig,
-  sheet: Sheet = browser ? (dev ? dom() : cssom()) : virtual(),
+  sheet: Sheet = import.meta.env.SSR ? virtual() : import.meta.env.DEV ? dom() : cssom(),
   target?: HTMLElement,
 ): Twind {
   return setup$(defineConfig(config as TwindUserConfig), sheet, target)
