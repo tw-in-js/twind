@@ -17,8 +17,6 @@ const variants: Variant<TailwindTheme>[] = [
   ['file', '&::file-selector-button'],
   ['placeholder', '&::placeholder'],
 
-  // TODO before and after with { content: 'var(--tw-content)' }
-
   ['first', '&:first-child'],
   ['last', '&:last-child'],
   ['even', '&:nth-child(2n)'],

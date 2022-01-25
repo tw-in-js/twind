@@ -100,7 +100,6 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
           classNames.add(rule.c).add(insert(rule))
         }
 
-        // TODO try do keep classNames unmodified or same order
         className = [...classNames].filter(Boolean).join(' ')
 
         // Remember the generated class name

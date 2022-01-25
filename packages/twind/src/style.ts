@@ -27,12 +27,11 @@ export type MorphVariant<T> = T extends number
   ? number | T
   : T
 
-// TODO export type StyleTokenValue = string | CSSObject | Falsey
 export type StyleTokenValue = string | Falsey
-// export type StyleTokenThunk<Variants> = (props: StyleProps<Variants>) => StyleTokenValue
+
 // No support for thunks yet — these may use props that are not in the generated class name
 // and may therefore override each other
-export type StyleToken = StyleTokenValue // | StyleTokenThunk<Variants>
+export type StyleToken = StyleTokenValue
 
 /**
  * Allows to extract the supported properties of a style function.

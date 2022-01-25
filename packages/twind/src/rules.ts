@@ -56,7 +56,6 @@ export function fromTheme<
   return (match, context) => {
     const themeSection = camelize(section || match[1]) as Section
 
-    // TODO suppport https://github.com/tailwindlabs/tailwindcss/pull/4348
     const value =
       context.theme(themeSection, match.$$) ??
       /** Arbitrary lookup type */
