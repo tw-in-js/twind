@@ -29,7 +29,7 @@ export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = 
 ): TwindConfig<BaseTheme & ExtractThemes<Theme, Presets>>
 
 export function defineConfig({
-  hash = !import.meta.env.DEV,
+  hash = import.meta.env.PROD,
   ...config
 }: TwindConfig | TwindUserConfig = {}): TwindConfig {
   return defineConfig$({ ...config, hash } as TwindUserConfig)
@@ -53,7 +53,7 @@ export function setup<
 
 export function setup(
   config: TwindConfig | TwindUserConfig = {} as TwindUserConfig,
-  sheet: Sheet = import.meta.env.SSR ? virtual() : import.meta.env.DEV ? dom() : cssom(),
+  sheet: Sheet = import.meta.env.SSR ? virtual() : import.meta.env.PROD ? cssom() : dom(),
   target?: HTMLElement,
 ): Twind {
   return setup$(defineConfig(config as TwindUserConfig), sheet, target)
