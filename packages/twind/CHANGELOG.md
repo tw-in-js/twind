@@ -1,5 +1,11 @@
 # twind
 
+## 1.0.0-next.25
+
+### Patch Changes
+
+- update package badges ([`4527aa91`](https://github.com/tw-in-js/twind/commit/4527aa919f853d613c89df9dde2587173cb91a3a))
+
 ## 1.0.0-next.24
 
 ### Patch Changes
