@@ -57,9 +57,13 @@ function createRule(active: string[], current: ParsedRule[][]): void {
     if (name) {
       if (negated) name = '-' + name
 
-      current[0].push({ n: name, v: variants, i: important })
+      current[0].push({ n: name, v: variants.filter(uniq), i: important })
     }
   }
+}
+
+function uniq<T>(value: T, index: number, values: T[]): boolean {
+  return values.indexOf(value) == index
 }
 
 // Remove comments (multiline and single line)
