@@ -1,5 +1,11 @@
 # @twind/website
 
+## 1.0.0-next.20
+
+### Patch Changes
+
+- add `keyframes` function that lazily injects the keyframes into the sheet and return a unique name ([`a415d389`](https://github.com/tw-in-js/twind/commit/a415d3896ec1981cf1d9a2f884a07be9c8a86bcc))
+
 ## 1.0.0-next.19
 
 ### Patch Changes
