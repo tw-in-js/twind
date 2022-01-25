@@ -256,7 +256,6 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
 
 ## TODO
 
-- `inject` for global styles (CSS string and objects) — always base layer
 - rewrite https://github.com/TanStack/tanstack.com
 - support `is(:hover,:focus-visible):underline`?
 - style: should it pass `class` and `className` through? alternatives: string concat, `cx`
@@ -272,6 +271,9 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
 - auto support dark mode in theme helpers (`<section>.dark.<key>` or `dark.<section>.<key>`)
 - @twind/preset-\* from tailwind core
 - @twind/react
+  - Global: https://emotion.sh/docs/globals
+  - createGlobalStyles: https://goober.js.org/api/createGlobalStyles
+  - createGlobalStyle: https://styled-components.com/docs/api#createglobalstyle
 - @twind/completions — provide autocompletion for classNames
 - a package to make it easy to create lightweight versions of presets (like https://lodash.com/custom-builds)
 - postcss plugin like tailwindcss for SSR

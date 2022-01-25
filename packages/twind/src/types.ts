@@ -42,6 +42,8 @@ export type CSSBase = BaseProperties & CSSNested
 
 export type CSSObject = CSSProperties & CSSBase
 
+export type CSSValue = string | number | bigint | Falsey
+
 export type Preflight = CSSBase | string
 
 export interface TwindRule {
