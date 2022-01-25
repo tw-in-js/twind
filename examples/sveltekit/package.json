@@ -23,10 +23,10 @@
   "devDependencies": {
     "@sveltejs/adapter-node": "^1.0.0-next.66",
     "@sveltejs/kit": "^1.0.0-next.240",
-    "@twind/sveltekit": "1.0.0-next.23",
-    "@twind/tailwind": "1.0.0-next.23",
+    "@twind/sveltekit": "1.0.0-next.24",
+    "@twind/tailwind": "1.0.0-next.24",
     "svelte": "^3.44.0",
-    "twind": "1.0.0-next.23",
+    "twind": "1.0.0-next.24",
     "typescript": "^4.4.3"
   }
 }
