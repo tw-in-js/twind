@@ -3,7 +3,7 @@
 ## twind
 
 [![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.dev/api/modules/twind.html)
-[![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%2Fpackages%2Ftwind?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/twind)
+[![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23twind?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/twind)
 
 Sizes including dependencies
 
@@ -14,7 +14,7 @@ Sizes including dependencies
 ## @twind/core
 
 [![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.dev/api/modules/twind.html)
-[![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%2Fpackages%2Fcore?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/core)
+[![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23core?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/core)
 
 Sizes including dependencies
 

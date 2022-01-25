@@ -1,4 +1,4 @@
-# @twind/cdn
+# @twind/cdn [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/cdn/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/cdn) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23cdn?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/cdn)
 
 ---
 

@@ -1,4 +1,4 @@
-# @twind/preset-tailwind-forms
+# @twind/preset-tailwind-forms [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/preset-tailwind-forms/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/preset-tailwind-forms) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23preset-tailwind-forms?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind-forms)
 
 ---
 

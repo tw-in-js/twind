@@ -1,4 +1,4 @@
-# @twind/tailwind
+# @twind/tailwind [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/tailwind/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/tailwind) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23tailwind?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/tailwind)
 
 ---
 
