@@ -1,7 +1,6 @@
 // taken from https://raw.githubusercontent.com/sveltejs/vite-plugin-svelte/master/scripts/changelog-github-custom.js
 // based on https://github.com/atlassian/changesets/blob/main/packages/changelog-github/src/index.ts
 // modifications to improve readability:
-// - removed thanks notes. We're thanking contributors in the PRs or acknowledge their work in different ways
 // - moved issue links to end of first line
 // - omit link to merge commit if PR link is found
 // - linkify issue hints like (see #123) or (fixes #567)
@@ -51,7 +50,7 @@ const changelogFunctions = {
 
     let prFromSummary
     let commitFromSummary
-    let usersFromSummary
+    let usersFromSummary = []
 
     const replacedChangelog = changeset.summary
       .replace(/^\s*(?:pr|pull|pull\s+request):\s*#?(\d+)/im, (_, pr) => {
@@ -64,7 +63,9 @@ const changelogFunctions = {
         return ''
       })
       .replace(/^\s*(?:author|user):\s*@?([^\s]+)/gim, (_, user) => {
-        usersFromSummary.push(user)
+        if (user != 'sastan') {
+          usersFromSummary.push(user)
+        }
         return ''
       })
       .trim()
@@ -98,6 +99,14 @@ const changelogFunctions = {
           repo: options.repo,
           commit: commitToFetchFrom,
         })
+        // This is from the changeset action — remove pull and user leaving the commit to use
+        if (links.user.includes('github-actions')) {
+          links = {
+            ...links,
+            pull: null,
+            user: null,
+          }
+        }
         return links
       }
       return {
@@ -107,8 +116,17 @@ const changelogFunctions = {
       }
     })()
 
-    // only link PR or merge commit not both
-    const suffix = links.pull ? ` (${links.pull})` : links.commit ? ` (${links.commit})` : ''
+    const users = usersFromSummary.length
+      ? usersFromSummary
+          .map((userFromSummary) => `[@${userFromSummary}](https://github.com/${userFromSummary})`)
+          .join(', ')
+      : links.user
+
+    const suffix = [
+      // only link PR or merge commit not both
+      links.pull ? ` (${links.pull})` : links.commit ? ` (${links.commit})` : '',
+      users ? ` 🙏🏽  Thanks ${users}!` : '',
+    ].join('')
 
     return `\n\n- ${firstLine}${suffix}\n${futureLines.map((l) => `  ${l}`).join('\n')}`
   },
