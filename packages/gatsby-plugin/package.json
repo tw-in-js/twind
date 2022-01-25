@@ -36,7 +36,10 @@
   "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
   "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
   "exports": {
-    "./gatsby-browser": "./src/gatsby-browser.ts",
+    "./gatsby-browser": {
+      "script": null,
+      "default": "./src/gatsby-browser.ts"
+    },
     "./gatsby-node": {
       "node": "./src/gatsby-node.ts"
     },

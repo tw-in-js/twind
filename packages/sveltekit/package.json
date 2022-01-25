@@ -36,7 +36,10 @@
   "main": "src/index.ts",
   "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
   "exports": {
-    ".": "./src/index.ts",
+    ".": {
+      "script": null,
+      "default": "./src/index.ts"
+    },
     "./hooks": {
       "node": "./src/hooks.ts"
     },
