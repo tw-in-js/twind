@@ -38,7 +38,7 @@ jobs:
       - name: 🔧  Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 6.27.1
+          version: 6.28.0
 
       - name: 🔧  Use Node ${{ matrix.node }}
         uses: actions/setup-node@v2
@@ -82,7 +82,7 @@ jobs:
       - name: 🔧  Setup pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 6.27.1
+          version: 6.28.0
 
       - name: 🔧  Setup Node
         uses: actions/setup-node@v2
@@ -99,13 +99,7 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
-
-      # Uses the root package.json['size-limit'] config
-      - name: 📨  Report Size Limit
-        uses: andresz1/size-limit-action@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          skip_step: install
+      - run: pnpm size-limit
 
   coveralls:
     name: Collect Coverage
