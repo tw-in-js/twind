@@ -22,15 +22,19 @@ export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
   // handle children of target
   handleMutationRecords([{ target, type: '' }])
 
-  return Object.create(tw, {
-    destroy: {
-      enumerable: true,
-      value: () => {
-        observer.disconnect()
-        tw.destroy()
-      },
+  return new Proxy(tw, {
+    get(target, propertyKey) {
+      if (propertyKey == 'destroy') {
+        return function destroy() {
+          observer.disconnect()
+          target.destroy()
+        }
+      }
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+      return Reflect.get(target, propertyKey)
     },
-  }) as Twind<Theme, Target>
+  })
 
   function handleMutationRecords(records: MinimalMutationRecord[]): void {
     for (const { type, target } of records) {

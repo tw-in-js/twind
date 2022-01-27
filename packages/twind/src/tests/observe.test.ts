@@ -51,6 +51,22 @@ test('use happy-dom in this test file', () => {
     `.trim(),
   )
 
+  // ensure tw is callable
+  tw.clear()
+  assert.strictEqual(tw('underline'), 'underline')
+  assert.deepEqual(tw.target, ['.underline{text-decoration:underline}'])
+
+  // ensure the observer is disconnected on destroy
+  tw.destroy()
+  // the stylesheet is emptied
+  assert.lengthOf(tw.target, 0)
+
+  // attributes are no longer modified
+  ;(document.querySelector('main') as Element).className = '~(text-3xl bg-gray-100)'
+  // the stylesheet is emptied
+  assert.lengthOf(tw.target, 0)
+  assert.strictEqual(document.querySelector('main')?.className, '~(text-3xl bg-gray-100)')
+
   // TODO these do not work right now - bug in happy-dom?
   // TODO Update attribute
 
