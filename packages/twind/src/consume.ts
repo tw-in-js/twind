@@ -101,7 +101,6 @@ function extract(
   let mode = MODE_TEXT
   let startIndex = 0
   let quote = ''
-  let char = ''
   let attributeName = ''
 
   const commit = (currentIndex: number): void => {
@@ -111,7 +110,7 @@ function extract(
   }
 
   for (let position = 0; position < markup.length; position++) {
-    char = markup[position]
+    const char = markup[position]
 
     if (mode == MODE_TEXT) {
       if (char == '<') {

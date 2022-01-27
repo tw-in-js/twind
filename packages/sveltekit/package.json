@@ -1,6 +1,6 @@
 {
   "name": "@twind/sveltekit",
-  "version": "1.0.0-next.25",
+  "version": "1.0.0-next.26",
   "description": "sveltekit integration for Twind",
   "publishConfig": {
     "tag": "next",
@@ -16,21 +16,6 @@
     "svelte",
     "sveltekit"
   ],
-  "homepage": "https://twind.dev",
-  "bugs": "https://github.com/tw-in-js/twind/issues",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tw-in-js/twind.git",
-    "directory": "packages/sveltekit"
-  },
-  "license": "MIT",
-  "contributors": [
-    "Luke Jackson (lukejacksonn.github.io)",
-    "Sascha Tandel (https://github.com/sastan)"
-  ],
-  "engines": {
-    "node": ">=12.4"
-  },
   "type": "module",
   "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
   "main": "src/index.ts",
@@ -49,7 +34,7 @@
   "sideEffects": false,
   "peerDependencies": {
     "@sveltejs/kit": "^1.0.0-next.234",
-    "twind": "1.0.0-next.25",
+    "twind": "1.0.0-next.26",
     "typescript": "^4.4.0"
   },
   "peerDependenciesMeta": {
@@ -60,7 +45,7 @@
   "devDependencies": {
     "@sveltejs/kit": "^1.0.0-next.234",
     "svelte": "^3.44.0",
-    "twind": "1.0.0-next.25"
+    "twind": "1.0.0-next.26"
   },
   "scripts": {
     "prepublishOnly": "distilt"

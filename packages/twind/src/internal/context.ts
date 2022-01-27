@@ -58,7 +58,7 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
   // we can modify variants as it has been passed through defineConfig which already made a copy
   variants.push([
     'dark',
-    darkMode === 'class'
+    darkMode == 'class'
       ? '.dark &'
       : typeof darkMode === 'string' && darkMode != 'media'
       ? darkMode // a custom selector

@@ -10,7 +10,7 @@ A [Gatsby](https://github.com/gatsbyjs/gatsby) plugin for [Twind](<(https://www.
 
 Used within the following [examples](https://github.com/tw-in-js/twind/tree/next/examples):
 
-- [gatsby](https://github.com/tw-in-js/twind/tree/next/examples/gatsby)
+- [gatsby](https://github.com/tw-in-js/twind/tree/next/examples/with-gatsby)
 
 ## Installation
 

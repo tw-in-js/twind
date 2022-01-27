@@ -19,18 +19,19 @@ export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
 
   // handle class attribute on target
   handleClassAttributeChange(target)
+
   // handle children of target
   handleMutationRecords([{ target, type: '' }])
 
-  return Object.create(tw, {
-    destroy: {
-      enumerable: true,
-      value: () => {
-        observer.disconnect()
-        tw.destroy()
-      },
-    },
-  }) as Twind<Theme, Target>
+  // monkey patch tw.destroy to disconnect this observer
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  const { destroy } = tw
+  tw.destroy = () => {
+    observer.disconnect()
+    destroy.call(tw)
+  }
+
+  return tw
 
   function handleMutationRecords(records: MinimalMutationRecord[]): void {
     for (const { type, target } of records) {

@@ -1,6 +1,6 @@
 {
   "name": "@twind/preset-tailwind",
-  "version": "1.0.0-next.25",
+  "version": "1.0.0-next.26",
   "description": "tailwindcss preset for twind",
   "keywords": [
     "twind",
@@ -11,7 +11,6 @@
     "twind-preset",
     "preset"
   ],
-  "license": "MIT",
   "type": "module",
   "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
   "main": "src/index.ts",
@@ -51,7 +50,7 @@
     }
   ],
   "peerDependencies": {
-    "twind": "1.0.0-next.25",
+    "twind": "1.0.0-next.26",
     "typescript": "^4.4.0"
   },
   "peerDependenciesMeta": {
@@ -60,7 +59,7 @@
     }
   },
   "devDependencies": {
-    "twind": "1.0.0-next.25"
+    "twind": "1.0.0-next.26"
   },
   "scripts": {
     "prepublishOnly": "distilt"

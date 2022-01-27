@@ -1,6 +1,6 @@
 {
   "name": "@twind/tailwind",
-  "version": "1.0.0-next.25",
+  "version": "1.0.0-next.26",
   "description": "tailwindcss compat based on twind",
   "publishConfig": {
     "tag": "next",
@@ -14,30 +14,24 @@
     "tw-in-js",
     "tailwind-in-js"
   ],
-  "homepage": "https://twind.dev",
-  "bugs": "https://github.com/tw-in-js/twind/issues",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tw-in-js/twind.git",
-    "directory": "packages/tailwind"
-  },
-  "license": "MIT",
-  "contributors": [
-    "Luke Jackson (lukejacksonn.github.io)",
-    "Sascha Tandel (https://github.com/sastan)"
-  ],
-  "engines": {
-    "node": ">=12.4"
-  },
   "type": "module",
   "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
   "main": "src/index.ts",
   "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
   "exports": {
     ".": "./src/index.ts",
-    "./colors": "./src/colors.ts",
-    "./defaultTheme": "./src/defaultTheme.ts",
-    "./preflight": "./src/preflight.ts",
+    "./colors": {
+      "script": null,
+      "default": "./src/colors.ts"
+    },
+    "./defaultTheme": {
+      "script": null,
+      "default": "./src/defaultTheme.ts"
+    },
+    "./preflight": {
+      "script": null,
+      "default": "./src/preflight.ts"
+    },
     "./package.json": "./package.json"
   },
   "// These are relative from within the dist/ folder": "",
@@ -51,11 +45,11 @@
     }
   ],
   "dependencies": {
-    "@twind/preset-autoprefix": "1.0.0-next.25",
-    "@twind/preset-tailwind": "1.0.0-next.25"
+    "@twind/preset-autoprefix": "1.0.0-next.26",
+    "@twind/preset-tailwind": "1.0.0-next.26"
   },
   "peerDependencies": {
-    "twind": "1.0.0-next.25",
+    "twind": "1.0.0-next.26",
     "typescript": "^4.4.0"
   },
   "peerDependenciesMeta": {
@@ -64,7 +58,7 @@
     }
   },
   "devDependencies": {
-    "twind": "1.0.0-next.25"
+    "twind": "1.0.0-next.26"
   },
   "scripts": {
     "prepublishOnly": "distilt"

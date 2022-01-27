@@ -73,23 +73,28 @@ Other features include:
 - [@twind/preset-tailwind-forms](https://www.npmjs.com/package/@twind/preset-tailwind-forms) to get Tailwind v3 and Tailwind Forms.
 - [@twind/preset-ext](https://www.npmjs.com/package/@twind/preset-ext)
 
-For the full [Tailwind CSS](https://tailwindcss.com) experience try [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind) or start with [Twind CDN](https://www.npmjs.com/package/@twind/cdn) a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn) that is almost 6 times smaller (96.4kb vs 16.9kB).
+For the full [Tailwind CSS](https://tailwindcss.com) experience try [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind) or start with [Twind CDN](https://www.npmjs.com/package/@twind/cdn) a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn) that is almost 5.5 times smaller (96.4kb vs 17.6kB).
 
 We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/examples) to get you started:
 
-| Example                                                                               | Try it live at                                                                                                                                                                            | Description                                                                                                                                                          |
-| ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Basic](https://github.com/tw-in-js/twind/tree/next/examples/basic)                   | [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/basic) • [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/basic)                   | with [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind)                                                                                                |
-| [Playground](https://github.com/tw-in-js/twind/tree/next/examples/playground)         | [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/playground) • [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/playground)         | with all presets enabled                                                                                                                                             |
-| [Tailwind Forms](https://github.com/tw-in-js/twind/tree/next/examples/tailwind-forms) | [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/tailwind-forms) • [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/tailwind-forms) | with [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind) and [@twind/preset-tailwind-forms](https://www.npmjs.com/package/@twind/preset-tailwind-forms) |
-| [Twind CDN](https://github.com/tw-in-js/twind/tree/next/examples/twind-cdn)           | [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/twind-cdn) • [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/twind-cdn)           | with [@twind/cdn](https://www.npmjs.com/package/@twind/cdn)                                                                                                          |
+| Example                                                                       | Try it live at                                                                                                                                                                    | Description                                                            |
+| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| [Basic](https://github.com/tw-in-js/twind/tree/next/examples/basic)           | [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/basic) • [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/basic)           | using [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind) |
+| [Playground](https://github.com/tw-in-js/twind/tree/next/examples/playground) | [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/playground) • [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/playground) | using using all presets                                                |
+
+**Packages**
+
+| Example                                                                               | Try it live at                                                                                                                                                                                        | Description                                                                                                                                                           |
+| ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Tailwind Forms](https://github.com/tw-in-js/twind/tree/next/examples/tailwind-forms) | [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/using-tailwind-forms) • [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/using-tailwind-forms) | using [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind) and [@twind/preset-tailwind-forms](https://www.npmjs.com/package/@twind/preset-tailwind-forms) |
+| [Twind CDN](https://github.com/tw-in-js/twind/tree/next/examples/using-twind-cdn)     | [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/using-twind-cdn) • [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/twind-cdn)                 | using [@twind/cdn](https://www.npmjs.com/package/@twind/cdn)                                                                                                          |
 
 **Frameworks**
 
-| Example                                                                     | Try it live at                                                                                                                                                                  | Description                                                                                                                                                                                 |
-| --------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Gatsby](https://github.com/tw-in-js/twind/tree/next/examples/gatsby)       | ~~[Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/gatsby)~~ • [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/gatsby)   | for [Gatsby](https://www.gatsbyjs.com) using [gatsby-plugin-twind](https://www.npmjs.com/package/gatsby-plugin-twind) with [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind) |
-| [SvelteKit](https://github.com/tw-in-js/twind/tree/next/examples/sveltekit) | [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/sveltekit) • [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/sveltekit) | for [SvelteKit](https://kit.svelte.dev) using [@twind/sveltekit](https://www.npmjs.com/package/@twind/sveltekit) with [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind)      |
+| Example                                                                          | Try it live at                                                                                                                                                                            | Description                                                                                                                                                                                 |
+| -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [Gatsby](https://github.com/tw-in-js/twind/tree/next/examples/gatsby)            | ~~[Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/with-gatsby)~~ • [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/with-gatsby)   | with [Gatsby](https://www.gatsbyjs.com) using [gatsby-plugin-twind](https://www.npmjs.com/package/gatsby-plugin-twind) and [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind) |
+| [SvelteKit](https://github.com/tw-in-js/twind/tree/next/examples/with-sveltekit) | [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/with-sveltekit) • [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/with-sveltekit) | with [SvelteKit](https://kit.svelte.dev) using [@twind/sveltekit](https://www.npmjs.com/package/@twind/sveltekit) and [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind)      |
 
 ## Notable Changes
 
@@ -140,7 +145,7 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
     - `rules`, `variants`, and `ignorelist` — applied first
     - `darkMode`, `hash` and `stringify` are overridden if defined by the preset — applied first
 
-  - darkMode can be selector string `{ darkMode: '.dark-mode' }`
+  - darkMode can be selector string `{ darkMode: '.dark-mode &' }` or `{ darkMode: 'html[data-theme="dark"] &` }`
 
   - rules and shortcuts based on ideas from [UnoCSS](https://github.com/antfu/unocss)
 
@@ -195,10 +200,12 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
 
     ```diff
     theme: {
+      extend: {
     -  fill: (theme) => ({
     +  fill: ({ theme }) => ({
         gray: theme('colors.gray')
       })
+      }
     }
     ```
 
@@ -223,20 +230,18 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
   The following layer exist in the given order: `defaults`, `base`, `components`, `shortcuts`, `utilities`, `overrides`
 
   ```js
-  import { css } from 'twind'
+  import { injectGlobal } from 'twind'
 
-  element.className = css`
+  injectGlobal`
     /* rules with base are not sorted */
-    @layer base {
-      h1 {
-        @apply text-2xl;
-      }
-      h2 {
-        @apply text-xl;
-      }
-      /* ... */
+    h1 {
+      @apply text-2xl;
     }
-
+    h2 {
+      @apply text-xl;
+    }
+    /* ... */
+  
     @layer components {
       .select2-dropdown {
         @apply rounded-b-lg shadow-md;
@@ -256,15 +261,38 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
 
 ## TODO
 
+- frameworks: next, remix, wmr, vue, stenciljs, angular, ...
+- pug support: https://github.com/tw-in-js/twind/issues/198
 - rewrite https://github.com/TanStack/tanstack.com
 - support `is(:hover,:focus-visible):underline`?
-- style: should it pass `class` and `className` through? alternatives: string concat, `cx`
 - console.warn(`[twind] unknown rule "${value}"`)
 - ci: post on discord after release
-- @twind/tailwind: parse style elements like tailwind?
+- @twind/tailwind: parse style elements like tailwind? `<style type="text/tailwindcss">`
+
+  https://github.com/tw-in-js/twind/issues/238#issuecomment-1021544996
+
+  ```js
+  // using a mutation observer?
+  document.querySelectorAll('style[type~="twind/css"]').forEach((e) => {
+    tw(css(e.textContent))
+  })
+  ```
+
 - zero runtime
-- cdn.twind.dev -> https://cdn.jsdelivr.net/npm/twind@next/cdn.global.js
-- docs: wmr + codehike + cloudflare pages
+- cdn.twind.dev -> https://cdn.jsdelivr.net/npm/@twind/cdn@next
+- docs: website
+  - framework:
+    - vite + codehike
+      - https://github.com/preactjs/wmr/tree/main/docs
+    - wmr + codehike
+      - https://mdxjs.com/docs/getting-started/#wmr
+      - https://github.com/preactjs/wmr/tree/main/docs
+    - nextjs + next-plugin-preact + codehike
+    - https://docusaurus.io
+  - deployment:
+    - cloudflare pages
+    - github pages
+    - netlify
 - docs: explain and examples of both modes (observe/shim vs library)
 - docs: common patterns
 - docs: debugging the generated CSS in the browser (cssom sheet)

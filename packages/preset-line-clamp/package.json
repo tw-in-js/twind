@@ -1,12 +1,7 @@
 {
-  "name": "@twind/preset-ext",
+  "name": "@twind/preset-line-clamp",
   "version": "1.0.0-next.26",
-  "description": "extension preset for twind",
-  "publishConfig": {
-    "tag": "next",
-    "access": "public",
-    "directory": "dist"
-  },
+  "description": "A twind preset that provides utilities for visually truncating text after a fixed number of lines.",
   "keywords": [
     "twind",
     "tailwind",
@@ -18,29 +13,22 @@
   ],
   "type": "module",
   "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
-  "main": "src/index.ts",
+  "main": "src/line-clamp.ts",
   "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
   "exports": {
-    ".": "./src/index.ts",
-    "./rules": "./src/rules.ts",
-    "./variants": "./src/variants.ts",
-    "./package.json": "./package.json"
+    ".": "./src/line-clamp.ts"
   },
   "// These are relative from within the dist/ folder": "",
   "sideEffects": false,
   "size-limit": [
     {
-      "name": "@twind/preset-ext",
-      "path": "dist/preset-ext.esnext.js",
+      "name": "@twind/preset-line-clamp",
+      "path": "dist/preset-line-clamp.esnext.js",
       "brotli": true,
-      "limit": "0.5kb",
-      "ignore": [
-        "twind"
-      ]
+      "limit": "0.3kb"
     }
   ],
   "peerDependencies": {
-    "@twind/preset-tailwind": "1.0.0-next.26",
     "twind": "1.0.0-next.26",
     "typescript": "^4.4.0"
   },
@@ -50,10 +38,14 @@
     }
   },
   "devDependencies": {
-    "@twind/preset-tailwind": "1.0.0-next.26",
     "twind": "1.0.0-next.26"
   },
   "scripts": {
     "prepublishOnly": "distilt"
+  },
+  "publishConfig": {
+    "tag": "next",
+    "access": "public",
+    "directory": "dist"
   }
 }

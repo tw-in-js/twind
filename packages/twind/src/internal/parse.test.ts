@@ -172,6 +172,21 @@ test('anonymous apply', () => {
   ])
 })
 
+test('anonymous apply with comma', () => {
+  assert.deepEqual(
+    parse(
+      '@(opacity-50,underline,text-[2rem],bg-blue-500,m-[.2rem],hover:opacity-90,max-w-[500px])',
+    ),
+    [
+      {
+        n: '@(opacity-50,underline,text-[2rem],bg-blue-500,m-[.2rem],hover:opacity-90,max-w-[500px])',
+        v: [],
+        i: false,
+      },
+    ],
+  )
+})
+
 test('apply with dark in nested with grouping', () => {
   assert.deepEqual(parse('hover:@(text-blue-400 focus:(text-blue-(600 dark:100)))'), [
     {
@@ -194,5 +209,14 @@ test('primary-foreground-(light dark:dark)', () => {
   assert.deepEqual(parse('primary-foreground-(light dark:dark)'), [
     { n: 'primary-foreground-light', v: [], i: false },
     { n: 'primary-foreground-dark', v: ['dark'], i: false },
+  ])
+})
+
+test('utility grouping', () => {
+  assert.deepEqual(parse('rotate-(-3,hover:6,md:(3 hover:-6))'), [
+    { n: '-rotate-3', v: [], i: false },
+    { n: 'rotate-6', v: ['hover'], i: false },
+    { n: 'rotate-3', v: ['md'], i: false },
+    { n: '-rotate-6', v: ['md', 'hover'], i: false },
   ])
 })

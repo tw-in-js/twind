@@ -71,9 +71,6 @@ export function removeComments(tokens: string): string {
   return tokens.replace(/\/\*[^]*?\*\/|\/\/[^]*?$|\s\s+|\n/gm, ' ')
 }
 
-// (?=[ ,)(:[]|$)
-const parts = /([ ,)])|\(|[^ ,)(:[]*(?:\[[^ ]+])?:*/g
-
 const cache = new Map<string, ParsedRule[]>()
 
 export function parse(token: string): ParsedRule[] {
@@ -89,17 +86,51 @@ export function parse(token: string): ParsedRule[] {
     // the first `0` element is the current list
     const current: ParsedRule[][] = [[]]
 
-    let match: RegExpExecArray | null
-    parts.lastIndex = 0
-    while ((match = parts.exec(token)) && match[0]) {
-      if (match[1]) {
+    let startIndex = 0
+    let skip = 0
+    let position = 0
+
+    // eslint-disable-next-line no-inner-declarations
+    const commit = (isRule?: boolean, endOffset = 0) => {
+      if (startIndex != position) {
+        active.push(token.slice(startIndex, position + endOffset))
+
+        if (isRule) {
+          createRule(active, current)
+        }
+      }
+      startIndex = position + 1
+    }
+
+    for (; position < token.length; position++) {
+      const char = token[position]
+
+      if (skip) {
+        // within [...]
+        // skip over until not skipping
+        // ignore escaped chars
+        if (token[position - 1] != '\\') {
+          skip += +(char == '[') || -(char == ']')
+        }
+      } else if (char == '[') {
+        // start to skip
+        skip += 1
+      } else if (char == '(') {
+        // hover:(...) or utilitity-(...)
+        commit()
+        active.push(char)
+      } else if (char == ':') {
+        // hover: or after::
+        if (token[position + 1] != ':') {
+          commit(false, 1)
+        }
+      } else if (/[\s,)]/.test(char)) {
         // whitespace, comma or closing brace
-        // create rule
-        createRule(active, current)
+        commit(true)
 
         let lastGroup = active.lastIndexOf('(')
 
-        if (match[1] == ')') {
+        if (char == ')') {
           // Close nested block
           const nested = active[lastGroup - 1]
 
@@ -124,7 +155,7 @@ export function parse(token: string): ParsedRule[] {
                   // named nested
                   nested.length > 1
                     ? nested.slice(0, -1) + hash(JSON.stringify([nested, rules]))
-                    : nested + '(' + format(rules, ',') + ')',
+                    : nested + '(' + format(rules) + ')',
                   Layer.s,
                   rules,
                   /@$/.test(nested),
@@ -138,24 +169,16 @@ export function parse(token: string): ParsedRule[] {
         }
 
         active.length = lastGroup + 1
-      } else {
-        // - open brace
-        // - new variant: `focus:`, `after::`, `[...]:`
-        // - new rule
-
-        // Start nested block
+      } else if (/[~@]/.test(char) && token[position + 1] == '(') {
+        // start nested block
         // ~(...) or button~(...)
         // @(...) or button@(...)
-        if (/[~@]$/.test(match[0])) {
-          current.unshift([])
-        }
-
-        active.push(match[0])
+        current.unshift([])
       }
     }
 
     // Consume remaining stack
-    createRule(active, current)
+    commit(true)
 
     cache.set(token, (parsed = current[0]))
   }

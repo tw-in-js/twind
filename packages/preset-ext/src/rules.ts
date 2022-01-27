@@ -5,7 +5,7 @@ const rules: Rule[] = [
   // `background-color[#1da1f1]` -> `{ background-color: #1da1f1 }`
   // TODO arbitrary values
   // TODO $ prefix for variables
-  /^([-\w]+)\[(.+)]$/,
+  /^([-\w]+\w)\[(.+)]$/,
 ]
 
 export default rules

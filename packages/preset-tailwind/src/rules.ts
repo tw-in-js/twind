@@ -341,7 +341,7 @@ const rules: Rule<TailwindTheme>[] = [
             fontVariantNumeric:
               'var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)',
             '@layer defaults': {
-              '*': {
+              '*,::before,::after': {
                 '--tw-ordinal': 'var(--tw-empty,/*!*/ /*!*/)',
                 '--tw-slashed-zero': 'var(--tw-empty,/*!*/ /*!*/)',
                 '--tw-numeric-figure': 'var(--tw-empty,/*!*/ /*!*/)',
@@ -687,7 +687,7 @@ const rules: Rule<TailwindTheme>[] = [
       '--tw-ring-shadow': `var(--tw-ring-inset) 0 0 0 calc(${_} + var(--tw-ring-offset-width)) var(--tw-ring-color)`,
       boxShadow: `var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)`,
       '@layer defaults': {
-        '*': {
+        '*,::before,::after': {
           '--tw-ring-offset-shadow': '0 0 #0000',
           '--tw-ring-shadow': '0 0 #0000',
           '--tw-shadow': '0 0 #0000',
@@ -737,7 +737,7 @@ const rules: Rule<TailwindTheme>[] = [
       ),
       boxShadow: `var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)`,
       '@layer defaults': {
-        '*': {
+        '*,::before,::after': {
           '--tw-ring-offset-shadow': '0 0 #0000',
           '--tw-ring-shadow': '0 0 #0000',
           '--tw-shadow': '0 0 #0000',
@@ -857,7 +857,7 @@ const rules: Rule<TailwindTheme>[] = [
     ({ 1: $1 }) => ({
       'scroll-snap-type': $1 + ' var(--tw-scroll-snap-strictness)',
       '@layer defaults': {
-        '*': {
+        '*,::before,::after': {
           '--tw-scroll-snap-strictness': 'proximity',
         },
       },
@@ -894,7 +894,7 @@ const rules: Rule<TailwindTheme>[] = [
       [`--tw-${$2 ? 'pan-x' : $3 ? 'pan-y' : $1}` as '--tw-pan-x']: $1,
       'touch-action': 'var(--tw-touch-action)',
       '@layer defaults': {
-        '*': {
+        '*,::before,::after': {
           '--tw-pan-x': 'var(--tw-empty,/*!*/ /*!*/)',
           '--tw-pan-y': 'var(--tw-empty,/*!*/ /*!*/)',
           '--tw-pinch-zoom': 'var(--tw-empty,/*!*/ /*!*/)',
@@ -1068,23 +1068,26 @@ function filter(prefix = ''): Rule<TailwindTheme>[] {
     !prefix && 'drop-shadow',
   ].filter(Boolean) as string[]
 
+  let defaults = {} as CSSObject
+
+  // first create properties defaults
+  for (const key of filters) {
+    defaults[`--tw-${prefix}${key}` as '--tw-blur'] = 'var(--tw-empty,/*!*/ /*!*/)'
+  }
+
+  defaults = {
+    // add default filter which allows standalone usage
+    [`${prefix}filter`]: filters.map((key) => `var(--tw-${prefix}${key})`).join(' '),
+    // move defaults
+    '@layer defaults': {
+      '*,::before,::after': defaults,
+    },
+  } as CSSObject
+
   return [
     `(${prefix}filter)-(none)`,
 
-    [
-      `${prefix}filter`,
-      () => {
-        const css = {
-          [`${prefix}filter`]: filters.map((key) => `var(--tw-${prefix}${key})`).join(' '),
-        } as CSSObject
-
-        for (const key of filters) {
-          css[`--tw-${prefix}${key}` as '--tw-blur'] = 'var(--tw-empty,/*!*/ /*!*/)'
-        }
-
-        return css
-      },
-    ],
+    [`${prefix}filter`, defaults],
 
     ...filters.map(
       (key) =>
@@ -1098,6 +1101,7 @@ function filter(prefix = ''): Rule<TailwindTheme>[] {
                 [`--tw-${$1}`]: asArray(_)
                   .map((value) => `${key}(${value})`)
                   .join(' '),
+                ...defaults,
               } as CSSObject),
           ),
         ] as Rule<TailwindTheme>,
@@ -1116,7 +1120,7 @@ function tranformDefaults(): CSSObject {
   return {
     transform: 'var(--tw-transform)',
     '@layer defaults': {
-      '*': {
+      '*,::before,::after': {
         '--tw-translate-x': '0',
         '--tw-translate-y': '0',
         '--tw-rotate': '0',

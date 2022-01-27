@@ -1,7 +1,7 @@
 {
   "name": "@example/playground",
   "description": "playground with all presets enabled",
-  "version": "0.0.1-next.10",
+  "version": "0.0.1-next.11",
   "private": true,
   "main": "index.js",
   "license": "MIT",
@@ -21,11 +21,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@twind/preset-autoprefix": "1.0.0-next.25",
-    "@twind/preset-ext": "1.0.0-next.25",
-    "@twind/preset-tailwind": "1.0.0-next.25",
-    "@twind/preset-tailwind-forms": "1.0.0-next.25",
-    "twind": "1.0.0-next.25"
+    "@twind/preset-autoprefix": "1.0.0-next.26",
+    "@twind/preset-ext": "1.0.0-next.26",
+    "@twind/preset-line-clamp": "1.0.0-next.26",
+    "@twind/preset-tailwind": "1.0.0-next.26",
+    "@twind/preset-tailwind-forms": "1.0.0-next.26",
+    "twind": "1.0.0-next.26"
   },
   "devDependencies": {
     "vite": "^2.7.13"

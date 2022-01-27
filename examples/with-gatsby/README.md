@@ -1,8 +1,8 @@
 # Example: Gatsby
 
-> Try it live at [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/gatsby).
+> Try it live at [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/with-gatsby).
 
-_Does not work in [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/gatsby) until [sharp is supported](https://github.com/stackblitz/webcontainer-core/issues/147)._
+_Does not work in [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/with-gatsby) until [sharp is supported](https://github.com/stackblitz/webcontainer-core/issues/147)._
 
 ## How does this work?
 

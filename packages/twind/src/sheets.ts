@@ -31,8 +31,7 @@ export function cssom(target = createStyleElement().sheet as CSSStyleSheet): She
     },
 
     destroy() {
-      // eslint-disable-next-line @typescript-eslint/no-extra-semi
-      ;(target.ownerNode as Element).remove()
+      target.ownerNode?.remove()
     },
 
     insert(css, index) {

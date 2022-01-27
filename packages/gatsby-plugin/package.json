@@ -1,6 +1,6 @@
 {
   "name": "gatsby-plugin-twind",
-  "version": "1.0.0-next.25",
+  "version": "1.0.0-next.26",
   "description": "gatsby integration for Twind",
   "publishConfig": {
     "tag": "next",
@@ -17,21 +17,6 @@
     "gatsby",
     "gatsby-plugin"
   ],
-  "homepage": "https://twind.dev",
-  "bugs": "https://github.com/tw-in-js/twind/issues",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tw-in-js/twind.git",
-    "directory": "packages/gatsby-plugin"
-  },
-  "license": "MIT",
-  "contributors": [
-    "Luke Jackson (lukejacksonn.github.io)",
-    "Sascha Tandel (https://github.com/sastan)"
-  ],
-  "engines": {
-    "node": ">=12.4"
-  },
   "type": "commonjs",
   "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
   "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
@@ -54,7 +39,7 @@
     "gatsby": "2.x || 3.x || 4.x",
     "react": "16.x || 17.x || 18.x",
     "react-dom": "16.x || 17.x || 18.x",
-    "twind": "1.0.0-next.25",
+    "twind": "1.0.0-next.26",
     "typescript": "^4.4.0"
   },
   "peerDependenciesMeta": {
@@ -65,10 +50,10 @@
   "devDependencies": {
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
-    "gatsby": "^4.0.0-next",
+    "gatsby": "^4.5.3",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "twind": "1.0.0-next.25"
+    "twind": "1.0.0-next.26"
   },
   "pnpm": {
     "peerDependencyRules": {

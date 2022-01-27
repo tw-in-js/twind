@@ -56,11 +56,12 @@ function keyframes$(
 
   const keyframeName = escape(name + hash(JSON.stringify([name, ast])))
 
-  const tw = typeof thisArg == 'function' ? thisArg : tw$
-
   // lazy inject keyframes
   return {
     toString() {
+      // lazy access tw
+      const tw = typeof thisArg == 'function' ? thisArg : tw$
+
       tw(
         css({
           [`@keyframes ${keyframeName}`]: astish(strings, interpolations),

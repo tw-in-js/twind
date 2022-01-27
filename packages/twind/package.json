@@ -1,6 +1,6 @@
 {
   "name": "twind",
-  "version": "1.0.0-next.25",
+  "version": "1.0.0-next.26",
   "description": "The core engine without any presets.",
   "publishConfig": {
     "tag": "next",
@@ -14,21 +14,6 @@
     "tw-in-js",
     "tailwind-in-js"
   ],
-  "homepage": "https://twind.dev",
-  "bugs": "https://github.com/tw-in-js/twind/issues",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tw-in-js/twind.git",
-    "directory": "packages/twind"
-  },
-  "license": "MIT",
-  "contributors": [
-    "Luke Jackson (lukejacksonn.github.io)",
-    "Sascha Tandel (https://github.com/sastan)"
-  ],
-  "engines": {
-    "node": ">=12.4"
-  },
   "type": "module",
   "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
   "main": "src/index.ts",
@@ -58,7 +43,7 @@
       "path": "dist/twind.esnext.js",
       "import": "{ twind, cssom }",
       "brotli": true,
-      "limit": "4.05kb"
+      "limit": "4.1kb"
     }
   ],
   "dependencies": {
@@ -73,7 +58,7 @@
     }
   },
   "devDependencies": {
-    "@twind/preset-tailwind": "1.0.0-next.25"
+    "@twind/preset-tailwind": "1.0.0-next.26"
   },
   "scripts": {
     "prepublishOnly": "distilt"

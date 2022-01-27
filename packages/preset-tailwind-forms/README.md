@@ -12,6 +12,10 @@ A [twind](https://www.npmjs.com/package/twind) preset that provides a basic rese
 
 > Based on [@tailwindcss/forms](https://github.com/tailwindlabs/tailwindcss-forms).
 
+Used within the following [examples](https://github.com/tw-in-js/twind/tree/next/examples):
+
+- [Tailwind Forms](https://github.com/tw-in-js/twind/tree/next/examples/using-tailwind-forms)
+
 ## Installation
 
 Install from npm:
