@@ -14,21 +14,6 @@
     "tw-in-js",
     "tailwind-in-js"
   ],
-  "homepage": "https://twind.dev",
-  "bugs": "https://github.com/tw-in-js/twind/issues",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tw-in-js/twind.git",
-    "directory": "packages/tailwind"
-  },
-  "license": "MIT",
-  "contributors": [
-    "Luke Jackson (lukejacksonn.github.io)",
-    "Sascha Tandel (https://github.com/sastan)"
-  ],
-  "engines": {
-    "node": ">=12.4"
-  },
   "type": "module",
   "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
   "main": "src/index.ts",
