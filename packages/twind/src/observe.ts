@@ -19,22 +19,19 @@ export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
 
   // handle class attribute on target
   handleClassAttributeChange(target)
+
   // handle children of target
   handleMutationRecords([{ target, type: '' }])
 
-  return new Proxy(tw, {
-    get(target, propertyKey) {
-      if (propertyKey == 'destroy') {
-        return function destroy() {
-          observer.disconnect()
-          target.destroy()
-        }
-      }
+  // monkey patch tw.destroy to disconnect this observer
+  // eslint-disable-next-line @typescript-eslint/unbound-method
+  const { destroy } = tw
+  tw.destroy = () => {
+    observer.disconnect()
+    destroy.call(tw)
+  }
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-return
-      return Reflect.get(target, propertyKey)
-    },
-  })
+  return tw
 
   function handleMutationRecords(records: MinimalMutationRecord[]): void {
     for (const { type, target } of records) {
