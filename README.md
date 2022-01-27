@@ -258,7 +258,6 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
 
 ## TODO
 
-- typings of config.theme: see stash
 - frameworks: next, remix, wmr, vue, stenciljs, angular, ...
 - pug support: https://github.com/tw-in-js/twind/issues/198
 - rewrite https://github.com/TanStack/tanstack.com

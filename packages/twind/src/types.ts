@@ -73,7 +73,7 @@ export interface Twind<Theme extends BaseTheme = BaseTheme, Target = unknown> {
 
   readonly target: Target
 
-  theme: ThemeFunction<Theme>
+  theme: ThemeFunction<ExtractUserTheme<Theme>>
 
   /** Clears all CSS rules from the sheet. */
   clear(): void
@@ -290,12 +290,20 @@ export interface TwindConfig<Theme extends BaseTheme = BaseTheme> {
 
 type ArrayType<T> = T extends (infer Item)[] ? Item : T
 type ExtractTheme<T> = T extends Preset<infer Theme> ? Theme : T
+type ExtractUserTheme<T> = {
+  [key in keyof T]: key extends 'extend'
+    ? never
+    : T[key] extends ThemeSectionResolver<infer Value, T & BaseTheme>
+    ? Value
+    : T[key]
+} & BaseTheme
+
 type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (k: infer I) => void
   ? I
   : never
 
 export type ExtractThemes<Theme, Presets extends Preset<any>[]> = UnionToIntersection<
-  ExtractTheme<Omit<Theme, 'extend'> | BaseTheme | ArrayType<Presets>>
+  ExtractTheme<ExtractUserTheme<Theme> | BaseTheme | ArrayType<Presets>>
 >
 
 export interface TwindPresetConfig<Theme = BaseTheme> {
@@ -319,7 +327,7 @@ export interface TwindUserConfig<Theme = BaseTheme, Presets extends Preset<any>[
   /** Allows to change how the `dark` variant is used (default: `"media"`) */
   darkMode?: DarkModeConfig
 
-  theme?: Theme & ThemeConfig<BaseTheme & ExtractThemes<Theme, Presets>>
+  theme?: Theme | ThemeConfig<BaseTheme & ExtractThemes<Theme, Presets>>
 
   preflight?:
     | false
@@ -365,6 +373,7 @@ export interface ColorFunctionOptions {
   opacityVariable?: string | undefined
   opacityValue?: string | undefined
 }
+
 export type ColorFunction = (options: ColorFunctionOptions) => string
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
