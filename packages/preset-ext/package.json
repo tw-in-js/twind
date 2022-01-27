@@ -1,6 +1,6 @@
 {
   "name": "@twind/preset-ext",
-  "version": "1.0.0-next.25",
+  "version": "1.0.0-next.26",
   "description": "extension preset for twind",
   "publishConfig": {
     "tag": "next",
@@ -40,8 +40,8 @@
     }
   ],
   "peerDependencies": {
-    "@twind/preset-tailwind": "1.0.0-next.25",
-    "twind": "1.0.0-next.25",
+    "@twind/preset-tailwind": "1.0.0-next.26",
+    "twind": "1.0.0-next.26",
     "typescript": "^4.4.0"
   },
   "peerDependenciesMeta": {
@@ -50,8 +50,8 @@
     }
   },
   "devDependencies": {
-    "@twind/preset-tailwind": "1.0.0-next.25",
-    "twind": "1.0.0-next.25"
+    "@twind/preset-tailwind": "1.0.0-next.26",
+    "twind": "1.0.0-next.26"
   },
   "scripts": {
     "prepublishOnly": "distilt"

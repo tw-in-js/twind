@@ -1,6 +1,6 @@
 {
   "name": "@twind/tailwind",
-  "version": "1.0.0-next.25",
+  "version": "1.0.0-next.26",
   "description": "tailwindcss compat based on twind",
   "publishConfig": {
     "tag": "next",
@@ -45,11 +45,11 @@
     }
   ],
   "dependencies": {
-    "@twind/preset-autoprefix": "1.0.0-next.25",
-    "@twind/preset-tailwind": "1.0.0-next.25"
+    "@twind/preset-autoprefix": "1.0.0-next.26",
+    "@twind/preset-tailwind": "1.0.0-next.26"
   },
   "peerDependencies": {
-    "twind": "1.0.0-next.25",
+    "twind": "1.0.0-next.26",
     "typescript": "^4.4.0"
   },
   "peerDependenciesMeta": {
@@ -58,7 +58,7 @@
     }
   },
   "devDependencies": {
-    "twind": "1.0.0-next.25"
+    "twind": "1.0.0-next.26"
   },
   "scripts": {
     "prepublishOnly": "distilt"

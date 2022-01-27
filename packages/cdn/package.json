@@ -1,6 +1,6 @@
 {
   "name": "@twind/cdn",
-  "version": "1.0.0-next.25",
+  "version": "1.0.0-next.26",
   "description": "Tailwind CSS CDN based on Twind",
   "publishConfig": {
     "tag": "next",
@@ -33,8 +33,8 @@
     }
   ],
   "dependencies": {
-    "@twind/tailwind": "1.0.0-next.25",
-    "twind": "1.0.0-next.25"
+    "@twind/tailwind": "1.0.0-next.26",
+    "twind": "1.0.0-next.26"
   },
   "peerDependencies": {
     "typescript": "^4.4.0"

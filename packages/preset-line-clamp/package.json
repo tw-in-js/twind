@@ -1,6 +1,6 @@
 {
   "name": "@twind/preset-line-clamp",
-  "version": "1.0.0-next.25",
+  "version": "1.0.0-next.26",
   "description": "A twind preset that provides utilities for visually truncating text after a fixed number of lines.",
   "keywords": [
     "twind",
@@ -29,7 +29,7 @@
     }
   ],
   "peerDependencies": {
-    "twind": "1.0.0-next.25",
+    "twind": "1.0.0-next.26",
     "typescript": "^4.4.0"
   },
   "peerDependenciesMeta": {
@@ -38,7 +38,7 @@
     }
   },
   "devDependencies": {
-    "twind": "1.0.0-next.25"
+    "twind": "1.0.0-next.26"
   },
   "scripts": {
     "prepublishOnly": "distilt"
