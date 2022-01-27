@@ -77,7 +77,6 @@ export function translateWith<Theme extends BaseTheme = BaseTheme>(
   important?: boolean | undefined,
   useOrderOfRules?: boolean,
 ) {
-  // console.log(rules)
   return merge(
     (useOrderOfRules
       ? rules.flatMap((rule) => translate([rule], context, precedence, conditions, important))

@@ -10,7 +10,7 @@ export function withTwind(options: InlineOptions['tw'] | InlineOptions = {}): Ha
   return async function withTwind$({ event, resolve }) {
     const response = await resolve(event)
 
-    if (response.headers?.get('content-type')?.startsWith('text/html')) {
+    if (response.headers.get('content-type')?.startsWith('text/html')) {
       const body = await response.text()
 
       return new Response(inline(body, options), response)

@@ -35,9 +35,18 @@
   "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
   "exports": {
     ".": "./src/index.ts",
-    "./colors": "./src/colors.ts",
-    "./defaultTheme": "./src/defaultTheme.ts",
-    "./preflight": "./src/preflight.ts",
+    "./colors": {
+      "script": null,
+      "default": "./src/colors.ts"
+    },
+    "./defaultTheme": {
+      "script": null,
+      "default": "./src/defaultTheme.ts"
+    },
+    "./preflight": {
+      "script": null,
+      "default": "./src/preflight.ts"
+    },
     "./package.json": "./package.json"
   },
   "// These are relative from within the dist/ folder": "",

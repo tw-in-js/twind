@@ -73,7 +73,7 @@ Other features include:
 - [@twind/preset-tailwind-forms](https://www.npmjs.com/package/@twind/preset-tailwind-forms) to get Tailwind v3 and Tailwind Forms.
 - [@twind/preset-ext](https://www.npmjs.com/package/@twind/preset-ext)
 
-For the full [Tailwind CSS](https://tailwindcss.com) experience try [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind) or start with [Twind CDN](https://www.npmjs.com/package/@twind/cdn) a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn) that is almost 6 times smaller (96.4kb vs 16.9kB).
+For the full [Tailwind CSS](https://tailwindcss.com) experience try [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind) or start with [Twind CDN](https://www.npmjs.com/package/@twind/cdn) a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn) that is almost 5.5 times smaller (96.4kb vs 17.6kB).
 
 We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/examples) to get you started:
 
@@ -140,7 +140,7 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
     - `rules`, `variants`, and `ignorelist` — applied first
     - `darkMode`, `hash` and `stringify` are overridden if defined by the preset — applied first
 
-  - darkMode can be selector string `{ darkMode: '.dark-mode' }`
+  - darkMode can be selector string `{ darkMode: '.dark-mode &' }` or `{ darkMode: 'html[data-theme="dark"] &` }`
 
   - rules and shortcuts based on ideas from [UnoCSS](https://github.com/antfu/unocss)
 
@@ -195,10 +195,12 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
 
     ```diff
     theme: {
+      extend: {
     -  fill: (theme) => ({
     +  fill: ({ theme }) => ({
         gray: theme('colors.gray')
       })
+      }
     }
     ```
 
@@ -256,15 +258,39 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
 
 ## TODO
 
+- typings of config.theme: see stash
+- frameworks: next, remix, wmr, vue, stenciljs, angular, ...
+- pug support: https://github.com/tw-in-js/twind/issues/198
 - rewrite https://github.com/TanStack/tanstack.com
 - support `is(:hover,:focus-visible):underline`?
-- style: should it pass `class` and `className` through? alternatives: string concat, `cx`
 - console.warn(`[twind] unknown rule "${value}"`)
 - ci: post on discord after release
-- @twind/tailwind: parse style elements like tailwind?
+- @twind/tailwind: parse style elements like tailwind? `<style type="text/tailwindcss">`
+
+  https://github.com/tw-in-js/twind/issues/238#issuecomment-1021544996
+
+  ```js
+  // using a mutation observer?
+  document.querySelectorAll('style[type~="twind/css"]').forEach((e) => {
+    tw(css(e.textContent))
+  })
+  ```
+
 - zero runtime
-- cdn.twind.dev -> https://cdn.jsdelivr.net/npm/twind@next/cdn.global.js
-- docs: wmr + codehike + cloudflare pages
+- cdn.twind.dev -> https://cdn.jsdelivr.net/npm/@twind/cdn@next
+- docs: website
+  - framework:
+    - vite + codehike
+      - https://github.com/preactjs/wmr/tree/main/docs
+    - wmr + codehike
+      - https://mdxjs.com/docs/getting-started/#wmr
+      - https://github.com/preactjs/wmr/tree/main/docs
+    - nextjs + next-plugin-preact + codehike
+    - https://docusaurus.io
+  - deployment:
+    - cloudflare pages
+    - github pages
+    - netlify
 - docs: explain and examples of both modes (observe/shim vs library)
 - docs: common patterns
 - docs: debugging the generated CSS in the browser (cssom sheet)

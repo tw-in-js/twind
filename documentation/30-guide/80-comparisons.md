@@ -1,6 +1,6 @@
 ## tailwindcss
 
-CDN: 96.4kB (brotli) vs 16.9kB (brotli) -> almost 6 times smaller (5.7)
+CDN: 96.4kB (brotli) vs 17.6kB (brotli) -> almost 5.5 times smaller (5.47)
 
 - no implicit ordering of utilities: https://play.tailwindcss.com/EsRtpBotox
   - if two utilities use the same CSS property, the one used first anywhere in the document will be used
