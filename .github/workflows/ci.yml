@@ -57,7 +57,13 @@ jobs:
       - run: pnpm check
       - run: pnpm test:coverage
       - run: pnpm build
-      - run: pnpm size-limit
+
+      # Uses the root package.json['size-limit'] config
+      - name: 📨  Report Size Limit
+        uses: andresz1/size-limit-action@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          skip_step: install
 
       - name: 📖  Coveralls
         uses: coverallsapp/github-action@master
