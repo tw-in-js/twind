@@ -1,0 +1,51 @@
+{
+  "name": "@twind/preset-line-clamp",
+  "version": "1.0.0-next.25",
+  "description": "A twind preset that provides utilities for visually truncating text after a fixed number of lines.",
+  "keywords": [
+    "twind",
+    "tailwind",
+    "tailwindcss",
+    "tw-in-js",
+    "tailwind-in-js",
+    "twind-preset",
+    "preset"
+  ],
+  "type": "module",
+  "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
+  "main": "src/line-clamp.ts",
+  "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
+  "exports": {
+    ".": "./src/line-clamp.ts"
+  },
+  "// These are relative from within the dist/ folder": "",
+  "sideEffects": false,
+  "size-limit": [
+    {
+      "name": "@twind/preset-line-clamp",
+      "path": "dist/preset-line-clamp.esnext.js",
+      "brotli": true,
+      "limit": "0.3kb"
+    }
+  ],
+  "peerDependencies": {
+    "twind": "1.0.0-next.25",
+    "typescript": "^4.4.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "twind": "1.0.0-next.25"
+  },
+  "scripts": {
+    "prepublishOnly": "distilt"
+  },
+  "publishConfig": {
+    "tag": "next",
+    "access": "public",
+    "directory": "dist"
+  }
+}

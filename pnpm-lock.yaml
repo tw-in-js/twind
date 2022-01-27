@@ -84,6 +84,7 @@ importers:
     specifiers:
       '@twind/preset-autoprefix': 1.0.0-next.25
       '@twind/preset-ext': 1.0.0-next.25
+      '@twind/preset-line-clamp': 1.0.0-next.25
       '@twind/preset-tailwind': 1.0.0-next.25
       '@twind/preset-tailwind-forms': 1.0.0-next.25
       twind: 1.0.0-next.25
@@ -91,6 +92,7 @@ importers:
     dependencies:
       '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
       '@twind/preset-ext': link:../../packages/preset-ext
+      '@twind/preset-line-clamp': link:../../packages/preset-line-clamp
       '@twind/preset-tailwind': link:../../packages/preset-tailwind
       '@twind/preset-tailwind-forms': link:../../packages/preset-tailwind-forms
       twind: link:../../packages/twind
@@ -197,6 +199,12 @@ importers:
       twind: 1.0.0-next.25
     devDependencies:
       '@twind/preset-tailwind': link:../preset-tailwind
+      twind: link:../twind
+
+  packages/preset-line-clamp:
+    specifiers:
+      twind: 1.0.0-next.25
+    devDependencies:
       twind: link:../twind
 
   packages/preset-tailwind:
