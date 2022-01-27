@@ -141,3 +141,75 @@ test('apply with filters', () => {
     '.\\@\\(blur-sm\\,filter\\){filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}',
   ])
 })
+
+test('apply with dynamic values', () => {
+  assert.strictEqual(
+    tw('opacity-50 underline text-[2rem] bg-blue-500 m-[.2rem] hover:(opacity-90) max-w-[500px]'),
+    'm-[.2rem] opacity-50 bg-blue-500 max-w-[500px] text-[2rem] underline hover:opacity-90',
+  )
+  assert.deepEqual(tw.target, [
+    '.m-\\[\\.2rem\\]{margin:.2rem}',
+    '.opacity-50{opacity:0.5}',
+    '.bg-blue-500{--tw-bg-opacity:1;background-color:rgba(59,130,246,var(--tw-bg-opacity))}',
+    '.max-w-\\[500px\\]{max-width:500px}',
+    '.text-\\[2rem\\]{font-size:2rem}',
+    '.underline{text-decoration:underline}',
+    '.hover\\:opacity-90:hover{opacity:0.9}',
+  ])
+
+  tw.clear()
+
+  assert.strictEqual(
+    tw(
+      '@(opacity-50 underline text-[2rem] bg-blue-500 m-[.2rem] hover:(opacity-90) max-w-[500px])',
+    ),
+    '@(opacity-50,underline,text-[2rem],bg-blue-500,m-[.2rem],hover:opacity-90,max-w-[500px])',
+  )
+  assert.deepEqual(tw.target, [
+    '.\\@\\(opacity-50\\,underline\\,text-\\[2rem\\]\\,bg-blue-500\\,m-\\[\\.2rem\\]\\,hover\\:opacity-90\\,max-w-\\[500px\\]\\){opacity:0.5;text-decoration:underline;font-size:2rem;--tw-bg-opacity:1;background-color:rgba(59,130,246,var(--tw-bg-opacity));margin:.2rem}',
+    '.\\@\\(opacity-50\\,underline\\,text-\\[2rem\\]\\,bg-blue-500\\,m-\\[\\.2rem\\]\\,hover\\:opacity-90\\,max-w-\\[500px\\]\\){max-width:500px}',
+    '.\\@\\(opacity-50\\,underline\\,text-\\[2rem\\]\\,bg-blue-500\\,m-\\[\\.2rem\\]\\,hover\\:opacity-90\\,max-w-\\[500px\\]\\):hover{opacity:0.9}',
+  ])
+
+  tw.clear()
+
+  assert.strictEqual(
+    tw(
+      'Named@(opacity-50 underline text-[2rem] bg-blue-500 m-[.2rem] hover:(opacity-90) max-w-[500px])',
+    ),
+    'Named#11t9suh',
+  )
+  assert.deepEqual(tw.target, [
+    '.Named\\#11t9suh{opacity:0.5;text-decoration:underline;font-size:2rem;--tw-bg-opacity:1;background-color:rgba(59,130,246,var(--tw-bg-opacity));margin:.2rem}',
+    '.Named\\#11t9suh{max-width:500px}',
+    '.Named\\#11t9suh:hover{opacity:0.9}',
+  ])
+
+  tw.clear()
+
+  assert.strictEqual(
+    tw(
+      apply`opacity-50 underline text-[2rem] bg-blue-500 m-[.2rem] hover:(opacity-90) max-w-[500px]`,
+    ),
+    '@(opacity-50,underline,text-[2rem],bg-blue-500,m-[.2rem],hover:opacity-90,max-w-[500px])',
+  )
+  assert.deepEqual(tw.target, [
+    '.\\@\\(opacity-50\\,underline\\,text-\\[2rem\\]\\,bg-blue-500\\,m-\\[\\.2rem\\]\\,hover\\:opacity-90\\,max-w-\\[500px\\]\\){opacity:0.5;text-decoration:underline;font-size:2rem;--tw-bg-opacity:1;background-color:rgba(59,130,246,var(--tw-bg-opacity));margin:.2rem}',
+    '.\\@\\(opacity-50\\,underline\\,text-\\[2rem\\]\\,bg-blue-500\\,m-\\[\\.2rem\\]\\,hover\\:opacity-90\\,max-w-\\[500px\\]\\){max-width:500px}',
+    '.\\@\\(opacity-50\\,underline\\,text-\\[2rem\\]\\,bg-blue-500\\,m-\\[\\.2rem\\]\\,hover\\:opacity-90\\,max-w-\\[500px\\]\\):hover{opacity:0.9}',
+  ])
+
+  tw.clear()
+
+  assert.strictEqual(
+    tw(
+      apply.Named`opacity-50 underline text-[2rem] bg-blue-500 m-[.2rem] hover:(opacity-90) max-w-[500px]`,
+    ),
+    'Named#11t9suh',
+  )
+  assert.deepEqual(tw.target, [
+    '.Named\\#11t9suh{opacity:0.5;text-decoration:underline;font-size:2rem;--tw-bg-opacity:1;background-color:rgba(59,130,246,var(--tw-bg-opacity));margin:.2rem}',
+    '.Named\\#11t9suh{max-width:500px}',
+    '.Named\\#11t9suh:hover{opacity:0.9}',
+  ])
+})
