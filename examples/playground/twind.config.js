@@ -9,9 +9,14 @@ import presetTailwindForms from '@twind/preset-tailwind-forms'
 export default defineConfig({
   presets: [
     presetAutoprefix(),
-    presetExt(),
     presetLineClamp(),
     presetTailwind(),
     presetTailwindForms(),
+
+    // 'ext' must come after other presets,
+    // as it includes a "Short CSS" feature which catches arbitrary CSS rules:
+    // https://github.com/tw-in-js/twind/blob/next/packages/preset-ext/README.md#short-css
+    // https://github.com/tw-in-js/twind/blob/next/packages/preset-ext/src/rules.ts
+    presetExt(),
   ],
 })
