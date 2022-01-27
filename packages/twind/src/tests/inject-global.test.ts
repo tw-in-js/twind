@@ -94,3 +94,38 @@ test('inject global styles using custom tw', () => {
 
   assert.lengthOf(tw.target as string[], 0)
 })
+
+test('layers', () => {
+  injectGlobal`
+    @layer components {
+      .select2-dropdown {
+        @apply rounded-b-lg shadow-md;
+      }
+      .select2-search {
+        @apply border border-gray-300 rounded;
+      }
+      .select2-results__group {
+        @apply text-lg font-bold text-gray-900;
+      }
+      /* ... */
+    }
+
+    /* rules with base are not sorted */
+    h1 {
+      @apply text-2xl;
+    }
+    h2 {
+      @apply text-xl;
+    }
+    /* ... */
+  `
+
+  assert.deepEqual(tw.target, [
+    '*,::before,::after{--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000}',
+    'h1{font-size:1.5rem;line-height:2rem}',
+    'h2{font-size:1.25rem;line-height:1.75rem}',
+    '.select2-dropdown{border-bottom-left-radius:0.5rem;border-bottom-right-radius:0.5rem;--tw-shadow:0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}',
+    '.select2-results__group{font-size:1.125rem;line-height:1.75rem;font-weight:700;--tw-text-opacity:1;color:rgba(17,24,39,var(--tw-text-opacity))}',
+    '.select2-search{border-width:1px;--tw-border-opacity:1;border-color:rgba(209,213,219,var(--tw-border-opacity));border-radius:0.25rem}',
+  ])
+})

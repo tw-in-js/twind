@@ -225,20 +225,18 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
   The following layer exist in the given order: `defaults`, `base`, `components`, `shortcuts`, `utilities`, `overrides`
 
   ```js
-  import { css } from 'twind'
+  import { injectGlobal } from 'twind'
 
-  element.className = css`
+  injectGlobal`
     /* rules with base are not sorted */
-    @layer base {
-      h1 {
-        @apply text-2xl;
-      }
-      h2 {
-        @apply text-xl;
-      }
-      /* ... */
+    h1 {
+      @apply text-2xl;
     }
-
+    h2 {
+      @apply text-xl;
+    }
+    /* ... */
+  
     @layer components {
       .select2-dropdown {
         @apply rounded-b-lg shadow-md;
