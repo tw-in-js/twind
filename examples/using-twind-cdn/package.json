@@ -1,6 +1,6 @@
 {
   "version": "0.0.1-next.2",
-  "name": "@example/twind-cdn",
+  "name": "@example/using-twind-cdn",
   "description": "twind cdn twind example",
   "private": true,
   "main": "index.html",
@@ -8,7 +8,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/tw-in-js/twind.git",
-    "directory": "examples/twind-cdn"
+    "directory": "examples/using-twind-cdn"
   },
   "engines": {
     "node": ">=14"

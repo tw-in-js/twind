@@ -1,5 +1,5 @@
 {
-  "name": "@example/gatsby",
+  "name": "@example/with-gatsby",
   "description": "gatsby with twind example",
   "version": "0.0.1-next.5",
   "private": true,
@@ -8,7 +8,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/tw-in-js/twind.git",
-    "directory": "examples/gatsby"
+    "directory": "examples/with-gatsby"
   },
   "engines": {
     "node": ">=14"

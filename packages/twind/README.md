@@ -20,13 +20,17 @@ Twind does **not** include any core utilities — use one of the existing preset
 - [@twind/preset-tailwind-forms](https://www.npmjs.com/package/@twind/preset-tailwind-forms) to get Tailwind v3 and Tailwind Forms.
 - [@twind/preset-ext](https://www.npmjs.com/package/@twind/preset-ext)
 
-Or write your own variants and rules.
+Here are some examples of how to write your own rules or variants:
 
-Take a look at [examples](https://github.com/tw-in-js/twind/tree/next/examples).
+- preset-tailwind: [rules](https://github.com/tw-in-js/twind/blob/next/packages/preset-tailwind/src/rules.ts) and [variants](https://github.com/tw-in-js/twind/blob/next/packages/preset-tailwind/src/variants.ts)
+- preset-ext: [rules](https://github.com/tw-in-js/twind/blob/next/packages/preset-ext/src/rules.ts) and [variants](https://github.com/tw-in-js/twind/blob/next/packages/preset-ext/src/variants.ts)
 
 Additionally we provides several integrations:
 
-- [@twind/sveltekit](https://www.npmjs.com/package/@twind/sveltekit) — [SvelteKit](https://kit.svelte.dev)
+- [Gatsby](https://github.com/gatsbyjs/gatsby) — [gatsby-plugin-twind](https://www.npmjs.com/package/gatsby-plugin-twind)
+- [SvelteKit](https://kit.svelte.dev) — [@twind/sveltekit](https://www.npmjs.com/package/@twind/sveltekit)
+
+To get you started, take a look at the [examples](https://github.com/tw-in-js/twind/tree/next/examples).
 
 ## Usage
 

@@ -18,8 +18,8 @@ The following presets are included out-of-the-box:
 Used within the following [examples](https://github.com/tw-in-js/twind/tree/next/examples):
 
 - [Basic](https://github.com/tw-in-js/twind/tree/next/examples/basic)
-- [SvelteKit](https://github.com/tw-in-js/twind/tree/next/examples/sveltekit)
-- [Tailwind Forms](https://github.com/tw-in-js/twind/tree/next/examples/tailwind-forms)
+- [Tailwind Forms](https://github.com/tw-in-js/twind/tree/next/examples/using-tailwind-forms)
+- [SvelteKit](https://github.com/tw-in-js/twind/tree/next/examples/with-sveltekit)
 
 ## Usage
 

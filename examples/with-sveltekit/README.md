@@ -1,6 +1,6 @@
 # Example: Sveltekit
 
-> Try it live at [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/sveltekit) or [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/sveltekit).
+> Try it live at [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/with-sveltekit) or [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/with-sveltekit).
 
 ## How does this work?
 

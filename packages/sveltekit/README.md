@@ -12,7 +12,7 @@ Seamless integration of [twind](https://www.npmjs.com/package/twind) for [Svelte
 
 Used within the following [examples](https://github.com/tw-in-js/twind/tree/next/examples):
 
-- [SvelteKit](https://github.com/tw-in-js/twind/tree/next/examples/sveltekit)
+- [SvelteKit](https://github.com/tw-in-js/twind/tree/next/examples/with-sveltekit)
 
 ## Installation
 

@@ -19,7 +19,7 @@ The following presets are included out-of-the-box:
 
 Used within the following [examples](https://github.com/tw-in-js/twind/tree/next/examples):
 
-- [Twind CDN](https://github.com/tw-in-js/twind/tree/next/examples/twind-cdn)
+- [Twind CDN](https://github.com/tw-in-js/twind/tree/next/examples/using-twind-cdn)
 
 ## Usage
 

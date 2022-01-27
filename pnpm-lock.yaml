@@ -80,7 +80,43 @@ importers:
     devDependencies:
       vite: 2.7.13
 
-  examples/gatsby:
+  examples/playground:
+    specifiers:
+      '@twind/preset-autoprefix': 1.0.0-next.25
+      '@twind/preset-ext': 1.0.0-next.25
+      '@twind/preset-tailwind': 1.0.0-next.25
+      '@twind/preset-tailwind-forms': 1.0.0-next.25
+      twind: 1.0.0-next.25
+      vite: ^2.7.13
+    dependencies:
+      '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
+      '@twind/preset-ext': link:../../packages/preset-ext
+      '@twind/preset-tailwind': link:../../packages/preset-tailwind
+      '@twind/preset-tailwind-forms': link:../../packages/preset-tailwind-forms
+      twind: link:../../packages/twind
+    devDependencies:
+      vite: 2.7.13
+
+  examples/using-tailwind-forms:
+    specifiers:
+      '@twind/preset-tailwind-forms': 1.0.0-next.25
+      '@twind/tailwind': 1.0.0-next.25
+      twind: 1.0.0-next.25
+      vite: ^2.7.13
+    dependencies:
+      '@twind/preset-tailwind-forms': link:../../packages/preset-tailwind-forms
+      '@twind/tailwind': link:../../packages/tailwind
+      twind: link:../../packages/twind
+    devDependencies:
+      vite: 2.7.13
+
+  examples/using-twind-cdn:
+    specifiers:
+      serve: ^13.0.2
+    devDependencies:
+      serve: 13.0.2
+
+  examples/with-gatsby:
     specifiers:
       '@twind/tailwind': 1.0.0-next.25
       gatsby: ^4.5.3
@@ -104,24 +140,7 @@ importers:
       react-helmet: 6.1.0_react@17.0.2
       twind: link:../../packages/twind
 
-  examples/playground:
-    specifiers:
-      '@twind/preset-autoprefix': 1.0.0-next.25
-      '@twind/preset-ext': 1.0.0-next.25
-      '@twind/preset-tailwind': 1.0.0-next.25
-      '@twind/preset-tailwind-forms': 1.0.0-next.25
-      twind: 1.0.0-next.25
-      vite: ^2.7.13
-    dependencies:
-      '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
-      '@twind/preset-ext': link:../../packages/preset-ext
-      '@twind/preset-tailwind': link:../../packages/preset-tailwind
-      '@twind/preset-tailwind-forms': link:../../packages/preset-tailwind-forms
-      twind: link:../../packages/twind
-    devDependencies:
-      vite: 2.7.13
-
-  examples/sveltekit:
+  examples/with-sveltekit:
     specifiers:
       '@sveltejs/adapter-node': ^1.0.0-next.66
       '@sveltejs/kit': ^1.0.0-next.240
@@ -139,25 +158,6 @@ importers:
       twind: link:../../packages/twind
       typescript: 4.5.4
 
-  examples/tailwind-forms:
-    specifiers:
-      '@twind/preset-tailwind-forms': 1.0.0-next.25
-      '@twind/tailwind': 1.0.0-next.25
-      twind: 1.0.0-next.25
-      vite: ^2.7.13
-    dependencies:
-      '@twind/preset-tailwind-forms': link:../../packages/preset-tailwind-forms
-      '@twind/tailwind': link:../../packages/tailwind
-      twind: link:../../packages/twind
-    devDependencies:
-      vite: 2.7.13
-
-  examples/twind-cdn:
-    specifiers:
-      serve: ^13.0.2
-    devDependencies:
-      serve: 13.0.2
-
   packages/cdn:
     specifiers:
       '@twind/tailwind': 1.0.0-next.25
@@ -170,7 +170,7 @@ importers:
     specifiers:
       '@types/react': ^17.0.0
       '@types/react-dom': ^17.0.0
-      gatsby: ^4.0.0-next
+      gatsby: ^4.5.3
       react: ^17.0.0
       react-dom: ^17.0.0
       twind: 1.0.0-next.25
