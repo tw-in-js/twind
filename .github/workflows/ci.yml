@@ -56,12 +56,15 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm check
       - run: pnpm test:coverage
+
       - run: pnpm build
 
       # Uses the root package.json['size-limit'] config
       - run: pnpm size-limit
 
       - name: 📖  Coveralls
+        # prevents this step from running on forks
+        if: ${{ github.repository == 'tw-in-js/twind' }}
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -69,44 +72,37 @@ jobs:
           parallel: true
           path-to-lcov: ./coverage/lcov.info
 
-  size-pr:
-    name: Size Limit
-    runs-on: ubuntu-latest
-    # Run only for PRs
-    if: ${{ github.event.pull_request }}
-    needs: build
-    env:
-      CI_JOB_NUMBER: 1
-    steps:
-      - name: 📥  Checkout
-        uses: actions/checkout@v2
-
-      - name: 🔧  Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 6.28.0
-
-      - name: 🔧  Setup Node
-        uses: actions/setup-node@v2
-        with:
-          node-version: 16.x
-          cache: pnpm
-
-      - name: 💡  Environment Info
+      # if a .npmrc file is found, the GitHub Action does not recreate the file.
+      - name: 📝  Updating .npmrc
+        # 1. prevents this step from running on forks
+        # 2. only run once in the matrix
+        if: ${{ github.repository == 'tw-in-js/twind' && matrix.node == '16.x' }}
         run: |
-          echo cwd: `pwd`;
-          echo branch: `git branch --show-current`;
-          echo node: `node --version`;
-          echo pnpm: v`pnpm --version`
+          cat << EOF > "$HOME/.npmrc"
+            email=release-workflow@twind.dev
+            //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          EOF
+        env:
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm build
-      - run: pnpm size-limit
+      - name: 📦  Create Release Pull Request or Publish to npm
+        id: changesets
+        # 1. prevents this step from running on forks
+        # 2. only run once in the matrix
+        if: ${{ github.repository == 'tw-in-js/twind' && matrix.node == '16.x' }}
+        uses: changesets/action@v1
+        with:
+          version: pnpm changeset:version
+          publish: pnpm release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   coveralls:
     name: Collect Coverage
     needs: build
     runs-on: ubuntu-latest
+    # prevents this step from running on forks
+    if: ${{ github.repository == 'tw-in-js/twind' }}
     steps:
       - name: 📖  Coveralls Finished
         uses: coverallsapp/github-action@master
