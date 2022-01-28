@@ -1,10 +1,24 @@
-name: '✨ Feature Request'
+name: ✨ Feature Request
 description: Suggest an idea for this project
+title: '[Feature]: '
+labels:
+  - ✨ Feature Request
 body:
   - type: markdown
     attributes:
       value: |
         Thanks for taking the time to request this feature!
+
+        Do you need some help?
+        ======================
+        The issue tracker is meant for feature requests and bug reports only. This isn't the best place for
+        support or usage questions. Questions here don't have as much visibility as they do elsewhere. Before
+        you ask a question, here are some resources to get help first:
+
+        - Read [the docs](https://twind.dev)
+        - Explore [examples](https://github.com/tw-in-js/twind/tree/next/examples#readme)
+        - Ask in [Github Discussions](https://github.com/tw-in-js/twind/discussions).
+        - Ask in [Discord Chat](https://discord.com/invite/2aP5NkszvD)
   - type: textarea
     id: problem
     attributes:

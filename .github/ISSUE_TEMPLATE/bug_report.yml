@@ -1,16 +1,48 @@
 name: '🐞 Bug report'
 description: Something went awry and you'd like to tell us about it.
+title: '[Bug]: '
+labels:
+  - 🐞 Bug
 body:
   - type: markdown
     attributes:
       value: |
         Thanks for taking the time to fill out this bug report!
+
+        Do you need some help?
+        ======================
+        The issue tracker is meant for feature requests and bug reports only. This isn't the best place for
+        support or usage questions. Questions here don't have as much visibility as they do elsewhere. Before
+        you ask a question, here are some resources to get help first:
+
+        - Read [the docs](https://twind.dev)
+        - Explore [examples](https://github.com/tw-in-js/twind/tree/next/examples#readme)
+        - Ask in [Github Discussions](https://github.com/tw-in-js/twind/discussions).
+        - Ask in [Discord Chat](https://discord.com/invite/2aP5NkszvD)
+
+        ### Test Case Starter:
+        https://github.com/tw-in-js/twind/tree/next/examples/basic?file=index.html
+  - type: checkboxes
+    id: packages
+    attributes:
+      label: Which Twind packages are impacted?
+      options:
+        - label: '`twind` (Twind core)'
+        - label: '`@twind/tailwind`'
+        - label: '`@twind/cdn`'
+        - label: '`@twind/preset-autoprefix`'
+        - label: '`@twind/preset-ext`'
+        - label: '`@twind/preset-line-clamp`'
+        - label: '`@twind/preset-tailwind`'
+        - label: '`@twind/preset-tailwind-forms`'
+        - label: '`@twind/sveltekit`'
+        - label: '`gatsby-plugin-twind`'
   - type: textarea
     id: bug-description
     attributes:
       label: Describe the bug
       description: If you intend to submit a PR for this issue, tell us in the description. Thanks!
-      placeholder: Bug description
+      placeholder: Steps to reproduce the behavior with a concise description of what you expected to happen and what you're experiencing.
     validations:
       required: true
   - type: textarea
@@ -25,9 +57,9 @@ body:
     id: system-info
     attributes:
       label: System Info
-      description: Output of `npx envinfo --system --binaries --browsers --npmPackages "{twind,@twind/*}"`
+      description: Output of `npx envinfo --system --binaries --browsers --npmPackages`
       render: shell
-      placeholder: System, Binaries, Browsers
+      placeholder: System, Binaries, Browsers, Packages
     validations:
       required: true
   - type: dropdown
