@@ -78,5 +78,5 @@ export function inline(markup: string, options: InlineOptions['tw'] | InlineOpti
   const { html, css } = extract(markup, tw)
 
   // inject as last element into the head
-  return html.replace('</head>', `<style data-twind>${minify(css, html)}</style></head>`)
+  return html.replace('</head>', `<style data-twind=ssr>${minify(css, html)}</style></head>`)
 }

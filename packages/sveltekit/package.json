@@ -26,7 +26,8 @@
       "default": "./src/index.ts"
     },
     "./hooks": {
-      "node": "./src/hooks.ts"
+      "node": "./src/hooks.ts",
+      "module": "./src/hooks.ts"
     },
     "./package.json": "./package.json"
   },
