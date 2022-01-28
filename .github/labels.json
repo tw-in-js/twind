@@ -67,6 +67,12 @@
     "aliases": ["blocked", "on hold"]
   },
   {
+    "name": "✨ Feature Request",
+    "color": "151BCD",
+    "description": "Something should be added",
+    "aliases": ["feature", "Feature", "feature request", "Feature Request"]
+  },
+  {
     "name": "💡 Proposal",
     "color": "d4c5f9",
     "description": "Request for comments",
