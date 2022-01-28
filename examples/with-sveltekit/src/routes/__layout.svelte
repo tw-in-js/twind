@@ -1,4 +1,4 @@
-<script type="module">
+<script context="module">
   import { setup } from '@twind/sveltekit'
   import config from '../twind.config'
 
