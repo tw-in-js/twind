@@ -195,10 +195,8 @@ importers:
 
   packages/preset-ext:
     specifiers:
-      '@twind/preset-tailwind': 1.0.0-next.26
       twind: 1.0.0-next.26
     devDependencies:
-      '@twind/preset-tailwind': link:../preset-tailwind
       twind: link:../twind
 
   packages/preset-line-clamp:
