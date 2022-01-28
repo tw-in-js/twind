@@ -153,14 +153,6 @@ The [Changesets GitHub action](https://github.com/changesets/action#with-publish
 
 > It uses `pnpm publish` rather than `pnpx changeset publish` so that we can use the `--filter` and (while in beta) `--tag` flags — though perhaps they work with `pnpx changeset publish`?
 
-## TODO
-
-- how to contribute
-- issues: templates on stackplitz, codesandbox, ...
-- how to create a PR
-  - https://codesandbox.io/docs/git
-- changesets
-
 [already been reported]: https://github.com/tw-in-js/twind/issues
 [fork this project]: https://github.com/tw-in-js/twind/fork
 [live example]: https://codesandbox.io/s/twind-bug-report-template-yfxpx

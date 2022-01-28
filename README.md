@@ -261,6 +261,7 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
 
 ## TODO
 
+- how to create a PR in contributing guide: https://codesandbox.io/docs/git
 - frameworks: next, remix, wmr, vue, stenciljs, angular, ...
 - pug support: https://github.com/tw-in-js/twind/issues/198
 - rewrite https://github.com/TanStack/tanstack.com

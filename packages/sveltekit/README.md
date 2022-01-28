@@ -29,7 +29,7 @@ Please see [examples/sveltekit](https://github.com/tw-in-js/twind/tree/next/exam
 **`src/routes/__layout.svelte`**
 
 ```html
-<script type="module">
+<script context="module">
   import { setup } from '@twind/sveltekit'
   import twindConfig from '../twind.config'
   setup(twindConfig)
