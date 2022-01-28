@@ -1,5 +1,14 @@
 # @twind/preset-tailwind
 
+## 1.0.0-next.27
+
+### Patch Changes
+
+- fix: ensure sources are included in sourcemap ([`bbbbd88e`](https://github.com/tw-in-js/twind/commit/bbbbd88efc7cb8c0c1b73ade9249389958e1d7cf))
+
+- Updated dependencies [[`bbbbd88e`](https://github.com/tw-in-js/twind/commit/bbbbd88efc7cb8c0c1b73ade9249389958e1d7cf), [`e8eaae8b`](https://github.com/tw-in-js/twind/commit/e8eaae8b6034b3117bf781ec374c1cd7e05a2d26), [`b526c888`](https://github.com/tw-in-js/twind/commit/b526c88843424ef8a6caf93c3236947b59414edd)]:
+  - twind@1.0.0-next.27
+
 ## 1.0.0-next.26
 
 ### Patch Changes
