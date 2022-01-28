@@ -37,8 +37,13 @@ export default function presetTailwind({
 }
 
 function hashVars(value: string, { h }: Context<TailwindTheme>): string {
+  // PERF: check for --tw before running the regexp
+  // if (value.includes('--tw')) {
   return value.replace(
     /--(tw-[\w-]+)\b/g,
     (_, property: string) => '--' + h(property).replace('#', ''),
   )
+  // }
+
+  // return value
 }

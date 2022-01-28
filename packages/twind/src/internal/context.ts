@@ -143,27 +143,27 @@ function getRuleResolver<Theme extends BaseTheme = BaseTheme>(
 }
 
 function createVariantFunction<Theme extends BaseTheme = BaseTheme>(
-  condition: MaybeArray<string | RegExp>,
+  patterns: MaybeArray<string | RegExp>,
 
   resolve: string | VariantResolver<Theme>,
 ): VariantFunction<Theme> {
-  return createResolve(condition, typeof resolve == 'function' ? resolve : () => resolve)
+  return createResolve(patterns, typeof resolve == 'function' ? resolve : () => resolve)
 }
 
 function createResolveFunction<Theme extends BaseTheme = BaseTheme>(
-  condition: MaybeArray<string | RegExp> | Shortcuts<Theme>,
+  patterns: MaybeArray<string | RegExp> | Shortcuts<Theme>,
 
   resolve?: keyof CSSProperties | string | CSSObject | RuleResolver<Theme>,
 
   convert?: MatchConverter<Theme>,
 ): ResolveFunction<Theme> {
   // This is a shortcuts object
-  if (Object.getPrototypeOf(condition) === Object.prototype) {
+  if (Object.getPrototypeOf(patterns) === Object.prototype) {
     return createExecutor(
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      Object.keys(condition).map((key) => {
+      Object.keys(patterns).map((key) => {
         // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-        const value = (condition as Shortcuts<Theme>)[key]
+        const value = (patterns as Shortcuts<Theme>)[key]
         return createResolveFunction(key, typeof value == 'function' ? value : () => value)
       }),
       (value, resolver, context) => {
@@ -183,7 +183,7 @@ function createResolveFunction<Theme extends BaseTheme = BaseTheme>(
   }
 
   return createResolve(
-    condition as MaybeArray<string | RegExp>,
+    patterns as MaybeArray<string | RegExp>,
     !resolve
       ? (match) =>
           ({
@@ -210,21 +210,21 @@ function maybeNegate($_: string, value: string): string {
 }
 
 function createResolve<Result, Theme extends BaseTheme = BaseTheme>(
-  condition: MaybeArray<string | RegExp>,
+  patterns: MaybeArray<string | RegExp>,
   resolve: (match: MatchResult, context: Context<Theme>) => Result,
 ): (value: string, context: Context<Theme>) => Result | undefined {
-  return createRegExpExecutor(condition, (value, condition, context) =>
+  return createRegExpExecutor(patterns, (value, condition, context) =>
     exec(value, condition, resolve, context),
   )
 }
 
 function exec<Result, Theme extends BaseTheme = BaseTheme>(
   value: string,
-  condition: RegExp,
+  condition: Condition,
   resolve: (match: MatchResult, context: Context<Theme>) => Result,
   context: Context<Theme>,
 ): Result | undefined {
-  const match = condition.exec(value) as MatchResult | null
+  const match = condition.exec(value) as MatchResult | Falsey
 
   if (match) {
     // MATCH.$_ = value
@@ -235,10 +235,10 @@ function exec<Result, Theme extends BaseTheme = BaseTheme>(
 }
 
 function createRegExpExecutor<Result, Theme extends BaseTheme = BaseTheme>(
-  condition: MaybeArray<string | RegExp>,
-  run: (value: string, condition: RegExp, context: Context<Theme>) => Result,
+  patterns: MaybeArray<string | RegExp>,
+  run: (value: string, condition: Condition, context: Context<Theme>) => Result,
 ): (value: string, context: Context<Theme>) => Result | undefined {
-  return createExecutor(asArray(condition).map(asRegExp), run)
+  return createExecutor(asArray(patterns).map(toCondition), run)
 }
 
 function createExecutor<Condition, Result, Theme extends BaseTheme = BaseTheme>(
@@ -254,11 +254,28 @@ function createExecutor<Condition, Result, Theme extends BaseTheme = BaseTheme>(
   }
 }
 
-function asRegExp(value: string | RegExp): RegExp {
+/**
+ * Executes a search on a string using a regular expression pattern, and returns an array containing the results of that search.
+ * @param string The String object or string literal on which to perform the search.
+ */
+// type Condition = (string: string) => RegExpExecArray | Falsey
+type Condition = RegExp
+
+function toCondition(value: string | RegExp): Condition {
   // "visible" -> /^visible$/
   // "(float)-(left|right|none)" -> /^(float)-(left|right|none)$/
   // "auto-rows-" -> /^auto-rows-/
   // "gap(-|$)" -> /^gap(-|$)/
+
+  // PERF: try to detect if we can skip the regex execution
+  // if (typeof value == 'string') {
+  // const prefix = /^[\w-#~@]+(?!\?)/.exec(value)?.[0]
+  // value = new RegExp('^' + value + (value.includes('$') || value.slice(-1) == '-' ? '' : '$'))
+  // if (prefix) {
+  //   return (string) => string.startsWith(prefix) && (value as RegExp).exec(string)
+  // }
+  // }
+  // return (string) => (value as RegExp).exec(string)
 
   return typeof value == 'string'
     ? new RegExp('^' + value + (value.includes('$') || value.slice(-1) == '-' ? '' : '$'))

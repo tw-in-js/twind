@@ -40,80 +40,77 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
     const value = (style as Record<string, unknown>)[key]
 
     if (key[0] == '@') {
+      // at rules: https://developer.mozilla.org/en-US/docs/Web/CSS/At-rule
       if (!value) continue
 
-      // at rules: https://developer.mozilla.org/en-US/docs/Web/CSS/At-rule
-      switch (key[1]) {
-        // @apply ...;
-        case 'a': {
+      // @apply ...;
+      if (key[1] == 'a') {
+        rules.push(
+          ...translateWith(
+            name as string,
+            precedence,
+            parse(value as string),
+            context,
+            precedence,
+            conditions,
+            important,
+            true /* useOrderOfRules */,
+          ),
+        )
+        continue
+      }
+
+      // @layer <layer>
+      if (key[1] == 'l') {
+        for (const css of asArray(value as MaybeArray<CSSObject>)) {
           rules.push(
-            ...translateWith(
-              name as string,
-              precedence,
-              parse(value as string),
+            ...serialize$(
+              css,
+              {
+                n: name,
+                p: moveToLayer(precedence, Layer[key[7] as 'b']),
+                r: conditions,
+                i: important,
+              },
               context,
-              precedence,
-              conditions,
-              important,
-              true /* useOrderOfRules */,
             ),
           )
-          continue
         }
 
-        // @layer <layer>
-        case 'l': {
-          for (const css of asArray(value as MaybeArray<CSSObject>)) {
-            rules.push(
-              ...serialize$(
-                css,
-                {
-                  n: name,
-                  p: moveToLayer(precedence, Layer[key[7] as 'b']),
-                  r: conditions,
-                  i: important,
-                },
-                context,
-              ),
-            )
-          }
-
-          continue
-        }
-
-        // @import
-        case 'i': {
-          rules.push({
-            // before all layers
-            p: -1,
-            o: 0,
-            r: [],
-            d: asArray(value)
-              .filter(Boolean)
-              .map((value) => key + ' ' + (value as string))
-              .join(';'),
-          })
-          continue
-        }
-
-        // @keyframes
-        // @font-face
-        // TODO @font-feature-values
-        case 'k':
-        case 'f': {
-          // Use base layer
-          rules.push({
-            p: Layer.d,
-            o: 0,
-            r: [key],
-            d: serialize$(value as CSSObject, { p: Layer.d }, context)
-              .map(stringify)
-              .join(''),
-          })
-          continue
-        }
-        // -> All other are handled below; same as selector
+        continue
       }
+
+      // @import
+      if (key[1] == 'i') {
+        rules.push({
+          // before all layers
+          p: -1,
+          o: 0,
+          r: [],
+          d: asArray(value)
+            .filter(Boolean)
+            .map((value) => key + ' ' + (value as string))
+            .join(';'),
+        })
+        continue
+      }
+
+      // @keyframes
+      // @font-face
+      // TODO @font-feature-values
+      if (key[1] == 'k' || key[1] == 'f') {
+        // Use base layer
+        rules.push({
+          p: Layer.d,
+          o: 0,
+          r: [key],
+          d: serialize$(value as CSSObject, { p: Layer.d }, context)
+            .map(stringify)
+            .join(''),
+        })
+        continue
+      }
+      // -> All other are handled below; same as selector
     }
 
     // @media
@@ -159,7 +156,7 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
       name = (value as string) + hash(JSON.stringify([precedence, important, style]))
     } else if (value || value === 0) {
       // property -> hyphenate
-      key = key.replace(/[A-Z]/g, '-$&').toLowerCase()
+      key = key.replace(/[A-Z]/g, (_) => '-' + _.toLowerCase())
 
       // Update precedence
       numberOfDeclarations += 1
@@ -181,6 +178,7 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
     }
   }
 
+  // PERF: prevent unshift using `rules = [{}]` above and then `rules[0] = {...}`
   rules.unshift({
     n: name && context.h(name),
 
@@ -200,7 +198,6 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
     d: declarations,
   })
 
-  // only keep layer bits for merging
   return rules.sort(compareTwindRules)
 }
 
@@ -211,8 +208,14 @@ export function resolveThemeFunction<Theme extends BaseTheme = BaseTheme>(
   // support theme(...) function in values
   // calc(100vh - theme('spacing.12'))
   // theme('borderColor.DEFAULT', 'currentColor')
+
+  // PERF: check for theme before running the regexp
+  // if (value.includes('theme')) {
   return value.replace(
     /theme\((["'`])?(.+?)\1(?:\s*,\s*(["'`])?(.+?)\3)?\)/g,
     (_, __, key, ___, value) => context.theme(key, value) as string,
   )
+  // }
+
+  // return value
 }

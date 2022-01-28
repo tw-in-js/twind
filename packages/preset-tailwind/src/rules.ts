@@ -1094,8 +1094,8 @@ function filter(prefix = ''): Rule<TailwindTheme>[] {
         [
           // hue-rotate can be negated
           `${key[0] == 'h' ? '-?' : ''}(${prefix}${key})(?:-|$)`,
-          fromTheme<TailwindTheme, 'hueRotate'>(
-            key as 'hueRotate',
+          fromTheme<TailwindTheme, 'hueRotate' | 'dropShadow'>(
+            key as 'hueRotate' | 'dropShadow',
             ({ 1: $1, _ }) =>
               ({
                 [`--tw-${$1}`]: asArray(_)
