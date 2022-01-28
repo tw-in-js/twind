@@ -61,6 +61,6 @@
     "@twind/preset-tailwind": "1.0.0-next.26"
   },
   "scripts": {
-    "prepublishOnly": "distilt"
+    "build": "distilt"
   }
 }

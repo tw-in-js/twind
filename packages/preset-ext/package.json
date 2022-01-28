@@ -40,7 +40,6 @@
     }
   ],
   "peerDependencies": {
-    "@twind/preset-tailwind": "1.0.0-next.26",
     "twind": "1.0.0-next.26",
     "typescript": "^4.4.0"
   },
@@ -50,10 +49,9 @@
     }
   },
   "devDependencies": {
-    "@twind/preset-tailwind": "1.0.0-next.26",
     "twind": "1.0.0-next.26"
   },
   "scripts": {
-    "prepublishOnly": "distilt"
+    "build": "distilt"
   }
 }

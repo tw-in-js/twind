@@ -62,7 +62,7 @@
   "// start — use 'BROWSER=none' to prevent vite to open a browser if within codesandbox or stackblitz": "",
   "scripts": {
     "start": "BROWSER=none npm run test:ui",
-    "build": "pnpm prepublishOnly --recursive --if-present --filter=./packages",
+    "build": "pnpm build --recursive --if-present --filter=./packages",
     "check": "eslint --ext .js,.jsx,.cjs,.mjs,.ts,.tsx --ignore-path .gitignore .",
     "check:fix": "npm run check -- --fix",
     "size-limit": "size-limit",

@@ -45,6 +45,6 @@
     }
   },
   "scripts": {
-    "prepublishOnly": "distilt"
+    "build": "distilt"
   }
 }
