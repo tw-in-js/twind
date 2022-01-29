@@ -1,5 +1,102 @@
 # twind
 
+## 1.0.0-next.28
+
+### Patch Changes
+
+- BREAKING: changed the definition of shortcuts within config.rules ([`24b095af`](https://github.com/tw-in-js/twind/commit/24b095af51195a43fe32229e5560aed088b97c0a))
+
+  The new format should be more readable and clear about what is happening.
+
+  ```js
+  // defineConfig is optional but helps with type inference
+  defineConfig({
+    rules: [
+      /* Some aliases */
+      // shortcut: styles are generated as defined by twind — same as if they where used alone
+      // shortcut to multiple utilities
+      ['card', 'py-2 px-4 font-semibold rounded-lg shadow-md'],
+
+      // dynamic shortcut — `$` is everything after the match eg `btn-red` -> `red`
+      ['card-', ({ $ }) => `bg-${$}-400 text-${$}-100 py-2 px-4 rounded-lg`],
+
+      // single utility alias — need to use `~(...)` as it would be otherwise recognized as a CSS property
+      ['red', '~(text-red-100)'],
+
+      // apply: styles are generated in order they are declared
+      // apply to multiple utilities
+      ['btn-green', '@(bg-green-500 hover:bg-green-700 text-white)'],
+
+      // dynamic apply
+      ['btn-', ({ $ }) => `@(bg-${$}-400 text-${$}-100 py-2 px-4 rounded-lg)`],
+
+      /* Some rules */
+      ['hidden', { display: 'none' }],
+
+      // Table Layout
+      // .table-auto { table-layout: auto }
+      // .table-fixed { table-layout: fixed }
+      ['table-(auto|fixed)', 'tableLayout'],
+
+      // dynamic
+      ['table-', (match, context) => /* ... */],
+  ],
+  })
+  ```
+
+* allow `css()`, `cx()`, and `style()` to be used for rule definition ([`b7280003`](https://github.com/tw-in-js/twind/commit/b728000391cffea29eb4215b79a1b23d75751fe8))
+
+  ```js
+  defineConfig({
+    rules: [
+      // Using css
+      [
+        'target-new-tab',
+        css`
+          target-name: new;
+          target-new: tab;
+        `,
+      ],
+      // dynamic
+      [
+        'target-new-(tab|window)',
+        ({ 1: $1 }) => css`
+          target-name: new;
+          target-new: ${$1};
+        `,
+      ],
+
+      // Using cx
+      ['highlight(-rounded)?', ({ 1: rounded }) => cx({ 'bg-yellow-200': true, rounded })],
+
+      // Using style
+      // `box?color=coral` -> `.box\\?color\\=coral{background-color:coral}`
+      // `box?rounded` -> `.box\\?rounded{border-radius:0.25rem}`
+      // `box?color=coral&rounded` -> `.box\\?color\\=coral\\&rounded{background-color:coral;border-radius:0.25rem}`
+      // `box?color=purple&rounded=md` -> `.box\\?color\\=purple\\&rounded\\=md{background-color:purple;border-radius:0.375rem}`
+      [
+        'box\\?(.+)',
+        style({
+          props: {
+            color: {
+              coral: css({
+                backgroundColor: 'coral',
+              }),
+              purple: css`
+                background-color: purple;
+              `,
+            },
+            rounded: {
+              '': 'rounded',
+              md: 'rounded-md',
+            },
+          },
+        }),
+      ],
+    ],
+  })
+  ```
+
 ## 1.0.0-next.27
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@twind/preset-autoprefix",
-  "version": "1.0.0-next.27",
+  "version": "1.0.0-next.28",
   "description": "CSS vendor prefixer and property alias mapper preset for twind",
   "publishConfig": {
     "tag": "next",
@@ -41,7 +41,7 @@
     "style-vendorizer": "^2.1.1"
   },
   "peerDependencies": {
-    "twind": "1.0.0-next.27",
+    "twind": "1.0.0-next.28",
     "typescript": "^4.4.0"
   },
   "peerDependenciesMeta": {
@@ -50,7 +50,7 @@
     }
   },
   "devDependencies": {
-    "twind": "1.0.0-next.27"
+    "twind": "1.0.0-next.28"
   },
   "scripts": {
     "build": "distilt"
