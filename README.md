@@ -125,7 +125,7 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
         - `hover:~(!text-(3xl,center),!underline,italic,focus:not-italic)`
         - `cx()` converts these to comma-separated group
     - named shortcuts: `PrimaryButton~(bg-red-500 text-white)` -> `PrimaryButton#<hash>`
-      - `shortcut()` is an helper to simplify creation of shortcuts (works like `apply()` in twind v0.16); it supports creating named shortcuts: `shortcut.PrimaryButton\`bg-red-500 text-white\``->`PrimaryButton#<hash>`
+      - `shortcut()` is a helper to simplify creation of shortcuts (works like `apply()` in twind v0.16); it supports creating named shortcuts: ``shortcut.PrimaryButton`bg-red-500 text-white`​`` -> `PrimaryButton#<hash>`
 - config
 
   - presets are executed in order they are defined
