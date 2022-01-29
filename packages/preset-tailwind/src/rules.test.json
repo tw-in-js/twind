@@ -1891,6 +1891,14 @@
     ".btn-green:hover{--tw-bg-opacity:1;background-color:rgba(21,128,61,var(--tw-bg-opacity))}"
   ],
   "btn-red": ".btn-red{--tw-bg-opacity:1;background-color:rgba(248,113,113,var(--tw-bg-opacity));--tw-text-opacity:1;color:rgba(254,226,226,var(--tw-text-opacity));padding-top:0.5rem;padding-bottom:0.5rem;padding-left:1rem;padding-right:1rem;border-radius:0.5rem}",
+  "target-new-tab": ".target-new-tab{target-name:new;target-new:tab}",
+  "target-new-window": ".target-new-window{target-name:new;target-new:window}",
+  "highlight": ".highlight{--tw-bg-opacity:1;background-color:rgba(254,240,138,var(--tw-bg-opacity))}",
+  "highlight-rounded": ".highlight-rounded{--tw-bg-opacity:1;background-color:rgba(254,240,138,var(--tw-bg-opacity));border-radius:0.25rem}",
+  "box?color=coral": ".box\\?color\\=coral{background-color:coral}",
+  "box?rounded": ".box\\?rounded{border-radius:0.25rem}",
+  "box?color=coral&rounded": ".box\\?color\\=coral\\&rounded{background-color:coral;border-radius:0.25rem}",
+  "box?color=purple&rounded=md": ".box\\?color\\=purple\\&rounded\\=md{background-color:purple;border-radius:0.375rem}",
   "m-5 mr-3 mx-1": [
     "m-5 mx-1 mr-3",
     [

@@ -223,6 +223,51 @@ defineConfig({
 
     // dynamic apply
     ['btn-', ({ $$ }) => `@(bg-${$$}-400 text-${$$}-100 py-2 px-4 rounded-lg)`],
+
+    // Using cx
+    ['highlight(-rounded)?', ({ 1: rounded }) => cx({ 'bg-yellow-200': true, rounded })],
+
+    // Using css
+    [
+      'target-new-tab',
+      css`
+        target-name: new;
+        target-new: tab;
+      `,
+    ],
+    // dynamic
+    [
+      'target-new-(tab|window)',
+      ({ 1: $1 }) => css`
+        target-name: new;
+        target-new: ${$1};
+      `,
+    ],
+
+    // Using style
+    // `box?color=coral` -> `.box\\?color\\=coral{background-color:coral}`
+    // `box?rounded` -> `.box\\?rounded{border-radius:0.25rem}`
+    // `box?color=coral&rounded` -> `.box\\?color\\=coral\\&rounded{background-color:coral;border-radius:0.25rem}`
+    // `box?color=purple&rounded=md` -> `.box\\?color\\=purple\\&rounded\\=md{background-color:purple;border-radius:0.375rem}`
+    [
+      'box\\?(.+)',
+      style({
+        props: {
+          color: {
+            coral: css({
+              backgroundColor: 'coral',
+            }),
+            purple: css`
+              background-color: purple;
+            `,
+          },
+          rounded: {
+            '': 'rounded',
+            md: 'rounded-md',
+          },
+        },
+      }),
+    ],
   ],
 })
 ```
@@ -261,3 +306,12 @@ The following JS APIs may need polyfills:
 - [Math.imul](https://caniuse.com/mdn-javascript_builtins_math_imul)
   - Firefox<20, Chrome<28, Safari<7, Opera<16
   - [polyfill](https://www.npmjs.com/package/math.imul)
+
+When using `style()` within `config.rules`:
+
+- [Object.fromEntries](https://caniuse.com/mdn-javascript_builtins_object_fromentries)
+  - Edge<79, Firefox<63, Chrome<73, Safari<12.2, Opera<60
+  - [polyfill](https://www.npmjs.com/package/object.fromentries) or [@ungap/from-entries](https://github.com/ungap/from-entries)
+- [URLSearchParams](https://caniuse.com/urlsearchparams)
+  - Edge<17, Firefox<44, Chrome<49, Safari<10.3, Opera<36
+  - [polyfill](https://www.npmjs.com/package/url-search-params-polyfill) or [@ungap/url-search-params](https://github.com/ungap/url-search-params)

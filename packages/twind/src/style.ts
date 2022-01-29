@@ -2,7 +2,7 @@
 // Based on https://github.com/modulz/stitches
 // License MIT
 
-import type { Falsey } from './types'
+import type { Falsey, MatchResult } from './types'
 import { parse } from './internal/parse'
 import { Layer } from './internal/precedence'
 
@@ -116,6 +116,26 @@ export interface Style<Variants> {
    */
   (props?: StyleProps<Variants>): string
 
+  /**
+   * To be used as resolve within config.rules:
+   *
+   * ```js
+   * {
+   *   rules: [
+   *     // label?prop=value&other=propValue
+   *     // if the style has base eg no prop is required
+   *     ['label(\\?.+)?', style( /* ... *\/ )],
+   *
+   *     // if the style requires at least one prop
+   *     ['label\\?(.+)', style( /* ... *\/ )],
+   *   ]
+   * }
+   * ```
+   *
+   * The first group is used to extract the props using {@link URLSearchParams}.
+   */
+  (match: MatchResult): string
+
   readonly defaults: StyleProps<Variants>
 
   /**
@@ -195,9 +215,21 @@ function createStyle<Variants, BaseVariants>(
 
   return Object.defineProperties(
     function style(allProps) {
+      let isWithinRuleDeclaration
+
+      if (Array.isArray(allProps)) {
+        isWithinRuleDeclaration = true
+        allProps = Object.fromEntries(new URLSearchParams(allProps[1]).entries()) as VariantsProps<
+          Variants & BaseVariants
+        >
+      }
+
       const props = { ...defaults, ...allProps }
 
-      let classNames = (parent ? parent(props) + ' ' : '') + className
+      // If this style is used within config.rules we do NOT include the marker classes
+      let classNames = isWithinRuleDeclaration
+        ? ''
+        : (parent ? parent(props) + ' ' : '') + className
 
       let token: StyleToken
 

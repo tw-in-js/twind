@@ -1,6 +1,6 @@
 import { assert, test, afterEach } from 'vitest'
 
-import { apply, twind, virtual } from 'twind'
+import { apply, css, cx, style, twind, virtual } from 'twind'
 
 import tailwind from '.'
 import data from './rules.test.json'
@@ -63,6 +63,49 @@ const tw = twind(
 
       // dynamic apply
       ['btn-', ({ $$ }) => `@(bg-${$$}-400 text-${$$}-100 py-2 px-4 rounded-lg)`],
+
+      // Using css
+      [
+        'target-new-tab',
+        css`
+          target-name: new;
+          target-new: tab;
+        `,
+      ],
+      // dynamic
+      [
+        'target-new-(tab|window)',
+        ({ 1: $1 }) => css`
+          target-name: new;
+          target-new: ${$1};
+        `,
+      ],
+
+      // Using cx
+      ['highlight(-rounded)?', ({ 1: rounded }) => cx({ 'bg-yellow-200': true, rounded })],
+
+      // Using style
+      // box?color=coral&rounded
+      // box?color=purple&rounded=md
+      [
+        'box\\?(.+)',
+        style({
+          props: {
+            color: {
+              coral: css({
+                backgroundColor: 'coral',
+              }),
+              purple: css`
+                background-color: purple;
+              `,
+            },
+            rounded: {
+              '': 'rounded',
+              md: 'rounded-md',
+            },
+          },
+        }),
+      ],
     ],
   },
   virtual(),
