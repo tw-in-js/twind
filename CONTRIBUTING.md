@@ -57,7 +57,7 @@ Pull requests are the greatest contributions, so be sure they are focused in sco
   - Provide a detailed description of the bug in the PR. Live demo preferred.
   - Add appropriate test coverage if applicable.
 
-- It's OK to have multiple small commits as you work on the PR - GitHub can automatically squash them before merging.
+- It's OK to have multiple small commits as you work on the PR - we will automatically squash them before merging. Please do not force push commits — this makes the conversation difficult to follow.
 
 - Make sure tests pass!
 

@@ -96,10 +96,7 @@ use `tw` or `tx` to inject styles
   ```js
   import { tx } from 'twind'
 
-  const className = tx`
-    color: red;
-    font-size: 12px;
-  `
+  const className = tx`underline bg-red-200 text-red-900`
   ```
 
 - `injectGlobal(...args)`: injects the given styles into the base layer
@@ -138,13 +135,7 @@ use `tw` or `tx` to inject styles
     }
   `
 
-  // if in _Shim Mode_
   const fadeInClass = css`
-    animation: 1s ${fadeIn} ease-out;
-  `
-
-  // if in _Library Mode_
-  const fadeInClass = tx`
     animation: 1s ${fadeIn} ease-out;
   `
   ```

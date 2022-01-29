@@ -75,6 +75,8 @@ Other features include:
 
 For the full [Tailwind CSS](https://tailwindcss.com) experience try [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind) or start with [Twind CDN](https://www.npmjs.com/package/@twind/cdn) a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn) that is almost 5.5 times smaller (96.4kb vs 17.6kB).
 
+While we work on the new documentation website we have created a [reference sheet](https://github.com/tw-in-js/twind/blob/next/documentation/40-reference/README.md) to lookup up the available API.
+
 We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/examples) to get you started:
 
 | Example                                                                       | Try it live at                                                                                                                                                                    | Description                                                            |
@@ -108,10 +110,13 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
     - the target sheet: `tw.target`
     - allows to reset twind (start clean): `tw.clear()`
     - allows to remove twind (remove the associated style element): `tw.destroy()`
-  - `shortcut` (previously known as `apply`) and `css` as known from twind v0.16.
+  - `css` as known from twind v0.16
+  - `apply` finally works — styles are generated in order they are declared
+  - `shortcut` — styles are generated as defined by twind — same as if they where used alone
     - with support for creating named shortcuts: `` shortcut.PrimaryButton`bg-red-500 text-white`​ `` -> `PrimaryButton#<hash>`
   - new `cx` function to create class names
     - grouped rules are ungrouped
+  - new `tx` function to create class names and inject styles — like using `tw(cx(...))`
   - `style` — stitches like component definitions
     - creates _readable_ class names like
       - `style#1hvn013 style--variant-gray#1hvn013 style--size-sm#1hvn013 style--outlined-@sm-true#1hvn013`
@@ -342,6 +347,8 @@ Thank you to all the people who have already contributed to twind!
 
 ### 🙏🏾 Sponsors
 
+> This project is kindly sponsored by <a href="https://www.kenoxa.com" target="_blank">Kenoxa GmbH</a> who support [@sastan](https://github.com/sastan) to maintain this project as part of their open-source engangment.
+
 Thank you to all our sponsors! (please ask your company to also support this open source project by [becoming a sponsor](https://opencollective.com/twind#sponsor))
 
 <a href="https://www.kenoxa.com" target="_blank"><img src="https://images.opencollective.com/kenoxa/9c25796/logo/68.png"></a>
@@ -358,6 +365,7 @@ Thank you to all our sponsors! (please ask your company to also support this ope
 
 <a href="https://opencollective.com/twind#backers" target="_blank"><img src="https://opencollective.com/twind/backers.svg?width=890"></a>
 
+<a href="https://github.com/tonysaad" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/1137569?v=4" width="64" height="64" alt="@tonysaad"></a>
 <a href="https://github.com/OnurGvnc" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/1294640?v=4" width="64" height="64" alt="@OnurGvnc"></a>
 <a href="https://github.com/tylerforesthauser" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/1226786?v=4" width="64" height="64" alt="@tylerforesthauser"></a>
 <a href="https://github.com/mtsknn" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/2226144?v=4" width="64" height="64" alt="@mtsknn"></a>
