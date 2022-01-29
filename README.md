@@ -109,7 +109,7 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
     - allows to reset twind (start clean): `tw.clear()`
     - allows to remove twind (remove the associated style element): `tw.destroy()`
   - `shortcut` (previously known as `apply`) and `css` as known from twind v0.16.
-    - with support for creating named shortcuts: `shortcut.PrimaryButton\`bg-red-500 text-white\``->`PrimaryButton#<hash>`
+    - with support for creating named shortcuts: `` shortcut.PrimaryButton`bg-red-500 text-white`​ `` -> `PrimaryButton#<hash>`
   - new `cx` function to create class names
     - grouped rules are ungrouped
   - `style` — stitches like component definitions
@@ -123,9 +123,9 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
     - anonymous shortcuts: `~(!text-(3xl center) !underline italic focus:not-italic)`
       - support comma-separated shortcuts — this prevents different classNames errors during hydration:
         - `hover:~(!text-(3xl,center),!underline,italic,focus:not-italic)`
-        - `cx()` converts these to comma-separated group
+        - `cx()` converts space-separated to comma-separated
     - named shortcuts: `PrimaryButton~(bg-red-500 text-white)` -> `PrimaryButton#<hash>`
-      - `shortcut()` is a helper to simplify creation of shortcuts (works like `apply()` in twind v0.16); it supports creating named shortcuts: ``shortcut.PrimaryButton`bg-red-500 text-white`​`` -> `PrimaryButton#<hash>`
+      - `shortcut()` is a helper to simplify creation of shortcuts (works like `apply()` in twind v0.16); it supports creating named shortcuts: `` shortcut.PrimaryButton`bg-red-500 text-white`​ `` -> `PrimaryButton#<hash>`
 - config
 
   - presets are executed in order they are defined
@@ -147,7 +147,7 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
 
   - darkMode can be selector string `{ darkMode: '.dark-mode &' }` or `{ darkMode: 'html[data-theme="dark"] &` }`
 
-  - rules and shortcuts based on ideas from [UnoCSS](https://github.com/antfu/unocss)
+  - rules based on ideas from [UnoCSS](https://github.com/antfu/unocss)
 
     ```js
     // defineConfig is optional but helps with type inference
@@ -161,18 +161,21 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
         // .table-fixed { table-layout: fixed }
         ['table-(auto|fixed)', 'tableLayout'],
 
-        // Some shortcuts
-        {
-          // single utility alias
-          red: 'text-red-100',
+        // Some aliases
+        // shortcut to multiple utilities
+        ['card', 'py-2 px-4 font-semibold rounded-lg shadow-md'],
 
-          // shortcuts to multiple utilities
-          btn: 'py-2 px-4 font-semibold rounded-lg shadow-md',
-          'btn-green': 'text-white bg-green-500 hover:bg-green-700',
+        // dynamic shortcut
+        ['card-', ({ $$ }) => `bg-${$$}-400 text-${$$}-100 py-2 px-4 rounded-lg`],
 
-          // dynamic shortcut
-          'btn-': ({ $$ }) => `bg-${$$}-400 text-${$$}-100 py-2 px-4 rounded-lg`,
-        },
+        // single utility alias — need to use `~(...)` as it would be otherwise recognized as a CSS property
+        ['red', '~(text-red-100)'],
+
+        // apply to multiple utilities
+        ['btn-green', '@(bg-green-500 hover:bg-green-700 text-white)'],
+
+        // dynamic apply
+        ['btn-', ({ $$ }) => `@(bg-${$$}-400 text-${$$}-100 py-2 px-4 rounded-lg)`],
       ],
     })
     ```

@@ -48,18 +48,21 @@ const tw = twind(
       },
     },
     rules: [
-      // Some shortcuts
-      {
-        // single utility alias
-        red: 'text-red-100',
+      // Some aliases
+      // shortcut to multiple utilities
+      ['card', 'py-2 px-4 font-semibold rounded-lg shadow-md'],
 
-        // shortcuts to multiple utilities
-        btn: 'py-2 px-4 font-semibold rounded-lg shadow-md',
-        'btn-green': 'text-white bg-green-500 hover:bg-green-700',
+      // dynamic shortcut
+      ['card-', ({ $$ }) => `bg-${$$}-400 text-${$$}-100 py-2 px-4 rounded-lg`],
 
-        // dynamic shortcut — could be a rule as well
-        'btn-': ({ $$ }) => `bg-${$$}-400 text-${$$}-100 py-2 px-4 rounded-lg`,
-      },
+      // single utility alias — need to use `~(...)` as it would be otherwise recognized as a CSS property
+      ['red', '~(text-red-100)'],
+
+      // apply to multiple utilities
+      ['btn-green', '@(bg-green-500 hover:bg-green-700 text-white)'],
+
+      // dynamic apply
+      ['btn-', ({ $$ }) => `@(bg-${$$}-400 text-${$$}-100 py-2 px-4 rounded-lg)`],
     ],
   },
   virtual(),

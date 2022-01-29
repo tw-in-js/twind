@@ -13,7 +13,6 @@ import type {
   Variant,
   VariantResult,
   VariantResolver,
-  Shortcuts,
   Falsey,
 } from '../types'
 
@@ -151,39 +150,14 @@ function createVariantFunction<Theme extends BaseTheme = BaseTheme>(
 }
 
 function createResolveFunction<Theme extends BaseTheme = BaseTheme>(
-  patterns: MaybeArray<string | RegExp> | Shortcuts<Theme>,
+  patterns: MaybeArray<string | RegExp>,
 
   resolve?: keyof CSSProperties | string | CSSObject | RuleResolver<Theme>,
 
   convert?: MatchConverter<Theme>,
 ): ResolveFunction<Theme> {
-  // This is a shortcuts object
-  if (Object.getPrototypeOf(patterns) === Object.prototype) {
-    return createExecutor(
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-      Object.keys(patterns).map((key) => {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-        const value = (patterns as Shortcuts<Theme>)[key]
-        return createResolveFunction(key, typeof value == 'function' ? value : () => value)
-      }),
-      (value, resolver, context) => {
-        // We need to move the result into the shortcuts layer
-        const resolved = resolver(value, context) as string | Falsey
-
-        // return resolved
-        return (
-          resolved && {
-            '@layer shortcuts': {
-              '@apply': resolved,
-            },
-          }
-        )
-      },
-    )
-  }
-
   return createResolve(
-    patterns as MaybeArray<string | RegExp>,
+    patterns,
     !resolve
       ? (match) =>
           ({
@@ -192,16 +166,17 @@ function createResolveFunction<Theme extends BaseTheme = BaseTheme>(
               match.slice(2).find(Boolean) || match.$$ || match.input,
             ),
           } as CSSObject)
-      : typeof resolve == 'string'
+      : typeof resolve == 'function'
+      ? resolve
+      : typeof resolve == 'string' && /^[\w-]+$/.test(resolve) // a CSS property alias
       ? (match, context) =>
           ({
             [resolve]: convert
               ? convert(match, context)
               : maybeNegate(match.input, match.slice(1).find(Boolean) || match.$$ || match.input),
           } as CSSObject)
-      : typeof resolve == 'function'
-      ? resolve
-      : () => resolve,
+      : // CSSObject, shortcut or apply
+        () => resolve,
   )
 }
 
@@ -213,38 +188,24 @@ function createResolve<Result, Theme extends BaseTheme = BaseTheme>(
   patterns: MaybeArray<string | RegExp>,
   resolve: (match: MatchResult, context: Context<Theme>) => Result,
 ): (value: string, context: Context<Theme>) => Result | undefined {
-  return createRegExpExecutor(patterns, (value, condition, context) =>
-    exec(value, condition, resolve, context),
-  )
-}
+  return createRegExpExecutor(patterns, (value, condition, context) => {
+    const match = condition.exec(value) as MatchResult | Falsey
 
-function exec<Result, Theme extends BaseTheme = BaseTheme>(
-  value: string,
-  condition: Condition,
-  resolve: (match: MatchResult, context: Context<Theme>) => Result,
-  context: Context<Theme>,
-): Result | undefined {
-  const match = condition.exec(value) as MatchResult | Falsey
+    if (match) {
+      // MATCH.$_ = value
+      match.$$ = value.slice(match[0].length)
 
-  if (match) {
-    // MATCH.$_ = value
-    match.$$ = value.slice(match[0].length)
-
-    return resolve(match, context)
-  }
+      return resolve(match, context)
+    }
+  })
 }
 
 function createRegExpExecutor<Result, Theme extends BaseTheme = BaseTheme>(
   patterns: MaybeArray<string | RegExp>,
-  run: (value: string, condition: Condition, context: Context<Theme>) => Result,
+  run: (value: string, condition: RegExp, context: Context<Theme>) => Result,
 ): (value: string, context: Context<Theme>) => Result | undefined {
-  return createExecutor(asArray(patterns).map(toCondition), run)
-}
+  const conditions = asArray(patterns).map(toCondition)
 
-function createExecutor<Condition, Result, Theme extends BaseTheme = BaseTheme>(
-  conditions: Condition[],
-  run: (value: string, condition: Condition, context: Context<Theme>) => Result,
-): (value: string, context: Context<Theme>) => Result | undefined {
   return (value, context) => {
     for (const condition of conditions) {
       const result = run(value, condition, context)
@@ -259,9 +220,8 @@ function createExecutor<Condition, Result, Theme extends BaseTheme = BaseTheme>(
  * @param string The String object or string literal on which to perform the search.
  */
 // type Condition = (string: string) => RegExpExecArray | Falsey
-type Condition = RegExp
 
-function toCondition(value: string | RegExp): Condition {
+function toCondition(value: string | RegExp): RegExp {
   // "visible" -> /^visible$/
   // "(float)-(left|right|none)" -> /^(float)-(left|right|none)$/
   // "auto-rows-" -> /^auto-rows-/

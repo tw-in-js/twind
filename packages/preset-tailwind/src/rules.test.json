@@ -1881,13 +1881,13 @@
       ".text-red-100{--tw-text-opacity:1;color:rgba(254,226,226,var(--tw-text-opacity))}"
     ]
   ],
-  "btn": [
+  "card": [
     "*,::before,::after{--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000}",
-    ".btn{padding-top:0.5rem;padding-bottom:0.5rem;padding-left:1rem;padding-right:1rem;font-weight:600;border-radius:0.5rem}",
-    ".btn{--tw-shadow:0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}"
+    ".card{--tw-shadow:0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow);padding-left:1rem;padding-right:1rem;padding-top:0.5rem;padding-bottom:0.5rem;font-weight:600;border-radius:0.5rem}"
   ],
+  "card-red": ".card-red{--tw-text-opacity:1;color:rgba(254,226,226,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:rgba(248,113,113,var(--tw-bg-opacity));padding-left:1rem;padding-right:1rem;padding-top:0.5rem;padding-bottom:0.5rem;border-radius:0.5rem}",
   "btn-green": [
-    ".btn-green{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:rgba(34,197,94,var(--tw-bg-opacity))}",
+    ".btn-green{--tw-bg-opacity:1;background-color:rgba(34,197,94,var(--tw-bg-opacity));--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}",
     ".btn-green:hover{--tw-bg-opacity:1;background-color:rgba(21,128,61,var(--tw-bg-opacity))}"
   ],
   "btn-red": ".btn-red{--tw-bg-opacity:1;background-color:rgba(248,113,113,var(--tw-bg-opacity));--tw-text-opacity:1;color:rgba(254,226,226,var(--tw-text-opacity));padding-top:0.5rem;padding-bottom:0.5rem;padding-left:1rem;padding-right:1rem;border-radius:0.5rem}",

@@ -172,25 +172,15 @@ export type RuleResolver<Theme extends BaseTheme = BaseTheme> = (
   context: Context<Theme>,
 ) => RuleResult
 
-export type ShortcutResolver<Theme extends BaseTheme = BaseTheme> = (
-  match: MatchResult,
-  context: Context<Theme>,
-) => string | Falsey
-
-export type Shortcuts<Theme extends BaseTheme = BaseTheme> = {
-  [classname: string]: string | ShortcutResolver<Theme>
-}
-
 export type Rule<Theme extends BaseTheme = BaseTheme> =
   | string
   | RegExp
-  | Shortcuts<Theme>
+  | [pattern: MaybeArray<string | RegExp>, alias: string]
+  | [pattern: MaybeArray<string | RegExp>, css: CSSObject]
+  | [pattern: MaybeArray<string | RegExp>, resolve: RuleResolver<Theme>]
+  | [pattern: MaybeArray<string | RegExp>, property: keyof CSSProperties]
   | [
-      condition: MaybeArray<string | RegExp>,
-      resolve: keyof CSSProperties | string | CSSObject | RuleResolver<Theme>,
-    ]
-  | [
-      condition: MaybeArray<string | RegExp>,
+      pattern: MaybeArray<string | RegExp>,
       property: keyof CSSProperties,
       // Default to first matched group
       convert: MatchConverter<Theme>,
