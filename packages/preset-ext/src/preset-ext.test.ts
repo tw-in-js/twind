@@ -17,6 +17,7 @@ const tw = twind(
 afterEach(() => tw.clear())
 
 Object.entries(data)
+  .filter(([tokens]) => !tokens.startsWith('//'))
   .map(([tokens, declarations]): [string, string, string[]] => {
     if (Array.isArray(declarations)) {
       return Array.isArray(declarations[1])
@@ -41,13 +42,13 @@ test('dark class using peer', () => {
   const tw = twind(
     {
       presets: [presetExt(), presetTailwind({ enablePreflight: false })],
-      darkMode: 'class'
+      darkMode: 'class',
     },
     virtual(),
   )
 
   assert.strictEqual(tw('dark:group-hocus:underline'), 'dark:group-hocus:underline')
   assert.deepEqual(tw.target, [
-    ".dark .group:is(:hover,:focus-visible) .dark\\:group-hocus\\:underline{text-decoration:underline}"
+    '.dark .group:is(:hover,:focus-visible) .dark\\:group-hocus\\:underline{text-decoration:underline}',
   ])
 })

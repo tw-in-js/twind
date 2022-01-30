@@ -259,3 +259,33 @@ test('apply with dynamic values', () => {
     '.Named\\#11t9suh:hover{opacity:0.9}',
   ])
 })
+
+test('group and peer marker classes', () => {
+  assert.strictEqual(tw('group'), 'group')
+  assert.lengthOf(tw.target, 0)
+
+  tw.clear()
+
+  assert.strictEqual(tw('peer'), 'peer')
+  assert.lengthOf(tw.target, 0)
+})
+
+test('group and peer hashed marker classes', () => {
+  const tw = twind(
+    {
+      presets: [tailwind({ enablePreflight: false })],
+      hash: true,
+    },
+    virtual(),
+  )
+
+  assert.strictEqual(tw('group'), '#1bk5mm5')
+  assert.strictEqual(tw('group-hover:underline'), '#hnr61o')
+  assert.deepEqual(tw.target, ['.\\#1bk5mm5:hover .\\#hnr61o{text-decoration:underline}'])
+
+  tw.clear()
+
+  assert.strictEqual(tw('peer'), '#p4d4mm')
+  assert.strictEqual(tw('peer-focus:underline'), '#1glqsdd')
+  assert.deepEqual(tw.target, ['.\\#p4d4mm:focus~.\\#1glqsdd{text-decoration:underline}'])
+})
