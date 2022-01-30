@@ -4,7 +4,7 @@ import { assert, test } from 'vitest'
 import presetTailwind from '@twind/preset-tailwind'
 import { twind, virtual, observe } from '..'
 
-test('use happy-dom in this test file', () => {
+test('observe in browser', () => {
   document.documentElement.innerHTML = `
     <!DOCTYPE html>
     <html lang="en">

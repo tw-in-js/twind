@@ -67,7 +67,7 @@
     "check:fix": "npm run check -- --fix",
     "size-limit": "size-limit",
     "format": "prettier --write --ignore-path .gitignore . '!pnpm-lock.yaml'",
-    "test": "vitest",
+    "test": "vitest --reporter dot",
     "test:ui": "npm test -- --ui",
     "test:coverage": "vitest run --coverage",
     "release": "pnpm publish -r",

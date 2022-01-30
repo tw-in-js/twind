@@ -36,3 +36,18 @@ Object.entries(data)
       assert.deepEqual(tw.target, rules)
     }),
   )
+
+test('dark class using peer', () => {
+  const tw = twind(
+    {
+      presets: [presetExt(), presetTailwind({ enablePreflight: false })],
+      darkMode: 'class'
+    },
+    virtual(),
+  )
+
+  assert.strictEqual(tw('dark:group-hocus:underline'), 'dark:group-hocus:underline')
+  assert.deepEqual(tw.target, [
+    ".dark .group:is(:hover,:focus-visible) .dark\\:group-hocus\\:underline{text-decoration:underline}"
+  ])
+})

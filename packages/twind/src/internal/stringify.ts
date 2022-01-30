@@ -6,15 +6,20 @@ export function stringify(rule: TwindRule): string | undefined {
   if (rule.d) {
     const groups: string[] = []
 
-    const selector = rule.r.reduce(
-      (selector, condition) => {
-        if (condition[0] == '@') {
-          groups.unshift(condition)
-          return selector
-        }
+    let selector = rule.n ? '.' + escape(rule.n) : ''
+    let conditions = rule.r
+    // move dark selector condition last
+    // ['.dark &', '.group:hover &'] -> '.dark .group:hover .rule'
+    if (rule.p & (1 << 30) /* Shifts.darkMode */ && conditions[0][0] != '@') {
+      conditions = [...conditions.slice(1), conditions[0]]
+    }
 
+    for (const condition of conditions) {
+      if (condition[0] == '@') {
+        groups.push(condition)
+      } else {
         // Go over the selector and replace the matching multiple selectors if any
-        return selector.replace(
+        selector = selector.replace(
           /^$| *((?:\\,|\(.+?\)|\[.+?\]|[^,])+) *(,|$)/g,
           (_, selectorPart = _, comma = '') =>
             // Return the current selector with the key matching multiple selectors if any
@@ -22,12 +27,11 @@ export function stringify(rule: TwindRule): string | undefined {
               / *((?:\\,|\(.+?\)|\[.+?\]|[^,])+) *(,|$)/g,
               // If the current condition has a nested selector replace it
               (_, conditionPart: string, comma = '') =>
-                conditionPart.replace(/&/g, selectorPart as string) + comma,
+                conditionPart.replace(/&/g, selectorPart) + comma,
             ) + comma,
         )
-      },
-      rule.n ? '.' + escape(rule.n) : '',
-    )
+      }
+    }
 
     if (selector) {
       groups.push(selector)
