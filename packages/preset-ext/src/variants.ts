@@ -3,9 +3,9 @@ import type { Variant } from 'twind'
 const variants: Variant[] = [
   ['hocus', '&:hover,&:focus-visible'],
   [
-    '((group|peer)(-[^-]+)?)-hocus',
-    ({ 1: $1, 2: $2 }, { e, h }) =>
-      `.${e(h($1))}:is(:hover,:focus-visible)${$2[0] == 'p' ? '~' : ' '}&`,
+    '((group|peer)(~.+)?)-hocus',
+    ({ 1: $1 }, { e, h }) =>
+      `:merge(.${e(h($1))}):is(:hover,:focus-visible)${$1[0] == 'p' ? '~' : ' '}&`,
   ],
 
   // - `dir-rtl` -> `:dir(rtl)`

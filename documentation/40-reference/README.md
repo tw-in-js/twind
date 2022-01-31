@@ -17,6 +17,36 @@
 - comments
   - multi line: `/* .. */`
   - single line: `//` — should **not** be used directly in a class attribute, use `cx` to _clear_ the class names before
+- [`group~{name}-{modifier}`](https://tailwindcss.com/docs/hover-focus-and-other-states#styling-based-on-parent-state) and [`peer~{name}-{modifier}`](https://tailwindcss.com/docs/hover-focus-and-other-states#styling-based-on-sibling-state)
+
+  Name can contain any characters except whitespace, parenthesis (`(` and `)`), colon (`:`), dash (`-`), and opening bracket (`[`).
+
+  ```html
+  <div class="group~project bg-white hover:bg-blue-500 ...">
+    <p class="text-gray-900 group~project-hover:text-white ...">New Project</p>
+    <div class="group~create bg-gray-100 hover:bg-green-500 ...">
+      <p class="text-gray-500 group~create-hover:text-white ...">
+        Create a new project from a variety of starting templates.
+      </p>
+    </div>
+  </div>
+  ```
+
+- attribute selector as modifier for [groups](https://tailwindcss.com/docs/hover-focus-and-other-states#styling-based-on-parent-state) and [peers](https://tailwindcss.com/docs/hover-focus-and-other-states#styling-based-on-sibling-state)
+
+  ```html
+  <div class="group bg-white hover:bg-blue-500 ...">
+    <p class="text-gray-900 group[disabled]:text-gray-200 ...">Project Name</p>
+  </div>
+  ```
+
+  With named groups/peers:
+
+  ```html
+  <div class="group~project bg-white hover:bg-blue-500 ...">
+    <p class="text-gray-900 group~project[disabled]:text-gray-200 ...">Project Name</p>
+  </div>
+  ```
 
 ## CSS (strings and objects)
 

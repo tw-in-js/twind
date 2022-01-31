@@ -36,12 +36,12 @@
       "@media (prefers-color-scheme:dark){.group:is(:hover,:focus-visible) .dark\\:group-hocus\\:underline{text-decoration:underline}}"
     ]
   ],
-  "group-xxx-hocus:underline": ".group-xxx:is(:hover,:focus-visible) .group-xxx-hocus\\:underline{text-decoration:underline}",
-  "dark:group-xxx-hocus:underline": "@media (prefers-color-scheme:dark){.group-xxx:is(:hover,:focus-visible) .dark\\:group-xxx-hocus\\:underline{text-decoration:underline}}",
-  "group-xxx-hocus:dark:underline": [
-    "dark:group-xxx-hocus:underline",
+  "group~xxx-hocus:underline": ".group\\~xxx:is(:hover,:focus-visible) .group\\~xxx-hocus\\:underline{text-decoration:underline}",
+  "dark:group~xxx-hocus:underline": "@media (prefers-color-scheme:dark){.group\\~xxx:is(:hover,:focus-visible) .dark\\:group\\~xxx-hocus\\:underline{text-decoration:underline}}",
+  "group~xxx-hocus:dark:underline": [
+    "dark:group~xxx-hocus:underline",
     [
-      "@media (prefers-color-scheme:dark){.group-xxx:is(:hover,:focus-visible) .dark\\:group-xxx-hocus\\:underline{text-decoration:underline}}"
+      "@media (prefers-color-scheme:dark){.group\\~xxx:is(:hover,:focus-visible) .dark\\:group\\~xxx-hocus\\:underline{text-decoration:underline}}"
     ]
   ]
 }

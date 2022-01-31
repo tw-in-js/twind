@@ -31,9 +31,9 @@ const variants: Variant<TailwindTheme>[] = [
   // these need to add a marker selector with the pseudo class
   // => '.group:focus .group-focus:selector'
   [
-    '((group|peer)((?!-focus)-[^-]+)?)-([a-z-]+|\\[.+])',
-    ({ 1: $1, 2: $2, 4: $4 }, { e, h }) =>
-      `.${e(h($1))}${($4[0] == '[' ? '' : ':') + $4}${$2[0] == 'p' ? '~' : ' '}&`,
+    '((group|peer)(~[^-[]+)?)(-[a-z-]+|\\[.+])',
+    ({ 1: $1, 4: $4 }, { e, h }) =>
+      `:merge(.${e(h($1))})${$4[0] == '[' ? $4 : ':' + $4.slice(1)}${$1[0] == 'p' ? '~' : ' '}&`,
   ],
 
   // direction variants

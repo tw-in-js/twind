@@ -662,8 +662,8 @@
   "group-hover:text-yellow-600": [
     ".group:hover .group-hover\\:text-yellow-600{--tw-text-opacity:1;color:rgba(202,138,4,var(--tw-text-opacity))}"
   ],
-  "group-x-hover:text-yellow-600": [
-    ".group-x:hover .group-x-hover\\:text-yellow-600{--tw-text-opacity:1;color:rgba(202,138,4,var(--tw-text-opacity))}"
+  "group~x-hover:text-yellow-600": [
+    ".group\\~x:hover .group\\~x-hover\\:text-yellow-600{--tw-text-opacity:1;color:rgba(202,138,4,var(--tw-text-opacity))}"
   ],
   "group-focus:text-yellow-600": [
     ".group:focus .group-focus\\:text-yellow-600{--tw-text-opacity:1;color:rgba(202,138,4,var(--tw-text-opacity))}"
@@ -671,16 +671,13 @@
   "group-focus-within:text-yellow-600": [
     ".group:focus-within .group-focus-within\\:text-yellow-600{--tw-text-opacity:1;color:rgba(202,138,4,var(--tw-text-opacity))}"
   ],
-  "group-focus:text-red-500 group-x-hover:text-yellow-500": [
-    "group-x-hover:text-yellow-500 group-focus:text-red-500",
-    [
-      ".group-x:hover .group-x-hover\\:text-yellow-500{--tw-text-opacity:1;color:rgba(234,179,8,var(--tw-text-opacity))}",
-      ".group:focus .group-focus\\:text-red-500{--tw-text-opacity:1;color:rgba(239,68,68,var(--tw-text-opacity))}"
-    ]
+  "group-focus:text-red-500 group~x-hover:text-yellow-500": [
+    ".group:focus .group-focus\\:text-red-500{--tw-text-opacity:1;color:rgba(239,68,68,var(--tw-text-opacity))}",
+    ".group\\~x:hover .group\\~x-hover\\:text-yellow-500{--tw-text-opacity:1;color:rgba(234,179,8,var(--tw-text-opacity))}"
   ],
   "peer-invalid:visible": ".peer:invalid~.peer-invalid\\:visible{visibility:visible}",
   "peer-focus:visible": ".peer:focus~.peer-focus\\:visible{visibility:visible}",
-  "peer-xxx-focus:visible": ".peer-xxx:focus~.peer-xxx-focus\\:visible{visibility:visible}",
+  "peer~xxx-focus:visible": ".peer\\~xxx:focus~.peer\\~xxx-focus\\:visible{visibility:visible}",
   "rotate-3 scale-125": [
     "rotate-3 scale-125",
     [
@@ -1967,5 +1964,10 @@
       ".after\\:ml-0\\.5:after{margin-left:0.125rem}"
     ]
   ],
-  "h-[14px]": ".h-\\[14px\\]{height:14px}"
+  "h-[14px]": ".h-\\[14px\\]{height:14px}",
+  "disabled:focus:hover:space-x-4": ".disabled\\:focus\\:hover\\:space-x-4:disabled:focus:hover>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-left:calc(1rem * calc(1 - var(--tw-space-x-reverse)));margin-right:calc(1rem * var(--tw-space-x-reverse))}",
+  "group-focus:group-hover:text-center": ".group:hover:focus .group-focus\\:group-hover\\:text-center{text-align:center}",
+  "peer-focus:group-hover:text-center": ".peer:focus~.group:hover .peer-focus\\:group-hover\\:text-center{text-align:center}",
+  "peer[disabled]:peer-focus:peer-hover:border-blue-500": ".peer:hover:focus[disabled]~.peer\\[disabled\\]\\:peer-focus\\:peer-hover\\:border-blue-500{--tw-border-opacity:1;border-color:rgba(59,130,246,var(--tw-border-opacity))}",
+  "peer-disabled:peer-first-child:group-hover:group-focus:focus:hover:space-x-4": ".peer:first-child:disabled~.group:focus:hover .peer-disabled\\:peer-first-child\\:group-hover\\:group-focus\\:focus\\:hover\\:space-x-4:focus:hover>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-left:calc(1rem * calc(1 - var(--tw-space-x-reverse)));margin-right:calc(1rem * var(--tw-space-x-reverse))}"
 }

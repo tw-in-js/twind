@@ -114,6 +114,7 @@ const tw = twind(
 afterEach(() => tw.clear())
 
 Object.entries(data)
+  .filter(([tokens]) => !tokens.startsWith('//'))
   .map(([tokens, declarations]): [string, string, string[]] => {
     if (Array.isArray(declarations)) {
       // "group hover:bg-surface": [
@@ -262,12 +263,32 @@ test('apply with dynamic values', () => {
 
 test('group and peer marker classes', () => {
   assert.strictEqual(tw('group'), 'group')
-  assert.lengthOf(tw.target, 0)
+  assert.strictEqual(tw('group-hover:underline'), 'group-hover:underline')
+  assert.deepEqual(tw.target, ['.group:hover .group-hover\\:underline{text-decoration:underline}'])
 
   tw.clear()
 
   assert.strictEqual(tw('peer'), 'peer')
-  assert.lengthOf(tw.target, 0)
+  assert.strictEqual(tw('peer[disabled]:underline'), 'peer[disabled]:underline')
+  assert.deepEqual(tw.target, [
+    '.peer[disabled]~.peer\\[disabled\\]\\:underline{text-decoration:underline}',
+  ])
+
+  tw.clear()
+
+  assert.strictEqual(tw('group~name'), 'group~name')
+  assert.strictEqual(tw('group~name[disabled]:underline'), 'group~name[disabled]:underline')
+  assert.deepEqual(tw.target, [
+    '.group\\~name[disabled] .group\\~name\\[disabled\\]\\:underline{text-decoration:underline}',
+  ])
+
+  tw.clear()
+
+  assert.strictEqual(tw('peer~name'), 'peer~name')
+  assert.strictEqual(tw('peer~name-focus-visible:underline'), 'peer~name-focus-visible:underline')
+  assert.deepEqual(tw.target, [
+    '.peer\\~name:focus-visible~.peer\\~name-focus-visible\\:underline{text-decoration:underline}',
+  ])
 })
 
 test('group and peer hashed marker classes', () => {
@@ -288,4 +309,16 @@ test('group and peer hashed marker classes', () => {
   assert.strictEqual(tw('peer'), '#p4d4mm')
   assert.strictEqual(tw('peer-focus:underline'), '#1glqsdd')
   assert.deepEqual(tw.target, ['.\\#p4d4mm:focus~.\\#1glqsdd{text-decoration:underline}'])
+
+  tw.clear()
+
+  assert.strictEqual(tw('group~name'), '#1uaq32w')
+  assert.strictEqual(tw('group~name-focus:underline'), '#13f0hiy')
+  assert.deepEqual(tw.target, ['.\\#1uaq32w:focus .\\#13f0hiy{text-decoration:underline}'])
+
+  tw.clear()
+
+  assert.strictEqual(tw('peer~name'), '#1krcwoi')
+  assert.strictEqual(tw('peer~name[disabled]:underline'), '#1nh745q')
+  assert.deepEqual(tw.target, ['.\\#1krcwoi[disabled]~.\\#1nh745q{text-decoration:underline}'])
 })

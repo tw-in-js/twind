@@ -28,7 +28,7 @@ const rules: Rule<TailwindTheme>[] = [
   ],
 
   /* Styling based on parent and peer state */
-  ['((group|peer)((?!-focus)-[^-]+)?)', ({ input }, { h }) => [{ c: h(input) }]],
+  ['(group|peer)(~[^-[]+)?', ({ input }, { h }) => [{ c: h(input) }]],
 
   /* LAYOUT */
   ['aspect-', fromTheme('aspectRatio')],
