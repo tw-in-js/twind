@@ -1,5 +1,11 @@
 # twind
 
+## 1.0.0-next.31
+
+### Patch Changes
+
+- bump all packages ([`57405812`](https://github.com/tw-in-js/twind/commit/57405812281dd1bf32b1250c459db9a48466786c))
+
 ## 1.0.0-next.30
 
 ### Patch Changes
