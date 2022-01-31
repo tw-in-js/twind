@@ -129,7 +129,7 @@ const changelogFunctions = {
     const suffix = [
       // only link PR or merge commit not both
       links.pull ? ` (${links.pull})` : links.commit ? ` (${links.commit})` : '',
-      users ? ` 🙏🏽  Thanks ${users}!` : '',
+      users ? ` 🙏🏽  ${users}!` : '',
     ].join('')
 
     return `\n\n- ${firstLine}${suffix}\n${futureLines.map((l) => `  ${l}`).join('\n')}`
