@@ -829,7 +829,8 @@ function ratios(start: number, end: number): Record<string, string> {
 
   do {
     // XXX: using var to avoid strange bug when generating cjs where `= 1` is removed
-    for (let dividend = 1; dividend < start; dividend++) {
+    // eslint-disable-next-line no-var
+    for (var dividend = 1; dividend < start; dividend++) {
       // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
       result[`${dividend}/${start}`] = Number(((dividend / start) * 100).toFixed(6)) + '%'
     }
