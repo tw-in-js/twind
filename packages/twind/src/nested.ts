@@ -13,8 +13,8 @@ function nested(marker: string): Nested {
     } as Nested,
     {
       get(target, name) {
-        if (name in nested$) return Reflect.get(nested$, name);
-        
+        if (name in target) return target[name as string]
+
         return function namedNested(
           strings: TemplateStringsArray | Class,
           ...interpolations: Class[]
