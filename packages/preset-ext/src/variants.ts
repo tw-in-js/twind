@@ -5,7 +5,11 @@ const variants: Variant[] = [
   [
     '((group|peer)(~.+)?)-hocus',
     ({ 1: $1 }, { e, h }) =>
-      `:merge(.${e(h($1))}):is(:hover,:focus-visible)${$1[0] == 'p' ? '~' : ' '}&`,
+      // we could you `:is(:hover,:focus-visible)` but browser support is not so good ATM (2022-02)
+      // https://caniuse.com/css-matches-pseudo
+      ['hover', 'focus-visible']
+        .map((state) => `:merge(.${e(h($1))}):${state}${$1[0] == 'p' ? '~' : ' '}&`)
+        .join(','),
   ],
 
   // - `dir-rtl` -> `:dir(rtl)`

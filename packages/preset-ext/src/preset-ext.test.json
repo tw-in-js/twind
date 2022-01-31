@@ -28,20 +28,20 @@
   "[lang~='en-us']:text-blue-400": ".\\[lang\\~\\=\\'en-us\\'\\]\\:text-blue-400[lang~='en-us']{--tw-text-opacity:1;color:rgba(96,165,250,var(--tw-text-opacity))}",
   "[lang|='zh']:text-red-400": ".\\[lang\\|\\=\\'zh\\'\\]\\:text-red-400[lang|='zh']{--tw-text-opacity:1;color:rgba(248,113,113,var(--tw-text-opacity))}",
   "[data-lang='zh-TW']:text-purple-400": ".\\[data-lang\\=\\'zh-TW\\'\\]\\:text-purple-400[data-lang='zh-TW']{--tw-text-opacity:1;color:rgba(192,132,252,var(--tw-text-opacity))}",
-  "group-hocus:underline": ".group:is(:hover,:focus-visible) .group-hocus\\:underline{text-decoration:underline}",
-  "dark:group-hocus:underline": "@media (prefers-color-scheme:dark){.group:is(:hover,:focus-visible) .dark\\:group-hocus\\:underline{text-decoration:underline}}",
+  "group-hocus:underline": ".group:hover .group-hocus\\:underline,.group:focus-visible .group-hocus\\:underline{text-decoration:underline}",
+  "dark:group-hocus:underline": "@media (prefers-color-scheme:dark){.group:hover .dark\\:group-hocus\\:underline,.group:focus-visible .dark\\:group-hocus\\:underline{text-decoration:underline}}",
   "group-hocus:dark:underline": [
     "dark:group-hocus:underline",
     [
-      "@media (prefers-color-scheme:dark){.group:is(:hover,:focus-visible) .dark\\:group-hocus\\:underline{text-decoration:underline}}"
+      "@media (prefers-color-scheme:dark){.group:hover .dark\\:group-hocus\\:underline,.group:focus-visible .dark\\:group-hocus\\:underline{text-decoration:underline}}"
     ]
   ],
-  "group~xxx-hocus:underline": ".group\\~xxx:is(:hover,:focus-visible) .group\\~xxx-hocus\\:underline{text-decoration:underline}",
-  "dark:group~xxx-hocus:underline": "@media (prefers-color-scheme:dark){.group\\~xxx:is(:hover,:focus-visible) .dark\\:group\\~xxx-hocus\\:underline{text-decoration:underline}}",
+  "group~xxx-hocus:underline": ".group\\~xxx:hover .group\\~xxx-hocus\\:underline,.group\\~xxx:focus-visible .group\\~xxx-hocus\\:underline{text-decoration:underline}",
+  "dark:group~xxx-hocus:underline": "@media (prefers-color-scheme:dark){.group\\~xxx:hover .dark\\:group\\~xxx-hocus\\:underline,.group\\~xxx:focus-visible .dark\\:group\\~xxx-hocus\\:underline{text-decoration:underline}}",
   "group~xxx-hocus:dark:underline": [
     "dark:group~xxx-hocus:underline",
     [
-      "@media (prefers-color-scheme:dark){.group\\~xxx:is(:hover,:focus-visible) .dark\\:group\\~xxx-hocus\\:underline{text-decoration:underline}}"
+      "@media (prefers-color-scheme:dark){.group\\~xxx:hover .dark\\:group\\~xxx-hocus\\:underline,.group\\~xxx:focus-visible .dark\\:group\\~xxx-hocus\\:underline{text-decoration:underline}}"
     ]
   ]
 }
