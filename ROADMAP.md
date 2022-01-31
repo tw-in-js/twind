@@ -48,6 +48,7 @@
 - pug support: https://github.com/tw-in-js/twind/issues/198
 - how to create a PR in contributing guide: https://codesandbox.io/docs/git
 - support `is(:hover,:focus-visible):underline`?
+  - maybe as `is-hover,focus-visible:underline`
 - @twind/tailwind: parse style elements like tailwind? `<style type="text/tailwindcss">`
 
   https://github.com/tw-in-js/twind/issues/238#issuecomment-1021544996
