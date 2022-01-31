@@ -1,5 +1,45 @@
 # @twind/preset-ext
 
+## 1.0.0-next.29
+
+### Patch Changes
+
+- named groups (`group~{name}-{modifier}`) and peers (`peer~{name}-{modifier}`) ([`2c823293`](https://github.com/tw-in-js/twind/commit/2c82329376ef3f743bc25f355468f4a45c36a3e6))
+
+  ```html
+  <div class="group~project bg-white hover:bg-blue-500 ...">
+    <p class="text-gray-900 group~project-hover:text-white ...">New Project</p>
+    <div class="group~create bg-gray-100 hover:bg-green-500 ...">
+      <p class="text-gray-500 group~create-hover:text-white ...">
+        Create a new project from a variety of starting templates.
+      </p>
+    </div>
+  </div>
+  ```
+
+* use multiple selectors for group/peer hocus because browser support for `:is()` is not so good ATM ([`cdc9b7fe`](https://github.com/tw-in-js/twind/commit/cdc9b7febe5d67649a1dbdd01c6405b18d1f5433))
+
+- merge multiple group and peer classes ([`2c823293`](https://github.com/tw-in-js/twind/commit/2c82329376ef3f743bc25f355468f4a45c36a3e6))
+
+  `peer-disabled:peer-first-child:group-hover:group-focus:focus:hover:space-x-4`
+
+  ↓ ↓ ↓ ↓ ↓ ↓
+
+  ```css
+  .peer:first-child:disabled
+    ~ .group:focus:hover
+    .peer-disabled\\:peer-first-child\\:group-hover\\:group-focus\\:focus\\:hover\\:space-x-4:focus:hover
+    > :not([hidden])
+    ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+    margin-right: calc(1rem * var(--tw-space-x-reverse));
+  }
+  ```
+
+- Updated dependencies [[`a15d2655`](https://github.com/tw-in-js/twind/commit/a15d26559f3b04144552e3123c04672c4260b23b), [`b758c748`](https://github.com/tw-in-js/twind/commit/b758c7480949fb304bbed7d1f8214694733f666e), [`e1d3433a`](https://github.com/tw-in-js/twind/commit/e1d3433a985a906454d53b289554db026dbd527d), [`2c823293`](https://github.com/tw-in-js/twind/commit/2c82329376ef3f743bc25f355468f4a45c36a3e6), [`a2a343cc`](https://github.com/tw-in-js/twind/commit/a2a343ccf7ea734b87d44da4545f70400242b748)]:
+  - twind@1.0.0-next.29
+
 ## 1.0.0-next.28
 
 ### Patch Changes
