@@ -34,6 +34,8 @@ function bind(thisArg: ((tokens: string) => string) | undefined | void): Keyfram
         if (name === 'bind') {
           return bind
         }
+        /* eslint-disable-next-line @typescript-eslint/no-unsafe-return */
+        if (name in keyframes$) return Reflect.get(keyframes$, name)
 
         return function namedKeyframes(
           strings: CSSObject | string | TemplateStringsArray,

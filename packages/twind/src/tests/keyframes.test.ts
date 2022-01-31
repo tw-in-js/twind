@@ -132,3 +132,39 @@ test('bound named keyframes', () => {
   ])
   assert.lengthOf(tw.target as string[], 0)
 })
+
+test('keyframes proxy passthrough', () => {
+  const str = '0% {opacity: 0;}'
+  assert.strictEqual(keyframes(str).toString(), '\\#1bzmnn1')
+  assert.strictEqual(keyframes.func(str).toString(), 'func\\#2vt08t')
+
+  assert.strictEqual(keyframes.toString().replace(/[\s]/g, ''), 'function(){[nativecode]}')
+
+  const k = keyframes.bind(tw) // (otherwise, 'active' will be undefined))
+
+  assert.strictEqual(
+    k`
+0% {
+opacity: 0;
+}
+100% {
+opacity: 1;
+}
+`.toString(),
+    '\\#ts0qzs',
+  )
+
+  assert.strictEqual(
+    k.func`
+0% {
+opacity: 0;
+}
+100% {
+opacity: 1;
+}
+`.toString(),
+    'func\\#iw1k4k',
+  )
+
+  assert.strictEqual(k.toString().replace(/[\s]/g, ''), 'function(){[nativecode]}')
+})
