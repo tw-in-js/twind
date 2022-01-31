@@ -36,7 +36,7 @@
       "path": "dist/twind.esnext.js",
       "import": "{ setup }",
       "brotli": true,
-      "limit": "4.4kb"
+      "limit": "4.45kb"
     },
     {
       "name": "twind (twind + cssom)",
