@@ -1,5 +1,13 @@
 # @twind/preset-tailwind-forms
 
+## 1.0.0-next.31
+
+### Patch Changes
+
+- Updated dependencies [[`76922c22`](https://github.com/tw-in-js/twind/commit/76922c223374f30af6ff8ed7a351e90fd351c13c), [`57405812`](https://github.com/tw-in-js/twind/commit/57405812281dd1bf32b1250c459db9a48466786c)]:
+  - @twind/preset-tailwind@1.0.0-next.31
+  - twind@1.0.0-next.31
+
 ## 1.0.0-next.30
 
 ### Patch Changes

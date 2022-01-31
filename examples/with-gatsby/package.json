@@ -1,7 +1,7 @@
 {
   "name": "@example/with-gatsby",
   "description": "gatsby with twind example",
-  "version": "0.0.1-next.10",
+  "version": "0.0.1-next.11",
   "private": true,
   "license": "MIT",
   "bugs": "https://github.com/tw-in-js/twind/issues",
@@ -22,16 +22,16 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "dependencies": {
-    "@twind/tailwind": "1.0.0-next.30",
+    "@twind/tailwind": "1.0.0-next.31",
     "gatsby": "^4.5.3",
     "gatsby-plugin-manifest": "^4.5.2",
     "gatsby-plugin-offline": "^5.5.2",
     "gatsby-plugin-react-helmet": "^5.5.0",
-    "gatsby-plugin-twind": "1.0.0-next.30",
+    "gatsby-plugin-twind": "1.0.0-next.31",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0",
-    "twind": "1.0.0-next.30"
+    "twind": "1.0.0-next.31"
   },
   "// Only used within the twind monorepo": "",
   "pnpm": {

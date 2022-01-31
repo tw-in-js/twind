@@ -1,5 +1,14 @@
 # @twind/preset-tailwind
 
+## 1.0.0-next.31
+
+### Patch Changes
+
+- using var to avoid strange bug when generating cjs where `= 1` is removed ([`76922c22`](https://github.com/tw-in-js/twind/commit/76922c223374f30af6ff8ed7a351e90fd351c13c))
+
+- Updated dependencies [[`57405812`](https://github.com/tw-in-js/twind/commit/57405812281dd1bf32b1250c459db9a48466786c)]:
+  - twind@1.0.0-next.31
+
 ## 1.0.0-next.30
 
 ### Patch Changes
