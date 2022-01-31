@@ -1,5 +1,35 @@
 # twind
 
+## 1.0.0-next.29
+
+### Patch Changes
+
+- ensure dark class condition is always applied last ([`a15d2655`](https://github.com/tw-in-js/twind/commit/a15d26559f3b04144552e3123c04672c4260b23b))
+
+* fix: native methods such as `bind` not working properly when used on twind's apply helper ([#269](https://github.com/tw-in-js/twind/pull/269)) 🙏🏽 Thanks [@IgnusG](https://github.com/IgnusG)!
+
+- keyframes can be use within arbitrary values `` ​ `animate-[1s_${fadeIn}_ease-out]`​ `` ([`e1d3433a`](https://github.com/tw-in-js/twind/commit/e1d3433a985a906454d53b289554db026dbd527d))
+
+* merge multiple group and peer classes ([`2c823293`](https://github.com/tw-in-js/twind/commit/2c82329376ef3f743bc25f355468f4a45c36a3e6))
+
+  `peer-disabled:peer-first-child:group-hover:group-focus:focus:hover:space-x-4`
+
+  ↓ ↓ ↓ ↓ ↓ ↓
+
+  ```css
+  .peer:first-child:disabled
+    ~ .group:focus:hover
+    .peer-disabled\\:peer-first-child\\:group-hover\\:group-focus\\:focus\\:hover\\:space-x-4:focus:hover
+    > :not([hidden])
+    ~ :not([hidden]) {
+    --tw-space-x-reverse: 0;
+    margin-left: calc(1rem * calc(1 - var(--tw-space-x-reverse)));
+    margin-right: calc(1rem * var(--tw-space-x-reverse));
+  }
+  ```
+
+- Fix: keyframes Proxy now passthrough Function's own properties ([#270](https://github.com/tw-in-js/twind/pull/270)) 🙏🏽 Thanks [@danielweck](https://github.com/danielweck)!
+
 ## 1.0.0-next.28
 
 ### Patch Changes

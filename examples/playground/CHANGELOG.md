@@ -1,5 +1,17 @@
 # @example/playground
 
+## 0.0.1-next.14
+
+### Patch Changes
+
+- Updated dependencies [[`a15d2655`](https://github.com/tw-in-js/twind/commit/a15d26559f3b04144552e3123c04672c4260b23b), [`2c823293`](https://github.com/tw-in-js/twind/commit/2c82329376ef3f743bc25f355468f4a45c36a3e6), [`2c823293`](https://github.com/tw-in-js/twind/commit/2c82329376ef3f743bc25f355468f4a45c36a3e6), [`cdc9b7fe`](https://github.com/tw-in-js/twind/commit/cdc9b7febe5d67649a1dbdd01c6405b18d1f5433), [`b758c748`](https://github.com/tw-in-js/twind/commit/b758c7480949fb304bbed7d1f8214694733f666e), [`e1d3433a`](https://github.com/tw-in-js/twind/commit/e1d3433a985a906454d53b289554db026dbd527d), [`2c823293`](https://github.com/tw-in-js/twind/commit/2c82329376ef3f743bc25f355468f4a45c36a3e6), [`a2a343cc`](https://github.com/tw-in-js/twind/commit/a2a343ccf7ea734b87d44da4545f70400242b748), [`4fa0d3f0`](https://github.com/tw-in-js/twind/commit/4fa0d3f04d992d4f81986683466c5f60964b783d)]:
+  - twind@1.0.0-next.29
+  - @twind/preset-ext@1.0.0-next.29
+  - @twind/preset-tailwind@1.0.0-next.29
+  - @twind/preset-autoprefix@1.0.0-next.29
+  - @twind/preset-line-clamp@1.0.0-next.29
+  - @twind/preset-tailwind-forms@1.0.0-next.29
+
 ## 0.0.1-next.13
 
 ### Patch Changes

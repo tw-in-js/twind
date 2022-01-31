@@ -1,5 +1,12 @@
 # @twind/gatsby-plugin
 
+## 1.0.0-next.29
+
+### Patch Changes
+
+- Updated dependencies [[`a15d2655`](https://github.com/tw-in-js/twind/commit/a15d26559f3b04144552e3123c04672c4260b23b), [`b758c748`](https://github.com/tw-in-js/twind/commit/b758c7480949fb304bbed7d1f8214694733f666e), [`e1d3433a`](https://github.com/tw-in-js/twind/commit/e1d3433a985a906454d53b289554db026dbd527d), [`2c823293`](https://github.com/tw-in-js/twind/commit/2c82329376ef3f743bc25f355468f4a45c36a3e6), [`a2a343cc`](https://github.com/tw-in-js/twind/commit/a2a343ccf7ea734b87d44da4545f70400242b748)]:
+  - twind@1.0.0-next.29
+
 ## 1.0.0-next.28
 
 ### Patch Changes
