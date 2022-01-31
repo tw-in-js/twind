@@ -267,58 +267,6 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
 
 - drop IE 11 support
 
-## TODO
-
-- how to create a PR in contributing guide: https://codesandbox.io/docs/git
-- frameworks: next, remix, wmr, vue, stenciljs, angular, ...
-- pug support: https://github.com/tw-in-js/twind/issues/198
-- rewrite https://github.com/TanStack/tanstack.com
-- support `is(:hover,:focus-visible):underline`?
-- console.warn(`[twind] unknown rule "${value}"`)
-- ci: post on discord after release
-- @twind/tailwind: parse style elements like tailwind? `<style type="text/tailwindcss">`
-
-  https://github.com/tw-in-js/twind/issues/238#issuecomment-1021544996
-
-  ```js
-  // using a mutation observer?
-  document.querySelectorAll('style[type~="twind/css"]').forEach((e) => {
-    tw(css(e.textContent))
-  })
-  ```
-
-- zero runtime
-- cdn.twind.dev -> https://cdn.jsdelivr.net/npm/@twind/cdn@next
-- docs: website
-  - framework:
-    - vite + codehike
-      - https://github.com/preactjs/wmr/tree/main/docs
-    - wmr + codehike
-      - https://mdxjs.com/docs/getting-started/#wmr
-      - https://github.com/preactjs/wmr/tree/main/docs
-    - nextjs + next-plugin-preact + codehike
-    - https://docusaurus.io
-  - deployment:
-    - cloudflare pages
-    - github pages
-    - netlify
-- docs: explain and examples of both modes (observe/shim vs library)
-- docs: common patterns
-- docs: debugging the generated CSS in the browser (cssom sheet)
-- auto support dark mode in theme helpers (`<section>.dark.<key>` or `dark.<section>.<key>`)
-- @twind/preset-\* from tailwind core
-- @twind/react
-  - Global: https://emotion.sh/docs/globals
-  - createGlobalStyles: https://goober.js.org/api/createGlobalStyles
-  - createGlobalStyle: https://styled-components.com/docs/api#createglobalstyle
-- @twind/completions — provide autocompletion for classNames
-- a package to make it easy to create lightweight versions of presets (like https://lodash.com/custom-builds)
-- postcss plugin like tailwindcss for SSR
-
-  ```css
-  @twind;
-  ```
-
 ## 🧱 Contribute
 
 See the [Contributing Guide](./CONTRIBUTING.md)
