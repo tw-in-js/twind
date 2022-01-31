@@ -165,6 +165,10 @@ use `tw` or `tx` to inject styles
     }
   `
 
+  // within a arbitrary value
+  el.className = `animate-[1s_${fadeIn}_ease-out]`
+
+  // within CSS
   const fadeInClass = css`
     animation: 1s ${fadeIn} ease-out;
   `

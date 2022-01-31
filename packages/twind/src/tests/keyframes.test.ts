@@ -33,6 +33,15 @@ test('keyframes are lazy injected', () => {
     '@keyframes \\#ts0qzs{0%{opacity:0}100%{opacity:1}}',
     '.css\\#crz8f0{animation:1s \\#ts0qzs ease-out}',
   ])
+
+  tw.clear()
+
+  assert.strictEqual(tw(`animate-[1s_${fadeIn}_ease-out]`), 'animate-[1s_\\#ts0qzs_ease-out]')
+
+  assert.deepEqual(tw.target, [
+    '@keyframes \\#ts0qzs{0%{opacity:0}100%{opacity:1}}',
+    '.animate-\\[1s_\\\\\\#ts0qzs_ease-out\\]{animation:1s \\#ts0qzs ease-out}',
+  ])
 })
 
 test('bound keyframes are lazy injected', () => {
