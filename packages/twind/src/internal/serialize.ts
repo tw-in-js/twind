@@ -100,6 +100,7 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
       // TODO @font-feature-values
       if (key[1] == 'k' || key[1] == 'f') {
         // Use base layer
+        // TODO support arrays?
         rules.push({
           p: Layer.d,
           o: 0,
