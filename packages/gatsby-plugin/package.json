@@ -1,6 +1,6 @@
 {
   "name": "gatsby-plugin-twind",
-  "version": "1.0.0-next.29",
+  "version": "1.0.0-next.30",
   "description": "gatsby integration for Twind",
   "publishConfig": {
     "tag": "next",
@@ -39,7 +39,7 @@
     "gatsby": "2.x || 3.x || 4.x",
     "react": "16.x || 17.x || 18.x",
     "react-dom": "16.x || 17.x || 18.x",
-    "twind": "1.0.0-next.29",
+    "twind": "1.0.0-next.30",
     "typescript": "^4.4.0"
   },
   "peerDependenciesMeta": {
@@ -53,7 +53,7 @@
     "gatsby": "^4.5.3",
     "react": "^17.0.0",
     "react-dom": "^17.0.0",
-    "twind": "1.0.0-next.29"
+    "twind": "1.0.0-next.30"
   },
   "pnpm": {
     "peerDependencyRules": {
