@@ -11,7 +11,7 @@ importers:
       '@swc/helpers': ^0.3.2
       '@typescript-eslint/eslint-plugin': ^5.10.1
       '@typescript-eslint/parser': ^5.10.1
-      '@vitest/ui': ^0.2.3
+      '@vitest/ui': ^0.2.5
       c8: ^7.11.0
       distilt: ^0.16.8
       dotenv: ^10.0.0
@@ -28,7 +28,7 @@ importers:
       style-vendorizer: ^2.1.1
       tslib: ^2.3.1
       typescript: ^4.5.5
-      vitest: ^0.2.3
+      vitest: ^0.2.5
     dependencies:
       '@swc/helpers': 0.3.2
     devDependencies:
@@ -38,7 +38,7 @@ importers:
       '@size-limit/file': 7.0.5_size-limit@7.0.5
       '@typescript-eslint/eslint-plugin': 5.10.1_0f442f6b60390429061d5d9b6bcaaba6
       '@typescript-eslint/parser': 5.10.1_eslint@8.7.0+typescript@4.5.5
-      '@vitest/ui': 0.2.3
+      '@vitest/ui': 0.2.5
       c8: 7.11.0
       distilt: 0.16.8_typescript@4.5.5
       dotenv: 10.0.0
@@ -55,7 +55,7 @@ importers:
       style-vendorizer: 2.1.1
       tslib: 2.3.1
       typescript: 4.5.5
-      vitest: 0.2.3_ecfb20571b54874e0e616d3cea76d5b9
+      vitest: 0.2.5_50cdcbf8f945f20786ab393d0266a7e2
 
   documentation:
     specifiers:
@@ -2783,8 +2783,8 @@ packages:
   /@vercel/webpack-asset-relocator-loader/1.7.0:
     resolution: {integrity: sha512-1Dy3BdOliDwxA7VZSIg55E1d/us2KvsCQOZV25fgufG//CsnZBGiSAL7qewTQf7YVHH0A9PHgzwMmKIZ8aFYVw==}
 
-  /@vitest/ui/0.2.3:
-    resolution: {integrity: sha512-yShM+v8hBOjrrq/TfnC9ZzQ4mPGB4SCCTluZU3SgDrQsiFWXLexleE3xH97l0UoX3SSeCTcoUMM5s3jesHaXHQ==}
+  /@vitest/ui/0.2.5:
+    resolution: {integrity: sha512-gWjTlIx2ZW+JpPdMF5UA8KoRAKwSB2MywJ62I5g8H+NbLipu9N3OMcSm4Y4iC+qJ2ol3RS1S2dYj19y9MuKzaw==}
     dependencies:
       sirv: 2.0.2
     dev: true
@@ -3658,15 +3658,15 @@ packages:
     resolution: {integrity: sha1-G2gcIf+EAzyCZUMJBolCDRhxUdw=}
     dev: true
 
-  /chai/4.3.5:
-    resolution: {integrity: sha512-0gKhNDL29PUlmwz1CG42p/OaBf1v0YD3oH4//YMS1niT7rLH9tC+lqTgk+SvdbhMLd7ToTtxA61orNBmpSO/DA==}
+  /chai/4.3.6:
+    resolution: {integrity: sha512-bbcp3YfHCUzMOvKqsztczerVgBKSsEijCySNlHHbX3VG1nskvqjz5Rfso1gGwD6w6oOV3eI60pKuMOV5MV7p3Q==}
     engines: {node: '>=4'}
     dependencies:
       assertion-error: 1.1.0
       check-error: 1.0.2
       deep-eql: 3.0.1
       get-func-name: 2.0.0
-      loupe: 2.3.0
+      loupe: 2.3.1
       pathval: 1.1.1
       type-detect: 4.0.8
     dev: true
@@ -7868,11 +7868,10 @@ packages:
     dependencies:
       js-tokens: 4.0.0
 
-  /loupe/2.3.0:
-    resolution: {integrity: sha512-b6TVXtF01VErh8IxN/MfdiWLQmttrenN98PPGS01kym8kGycJ9tqBXD6D+4sNEDhgE83+H0Mk1cVSl0mD1nNSg==}
+  /loupe/2.3.1:
+    resolution: {integrity: sha512-EN1D3jyVmaX4tnajVlfbREU4axL647hLec1h/PXAb8CPDMJiYitcWF2UeLVNttRqaIqQs4x+mRvXf+d+TlDrCA==}
     dependencies:
       get-func-name: 2.0.0
-      type-detect: 4.0.8
     dev: true
 
   /lower-case/2.0.2:
@@ -10802,8 +10801,8 @@ packages:
     engines: {node: '>=14.0.0'}
     dev: true
 
-  /tinyspy/0.2.8:
-    resolution: {integrity: sha512-4VXqQzzh9gC5uOLk77cLr9R3wqJq07xJlgM9IUdCNJCet139r+046ETKbU1x7mGs7B0k7eopyH5U6yflbBXNyA==}
+  /tinyspy/0.2.10:
+    resolution: {integrity: sha512-Qij6rGWCDjWIejxCXXVi6bNgvrYBp3PbqC4cBP/0fD6WHDOHCw09Zd13CsxrDqSR5PFq01WeqDws8t5lz5sH0A==}
     engines: {node: '>=14.0.0'}
     dev: true
 
@@ -11275,8 +11274,8 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitest/0.2.3_ecfb20571b54874e0e616d3cea76d5b9:
-    resolution: {integrity: sha512-hkJpXkJJ52yyBrnoyqox6eoo4mzYmlm+OwSNSFqhMidY75wEGV1/DsAR6kx6WLucI3CtlToAzfI94WZGfgRUrg==}
+  /vitest/0.2.5_50cdcbf8f945f20786ab393d0266a7e2:
+    resolution: {integrity: sha512-QruEhsNxy8ycLxYG9rrGUfHZzJ8A6YvA9ULZ4w/ecvm0Zejm1nxUar/XkRWkL2xzrqA5AjmfqDSQZ8q2bFbA0Q==}
     engines: {node: '>=14.14.0'}
     hasBin: true
     peerDependencies:
@@ -11296,13 +11295,13 @@ packages:
     dependencies:
       '@types/chai': 4.3.0
       '@types/chai-subset': 1.3.3
-      '@vitest/ui': 0.2.3
+      '@vitest/ui': 0.2.5
       c8: 7.11.0
-      chai: 4.3.5
+      chai: 4.3.6
       happy-dom: 2.30.1
       local-pkg: 0.4.1
       tinypool: 0.1.1
-      tinyspy: 0.2.8
+      tinyspy: 0.2.10
       vite: 2.7.13
     transitivePeerDependencies:
       - less

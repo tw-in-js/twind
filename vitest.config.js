@@ -5,6 +5,6 @@ export default {
     coverage: {
       reporter: isCI ? 'lcovonly' : 'html',
     },
-    uiBase: '/',
+    api: { port: 3002 },
   },
 }
