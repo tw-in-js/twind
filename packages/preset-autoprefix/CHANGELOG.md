@@ -1,5 +1,12 @@
 # @twind/preset-autoprefix
 
+## 1.0.0-next.30
+
+### Patch Changes
+
+- Updated dependencies [[`39001d2a`](https://github.com/tw-in-js/twind/commit/39001d2a2b6718a92080ae47cb6157d1077405b3)]:
+  - twind@1.0.0-next.30
+
 ## 1.0.0-next.29
 
 ### Patch Changes

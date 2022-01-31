@@ -1,5 +1,18 @@
 # twind
 
+## 1.0.0-next.30
+
+### Patch Changes
+
+- mark the twind style sheet ([`39001d2a`](https://github.com/tw-in-js/twind/commit/39001d2a2b6718a92080ae47cb6157d1077405b3))
+
+  ```html
+  <!-- the SSR stylesheet -->
+  <style data-twind="ssr"></style>
+  <!-- the client stylesheet -->
+  <style data-twind></style>
+  ```
+
 ## 1.0.0-next.29
 
 ### Patch Changes
