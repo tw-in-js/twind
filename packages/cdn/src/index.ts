@@ -52,5 +52,5 @@ export function setup(
 ): Twind {
   cancelAutoSetup()
 
-  return observe(twind(defineConfig(config as TwindConfig), sheet), target)
+  return observe(twind(defineConfig(config as TwindConfig), sheet), target) as unknown as Twind
 }

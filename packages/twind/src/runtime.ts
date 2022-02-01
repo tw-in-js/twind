@@ -60,7 +60,9 @@ export const tw = /* @__PURE__ */ Object.defineProperties(
     theme(...args: unknown[]) {
       return active.theme(...(args as []))
     },
-
+    get config() {
+      return active.config
+    },
     clear() {
       return active.clear()
     },
@@ -108,7 +110,7 @@ export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown
     active.destroy()
   }
 
-  active = observe(twind(config as TwindUserConfig<Theme>, sheet), target)
+  active = observe(twind(config as TwindUserConfig, sheet), target)
 
   if (firstRun && typeof document != 'undefined') {
     // first run in browser
@@ -120,5 +122,5 @@ export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown
     }
   }
 
-  return active as Twind<Theme, SheetTarget>
+  return active as unknown as Twind<Theme, SheetTarget>
 }

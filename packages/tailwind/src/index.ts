@@ -70,7 +70,7 @@ export function setup(
   sheet?: Sheet,
   target?: HTMLElement,
 ): Twind {
-  return setup$(defineConfig(config as TwindUserConfig), sheet, target)
+  return setup$(defineConfig(config as TwindUserConfig), sheet, target) as unknown as Twind
 }
 
 // If we run in the browser as `<script src="..."></script>` patch twind to use our setup and defineConfig

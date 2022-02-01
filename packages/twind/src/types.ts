@@ -73,7 +73,9 @@ export interface Twind<Theme extends BaseTheme = BaseTheme, Target = unknown> {
 
   readonly target: Target
 
-  theme: ThemeFunction<ExtractUserTheme<Theme>>
+  readonly theme: ThemeFunction<ExtractUserTheme<Theme>>
+
+  readonly config: TwindConfig<Theme>
 
   /** Clears all CSS rules from the sheet. */
   clear(): void

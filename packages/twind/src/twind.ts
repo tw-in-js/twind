@@ -125,6 +125,8 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
 
       theme: context.theme,
 
+      config,
+
       clear() {
         sheet.clear()
         insertedRules.clear()

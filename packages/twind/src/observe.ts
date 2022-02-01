@@ -4,7 +4,7 @@ import { changed } from './internal/changed'
 import { tw as tw$ } from './runtime'
 
 export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
-  tw: Twind<Theme, Target> = tw$ as Twind<Theme, Target>,
+  tw: Twind<Theme, Target> = tw$ as unknown as Twind<Theme, Target>,
   target = typeof document != 'undefined' && document.documentElement,
 ): Twind<Theme, Target> {
   if (!target) return tw
