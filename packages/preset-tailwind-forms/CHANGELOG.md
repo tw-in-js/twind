@@ -1,5 +1,15 @@
 # @twind/preset-tailwind-forms
 
+## 1.0.0-next.33
+
+### Patch Changes
+
+- fix: default border color in preflight ([`f7650fe8`](https://github.com/tw-in-js/twind/commit/f7650fe81f20e4f711f7766b5886cb72e0af67d2))
+
+- Updated dependencies [[`b223e5bb`](https://github.com/tw-in-js/twind/commit/b223e5bb9f701db03c30e14d3f7b84b705d43ef0), [`f7650fe8`](https://github.com/tw-in-js/twind/commit/f7650fe81f20e4f711f7766b5886cb72e0af67d2), [`92037344`](https://github.com/tw-in-js/twind/commit/92037344787e28454ffa688b969244f261d28306)]:
+  - twind@1.0.0-next.33
+  - @twind/preset-tailwind@1.0.0-next.33
+
 ## 1.0.0-next.32
 
 ### Patch Changes
