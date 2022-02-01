@@ -1,15 +1,28 @@
 /* eslint-disable @typescript-eslint/restrict-plus-operands */
-import type { TwindRule } from '../types'
 import { Layer } from './precedence'
 
 const collator = new Intl.Collator('en', { numeric: true })
+
+export interface SortableRule {
+  /** The calculated precedence taking all variants into account. */
+  p: number
+
+  /* The precedence of the properties within {@link d}. */
+  o: number
+
+  /** The name to use for `&` expansion in selectors. Maybe empty for at-rules like `@import`, `@font-face`, `@media`, ... */
+  n?: string | null
+}
 
 /**
  * Find the array index of where to add an element to keep it sorted.
  *
  * @returns The insertion index
  */
-export function sortedInsertionIndex(array: readonly TwindRule[], element: TwindRule): number {
+export function sortedInsertionIndex(
+  array: readonly SortableRule[],
+  element: SortableRule,
+): number {
   // Find position using binary search
   // eslint-disable-next-line no-var
   for (var low = 0, high = array.length; low < high; ) {
@@ -26,7 +39,7 @@ export function sortedInsertionIndex(array: readonly TwindRule[], element: Twind
   return high
 }
 
-export function compareTwindRules(a: TwindRule, b: TwindRule): number {
+export function compareTwindRules(a: SortableRule, b: SortableRule): number {
   // base and overrides (css) layers are kept in order they are declared
   const layer = a.p & Layer.o
 
@@ -34,11 +47,5 @@ export function compareTwindRules(a: TwindRule, b: TwindRule): number {
     return 0
   }
 
-  return (
-    a.p - b.p ||
-    a.o - b.o ||
-    // XXX: should we compare the conditions as well — already included in precedence
-    // collator.compare(a.r as unknown as string, b.r as unknown as string) ||
-    collator.compare(a.n as string, b.n as string)
-  )
+  return a.p - b.p || a.o - b.o || collator.compare(a.n as string, b.n as string)
 }

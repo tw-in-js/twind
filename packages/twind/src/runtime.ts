@@ -11,7 +11,7 @@ import type {
 
 import { twind } from './twind'
 import { observe } from './observe'
-import { cssom, virtual } from './sheets'
+import { getSheet } from './sheets'
 import { noop } from './utils'
 
 export function auto(setup: () => void): () => void {
@@ -99,9 +99,7 @@ export function setup<
 
 export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown>(
   config: TwindConfig<any> | TwindUserConfig<any> = {},
-  sheet: Sheet<SheetTarget> = (typeof document != 'undefined'
-    ? cssom()
-    : virtual()) as unknown as Sheet<SheetTarget>,
+  sheet: Sheet<SheetTarget> = getSheet() as unknown as Sheet<SheetTarget>,
   target?: HTMLElement,
 ): Twind<Theme, SheetTarget> {
   const firstRun = !active
@@ -114,10 +112,6 @@ export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown
 
   if (firstRun && typeof document != 'undefined') {
     // first run in browser
-
-    // remove server-side generated style element
-    // after `observe` twind has taken over and the SSR styles are no longer used
-    document.querySelector('style[data-twind=ssr]')?.remove()
 
     // If they body was hidden autofocus the first element
     if (!document.activeElement) {

@@ -30,8 +30,8 @@ test('keyframes are lazy injected', () => {
     'css#crz8f0',
   )
   assert.deepEqual(tw.target, [
-    '@keyframes \\#ts0qzs{0%{opacity:0}100%{opacity:1}}',
-    '.css\\#crz8f0{animation:1s \\#ts0qzs ease-out}',
+    '/*!0,0*/@keyframes \\#ts0qzs{0%{opacity:0}100%{opacity:1}}',
+    '/*!fjd9fk,v,css#crz8f0*/.css\\#crz8f0{animation:1s \\#ts0qzs ease-out}',
   ])
 
   tw.clear()
@@ -39,8 +39,8 @@ test('keyframes are lazy injected', () => {
   assert.strictEqual(tw(`animate-[1s_${fadeIn}_ease-out]`), 'animate-[1s_\\#ts0qzs_ease-out]')
 
   assert.deepEqual(tw.target, [
-    '@keyframes \\#ts0qzs{0%{opacity:0}100%{opacity:1}}',
-    '.animate-\\[1s_\\\\\\#ts0qzs_ease-out\\]{animation:1s \\#ts0qzs ease-out}',
+    '/*!0,0*/@keyframes \\#ts0qzs{0%{opacity:0}100%{opacity:1}}',
+    '/*!dbgidc,v,animate-[1s_\\#ts0qzs_ease-out]*/.animate-\\[1s_\\\\\\#ts0qzs_ease-out\\]{animation:1s \\#ts0qzs ease-out}',
   ])
 })
 
@@ -101,8 +101,8 @@ test('named keyframes', () => {
     'css#e7l0t2',
   )
   assert.deepEqual(tw.target, [
-    '@keyframes FadeIn\\#37blcs{0%{opacity:0}100%{opacity:1}}',
-    '.css\\#e7l0t2{animation:1s FadeIn\\#37blcs ease-out}',
+    '/*!0,0*/@keyframes FadeIn\\#37blcs{0%{opacity:0}100%{opacity:1}}',
+    '/*!fjd9fk,v,css#e7l0t2*/.css\\#e7l0t2{animation:1s FadeIn\\#37blcs ease-out}',
   ])
 })
 

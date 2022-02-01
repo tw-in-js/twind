@@ -241,12 +241,27 @@ export type MatchResult = RegExpExecArray & {
   // _: Value
 }
 
+export interface SheetRule {
+  /** The calculated precedence taking all variants into account. */
+  p: number
+
+  /* The precedence of the properties within {@link d}. */
+  o: number
+
+  /** The name to use for `&` expansion in selectors. Maybe empty for at-rules like `@import`, `@font-face`, `@media`, ... */
+  n?: string | null
+}
+
 export interface Sheet<Target = unknown> {
   readonly target: Target
-  insert(css: string, index: number, rule: TwindRule): void
+  insert(css: string, index: number, rule: SheetRule): void
   /** Clears all CSS rules from the sheet. */
   clear(): void
   destroy(): void
+  resume(
+    addClassName: (className: string) => void,
+    insert: (rule: SheetRule, cssText: string) => void,
+  ): void
 }
 
 export type StringifyDeclaration<Theme extends BaseTheme = BaseTheme> = (

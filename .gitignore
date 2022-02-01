@@ -6,10 +6,13 @@ web_modules
 .env
 
 .svelte-kit
+.next
 .cache
 .swc
 dist
 website
+documentation/70-api
+examples/with-gatsby/public
 __generated__
 tsconfig.dist*.json
 

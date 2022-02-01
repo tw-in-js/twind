@@ -5,18 +5,10 @@ import type { ReplaceRendererArgs } from 'gatsby'
 
 import { renderToString } from 'react-dom/server'
 import { createElement } from 'react'
-import { setup, virtual, extract } from 'twind'
+import { extract } from 'twind'
 
-import config from '@twind/gatsby-plugin/config'
-
-setup(
-  {
-    ...config,
-    // in production use short hashed class names
-    hash: config.hash ?? process.env.NODE_ENV == 'production',
-  },
-  virtual(),
-)
+import setup from './setup-twind'
+setup()
 
 export function replaceRenderer({
   bodyComponent,

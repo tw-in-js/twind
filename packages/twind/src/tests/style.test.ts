@@ -184,7 +184,139 @@ test('basic style', () => {
   tw.clear()
 })
 
-test('Mixing string, apply, css and object', () => {
+test('without a label', () => {
+  const component = style({
+    base: 'p-1',
+    defaults: {
+      color: 'orange',
+    },
+    props: {
+      color: {
+        orange: `bg-orange-900 text-orange-100 hover:text-white`,
+        gray: `bg-gray-900 text-gray-100 hover:bg-gray-500`,
+      },
+      size: {
+        small: `text-sm h-sm p-sm`,
+        large: `text-lg h-lg p-lg`,
+      },
+      outlined: {
+        true: '',
+      },
+    },
+    when: [
+      [
+        { color: 'orange', outlined: true },
+        `border-orange-500 bg-orange-100 text-orange-500 hover:text-orange-900`,
+      ],
+      [
+        { color: 'gray', outlined: true },
+        `border-gray-500 bg-gray-100 text-gray-500 hover:text-gray-900`,
+      ],
+      // [
+      //   { outlined: true },
+      //   ({ color }) =>
+      //     typeof color == 'string' &&
+      //     `border-${color}-500 bg-${color}-100 text-${color}-500 hover:text-${color}-900`,
+      // ],
+    ],
+  })
+
+  assert.strictEqual(component.selector, '.style\\#4f78gw')
+  assert.strictEqual(component.className, 'style#4f78gw')
+  assert.deepEqual(tw.target, [])
+
+  // Renders a component with the default variant applied
+  assert.strictEqual(tw(component()), 'style#4f78gw style--color-orange#4f78gw')
+  assert.deepEqual(tw.target, [
+    '.style\\#4f78gw{padding:.25rem}',
+    '.style--color-orange\\#4f78gw{--tw-text-opacity:1;color:rgba(255,237,213,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:rgba(124,45,18,var(--tw-bg-opacity))}',
+    '.style--color-orange\\#4f78gw:hover{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}',
+  ])
+  tw.clear()
+
+  assert.strictEqual(
+    tw(component({ color: 'gray', size: 'large', outlined: true })),
+    'style#4f78gw style--color-gray#4f78gw style--size-large#4f78gw style-1--color-gray_outlined-true#4f78gw',
+  )
+  assert.deepEqual(tw.target, [
+    '.style\\#4f78gw{padding:.25rem}',
+    '.style--color-gray\\#4f78gw{--tw-text-opacity:1;color:rgba(243,244,246,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:rgba(17,24,39,var(--tw-bg-opacity))}',
+    '.style--size-large\\#4f78gw{height:2rem;padding:2rem;font-size:2rem}',
+    '.style--color-gray\\#4f78gw:hover{--tw-bg-opacity:1;background-color:rgba(107,114,128,var(--tw-bg-opacity))}',
+    '.style-1--color-gray_outlined-true\\#4f78gw{--tw-text-opacity:1;color:rgba(107,114,128,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:rgba(243,244,246,var(--tw-bg-opacity));--tw-border-opacity:1;border-color:rgba(107,114,128,var(--tw-border-opacity))}',
+    '.style-1--color-gray_outlined-true\\#4f78gw:hover{--tw-text-opacity:1;color:rgba(17,24,39,var(--tw-text-opacity))}',
+  ])
+  tw.clear()
+
+  assert.strictEqual(
+    tw(component({ color: 'orange', size: 'small', outlined: true })),
+    'style#4f78gw style--color-orange#4f78gw style--size-small#4f78gw style-0--color-orange_outlined-true#4f78gw',
+  )
+  assert.deepEqual(tw.target, [
+    '.style\\#4f78gw{padding:.25rem}',
+    '.style--color-orange\\#4f78gw{--tw-text-opacity:1;color:rgba(255,237,213,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:rgba(124,45,18,var(--tw-bg-opacity))}',
+    '.style--size-small\\#4f78gw{height:1rem;padding:1rem;font-size:1rem}',
+    '.style--color-orange\\#4f78gw:hover{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}',
+    '.style-0--color-orange_outlined-true\\#4f78gw{--tw-text-opacity:1;color:rgba(249,115,22,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:rgba(255,237,213,var(--tw-bg-opacity));--tw-border-opacity:1;border-color:rgba(249,115,22,var(--tw-border-opacity))}',
+    '.style-0--color-orange_outlined-true\\#4f78gw:hover{--tw-text-opacity:1;color:rgba(124,45,18,var(--tw-text-opacity))}',
+  ])
+  tw.clear()
+
+  assert.strictEqual(
+    tw(component({ color: 'orange', size: 'small', outlined: false })),
+    'style#4f78gw style--color-orange#4f78gw style--size-small#4f78gw',
+  )
+  assert.deepEqual(tw.target, [
+    '.style\\#4f78gw{padding:.25rem}',
+    '.style--color-orange\\#4f78gw{--tw-text-opacity:1;color:rgba(255,237,213,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:rgba(124,45,18,var(--tw-bg-opacity))}',
+    '.style--size-small\\#4f78gw{height:1rem;padding:1rem;font-size:1rem}',
+    '.style--color-orange\\#4f78gw:hover{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}',
+  ])
+  tw.clear()
+
+  assert.strictEqual(
+    tw(component({ color: { _: 'gray', lg: 'orange' } })),
+    'style#4f78gw style--color-@_-gray@lg-orange#4f78gw',
+  )
+  assert.deepEqual(tw.target, [
+    '.style\\#4f78gw{padding:.25rem}',
+    '.style--color-\\@_-gray\\@lg-orange\\#4f78gw{--tw-text-opacity:1;color:rgba(243,244,246,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:rgba(17,24,39,var(--tw-bg-opacity))}',
+    '.style--color-\\@_-gray\\@lg-orange\\#4f78gw:hover{--tw-bg-opacity:1;background-color:rgba(107,114,128,var(--tw-bg-opacity))}',
+    '@media (min-width:1024px){.style--color-\\@_-gray\\@lg-orange\\#4f78gw{--tw-text-opacity:1;color:rgba(255,237,213,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:rgba(124,45,18,var(--tw-bg-opacity))}}',
+    '@media (min-width:1024px){.style--color-\\@_-gray\\@lg-orange\\#4f78gw:hover{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}}',
+  ])
+  tw.clear()
+
+  // ignore inline responsive breakpoints for now
+  assert.strictEqual(
+    tw(component({ color: { _: 'gray', lg: 'orange' }, outlined: true })),
+    'style#4f78gw style--color-@_-gray@lg-orange#4f78gw',
+  )
+  assert.deepEqual(tw.target, [
+    '.style\\#4f78gw{padding:.25rem}',
+    '.style--color-\\@_-gray\\@lg-orange\\#4f78gw{--tw-text-opacity:1;color:rgba(243,244,246,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:rgba(17,24,39,var(--tw-bg-opacity))}',
+    '.style--color-\\@_-gray\\@lg-orange\\#4f78gw:hover{--tw-bg-opacity:1;background-color:rgba(107,114,128,var(--tw-bg-opacity))}',
+    '@media (min-width:1024px){.style--color-\\@_-gray\\@lg-orange\\#4f78gw{--tw-text-opacity:1;color:rgba(255,237,213,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:rgba(124,45,18,var(--tw-bg-opacity))}}',
+    '@media (min-width:1024px){.style--color-\\@_-gray\\@lg-orange\\#4f78gw:hover{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}}',
+  ])
+  tw.clear()
+
+  assert.strictEqual(
+    tw(`sm:(${component({ outlined: true })})`),
+    'sm:style#4f78gw sm:style--color-orange#4f78gw sm:style-0--color-orange_outlined-true#4f78gw',
+  )
+  assert.deepEqual(tw.target, [
+    '@media (min-width:640px){.sm\\:style\\#4f78gw{padding:.25rem}}',
+    '@media (min-width:640px){.sm\\:style--color-orange\\#4f78gw{--tw-text-opacity:1;color:rgba(255,237,213,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:rgba(124,45,18,var(--tw-bg-opacity))}}',
+    '@media (min-width:640px){.sm\\:style--color-orange\\#4f78gw:hover{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}}',
+    '@media (min-width:640px){.sm\\:style-0--color-orange_outlined-true\\#4f78gw{--tw-text-opacity:1;color:rgba(249,115,22,var(--tw-text-opacity));--tw-bg-opacity:1;background-color:rgba(255,237,213,var(--tw-bg-opacity));--tw-border-opacity:1;border-color:rgba(249,115,22,var(--tw-border-opacity))}}',
+    '@media (min-width:640px){.sm\\:style-0--color-orange_outlined-true\\#4f78gw:hover{--tw-text-opacity:1;color:rgba(124,45,18,var(--tw-text-opacity))}}',
+  ])
+
+  tw.clear()
+})
+
+test('mixing string, apply, css and object', () => {
   const button = style({
     base: 'p-sm',
 
@@ -267,7 +399,7 @@ test('Mixing string, apply, css and object', () => {
   ])
 })
 
-test('With a Base component', () => {
+test('with a Base component', () => {
   const button = style({
     label: 'button',
     base: `p-2.5`,

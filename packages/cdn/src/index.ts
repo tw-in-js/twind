@@ -23,8 +23,8 @@ import type {
 
 import type { TailwindPresetOptions, TailwindTheme } from '@twind/tailwind'
 
-import { auto } from 'twind'
-import { setup as setup$ } from '@twind/tailwind'
+import { twind, observe, auto, cssom } from 'twind'
+import { defineConfig } from '@twind/tailwind'
 
 // If we run in the browser as `<script src="..."></script>` auto call setup once the body starts rendering
 const cancelAutoSetup = /* @__PURE__ */ auto(setup)
@@ -46,11 +46,11 @@ export function setup<
 ): Twind<TailwindTheme & ExtractThemes<Theme, Presets>, SheetTarget>
 
 export function setup(
-  config?: (TwindConfig | TwindUserConfig) & TailwindPresetOptions,
-  sheet?: Sheet,
+  config: (TwindConfig | TwindUserConfig) & TailwindPresetOptions = {},
+  sheet: Sheet = cssom(),
   target?: HTMLElement,
 ): Twind {
   cancelAutoSetup()
 
-  return setup$(config as TwindUserConfig, sheet, target)
+  return observe(twind(defineConfig(config as TwindConfig), sheet), target)
 }

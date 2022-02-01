@@ -9,6 +9,7 @@ import type {
   TwindRule,
   TwindUserConfig,
 } from './types'
+import type { SortableRule } from './internal/sorted-insertion-index'
 
 import { sortedInsertionIndex } from './internal/sorted-insertion-index'
 import { stringify } from './internal/stringify'
@@ -44,27 +45,36 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
 
   // An array of precedence by index within the sheet
   // always sorted
-  const sortedPrecedences: TwindRule[] = []
+  const sortedPrecedences: SortableRule[] = []
 
   // Cache for already inserted css rules
   // to prevent double insertions
   const insertedRules = new Set<string>()
 
+  sheet.resume(
+    (className) => cache.set(className, className),
+    (rule, cssText) => {
+      sheet.insert(cssText, sortedPrecedences.length, rule)
+      sortedPrecedences.push(rule)
+      insertedRules.add(cssText)
+    },
+  )
+
   function insert(rule: TwindRule): string | undefined {
     rule = { ...rule, n: rule.n && context.h(rule.n) }
 
-    const css = stringify(rule)
+    const cssText = stringify(rule)
 
     // If not already inserted
-    if (css && !insertedRules.has(css)) {
+    if (cssText && !insertedRules.has(cssText)) {
       // Mark rule as inserted
-      insertedRules.add(css)
+      insertedRules.add(cssText)
 
       // Find the correct position
       const index = sortedInsertionIndex(sortedPrecedences, rule)
 
       // Insert
-      sheet.insert(css, index, rule)
+      sheet.insert(cssText, index, rule)
 
       // Update sorted index
       sortedPrecedences.splice(index, 0, rule)

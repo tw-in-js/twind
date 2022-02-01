@@ -19,7 +19,10 @@
   "main": "src/index.ts",
   "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
   "exports": {
-    ".": "./src/index.ts",
+    ".": {
+      "node": null,
+      "default": "./src/index.ts"
+    },
     "./package.json": "./package.json"
   },
   "// These are relative from within the dist/ folder": "",
@@ -29,7 +32,7 @@
       "name": "@twind/cdn",
       "path": "dist/cdn.esnext.js",
       "brotli": true,
-      "limit": "14.7kb"
+      "limit": "15kb"
     }
   ],
   "dependencies": {

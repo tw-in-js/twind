@@ -66,7 +66,7 @@ The following functions are all exports from `twind`.
 
 Observe class attributes to inject styles
 
-- `setup(config, sheet?, target?): Twind`: configures the global `tw` instance, observes all class attributes and inject there styles into the DOM; returns a twind instance
+- `setup(config, sheet?, target?): Twind`: configures the global `tw` instance, observes all class attributes and inject the styles into the DOM; returns a twind instance
 - `tw`: the global twind instance updated by each `setup` call
 
 ### _Library Mode_
@@ -80,7 +80,7 @@ use `tw` or `tx` to inject styles
   ```js
   import {
     twind,
-    cssom,
+    getSheet,
     virtual,
     tx as tx$,
     injectGlobal as injectGlobal$,
@@ -91,9 +91,8 @@ use `tw` or `tx` to inject styles
 
   export const tw = /* @__PURE__ */ twind(
     config,
-    // IS_SSR: `typeof document == 'undefined'` or `import.meta.env.SSR` (vite)
-    // IS_PROD: `proces.env.NODE_ENV == 'production'` or `import.meta.env.PROD` (vite)
-    IS_SSR ? virtual() : IS_PROD ? cssom() : dom(),
+    // IS_DEV: `proces.env.NODE_ENV != 'production'` or `import.meta.env.DEV` (vite)
+    getSheet(IS_PROD),
   )
 
   export const tx = /* @__PURE__ */ tx$.bind(tw)
@@ -205,9 +204,10 @@ Used to update an html string with styles.
 
 ### Sheets
 
-- `virtual()`: collect styles into an array
-- `cssom()`: uses a fast DOM sheet — bad for debugging
-- `dom()`: uses a slow DOM sheet — great for debugging
+- `getSheet(useDOMSheet?: boolean, disableResume?: boolean)`: returns a `Sheet` for the current environment — `virtual` on server, either `dom` or `cssom` in browsers
+- `virtual(includeResumeData?: boolean)`: collect styles into an array
+- `cssom(element?: CSSStyleSheet | Element | null | false)`: uses a fast DOM sheet — bad for debugging
+- `dom(element?: Element | null | false)`: uses a slow DOM sheet — great for debugging
 - `stringify(target)`: returns the CSS string of a sheet target
 
 ## Config
@@ -328,9 +328,6 @@ The following JS APIs may need polyfills:
 - [Array.flatMap](https://caniuse.com/mdn-javascript_builtins_array_flatmap)
   - Edge<79, Firefox<62, Chrome<69, Safari<12, Opera<56
   - [polyfill](https://www.npmjs.com/package/array-flat-polyfill)
-- [Math.imul](https://caniuse.com/mdn-javascript_builtins_math_imul)
-  - Firefox<20, Chrome<28, Safari<7, Opera<16
-  - [polyfill](https://www.npmjs.com/package/math.imul)
 
 When using `style()` within `config.rules`:
 
