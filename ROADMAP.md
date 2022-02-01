@@ -32,6 +32,7 @@
 
 ## v1
 
+- handle arbitrary prefix like `[length:...]`
 - @twind/preset-\* from tailwind core
 - @twind/styled (previously @twind/react)
   - Global: https://emotion.sh/docs/globals
@@ -47,8 +48,9 @@
 - perf: large website with many different rules
 - pug support: https://github.com/tw-in-js/twind/issues/198
 - how to create a PR in contributing guide: https://codesandbox.io/docs/git
-- support `is(:hover,:focus-visible):underline`?
+- support `is(:hover,:focus-visible):underline`? in preset-ext
   - maybe as `is-hover,focus-visible:underline`
+  - same for `:where` and `:has`
 - @twind/tailwind: parse style elements like tailwind? `<style type="text/tailwindcss">`
 
   https://github.com/tw-in-js/twind/issues/238#issuecomment-1021544996
