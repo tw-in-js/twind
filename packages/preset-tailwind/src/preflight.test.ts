@@ -17,7 +17,7 @@ test('preflight on first inject', () => {
   assert.strictEqual(tw('underline'), 'underline')
 
   assert.deepEqual(tw.target, [
-    '*,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:currentColor}',
+    '*,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}',
     "::before,::after{--tw-content:''}",
     'html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}',
     'body{margin:0;line-height:inherit}',
@@ -92,7 +92,7 @@ test('custom preflight', () => {
 
   assert.deepEqual(tw.target, [
     '*,::before,::after{--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000}',
-    '*,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:currentColor}',
+    '*,::before,::after{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}',
     "::before,::after{--tw-content:''}",
     'html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}',
     'body{margin:0;line-height:inherit}',
