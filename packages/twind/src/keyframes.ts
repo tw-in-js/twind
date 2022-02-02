@@ -19,9 +19,22 @@ export interface KeyframesFunction {
     style: CSSObject | string,
   ): StringLike
 
+  call(
+    thisArg: ((tokens: string) => string) | undefined | void,
+    strings: TemplateStringsArray,
+    ...interpolations: readonly CSSValue[]
+  ): StringLike
+
   apply(
     thisArg: ((tokens: string) => string) | undefined | void,
     args: [CSSObject | string],
+  ): StringLike
+
+  apply(
+    thisArg: ((tokens: string) => string) | undefined | void,
+    args:
+      | [CSSObject | string]
+      | [strings: TemplateStringsArray, ...interpolations: readonly CSSValue[]],
   ): StringLike
 }
 
@@ -64,15 +77,15 @@ function keyframes$(
   strings: CSSObject | string | TemplateStringsArray,
   interpolations: readonly CSSValue[],
 ): StringLike {
-  const ast = astish(strings, interpolations)
-
-  const keyframeName = escape(name + hash(JSON.stringify([name, ast])))
-
   // lazy inject keyframes
   return {
     toString() {
       // lazy access tw
       const tw = typeof thisArg == 'function' ? thisArg : tw$
+
+      const ast = astish(strings, interpolations)
+
+      const keyframeName = escape(name + hash(JSON.stringify([name, ast])))
 
       tw(
         css({

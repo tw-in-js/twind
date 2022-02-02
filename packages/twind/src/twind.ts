@@ -101,6 +101,8 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
         }
       }
 
+      tokens = '' + tokens
+
       let className = cache.get(tokens)
 
       if (!className) {

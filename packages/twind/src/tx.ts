@@ -10,8 +10,16 @@ export interface TxFunction {
   bind(thisArg?: ((tokens: string) => string) | undefined | void): TxFunction
 
   call(thisArg: ((tokens: string) => string) | undefined | void, ...classes: Class[]): string
+  call(
+    thisArg: ((tokens: string) => string) | undefined | void,
+    strings: TemplateStringsArray,
+    ...interpolations: readonly Class[]
+  ): string
 
-  apply(thisArg: ((tokens: string) => string) | undefined | void, classes: Class[]): string
+  apply(
+    thisArg: ((tokens: string) => string) | undefined | void,
+    classes: Class[] | [strings: TemplateStringsArray, ...interpolations: readonly Class[]],
+  ): string
 }
 
 /**

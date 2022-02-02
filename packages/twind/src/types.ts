@@ -69,7 +69,7 @@ export interface TwindRule {
 }
 
 export interface Twind<Theme extends BaseTheme = BaseTheme, Target = unknown> {
-  (tokens: string): string
+  (tokens: StringLike): string
 
   readonly target: Target
 
@@ -325,7 +325,7 @@ export interface TwindPresetConfig<Theme = BaseTheme> {
 
   hash?: boolean | undefined | HashFunction
   stringify?: StringifyDeclaration<Theme & BaseTheme>
-  ignorelist?: (string | RegExp)[]
+  ignorelist?: MaybeArray<string | RegExp>
 }
 
 export interface TwindUserConfig<Theme = BaseTheme, Presets extends Preset<any>[] = Preset[]> {
@@ -350,8 +350,8 @@ export interface TwindUserConfig<Theme = BaseTheme, Presets extends Preset<any>[
    * ```js
    * {
    *   hash(className, defaultHash) {
-   *     if (/^[\w-]*~\(/.test(className)) {
-   *       // a shortcut like `~(...)` or `Button~(...)`
+   *     if (/^[~@]\(/.test(className)) {
+   *       // a shortcut like `~(...)` or apply like `@(...)`
    *       return defaultHash(className)
    *     }
    *     return className

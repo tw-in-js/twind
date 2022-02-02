@@ -5,6 +5,7 @@
  * @module
  */
 
+export * from './animation'
 export * from './colors'
 export * from './consume'
 export * from './css'
