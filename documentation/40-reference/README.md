@@ -14,9 +14,7 @@
 - inline shortcut: styles are generated as defined by twind — same as if they where used alone
   - `~(underline font-bold)` -> `~(underline,font-bold)`
   - `Link~(underline font-bold)` -> `Link#abcdef`
-- comments
-  - multi line: `/* .. */`
-  - single line: `//` — should **not** be used directly in a class attribute, use `cx` to _clear_ the class names before
+- comments like in CSS: `/* ... */`
 - [`group~{name}-{modifier}`](https://tailwindcss.com/docs/hover-focus-and-other-states#styling-based-on-parent-state) and [`peer~{name}-{modifier}`](https://tailwindcss.com/docs/hover-focus-and-other-states#styling-based-on-sibling-state)
 
   Name can contain any characters except whitespace, parenthesis (`(` and `)`), colon (`:`), dash (`-`), and opening bracket (`[`).

@@ -22,11 +22,11 @@ export type TypedAtRules = {
 
 export interface BaseProperties extends TypedAtRules {
   '@import'?: MaybeArray<string | Falsey>
-  '@font-face'?: CSSFontFace
+  '@font-face'?: MaybeArray<CSSFontFace>
 }
 export interface CustomProperties {
   label?: string
-  '@apply'?: string | Falsey
+  '@apply'?: MaybeArray<string> | Falsey
 }
 
 export type CSSProperties = CSS.PropertiesFallback<string | Falsey, string | Falsey> &
@@ -36,7 +36,8 @@ export type CSSProperties = CSS.PropertiesFallback<string | Falsey, string | Fal
 export type CSSFontFace = CSS.AtRule.FontFaceFallback & CSS.AtRule.FontFaceHyphenFallback
 
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
-export interface CSSNested extends Record<string, CSSProperties | CSSObject | string | Falsey> {}
+export interface CSSNested
+  extends Record<string, CSSProperties | MaybeArray<CSSObject | string> | Falsey> {}
 
 export type CSSBase = BaseProperties & CSSNested
 

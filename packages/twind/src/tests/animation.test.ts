@@ -55,10 +55,10 @@ test('bound keyframes are lazy injected', () => {
 
   assert.lengthOf(tw$.target, 0)
 
-  assert.strictEqual(tw$(fadeIn), 'animation#koksgx')
+  assert.strictEqual(tw$(fadeIn), 'animation#b4mmuv')
   assert.deepEqual(tw$.target, [
-    '@keyframes \\#ts0qzs{0%{opacity:0}100%{opacity:1}}',
-    '.animation\\#koksgx{animation-duration:5s;animation-name:\\#ts0qzs}',
+    '@keyframes \\#1b0mdne{0%{opacity:0}100%{opacity:1}}',
+    '.animation\\#b4mmuv{animation-duration:5s;animation-name:\\#1b0mdne}',
   ])
 
   assert.lengthOf(tw.target as string[], 0)
@@ -79,10 +79,10 @@ test('named animations', () => {
 
   assert.lengthOf(tw.target as string[], 0)
 
-  assert.strictEqual(tw(fadeIn), 'FadeIn#124zdi8')
+  assert.strictEqual(tw(fadeIn), 'FadeIn#1b2nfnd')
   assert.deepEqual(tw.target, [
-    '/*!0,0*/@keyframes FadeIn\\#1775q8c{0%{opacity:0}100%{opacity:1}}',
-    '/*!fjd9fk,w,FadeIn#124zdi8*/.FadeIn\\#124zdi8{animation:5s;animation-name:FadeIn\\#1775q8c}',
+    '/*!0,0*/@keyframes FadeIn\\#zobdkg{0%{opacity:0}100%{opacity:1}}',
+    '/*!fjd9fk,w,FadeIn#1b2nfnd*/.FadeIn\\#1b2nfnd{animation:5s;animation-name:FadeIn\\#zobdkg}',
   ])
 })
 
@@ -112,7 +112,7 @@ test('animation proxy passthrough', () => {
         }
       `,
     ).toString(),
-    'animation#1b9rtwi',
+    'animation#14y2azx',
   )
 
   assert.strictEqual(
@@ -129,7 +129,7 @@ test('animation proxy passthrough', () => {
         `,
       )
       .toString(),
-    'func#u3tp5s',
+    'func#1of5fce',
   )
 
   assert.strictEqual(k.toString().replace(/[\s]/g, ''), 'function(){[nativecode]}')

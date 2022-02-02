@@ -27,20 +27,20 @@ test('keyframes are lazy injected', () => {
         animation: 1s ${fadeIn} ease-out;
       `,
     ),
-    'css#crz8f0',
+    'css#1h96eou',
   )
   assert.deepEqual(tw.target, [
-    '/*!0,0*/@keyframes \\#ts0qzs{0%{opacity:0}100%{opacity:1}}',
-    '/*!fjd9fk,v,css#crz8f0*/.css\\#crz8f0{animation:1s \\#ts0qzs ease-out}',
+    '/*!0,0*/@keyframes \\#1b0mdne{0%{opacity:0}100%{opacity:1}}',
+    '/*!fjd9fk,v,css#1h96eou*/.css\\#1h96eou{animation:1s \\#1b0mdne ease-out}',
   ])
 
   tw.clear()
 
-  assert.strictEqual(tw(`animate-[1s_${fadeIn}_ease-out]`), 'animate-[1s_\\#ts0qzs_ease-out]')
+  assert.strictEqual(tw(`animate-[1s_${fadeIn}_ease-out]`), 'animate-[1s_\\#1b0mdne_ease-out]')
 
   assert.deepEqual(tw.target, [
-    '/*!0,0*/@keyframes \\#ts0qzs{0%{opacity:0}100%{opacity:1}}',
-    '/*!dbgidc,v,animate-[1s_\\#ts0qzs_ease-out]*/.animate-\\[1s_\\\\\\#ts0qzs_ease-out\\]{animation:1s \\#ts0qzs ease-out}',
+    '/*!0,0*/@keyframes \\#1b0mdne{0%{opacity:0}100%{opacity:1}}',
+    '/*!dbgidc,v,animate-[1s_\\#1b0mdne_ease-out]*/.animate-\\[1s_\\\\\\#1b0mdne_ease-out\\]{animation:1s \\#1b0mdne ease-out}',
   ])
 })
 
@@ -71,11 +71,11 @@ test('bound keyframes are lazy injected', () => {
         animation: 1s ${fadeIn} ease-out;
       `,
     ),
-    'css#crz8f0',
+    'css#1h96eou',
   )
   assert.deepEqual(tw$.target, [
-    '@keyframes \\#ts0qzs{0%{opacity:0}100%{opacity:1}}',
-    '.css\\#crz8f0{animation:1s \\#ts0qzs ease-out}',
+    '@keyframes \\#1b0mdne{0%{opacity:0}100%{opacity:1}}',
+    '.css\\#1h96eou{animation:1s \\#1b0mdne ease-out}',
   ])
   assert.lengthOf(tw.target as string[], 0)
 })
@@ -133,19 +133,19 @@ test('bound named keyframes', () => {
         animation: 1s ${fadeIn} ease-out;
       `,
     ),
-    'css#1v9hf80',
+    'css#exvsdi',
   )
   assert.deepEqual(tw$.target, [
-    '@keyframes FadeIn\\#1775q8c{0%{opacity:0}100%{opacity:1}}',
-    '.css\\#1v9hf80{animation:1s FadeIn\\#1775q8c ease-out}',
+    '@keyframes FadeIn\\#zobdkg{0%{opacity:0}100%{opacity:1}}',
+    '.css\\#exvsdi{animation:1s FadeIn\\#zobdkg ease-out}',
   ])
   assert.lengthOf(tw.target as string[], 0)
 })
 
 test('keyframes proxy passthrough', () => {
   const str = '0% {opacity: 0;}'
-  assert.strictEqual(keyframes(str).toString(), '\\#1bzmnn1')
-  assert.strictEqual(keyframes.func(str).toString(), 'func\\#2vt08t')
+  assert.strictEqual(keyframes(str).toString(), '\\#66k1rx')
+  assert.strictEqual(keyframes.func(str).toString(), 'func\\#3ais1h')
 
   assert.strictEqual(keyframes.toString().replace(/[\s]/g, ''), 'function(){[nativecode]}')
 
@@ -160,7 +160,7 @@ opacity: 0;
 opacity: 1;
 }
 `.toString(),
-    '\\#ts0qzs',
+    '\\#1b0mdne',
   )
 
   assert.strictEqual(
@@ -172,7 +172,7 @@ opacity: 0;
 opacity: 1;
 }
 `.toString(),
-    'func\\#iw1k4k',
+    'func\\#ydo9qy',
   )
 
   assert.strictEqual(k.toString().replace(/[\s]/g, ''), 'function(){[nativecode]}')

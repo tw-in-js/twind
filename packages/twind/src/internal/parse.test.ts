@@ -15,7 +15,7 @@ test('comments', () => {
         lg:-(px)
         -mx-1
       )
-      // Position
+      /* Position */
       !top-1 !-bottom-2
       text-(xl black)
     `),

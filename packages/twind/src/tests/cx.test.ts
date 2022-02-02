@@ -20,7 +20,7 @@ test('comments', () => {
         -mx-1
       )
       ${false} ${undefined} ${null} ${''}
-      // Position
+      /* Position */
       !top-1 !-bottom-${2} mx-${0}
       text-(xl black)
     `,

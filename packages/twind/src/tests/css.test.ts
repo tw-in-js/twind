@@ -136,15 +136,15 @@ test('nesting in template literal', () => {
     }
   `
 
-  assert.strictEqual(tw(style), 'css#1ffqhov')
+  assert.strictEqual(tw(style), 'css#raqi15')
 
   assert.deepEqual(tw.target, [
-    '.css\\#1ffqhov{padding:2em 1em;background:papayawhip}',
-    '.css\\#1ffqhov:hover{background:palevioletred}',
-    '@media (max-width: 600px){.css\\#1ffqhov{background:tomato}}',
-    '@media (min-width:640px){.css\\#1ffqhov:hover{background:yellow}}',
-    '.css\\#1ffqhov > p{text-decoration:underline}',
-    'html.test .css\\#1ffqhov{display:none}',
+    '.css\\#raqi15{padding:2em 1em;background:papayawhip}',
+    '.css\\#raqi15:hover{background:palevioletred}',
+    '@media (max-width: 600px){.css\\#raqi15{background:tomato}}',
+    '@media (min-width:640px){.css\\#raqi15:hover{background:yellow}}',
+    '.css\\#raqi15 > p{text-decoration:underline}',
+    'html.test .css\\#raqi15{display:none}',
   ])
 })
 
@@ -229,8 +229,8 @@ test('css within apply and nested selectors', () => {
     }
   `
 
-  assert.strictEqual(tw(prose), 'css#idc0fv')
+  assert.strictEqual(tw(prose), 'css#1e8vcf')
   assert.deepEqual(tw.target, [
-    '.css\\#idc0fv ul > li::before{--tw-text-opacity:1;color:rgba(107,114,128,var(--tw-text-opacity))}',
+    '.css\\#1e8vcf ul > li::before{--tw-text-opacity:1;color:rgba(107,114,128,var(--tw-text-opacity))}',
   ])
 })

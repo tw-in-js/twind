@@ -28,25 +28,33 @@ const newRule = / *(?:(?:([\u0080-\uFFFF\w-%@]+) *:? *([^{;]+?);|([^;}{]*?) *{)|
 function astish$(css: string): CSSObject[] {
   css = removeComments(css)
 
-  const rules: CSSObject[] = []
-  const tree: string[] = []
+  const tree: CSSObject[] = [{}]
+  const rules: CSSObject[] = [tree[0]]
+  const conditions: string[] = []
   let block: RegExpExecArray | null
 
   while ((block = newRule.exec(css))) {
     // Remove the current entry
-    if (block[4]) tree.pop()
+    if (block[4]) {
+      tree.shift()
+      conditions.shift()
+    }
 
     if (block[3]) {
       // new nested
-      tree.push(block[3])
+      conditions.unshift(block[3])
+      tree.unshift({})
+      rules.push(conditions.reduce((body, condition) => ({ [condition]: body }), tree[0]))
     } else if (!block[4]) {
-      rules.push(
-        tree.reduceRight((css, block) => ({ [block]: css }), {
-          [block[1]]: block[2],
-        } as CSSObject),
-      )
+      // if we already have that property — start a new CSSObject
+      if (tree[0][block[1]]) {
+        tree.unshift({})
+        rules.push(conditions.reduce((body, condition) => ({ [condition]: body }), tree[0]))
+      }
+      tree[0][block[1]] = block[2]
     }
   }
 
+  // console.log(rules)
   return rules
 }

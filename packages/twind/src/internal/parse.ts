@@ -68,7 +68,7 @@ function uniq<T>(value: T, index: number, values: T[]): boolean {
 
 // Remove comments (multiline and single line)
 export function removeComments(tokens: string): string {
-  return tokens.replace(/\/\*[^]*?\*\/|\/\/[^]*?$|\s\s+|\n/gm, ' ')
+  return tokens.replace(/\/\*[^]*?\*\/|\s\s+|\n/gm, ' ')
 }
 
 const cache = new Map<string, ParsedRule[]>()

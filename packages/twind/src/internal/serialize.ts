@@ -49,7 +49,8 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
           ...translateWith(
             name as string,
             precedence,
-            parse(value as string),
+            // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+            parse('' + value),
             context,
             precedence,
             conditions,
@@ -82,25 +83,21 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
 
       // @import
       if (key[1] == 'i') {
-        rules.push({
-          // before all layers
-          p: -1,
-          o: 0,
-          r: [],
-          d: asArray(value)
-            .filter(Boolean)
-            .map((value) => key + ' ' + (value as string))
-            .join(';'),
-        })
+        rules.push(
+          ...asArray(value).map((value) => ({
+            // before all layers
+            p: -1,
+            o: 0,
+            r: [],
+            d: key + ' ' + (value as string),
+          })),
+        )
         continue
       }
 
       // @keyframes
-      // @font-face
-      // TODO @font-feature-values
-      if (key[1] == 'k' || key[1] == 'f') {
-        // Use base layer
-        // TODO support arrays?
+      if (key[1] == 'k') {
+        // Use defaults layer
         rules.push({
           p: Layer.d,
           o: 0,
@@ -109,6 +106,23 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
             .map(stringify)
             .join(''),
         })
+        continue
+      }
+
+      // @font-face
+      // TODO @font-feature-values
+      if (key[1] == 'f') {
+        // Use defaults layer
+        rules.push(
+          ...asArray(value).map((value) => ({
+            p: Layer.d,
+            o: 0,
+            r: [key],
+            d: serialize$(value as CSSObject, { p: Layer.d }, context)
+              .map(stringify)
+              .join(''),
+          })),
+        )
         continue
       }
       // -> All other are handled below; same as selector
