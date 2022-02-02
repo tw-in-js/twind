@@ -1,7 +1,7 @@
 {
   "name": "@example/basic",
   "description": "basic twind example",
-  "version": "0.0.1-next.18",
+  "version": "0.0.1-next.19",
   "private": true,
   "main": "index.js",
   "license": "MIT",
@@ -21,8 +21,8 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@twind/tailwind": "1.0.0-next.33",
-    "twind": "1.0.0-next.33"
+    "@twind/tailwind": "1.0.0-next.34",
+    "twind": "1.0.0-next.34"
   },
   "devDependencies": {
     "vite": "^2.7.13"
