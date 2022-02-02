@@ -35,16 +35,16 @@ jobs:
       - name: 📥  Checkout
         uses: actions/checkout@v2
 
+      - name: 🔧  Setup pnpm
+        uses: pnpm/action-setup@v2
+        with:
+          version: 6.29.1
+
       - name: 🔧  Use Node ${{ matrix.node }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node }}
           cache: pnpm
-
-      - name: 🔧  Setup pnpm
-        uses: pnpm/action-setup@v2
-        with:
-          version: 6.29.1
 
       - name: 💡  Environment Info
         run: |
