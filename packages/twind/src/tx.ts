@@ -2,6 +2,18 @@ import type { Class } from './types'
 import { interpolate } from './internal/interpolate'
 import { tw as tw$ } from './runtime'
 
+export interface TxFunction {
+  (...classes: Class[]): string
+
+  (strings: TemplateStringsArray, ...interpolations: readonly Class[]): string
+
+  bind(thisArg?: ((tokens: string) => string) | undefined | void): TxFunction
+
+  call(thisArg: ((tokens: string) => string) | undefined | void, ...classes: Class[]): string
+
+  apply(thisArg: ((tokens: string) => string) | undefined | void, classes: Class[]): string
+}
+
 /**
  * Combines {@link tw} and {@link cx}.
  *
@@ -37,7 +49,7 @@ import { tw as tw$ } from './runtime'
  * @param interpolations
  * @returns the class name
  */
-export function tx(
+export const tx: TxFunction = function tx(
   this: ((tokens: string) => string) | undefined | void,
   strings: TemplateStringsArray | Class,
   ...interpolations: Class[]

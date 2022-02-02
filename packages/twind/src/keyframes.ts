@@ -13,6 +13,16 @@ export interface KeyframesFunction {
   bind(thisArg?: ((tokens: string) => string) | undefined | void): Keyframes & {
     [label: string]: KeyframesFunction
   }
+
+  call(
+    thisArg: ((tokens: string) => string) | undefined | void,
+    style: CSSObject | string,
+  ): StringLike
+
+  apply(
+    thisArg: ((tokens: string) => string) | undefined | void,
+    args: [CSSObject | string],
+  ): StringLike
 }
 
 export type Keyframes = KeyframesFunction & {
