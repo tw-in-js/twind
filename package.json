@@ -31,7 +31,7 @@
     "pnpm": "^6.26.0"
   },
   "// https://nodejs.org/dist/latest-v16.x/docs/api/corepack.html": "",
-  "packageManager": "pnpm@6.27.1",
+  "packageManager": "pnpm@6.29.1",
   "// for npm/yarn within codesandbox — same as in pnpm-workspace.yml": "",
   "workspaces": [
     "documentation",
@@ -69,7 +69,7 @@
   "scripts": {
     "start": "BROWSER=none npm run test:ui",
     "build": "pnpm build --recursive --if-present --filter=./packages",
-    "check": "eslint --ext .js,.jsx,.cjs,.mjs,.ts,.tsx --ignore-path .gitignore .",
+    "check": "TIMING=1 eslint --ext .js,.jsx,.cjs,.mjs,.ts,.tsx --ignore-path .gitignore .",
     "check:fix": "npm run check -- --fix",
     "size-limit": "size-limit",
     "format": "prettier --write --ignore-path .gitignore . '!pnpm-lock.yaml'",
