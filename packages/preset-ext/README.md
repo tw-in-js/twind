@@ -120,3 +120,7 @@ Allows any CSS properties to be added:
   background-color: #1da1f1;
 }
 ```
+
+When a value needs to contain a space, use an underscore (`_`) instead and Twind will automatically convert it to a space at build-time [^1].
+
+[^1]: [Tailwind CSS › Adding Custom Styles › Handling whitespace](https://tailwindcss.com/docs/adding-custom-styles#handling-whitespace)

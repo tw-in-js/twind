@@ -43,5 +43,6 @@
     [
       "@media (prefers-color-scheme:dark){.group\\~xxx:hover .dark\\:group\\~xxx-hocus\\:underline,.group\\~xxx:focus-visible .dark\\:group\\~xxx-hocus\\:underline{text-decoration:underline}}"
     ]
-  ]
+  ],
+  "grid-template-areas[outlet_nav]": ".grid-template-areas\\[outlet_nav\\]{grid-template-areas:outlet nav}"
 }
