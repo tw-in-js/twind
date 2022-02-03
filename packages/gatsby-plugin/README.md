@@ -24,23 +24,7 @@ npm install twind@next gatsby-plugin-twind@next
 
 Please see [examples/gatsby](https://github.com/tw-in-js/twind/tree/next/examples/gatsby) for detailed usage example.
 
-**`gatsby-config.js`**
-
-```js
-module.exports = {
-  plugins: [
-    `gatsby-plugin-twind`,
-    // {
-    //   resolve: `gatsby-plugin-twind`,
-    //   options: {
-    //     config: `./path/to/twind.config`
-    //   }
-    // },
-  ],
-}
-```
-
-**`twind.config.js`**
+### `twind.config.js`
 
 ```js
 import { defineConfig } from 'twind'
@@ -60,6 +44,22 @@ export default defineConfig({
 })
 ```
 
+### `gatsby-config.js`
+
+```js
+module.exports = {
+  plugins: [
+    `gatsby-plugin-twind`,
+    // {
+    //   resolve: `gatsby-plugin-twind`,
+    //   options: {
+    //     config: `./path/to/twind.config`
+    //   }
+    // },
+  ],
+}
+```
+
 ## Options
 
 This plugin assumes a `twind.config.js` file in the root of your project.
@@ -72,7 +72,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-twind`,
       options: {
-        config: `./path/to/twind.config`,
+        config: `./path/to/twind.config.js`,
       },
     },
   ],

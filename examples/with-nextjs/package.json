@@ -1,0 +1,39 @@
+{
+  "name": "@example/with-nextjs",
+  "description": "nextjs with twind example",
+  "version": "0.0.1-next.4",
+  "private": true,
+  "license": "MIT",
+  "bugs": "https://github.com/tw-in-js/twind/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tw-in-js/twind.git",
+    "directory": "examples/with-nextjs"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "next",
+    "build": "next build",
+    "serve": "next start",
+    "export": "next export"
+  },
+  "devDependencies": {
+    "@twind/preset-autoprefix": "1.0.0-next.34",
+    "@twind/preset-ext": "^1.0.0-next.34",
+    "@twind/preset-tailwind": "1.0.0-next.34",
+    "@twind/tailwind": "1.0.0-next.34",
+    "@twind/with-next": "1.0.0-next.34",
+    "@types/node": "^17.0.13",
+    "@types/react": "^17.0.0",
+    "next": "^12.0.0",
+    "next-compose-plugins": "^2.2.1",
+    "next-transpile-modules": "^9.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "twind": "1.0.0-next.34",
+    "typescript": "^4.5.5"
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "name": "@twind/with-next",
+  "version": "1.0.0-next.34",
+  "description": "next integration for Twind",
+  "publishConfig": {
+    "tag": "next",
+    "access": "public",
+    "directory": "dist"
+  },
+  "keywords": [
+    "twind",
+    "tailwind",
+    "tailwindcss",
+    "tw-in-js",
+    "tailwind-in-js",
+    "svelte",
+    "next"
+  ],
+  "type": "module",
+  "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
+  "main": "src/index.ts",
+  "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
+  "exports": {
+    ".": {
+      "script": null,
+      "default": "./src/index.ts"
+    },
+    "./app": {
+      "script": null,
+      "default": "./src/app.ts"
+    },
+    "./document": {
+      "script": null,
+      "default": "./src/document.ts"
+    },
+    "./package.json": "./package.json"
+  },
+  "// These are relative from within the dist/ folder": "",
+  "sideEffects": false,
+  "peerDependencies": {
+    "next": "12.x",
+    "react": "^16.6.0 || 17.x || 18.x",
+    "twind": "1.0.0-next.34",
+    "typescript": "^4.4.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "next": "^12.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "twind": "1.0.0-next.34"
+  },
+  "scripts": {
+    "build": "distilt"
+  }
+}
