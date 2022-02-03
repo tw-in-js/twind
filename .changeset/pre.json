@@ -15,7 +15,7 @@
     "@twind/preset-tailwind-forms": "1.0.0-next.13",
     "@example/playground": "0.0.1-next.0",
     "@example/sveltekit": "0.0.1-next.0",
-    "@twind/sveltekit": "1.0.0-next.13",
+    "@twind/with-sveltekit": "1.0.0-next.13",
     "@example/twind-cdn": "0.0.1-next.0",
     "@twind/cdn": "1.0.0-next.16",
     "@twind/tailwind": "1.0.0-next.16",

@@ -1,5 +1,5 @@
 {
-  "name": "@twind/sveltekit",
+  "name": "@twind/with-sveltekit",
   "version": "1.0.0-next.34",
   "description": "sveltekit integration for Twind",
   "publishConfig": {

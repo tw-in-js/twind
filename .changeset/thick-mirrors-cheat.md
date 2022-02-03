@@ -1,5 +1,5 @@
 ---
-'@twind/sveltekit': patch
+'@twind/with-sveltekit': patch
 ---
 
 enable hash only if prod — align with other framework integration

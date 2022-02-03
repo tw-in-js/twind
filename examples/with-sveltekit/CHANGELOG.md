@@ -24,4 +24,4 @@
 
 ### Patch Changes
 
-- add sveltekit integration (@twind/sveltekit) with example ([#245](https://github.com/tw-in-js/twind/pull/245))
+- add sveltekit integration (@twind/with-sveltekit) with example ([#245](https://github.com/tw-in-js/twind/pull/245))

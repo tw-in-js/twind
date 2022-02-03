@@ -1,5 +1,5 @@
 /**
- * [[include:packages/sveltekit/README.md]]
+ * [[include:packages/with-sveltekit/README.md]]
  *
  * @packageDocumentation
  * @module

@@ -10,7 +10,7 @@
 '@twind/preset-ext': patch
 '@twind/preset-tailwind': patch
 '@twind/preset-tailwind-forms': patch
-'@twind/sveltekit': patch
+'@twind/with-sveltekit': patch
 '@twind/tailwind': patch
 ---
 

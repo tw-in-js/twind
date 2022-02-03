@@ -4,8 +4,8 @@
 
 This example uses
 
-- [twind](https://www.npmjs.com/package/twind) — which includes
-  - [@twind/preset-autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix)
-  - [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind)
-- [@twind/preset-tailwind-forms](https://www.npmjs.com/package/@twind/preset-tailwind-forms)
-- [@twind/preset-ext](https://www.npmjs.com/package/@twind/preset-ext)
+- [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind) — which includes
+  - [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix)
+  - [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind)
+- [@twind/preset-tailwind-forms](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind-forms)
+- [@twind/preset-ext](https://github.com/tw-in-js/twind/tree/next/packages/preset-ext)

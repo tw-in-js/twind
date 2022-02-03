@@ -17,7 +17,7 @@
     "@twind/preset-ext": "packages/preset-ext/dist",
     "@twind/preset-tailwind": "packages/preset-tailwind/dist",
     "@twind/preset-tailwind-forms": "packages/preset-tailwind-forms/dist",
-    "@twind/sveltekit": "packages/sveltekit/dist",
+    "@twind/with-sveltekit": "packages/with-sveltekit/dist",
     "@twind/tailwind": "packages/tailwind/dist",
     "twind": "packages/twind/dist"
   },

@@ -1,5 +1,5 @@
 ---
-'@twind/sveltekit': patch
+'@twind/with-sveltekit': patch
 'twind': patch
 ---
 

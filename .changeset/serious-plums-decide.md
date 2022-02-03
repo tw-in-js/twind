@@ -1,6 +1,6 @@
 ---
 'gatsby-plugin-twind': patch
-'@twind/sveltekit': patch
+'@twind/with-sveltekit': patch
 '@twind/tailwind': patch
 'twind': patch
 ---

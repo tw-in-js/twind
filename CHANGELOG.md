@@ -13,5 +13,5 @@
 
 ## Integrations
 
-- [@twind/sveltekit](./packages/sveltekit/CHANGELOG.md)
+- [@twind/with-sveltekit](./packages/with-sveltekit/CHANGELOG.md)
 - [gatsyb-plugin-twind](./packages/gatsby-plugin/CHANGELOG.md)

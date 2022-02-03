@@ -28,7 +28,7 @@ Here are some examples of how to write your own rules or variants:
 Additionally we provides several integrations:
 
 - [Gatsby](https://github.com/gatsbyjs/gatsby) — [gatsby-plugin-twind](https://github.com/tw-in-js/twind/tree/next/packages/gatsby-plugin-twind)
-- [SvelteKit](https://kit.svelte.dev) — [@twind/sveltekit](https://github.com/tw-in-js/twind/tree/next/packages/sveltekit)
+- [SvelteKit](https://kit.svelte.dev) — [@twind/with-sveltekit](https://github.com/tw-in-js/twind/tree/next/packages/with-sveltekit)
 
 To get you started, take a look at the [examples](https://github.com/tw-in-js/twind/tree/next/examples).
 

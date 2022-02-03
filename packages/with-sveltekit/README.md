@@ -1,4 +1,4 @@
-# @twind/sveltekit [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/sveltekit/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/sveltekit/v/next) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23sveltekit?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/sveltekit)
+# @twind/with-sveltekit [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/with-sveltekit/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/with-sveltekit/v/next) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23sveltekit?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/with-sveltekit)
 
 ---
 
@@ -19,7 +19,7 @@ Used within the following [examples](https://github.com/tw-in-js/twind/tree/next
 Install from npm:
 
 ```sh
-npm install twind@next @twind/sveltekit@next
+npm install twind@next @twind/with-sveltekit@next
 ```
 
 ## Usage
@@ -30,7 +30,7 @@ Please see [examples/sveltekit](https://github.com/tw-in-js/twind/tree/next/exam
 
 ```html
 <script context="module">
-  import { setup } from '@twind/sveltekit'
+  import { setup } from '@twind/with-sveltekit'
   import twindConfig from '../twind.config'
   setup(twindConfig)
 </script>
@@ -47,7 +47,7 @@ export default defineConfig({
 })
 ```
 
-`@twind/sveltekit` will use hashed class names in production by default. If you don't want this, you can use the `hash` config option:
+`@twind/with-sveltekit` will use hashed class names in production by default. If you don't want this, you can use the `hash` config option:
 
 ```js
 export default defineConfig({
@@ -61,7 +61,7 @@ export default defineConfig({
 enable for server-side rendering of Twind styles
 
 ```js
-import { withTwind } from '@twind/sveltekit/hooks'
+import { withTwind } from '@twind/with-sveltekit/hooks'
 
 export const handle = withTwind()
 ```
@@ -77,7 +77,7 @@ export const handle = sequence(withTwind(), ...otherHandles)
 Using a custom Twind instance:
 
 ```js
-import { withTwind } from '@twind/sveltekit'
+import { withTwind } from '@twind/with-sveltekit'
 import { tw } from './custom/twind/instance'
 
 export const handle = withTwind(tw)

@@ -1,6 +1,6 @@
 ---
 '@example/sveltekit': patch
-'@twind/sveltekit': patch
+'@twind/with-sveltekit': patch
 ---
 
-add sveltekit integration (@twind/sveltekit) with example
+add sveltekit integration (@twind/with-sveltekit) with example

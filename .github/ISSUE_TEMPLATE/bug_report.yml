@@ -35,7 +35,7 @@ body:
         - label: '`@twind/preset-line-clamp`'
         - label: '`@twind/preset-tailwind`'
         - label: '`@twind/preset-tailwind-forms`'
-        - label: '`@twind/sveltekit`'
+        - label: '`@twind/with-sveltekit`'
         - label: '`gatsby-plugin-twind`'
   - type: textarea
     id: bug-description
