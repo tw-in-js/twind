@@ -27,7 +27,7 @@ import { twind, observe, auto, cssom } from 'twind'
 import { defineConfig } from '@twind/tailwind'
 
 // If we run in the browser as `<script src="..."></script>` auto call setup once the body starts rendering
-const cancelAutoSetup = /* @__PURE__ */ auto(setup)
+const cancelAutoSetup = /* #__PURE__ */ auto(setup)
 
 export function setup<Theme extends BaseTheme = TailwindTheme, SheetTarget = unknown>(
   config?: TwindConfig<Theme> & TailwindPresetOptions,

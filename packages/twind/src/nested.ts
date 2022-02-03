@@ -3,8 +3,8 @@ import { format } from './internal/format'
 import { parse } from './internal/parse'
 import { interpolate } from './internal/interpolate'
 
-export const apply = /* @__PURE__ */ nested('@')
-export const shortcut = /* @__PURE__ */ nested('~')
+export const apply = /* #__PURE__ */ nested('@')
+export const shortcut = /* #__PURE__ */ nested('~')
 
 function nested(marker: string): Nested {
   return new Proxy(

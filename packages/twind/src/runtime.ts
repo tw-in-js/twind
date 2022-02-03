@@ -46,7 +46,7 @@ export function auto(setup: () => void): () => void {
 /**
  * A proxy to the currently active Twind instance.
  */
-export const tw = /* @__PURE__ */ Object.defineProperties(
+export const tw = /* #__PURE__ */ Object.defineProperties(
   // just exposing the active as tw should work with most bundlers
   // as ES module export can be re-assigned BUT some bundlers to not honor this
   // -> using a delegation proxy here

@@ -10,7 +10,7 @@ export type Animation = AnimationFunction & {
   [label: string]: AnimationFunction
 }
 
-export const animation = /* @__PURE__ */ new Proxy(
+export const animation = /* #__PURE__ */ new Proxy(
   function animation(animation: string | CSSProperties, waypoints: StringLike): StringLike {
     return animation$('animation', animation, waypoints)
   } as Animation,

@@ -87,15 +87,15 @@ use `tw` or `tx` to inject styles
 
   import config from './twind.config'
 
-  export const tw = /* @__PURE__ */ twind(
+  export const tw = /* #__PURE__ */ twind(
     config,
     // IS_DEV: `proces.env.NODE_ENV != 'production'` or `import.meta.env.DEV` (vite)
     getSheet(IS_DEV),
   )
 
-  export const tx = /* @__PURE__ */ tx$.bind(tw)
-  export const injectGlobal = /* @__PURE__ */ injectGlobal$.bind(tw)
-  export const keyframes = /* @__PURE__ */ keyframes$.bind(tw)
+  export const tx = /* #__PURE__ */ tx$.bind(tw)
+  export const injectGlobal = /* #__PURE__ */ injectGlobal$.bind(tw)
+  export const keyframes = /* #__PURE__ */ keyframes$.bind(tw)
   ```
 
 - `observe(tw, target?)`: observes all class attributes and injects the styles into the DOM

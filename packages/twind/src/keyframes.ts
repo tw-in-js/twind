@@ -42,7 +42,7 @@ export type Keyframes = KeyframesFunction & {
   [label: string]: KeyframesFunction
 }
 
-export const keyframes = /* @__PURE__ */ bind()
+export const keyframes = /* #__PURE__ */ bind()
 
 function bind(thisArg: ((tokens: string) => string) | undefined | void): Keyframes {
   return new Proxy(
