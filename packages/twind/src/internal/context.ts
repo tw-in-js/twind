@@ -50,7 +50,6 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
   // lazy created resolve functions
   const ruleResolvers = new Map<Rule<Theme>, ResolveFunction<Theme>>()
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const ignored = createRegExpExecutor(ignorelist, (value, condition) => condition.test(value))
 
   // add dark as last variant to allow user to override it

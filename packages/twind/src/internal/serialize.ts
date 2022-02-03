@@ -49,7 +49,6 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
           ...translateWith(
             name as string,
             precedence,
-            // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
             parse('' + value),
             context,
             precedence,
@@ -185,7 +184,6 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
               key,
               // support theme(...) function in values
               // calc(100vh - theme('spacing.12'))
-              // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
               resolveThemeFunction('' + value, context) + (important ? ' !important' : ''),
             ),
           )

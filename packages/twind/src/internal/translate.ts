@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
 import type { TwindRule, Context, BaseTheme } from '../types'
 import type { ParsedRule } from './parse'
 
@@ -49,7 +48,6 @@ function translate$<Theme extends BaseTheme = BaseTheme>(
 
   // a list of class names
   if (typeof resolved == 'string') {
-    // eslint-disable-next-line @typescript-eslint/no-extra-semi
     ;({ r: conditions, p: precedence } = convert(rule, context, precedence, conditions))
 
     return merge(translate(parse(resolved), context, precedence, conditions, rule.i), rule.n)

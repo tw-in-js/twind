@@ -10,6 +10,7 @@ web_modules
 .cache
 .swc
 dist
+out
 website
 documentation/70-api
 examples/with-gatsby/public

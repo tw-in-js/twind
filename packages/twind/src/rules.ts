@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-extra-semi */
 import type {
   Context,
   ColorValue,
@@ -129,7 +128,6 @@ export function colorFromTheme<
     // [hsl(0_100%_/_50%)]       -> ['[hsl(0_100%_/_50%)]']
     // indigo-500/100            -> ['indigo-500', '100']
     // [hsl(0_100%_/_50%)]/[.25] -> ['[hsl(0_100%_/_50%)]', '[.25]']
-    // eslint-disable-next-line no-sparse-arrays
     if (!/^(\[[^\]]+]|[^/]+?)(?:\/(.+))?$/.test(match.$$)) return
 
     const { $1: colorMatch, $2: opacityMatch } = RegExp

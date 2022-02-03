@@ -41,7 +41,6 @@ export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
       } else {
         /* childList */
         // some nodes have been added — find all with a class attribute
-        // eslint-disable-next-line @typescript-eslint/no-extra-semi
         ;(target as Element).querySelectorAll('[class]').forEach(handleClassAttributeChange)
       }
     }

@@ -5,7 +5,6 @@
  * @module
  */
 
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
 // Based on https://github.com/tailwindlabs/tailwindcss-forms/blob/ce5386b66a8a5833372fd245e95bf3c4e21da8d3/src/index.js
 // License MIT
 

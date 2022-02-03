@@ -5,9 +5,6 @@
  * @module
  */
 
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 // Fix exported global variable from `twindCdn` to `twind`
 /* @distilt-global-name twind */
 

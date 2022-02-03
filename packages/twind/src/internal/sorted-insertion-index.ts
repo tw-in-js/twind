@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
 import { Layer } from './precedence'
 
 const collator = new Intl.Collator('en', { numeric: true })

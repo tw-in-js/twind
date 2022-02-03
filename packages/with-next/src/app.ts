@@ -1,5 +1,4 @@
 /* eslint-env node, browser */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { AppProps } from 'next/app'
 
 import type { BaseTheme, TwindConfig, TwindUserConfig, Preset } from 'twind'
@@ -35,7 +34,6 @@ function withTwind<Props, Component>(
 
 function withTwind<Props, Component>(
   config: TwindConfig | TwindUserConfig,
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-explicit-any
   AppComponent: React.JSXElementConstructor<Props> & Component = TwindApp as any,
 ): Component {
   setup(config as TwindUserConfig)
@@ -44,6 +42,5 @@ function withTwind<Props, Component>(
 }
 
 function TwindApp(props: AppProps) {
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   return createElement(props.Component, props.pageProps)
 }

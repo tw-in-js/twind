@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type {
   Twind,
   BaseTheme,
@@ -117,7 +116,7 @@ export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown
 
     // If they body was hidden autofocus the first element
     if (!document.activeElement) {
-      // eslint-disable-next-line @typescript-eslint/no-extra-semi, @typescript-eslint/no-unnecessary-type-assertion
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
       ;(document.querySelector('[autofocus]') as HTMLElement | null)?.focus()
     }
   }

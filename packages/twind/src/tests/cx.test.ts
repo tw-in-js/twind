@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-sparse-arrays */
-/* eslint-disable @typescript-eslint/no-unsafe-argument */
 import { assert, test } from 'vitest'
 
 import { cx } from '..'

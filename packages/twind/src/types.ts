@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type * as CSS from 'csstype'
 
 export type Falsey = false | null | undefined | void | ''
@@ -202,7 +201,6 @@ export type Variant<Theme extends BaseTheme = BaseTheme> = [
 ]
 
 // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp/n
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type MatchResult = RegExpExecArray & {
   // /** The input string */
   // $_: string

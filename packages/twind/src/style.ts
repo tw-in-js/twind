@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/restrict-plus-operands */
 // Based on https://github.com/modulz/stitches
 // License MIT
 

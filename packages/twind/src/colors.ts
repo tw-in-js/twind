@@ -20,7 +20,6 @@ export function toColorValue(color: ColorValue, options: ColorFunctionOptions = 
     const size = (color.length - 1) / 3
     const factor = [17, 1, 0.062272][size - 1]
 
-    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     return `rgba(${[
       parseColorComponent(color.substr(1, size), factor),
       parseColorComponent(color.substr(1 + size, size), factor),

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type {
   BaseTheme,
   ExtractThemes,
@@ -92,7 +91,6 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
           }
 
           if (preflight) {
-            // eslint-disable-next-line @typescript-eslint/no-extra-semi
             ;(typeof preflight == 'string'
               ? translateWith('', Layer.b, parse(preflight), context, Layer.b, [], false, true)
               : serialize(preflight, {}, context, Layer.b)

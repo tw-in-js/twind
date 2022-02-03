@@ -33,7 +33,6 @@ function toString(value: Class): string {
       }
     }
   } else if (value != null && typeof value != 'boolean') {
-    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     result += ' ' + value
   }
 

@@ -831,7 +831,6 @@ function ratios(start: number, end: number): Record<string, string> {
     // XXX: using var to avoid strange bug when generating cjs where `= 1` is removed
     // eslint-disable-next-line no-var
     for (var dividend = 1; dividend < start; dividend++) {
-      // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
       result[`${dividend}/${start}`] = Number(((dividend / start) * 100).toFixed(6)) + '%'
     }
   } while (++start <= end)
@@ -847,7 +846,6 @@ function exponential(stop: number, unit: string, start = 0): Record<string, stri
   const result: Record<string, string> = {}
 
   for (; start <= stop; start = start * 2 || 1) {
-    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     result[start] = start + unit
   }
 
@@ -872,7 +870,6 @@ function linear(
   // eslint-disable-next-line max-params
 ): Record<string, string> {
   for (; start <= stop; start += step) {
-    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     result[start] = start / divideBy + unit
   }
 
