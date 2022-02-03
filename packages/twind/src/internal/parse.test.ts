@@ -220,3 +220,37 @@ test('utility grouping', () => {
     { n: '-rotate-6', v: ['md', 'hover'], i: false },
   ])
 })
+
+test('groups with arbitrary values', () => {
+  assert.deepEqual(
+    parse(`
+      grid-template-(
+        areas["head_head"_"nav_main"_"nav_foot"]
+        columns[150px_1fr]
+        rows[50px_1fr_30px]
+
+        md:(
+          areas["head"_"nav"_"main"_"foot"]
+          columns[150px_1fr]
+          rows[5rem_auto]
+        )
+      )
+    `),
+    [
+      {
+        n: 'grid-template-areas["head_head"_"nav_main"_"nav_foot"]',
+        v: [],
+        i: false,
+      },
+      { n: 'grid-template-columns[150px_1fr]', v: [], i: false },
+      { n: 'grid-template-rows[50px_1fr_30px]', v: [], i: false },
+      {
+        n: 'grid-template-areas["head"_"nav"_"main"_"foot"]',
+        v: ['md'],
+        i: false,
+      },
+      { n: 'grid-template-columns[150px_1fr]', v: ['md'], i: false },
+      { n: 'grid-template-rows[5rem_auto]', v: ['md'], i: false },
+    ],
+  )
+})

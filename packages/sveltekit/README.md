@@ -1,4 +1,4 @@
-# @twind/sveltekit [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/sveltekit/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/sveltekit) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23sveltekit?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/sveltekit)
+# @twind/sveltekit [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/sveltekit/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/sveltekit/v/next) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23sveltekit?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/sveltekit)
 
 ---
 
@@ -8,7 +8,7 @@
 
 ---
 
-Seamless integration of [twind](https://www.npmjs.com/package/twind) for [SvelteKit](https://kit.svelte.dev)
+Seamless integration of [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind) for [SvelteKit](https://kit.svelte.dev)
 
 Used within the following [examples](https://github.com/tw-in-js/twind/tree/next/examples):
 

@@ -33,13 +33,25 @@
 ## v1
 
 - handle arbitrary prefix like `[length:...]`
+- `ensure`: like setup but keeps track of presets and merges them
+
+  ```js
+  // package a
+  import { ensure } from 'twind'
+  ensure(presetTailwind())
+
+  // package b
+  import { ensure } from 'twind'
+  ensure(presetTailwind(), presetTailwindForms())
+  ```
+
 - @twind/preset-\* from tailwind core
 - @twind/styled (previously @twind/react)
   - Global: https://emotion.sh/docs/globals
   - createGlobalStyles: https://goober.js.org/api/createGlobalStyles
   - createGlobalStyle: https://styled-components.com/docs/api#createglobalstyle
   - @twind/styled/css - like styled-components eg using css
-- frameworks: next, remix, wmr, vue, stenciljs, angular, ...
+- frameworks: next, remix, solid, wmr, vue, stenciljs, angular, ...
 - development condition — let distilt create development bundles
   - warnings: console.warn(`[twind] unknown rule "${value}"`)
   - completion infos

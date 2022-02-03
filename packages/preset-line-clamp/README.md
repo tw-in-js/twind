@@ -1,4 +1,4 @@
-# @twind/preset-line-clamp [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/preset-line-clamp/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/preset-line-clamp) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23preset-line-clamp?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/preset-line-clamp)
+# @twind/preset-line-clamp [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/preset-line-clamp/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/preset-line-clamp/v/next) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23preset-line-clamp?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/preset-line-clamp)
 
 ---
 
@@ -8,7 +8,7 @@
 
 ---
 
-A [twind](https://www.npmjs.com/package/twind) preset that provides utilities for visually truncating text after a fixed number of lines.
+A [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind) preset that provides utilities for visually truncating text after a fixed number of lines.
 
 > Based on [@tailwindcss/line-clamp](https://github.com/tailwindlabs/tailwindcss-line-clamp).
 
@@ -26,7 +26,7 @@ npm install twind@next @twind/preset-line-clamp@next
 
 ## Installation
 
-**with [twind](https://www.npmjs.com/package/twind)**
+**with [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)**
 
 ```js
 import { setup } from 'twind/core'
@@ -57,7 +57,7 @@ setup({
 
 </details>
 
-**with [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind)** — ready to use Tailwind CSS
+**with [@twind/tailwind](https://github.com/tw-in-js/twind/tree/next/packages/tailwind)** — ready to use Tailwind CSS
 
 ```js
 import { setup } from '@twind/tailwind'
@@ -88,7 +88,7 @@ setup({
 
 </details>
 
-**with [Twind CDN](https://www.npmjs.com/package/@twind/cdn)** — a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn)
+**with [Twind CDN](https://github.com/tw-in-js/twind/tree/next/packages/cdn)** — a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn)
 
 ```html
 <head>

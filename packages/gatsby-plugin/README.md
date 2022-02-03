@@ -1,4 +1,4 @@
-# gatsby-plugin-twind [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/gatsby-plugin-twind/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/gatsby-plugin-twind) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23gatsby-plugin?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/gatsby-plugin)
+# gatsby-plugin-twind [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/gatsby-plugin-twind/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/gatsby-plugin-twind/v/next) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23gatsby-plugin?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/gatsby-plugin)
 
 ## READ THIS FIRST!
 

@@ -343,7 +343,7 @@ setup({
 
 In general, Twind is designed for and tested on the latest stable versions of Chrome, Firefox, Edge, and Safari. It does not support any version of IE, including IE 11.
 
-For automatic vendor prefixing include the [@twind/preset-autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix) preset.
+For automatic vendor prefixing include the [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix) preset.
 
 For more details see [Tailwind CSS › Browser Support](https://tailwindcss.com/docs/browser-support).
 

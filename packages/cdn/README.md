@@ -1,4 +1,4 @@
-# @twind/cdn [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/cdn/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/cdn) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23cdn?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/cdn)
+# @twind/cdn [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/cdn/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/cdn/v/next) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23cdn?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/cdn)
 
 ---
 
@@ -14,8 +14,8 @@ Twind CDN is a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindc
 
 The following presets are included out-of-the-box:
 
-- [@twind/preset-autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix)
-- [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind)
+- [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix)
+- [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind)
 
 Used within the following [examples](https://github.com/tw-in-js/twind/tree/next/examples):
 

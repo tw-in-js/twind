@@ -1,4 +1,4 @@
-# @twind/tailwind [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/tailwind/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/tailwind) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23tailwind?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/tailwind)
+# @twind/tailwind [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/tailwind/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/tailwind/v/next) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23tailwind?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/tailwind)
 
 ---
 
@@ -12,8 +12,8 @@ The full [Tailwind CSS](https://tailwindcss.com) experience without any build st
 
 The following presets are included out-of-the-box:
 
-- [@twind/preset-autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix)
-- [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind)
+- [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix)
+- [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind)
 
 Used within the following [examples](https://github.com/tw-in-js/twind/tree/next/examples):
 
@@ -61,7 +61,7 @@ If any element has the `autofocus` attribute, Twind will focus it after all styl
 
 <details><summary>Usage with a script tag</summary>
 
-> If you are not using any Twind API (like `cx`, `css`, ...) you can use the optimized [@twind/cdn](https://www.npmjs.com/package/@twind/cdn) package.
+> If you are not using any Twind API (like `cx`, `css`, ...) you can use the optimized [@twind/cdn](https://github.com/tw-in-js/twind/tree/next/packages/cdn) package.
 
 Add this to your `index.html`:
 
@@ -104,7 +104,7 @@ To add other presets add their ids to the script `src` attribute:
 
 > If you are using the `script` tag these methods are available via the `twind` global object (eg `twind.setup`).
 
-The following options from [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind) are available:
+The following options from [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind) are available:
 
 - `enablePreflight: boolean = true` — whether to enable the [preflight](https://tailwindcss.com/docs/preflight)
 

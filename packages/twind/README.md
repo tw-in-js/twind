@@ -1,4 +1,4 @@
-# twind [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/twind/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/twind) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23twind?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/twind)
+# twind [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/twind/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/twind/v/next) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23twind?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/twind)
 
 ---
 
@@ -12,13 +12,13 @@ Utility-first CSS without any build step right in the browser or any other envir
 
 Twind does **not** include any core utilities — use one of the existing presets:
 
-- [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind) to get a full Tailwind v3 experience. It includes the following presets:
+- [@twind/tailwind](https://github.com/tw-in-js/twind/tree/next/packages/tailwind) to get a full Tailwind v3 experience. It includes the following presets:
 
-  - [@twind/preset-autoprefix](https://www.npmjs.com/package/@twind/preset-autoprefix)
-  - [@twind/preset-tailwind](https://www.npmjs.com/package/@twind/preset-tailwind)
+  - [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix)
+  - [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind)
 
-- [@twind/preset-tailwind-forms](https://www.npmjs.com/package/@twind/preset-tailwind-forms) to get Tailwind v3 and Tailwind Forms.
-- [@twind/preset-ext](https://www.npmjs.com/package/@twind/preset-ext)
+- [@twind/preset-tailwind-forms](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind-forms) to get Tailwind v3 and Tailwind Forms.
+- [@twind/preset-ext](https://github.com/tw-in-js/twind/tree/next/packages/preset-ext)
 
 Here are some examples of how to write your own rules or variants:
 
@@ -27,8 +27,8 @@ Here are some examples of how to write your own rules or variants:
 
 Additionally we provides several integrations:
 
-- [Gatsby](https://github.com/gatsbyjs/gatsby) — [gatsby-plugin-twind](https://www.npmjs.com/package/gatsby-plugin-twind)
-- [SvelteKit](https://kit.svelte.dev) — [@twind/sveltekit](https://www.npmjs.com/package/@twind/sveltekit)
+- [Gatsby](https://github.com/gatsbyjs/gatsby) — [gatsby-plugin-twind](https://github.com/tw-in-js/twind/tree/next/packages/gatsby-plugin-twind)
+- [SvelteKit](https://kit.svelte.dev) — [@twind/sveltekit](https://github.com/tw-in-js/twind/tree/next/packages/sveltekit)
 
 To get you started, take a look at the [examples](https://github.com/tw-in-js/twind/tree/next/examples).
 

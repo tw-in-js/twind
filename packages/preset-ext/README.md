@@ -1,4 +1,4 @@
-# @twind/preset-ext [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/preset-ext/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/preset-ext) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23preset-ext?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/preset-ext)
+# @twind/preset-ext [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/preset-ext/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/preset-ext/v/next) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23preset-ext?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/preset-ext)
 
 ---
 
@@ -22,7 +22,7 @@ npm install twind@next @twind/preset-ext@next
 
 Then add the preset to your twind config:
 
-**with [twind](https://www.npmjs.com/package/twind)**
+**with [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)**
 
 ```js
 import { setup } from 'twind'
@@ -53,7 +53,7 @@ setup({
 
 </details>
 
-**with [@twind/tailwind](https://www.npmjs.com/package/@twind/tailwind)** — ready to use Tailwind CSS
+**with [@twind/tailwind](https://github.com/tw-in-js/twind/tree/next/packages/tailwind)** — ready to use Tailwind CSS
 
 ```js
 import { setup } from '@twind/tailwind'
@@ -84,7 +84,7 @@ setup({
 
 </details>
 
-**with [Twind CDN](https://www.npmjs.com/package/@twind/cdn)** — a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn)
+**with [Twind CDN](https://github.com/tw-in-js/twind/tree/next/packages/cdn)** — a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn)
 
 ```html
 <head>
