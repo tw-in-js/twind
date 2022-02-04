@@ -17,7 +17,7 @@ body:
 
         - Read [the docs](https://twind.dev)
         - Explore [examples](https://github.com/tw-in-js/twind/tree/next/examples#readme)
-        - Ask in [Github Discussions](https://github.com/tw-in-js/twind/discussions).
+        - Ask in [Github Discussions](https://github.com/tw-in-js/twind/discussions)
         - Ask in [Discord Chat](https://discord.com/invite/2aP5NkszvD)
   - type: textarea
     id: problem

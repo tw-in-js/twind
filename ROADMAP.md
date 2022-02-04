@@ -57,6 +57,10 @@
   - completion infos
   - additional checks
   - performance marks for devtools
+  - hints:
+    - https://www.npmjs.com/package/genex
+    - https://www.npmjs.com/package/simpexp
+    - https://www.npmjs.com/package/regexgen
 - perf: large website with many different rules
 - pug support: https://github.com/tw-in-js/twind/issues/198
 - how to create a PR in contributing guide: https://codesandbox.io/docs/git
@@ -80,6 +84,8 @@
 - ci: post on discord after release
 - auto support dark mode in theme helpers (`<section>.dark.<key>` or `dark.<section>.<key>`)
 - @twind/completions — provide autocompletion for classNames
+  - https://npm.runkit.com/regexp-enumerator
+  - https://www.npmjs.com/package/randexp
 - a package to make it easy to create lightweight versions of presets (like https://lodash.com/custom-builds)
 - postcss plugin like tailwindcss for SSR
 

@@ -17,49 +17,32 @@ body:
 
         - Read [the docs](https://twind.dev)
         - Explore [examples](https://github.com/tw-in-js/twind/tree/next/examples#readme)
-        - Ask in [Github Discussions](https://github.com/tw-in-js/twind/discussions).
+        - Ask in [Github Discussions](https://github.com/tw-in-js/twind/discussions)
         - Ask in [Discord Chat](https://discord.com/invite/2aP5NkszvD)
 
         ### Test Case Starter:
         https://github.com/tw-in-js/twind/tree/next/examples/basic?file=index.html
-  - type: checkboxes
-    id: packages
+  - type: textarea
+    id: reproduction
     attributes:
-      label: Which Twind packages are impacted?
-      options:
-        - label: '`twind` (Twind core)'
-        - label: '`@twind/tailwind`'
-        - label: '`@twind/cdn`'
-        - label: '`@twind/preset-autoprefix`'
-        - label: '`@twind/preset-ext`'
-        - label: '`@twind/preset-line-clamp`'
-        - label: '`@twind/preset-tailwind`'
-        - label: '`@twind/preset-tailwind-forms`'
-        - label: '`@twind/with-sveltekit`'
-        - label: '`gatsby-plugin-twind`'
+      label: Reproduction
+      description: |
+        A [minimal reproduction](https://minimum-reproduction.wtf) on Stackblitz or Codesandbox of an
+        [example](https://github.com/tw-in-js/twind/tree/next/examples#readme) that reproduces the issue.
+
+        Explaining how to reproduce is generally not enough. It pushes the burden of creating a reproduction
+        onto a small set of volunteer maintainers and isn't scalable.
+
+        If no reproduction is provided, the issue will be closed.
+      placeholder: Reproduction
+    validations:
+      required: true
   - type: textarea
     id: bug-description
     attributes:
       label: Describe the bug
       description: If you intend to submit a PR for this issue, tell us in the description. Thanks!
       placeholder: Steps to reproduce the behavior with a concise description of what you expected to happen and what you're experiencing.
-    validations:
-      required: true
-  - type: textarea
-    id: reproduction
-    attributes:
-      label: Reproduction
-      description: A fork on Stackblitz or Codesandbox of an [example](https://github.com/tw-in-js/twind/tree/next/examples#readme) that reproduces the issue. Explaining how to reproduce is generally not enough. It pushes the burden of creating a reproduction project onto a small set of volunteer maintainers and isn't scalable. If no reproduction is provided, the issue will be closed.
-      placeholder: Reproduction
-    validations:
-      required: true
-  - type: textarea
-    id: system-info
-    attributes:
-      label: System Info
-      description: Output of `npx envinfo --system --binaries --browsers --npmPackages`
-      render: shell
-      placeholder: System, Binaries, Browsers, Packages
     validations:
       required: true
   - type: dropdown
@@ -71,6 +54,15 @@ body:
         - serious, but I can work around it
         - blocking an upgrade
         - blocking all usage of Twind
+    validations:
+      required: true
+  - type: textarea
+    id: system-info
+    attributes:
+      label: System Info
+      description: Output of `npx envinfo --system --binaries --browsers --npmPackages`
+      render: shell
+      placeholder: System, Binaries, Browsers, Packages
     validations:
       required: true
   - type: textarea

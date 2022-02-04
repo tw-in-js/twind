@@ -13,13 +13,16 @@
   // to our registry.
   "publishDirectory": {
     "@twind/cdn": "packages/cdn/dist",
+    "gatsby-plugin-twind": "packages/gatsby-plugin/dist",
     "@twind/preset-autoprefix": "packages/preset-autoprefix/dist",
     "@twind/preset-ext": "packages/preset-ext/dist",
+    "@twind/preset-line-clamp": "packages/preset-line-clamp/dist",
     "@twind/preset-tailwind": "packages/preset-tailwind/dist",
     "@twind/preset-tailwind-forms": "packages/preset-tailwind-forms/dist",
-    "@twind/with-sveltekit": "packages/with-sveltekit/dist",
     "@twind/tailwind": "packages/tailwind/dist",
-    "twind": "packages/twind/dist"
+    "twind": "packages/twind/dist",
+    "@twind/with-next": "packages/with-next/dist",
+    "@twind/with-sveltekit": "packages/with-sveltekit/dist"
   },
   // A list of sandboxes that you want generated for a PR, if this list
   // is not set we will default to `vanilla`. The built library will automatically
@@ -28,7 +31,13 @@
   // replace `lodash` with the built version.
   // You can also set absolute paths to a directory in your repository. We will make sure
   // to generate a sandbox from the contents of that directory.
-  "sandboxes": ["/examples/basic", "/examples/playground", "/examples/sveltekit"],
+  "sandboxes": [
+    "/examples/basic",
+    "/examples/playground",
+    "/examples/with-gatsby",
+    "/examples/with-next",
+    "/examples/with-sveltekit"
+  ],
   // Node.js version to use for building the PR.
   // Supported versions are '10' (10.24.1, default), '12' (12.22.7), '14' (14.18.1) and '16' (16.13.0).
   "node": "16"
