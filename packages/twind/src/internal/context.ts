@@ -214,28 +214,11 @@ function createRegExpExecutor<Result, Theme extends BaseTheme = BaseTheme>(
   }
 }
 
-/**
- * Executes a search on a string using a regular expression pattern, and returns an array containing the results of that search.
- * @param string The String object or string literal on which to perform the search.
- */
-// type Condition = (string: string) => RegExpExecArray | Falsey
-
 function toCondition(value: string | RegExp): RegExp {
   // "visible" -> /^visible$/
   // "(float)-(left|right|none)" -> /^(float)-(left|right|none)$/
   // "auto-rows-" -> /^auto-rows-/
   // "gap(-|$)" -> /^gap(-|$)/
-
-  // PERF: try to detect if we can skip the regex execution
-  // if (typeof value == 'string') {
-  // const prefix = /^[\w-#~@]+(?!\?)/.exec(value)?.[0]
-  // value = new RegExp('^' + value + (value.includes('$') || value.slice(-1) == '-' ? '' : '$'))
-  // if (prefix) {
-  //   return (string) => string.startsWith(prefix) && (value as RegExp).exec(string)
-  // }
-  // }
-  // return (string) => (value as RegExp).exec(string)
-
   return typeof value == 'string'
     ? new RegExp('^' + value + (value.includes('$') || value.slice(-1) == '-' ? '' : '$'))
     : value

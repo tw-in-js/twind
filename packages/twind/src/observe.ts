@@ -41,7 +41,9 @@ export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
       } else {
         /* childList */
         // some nodes have been added — find all with a class attribute
-        ;(target as Element).querySelectorAll('[class]').forEach(handleClassAttributeChange)
+        for (const el of (target as Element).querySelectorAll('[class]')) {
+          handleClassAttributeChange(el)
+        }
       }
     }
 

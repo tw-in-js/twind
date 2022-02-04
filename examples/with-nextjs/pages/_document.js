@@ -1,1 +1,3 @@
-export { default } from '@twind/with-next/document'
+import install from '@twind/with-next/document'
+
+export default install()

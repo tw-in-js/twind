@@ -61,7 +61,7 @@ export function dom(element?: Element | null | false): Sheet<HTMLStyleElement> {
     target,
 
     clear() {
-      target.innerHTML = ''
+      target.textContent = ''
     },
 
     destroy() {
@@ -131,7 +131,7 @@ export function getSheet(
 export function stringify(target: unknown): string {
   // string[] | CSSStyleSheet | HTMLStyleElement
   return (
-    // prefer the raw test content of a CSSStyleSheet as it may include the resume data
+    // prefer the raw text content of a CSSStyleSheet as it may include the resume data
     ((target as CSSStyleSheet).ownerNode || (target as HTMLStyleElement))?.textContent ||
     ((target as CSSStyleSheet).cssRules
       ? Array.from((target as CSSStyleSheet).cssRules, (rule) => rule.cssText)
@@ -143,7 +143,7 @@ export function stringify(target: unknown): string {
 function resume(
   this: Sheet,
   addClassName: (className: string) => void,
-  insert: (rule: SheetRule, cssText: string) => void,
+  insert: (cssText: string, rule: SheetRule) => void,
 ) {
   // hydration from SSR sheet
   const textContent = stringify(this.target)
@@ -172,13 +172,13 @@ function resume(
       (function commit(match?: RegExpExecArray | null) {
         if (lastMatch) {
           insert(
+            // grep the cssText from the previous match end up to this match start
+            textContent.slice(lastMatch.index + lastMatch[0].length, match?.index),
             {
               p: (lastPrecedence += parseInt(lastMatch[1], 36)),
               o: parseInt(lastMatch[2], 36) / 2,
-              n: lastMatch[3] ?? undefined,
+              n: lastMatch[3],
             },
-            // grep the cssText from the previous match end up to this match start
-            textContent.slice(lastMatch.index + lastMatch[0].length, match?.index),
           )
         }
 

@@ -5,38 +5,51 @@ import { createElement, Fragment } from 'react'
 import Document from 'next/document'
 import { extract } from 'twind'
 
-export default class TwindDocument extends Document {
-  static async getInitialProps(
-    ctx: DocumentContext & {
-      defaultGetInitialProps: (
-        ctx: DocumentContext,
-        options?: { nonce?: string },
-      ) => Promise<DocumentInitialProps>
-    },
-  ) {
-    const defaultGetInitialProps = ctx.defaultGetInitialProps.bind(ctx)
+export default install
 
-    ctx.defaultGetInitialProps = async (ctx, options: { nonce?: string } = {}) => {
-      const props = await defaultGetInitialProps(ctx, options)
+function install(): typeof Document
+function install<Component extends typeof Document = typeof Document>(
+  DocumentComponent: Component,
+): Component
 
-      const { html, css } = extract(props.html)
+function install<Component extends typeof Document = typeof Document>(
+  BaseComponent: Component = Document as Component,
+): Component {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  return class TwindDocument extends BaseComponent {
+    static getInitialProps(
+      ctx: DocumentContext & {
+        defaultGetInitialProps: (
+          ctx: DocumentContext,
+          options?: { nonce?: string },
+        ) => Promise<DocumentInitialProps>
+      },
+    ) {
+      const defaultGetInitialProps = ctx.defaultGetInitialProps.bind(ctx)
 
-      const styles = createElement(
-        Fragment,
-        null,
-        createElement('style', {
-          'data-twind': true,
-          nonce: options.nonce,
-          dangerouslySetInnerHTML: {
-            __html: css,
-          },
-        }),
-        props.styles,
-      )
+      ctx.defaultGetInitialProps = async (ctx, options: { nonce?: string } = {}) => {
+        const props = await defaultGetInitialProps(ctx, options)
 
-      return { ...props, html, styles }
+        const { html, css } = extract(props.html)
+
+        const styles = createElement(
+          Fragment,
+          null,
+          createElement('style', {
+            'data-twind': '',
+            nonce: options.nonce,
+            dangerouslySetInnerHTML: {
+              __html: css,
+            },
+          }),
+          props.styles,
+        )
+
+        return { ...props, html, styles }
+      }
+
+      return BaseComponent.getInitialProps(ctx)
     }
-
-    return Document.getInitialProps(ctx)
   }
 }

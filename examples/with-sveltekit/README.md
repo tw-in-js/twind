@@ -4,7 +4,7 @@
 
 ## How does this work?
 
-1. setup twind in [src/routes/\_\_layout.svelte](./src/routes/__layout.svelte)
+1. use twind in [src/routes/\_\_layout.svelte](./src/routes/__layout.svelte)
 2. use [@twind/with-sveltekit](https://github.com/tw-in-js/twind/tree/next/packages/with-sveltekit) in [src/hooks](./src/hooks.ts) to enable server-side rendering (SSR) and injecting of twind styles
 3. (optional) a dedicated [src/twind.config](./src/twind.config.ts)
 

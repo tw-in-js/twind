@@ -1,4 +1,4 @@
 /* eslint-env browser */
 
-import setup from './setup-twind'
-setup()
+import install from './install-twind'
+install()

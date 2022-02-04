@@ -18,13 +18,8 @@
   ],
   "type": "module",
   "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
-  "main": "src/index.ts",
   "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
   "exports": {
-    ".": {
-      "script": null,
-      "default": "./src/index.ts"
-    },
     "./app": {
       "script": null,
       "default": "./src/app.ts"

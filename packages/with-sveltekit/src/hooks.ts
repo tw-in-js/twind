@@ -6,8 +6,8 @@ import { inline } from 'twind'
 
 export type { InlineOptions }
 
-export function withTwind(options: InlineOptions['tw'] | InlineOptions = {}): Handle {
-  return async function withTwind$({ event, resolve }) {
+export default function handleTwind(options: InlineOptions['tw'] | InlineOptions = {}): Handle {
+  return async function handleTwind$({ event, resolve }) {
     const response = await resolve(event)
 
     if (response.headers.get('content-type')?.startsWith('text/html')) {

@@ -255,13 +255,13 @@ export interface SheetRule {
 
 export interface Sheet<Target = unknown> {
   readonly target: Target
-  insert(css: string, index: number, rule: SheetRule): void
+  insert(cssText: string, index: number, rule: SheetRule): void
   /** Clears all CSS rules from the sheet. */
   clear(): void
   destroy(): void
   resume(
     addClassName: (className: string) => void,
-    insert: (rule: SheetRule, cssText: string) => void,
+    insert: (cssText: string, rule: SheetRule) => void,
   ): void
 }
 

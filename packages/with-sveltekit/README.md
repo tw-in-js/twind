@@ -50,9 +50,9 @@ export default defineConfig({
 
 ```html
 <script context="module">
-  import { setup } from '@twind/with-sveltekit'
+  import install from '@twind/with-sveltekit'
   import config from '../twind.config'
-  setup(config)
+  install(config)
 </script>
 ```
 
@@ -61,9 +61,9 @@ export default defineConfig({
 Enable server-side rendering of Twind styles.
 
 ```js
-import { withTwind } from '@twind/with-sveltekit/hooks'
+import handleTwind from '@twind/with-sveltekit/hooks'
 
-export const handle = withTwind()
+export const handle = handleTwind()
 ```
 
 If you have other handlers use the [`sequence` helper](https://kit.svelte.dev/docs#modules-sveltejs-kit-hooks):
@@ -71,7 +71,7 @@ If you have other handlers use the [`sequence` helper](https://kit.svelte.dev/do
 ```js
 import { sequence } from '@sveltejs/kit/hooks'
 
-export const handle = sequence(withTwind(), ...otherHandlers)
+export const handle = sequence(handleTwind(), ...otherHandlers)
 ```
 
 [^1]: [SvelteKit › Hooks](https://kit.svelte.dev/docs#hooks)

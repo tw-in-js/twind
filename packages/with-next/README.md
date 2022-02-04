@@ -49,10 +49,10 @@ export default defineConfig({
 ### `pages/_app.js`[^1]
 
 ```js
-import withTwind from '@twind/with-next/app'
+import install from '@twind/with-next/app'
 import config from '../twind.config'
 
-export default withTwind(config)
+export default install(config)
 ```
 
 <details>
@@ -61,17 +61,19 @@ export default withTwind(config)
 TLDR;
 
 ```diff
-+ import withTwind from '@twind/with-next/app'
++ import install from '@twind/with-next/app'
 + import config from '../twind.config'
-
+function MyApp({ Component, pageProps }) {
+  /* ... */
+}
 - export default MyApp
-+ export default withTwind(config, MyApp)
++ export default install(config, MyApp)
 ```
 
 Here is a full example:
 
 ```js
-import withTwind from '@twind/with-next/app'
+import install from '@twind/with-next/app'
 import config from '../twind.config'
 
 function MyApp({ Component, pageProps }) {
@@ -90,7 +92,7 @@ function MyApp({ Component, pageProps }) {
 //   return { ...appProps }
 // }
 
-export default withTwind(config, MyApp)
+export default install(config, MyApp)
 ```
 
 </details>
@@ -109,17 +111,19 @@ export { default } from '@twind/with-next/document'
 TLDR;
 
 ```diff
-- import Document, { Html, Head, Main, NextScript } from 'next/document'
-+ import { Html, Head, Main, NextScript } from 'next/document'
-+ import Document from '@twind/with-next/document'
+import Document, { Html, Head, Main, NextScript } from 'next/document'
++ import install from '@twind/with-next/document'
+class MyDocument extends Document {
+  /* ... */
+}
++ export default install(MyDocument)
 ```
 
 Here is a full example:
 
 ```js
-import { Html, Head, Main, NextScript } from 'next/document'
-import Document from '@twind/with-next/document'
-import config from '../twind.config'
+import Document, { Html, Head, Main, NextScript } from 'next/document'
+import install from '@twind/with-next/document'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {
@@ -140,7 +144,7 @@ class MyDocument extends Document {
   }
 }
 
-export default MyDocument
+export default install(MyDocument)
 ```
 
 > The code above is the default `Document` added by Next.js. Feel free to remove the `getInitialProps` or `render` function from `MyDocument` if you don't need to change them.

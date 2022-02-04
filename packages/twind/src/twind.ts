@@ -52,7 +52,7 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
 
   sheet.resume(
     (className) => cache.set(className, className),
-    (rule, cssText) => {
+    (cssText, rule) => {
       sheet.insert(cssText, sortedPrecedences.length, rule)
       sortedPrecedences.push(rule)
       insertedRules.add(cssText)

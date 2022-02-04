@@ -7,8 +7,8 @@ import { renderToString } from 'react-dom/server'
 import { createElement } from 'react'
 import { extract } from 'twind'
 
-import setup from './setup-twind'
-setup()
+import install from './install-twind'
+install()
 
 export function replaceRenderer({
   bodyComponent,
