@@ -142,7 +142,6 @@ function getRuleResolver<Theme extends BaseTheme = BaseTheme>(
 
 function createVariantFunction<Theme extends BaseTheme = BaseTheme>(
   patterns: MaybeArray<string | RegExp>,
-
   resolve: string | VariantResolver<Theme>,
 ): VariantFunction<Theme> {
   return createResolve(patterns, typeof resolve == 'function' ? resolve : () => resolve)
@@ -150,9 +149,7 @@ function createVariantFunction<Theme extends BaseTheme = BaseTheme>(
 
 function createResolveFunction<Theme extends BaseTheme = BaseTheme>(
   patterns: MaybeArray<string | RegExp>,
-
   resolve?: keyof CSSProperties | string | CSSObject | RuleResolver<Theme>,
-
   convert?: MatchConverter<Theme>,
 ): ResolveFunction<Theme> {
   return createResolve(
