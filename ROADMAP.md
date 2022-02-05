@@ -49,7 +49,7 @@
   - createGlobalStyle: https://styled-components.com/docs/api#createglobalstyle
   - @twind/styled/css - like styled-components eg using css
 - framework integrations
-  - solid, wmr, vue, stenciljs, angular, ...
+  - solid, wmr, nuxt, vue, stenciljs, angular, ...
   - https://vercel.com/templates
 - development condition — let distilt create development bundles
   - warnings: console.warn(`[twind] unknown rule "${value}"`)
