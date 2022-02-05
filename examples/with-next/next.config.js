@@ -1,12 +1,20 @@
+/* eslint-env node */
+// ONLY REQUIRED WITHIN THE TWIND MONOREPO
+try {
+  require('jiti/register')
+} catch {
+  // IGNORE
+}
+
 // @ts-check
 // THIS IS ONLY NEEDED WHEN USED INSIDE THE TWIND MONOREPO
-import withPlugins from 'next-compose-plugins'
-import withTM from 'next-transpile-modules'
+const withPlugins = require('next-compose-plugins')
+const withTM = require('next-transpile-modules')
 
 /**
  * @type {import('next').NextConfig}
  **/
-export default withPlugins(
+module.exports = withPlugins(
   [
     withTM([
       'twind',

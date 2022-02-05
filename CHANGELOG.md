@@ -13,5 +13,7 @@
 
 ## Integrations
 
-- [@twind/with-sveltekit](./packages/with-sveltekit/CHANGELOG.md)
 - [gatsyb-plugin-twind](./packages/gatsby-plugin/CHANGELOG.md)
+- [@twind/with-next](./packages/with-next/CHANGELOG.md)
+- [@twind/with-remix](./packages/with-remix/CHANGELOG.md)
+- [@twind/with-sveltekit](./packages/with-sveltekit/CHANGELOG.md)

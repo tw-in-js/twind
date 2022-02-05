@@ -1,5 +1,12 @@
 /* eslint-env node */
 
+// ONLY REQUIRED WITHIN THE TWIND MONOREPO
+try {
+  require('jiti/register')
+} catch {
+  // IGNORE
+}
+
 const { white, green } = require('@twind/tailwind/colors')
 
 module.exports = {

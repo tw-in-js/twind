@@ -8,7 +8,7 @@
 
 ---
 
-Seamless integration of [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind) for [SvelteKit](https://kit.svelte.dev)
+Seamless integration of [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind) with [SvelteKit](https://kit.svelte.dev)
 
 Used within the following [examples](https://github.com/tw-in-js/twind/tree/next/examples):
 

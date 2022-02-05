@@ -34,7 +34,7 @@ function install<Props, Component>(
   config: TwindConfig | TwindUserConfig,
   AppComponent: React.JSXElementConstructor<Props> & Component = TwindApp as any,
 ): Component {
-  install$(config as TwindUserConfig, process.env.NODE_ENV != 'production')
+  install$(config as TwindUserConfig, process.env.NODE_ENV == 'production')
 
   return AppComponent
 }

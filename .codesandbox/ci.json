@@ -22,6 +22,7 @@
     "@twind/tailwind": "packages/tailwind/dist",
     "twind": "packages/twind/dist",
     "@twind/with-next": "packages/with-next/dist",
+    "@twind/with-remix": "packages/with-remix/dist",
     "@twind/with-sveltekit": "packages/with-sveltekit/dist"
   },
   // A list of sandboxes that you want generated for a PR, if this list

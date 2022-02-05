@@ -1,4 +1,4 @@
-# @twind/with-next [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/with-next/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/with-next/v/next) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23next?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/next)
+# @twind/with-remix [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/with-remix/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/with-remix/v/next) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23next?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/next)
 
 ---
 
@@ -8,36 +8,35 @@
 
 ---
 
-Seamless integration of [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind) with [Next.js](https://nextjs.org) 12.x.
+Seamless integration of [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind) with [Remix](https://remix.run)
 
 Used within the following [examples](https://github.com/tw-in-js/twind/tree/next/examples):
 
-- [Next.js](https://github.com/tw-in-js/twind/tree/next/examples/with-next)
+- [Remix](https://github.com/tw-in-js/twind/tree/next/examples/with-remix)
 
 ## Installation
 
 Install from npm:
 
 ```sh
-npm install twind@next @twind/with-next@next
+npm install twind@next @twind/with-remix@next
 ```
 
 ## Usage
 
-Please see [examples/with-next](https://github.com/tw-in-js/twind/tree/next/examples/with-next) for detailed usage example.
+Please see [examples/with-remix](https://github.com/tw-in-js/twind/tree/next/examples/with-remix) for detailed usage example.
 
 ### `twind.config.js`
 
 ```js
 import { defineConfig } from 'twind'
-// import { defineConfig } from '@twind/tailwind'
 
 export default defineConfig({
   /* config */
 })
 ```
 
-`@twind/with-next` will use hashed class names in production by default. If you don't want this, you can use the `hash` config option:
+`@twind/with-remix` will use hashed class names in production by default. If you don't want this, you can use the `hash` config option:
 
 ```js
 export default defineConfig({
@@ -49,7 +48,7 @@ export default defineConfig({
 ### `pages/_app.js`[^1]
 
 ```js
-import install from '@twind/with-next/app'
+import install from '@twind/with-remix/app'
 import config from '../twind.config'
 
 export default install(config)
@@ -61,7 +60,7 @@ export default install(config)
 TLDR;
 
 ```diff
-+ import install from '@twind/with-next/app'
++ import install from '@twind/with-remix/app'
 + import config from '../twind.config'
 function MyApp({ Component, pageProps }) {
   /* ... */
@@ -73,7 +72,7 @@ function MyApp({ Component, pageProps }) {
 Here is a full example:
 
 ```js
-import install from '@twind/with-next/app'
+import install from '@twind/with-remix/app'
 import config from '../twind.config'
 
 function MyApp({ Component, pageProps }) {
@@ -102,7 +101,7 @@ export default install(config, MyApp)
 Enable server-side rendering of Twind styles.
 
 ```js
-export { default } from '@twind/with-next/document'
+export { default } from '@twind/with-remix/document'
 ```
 
 <details>
@@ -112,7 +111,7 @@ TLDR;
 
 ```diff
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-+ import install from '@twind/with-next/document'
++ import install from '@twind/with-remix/document'
 class MyDocument extends Document {
   /* ... */
 }
@@ -123,7 +122,7 @@ Here is a full example:
 
 ```js
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import install from '@twind/with-next/document'
+import install from '@twind/with-remix/document'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx) {

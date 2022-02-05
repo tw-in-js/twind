@@ -51,7 +51,9 @@
   - createGlobalStyles: https://goober.js.org/api/createGlobalStyles
   - createGlobalStyle: https://styled-components.com/docs/api#createglobalstyle
   - @twind/styled/css - like styled-components eg using css
-- frameworks: next, remix, solid, wmr, vue, stenciljs, angular, ...
+- framework integrations
+  - solid, wmr, vue, stenciljs, angular, ...
+  - https://vercel.com/templates
 - development condition — let distilt create development bundles
   - warnings: console.warn(`[twind] unknown rule "${value}"`)
   - completion infos
@@ -79,6 +81,7 @@
   ```
 
 - zero runtime
+  - safelist, extractor, examples
 - cdn.twind.dev -> https://cdn.jsdelivr.net/npm/@twind/cdn@next
 - rewrite https://github.com/TanStack/tanstack.com
 - ci: post on discord after release
