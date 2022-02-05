@@ -1,5 +1,56 @@
 # @twind/tailwind
 
+## 1.0.0-next.35
+
+### Patch Changes
+
+- DEPRECATE: @twind/tailwind — use @twind/preset-autoprefix and @twind/preset-tailwind directly ([`47ed17b3`](https://github.com/tw-in-js/twind/commit/47ed17b3c41a35e7339b8073574696f1e63a08e8))
+
+  Adjust your `package.json`:
+
+  ```diff
+  {
+    "dependencies": {
+  +    "@twind/preset-autoprefix": "1.0.0-next.34",
+  +    "@twind/preset-tailwind": "1.0.0-next.34",
+  -    "@twind/tailwind": "1.0.0-next.34",
+    }
+  }
+  ```
+
+  If you are using `defineConfig` from `@twind/tailwind`:
+
+  ```diff
+  -import { defineConfig } from '@twind/tailwind'
+  +import { defineConfig } from 'twind'
+  +import presetAutoprefix from '@twind/preset-autoprefix'
+  +import presetTailwind from '@twind/preset-tailwind'
+
+  export default defineConfig({
+  +  presets: [presetAutoprefix(), presetTailwind()],
+    /* config */
+  })
+  ```
+
+  If you are using `setup` from `@twind/tailwind`:
+
+  ```diff
+  -import { setup } from '@twind/tailwind'
+  +import { setup } from 'twind'
+  +import presetAutoprefix from '@twind/preset-autoprefix'
+  +import presetTailwind from '@twind/preset-tailwind'
+
+  export default setup({
+  +  presets: [presetAutoprefix(), presetTailwind()],
+    /* config */
+  })
+  ```
+
+- Updated dependencies [[`009594c6`](https://github.com/tw-in-js/twind/commit/009594c65fb7d0f1da0203c6b6c26bd258ee46d0), [`53058c2e`](https://github.com/tw-in-js/twind/commit/53058c2ea0f5fbdbb852f42d1c7de47c70dee0bf)]:
+  - twind@1.0.0-next.35
+  - @twind/preset-tailwind@1.0.0-next.35
+  - @twind/preset-autoprefix@1.0.0-next.35
+
 ## 1.0.0-next.34
 
 ### Patch Changes

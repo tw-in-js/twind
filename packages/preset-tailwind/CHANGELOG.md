@@ -1,5 +1,14 @@
 # @twind/preset-tailwind
 
+## 1.0.0-next.35
+
+### Patch Changes
+
+- BREAKING: rename `enablePreflight` to `disablePreflight` to make it more clear what this option is used for and what its default is ([`53058c2e`](https://github.com/tw-in-js/twind/commit/53058c2ea0f5fbdbb852f42d1c7de47c70dee0bf))
+
+- Updated dependencies [[`009594c6`](https://github.com/tw-in-js/twind/commit/009594c65fb7d0f1da0203c6b6c26bd258ee46d0)]:
+  - twind@1.0.0-next.35
+
 ## 1.0.0-next.34
 
 ### Patch Changes
