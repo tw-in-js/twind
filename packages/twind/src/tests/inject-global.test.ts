@@ -4,7 +4,7 @@ import presetTailwind from '@twind/preset-tailwind'
 import { setup, tw, twind, virtual, injectGlobal } from '..'
 
 setup({
-  presets: [presetTailwind({ enablePreflight: false })],
+  presets: [presetTailwind({ disablePreflight: true })],
 })
 
 afterEach(() => tw.clear())
@@ -45,7 +45,7 @@ test('inject global styles', () => {
 test('inject global styles using custom tw', () => {
   const tw$ = twind(
     {
-      presets: [presetTailwind({ enablePreflight: false })],
+      presets: [presetTailwind({ disablePreflight: true })],
     },
     virtual(),
   )

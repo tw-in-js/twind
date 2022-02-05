@@ -7,7 +7,7 @@ import data from './rules.test.json'
 
 const tw = twind(
   {
-    presets: [tailwind({ enablePreflight: false })],
+    presets: [tailwind({ disablePreflight: true })],
     variants: [['not-logged-in', 'body:not(.logged-in) &']],
     theme: {
       extend: {
@@ -292,7 +292,7 @@ test('group and peer marker classes', () => {
 test('group and peer hashed marker classes', () => {
   const tw = twind(
     {
-      presets: [tailwind({ enablePreflight: false })],
+      presets: [tailwind({ disablePreflight: true })],
       hash: true,
     },
     virtual(),

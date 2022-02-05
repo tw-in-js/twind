@@ -4,7 +4,7 @@ import presetTailwind from '@twind/preset-tailwind'
 import { setup, twind, virtual, tw, keyframes, css } from '..'
 
 setup({
-  presets: [presetTailwind({ enablePreflight: false })],
+  presets: [presetTailwind({ disablePreflight: true })],
 })
 
 afterEach(() => tw.clear())
@@ -47,7 +47,7 @@ test('keyframes are lazy injected', () => {
 test('bound keyframes are lazy injected', () => {
   const tw$ = twind(
     {
-      presets: [presetTailwind({ enablePreflight: false })],
+      presets: [presetTailwind({ disablePreflight: true })],
     },
     virtual(),
   )
@@ -109,7 +109,7 @@ test('named keyframes', () => {
 test('bound named keyframes', () => {
   const tw$ = twind(
     {
-      presets: [presetTailwind({ enablePreflight: false })],
+      presets: [presetTailwind({ disablePreflight: true })],
     },
     virtual(),
   )

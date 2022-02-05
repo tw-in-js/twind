@@ -23,7 +23,7 @@ test('observe in browser', () => {
     </html>
     `
 
-  const tw = observe(twind({ presets: [presetTailwind({ enablePreflight: false })] }, virtual()))
+  const tw = observe(twind({ presets: [presetTailwind({ disablePreflight: true })] }, virtual()))
 
   assert.deepEqual(tw.target, [
     '.text-white{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text-opacity))}',
@@ -129,7 +129,7 @@ test('hydratable from SSR sheet', () => {
   `,
     {
       tw: twind(
-        { presets: [presetTailwind({ enablePreflight: false })] },
+        { presets: [presetTailwind({ disablePreflight: true })] },
         virtual(true /* includeHydrationInfos */),
       ),
     },
@@ -143,7 +143,7 @@ test('hydratable from SSR sheet', () => {
   // test resumeable sheets
   const tw = observe(
     twind(
-      { presets: [presetTailwind({ enablePreflight: false })] },
+      { presets: [presetTailwind({ disablePreflight: true })] },
       getSheet(true /* useDOMSheet */),
     ),
   )

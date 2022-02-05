@@ -5,7 +5,7 @@ import presetTailwind from '@twind/preset-tailwind'
 import { twind, virtual, extract } from '..'
 
 test('expand class names', () => {
-  const tw = twind({ presets: [presetTailwind({ enablePreflight: false })] }, virtual())
+  const tw = twind({ presets: [presetTailwind({ disablePreflight: true })] }, virtual())
 
   const { html, css } = extract(
     `
@@ -50,7 +50,7 @@ test('expand class names', () => {
 })
 
 test('hash class names', () => {
-  const tw = twind({ presets: [presetTailwind({ enablePreflight: false })], hash: true }, virtual())
+  const tw = twind({ presets: [presetTailwind({ disablePreflight: true })], hash: true }, virtual())
 
   const { html, css } = extract(
     `

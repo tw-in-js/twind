@@ -63,4 +63,4 @@ _Already included in `@twind/cdn`_
 
 This preset can be configured with the following options:
 
-- `enablePreflight: boolean = true` — whether to enable the [preflight](https://tailwindcss.com/docs/preflight)
+- `disablePreflight: boolean` — allows to disable the [preflight](https://tailwindcss.com/docs/preflight)

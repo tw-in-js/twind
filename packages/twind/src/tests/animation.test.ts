@@ -4,7 +4,7 @@ import presetTailwind from '@twind/preset-tailwind'
 import { setup, twind, virtual, tw, animation, keyframes } from '..'
 
 setup({
-  presets: [presetTailwind({ enablePreflight: false })],
+  presets: [presetTailwind({ disablePreflight: true })],
 })
 
 afterEach(() => tw.clear())
@@ -34,7 +34,7 @@ test('animations are lazy injected', () => {
 test('bound keyframes are lazy injected', () => {
   const tw$ = twind(
     {
-      presets: [presetTailwind({ enablePreflight: false })],
+      presets: [presetTailwind({ disablePreflight: true })],
     },
     virtual(),
   )

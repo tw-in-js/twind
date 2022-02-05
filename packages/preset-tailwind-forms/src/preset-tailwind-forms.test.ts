@@ -6,7 +6,7 @@ import presetTailwindForms from './preset-tailwind-forms'
 
 test('using default strategy (base)', () => {
   const tw = twind(
-    { presets: [presetTailwind({ enablePreflight: false }), presetTailwindForms()] },
+    { presets: [presetTailwind({ disablePreflight: true }), presetTailwindForms()] },
     virtual(),
   )
 
@@ -115,7 +115,7 @@ test('using class strategy', () => {
   const tw = twind(
     {
       presets: [
-        presetTailwind({ enablePreflight: false }),
+        presetTailwind({ disablePreflight: true }),
         presetTailwindForms({ strategy: 'class' }),
       ],
     },
@@ -141,7 +141,7 @@ test('using class strategy with hash', () => {
   const tw = twind(
     {
       presets: [
-        presetTailwind({ enablePreflight: false }),
+        presetTailwind({ disablePreflight: true }),
         presetTailwindForms({ strategy: 'class' }),
       ],
       hash: true,

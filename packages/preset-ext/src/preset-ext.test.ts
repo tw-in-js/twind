@@ -8,7 +8,7 @@ import data from './preset-ext.test.json'
 
 const tw = twind(
   {
-    presets: [presetExt(), presetTailwind({ enablePreflight: false })],
+    presets: [presetExt(), presetTailwind({ disablePreflight: true })],
     variants: [['not-logged-in', 'body:not(.logged-in) &']],
   },
   virtual(),
@@ -41,7 +41,7 @@ Object.entries(data)
 test('dark class using peer', () => {
   const tw = twind(
     {
-      presets: [presetExt(), presetTailwind({ enablePreflight: false })],
+      presets: [presetExt(), presetTailwind({ disablePreflight: true })],
       darkMode: 'class',
     },
     virtual(),

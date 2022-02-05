@@ -16,16 +16,16 @@ import variants from './variants'
 export * from './types'
 
 export interface TailwindPresetOptions {
-  /** Allows to disable to tailwind preflight (default: `true`) */
-  enablePreflight?: boolean | undefined
+  /** Allows to disable to tailwind preflight (default: `false` eg include the tailwind preflight ) */
+  disablePreflight?: boolean | undefined
 }
 
 export default function presetTailwind({
-  enablePreflight = true,
+  disablePreflight,
 }: TailwindPresetOptions = {}): Preset<TailwindTheme> {
   return ({ stringify }) => ({
     // allow other preflight to run
-    preflight: enablePreflight ? preflight : undefined,
+    preflight: disablePreflight ? undefined : preflight,
     theme,
     variants,
     rules,

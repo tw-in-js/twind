@@ -4,7 +4,7 @@ import presetTailwind from '@twind/preset-tailwind'
 
 import { setup, inline } from '..'
 
-setup({ presets: [presetTailwind({ enablePreflight: false })] })
+setup({ presets: [presetTailwind({ disablePreflight: true })] })
 
 test('expand class names', () => {
   const html = inline(
