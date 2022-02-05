@@ -21,8 +21,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@twind/preset-autoprefix": "1.0.0-next.34",
+    "@twind/preset-tailwind": "1.0.0-next.34",
     "@twind/preset-tailwind-forms": "1.0.0-next.34",
-    "@twind/tailwind": "1.0.0-next.34",
     "twind": "1.0.0-next.34"
   },
   "devDependencies": {

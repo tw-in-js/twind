@@ -7,7 +7,7 @@ try {
   // IGNORE
 }
 
-const { white, green } = require('@twind/tailwind/colors')
+const { white, green } = require('@twind/preset-tailwind/colors')
 
 module.exports = {
   siteMetadata: {

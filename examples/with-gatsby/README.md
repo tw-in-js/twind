@@ -11,12 +11,11 @@ _Does not work in [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind
 
 ## What is included?
 
-- [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)
-- [@twind/tailwind](https://github.com/tw-in-js/twind/tree/next/packages/tailwind) — which includes
-  - [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix)
-  - [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind)
 - [gatsby](https://www.npmjs.com/package/gatsby)
 - [gatsby-plugin-twind](https://github.com/tw-in-js/twind/tree/next/packages/gatsby-plugin-twind)
+- [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)
+- [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix)
+- [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind)
 
 ## Credits
 

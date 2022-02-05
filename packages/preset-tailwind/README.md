@@ -8,16 +8,11 @@
 
 ---
 
-The full [Tailwind CSS](https://tailwindcss.com) experience without any build step right in the browser or any other environment like Node.js, deno, workers, ...
+The full [Tailwind CSS](https://tailwindcss.com) v3 experience without any build step right in the browser or any other environment like Node.js, deno, workers, ...
 
-This preset is included out-of-the-box in
+This preset is included out-of-the-box in [@twind/cdn](https://github.com/tw-in-js/twind/tree/next/packages/cdn) — a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn)
 
-- [@twind/tailwind](https://github.com/tw-in-js/twind/tree/next/packages/tailwind) — ready to use Tailwind CSS
-- [@twind/cdn](https://github.com/tw-in-js/twind/tree/next/packages/cdn) — a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn)
-
-Used within the following [examples](https://github.com/tw-in-js/twind/tree/next/examples):
-
-- [Playground](https://github.com/tw-in-js/twind/tree/next/examples/playground)
+Used within the most [examples](https://github.com/tw-in-js/twind/tree/next/examples).
 
 ## Installation
 
@@ -59,10 +54,6 @@ setup({
 ```
 
 </details>
-
-**with [@twind/tailwind](https://github.com/tw-in-js/twind/tree/next/packages/tailwind)** — ready to use Tailwind CSS
-
-_Already included in `@twind/tailwind`_
 
 **with [Twind CDN](https://github.com/tw-in-js/twind/tree/next/packages/cdn)** — a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn)
 

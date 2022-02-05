@@ -10,11 +10,7 @@
 
 CSS vendor prefixer and property alias mapper preset for [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind).
 
-This preset is included out-of-the-box in [@twind/tailwind](https://github.com/tw-in-js/twind/tree/next/packages/tailwind).
-
-Used within the following [examples](https://github.com/tw-in-js/twind/tree/next/examples):
-
-- [Playground](https://github.com/tw-in-js/twind/tree/next/examples/playground)
+Used within the most [examples](https://github.com/tw-in-js/twind/tree/next/examples).
 
 ## Installation
 
@@ -56,10 +52,6 @@ setup({
 ```
 
 </details>
-
-**with [@twind/tailwind](https://github.com/tw-in-js/twind/tree/next/packages/tailwind)** — ready to use Tailwind CSS
-
-_Already included in `@twind/tailwind`_
 
 **with [Twind CDN](https://github.com/tw-in-js/twind/tree/next/packages/cdn)** — a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn)
 

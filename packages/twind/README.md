@@ -10,15 +10,12 @@
 
 Utility-first CSS without any build step right in the browser or any other environment like Node.js, deno, workers, ...
 
-Twind does **not** include any core utilities — use one of the existing presets:
+Twind does **not** include any core utilities — use one or more of the existing presets:
 
-- [@twind/tailwind](https://github.com/tw-in-js/twind/tree/next/packages/tailwind) to get a full Tailwind v3 experience. It includes the following presets:
-
-  - [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix)
-  - [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind)
-
-- [@twind/preset-tailwind-forms](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind-forms) to get Tailwind v3 and Tailwind Forms.
+- [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix)
 - [@twind/preset-ext](https://github.com/tw-in-js/twind/tree/next/packages/preset-ext)
+- [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind)
+- [@twind/preset-tailwind-forms](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind-forms) to get Tailwind v3 and Tailwind Forms.
 
 Here are some examples of how to write your own rules or variants:
 
@@ -28,6 +25,8 @@ Here are some examples of how to write your own rules or variants:
 Additionally we provides several integrations:
 
 - [Gatsby](https://github.com/gatsbyjs/gatsby) — [gatsby-plugin-twind](https://github.com/tw-in-js/twind/tree/next/packages/gatsby-plugin-twind)
+- [Next.js](https://kit.svelte.dev) — [@twind/with-next](https://github.com/tw-in-js/twind/tree/next/packages/with-next)
+- [Remix](https://remix.run) — [@twind/with-remix](https://github.com/tw-in-js/twind/tree/next/packages/with-remix)
 - [SvelteKit](https://kit.svelte.dev) — [@twind/with-sveltekit](https://github.com/tw-in-js/twind/tree/next/packages/with-sveltekit)
 
 To get you started, take a look at the [examples](https://github.com/tw-in-js/twind/tree/next/examples).

@@ -8,8 +8,13 @@ TODO with file diffs
 
 ### Notable Changes
 
-- [twind](./packages/twind) — shim-first implementation without any presets to have a clean start
-- [@twind/tailwind](./packages/tailwind) — shim-first implementation using [@twind/preset-tailwind](./packages/preset-tailwind) and [@twind/preset-autoprefixer](./packages/preset-autoprefixer)
+- [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind) does **not** include any core utilities — use one or more of the following presets:
+
+  - [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix)
+  - [@twind/preset-ext](hhttps://github.com/tw-in-js/twind/tree/next/packages/preset-ext)
+  - [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind) to get a full Tailwind v3 experience
+  - [@twind/preset-tailwind-forms](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind-forms) to get Tailwind v3 and Tailwind Forms.
+
 - API
   - `setup` can be called as many times as you want.
   - classes are returned in order they are applied by the browser - last one wins

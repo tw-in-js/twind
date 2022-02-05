@@ -30,7 +30,6 @@ Please see [examples/with-next](https://github.com/tw-in-js/twind/tree/next/exam
 
 ```js
 import { defineConfig } from 'twind'
-// import { defineConfig } from '@twind/tailwind'
 
 export default defineConfig({
   /* config */

@@ -45,110 +45,48 @@ export default defineConfig({
 })
 ```
 
-### `pages/_app.js`[^1]
-
-```js
-import install from '@twind/with-remix/app'
-import config from '../twind.config'
-
-export default install(config)
-```
-
-<details>
-<summary>With a custom App component</summary>
-
-TLDR;
+### `app/root.jsx`
 
 ```diff
-+ import install from '@twind/with-remix/app'
+import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from 'remix'
+import type { MetaFunction } from 'remix'
+
++ import install from '@twind/with-remix'
 + import config from '../twind.config'
-function MyApp({ Component, pageProps }) {
-  /* ... */
++ install(config)
+
+export const meta: MetaFunction = () => {
+  return { title: 'New Remix App' }
 }
-- export default MyApp
-+ export default install(config, MyApp)
 ```
 
-Here is a full example:
-
-```js
-import install from '@twind/with-remix/app'
-import config from '../twind.config'
-
-function MyApp({ Component, pageProps }) {
-  return <Component {...pageProps} />
-}
-
-// Only uncomment this method if you have blocking data requirements for
-// every single page in your application. This disables the ability to
-// perform automatic static optimization, causing every page in your app to
-// be server-side rendered.
-//
-// MyApp.getInitialProps = async (appContext) => {
-//   // calls page's `getInitialProps` and fills `appProps.pageProps`
-//   const appProps = await App.getInitialProps(appContext);
-//
-//   return { ...appProps }
-// }
-
-export default install(config, MyApp)
-```
-
-</details>
-
-### `pages/_document.js`[^2]
+### `app/entry.server.jsx`
 
 Enable server-side rendering of Twind styles.
 
-```js
-export { default } from '@twind/with-remix/document'
-```
-
-<details>
-<summary>With a custom Document component</summary>
-
-TLDR;
-
 ```diff
-import Document, { Html, Head, Main, NextScript } from 'next/document'
-+ import install from '@twind/with-remix/document'
-class MyDocument extends Document {
-  /* ... */
+import { renderToString } from 'react-dom/server'
+import { RemixServer } from 'remix'
+import type { EntryContext } from 'remix'
+
++ import inline from '@twind/with-remix/server'
+
+export default function handleRequest(
+  request: Request,
+  responseStatusCode: number,
+  responseHeaders: Headers,
+  remixContext: EntryContext,
+) {
+  let markup = renderToString(<RemixServer context={remixContext} url={request.url} />)
+
++  // Add twind styles to the markup
++  markup = inline(markup)
+
+  responseHeaders.set('Content-Type', 'text/html')
+
+  return new Response('<!DOCTYPE html>' + markup, {
+    status: responseStatusCode,
+    headers: responseHeaders,
+  })
 }
-+ export default install(MyDocument)
 ```
-
-Here is a full example:
-
-```js
-import Document, { Html, Head, Main, NextScript } from 'next/document'
-import install from '@twind/with-remix/document'
-
-class MyDocument extends Document {
-  static async getInitialProps(ctx) {
-    const initialProps = await Document.getInitialProps(ctx)
-    return { ...initialProps }
-  }
-
-  render() {
-    return (
-      <Html>
-        <Head />
-        <body>
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    )
-  }
-}
-
-export default install(MyDocument)
-```
-
-> The code above is the default `Document` added by Next.js. Feel free to remove the `getInitialProps` or `render` function from `MyDocument` if you don't need to change them.
-
-</details>
-
-[^1]: [Next.js › Custom App](https://nextjs.org/docs/advanced-features/custom-app)
-[^2]: [Next.js › Custom Document](https://nextjs.org/docs/advanced-features/custom-document)

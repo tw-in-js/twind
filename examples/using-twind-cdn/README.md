@@ -6,6 +6,6 @@ Twind CDN is a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindc
 
 This example uses
 
-- [twind/cdn](https://github.com/tw-in-js/twind/tree/next/packages/twind) — which includes
+- [@twind/cdn](https://github.com/tw-in-js/twind/tree/next/packages/twind) — which includes
   - [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix)
   - [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind)

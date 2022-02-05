@@ -6,8 +6,6 @@
 
 **Twind v1 is still in beta. Expect bugs!**
 
-Twind v1 is a complete rewrite aiming to be compatible with Tailwind v3.
-
 ---
 
 Twind CDN is a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn) that is almost 5.5 times smaller (96.4kb vs 17.6kB) without any build step right in the browser or any other environment like Node.js, deno, workers, ...

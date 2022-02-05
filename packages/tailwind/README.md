@@ -8,6 +8,50 @@
 
 ---
 
+**THIS PACKAGE IS DEPRECATED**: Please use [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix) and [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind) directly.
+
+Adjust your `package.json`:
+
+```diff
+{
+  "dependencies": {
++    "@twind/preset-autoprefix": "1.0.0-next.34",
++    "@twind/preset-tailwind": "1.0.0-next.34",
+-    "@twind/tailwind": "1.0.0-next.34",
+  }
+}
+```
+
+If you are using `defineConfig` from `@twind/tailwind`:
+
+```diff
+-import { defineConfig } from '@twind/tailwind'
++import { defineConfig } from 'twind'
++import presetAutoprefix from '@twind/preset-autoprefix'
++import presetTailwind from '@twind/preset-tailwind'
+
+export default defineConfig({
++  presets: [presetAutoprefix(), presetTailwind()],
+  /* config */
+})
+```
+
+If you are using `setup` from `@twind/tailwind`:
+
+```diff
+-import { setup } from '@twind/tailwind'
++import { setup } from 'twind'
++import presetAutoprefix from '@twind/preset-autoprefix'
++import presetTailwind from '@twind/preset-tailwind'
+
+export default setup({
++  presets: [presetAutoprefix(), presetTailwind()],
+  /* config */
+})
+```
+
+---
+
 The full [Tailwind CSS](https://tailwindcss.com) experience without any build step right in the browser or any other environment like Node.js, deno, workers, ...
 
 The following presets are included out-of-the-box:
@@ -106,7 +150,7 @@ To add other presets add their ids to the script `src` attribute:
 
 The following options from [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind) are available:
 
-- `enablePreflight: boolean = true` — whether to enable the [preflight](https://tailwindcss.com/docs/preflight)
+- `disblePreflight: boolean` — allows to disable the [preflight](https://tailwindcss.com/docs/preflight)
 
 ### `setup([config [, sheet [, target]]])`
 
@@ -117,7 +161,7 @@ import { setup } from '@twind/tailwind'
 
 const tw = setup({
   // this are the defaults
-  enablePreflight: true,
+  disablePreflight: false,
   /* config */
 })
 // -> tw === import { tw } from 'twind'
@@ -132,7 +176,7 @@ import { defineConfig } from '@twind/tailwind'
 
 export default defineConfig({
   // this are the defaults
-  enablePreflight: true,
+  disablePreflight: false,
   /* config */
 })
 ```

@@ -53,16 +53,26 @@
       "limit": "4.8kb"
     },
     {
+      "name": "twind (twind + cssom)",
+      "path": "packages/twind/dist/twind.esnext.js",
+      "import": "{ twind, cssom }",
+      "brotli": true,
+      "limit": "4.15kb"
+    },
+    {
       "name": "@twind/cdn",
       "path": "packages/cdn/dist/cdn.esnext.js",
       "brotli": true,
-      "limit": "15.1kb"
+      "limit": "14.7kb"
     },
     {
-      "name": "@twind/tailwind",
-      "path": "packages/tailwind/dist/tailwind.esnext.js",
+      "name": "@twind/preset-tailwind",
+      "path": "packages/preset-tailwind/dist/preset-tailwind.esnext.js",
       "brotli": true,
-      "limit": "15kb"
+      "limit": "9.1kb",
+      "ignore": [
+        "twind"
+      ]
     }
   ],
   "// start — use 'BROWSER=none' to prevent vite to open a browser if within codesandbox or stackblitz": "",

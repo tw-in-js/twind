@@ -28,7 +28,6 @@ Please see [examples/gatsby](https://github.com/tw-in-js/twind/tree/next/example
 
 ```js
 import { defineConfig } from 'twind'
-// import { defineConfig } from '@twind/tailwind'
 
 export default defineConfig({
   /* config */

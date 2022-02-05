@@ -53,37 +53,6 @@ setup({
 
 </details>
 
-**with [@twind/tailwind](https://github.com/tw-in-js/twind/tree/next/packages/tailwind)** — ready to use Tailwind CSS
-
-```js
-import { setup } from '@twind/tailwind'
-import presetExt from '@twind/preset-ext'
-
-setup({
-  presets: [presetExt()],
-  /* config */
-})
-```
-
-<details><summary>Usage with a script tag</summary>
-
-```html
-<head>
-  <script
-    src="https://cdn.jsdelivr.net/combine/npm/twind@next,npm/@twind/tailwind@next,npm/@twind/preset-ext@next"
-    crossorigin
-  ></script>
-  <script>
-    twind.setup({
-      presets: [twind.presetExt()],
-      /* config */
-    })
-  </script>
-</head>
-```
-
-</details>
-
 **with [Twind CDN](https://github.com/tw-in-js/twind/tree/next/packages/cdn)** — a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn)
 
 ```html

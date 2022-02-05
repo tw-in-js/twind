@@ -22,9 +22,6 @@ Install from npm:
 
 ```sh
 npm install twind@next @twind/preset-tailwind@next @twind/preset-tailwind-forms@next
-
-# or when using @twind/tailwind
-npm install twind@next @twind/tailwind@next @twind/preset-tailwind-forms@next
 ```
 
 Then add the preset to your twind config:
@@ -61,24 +58,12 @@ setup({
 
 </details>
 
-**with [@twind/tailwind](https://github.com/tw-in-js/twind/tree/next/packages/tailwind)** — ready to use Tailwind CSS
-
-```js
-import { setup } from '@twind/tailwind'
-import presetTailwindForms from '@twind/preset-tailwind-forms'
-
-setup({
-  presets: [presetTailwindForms(/* options */)],
-  /* config */
-})
-```
-
-<details><summary>Usage with a script tag</summary>
+**with [Twind CDN](https://github.com/tw-in-js/twind/tree/next/packages/cdn)** — a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn)
 
 ```html
 <head>
   <script
-    src="https://cdn.jsdelivr.net/combine/npm/twind@next,npm/@twind/tailwind@next,npm/@twind/preset-tailwind-forms@next"
+    src="https://cdn.jsdelivr.net/combine/npm/npm/@twind/cdn@next,npm/@twind/preset-tailwind-forms@next"
     crossorigin
   ></script>
   <script>
@@ -89,12 +74,6 @@ setup({
   </script>
 </head>
 ```
-
-</details>
-
-**with [Twind CDN](https://github.com/tw-in-js/twind/tree/next/packages/cdn)** — a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn)
-
-_Currently not possible_
 
 ## Usage
 

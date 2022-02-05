@@ -1,6 +1,8 @@
-import { defineConfig } from '@twind/tailwind'
+import { defineConfig } from 'twind'
+import presetAutoprefix from '@twind/preset-autoprefix'
+import presetTailwind from '@twind/preset-tailwind'
 
-// `defineConfig` is required as it adds the default tailwind presets
 export default defineConfig({
-  /* options */
+  presets: [presetAutoprefix(), presetTailwind()],
+  /* config */
 })

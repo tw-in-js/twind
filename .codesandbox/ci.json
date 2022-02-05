@@ -19,7 +19,6 @@
     "@twind/preset-line-clamp": "packages/preset-line-clamp/dist",
     "@twind/preset-tailwind": "packages/preset-tailwind/dist",
     "@twind/preset-tailwind-forms": "packages/preset-tailwind-forms/dist",
-    "@twind/tailwind": "packages/tailwind/dist",
     "twind": "packages/twind/dist",
     "@twind/with-next": "packages/with-next/dist",
     "@twind/with-remix": "packages/with-remix/dist",
@@ -37,6 +36,7 @@
     "/examples/playground",
     "/examples/with-gatsby",
     "/examples/with-next",
+    "/examples/with-remix",
     "/examples/with-sveltekit"
   ],
   // Node.js version to use for building the PR.

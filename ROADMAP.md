@@ -2,14 +2,11 @@
 
 ## Documentation
 
-- framework:
-  - vite + vite-plugin-ssr + codehike
-  - wmr + codehike
-    - https://github.com/preactjs/wmr/tree/main/docs
-- deployment:
-  - cloudflare pages
-  - github pages
-  - netlify
+- framework: codehike +
+  - remix
+  - nextjs + preact
+  - vite + preact + vite-plugin-ssr
+- deployment: cloudflare pages
 - why twind?
   - no build step
   - one line installation
@@ -69,7 +66,7 @@
 - support `is(:hover,:focus-visible):underline`? in preset-ext
   - maybe as `is-hover,focus-visible:underline`
   - same for `:where` and `:has`
-- @twind/tailwind: parse style elements like tailwind? `<style type="text/tailwindcss">`
+- @twind/cdn: parse style elements like tailwind? `<style type="text/tailwindcss">`
 
   https://github.com/tw-in-js/twind/issues/238#issuecomment-1021544996
 

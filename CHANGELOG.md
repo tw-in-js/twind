@@ -1,7 +1,6 @@
 # Changelog
 
 - [twind](./packages/twind/CHANGELOG.md)
-- [@twind/tailwind](./packages/tailwind/CHANGELOG.md)
 - [@twind/cdn](./packages/cdn/CHANGELOG.md)
 
 ## Presets

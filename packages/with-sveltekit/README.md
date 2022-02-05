@@ -30,7 +30,6 @@ Please see [examples/with-sveltekit](https://github.com/tw-in-js/twind/tree/next
 
 ```js
 import { defineConfig } from 'twind'
-// import { defineConfig } from '@twind/tailwind'
 
 export default defineConfig({
   /* config */
