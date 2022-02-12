@@ -16,6 +16,7 @@ test('the config can accessed', () => {
   assert.deepEqual(tw.config, {
     preflight: [],
     darkMode: undefined,
+    darkColor: undefined,
     theme: { extend: {} },
     variants: [['dark', '@media (prefers-color-scheme:dark)']],
     rules: [['bg-', 'background']],

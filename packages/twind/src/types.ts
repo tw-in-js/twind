@@ -93,25 +93,32 @@ export interface Context<Theme extends BaseTheme = BaseTheme> {
   h: (value: string) => string
 
   /**
+   * returns the dark color
+   *
+   * @private
+   */
+  d(section: string, key: string, color: ColorValue): ColorValue | Falsey
+
+  /**
    * resolves a variant
    *
    * @private
    */
-  v(value: string): string
+  v: (value: string) => string
 
   /**
    * resolves a rule
    *
    * @private
    */
-  r(value: string): RuleResult
+  r: (value: string, isDark?: boolean) => RuleResult
 
   /**
    * stringifies a CSS property and value to a declaration
    *
    * @private
    */
-  s(property: string, value: string): string
+  s: (property: string, value: string) => string
 }
 
 // Get the leaf theme value and omit nested records like for colors
@@ -161,10 +168,10 @@ export interface ThemeFunction<Theme extends BaseTheme = BaseTheme> {
     defaultValue: ThemeValue<Theme[Section]>,
   ): ThemeValue<Theme[Section]>
 
-  // (section: string): unknown | undefined
-  // (section: string, key: string): unknown | string | undefined
-  // <T>(section: string, key: string, defaultValue: T): T | string
-  // <T>(key: string, defaultValue: T): T | string
+  (section: string): unknown | undefined
+  (section: string, key: string): unknown | string | undefined
+  <T>(section: string, key: string, defaultValue: T): T | string
+  <T>(key: string, defaultValue: T): T | string
 }
 
 export type RuleResult = string | CSSObject | Falsey | Partial<TwindRule>[]
@@ -240,6 +247,8 @@ export type MatchResult = RegExpExecArray & {
 
   /** Can be used to propagate a value like a theme value */
   // _: Value
+
+  dark?: boolean
 }
 
 export interface SheetRule {
@@ -279,9 +288,45 @@ export type HashFunction = (value: string, defaultHash: (value: string) => strin
 
 export type DarkModeConfig = 'media' | 'class' | string | boolean | undefined
 
+/**
+ * Allows to return a dark color for the given light color.
+ *
+ * ```js
+ * {
+ *   // 50 -> 900, 100 -> 800, ..., 800 -> 100, 900 -> 50
+ *   darkColor: autoDarkColor
+ *   // custom resolvers
+ *   darkColor: (section, key, { theme }) => theme(`${section}.${key}-dark`) as ColorValue
+ *   darkColor: (section, key, { theme }) => theme(`dark.${section}.${key}`) as ColorValue
+ *   darkColor: (section, key, { theme }) => theme(`${section}.dark.${key}`) as ColorValue
+ *   darkColor: (section, key, context, lightColor) => generateDarkColor(lightColor),
+ * }
+ * ```
+ *
+ * Or use the light color to generate a dark color
+ *
+ * ```js
+ * {
+ *   darkColor: (section, key, context, color) => generateDark(color)
+ * }
+ * ```
+ * @param section the theme section
+ * @param key the theme key within section — maybe an arbitrary value `[...]`
+ * @param context the context
+ * @param color the current color
+ * @returns the dark color to use
+ */
+export type DarkColor<Theme extends BaseTheme> = (
+  section: string,
+  key: string,
+  context: Context<Theme>,
+  color: ColorValue,
+) => ColorValue | Falsey
+
 export interface TwindConfig<Theme extends BaseTheme = BaseTheme> {
   /** Allows to change how the `dark` variant is used (default: `"media"`) */
   darkMode?: DarkModeConfig
+  darkColor?: DarkColor<Theme>
 
   theme: ThemeConfig<Theme>
 
@@ -315,6 +360,7 @@ export type ExtractThemes<Theme, Presets extends Preset<any>[]> = UnionToInterse
 export interface TwindPresetConfig<Theme = BaseTheme> {
   /** Allows to change how the `dark` variant is used (default: `"media"`) */
   darkMode?: DarkModeConfig
+  darkColor?: DarkColor<Theme & BaseTheme>
 
   theme?: ThemeConfig<Theme & BaseTheme>
 
@@ -332,6 +378,7 @@ export interface TwindUserConfig<Theme = BaseTheme, Presets extends Preset<any>[
 
   /** Allows to change how the `dark` variant is used (default: `"media"`) */
   darkMode?: DarkModeConfig
+  darkColor?: DarkColor<BaseTheme & ExtractThemes<Theme, Presets>>
 
   theme?: Theme | ThemeConfig<BaseTheme & ExtractThemes<Theme, Presets>>
 

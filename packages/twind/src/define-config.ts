@@ -18,6 +18,7 @@ export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = 
   let config: TwindConfig<BaseTheme & ExtractThemes<Theme, Presets>> = {
     preflight: userConfig.preflight !== false && [],
     darkMode: undefined,
+    darkColor: undefined,
     theme: {},
     variants: asArray(userConfig.variants),
     rules: asArray(userConfig.rules),
@@ -30,6 +31,7 @@ export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = 
     ...presets,
     {
       darkMode: userConfig.darkMode,
+      darkColor: userConfig.darkColor,
       preflight: userConfig.preflight !== false && asArray(userConfig.preflight),
       theme: userConfig.theme as TwindConfig<BaseTheme & ExtractThemes<Theme, Presets>>['theme'],
     } as TwindPresetConfig<Theme>,
@@ -37,6 +39,7 @@ export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = 
     const {
       preflight,
       darkMode = config.darkMode,
+      darkColor = config.darkColor,
       theme,
       variants,
       rules,
@@ -51,6 +54,7 @@ export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = 
         preflight !== false && [...config.preflight, ...asArray(preflight)],
 
       darkMode,
+      darkColor,
 
       theme: {
         ...config.theme,

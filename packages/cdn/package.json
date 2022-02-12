@@ -32,7 +32,7 @@
       "name": "@twind/cdn",
       "path": "dist/cdn.esnext.js",
       "brotli": true,
-      "limit": "14.7kb"
+      "limit": "14.75kb"
     }
   ],
   "dependencies": {

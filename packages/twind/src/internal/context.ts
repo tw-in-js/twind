@@ -22,6 +22,7 @@ import { asArray, escape, hash as defaultHash, identity } from '../utils'
 type ResolveFunction<Theme extends BaseTheme = BaseTheme> = (
   className: string,
   context: Context<Theme>,
+  isDark?: boolean,
 ) => RuleResult
 
 type VariantFunction<Theme extends BaseTheme = BaseTheme> = (
@@ -98,16 +99,18 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
       return variantCache.get(value) as string
     },
 
-    r(value) {
-      if (!ruleCache.has(value)) {
+    r(className, isDark) {
+      const key = JSON.stringify([className, isDark])
+      if (!ruleCache.has(key)) {
         ruleCache.set(
-          value,
+          key,
           // TODO console.warn(`[twind] unknown rule "${value}"`),
-          !ignored(value, this) && find(value, rules, ruleResolvers, getRuleResolver, this),
+          !ignored(className, this) &&
+            find(className, rules, ruleResolvers, getRuleResolver, this, isDark),
         )
       }
 
-      return ruleCache.get(value)
+      return ruleCache.get(key)
     },
   }
 }
@@ -115,9 +118,12 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
 function find<Value, Config, Result, Theme extends BaseTheme = BaseTheme>(
   value: Value,
   list: Config[],
-  cache: Map<Config, (value: Value, context: Context<Theme>) => Result>,
-  getResolver: (item: Config) => (value: Value, context: Context<Theme>) => Result,
+  cache: Map<Config, (value: Value, context: Context<Theme>, isDark?: boolean) => Result>,
+  getResolver: (
+    item: Config,
+  ) => (value: Value, context: Context<Theme>, isDark?: boolean) => Result,
   context: Context<Theme>,
+  isDark?: boolean,
 ) {
   for (const item of list) {
     let resolver = cache.get(item)
@@ -126,7 +132,7 @@ function find<Value, Config, Result, Theme extends BaseTheme = BaseTheme>(
       cache.set(item, (resolver = getResolver(item)))
     }
 
-    const resolved = resolver(value, context)
+    const resolved = resolver(value, context, isDark)
 
     if (resolved) return resolved
   }
@@ -191,13 +197,14 @@ function maybeNegate($_: string, value: string): string {
 function createResolve<Result, Theme extends BaseTheme = BaseTheme>(
   patterns: MaybeArray<string | RegExp>,
   resolve: (match: MatchResult, context: Context<Theme>) => Result,
-): (value: string, context: Context<Theme>) => Result | undefined {
-  return createRegExpExecutor(patterns, (value, condition, context) => {
+): (value: string, context: Context<Theme>, isDark?: boolean) => Result | undefined {
+  return createRegExpExecutor(patterns, (value, condition, context, isDark?: boolean) => {
     const match = condition.exec(value) as MatchResult | Falsey
 
     if (match) {
       // MATCH.$_ = value
       match.$$ = value.slice(match[0].length)
+      match.dark = isDark
 
       return resolve(match, context)
     }
@@ -206,13 +213,13 @@ function createResolve<Result, Theme extends BaseTheme = BaseTheme>(
 
 function createRegExpExecutor<Result, Theme extends BaseTheme = BaseTheme>(
   patterns: MaybeArray<string | RegExp>,
-  run: (value: string, condition: RegExp, context: Context<Theme>) => Result,
-): (value: string, context: Context<Theme>) => Result | undefined {
+  run: (value: string, condition: RegExp, context: Context<Theme>, isDark?: boolean) => Result,
+): (value: string, context: Context<Theme>, isDark?: boolean) => Result | undefined {
   const conditions = asArray(patterns).map(toCondition)
 
-  return (value, context) => {
+  return (value, context, isDark) => {
     for (const condition of conditions) {
-      const result = run(value, condition, context)
+      const result = run(value, condition, context, isDark)
 
       if (result) return result
     }

@@ -1,4 +1,4 @@
-import type { ColorValue, ColorFunctionOptions } from './types'
+import type { ColorValue, ColorFunctionOptions, Context, Falsey } from './types'
 
 function parseColorComponent(chars: string, factor: number): number {
   return Math.round(parseInt(chars, 16) * factor)
@@ -29,4 +29,38 @@ export function toColorValue(color: ColorValue, options: ColorFunctionOptions = 
   }
 
   return color
+}
+
+/**
+ * Looks for a matching dark color within a [tailwind color palette](https://tailwindcss.com/docs/customizing-colors) (`50`, `100`, `200`, ..., `800`, `900`).
+ *
+ * ```js
+ * defineConfig({
+ *   darkColor: autoDarkColor,
+ * })
+ * ```
+ *
+ * **Note**: Does not work for arbitrary values like `[theme(colors.gray.500)]` or `[theme(colors.gray.500, #ccc)]`.
+ *
+ * @param section within theme to use
+ * @param key of the light color or an arbitrary value
+ * @param context to use
+ * @returns the dark color if found
+ */
+export function autoDarkColor(
+  section: string,
+  key: string,
+  { theme }: Context<any>,
+): ColorValue | Falsey {
+  // 50 -> 900, 100 -> 800, ..., 800 -> 100, 900 -> 50
+  // key: gray-50, gray.50
+  key = key.replace(
+    /\d+$/,
+    (shade) =>
+      // ~~(parseInt(shade, 10) / 100): 50 -> 0, 900 -> 9
+      // (9 - 0) -> 900, (9 - 9) -> 50
+      ((9 - ~~(parseInt(shade, 10) / 100) || 0.5) * 100) as any,
+  )
+
+  return theme(section as 'colors', key)
 }

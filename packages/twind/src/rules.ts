@@ -151,34 +151,58 @@ export function colorFromTheme<
       (context.theme(opacitySection, opacityMatch || 'DEFAULT') as string | undefined) ||
       (opacityMatch && arbitrary(opacityMatch, opacitySection, context))
 
-    const color = toColorValue(colorValue, {
-      opacityVariable: opacityVariable || undefined,
-      opacityValue: opacityValue || undefined,
-    })
-
     // if (typeof color != 'string') {
     //   console.warn(`Invalid color ${colorMatch} (from ${match.input}):`, color)
     //   return
     // }
 
-    if (resolve) {
-      ;(match as ThemeMatchResult<ColorFromThemeValue>)._ = {
-        value: color,
-        color: (options) => toColorValue(colorValue, options),
+    const create =
+      resolve ||
+      ((match) => {
+        const properties: Record<string, string> = {}
+
+        const color = match._.value
+
+        if (opacityVariable && color.includes(opacityVariable)) {
+          properties[opacityVariable] = opacityValue || '1'
+        }
+
+        properties[property] = color
+
+        return (selector ? { [selector]: properties } : properties) as CSSObject
+      })
+
+    ;(match as ThemeMatchResult<ColorFromThemeValue>)._ = {
+      value: toColorValue(colorValue, {
+        opacityVariable: opacityVariable || undefined,
+        opacityValue: opacityValue || undefined,
+      }),
+      color: (options) => toColorValue(colorValue, options),
+    }
+
+    let properties = create(match as ThemeMatchResult<ColorFromThemeValue>, context)
+
+    // auto support dark mode colors
+    if (!match.dark) {
+      const darkColorValue = context.d(section, colorMatch, colorValue)
+
+      if (darkColorValue && darkColorValue !== colorValue) {
+        ;(match as ThemeMatchResult<ColorFromThemeValue>)._ = {
+          value: toColorValue(darkColorValue, {
+            opacityVariable: opacityVariable || undefined,
+            opacityValue: opacityValue || undefined,
+          }),
+          color: (options) => toColorValue(darkColorValue, options),
+        }
+
+        properties = {
+          '&': properties,
+          [context.v('dark')]: create(match as ThemeMatchResult<ColorFromThemeValue>, context),
+        } as CSSObject
       }
-
-      return resolve(match as ThemeMatchResult<ColorFromThemeValue>, context)
     }
 
-    const properties = {} as Record<string, string>
-
-    if (opacityVariable && color.includes(opacityVariable)) {
-      properties[opacityVariable] = opacityValue || '1'
-    }
-
-    properties[property] = color
-
-    return (selector ? { [selector]: properties } : properties) as CSSObject
+    return properties
   }
 }
 

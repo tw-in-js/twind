@@ -82,7 +82,6 @@
 - cdn.twind.dev -> https://cdn.jsdelivr.net/npm/@twind/cdn@next
 - rewrite https://github.com/TanStack/tanstack.com
 - ci: post on discord after release
-- auto support dark mode in theme helpers (`<section>.dark.<key>` or `dark.<section>.<key>`)
 - @twind/completions — provide autocompletion for classNames
   - https://npm.runkit.com/regexp-enumerator
   - https://www.npmjs.com/package/randexp

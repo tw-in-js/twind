@@ -16,5 +16,5 @@ export function resolve<Theme extends BaseTheme = BaseTheme>(
 ): RuleResult | TwindRule[] {
   const factory = registry.get(rule.n)
 
-  return factory ? factory(rule, context as any) : context.r(rule.n)
+  return factory ? factory(rule, context as any) : context.r(rule.n, rule.v[0] == 'dark')
 }
