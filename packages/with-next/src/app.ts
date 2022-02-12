@@ -1,32 +1,18 @@
 /* eslint-env node, browser */
 import type { AppProps } from 'next/app'
-import type { BaseTheme, TwindConfig, TwindUserConfig, Preset } from 'twind'
+import type { TwindConfig, TwindUserConfig } from 'twind'
 
 import { createElement } from 'react'
 import { install as install$ } from 'twind'
 
 export default install
 
-function install<Theme extends BaseTheme = BaseTheme>(
-  config: TwindConfig<Theme>,
+function install(
+  config: TwindConfig<any> | TwindUserConfig<any>,
 ): React.JSXElementConstructor<AppProps>
-
-function install<Theme = BaseTheme, Presets extends Preset<any>[] = Preset[]>(
-  config: TwindUserConfig<Theme, Presets>,
-): React.JSXElementConstructor<AppProps>
-
-function install<Props, Component, Theme extends BaseTheme = BaseTheme>(
-  config: TwindConfig<Theme>,
-  AppComponent: React.JSXElementConstructor<Props> & Component,
-): Component
-
-function install<Props, Component, Theme = BaseTheme, Presets extends Preset<any>[] = Preset[]>(
-  config: TwindUserConfig<Theme, Presets>,
-  AppComponent: React.JSXElementConstructor<Props> & Component,
-): Component
 
 function install<Props, Component>(
-  config: TwindConfig | TwindUserConfig,
+  config: TwindConfig<any> | TwindUserConfig<any>,
   AppComponent: React.JSXElementConstructor<Props> & Component,
 ): Component
 

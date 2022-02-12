@@ -1,3 +1,4 @@
+import type { Twind } from './types'
 import { consume } from './consume'
 import { stringify } from './sheets'
 import { tw as tw$ } from './runtime'
@@ -53,7 +54,7 @@ export interface ExtractResult {
  * @param tw a {@link Twind} instance (default: twind managed tw)
  * @returns the possibly modified html and css
  */
-export function extract(html: string, tw = tw$): ExtractResult {
+export function extract(html: string, tw: Twind<any, any> = tw$): ExtractResult {
   tw.clear()
   return { html: consume(html, tw), css: stringify(tw.target) }
 }

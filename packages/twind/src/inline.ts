@@ -1,3 +1,4 @@
+import type { Twind } from './types'
 import { extract } from './extract'
 import { tw as tw$ } from './runtime'
 import { identity } from './utils'
@@ -9,7 +10,7 @@ export interface InlineOptions {
   /**
    * {@link Twind} instance to use (default: {@link tw$ | module tw})
    */
-  tw?: typeof tw$
+  tw?: Twind<any, any>
 
   /**
    * Allows to minify the resulting CSS.
