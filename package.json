@@ -63,7 +63,7 @@
       "name": "@twind/cdn",
       "path": "packages/cdn/dist/cdn.esnext.js",
       "brotli": true,
-      "limit": "14.75kb"
+      "limit": "14.8kb"
     },
     {
       "name": "@twind/preset-tailwind",
