@@ -24,10 +24,10 @@ test('animations are lazy injected', () => {
 
   assert.lengthOf(tw.target as string[], 0)
 
-  assert.strictEqual(tw(breath), 'animation#1u47gj')
+  assert.strictEqual(tw(breath), 'animation#12k3h7d')
   assert.deepEqual(tw.target, [
     '/*!0,0*/@keyframes \\#1hjufz5{0%{transform:scaleY(1)}50%,100%{transform:scaleY(0.5)}}',
-    '/*!fjd9fk,w,animation#1u47gj*/.animation\\#1u47gj{animation:1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;animation-name:\\#1hjufz5}',
+    '/*!4fti4g,w,animation#12k3h7d*/.animation\\#12k3h7d{animation:1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;animation-name:\\#1hjufz5}',
   ])
 })
 
@@ -55,10 +55,10 @@ test('bound keyframes are lazy injected', () => {
 
   assert.lengthOf(tw$.target, 0)
 
-  assert.strictEqual(tw$(fadeIn), 'animation#b4mmuv')
+  assert.strictEqual(tw$(fadeIn), 'animation#11ckg5k')
   assert.deepEqual(tw$.target, [
     '@keyframes \\#1b0mdne{0%{opacity:0}100%{opacity:1}}',
-    '.animation\\#b4mmuv{animation-duration:5s;animation-name:\\#1b0mdne}',
+    '.animation\\#11ckg5k{animation-duration:5s;animation-name:\\#1b0mdne}',
   ])
 
   assert.lengthOf(tw.target as string[], 0)
@@ -79,21 +79,21 @@ test('named animations', () => {
 
   assert.lengthOf(tw.target as string[], 0)
 
-  assert.strictEqual(tw(fadeIn), 'FadeIn#1b2nfnd')
+  assert.strictEqual(tw(fadeIn), 'FadeIn#1t4zxbj')
   assert.deepEqual(tw.target, [
     '/*!0,0*/@keyframes FadeIn\\#zobdkg{0%{opacity:0}100%{opacity:1}}',
-    '/*!fjd9fk,w,FadeIn#1b2nfnd*/.FadeIn\\#1b2nfnd{animation:5s;animation-name:FadeIn\\#zobdkg}',
+    '/*!4fti4g,w,FadeIn#1t4zxbj*/.FadeIn\\#1t4zxbj{animation:5s;animation-name:FadeIn\\#zobdkg}',
   ])
 })
 
 test('animation proxy passthrough', () => {
   assert.strictEqual(
     animation('linear 7s', keyframes({ '0%': { opacity: 0 } })).toString(),
-    'animation#ilpl5p',
+    'animation#k0caog',
   )
   assert.strictEqual(
     animation.func('linear 7s', keyframes({ '0%': { opacity: 0 } })).toString(),
-    'func#1hvnq9l',
+    'func#m3iab4',
   )
 
   assert.strictEqual(animation.toString().replace(/[\s]/g, ''), 'function(){[nativecode]}')
@@ -112,7 +112,7 @@ test('animation proxy passthrough', () => {
         }
       `,
     ).toString(),
-    'animation#14y2azx',
+    'animation#1hhfs83',
   )
 
   assert.strictEqual(
@@ -129,7 +129,7 @@ test('animation proxy passthrough', () => {
         `,
       )
       .toString(),
-    'func#1of5fce',
+    'func#akii6p',
   )
 
   assert.strictEqual(k.toString().replace(/[\s]/g, ''), 'function(){[nativecode]}')

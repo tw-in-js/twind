@@ -193,7 +193,7 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
 
   // PERF: prevent unshift using `rules = [{}]` above and then `rules[0] = {...}`
   rules.unshift({
-    n: name && context.h(name),
+    n: name,
 
     p: precedence,
 

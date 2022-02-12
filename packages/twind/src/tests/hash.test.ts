@@ -27,10 +27,10 @@ const tw = twind(
 afterEach(() => tw.clear())
 
 test('class names are hashed', () => {
-  assert.strictEqual(tw('flex text-center'), '#e9txhd #1vaw68m')
+  assert.strictEqual(tw('flex text-center'), '#1mjcm6l #xwomwz')
   assert.deepEqual(tw.target, [
-    '/*!dbgidc,v,#e9txhd*/.\\#e9txhd{display:flex}',
-    '/*!0,y,#1vaw68m*/.\\#1vaw68m{text-align:center}',
+    '/*!dbgidc,v,flex*/.\\#1mjcm6l{display:flex}',
+    '/*!dbgidc,y,text-center*/.\\#xwomwz{text-align:center}',
   ])
 })
 
@@ -40,10 +40,10 @@ test('accept already hashed rules', () => {
 })
 
 test('different variant produce different hashes', () => {
-  assert.strictEqual(tw('sm:text-center lg:text-center'), '#7n36h2 #18xkmkh')
+  assert.strictEqual(tw('sm:text-center lg:text-center'), '#1t8l2lu #1b1gwwj')
   assert.deepEqual(tw.target, [
-    '/*!epppts,y,#7n36h2*/@media (min-width:640px){.\\#7n36h2{text-align:center}}',
-    '/*!4zsow,y,#18xkmkh*/@media (min-width:1024px){.\\#18xkmkh{text-align:center}}',
+    '/*!epppts,y,sm:text-center*/@media (min-width:640px){.\\#1t8l2lu{text-align:center}}',
+    '/*!eupiio,y,lg:text-center*/@media (min-width:1024px){.\\#1b1gwwj{text-align:center}}',
   ])
 })
 
@@ -67,22 +67,19 @@ test('keyframes are hashed', () => {
   )
   assert.deepEqual(tw.target, [
     '/*!0,0*/@keyframes \\#1hjufz5{0%{transform:scaleY(1)}50%,100%{transform:scaleY(0.5)}}',
-    '/*!fjd9fk,v,#e55o0r*/.\\#e55o0r{animation:\\#1hjufz5 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite}',
+    '/*!fjd9fk,v,css#1gdx1hc*/.\\#e55o0r{animation:\\#1hjufz5 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite}',
   ])
 })
 
 test('same style in different layers has different hash', () => {
   assert.strictEqual(
     tw(`w-0 ${css({ width: '0px' })} ${shortcut(`w-0`)}`),
-    '#1wdxrmr #xs3c6s #q8j53i',
+    '#1wdxrmr #7ik80s #q8j53i',
   )
   assert.deepEqual(tw.target, [
-    // apply(`w-0`)
-    '/*!b3jrb4,0,#1wdxrmr*/.\\#1wdxrmr{width:0px}',
-    // w-0
-    '/*!27wr28,v,#xs3c6s*/.\\#xs3c6s{width:0px}',
-    // css({ width: '0px' })
-    '/*!27wr28,v,#q8j53i*/.\\#q8j53i{width:0px}',
+    '/*!b3jrb4,0,~(w-0)*/.\\#1wdxrmr{width:0px}',
+    '/*!dbgidc,v,w-0*/.\\#7ik80s{width:0px}',
+    '/*!fjd9fk,v,css#1qxe0w9*/.\\#q8j53i{width:0px}',
   ])
 })
 

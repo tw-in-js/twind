@@ -37,8 +37,8 @@ test('inject global styles', () => {
     "/*!0,0*/@font-face{font-family:'Patrick Hand SC';font-style:normal;font-weight:400;src:local('Patrick Hand SC'), local('PatrickHandSC-Regular'), url(https://fonts.gstatic.com/s/patrickhandsc/v4/OYFWCgfCR-7uHIovjUZXsZ71Uis0Qeb9Gqo8IZV7ckE.woff2) format('woff2');unicode-range:U+0100-024f, U+1-1eff, U+20a0-20ab, U+20ad-20cf, U+2c60-2c7f, U+A720-A7FF}",
     '/*!0,1v*/*,::before,::after{--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000}',
     '/*!27wr28,y*/*{box-sizing:border-box}',
-    '/*!b3jrb4,u,shadow*/.shadow{--tw-shadow:0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}',
-    '/*!0,y,underline*/.underline{text-decoration:underline}',
+    '/*!dbgidc,u,shadow*/.shadow{--tw-shadow:0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}',
+    '/*!dbgidc,y,underline*/.underline{text-decoration:underline}',
   ])
 })
 
@@ -126,10 +126,10 @@ test('layers', () => {
   assert.deepEqual(tw.target, [
     '/*!0,1v*/*,::before,::after{--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000}',
     '/*!27wr28,0*/h1{font-size:1.5rem;line-height:2rem}',
-    '/*!0,0*/h2{font-size:1.25rem;line-height:1.75rem}',
-    '/*!27wr28,0*/.select2-dropdown{border-bottom-left-radius:0.5rem;border-bottom-right-radius:0.5rem;--tw-shadow:0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}',
-    '/*!0,0*/.select2-search{border-width:1px;--tw-border-opacity:1;border-color:rgba(209,213,219,var(--tw-border-opacity));border-radius:0.25rem}',
-    '/*!0,0*/.select2-results__group{font-size:1.125rem;line-height:1.75rem;font-weight:700;--tw-text-opacity:1;color:rgba(17,24,39,var(--tw-text-opacity))}',
+    '/*!27wr28,0*/h2{font-size:1.25rem;line-height:1.75rem}',
+    '/*!4fti4g,0*/.select2-dropdown{border-bottom-left-radius:0.5rem;border-bottom-right-radius:0.5rem;--tw-shadow:0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}',
+    '/*!4fti4g,0*/.select2-search{border-width:1px;--tw-border-opacity:1;border-color:rgba(209,213,219,var(--tw-border-opacity));border-radius:0.25rem}',
+    '/*!4fti4g,0*/.select2-results__group{font-size:1.125rem;line-height:1.75rem;font-weight:700;--tw-text-opacity:1;color:rgba(17,24,39,var(--tw-text-opacity))}',
   ])
 })
 
@@ -160,8 +160,8 @@ test('multiple @font-face and @import using template literal', () => {
 
   assert.deepEqual(tw.target, [
     '/*!-1,0*/@import url(//fonts.googleapis.com/css?family=Open+Sans)',
-    '/*!0,0*/@import url(https://fonts.googleapis.com/css?family=Tangerine:400,300italic,600)',
-    "/*!1,0*/@font-face{font-family:'MyWebFont';src:url('myfont.woff2') format('woff2'), url('myfont.woff') format('woff'), url('myfont.ttf') format('truetype')}",
+    '/*!-1,0*/@import url(https://fonts.googleapis.com/css?family=Tangerine:400,300italic,600)',
+    "/*!0,0*/@font-face{font-family:'MyWebFont';src:url('myfont.woff2') format('woff2'), url('myfont.woff') format('woff'), url('myfont.ttf') format('truetype')}",
     "/*!0,0*/@font-face{font-family:'Roboto';font-style:normal;font-weight:400;src:local('Roboto'), local('Roboto-Regular'), url(fonts/roboto-v18-latin-regular.woff2) format('woff2'), url(fonts/roboto-v18-latin-regular.woff) format('woff')}",
   ])
 })
@@ -198,8 +198,8 @@ test('multiple @font-face and @import using object', () => {
 
   assert.deepEqual(tw.target, [
     '/*!-1,0*/@import url(//fonts.googleapis.com/css?family=Open+Sans)',
-    '/*!0,0*/@import url(https://fonts.googleapis.com/css?family=Tangerine:400,300italic,600)',
-    "/*!1,0*/@font-face{font-family:'MyWebFont';src:url('myfont.woff2') format('woff2'),url('myfont.woff') format('woff'),url('myfont.ttf') format('truetype')}",
+    '/*!-1,0*/@import url(https://fonts.googleapis.com/css?family=Tangerine:400,300italic,600)',
+    "/*!0,0*/@font-face{font-family:'MyWebFont';src:url('myfont.woff2') format('woff2'),url('myfont.woff') format('woff'),url('myfont.ttf') format('truetype')}",
     "/*!0,0*/@font-face{font-family:'Roboto';font-style:normal;font-weight:400;src:local('Roboto'),local('Roboto-Regular'),url(fonts/roboto-v18-latin-regular.woff2) format('woff2'),url(fonts/roboto-v18-latin-regular.woff) format('woff')}",
   ])
 })

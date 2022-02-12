@@ -150,7 +150,7 @@ test('using class strategy with hash', () => {
   )
 
   // trigger inject
-  assert.strictEqual(tw('form-input px-4 py-3 rounded-full'), '#jqts61 #icr44k #m9qv18 #105ip96')
+  assert.strictEqual(tw('form-input px-4 py-3 rounded-full'), '#1mevk01 #17u01q8 #bibf52 #1sxpzkv')
 
   assert.deepEqual(tw.target, [
     '.\\#1mevk01,.\\#l9u32f,.\\#1ankjuu,.\\#14uuokj{appearance:none;background-color:#fff;border-color:#6b7280;border-width:1px;border-radius:0px;padding-top:0.5rem;padding-right:0.75rem;padding-bottom:0.5rem;padding-left:0.75rem;font-size:1rem;line-height:1.5rem;--1qg7wmx:0 0 #0000}',
@@ -158,8 +158,8 @@ test('using class strategy with hash', () => {
     '.\\#1mevk01::placeholder,.\\#l9u32f::placeholder{color:#6b7280;opacity:1}',
     '.\\#1mevk01::-webkit-datetime-edit-fields-wrapper{padding:0}',
     '.\\#1mevk01::-webkit-date-and-time-value{min-height:1.5em}',
-    '.\\#icr44k{padding-left:1rem;padding-right:1rem}',
-    '.\\#m9qv18{padding-top:0.75rem;padding-bottom:0.75rem}',
-    '.\\#105ip96{border-radius:9999px}',
+    '.\\#17u01q8{padding-left:1rem;padding-right:1rem}',
+    '.\\#bibf52{padding-top:0.75rem;padding-bottom:0.75rem}',
+    '.\\#1sxpzkv{border-radius:9999px}',
   ])
 })

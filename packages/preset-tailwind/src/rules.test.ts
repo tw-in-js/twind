@@ -299,24 +299,24 @@ test('group and peer hashed marker classes', () => {
   )
 
   assert.strictEqual(tw('group'), '#1bk5mm5')
-  assert.strictEqual(tw('group-hover:underline'), '#hnr61o')
-  assert.deepEqual(tw.target, ['.\\#1bk5mm5:hover .\\#hnr61o{text-decoration:underline}'])
+  assert.strictEqual(tw('group-hover:underline'), '#1o9546u')
+  assert.deepEqual(tw.target, ['.\\#1bk5mm5:hover .\\#1o9546u{text-decoration:underline}'])
 
   tw.clear()
 
   assert.strictEqual(tw('peer'), '#p4d4mm')
-  assert.strictEqual(tw('peer-focus:underline'), '#1glqsdd')
-  assert.deepEqual(tw.target, ['.\\#p4d4mm:focus~.\\#1glqsdd{text-decoration:underline}'])
+  assert.strictEqual(tw('peer-focus:underline'), '#c809fj')
+  assert.deepEqual(tw.target, ['.\\#p4d4mm:focus~.\\#c809fj{text-decoration:underline}'])
 
   tw.clear()
 
   assert.strictEqual(tw('group~name'), '#1uaq32w')
-  assert.strictEqual(tw('group~name-focus:underline'), '#13f0hiy')
-  assert.deepEqual(tw.target, ['.\\#1uaq32w:focus .\\#13f0hiy{text-decoration:underline}'])
+  assert.strictEqual(tw('group~name-focus:underline'), '#cj7dm')
+  assert.deepEqual(tw.target, ['.\\#1uaq32w:focus .\\#cj7dm{text-decoration:underline}'])
 
   tw.clear()
 
   assert.strictEqual(tw('peer~name'), '#1krcwoi')
-  assert.strictEqual(tw('peer~name[disabled]:underline'), '#1nh745q')
-  assert.deepEqual(tw.target, ['.\\#1krcwoi[disabled]~.\\#1nh745q{text-decoration:underline}'])
+  assert.strictEqual(tw('peer~name[disabled]:underline'), '#1tsl4h5')
+  assert.deepEqual(tw.target, ['.\\#1krcwoi[disabled]~.\\#1tsl4h5{text-decoration:underline}'])
 })

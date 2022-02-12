@@ -63,25 +63,25 @@ test('hash class names', () => {
   assert.strictEqual(
     html,
     `
-    <main class="#e9txhd #13zmkow #c7xh85 #tl02vf #eh6hfv">
-      <h1 class="#366evo #awuz9m #1vaw68m #qvvf3j #15z8gvd">
-        This is <span class="#wd565q">Twind</span>!
+    <main class="#1mjcm6l #19akslq #9athnx #8gfukc #vlgikd">
+      <h1 class="#s4i0jm #1khack9 #xwomwz #vdqslz #1ke7mwv">
+        This is <span class="#wf2app">Twind</span>!
       </h1>
     </main>
     `,
   )
   assert.deepEqual(tw.target, [
-    '.\\#366evo{--dxr4o8:1;color:rgba(255,255,255,var(--dxr4o8))}',
-    '.\\#13zmkow{height:100vh}',
-    '.\\#e9txhd{display:flex}',
-    '.\\#awuz9m{font-size:3rem;line-height:1}',
-    '.\\#c7xh85{--17cwy6m:1;background-color:rgba(192,132,252,var(--17cwy6m))}',
-    '.\\#1vaw68m{text-align:center}',
-    '.\\#eh6hfv{justify-content:center}',
-    '.\\#tl02vf{align-items:center}',
-    '.\\#wd565q{font-weight:700}',
-    '@media (min-width:640px){.\\#qvvf3j{--dxr4o8:1;color:rgba(31,41,55,var(--dxr4o8))}}',
-    '@media (min-width:768px){.\\#15z8gvd{--dxr4o8:1;color:rgba(190,24,93,var(--dxr4o8))}}',
+    '.\\#s4i0jm{--dxr4o8:1;color:rgba(255,255,255,var(--dxr4o8))}',
+    '.\\#1mjcm6l{display:flex}',
+    '.\\#19akslq{height:100vh}',
+    '.\\#9athnx{--17cwy6m:1;background-color:rgba(192,132,252,var(--17cwy6m))}',
+    '.\\#1khack9{font-size:3rem;line-height:1}',
+    '.\\#wf2app{font-weight:700}',
+    '.\\#8gfukc{align-items:center}',
+    '.\\#vlgikd{justify-content:center}',
+    '.\\#xwomwz{text-align:center}',
+    '@media (min-width:640px){.\\#vdqslz{--dxr4o8:1;color:rgba(31,41,55,var(--dxr4o8))}}',
+    '@media (min-width:768px){.\\#1ke7mwv{--dxr4o8:1;color:rgba(190,24,93,var(--dxr4o8))}}',
   ])
 })
 
