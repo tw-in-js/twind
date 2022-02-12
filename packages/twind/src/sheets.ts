@@ -78,19 +78,8 @@ export function dom(element?: Element | null | false): Sheet<HTMLStyleElement> {
 
 export function virtual(includeResumeData?: boolean): Sheet<string[]> {
   const target: string[] = []
-  const rules: SheetRule[] = []
   return {
-    get target() {
-      return includeResumeData
-        ? target.map((css, index) => {
-            const rule = rules[index]
-            const p = rule.p - (rules[index - 1]?.p || 0)
-            return `/*!${p.toString(36)},${(rule.o * 2).toString(36)}${
-              rule.n ? ',' + rule.n : ''
-            }*/${css}`
-          })
-        : target
-    },
+    target,
 
     clear() {
       target.length = 0
@@ -101,8 +90,15 @@ export function virtual(includeResumeData?: boolean): Sheet<string[]> {
     },
 
     insert(css, index, rule) {
-      target.splice(index, 0, css)
-      rules.splice(index, 0, rule)
+      target.splice(
+        index,
+        0,
+        includeResumeData
+          ? `/*!${rule.p.toString(36)},${(rule.o * 2).toString(36)}${
+              rule.n ? ',' + rule.n : ''
+            }*/${css}`
+          : css,
+      )
     },
 
     resume: noop,
@@ -166,7 +162,6 @@ function resume(
 
     // 3. parse SSR styles
     let lastMatch: RegExpExecArray | null | undefined
-    let lastPrecedence = 0
 
     while (
       (function commit(match?: RegExpExecArray | null) {
@@ -175,7 +170,7 @@ function resume(
             // grep the cssText from the previous match end up to this match start
             textContent.slice(lastMatch.index + lastMatch[0].length, match?.index),
             {
-              p: (lastPrecedence += parseInt(lastMatch[1], 36)),
+              p: parseInt(lastMatch[1], 36),
               o: parseInt(lastMatch[2], 36) / 2,
               n: lastMatch[3],
             },
