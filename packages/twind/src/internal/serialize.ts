@@ -1,4 +1,12 @@
-import type { CSSObject, Falsey, Context, TwindRule, BaseTheme, MaybeArray } from '../types'
+import type {
+  CSSObject,
+  Falsey,
+  Context,
+  TwindRule,
+  BaseTheme,
+  MaybeArray,
+  ColorValue,
+} from '../types'
 import type { ParsedRule } from './parse'
 import type { ConvertedRule } from './precedence'
 import { Layer, moveToLayer } from './precedence'
@@ -9,6 +17,7 @@ import { stringify } from './stringify'
 import { translateWith } from './translate'
 import { parse } from './parse'
 import { compareTwindRules } from './sorted-insertion-index'
+import { toColorValue } from '../colors'
 
 export function serialize<Theme extends BaseTheme = BaseTheme>(
   style: CSSObject | Falsey,
@@ -226,7 +235,16 @@ export function resolveThemeFunction<Theme extends BaseTheme = BaseTheme>(
   // if (value.includes('theme')) {
   return value.replace(
     /theme\((["'`])?(.+?)\1(?:\s*,\s*(["'`])?(.+?)\3)?\)/g,
-    (_, __, key, ___, value) => context.theme(key, value) as string,
+    (_, __, key, ___, defaultValue) => {
+      const value = context.theme(key, defaultValue)
+
+      if (typeof value == 'function' && /color|fill|stroke/i.test(key)) {
+        return toColorValue(value as ColorValue)
+      }
+
+      // TODO: warn if not a string
+      return value as string
+    },
   )
   // }
 
