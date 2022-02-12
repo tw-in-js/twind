@@ -31,7 +31,6 @@ export default function LayoutDocs({ toc, meta, filename, children }: LayoutMDXP
   const next = entries[entry.next as string]
   const prev = entries[entry.prev as string]
 
-  console.log({ toc, meta, filename, entry, next, prev })
   const aside = toc.length > 0 && (
     <nav className="text-sm leading-6" role="directory" aria-label="Table of contents">
       <h2 className="text-brand-12 font-semibold mb-4">On this page</h2>

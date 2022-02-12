@@ -88,6 +88,7 @@
     "test:coverage": "vitest run --coverage",
     "release": "pnpm publish -r",
     "changeset:version": "changeset version && pnpm i --lockfile-only",
+    "build:website": "pnpm run build --filter=./website && pnpm run export --filter=./website",
     "prepare": "node ./.husky/prepare.cjs"
   },
   "// these are added as dependencies to all packages": "",
