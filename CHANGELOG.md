@@ -9,6 +9,7 @@
 - [@twind/preset-ext](./packages/preset-ext/CHANGELOG.md)
 - [@twind/preset-tailwind](./packages/preset-tailwind/CHANGELOG.md)
 - [@twind/preset-tailwind-forms](./packages/preset-tailwind-forms/CHANGELOG.md)
+- [@twind/preset-typography](./packages/preset-typography/CHANGELOG.md)
 
 ## Integrations
 
