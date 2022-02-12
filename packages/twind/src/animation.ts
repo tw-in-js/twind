@@ -37,8 +37,10 @@ function animation$(
     toString() {
       return css({
         label,
-        ...(typeof animation == 'object' ? animation : { animation }),
-        animationName: '' + waypoints,
+        '@layer components': {
+          ...(typeof animation == 'object' ? animation : { animation }),
+          animationName: '' + waypoints,
+        },
       } as CSSObject)
     },
   } as StringLike
