@@ -25,7 +25,7 @@
 - migration from v0.16 guide
 - common patterns
 - debugging the generated CSS in the browser (cssom sheet)
-- link to [transform css to tailwind](https://transform.tools/css-to-tailwind)
+- link to [transform css to tailwind](https://tailwind-converter.netlify.app/)
 
 ## v1
 
