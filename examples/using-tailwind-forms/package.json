@@ -27,6 +27,6 @@
     "twind": "1.0.0-next.35"
   },
   "devDependencies": {
-    "vite": "^2.7.13"
+    "vite": "^2.8.1"
   }
 }

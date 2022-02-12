@@ -44,8 +44,8 @@
     }
   },
   "devDependencies": {
-    "@sveltejs/kit": "^1.0.0-next.234",
-    "svelte": "^3.44.0",
+    "@sveltejs/kit": "^1.0.0-next.267",
+    "svelte": "^3.46.4",
     "twind": "1.0.0-next.35"
   },
   "scripts": {

@@ -21,13 +21,13 @@
     "preview": "svelte-kit preview"
   },
   "devDependencies": {
-    "@sveltejs/adapter-node": "^1.0.0-next.66",
-    "@sveltejs/kit": "^1.0.0-next.240",
+    "@sveltejs/adapter-node": "^1.0.0-next.68",
+    "@sveltejs/kit": "^1.0.0-next.267",
     "@twind/preset-autoprefix": "1.0.0-next.35",
     "@twind/preset-tailwind": "1.0.0-next.35",
     "@twind/with-sveltekit": "1.0.0-next.35",
-    "svelte": "^3.44.0",
+    "svelte": "^3.46.4",
     "twind": "1.0.0-next.35",
-    "typescript": "^4.4.3"
+    "typescript": "^4.5.5"
   }
 }
