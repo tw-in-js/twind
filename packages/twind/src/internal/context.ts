@@ -32,6 +32,7 @@ type VariantFunction<Theme extends BaseTheme = BaseTheme> = (
 export function createContext<Theme extends BaseTheme = BaseTheme>({
   theme,
   darkMode,
+  darkColor,
   variants,
   rules,
   hash,
@@ -63,20 +64,27 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
       : '@media (prefers-color-scheme:dark)',
   ])
 
+  const h =
+    typeof hash == 'function'
+      ? (value: string) => hash(value, defaultHash)
+      : hash
+      ? defaultHash
+      : identity
+
   return {
     theme: makeThemeFunction(theme),
 
     e: escape,
 
-    h:
-      typeof hash == 'function'
-        ? (value) => hash(value, defaultHash)
-        : hash
-        ? defaultHash
-        : identity,
+    h,
 
     s(property, value) {
-      return stringify(property, value, this)
+      // Hash/Tag tailwind custom properties during serialization
+      return stringify(hashVars(property, h), hashVars(value, h), this)
+    },
+
+    d(section, key, color) {
+      return darkColor?.(section, key, this, color)
     },
 
     v(value) {
@@ -219,4 +227,16 @@ function toCondition(value: string | RegExp): RegExp {
   return typeof value == 'string'
     ? new RegExp('^' + value + (value.includes('$') || value.slice(-1) == '-' ? '' : '$'))
     : value
+}
+
+function hashVars(value: string, h: Context['h']): string {
+  // PERF: check for --tw before running the regexp
+  // if (value.includes('--tw')) {
+  return value.replace(
+    /--(tw-[\w-]+)\b/g,
+    (_, property: string) => '--' + h(property).replace('#', ''),
+  )
+  // }
+
+  // return value
 }

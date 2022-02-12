@@ -5,7 +5,7 @@
  * @module
  */
 
-import type { Context, Preset } from 'twind'
+import type { Preset } from 'twind'
 import type { TailwindTheme } from './types'
 
 import theme from './defaultTheme'
@@ -23,27 +23,11 @@ export interface TailwindPresetOptions {
 export default function presetTailwind({
   disablePreflight,
 }: TailwindPresetOptions = {}): Preset<TailwindTheme> {
-  return ({ stringify }) => ({
+  return {
     // allow other preflight to run
     preflight: disablePreflight ? undefined : preflight,
     theme,
     variants,
     rules,
-    // Hash/Tag tailwind custom properties during serialization
-    stringify(property, value, context) {
-      return stringify(hashVars(property, context), hashVars(value, context), context)
-    },
-  })
-}
-
-function hashVars(value: string, { h }: Context<TailwindTheme>): string {
-  // PERF: check for --tw before running the regexp
-  // if (value.includes('--tw')) {
-  return value.replace(
-    /--(tw-[\w-]+)\b/g,
-    (_, property: string) => '--' + h(property).replace('#', ''),
-  )
-  // }
-
-  // return value
+  }
 }
