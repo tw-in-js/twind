@@ -50,7 +50,7 @@ export default function Header({ sticky }: { sticky: boolean }) {
           </a>
           <a
             className="ml-5 flex item-center hover:text-brand-12"
-            href="https://discord.com/invite/2aP5NkszvD"
+            href="https://chat.twind.style"
             rel="noopener noreferrer"
             target="_blank"
           >

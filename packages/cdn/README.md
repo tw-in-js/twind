@@ -25,7 +25,7 @@ Add this line to your `index.html`:
 
 ```html
 <head>
-  <script src="https://cdn.jsdelivr.net/npm/@twind/cdn@next" crossorigin></script>
+  <script src="https://cdn.twind.style" crossorigin></script>
 </head>
 ```
 

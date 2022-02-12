@@ -27,10 +27,11 @@
 - debugging the generated CSS in the browser (cssom sheet)
 - link to [transform css to tailwind](https://tailwind-converter.netlify.app/)
 - redirects
-  - 'twind.style/discord' -> 'https://discord.com/invite/2aP5NkszvD'
-  - 'twind.style/discussions' -> 'https://github.com/tw-in-js/twind/discussions'
-  - 'twind.style/issues' -> 'https://github.com/tw-in-js/twind/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc'
-  - 'cdn.twind.style' -> 'https://cdn.jsdelivr.net/npm/@twind/cdn@next'
+  - [x] 'chat.twind.style' -> 'https://discord.gg/3fwqsmXNYK'
+  - [x] 'cdn.twind.style' -> 'https://cdn.jsdelivr.net/npm/@twind/cdn@next'
+  - [ ] 'github.twind.style' -> 'https://github.com/tw-in-js/twind'
+  - [ ] 'discussions.twind.style' -> 'https://github.com/tw-in-js/twind/discussions'
+  - [ ] 'issues.twind.style' -> 'https://github.com/tw-in-js/twind/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc'
 - add https://twind.style/twind-logo-animated.svg for use in github readme
 - update readmes
 
