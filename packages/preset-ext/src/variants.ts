@@ -3,7 +3,7 @@ import type { Variant } from 'twind'
 const variants: Variant[] = [
   ['hocus', '&:hover,&:focus-visible'],
   [
-    '((group|peer)(~.+)?)-hocus',
+    '((group|peer)(~[^-]+)?)-hocus',
     ({ 1: $1 }, { e, h }) =>
       // we could you `:is(:hover,:focus-visible)` but browser support is not so good ATM (2022-02)
       // https://caniuse.com/css-matches-pseudo
