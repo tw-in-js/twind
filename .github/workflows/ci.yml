@@ -77,7 +77,7 @@ jobs:
         # 1. prevents this step from running on forks
         # 2. do not run for PRs
         # 3. only run once in the matrix
-        if: ${{ github.repository == 'tw-in-js/twind' &&  && !github.event.pull_request && matrix.node == '16.x' }}
+        if: ${{ github.repository == 'tw-in-js/twind' && !github.event.pull_request && matrix.node == '16.x' }}
         run: |
           cat << EOF > "$HOME/.npmrc"
             email=release-workflow@twind.dev

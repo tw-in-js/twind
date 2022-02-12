@@ -27,7 +27,7 @@ npm install twind@next @twind/preset-tailwind@next
 **with [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)**
 
 ```js
-import { setup } from 'twind/core'
+import { setup } from 'twind'
 import presetTailwind from '@twind/preset-tailwind'
 
 setup({

@@ -25,7 +25,7 @@ Then add the preset to your twind config:
 **with [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)**
 
 ```js
-import { setup } from 'twind/core'
+import { setup } from 'twind'
 import presetAutoprefix from '@twind/preset-autoprefix'
 
 setup({

@@ -29,7 +29,7 @@ npm install twind@next @twind/preset-line-clamp@next
 **with [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)**
 
 ```js
-import { setup } from 'twind/core'
+import { setup } from 'twind'
 import presetLineClamp from '@twind/preset-line-clamp'
 
 setup({
