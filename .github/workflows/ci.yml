@@ -75,8 +75,9 @@ jobs:
       # if a .npmrc file is found, the GitHub Action does not recreate the file.
       - name: 📝  Updating .npmrc
         # 1. prevents this step from running on forks
-        # 2. only run once in the matrix
-        if: ${{ github.repository == 'tw-in-js/twind' && matrix.node == '16.x' }}
+        # 2. do not run for PRs
+        # 3. only run once in the matrix
+        if: ${{ github.repository == 'tw-in-js/twind' &&  && !github.event.pull_request && matrix.node == '16.x' }}
         run: |
           cat << EOF > "$HOME/.npmrc"
             email=release-workflow@twind.dev
@@ -88,8 +89,9 @@ jobs:
       - name: 📦  Create Release Pull Request or Publish to npm
         id: changesets
         # 1. prevents this step from running on forks
-        # 2. only run once in the matrix
-        if: ${{ github.repository == 'tw-in-js/twind' && matrix.node == '16.x' }}
+        # 2. do not run for PRs
+        # 3. only run once in the matrix
+        if: ${{ github.repository == 'tw-in-js/twind' && !github.event.pull_request && matrix.node == '16.x' }}
         uses: changesets/action@v1
         with:
           version: pnpm changeset:version
