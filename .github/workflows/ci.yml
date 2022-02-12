@@ -80,7 +80,7 @@ jobs:
         if: ${{ github.repository == 'tw-in-js/twind' && !github.event.pull_request && matrix.node == '16.x' }}
         run: |
           cat << EOF > "$HOME/.npmrc"
-            email=release-workflow@twind.dev
+            email=release-workflow@twind.style
             //registry.npmjs.org/:_authToken=$NPM_TOKEN
           EOF
         env:

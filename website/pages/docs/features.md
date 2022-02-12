@@ -1,4 +1,7 @@
-# Features
+---
+title: Features
+next: ./grouping-syntax.md
+---
 
 - grouping syntax
 - inline shortcut: `~` to apply/merge utilities -> `~(text(5xl,red-700),bg-red-100)`

@@ -1,7 +1,7 @@
 <div align="center">
 
 <img src="https://twind.dev/assets/twind-logo-animated.svg" height="125" width="125" />
-<a href="https://twind.dev" align="center"><h1>Twind</h1></a>
+<a href="https://twind.style" align="center"><h1>Twind</h1></a>
 
 <p align="center">
 The smallest, fastest, most feature complete Tailwind-in-JS solution in existence
@@ -13,7 +13,7 @@ The smallest, fastest, most feature complete Tailwind-in-JS solution in existenc
 
 [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE)
 [![Latest Release](https://flat.badgen.net/npm/v/twind/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/twind/v/next)
-[![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.dev)
+[![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.style/docs)
 [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind?icon=github&label)](https://github.com/tw-in-js/twind/tree/next)
 [![Discord](https://img.shields.io/discord/798324011980423188?label=chat&logo=discord)](https://discord.com/invite/2aP5NkszvD)
 [![CI](https://github.com/tw-in-js/twind/actions/workflows/ci.yml/badge.svg?branch=next)](https://github.com/tw-in-js/twind/actions/workflows/ci.yml)
@@ -75,7 +75,7 @@ Other features include:
 
 For the full [Tailwind CSS](https://tailwindcss.com) experience try [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind) or start with [Twind CDN](https://github.com/tw-in-js/twind/tree/next/packages/cdn) a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn) that is almost 5.5 times smaller (96.4kb vs 17.6kB).
 
-While we work on the new documentation website we have created a [reference sheet](https://github.com/tw-in-js/twind/blob/next/documentation/40-reference/README.md) to lookup up the available API.
+While we work on the new documentation website we have created a [reference sheet](https://github.com/tw-in-js/twind/blob/next/website/pages/docs/reference.md) to lookup up the available API.
 
 We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/examples) to get you started:
 
@@ -102,7 +102,7 @@ We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/exa
 
 ## Migration from twind v0.16
 
-We have collected a list of changes in [Migration › Twind v0.16 › Notable Changes](https://github.com/tw-in-js/twind/blob/next/documentation/30-guide/50-migration.md#notable-changes). A detailed migration guide will follow.
+We have collected a list of changes in [Migration › Twind v0.16 › Notable Changes](https://github.com/tw-in-js/twind/blob/next/website/pages/docs/migration.md#notable-changes). A detailed migration guide will follow.
 
 ## 🧱 Contribute
 

@@ -1,4 +1,7 @@
-# Migration
+---
+title: Migration
+next: ./comparison.md
+---
 
 TODO with file diffs
 

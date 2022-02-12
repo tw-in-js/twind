@@ -4,7 +4,7 @@
   "description": "twind monorepo",
   "private": true,
   "type": "module",
-  "homepage": "https://twind.dev",
+  "homepage": "https://twind.style",
   "bugs": "https://github.com/tw-in-js/twind/issues",
   "repository": "github:tw-in-js/twind",
   "keywords": [
@@ -34,9 +34,9 @@
   "packageManager": "pnpm@6.29.1",
   "// for npm/yarn within codesandbox — same as in pnpm-workspace.yml": "",
   "workspaces": [
-    "documentation",
     "examples/*",
-    "packages/*"
+    "packages/*",
+    "website"
   ],
   "size-limit": [
     {
@@ -175,7 +175,8 @@
         "parserOptions": {
           "project": [
             "./examples/**/tsconfig.json",
-            "./packages/**/tsconfig.json"
+            "./packages/**/tsconfig.json",
+            "./website/tsconfig.json"
           ]
         },
         "plugins": [

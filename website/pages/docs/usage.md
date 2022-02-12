@@ -1,4 +1,6 @@
-## Examples
+---
+title: Usage
+---
 
 TODO list from /examples with title, description, and links to stackblitz/codesandbox
 

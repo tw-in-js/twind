@@ -31,6 +31,7 @@
   - 'twind.style/discussions' -> 'https://github.com/tw-in-js/twind/discussions'
   - 'twind.style/issues' -> 'https://github.com/tw-in-js/twind/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc'
   - 'cdn.twind.style' -> 'https://cdn.jsdelivr.net/npm/@twind/cdn@next'
+- add https://twind.style/twind-logo-animated.svg for use in github readme
 - update readmes
 
   ```md
@@ -102,7 +103,6 @@
 
 - zero runtime
   - safelist, extractor, examples
-- cdn.twind.dev -> https://cdn.jsdelivr.net/npm/@twind/cdn@next
 - rewrite https://github.com/TanStack/tanstack.com
 - ci: post on discord after release
 - @twind/completions — provide autocompletion for classNames
