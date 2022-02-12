@@ -26,6 +26,28 @@
 - common patterns
 - debugging the generated CSS in the browser (cssom sheet)
 - link to [transform css to tailwind](https://tailwind-converter.netlify.app/)
+- redirects
+  - 'twind.style/discord' -> 'https://discord.com/invite/2aP5NkszvD'
+  - 'twind.style/discussions' -> 'https://github.com/tw-in-js/twind/discussions'
+  - 'twind.style/issues' -> 'https://github.com/tw-in-js/twind/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc'
+  - 'cdn.twind.style' -> 'https://cdn.jsdelivr.net/npm/@twind/cdn@next'
+- update readmes
+
+  ```md
+  ## Documentation
+
+  For full documentation, visit [twind.style/docs/preset-typography](https://twind.style/docs/preset-typography).
+
+  ## Community
+
+  For help, discussion about best practices, or any other conversation that would benefit from being searchable:
+
+  [Discuss the Twind Typography preset on GitHub](https://twind.style/discussions)
+
+  For casual chit-chat with others using the framework:
+
+  [Join the Twind Discord Server](https://twind.style/discord)
+  ```
 
 ## v1
 
@@ -42,6 +64,7 @@
   ensure(presetTailwind(), presetTailwindForms())
   ```
 
+- @twind/with-remix: https://github.com/remix-run/remix/issues/1804
 - @twind/preset-\* from tailwind core
 - @twind/styled (previously @twind/react)
   - Global: https://emotion.sh/docs/globals

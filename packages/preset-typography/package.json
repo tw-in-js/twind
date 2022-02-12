@@ -1,0 +1,55 @@
+{
+  "name": "@twind/preset-typography",
+  "version": "1.0.0-next.35",
+  "description": "Typography preset for twind",
+  "keywords": [
+    "twind",
+    "tailwind",
+    "tailwindcss",
+    "tw-in-js",
+    "tailwind-in-js",
+    "twind-preset",
+    "preset"
+  ],
+  "type": "module",
+  "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
+  "main": "src/index.ts",
+  "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
+  "exports": {
+    ".": "./src/index.ts",
+    "./package.json": "./package.json"
+  },
+  "// These are relative from within the dist/ folder": "",
+  "sideEffects": false,
+  "size-limit": [
+    {
+      "name": "@twind/preset-typography",
+      "path": "dist/preset-typography.esnext.js",
+      "brotli": true,
+      "limit": "2.3kb",
+      "ignore": [
+        "twind"
+      ]
+    }
+  ],
+  "peerDependencies": {
+    "twind": "1.0.0-next.35",
+    "typescript": "^4.4.0"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "twind": "1.0.0-next.35"
+  },
+  "scripts": {
+    "build": "distilt"
+  },
+  "publishConfig": {
+    "tag": "next",
+    "access": "public",
+    "directory": "dist"
+  }
+}

@@ -19,6 +19,7 @@
     "@twind/preset-line-clamp": "packages/preset-line-clamp/dist",
     "@twind/preset-tailwind": "packages/preset-tailwind/dist",
     "@twind/preset-tailwind-forms": "packages/preset-tailwind-forms/dist",
+    "@twind/preset-typography": "packages/preset-typography/dist",
     "twind": "packages/twind/dist",
     "@twind/with-next": "packages/with-next/dist",
     "@twind/with-remix": "packages/with-remix/dist",
