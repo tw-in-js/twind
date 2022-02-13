@@ -16,7 +16,7 @@ export interface CloudflareImageProps {
     | 'bottom'
     | `${'0' | '1' | `0.${number}`}x${'0' | '1' | `0.${number}`}`
     | undefined
-  format?: 'auto' | 'png' | 'jpg' | 'jpeg' | 'gif' | 'avif' | 'webp' | undefined
+  format?: 'auto' | 'png' | 'jpeg' | 'gif' | 'avif' | 'webp' | undefined
   anim?: false | undefined
   blur?: string | number | undefined
 }
@@ -27,7 +27,7 @@ export function loader({
   width,
   height,
   quality,
-  fit = 'scale-down',
+  fit = 'contain',
   gravity = 'auto',
   format = 'auto',
   anim,

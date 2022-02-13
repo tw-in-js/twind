@@ -56,12 +56,12 @@ export default function Layout({
         <meta
           key="og:image"
           property="og:image"
-          content={loader({ src: twindLogo.src, width: 600, height: 315, format: 'jpg' })}
+          content={loader({ src: twindLogo.src, width: 600, format: 'jpeg' })}
         />
         <meta
           key="twitter:image"
           name="twitter:image"
-          content={loader({ src: twindLogo.src, width: 600, format: 'jpg' })}
+          content={loader({ src: twindLogo.src, width: 600, format: 'jpeg' })}
         />
         <meta name="twitter:card" content="summary" />
 
