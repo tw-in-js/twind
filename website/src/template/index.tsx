@@ -63,8 +63,7 @@ export default function Layout({
         />
         <meta name="twitter:card" content="summary" />
 
-        {/* TODO:???<meta name="twitter:site" content="@tw-in-js" />
-        <meta name="twitter:creator" content="@sastan" />*/}
+        {/* TODO:???<meta name="twitter:site" content="@tw-in-js" />*/}
 
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1"></link>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=1"></link>

@@ -25,7 +25,7 @@ export default function Header({ sticky }: { sticky: boolean }) {
           className="ml-auto flex flex-wrap items-center text-base justify-center"
           aria-label="Site Navigation"
         >
-          <Link href={start}>
+          <Link href={start} prefetch={false}>
             <a className="ml-5 hover:text-brand-12">
               <span className="lg:hidden" aria-hidden="true">
                 Docs

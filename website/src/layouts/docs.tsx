@@ -66,7 +66,7 @@ export default function LayoutDocs({ toc, meta, filename, children }: LayoutMDXP
           <footer className="text-sm leading-6">
             <div className="mt-12 font-semibold flex items-center text-brand-11">
               {prev && (
-                <Link href={entry.prev as string}>
+                <Link href={entry.prev as string} prefetch={false}>
                   <a className="hover:text-brand-12" rel="prev">
                     <span className="inline-block mr-2" aria-hidden="true">
                       ‹
@@ -76,7 +76,7 @@ export default function LayoutDocs({ toc, meta, filename, children }: LayoutMDXP
                 </Link>
               )}
               {next && (
-                <Link href={entry.next as string}>
+                <Link href={entry.next as string} prefetch={false}>
                   <a className="ml-auto hover:text-brand-12" rel="next">
                     {next.label}
                     <span className="inline-block ml-2" aria-hidden="true">
@@ -172,7 +172,7 @@ function NavEntry({ href }: { href: string }) {
 
   return (
     <li>
-      <Link href={href}>
+      <Link href={href} prefetch={false}>
         <a
           className={cx(
             'block',

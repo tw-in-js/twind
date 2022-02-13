@@ -124,7 +124,7 @@ export default function Home() {
           The smallest, fastest, most feature complete tailwind-in-js solution in existence
         </p>
         <div className="mt-6 sm:mt-10 flex justify-center space-x-6 text-sm">
-          <Link href={start}>
+          <Link href={start} prefetch={false}>
             <a
               className={cx`
                     text-brand-12 bg-brand-9
