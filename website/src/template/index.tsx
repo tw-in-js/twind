@@ -30,16 +30,8 @@ export default function Layout({
       <Head>
         <title>{[title, 'Twind'].filter(Boolean).join(' — ')}</title>
         {/* TODO: add Twind prefix */}
-        <meta
-          key="og:title"
-          property="og:title"
-          content={['Twind', title].filter(Boolean).join(' — ')}
-        />
-        <meta
-          key="twitter:title"
-          name="twitter:title"
-          content={['Twind', title].filter(Boolean).join(' — ')}
-        />
+        <meta key="og:title" property="og:title" content={title || 'Twind'} />
+        <meta key="twitter:title" name="twitter:title" content={title || 'Twind'} />
 
         {description && (
           <meta key="og:description" property="og:description" content={description} />
@@ -56,17 +48,23 @@ export default function Layout({
         <meta
           key="og:image"
           property="og:image"
-          content={loader({ src: twindLogo.src, width: 600, format: 'jpeg' })}
+          content={loader({
+            src: twindLogo.src,
+            width: 1200,
+            height: 630,
+            fit: 'pad',
+            format: 'png',
+          })}
         />
         <meta
           key="twitter:image"
           name="twitter:image"
-          content={loader({ src: twindLogo.src, width: 600, format: 'jpeg' })}
+          content={loader({ src: twindLogo.src, width: 512, format: 'png' })}
         />
         <meta name="twitter:card" content="summary" />
 
-        <meta name="twitter:site" content="@tw-in-js" />
-        <meta name="twitter:creator" content="@sastan" />
+        {/* TODO:???<meta name="twitter:site" content="@tw-in-js" />
+        <meta name="twitter:creator" content="@sastan" />*/}
 
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=1"></link>
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=1"></link>
