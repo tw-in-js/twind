@@ -6,7 +6,6 @@
   X-Content-Type-Options: nosniff
   Referrer-Policy: no-referrer
   Permissions-Policy: document-domain=()
-  Content-Security-Policy: default-src 'self'; img-src data: 'self'; frame-ancestors 'none';
 
 ## Immutable assets
 /_next/*
