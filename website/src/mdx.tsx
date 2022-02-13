@@ -1,6 +1,6 @@
 // https://opstrace.com/blog/nextjs-on-cloudflare
 
-import Image from '@/image'
+import Image from '~/image'
 
 export function Img({
   alt,

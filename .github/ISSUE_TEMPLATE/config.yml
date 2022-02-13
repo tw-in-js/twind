@@ -1,8 +1,11 @@
 blank_issues_enabled: false
 contact_links:
+  - name: Documentation
+    url: https://twind.style/docs
+    about: Learn how to integrate Twind with your website or app.
   - name: Questions & Discussions
     url: https://github.com/tw-in-js/twind/discussions
     about: Use GitHub discussions for message-board style questions and discussions.
-  - name: Discord Chat
+  - name: Chat
     url: https://chat.twind.style
     about: Ask questions and discuss with other Twind users in real time.

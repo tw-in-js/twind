@@ -1,7 +1,7 @@
-import Layout from '@/template/layout'
-import Head from 'next/head'
 import Link from 'next/link'
 import { animation, cx, keyframes } from 'twind'
+
+import Template from '~/template'
 
 import { start } from '$sitemap/docs'
 
@@ -38,12 +38,7 @@ const breeze = animation.breeze(
 
 export default function Home() {
   return (
-    <Layout>
-      <Head>
-        <title>twind.style</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+    <Template description="The smallest, fastest, most feature complete tailwind-in-js solution in existence">
       <div className="text-center">
         <svg
           className={cx`mx-auto h-(24 md:40 lg:56)`}
@@ -212,7 +207,7 @@ export default function Home() {
           </dl>
         </div>
       </section>
-    </Layout>
+    </Template>
   )
 }
 

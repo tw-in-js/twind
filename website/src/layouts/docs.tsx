@@ -6,9 +6,9 @@ import { createRef } from 'react'
 import { MDXProvider } from '@mdx-js/react'
 import { cx } from 'twind'
 
-import { components } from '@/mdx'
-import { ScrollSpy, useScrollSpyActive, useScrollSpyRef } from '@/scroll-spy'
-import Layout from '@/template/layout'
+import { components } from '~/mdx'
+import { ScrollSpy, useScrollSpyActive, useScrollSpyRef } from '~/scroll-spy'
+import Template from '~/template'
 
 import { entries, sections } from '$sitemap/docs'
 import { useRouter } from 'next/router'
@@ -38,9 +38,16 @@ export default function LayoutDocs({ toc, meta, filename, children }: LayoutMDXP
     </nav>
   )
 
+  // TODO: header title and meta tags
   return (
     <ScrollSpy>
-      <Layout nav={<Nav />} aside={aside}>
+      <Template
+        title={[meta.section, meta.title].filter(Boolean).join(' › ') || 'Documentation'}
+        description={meta.excerpt}
+        edit={filename}
+        nav={<Nav />}
+        aside={aside}
+      >
         {meta.title && (
           <header className="mb-10">
             {meta.section && (
@@ -55,12 +62,12 @@ export default function LayoutDocs({ toc, meta, filename, children }: LayoutMDXP
 
         <Content>{children}</Content>
 
-        <footer className="text-sm leading-6">
-          {(prev || next) && (
+        {(prev || next) && (
+          <footer className="text-sm leading-6">
             <div className="mt-12 font-semibold flex items-center text-brand-11">
               {prev && (
                 <Link href={entry.prev as string}>
-                  <a className="hover:text-brand-12">
+                  <a className="hover:text-brand-12" rel="prev">
                     <span className="inline-block mr-2" aria-hidden="true">
                       ‹
                     </span>
@@ -70,7 +77,7 @@ export default function LayoutDocs({ toc, meta, filename, children }: LayoutMDXP
               )}
               {next && (
                 <Link href={entry.next as string}>
-                  <a className="ml-auto hover:text-brand-12">
+                  <a className="ml-auto hover:text-brand-12" rel="next">
                     {next.label}
                     <span className="inline-block ml-2" aria-hidden="true">
                       ›
@@ -79,14 +86,9 @@ export default function LayoutDocs({ toc, meta, filename, children }: LayoutMDXP
                 </Link>
               )}
             </div>
-          )}
-          <div className="mt-10 pt-10 pb-10 border-t border-brand-7 flex items-center">
-            <Link href={`https://github.com/tw-in-js/twind/edit/next/${filename}`}>
-              <a className="ml-auto hover:text-brand-12">Edit this page on GitHub</a>
-            </Link>
-          </div>
-        </footer>
-      </Layout>
+          </footer>
+        )}
+      </Template>
     </ScrollSpy>
   )
 }

@@ -5,7 +5,7 @@ import { tw } from 'twind'
 class MyDocument extends Document {
   render() {
     return (
-      <Html lang="en">
+      <Html lang="en_US">
         <Head />
         {/* using tw here to have class names hashed in production */}
         {/* because nextjs only shims the content */}

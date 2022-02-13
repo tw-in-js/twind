@@ -1,15 +1,21 @@
 import { ChevronRightIcon } from '@heroicons/react/solid'
 import { BookOpenIcon, GiftIcon } from '@heroicons/react/outline'
 import Link from 'next/link'
-import Layout from '@/template/layout'
+import Template from '~/template'
 
 import { start } from '$sitemap/docs'
+
+// TODO: links to chat, issues, and discussions
+// - Read [the docs](https://twind.style/docs)
+// - Explore [the examples](https://github.com/tw-in-js/twind/tree/next/examples#readme)
+// - Use [Github Discussions](https://github.com/tw-in-js/twind/discussions) for message-board style questions and discussions.
+// - Ask questions and discuss with other Twind users in real time on [Discord Chat](https://chat.twind.style).
 
 const links = [
   {
     href: start,
     title: 'Documentation',
-    description: 'Learn how to integrate Twind with your app',
+    description: 'Learn how to integrate Twind with your website or app',
     icon: BookOpenIcon,
   },
   {
@@ -23,7 +29,7 @@ const links = [
 
 export default function _404() {
   return (
-    <Layout>
+    <Template>
       <div className="max-w-xl mx-auto py-16 sm:py-24">
         <div className="text-center">
           <p className="text-sm font-semibold text-error-11 uppercase tracking-wide">404 error</p>
@@ -74,6 +80,6 @@ export default function _404() {
           </div>
         </div>
       </div>
-    </Layout>
+    </Template>
   )
 }

@@ -1,0 +1,21 @@
+# Cloudflare Headers: https://developers.cloudflare.com/pages/platform/headers
+
+## Harden security for an application
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: no-referrer
+  Permissions-Policy: document-domain=()
+  Content-Security-Policy: default-src 'self'; img-src data: 'self'; frame-ancestors 'none';
+
+## Immutable assets
+/_next/*
+  Cache-Control: public, max-age=31536000, immutable
+  X-Robots-Tag: nosnippet
+
+## Prevent *.pages.dev deployments showing in search results
+https://twind.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:preview.twind.pages.dev/*
+  X-Robots-Tag: noindex

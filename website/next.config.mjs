@@ -89,7 +89,7 @@ export default withPlugins(
                 }
               }
 
-              // import __LayoutDocs$ from '@/layouts/docs.tsx'
+              // import __LayoutDocs$ from '~/layouts/docs.tsx'
               // export default function MDXLayout(props) {
               //   return <__LayoutDocs$ {...props} toc={{...}} meta={{...}} filename={'...'} />;
               // }
@@ -113,8 +113,8 @@ export default withPlugins(
                         ],
                         source: {
                           type: 'Literal',
-                          value: '@/layouts/docs.tsx',
-                          raw: "'@/layouts/docs.tsx'",
+                          value: '~/layouts/docs.tsx',
+                          raw: "'~/layouts/docs.tsx'",
                         },
                       },
                       {

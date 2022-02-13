@@ -5,16 +5,8 @@ on:
     branches:
       # Push events on next branch
       - next
-    paths-ignore:
-      # Do not run for docs changes
-      - 'documentation/**'
-      - '**/*.md'
 
   pull_request:
-    paths-ignore:
-      # Do not run for docs changes
-      - 'documentation/**'
-      - '**/*.md'
 
 env:
   CI: true
@@ -75,9 +67,9 @@ jobs:
       # if a .npmrc file is found, the GitHub Action does not recreate the file.
       - name: 📝  Updating .npmrc
         # 1. prevents this step from running on forks
-        # 2. do not run for PRs
+        # 2. only run for push events
         # 3. only run once in the matrix
-        if: ${{ github.repository == 'tw-in-js/twind' && !github.event.pull_request && matrix.node == '16.x' }}
+        if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'push' && matrix.node == '16.x' }}
         run: |
           cat << EOF > "$HOME/.npmrc"
             email=release-workflow@twind.style
@@ -89,15 +81,40 @@ jobs:
       - name: 📦  Create Release Pull Request or Publish to npm
         id: changesets
         # 1. prevents this step from running on forks
-        # 2. do not run for PRs
+        # 2. only run for push events
         # 3. only run once in the matrix
-        if: ${{ github.repository == 'tw-in-js/twind' && !github.event.pull_request && matrix.node == '16.x' }}
+        if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'push' && matrix.node == '16.x' }}
         uses: changesets/action@v1
         with:
           version: pnpm changeset:version
           publish: pnpm release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🐣  Deploy preview website
+        # 1. prevents this step from running on forks
+        # 2. only run if not publishing
+        # 3. only run once in the matrix
+        if: ${{ github.repository == 'tw-in-js/twind' && steps.changesets.outputs.published != 'true' && matrix.node == '16.x' }}
+        uses: tomjschuster/cloudflare-pages-deploy-action@v0
+        with:
+          account-id: '${{ secrets.CF_ACCOUNT_ID }}'
+          api-key: '${{ secrets.CF_GLOBAL_APIKEY }}'
+          email: '${{ secrets.CF_EMAIL }}'
+          project-name: '${{ secrets.PAGES_PROJECT_NAME }}'
+          branch: ${{ github.head_ref }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🌎  Deploy production website
+        if: steps.changesets.outputs.published == 'true'
+        uses: tomjschuster/cloudflare-pages-deploy-action@v0
+        with:
+          account-id: '${{ secrets.CF_ACCOUNT_ID }}'
+          api-key: '${{ secrets.CF_GLOBAL_APIKEY }}'
+          email: '${{ secrets.CF_EMAIL }}'
+          project-name: '${{ secrets.PAGES_PROJECT_NAME }}'
+          production: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
   coveralls:
     name: Collect Coverage

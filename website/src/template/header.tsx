@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { cx } from 'twind'
-import { ThemeSwitcher } from '@/theme-switcher'
-import { TwindLogo, GitHubIcon, DiscordIcon } from '@/icons'
+import { ThemeSwitcher } from '~/theme-switcher'
+import { TwindLogo, GitHubIcon, DiscordIcon } from '~/icons'
 
 import { start } from '$sitemap/docs'
 

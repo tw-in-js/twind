@@ -17,9 +17,8 @@
   "scripts": {
     "start": "npm run dev",
     "dev": "cross-env NODE_ENV=development next",
-    "build": "cross-env NODE_ENV=production next build",
+    "build": "cross-env NODE_ENV=production next build && next export",
     "serve": "cross-env NODE_ENV=production next start",
-    "export": "next export",
     "typedoc": "typedoc",
     "typedoc:watch": "typedoc --watch"
   },

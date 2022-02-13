@@ -2,11 +2,6 @@
 
 ## Documentation
 
-- framework: codehike +
-  - remix
-  - nextjs + preact
-  - vite + preact + vite-plugin-ssr
-- deployment: cloudflare pages
 - why twind?
   - no build step
   - one line installation
@@ -18,6 +13,7 @@
   - framework agnostic
   - comments
   - hashed class names
+- algolia
 - playground
 - examples: template with all lang and css features
 - explain and examples of both modes (observe/shim vs library) with example
@@ -29,26 +25,20 @@
 - redirects
   - [x] 'chat.twind.style' -> 'https://discord.gg/3fwqsmXNYK'
   - [x] 'cdn.twind.style' -> 'https://cdn.jsdelivr.net/npm/@twind/cdn@next'
-  - [ ] 'github.twind.style' -> 'https://github.com/tw-in-js/twind'
-  - [ ] 'discussions.twind.style' -> 'https://github.com/tw-in-js/twind/discussions'
-  - [ ] 'issues.twind.style' -> 'https://github.com/tw-in-js/twind/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc'
 - add https://twind.style/twind-logo-animated.svg for use in github readme
+- update discord welcome with link to website
 - update readmes
 
   ```md
   ## Documentation
 
-  For full documentation, visit [twind.style/docs/preset-typography](https://twind.style/docs/preset-typography).
+  For full documentation, visit [twind.style/docs](https://twind.style/docs) or explore [the examples](https://github.com/tw-in-js/twind/tree/next/examples#readme).
 
   ## Community
 
-  For help, discussion about best practices, or any other conversation that would benefit from being searchable:
+  For help, discussion about best practices, or any other conversation that would benefit from being searchable use [Github Discussions](https://github.com/tw-in-js/twind/discussions).
 
-  [Discuss the Twind Typography preset on GitHub](https://twind.style/discussions)
-
-  For casual chit-chat with others using the framework:
-
-  [Join the Twind Discord Server](https://twind.style/discord)
+  To ask questions and discuss with other Twind users in real time use [Discord Chat](https://chat.twind.style).
   ```
 
 ## v1
