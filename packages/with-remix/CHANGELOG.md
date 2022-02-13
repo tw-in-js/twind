@@ -1,9 +1,8 @@
 # @twind/with-remix
 
 ## 1.0.0-next.35
+
 ### Patch Changes
-
-
 
 - add remix example ([`98688bcb`](https://github.com/tw-in-js/twind/commit/98688bcb33ec48f4dd8ea61166467f256e4422da))
 

@@ -96,17 +96,19 @@ jobs:
         # 2. only run if not publishing
         # 3. only run once in the matrix
         if: ${{ github.repository == 'tw-in-js/twind' && steps.changesets.outputs.published != 'true' && matrix.node == '16.x' }}
+        continue-on-error: true
         uses: tomjschuster/cloudflare-pages-deploy-action@v0
         with:
           account-id: '${{ secrets.CF_ACCOUNT_ID }}'
           api-key: '${{ secrets.CF_GLOBAL_APIKEY }}'
           email: '${{ secrets.CF_EMAIL }}'
           project-name: '${{ secrets.PAGES_PROJECT_NAME }}'
-          branch: ${{ github.head_ref }}
+          branch: ${{ github.head_ref || 'next' }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🌎  Deploy production website
         if: steps.changesets.outputs.published == 'true'
+        continue-on-error: true
         uses: tomjschuster/cloudflare-pages-deploy-action@v0
         with:
           account-id: '${{ secrets.CF_ACCOUNT_ID }}'

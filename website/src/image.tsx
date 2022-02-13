@@ -5,8 +5,8 @@ function normalizeSrc(src: string): string {
   return src.startsWith('/') ? src.slice(1) : src
 }
 
-export type ImageProps = import('next/image').ImageLoaderProps & {
-  height?: number
+export interface CloudflareImageProps {
+  height?: string | number | undefined
   fit?: 'scale-down' | 'contain' | 'cover' | 'crop' | 'pad'
   gravity?:
     | 'auto'
@@ -15,9 +15,10 @@ export type ImageProps = import('next/image').ImageLoaderProps & {
     | 'top'
     | 'bottom'
     | `${'0' | '1' | `0.${number}`}x${'0' | '1' | `0.${number}`}`
-  format?: 'auto' | 'png' | 'jpg' | 'jpeg' | 'gif' | 'avif' | 'webp'
-  anim?: false
-  blur?: number
+    | undefined
+  format?: 'auto' | 'png' | 'jpg' | 'jpeg' | 'gif' | 'avif' | 'webp' | undefined
+  anim?: false | undefined
+  blur?: string | number | undefined
 }
 
 // https://developers.cloudflare.com/images/image-resizing/url-format
@@ -31,7 +32,7 @@ export function loader({
   format = 'auto',
   anim,
   blur,
-}: ImageProps): string {
+}: import('next/image').ImageLoaderProps & CloudflareImageProps): string {
   const params = [
     `width=${width},fit=${fit},gravity=${gravity},format=${format}`,
     height && `height=${height}`,
@@ -43,7 +44,7 @@ export function loader({
   return `/cdn-cgi/image/${params}/${normalizeSrc(src)}`
 }
 
-export default function Image(props: ImageProps) {
+export default function Image(props: import('next/image').ImageProps & CloudflareImageProps) {
   if (process.env.NODE_ENV === 'development') {
     return <Img unoptimized={true} {...props} />
   } else {

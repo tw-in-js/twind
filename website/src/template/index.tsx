@@ -23,17 +23,23 @@ export default function Layout({
   aside?: ReactNode
 }) {
   const router = useRouter()
-  title = [title, 'Twind.style'].filter(Boolean).join(' — ')
-  // adjust bg and text colors in _document.tsx as well
   // TODO: skip to content
   // TODO: update theme-color based on dark mode
   return (
     <>
       <Head>
-        <title>{title}</title>
+        <title>{[title, 'Twind'].filter(Boolean).join(' — ')}</title>
         {/* TODO: add Twind prefix */}
-        <meta key="og:title" property="og:title" content={title} />
-        <meta key="twitter:title" name="twitter:title" content={title} />
+        <meta
+          key="og:title"
+          property="og:title"
+          content={['Twind', title].filter(Boolean).join(' — ')}
+        />
+        <meta
+          key="twitter:title"
+          name="twitter:title"
+          content={['Twind', title].filter(Boolean).join(' — ')}
+        />
 
         {description && (
           <meta key="og:description" property="og:description" content={description} />
@@ -77,6 +83,7 @@ export default function Layout({
         <link rel="preconnect" href="https://bh4d9od16a-dsn.algolia.net" crossOrigin="true"></link>
       </Head>
 
+      {/* adjust bg and text colors in _document.tsx as well */}
       <div className="antialiased bg-brand-1 text-brand-11">
         <Header sticky={!!nav} />
 

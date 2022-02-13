@@ -9,15 +9,12 @@ import { TipGood, TipBad, TipInfo } from '@/components/Tip'
 
 The official Tailwind CSS Typography plugin provides a set of `prose` classes you can use to add beautiful typographic defaults to any vanilla HTML you don't control, like HTML rendered from Markdown, or pulled from a CMS.
 
-
 <a href="https://play.tailwindcss.com/uj1vGACRJA?layout=preview">
   <img src={require('@/img/typography-demo.jpg').default} alt="Tailwind CSS IntelliSense extension for Visual Studio Code" width={3086} height={1658} className="rounded-lg ring-1 ring-black/5" />
 </a>
 
 ```html
-<article class="prose lg:prose-xl">
-  {{ markdown }}
-</article>
+<article class="prose lg:prose-xl">{{ markdown }}</article>
 ```
 
 To see what it looks like in action, check out our [live demo](https://play.tailwindcss.com/uj1vGACRJA?layout=preview) on Tailwind Play.
@@ -74,9 +71,7 @@ Now you can use the `prose` classes to add sensible typography styles to any van
 This plugin includes a modifier class for each of the five gray scales Tailwind includes by default so you can easily style your content to match the grays you're using in your project.
 
 ```html
-<article class="prose **prose-slate**">
-  {{ markdown }}
-</article>
+<article class="prose **prose-slate**">{{ markdown }}</article>
 ```
 
 Here are the classes that are generated using a totally default Tailwind CSS v2.0 build:
@@ -94,9 +89,7 @@ Modifier classes are designed to be used with the [multi-class modifier pattern]
 <TipInfo>Always include the `prose` class when adding a gray scale modifier</TipInfo>
 
 ```html
-<article class="**prose** prose-stone">
-  {{ markdown }}
-</article>
+<article class="**prose** prose-stone">{{ markdown }}</article>
 ```
 
 To learn about creating your own color themes, read the [adding custom color themes](#adding-custom-color-themes) documentation.
@@ -106,27 +99,23 @@ To learn about creating your own color themes, read the [adding custom color the
 Size modifiers allow you to adjust the overall size of your typography for different contexts.
 
 ```html
-<article class="prose **prose-xl**">
-  {{ markdown }}
-</article>
+<article class="prose **prose-xl**">{{ markdown }}</article>
 ```
 
 Five different typography sizes are included out of the box:
 
-| Class                    |  Body font size |
-| ------------------------ | --------------- |
+| Class                    | Body font size    |
+| ------------------------ | ----------------- |
 | `prose-sm`               | 0.875rem _(14px)_ |
-| `prose-base` _(default)_ |     1rem _(16px)_ |
+| `prose-base` _(default)_ | 1rem _(16px)_     |
 | `prose-lg`               | 1.125rem _(18px)_ |
-| `prose-xl`               |  1.25rem _(20px)_ |
-| `prose-2xl`              |   1.5rem _(24px)_ |
+| `prose-xl`               | 1.25rem _(20px)_  |
+| `prose-2xl`              | 1.5rem _(24px)_   |
 
 These can be used in combination with Tailwind's [breakpoint modifiers](/docs/responsive-design) to change the overall font size of a piece of content at different viewport sizes:
 
 ```html
-<article class="prose **md:prose-lg** **lg:prose-xl**">
-  {{ markdown }}
-</article>
+<article class="prose **md:prose-lg** **lg:prose-xl**">{{ markdown }}</article>
 ```
 
 Everything about the provided size modifiers has been hand-tuned by professional designers to look as beautiful as possible, including the relationships between font sizes, heading spacing, code block padding, and more.
@@ -136,9 +125,7 @@ Size modifiers are designed to be used with the [multi-class modifier pattern](h
 <TipInfo>Always include the `prose` class when adding a size modifier</TipInfo>
 
 ```html
-<article class="**prose** prose-lg">
-  {{ markdown }}
-</article>
+<article class="**prose** prose-lg">{{ markdown }}</article>
 ```
 
 To learn about customizing the included type scales, read the documentation on [customizing the CSS](#customizing-the-css).
@@ -148,20 +135,19 @@ To learn about customizing the included type scales, read the documentation on [
 Each default color theme includes a hand-designed dark mode version that you can trigger by adding the `prose-invert` class:
 
 ```html
-<article class="prose **dark:prose-invert**">
-  {{ markdown }}
-</article>
+<article class="prose **dark:prose-invert**">{{ markdown }}</article>
 ```
 
 To learn about creating your own color themes, read the [adding custom color themes](#adding-custom-color-themes) documentation.
-
 
 ### Element modifiers
 
 Use element modifiers to customize the style of individual elements in your content directly in your HTML:
 
 ```html
-<article class="prose **prose-img:rounded-xl** **prose-headings:underline** **prose-a:text-blue-600**">
+<article
+  class="prose **prose-img:rounded-xl** **prose-headings:underline** **prose-a:text-blue-600**"
+>
   {{ markdown }}
 </article>
 ```
@@ -221,9 +207,7 @@ In those cases, all you need to do is add `max-w-none` to your content to overri
     <!-- ... -->
   </div>
   <div class="col-span-3">
-    <article class="prose **max-w-none**">
-      {{ markdown }}
-    </article>
+    <article class="prose **max-w-none**">{{ markdown }}</article>
   </div>
 </div>
 ```
@@ -233,7 +217,6 @@ In those cases, all you need to do is add `max-w-none` to your content to overri
 ## Advanced topics
 
 ### Undoing typography styles
-
 
 If you have a block of markup embedded in some content that shouldn't inherit the `prose` styles, use the `not-prose` class to sandbox it:
 

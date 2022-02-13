@@ -1,9 +1,8 @@
 # @twind/with-next
 
 ## 1.0.0-next.35
+
 ### Patch Changes
-
-
 
 - add Next.js integration and example ([`df5fc751`](https://github.com/tw-in-js/twind/commit/df5fc751fb340eb02b05ccd3d17c513919297b4e))
 

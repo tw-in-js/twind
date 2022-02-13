@@ -1,8 +1,6 @@
 {
   "extends": "next/core-web-vitals",
   "parserOptions": {
-    "project": [
-      "../website/tsconfig.json"
-    ]
+    "project": ["../website/tsconfig.json"]
   }
 }
