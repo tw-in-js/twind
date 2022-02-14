@@ -43,7 +43,7 @@ export function makeThemeFunction<Theme extends BaseTheme = BaseTheme>({
       if (/[.[]/.test(sectionKey)) {
         const path: string[] = []
 
-        // dotted deep access: colors.gray.500 or or spacing[2.5]
+        // dotted deep access: colors.gray.500 or spacing[2.5]
         sectionKey.replace(
           /\[([^\]]+)\]|([^.[]+)/g,
           (_, $1, $2 = $1) => path.push($2) as unknown as string,
@@ -101,16 +101,18 @@ function flattenColorPalette(colors: Record<string, MaybeColorValue>, path: stri
 
   for (const key in colors) {
     const value = colors[key]
-    const keyPath = key == 'DEFAULT' ? path : [...path, key]
 
-    if (typeof value == 'object') {
-      Object.assign(flattend, flattenColorPalette(value, keyPath))
-    }
+    let keyPath = [...path, key]
 
     flattend[keyPath.join('-')] = value
 
     if (key == 'DEFAULT') {
-      flattend[[...path, key].join('-')] = value
+      keyPath = path
+      flattend[path.join('-')] = value
+    }
+
+    if (typeof value == 'object') {
+      Object.assign(flattend, flattenColorPalette(value, keyPath))
     }
   }
 
