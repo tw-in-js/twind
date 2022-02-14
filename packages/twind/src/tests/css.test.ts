@@ -127,7 +127,7 @@ test('nesting in template literal', () => {
 
     & > p {
       /* descendant-selectors work as well, but are more of an escape hatch */
-      text-decoration: underline;
+      text-decoration-line: underline;
     }
 
     /* Contextual selectors work as well */
@@ -136,15 +136,15 @@ test('nesting in template literal', () => {
     }
   `
 
-  assert.strictEqual(tw(style), 'css#raqi15')
+  assert.strictEqual(tw(style), 'css#1h873n0')
 
   assert.deepEqual(tw.target, [
-    '.css\\#raqi15{padding:2em 1em;background:papayawhip}',
-    '.css\\#raqi15:hover{background:palevioletred}',
-    '@media (max-width: 600px){.css\\#raqi15{background:tomato}}',
-    '@media (min-width:640px){.css\\#raqi15:hover{background:yellow}}',
-    '.css\\#raqi15 > p{text-decoration:underline}',
-    'html.test .css\\#raqi15{display:none}',
+    '.css\\#1h873n0{padding:2em 1em;background:papayawhip}',
+    '.css\\#1h873n0:hover{background:palevioletred}',
+    '@media (max-width: 600px){.css\\#1h873n0{background:tomato}}',
+    '@media (min-width:640px){.css\\#1h873n0:hover{background:yellow}}',
+    '.css\\#1h873n0 > p{text-decoration-line:underline}',
+    'html.test .css\\#1h873n0{display:none}',
   ])
 })
 

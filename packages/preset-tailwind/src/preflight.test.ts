@@ -54,7 +54,7 @@ test('preflight on first inject', () => {
     'img,svg,video,canvas,audio,iframe,embed,object{display:block;vertical-align:middle}',
     'img,video{max-width:100%;height:auto}',
     '[hidden]{display:none}',
-    '.underline{text-decoration:underline}',
+    '.underline{text-decoration-line:underline}',
   ])
 })
 
@@ -134,6 +134,6 @@ test('custom preflight', () => {
     'p{--tw-shadow:0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}',
     '*{scrollbar-color:#6b7280}',
     '*::-webkit-scrollbar,* scrollbar{width:1rem;height:1rem}',
-    '.underline{text-decoration:underline}',
+    '.underline{text-decoration-line:underline}',
   ])
 })

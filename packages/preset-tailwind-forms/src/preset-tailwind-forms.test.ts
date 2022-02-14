@@ -33,7 +33,7 @@ test('using default strategy (base)', () => {
     `[type='radio']:checked{background-image:url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='white' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='3'/%3e%3c/svg%3e")}`,
     "[type='file']{background:unset;border-color:inherit;border-width:0;border-radius:0;padding:0;font-size:unset;line-height:inherit}",
     "[type='file']:focus{outline:1px solid ButtonText;outline:1px auto -webkit-focus-ring-color}",
-    '.underline{text-decoration:underline}',
+    '.underline{text-decoration-line:underline}',
   ])
 })
 
@@ -107,7 +107,7 @@ test('using default strategy (base) and tailwind preflight', () => {
     "[type='file']{background:unset;border-color:inherit;border-width:0;border-radius:0;padding:0;font-size:unset;line-height:inherit}",
     "[type='file']:focus{outline:1px solid ButtonText;outline:1px auto -webkit-focus-ring-color}",
     'body{color:#f3f4f6}',
-    '.underline{text-decoration:underline}',
+    '.underline{text-decoration-line:underline}',
   ])
 })
 

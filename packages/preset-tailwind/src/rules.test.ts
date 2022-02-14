@@ -198,7 +198,7 @@ test('apply with dynamic values', () => {
     '.bg-blue-500{--tw-bg-opacity:1;background-color:rgba(59,130,246,var(--tw-bg-opacity))}',
     '.max-w-\\[500px\\]{max-width:500px}',
     '.text-\\[2rem\\]{font-size:2rem}',
-    '.underline{text-decoration:underline}',
+    '.underline{text-decoration-line:underline}',
     '.hover\\:opacity-90:hover{opacity:0.9}',
   ])
 
@@ -211,7 +211,7 @@ test('apply with dynamic values', () => {
     '@(opacity-50,underline,text-[2rem],bg-blue-500,m-[.2rem],hover:opacity-90,max-w-[500px])',
   )
   assert.deepEqual(tw.target, [
-    '.\\@\\(opacity-50\\,underline\\,text-\\[2rem\\]\\,bg-blue-500\\,m-\\[\\.2rem\\]\\,hover\\:opacity-90\\,max-w-\\[500px\\]\\){opacity:0.5;text-decoration:underline;font-size:2rem;--tw-bg-opacity:1;background-color:rgba(59,130,246,var(--tw-bg-opacity));margin:.2rem}',
+    '.\\@\\(opacity-50\\,underline\\,text-\\[2rem\\]\\,bg-blue-500\\,m-\\[\\.2rem\\]\\,hover\\:opacity-90\\,max-w-\\[500px\\]\\){opacity:0.5;text-decoration-line:underline;font-size:2rem;--tw-bg-opacity:1;background-color:rgba(59,130,246,var(--tw-bg-opacity));margin:.2rem}',
     '.\\@\\(opacity-50\\,underline\\,text-\\[2rem\\]\\,bg-blue-500\\,m-\\[\\.2rem\\]\\,hover\\:opacity-90\\,max-w-\\[500px\\]\\){max-width:500px}',
     '.\\@\\(opacity-50\\,underline\\,text-\\[2rem\\]\\,bg-blue-500\\,m-\\[\\.2rem\\]\\,hover\\:opacity-90\\,max-w-\\[500px\\]\\):hover{opacity:0.9}',
   ])
@@ -225,7 +225,7 @@ test('apply with dynamic values', () => {
     'Named#11t9suh',
   )
   assert.deepEqual(tw.target, [
-    '.Named\\#11t9suh{opacity:0.5;text-decoration:underline;font-size:2rem;--tw-bg-opacity:1;background-color:rgba(59,130,246,var(--tw-bg-opacity));margin:.2rem}',
+    '.Named\\#11t9suh{opacity:0.5;text-decoration-line:underline;font-size:2rem;--tw-bg-opacity:1;background-color:rgba(59,130,246,var(--tw-bg-opacity));margin:.2rem}',
     '.Named\\#11t9suh{max-width:500px}',
     '.Named\\#11t9suh:hover{opacity:0.9}',
   ])
@@ -239,7 +239,7 @@ test('apply with dynamic values', () => {
     '@(opacity-50,underline,text-[2rem],bg-blue-500,m-[.2rem],hover:opacity-90,max-w-[500px])',
   )
   assert.deepEqual(tw.target, [
-    '.\\@\\(opacity-50\\,underline\\,text-\\[2rem\\]\\,bg-blue-500\\,m-\\[\\.2rem\\]\\,hover\\:opacity-90\\,max-w-\\[500px\\]\\){opacity:0.5;text-decoration:underline;font-size:2rem;--tw-bg-opacity:1;background-color:rgba(59,130,246,var(--tw-bg-opacity));margin:.2rem}',
+    '.\\@\\(opacity-50\\,underline\\,text-\\[2rem\\]\\,bg-blue-500\\,m-\\[\\.2rem\\]\\,hover\\:opacity-90\\,max-w-\\[500px\\]\\){opacity:0.5;text-decoration-line:underline;font-size:2rem;--tw-bg-opacity:1;background-color:rgba(59,130,246,var(--tw-bg-opacity));margin:.2rem}',
     '.\\@\\(opacity-50\\,underline\\,text-\\[2rem\\]\\,bg-blue-500\\,m-\\[\\.2rem\\]\\,hover\\:opacity-90\\,max-w-\\[500px\\]\\){max-width:500px}',
     '.\\@\\(opacity-50\\,underline\\,text-\\[2rem\\]\\,bg-blue-500\\,m-\\[\\.2rem\\]\\,hover\\:opacity-90\\,max-w-\\[500px\\]\\):hover{opacity:0.9}',
   ])
@@ -253,7 +253,7 @@ test('apply with dynamic values', () => {
     'Named#11t9suh',
   )
   assert.deepEqual(tw.target, [
-    '.Named\\#11t9suh{opacity:0.5;text-decoration:underline;font-size:2rem;--tw-bg-opacity:1;background-color:rgba(59,130,246,var(--tw-bg-opacity));margin:.2rem}',
+    '.Named\\#11t9suh{opacity:0.5;text-decoration-line:underline;font-size:2rem;--tw-bg-opacity:1;background-color:rgba(59,130,246,var(--tw-bg-opacity));margin:.2rem}',
     '.Named\\#11t9suh{max-width:500px}',
     '.Named\\#11t9suh:hover{opacity:0.9}',
   ])
@@ -262,14 +262,16 @@ test('apply with dynamic values', () => {
 test('group and peer marker classes', () => {
   assert.strictEqual(tw('group'), 'group')
   assert.strictEqual(tw('group-hover:underline'), 'group-hover:underline')
-  assert.deepEqual(tw.target, ['.group:hover .group-hover\\:underline{text-decoration:underline}'])
+  assert.deepEqual(tw.target, [
+    '.group:hover .group-hover\\:underline{text-decoration-line:underline}',
+  ])
 
   tw.clear()
 
   assert.strictEqual(tw('peer'), 'peer')
   assert.strictEqual(tw('peer[disabled]:underline'), 'peer[disabled]:underline')
   assert.deepEqual(tw.target, [
-    '.peer[disabled]~.peer\\[disabled\\]\\:underline{text-decoration:underline}',
+    '.peer[disabled]~.peer\\[disabled\\]\\:underline{text-decoration-line:underline}',
   ])
 
   tw.clear()
@@ -277,7 +279,7 @@ test('group and peer marker classes', () => {
   assert.strictEqual(tw('group~name'), 'group~name')
   assert.strictEqual(tw('group~name[disabled]:underline'), 'group~name[disabled]:underline')
   assert.deepEqual(tw.target, [
-    '.group\\~name[disabled] .group\\~name\\[disabled\\]\\:underline{text-decoration:underline}',
+    '.group\\~name[disabled] .group\\~name\\[disabled\\]\\:underline{text-decoration-line:underline}',
   ])
 
   tw.clear()
@@ -285,7 +287,7 @@ test('group and peer marker classes', () => {
   assert.strictEqual(tw('peer~name'), 'peer~name')
   assert.strictEqual(tw('peer~name-focus-visible:underline'), 'peer~name-focus-visible:underline')
   assert.deepEqual(tw.target, [
-    '.peer\\~name:focus-visible~.peer\\~name-focus-visible\\:underline{text-decoration:underline}',
+    '.peer\\~name:focus-visible~.peer\\~name-focus-visible\\:underline{text-decoration-line:underline}',
   ])
 })
 
@@ -300,23 +302,23 @@ test('group and peer hashed marker classes', () => {
 
   assert.strictEqual(tw('group'), '#1bk5mm5')
   assert.strictEqual(tw('group-hover:underline'), '#1o9546u')
-  assert.deepEqual(tw.target, ['.\\#1bk5mm5:hover .\\#1o9546u{text-decoration:underline}'])
+  assert.deepEqual(tw.target, ['.\\#1bk5mm5:hover .\\#1o9546u{text-decoration-line:underline}'])
 
   tw.clear()
 
   assert.strictEqual(tw('peer'), '#p4d4mm')
   assert.strictEqual(tw('peer-focus:underline'), '#c809fj')
-  assert.deepEqual(tw.target, ['.\\#p4d4mm:focus~.\\#c809fj{text-decoration:underline}'])
+  assert.deepEqual(tw.target, ['.\\#p4d4mm:focus~.\\#c809fj{text-decoration-line:underline}'])
 
   tw.clear()
 
   assert.strictEqual(tw('group~name'), '#1uaq32w')
   assert.strictEqual(tw('group~name-focus:underline'), '#cj7dm')
-  assert.deepEqual(tw.target, ['.\\#1uaq32w:focus .\\#cj7dm{text-decoration:underline}'])
+  assert.deepEqual(tw.target, ['.\\#1uaq32w:focus .\\#cj7dm{text-decoration-line:underline}'])
 
   tw.clear()
 
   assert.strictEqual(tw('peer~name'), '#1krcwoi')
   assert.strictEqual(tw('peer~name[disabled]:underline'), '#1tsl4h5')
-  assert.deepEqual(tw.target, ['.\\#1krcwoi[disabled]~.\\#1tsl4h5{text-decoration:underline}'])
+  assert.deepEqual(tw.target, ['.\\#1krcwoi[disabled]~.\\#1tsl4h5{text-decoration-line:underline}'])
 })

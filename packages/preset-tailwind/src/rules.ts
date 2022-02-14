@@ -402,8 +402,8 @@ const rules: Rule<TailwindTheme>[] = [
   ['indent-', fromTheme('textIndent')],
 
   // Text Decoration
-  ['(overline|underline|line-through)', 'textDecoration'],
-  ['no-underline', { textDecoration: 'none' }],
+  ['(overline|underline|line-through)', 'textDecorationLine'],
+  ['no-underline', { textDecorationLine: 'none' }],
 
   // Text Underline offset
   ['underline-', fromTheme('textUnderlineOffset')],

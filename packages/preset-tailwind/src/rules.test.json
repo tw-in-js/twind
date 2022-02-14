@@ -36,10 +36,10 @@
   "subpixel-antialiased": ".subpixel-antialiased{-webkit-font-smoothing:auto;-moz-osx-font-smoothing:auto}",
   "italic": ".italic{font-style:italic}",
   "not-italic": ".not-italic{font-style:normal}",
-  "underline": ".underline{text-decoration:underline}",
-  "overline": ".overline{text-decoration:overline}",
-  "no-underline": ".no-underline{text-decoration:none}",
-  "line-through": ".line-through{text-decoration:line-through}",
+  "underline": ".underline{text-decoration-line:underline}",
+  "overline": ".overline{text-decoration-line:overline}",
+  "no-underline": ".no-underline{text-decoration-line:none}",
+  "line-through": ".line-through{text-decoration-line:line-through}",
   "decoration-solid": ".decoration-solid{text-decoration-style:solid}",
   "decoration-double": ".decoration-double{text-decoration-style:double}",
   "decoration-dotted": ".decoration-dotted{text-decoration-style:dotted}",
@@ -598,7 +598,7 @@
     [
       ".text-2xl{font-size:1.5rem;line-height:2rem}",
       ".text-center{text-align:center}",
-      ".underline{text-decoration:underline}"
+      ".underline{text-decoration-line:underline}"
     ]
   ],
   "((underline) (text-(center 2xl)) (((font-(bold)))))": [
@@ -607,7 +607,7 @@
       ".text-2xl{font-size:1.5rem;line-height:2rem}",
       ".font-bold{font-weight:700}",
       ".text-center{text-align:center}",
-      ".underline{text-decoration:underline}"
+      ".underline{text-decoration-line:underline}"
     ]
   ],
   "text-(indigo-700 opacity-70)": [
@@ -653,7 +653,7 @@
       ".px-5{padding-left:1.25rem;padding-right:1.25rem}",
       ".font-bold{font-weight:700}",
       ".text-center{text-align:center}",
-      ".underline{text-decoration:underline}"
+      ".underline{text-decoration-line:underline}"
     ]
   ],
   "group hover:bg-gray-300": [
@@ -758,7 +758,7 @@
       ".text-purple-500{--tw-text-opacity:1;color:rgba(168,85,247,var(--tw-text-opacity))}",
       ".text-lg{font-size:1.125rem;line-height:1.75rem}",
       ".capitalize{text-transform:capitalize}",
-      ".underline{text-decoration:underline}"
+      ".underline{text-decoration-line:underline}"
     ]
   ],
   "font(sans bold) italic": [
@@ -788,7 +788,7 @@
       ".hover\\:text-center:hover{text-align:center}",
       ".hover\\:active\\:ring:hover:active{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}",
       ".active\\:hover\\:text-lg:active:hover{font-size:1.125rem;line-height:1.75rem}",
-      ".hover\\:active\\:underline:hover:active{text-decoration:underline}",
+      ".hover\\:active\\:underline:hover:active{text-decoration-line:underline}",
       ".hover\\:active\\:ring-opacity-5:hover:active{--tw-ring-opacity:0.05}"
     ]
   ],
@@ -800,7 +800,7 @@
       ".transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}",
       ".font-bold{font-weight:700}",
       ".font-sans{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"}",
-      ".underline{text-decoration:underline}",
+      ".underline{text-decoration-line:underline}",
       ".hover\\:scale-125:hover{--tw-scale-x:1.25;--tw-scale-y:1.25;transform:var(--tw-transform)}",
       ".hover\\:rotate-6:hover{--tw-rotate:6deg;transform:var(--tw-transform)}",
       ".hover\\:cursor-pointer:hover{cursor:pointer}",
@@ -983,7 +983,7 @@
     "!text-xl !underline",
     [
       ".\\!text-xl{font-size:1.25rem !important;line-height:1.75rem !important}",
-      ".\\!underline{text-decoration:underline !important}"
+      ".\\!underline{text-decoration-line:underline !important}"
     ]
   ],
   "!-m-8": ".\\!-m-8{margin:calc(2rem * -1) !important}",
@@ -991,7 +991,7 @@
     "!text-xl !underline md:!-m-8",
     [
       ".\\!text-xl{font-size:1.25rem !important;line-height:1.75rem !important}",
-      ".\\!underline{text-decoration:underline !important}",
+      ".\\!underline{text-decoration-line:underline !important}",
       "@media (min-width:768px){.md\\:\\!-m-8{margin:calc(2rem * -1) !important}}"
     ]
   ],
@@ -1684,7 +1684,7 @@
     "*,::before,::after{--tw-backdrop-blur:var(--tw-empty,/*!*/ /*!*/);--tw-backdrop-brightness:var(--tw-empty,/*!*/ /*!*/);--tw-backdrop-contrast:var(--tw-empty,/*!*/ /*!*/);--tw-backdrop-grayscale:var(--tw-empty,/*!*/ /*!*/);--tw-backdrop-hue-rotate:var(--tw-empty,/*!*/ /*!*/);--tw-backdrop-invert:var(--tw-empty,/*!*/ /*!*/);--tw-backdrop-opacity:var(--tw-empty,/*!*/ /*!*/);--tw-backdrop-saturate:var(--tw-empty,/*!*/ /*!*/);--tw-backdrop-sepia:var(--tw-empty,/*!*/ /*!*/)}",
     ".backdrop-sepia{--tw-backdrop-sepia:sepia(100%);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}"
   ],
-  "!underline": ".\\!underline{text-decoration:underline !important}",
+  "!underline": ".\\!underline{text-decoration-line:underline !important}",
   "cursor bg-red-500": [
     "cursor bg-red-500",
     [".bg-red-500{--tw-bg-opacity:1;background-color:rgba(239,68,68,var(--tw-bg-opacity))}"]
@@ -1692,13 +1692,13 @@
   "~(text-(center 2xl) underline)": [
     "~(text-center,text-2xl,underline)",
     [
-      ".\\~\\(text-center\\,text-2xl\\,underline\\){font-size:1.5rem;line-height:2rem;text-align:center;text-decoration:underline}"
+      ".\\~\\(text-center\\,text-2xl\\,underline\\){font-size:1.5rem;line-height:2rem;text-align:center;text-decoration-line:underline}"
     ]
   ],
   "hover:~(!text-(3xl center) !underline italic focus:not-italic)": [
     "hover:~(!text-3xl,!text-center,!underline,italic,focus:not-italic)",
     [
-      ".hover\\:\\~\\(\\!text-3xl\\,\\!text-center\\,\\!underline\\,italic\\,focus\\:not-italic\\):hover{font-size:1.875rem !important;line-height:2.25rem !important;text-align:center !important;text-decoration:underline !important;font-style:italic}",
+      ".hover\\:\\~\\(\\!text-3xl\\,\\!text-center\\,\\!underline\\,italic\\,focus\\:not-italic\\):hover{font-size:1.875rem !important;line-height:2.25rem !important;text-align:center !important;font-style:italic;text-decoration-line:underline !important}",
       ".hover\\:\\~\\(\\!text-3xl\\,\\!text-center\\,\\!underline\\,italic\\,focus\\:not-italic\\):hover:focus{font-style:normal}"
     ]
   ],
@@ -1855,7 +1855,7 @@
     ".w-\\[theme\\(spacing\\.1\\)\\]{width:0.25rem}"
   ],
   "<sm:underline md>:font-bold": [
-    "@media (max-width:399px){.\\<sm\\:underline{text-decoration:underline}}",
+    "@media (max-width:399px){.\\<sm\\:underline{text-decoration-line:underline}}",
     "@media (min-width:768px){.md\\>\\:font-bold{font-weight:700}}"
   ],
   "[--x:theme(colors.blue.500)]": ".\\[--x\\:theme\\(colors\\.blue\\.500\\)\\]{--x:#3b82f6}",

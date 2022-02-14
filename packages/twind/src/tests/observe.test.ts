@@ -55,7 +55,7 @@ test('observe in browser', () => {
 
   // ensure tw is callable
   assert.strictEqual(tw('underline'), 'underline')
-  assert.deepEqual(tw.target, ['.underline{text-decoration:underline}'])
+  assert.deepEqual(tw.target, ['.underline{text-decoration-line:underline}'])
 
   // ensure the observer is disconnected on destroy
   tw.destroy()

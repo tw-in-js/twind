@@ -360,7 +360,7 @@ export default function presetTypography({
               adjustSelectors(className, context, {
                 a: {
                   color: 'var(--tw-prose-links)',
-                  textDecoration: 'underline',
+                  textDecorationLine: 'underline',
                   fontWeight: '500',
                 },
                 strong: {

@@ -38,7 +38,7 @@ test('inject global styles', () => {
     '/*!0,1v*/*,::before,::after{--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000}',
     '/*!27wr28,y*/*{box-sizing:border-box}',
     '/*!dbgidc,u,shadow*/.shadow{--tw-shadow:0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}',
-    '/*!dbgidc,y,underline*/.underline{text-decoration:underline}',
+    '/*!dbgidc,11,underline*/.underline{text-decoration-line:underline}',
   ])
 })
 
@@ -92,7 +92,7 @@ test('inject global styles using custom tw', () => {
     '*{scrollbar-color:#6b7280}',
     '*::-webkit-scrollbar,* scrollbar{width:1rem;height:1rem}',
     '.shadow{--tw-shadow:0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}',
-    '.underline{text-decoration:underline}',
+    '.underline{text-decoration-line:underline}',
   ])
 
   assert.lengthOf(tw.target as string[], 0)

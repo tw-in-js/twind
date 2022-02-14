@@ -8,9 +8,9 @@
       ".before\\:\\:block::before{display:block}"
     ]
   ],
-  "children:underline": ".children\\:underline>*{text-decoration:underline}",
-  "siblings:underline": ".siblings\\:underline~*{text-decoration:underline}",
-  "sibling:underline": ".sibling\\:underline+*{text-decoration:underline}",
+  "children:underline": ".children\\:underline>*{text-decoration-line:underline}",
+  "siblings:underline": ".siblings\\:underline~*{text-decoration-line:underline}",
+  "sibling:underline": ".sibling\\:underline+*{text-decoration-line:underline}",
   "override:text-center": ".override\\:text-center.override\\:text-center{text-align:center}",
   "not-focus:invalid:border-red-500": ".not-focus\\:invalid\\:border-red-500:not(:focus):invalid{--tw-border-opacity:1;border-color:rgba(239,68,68,var(--tw-border-opacity))}",
   "invalid:not-focus:border-red-500": ".invalid\\:not-focus\\:border-red-500:invalid:not(:focus){--tw-border-opacity:1;border-color:rgba(239,68,68,var(--tw-border-opacity))}",
@@ -28,20 +28,20 @@
   "[lang~='en-us']:text-blue-400": ".\\[lang\\~\\=\\'en-us\\'\\]\\:text-blue-400[lang~='en-us']{--tw-text-opacity:1;color:rgba(96,165,250,var(--tw-text-opacity))}",
   "[lang|='zh']:text-red-400": ".\\[lang\\|\\=\\'zh\\'\\]\\:text-red-400[lang|='zh']{--tw-text-opacity:1;color:rgba(248,113,113,var(--tw-text-opacity))}",
   "[data-lang='zh-TW']:text-purple-400": ".\\[data-lang\\=\\'zh-TW\\'\\]\\:text-purple-400[data-lang='zh-TW']{--tw-text-opacity:1;color:rgba(192,132,252,var(--tw-text-opacity))}",
-  "group-hocus:underline": ".group:hover .group-hocus\\:underline,.group:focus-visible .group-hocus\\:underline{text-decoration:underline}",
-  "dark:group-hocus:underline": "@media (prefers-color-scheme:dark){.group:hover .dark\\:group-hocus\\:underline,.group:focus-visible .dark\\:group-hocus\\:underline{text-decoration:underline}}",
+  "group-hocus:underline": ".group:hover .group-hocus\\:underline,.group:focus-visible .group-hocus\\:underline{text-decoration-line:underline}",
+  "dark:group-hocus:underline": "@media (prefers-color-scheme:dark){.group:hover .dark\\:group-hocus\\:underline,.group:focus-visible .dark\\:group-hocus\\:underline{text-decoration-line:underline}}",
   "group-hocus:dark:underline": [
     "dark:group-hocus:underline",
     [
-      "@media (prefers-color-scheme:dark){.group:hover .dark\\:group-hocus\\:underline,.group:focus-visible .dark\\:group-hocus\\:underline{text-decoration:underline}}"
+      "@media (prefers-color-scheme:dark){.group:hover .dark\\:group-hocus\\:underline,.group:focus-visible .dark\\:group-hocus\\:underline{text-decoration-line:underline}}"
     ]
   ],
-  "group~xxx-hocus:underline": ".group\\~xxx:hover .group\\~xxx-hocus\\:underline,.group\\~xxx:focus-visible .group\\~xxx-hocus\\:underline{text-decoration:underline}",
-  "dark:group~xxx-hocus:underline": "@media (prefers-color-scheme:dark){.group\\~xxx:hover .dark\\:group\\~xxx-hocus\\:underline,.group\\~xxx:focus-visible .dark\\:group\\~xxx-hocus\\:underline{text-decoration:underline}}",
+  "group~xxx-hocus:underline": ".group\\~xxx:hover .group\\~xxx-hocus\\:underline,.group\\~xxx:focus-visible .group\\~xxx-hocus\\:underline{text-decoration-line:underline}",
+  "dark:group~xxx-hocus:underline": "@media (prefers-color-scheme:dark){.group\\~xxx:hover .dark\\:group\\~xxx-hocus\\:underline,.group\\~xxx:focus-visible .dark\\:group\\~xxx-hocus\\:underline{text-decoration-line:underline}}",
   "group~xxx-hocus:dark:underline": [
     "dark:group~xxx-hocus:underline",
     [
-      "@media (prefers-color-scheme:dark){.group\\~xxx:hover .dark\\:group\\~xxx-hocus\\:underline,.group\\~xxx:focus-visible .dark\\:group\\~xxx-hocus\\:underline{text-decoration:underline}}"
+      "@media (prefers-color-scheme:dark){.group\\~xxx:hover .dark\\:group\\~xxx-hocus\\:underline,.group\\~xxx:focus-visible .dark\\:group\\~xxx-hocus\\:underline{text-decoration-line:underline}}"
     ]
   ],
   "grid-template-areas[outlet_nav]": ".grid-template-areas\\[outlet_nav\\]{grid-template-areas:outlet nav}"

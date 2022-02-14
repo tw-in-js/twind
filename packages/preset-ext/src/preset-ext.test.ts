@@ -49,6 +49,6 @@ test('dark class using peer', () => {
 
   assert.strictEqual(tw('dark:group-hocus:underline'), 'dark:group-hocus:underline')
   assert.deepEqual(tw.target, [
-    '.dark .group:hover .dark\\:group-hocus\\:underline,.dark .group:focus-visible .dark\\:group-hocus\\:underline{text-decoration:underline}',
+    '.dark .group:hover .dark\\:group-hocus\\:underline,.dark .group:focus-visible .dark\\:group-hocus\\:underline{text-decoration-line:underline}',
   ])
 })
