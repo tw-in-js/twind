@@ -10,6 +10,7 @@ on:
 
 env:
   CI: true
+  PAGES_PROJECT_NAME: twind
 
 jobs:
   build:
@@ -95,24 +96,28 @@ jobs:
         # 1. prevents this step from running on forks
         # 2. only run if this is a pull_request or pull_request_target
         # 3. only run once in the matrix
-        if: ${{ github.repository == 'tw-in-js/twind' && github.head_ref && matrix.node == '16.x' }}
+        if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'pull_request' && matrix.node == '16.x' }}
         uses: tomjschuster/cloudflare-pages-deploy-action@v0
         with:
           account-id: '${{ secrets.CF_ACCOUNT_ID }}'
           api-key: '${{ secrets.CF_GLOBAL_APIKEY }}'
           email: '${{ secrets.CF_EMAIL }}'
-          project-name: '${{ secrets.PAGES_PROJECT_NAME }}'
-          branch: ${{ github.head_ref }}
+          project-name: '${{ env.PAGES_PROJECT_NAME }}'
+          preview: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: 🌎  Deploy production website
-        if: steps.changesets.outputs.published == 'true'
+        # 1. prevents this step from running on forks
+        # 2. only run if this is a push to next
+        # 3. only run once in the matrix
+        if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'push' && matrix.node == '16.x' }}
+        # TODO: if: ${{ steps.changesets.outputs.published == 'true' }}
         uses: tomjschuster/cloudflare-pages-deploy-action@v0
         with:
           account-id: '${{ secrets.CF_ACCOUNT_ID }}'
           api-key: '${{ secrets.CF_GLOBAL_APIKEY }}'
           email: '${{ secrets.CF_EMAIL }}'
-          project-name: '${{ secrets.PAGES_PROJECT_NAME }}'
+          project-name: '${{ env.PAGES_PROJECT_NAME }}'
           production: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
