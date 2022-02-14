@@ -32,7 +32,7 @@
   ```md
   ## Documentation
 
-  For full documentation, visit [twind.style/docs](https://twind.style/docs) or explore [the examples](https://github.com/tw-in-js/twind/tree/next/examples#readme).
+  For full documentation, visit [twind.style](https://twind.style) or explore [the examples](https://github.com/tw-in-js/twind/tree/next/examples#readme).
 
   ## Community
 

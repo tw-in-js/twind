@@ -7,4 +7,4 @@ Hey there! If you need help or tech support then this is not the place to ask. P
 
 To ask questions and discuss with other Twind users in real time use [Discord Chat](https://chat.twind.style).
 
-If you arrived here because you think [Twind's documentation](https://twind.style/docs) is unclear, insufficient, or wrong, please consider creating an issue for the documentation instead.
+If you arrived here because you think [Twind's documentation](https://twind.style) is unclear, insufficient, or wrong, please consider creating an issue for the documentation instead.
