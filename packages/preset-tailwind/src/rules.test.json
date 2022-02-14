@@ -1969,5 +1969,8 @@
   "group-focus:group-hover:text-center": ".group:hover:focus .group-focus\\:group-hover\\:text-center{text-align:center}",
   "peer-focus:group-hover:text-center": ".peer:focus~.group:hover .peer-focus\\:group-hover\\:text-center{text-align:center}",
   "peer[disabled]:peer-focus:peer-hover:border-blue-500": ".peer:hover:focus[disabled]~.peer\\[disabled\\]\\:peer-focus\\:peer-hover\\:border-blue-500{--tw-border-opacity:1;border-color:rgba(59,130,246,var(--tw-border-opacity))}",
-  "peer-disabled:peer-first-child:group-hover:group-focus:focus:hover:space-x-4": ".peer:first-child:disabled~.group:focus:hover .peer-disabled\\:peer-first-child\\:group-hover\\:group-focus\\:focus\\:hover\\:space-x-4:focus:hover>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-left:calc(1rem * calc(1 - var(--tw-space-x-reverse)));margin-right:calc(1rem * var(--tw-space-x-reverse))}"
+  "peer-disabled:peer-first-child:group-hover:group-focus:focus:hover:space-x-4": ".peer:first-child:disabled~.group:focus:hover .peer-disabled\\:peer-first-child\\:group-hover\\:group-focus\\:focus\\:hover\\:space-x-4:focus:hover>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-left:calc(1rem * calc(1 - var(--tw-space-x-reverse)));margin-right:calc(1rem * var(--tw-space-x-reverse))}",
+  "h-[calc(100%-theme(spacing.16))]": ".h-\\[calc\\(100\\%-theme\\(spacing\\.16\\)\\)\\]{height:calc(100% - 4rem)}",
+  "h-[calc(100%-theme('spacing.16'))]": ".h-\\[calc\\(100\\%-theme\\(\\'spacing\\.16\\'\\)\\)\\]{height:calc(100% - 4rem)}",
+  "h-[calc(100%-theme(\"spacing.16\"))]": ".h-\\[calc\\(100\\%-theme\\(\\\"spacing\\.16\\\"\\)\\)\\]{height:calc(100% - 4rem)}"
 }
