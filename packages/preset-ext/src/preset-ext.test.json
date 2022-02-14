@@ -44,5 +44,7 @@
       "@media (prefers-color-scheme:dark){.group\\~xxx:hover .dark\\:group\\~xxx-hocus\\:underline,.group\\~xxx:focus-visible .dark\\:group\\~xxx-hocus\\:underline{text-decoration-line:underline}}"
     ]
   ],
-  "grid-template-areas[outlet_nav]": ".grid-template-areas\\[outlet_nav\\]{grid-template-areas:outlet nav}"
+  "grid-template-areas[outlet_nav]": ".grid-template-areas\\[outlet_nav\\]{grid-template-areas:outlet nav}",
+  "&_span:underline": ".\\&_span\\:underline span{text-decoration-line:underline}",
+  "&_h1>span~a:underline": ".\\&_h1\\>span\\~a\\:underline h1>span~a{text-decoration-line:underline}"
 }

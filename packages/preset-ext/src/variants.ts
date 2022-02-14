@@ -31,7 +31,8 @@ const variants: Variant[] = [
   // - `&+span:underline`
   // - `&>span:underline`
   // - `&>*:underline`
-  ['&[&~+>*a-z]+', (match) => match.input],
+  // - `&_span:underline` -> `&_span:underline span`
+  ['&[&_~+>*a-z\\-\\d]+', (match) => match.input.replace('_', ' ')],
 
   // Attribute selector
   // `[lang]:underline` -> `[lang]:underline[lang]`
