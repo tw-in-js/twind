@@ -61,9 +61,9 @@ importers:
 
   examples/basic:
     specifiers:
-      '@twind/preset-autoprefix': 1.0.0-next.35
-      '@twind/preset-tailwind': 1.0.0-next.35
-      twind: 1.0.0-next.35
+      '@twind/preset-autoprefix': 1.0.0-next.36
+      '@twind/preset-tailwind': 1.0.0-next.36
+      twind: 1.0.0-next.36
       vite: ^2.8.1
     dependencies:
       '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
@@ -74,12 +74,12 @@ importers:
 
   examples/playground:
     specifiers:
-      '@twind/preset-autoprefix': 1.0.0-next.35
-      '@twind/preset-ext': 1.0.0-next.35
-      '@twind/preset-line-clamp': 1.0.0-next.35
-      '@twind/preset-tailwind': 1.0.0-next.35
-      '@twind/preset-tailwind-forms': 1.0.0-next.35
-      twind: 1.0.0-next.35
+      '@twind/preset-autoprefix': 1.0.0-next.36
+      '@twind/preset-ext': 1.0.0-next.36
+      '@twind/preset-line-clamp': 1.0.0-next.36
+      '@twind/preset-tailwind': 1.0.0-next.36
+      '@twind/preset-tailwind-forms': 1.0.0-next.36
+      twind: 1.0.0-next.36
       vite: ^2.8.1
     dependencies:
       '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
@@ -93,10 +93,10 @@ importers:
 
   examples/using-tailwind-forms:
     specifiers:
-      '@twind/preset-autoprefix': 1.0.0-next.35
-      '@twind/preset-tailwind': 1.0.0-next.35
-      '@twind/preset-tailwind-forms': 1.0.0-next.35
-      twind: 1.0.0-next.35
+      '@twind/preset-autoprefix': 1.0.0-next.36
+      '@twind/preset-tailwind': 1.0.0-next.36
+      '@twind/preset-tailwind-forms': 1.0.0-next.36
+      twind: 1.0.0-next.36
       vite: ^2.8.1
     dependencies:
       '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
@@ -114,17 +114,17 @@ importers:
 
   examples/with-gatsby:
     specifiers:
-      '@twind/preset-autoprefix': 1.0.0-next.35
-      '@twind/preset-tailwind': 1.0.0-next.35
+      '@twind/preset-autoprefix': 1.0.0-next.36
+      '@twind/preset-tailwind': 1.0.0-next.36
       gatsby: ^4.7.1
       gatsby-plugin-manifest: ^4.7.0
       gatsby-plugin-offline: ^5.7.0
       gatsby-plugin-react-helmet: ^5.7.0
-      gatsby-plugin-twind: 1.0.0-next.35
+      gatsby-plugin-twind: 1.0.0-next.36
       react: ^17.0.2
       react-dom: ^17.0.2
       react-helmet: ^6.1.0
-      twind: 1.0.0-next.35
+      twind: 1.0.0-next.36
     dependencies:
       '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
       '@twind/preset-tailwind': link:../../packages/preset-tailwind
@@ -140,9 +140,9 @@ importers:
 
   examples/with-next:
     specifiers:
-      '@twind/preset-autoprefix': 1.0.0-next.35
-      '@twind/preset-tailwind': 1.0.0-next.35
-      '@twind/with-next': 1.0.0-next.35
+      '@twind/preset-autoprefix': 1.0.0-next.36
+      '@twind/preset-tailwind': 1.0.0-next.36
+      '@twind/with-next': 1.0.0-next.36
       '@types/node': ^17.0.17
       '@types/react': ^17.0.39
       next: ^12.0.10
@@ -150,7 +150,7 @@ importers:
       next-transpile-modules: ^9.0.0
       react: ^17.0.2
       react-dom: ^17.0.2
-      twind: 1.0.0-next.35
+      twind: 1.0.0-next.36
       typescript: ^4.5.5
     devDependencies:
       '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
@@ -171,16 +171,16 @@ importers:
       '@remix-run/dev': ^1.1.3
       '@remix-run/react': ^1.1.3
       '@remix-run/serve': ^1.1.3
-      '@twind/preset-autoprefix': 1.0.0-next.35
-      '@twind/preset-tailwind': 1.0.0-next.35
-      '@twind/with-remix': 1.0.0-next.35
+      '@twind/preset-autoprefix': 1.0.0-next.36
+      '@twind/preset-tailwind': 1.0.0-next.36
+      '@twind/with-remix': 1.0.0-next.36
       '@types/react': ^17.0.39
       '@types/react-dom': ^17.0.11
       cross-env: ^7.0.3
       react: ^17.0.2
       react-dom: ^17.0.2
       remix: ^1.1.3
-      twind: 1.0.0-next.35
+      twind: 1.0.0-next.36
       typescript: ^4.5.5
     dependencies:
       '@remix-run/react': 1.1.3_react-dom@17.0.2+react@17.0.2
@@ -203,11 +203,11 @@ importers:
     specifiers:
       '@sveltejs/adapter-node': ^1.0.0-next.68
       '@sveltejs/kit': ^1.0.0-next.267
-      '@twind/preset-autoprefix': 1.0.0-next.35
-      '@twind/preset-tailwind': 1.0.0-next.35
-      '@twind/with-sveltekit': 1.0.0-next.35
+      '@twind/preset-autoprefix': 1.0.0-next.36
+      '@twind/preset-tailwind': 1.0.0-next.36
+      '@twind/with-sveltekit': 1.0.0-next.36
       svelte: ^3.46.4
-      twind: 1.0.0-next.35
+      twind: 1.0.0-next.36
       typescript: ^4.5.5
     devDependencies:
       '@sveltejs/adapter-node': 1.0.0-next.68
@@ -221,9 +221,9 @@ importers:
 
   packages/cdn:
     specifiers:
-      '@twind/preset-autoprefix': 1.0.0-next.35
-      '@twind/preset-tailwind': 1.0.0-next.35
-      twind: 1.0.0-next.35
+      '@twind/preset-autoprefix': 1.0.0-next.36
+      '@twind/preset-tailwind': 1.0.0-next.36
+      twind: 1.0.0-next.36
     dependencies:
       '@twind/preset-autoprefix': link:../preset-autoprefix
       '@twind/preset-tailwind': link:../preset-tailwind
@@ -236,7 +236,7 @@ importers:
       gatsby: ^4.7.1
       react: ^17.0.2
       react-dom: ^17.0.2
-      twind: 1.0.0-next.35
+      twind: 1.0.0-next.36
     devDependencies:
       '@types/react': 17.0.39
       '@types/react-dom': 17.0.11
@@ -248,7 +248,7 @@ importers:
   packages/preset-autoprefix:
     specifiers:
       style-vendorizer: ^2.1.1
-      twind: 1.0.0-next.35
+      twind: 1.0.0-next.36
     dependencies:
       style-vendorizer: 2.1.1
     devDependencies:
@@ -256,43 +256,43 @@ importers:
 
   packages/preset-ext:
     specifiers:
-      '@twind/preset-tailwind': 1.0.0-next.35
-      twind: 1.0.0-next.35
+      '@twind/preset-tailwind': 1.0.0-next.36
+      twind: 1.0.0-next.36
     devDependencies:
       '@twind/preset-tailwind': link:../preset-tailwind
       twind: link:../twind
 
   packages/preset-line-clamp:
     specifiers:
-      twind: 1.0.0-next.35
+      twind: 1.0.0-next.36
     devDependencies:
       twind: link:../twind
 
   packages/preset-tailwind:
     specifiers:
-      twind: 1.0.0-next.35
+      twind: 1.0.0-next.36
     devDependencies:
       twind: link:../twind
 
   packages/preset-tailwind-forms:
     specifiers:
-      '@twind/preset-tailwind': 1.0.0-next.35
-      twind: 1.0.0-next.35
+      '@twind/preset-tailwind': 1.0.0-next.36
+      twind: 1.0.0-next.36
     devDependencies:
       '@twind/preset-tailwind': link:../preset-tailwind
       twind: link:../twind
 
   packages/preset-typography:
     specifiers:
-      twind: 1.0.0-next.35
+      twind: 1.0.0-next.36
     devDependencies:
       twind: link:../twind
 
   packages/tailwind:
     specifiers:
-      '@twind/preset-autoprefix': 1.0.0-next.35
-      '@twind/preset-tailwind': 1.0.0-next.35
-      twind: 1.0.0-next.35
+      '@twind/preset-autoprefix': 1.0.0-next.36
+      '@twind/preset-tailwind': 1.0.0-next.36
+      twind: 1.0.0-next.36
     dependencies:
       '@twind/preset-autoprefix': link:../preset-autoprefix
       '@twind/preset-tailwind': link:../preset-tailwind
@@ -301,7 +301,7 @@ importers:
 
   packages/twind:
     specifiers:
-      '@twind/preset-tailwind': 1.0.0-next.35
+      '@twind/preset-tailwind': 1.0.0-next.36
       csstype: ^3.0.10
     dependencies:
       csstype: 3.0.10
@@ -313,7 +313,7 @@ importers:
       next: ^12.0.10
       react: ^17.0.2
       react-dom: ^17.0.2
-      twind: 1.0.0-next.35
+      twind: 1.0.0-next.36
     devDependencies:
       next: 12.0.10_react-dom@17.0.2+react@17.0.2
       react: 17.0.2
@@ -325,7 +325,7 @@ importers:
       react: ^17.0.2
       react-dom: ^17.0.2
       remix: ^1.1.3
-      twind: 1.0.0-next.35
+      twind: 1.0.0-next.36
     devDependencies:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
@@ -336,7 +336,7 @@ importers:
     specifiers:
       '@sveltejs/kit': ^1.0.0-next.267
       svelte: ^3.46.4
-      twind: 1.0.0-next.35
+      twind: 1.0.0-next.36
     devDependencies:
       '@sveltejs/kit': 1.0.0-next.267_svelte@3.46.4
       svelte: 3.46.4
@@ -352,11 +352,11 @@ importers:
       '@next/mdx': ^12.0.10
       '@radix-ui/colors': ^0.1.8
       '@stefanprobst/rehype-extract-toc': ^2.1.3
-      '@twind/preset-autoprefix': 1.0.0-next.35
-      '@twind/preset-ext': 1.0.0-next.35
-      '@twind/preset-tailwind': 1.0.0-next.35
-      '@twind/preset-typography': 1.0.0-next.35
-      '@twind/with-next': 1.0.0-next.35
+      '@twind/preset-autoprefix': 1.0.0-next.36
+      '@twind/preset-ext': 1.0.0-next.36
+      '@twind/preset-tailwind': 1.0.0-next.36
+      '@twind/preset-typography': 1.0.0-next.36
+      '@twind/with-next': 1.0.0-next.36
       '@types/node': 17.0.15
       '@types/react': 17.0.39
       babel-plugin-import-glob-array: ^0.2.0
@@ -379,7 +379,7 @@ importers:
       remark-gfm: ^3.0.1
       remark-github: ^11.2.2
       scheduler: ^0.20.2
-      twind: 1.0.0-next.35
+      twind: 1.0.0-next.36
       typedoc: ^0.22.11
       typedoc-plugin-markdown: ^3.11.13
       typedoc-plugin-mdn-links: ^1.0.5
