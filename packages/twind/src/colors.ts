@@ -12,9 +12,6 @@ export function toColorValue(color: ColorValue, options: ColorFunctionOptions = 
   const { opacityValue = '1', opacityVariable } = options
   const opacity = opacityVariable ? `var(${opacityVariable})` : opacityValue
 
-  if (opacity == '1') return color
-  if (opacity == '0') return '#0000'
-
   // rgb hex: #0123 and #001122
   if (color[0] == '#' && (color.length == 4 || color.length == 7)) {
     const size = (color.length - 1) / 3
@@ -27,6 +24,10 @@ export function toColorValue(color: ColorValue, options: ColorFunctionOptions = 
       opacity,
     ]})`
   }
+
+  // TODO: some other format like rgba(), hsla(), ...
+  if (opacity == '1') return color
+  if (opacity == '0') return '#0000'
 
   return color
 }
