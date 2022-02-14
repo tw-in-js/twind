@@ -1,6 +1,6 @@
 {
   "name": "@twind/preset-typography",
-  "version": "1.0.0-next.35",
+  "version": "1.0.0-next.36",
   "description": "Typography preset for twind",
   "keywords": [
     "twind",
@@ -33,7 +33,7 @@
     }
   ],
   "peerDependencies": {
-    "twind": "1.0.0-next.35",
+    "twind": "1.0.0-next.36",
     "typescript": "^4.4.0"
   },
   "peerDependenciesMeta": {
@@ -42,7 +42,7 @@
     }
   },
   "devDependencies": {
-    "twind": "1.0.0-next.35"
+    "twind": "1.0.0-next.36"
   },
   "scripts": {
     "build": "distilt"
