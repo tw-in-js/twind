@@ -88,7 +88,7 @@ export function makeThemeFunction<Theme extends BaseTheme = BaseTheme>({
       value = value(resolveContext)
     }
 
-    if (value && /color/i.test(section)) {
+    if (value && /color|fill|stroke/i.test(section)) {
       return flattenColorPalette(value)
     }
 
