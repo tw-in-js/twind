@@ -74,7 +74,7 @@ export function makeThemeFunction<Theme extends BaseTheme = BaseTheme>({
     // Collect the whole theme
     const result = {} as Record<string, any>
 
-    for (const section in base) {
+    for (const section of [...Object.keys(base), ...Object.keys(extend)]) {
       result[section] = theme(section)
     }
 
