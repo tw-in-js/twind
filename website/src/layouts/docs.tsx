@@ -32,7 +32,7 @@ export default function LayoutDocs({ toc, meta, filename, children }: LayoutMDXP
   const prev = entries[entry.prev as string]
 
   const aside = toc.length > 0 && (
-    <nav className="text-sm leading-6" role="directory" aria-label="Table of contents">
+    <nav className="text-sm leading-6 px-4" role="directory" aria-label="Table of contents">
       <h2 className="text-brand-12 font-semibold mb-4">On this page</h2>
       <TocEntries toc={toc} />
     </nav>

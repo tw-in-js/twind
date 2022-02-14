@@ -48,6 +48,6 @@ export default function Image(props: import('next/image').ImageProps & Cloudflar
   if (process.env.NODE_ENV === 'development') {
     return <Img unoptimized={true} {...props} />
   } else {
-    return <Img {...props} loader={loader} />
+    return <Img placeholder="blur" {...props} loader={loader} />
   }
 }

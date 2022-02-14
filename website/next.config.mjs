@@ -51,7 +51,14 @@ export default withPlugins(
         rehypePlugins: [
           rehypeSlugs,
           // TODO: configure https://github.com/rehypejs/rehype-autolink-headings
-          rehypeAutolinkHeadings,
+          [
+            rehypeAutolinkHeadings,
+            {
+              behavior: 'wrap',
+              // class `autolink` is the marker for src/mdx#a to add tailwind classes
+              properties: { tabIndex: -1, class: 'autolink' },
+            },
+          ],
           // TODO: configure https://github.com/rehypejs/rehype-external-links
           rehypeExternalLinks,
           // TODO: https://github.com/rsclarke/rehype-shiki

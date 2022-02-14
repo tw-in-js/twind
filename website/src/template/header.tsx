@@ -15,7 +15,7 @@ export default function Header({ sticky }: { sticky: boolean }) {
       )}
     >
       <div className="max-w-8xl mx-auto p-4 lg:px-10 flex flex-row items-center">
-        <Link href="/">
+        <Link href="/" prefetch={false}>
           <a className="flex title-font font-medium items-center hover:text-brand-12">
             <TwindLogo className="w-8 h-8" aria-hidden="true" />
             <span className={cx`sr-only md:(not-sr-only ml-3 text-xl)`}>Twind</span>
