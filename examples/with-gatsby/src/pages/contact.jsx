@@ -15,7 +15,7 @@ function ContactPage() {
               className="font-bold text-gray-700 no-underline"
               href="https://github.com/tailwindlabs/tailwindcss-forms"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="nofollow noopener noreferrer"
             >
               Read the docs
             </a>

@@ -42,7 +42,7 @@ export default function Header({ sticky }: { sticky: boolean }) {
           <a
             className="ml-5 flex item-center hover:text-brand-12"
             href="https://github.com/tw-in-js/twind/tree/next"
-            rel="noopener noreferrer"
+            rel="nofollow noopener noreferrer"
             target="_blank"
           >
             <GitHubIcon className="h-4 w-4" aria-hidden="true" />
@@ -51,7 +51,7 @@ export default function Header({ sticky }: { sticky: boolean }) {
           <a
             className="ml-5 flex item-center hover:text-brand-12"
             href="https://chat.twind.style"
-            rel="noopener noreferrer"
+            rel="nofollow noopener noreferrer"
             target="_blank"
           >
             <DiscordIcon className="h-4 w-4" aria-hidden="true" />

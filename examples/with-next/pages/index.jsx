@@ -74,7 +74,7 @@ export default function Home() {
           className="flex items-center justify-center"
           href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
           target="_blank"
-          rel="noopener noreferrer"
+          rel="nofollow noopener noreferrer"
         >
           Powered by <img src="/assets/vercel.svg" alt="Vercel Logo" className="ml-2 h-4" />
         </a>

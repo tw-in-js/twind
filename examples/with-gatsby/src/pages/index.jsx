@@ -26,7 +26,7 @@ function IndexPage() {
             className="font-bold text-gray-900 no-underline"
             href="https://twind.style"
             target="_blank"
-            rel="noopener noreferrer"
+            rel="nofollow noopener noreferrer"
           >
             Twind
           </a>

@@ -18,7 +18,7 @@ function Layout({ children }) {
               className="font-bold no-underline"
               href="https://bryant.io"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="nofollow noopener noreferrer"
             >
               Taylor Bryant
             </a>
@@ -29,7 +29,7 @@ function Layout({ children }) {
               className="font-bold text-white no-underline"
               href="https://github.com/taylorbryant/gatsby-starter-tailwind"
               target="_blank"
-              rel="noopener noreferrer"
+              rel="nofollow noopener noreferrer"
             >
               GitHub
             </a>

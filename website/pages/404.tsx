@@ -6,7 +6,7 @@ import Template from '~/template'
 import { start } from '$sitemap/docs'
 
 // TODO: links to chat, issues, and discussions
-// - Read [the docs](https://twind.style/docs)
+// - Read [the docs](https://twind.style)
 // - Explore [the examples](https://github.com/tw-in-js/twind/tree/next/examples#readme)
 // - Use [Github Discussions](https://github.com/tw-in-js/twind/discussions) for message-board style questions and discussions.
 // - Ask questions and discuss with other Twind users in real time on [Discord Chat](https://chat.twind.style).
