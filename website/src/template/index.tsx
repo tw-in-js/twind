@@ -33,7 +33,7 @@ export default function Layout({
         <meta key="og:title" property="og:title" content={title || 'Twind'} />
         <meta key="twitter:title" name="twitter:title" content={title || 'Twind'} />
 
-        {description && <meta key="description" property="description" content={description} />}
+        {description && <meta key="description" name="description" content={description} />}
         {description && (
           <meta key="og:description" property="og:description" content={description} />
         )}
@@ -93,7 +93,7 @@ export default function Layout({
           {nav && (
             <div
               id="nav"
-              className="w-72 hidden lg:block fixed top-16 bottom-0 pb-10 pr-8 overflow-y-auto"
+              className="w-64 hidden lg:block fixed top-16 bottom-0 pb-10 pr-8 overflow-y-auto"
             >
               {nav}
             </div>
@@ -102,13 +102,15 @@ export default function Layout({
           {aside && (
             <div
               id="toc"
-              className="w-72 hidden xl:block fixed top-16 bottom-0 right-[max(0px,calc(50%-45rem))] py-10 overflow-y-auto"
+              className="w-64 hidden xl:block fixed top-16 bottom-0 right-[max(0px,calc(50%-45rem))] py-10 overflow-y-auto"
             >
               {aside}
             </div>
           )}
 
-          <div className={cx(nav && 'mx-auto max-w-prose lg:max-w-none lg:ml-80 xl:mr-80')}>
+          <div
+            className={cx(nav && 'mx-auto max-w-prose lg:max-w-none lg:ml-64 pl-4', aside && 'xl:mr-60')}
+          >
             <main id="main">{children}</main>
 
             <Footer edit={edit} />

@@ -1,5 +1,6 @@
 import glob from 'glob'
 import { readFileSync } from 'fs'
+import { createRequire } from 'module'
 
 import withPlugins from 'next-compose-plugins'
 
@@ -12,6 +13,8 @@ import withMDX from '@next/mdx'
 import remarkGfm from 'remark-gfm'
 // import remarkGithub from 'remark-github'
 import remarkA11yEmoji from '@fec/remark-a11y-emoji'
+import { remarkCodeHike } from '@code-hike/mdx'
+
 import rehypeSlugs from 'rehype-slug'
 import rehypeToc from '@stefanprobst/rehype-extract-toc'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
@@ -47,6 +50,8 @@ export default withPlugins(
           // TODO: enable remarkGithub,
           remarkA11yEmoji,
           // TODO: https://github.com/kevin940726/remark-codesandbox
+          // slack-dark, github-dark-dimmed, one-dark-pro
+          [remarkCodeHike, { theme: createRequire(import.meta.url)('shiki/themes/one-dark-pro') }],
         ],
         rehypePlugins: [
           rehypeSlugs,
@@ -88,11 +93,14 @@ export default withPlugins(
                 toc.shift()
 
                 // remove frontmatter from tree
-                let child
-                while ((child = tree.children.shift())) {
-                  if (child.tagName == 'h2') {
-                    break
-                  }
+                // { type: 'text', value: '\n' },
+                // { type: 'element', tagName: 'hr' },
+                // { type: 'text', value: '\n' }
+                // { type: 'element', tagName: 'h2' },
+                // { type: 'text', value: '\n' },
+                const startIndex = tree.children.findIndex(({type, tagName}) => type == 'element' && tagName == 'hr')
+                if (~startIndex) {
+                  tree.children.splice(startIndex-1, 5)
                 }
               }
 

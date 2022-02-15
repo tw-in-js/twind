@@ -31,8 +31,7 @@ npm install -D @tailwindcss/typography
 
 Then add the plugin to your `tailwind.config.js` file:
 
-```js
-// tailwind.config.js
+```js twind.config.js focus=6
 module.exports = {
   theme: {
     // ...
@@ -70,8 +69,8 @@ Now you can use the `prose` classes to add sensible typography styles to any van
 
 This plugin includes a modifier class for each of the five gray scales Tailwind includes by default so you can easily style your content to match the grays you're using in your project.
 
-```html
-<article class="prose **prose-slate**">{{ markdown }}</article>
+```html focus=1[23:34]
+<article class="prose prose-slate">{{ markdown }}</article>
 ```
 
 Here are the classes that are generated using a totally default Tailwind CSS v2.0 build:
@@ -88,8 +87,8 @@ Modifier classes are designed to be used with the [multi-class modifier pattern]
 
 <TipInfo>Always include the `prose` class when adding a gray scale modifier</TipInfo>
 
-```html
-<article class="**prose** prose-stone">{{ markdown }}</article>
+```html focus=1[17:22]
+<article class="prose prose-stone">{{ markdown }}</article>
 ```
 
 To learn about creating your own color themes, read the [adding custom color themes](#adding-custom-color-themes) documentation.
@@ -98,8 +97,8 @@ To learn about creating your own color themes, read the [adding custom color the
 
 Size modifiers allow you to adjust the overall size of your typography for different contexts.
 
-```html
-<article class="prose **prose-xl**">{{ markdown }}</article>
+```html focus=1[23:31]
+<article class="prose prose-xl">{{ markdown }}</article>
 ```
 
 Five different typography sizes are included out of the box:

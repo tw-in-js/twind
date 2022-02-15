@@ -4,7 +4,7 @@ import type { Toc } from '@stefanprobst/rehype-extract-toc'
 import Link from 'next/link'
 import { createRef } from 'react'
 import { MDXProvider } from '@mdx-js/react'
-import { cx } from 'twind'
+import { cx, injectGlobal } from 'twind'
 
 import { components } from '~/mdx'
 import { ScrollSpy, useScrollSpyActive, useScrollSpyRef } from '~/scroll-spy'
@@ -13,6 +13,25 @@ import Template from '~/template'
 import { entries, sections } from '$sitemap/docs'
 import { useRouter } from 'next/router'
 
+import '@code-hike/mdx/dist/index.css'
+
+injectGlobal`
+  .ch-frame-buttons {
+    @apply hidden;
+  }
+  .ch-codeblock, .ch-codegroup, .ch-preview {
+    @apply shadow-md;
+  }
+  .ch-scrollycoding-content {
+    @apply top-20 w-2/5;
+  }
+  .ch-scrollycoding-sticker {
+    @apply top-20 w-3/5;
+  }
+  .ch-scrollycoding-step-content :is(h2,h3,h4,h5) {
+    @apply text-lg mb-3;
+  }
+`
 export interface LayoutMDXProps {
   children: ReactNode
   toc: Toc
@@ -97,7 +116,7 @@ function Content({ children }: { children: ReactNode }) {
   const scrollSpyRef = useScrollSpyRef()
 
   return (
-    <div className="prose prose-headings:scroll-mt-20" ref={scrollSpyRef}>
+    <div className="prose max-w-none prose-headings:scroll-mt-20" ref={scrollSpyRef}>
       <MDXProvider components={components}>{children}</MDXProvider>
     </div>
   )
