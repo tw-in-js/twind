@@ -19,3 +19,7 @@ https://twind.pages.dev/*
 
 https://:preview.twind.pages.dev/*
   X-Robots-Tag: noindex
+
+## Allow cdn access from everywhere
+https://cdn.twind.style/*
+  Access-Control-Allow-Origin: *
