@@ -845,4 +845,21 @@ test('using @font-apply', ({ tw, sheet }) => {
   ])
 })
 
+test.only('using :is(...)', ({ tw, sheet }) => {
+  const style = css`
+    color: black;
+    &:is(button, a):hover {
+      color: red;
+    }
+  `
+
+  assert.equal(sheet.target, [])
+
+  assert.is(tw(style), 'tw-1uatx6s')
+  assert.equal(sheet.target, [
+    '.tw-1uatx6s:is(button, a):hover{color:red}',
+    '.tw-1uatx6s{color:black}',
+  ])
+})
+
 test.run()

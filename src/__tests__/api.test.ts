@@ -771,7 +771,7 @@ test('expand nested selector', ({ sheet, tw }) => {
     'tw-n3qe40',
   )
 
-  assert.equal(sheet.target, ['.tw-n3qe40,.tw-n3qe40  a{color:black}'])
+  assert.equal(sheet.target, ['.tw-n3qe40,.tw-n3qe40 a{color:black}'])
 })
 
 test('fontSize string', ({ sheet }) => {

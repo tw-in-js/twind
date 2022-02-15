@@ -243,20 +243,16 @@ export const serialize = (
             // - replace `&` with the current selector
             selector
               ? // Go over the selector and replace the matching selectors respecting multiple selectors
-                join(
-                  selector.split(/,(?![^[]*])/g).map((selectorPart) =>
-                    // Same for the key
-                    join(
-                      key.split(/,(?![^[]*])/g).map((keyPart) =>
-                        // If the current part has a nested selector replace it
-                        includes(keyPart, '&')
+                selector.replace(
+                  / *((?:\(.+?\)|\[.+?\]|[^,])+) *(,|$)/g,
+                  (_, selectorPart: string, comma: string) =>
+                    key.replace(
+                      / *((?:\(.+?\)|\[.+?\]|[^,])+) *(,|$)/g,
+                      (_, keyPart: string, comma: string) =>
+                        (includes(keyPart, '&')
                           ? keyPart.replace(/&/g, selectorPart)
-                          : (selectorPart && selectorPart + ' ') + keyPart,
-                      ),
-                      ',',
-                    ),
-                  ),
-                  ',',
+                          : (selectorPart && selectorPart + ' ') + keyPart) + comma,
+                    ) + comma,
                 )
               : key,
             presedence,

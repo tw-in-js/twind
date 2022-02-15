@@ -22,6 +22,7 @@ test('new colors are available', () => {
   assert.is(tw('text-sky-200'), 'text-sky-200')
   assert.is(tw('text-rose-200'), 'text-rose-200')
   assert.equal(sheet.target, [
+    '.text-sky-200{--tw-text-opacity:1;color:#bae6fd;color:rgba(186,230,253,var(--tw-text-opacity))}',
     '.text-rose-200{--tw-text-opacity:1;color:#fecdd3;color:rgba(254,205,211,var(--tw-text-opacity))}',
   ])
 })
