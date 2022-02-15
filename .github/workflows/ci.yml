@@ -98,6 +98,7 @@ jobs:
         # 3. only run once in the matrix
         if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'pull_request' && matrix.node == '16.x' }}
         uses: tomjschuster/cloudflare-pages-deploy-action@v0
+        continue-on-error: true
         with:
           account-id: '${{ secrets.CF_ACCOUNT_ID }}'
           api-key: '${{ secrets.CF_GLOBAL_APIKEY }}'
@@ -113,6 +114,7 @@ jobs:
         if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'push' && matrix.node == '16.x' }}
         # TODO: if: ${{ steps.changesets.outputs.published == 'true' }}
         uses: tomjschuster/cloudflare-pages-deploy-action@v0
+        continue-on-error: true
         with:
           account-id: '${{ secrets.CF_ACCOUNT_ID }}'
           api-key: '${{ secrets.CF_GLOBAL_APIKEY }}'
