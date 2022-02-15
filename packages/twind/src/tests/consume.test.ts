@@ -125,3 +125,33 @@ test('will preserve html comments', () => {
     '@media (min-width:768px){.md\\:text-pink-700{--tw-text-opacity:1;color:rgba(190,24,93,var(--tw-text-opacity))}}',
   ])
 })
+
+test('handles escaped chars by react', () => {
+  const tw = twind({ presets: [presetTailwind({ disablePreflight: true })] }, virtual())
+
+  const html = consume(
+    `
+    <main class="before:content-[&#x27;x&#x27;]">
+      <h1 class='before:content-[&quot;y&quot;]'>
+        This is Twind!
+      </h1>
+    </main>
+    `,
+    tw,
+  )
+
+  assert.strictEqual(
+    html,
+    `
+    <main class="before:content-['x']">
+      <h1 class='before:content-["y"]'>
+        This is Twind!
+      </h1>
+    </main>
+    `,
+  )
+  assert.deepEqual(tw.target, [
+    ".before\\:content-\\[\\'x\\'\\]:before{--tw-content:'x';content:var(--tw-content)}",
+    '.before\\:content-\\[\\"y\\"\\]:before{--tw-content:"y";content:var(--tw-content)}',
+  ])
+})
