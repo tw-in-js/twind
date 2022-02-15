@@ -21,9 +21,9 @@
     "export": "next export"
   },
   "devDependencies": {
-    "@twind/preset-autoprefix": "1.0.0-next.36",
-    "@twind/preset-tailwind": "1.0.0-next.36",
-    "@twind/with-next": "1.0.0-next.36",
+    "@twind/preset-autoprefix": "1.0.0-next.37",
+    "@twind/preset-tailwind": "1.0.0-next.37",
+    "@twind/with-next": "1.0.0-next.37",
     "@types/node": "^17.0.17",
     "@types/react": "^17.0.39",
     "next": "^12.0.10",
@@ -31,7 +31,7 @@
     "next-transpile-modules": "^9.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "twind": "1.0.0-next.36",
+    "twind": "1.0.0-next.37",
     "typescript": "^4.5.5"
   }
 }

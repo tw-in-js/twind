@@ -1,6 +1,6 @@
 {
   "name": "@twind/website",
-  "version": "1.0.0-next.21",
+  "version": "1.0.0-next.22",
   "description": "Twind Website",
   "private": true,
   "license": "MIT",
@@ -26,11 +26,11 @@
     "@heroicons/react": "^1.0.5",
     "@mdx-js/react": "^2.0.0",
     "@radix-ui/colors": "^0.1.8",
-    "@twind/preset-autoprefix": "1.0.0-next.36",
-    "@twind/preset-ext": "1.0.0-next.36",
-    "@twind/preset-tailwind": "1.0.0-next.36",
-    "@twind/preset-typography": "1.0.0-next.36",
-    "@twind/with-next": "1.0.0-next.36",
+    "@twind/preset-autoprefix": "1.0.0-next.37",
+    "@twind/preset-ext": "1.0.0-next.37",
+    "@twind/preset-tailwind": "1.0.0-next.37",
+    "@twind/preset-typography": "1.0.0-next.37",
+    "@twind/with-next": "1.0.0-next.37",
     "next": "12.0.10",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -38,7 +38,7 @@
     "react-use": "^17.3.2",
     "scheduler": "^0.20.2",
     "shiki": "^0.10.1",
-    "twind": "1.0.0-next.36"
+    "twind": "1.0.0-next.37"
   },
   "devDependencies": {
     "@code-hike/mdx": "^0.3.0-next.24",
