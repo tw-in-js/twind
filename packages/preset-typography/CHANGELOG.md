@@ -1,13 +1,10 @@
 # @twind/preset-typography
 
 ## 1.0.0-next.36
+
 ### Patch Changes
 
-
-
 - feat: add @twind/preset-typography ([`e3796bf9`](https://github.com/tw-in-js/twind/commit/e3796bf9788373a33214a23bdaba6f56b9feaf96))
-
-
 
 - fix: use `text-decoration-line` ([`346efc4e`](https://github.com/tw-in-js/twind/commit/346efc4e84042d043e17bac8d829f0408279448e))
 

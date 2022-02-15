@@ -98,9 +98,11 @@ export default withPlugins(
                 // { type: 'text', value: '\n' }
                 // { type: 'element', tagName: 'h2' },
                 // { type: 'text', value: '\n' },
-                const startIndex = tree.children.findIndex(({type, tagName}) => type == 'element' && tagName == 'hr')
+                const startIndex = tree.children.findIndex(
+                  ({ type, tagName }) => type == 'element' && tagName == 'hr',
+                )
                 if (~startIndex) {
-                  tree.children.splice(startIndex-1, 5)
+                  tree.children.splice(startIndex - 1, 5)
                 }
               }
 

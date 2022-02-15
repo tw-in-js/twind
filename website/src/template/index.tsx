@@ -109,7 +109,10 @@ export default function Layout({
           )}
 
           <div
-            className={cx(nav && 'mx-auto max-w-prose lg:max-w-none lg:ml-64 pl-4', aside && 'xl:mr-60')}
+            className={cx(
+              nav && 'mx-auto max-w-prose lg:max-w-none lg:ml-64 pl-4',
+              aside && 'xl:mr-60',
+            )}
           >
             <main id="main">{children}</main>
 
