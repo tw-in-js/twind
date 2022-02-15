@@ -1,5 +1,11 @@
 # twind
 
+## 1.0.0-next.37
+
+### Patch Changes
+
+- fix: workaround for replaced `'` and `" when using react renderToString` ([`08c66ee8`](https://github.com/tw-in-js/twind/commit/08c66ee8f7f80a6c998a380acc4f44280aef3280))
+
 ## 1.0.0-next.36
 
 ### Patch Changes
