@@ -91,3 +91,29 @@ test('hash class names', () => {
     ].join(''),
   )
 })
+
+test('includes classes added by `tw` calls', () => {
+  const tw = twind({ presets: [presetTailwind({ disablePreflight: true })] }, virtual())
+
+  // some extra classes
+  tw('block underline')
+
+  const { html, css } = extract(`<span class='font-bold'></span>`, tw)
+
+  assert.strictEqual(html, `<span class='font-bold'></span>`)
+
+  assert.strictEqual(
+    css,
+    [
+      '.block{display:block}',
+      '.font-bold{font-weight:700}',
+      '.underline{text-decoration-line:underline}',
+    ].join(''),
+  )
+
+  // extra classes are not cleared
+  assert.deepEqual(tw.target, [
+    '.block{display:block}',
+    '.underline{text-decoration-line:underline}',
+  ])
+})

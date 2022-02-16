@@ -40,15 +40,15 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
   const context = createContext(config)
 
   // Map of tokens to generated className
-  const cache = new Map<string, string>()
+  let cache = new Map<string, string>()
 
   // An array of precedence by index within the sheet
   // always sorted
-  const sortedPrecedences: SortableRule[] = []
+  let sortedPrecedences: SortableRule[] = []
 
   // Cache for already inserted css rules
   // to prevent double insertions
-  const insertedRules = new Set<string>()
+  let insertedRules = new Set<string>()
 
   sheet.resume(
     (className) => cache.set(className, className),
@@ -127,11 +127,27 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
 
       config,
 
+      snapshot() {
+        const restoreSheet = sheet.snapshot()
+        const insertedRules$ = [...insertedRules]
+        const cache$ = [...cache]
+        const sortedPrecedences$ = [...sortedPrecedences]
+
+        return () => {
+          restoreSheet()
+
+          insertedRules = new Set(insertedRules$)
+          cache = new Map(cache$)
+          sortedPrecedences = sortedPrecedences$
+        }
+      },
+
       clear() {
         sheet.clear()
-        insertedRules.clear()
-        cache.clear()
-        sortedPrecedences.length = 0
+
+        insertedRules = new Set()
+        cache = new Map()
+        sortedPrecedences = []
       },
 
       destroy() {

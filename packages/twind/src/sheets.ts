@@ -21,6 +21,20 @@ export function cssom(element?: CSSStyleSheet | Element | null | false): Sheet<C
   return {
     target,
 
+    snapshot() {
+      // collect current rules
+      const rules = Array.from(target.cssRules, (rule) => rule.cssText)
+
+      return () => {
+        // remove all existing rules
+        this.clear()
+
+        // add all snapshot rules back
+        // eslint-disable-next-line @typescript-eslint/unbound-method
+        rules.forEach(this.insert as (cssText: string, index: number) => void)
+      }
+    },
+
     clear() {
       // remove all added rules
       for (let index = target.cssRules.length; index--; ) {
@@ -32,10 +46,10 @@ export function cssom(element?: CSSStyleSheet | Element | null | false): Sheet<C
       target.ownerNode?.remove()
     },
 
-    insert(css, index) {
+    insert(cssText, index) {
       try {
         // Insert
-        target.insertRule(css, index)
+        target.insertRule(cssText, index)
       } catch (error) {
         // Empty rule to keep index valid — not using `*{}` as that would show up in all rules (DX)
         target.insertRule(':root{}', index)
@@ -44,8 +58,8 @@ export function cssom(element?: CSSStyleSheet | Element | null | false): Sheet<C
         // lets filter them to prevent unnecessary warnings
         // ::-moz-focus-inner
         // :-moz-focusring
-        if (!/:-[mwo]/.test(css)) {
-          console.warn(error, css)
+        if (!/:-[mwo]/.test(cssText)) {
+          console.warn(error, cssText)
         }
       }
     },
@@ -60,6 +74,20 @@ export function dom(element?: Element | null | false): Sheet<HTMLStyleElement> {
   return {
     target,
 
+    snapshot() {
+      // collect current rules
+      const rules = Array.from(target.childNodes, (node) => node.textContent as string)
+
+      return () => {
+        // remove all existing rules
+        this.clear()
+
+        // add all snapshot rules back
+        // eslint-disable-next-line @typescript-eslint/unbound-method
+        rules.forEach(this.insert as (cssText: string, index: number) => void)
+      }
+    },
+
     clear() {
       target.textContent = ''
     },
@@ -68,8 +96,8 @@ export function dom(element?: Element | null | false): Sheet<HTMLStyleElement> {
       target.remove()
     },
 
-    insert(css, index) {
-      target.insertBefore(document.createTextNode(css), target.childNodes[index] || null)
+    insert(cssText, index) {
+      target.insertBefore(document.createTextNode(cssText), target.childNodes[index] || null)
     },
 
     resume: noop,
@@ -78,8 +106,19 @@ export function dom(element?: Element | null | false): Sheet<HTMLStyleElement> {
 
 export function virtual(includeResumeData?: boolean): Sheet<string[]> {
   const target: string[] = []
+
   return {
     target,
+
+    snapshot() {
+      // collect current rules
+      const rules = [...target]
+
+      return () => {
+        // remove all existing rules and add all snapshot rules back
+        target.splice(0, target.length, ...rules)
+      }
+    },
 
     clear() {
       target.length = 0
@@ -128,7 +167,7 @@ export function stringify(target: unknown): string {
   // string[] | CSSStyleSheet | HTMLStyleElement
   return (
     // prefer the raw text content of a CSSStyleSheet as it may include the resume data
-    ((target as CSSStyleSheet).ownerNode || (target as HTMLStyleElement))?.textContent ||
+    ((target as CSSStyleSheet).ownerNode || (target as HTMLStyleElement)).textContent ||
     ((target as CSSStyleSheet).cssRules
       ? Array.from((target as CSSStyleSheet).cssRules, (rule) => rule.cssText)
       : asArray(target)

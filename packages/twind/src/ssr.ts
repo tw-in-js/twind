@@ -1,26 +1,168 @@
+import type { Twind } from './types'
 import { changed } from './internal/changed'
 import { tw as tw$ } from './runtime'
+import { identity } from './utils'
+import { stringify } from './sheets'
+
+/**
+ * Options for {@link inline}
+ */
+export interface InlineOptions {
+  /**
+   * {@link Twind} instance to use (default: {@link tw$ | module tw})
+   */
+  tw?: Twind<any, any>
+
+  /**
+   * Allows to minify the resulting CSS.
+   */
+  minify?: InlineMinify
+}
+
+export interface InlineMinify {
+  /**
+   * Called to minify the CSS.
+   *
+   * @param css the CSS to minify
+   * @param html the HTML that will be used — allows to only include above-the-fold CSS
+   * @return the resulting CSS
+   */
+  (css: string, html: string): string
+}
+/**
+ * Used for static HTML processing (usually to provide SSR support for your javascript-powered web apps)
+ *
+ * 1. parse the markup and process element classes with the provided Twind instance
+ * 2. update the class attributes _if_ necessary
+ * 3. inject a style element with the CSS as last element into the head
+ * 4. return the HTML string with the final element classes
+ *
+ * ```js
+ * import { inline } from 'twind'
+ *
+ * function render() {
+ *   return inline(renderApp())
+ * }
+ * ```
+ *
+ * Minify CSS with [@parcel/css](https://www.npmjs.com/package/@parcel/css):
+ *
+ * ```js
+ * import { inline } from 'twind'
+ * import { transform } from '@parcel/css'
+ *
+ * function render() {
+ *   return inline(renderApp(), { minify: (css) => transform({ filename: 'twind.css', code: Buffer.from(css), minify: true }) })
+ * }
+ * ```
+ *
+ * You can provide your own Twind instance:
+ *
+ * ```js
+ * import { inline } from 'twind'
+ * import { tw } from './custom/twind/instance'
+ *
+ * function render() {
+ *   return inline(renderApp(), { tw })
+ * }
+ * ```
+ *
+ * @param markup HTML to process
+ * @param tw a {@link Twind} instance
+ * @returns the resulting HTML
+ */
+export function inline(markup: string, options: InlineOptions['tw'] | InlineOptions = {}): string {
+  const { tw = tw$, minify = identity } =
+    typeof options == 'function' ? ({ tw: options } as InlineOptions) : options
+
+  const { html, css } = extract(markup, tw)
+
+  // inject as last element into the head
+  return html.replace('</head>', `<style data-twind>${minify(css, html)}</style></head>`)
+}
+
+/**
+ * Result of {@link extract}
+ */
+export interface ExtractResult {
+  /** The possibly modified HTML */
+  html: string
+
+  /** The generated CSS */
+  css: string
+}
 
 /**
  * Used for static HTML processing (usually to provide SSR support for your javascript-powered web apps)
  *
- * **Note**: Consider using {@link inject} or {@link extract} instead.
+ * **Note**: Consider using {@link inline} instead.
  *
  * 1. parse the markup and process element classes with the provided Twind instance
  * 2. update the class attributes _if_ necessary
  * 3. return the HTML string with the final element classes
  *
  * ```js
- * import { consume, stringify, tw } from 'twind'
+ * import { extract } from 'twind'
+ *
+ * function render() {
+ *   const { html, css } = extract(renderApp())
+ *
+ *   // inject as last element into the head
+ *   return html.replace('</head>', `<style data-twind>${css}</style></head>`)
+ * }
+ * ```
+ *
+ * You can provide your own Twind instance:
+ *
+ * ```js
+ * import { extract } from 'twind'
+ * import { tw } from './custom/twind/instance'
+ *
+ * function render() {
+ *   const { html, css } = extract(renderApp(), tw)
+ *
+ *   // inject as last element into the head
+ *   return html.replace('</head>', `<style data-twind>${css}</style></head>`)
+ * }
+ * ```
+ *
+ * @param markup HTML to process
+ * @param tw a {@link Twind} instance (default: twind managed tw)
+ * @returns the possibly modified html and css
+ */
+export function extract(html: string, tw: Twind<any, any> = tw$): ExtractResult {
+  const restore = tw.snapshot()
+
+  const result = { html: consume(html, tw), css: stringify(tw.target) }
+
+  restore()
+
+  return result
+}
+
+/**
+ * Used for static HTML processing (usually to provide SSR support for your javascript-powered web apps)
+ *
+ * **Note**: Consider using {@link inline} or {@link extract} instead.
+ *
+ * 1. parse the markup and process element classes with the provided Twind instance
+ * 2. update the class attributes _if_ necessary
+ * 3. return the HTML string with the final element classes
+ *
+ * ```js
+ * import { consume, stringify, snapshot, tw } from 'twind'
  *
  * function render() {
  *   const html = renderApp()
  *
- *   // clear all styles — optional
- *   tw.clear()
+ *   // remember global classes
+ *   const restore = snapshot(tw.target)
  *
  *   // generated markup
  *   const markup = consume(html)
+ *
+ *   // restore global classes
+ *   restore()
  *
  *   // create CSS
  *   const css = stringify(tw.target)
@@ -39,11 +181,14 @@ import { tw as tw$ } from './runtime'
  * function render() {
  *   const html = renderApp()
  *
- *   // clear all styles — optional
- *   tw.clear()
+ *   // remember global classes
+ *   const restore = snapshot(tw.target)
  *
  *   // generated markup
  *   const markup = consume(html)
+ *
+ *   // restore global classes
+ *   restore()
  *
  *   // create CSS
  *   const css = stringify(tw.target)
@@ -61,7 +206,7 @@ export function consume(markup: string, tw: (className: string) => string = tw$)
   let result = ''
   let lastChunkStart = 0
 
-  extract(markup, (startIndex, endIndex, quote) => {
+  parse(markup, (startIndex, endIndex, quote) => {
     const value = markup.slice(startIndex, endIndex)
 
     // Lets handle some special react case that messes with arbitrary values for `content-`
@@ -110,7 +255,7 @@ const MODE_TAGNAME = 3
 const MODE_COMMENT = 4
 const MODE_ATTRIBUTE = 5
 
-function extract(
+function parse(
   markup: string,
   onClass: (startIndex: number, endIndex: number, quote: string) => void,
 ): void {

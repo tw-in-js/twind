@@ -68,6 +68,7 @@ export interface TwindRule {
   d?: string
 }
 
+export type RestoreSnapshot = () => void
 export interface Twind<Theme extends BaseTheme = BaseTheme, Target = unknown> {
   (tokens: StringLike): string
 
@@ -76,6 +77,8 @@ export interface Twind<Theme extends BaseTheme = BaseTheme, Target = unknown> {
   readonly theme: ThemeFunction<ExtractUserTheme<Theme>>
 
   readonly config: TwindConfig<Theme>
+
+  snapshot(): RestoreSnapshot
 
   /** Clears all CSS rules from the sheet. */
   clear(): void
@@ -265,6 +268,7 @@ export interface SheetRule {
 export interface Sheet<Target = unknown> {
   readonly target: Target
   insert(cssText: string, index: number, rule: SheetRule): void
+  snapshot(): RestoreSnapshot
   /** Clears all CSS rules from the sheet. */
   clear(): void
   destroy(): void
