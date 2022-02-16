@@ -45,31 +45,26 @@ export function auto(setup: () => void): () => void {
 /**
  * A proxy to the currently active Twind instance.
  */
-export const tw = /* #__PURE__ */ Object.defineProperties(
+
+export const tw = /* #__PURE__ */ new Proxy(
   // just exposing the active as tw should work with most bundlers
   // as ES module export can be re-assigned BUT some bundlers to not honor this
   // -> using a delegation proxy here
-  function tw(...args) {
-    return active(...args)
-  } as Twind,
-  Object.getOwnPropertyDescriptors({
-    get target() {
-      return active.target
+  noop as unknown as Twind<any, any>,
+  {
+    apply(target, thisArg, args) {
+      return active(args[0])
     },
-    theme(...args: unknown[]) {
-      return active.theme(...(args as []))
-    },
-    get config() {
-      return active.config
-    },
-    clear() {
-      return active.clear()
-    },
+    get(target, property) {
+      const value = (active || target)[property as keyof Twind]
 
-    destroy() {
-      return active.destroy()
+      if (typeof value === 'function') {
+        return value.bind(active)
+      }
+
+      return value
     },
-  }),
+  },
 )
 
 let active: Twind
@@ -103,23 +98,9 @@ export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown
   sheet: Sheet<SheetTarget> = getSheet() as unknown as Sheet<SheetTarget>,
   target?: HTMLElement,
 ): Twind<Theme, SheetTarget> {
-  const firstRun = !active
-
-  if (!firstRun) {
-    active.destroy()
-  }
+  active?.destroy()
 
   active = observe(twind(config as TwindUserConfig, sheet), target)
-
-  if (firstRun && typeof document != 'undefined') {
-    // first run in browser
-
-    // If they body was hidden autofocus the first element
-    if (!document.activeElement) {
-      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-      ;(document.querySelector('[autofocus]') as HTMLElement | null)?.focus()
-    }
-  }
 
   return active as unknown as Twind<Theme, SheetTarget>
 }

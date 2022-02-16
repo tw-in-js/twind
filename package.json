@@ -43,7 +43,7 @@
       "name": "twind",
       "path": "packages/twind/dist/twind.esnext.js",
       "brotli": true,
-      "limit": "7.35kb"
+      "limit": "7.4kb"
     },
     {
       "name": "twind (setup)",
@@ -57,7 +57,7 @@
       "path": "packages/twind/dist/twind.esnext.js",
       "import": "{ twind, cssom }",
       "brotli": true,
-      "limit": "4.45kb"
+      "limit": "4.5kb"
     },
     {
       "name": "@twind/cdn",
