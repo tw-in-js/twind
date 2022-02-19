@@ -1,0 +1,57 @@
+{
+  "name": "twind.style",
+  "version": "1.0.0-next.37",
+  "description": "Twind Website",
+  "private": true,
+  "license": "MIT",
+  "homepage": "https://twind.style",
+  "bugs": "https://github.com/tw-in-js/twind/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tw-in-js/twind.git",
+    "directory": "sites/twind.style"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "start": "svelte-kit dev",
+    "build": "svelte-kit build --verbose",
+    "preview": "svelte-kit preview",
+    "check": "svelte-check --tsconfig ./tsconfig.json",
+    "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
+    "typedoc": "typedoc",
+    "typedoc:watch": "typedoc --watch"
+  },
+  "dependencies": {
+    "@radix-ui/colors": "^0.1.8",
+    "@twind/preset-autoprefix": "1.0.0-next.37",
+    "@twind/preset-ext": "1.0.0-next.37",
+    "@twind/preset-tailwind": "1.0.0-next.37",
+    "@twind/preset-typography": "1.0.0-next.37",
+    "@twind/with-sveltekit": "1.0.0-next.37",
+    "svelte-actions": "^0.2.1",
+    "twind": "1.0.0-next.37"
+  },
+  "devDependencies": {
+    "@sveltejs/adapter-static": "1.0.0-next.28",
+    "@sveltejs/kit": "1.0.0-next.272",
+    "mdsvex": "^0.10.5",
+    "rehype-autolink-headings": "^6.1.1",
+    "rehype-slug": "^5.0.1",
+    "rehype-toc": "^3.0.2",
+    "remark-abbr": "^1.4.1",
+    "remark-github": "^11.2.2",
+    "shiki": "^0.10.1",
+    "svelte": "^3.44.0",
+    "svelte-check": "^2.2.6",
+    "tslib": "^2.3.1",
+    "typedoc": "^0.22.11",
+    "typedoc-plugin-markdown": "^3.11.13",
+    "typedoc-plugin-mdn-links": "^1.0.5",
+    "typedoc-plugin-rename-defaults": "^0.4.0",
+    "typescript": "^4.5.5",
+    "vite": "^2.8.1"
+  }
+}

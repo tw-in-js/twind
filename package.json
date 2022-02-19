@@ -36,7 +36,7 @@
   "workspaces": [
     "examples/*",
     "packages/*",
-    "website"
+    "sites/*"
   ],
   "size-limit": [
     {
@@ -79,10 +79,10 @@
   "scripts": {
     "start": "BROWSER=none npm run test:ui",
     "build": "pnpm build --recursive --if-present --filter=./packages",
-    "check": "TIMING=1 eslint --ext .js,.jsx,.cjs,.mjs,.ts,.tsx --ignore-path .gitignore .",
+    "check": "TIMING=1 eslint --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.svelte --ignore-path .gitignore .",
     "check:fix": "npm run check -- --fix",
     "size-limit": "size-limit",
-    "format": "prettier --write --ignore-path .gitignore . '!pnpm-lock.yaml'",
+    "format": "prettier --write --plugin-search-dir=. --ignore-path .gitignore . '!pnpm-lock.yaml'",
     "test": "vitest",
     "test:ui": "npm test -- --ui",
     "test:coverage": "vitest run --coverage",
@@ -111,6 +111,7 @@
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-svelte3": "^3.2.1",
     "happy-dom": "^2.31.1",
     "husky": "^7.0.4",
     "is-ci": "^3.0.1",
@@ -118,8 +119,10 @@
     "lint-staged": "^12.3.3",
     "local-pkg": "^0.4.1",
     "prettier": "^2.5.1",
+    "prettier-plugin-svelte": "^2.6.0",
     "size-limit": "^7.0.8",
     "style-vendorizer": "^2.1.1",
+    "svelte": "^3.46.4",
     "tslib": "^2.3.1",
     "typescript": "^4.5.5",
     "vitest": "^0.3.4"
@@ -169,6 +172,15 @@
       },
       {
         "files": [
+          "*.svelte"
+        ],
+        "processor": "svelte3/svelte3",
+        "plugins": [
+          "svelte3"
+        ]
+      },
+      {
+        "files": [
           "**/*.ts",
           "**/*.tsx"
         ],
@@ -202,10 +214,10 @@
     ]
   },
   "lint-staged": {
-    "*.{js,jsx,cjs,mjs,ts,tsx}": [
+    "*.{js,jsx,cjs,mjs,ts,tsx,svelte}": [
       "eslint --cache --fix",
       "vitest related --run --silent"
     ],
-    "!(pnpm-lock.yaml)*": "prettier --ignore-unknown --write"
+    "!(pnpm-lock.yaml)*": "prettier --plugin-search-dir=. --ignore-unknown --write"
   }
 }

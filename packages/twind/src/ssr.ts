@@ -75,10 +75,24 @@ export function inline(markup: string, options: InlineOptions['tw'] | InlineOpti
   const { tw = tw$, minify = identity } =
     typeof options == 'function' ? ({ tw: options } as InlineOptions) : options
 
-  const { html, css } = extract(markup, tw)
+  let { html, css } = extract(markup, tw)
 
-  // inject as last element into the head
-  return html.replace('</head>', `<style data-twind>${minify(css, html)}</style></head>`)
+  css = minify(css, html)
+
+  // reuse existing style tag
+  // <style data-twind data-svelte="svelte-vdbqz9">*{}</style>
+  let replaced = false
+  html = html.replace(/(<style[^>]*data-twind[^>]*>)[^<]*(<\/style>)/, (_, startTag, endTag) => {
+    replaced = true
+    return `${startTag}${css}${endTag}`
+  })
+
+  if (!replaced) {
+    // inject as last element into the head
+    html = html.replace('</head>', `<style data-twind>${css}</style></head>`)
+  }
+
+  return html
 }
 
 /**
@@ -153,19 +167,17 @@ export function extract(html: string, tw: Twind<any, any> = tw$): ExtractResult 
  * import { consume, stringify, snapshot, tw } from 'twind'
  *
  * function render() {
- *   const html = renderApp()
- *
  *   // remember global classes
- *   const restore = snapshot(tw.target)
+ *   const restore = tw.snapshot()
  *
  *   // generated markup
- *   const markup = consume(html)
- *
- *   // restore global classes
- *   restore()
+ *   const markup = consume(renderApp())
  *
  *   // create CSS
  *   const css = stringify(tw.target)
+ *
+ *   // restore global classes
+ *   restore()
  *
  *   // inject as last element into the head
  *   return markup.replace('</head>', `<style data-twind>${css}</style></head>`)
@@ -179,19 +191,17 @@ export function extract(html: string, tw: Twind<any, any> = tw$): ExtractResult 
  * import { tw } from './custom/twind/instance'
  *
  * function render() {
- *   const html = renderApp()
- *
  *   // remember global classes
- *   const restore = snapshot(tw.target)
+ *   const restore = tw.snapshot()
  *
  *   // generated markup
- *   const markup = consume(html)
- *
- *   // restore global classes
- *   restore()
+ *   const markup = consume(renderApp())
  *
  *   // create CSS
  *   const css = stringify(tw.target)
+ *
+ *   // restore global classes
+ *   restore()
  *
  *   // inject as last element into the head
  *   return markup.replace('</head>', `<style data-twind>${css}</style></head>`)
