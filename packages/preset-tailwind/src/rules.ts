@@ -7,9 +7,10 @@ import type {
   CSSBase,
   ThemeMatchResult,
   ThemeRuleResolver,
+  ColorFromThemeValue,
 } from 'twind'
 
-import { mql, fromTheme, colorFromTheme, toColorValue, asArray, arbitrary } from 'twind'
+import { mql, fromTheme, colorFromTheme, toColorValue, toCSS, asArray, arbitrary } from 'twind'
 
 import type { TailwindTheme } from './types'
 
@@ -585,6 +586,7 @@ const rules: Rule<TailwindTheme>[] = [
   ['border-(solid|dashed|dotted|double|none)', 'borderStyle'],
 
   // Border Color
+  ['border-([xytrbl])-', colorFromTheme({ section: 'borderColor' }, edge('border', 'Color'))],
   ['border-', colorFromTheme()],
 
   // Border Width
@@ -1034,7 +1036,7 @@ function convertContentValue({ $$ }: MatchResult) {
 function edge(
   propertyPrefix: string,
   propertySuffix = '',
-): ThemeRuleResolver<string, TailwindTheme> {
+): ThemeRuleResolver<string | ColorFromThemeValue, TailwindTheme> {
   return ({ 1: $1, _ }) => {
     const edges =
       {
@@ -1045,10 +1047,10 @@ function edge(
     return (
       edges
         ? {
-            [propertyPrefix + '-' + position(edges[0]) + propertySuffix]: _,
-            [propertyPrefix + '-' + position(edges[1]) + propertySuffix]: _,
+            ...toCSS(propertyPrefix + '-' + position(edges[0]) + propertySuffix, _),
+            ...toCSS(propertyPrefix + '-' + position(edges[1]) + propertySuffix, _),
           }
-        : { [propertyPrefix + propertySuffix]: _ }
+        : toCSS(propertyPrefix + propertySuffix, _)
     ) as CSSObject
   }
 }

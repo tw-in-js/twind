@@ -80,6 +80,8 @@ export type FilterByThemeValue<Theme, Value> = {
 export interface ColorFromThemeValue {
   value: string
   color: ColorFunction
+  opacityVariable: string | undefined
+  opacityValue: string | undefined
 }
 
 export interface ColorFromThemeOptions<
@@ -158,16 +160,8 @@ export function colorFromTheme<
 
     const create =
       resolve ||
-      ((match) => {
-        const properties: Record<string, string> = {}
-
-        const color = match._.value
-
-        if (opacityVariable && color.includes(opacityVariable)) {
-          properties[opacityVariable] = opacityValue || '1'
-        }
-
-        properties[property] = color
+      (({ _ }) => {
+        const properties = toCSS(property, _)
 
         return (selector ? { [selector]: properties } : properties) as CSSObject
       })
@@ -178,6 +172,8 @@ export function colorFromTheme<
         opacityValue: opacityValue || undefined,
       }),
       color: (options) => toColorValue(colorValue, options),
+      opacityVariable: opacityVariable || undefined,
+      opacityValue: opacityValue || undefined,
     }
 
     let properties = create(match as ThemeMatchResult<ColorFromThemeValue>, context)
@@ -190,9 +186,11 @@ export function colorFromTheme<
         ;(match as ThemeMatchResult<ColorFromThemeValue>)._ = {
           value: toColorValue(darkColorValue, {
             opacityVariable: opacityVariable || undefined,
-            opacityValue: opacityValue || undefined,
+            opacityValue: opacityValue || '1',
           }),
           color: (options) => toColorValue(darkColorValue, options),
+          opacityVariable: opacityVariable || undefined,
+          opacityValue: opacityValue || undefined,
         }
 
         properties = {
@@ -206,13 +204,29 @@ export function colorFromTheme<
   }
 }
 
+export function toCSS(property: string, value: string | ColorFromThemeValue): CSSObject {
+  const properties: CSSObject = {}
+
+  if (typeof value === 'string') {
+    properties[property] = value
+  } else {
+    if (value.opacityVariable && value.value.includes(value.opacityVariable)) {
+      properties[value.opacityVariable] = value.opacityValue || '1'
+    }
+
+    properties[property] = value.value
+  }
+
+  return properties
+}
+
 export function arbitrary<Theme extends BaseTheme = BaseTheme>(
   value: string,
   section: string,
   context: Context<Theme>,
 ): string | undefined {
   if (value[0] == '[' && value.slice(-1) == ']') {
-    value = resolveThemeFunction(value.slice(1, -1), context)
+    value = normalize(resolveThemeFunction(value.slice(1, -1), context))
 
     // TODO remove arbitrary type prefix — we do not need it but user may use it
     // https://github.com/tailwindlabs/tailwindcss/blob/master/src/util/dataTypes.js
@@ -233,25 +247,40 @@ export function arbitrary<Theme extends BaseTheme = BaseTheme>(
       // - backgroundSize vs backgroundPosition
       // - fontWeight vs fontFamily
 
-      if (value.includes('calc(')) {
-        value = value.replace(
-          /(-?\d*\.?\d(?!\b-.+[,)](?![^+\-/*])\D)(?:%|[a-z]+)?|\))([+\-/*])/g,
-          '$1 $2 ',
-        )
-      }
-
-      // Convert `_` to ` `, except for escaped underscores `\_` but not between brackets
       return value
-        .replace(
-          /(^|[^\\])_+(?![^(]*\))/g,
-          (fullMatch, characterBefore: string) =>
-            characterBefore + ' '.repeat(fullMatch.length - 1),
-        )
-        .replace(/\\_(?![^(]*\))/g, '_')
     }
   }
 }
 
 function camelize(value: string): string {
   return value.replace(/-./g, (x) => x[1].toUpperCase())
+}
+
+function normalize(value: string): string {
+  // Keep raw strings if it starts with `url(`
+  if (value.includes('url(')) {
+    return value.replace(
+      /(.*?)(url\(.*?\))(.*?)/g,
+      (_, before = '', url, after = '') => normalize(before) + url + normalize(after),
+    )
+  }
+
+  // Convert `_` to ` `, except for escaped underscores `\_`
+  value = value
+    .replace(
+      /(^|[^\\])_+/g,
+      (fullMatch, characterBefore) =>
+        characterBefore + ' '.repeat(fullMatch.length - characterBefore.length),
+    )
+    .replace(/\\_/g, '_')
+
+  if (value.includes('calc(')) {
+    // Add spaces around operators inside calc() that do not follow an operator or '('.
+    value = value.replace(
+      /(-?\d*\.?\d(?!\b-.+[,)](?![^+\-/*])\D)(?:%|[a-z]+)?|\))([+\-/*])/g,
+      '$1 $2 ',
+    )
+  }
+
+  return value
 }

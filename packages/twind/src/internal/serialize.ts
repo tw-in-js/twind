@@ -243,7 +243,7 @@ export function resolveThemeFunction<Theme extends BaseTheme = BaseTheme>(
       }
 
       // TODO: warn if not a string
-      return value as string
+      return '' + value
     },
   )
   // }
