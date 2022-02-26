@@ -229,9 +229,11 @@ export function consume(markup: string, tw: (className: string) => string = tw$)
     // but this works for now
     const token =
       quote == `"`
-        ? value.replace(/(\[)&#x27;|&#x27;(])/g, `$1'$2`)
+        ? // `'` -> &#39; &apos; &#x27;
+          value.replace(/(=|\[)(?:&#39;|&apos;|&#x27;)|(?:&#39;|&apos;|&#x27;)(])/g, `$1'$2`)
         : quote == `'`
-        ? value.replace(/(\[)&quot;|&quot;(])/g, `$1"$2`)
+        ? // `"` -> &#34; &quot; &#x22;
+          value.replace(/(=|\[)(?:&#34;|&quot;|&#x22;)|(?:&#34;|&quot;|&#x22;)(])/g, `$1"$2`)
         : value
 
     const className = tw(token)
