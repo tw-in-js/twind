@@ -14,7 +14,7 @@ head:
 
 # {{ $frontmatter.title }}
 
-> 💡 Didn't find your answer? Try [GitHub discussions](https://github.com/tw-in-js/twind/discussions), our [issues tracker](https://github.com/tw-in-js/twind/issues), or ask the community in our [discord channel](https://discord.com/invite/2aP5NkszvD).
+> 💡 Didn't find your answer? Try [GitHub discussions](https://github.com/tw-in-js/twind/discussions), our [issues tracker](https://github.com/tw-in-js/twind/issues), or ask the community in our [discord channel](https://chat.twind.style).
 
 ### General
 
@@ -156,7 +156,7 @@ Not yet, but a Twind VSCode extension is in the works. You can follow the progre
 Yes, we are active both on Github Discussions and Discord.
 
 - Github Discussions: [https://github.com/tw-in-js/twind/discussions](https://github.com/tw-in-js/twind/discussions)
-- Link to join Discord server: [https://discord.com/invite/2aP5NkszvD](https://discord.com/invite/2aP5NkszvD)
+- Link to join Discord server: [https://chat.twind.style](https://chat.twind.style)
 
 </Collapse>
 

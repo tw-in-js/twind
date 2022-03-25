@@ -236,7 +236,7 @@ module.exports = {
       { text: 'Guide', link: '/handbook/introduction' },
       { text: 'API', link: '/api/README.html' },
       { text: 'GitHub', link: 'https://github.com/tw-in-js/twind' },
-      { text: 'Discord', link: 'https://discord.com/invite/2aP5NkszvD' },
+      { text: 'Discord', link: 'https://chat.twind.style' },
     ],
     sidebar: {
       '/handbook/': guideSidebar,
