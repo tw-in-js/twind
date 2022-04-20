@@ -131,7 +131,7 @@ test('handles escaped chars by react', () => {
 
   const html = consume(
     `
-    <main class="before:content-[&#x27;x&#x27;]">
+    <main class="flex(&amp; col) before:content-[&#x27;x&#x27;]">
       <h1 class='before:content-[&quot;y&quot;]'>
         This is Twind!
       </h1>
@@ -143,7 +143,7 @@ test('handles escaped chars by react', () => {
   assert.strictEqual(
     html,
     `
-    <main class="before:content-['x']">
+    <main class="flex flex-col before:content-['x']">
       <h1 class='before:content-["y"]'>
         This is Twind!
       </h1>
@@ -151,6 +151,8 @@ test('handles escaped chars by react', () => {
     `,
   )
   assert.deepEqual(tw.target, [
+    '.flex{display:flex}',
+    '.flex-col{flex-direction:column}',
     ".before\\:content-\\[\\'x\\'\\]:before{--tw-content:'x';content:var(--tw-content)}",
     '.before\\:content-\\[\\"y\\"\\]:before{--tw-content:"y";content:var(--tw-content)}',
   ])

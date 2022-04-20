@@ -64,20 +64,25 @@ export function consume(markup: string, tw: (className: string) => string = tw$)
   extract(markup, (startIndex, endIndex, quote) => {
     const value = markup.slice(startIndex, endIndex)
 
-    // Lets handle some special react case that messes with arbitrary values for `content-`
-    // <span class="before:content-[&#x27;asas&#x27;]"></span>
-    // <span class="before:content-[&quot;asas&quot;]"></span>
+    // Lets handle some special react cases:
+    //   * arbitrary values for `content-`
+    //     <span class="before:content-[&#x27;asas&#x27;]"></span>
+    //     <span class="before:content-[&quot;asas&quot;]"></span>
     //
-    // if a class name contains `'` or `"` those will be replaced with HTMl entities
-    // To fix this we replace those for depending on the actual quote that is being used
-    // as an alternative we could always escape class names direcly in twind like react does
-    // but this works for now
-    const token =
+    //   * self-referenced groups
+    //     <span class="flex(&amp; col)"></span>
+    //
+    //     If a class name contains `'`, `"`, or `&` those will be replaced with HTML entities
+    //     To fix this we replace those for depending on the actual symbol that is being used
+    //     As an alternative we could always escape class names direcly in twind like react does
+    //     but this works for now
+    const token = (
       quote == `"`
         ? value.replace(/(\[)&#x27;|&#x27;(])/g, `$1'$2`)
         : quote == `'`
         ? value.replace(/(\[)&quot;|&quot;(])/g, `$1"$2`)
         : value
+    ).replace(/&amp;/g, '&')
 
     const className = tw(token)
 
