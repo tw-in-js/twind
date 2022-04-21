@@ -26,7 +26,7 @@ importers:
       local-pkg: ^0.4.1
       prettier: ^2.5.1
       size-limit: ^7.0.8
-      style-vendorizer: ^2.1.1
+      stylis: ^4.1.0
       tslib: ^2.3.1
       typescript: ^4.5.5
       vitest: ^0.3.4
@@ -54,7 +54,7 @@ importers:
       local-pkg: 0.4.1
       prettier: 2.5.1
       size-limit: 7.0.8
-      style-vendorizer: 2.1.1
+      stylis: 4.1.0
       tslib: 2.3.1
       typescript: 4.5.5
       vitest: 0.3.4_4838e9f3c7bd6df8819d00262db69304
@@ -247,11 +247,13 @@ importers:
 
   packages/preset-autoprefix:
     specifiers:
-      style-vendorizer: ^2.1.1
+      '@types/stylis': ^4.0.2
+      stylis: ^4.1.0
       twind: 1.0.0-next.37
     dependencies:
-      style-vendorizer: 2.1.1
+      stylis: 4.1.0
     devDependencies:
+      '@types/stylis': 4.0.2
       twind: link:../twind
 
   packages/preset-ext:
@@ -3252,6 +3254,10 @@ packages:
     dependencies:
       '@types/node': 17.0.17
     optional: true
+
+  /@types/stylis/4.0.2:
+    resolution: {integrity: sha512-wtckGuk1eXUlUz0Qb1eXHG37Z7HWT2GfMdqRf8F/ifddTwadSS9Jwsqi4qtXk7cP7MtoyGVIHPElFCLc6HItbg==}
+    dev: true
 
   /@types/tmp/0.0.33:
     resolution: {integrity: sha1-EHPEvIJHVK49EM+riKsCN7qWTk0=}
@@ -13042,9 +13048,6 @@ packages:
       inline-style-parser: 0.1.1
     dev: true
 
-  /style-vendorizer/2.1.1:
-    resolution: {integrity: sha512-gVO6Cwxtg8iX0X1W4xMhSc5WbQpiIBQDkhq3JkwebMRRgyhCfuvMrnPlTAGTRjfQPGRmzgjCOZ4drehTnLahHA==}
-
   /styled-jsx/5.0.0_react@17.0.2:
     resolution: {integrity: sha512-qUqsWoBquEdERe10EW8vLp3jT25s/ssG1/qX5gZ4wu15OZpmSMFI2v+fWlRhLfykA5rFtlJ1ME8A8pm/peV4WA==}
     engines: {node: '>= 12.0.0'}
@@ -13073,6 +13076,9 @@ packages:
   /stylis/4.0.13:
     resolution: {integrity: sha512-xGPXiFVl4YED9Jh7Euv2V220mriG9u4B2TA6Ybjc1catrstKD2PpIdU3U0RKpkVBC2EhmL/F0sPCr9vrFTNRag==}
     dev: false
+
+  /stylis/4.1.0:
+    resolution: {integrity: sha512-SrSDzNasOCBTo7C2N9geFwydg/2bmdkWXd4gJirtq82m5JBYtR2+Ialck8czmfBLIdPxCOotlgJESPa8C1RqvA==}
 
   /subscriptions-transport-ws/0.9.19_graphql@15.8.0:
     resolution: {integrity: sha512-dxdemxFFB0ppCLg10FTtRqH/31FNRL1y1BQv8209MK5I4CwALb7iihQg+7p65lFcIl8MHatINWBLOqpgU4Kyyw==}
