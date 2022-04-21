@@ -247,12 +247,14 @@ importers:
 
   packages/preset-autoprefix:
     specifiers:
+      '@twind/preset-tailwind': 1.0.0-next.37
       '@types/stylis': ^4.0.2
       stylis: ^4.1.0
       twind: 1.0.0-next.37
     dependencies:
       stylis: 4.1.0
     devDependencies:
+      '@twind/preset-tailwind': link:../preset-tailwind
       '@types/stylis': 4.0.2
       twind: link:../twind
 
