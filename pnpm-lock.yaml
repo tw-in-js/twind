@@ -249,10 +249,10 @@ importers:
     specifiers:
       '@twind/preset-tailwind': 1.0.0-next.37
       '@types/stylis': ^4.0.2
-      stylis: ^4.1.0
+      stylis: ^4.1.1
       twind: 1.0.0-next.37
     dependencies:
-      stylis: 4.1.0
+      stylis: 4.1.1
     devDependencies:
       '@twind/preset-tailwind': link:../preset-tailwind
       '@types/stylis': 4.0.2
@@ -13081,6 +13081,11 @@ packages:
 
   /stylis/4.1.0:
     resolution: {integrity: sha512-SrSDzNasOCBTo7C2N9geFwydg/2bmdkWXd4gJirtq82m5JBYtR2+Ialck8czmfBLIdPxCOotlgJESPa8C1RqvA==}
+    dev: true
+
+  /stylis/4.1.1:
+    resolution: {integrity: sha512-lVrM/bNdhVX2OgBFNa2YJ9Lxj7kPzylieHd3TNjuGE0Re9JB7joL5VUKOVH1kdNNJTgGPpT8hmwIAPLaSyEVFQ==}
+    dev: false
 
   /subscriptions-transport-ws/0.9.19_graphql@15.8.0:
     resolution: {integrity: sha512-dxdemxFFB0ppCLg10FTtRqH/31FNRL1y1BQv8209MK5I4CwALb7iihQg+7p65lFcIl8MHatINWBLOqpgU4Kyyw==}
