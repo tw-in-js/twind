@@ -27,19 +27,19 @@ const variants: Variant[] = [
   ['sibling', '&+*'],
   ['override', '&&'],
 
-  // - `&~span:underline` -> `&~span:underline ~ span`
-  // - `&+span:underline`
-  // - `&>span:underline`
-  // - `&>*:underline`
-  // - `&_span:underline` -> `&_span:underline span`
-  ['&[&_~+>*a-z\\-\\d]+', (match) => match.input.replace('_', ' ')],
-
   // Attribute selector
   // `[lang]:underline` -> `[lang]:underline[lang]`
   ['\\[.+]', (match) => '&' + match.input],
 
   // Pseudo Elements using double colon (`first-letter::underline`) as well
   ['([a-z-]+):', ({ 1: $1 }) => '&::' + $1],
+
+  // - `&~span:underline` -> `&~span:underline ~ span`
+  // - `&+span:underline`
+  // - `&>span:underline`
+  // - `&>*:underline`
+  // - `&_span:underline` -> `&_span:underline span`
+  [/&/, (match) => match.input.replace('_', ' ')],
 ]
 
 export default variants
