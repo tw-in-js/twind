@@ -31,7 +31,7 @@
   <ul
     class="bg-brand-7 text-brand-12 mx-auto px-5 py-2 space-y-2 rounded-bl rounded-br shadow list-['›']"
   >
-    {#each active as [selector, label] (selector)}
+    {#each                                         active as [selector, label] (selector)}
       <li class="pl-2">
         <a href={selector} class="block">
           {label}

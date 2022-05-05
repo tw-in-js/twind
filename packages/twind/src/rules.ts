@@ -163,7 +163,7 @@ export function colorFromTheme<
       (({ _ }) => {
         const properties = toCSS(property, _)
 
-        return (selector ? { [selector]: properties } : properties) as CSSObject
+        return selector ? { [selector]: properties } : properties
       })
 
     ;(match as ThemeMatchResult<ColorFromThemeValue>)._ = {
@@ -269,7 +269,7 @@ function normalize(value: string): string {
   value = value
     .replace(
       /(^|[^\\])_+/g,
-      (fullMatch, characterBefore) =>
+      (fullMatch, characterBefore: string) =>
         characterBefore + ' '.repeat(fullMatch.length - characterBefore.length),
     )
     .replace(/\\_/g, '_')

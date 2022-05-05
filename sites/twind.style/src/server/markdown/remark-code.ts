@@ -248,12 +248,12 @@ export default function attacher({
           .replace(/[=/]/g, '')
           .slice(0, 8)
 
-      let { code, lang, title, isDiff, showLineNumbers, terms, lineOptions } = parse(
+      const { code, lang, title, isDiff, showLineNumbers, terms, lineOptions } = parse(
         node,
         resolvedClassNames,
       )
 
-      let html = highlight(code, lang, lineOptions)
+      const html = highlight(code, lang, lineOptions)
 
       if (terms.length) {
         highlightTerms(html, terms, resolvedClassNames['term-highlight'] || 'term-highlight')
@@ -469,11 +469,11 @@ function highlightTerms(html: any, terms: any, className: string) {
       // [ <span>...<span>, <span>...</span>, ...]
 
       for (const term of terms) {
-        let needle = term.value
+        const needle = term.value
         let lineContent = ''
         for (let i = 0; i < node.children.length; i++) {
           const span = node.children[i]
-          const textContent = (span as any).children[0].value as string
+          const textContent = span.children[0].value as string
 
           if (!textContent) {
             lineContent = ''
@@ -510,19 +510,19 @@ function highlightTerms(html: any, terms: any, className: string) {
             // walk backwords through the nodes
             // prefix.nee|dl|e.suffix
             //
-            let startIndex = lineContent.indexOf(needle)
+            const startIndex = lineContent.indexOf(needle)
             if (~startIndex) {
               term.count += 1
 
               if (!term.instances || term.instances.includes(term.count)) {
                 let position = lineContent.length
-                let endIndex = startIndex + needle.length
+                const endIndex = startIndex + needle.length
 
                 let suffixNode
                 const wrappedNodes = []
                 for (let j = i; j >= 0; j--) {
                   const span = node.children[j]
-                  const textContent = (span as any).children[0].value as string
+                  const textContent = span.children[0].value as string
 
                   position -= textContent.length
                   const index =

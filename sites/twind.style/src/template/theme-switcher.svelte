@@ -37,7 +37,7 @@
 <fieldset class={cx('~(relative h-full w-4)', className)}>
   <legend class="sr-only">Switch theme</legend>
 
-  {#each THEMES as current, index (current)}
+  {#each                                         THEMES as current, index (current)}
     <label
       class="cursor-pointer flex items-center justify-center h-full absolute top-0 left-0 w-full"
       class:z-30={current === nextTheme}

@@ -88,7 +88,7 @@
     "test:coverage": "vitest run --coverage",
     "release": "pnpm publish -r",
     "changeset:version": "changeset version && pnpm i --lockfile-only",
-    "build:website": "pnpm run build --filter=./website",
+    "build:website": "pnpm run build --filter=./sites/twind.style",
     "prepare": "node ./.husky/prepare.cjs"
   },
   "// these are added as dependencies to all packages": "",
@@ -146,7 +146,8 @@
     },
     "ignorePatterns": [
       "dist",
-      "node_modules"
+      "node_modules",
+      "sites/**"
     ],
     "extends": [
       "eslint:recommended",
@@ -189,7 +190,7 @@
           "project": [
             "./examples/**/tsconfig.json",
             "./packages/**/tsconfig.json",
-            "./website/tsconfig.json"
+            "./sites/**/tsconfig.json"
           ]
         },
         "plugins": [

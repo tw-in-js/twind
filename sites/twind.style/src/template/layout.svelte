@@ -12,6 +12,20 @@
 <Header />
 
 <div class="max-w-8xl mx-auto px-4 relative">
+  {#if $page.stuff.nav<script>
+  import { page } from '$app/stores'
+
+  import SkipTo from './skip-to.svelte'
+  import Header from './header.svelte'
+  import Nav from './nav.svelte'
+  import Footer from './footer.svelte'
+</script>
+
+<SkipTo />
+
+<Header />
+
+<div class="max-w-8xl mx-auto px-4 relative">
   {#if $page.stuff.nav}
     <Nav nav={$page.stuff.nav} />
   {/if}

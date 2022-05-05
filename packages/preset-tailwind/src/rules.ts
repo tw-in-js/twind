@@ -1044,14 +1044,12 @@ function edge(
         y: 'tb',
       }[$1 as 'x' | 'y'] || $1 + $1
 
-    return (
-      edges
-        ? {
-            ...toCSS(propertyPrefix + '-' + position(edges[0]) + propertySuffix, _),
-            ...toCSS(propertyPrefix + '-' + position(edges[1]) + propertySuffix, _),
-          }
-        : toCSS(propertyPrefix + propertySuffix, _)
-    ) as CSSObject
+    return edges
+      ? {
+          ...toCSS(propertyPrefix + '-' + position(edges[0]) + propertySuffix, _),
+          ...toCSS(propertyPrefix + '-' + position(edges[1]) + propertySuffix, _),
+        }
+      : toCSS(propertyPrefix + propertySuffix, _)
   }
 }
 

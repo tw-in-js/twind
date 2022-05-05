@@ -12,6 +12,20 @@
       href="/"
       class="flex title-font font-medium items-center hover:text-brand-12"
     >
+      <Icon src={TwindLogo<script>
+  import Icon, { TwindLogo, Github, Discord, Search } from '$/icons'
+
+  import { page } from '$app/stores'
+  import ThemeSwitcher from './theme-switcher.svelte'
+</script>
+
+<header class="w-full sticky top-0 z-30 border-b border-brand-7 backdrop-blur bg-brand-1/95">
+  <div class="max-w-8xl mx-auto p-4 flex flex-row items-center">
+    <a
+      sveltekit:prefetch
+      href="/"
+      class="flex title-font font-medium items-center hover:text-brand-12"
+    >
       <Icon src={TwindLogo} class="w-8 h-8" />
       <span class="sr-only md:(not-sr-only ml-3 text-xl)">Twind</span>
     </a>
