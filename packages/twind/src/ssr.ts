@@ -75,24 +75,10 @@ export function inline(markup: string, options: InlineOptions['tw'] | InlineOpti
   const { tw = tw$, minify = identity } =
     typeof options == 'function' ? ({ tw: options } as InlineOptions) : options
 
-  let { html, css } = extract(markup, tw)
+  const { html, css } = extract(markup, tw)
 
-  css = minify(css, html)
-
-  // reuse existing style tag
-  // <style data-twind data-svelte="svelte-vdbqz9">*{}</style>
-  let replaced = false
-  html = html.replace(/(<style[^>]*data-twind[^>]*>)[^<]*(<\/style>)/, (_, startTag, endTag) => {
-    replaced = true
-    return `${startTag}${css}${endTag}`
-  })
-
-  if (!replaced) {
-    // inject as last element into the head
-    html = html.replace('</head>', `<style data-twind>${css}</style></head>`)
-  }
-
-  return html
+  // inject as last element into the head
+  return html.replace('</head>', `<style data-twind>${minify(css, html)}</style></head>`)
 }
 
 /**
@@ -167,17 +153,19 @@ export function extract(html: string, tw: Twind<any, any> = tw$): ExtractResult 
  * import { consume, stringify, snapshot, tw } from 'twind'
  *
  * function render() {
+ *   const html = renderApp()
+ *
  *   // remember global classes
- *   const restore = tw.snapshot()
+ *   const restore = snapshot(tw.target)
  *
  *   // generated markup
- *   const markup = consume(renderApp())
- *
- *   // create CSS
- *   const css = stringify(tw.target)
+ *   const markup = consume(html)
  *
  *   // restore global classes
  *   restore()
+ *
+ *   // create CSS
+ *   const css = stringify(tw.target)
  *
  *   // inject as last element into the head
  *   return markup.replace('</head>', `<style data-twind>${css}</style></head>`)
@@ -191,17 +179,19 @@ export function extract(html: string, tw: Twind<any, any> = tw$): ExtractResult 
  * import { tw } from './custom/twind/instance'
  *
  * function render() {
+ *   const html = renderApp()
+ *
  *   // remember global classes
- *   const restore = tw.snapshot()
+ *   const restore = snapshot(tw.target)
  *
  *   // generated markup
- *   const markup = consume(renderApp())
- *
- *   // create CSS
- *   const css = stringify(tw.target)
+ *   const markup = consume(html)
  *
  *   // restore global classes
  *   restore()
+ *
+ *   // create CSS
+ *   const css = stringify(tw.target)
  *
  *   // inject as last element into the head
  *   return markup.replace('</head>', `<style data-twind>${css}</style></head>`)
@@ -219,15 +209,19 @@ export function consume(markup: string, tw: (className: string) => string = tw$)
   parse(markup, (startIndex, endIndex, quote) => {
     const value = markup.slice(startIndex, endIndex)
 
-    // Lets handle some special react case that messes with arbitrary values for `content-`
-    // <span class="before:content-[&#x27;asas&#x27;]"></span>
-    // <span class="before:content-[&quot;asas&quot;]"></span>
+    // Lets handle some special react cases:
+    //   * arbitrary values for `content-`
+    //     <span class="before:content-[&#x27;asas&#x27;]"></span>
+    //     <span class="before:content-[&quot;asas&quot;]"></span>
     //
-    // if a class name contains `'` or `"` those will be replaced with HTMl entities
-    // To fix this we replace those for depending on the actual quote that is being used
-    // as an alternative we could always escape class names direcly in twind like react does
-    // but this works for now
-    const token =
+    //   * self-referenced groups
+    //     <span class="flex(&amp; col)"></span>
+    //
+    //     If a class name contains `'`, `"`, or `&` those will be replaced with HTML entities
+    //     To fix this we replace those for depending on the actual symbol that is being used
+    //     As an alternative we could always escape class names direcly in twind like react does
+    //     but this works for now
+    const token = (
       quote == `"`
         ? // `'` -> &#39; &apos; &#x27;
           value.replace(/(=|\[)(?:&#39;|&apos;|&#x27;)|(?:&#39;|&apos;|&#x27;)(])/g, `$1'$2`)
@@ -235,6 +229,7 @@ export function consume(markup: string, tw: (className: string) => string = tw$)
         ? // `"` -> &#34; &quot; &#x22;
           value.replace(/(=|\[)(?:&#34;|&quot;|&#x22;)|(?:&#34;|&quot;|&#x22;)(])/g, `$1"$2`)
         : value
+    ).replace(/&amp;/g, '&')
 
     const className = tw(token)
 
