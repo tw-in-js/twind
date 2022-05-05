@@ -138,9 +138,7 @@ To learn about creating your own color themes, read the [adding custom color the
 Use element modifiers to customize the style of individual elements in your content directly in your HTML:
 
 ```html /prose-img:rounded-xl/ /prose-headings:underline/ /prose-a:text-blue-600/
-<article
-  class="prose prose-img:rounded-xl prose-headings:underline prose-a:text-blue-600"
->
+<article class="prose prose-img:rounded-xl prose-headings:underline prose-a:text-blue-600">
   {{ markdown }}
 </article>
 ```
@@ -181,9 +179,7 @@ Here's a complete list of available element modifiers:
 When stacking these modifiers with other modifiers like `hover`, you most likely want the other modifier to come first:
 
 ```html /hover:prose-a:text-blue-500/
-<article class="prose prose-a:text-blue-600 hover:prose-a:text-blue-500">
-  {{ markdown }}
-</article>
+<article class="prose prose-a:text-blue-600 hover:prose-a:text-blue-500">{{ markdown }}</article>
 ```
 
 Read the Tailwind CSS documentation on [ordering stacked modifiers](https://tailwindcss.com/docs/hover-focus-and-other-states#ordering-stacked-modifiers) to learn more.

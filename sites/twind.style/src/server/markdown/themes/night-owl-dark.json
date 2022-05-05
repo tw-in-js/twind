@@ -288,11 +288,7 @@
     },
     {
       "name": "Built-in constant",
-      "scope": [
-        "constant.language",
-        "punctuation.definition.constant",
-        "variable.other.constant"
-      ],
+      "scope": ["constant.language", "punctuation.definition.constant", "variable.other.constant"],
       "settings": {
         "foreground": "#82AAFF"
       }
@@ -1002,10 +998,7 @@
     },
     {
       "name": "Dart String",
-      "scope": [
-        "string.interpolated.single.dart",
-        "string.interpolated.double.dart"
-      ],
+      "scope": ["string.interpolated.single.dart", "string.interpolated.double.dart"],
       "settings": {
         "foreground": "#FFCB8B"
       }
@@ -1147,20 +1140,14 @@
     },
     {
       "name": "Go Constants e.g. nil, string format (%s, %d, etc.)",
-      "scope": [
-        "source.go constant.language.go",
-        "source.go constant.other.placeholder.go"
-      ],
+      "scope": ["source.go constant.language.go", "source.go constant.other.placeholder.go"],
       "settings": {
         "foreground": "#ff5874"
       }
     },
     {
       "name": "C++ Functions",
-      "scope": [
-        "entity.name.function.preprocessor.cpp",
-        "entity.scope.name.cpp"
-      ],
+      "scope": ["entity.name.function.preprocessor.cpp", "entity.scope.name.cpp"],
       "settings": {
         "foreground": "#7fdbcaff"
       }
@@ -1259,10 +1246,7 @@
     },
     {
       "name": "Entity Names in Code Documentations",
-      "scope": [
-        "entity.name.type.instance.jsdoc",
-        "entity.name.type.instance.phpdoc"
-      ],
+      "scope": ["entity.name.type.instance.jsdoc", "entity.name.type.instance.phpdoc"],
       "settings": {
         "foreground": "#5f7e97"
       }
@@ -1463,20 +1447,14 @@
     },
     {
       "name": "Markdown Links",
-      "scope": [
-        "markup.underline.link.markdown",
-        "markup.underline.link.image.markdown"
-      ],
+      "scope": ["markup.underline.link.markdown", "markup.underline.link.image.markdown"],
       "settings": {
         "foreground": "#ff869a"
       }
     },
     {
       "name": "Markdown Link Title and Description",
-      "scope": [
-        "string.other.link.title.markdown",
-        "string.other.link.description.markdown"
-      ],
+      "scope": ["string.other.link.title.markdown", "string.other.link.description.markdown"],
       "settings": {
         "foreground": "#d6deeb"
       }
@@ -1558,20 +1536,14 @@
     },
     {
       "name": "Python Function Parameter and Arguments",
-      "scope": [
-        "variable.parameter.function.python",
-        "meta.function-call.arguments.python"
-      ],
+      "scope": ["variable.parameter.function.python", "meta.function-call.arguments.python"],
       "settings": {
         "foreground": "#82AAFF"
       }
     },
     {
       "name": "Python Function Call",
-      "scope": [
-        "meta.function-call.python",
-        "meta.function-call.generic.python"
-      ],
+      "scope": ["meta.function-call.python", "meta.function-call.generic.python"],
       "settings": {
         "foreground": "#B2CCD6"
       }
@@ -1619,20 +1591,14 @@
     },
     {
       "name": "Variables in SASS At-Rules",
-      "scope": [
-        "source.css.scss meta.at-rule variable",
-        "source.css.sass meta.at-rule variable"
-      ],
+      "scope": ["source.css.scss meta.at-rule variable", "source.css.sass meta.at-rule variable"],
       "settings": {
         "foreground": "#82AAFF"
       }
     },
     {
       "name": "Variables in SASS At-Rules",
-      "scope": [
-        "source.css.scss meta.at-rule variable",
-        "source.css.sass meta.at-rule variable"
-      ],
+      "scope": ["source.css.scss meta.at-rule variable", "source.css.sass meta.at-rule variable"],
       "settings": {
         "foreground": "#bec5d4"
       }
@@ -1758,11 +1724,7 @@
     },
     {
       "name": "Text nested in React tags",
-      "scope": [
-        "meta.jsx.children",
-        "meta.jsx.children.js",
-        "meta.jsx.children.tsx"
-      ],
+      "scope": ["meta.jsx.children", "meta.jsx.children.js", "meta.jsx.children.tsx"],
       "settings": {
         "foreground": "#d6deeb"
       }

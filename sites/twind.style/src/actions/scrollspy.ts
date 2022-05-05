@@ -48,7 +48,7 @@ export default function scrollspy(
       .map((a) => links.get(a.e.id))
       .filter(Boolean)[0]
 
-      if (lastActive !== nextActive) {
+    if (lastActive !== nextActive) {
       const classList = options.className.split(/\s+/g)
       lastActive?.classList.remove(...classList)
       nextActive?.classList.add(...classList)

@@ -18,9 +18,9 @@ declare namespace App {
 
 declare module '*.md' {
   // "unknown" would be more detailed depends on how you structure frontmatter
-  export const frontmatter: Record<string, unknown>;
+  export const frontmatter: Record<string, unknown>
 
-  export const toc: { level: 1 | 2 | 3 | 4 | 5 | 6, id: string, content: string }[];
+  export const toc: { level: 1 | 2 | 3 | 4 | 5 | 6; id: string; content: string }[]
 
   const toHTML: () => Promise<string>
   export default toHTML
