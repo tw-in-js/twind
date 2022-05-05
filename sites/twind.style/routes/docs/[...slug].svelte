@@ -36,7 +36,7 @@
 <div
   class="mt-4 lg:mt-8 prose max-w-none prose-headings:scroll-mt-24"
   use:scrollspy={{ className: tw('text-accent-11') }}
-  use:wicked={;[['[data-clipboard-copy]', lazy(() => import('$/actions/clipboard-copy'))]]}
+  use:wicked={[['[data-clipboard-copy]', lazy(() => import('$/actions/clipboard-copy'))]]}
 >
   {@html page.content}
 </div>
