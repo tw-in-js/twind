@@ -1,5 +1,54 @@
 # twind
 
+## 1.0.0-next.38
+
+### Patch Changes
+
+- fix: replace escaped quotes within class names during SSR ([`b212b52f`](https://github.com/tw-in-js/twind/commit/b212b52fbd53e9ecb38d97589ca2f717445ed185))
+
+* Rewrites HTML entity &amp; when self-referenced groups are used with (p)react ([`782f93df`](https://github.com/tw-in-js/twind/commit/782f93df6abb1ebd24ef6c45dc08de602e198107)) 🙏🏽 [@rschristian](https://github.com/rschristian)!
+
+- feat: preserve classes created by explicit `tw` calls during SSR ([`fe88051d`](https://github.com/tw-in-js/twind/commit/fe88051deb3176d014ba527471b1345c47bfb28e))
+
+  Previously `inline` and `extract` cleared the `tw` instance before parsing the html assuming that all classes are available via `class` attributes. That led to missing styles from `injectGlobal` or explicit `tw` calls.
+
+  This change introduces a `snaphot` method on `tw` and sheet instances which allows to preserve the classes that are created by explicit `tw` calls.
+
+  **Default Mode** _(nothing changed here)_
+
+  ```js
+  import { inline } from 'twind'
+
+  function render() {
+    return inline(renderApp())
+  }
+  ```
+
+  **Library Mode**
+
+  ```js
+  import { tw, stringify } from 'twind'
+
+  function render() {
+    // remember global classes
+    const restore = tw.snapshot()
+
+    // generated html
+    const html = renderApp()
+
+    // create CSS
+    const css = stringify(tw.target)
+
+    // restore global classes
+    restore()
+
+    // inject as last element into the head
+    return html.replace('</head>', `<style data-twind>${css}</style></head>`)
+  }
+  ```
+
+* fix: gradients with arbitrary color stop positions (#296) ([`77954405`](https://github.com/tw-in-js/twind/commit/7795440566fc95a424a7f6210998dd1d16ef216f))
+
 ## 1.0.0-next.37
 
 ### Patch Changes

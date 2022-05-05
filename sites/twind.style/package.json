@@ -1,6 +1,6 @@
 {
   "name": "twind.style",
-  "version": "1.0.0-next.37",
+  "version": "1.0.0-next.38",
   "description": "Twind Website",
   "private": true,
   "license": "MIT",
@@ -26,13 +26,13 @@
   },
   "dependencies": {
     "@radix-ui/colors": "^0.1.8",
-    "@twind/preset-autoprefix": "1.0.0-next.37",
-    "@twind/preset-ext": "1.0.0-next.37",
-    "@twind/preset-tailwind": "1.0.0-next.37",
-    "@twind/preset-typography": "1.0.0-next.37",
-    "@twind/with-sveltekit": "1.0.0-next.37",
+    "@twind/preset-autoprefix": "1.0.0-next.38",
+    "@twind/preset-ext": "1.0.0-next.38",
+    "@twind/preset-tailwind": "1.0.0-next.38",
+    "@twind/preset-typography": "1.0.0-next.38",
+    "@twind/with-sveltekit": "1.0.0-next.38",
     "svelte-actions": "^0.2.1",
-    "twind": "1.0.0-next.37"
+    "twind": "1.0.0-next.38"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "1.0.0-next.28",
