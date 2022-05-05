@@ -1,8 +1,7 @@
 <script>
   import { browser } from '$app/env'
   import { onDestroy } from 'svelte'
-  import { mutationObserver } from '$/actions/mutationObserver'
-  import { writable } from 'svelte/store'
+  import { mutationObserver } from '$/actions'
 
   const links = [
     ['#main', 'Skip to main content'],

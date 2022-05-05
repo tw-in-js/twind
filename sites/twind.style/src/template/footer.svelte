@@ -6,7 +6,7 @@
 <footer
   class={cx(
     'mt-10 py-10 text-sm',
-    $page.stuff.editPath ? 'border-t border-brand-7 flex items-center' : 'text-center',
+    $page.stuff.file ? 'border-t border-brand-7 flex items-center' : 'text-center',
   )}
 >
   <a
@@ -28,9 +28,9 @@
     Twind
   </a>
 
-  {#if $page.stuff.editPath}
+  {#if $page.stuff.file}
     <a
-      href={`https://github.com/tw-in-js/twind/edit/next/${$page.stuff.editPath}`}
+      href={`https://github.com/tw-in-js/twind/edit/next/${$page.stuff.file}`}
       rel="external noopener noreferrer nofollow"
       target="_blank"
       class="ml-auto hover:text-brand-12"

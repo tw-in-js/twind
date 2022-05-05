@@ -30,6 +30,8 @@
 
   $: browser && document.documentElement.setAttribute('theme', $colorScheme)
   $: nextTheme = THEMES[THEMES.indexOf($theme) + 1] || THEMES[0]
+
+  // TODO: use [theme="..."] within styles
 </script>
 
 <fieldset class={cx('~(relative h-full w-4)', className)}>
@@ -58,7 +60,7 @@
         document.documentElement.setAttribute(
           'theme',
           t && t != '"auto"'
-            ? t
+            ? t.slice(1, -1)
             : matchMedia('(prefers-color-scheme:dark)').matches
             ? 'dark'
             : 'light',

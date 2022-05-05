@@ -8,12 +8,12 @@ import presetTypography from '@twind/preset-typography'
 // https://www.radix-ui.com/docs/colors/palette-composition/composing-a-palette
 // Using semantic color names
 import {
-  teal as brand,
-  tealDark as brandDark,
-  purple as accent,
-  purpleDark as accentDark,
-  sage as neutral,
-  sageDark as neutralDark,
+  sky as brand,
+  skyDark as brandDark,
+  plum as accent,
+  plumDark as accentDark,
+  slate as neutral,
+  slateDark as neutralDark,
 
   // Error: Red/Tomato/Crimson
   tomato as error,
@@ -28,8 +28,8 @@ import {
   amberDark as warningDark,
 
   // Info: Blue/Sky/Cyan
-  sky as info,
-  skyDark as infoDark,
+  cyan as info,
+  cyanDark as infoDark,
 } from '@radix-ui/colors'
 
 // TODO: @radix-ui/colors as own package with colors converted to rgb

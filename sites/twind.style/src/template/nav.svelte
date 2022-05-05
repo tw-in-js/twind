@@ -4,7 +4,7 @@
   import { page } from '$app/stores'
   import Icon, { MenuOutline, Search, X } from '$/icons'
   import { MOD_KEY } from '$/constants'
-import { browser } from '$app/env';
+  import { browser } from '$app/env'
 
   /** @type {Exclude<App.Stuff['nav'], undefined>}*/
   export let nav

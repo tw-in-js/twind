@@ -5,8 +5,8 @@ export interface MutationObserverOptions extends MutationObserverInit {
   callback?: MutationCallback
 }
 
-export function mutationObserver(
-  node: HTMLElement,
+export default function mutationObserver(
+  node: Element,
   initialOptions?: MutationObserverOptions,
 ): ReturnType<Action> {
   let observer: MutationObserver | undefined | void

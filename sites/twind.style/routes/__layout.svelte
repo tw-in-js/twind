@@ -7,9 +7,10 @@
    * @type {import('@sveltejs/kit').Load}
    */
   export async function load({ fetch }) {
-    const { startHref: docStartHref } = await fetch(`/docs/$start.json`).then((res) => res.json())
+    /** @type {import('./content.json').Body}*/
+    const data = await fetch(`/content.json`).then((res) => res.json())
 
-    return { stuff: { docStartHref } }
+    return { stuff: data }
   }
 </script>
 

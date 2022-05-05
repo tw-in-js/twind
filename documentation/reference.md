@@ -1,4 +1,5 @@
 ---
+section: Getting Started
 title: Reference
 next: ./migration.md
 ---
@@ -22,7 +23,7 @@ next: ./migration.md
 
   Name can contain any characters except whitespace, parenthesis (`(` and `)`), colon (`:`), dash (`-`), and opening bracket (`[`).
 
-  ```html
+  ```html /group~project/1 /group~project-hover/1 /group~create/1 /group~create-hover/1
   <div class="group~project bg-white hover:bg-blue-500 ...">
     <p class="text-gray-900 group~project-hover:text-white ...">New Project</p>
     <div class="group~create bg-gray-100 hover:bg-green-500 ...">
@@ -61,20 +62,20 @@ next: ./migration.md
 
 ## API
 
-The following functions are all exports from `twind`.
+The following functions are all exports from `twind{:.module}`.
 
 ### _Shim Mode_
 
 Observe class attributes to inject styles
 
-- `setup(config, sheet?, target?): Twind`: configures the global `tw` instance, observes all class attributes and inject the styles into the DOM; returns a twind instance
-- `tw`: the global twind instance updated by each `setup` call
+- `setup(config, sheet?, target?): Twind{:ts}`: configures the global `tw{:.fn}` instance, observes all class attributes and inject the styles into the DOM; returns a twind instance
+- `tw{:.fn}`: the global twind instance updated by each `setup{:.fn}` call
 
 ### _Library Mode_
 
-use `tw` or `tx` to inject styles
+use `tw{:.fn}` or `tx{:.fn}` to inject styles
 
-- `twind(config, sheet?): Twind`: creates a custom twind instance (`tw`)
+- `twind(config, sheet?): Twind{:ts}`: creates a custom twind instance (`tw{:.fn}`)
 
   Recommended custom twind pattern:
 
@@ -103,26 +104,26 @@ use `tw` or `tx` to inject styles
 
 - `observe(tw, target?)`: observes all class attributes and injects the styles into the DOM
 
-### Twind instance — `tw`
+### Twind instance — `tw{:.fn}`
 
-- global twind instance: `import { tw } from 'twind'`
-- `tw(className)`: injects a className string into the sheet and return the resulting class names
-- `tw.config`: access the current config
-- `tw.theme(section?, key?, defaultValue?)`: access the current theme
-  - `tw.theme()`: returns the whole theme
-  - `tw.theme(section)`: returns the whole section
-  - `tw.theme(dottedKey, defaultValue?)`: returns the current value
-  - `tw.theme(section?, key?, defaultValue?)`: returns the theme value
-- `tw.target`: the sheet target of this instance (`string[]`, `HTMLStyleSheet`, `CSSStyleSheet`)
-- `tw.clear()`: clears all CSS rules from the sheet
-- `tw.destroy()`: remove the sheet from the document
+- global twind instance: `import { tw } from 'twind'{:js}`
+- `tw(className){:js}`: injects a className string into the sheet and return the resulting class names
+- `tw.config{:js}`: access the current config
+- `tw.theme(section?, key?, defaultValue?){:js}`: access the current theme
+  - `tw.theme(){:js}`: returns the whole theme
+  - `tw.theme(section){:js}`: returns the whole section
+  - `tw.theme(dottedKey, defaultValue?){:js}`: returns the current value
+  - `tw.theme(section?, key?, defaultValue?){:js}`: returns the theme value
+- `tw.target{:js}`: the sheet target of this instance (`string[]`, `HTMLStyleSheet`, `CSSStyleSheet`)
+- `tw.clear(){:js}`: clears all CSS rules from the sheet
+- `tw.destroy(){:js}`: remove the sheet from the document
 
 ### Utilities
 
-- `defineConfig(config)`: define a configuration object for `setup` or `twind`
-- `tx(...args)`: creates a class name from the given arguments and injects the styles (like `tw(cx(...args))`)
+- `defineConfig(config){:js}`: define a configuration object for `setup{:.fn}` or `twind{:.fn}`
+- `tx(...args){:js}`: creates a class name from the given arguments and injects the styles (like `tw(cx(...args)){:js}`)
 
-  - `tx.bind(tw)`: binds the `tx` function to a custom twind instance; returns a new `tx` function
+  - `tx.bind(tw){:js}`: binds the `tx{:.fn}` function to a custom twind instance; returns a new `tx{:.fn}` function
 
   ```js
   import { tx } from 'twind'
@@ -130,9 +131,9 @@ use `tw` or `tx` to inject styles
   const className = tx`underline bg-red-200 text-red-900`
   ```
 
-- `injectGlobal(...args)`: injects the given styles into the base layer
+- `injectGlobal(...args){:js}`: injects the given styles into the base layer
 
-  - `injectGlobal.bind(tw)`: binds the `injectGlobal` function to a custom twind instance; returns a new `injectGlobal` function
+  - `injectGlobal.bind(tw){:js}`: binds the `injectGlobal{:.fn}` function to a custom twind instance; returns a new `injectGlobal{:.fn}` function
 
   ```js
   import { injectGlobal } from 'twind'
@@ -207,7 +208,7 @@ These generate class names but do **not** inject styles.
 These can be used to generate class names that are then
 
 a) set the class attribute on an element (_Shim Mode_)<br>
-b) used with `tw` to inject styles and return a class name (_Library Mode_)
+b) used with `tw{:.fn}` to inject styles and return a class name (_Library Mode_)
 
 - `cx(...args)`: creates a class name from the given arguments; no styles injected
 - `css(...args)`: creates a class name from the given arguments; no styles injected
@@ -227,7 +228,7 @@ Used to update an html string with styles.
 
 - `inline(html, tw? | {tw, minfiy}?)`: updates all class attributes in html string and inject there styles into the head as style element; returns the updated html string
 - `extract(html, tw?)`: updates all class attributes from html string; returns the updated html string and the CSS
-- `consume(html, tw?)`: updates all class attributes from html string; returns the updated html string and injects all styles into `tw`
+- `consume(html, tw?)`: updates all class attributes from html string; returns the updated html string and injects all styles into `tw{:.fn}`
 
 ### Sheets
 
@@ -431,14 +432,14 @@ For more details see [Tailwind CSS › Browser Support](https://tailwindcss.com/
 The following JS APIs may need polyfills:
 
 - [Array.flatMap](https://caniuse.com/mdn-javascript_builtins_array_flatmap)
-  - Edge ＜ 79, Firefox ＜ 62, Chrome ＜ 69, Safari ＜ 12, Opera ＜ 56
+  - Edge<79, Firefox<62, Chrome<69, Safari<12, Opera<56
   - [polyfill](https://www.npmjs.com/package/array-flat-polyfill)
 
 When using `style()` within `config.rules`:
 
 - [Object.fromEntries](https://caniuse.com/mdn-javascript_builtins_object_fromentries)
-  - Edge ＜ 79, Firefox ＜ 63, Chrome ＜ 73, Safari ＜ 12.2, Opera ＜ 60
+  - Edge<79, Firefox<63, Chrome<73, Safari<12.2, Opera<60
   - [polyfill](https://www.npmjs.com/package/object.fromentries) or [@ungap/from-entries](https://github.com/ungap/from-entries)
 - [URLSearchParams](https://caniuse.com/urlsearchparams)
-  - Edge ＜ 17, Firefox ＜ 44, Chrome ＜ 49, Safari ＜ 10.3, Opera ＜ 36
+  - Edge<17, Firefox<44, Chrome<49, Safari<10.3, Opera<36
   - [polyfill](https://www.npmjs.com/package/url-search-params-polyfill) or [@ungap/url-search-params](https://github.com/ungap/url-search-params)

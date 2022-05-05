@@ -6,7 +6,7 @@ next: ./features.md
 
 Twind is a small compiler that converts Tailwind utility classes into CSS at runtime. The goal of this project is to unify the flexibility of CSS-in-JS with the carefully considered constraints of the Tailwind API.
 
-```sh npm
+```
 npm install twind@next
 ```
 

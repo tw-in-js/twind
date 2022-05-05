@@ -1,4 +1,5 @@
 ---
+section: Getting Started
 title: Grouping Syntax
 excerpt: Twind provides a terse syntax for grouping related classes together in an intuitive way.
 next: ./reference.md
@@ -18,11 +19,13 @@ On common complain of Tailwind (and utility classes) is long and unwieldy class 
    class="
      w-full sm:w-auto inline-flex items-center px-4 py-2
      text-sm text-white font-medium
+
+
 -    border border-transparent rounded-md shadow-sm
 +    bg-indigo-600 hover:bg-indigo-700 focus:bg-indigo-800
      focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
      transition-colors duration-300
-    "
+   "
  >
    Button text
  </button>

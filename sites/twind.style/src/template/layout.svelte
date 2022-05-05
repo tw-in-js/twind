@@ -16,7 +16,7 @@
     <Nav nav={$page.stuff.nav} />
   {/if}
 
-  <div class="px-2 md:px-10" class:lg:ml-64={$page.stuff.nav} class:xl:mr-64={$page.stuff.editPath}>
+  <div class="px-2 md:px-10" class:lg:ml-64={$page.stuff.nav} class:xl:mr-64={$page.stuff.file}>
     <main id="main" class="pt-10 scroll-mt-24"><slot /></main>
 
     <Footer />

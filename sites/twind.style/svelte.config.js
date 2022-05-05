@@ -3,13 +3,10 @@
 import * as path from 'path'
 import adapter from '@sveltejs/adapter-static'
 import { searchForWorkspaceRoot } from 'vite'
-import md from 'mdsvex'
-import mdsvexConfig from './mdsvex.config.js'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-  extensions: ['.svelte', '.html', ...mdsvexConfig.extensions],
-  preprocess: [md.mdsvex(mdsvexConfig)],
+  extensions: ['.svelte', '.html'],
 
   kit: {
     // TODO: csp — https://kit.svelte.dev/docs/configuration#csp
@@ -18,7 +15,7 @@ const config = {
       // a place to put static files that should have stable URLs and undergo no processing,
       // such as favicon.ico or manifest.json
       assets: 'static',
-      routes: 'pages',
+      routes: 'routes',
     },
     adapter: adapter(),
     prerender: {
@@ -43,7 +40,7 @@ const config = {
       resolve: {
         alias: {
           $: path.resolve('src'),
-          '@': path.resolve('pages'),
+          '@': path.resolve('routes'),
           '#': path.resolve('assets'),
         },
       },

@@ -1,5 +1,5 @@
 import type { Action } from './types'
-import { mutationObserver } from './mutationObserver'
+import mutationObserver from './mutation-observer'
 
 export interface ScrollspyOptions {
   enabled?: boolean
@@ -10,8 +10,8 @@ export interface ScrollspyOptions {
   className?: string
 }
 
-export function scrollspy(
-  node: HTMLElement,
+export default function scrollspy(
+  node: Element,
   initialOptions?: ScrollspyOptions,
 ): ReturnType<Action> {
   let options: Required<ScrollspyOptions>
@@ -48,7 +48,7 @@ export function scrollspy(
       .map((a) => links.get(a.e.id))
       .filter(Boolean)[0]
 
-    if (lastActive !== nextActive) {
+      if (lastActive !== nextActive) {
       const classList = options.className.split(/\s+/g)
       lastActive?.classList.remove(...classList)
       nextActive?.classList.add(...classList)
@@ -58,7 +58,7 @@ export function scrollspy(
 
   function scheduleCheck() {
     clearTimeout(checkTimer)
-    checkTimer = setTimeout(check, 100)
+    checkTimer = setTimeout(check, 35)
   }
 
   function update({

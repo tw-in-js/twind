@@ -1,4 +1,5 @@
 ---
+section: Getting Started
 title: Features
 next: ./grouping-syntax.md
 ---

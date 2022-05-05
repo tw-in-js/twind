@@ -1,4 +1,5 @@
 ---
+section: Getting Started
 title: Comparison
 next: ./usage.md
 ---

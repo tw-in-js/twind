@@ -7,8 +7,8 @@ import { build } from '$service-worker'
 const staticFiles = [
   '/_app/version.json',
   '/twind-logo-animated.svg',
-  '/docs/$start.json',
-  // not adding '/docs/$nav.json' as it is explicitly loaded to detect endpoints
+  '/content.json',
+  // not adding '/docs.json' as it is explicitly loaded to detect endpoints
 ]
 
 // Do not cache images as they are/should be transform by cloudflare /cdn-cgi/image/
@@ -33,7 +33,7 @@ addEventListener('install', (event) => {
   event.waitUntil(
     cachePromise.then((cache) =>
       Promise.all([
-        // re-use from existing cache
+        // re-use from existing cache for hashed files
         Promise.all(
           hashedFiles.map((file) =>
             caches
@@ -42,13 +42,13 @@ addEventListener('install', (event) => {
           ),
         ),
 
-        // always load these
+        // always force load these
         cache.addAll(staticFiles),
 
         // load endpoints
-        load('/docs/$nav.json', cache).then(async (response) => {
+        load('/docs.json', cache).then(async (response) => {
           if (response.ok && response.type === 'basic') {
-            const nav = await response.json()
+            const nav: import('@/docs/index.json').Body = await response.json()
 
             await cache.addAll(Object.keys(nav?.pages || {}).map((href) => `${href}.json`))
           }

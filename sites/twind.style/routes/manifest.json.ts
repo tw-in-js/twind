@@ -1,6 +1,6 @@
 import type { EndpointOutput } from '@sveltejs/kit'
 
-import { startHref } from './docs/[pages].json'
+import { startHref } from './docs/index.json'
 import { img } from '$/image'
 import iconPNG from '#/icon.png'
 

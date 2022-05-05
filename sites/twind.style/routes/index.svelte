@@ -1,10 +1,10 @@
 <script>
+  import { browser } from '$app/env'
+  import { page } from '$app/stores'
+
   import { MOD_KEY } from '$/constants'
   import Icon, { Search } from '$/icons'
   import Head from '$/template/head.svelte'
-import { browser } from '$app/env';
-
-  import { page } from '$app/stores'
 </script>
 
 <Head
@@ -17,14 +17,11 @@ import { browser } from '$app/env';
   <h1 class="text-4xl tracking-tight font-extrabold sm:text-5xl md:text-6xl">
     <span
       class="bg-clip-text text-transparent bg-gradient-to-r from-brand-11 via-accent-11 to-info-11"
-    >
-      twind
-    </span>
-    <span
+      >twind</span
+    ><span
       class="bg-clip-text text-transparent bg-gradient-to-r from-info-11 via-accent-11 to-brand-11"
+      >.style</span
     >
-      .style
-    </span>
   </h1>
   <p
     class="mt-3 max-w-md mx-auto text-base sm:text-lg md:mt-5 md:text-xl md:max-w-3xl text-accent-11"
