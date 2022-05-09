@@ -46,5 +46,7 @@
   ],
   "grid-template-areas[outlet_nav]": ".grid-template-areas\\[outlet_nav\\]{grid-template-areas:outlet nav}",
   "&_span:underline": ".\\&_span\\:underline span{text-decoration-line:underline}",
-  "&_h1>span~a:underline": ".\\&_h1\\>span\\~a\\:underline h1>span~a{text-decoration-line:underline}"
+  "&_h1>span~a:underline": ".\\&_h1\\>span\\~a\\:underline h1>span~a{text-decoration-line:underline}",
+  "&_a[href^='#']:bg-yellow-500": ".\\&_a\\[href\\^\\=\\'\\#\\'\\]\\:bg-yellow-500 a[href^='#']{--tw-bg-opacity:1;background-color:rgba(234,179,8,var(--tw-bg-opacity))}",
+  "&_a[href*='cAsE'_s]:text-pink-400": ".\\&_a\\[href\\*\\=\\'cAsE\\'_s\\]\\:text-pink-400 a[href*='cAsE' s]{--tw-text-opacity:1;color:rgba(244,114,182,var(--tw-text-opacity))}"
 }

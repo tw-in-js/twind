@@ -39,7 +39,7 @@ const variants: Variant[] = [
   // - `&>span:underline`
   // - `&>*:underline`
   // - `&_span:underline` -> `&_span:underline span`
-  [/&/, (match) => match.input.replace('_', ' ')],
+  [/&/, (match) => match.input.replace(/_/g, ' ')],
 ]
 
 export default variants
