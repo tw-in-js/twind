@@ -100,7 +100,7 @@ export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown
 ): Twind<Theme, SheetTarget> {
   active?.destroy()
 
-  sheet ??= getSheet() as unknown as Sheet<SheetTarget>
+  sheet = sheet ?? (getSheet() as unknown as Sheet<SheetTarget>)
 
   active = observe(twind(config as TwindUserConfig, sheet), target)
 
