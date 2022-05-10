@@ -95,10 +95,12 @@ export function setup<
 
 export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown>(
   config: TwindConfig<any> | TwindUserConfig<any> = {},
-  sheet: Sheet<SheetTarget> = getSheet() as unknown as Sheet<SheetTarget>,
+  sheet?: Sheet<SheetTarget>,
   target?: HTMLElement,
 ): Twind<Theme, SheetTarget> {
   active?.destroy()
+
+  sheet ??= getSheet() as unknown as Sheet<SheetTarget>
 
   active = observe(twind(config as TwindUserConfig, sheet), target)
 
