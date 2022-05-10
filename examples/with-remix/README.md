@@ -6,7 +6,7 @@
 
 1. a modified [app/root](./app/root.tsx)
 2. a modified [app/entry.server](./app/entry.server.tsx) to enable server-side rendering (SSR) of style
-3. (optional) a dedicated [twind.config](./twind.config.js)
+3. (optional) a dedicated [twind.config](./twind.config.ts)
 
 ## What is included?
 
