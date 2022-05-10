@@ -16,4 +16,10 @@ module.exports = {
   serverBuildDirectory: 'build',
   devServerPort: 8002,
   ignoredRouteFiles: ['.*'],
+  serverDependenciesToBundle: [
+    "@twind/with-remix",
+    "twind",
+    "@twind/preset-autoprefix",
+    "@twind/preset-tailwind",
+  ],
 }
