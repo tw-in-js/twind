@@ -54,11 +54,11 @@
     <desc>{description}</desc>
   {/if}
 
-  {#each                                         src.circles || [] as circle}
+  {#each src.circles || [] as circle}
     <circle {...circle} />
   {/each}
 
-  {#each                                         src.paths || [] as path}
+  {#each src.paths || [] as path}
     {#if drawParams}
       <path {...path} in:draw={drawParams === true ? {} : drawParams} />
     {:else}
@@ -66,15 +66,15 @@
     {/if}
   {/each}
 
-  {#each                                         src.polygons || [] as polygon}
+  {#each src.polygons || [] as polygon}
     <polygon {...polygon} />
   {/each}
 
-  {#each                                         src.rects || [] as rect}
+  {#each src.rects || [] as rect}
     <rect {...rect} />
   {/each}
 
-  {#each                                         src.lines || [] as line}
+  {#each src.lines || [] as line}
     <line {...line} />
   {/each}
 </svg>

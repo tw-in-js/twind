@@ -17,9 +17,9 @@ module.exports = {
   devServerPort: 8002,
   ignoredRouteFiles: ['.*'],
   serverDependenciesToBundle: [
-    "@twind/with-remix",
-    "twind",
-    "@twind/preset-autoprefix",
-    "@twind/preset-tailwind",
+    '@twind/with-remix',
+    'twind',
+    '@twind/preset-autoprefix',
+    '@twind/preset-tailwind',
   ],
 }

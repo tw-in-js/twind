@@ -5,9 +5,9 @@
 
 <footer
   class={cx(
-  'mt-10 py-10 text-sm',
-  $page.stuff.file ? 'border-t border-brand-7 flex items-center' : 'text-center',
-)}
+    'mt-10 py-10 text-sm',
+    $page.stuff.file ? 'border-t border-brand-7 flex items-center' : 'text-center',
+  )}
 >
   <a
     href="https://github.com/tw-in-js/twind/blob/next/LICENSE"
