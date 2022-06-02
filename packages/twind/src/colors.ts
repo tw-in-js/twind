@@ -4,6 +4,8 @@ function parseColorComponent(chars: string, factor: number): number {
   return Math.round(parseInt(chars, 16) * factor)
 }
 
+const RGB_HSL_REGEX = /^(rgb|hsl)(\([^)]+)(\))$/
+
 export function toColorValue(color: ColorValue, options: ColorFunctionOptions = {}): string {
   if (typeof color == 'function') {
     return color(options)
@@ -23,6 +25,10 @@ export function toColorValue(color: ColorValue, options: ColorFunctionOptions = 
       parseColorComponent(color.substr(1 + 2 * size, size), factor),
       opacity,
     ]})`
+  }
+
+  if (RGB_HSL_REGEX.test(color)) {
+    return color.replace(RGB_HSL_REGEX, `$1a$2,${opacity}$3`)
   }
 
   // TODO: some other format like rgba(), hsla(), ...
