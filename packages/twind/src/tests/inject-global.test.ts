@@ -203,3 +203,15 @@ test('multiple @font-face and @import using object', () => {
     "/*!0,0*/@font-face{font-family:'Roboto';font-style:normal;font-weight:400;src:local('Roboto'),local('Roboto-Regular'),url(fonts/roboto-v18-latin-regular.woff2) format('woff2'),url(fonts/roboto-v18-latin-regular.woff) format('woff')}",
   ])
 })
+
+test('@media print', () => {
+  injectGlobal(`
+     @media print {
+       main {
+         height: auto;
+       }
+     }
+  `)
+
+  assert.deepEqual(tw.target, ['/*!27wr28,v*/@media print{main{height:auto}}'])
+})

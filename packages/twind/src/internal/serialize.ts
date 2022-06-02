@@ -173,7 +173,9 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
         )
       } else {
         // global selector
-        rules.push(...serialize$(value as CSSObject, { p: precedence, r: [key] }, context))
+        rules.push(
+          ...serialize$(value as CSSObject, { p: precedence, r: [...conditions, key] }, context),
+        )
       }
     } else if (key == 'label' && value) {
       name = (value as string) + hash(JSON.stringify([precedence, important, style]))
