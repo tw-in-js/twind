@@ -36,7 +36,7 @@ Twind works with all existing Tailwind classes and configuration. However, Twind
 
 <Collapse title="How does CSS-in JS perform? Is it slow?">
 
-Twind was designed with performance in mind from the start and is in the top two fastest CSS-in-JS solutions. We've put together [some benchmarks](https://github.com/tw-in-js/twind#benchmarks) if you are interested in learning more.
+Twind was designed with performance in mind from the start and is in the top two fastest CSS-in-JS solutions. We've put together [some benchmarks](/handbook/benchmarks) if you are interested in learning more.
 
 </Collapse>
 
@@ -145,7 +145,7 @@ Please check out [The Shim Guide](/handbook/the-shim) for more information.
 
 <Collapse title="Is there a Twind VSCode extension for syntax highlighting, style validation/linting, auto-completion, etc..?">
 
-Not yet, but a Twind VSCode extension is in the works. You can follow the progress on [this issue](https://github.com/tw-in-js/twind/issues/24).
+Yes, [get it here](https://github.com/tw-in-js/typescript-plugin).
 
 </Collapse>
 

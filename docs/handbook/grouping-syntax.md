@@ -164,7 +164,7 @@ It is possible to nest directive groups inside of responsive groups and vice ver
 ```js
 tw`sm:(border(2 black opacity-50 hover:dashed))`
 // => sm:border-2 sm:border-black sm:border-opacity-50 sm:hover:border-dashed
-tw`border(md:(2 black opacity-50 hover:dashed))`
+tw`border(sm:(2 black opacity-50 hover:dashed))`
 // => sm:border-2 sm:border-black sm:border-opacity-50 sm:hover:border-dashed
 
 tw`divide(y-2 blue-500 opacity(75 md:50))`
