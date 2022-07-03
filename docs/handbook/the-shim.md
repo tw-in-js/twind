@@ -48,9 +48,9 @@ import { setup, disconnect } from 'twind/shim'
 
 <!-- > [live and interactive shim demo 🚀 ](https://esm.codes/#aW1wb3J0ICdodHRwczovL2Nkbi5za3lwYWNrLmRldi90d2luZC9zaGltJwoKZG9jdW1lbnQuYm9keS5pbm5lckhUTUwgPSBgCiAgPG1haW4gY2xhc3M9Imgtc2NyZWVuIGJnLXB1cnBsZS00MDAgZmxleCBpdGVtcy1jZW50ZXIganVzdGlmeS1jZW50ZXIiPgogICAgPGgxIGNsYXNzPSJmb250LWJvbGQgdGV4dChjZW50ZXIgNXhsIHdoaXRlIHNtOmdyYXktODAwIG1kOnBpbmstNzAwKSI+CiAgICAgIFRoaXMgaXMgVHdpbmQhCiAgICA8L2gxPgogIDwvbWFpbj4KYA==) -->
 
-## Prevent FOUC / CLS
+## Prevent FOUC / LS
 
-To prevent FOUC (_flash of unstyled content_) or more probably known as Cumulative Layout Shift, set the `hidden` attribute on the target element. `twind/shim` will remove it once all styles have been generated.
+To prevent FOUC (_flash of unstyled content_) or more probably known as Layout Shift, set the `hidden` attribute on the target element. `twind/shim` will remove it once all styles have been generated.
 
 ```html
 <!DOCTYPE html>
