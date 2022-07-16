@@ -68,7 +68,7 @@ Yes! With Twind, dark mode is always available. Please see the [configuration gu
 
 <Collapse title="Does Twind support Tailwind V2 colors?">
 
-Yes, but with a little extra configuration. With Twind, dark mode is always available! Please see the [configuration guide](/handbook/configuration#colors) for more info.
+Yes, but with a little extra configuration. Please check out the [configuration guide](/handbook/configuration#colors) for more info.
 
 </Collapse>
 
@@ -122,7 +122,7 @@ The `twind/css` package exposes a `theme` helper for use with the `css` function
 
 <Collapse title="How do I use Twind with server-rendered (SSR) apps?">
 
-Twind provides a `twind/server` package to assist with static extraction needed for SSR apps. Please the [SSR Usage Guide](/usage-guides/ssr) for more information.
+Twind provides a `twind/server` package to assist with static extraction needed for SSR apps. Please see the [SSR Usage Guide](/usage-guides/ssr) for more information.
 
 There is also a working [example Next App](https://github.com/tw-in-js/example-next) to get you up in running.
 
