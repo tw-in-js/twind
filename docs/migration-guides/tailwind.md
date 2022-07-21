@@ -24,7 +24,7 @@ The Shim will automagically convert all of your Tailwind classes to Twind, and e
 import 'twind/shim'
 ```
 
-Example: `class="text-blue-500 font-bold"` becomes `` class=${tw`text-blue-500 font-bold`} ``
+Example: `class="text-blue-500 font-bold"` becomes `` class={tw`text-blue-500 font-bold`} ``
 
 While the shim is a good starting point, it is recommended that you eventually move your project away from using the shim. In order to do so, you will need to do a few things:
 
