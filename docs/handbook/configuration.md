@@ -202,7 +202,7 @@ setup({
   },
   preflight: {
     // Import external stylesheet
-    '@import': `url('https://fonts.googleapis.com/css2?amily=Roboto:ital,wght@0,400;0,700;1,400&display=swap')`,
+    '@import': `url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400&display=swap')`,
     // Declare font face
     '@font-face': [
       {
