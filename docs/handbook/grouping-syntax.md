@@ -16,7 +16,7 @@ head:
 
 Twind is not limited to strings as class names. Twind ships a compiler that runs when your app runs. This is unlike Tailwind, which generates CSS in a build step that is required before you run your app. This compiler is a function that is designed to interpret almost any form: strings, arrays, objects, template literals, or a mix of any of these.
 
-On common complain of Tailwind (and utility classes) is long and unwieldy class names in markup:
+One common complain of Tailwind (and utility classes) is long and unwieldy class names in markup:
 
 ```html
 <button
