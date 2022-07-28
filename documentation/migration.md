@@ -102,7 +102,7 @@ TODO with file diffs
     })
     ```
 
-    There are lots of things possible. See [preset-tailwind/rules](https://github.com/tw-in-js/twind/treee/next/packages/preset-tailwind/src/rules.ts) and [preset-ext/rules](https://github.com/tw-in-js/twind/treee/next/packages/preset-ext/src/rules.ts) for more examples.
+    There are lots of things possible. See [preset-tailwind/rules](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind/src/rules.ts) and [preset-ext/rules](https://github.com/tw-in-js/twind/tree/next/packages/preset-ext/src/rules.ts) for more examples.
 
   - ignorelist: can be used ignore certain rules
 
