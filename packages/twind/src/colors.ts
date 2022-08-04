@@ -25,11 +25,11 @@ export function toColorValue(color: ColorValue, options: ColorFunctionOptions = 
     ]})`
   }
 
-  // TODO: some other format like rgba(), hsla(), ...
   if (opacity == '1') return color
   if (opacity == '0') return '#0000'
 
-  return color
+  // convert rgb and hsl to alpha variant
+  return color.replace(/^(rgb|hsl)(\([^)]+)\)$/, `$1a$2,${opacity})`)
 }
 
 /**
