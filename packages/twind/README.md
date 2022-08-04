@@ -209,7 +209,7 @@ function render() {
   tw.clear()
 
   // generated markup
-  const markup = comsume(html, tw)
+  const markup = consume(html, tw)
 
   // create CSS
   const css = stringify(tw.target)
