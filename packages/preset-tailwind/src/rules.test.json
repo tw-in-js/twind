@@ -1113,15 +1113,29 @@
   "from-[rgb(123,123,123)] to-[rgba(123,123,123,.5)]": [
     "from-[rgb(123,123,123)] to-[rgba(123,123,123,.5)]",
     [
-      ".from-\\[rgb\\(123\\,123\\,123\\)\\]{--tw-gradient-from:rgba(123,123,123,1);--tw-gradient-to:rgba(123,123,123,0);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}",
+      ".from-\\[rgb\\(123\\,123\\,123\\)\\]{--tw-gradient-from:rgb(123,123,123);--tw-gradient-to:#0000;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}",
       ".to-\\[rgba\\(123\\,123\\,123\\,\\.5\\)\\]{--tw-gradient-to:rgba(123,123,123,.5)}"
     ]
   ],
   "from-[hsl(0,100%,50%)] to-[hsla(0,100%,50%,0.3)]": [
     "from-[hsl(0,100%,50%)] to-[hsla(0,100%,50%,0.3)]",
     [
-      ".from-\\[hsl\\(0\\,100\\%\\,50\\%\\)\\]{--tw-gradient-from:hsla(0,100%,50%,1);--tw-gradient-to:hsla(0,100%,50%,0);--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}",
+      ".from-\\[hsl\\(0\\,100\\%\\,50\\%\\)\\]{--tw-gradient-from:hsl(0,100%,50%);--tw-gradient-to:#0000;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}",
       ".to-\\[hsla\\(0\\,100\\%\\,50\\%\\,0\\.3\\)\\]{--tw-gradient-to:hsla(0,100%,50%,0.3)}"
+    ]
+  ],
+  "from-[rgb(123,123,123)]/80 to-[rgb(123,123,123)]/[.35]": [
+    "from-[rgb(123,123,123)]/80 to-[rgb(123,123,123)]/[.35]",
+    [
+      ".from-\\[rgb\\(123\\,123\\,123\\)\\]\\/80{--tw-gradient-from:rgba(123,123,123,0.8);--tw-gradient-to:#0000;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}",
+      ".to-\\[rgb\\(123\\,123\\,123\\)\\]\\/\\[\\.35\\]{--tw-gradient-to:rgba(123,123,123,.35)}"
+    ]
+  ],
+  "from-[hsl(0,100%,50%)]/10 to-[hsl(0,100%,50%)]/30": [
+    "from-[hsl(0,100%,50%)]/10 to-[hsl(0,100%,50%)]/30",
+    [
+      ".from-\\[hsl\\(0\\,100\\%\\,50\\%\\)\\]\\/10{--tw-gradient-from:hsla(0,100%,50%,0.1);--tw-gradient-to:#0000;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}",
+      ".to-\\[hsl\\(0\\,100\\%\\,50\\%\\)\\]\\/30{--tw-gradient-to:hsla(0,100%,50%,0.3)}"
     ]
   ],
   "w-[3.23rem]": ".w-\\[3\\.23rem\\]{width:3.23rem}",
