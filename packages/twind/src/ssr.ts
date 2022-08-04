@@ -156,16 +156,16 @@ export function extract(html: string, tw: Twind<any, any> = tw$): ExtractResult 
  *   const html = renderApp()
  *
  *   // remember global classes
- *   const restore = snapshot(tw.target)
+ *   const restore = tw.snapshot()
  *
  *   // generated markup
  *   const markup = consume(html)
  *
- *   // restore global classes
- *   restore()
- *
  *   // create CSS
  *   const css = stringify(tw.target)
+ *
+ *   // restore global classes
+ *   restore()
  *
  *   // inject as last element into the head
  *   return markup.replace('</head>', `<style data-twind>${css}</style></head>`)
