@@ -150,7 +150,7 @@ export function extract(html: string, tw: Twind<any, any> = tw$): ExtractResult 
  * 3. return the HTML string with the final element classes
  *
  * ```js
- * import { consume, stringify, snapshot, tw } from 'twind'
+ * import { consume, stringify, tw } from 'twind'
  *
  * function render() {
  *   const html = renderApp()
