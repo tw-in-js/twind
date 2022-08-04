@@ -195,7 +195,7 @@ Used for static HTML processing (usually to provide SSR support for your javascr
 3. return the HTML string with the final element classes
 
 ```js
-import { setup, tw, consume, stringify } from 'twind'
+import { setup, consume, stringify, tw } from 'twind'
 
 // can be in a different file — but should be called at least once
 setup({
@@ -205,14 +205,17 @@ setup({
 function render() {
   const html = renderApp()
 
-  // clear all styles
-  tw.clear()
+  // remember global classes
+  const restore = tw.snapshot()
 
   // generated markup
-  const markup = comsume(html, tw)
+  const markup = consume(html)
 
   // create CSS
   const css = stringify(tw.target)
+
+  // restore global classes
+  restore()
 
   // inject as last element into the head
   return markup.replace('</head>', `<style data-twind>${css}</style></head>`)
