@@ -223,6 +223,11 @@
   "border-blue-300": ".border-blue-300{--tw-border-opacity:1;border-color:#93c5fd;border-color:rgba(147,197,253,var(--tw-border-opacity))}",
   "border-fuchsia": ".border-fuchsia{border-color:fuchsia}",
   "border-opacity-95": ".border-opacity-95{--tw-border-opacity:0.95}",
+  "border-l-transparent": ".border-l-transparent{border-left-color:transparent}",
+  "border-t-transparent": ".border-t-transparent{border-top-color:transparent}",
+  "border-x-transparent": ".border-x-transparent{border-left-color:transparent;border-right-color:transparent}",
+  "border-y-transparent": ".border-y-transparent{border-bottom-color:transparent;border-top-color:transparent}",
+  "border-br-transparent": ".border-br-transparent{border-bottom-color:transparent;border-right-color:transparent}",
   "shadow": [
     "*{--tw-shadow:0 0 transparent}",
     ".shadow{--tw-shadow:0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06);box-shadow:0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06);box-shadow:var(--tw-ring-offset-shadow,0 0 transparent),var(--tw-ring-shadow,0 0 transparent),var(--tw-shadow)}"
@@ -706,7 +711,6 @@
       ".space-x-reverse>:not([hidden])~:not([hidden]){--tw-space-x-reverse:1}"
     ]
   ],
-
   "divide-x": ".divide-x>:not([hidden])~:not([hidden]){--tw-divide-x-reverse:0;border-right-width:calc(1px * var(--tw-divide-x-reverse));border-left-width:1px;border-left-width:calc(1px * calc(1 - var(--tw-divide-x-reverse)))}",
   "divide-x-0": ".divide-x-0>:not([hidden])~:not([hidden]){--tw-divide-x-reverse:0;border-right-width:calc(0px * var(--tw-divide-x-reverse));border-left-width:0px;border-left-width:calc(0px * calc(1 - var(--tw-divide-x-reverse)))}",
   "divide-x-2": ".divide-x-2>:not([hidden])~:not([hidden]){--tw-divide-x-reverse:0;border-right-width:calc(2px * var(--tw-divide-x-reverse));border-left-width:2px;border-left-width:calc(2px * calc(1 - var(--tw-divide-x-reverse)))}",
