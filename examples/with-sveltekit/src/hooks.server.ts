@@ -1,7 +1,7 @@
 import type { Handle } from '@sveltejs/kit'
 import handleTwind from '@twind/with-sveltekit/hooks'
 
-export const handle: Handle = handleTwind()
+export const handle: Handle = handleTwind() as unknown as Handle
 
 /* If you have other handles use the `sequence` helper */
 // import { sequence } from '@sveltejs/kit/hooks';
