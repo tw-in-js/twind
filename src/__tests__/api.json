@@ -41,9 +41,9 @@
   "not-italic": ".not-italic{font-style:normal}",
   "font-italic": ".font-italic{font-style:italic}",
   "font-not-italic": ".font-not-italic{font-style:normal}",
-  "underline": ".underline{text-decoration:underline}",
-  "no-underline": ".no-underline{text-decoration:none}",
-  "line-through": ".line-through{text-decoration:line-through}",
+  "underline": ".underline{text-decoration-line:underline}",
+  "no-underline": ".no-underline{text-decoration-line:none}",
+  "line-through": ".line-through{text-decoration-line:line-through}",
   "uppercase": ".uppercase{text-transform:uppercase}",
   "lowercase": ".lowercase{text-transform:lowercase}",
   "capitalize": ".capitalize{text-transform:capitalize}",
@@ -53,9 +53,9 @@
   "list-none": ".list-none{list-style-type:none}",
   "list-disc": ".list-disc{list-style-type:disc}",
   "list-decimal": ".list-decimal{list-style-type:decimal}",
-  "text-underline": ".text-underline{text-decoration:underline}",
-  "text-no-underline": ".text-no-underline{text-decoration:none}",
-  "text-line-through": ".text-line-through{text-decoration:line-through}",
+  "text-underline": ".text-underline{text-decoration-line:underline}",
+  "text-no-underline": ".text-no-underline{text-decoration-line:none}",
+  "text-line-through": ".text-line-through{text-decoration-line:line-through}",
   "text-uppercase": ".text-uppercase{text-transform:uppercase}",
   "text-lowercase": ".text-lowercase{text-transform:lowercase}",
   "text-capitalize": ".text-capitalize{text-transform:capitalize}",
@@ -480,16 +480,16 @@
     [
       ".text-2xl{font-size:1.5rem;line-height:2rem}",
       ".text-center{text-align:center}",
-      ".underline{text-decoration:underline}"
+      ".underline{text-decoration-line:underline}"
     ]
   ],
   "((underline) (text(center 2xl)) (((font(bold)))))": [
     "underline text-center text-2xl font-bold",
     [
       ".text-2xl{font-size:1.5rem;line-height:2rem}",
-      ".underline{text-decoration:underline}",
       ".text-center{text-align:center}",
-      ".font-bold{font-weight:700}"
+      ".font-bold{font-weight:700}",
+      ".underline{text-decoration-line:underline}"
     ]
   ],
   "text(indigo-700 opacity-70)": [
@@ -534,8 +534,8 @@
       ".my-2{margin-bottom:0.5rem;margin-top:0.5rem}",
       ".px-5{padding-left:1.25rem;padding-right:1.25rem}",
       ".text-center{text-align:center}",
-      ".underline{text-decoration:underline}",
-      ".font-bold{font-weight:700}"
+      ".font-bold{font-weight:700}",
+      ".underline{text-decoration-line:underline}"
     ]
   ],
   "group hover:bg-gray-300": [
@@ -633,7 +633,7 @@
       ".text-purple-500{--tw-text-opacity:1;color:#8b5cf6;color:rgba(139,92,246,var(--tw-text-opacity))}",
       ".text-lg{font-size:1.125rem;line-height:1.75rem}",
       ".text-capitalize{text-transform:capitalize}",
-      ".text-underline{text-decoration:underline}"
+      ".text-underline{text-decoration-line:underline}"
     ]
   ],
   "font(sans italic bold)": [
@@ -662,7 +662,7 @@
       ".hover\\:text-center:hover{text-align:center}",
       ".hover\\:active\\:ring:hover:active{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 transparent)}",
       ".active\\:hover\\:text-lg:active:hover{font-size:1.125rem;line-height:1.75rem}",
-      ".hover\\:active\\:text-underline:hover:active{text-decoration:underline}",
+      ".hover\\:active\\:text-underline:hover:active{text-decoration-line:underline}",
       ".hover\\:active\\:ring-opacity-5:hover:active{--tw-ring-opacity:0.05}"
     ]
   ],
@@ -671,9 +671,9 @@
     [
       ".transition{transition-property:background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}",
       ".text-4xl{font-size:2.25rem;line-height:2.5rem}",
-      ".text-underline{text-decoration:underline}",
       ".font-bold{font-weight:700}",
       ".font-sans{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,\"Segoe UI\",Roboto,\"Helvetica Neue\",Arial,\"Noto Sans\",sans-serif,\"Apple Color Emoji\",\"Segoe UI Emoji\",\"Segoe UI Symbol\",\"Noto Color Emoji\"}",
+      ".text-underline{text-decoration-line:underline}",
       ".hover\\:transform:hover{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}",
       ".hover\\:scale-125:hover{--tw-scale-x:1.25;--tw-scale-y:1.25;transform:scale(1.25);transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}",
       ".hover\\:rotate-6:hover{--tw-rotate:6deg;transform:rotate(6deg);transform:translateX(var(--tw-translate-x,0)) translateY(var(--tw-translate-y,0)) rotate(var(--tw-rotate,0)) skewX(var(--tw-skew-x,0)) skewY(var(--tw-skew-y,0)) scaleX(var(--tw-scale-x,1)) scaleY(var(--tw-scale-y,1))}",
@@ -792,9 +792,9 @@
   "proportional-nums": ".proportional-nums{--tw-numeric-spacing:proportional-nums;font-variant-numeric:var(--tw-ordinal,/*!*/ /*!*/) var(--tw-slashed-zero,/*!*/ /*!*/) var(--tw-numeric-figure,/*!*/ /*!*/) var(--tw-numeric-spacing,/*!*/ /*!*/) var(--tw-numeric-fraction,/*!*/ /*!*/)}",
   "diagonal-fractions": ".diagonal-fractions{--tw-numeric-fraction:diagonal-fractions;font-variant-numeric:var(--tw-ordinal,/*!*/ /*!*/) var(--tw-slashed-zero,/*!*/ /*!*/) var(--tw-numeric-figure,/*!*/ /*!*/) var(--tw-numeric-spacing,/*!*/ /*!*/) var(--tw-numeric-fraction,/*!*/ /*!*/)}",
   "stacked-fractions": ".stacked-fractions{--tw-numeric-fraction:stacked-fractions;font-variant-numeric:var(--tw-ordinal,/*!*/ /*!*/) var(--tw-slashed-zero,/*!*/ /*!*/) var(--tw-numeric-figure,/*!*/ /*!*/) var(--tw-numeric-spacing,/*!*/ /*!*/) var(--tw-numeric-fraction,/*!*/ /*!*/)}",
-  "children:underline": ".children\\:underline>*{text-decoration:underline}",
-  "siblings:underline": ".siblings\\:underline~*{text-decoration:underline}",
-  "sibling:underline": ".sibling\\:underline+*{text-decoration:underline}",
+  "children:underline": ".children\\:underline>*{text-decoration-line:underline}",
+  "siblings:underline": ".siblings\\:underline~*{text-decoration-line:underline}",
+  "sibling:underline": ".sibling\\:underline+*{text-decoration-line:underline}",
   "!text-center": ".\\!text-center{text-align:center !important}",
   "text-center!": ["!text-center", [".\\!text-center{text-align:center !important}"]],
   "!(text-center font-bold)": [
@@ -826,7 +826,7 @@
     "!text-xl !text-underline",
     [
       ".\\!text-xl{font-size:1.25rem !important;line-height:1.75rem !important}",
-      ".\\!text-underline{text-decoration:underline !important}"
+      ".\\!text-underline{text-decoration-line:underline !important}"
     ]
   ],
   "!-m-8": ".\\!-m-8{margin:calc(2rem * -1) !important}",
@@ -834,7 +834,7 @@
     "!text-xl !text-underline md:!-m-8",
     [
       ".\\!text-xl{font-size:1.25rem !important;line-height:1.75rem !important}",
-      ".\\!text-underline{text-decoration:underline !important}",
+      ".\\!text-underline{text-decoration-line:underline !important}",
       "@media (min-width:768px){.md\\:\\!-m-8{margin:calc(2rem * -1) !important}}"
     ]
   ],

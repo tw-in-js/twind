@@ -322,7 +322,7 @@ test('properties presedence (divide)', ({ sheet, tw }) => {
       '@media (min-width:1024px){.lg\\:hover\\:text-black:hover{--tw-text-opacity:1;color:#000;color:rgba(0,0,0,var(--tw-text-opacity))}}',
       '@media (min-width:1024px){.lg\\:hover\\:bg-white:hover{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}}',
       '@media (min-width:1024px){.lg\\:hover\\:active\\:shadow:hover:active{--tw-shadow:0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06);box-shadow:0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06);box-shadow:var(--tw-ring-offset-shadow,0 0 transparent),var(--tw-ring-shadow,0 0 transparent),var(--tw-shadow)}}',
-      '@media (min-width:1024px){.lg\\:hover\\:active\\:underline:hover:active{text-decoration:underline}}',
+      '@media (min-width:1024px){.lg\\:hover\\:active\\:underline:hover:active{text-decoration-line:underline}}',
     ],
   ],
 ].forEach(([tokens, classNames, rules]) => {
@@ -394,9 +394,9 @@ test('tw`bg-white sm:${["rounded"]} text-black hover:${{sm: ({tw}) => tw`underli
     '.bg-white{--tw-bg-opacity:1;background-color:#fff;background-color:rgba(255,255,255,var(--tw-bg-opacity))}',
     '.font-bold{font-weight:700}',
     '@media (min-width:640px){.sm\\:rounded{border-radius:0.25rem}}',
-    '@media (min-width:640px){.hover\\:sm\\:underline:hover{text-decoration:underline}}',
-    '@media (min-width:1024px){.hover\\:lg\\:no-underline:hover{text-decoration:none}}',
-    '@media (min-width:1024px){.hover\\:lg\\:line-through:hover{text-decoration:line-through}}',
+    '@media (min-width:640px){.hover\\:sm\\:underline:hover{text-decoration-line:underline}}',
+    '@media (min-width:1024px){.hover\\:lg\\:no-underline:hover{text-decoration-line:none}}',
+    '@media (min-width:1024px){.hover\\:lg\\:line-through:hover{text-decoration-line:line-through}}',
   ])
 })
 
@@ -424,10 +424,10 @@ test('tw`bg-${"fuchsia"}) sm:${"underline"} lg:${false && "line-through"} text-$
   )
   assert.equal(sheet.target, [
     '.bg-fuchsia{background-color:fuchsia}',
-    '.text-underline{text-decoration:underline}',
     '.text-center{text-align:center}',
+    '.text-underline{text-decoration-line:underline}',
     '.rounded-xl{border-radius:0.75rem}',
-    '@media (min-width:640px){.sm\\:underline{text-decoration:underline}}',
+    '@media (min-width:640px){.sm\\:underline{text-decoration-line:underline}}',
   ])
 })
 
@@ -462,7 +462,7 @@ test('tw`hover:${() => ...} bg-${"red"}-600 ${"underline"}`', ({ tw, sheet }) =>
   )
   assert.equal(sheet.target, [
     '.bg-red-600{--tw-bg-opacity:1;background-color:#dc2626;background-color:rgba(220,38,38,var(--tw-bg-opacity))}',
-    '.underline{text-decoration:underline}',
+    '.underline{text-decoration-line:underline}',
     '.tw-41gqd9:hover{color:fuchsia}',
   ])
 })
@@ -654,9 +654,9 @@ test('inline rule (tw combined)', ({ sheet, tw }) => {
     'underline text-center font-bold',
   )
   assert.equal(sheet.target, [
-    '.underline{text-decoration:underline}',
     '.text-center{text-align:center}',
     '.font-bold{font-weight:700}',
+    '.underline{text-decoration-line:underline}',
   ])
 })
 
@@ -668,7 +668,7 @@ test('inline rule (variants)', ({ sheet, tw }) => {
   assert.equal(sheet.target, [
     '.text-center{text-align:center}',
     '.active\\:font-bold:active{font-weight:700}',
-    '@media (min-width:640px){.sm\\:hover\\:underline:hover{text-decoration:underline}}',
+    '@media (min-width:640px){.sm\\:hover\\:underline:hover{text-decoration-line:underline}}',
   ])
 })
 
@@ -693,9 +693,9 @@ test('inline rule nested', ({ sheet, tw }) => {
   assert.equal(sheet.target, [
     '.text-center{text-align:center}',
     '.font-bold{font-weight:700}',
-    '@media (min-width:640px){.sm\\:hover\\:underline:hover{text-decoration:underline}}',
+    '@media (min-width:640px){.sm\\:hover\\:underline:hover{text-decoration-line:underline}}',
     '@media (min-width:1024px){.lg\\:text-lg{font-size:1.125rem;line-height:1.75rem}}',
-    '@media (min-width:1024px){.lg\\:focus\\:underline:focus{text-decoration:underline}}',
+    '@media (min-width:1024px){.lg\\:focus\\:underline:focus{text-decoration-line:underline}}',
     '@media (min-width:640px){.tw-1xfd7yc:focus{color:#ef4444}}',
   ])
 })
@@ -884,7 +884,7 @@ test('@screen (object notation)', ({ tw, sheet }) => {
   assert.is(tw(style), 'tw-svjqbe')
   assert.equal(sheet.target, [
     '@media (min-width:640px){.tw-svjqbe{match:sm}}',
-    '@media (min-width:1536px){.tw-svjqbe{text-decoration:underline}}',
+    '@media (min-width:1536px){.tw-svjqbe{text-decoration-line:underline}}',
   ])
 })
 
@@ -899,7 +899,7 @@ test('@apply (object notation)', ({ tw, sheet }) => {
 
   assert.is(tw(style), 'tw-1dlm15h')
   assert.equal(sheet.target, [
-    '.tw-1dlm15h{font-weight:700;padding-bottom:0.5rem;padding-top:0.5rem;padding-left:1rem;padding-right:1rem;text-decoration:underline;color:fuchsia;transform:translateY(-1px)}',
+    '.tw-1dlm15h{font-weight:700;padding-bottom:0.5rem;padding-top:0.5rem;padding-left:1rem;padding-right:1rem;text-decoration-line:underline;color:fuchsia;transform:translateY(-1px)}',
   ])
 })
 
@@ -914,7 +914,7 @@ test('using @apply with array', ({ tw, sheet }) => {
 
   assert.is(tw(style), 'tw-v9zanm')
   assert.equal(sheet.target, [
-    '.tw-v9zanm{font-weight:700;text-decoration:underline;padding-bottom:0.5rem;padding-top:0.5rem;padding-left:1rem;padding-right:1rem;color:fuchsia;transform:translateY(-1px)}',
+    '.tw-v9zanm{font-weight:700;text-decoration-line:underline;padding-bottom:0.5rem;padding-top:0.5rem;padding-left:1rem;padding-right:1rem;color:fuchsia;transform:translateY(-1px)}',
   ])
 })
 
@@ -931,8 +931,8 @@ test('using @apply with variant', ({ tw, sheet }) => {
 
   assert.is(tw(style), 'tw-1plavv4')
   assert.equal(sheet.target, [
-    '.tw-1plavv4:hover{text-decoration:underline;transform:translateY(-1px)}',
     '.tw-1plavv4{font-weight:700;color:fuchsia}',
+    '.tw-1plavv4:hover{text-decoration-line:underline;transform:translateY(-1px)}',
   ])
 })
 

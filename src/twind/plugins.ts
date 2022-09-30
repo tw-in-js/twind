@@ -72,7 +72,7 @@ const alias = (handler: PluginHandler, name: string): PluginHandler => (params, 
 const display = property('display')
 const position = property('position')
 const textTransform = property('textTransform')
-const textDecoration = property('textDecoration')
+const textDecorationLine = property('textDecorationLine')
 const fontStyle = property('fontStyle')
 const fontVariantNumeric = (key: string): PluginHandler => (params, context, id) => ({
   ['--tw-' + key]: id,
@@ -490,13 +490,13 @@ export const corePlugins: Record<string, Plugin | undefined> = {
           left: _,
         },
 
-  underline: textDecoration,
-  'line-through': textDecoration,
-  'no-underline': alias(textDecoration, 'none'),
+  underline: textDecorationLine,
+  'line-through': textDecorationLine,
+  'no-underline': alias(textDecorationLine, 'none'),
 
-  'text-underline': alias(textDecoration, 'underline'),
-  'text-no-underline': alias(textDecoration, 'none'),
-  'text-line-through': alias(textDecoration, 'line-through'),
+  'text-underline': alias(textDecorationLine, 'underline'),
+  'text-no-underline': alias(textDecorationLine, 'none'),
+  'text-line-through': alias(textDecorationLine, 'line-through'),
 
   uppercase: textTransform,
   lowercase: textTransform,

@@ -98,8 +98,8 @@ test('ignore vendor specific pseudo classes errors', () => {
   assert.equal(calls, [
     ['::-moz-focus-inner{border-style:none}', 0],
     [':-moz-focusring{outline:1px dotted ButtonText}', 0],
-    ['.underline{-webkit-text-decoration:underline;text-decoration:underline}', 0],
-    ['.text-center{text-align:center}', 1],
+    ['.underline{text-decoration-line:underline}', 0],
+    ['.text-center{text-align:center}', 0],
   ])
 
   assert.is(warn.callCount, 0)
@@ -133,7 +133,7 @@ test('propagate other errors to warn', () => {
 
   assert.equal(calls, [
     ['.invalid-web{color:blue}', 0],
-    ['.underline{-webkit-text-decoration:underline;text-decoration:underline}', 0],
+    ['.underline{text-decoration-line:underline}', 0],
   ])
 
   assert.is(warn.callCount, 1)

@@ -92,13 +92,13 @@ if (Number(process.versions.node.split('.')[0]) >= 12) {
     assert.match(first.textContent, '.text-center{text-align:center}.font-bold{font-weight:700}')
     assert.not.match(
       first.textContent,
-      '.italic{font-style:italic}.underline{-webkit-text-decoration:underline;text-decoration:underline}',
+      '.italic{font-style:italic}.underline{text-decoration-line:underline}',
     )
 
     assert.match(second.textContent, 'ol,ul{list-style:none}')
     assert.match(
       second.textContent,
-      '.italic{font-style:italic}.underline{-webkit-text-decoration:underline;text-decoration:underline}',
+      '.italic{font-style:italic}.underline{text-decoration-line:underline}',
     )
     assert.not.match(
       second.textContent,

@@ -43,9 +43,9 @@ test('The "tw" property is evaluated', ({ sheet, tw }) => {
 
   assert.equal(sheet.target, [])
 
-  assert.is(tw(component({ tw: `underline` })), 'tw-17aav39 tw-146i9et')
+  assert.is(tw(component({ tw: `underline` })), 'tw-tfsxaf tw-146i9et')
   assert.equal(sheet.target, [
-    '.tw-17aav39{font-size:1rem;line-height:1.5rem;text-decoration:underline}',
+    '.tw-tfsxaf{font-size:1rem;line-height:1.5rem;text-decoration-line:underline}',
   ])
 
   sheet.reset()

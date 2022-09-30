@@ -80,7 +80,7 @@ test('important', () => {
   )
   assert.equal(sheet.target, [
     '.tw-nziaos{font-size:1.25rem !important;line-height:1.75rem !important}',
-    '.underline{text-decoration:underline !important}',
+    '.underline{text-decoration-line:underline !important}',
     '.tw-yinfv4{color:#ef4444 !important}',
   ])
 })

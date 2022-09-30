@@ -101,7 +101,7 @@ test('css can be used', ({ tw, sheet }) => {
   assert.equal(sheet.target, [
     '.tw-1ky59p5{padding-bottom:0.5rem;padding-top:0.5rem;padding-left:1rem;padding-right:1rem;border-color:black}',
     '.tw-x66wbi{padding-left:2rem;padding-right:2rem}',
-    '.tw-1tbrnfj{text-decoration:underline}',
+    '.tw-1tbrnfj{text-decoration-line:underline}',
   ])
 })
 
@@ -420,10 +420,10 @@ test('applied rules can be used alone after apply', ({ tw, sheet }) => {
 })
 
 test('applied rules are within component layer', ({ tw, sheet }) => {
-  assert.is(tw(apply`underline`, 'bg-red-500'), 'tw-1h2u08d tw-1u8yv89')
+  assert.is(tw(apply`underline`, 'bg-red-500'), 'tw-1gmjw68 tw-1u8yv89')
 
   assert.equal(sheet.target, [
-    '.tw-1h2u08d{text-decoration:underline}',
+    '.tw-1gmjw68{text-decoration-line:underline}',
     '.tw-1u8yv89{--tw-17cwy6m:1;background-color:#ef4444;background-color:rgba(239,68,68,var(--tw-17cwy6m))}',
   ])
 
@@ -433,7 +433,7 @@ test('applied rules are within component layer', ({ tw, sheet }) => {
 
   assert.equal(sheet.target, [
     '.tw-1u8yv89{--tw-17cwy6m:1;background-color:#ef4444;background-color:rgba(239,68,68,var(--tw-17cwy6m))}',
-    '.tw-1tbrnfj{text-decoration:underline}',
+    '.tw-1tbrnfj{text-decoration-line:underline}',
   ])
 })
 
