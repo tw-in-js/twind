@@ -64,9 +64,7 @@ export function fromTheme<
 
     if (value != null) {
       ;(match as ThemeMatchResult<ThemeValue<Theme[Section]>>)._ =
-        match.input[0] == '-'
-          ? (`calc(${value as string} * -1)` as ThemeValue<Theme[Section]>)
-          : value
+        match.input[0] == '-' ? (`calc(${value} * -1)` as ThemeValue<Theme[Section]>) : value
 
       return factory(match as ThemeMatchResult<ThemeValue<Theme[Section]>>, context, themeSection)
     }

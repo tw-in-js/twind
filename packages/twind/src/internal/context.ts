@@ -211,7 +211,7 @@ function createResolve<Result, Theme extends BaseTheme = BaseTheme>(
   })
 }
 
-function createRegExpExecutor<Result, Theme extends BaseTheme = BaseTheme>(
+function createRegExpExecutor<Result, Theme extends BaseTheme = any>(
   patterns: MaybeArray<string | RegExp>,
   run: (value: string, condition: RegExp, context: Context<Theme>, isDark?: boolean) => Result,
 ): (value: string, context: Context<Theme>, isDark?: boolean) => Result | undefined {

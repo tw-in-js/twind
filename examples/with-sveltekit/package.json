@@ -33,6 +33,6 @@
     "vite": "^3.1.2",
     "svelte": "^3.46.4",
     "twind": "1.0.0-next.38",
-    "typescript": "^4.7.4"
+    "typescript": "^4.8.4"
   }
 }

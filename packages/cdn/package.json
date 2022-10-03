@@ -41,7 +41,7 @@
     "twind": "1.0.0-next.38"
   },
   "peerDependencies": {
-    "typescript": "^4.4.0"
+    "typescript": "^4.8.4"
   },
   "peerDependenciesMeta": {
     "typescript": {
