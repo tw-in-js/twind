@@ -14,6 +14,8 @@ declare module 'twind' {
     '--tw-bg-opacity'?: string | number
     '--tw-blur'?: string
     '--tw-border-opacity'?: string | number
+    '--tw-border-spacing-x'?: string | number
+    '--tw-border-spacing-y'?: string | number
     '--tw-brightness'?: string
     '--tw-contrast'?: string
     '--tw-divide-opacity'?: string | number
@@ -99,6 +101,7 @@ export interface TailwindTheme extends BaseTheme {
   borderColor: BaseTheme['colors']
   borderOpacity: Record<string, string>
   borderRadius: Record<string, string>
+  borderSpacing: Record<string, string>
   borderWidth: Record<string, string>
   boxShadow: Record<string, MaybeArray<string>>
   boxShadowColor: BaseTheme['colors']

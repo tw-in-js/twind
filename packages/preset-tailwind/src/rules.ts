@@ -586,6 +586,22 @@ const rules: Rule<TailwindTheme>[] = [
   // Border Style
   ['border-(solid|dashed|dotted|double|none)', 'borderStyle'],
 
+  // Border Spacing
+  [
+    'border-spacing(-[xy])?(?:-|$)',
+    fromTheme('borderSpacing', ({ 1: $1, _ }) => ({
+      '@layer defaults': {
+        '*,::before,::after,::backdrop': {
+          '--tw-border-spacing-x': 0,
+          '--tw-border-spacing-y': 0,
+        },
+      },
+      [('--tw-border-spacing' + ($1 || '-x')) as '--tw-border-spacing-x']: _,
+      [('--tw-border-spacing' + ($1 || '-y')) as '--tw-border-spacing-y']: _,
+      'border-spacing': 'var(--tw-border-spacing-x) var(--tw-border-spacing-y)',
+    })),
+  ],
+
   // Border Color
   ['border-([xytrbl])-', colorFromTheme({ section: 'borderColor' }, edge('border', 'Color'))],
   ['border-', colorFromTheme()],

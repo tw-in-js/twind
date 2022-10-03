@@ -241,6 +241,7 @@ const theme: DefaultTheme = {
     '1/2': '50%',
     full: '9999px',
   },
+  borderSpacing: /* #__PURE__ */ alias('spacing'),
   borderWidth: {
     .../* #__PURE__ */ exponential(8, 'px'),
     // 0: '0px',
