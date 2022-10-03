@@ -6,6 +6,8 @@ import type {
   ThemeFunction,
   ThemeSectionResolverContext,
 } from '../types'
+import { toColorValue } from '../colors'
+import { resolveThemeFunction } from './serialize'
 
 export function makeThemeFunction<Theme extends BaseTheme = BaseTheme>({
   extend = {},
@@ -14,7 +16,9 @@ export function makeThemeFunction<Theme extends BaseTheme = BaseTheme>({
   const resolved: Record<string, any> = {}
 
   const resolveContext: ThemeSectionResolverContext<Theme> = {
-    colors: theme('colors'),
+    get colors() {
+      return theme('colors')
+    },
 
     theme,
 
@@ -38,8 +42,17 @@ export function makeThemeFunction<Theme extends BaseTheme = BaseTheme>({
 
   return theme as ThemeFunction<Theme>
 
-  function theme(sectionKey?: string, key?: string, defaultValue?: any): any {
+  function theme(
+    sectionKey?: string,
+    key?: string,
+    defaultValue?: any,
+    opacityValue?: string | undefined,
+  ): any {
     if (sectionKey) {
+      ;({ 1: sectionKey, 2: opacityValue } =
+        // eslint-disable-next-line no-sparse-arrays
+        /^(\S+?)(?:\s*\/\s*([^/]+))?$/.exec(sectionKey) || ([, sectionKey] as RegExpExecArray))
+
       if (/[.[]/.test(sectionKey)) {
         const path: string[] = []
 
@@ -68,7 +81,11 @@ export function makeThemeFunction<Theme extends BaseTheme = BaseTheme>({
 
       if (key == null) return section
 
-      return section[key || 'DEFAULT'] ?? defaultValue
+      const value = section[key || 'DEFAULT'] ?? defaultValue
+
+      return opacityValue
+        ? toColorValue(value, { opacityValue: resolveThemeFunction(opacityValue, theme) })
+        : value
     }
 
     // Collect the whole theme

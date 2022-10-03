@@ -193,7 +193,7 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
               key,
               // support theme(...) function in values
               // calc(100vh - theme('spacing.12'))
-              resolveThemeFunction('' + value, context) + (important ? ' !important' : ''),
+              resolveThemeFunction('' + value, context.theme) + (important ? ' !important' : ''),
             ),
           )
           .join(';')
@@ -225,7 +225,7 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
 
 export function resolveThemeFunction<Theme extends BaseTheme = BaseTheme>(
   value: string,
-  context: Context<Theme>,
+  theme: Context<Theme>['theme'],
 ): string {
   // support theme(...) function in values
   // calc(100vh - theme('spacing.12'))
@@ -235,8 +235,8 @@ export function resolveThemeFunction<Theme extends BaseTheme = BaseTheme>(
   // if (value.includes('theme')) {
   return value.replace(
     /theme\((["'`])?(.+?)\1(?:\s*,\s*(["'`])?(.+?)\3)?\)/g,
-    (_, __, key, ___, defaultValue) => {
-      const value = context.theme(key, defaultValue)
+    (_, __, key: string, ___, defaultValue: string | undefined) => {
+      const value = theme(key, defaultValue)
 
       if (typeof value == 'function' && /color|fill|stroke/i.test(key)) {
         return toColorValue(value as ColorValue)

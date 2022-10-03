@@ -224,7 +224,7 @@ export function arbitrary<Theme extends BaseTheme = BaseTheme>(
   context: Context<Theme>,
 ): string | undefined {
   if (value[0] == '[' && value.slice(-1) == ']') {
-    value = normalize(resolveThemeFunction(value.slice(1, -1), context))
+    value = normalize(resolveThemeFunction(value.slice(1, -1), context.theme))
 
     // TODO remove arbitrary type prefix — we do not need it but user may use it
     // https://github.com/tailwindlabs/tailwindcss/blob/master/src/util/dataTypes.js
