@@ -175,6 +175,8 @@
   "text-right": ".text-right{text-align:right}",
   "text-center": ".text-center{text-align:center}",
   "text-justify": ".text-justify{text-align:justify}",
+  "text-start": ".text-start{text-align:start}",
+  "text-end": ".text-end{text-align:end}",
   "text-xs": ".text-xs{font-size:0.75rem;line-height:1rem}",
   "text-base": ".text-base{font-size:1rem;line-height:1.5rem}",
   "text-xl": ".text-xl{font-size:1.25rem;line-height:1.75rem}",
