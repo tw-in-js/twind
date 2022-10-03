@@ -1,6 +1,8 @@
 import type { Variant } from 'twind'
 import type { TailwindTheme } from './types'
 
+import { normalize } from 'twind'
+
 const variants: Variant<TailwindTheme>[] = [
   ['sticky', '@supports ((position: -webkit-sticky) or (position:sticky))'],
   ['motion-reduce', '@media (prefers-reduced-motion:reduce)'],
@@ -40,6 +42,9 @@ const variants: Variant<TailwindTheme>[] = [
 
   // direction variants
   ['(ltr|rtl)', ({ 1: $1 }) => `[dir="${$1}"] &`],
+
+  // Arbitrary variants
+  [/^\[(.+)]$/, ({ 1: $1 }) => /[&@]/.test($1) && normalize($1).replace(/[}]+$/, '').split('{')],
 ]
 
 export default variants

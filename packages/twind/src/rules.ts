@@ -193,7 +193,10 @@ export function colorFromTheme<
 
         properties = {
           '&': properties,
-          [context.v('dark')]: create(match as ThemeMatchResult<ColorFromThemeValue>, context),
+          [context.v('dark') as string]: create(
+            match as ThemeMatchResult<ColorFromThemeValue>,
+            context,
+          ),
         } as CSSObject
       }
     }
@@ -254,7 +257,7 @@ function camelize(value: string): string {
   return value.replace(/-./g, (x) => x[1].toUpperCase())
 }
 
-function normalize(value: string): string {
+export function normalize(value: string): string {
   // Keep raw strings if it starts with `url(`
   if (value.includes('url(')) {
     return value.replace(

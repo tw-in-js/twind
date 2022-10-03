@@ -107,7 +107,7 @@ export interface Context<Theme extends BaseTheme = BaseTheme> {
    *
    * @private
    */
-  v: (value: string) => string
+  v: (value: string) => MaybeArray<string>
 
   /**
    * resolves a rule
@@ -198,7 +198,7 @@ export type Rule<Theme extends BaseTheme = BaseTheme> =
       convert: MatchConverter<Theme>,
     ]
 
-export type VariantResult = string | Falsey
+export type VariantResult = MaybeArray<string> | Falsey
 
 export type VariantResolver<Theme extends BaseTheme = BaseTheme> = (
   match: MatchResult,

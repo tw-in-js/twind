@@ -41,7 +41,7 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
   ignorelist,
 }: TwindConfig<Theme>): Context<Theme> {
   // Used to cache resolved rule values
-  const variantCache = new Map<string, string>()
+  const variantCache = new Map<string, MaybeArray<string>>()
 
   // lazy created resolve functions
   const variantResolvers = new Map<Variant<Theme>, VariantFunction<Theme>>()

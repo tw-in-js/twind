@@ -328,3 +328,17 @@ test('group and peer hashed marker classes', () => {
   assert.strictEqual(tw('peer~name[disabled]:underline'), '#1tsl4h5')
   assert.deepEqual(tw.target, ['.\\#1krcwoi[disabled]~.\\#1tsl4h5{text-decoration-line:underline}'])
 })
+
+test('arbitrary variants with @apply', () => {
+  const style = css({
+    '@apply': '[@media_screen{@media(hover:hover){&:hover}}]:underline',
+  })
+
+  assert.strictEqual(style, 'css#itthsz')
+
+  assert.strictEqual(tw(style), 'css#itthsz')
+
+  assert.deepEqual(tw.target, [
+    '@media screen{@media(hover:hover){.css\\#itthsz:hover{text-decoration-line:underline}}}',
+  ])
+})

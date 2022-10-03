@@ -1,5 +1,7 @@
 import type { Variant } from 'twind'
 
+import { normalize } from 'twind'
+
 const variants: Variant[] = [
   ['hocus', '&:hover,&:focus-visible'],
   [
@@ -39,7 +41,7 @@ const variants: Variant[] = [
   // - `&>span:underline`
   // - `&>*:underline`
   // - `&_span:underline` -> `&_span:underline span`
-  [/&/, (match) => match.input.replace(/_/g, ' ')],
+  [/&/, (match) => normalize(match.input)],
 ]
 
 export default variants
