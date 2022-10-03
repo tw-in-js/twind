@@ -137,6 +137,8 @@ Thank you to all the people who have already contributed to twind!
 Thank you to all our sponsors! (please ask your company to also support this open source project by [becoming a sponsor](https://opencollective.com/twind#sponsor))
 
 <a href="https://www.kenoxa.com" target="_blank"><img src="https://images.opencollective.com/kenoxa/9c25796/logo/68.png"></a>
+<a href="https://www.copilottravel.com" target="_blank"><img src="https://assets.website-files.com/5f7bc722eed484e8af21e542/620edd53664c683a9cb371a3_copilot%20travel%20vector%20header%20logo.svg"></a>
+
 <a href="https://opencollective.com/twind/sponsor/0/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/0/avatar.svg"></a>
 <a href="https://opencollective.com/twind/sponsor/1/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/1/avatar.svg"></a>
 <a href="https://opencollective.com/twind/sponsor/2/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/2/avatar.svg"></a>
@@ -150,10 +152,11 @@ Thank you to all our sponsors! (please ask your company to also support this ope
 
 <a href="https://opencollective.com/twind#backers" target="_blank"><img src="https://opencollective.com/twind/backers.svg?width=890"></a>
 
-<a href="https://github.com/tonysaad" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/1137569?v=4" width="64" height="64" alt="@tonysaad"></a>
-<a href="https://github.com/OnurGvnc" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/1294640?v=4" width="64" height="64" alt="@OnurGvnc"></a>
+<a href="https://github.com/copilottravel" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/64566279?s=88&v=4" width="64" height="64" alt="@copilottravel"></a>
+<a href="https://github.com/denoland" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/42048915?s=88&v=4" width="64" height="64" alt="@denoland"></a>
 <a href="https://github.com/tylerforesthauser" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/1226786?v=4" width="64" height="64" alt="@tylerforesthauser"></a>
-<a href="https://github.com/mtsknn" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/2226144?v=4" width="64" height="64" alt="@mtsknn"></a>
+<a href="https://github.com/tonysaad" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/1137569?v=4" width="64" height="64" alt="@tonysaad"></a>
+<a href="https://github.com/izznatsir" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/32354148?s=120&v=4" width="64" height="64" alt="@izznatsir"></a>
 [[Become a GitHub Sponsor](https://github.com/sponsors/tw-in-js)]
 
 ## ⚖️ License
