@@ -22,10 +22,7 @@
   "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
   "exports": {
     ".": "./src/index.ts",
-    "./hooks": {
-      "node": "./src/hooks.ts",
-      "module": "./src/hooks.ts"
-    },
+    "./hooks": "./src/hooks.ts",
     "./package.json": "./package.json"
   },
   "distilt": {
@@ -37,7 +34,7 @@
   "// These are relative from within the dist/ folder": "",
   "sideEffects": false,
   "peerDependencies": {
-    "@sveltejs/kit": "^1.0.0-next.234",
+    "@sveltejs/kit": "^1.0.0-next.507",
     "twind": "1.0.0-next.38",
     "typescript": "^4.8.4"
   },
@@ -47,7 +44,7 @@
     }
   },
   "devDependencies": {
-    "@sveltejs/kit": "^1.0.0-next.267",
+    "@sveltejs/kit": "^1.0.0-next.507",
     "svelte": "^3.46.4",
     "twind": "1.0.0-next.38"
   },
