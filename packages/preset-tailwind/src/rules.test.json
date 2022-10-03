@@ -866,6 +866,7 @@
     "-rotate-3 hover:rotate-6 md:rotate-3 md:hover:-rotate-6",
     [
       "*,::before,::after,::backdrop{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-transform:translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}",
+      "@media (min-width:768px){*,::before,::after,::backdrop{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-transform:translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}}",
       ".-rotate-3{--tw-rotate:calc(3deg * -1);transform:var(--tw-transform)}",
       ".hover\\:rotate-6:hover{--tw-rotate:6deg;transform:var(--tw-transform)}",
       "@media (min-width:768px){.md\\:rotate-3{--tw-rotate:3deg;transform:var(--tw-transform)}}",

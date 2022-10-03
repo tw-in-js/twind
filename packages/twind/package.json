@@ -29,7 +29,7 @@
       "name": "twind",
       "path": "dist/twind.esnext.js",
       "brotli": true,
-      "limit": "7.65kb"
+      "limit": "7.7kb"
     },
     {
       "name": "twind (setup)",
