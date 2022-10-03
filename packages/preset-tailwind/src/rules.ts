@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+
 import type {
   MatchResult,
   Rule,
@@ -563,12 +565,14 @@ const rules: Rule<TailwindTheme>[] = [
   [
     'rounded-([trbl]{1,2})(?:-|$)',
     fromTheme('borderRadius', ({ 1: $1, _ }) => {
-      const corners = {
-        t: ['tl', 'tr'],
-        r: ['tr', 'br'],
-        b: ['bl', 'br'],
-        l: ['bl', 'tl'],
-      }[$1] || [$1, $1]
+      const corners = (
+        {
+          t: ['tl', 'tr'],
+          r: ['tr', 'br'],
+          b: ['bl', 'br'],
+          l: ['bl', 'tl'],
+        } as const
+      )[$1] || [$1, $1]
 
       return {
         [`border-${position(corners[0])}-radius` as 'border-top-left-radius']: _,
@@ -637,10 +641,12 @@ const rules: Rule<TailwindTheme>[] = [
   [
     'divide-([xy])(?:-|$)',
     fromTheme('divideWidth', ({ 1: $1, _ }) => {
-      const edges = {
-        x: 'lr',
-        y: 'tb',
-      }[$1 as 'x' | 'y']
+      const edges = (
+        {
+          x: 'lr',
+          y: 'tb',
+        } as const
+      )[$1 as 'x' | 'y']
 
       return {
         '&>:not([hidden])~:not([hidden])': {
@@ -799,7 +805,7 @@ const rules: Rule<TailwindTheme>[] = [
   [
     'animate(?:-|$)',
     fromTheme('animation', (match, { theme, h }) => {
-      const animation = join(match)
+      const animation: string = join(match)
 
       // Try to auto inject keyframes
       const parts = animation.split(' ')

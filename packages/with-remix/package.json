@@ -21,15 +21,18 @@
   "main": "src/index.ts",
   "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
   "exports": {
-    ".": {
-      "script": null,
-      "default": "./src/index.ts"
-    },
+    ".": "./src/index.ts",
     "./server": {
       "node": "./src/server.ts",
       "module": "./src/server.ts"
     },
     "./package.json": "./package.json"
+  },
+  "distilt": {
+    "targets": {
+      "// No browser global build": "",
+      "script": false
+    }
   },
   "// These are relative from within the dist/ folder": "",
   "sideEffects": false,
