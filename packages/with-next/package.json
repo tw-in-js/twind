@@ -20,15 +20,15 @@
   "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
   "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
   "exports": {
-    "./app": {
-      "script": null,
-      "default": "./src/app.ts"
-    },
-    "./document": {
-      "script": null,
-      "default": "./src/document.ts"
-    },
+    "./app": "./src/app.ts",
+    "./document": "./src/document.ts",
     "./package.json": "./package.json"
+  },
+  "distilt": {
+    "targets": {
+      "// No browser global build": "",
+      "script": false
+    }
   },
   "// These are relative from within the dist/ folder": "",
   "sideEffects": false,
