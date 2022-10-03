@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['14.x', '16.x']
+        node: ['16.x']
         # os: [ubuntu-20.04]
         # Maybe add those later again
         # os: [ubuntu-20.04, macos-11, windows-2022]
