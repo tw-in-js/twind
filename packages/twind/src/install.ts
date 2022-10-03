@@ -23,6 +23,6 @@ export function install(config: TwindConfig | TwindUserConfig, isProduction: boo
       // in production use short hashed class names
       hash: config$.hash ?? isProduction,
     },
-    getSheet(!isProduction),
+    () => getSheet(!isProduction),
   )
 }

@@ -13,6 +13,7 @@ import type {
   Preset,
   ExtractThemes,
   Sheet,
+  SheetFactory,
 } from 'twind'
 
 import type { TailwindPresetOptions, TailwindTheme } from '@twind/preset-tailwind'
@@ -48,7 +49,7 @@ export function defineConfig<Theme = TailwindTheme, Presets extends Preset<any>[
 
 export function setup<Theme extends BaseTheme = TailwindTheme, SheetTarget = unknown>(
   config?: TwindConfig<Theme> & TailwindPresetOptions,
-  sheet?: Sheet<SheetTarget>,
+  sheet?: Sheet<SheetTarget> | SheetFactory<SheetTarget>,
   target?: HTMLElement,
 ): Twind<Theme & TailwindTheme, SheetTarget>
 
@@ -58,13 +59,13 @@ export function setup<
   SheetTarget = unknown,
 >(
   config?: TwindUserConfig<Theme, Presets> & TailwindPresetOptions,
-  sheet?: Sheet<SheetTarget>,
+  sheet?: Sheet<SheetTarget> | SheetFactory<SheetTarget>,
   target?: HTMLElement,
 ): Twind<TailwindTheme & ExtractThemes<Theme, Presets>, SheetTarget>
 
 export function setup(
   config?: (TwindConfig | TwindUserConfig) & TailwindPresetOptions,
-  sheet?: Sheet,
+  sheet?: Sheet | SheetFactory,
   target?: HTMLElement,
 ): Twind {
   return setup$(defineConfig(config as TwindUserConfig), sheet, target) as unknown as Twind

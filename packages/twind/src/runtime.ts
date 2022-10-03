@@ -69,6 +69,8 @@ export const tw = /* #__PURE__ */ new Proxy(
 
 let active: Twind
 
+export type SheetFactory<SheetTarget = unknown> = () => Sheet<SheetTarget>
+
 /**
  * Manages a single Twind instance — works in browser, Node.js, Deno, workers...
  *
@@ -79,7 +81,7 @@ let active: Twind
  */
 export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown>(
   config?: TwindConfig<Theme>,
-  sheet?: Sheet<SheetTarget>,
+  sheet?: Sheet<SheetTarget> | SheetFactory<SheetTarget>,
   target?: HTMLElement,
 ): Twind<Theme, SheetTarget>
 
@@ -89,18 +91,21 @@ export function setup<
   SheetTarget = unknown,
 >(
   config?: TwindUserConfig<Theme, Presets>,
-  sheet?: Sheet<SheetTarget>,
+  sheet?: Sheet<SheetTarget> | SheetFactory<SheetTarget>,
   target?: HTMLElement,
 ): Twind<BaseTheme & ExtractThemes<Theme, Presets>, SheetTarget>
 
 export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown>(
   config: TwindConfig<any> | TwindUserConfig<any> = {},
-  sheet: Sheet<SheetTarget> = getSheet() as unknown as Sheet<SheetTarget>,
+  sheet: Sheet<SheetTarget> | SheetFactory<SheetTarget> = getSheet as SheetFactory<SheetTarget>,
   target?: HTMLElement,
 ): Twind<Theme, SheetTarget> {
   active?.destroy()
 
-  active = observe(twind(config as TwindUserConfig, sheet), target)
+  active = observe(
+    twind(config as TwindUserConfig, typeof sheet == 'function' ? sheet() : sheet),
+    target,
+  )
 
   return active as unknown as Twind<Theme, SheetTarget>
 }
