@@ -126,9 +126,7 @@ It would be untrue to suggest that the design here is totally original. Other th
 
 ### 🤝 Contributors
 
-Thank you to all the people who have already contributed to twind!
-
-<a href="https://github.com/tw-in-js/twind/graphs/contributors"><img src="https://opencollective.com/twind/contributors.svg?width=890" /></a>
+Thank you to all the people who have <a href="https://github.com/tw-in-js/twind/graphs/contributors">already contributed</a> to twind!
 
 ### 🙏🏾 Sponsors
 
