@@ -379,7 +379,7 @@ const rules: Rule<TailwindTheme>[] = [
   ['placeholder-', colorFromTheme({ property: 'color', selector: '&::placeholder' })],
 
   // Text Alignment
-  ['text-(left|center|right|justify)', 'textAlign'],
+  ['text-(left|center|right|justify|start|end)', 'textAlign'],
 
   // Text Opacity
   ['text-opacity-', fromTheme('textOpacity', '--tw-text-opacity')],
