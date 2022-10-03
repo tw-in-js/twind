@@ -266,22 +266,23 @@ export function normalize(value: string): string {
     )
   }
 
-  // Convert `_` to ` `, except for escaped underscores `\_`
-  value = value
-    .replace(
-      /(^|[^\\])_+/g,
-      (fullMatch, characterBefore: string) =>
-        characterBefore + ' '.repeat(fullMatch.length - characterBefore.length),
-    )
-    .replace(/\\_/g, '_')
+  return (
+    value
+      // Convert `_` to ` `, except for escaped underscores `\_`
+      .replace(
+        /(^|[^\\])_+/g,
+        (fullMatch, characterBefore: string) =>
+          characterBefore + ' '.repeat(fullMatch.length - characterBefore.length),
+      )
+      .replace(/\\_/g, '_')
 
-  if (value.includes('calc(')) {
-    // Add spaces around operators inside calc() that do not follow an operator or '('.
-    value = value.replace(
-      /(-?\d*\.?\d(?!\b-.+[,)](?![^+\-/*])\D)(?:%|[a-z]+)?|\))([+\-/*])/g,
-      '$1 $2 ',
-    )
-  }
-
-  return value
+      // Add spaces around operators inside math functions like calc() that do not follow an operator
+      // or '('.
+      .replace(/(calc|min|max|clamp)\(.+\)/g, (match) =>
+        match.replace(
+          /(-?\d*\.?\d(?!\b-.+[,)](?![^+\-/*])\D)(?:%|[a-z]+)?|\))([+\-/*])/g,
+          '$1 $2 ',
+        ),
+      )
+  )
 }
