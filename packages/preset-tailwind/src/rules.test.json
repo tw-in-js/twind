@@ -2017,5 +2017,14 @@
   "text-translucent-rose": ".text-translucent-rose{color:rgba(244,63,94,50%)}",
   "text-translucent-blue": ".text-translucent-blue{color:rgba(59,130,246,var(--my-alpha))}",
   "text-translucent-emerald": ".text-translucent-emerald{color:rgba(16,185,129,0.5)}",
-  "text-[theme(colors.amber.500/theme(opacity.75))]": ".text-\\[theme\\(colors\\.amber\\.500\\/theme\\(opacity\\.75\\)\\)\\]{color:rgba(245,158,11,0.75)}"
+  "text-[theme(colors.amber.500/theme(opacity.75))]": ".text-\\[theme\\(colors\\.amber\\.500\\/theme\\(opacity\\.75\\)\\)\\]{color:rgba(245,158,11,0.75)}",
+  "bg-white contrast-less:bg-black contrast-more:bg-pink-500": [
+    ".bg-white{--tw-bg-opacity:1;background-color:rgba(255,255,255,var(--tw-bg-opacity))}",
+    "@media (prefers-contrast:less){.contrast-less\\:bg-black{--tw-bg-opacity:1;background-color:rgba(0,0,0,var(--tw-bg-opacity))}}",
+    "@media (prefers-contrast:more){.contrast-more\\:bg-pink-500{--tw-bg-opacity:1;background-color:rgba(236,72,153,var(--tw-bg-opacity))}}"
+  ],
+  "contrast-more:bg-black dark:bg-white": [
+    "@media (prefers-contrast:more){.contrast-more\\:bg-black{--tw-bg-opacity:1;background-color:rgba(0,0,0,var(--tw-bg-opacity))}}",
+    "@media (prefers-color-scheme:dark){.dark\\:bg-white{--tw-bg-opacity:1;background-color:rgba(255,255,255,var(--tw-bg-opacity))}}"
+  ]
 }

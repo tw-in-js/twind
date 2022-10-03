@@ -8,6 +8,8 @@ const variants: Variant<TailwindTheme>[] = [
   ['print', '@media print'],
   ['portrait', '@media (orientation:portrait)'],
   ['landscape', '@media (orientation:landscape)'],
+  ['contrast-more', '@media (prefers-contrast:more)'],
+  ['contrast-less', '@media (prefers-contrast:less)'],
 
   ['first-letter', '&::first-letter'],
   ['first-line', '&::first-line'],
