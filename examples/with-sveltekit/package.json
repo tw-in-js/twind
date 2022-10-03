@@ -28,6 +28,6 @@
     "@twind/with-sveltekit": "1.0.0-next.38",
     "svelte": "^3.46.4",
     "twind": "1.0.0-next.38",
-    "typescript": "^4.5.5"
+    "typescript": "^4.8.4"
   }
 }

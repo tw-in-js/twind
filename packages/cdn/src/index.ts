@@ -62,7 +62,7 @@ export function setup(
           presetTailwind({ disablePreflight }),
           ...asArray((config as TwindUserConfig).presets),
         ],
-      },
+      } as any,
       sheet,
     ),
     target,

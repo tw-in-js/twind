@@ -5,7 +5,15 @@
  * @module
  */
 
-import type { CSSNested, Preset, CustomProperties, CSSObject, Context, BaseTheme } from 'twind'
+import type {
+  CSSNested,
+  Preset,
+  CustomProperties,
+  CSSObject,
+  Context,
+  BaseTheme,
+  ColorValue,
+} from 'twind'
 import { toColorValue } from 'twind'
 
 declare module 'twind' {
@@ -642,12 +650,15 @@ export default function presetTypography({
     ],
   }
 
-  function getColors(colorName: string, context: Context): CSSObject | undefined {
+  function getColors<Theme extends BaseTheme>(
+    colorName: string,
+    context: Context<Theme>,
+  ): CSSObject | undefined {
     const properties: CustomProperties = {}
     const darkProperties: CustomProperties = {}
 
     const set = (key: string, shade: string, target: CustomProperties) => {
-      const color = context.theme(`colors.${colorName}.${shade}`, shade)
+      const color = context.theme(`colors.${colorName}.${shade}`, shade) as ColorValue
 
       target[('--tw-prose-' + key) as keyof CustomProperties] = toColorValue(color)
 
@@ -693,7 +704,11 @@ export default function presetTypography({
   }
 }
 
-function adjustSelectors(className: string, context: Context, css: CSSNested): CSSNested {
+function adjustSelectors<Theme extends BaseTheme>(
+  className: string,
+  context: Context<Theme>,
+  css: CSSNested,
+): CSSNested {
   const result: CSSNested = {}
 
   for (const selector in css) {
@@ -710,10 +725,10 @@ function adjustSelectors(className: string, context: Context, css: CSSNested): C
   return result
 }
 
-function adjustSelector(
+function adjustSelector<Theme extends BaseTheme>(
   className: string,
   selector: string,
-  { e, h }: Context,
+  { e, h }: Context<Theme>,
   replace: (selector: string) => string,
 ): string {
   // pseudo elements can't be matched

@@ -27,11 +27,11 @@
     }
   ],
   "engines": {
-    "node": ">=12.4",
-    "pnpm": "^6.26.0"
+    "node": ">=14.15.0",
+    "pnpm": "^7.13.0"
   },
   "// https://nodejs.org/dist/latest-v16.x/docs/api/corepack.html": "",
-  "packageManager": "pnpm@6.29.1",
+  "packageManager": "pnpm@7.13.0",
   "// for npm/yarn within codesandbox — same as in pnpm-workspace.yml": "",
   "workspaces": [
     "examples/*",
@@ -78,7 +78,7 @@
   "// start — use 'BROWSER=none' to prevent vite to open a browser if within codesandbox or stackblitz": "",
   "scripts": {
     "start": "BROWSER=none npm run test:ui",
-    "build": "pnpm build --recursive --if-present --filter=./packages",
+    "build": "pnpm run --recursive --if-present --filter='./packages/*' build",
     "check": "TIMING=1 eslint --ext .js,.jsx,.cjs,.mjs,.ts,.tsx,.svelte --ignore-path .gitignore .",
     "check:fix": "npm run check -- --fix",
     "size-limit": "size-limit",
@@ -86,15 +86,15 @@
     "test": "vitest",
     "test:ui": "npm test -- --ui",
     "test:coverage": "vitest run --coverage",
-    "release": "pnpm publish -r",
+    "release": "pnpm publish --recursive",
     "changeset:version": "changeset version && pnpm i --lockfile-only",
-    "build:website": "pnpm run build --filter=./sites/twind.style",
+    "build:website": "pnpm run --filter=./sites/twind.style build",
     "prepare": "node ./.husky/prepare.cjs"
   },
   "// these are added as dependencies to all packages": "",
   "// @swc/helpers: common helper used by code generated from swc (distilt)": "",
   "dependencies": {
-    "@swc/helpers": "^0.3.3"
+    "@swc/helpers": "^0.4.11"
   },
   "// style-vendorizer is included here to allow examples to find it": "",
   "devDependencies": {
@@ -124,7 +124,7 @@
     "style-vendorizer": "^2.1.1",
     "svelte": "^3.46.4",
     "tslib": "^2.3.1",
-    "typescript": "^4.5.5",
+    "typescript": "^4.8.4",
     "vitest": "^0.3.4"
   },
   "prettier": {

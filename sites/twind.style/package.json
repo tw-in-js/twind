@@ -62,7 +62,7 @@
     "typedoc-plugin-markdown": "^3.11.13",
     "typedoc-plugin-mdn-links": "^1.0.5",
     "typedoc-plugin-rename-defaults": "^0.4.0",
-    "typescript": "^4.5.5",
+    "typescript": "^4.8.4",
     "unified": "^10.1.1",
     "unist-util-visit": "^4.1.0",
     "vite": "^2.8.1"
