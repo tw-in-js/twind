@@ -68,7 +68,7 @@ declare module 'twind' {
 export type FontSizeValue =
   | string
   | [size: string, lineHeight: string]
-  | [size: string, options: { lineHeight?: string; letterSpacing?: string }]
+  | [size: string, options: { lineHeight?: string; letterSpacing?: string; fontWeight?: string }]
 
 export interface Container {
   screens?: BaseTheme['screens']

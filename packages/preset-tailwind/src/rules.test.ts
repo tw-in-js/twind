@@ -342,3 +342,26 @@ test('arbitrary variants with @apply', () => {
     '@media screen{@media(hover:hover){.css\\#itthsz:hover{text-decoration-line:underline}}}',
   ])
 })
+
+test('font-size utilities can include a font-weight', () => {
+  const tw = twind(
+    {
+      presets: [tailwind({ disablePreflight: true })],
+      theme: {
+        fontSize: {
+          sm: '12px',
+          md: ['16px', { lineHeight: '24px', fontWeight: 500 }],
+          lg: ['20px', { lineHeight: '28px', fontWeight: 'bold' }],
+        },
+      },
+    },
+    virtual(),
+  )
+
+  assert.strictEqual(tw('text-sm text-md text-lg'), 'text-lg text-md text-sm')
+  assert.deepEqual(tw.target, [
+    '.text-lg{font-size:20px;line-height:28px;font-weight:bold}',
+    '.text-md{font-size:16px;line-height:24px;font-weight:500}',
+    '.text-sm{font-size:12px}',
+  ])
+})
