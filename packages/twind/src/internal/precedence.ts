@@ -155,7 +155,7 @@ These are calculated by serialize and added afterwards:
 
 | bits | trait                               |
 | ---- | ----------------------------------- |
-| 4    | number of selectors (descending) |
+| 4    | number of selectors (descending)    |
 | 4    | number of declarations (descending) |
 | 4    | greatest precedence of properties   |
 
@@ -305,17 +305,17 @@ export function convert<Theme extends BaseTheme = BaseTheme>(
   for (const variant of variants) {
     const screen = context.theme('screens', variant)
 
-    const condition = (screen && mql(screen)) || context.v(variant)
+    for (const condition of asArray((screen && mql(screen)) || context.v(variant))) {
+      conditions.push(condition)
 
-    conditions.push(condition)
-
-    precedence |= screen
-      ? (1 << 26) /* Shifts.screens */ | atRulePrecedence(condition)
-      : variant == 'dark'
-      ? 1 << 30 /* Shifts.darkMode */
-      : condition[0] == '@'
-      ? atRulePrecedence(condition)
-      : pseudoPrecedence(condition)
+      precedence |= screen
+        ? (1 << 26) /* Shifts.screens */ | atRulePrecedence(condition)
+        : variant == 'dark'
+        ? 1 << 30 /* Shifts.darkMode */
+        : condition[0] == '@'
+        ? atRulePrecedence(condition)
+        : pseudoPrecedence(condition)
+    }
   }
 
   return { n: name, p: precedence, r: conditions, i: important }

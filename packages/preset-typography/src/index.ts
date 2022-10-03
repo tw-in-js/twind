@@ -697,7 +697,7 @@ export default function presetTypography({
       ? ({
           '@layer defaults': {
             '&': properties,
-            [context.v('dark')]: darkProperties,
+            [context.v('dark') as string]: darkProperties,
           } as CSSNested,
         } as CSSObject)
       : undefined

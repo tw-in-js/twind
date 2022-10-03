@@ -2026,5 +2026,14 @@
   "contrast-more:bg-black dark:bg-white": [
     "@media (prefers-contrast:more){.contrast-more\\:bg-black{--tw-bg-opacity:1;background-color:rgba(0,0,0,var(--tw-bg-opacity))}}",
     "@media (prefers-color-scheme:dark){.dark\\:bg-white{--tw-bg-opacity:1;background-color:rgba(255,255,255,var(--tw-bg-opacity))}}"
-  ]
+  ],
+  "[&>*]:underline": ".\\[\\&\\>\\*\\]\\:underline>*{text-decoration-line:underline}",
+  "[.a.b_&]:underline": ".a.b .\\[\\.a\\.b_\\&\\]\\:underline{text-decoration-line:underline}",
+  "dark:lg:hover:[&>*]:underline": "@media (prefers-color-scheme:dark){@media (min-width:1024px){.dark\\:lg\\:hover\\:\\[\\&\\>\\*\\]\\:underline:hover>*{text-decoration-line:underline}}}",
+  "[&>*]:!underline": ".\\[\\&\\>\\*\\]\\:\\!underline>*{text-decoration-line:underline !important}",
+  "[@supports(what:ever)]:underline": "@supports(what:ever){.\\[\\@supports\\(what\\:ever\\)\\]\\:underline{text-decoration-line:underline}}",
+  "[@media_screen{@media(hover:hover)}]:underline": "@media screen{@media(hover:hover){.\\[\\@media_screen\\{\\@media\\(hover\\:hover\\)\\}\\]\\:underline{text-decoration-line:underline}}}",
+  "[@media_screen{@media(hover:hover){&:hover}}]:underline": "@media screen{@media(hover:hover){.\\[\\@media_screen\\{\\@media\\(hover\\:hover\\)\\{\\&\\:hover\\}\\}\\]\\:underline:hover{text-decoration-line:underline}}}",
+  "[&[data-open]]:underline": ".\\[\\&\\[data-open\\]\\]\\:underline[data-open]{text-decoration-line:underline}",
+  "[&[data-foo][data-bar]:not([data-baz])]:underline": ".\\[\\&\\[data-foo\\]\\[data-bar\\]\\:not\\(\\[data-baz\\]\\)\\]\\:underline[data-foo][data-bar]:not([data-baz]){text-decoration-line:underline}"
 }
