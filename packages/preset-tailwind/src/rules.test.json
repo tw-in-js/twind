@@ -1991,6 +1991,9 @@
   "h-[calc(100%-theme(spacing.16))]": ".h-\\[calc\\(100\\%-theme\\(spacing\\.16\\)\\)\\]{height:calc(100% - 4rem)}",
   "h-[calc(100%-theme('spacing.16'))]": ".h-\\[calc\\(100\\%-theme\\(\\'spacing\\.16\\'\\)\\)\\]{height:calc(100% - 4rem)}",
   "h-[calc(100%-theme(\"spacing.16\"))]": ".h-\\[calc\\(100\\%-theme\\(\\\"spacing\\.16\\\"\\)\\)\\]{height:calc(100% - 4rem)}",
+  "h-[min(1+2)]": ".h-\\[min\\(1\\+2\\)\\]{height:min(1 + 2)}",
+  "h-[max(1+2)]": ".h-\\[max\\(1\\+2\\)\\]{height:max(1 + 2)}",
+  "h-[clamp(1+2,1+3,1+4)]": ".h-\\[clamp\\(1\\+2\\,1\\+3\\,1\\+4\\)\\]{height:clamp(1 + 2,1 + 3,1 + 4)}",
   "bg-gradient-to-r from-[#FF0000_50%] to-[#CCCC00_85%]": [
     ".bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops))}",
     ".from-\\[\\#FF0000_50\\%\\]{--tw-gradient-from:#FF0000 50%;--tw-gradient-to:#0000;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to)}",
