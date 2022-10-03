@@ -2001,5 +2001,8 @@
   "bg-[linear-gradient(to_right,#ff0000_50%,#cccc00_85%)]": ".bg-\\[linear-gradient\\(to_right\\,\\#ff0000_50\\%\\,\\#cccc00_85\\%\\)\\]{background-image:linear-gradient(to right,#ff0000 50%,#cccc00 85%)}",
   "bg-primary": ".bg-primary{--tw-bg-opacity:1;background-color:rgb(var(--color-primary) / var(--tw-bg-opacity))}",
   "bg-primary/50": ".bg-primary\\/50{--tw-bg-opacity:0.5;background-color:rgb(var(--color-primary) / var(--tw-bg-opacity))}",
-  "bg-[rgb(var(--color-primary)/<alpha-value>)]/50": ".bg-\\[rgb\\(var\\(--color-primary\\)\\/\\<alpha-value\\>\\)\\]\\/50{--tw-bg-opacity:0.5;background-color:rgb(var(--color-primary)/var(--tw-bg-opacity))}"
+  "bg-[rgb(var(--color-primary)/<alpha-value>)]/50": ".bg-\\[rgb\\(var\\(--color-primary\\)\\/\\<alpha-value\\>\\)\\]\\/50{--tw-bg-opacity:0.5;background-color:rgb(var(--color-primary)/var(--tw-bg-opacity))}",
+  "optional:text-base": ".optional\\:text-base:optional{font-size:1rem;line-height:1.5rem}",
+  "group-optional:text-base": ".group:optional .group-optional\\:text-base{font-size:1rem;line-height:1.5rem}",
+  "peer-optional:text-base": ".peer:optional~.peer-optional\\:text-base{font-size:1rem;line-height:1.5rem}"
 }
