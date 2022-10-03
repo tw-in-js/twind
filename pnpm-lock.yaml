@@ -266,11 +266,11 @@ importers:
 
   packages/preset-autoprefix:
     specifiers:
-      style-vendorizer: ^2.1.1
+      style-vendorizer: ^2.2.3
       twind: 1.0.0-next.38
       typescript: ^4.8.4
     dependencies:
-      style-vendorizer: 2.1.1
+      style-vendorizer: 2.2.3
       typescript: 4.8.4
     devDependencies:
       twind: link:../twind
@@ -13824,6 +13824,11 @@ packages:
 
   /style-vendorizer/2.1.1:
     resolution: {integrity: sha512-gVO6Cwxtg8iX0X1W4xMhSc5WbQpiIBQDkhq3JkwebMRRgyhCfuvMrnPlTAGTRjfQPGRmzgjCOZ4drehTnLahHA==}
+    dev: true
+
+  /style-vendorizer/2.2.3:
+    resolution: {integrity: sha512-/VDRsWvQAgspVy9eATN3z6itKTuyg+jW1q6UoTCQCFRqPDw8bi3E1hXIKnGw5LvXS2AQPuJ7Af4auTLYeBOLEg==}
+    dev: false
 
   /styled-jsx/5.0.0_react@17.0.2:
     resolution: {integrity: sha512-qUqsWoBquEdERe10EW8vLp3jT25s/ssG1/qX5gZ4wu15OZpmSMFI2v+fWlRhLfykA5rFtlJ1ME8A8pm/peV4WA==}

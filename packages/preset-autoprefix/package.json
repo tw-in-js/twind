@@ -38,7 +38,7 @@
     }
   ],
   "dependencies": {
-    "style-vendorizer": "^2.1.1"
+    "style-vendorizer": "^2.2.3"
   },
   "peerDependencies": {
     "twind": "1.0.0-next.38",
