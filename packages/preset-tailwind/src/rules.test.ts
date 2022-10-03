@@ -23,11 +23,16 @@ const tw = twind(
             { min: '868px' },
           ],
         },
-        colors: {
+        colors: ({ theme }) => ({
           gainsboro: 'gainsboro',
           'gray-light': '#d3dce6',
           primary: 'rgb(var(--color-primary) / <alpha-value>)',
-        },
+          translucent: {
+            rose: 'theme(colors.rose.500 / 50%)',
+            blue: 'theme(colors.blue.500 / var(--my-alpha))',
+            emerald: theme('colors.emerald.500 / theme(opacity.50)'),
+          },
+        }),
         backgroundImage: {
           'hero-pattern': "url('/img/hero-pattern.svg')",
         },

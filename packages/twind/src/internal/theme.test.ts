@@ -297,3 +297,13 @@ test('reference the default theme', () => {
     ...(defaultTheme.fontFamily as Theme['fontFamily']).sans,
   ])
 })
+
+test('can apply alpha values to colors', () => {
+  const theme = makeThemeFunction<Theme>(defaultTheme)
+
+  assert.strictEqual(theme('colors.gray.500 / 0.5'), 'rgba(107,114,128,0.5)')
+  assert.strictEqual(
+    theme('colors.gray.500 / var(--my-alpha)'),
+    'rgba(107,114,128,var(--my-alpha))',
+  )
+})

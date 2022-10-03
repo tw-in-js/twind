@@ -2013,5 +2013,9 @@
   "peer-focus-within:text-base": ".peer:focus-within~.peer-focus-within\\:text-base{font-size:1rem;line-height:1.5rem}",
   "focus-visible:text-base": ".focus-visible\\:text-base:focus-visible{font-size:1rem;line-height:1.5rem}",
   "group-focus-visible:text-base": ".group:focus-visible .group-focus-visible\\:text-base{font-size:1rem;line-height:1.5rem}",
-  "peer-focus-visible:text-base": ".peer:focus-visible~.peer-focus-visible\\:text-base{font-size:1rem;line-height:1.5rem}"
+  "peer-focus-visible:text-base": ".peer:focus-visible~.peer-focus-visible\\:text-base{font-size:1rem;line-height:1.5rem}",
+  "text-translucent-rose": ".text-translucent-rose{color:rgba(244,63,94,50%)}",
+  "text-translucent-blue": ".text-translucent-blue{color:rgba(59,130,246,var(--my-alpha))}",
+  "text-translucent-emerald": ".text-translucent-emerald{color:rgba(16,185,129,0.5)}",
+  "text-[theme(colors.amber.500/theme(opacity.75))]": ".text-\\[theme\\(colors\\.amber\\.500\\/theme\\(opacity\\.75\\)\\)\\]{color:rgba(245,158,11,0.75)}"
 }
