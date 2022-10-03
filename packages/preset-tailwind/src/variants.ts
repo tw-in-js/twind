@@ -20,6 +20,7 @@ const variants: Variant<TailwindTheme>[] = [
   ['selection', '& *::selection,&::selection'],
   ['file', '&::file-selector-button'],
   ['placeholder', '&::placeholder'],
+  ['backdrop', '&::backdrop'],
 
   ['first', '&:first-child'],
   ['last', '&:last-child'],
