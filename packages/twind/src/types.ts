@@ -290,7 +290,13 @@ export type PreflightThunk<Theme extends BaseTheme = BaseTheme> = (
 
 export type HashFunction = (value: string, defaultHash: (value: string) => string) => string
 
-export type DarkModeConfig = 'media' | 'class' | string | boolean | undefined
+export type DarkModeConfig =
+  | 'media'
+  | 'class'
+  | string
+  | boolean
+  | undefined
+  | [mode: 'class', selector: string]
 
 /**
  * Allows to return a dark color for the given light color.
