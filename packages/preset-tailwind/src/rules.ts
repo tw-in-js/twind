@@ -202,6 +202,7 @@ const rules: Rule<TailwindTheme>[] = [
 
   // Grid Auto Flow
   ['grid-flow-((row|col)(-dense)?)', 'gridAutoFlow', (match) => spacify(columnify(match))],
+  ['grid-flow-(dense)', 'gridAutoFlow'],
 
   // Grid Auto Columns
   ['auto-cols-', fromTheme('gridAutoColumns')],

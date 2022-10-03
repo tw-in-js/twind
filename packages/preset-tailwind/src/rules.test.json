@@ -449,6 +449,7 @@
   "grid-rows-layout": ".grid-rows-layout{grid-template-rows:200px minmax(900px, 1fr) 100px}",
   "grid-flow-row": ".grid-flow-row{grid-auto-flow:row}",
   "grid-flow-col": ".grid-flow-col{grid-auto-flow:column}",
+  "grid-flow-dense": ".grid-flow-dense{grid-auto-flow:dense}",
   "auto-rows-auto": ".auto-rows-auto{grid-auto-rows:auto}",
   "auto-rows-min": ".auto-rows-min{grid-auto-rows:min-content}",
   "auto-rows-max": ".auto-rows-max{grid-auto-rows:max-content}",
