@@ -2049,5 +2049,11 @@
       ".disabled\\:shadow-sm:disabled{--tw-shadow:0 1px 2px 0 rgba(0,0,0,0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}",
       ".enabled\\:shadow-md:enabled{--tw-shadow:0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}"
     ]
+  ],
+  "border-spacing-4 border-spacing-x-6 border-spacing-y-8": [
+    "*,::before,::after,::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0}",
+    ".border-spacing-4{--tw-border-spacing-x:1rem;--tw-border-spacing-y:1rem;border-spacing:var(--tw-border-spacing-x) var(--tw-border-spacing-y)}",
+    ".border-spacing-x-6{--tw-border-spacing-x:1.5rem;border-spacing:var(--tw-border-spacing-x) var(--tw-border-spacing-y)}",
+    ".border-spacing-y-8{--tw-border-spacing-y:2rem;border-spacing:var(--tw-border-spacing-x) var(--tw-border-spacing-y)}"
   ]
 }
