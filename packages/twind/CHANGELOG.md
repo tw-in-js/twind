@@ -1,5 +1,25 @@
 # twind
 
+## 1.0.0-next.39
+
+### Patch Changes
+
+- configurable Dark Mode ClassName ([`774e2bb4`](https://github.com/tw-in-js/twind/commit/774e2bb4c7a019d76e55296e9af75fedc77bd054))
+
+* Arbitrary variants ([`a3b1bcba`](https://github.com/tw-in-js/twind/commit/a3b1bcba6269bc4a51b63041689baf58f6222b7f))
+
+- prevent orphaned style tag when calling setup multiple times (closes #321) ([`0e2aa5c4`](https://github.com/tw-in-js/twind/commit/0e2aa5c4f07e5bca3bea37f864773f665935a263))
+
+* `injectGlobal` support for `@media print (#333, #334) 🙏 @javascriptjedi! ([`9b5e3297`](https://github.com/tw-in-js/twind/commit/9b5e3297470f9d2bdbd4f540d819ee0f42e63595))
+
+- Add `<alpha-value>` placeholder support for custom colors (closes #349) ([`0a63948e`](https://github.com/tw-in-js/twind/commit/0a63948e9f6c5f1bb8088ae6e21dc4bf215ee9e8))
+
+* feat: support rgb and hsl colors opacity conversion ([#336](https://github.com/tw-in-js/twind/pull/336)) 🙏🏽 [@javascriptjedi](https://github.com/javascriptjedi)!
+
+- support alpha values for `theme()` function ([`bdc0a7a1`](https://github.com/tw-in-js/twind/commit/bdc0a7a1c353990d0ef009af181f79c1134bfcec))
+
+* fix missing spaces around arithmetic operators ([`f74163ba`](https://github.com/tw-in-js/twind/commit/f74163ba7310ece8d2de4a80586d19df419bfa86))
+
 ## 1.0.0-next.38
 
 ### Patch Changes

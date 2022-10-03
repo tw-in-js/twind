@@ -1,5 +1,36 @@
 # @twind/preset-tailwind
 
+## 1.0.0-next.39
+
+### Patch Changes
+
+- ensure mix-blend-plus-lighter works ([`3d192886`](https://github.com/tw-in-js/twind/commit/3d19288619cd54ded867eb83df0cb64c78038438))
+
+* ensure optional variant works ([`8f2ddfa2`](https://github.com/tw-in-js/twind/commit/8f2ddfa242bb83c3d898673cc542fe9ec1c38804))
+
+- add `border-spacing` utilities ([`31928160`](https://github.com/tw-in-js/twind/commit/319281607cdaf42a97625c4a100ba5cba73c900c))
+
+* add `prefers-contrast` media query variants ([`226f38dd`](https://github.com/tw-in-js/twind/commit/226f38dd1b2633a210cfdb620509948f8cd8a5f3))
+
+- Arbitrary variants ([`a3b1bcba`](https://github.com/tw-in-js/twind/commit/a3b1bcba6269bc4a51b63041689baf58f6222b7f))
+
+* Add `::backdrop` to universal defaults ([`cd694cee`](https://github.com/tw-in-js/twind/commit/cd694cee79db80cb9625b7e55da0c2792a52a6c4))
+
+- Add `<alpha-value>` placeholder support for custom colors (closes #349) ([`0a63948e`](https://github.com/tw-in-js/twind/commit/0a63948e9f6c5f1bb8088ae6e21dc4bf215ee9e8))
+
+* feat: support rgb and hsl colors opacity conversion ([#336](https://github.com/tw-in-js/twind/pull/336)) 🙏🏽 [@javascriptjedi](https://github.com/javascriptjedi)!
+
+- support alpha values for `theme()` function ([`bdc0a7a1`](https://github.com/tw-in-js/twind/commit/bdc0a7a1c353990d0ef009af181f79c1134bfcec))
+
+* ensure enabled variant works ([`a73f1773`](https://github.com/tw-in-js/twind/commit/a73f17734519413fc0dc567c8ff9330de6163aec))
+
+- add `backdrop` variant ([`f0e532f1`](https://github.com/tw-in-js/twind/commit/f0e532f18162f863461858656ce4e83287fd4f23))
+
+* add `.grid-flow-dense` utility ([`65ea2f61`](https://github.com/tw-in-js/twind/commit/65ea2f6141340fadd99412bb7199a69c328f276f))
+
+* Updated dependencies [[`774e2bb4`](https://github.com/tw-in-js/twind/commit/774e2bb4c7a019d76e55296e9af75fedc77bd054), [`a3b1bcba`](https://github.com/tw-in-js/twind/commit/a3b1bcba6269bc4a51b63041689baf58f6222b7f), [`0e2aa5c4`](https://github.com/tw-in-js/twind/commit/0e2aa5c4f07e5bca3bea37f864773f665935a263), [`9b5e3297`](https://github.com/tw-in-js/twind/commit/9b5e3297470f9d2bdbd4f540d819ee0f42e63595), [`0a63948e`](https://github.com/tw-in-js/twind/commit/0a63948e9f6c5f1bb8088ae6e21dc4bf215ee9e8), [`b2b7e40d`](https://github.com/tw-in-js/twind/commit/b2b7e40d39406b8d04f72cac6c980775e64df6c4), [`bdc0a7a1`](https://github.com/tw-in-js/twind/commit/bdc0a7a1c353990d0ef009af181f79c1134bfcec), [`f74163ba`](https://github.com/tw-in-js/twind/commit/f74163ba7310ece8d2de4a80586d19df419bfa86)]:
+  - twind@1.0.0-next.39
+
 ## 1.0.0-next.38
 
 ### Patch Changes

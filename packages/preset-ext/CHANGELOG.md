@@ -1,5 +1,12 @@
 # @twind/preset-ext
 
+## 1.0.0-next.39
+
+### Patch Changes
+
+- Updated dependencies [[`774e2bb4`](https://github.com/tw-in-js/twind/commit/774e2bb4c7a019d76e55296e9af75fedc77bd054), [`a3b1bcba`](https://github.com/tw-in-js/twind/commit/a3b1bcba6269bc4a51b63041689baf58f6222b7f), [`0e2aa5c4`](https://github.com/tw-in-js/twind/commit/0e2aa5c4f07e5bca3bea37f864773f665935a263), [`9b5e3297`](https://github.com/tw-in-js/twind/commit/9b5e3297470f9d2bdbd4f540d819ee0f42e63595), [`0a63948e`](https://github.com/tw-in-js/twind/commit/0a63948e9f6c5f1bb8088ae6e21dc4bf215ee9e8), [`b2b7e40d`](https://github.com/tw-in-js/twind/commit/b2b7e40d39406b8d04f72cac6c980775e64df6c4), [`bdc0a7a1`](https://github.com/tw-in-js/twind/commit/bdc0a7a1c353990d0ef009af181f79c1134bfcec), [`f74163ba`](https://github.com/tw-in-js/twind/commit/f74163ba7310ece8d2de4a80586d19df419bfa86)]:
+  - twind@1.0.0-next.39
+
 ## 1.0.0-next.38
 
 ### Patch Changes

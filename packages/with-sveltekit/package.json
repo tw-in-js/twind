@@ -1,6 +1,6 @@
 {
   "name": "@twind/with-sveltekit",
-  "version": "1.0.0-next.38",
+  "version": "1.0.0-next.39",
   "description": "sveltekit integration for Twind",
   "publishConfig": {
     "tag": "next",
@@ -35,7 +35,7 @@
   "sideEffects": false,
   "peerDependencies": {
     "@sveltejs/kit": "^1.0.0-next.507",
-    "twind": "1.0.0-next.38",
+    "twind": "1.0.0-next.39",
     "typescript": "^4.8.4"
   },
   "peerDependenciesMeta": {
@@ -46,7 +46,7 @@
   "devDependencies": {
     "@sveltejs/kit": "^1.0.0-next.507",
     "svelte": "^3.46.4",
-    "twind": "1.0.0-next.38"
+    "twind": "1.0.0-next.39"
   },
   "scripts": {
     "build": "distilt"
