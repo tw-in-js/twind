@@ -106,7 +106,7 @@
     "@typescript-eslint/parser": "^5.38.1",
     "@vitest/coverage-c8": "^0.23.4",
     "@vitest/ui": "^0.23.4",
-    "distilt": "^0.17.0",
+    "distilt": "^0.17.1",
     "dotenv": "^10.0.0",
     "eslint": "^8.9.0",
     "eslint-config-prettier": "^8.3.0",

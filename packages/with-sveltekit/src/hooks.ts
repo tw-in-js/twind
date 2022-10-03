@@ -8,14 +8,8 @@ export type { InlineOptions }
 
 export default function handleTwind(options: InlineOptions['tw'] | InlineOptions = {}): Handle {
   return async function handleTwind$({ event, resolve }) {
-    const response = await resolve(event)
-
-    if (response.headers.get('content-type')?.startsWith('text/html')) {
-      const body = await response.text()
-
-      return new Response(inline(body, options), response)
-    }
-
-    return response
+    return resolve(event, {
+      transformPageChunk: ({ html, done }) => (done ? inline(html, options) : html),
+    })
   }
 }

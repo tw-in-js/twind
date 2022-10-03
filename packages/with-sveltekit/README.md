@@ -45,17 +45,19 @@ export default defineConfig({
 })
 ```
 
-### `src/routes/__layout.svelte`
+### `src/routes/+layout.js`[^1]
 
-```html
-<script context="module">
-  import install from '@twind/with-sveltekit'
-  import config from '../twind.config'
-  install(config)
-</script>
+```js
+import install from '@twind/with-sveltekit'
+import config from '../twind.config'
+
+install(config)
+
+// Optional: add a load function
+// https://kit.svelte.dev/docs/routing#layout-layout-js
 ```
 
-### `src/hooks`[^1]
+### `src/hooks.server.js`[^2]
 
 Enable server-side rendering of Twind styles.
 
@@ -65,7 +67,7 @@ import handleTwind from '@twind/with-sveltekit/hooks'
 export const handle = handleTwind()
 ```
 
-If you have other handlers use the [`sequence` helper](https://kit.svelte.dev/docs#modules-sveltejs-kit-hooks):
+If you have other handlers use the [`sequence` helper](https://kit.svelte.dev/docs/modules#sveltejs-kit-hooks):
 
 ```js
 import { sequence } from '@sveltejs/kit/hooks'
@@ -73,4 +75,5 @@ import { sequence } from '@sveltejs/kit/hooks'
 export const handle = sequence(handleTwind(), ...otherHandlers)
 ```
 
-[^1]: [SvelteKit › Hooks](https://kit.svelte.dev/docs#hooks)
+[^1]: [SvelteKit › Routing › `+layout.js`](https://kit.svelte.dev/docs/routing#layout-layout-js)
+[^2]: [SvelteKit › Hooks › `handle`](https://kit.svelte.dev/docs/hooks#server-hooks-handle)

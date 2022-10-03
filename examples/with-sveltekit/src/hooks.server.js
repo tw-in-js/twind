@@ -1,11 +1,10 @@
-import type { Handle } from '@sveltejs/kit'
 import handleTwind from '@twind/with-sveltekit/hooks'
 
-export const handle: Handle = handleTwind() as unknown as Handle
+export const handle = handleTwind()
 
 /* If you have other handles use the `sequence` helper */
 // import { sequence } from '@sveltejs/kit/hooks';
-// export const handle = sequence(handleTwind(tw), ...otherHandles)
+// export const handle = sequence(handleTwind(), ...otherHandles)
 
 /* Using a custom Twind instance */
 // import { tw } from './custom/twind/instance'
