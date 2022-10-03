@@ -228,11 +228,6 @@ const preflight: Preflight = {
     Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
     */
   'img,video': { maxWidth: '100%', height: 'auto' },
-
-  /*
-    Ensure the default browser behavior of the `hidden` attribute.
-    */
-  '[hidden]': { display: 'none' },
 }
 
 export default preflight
