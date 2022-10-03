@@ -26,6 +26,7 @@ const tw = twind(
         colors: {
           gainsboro: 'gainsboro',
           'gray-light': '#d3dce6',
+          primary: 'rgb(var(--color-primary) / <alpha-value>)',
         },
         backgroundImage: {
           'hero-pattern': "url('/img/hero-pattern.svg')",

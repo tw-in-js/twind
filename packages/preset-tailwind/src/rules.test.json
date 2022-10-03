@@ -1998,5 +1998,8 @@
     ".via-\\[rgba\\(255\\,225\\,0\\,0\\.7\\)_4\\%\\]{--tw-gradient-to:#0000;--tw-gradient-stops:var(--tw-gradient-from),rgba(255,225,0,0.7) 4%,var(--tw-gradient-to)}",
     ".to-\\[rgba\\(255\\,225\\,0\\,0\\.3\\)\\]{--tw-gradient-to:rgba(255,225,0,0.3)}"
   ],
-  "bg-[linear-gradient(to_right,#ff0000_50%,#cccc00_85%)]": ".bg-\\[linear-gradient\\(to_right\\,\\#ff0000_50\\%\\,\\#cccc00_85\\%\\)\\]{background-image:linear-gradient(to right,#ff0000 50%,#cccc00 85%)}"
+  "bg-[linear-gradient(to_right,#ff0000_50%,#cccc00_85%)]": ".bg-\\[linear-gradient\\(to_right\\,\\#ff0000_50\\%\\,\\#cccc00_85\\%\\)\\]{background-image:linear-gradient(to right,#ff0000 50%,#cccc00 85%)}",
+  "bg-primary": ".bg-primary{--tw-bg-opacity:1;background-color:rgb(var(--color-primary) / var(--tw-bg-opacity))}",
+  "bg-primary/50": ".bg-primary\\/50{--tw-bg-opacity:0.5;background-color:rgb(var(--color-primary) / var(--tw-bg-opacity))}",
+  "bg-[rgb(var(--color-primary)/<alpha-value>)]/50": ".bg-\\[rgb\\(var\\(--color-primary\\)\\/\\<alpha-value\\>\\)\\]\\/50{--tw-bg-opacity:0.5;background-color:rgb(var(--color-primary)/var(--tw-bg-opacity))}"
 }

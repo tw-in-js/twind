@@ -12,6 +12,10 @@ export function toColorValue(color: ColorValue, options: ColorFunctionOptions = 
   const { opacityValue = '1', opacityVariable } = options
   const opacity = opacityVariable ? `var(${opacityVariable})` : opacityValue
 
+  if (color.includes('<alpha-value>')) {
+    return color.replace('<alpha-value>', opacity)
+  }
+
   // rgb hex: #0123 and #001122
   if (color[0] == '#' && (color.length == 4 || color.length == 7)) {
     const size = (color.length - 1) / 3
