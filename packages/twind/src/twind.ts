@@ -129,15 +129,15 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
 
       snapshot() {
         const restoreSheet = sheet.snapshot()
-        const insertedRules$ = [...insertedRules]
-        const cache$ = [...cache]
+        const insertedRules$ = new Set(insertedRules)
+        const cache$ = new Map(cache)
         const sortedPrecedences$ = [...sortedPrecedences]
 
         return () => {
           restoreSheet()
 
-          insertedRules = new Set(insertedRules$)
-          cache = new Map(cache$)
+          insertedRules = insertedRules$
+          cache = cache$
           sortedPrecedences = sortedPrecedences$
         }
       },
