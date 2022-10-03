@@ -2004,5 +2004,14 @@
   "bg-[rgb(var(--color-primary)/<alpha-value>)]/50": ".bg-\\[rgb\\(var\\(--color-primary\\)\\/\\<alpha-value\\>\\)\\]\\/50{--tw-bg-opacity:0.5;background-color:rgb(var(--color-primary)/var(--tw-bg-opacity))}",
   "optional:text-base": ".optional\\:text-base:optional{font-size:1rem;line-height:1.5rem}",
   "group-optional:text-base": ".group:optional .group-optional\\:text-base{font-size:1rem;line-height:1.5rem}",
-  "peer-optional:text-base": ".peer:optional~.peer-optional\\:text-base{font-size:1rem;line-height:1.5rem}"
+  "peer-optional:text-base": ".peer:optional~.peer-optional\\:text-base{font-size:1rem;line-height:1.5rem}",
+  "placeholder-shown:text-base": ".placeholder-shown\\:text-base:placeholder-shown{font-size:1rem;line-height:1.5rem}",
+  "group-placeholder-shown:text-base": ".group:placeholder-shown .group-placeholder-shown\\:text-base{font-size:1rem;line-height:1.5rem}",
+  "peer-placeholder-shown:text-base": ".peer:placeholder-shown~.peer-placeholder-shown\\:text-base{font-size:1rem;line-height:1.5rem}",
+  "focus-within:text-base": ".focus-within\\:text-base:focus-within{font-size:1rem;line-height:1.5rem}",
+  "group-focus-within:text-base": ".group:focus-within .group-focus-within\\:text-base{font-size:1rem;line-height:1.5rem}",
+  "peer-focus-within:text-base": ".peer:focus-within~.peer-focus-within\\:text-base{font-size:1rem;line-height:1.5rem}",
+  "focus-visible:text-base": ".focus-visible\\:text-base:focus-visible{font-size:1rem;line-height:1.5rem}",
+  "group-focus-visible:text-base": ".group:focus-visible .group-focus-visible\\:text-base{font-size:1rem;line-height:1.5rem}",
+  "peer-focus-visible:text-base": ".peer:focus-visible~.peer-focus-visible\\:text-base{font-size:1rem;line-height:1.5rem}"
 }
