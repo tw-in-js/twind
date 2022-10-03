@@ -132,12 +132,14 @@ Thank you to all the people who have already contributed to twind!
 
 ### 🙏🏾 Sponsors
 
-> This project is kindly sponsored by <a href="https://www.kenoxa.com" target="_blank">Kenoxa GmbH</a> who support [@sastan](https://github.com/sastan) to maintain this project as part of their open-source engagement.
+<a href="https://www.kenoxa.com" target="_blank"><img src="https://images.opencollective.com/kenoxa/9c25796/logo/68.png" height="96"></a>
+<a href="https://www.copilottravel.com" target="_blank"><img src="https://assets.website-files.com/5f7bc722eed484e8af21e542/620edd53664c683a9cb371a3_copilot%20travel%20vector%20header%20logo.svg" height="96"></a>
+
+This project is kindly sponsored by <a href="https://www.kenoxa.com" target="_blank">Kenoxa GmbH</a> who support [@sastan](https://github.com/sastan) to maintain this project as part of their open-source engagement.
+
+<a href="https://www.copilottravel.com" target="_blank">COPILOT TRAVEL</a> is partnering with [@sastan](https://github.com/sastan) to keep twind aligned with the latest tailwindcss releases.
 
 Thank you to all our sponsors! (please ask your company to also support this open source project by [becoming a sponsor](https://opencollective.com/twind#sponsor))
-
-<a href="https://www.kenoxa.com" target="_blank"><img src="https://images.opencollective.com/kenoxa/9c25796/logo/68.png"></a>
-<a href="https://www.copilottravel.com" target="_blank"><img src="https://assets.website-files.com/5f7bc722eed484e8af21e542/620edd53664c683a9cb371a3_copilot%20travel%20vector%20header%20logo.svg"></a>
 
 <a href="https://opencollective.com/twind/sponsor/0/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/0/avatar.svg"></a>
 <a href="https://opencollective.com/twind/sponsor/1/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/1/avatar.svg"></a>
