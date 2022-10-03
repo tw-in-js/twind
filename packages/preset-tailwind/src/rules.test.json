@@ -1173,6 +1173,7 @@
   "mix-blend-saturation": ".mix-blend-saturation{mix-blend-mode:saturation}",
   "mix-blend-color": ".mix-blend-color{mix-blend-mode:color}",
   "mix-blend-luminosity": ".mix-blend-luminosity{mix-blend-mode:luminosity}",
+  "mix-blend-plus-lighter": ".mix-blend-plus-lighter{mix-blend-mode:plus-lighter}",
   "bg-blend-normal": ".bg-blend-normal{background-blend-mode:normal}",
   "bg-blend-multiply": ".bg-blend-multiply{background-blend-mode:multiply}",
   "bg-blend-screen": ".bg-blend-screen{background-blend-mode:screen}",
