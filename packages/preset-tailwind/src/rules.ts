@@ -552,12 +552,12 @@ const rules: Rule<TailwindTheme>[] = [
   // supported arbitrary types are: length, color, angle, list
   ['bg-', fromTheme('backgroundImage')],
 
-  // Background Size
-  ['bg-', fromTheme('backgroundSize')],
-
   // Background Position
   ['bg-', fromTheme('backgroundPosition')],
   ['bg-(top|bottom|center|(left|right)(-(top|bottom))?)', 'backgroundPosition', spacify],
+
+  // Background Size
+  ['bg-', fromTheme('backgroundSize')],
 
   /* BORDERS */
   // Border Radius

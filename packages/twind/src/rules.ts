@@ -57,9 +57,6 @@ export function fromTheme<
 
     const value =
       context.theme(themeSection, match.$$) ??
-      /** Arbitrary lookup type */
-      // https://github.com/tailwindlabs/tailwindcss/blob/875c850b37a57bc651e1fed91e3d89af11bdc79f/src/util/pluginUtils.js#L163
-      // type?: 'lookup' | 'color' | 'line-width' | 'length' | 'any' | 'shadow'
       (arbitrary(match.$$, themeSection, context) as ThemeValue<Theme[Section]>)
 
     if (value != null) {
@@ -229,29 +226,32 @@ export function arbitrary<Theme extends BaseTheme = BaseTheme>(
   if (value[0] == '[' && value.slice(-1) == ']') {
     value = normalize(resolveThemeFunction(value.slice(1, -1), context.theme))
 
-    // TODO remove arbitrary type prefix — we do not need it but user may use it
-    // https://github.com/tailwindlabs/tailwindcss/blob/master/src/util/dataTypes.js
-    // url, number, percentage, length, line-width, shadow, color, image, gradient, position, family-name, lookup, any, generic-name, absolute-size, relative-size
-
-    // If this is a color section and the value is a hex color, color function or color name
-    if (/color|fill|stroke/i.test(section)) {
-      // Respect color type hint from the user on ambiguous arbitrary values - https://tailwindcss.com/docs/adding-custom-styles#resolving-ambiguities
-      if (value.startsWith('color:')) return value.replace(/^color:/, '')
-
-      if (/^(#|((hsl|rgb)a?|hwb|lab|lch|color)\(|[a-z]+$)/.test(value)) {
-        return value
-      }
-    } else if (/image/i.test(section)) {
-      // url(, [a-z]-gradient(, image(, cross-fade(, image-set(
-      if (/^[a-z-]+\(/.test(value)) {
-        return value
-      }
-    } else {
-      // TODO how to differentiate arbitary values for
-      // - backgroundSize vs backgroundPosition
-      // - fontWeight vs fontFamily
-
-      return value
+    if (
+      // Respect type hints from the user on ambiguous arbitrary values - https://tailwindcss.com/docs/adding-custom-styles#resolving-ambiguities
+      !(
+        // If this is a color section and the value is a hex color, color function or color name
+        (
+          (/color|fill|stroke/i.test(section) &&
+            !(
+              /^color:/.test(value) || /^(#|((hsl|rgb)a?|hwb|lab|lch|color)\(|[a-z]+$)/.test(value)
+            )) ||
+          // url(, [a-z]-gradient(, image(, cross-fade(, image-set(
+          (/image/i.test(section) && !(/^image:/.test(value) || /^[a-z-]+\(/.test(value))) ||
+          // font-*
+          // - fontWeight (type: ['lookup', 'number', 'any'])
+          // - fontFamily (type: ['lookup', 'generic-name', 'family-name'])
+          (/weight/i.test(section) && !(/^(number|any):/.test(value) || /^\d+$/.test(value))) ||
+          // bg-*
+          // - backgroundPosition (type: ['lookup', ['position', { preferOnConflict: true }]])
+          // - backgroundSize (type: ['lookup', 'length', 'percentage', 'size'])
+          (/position/i.test(section) && /^(length|size):/.test(value))
+        )
+      )
+    ) {
+      // remove arbitrary type prefix — we do not need it but user may use it
+      // https://github.com/tailwindlabs/tailwindcss/blob/master/src/util/dataTypes.js
+      // url, number, percentage, length, line-width, shadow, color, image, gradient, position, family-name, lookup, any, generic-name, absolute-size, relative-size
+      return value.replace(/^[a-z-]+:/, '')
     }
   }
 }
