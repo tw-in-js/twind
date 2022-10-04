@@ -235,6 +235,9 @@ export function arbitrary<Theme extends BaseTheme = BaseTheme>(
 
     // If this is a color section and the value is a hex color, color function or color name
     if (/color|fill|stroke/i.test(section)) {
+      // Respect color type hint from the user on ambiguous arbitrary values - https://tailwindcss.com/docs/adding-custom-styles#resolving-ambiguities
+      if (value.startsWith('color:')) return value.replace(/^color:/, '')
+
       if (/^(#|((hsl|rgb)a?|hwb|lab|lch|color)\(|[a-z]+$)/.test(value)) {
         return value
       }
