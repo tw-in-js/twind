@@ -179,10 +179,10 @@ export interface ThemeFunction<Theme extends BaseTheme = BaseTheme> {
 
 export type RuleResult = string | CSSObject | Falsey | Partial<TwindRule>[]
 
-export type RuleResolver<Theme extends BaseTheme = BaseTheme> = (
-  match: MatchResult,
-  context: Context<Theme>,
-) => RuleResult
+export type RuleResolver<
+  Theme extends BaseTheme = BaseTheme,
+  Match extends MatchResult = MatchResult,
+> = (match: Match, context: Context<Theme>) => RuleResult
 
 export type Rule<Theme extends BaseTheme = BaseTheme> =
   | string
@@ -475,10 +475,10 @@ export type ThemeConfig<Theme extends BaseTheme = BaseTheme> = PartialTheme<Them
   extend?: PartialTheme<Theme>
 }
 
-export type MatchConverter<Theme extends BaseTheme = BaseTheme> = (
-  match: MatchResult,
-  context: Context<Theme>,
-) => string
+export type MatchConverter<
+  Theme extends BaseTheme = BaseTheme,
+  Match extends MatchResult = MatchResult,
+> = (match: Match, context: Context<Theme>) => string
 
 export interface PresetThunk<Theme = BaseTheme> {
   (config: TwindConfig<Theme & BaseTheme>): TwindPresetConfig<Theme>

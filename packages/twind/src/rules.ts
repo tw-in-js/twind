@@ -10,6 +10,7 @@ import type {
   RuleResult,
   ThemeValue,
   KebabCase,
+  MatchConverter,
 } from './types'
 
 import { toColorValue } from './colors'
@@ -20,15 +21,15 @@ export type ThemeMatchResult<Value> = MatchResult & {
   _: Value
 }
 
-export type ThemeRuleResolver<Value, Theme extends BaseTheme = BaseTheme> = (
-  match: ThemeMatchResult<Value>,
-  context: Context<Theme>,
-) => RuleResult
+export type ThemeRuleResolver<Value, Theme extends BaseTheme = BaseTheme> = RuleResolver<
+  Theme,
+  ThemeMatchResult<Value>
+>
 
-export type ThemeMatchConverter<Value, Theme extends BaseTheme = BaseTheme> = (
-  match: ThemeMatchResult<Value>,
-  context: Context<Theme>,
-) => string
+export type ThemeMatchConverter<Value, Theme extends BaseTheme = BaseTheme> = MatchConverter<
+  Theme,
+  ThemeMatchResult<Value>
+>
 
 export function fromTheme<
   Theme extends BaseTheme = BaseTheme,

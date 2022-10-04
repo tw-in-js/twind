@@ -6,7 +6,8 @@
     "module": "ESNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     // Search under node_modules for non-relative imports.
-    "moduleResolution": "node",
+    "moduleResolution": "Node",
+    "moduleDetection": "auto",
     // ensure that nobody can accidentally use this config for a build
     "noEmit": true,
     "declaration": true,
