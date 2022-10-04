@@ -47,6 +47,13 @@ test('using tx', () => {
   ])
 })
 
+test('using tx with falsey values', () => {
+  assert.strictEqual(tx(true && 'bg-gray-500', false && 'text-gray-500'), 'bg-gray-500')
+  assert.deepEqual(tw.target, [
+    '.bg-gray-500{--tw-bg-opacity:1;background-color:rgba(107,114,128,var(--tw-bg-opacity))}',
+  ])
+})
+
 test('using custom tw with tx', () => {
   const custom = twind(config, virtual())
 
