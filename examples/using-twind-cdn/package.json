@@ -20,6 +20,6 @@
     "build": "echo This is a static template, there is no bundler or bundling involved!"
   },
   "devDependencies": {
-    "serve": "^13.0.2"
+    "serve": "^13.0.4"
   }
 }

@@ -2,11 +2,6 @@
   "name": "gatsby-plugin-twind",
   "version": "1.0.0-next.39",
   "description": "gatsby integration for Twind",
-  "publishConfig": {
-    "tag": "next",
-    "access": "public",
-    "directory": "dist"
-  },
   "keywords": [
     "twind",
     "tailwind",
@@ -19,7 +14,7 @@
   ],
   "type": "commonjs",
   "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
-  "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
+  "// Each entry is expanded into several bundles (types, esnext, module, script, node, and default)": "",
   "exports": {
     "./gatsby-browser": "./src/gatsby-browser.ts",
     "./gatsby-node": {
@@ -30,20 +25,22 @@
     },
     "./package.json": "./package.json"
   },
-  "distilt": {
+  "// These are relative from within the dist/ folder": "",
+  "sideEffects": true,
+  "publishConfig": {
+    "tag": "next",
+    "access": "public",
+    "directory": "dist",
     "targets": {
       "// No browser global build": "",
       "script": false
     }
   },
-  "// These are relative from within the dist/ folder": "",
-  "sideEffects": true,
   "peerDependencies": {
     "gatsby": "2.x || 3.x || 4.x",
     "react": "16.x || 17.x || 18.x",
     "react-dom": "16.x || 17.x || 18.x",
-    "twind": "1.0.0-next.39",
-    "typescript": "^4.8.4"
+    "twind": "1.0.0-next.39"
   },
   "peerDependenciesMeta": {
     "typescript": {
@@ -51,12 +48,13 @@
     }
   },
   "devDependencies": {
-    "@types/react": "^17.0.39",
-    "@types/react-dom": "^17.0.11",
-    "gatsby": "^4.7.1",
+    "@types/react": "^17.0.50",
+    "@types/react-dom": "^17.0.17",
+    "gatsby": "^4.24.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "twind": "1.0.0-next.39"
+    "twind": "1.0.0-next.39",
+    "typescript": "^4.8.4"
   },
   "pnpm": {
     "peerDependencyRules": {

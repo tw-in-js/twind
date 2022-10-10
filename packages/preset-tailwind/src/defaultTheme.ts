@@ -14,7 +14,6 @@ type OmitedSections =
   | 'listStyleType'
   | 'objectPosition'
   | 'transformOrigin'
-  | 'willChange'
 
 type StableSections =
   | 'screens'
@@ -792,13 +791,13 @@ const theme: DefaultTheme = {
     fit: 'fit-content',
     screen: '100vw',
   }),
-  // willChange: {
-  //   // handled by plugin
-  //   auto: 'auto',
-  //   scroll: 'scroll-position',
-  //   contents: 'contents',
-  //   transform: 'transform',
-  // },
+  willChange: {
+    scroll: 'scroll-position',
+    // other options handled by rules
+    // auto: 'auto',
+    // contents: 'contents',
+    // transform: 'transform',
+  },
   zIndex: {
     .../* #__PURE__ */ linear(50, '', 1, 0, 10),
     // 0: '0',

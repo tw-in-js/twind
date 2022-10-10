@@ -2,11 +2,6 @@
   "name": "@twind/tailwind",
   "version": "1.0.0-next.39",
   "description": "tailwindcss compat based on twind",
-  "publishConfig": {
-    "tag": "next",
-    "access": "public",
-    "directory": "dist"
-  },
   "keywords": [
     "twind",
     "tailwind",
@@ -17,19 +12,13 @@
   "type": "module",
   "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
   "main": "src/index.ts",
-  "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
+  "// Each entry is expanded into several bundles (types, esnext, module, script, node, and default)": "",
   "exports": {
     ".": "./src/index.ts",
     "./colors": "./src/colors.ts",
     "./defaultTheme": "./src/defaultTheme.ts",
     "./preflight": "./src/preflight.ts",
     "./package.json": "./package.json"
-  },
-  "distilt": {
-    "targets": {
-      "// No browser global build": "",
-      "script": false
-    }
   },
   "// These are relative from within the dist/ folder": "",
   "sideEffects": false,
@@ -55,9 +44,15 @@
     }
   },
   "devDependencies": {
-    "twind": "1.0.0-next.39"
+    "twind": "1.0.0-next.39",
+    "typescript": "^4.8.4"
   },
   "scripts": {
     "build": "distilt"
+  },
+  "publishConfig": {
+    "tag": "next",
+    "access": "public",
+    "directory": "dist"
   }
 }

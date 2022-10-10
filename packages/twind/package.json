@@ -2,11 +2,6 @@
   "name": "twind",
   "version": "1.0.0-next.39",
   "description": "The core engine without any presets.",
-  "publishConfig": {
-    "tag": "next",
-    "access": "public",
-    "directory": "dist"
-  },
   "keywords": [
     "twind",
     "tailwind",
@@ -17,7 +12,7 @@
   "type": "module",
   "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
   "main": "src/index.ts",
-  "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
+  "// Each entry is expanded into several bundles (types, esnext, module, script, node, and default)": "",
   "exports": {
     ".": "./src/index.ts",
     "./package.json": "./package.json"
@@ -47,7 +42,7 @@
     }
   ],
   "dependencies": {
-    "csstype": "^3.0.10"
+    "csstype": "^3.1.1"
   },
   "peerDependencies": {
     "typescript": "^4.8.4"
@@ -58,9 +53,15 @@
     }
   },
   "devDependencies": {
-    "@twind/preset-tailwind": "1.0.0-next.39"
+    "@twind/preset-tailwind": "1.0.0-next.39",
+    "typescript": "^4.8.4"
   },
   "scripts": {
     "build": "distilt"
+  },
+  "publishConfig": {
+    "tag": "next",
+    "access": "public",
+    "directory": "dist"
   }
 }

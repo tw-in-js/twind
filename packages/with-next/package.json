@@ -5,7 +5,11 @@
   "publishConfig": {
     "tag": "next",
     "access": "public",
-    "directory": "dist"
+    "directory": "dist",
+    "targets": {
+      "// No browser global build": "",
+      "script": false
+    }
   },
   "keywords": [
     "twind",
@@ -18,17 +22,11 @@
   ],
   "type": "module",
   "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
-  "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
+  "// Each entry is expanded into several bundles (types, esnext, module, script, node, and default)": "",
   "exports": {
     "./app": "./src/app.ts",
     "./document": "./src/document.ts",
     "./package.json": "./package.json"
-  },
-  "distilt": {
-    "targets": {
-      "// No browser global build": "",
-      "script": false
-    }
   },
   "// These are relative from within the dist/ folder": "",
   "sideEffects": false,
@@ -44,11 +42,12 @@
     }
   },
   "devDependencies": {
-    "@types/react": "^17.0.39",
-    "next": "^12.0.10",
+    "@types/react": "^17.0.50",
+    "next": "^12.3.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "twind": "1.0.0-next.39"
+    "twind": "1.0.0-next.39",
+    "typescript": "^4.8.4"
   },
   "scripts": {
     "build": "distilt"

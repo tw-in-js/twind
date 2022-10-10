@@ -5,7 +5,11 @@
   "publishConfig": {
     "tag": "next",
     "access": "public",
-    "directory": "dist"
+    "directory": "dist",
+    "targets": {
+      "// No browser global build": "",
+      "script": false
+    }
   },
   "keywords": [
     "twind",
@@ -19,17 +23,11 @@
   "type": "module",
   "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
   "main": "src/index.ts",
-  "// Each entry is expanded into several bundles (module, script, types, require, node, and default)": "",
+  "// Each entry is expanded into several bundles (types, esnext, module, script, node, and default)": "",
   "exports": {
     ".": "./src/index.ts",
     "./hooks": "./src/hooks.ts",
     "./package.json": "./package.json"
-  },
-  "distilt": {
-    "targets": {
-      "// No browser global build": "",
-      "script": false
-    }
   },
   "// These are relative from within the dist/ folder": "",
   "sideEffects": false,
@@ -44,9 +42,10 @@
     }
   },
   "devDependencies": {
-    "@sveltejs/kit": "^1.0.0-next.507",
-    "svelte": "^3.46.4",
-    "twind": "1.0.0-next.39"
+    "@sveltejs/kit": "^1.0.0-next.511",
+    "svelte": "^3.50.1",
+    "twind": "1.0.0-next.39",
+    "typescript": "^4.8.4"
   },
   "scripts": {
     "build": "distilt"
