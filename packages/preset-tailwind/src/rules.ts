@@ -442,7 +442,6 @@ const rules: Rule<TailwindTheme>[] = [
     },
   ],
   ['text-(ellipsis|clip)', 'textOverflow'],
-  ['overflow-(ellipsis)', 'textOverflow'], // Deprecated
 
   // Vertical Alignment
   ['align-', 'verticalAlign'],
