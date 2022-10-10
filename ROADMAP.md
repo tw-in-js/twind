@@ -44,7 +44,6 @@
 
 ## v1
 
-- handle arbitrary prefix like `[length:...]`
 - `ensure`: like setup but keeps track of presets and merges them
 
   ```js
@@ -72,10 +71,6 @@
   - completion infos
   - additional checks
   - performance marks for devtools
-  - hints:
-    - https://www.npmjs.com/package/genex
-    - https://www.npmjs.com/package/simpexp
-    - https://www.npmjs.com/package/regexgen
 - perf: large website with many different rules
 - pug support: https://github.com/tw-in-js/twind/issues/198
 - how to create a PR in contributing guide: https://codesandbox.io/docs/git
@@ -95,11 +90,9 @@
 
 - zero runtime
   - safelist, extractor, examples
-- rewrite https://github.com/TanStack/tanstack.com
-- ci: post on discord after release
 - @twind/completions — provide autocompletion for classNames
-  - https://npm.runkit.com/regexp-enumerator
-  - https://www.npmjs.com/package/randexp
+  - https://www.npmjs.com/package/genex
+  - https://www.npmjs.com/regexp-enumerator
 - a package to make it easy to create lightweight versions of presets (like https://lodash.com/custom-builds)
 - postcss plugin like tailwindcss for SSR
 

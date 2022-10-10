@@ -91,11 +91,6 @@
     "build:website": "pnpm run --filter=./sites/twind.style build",
     "prepare": "node ./.husky/prepare.cjs"
   },
-  "// these are added as dependencies to all packages": "",
-  "// @swc/helpers: common helper used by code generated from swc (distilt)": "",
-  "dependencies": {
-    "@swc/helpers": "^0.4.11"
-  },
   "// style-vendorizer is included here to allow examples to find it": "",
   "devDependencies": {
     "@changesets/cli": "^2.25.0",
@@ -126,6 +121,11 @@
     "tslib": "^2.4.0",
     "typescript": "^4.8.4",
     "vitest": "^0.23.4"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "@size-limit/esbuild@8.1.0": "patches/@size-limit__esbuild@8.1.0.patch"
+    }
   },
   "prettier": {
     "printWidth": 100,

@@ -6,6 +6,7 @@
  */
 
 export * from './animation'
+export * from './autocomplete'
 export * from './colors'
 export * from './css'
 export * from './cx'

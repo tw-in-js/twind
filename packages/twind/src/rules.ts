@@ -1,3 +1,5 @@
+import { DEV } from 'distilt/env'
+
 import type {
   Context,
   ColorValue,
@@ -11,10 +13,14 @@ import type {
   ThemeValue,
   KebabCase,
   MatchConverter,
+  Rule,
+  MaybeArray,
 } from './types'
 
 import { toColorValue } from './colors'
 import { resolveThemeFunction } from './internal/serialize'
+import { maybeNegate } from './internal/context'
+import { type AutocompleteProvider, type Autocomplete, withAutocomplete } from './autocomplete'
 
 export type ThemeMatchResult<Value> = MatchResult & {
   /** The found theme value */
@@ -30,6 +36,89 @@ export type ThemeMatchConverter<Value, Theme extends BaseTheme = BaseTheme> = Ma
   Theme,
   ThemeMatchResult<Value>
 >
+
+// indirection wrapper to remove autocomplete functions from production bundles
+function withAutocomplete$<Theme extends BaseTheme = BaseTheme>(
+  resolver: RuleResolver<Theme>,
+  autocomplete: AutocompleteProvider<Theme> | false,
+): RuleResolver<Theme> {
+  if (DEV) {
+    return withAutocomplete(resolver, autocomplete)
+  }
+
+  return resolver
+}
+
+export function useMatch<Theme extends BaseTheme = BaseTheme>(
+  pattern: MaybeArray<string | RegExp>,
+): Rule<Theme>
+export function useMatch<Theme extends BaseTheme = BaseTheme>(
+  pattern: MaybeArray<string | RegExp>,
+  resolve: (string & {}) | CSSObject,
+): Rule<Theme>
+export function useMatch<Theme extends BaseTheme = BaseTheme>(
+  pattern: MaybeArray<string | RegExp>,
+  resolve: keyof CSSProperties,
+  convert?: MatchConverter<Theme>,
+): Rule<Theme>
+
+export function useMatch<Theme extends BaseTheme = BaseTheme>(
+  pattern: MaybeArray<string | RegExp>,
+  resolve?: (string & {}) | CSSObject | keyof CSSProperties,
+  convert?: MatchConverter<Theme>,
+): Rule<Theme> {
+  return [pattern, fromMatch(resolve as keyof CSSProperties, convert)]
+}
+
+export function fromMatch<Theme extends BaseTheme = BaseTheme>(): RuleResolver<Theme>
+
+export function fromMatch<Theme extends BaseTheme = BaseTheme>(
+  resolve: keyof CSSProperties,
+  convert?: MatchConverter<Theme>,
+): RuleResolver<Theme>
+
+export function fromMatch<Theme extends BaseTheme = BaseTheme>(
+  resolve: string | CSSObject,
+): RuleResolver<Theme>
+
+export function fromMatch<Theme extends BaseTheme = BaseTheme>(
+  resolve?: keyof CSSProperties | string | CSSObject,
+  convert?: MatchConverter<Theme>,
+): RuleResolver<Theme> {
+  return typeof resolve == 'string' && /^[\w-]+$/.test(resolve) // a CSS property alias
+    ? (match, context) =>
+        ({
+          [resolve]: convert
+            ? convert(match, context)
+            : maybeNegate(match.input, match.slice(1).find(Boolean) || match.$$ || match.input),
+        } as CSSObject)
+    : (match) =>
+        // CSSObject, shortcut or apply
+        resolve ||
+        ({
+          [match[1]]: maybeNegate(
+            match.input,
+            match.slice(2).find(Boolean) || match.$$ || match.input,
+          ),
+        } as CSSObject)
+}
+
+export function useTheme<
+  Theme extends BaseTheme = BaseTheme,
+  Section extends keyof Theme & string = keyof Theme & string,
+>(
+  pattern: MaybeArray<string | RegExp>,
+
+  /** Theme section to use (default: `$1` — The first matched group) */
+  section?: '' | Section | KebabCase<Section>,
+
+  /** The css property (default: value of {@link section}) */
+  resolve?: keyof CSSProperties | ThemeRuleResolver<ThemeValue<Theme[Section]>, Theme>,
+
+  convert?: ThemeMatchConverter<ThemeValue<Theme[Section]>, Theme>,
+): Rule<Theme> {
+  return [pattern, fromTheme(section, resolve)]
+}
 
 export function fromTheme<
   Theme extends BaseTheme = BaseTheme,
@@ -47,26 +136,68 @@ export function fromTheme<
     match: ThemeMatchResult<ThemeValue<Theme[Section]>>,
     context: Context<Theme>,
     section: Section,
-  ) => RuleResult = !resolve
-    ? ({ 1: $1, _ }, context, section) => ({ [$1 || section]: _ } as CSSObject)
-    : typeof resolve == 'string'
-    ? (match, context) => ({ [resolve]: convert ? convert(match, context) : match._ } as CSSObject)
-    : resolve
+  ) => RuleResult =
+    typeof resolve == 'string'
+      ? (match, context) =>
+          ({ [resolve]: convert ? convert(match, context) : match._ } as CSSObject)
+      : resolve || (({ 1: $1, _ }, context, section) => ({ [$1 || section]: _ } as CSSObject))
 
-  return (match, context) => {
-    const themeSection = camelize(section || match[1]) as Section
+  return withAutocomplete$(
+    (match, context) => {
+      const themeSection = camelize(section || match[1]) as Section
 
-    const value =
-      context.theme(themeSection, match.$$) ??
-      (arbitrary(match.$$, themeSection, context) as ThemeValue<Theme[Section]>)
+      const value =
+        context.theme(themeSection, match.$$) ??
+        (arbitrary(match.$$, themeSection, context) as ThemeValue<Theme[Section]>)
 
-    if (value != null) {
-      ;(match as ThemeMatchResult<ThemeValue<Theme[Section]>>)._ =
-        match.input[0] == '-' ? (`calc(${value} * -1)` as ThemeValue<Theme[Section]>) : value
+      if (value != null) {
+        ;(match as ThemeMatchResult<ThemeValue<Theme[Section]>>)._ = maybeNegate(
+          match.input,
+          value,
+        ) as ThemeValue<Theme[Section]>
 
-      return factory(match as ThemeMatchResult<ThemeValue<Theme[Section]>>, context, themeSection)
-    }
-  }
+        return factory(match as ThemeMatchResult<ThemeValue<Theme[Section]>>, context, themeSection)
+      }
+    },
+    DEV &&
+      ((match, context) => {
+        const themeSection = camelize(section || match[1]) as Section
+
+        const isKeyLookup = match.input.endsWith('-')
+
+        if (isKeyLookup) {
+          return Object.entries(context.theme(themeSection) || {})
+            .filter(
+              ([key, value]) =>
+                key != 'DEFAULT' &&
+                /^[\w-]+$/.test(key) &&
+                (!/color|fill|stroke/i.test(themeSection) ||
+                  ['string', 'function'].includes(typeof value)),
+            )
+            .map(
+              ([key, value]): Autocomplete => ({
+                suffix: key.replace(/-DEFAULT/g, ''),
+                color:
+                  /color|fill|stroke/i.test(themeSection) &&
+                  toColorValue(value as ColorValue, { opacityValue: '1' }),
+              }),
+            )
+            .concat([{ suffix: '[' }])
+        }
+
+        const value = context.theme(themeSection, 'DEFAULT')
+
+        return [
+          {
+            suffix: '',
+            color:
+              value &&
+              /color|fill|stroke/i.test(themeSection) &&
+              toColorValue(value as ColorValue, { opacityValue: '1' }),
+          },
+        ]
+      }),
+  )
 }
 
 export type FilterByThemeValue<Theme, Value> = {
@@ -102,6 +233,24 @@ export interface ColorFromThemeOptions<
   selector?: string
 }
 
+export function useColor<
+  Theme extends BaseTheme = BaseTheme,
+  Section extends keyof FilterByThemeValue<Theme, ColorValue> = keyof FilterByThemeValue<
+    Theme,
+    ColorValue
+  >,
+  OpacitySection extends keyof FilterByThemeValue<Theme, string> = keyof FilterByThemeValue<
+    Theme,
+    string
+  >,
+>(
+  pattern: MaybeArray<string | RegExp>,
+  options: ColorFromThemeOptions<Theme, Section, OpacitySection> = {},
+  resolve?: ThemeRuleResolver<ColorFromThemeValue, Theme>,
+): Rule<Theme> {
+  return [pattern, colorFromTheme(options, resolve)]
+}
+
 export function colorFromTheme<
   Theme extends BaseTheme = BaseTheme,
   Section extends keyof FilterByThemeValue<Theme, ColorValue> = keyof FilterByThemeValue<
@@ -116,91 +265,162 @@ export function colorFromTheme<
   options: ColorFromThemeOptions<Theme, Section, OpacitySection> = {},
   resolve?: ThemeRuleResolver<ColorFromThemeValue, Theme>,
 ): RuleResolver<Theme> {
-  return (match, context) => {
-    // text- -> textColor
-    // ring-offset(?:-|$) -> ringOffsetColor
-    const { section = (camelize(match[0]).replace('-', '') + 'Color') as Section } = options
+  return withAutocomplete$(
+    (match, context) => {
+      // text- -> textColor
+      // ring-offset(?:-|$) -> ringOffsetColor
+      const { section = (camelize(match[0]).replace('-', '') + 'Color') as Section } = options
 
-    // extract color and opacity
-    // rose-500                  -> ['rose-500']
-    // [hsl(0_100%_/_50%)]       -> ['[hsl(0_100%_/_50%)]']
-    // indigo-500/100            -> ['indigo-500', '100']
-    // [hsl(0_100%_/_50%)]/[.25] -> ['[hsl(0_100%_/_50%)]', '[.25]']
-    if (!/^(\[[^\]]+]|[^/]+?)(?:\/(.+))?$/.test(match.$$)) return
+      // extract color and opacity
+      // rose-500                  -> ['rose-500']
+      // [hsl(0_100%_/_50%)]       -> ['[hsl(0_100%_/_50%)]']
+      // indigo-500/100            -> ['indigo-500', '100']
+      // [hsl(0_100%_/_50%)]/[.25] -> ['[hsl(0_100%_/_50%)]', '[.25]']
+      if (!/^(\[[^\]]+]|[^/]+?)(?:\/(.+))?$/.test(match.$$)) return
 
-    const { $1: colorMatch, $2: opacityMatch } = RegExp
+      const { $1: colorMatch, $2: opacityMatch } = RegExp
 
-    const colorValue =
-      (context.theme(section, colorMatch) as ColorValue) || arbitrary(colorMatch, section, context)
+      const colorValue =
+        (context.theme(section, colorMatch) as ColorValue) ||
+        arbitrary(colorMatch, section, context)
 
-    if (!colorValue) return
+      if (!colorValue) return
 
-    const {
-      // text- -> --tw-text-opacity
-      // ring-offset(?:-|$) -> --tw-ring-offset-opacity
-      // TODO move this default into preset-tailwind?
-      opacityVariable = `--tw-${match[0].replace(/-$/, '')}-opacity`,
-      opacitySection = section.replace('Color', 'Opacity') as OpacitySection,
-      property = section,
-      selector,
-    } = options
+      const {
+        // text- -> --tw-text-opacity
+        // ring-offset(?:-|$) -> --tw-ring-offset-opacity
+        // TODO move this default into preset-tailwind?
+        opacityVariable = `--tw-${match[0].replace(/-$/, '')}-opacity`,
+        opacitySection = section.replace('Color', 'Opacity') as OpacitySection,
+        property = section,
+        selector,
+      } = options
 
-    const opacityValue =
-      (context.theme(opacitySection, opacityMatch || 'DEFAULT') as string | undefined) ||
-      (opacityMatch && arbitrary(opacityMatch, opacitySection, context))
+      const opacityValue =
+        (context.theme(opacitySection, opacityMatch || 'DEFAULT') as string | undefined) ||
+        (opacityMatch && arbitrary(opacityMatch, opacitySection, context))
 
-    // if (typeof color != 'string') {
-    //   console.warn(`Invalid color ${colorMatch} (from ${match.input}):`, color)
-    //   return
-    // }
+      // if (typeof color != 'string') {
+      //   console.warn(`Invalid color ${colorMatch} (from ${match.input}):`, color)
+      //   return
+      // }
 
-    const create =
-      resolve ||
-      (({ _ }) => {
-        const properties = toCSS(property, _)
+      const create =
+        resolve ||
+        (({ _ }) => {
+          const properties = toCSS(property, _)
 
-        return selector ? { [selector]: properties } : properties
-      })
+          return selector ? { [selector]: properties } : properties
+        })
 
-    ;(match as ThemeMatchResult<ColorFromThemeValue>)._ = {
-      value: toColorValue(colorValue, {
-        opacityVariable: opacityVariable || undefined,
-        opacityValue: opacityValue || undefined,
-      }),
-      color: (options) => toColorValue(colorValue, options),
-      opacityVariable: opacityVariable || undefined,
-      opacityValue: opacityValue || undefined,
-    }
-
-    let properties = create(match as ThemeMatchResult<ColorFromThemeValue>, context)
-
-    // auto support dark mode colors
-    if (!match.dark) {
-      const darkColorValue = context.d(section, colorMatch, colorValue)
-
-      if (darkColorValue && darkColorValue !== colorValue) {
-        ;(match as ThemeMatchResult<ColorFromThemeValue>)._ = {
-          value: toColorValue(darkColorValue, {
-            opacityVariable: opacityVariable || undefined,
-            opacityValue: opacityValue || '1',
-          }),
-          color: (options) => toColorValue(darkColorValue, options),
+      ;(match as ThemeMatchResult<ColorFromThemeValue>)._ = {
+        value: toColorValue(colorValue, {
           opacityVariable: opacityVariable || undefined,
           opacityValue: opacityValue || undefined,
+        }),
+        color: (options) => toColorValue(colorValue, options),
+        opacityVariable: opacityVariable || undefined,
+        opacityValue: opacityValue || undefined,
+      }
+
+      let properties = create(match as ThemeMatchResult<ColorFromThemeValue>, context)
+
+      // auto support dark mode colors
+      if (!match.dark) {
+        const darkColorValue = context.d(section, colorMatch, colorValue)
+
+        if (darkColorValue && darkColorValue !== colorValue) {
+          ;(match as ThemeMatchResult<ColorFromThemeValue>)._ = {
+            value: toColorValue(darkColorValue, {
+              opacityVariable: opacityVariable || undefined,
+              opacityValue: opacityValue || '1',
+            }),
+            color: (options) => toColorValue(darkColorValue, options),
+            opacityVariable: opacityVariable || undefined,
+            opacityValue: opacityValue || undefined,
+          }
+
+          properties = {
+            '&': properties,
+            [context.v('dark') as string]: create(
+              match as ThemeMatchResult<ColorFromThemeValue>,
+              context,
+            ),
+          } as CSSObject
+        }
+      }
+
+      return properties
+    },
+    DEV &&
+      ((match, context) => {
+        const {
+          section = (camelize(match[0]).replace('-', '') + 'Color') as Section,
+          opacitySection = section.replace('Color', 'Opacity') as OpacitySection,
+        } = options
+
+        const isKeyLookup = match.input.endsWith('-')
+
+        const opacities = Object.entries(context.theme(opacitySection) || {}).filter(
+          ([key, value]) => key != 'DEFAULT' && /^[\w-]+$/.test(key) && typeof value == 'string',
+        )
+
+        if (isKeyLookup) {
+          // ['gray-50', ['/0', '/10', ...]],
+          // ['gray-100', ['/0', '/10', ...]],
+          return Object.entries(context.theme(section) || {})
+            .filter(
+              ([key, value]) =>
+                key != 'DEFAULT' &&
+                /^[\w-]+$/.test(key) &&
+                ['string', 'function'].includes(typeof value),
+            )
+            .map(([key]) => key.replace(/-DEFAULT/g, ''))
+            .map(
+              ([key, value]): Autocomplete => ({
+                suffix: key.replace(/-DEFAULT/g, ''),
+                color: toColorValue(value as ColorValue, {
+                  opacityValue: (context.theme(opacitySection, 'DEFAULT') as string) || '1',
+                }),
+                extras: opacities
+                  .map(
+                    ([key, opacityValue]): Autocomplete => ({
+                      suffix: `/${key}`,
+                      color: toColorValue(value as ColorValue, {
+                        opacityValue: opacityValue as string,
+                      }),
+                    }),
+                  )
+                  .concat([{ suffix: '/[' }]),
+              }),
+            )
+            .concat([{ suffix: '[' }])
         }
 
-        properties = {
-          '&': properties,
-          [context.v('dark') as string]: create(
-            match as ThemeMatchResult<ColorFromThemeValue>,
-            context,
-          ),
-        } as CSSObject
-      }
-    }
+        const value = context.theme(section, 'DEFAULT')
 
-    return properties
-  }
+        return [
+          {
+            suffix: '',
+            color:
+              value &&
+              toColorValue(value as ColorValue, {
+                opacityValue: (context.theme(opacitySection, 'DEFAULT') as string) || '1',
+              }),
+            extras: opacities
+              .map(
+                ([key, opacityValue]): Autocomplete => ({
+                  suffix: `/${key}`,
+                  color:
+                    value &&
+                    toColorValue(value as ColorValue, { opacityValue: opacityValue as string }),
+                }),
+              )
+              .concat([{ suffix: '/[' }]),
+          },
+        ]
+      }),
+  )
 }
 
 export function toCSS(property: string, value: string | ColorFromThemeValue): CSSObject {

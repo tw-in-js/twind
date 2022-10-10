@@ -187,7 +187,7 @@ export type RuleResolver<
 export type Rule<Theme extends BaseTheme = BaseTheme> =
   | string
   | RegExp
-  | [pattern: MaybeArray<string | RegExp>, alias: string]
+  | [pattern: MaybeArray<string | RegExp>, alias: (string & {})]
   | [pattern: MaybeArray<string | RegExp>, css: CSSObject]
   | [pattern: MaybeArray<string | RegExp>, resolve: RuleResolver<Theme>]
   | [pattern: MaybeArray<string | RegExp>, property: keyof CSSProperties]
@@ -293,7 +293,7 @@ export type HashFunction = (value: string, defaultHash: (value: string) => strin
 export type DarkModeConfig =
   | 'media'
   | 'class'
-  | string
+  | (string & {})
   | boolean
   | undefined
   | [mode: 'class', selector: string]

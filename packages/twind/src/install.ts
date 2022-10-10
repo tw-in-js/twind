@@ -1,20 +1,22 @@
 import type { Twind, BaseTheme, TwindConfig, TwindUserConfig, Preset, ExtractThemes } from './types'
 
+import { PROD } from 'distilt/env'
+
 import { defineConfig } from './define-config'
 import { setup } from './runtime'
 import { getSheet } from './sheets'
 
 export function install<Theme extends BaseTheme = BaseTheme>(
   config: TwindConfig<Theme>,
-  isProduction: boolean,
+  isProduction?: boolean,
 ): Twind<Theme & BaseTheme>
 
 export function install<Theme = BaseTheme, Presets extends Preset<any>[] = Preset[]>(
   config: TwindUserConfig<Theme, Presets>,
-  isProduction: boolean,
+  isProduction?: boolean,
 ): Twind<BaseTheme & ExtractThemes<Theme, Presets>>
 
-export function install(config: TwindConfig | TwindUserConfig, isProduction: boolean): Twind {
+export function install(config: TwindConfig | TwindUserConfig, isProduction = PROD): Twind {
   const config$ = defineConfig(config as TwindUserConfig)
 
   return setup(

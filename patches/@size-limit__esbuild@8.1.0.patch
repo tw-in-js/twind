@@ -1,0 +1,42 @@
+diff --git a/get-config.js b/get-config.js
+index caf78653fda1c3464ffb12ff10e19cd82fce644a..fac7ad9e7b6fdeeb6c5b1103759549b1b6976ae8 100644
+--- a/get-config.js
++++ b/get-config.js
+@@ -8,15 +8,16 @@ module.exports = async function getConfig(limitConfig, check, output) {
+     external: check.ignore,
+     outdir: output,
+
++    conditions: ['production', 'esnext', 'module'],
++    target: 'es2022',
++
+     write: true,
+     metafile: true,
+     treeShaking: true,
+
+     allowOverwrite: !!check.import,
+     bundle: true,
+-    minifyWhitespace: true,
+-    minifyIdentifiers: true,
+-    minifySyntax: true
++    minify: true,
+   }
+
+   return config
+diff --git a/run-esbuild.js b/run-esbuild.js
+index 2f496c49802ed8dfbdef6c69db8c044b5b914ba8..3a6f52bdf57459818aa1f1bb2eaf430395f170ab 100644
+--- a/run-esbuild.js
++++ b/run-esbuild.js
+@@ -1,5 +1,11 @@
+ let esbuild = require('esbuild')
+
+-module.exports = function runEsbuild(check) {
+-  return esbuild.build(check.esbuildConfig)
++module.exports = async function runEsbuild(check) {
++  const result = await esbuild.build({ ...check.esbuildConfig, format: 'esm' })
++
++  return esbuild.build({
++    ...check.esbuildConfig,
++    allowOverwrite: true,
++    entryPoints: Object.keys(result.metafile.outputs)
++  })
+ }

@@ -15,7 +15,7 @@ test('uses CSSOM', () => {
   // is already injected
   assert.lengthOf(document.styleSheets, 1)
 
-  sheet.insert('*{}', 0, { r: ['*'], p: 0, o: 0 })
+  sheet.insert('*{}', 0, { p: 0, o: 0 })
 
   assert.strictEqual(document.styleSheets[0], sheet.target)
   assert.strictEqual(stringify(sheet.target).replace(/ /g, ''), '*{}')

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
-import type {
+import {
   MatchResult,
   Rule,
   MaybeArray,
@@ -10,11 +10,36 @@ import type {
   ThemeMatchResult,
   ThemeRuleResolver,
   ColorFromThemeValue,
+  AutocompleteProvider,
+  useTheme,
 } from 'twind'
 
-import { mql, fromTheme, colorFromTheme, toColorValue, toCSS, asArray, arbitrary } from 'twind'
+import { DEV } from 'distilt/env'
+
+import {
+  mql,
+  fromTheme,
+  colorFromTheme,
+  toColorValue,
+  toCSS,
+  asArray,
+  arbitrary,
+  withAutocomplete,
+} from 'twind'
 
 import type { TailwindTheme } from './types'
+
+// indirection wrapper to remove autocomplete functions from production bundles
+function withAutocomplete$(
+  rule: Rule<TailwindTheme>,
+  autocomplete: AutocompleteProvider<TailwindTheme> | false,
+): Rule<TailwindTheme> {
+  if (DEV) {
+    return withAutocomplete(rule, autocomplete)
+  }
+
+  return rule
+}
 
 const rules: Rule<TailwindTheme>[] = [
   /* arbitrary properties: [paint-order:markers] */
@@ -165,28 +190,31 @@ const rules: Rule<TailwindTheme>[] = [
 
   ['flex-(wrap|wrap-reverse|nowrap)', 'flexWrap'],
   ['(flex-(?:grow|shrink))(?:-|$)', fromTheme(/* 'flex-grow' | flex-shrink */)],
-  ['(flex)-', fromTheme(/* 'flex' */)],
+  useTheme('(flex)-' /*, 'flex' */),
   ['grow(?:-|$)', fromTheme('flexGrow')],
   ['shrink(?:-|$)', fromTheme('flexShrink')],
   ['basis-', fromTheme('flexBasis')],
 
   ['-?(order)-', fromTheme(/* 'order' */)],
-  '-?(order)-(\\d+)',
+  withAutocomplete$('-?(order)-(\\d+)', DEV && (() => range({ end: 12 }))),
 
   /* GRID */
   // Grid Template Columns
   ['grid-cols-', fromTheme('gridTemplateColumns')],
-  ['grid-cols-(\\d+)', 'gridTemplateColumns', gridTemplate],
+  withAutocomplete$(
+    ['grid-cols-(\\d+)', 'gridTemplateColumns', gridTemplate],
+    DEV && (() => range({ end: 6 })),
+  ),
 
   // Grid Column Start / End
   ['col-', fromTheme('gridColumn')],
   ['col-(span)-(\\d+)', 'gridColumn', span],
 
   ['col-start-', fromTheme('gridColumnStart')],
-  ['col-start-(\\d+|auto)', 'gridColumnStart'],
+  ['col-start-(auto|\\d+)', 'gridColumnStart'],
 
   ['col-end-', fromTheme('gridColumnEnd')],
-  ['col-end-(\\d+|auto)', 'gridColumnEnd'],
+  ['col-end-(auto|\\d+)', 'gridColumnEnd'],
 
   // Grid Template Rows
   ['grid-rows-', fromTheme('gridTemplateRows')],
@@ -197,10 +225,10 @@ const rules: Rule<TailwindTheme>[] = [
   ['row-(span)-(\\d+)', 'gridRow', span],
 
   ['row-start-', fromTheme('gridRowStart')],
-  ['row-start-(\\d+|auto)', 'gridRowStart'],
+  ['row-start-(auto|\\d+)', 'gridRowStart'],
 
   ['row-end-', fromTheme('gridRowEnd')],
-  ['row-end-(\\d+|auto)', 'gridRowEnd'],
+  ['row-end-(auto|\\d+)', 'gridRowEnd'],
 
   // Grid Auto Flow
   ['grid-flow-((row|col)(-dense)?)', 'gridAutoFlow', (match) => spacify(columnify(match))],
@@ -220,30 +248,58 @@ const rules: Rule<TailwindTheme>[] = [
   /* BOX ALIGNMENT */
   // Justify Items
   // Justify Self
-  '(justify-(?:items|self))-',
+  withAutocomplete$(
+    '(justify-(?:items|self))-',
+    DEV &&
+      (({ 1: $1 }) =>
+        $1.endsWith('-items-')
+          ? ['start', 'end', 'center', 'stretch']
+          : /* '-self-' */ ['auto', 'start', 'end', 'center', 'stretch']),
+  ),
 
   // Justify Content
-  ['justify-', 'justifyContent', convertContentValue],
+  withAutocomplete$(
+    ['justify-', 'justifyContent', convertContentValue],
+    DEV && (() => ['start', 'end', 'center', 'between', 'around', 'evenly']),
+  ),
 
   // Align Content
   // Align Items
   // Align Self
-  [
-    '(content|items|self)-',
-    (match) => ({
-      [('align-' + match[1]) as 'align-content']: convertContentValue(match),
-    }),
-  ],
+  withAutocomplete$(
+    [
+      '(content|items|self)-',
+      (match) => ({
+        [('align-' + match[1]) as 'align-content']: convertContentValue(match),
+      }),
+    ],
+    DEV &&
+      (({ 1: $1 }) =>
+        $1 == 'content'
+          ? ['center', 'start', 'end', 'between', 'around', 'evenly']
+          : $1 == 'items'
+          ? ['start', 'end', 'center', 'baseline', 'stretch']
+          : /* $1 == 'self' */ ['auto', 'start', 'end', 'center', 'stretch', 'baseline']),
+  ),
 
   // Place Content
   // Place Items
   // Place Self
-  [
-    '(place-(content|items|self))-',
-    ({ 1: $1, $$ }) => ({
-      [$1 as 'place-content']: ('wun'.includes($$[3]) ? 'space-' : '') + $$,
-    }),
-  ],
+  withAutocomplete$(
+    [
+      '(place-(content|items|self))-',
+      ({ 1: $1, $$ }) => ({
+        [$1 as 'place-content']: ('wun'.includes($$[3]) ? 'space-' : '') + $$,
+      }),
+    ],
+    DEV &&
+      (({ 1: $1 }) =>
+        $1 == 'content'
+          ? ['center', 'start', 'end', 'between', 'around', 'evenly', 'stretch']
+          : $1 == 'items'
+          ? ['start', 'end', 'center', 'stretch']
+          : /* $1 == 'self' */ ['auto', 'start', 'end', 'center', 'stretch']),
+  ),
 
   /* SPACING */
   // Padding
@@ -366,8 +422,7 @@ const rules: Rule<TailwindTheme>[] = [
 
   // List Style Type
   ['list-', fromTheme('listStyleType')],
-  // fallback for list style type
-  ['list-', 'listStyleType'],
+  withAutocomplete$(['list-', 'listStyleType'], DEV && (() => ['none', 'disc', 'decimal'])),
 
   // Placeholder Opacity
   [
@@ -447,7 +502,10 @@ const rules: Rule<TailwindTheme>[] = [
   ['align-', 'verticalAlign'],
 
   // Whitespace
-  ['whitespace-', 'whiteSpace'],
+  withAutocomplete$(
+    ['whitespace-', 'whiteSpace'],
+    DEV && (() => ['normal', 'nowrap', 'pre', 'pre-line', 'pre-wrap']),
+  ),
 
   // Word Break
   ['break-normal', { wordBreak: 'normal', overflowWrap: 'normal' }],
@@ -774,7 +832,28 @@ const rules: Rule<TailwindTheme>[] = [
   ['(opacity)-', fromTheme(/* 'opacity' */)],
 
   // Mix Blend Mode
-  ['mix-blend-', 'mixBlendMode'],
+  withAutocomplete$(
+    ['mix-blend-', 'mixBlendMode'],
+    DEV &&
+      (() => [
+        'normal',
+        'multiply',
+        'screen',
+        'overlay',
+        'darken',
+        'lighten',
+        'color-dodge',
+        'color-burn',
+        'hard-light',
+        'soft-light',
+        'difference',
+        'exclusion',
+        'hue',
+        'saturation',
+        'color',
+        'luminosity',
+      ]),
+  ),
 
   /* FILTERS */
   ...filter(),
@@ -860,18 +939,75 @@ const rules: Rule<TailwindTheme>[] = [
 
   /* INTERACTIVITY */
   // Appearance
-  '(appearance)-',
+  withAutocomplete$('(appearance)-', DEV && (() => ['auto', 'none'])),
 
   // Columns
   ['(columns)-', fromTheme(/* 'columns' */)],
   '(columns)-(\\d+)',
 
   // Break Before, After and Inside
-  '(break-(?:before|after|inside))-',
+  withAutocomplete$(
+    '(break-(?:before|after|inside))-',
+    DEV &&
+      (({ 1: $1 }) =>
+        $1.endsWith('-inside-')
+          ? ['auto', 'avoid', 'avoid-page', 'avoid-column']
+          : /* before || after */ [
+              'auto',
+              'avoid',
+              'all',
+              'avoid-page',
+              'page',
+              'left',
+              'right',
+              'column',
+            ]),
+  ),
 
   // Cursor
   ['(cursor)-', fromTheme(/* 'cursor' */)],
-  '(cursor)-',
+  withAutocomplete$(
+    '(cursor)-',
+    DEV &&
+      (() => [
+        'alias',
+        'all-scroll',
+        'auto',
+        'cell',
+        'col-resize',
+        'context-menu',
+        'copy',
+        'crosshair',
+        'default',
+        'e-resize',
+        'ew-resize',
+        'grab',
+        'grabbing',
+        'help',
+        'move',
+        'n-resize',
+        'ne-resize',
+        'nesw-resize',
+        'no-drop',
+        'none',
+        'not-allowed',
+        'ns-resize',
+        'nw-resize',
+        'nwse-resize',
+        'pointer',
+        'progress',
+        'row-resize',
+        's-resize',
+        'se-resize',
+        'sw-resize',
+        'text',
+        'vertical-text',
+        'w-resize',
+        'wait',
+        'zoom-in',
+        'zoom-out',
+      ]),
+  ),
 
   // Scroll Snap Type
   ['snap-(none)', 'scroll-snap-type'],
@@ -955,11 +1091,11 @@ const rules: Rule<TailwindTheme>[] = [
   ['outline-', fromTheme('outlineWidth')],
 
   // Pointer Events
-  '(pointer-events)-',
+  withAutocomplete$('(pointer-events)-', DEV && (() => ['auto', 'none'])),
 
   // Will Change
   ['(will-change)-', fromTheme(/* 'willChange' */)],
-  '(will-change)-',
+  withAutocomplete$('(will-change)-', DEV && (() => ['auto', 'contents', 'transform'])),
 
   // Resize
   [
@@ -1173,4 +1309,22 @@ function span({ 1: $1, 2: $2 }: MatchResult) {
 
 function gridTemplate({ 1: $1 }: MatchResult) {
   return `repeat(${$1},minmax(0,1fr))`
+}
+
+function range({
+  start = 1,
+  end,
+  step = 1,
+}: {
+  start?: number
+  end: number
+  step?: number
+}): string[] {
+  const result: string[] = []
+
+  for (let index = start; index <= end; index += step) {
+    result.push(`${index}`)
+  }
+
+  return result
 }

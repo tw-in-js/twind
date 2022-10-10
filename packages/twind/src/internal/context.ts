@@ -18,6 +18,7 @@ import type {
 
 import { makeThemeFunction } from './theme'
 import { asArray, escape, hash as defaultHash, identity } from '../utils'
+import { fromMatch } from '../rules'
 
 type ResolveFunction<Theme extends BaseTheme = BaseTheme> = (
   className: string,
@@ -168,29 +169,11 @@ function createResolveFunction<Theme extends BaseTheme = BaseTheme>(
 ): ResolveFunction<Theme> {
   return createResolve(
     patterns,
-    !resolve
-      ? (match) =>
-          ({
-            [match[1]]: maybeNegate(
-              match.input,
-              match.slice(2).find(Boolean) || match.$$ || match.input,
-            ),
-          } as CSSObject)
-      : typeof resolve == 'function'
-      ? resolve
-      : typeof resolve == 'string' && /^[\w-]+$/.test(resolve) // a CSS property alias
-      ? (match, context) =>
-          ({
-            [resolve]: convert
-              ? convert(match, context)
-              : maybeNegate(match.input, match.slice(1).find(Boolean) || match.$$ || match.input),
-          } as CSSObject)
-      : // CSSObject, shortcut or apply
-        () => resolve,
+    typeof resolve == 'function' ? resolve : fromMatch(resolve as keyof CSSProperties, convert),
   )
 }
 
-function maybeNegate($_: string, value: string): string {
+export function maybeNegate<T>($_: string, value: T): T | string {
   return $_[0] == '-' ? `calc(${value} * -1)` : value
 }
 
@@ -240,8 +223,8 @@ function hashVars(value: string, h: Context['h']): string {
   // PERF: check for --tw before running the regexp
   // if (value.includes('--tw')) {
   return value.replace(
-    /--(tw-[\w-]+)\b/g,
-    (_, property: string) => '--' + h(property).replace('#', ''),
+    /--(tw(?:-[\w-]+)?)\b/g,
+    (_: string, property: string) => '--' + h(property).replace('#', ''),
   )
   // }
 
