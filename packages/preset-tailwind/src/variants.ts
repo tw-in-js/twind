@@ -13,11 +13,12 @@ const variants: Variant<TailwindTheme>[] = [
   ['contrast-more', '@media (prefers-contrast:more)'],
   ['contrast-less', '@media (prefers-contrast:less)'],
 
-  ['first-letter', '&::first-letter'],
-  ['first-line', '&::first-line'],
-
   ['marker', '& *::marker,&::marker'],
   ['selection', '& *::selection,&::selection'],
+
+  // TODO: use pseudoElement helper?
+  ['first-letter', '&::first-letter'],
+  ['first-line', '&::first-line'],
   ['file', '&::file-selector-button'],
   ['placeholder', '&::placeholder'],
   ['backdrop', '&::backdrop'],
@@ -27,7 +28,7 @@ const variants: Variant<TailwindTheme>[] = [
   ['even', '&:nth-child(2n)'],
   ['odd', '&:nth-child(odd)'],
 
-  ['open', '[open]'],
+  ['open', '&[open]'],
 
   // All other pseudo classes are already supported by twind
 
@@ -37,8 +38,10 @@ const variants: Variant<TailwindTheme>[] = [
   // => '.group:focus .group-focus:selector'
   [
     '((group|peer)(~[^-[]+)?)(-[a-z-]+|\\[.+])',
-    ({ 1: $1, 4: $4 }, { e, h }) =>
-      `:merge(.${e(h($1))})${$4[0] == '[' ? $4 : ':' + $4.slice(1)}${$1[0] == 'p' ? '~' : ' '}&`,
+    ({ 1: $1, 4: $4 }, { e, h, v }) =>
+      `:merge(.${e(h($1))})${$4[0] == '[' ? $4 : (v($4.slice(1)) as string).replace('&', '')}${
+        $1[0] == 'p' ? '~' : ' '
+      }&`,
   ],
 
   // direction variants

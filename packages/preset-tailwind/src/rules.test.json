@@ -667,6 +667,17 @@
       ".underline{text-decoration-line:underline}"
     ]
   ],
+  "open:text-center": ".open\\:text-center[open]{text-align:center}",
+  "odd:text-center": ".odd\\:text-center:nth-child(odd){text-align:center}",
+  "even:text-center": ".even\\:text-center:nth-child(2n){text-align:center}",
+  "first-letter:text-center": ".first-letter\\:text-center::first-letter{text-align:center}",
+  "first-line:text-center": ".first-line\\:text-center::first-line{text-align:center}",
+  "first:text-center": ".first\\:text-center:first-child{text-align:center}",
+  "last:text-center": ".last\\:text-center:last-child{text-align:center}",
+  "marker:text-center": ".marker\\:text-center *::marker,.marker\\:text-center::marker{text-align:center}",
+  "selection:text-center": ".selection\\:text-center *::selection,.selection\\:text-center::selection{text-align:center}",
+  "ltr:text-right": "[dir=\"ltr\"] .ltr\\:text-right{text-align:right}",
+  "rtl:text-left": "[dir=\"rtl\"] .rtl\\:text-left{text-align:left}",
   "group hover:bg-gray-300": [
     ".hover\\:bg-gray-300:hover{--tw-bg-opacity:1;background-color:rgba(209,213,219,var(--tw-bg-opacity))}"
   ],
@@ -686,6 +697,8 @@
     ".group:focus .group-focus\\:text-red-500{--tw-text-opacity:1;color:rgba(239,68,68,var(--tw-text-opacity))}",
     ".group\\~x:hover .group\\~x-hover\\:text-yellow-500{--tw-text-opacity:1;color:rgba(234,179,8,var(--tw-text-opacity))}"
   ],
+  "group-odd:text-center": ".group:nth-child(odd) .group-odd\\:text-center{text-align:center}",
+  "peer-open:text-center": ".peer[open]~.peer-open\\:text-center{text-align:center}",
   "peer-invalid:visible": ".peer:invalid~.peer-invalid\\:visible{visibility:visible}",
   "peer-focus:visible": ".peer:focus~.peer-focus\\:visible{visibility:visible}",
   "peer~xxx-focus:visible": ".peer\\~xxx:focus~.peer\\~xxx-focus\\:visible{visibility:visible}",
