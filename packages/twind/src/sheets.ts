@@ -1,3 +1,4 @@
+import { warn } from './internal/warn'
 import type { Sheet, SheetRule } from './types'
 import { asArray, noop } from './utils'
 
@@ -59,7 +60,7 @@ export function cssom(element?: CSSStyleSheet | Element | null | false): Sheet<C
         // ::-moz-focus-inner
         // :-moz-focusring
         if (!/:-[mwo]/.test(cssText)) {
-          console.warn(error, cssText)
+          warn((error as Error).message, 'TWIND_INVALID_CSS', cssText)
         }
       }
     },

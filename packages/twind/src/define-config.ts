@@ -34,6 +34,7 @@ export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = 
       darkColor: userConfig.darkColor,
       preflight: userConfig.preflight !== false && asArray(userConfig.preflight),
       theme: userConfig.theme as TwindConfig<BaseTheme & ExtractThemes<Theme, Presets>>['theme'],
+      stringify: userConfig.stringify,
     } as TwindPresetConfig<Theme>,
   ])) {
     const {
