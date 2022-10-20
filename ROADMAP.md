@@ -44,18 +44,8 @@
 
 ## v1
 
-- `ensure`: like setup but keeps track of presets and merges them
-
-  ```js
-  // package a
-  import { ensure } from 'twind'
-  ensure(presetTailwind())
-
-  // package b
-  import { ensure } from 'twind'
-  ensure(presetTailwind(), presetTailwindForms())
-  ```
-
+- @twind/devtools:
+  - enumerate all classes and inject as empty for dev tools
 - @twind/with-remix: https://github.com/remix-run/remix/issues/1804
 - @twind/preset-\* from tailwind core
 - @twind/styled (previously @twind/react)
@@ -66,9 +56,9 @@
 - framework integrations
   - solid, wmr, nuxt, vue, stenciljs, angular, ...
   - https://vercel.com/templates
-- development condition — let distilt create development bundles
-  - warnings: console.warn(`[twind] unknown rule "${value}"`)
-  - completion infos
+- development condition
+  — [x] let distilt create development bundles
+  - [x] warnings: console.warn(`[twind] unknown rule "${value}"`)
   - additional checks
   - performance marks for devtools
 - perf: large website with many different rules
@@ -90,14 +80,23 @@
 
 - zero runtime
   - safelist, extractor, examples
-- @twind/completions — provide autocompletion for classNames
-  - https://www.npmjs.com/package/genex
-  - https://www.npmjs.com/regexp-enumerator
 - a package to make it easy to create lightweight versions of presets (like https://lodash.com/custom-builds)
 - postcss plugin like tailwindcss for SSR
 
   ```css
   @twind;
+  ```
+
+- `ensure`: like setup but keeps track of presets and merges them
+
+  ```js
+  // package a
+  import { ensure } from 'twind'
+  ensure(presetTailwind())
+
+  // package b
+  import { ensure } from 'twind'
+  ensure(presetTailwind(), presetTailwindForms())
   ```
 
 ## v2

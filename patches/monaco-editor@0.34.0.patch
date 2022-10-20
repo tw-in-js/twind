@@ -1,0 +1,13 @@
+diff --git a/esm/vs/language/typescript/ts.worker.js b/esm/vs/language/typescript/ts.worker.js
+index d3285d4dc35229d5b556f489ad12d2df13c3c914..784f2cc89eec80c77decd83c04165f143fef8718 100644
+--- a/esm/vs/language/typescript/ts.worker.js
++++ b/esm/vs/language/typescript/ts.worker.js
+@@ -5472,7 +5472,7 @@ var ts;
+   ts2.getNormalizedAbsolutePathWithoutRoot = getNormalizedAbsolutePathWithoutRoot;
+   function toPath(fileName, basePath, getCanonicalFileName) {
+     var nonCanonicalizedPath = isRootedDiskPath(fileName) ? normalizePath(fileName) : getNormalizedAbsolutePath(fileName, basePath);
+-    return getCanonicalFileName(nonCanonicalizedPath);
++    return getCanonicalFileName(decodeURIComponent(nonCanonicalizedPath));
+   }
+   ts2.toPath = toPath;
+   function normalizePathAndParts(path) {

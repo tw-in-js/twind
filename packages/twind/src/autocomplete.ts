@@ -1,18 +1,42 @@
-import type { BaseTheme, Context, CSSProperties, MatchResult, Rule, RuleResolver } from './types'
+import type {
+  BaseTheme,
+  CSSProperties,
+  MatchResult,
+  Rule,
+  RuleResolver,
+  ThemeFunction,
+  VariantResolver,
+} from './types'
 import { DEV } from 'distilt/env'
 import { fromMatch } from './rules'
 import { asArray } from './utils'
 
-export type Autocomplete = {
+export type AutocompleteItem = {
+  prefix?: string
   suffix: string
-  extras?: Autocomplete[]
+  theme?: { section: string; key: string }
+  modifiers?: AutocompleteModifier[] | false | null | undefined
   color?: string | false | null | undefined
+  label?: string
+}
+
+export type AutocompleteModifier = {
+  modifier: string
+  theme?: { section: string; key: string }
+  color?: string | false | null | undefined
+  label?: string
+}
+
+export interface AutocompleteContext<Theme extends BaseTheme = BaseTheme> {
+  /** Allows to resolve theme values. */
+  readonly theme: ThemeFunction<Theme>
+  readonly variants: Record<string, string>
 }
 
 export type AutocompleteProvider<Theme extends BaseTheme = BaseTheme> = (
   match: MatchResult,
-  context: Context<Theme>,
-) => (string | Autocomplete)[]
+  context: AutocompleteContext<Theme>,
+) => (string | AutocompleteItem)[]
 
 const kAutocomplete = /* #__PURE__ */ Symbol('@twind/autocomplete')
 
@@ -22,14 +46,19 @@ export function withAutocomplete<Theme extends BaseTheme = BaseTheme>(
 ): RuleResolver<Theme>
 
 export function withAutocomplete<Theme extends BaseTheme = BaseTheme>(
+  resolver: VariantResolver<Theme>,
+  autocomplete: AutocompleteProvider<Theme> | false | null | undefined,
+): VariantResolver<Theme>
+
+export function withAutocomplete<Theme extends BaseTheme = BaseTheme>(
   rule: Rule<Theme>,
   autocomplete: AutocompleteProvider<Theme> | false | null | undefined,
 ): Rule<Theme>
 
 export function withAutocomplete<Theme extends BaseTheme = BaseTheme>(
-  rule: Rule<Theme> | RuleResolver<Theme>,
+  rule: Rule<Theme> | RuleResolver<Theme> | VariantResolver<Theme>,
   autocomplete: AutocompleteProvider<Theme> | false | null | undefined,
-): Rule<Theme> | RuleResolver<Theme> {
+): Rule<Theme> | RuleResolver<Theme> | VariantResolver<Theme> {
   if (DEV && autocomplete) {
     if (typeof rule == 'function') {
       return Object.defineProperty(rule, kAutocomplete, {
@@ -48,14 +77,10 @@ export function withAutocomplete<Theme extends BaseTheme = BaseTheme>(
 
     return [
       pattern,
-      Object.defineProperty(
-        typeof resolve == 'function' ? resolve : fromMatch(resolve as keyof CSSProperties, convert),
-        kAutocomplete,
-        {
-          value: autocomplete,
-          configurable: true,
-        },
-      ),
+      Object.defineProperty(fromMatch(resolve as keyof CSSProperties, convert), kAutocomplete, {
+        value: autocomplete,
+        configurable: true,
+      }),
     ]
   }
 
@@ -63,7 +88,7 @@ export function withAutocomplete<Theme extends BaseTheme = BaseTheme>(
 }
 
 export function getAutocompleteProvider<Theme extends BaseTheme = BaseTheme>(
-  resolver: RuleResolver<Theme>,
+  resolver: RuleResolver<Theme> | VariantResolver<Theme>,
 ): AutocompleteProvider<Theme> | undefined {
   return (resolver as { [kAutocomplete]?: AutocompleteProvider<Theme> })[kAutocomplete]
 }

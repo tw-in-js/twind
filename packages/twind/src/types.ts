@@ -187,7 +187,8 @@ export type RuleResolver<
 export type Rule<Theme extends BaseTheme = BaseTheme> =
   | string
   | RegExp
-  | [pattern: MaybeArray<string | RegExp>, alias: (string & {})]
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  | [pattern: MaybeArray<string | RegExp>, alias: string & {}]
   | [pattern: MaybeArray<string | RegExp>, css: CSSObject]
   | [pattern: MaybeArray<string | RegExp>, resolve: RuleResolver<Theme>]
   | [pattern: MaybeArray<string | RegExp>, property: keyof CSSProperties]
@@ -293,6 +294,7 @@ export type HashFunction = (value: string, defaultHash: (value: string) => strin
 export type DarkModeConfig =
   | 'media'
   | 'class'
+  // eslint-disable-next-line @typescript-eslint/ban-types
   | (string & {})
   | boolean
   | undefined
@@ -351,7 +353,7 @@ export interface TwindConfig<Theme extends BaseTheme = BaseTheme> {
 
 type ArrayType<T> = T extends (infer Item)[] ? Item : T
 type ExtractTheme<T> = T extends Preset<infer Theme> ? Theme : T
-type ExtractUserTheme<T> = {
+export type ExtractUserTheme<T> = {
   [key in keyof T]: key extends 'extend'
     ? never
     : T[key] extends ThemeSectionResolver<infer Value, T & BaseTheme>

@@ -19,8 +19,12 @@ import type {
 
 import { toColorValue } from './colors'
 import { resolveThemeFunction } from './internal/serialize'
-import { maybeNegate } from './internal/context'
-import { type AutocompleteProvider, type Autocomplete, withAutocomplete } from './autocomplete'
+import {
+  type AutocompleteProvider,
+  type AutocompleteItem,
+  withAutocomplete,
+  type AutocompleteModifier,
+} from './autocomplete'
 
 export type ThemeMatchResult<Value> = MatchResult & {
   /** The found theme value */
@@ -54,6 +58,11 @@ export function useMatch<Theme extends BaseTheme = BaseTheme>(
 ): Rule<Theme>
 export function useMatch<Theme extends BaseTheme = BaseTheme>(
   pattern: MaybeArray<string | RegExp>,
+  resolver: RuleResolver<Theme>,
+): Rule<Theme>
+export function useMatch<Theme extends BaseTheme = BaseTheme>(
+  pattern: MaybeArray<string | RegExp>,
+  // eslint-disable-next-line @typescript-eslint/ban-types
   resolve: (string & {}) | CSSObject,
 ): Rule<Theme>
 export function useMatch<Theme extends BaseTheme = BaseTheme>(
@@ -64,13 +73,18 @@ export function useMatch<Theme extends BaseTheme = BaseTheme>(
 
 export function useMatch<Theme extends BaseTheme = BaseTheme>(
   pattern: MaybeArray<string | RegExp>,
-  resolve?: (string & {}) | CSSObject | keyof CSSProperties,
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  resolve?: RuleResolver<Theme> | (string & {}) | CSSObject | keyof CSSProperties,
   convert?: MatchConverter<Theme>,
 ): Rule<Theme> {
   return [pattern, fromMatch(resolve as keyof CSSProperties, convert)]
 }
 
 export function fromMatch<Theme extends BaseTheme = BaseTheme>(): RuleResolver<Theme>
+
+export function fromMatch<Theme extends BaseTheme = BaseTheme>(
+  resolver: RuleResolver<Theme>,
+): RuleResolver<Theme>
 
 export function fromMatch<Theme extends BaseTheme = BaseTheme>(
   resolve: keyof CSSProperties,
@@ -82,25 +96,30 @@ export function fromMatch<Theme extends BaseTheme = BaseTheme>(
 ): RuleResolver<Theme>
 
 export function fromMatch<Theme extends BaseTheme = BaseTheme>(
-  resolve?: keyof CSSProperties | string | CSSObject,
+  resolve?: RuleResolver<Theme> | keyof CSSProperties | string | CSSObject,
   convert?: MatchConverter<Theme>,
 ): RuleResolver<Theme> {
-  return typeof resolve == 'string' && /^[\w-]+$/.test(resolve) // a CSS property alias
+  return typeof resolve == 'function'
+    ? resolve
+    : typeof resolve == 'string' && /^[\w-]+$/.test(resolve) // a CSS property alias
     ? (match, context) =>
         ({
-          [resolve]: convert
-            ? convert(match, context)
-            : maybeNegate(match.input, match.slice(1).find(Boolean) || match.$$ || match.input),
+          [resolve]: convert ? convert(match, context) : maybeNegate(match, 1),
         } as CSSObject)
     : (match) =>
         // CSSObject, shortcut or apply
         resolve ||
         ({
-          [match[1]]: maybeNegate(
-            match.input,
-            match.slice(2).find(Boolean) || match.$$ || match.input,
-          ),
+          [match[1]]: maybeNegate(match, 2),
         } as CSSObject)
+}
+
+function maybeNegate<T>(
+  match: MatchResult,
+  offset: number,
+  value: T | string = match.slice(offset).find(Boolean) || match.$$ || match.input,
+): T | string {
+  return match.input[0] == '-' ? `calc(${value} * -1)` : value
 }
 
 export function useTheme<
@@ -117,7 +136,7 @@ export function useTheme<
 
   convert?: ThemeMatchConverter<ThemeValue<Theme[Section]>, Theme>,
 ): Rule<Theme> {
-  return [pattern, fromTheme(section, resolve)]
+  return [pattern, fromTheme(section, resolve, convert)]
 }
 
 export function fromTheme<
@@ -152,7 +171,8 @@ export function fromTheme<
 
       if (value != null) {
         ;(match as ThemeMatchResult<ThemeValue<Theme[Section]>>)._ = maybeNegate(
-          match.input,
+          match,
+          0,
           value,
         ) as ThemeValue<Theme[Section]>
 
@@ -169,14 +189,15 @@ export function fromTheme<
           return Object.entries(context.theme(themeSection) || {})
             .filter(
               ([key, value]) =>
+                key &&
                 key != 'DEFAULT' &&
-                /^[\w-]+$/.test(key) &&
                 (!/color|fill|stroke/i.test(themeSection) ||
                   ['string', 'function'].includes(typeof value)),
             )
             .map(
-              ([key, value]): Autocomplete => ({
+              ([key, value]): AutocompleteItem => ({
                 suffix: key.replace(/-DEFAULT/g, ''),
+                theme: { section: themeSection, key },
                 color:
                   /color|fill|stroke/i.test(themeSection) &&
                   toColorValue(value as ColorValue, { opacityValue: '1' }),
@@ -187,15 +208,19 @@ export function fromTheme<
 
         const value = context.theme(themeSection, 'DEFAULT')
 
-        return [
-          {
-            suffix: '',
-            color:
-              value &&
-              /color|fill|stroke/i.test(themeSection) &&
-              toColorValue(value as ColorValue, { opacityValue: '1' }),
-          },
-        ]
+        if (value) {
+          return [
+            {
+              suffix: '',
+              theme: { section: themeSection, key: 'DEFAULT' },
+              color:
+                /color|fill|stroke/i.test(themeSection) &&
+                toColorValue(value as ColorValue, { opacityValue: '1' }),
+            },
+          ]
+        }
+
+        return []
       }),
   )
 }
@@ -284,7 +309,7 @@ export function colorFromTheme<
         (context.theme(section, colorMatch) as ColorValue) ||
         arbitrary(colorMatch, section, context)
 
-      if (!colorValue) return
+      if (!colorValue || typeof colorValue == 'object') return
 
       const {
         // text- -> --tw-text-opacity
@@ -368,30 +393,40 @@ export function colorFromTheme<
         if (isKeyLookup) {
           // ['gray-50', ['/0', '/10', ...]],
           // ['gray-100', ['/0', '/10', ...]],
+
           return Object.entries(context.theme(section) || {})
             .filter(
               ([key, value]) =>
-                key != 'DEFAULT' &&
-                /^[\w-]+$/.test(key) &&
-                ['string', 'function'].includes(typeof value),
+                key && key != 'DEFAULT' && ['string', 'function'].includes(typeof value),
             )
-            .map(([key]) => key.replace(/-DEFAULT/g, ''))
             .map(
-              ([key, value]): Autocomplete => ({
+              ([key, value]): AutocompleteItem => ({
                 suffix: key.replace(/-DEFAULT/g, ''),
+                theme: { section, key },
                 color: toColorValue(value as ColorValue, {
                   opacityValue: (context.theme(opacitySection, 'DEFAULT') as string) || '1',
                 }),
-                extras: opacities
-                  .map(
-                    ([key, opacityValue]): Autocomplete => ({
-                      suffix: `/${key}`,
-                      color: toColorValue(value as ColorValue, {
-                        opacityValue: opacityValue as string,
+                modifiers:
+                  (typeof value == 'function' ||
+                    (typeof value == 'string' &&
+                      (value.includes('<alpha-value>') ||
+                        (value[0] == '#' && (value.length == 4 || value.length == 7))))) &&
+                  opacities
+                    .map(
+                      ([key, opacityValue]): AutocompleteModifier => ({
+                        modifier: key,
+                        theme: { section: opacitySection, key },
+                        color: toColorValue(value as ColorValue, {
+                          opacityValue: opacityValue as string,
+                        }),
                       }),
-                    }),
-                  )
-                  .concat([{ suffix: '/[' }]),
+                    )
+                    .concat([
+                      {
+                        modifier: '[',
+                        color: toColorValue(value as ColorValue, { opacityValue: '1' }),
+                      },
+                    ]),
               }),
             )
             .concat([{ suffix: '[' }])
@@ -399,26 +434,40 @@ export function colorFromTheme<
 
         const value = context.theme(section, 'DEFAULT')
 
-        return [
-          {
-            suffix: '',
-            color:
-              value &&
-              toColorValue(value as ColorValue, {
+        if (value) {
+          return [
+            {
+              suffix: '',
+              theme: { section, key: 'DEFAULT' },
+              color: toColorValue(value as ColorValue, {
                 opacityValue: (context.theme(opacitySection, 'DEFAULT') as string) || '1',
               }),
-            extras: opacities
-              .map(
-                ([key, opacityValue]): Autocomplete => ({
-                  suffix: `/${key}`,
-                  color:
-                    value &&
-                    toColorValue(value as ColorValue, { opacityValue: opacityValue as string }),
-                }),
-              )
-              .concat([{ suffix: '/[' }]),
-          },
-        ]
+              modifiers:
+                (typeof value == 'function' ||
+                  (typeof value == 'string' &&
+                    (value.includes('<alpha-value>') ||
+                      (value[0] == '#' && (value.length == 4 || value.length == 7))))) &&
+                opacities
+                  .map(
+                    ([key, opacityValue]): AutocompleteModifier => ({
+                      modifier: key,
+                      theme: { section: opacitySection, key },
+                      color: toColorValue(value as ColorValue, {
+                        opacityValue: opacityValue as string,
+                      }),
+                    }),
+                  )
+                  .concat([
+                    {
+                      modifier: '[',
+                      color: toColorValue(value as ColorValue, { opacityValue: '1' }),
+                    },
+                  ]),
+            },
+          ]
+        }
+
+        return []
       }),
   )
 }

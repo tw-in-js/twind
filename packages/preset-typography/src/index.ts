@@ -5,7 +5,8 @@
  * @module
  */
 
-import type {
+import { DEV } from 'distilt/env'
+import {
   CSSNested,
   Preset,
   CustomProperties,
@@ -13,6 +14,9 @@ import type {
   Context,
   BaseTheme,
   ColorValue,
+  RuleResolver,
+  AutocompleteProvider,
+  withAutocomplete,
 } from 'twind'
 import { toColorValue } from 'twind'
 
@@ -209,6 +213,18 @@ export interface TypographyOptions {
   extend?: CSSNested
 }
 
+// indirection wrapper to remove autocomplete functions from production bundles
+function withAutocomplete$(
+  resolver: RuleResolver<TypographyTheme>,
+  autocomplete: AutocompleteProvider<TypographyTheme> | false,
+): RuleResolver<TypographyTheme> {
+  if (DEV) {
+    return withAutocomplete(resolver, autocomplete)
+  }
+
+  return resolver
+}
+
 /**
  * Twind Preset for Typography
  *
@@ -348,14 +364,24 @@ export default function presetTypography({
       // for type scale: prose-xl
       [
         className + '-',
-        ({ $$ }, context) => {
+        withAutocomplete$(({ $$ }, context) => {
           const css = getFontSize(context.theme('fontSize', $$))
           return css && { '@layer components': css }
-        },
+        }, DEV && ((_, { theme }) => Object.keys(theme('fontSize')))),
       ],
 
       // for colors: prose-sky
-      [className + '-', ({ $$ }, context) => getColors($$, context)],
+      [
+        className + '-',
+        withAutocomplete$(
+          ({ $$ }, context) => getColors($$, context),
+          DEV &&
+            ((_, { theme }) =>
+              Object.keys(theme('colors')).filter(
+                (key) => key && key != 'DEFAULT' && !/[.-]/.test(key),
+              )),
+        ),
+      ],
 
       // prose
       [

@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 
-import {
+import type {
   MatchResult,
   Rule,
   MaybeArray,
@@ -11,15 +11,15 @@ import {
   ThemeRuleResolver,
   ColorFromThemeValue,
   AutocompleteProvider,
-  useTheme,
 } from 'twind'
 
 import { DEV } from 'distilt/env'
 
 import {
   mql,
-  fromTheme,
-  colorFromTheme,
+  useMatch,
+  useTheme,
+  useColor,
   toColorValue,
   toCSS,
   asArray,
@@ -43,93 +43,87 @@ function withAutocomplete$(
 
 const rules: Rule<TailwindTheme>[] = [
   /* arbitrary properties: [paint-order:markers] */
-  [
-    '\\[([-\\w]+):(.+)]',
-    ({ 1: $1, 2: $2 }, context) => ({
-      '@layer overrides': {
-        '&': {
-          [$1]: arbitrary(`[${$2}]`, $1, context),
-        },
+  useMatch('\\[([-\\w]+):(.+)]', ({ 1: $1, 2: $2 }, context) => ({
+    '@layer overrides': {
+      '&': {
+        [$1]: arbitrary(`[${$2}]`, $1, context),
       },
-    }),
-  ],
+    },
+  })),
 
   /* Styling based on parent and peer state */
-  ['(group|peer)(~[^-[]+)?', ({ input }, { h }) => [{ c: h(input) }]],
+  withAutocomplete$(
+    useMatch('(group|peer)(~[^-[]+)?', ({ input }, { h }) => [{ c: h(input) }]),
+    DEV && (() => ['group', 'peer']),
+  ),
 
   /* LAYOUT */
-  ['aspect-', fromTheme('aspectRatio')],
+  useTheme('aspect-', 'aspectRatio'),
 
-  [
-    'container',
-    (_, { theme }) => {
-      const { screens = theme('screens'), center, padding } = theme('container')
+  useMatch('container', (_, { theme }) => {
+    const { screens = theme('screens'), center, padding } = theme('container')
 
-      const rules = {
-        width: '100%',
-        marginRight: center && 'auto',
-        marginLeft: center && 'auto',
-        ...paddingFor('xs'),
-      } as CSSObject
+    const rules = {
+      width: '100%',
+      marginRight: center && 'auto',
+      marginLeft: center && 'auto',
+      ...paddingFor('xs'),
+    } as CSSObject
 
-      for (const screen in screens) {
-        const value = screens[screen]
+    for (const screen in screens) {
+      const value = screens[screen]
 
-        if (typeof value == 'string') {
-          rules[mql(value)] = {
-            '&': {
-              maxWidth: value,
-              ...paddingFor(screen),
-            },
-          }
+      if (typeof value == 'string') {
+        rules[mql(value)] = {
+          '&': {
+            maxWidth: value,
+            ...paddingFor(screen),
+          },
         }
       }
+    }
 
-      return rules
+    return rules
 
-      function paddingFor(screen: string): CSSProperties | undefined {
-        const value =
-          padding && (typeof padding == 'string' ? padding : padding[screen] || padding.DEFAULT)
+    function paddingFor(screen: string): CSSProperties | undefined {
+      const value =
+        padding && (typeof padding == 'string' ? padding : padding[screen] || padding.DEFAULT)
 
-        if (value) {
-          return {
-            paddingRight: value,
-            paddingLeft: value,
-          }
+      if (value) {
+        return {
+          paddingRight: value,
+          paddingLeft: value,
         }
       }
-    },
-  ],
+    }
+  }),
 
   // Content
-  [
-    'content-',
-    fromTheme('content', ({ _ }) => ({
-      '--tw-content': _,
-      content: 'var(--tw-content)',
-    })),
-  ],
+  useTheme('content-', 'content', ({ _ }) => ({
+    '--tw-content': _,
+    content: 'var(--tw-content)',
+  })),
 
   // Box Decoration Break
-  ['(?:box-)?decoration-(slice|clone)', 'boxDecorationBreak'],
+  useMatch('(?:box-)?decoration-(slice|clone)', 'boxDecorationBreak'),
 
   // Box Sizing
-  ['box-(border|content)', 'boxSizing', ({ 1: $1 }) => $1 + '-box'],
+  useMatch('box-(border|content)', 'boxSizing', ({ 1: $1 }) => $1 + '-box'),
 
   // Display
-  ['hidden', { display: 'none' }],
+  useMatch('hidden', { display: 'none' }),
 
   // Table Layout
-  ['table-(auto|fixed)', 'tableLayout'],
+  useMatch('table-(auto|fixed)', 'tableLayout'),
 
-  [
+  useMatch(
     [
       '(block|flex|table|grid|inline|contents|flow-root|list-item)',
       '(inline-(block|flex|table|grid))',
       '(table-(caption|cell|column|row|(column|row|footer|header)-group))',
     ],
     'display',
-  ],
+  ),
 
   // Floats
   '(float)-(left|right|none)',
@@ -144,106 +138,121 @@ const rules: Rule<TailwindTheme>[] = [
   '(isolation)-(auto)',
 
   // Isolation
-  ['isolate', 'isolation'],
+  useMatch('isolate', 'isolation'),
 
   // Object Fit
-  ['object-(contain|cover|fill|none|scale-down)', 'objectFit'],
+  useMatch('object-(contain|cover|fill|none|scale-down)', 'objectFit'),
 
   // Object Position
-  ['object-', fromTheme('objectPosition')],
-  ['object-(top|bottom|center|(left|right)(-(top|bottom))?)', 'objectPosition', spacify],
+  useTheme('object-', 'objectPosition'),
+  useMatch('object-(top|bottom|center|(left|right)(-(top|bottom))?)', 'objectPosition', spacify),
 
   // Overscroll Behavior
-  [
-    'overscroll(-[xy])?-(auto|contain|none)',
-    ({ 1: $1 = '', 2: $2 }) => ({
-      [('overscroll-behavior' + $1) as 'overscroll-behavior-x']: $2 as 'auto',
-    }),
-  ],
+  useMatch('overscroll(-[xy])?-(auto|contain|none)', ({ 1: $1 = '', 2: $2 }) => ({
+    [('overscroll-behavior' + $1) as 'overscroll-behavior-x']: $2 as 'auto',
+  })),
 
   // Position
-  ['(static|fixed|absolute|relative|sticky)', 'position'],
+  useMatch('(static|fixed|absolute|relative|sticky)', 'position'),
 
   // Top / Right / Bottom / Left
-  [
-    '-?inset(-[xy])?(?:-|$)',
-    fromTheme('inset', ({ 1: $1, _ }) => ({
-      top: $1 != '-x' && _,
-      right: $1 != '-y' && _,
-      bottom: $1 != '-x' && _,
-      left: $1 != '-y' && _,
-    })),
-  ],
+  useTheme('-?inset(-[xy])?(?:$|-)', 'inset', ({ 1: $1, _ }) => ({
+    top: $1 != '-x' && _,
+    right: $1 != '-y' && _,
+    bottom: $1 != '-x' && _,
+    left: $1 != '-y' && _,
+  })),
 
-  ['-?(top|bottom|left|right)(?:-|$)', fromTheme('inset')],
+  useTheme('-?(top|bottom|left|right)(?:$|-)', 'inset'),
 
   // Visibility
-  ['visible', 'visibility'],
-  ['invisible', { visibility: 'hidden' }],
+  useMatch('visible', 'visibility'),
+  useMatch('invisible', { visibility: 'hidden' }),
 
   // Z-Index
-  ['-?z-', fromTheme('zIndex')],
+  useTheme('-?z-', 'zIndex'),
 
   /* FLEXBOX */
   // Flex Direction
-  ['flex-((row|col)(-reverse)?)', 'flexDirection', columnify],
+  useMatch('flex-((row|col)(-reverse)?)', 'flexDirection', columnify),
 
-  ['flex-(wrap|wrap-reverse|nowrap)', 'flexWrap'],
-  ['(flex-(?:grow|shrink))(?:-|$)', fromTheme(/* 'flex-grow' | flex-shrink */)],
+  useMatch('flex-(wrap|wrap-reverse|nowrap)', 'flexWrap'),
+  useTheme('(flex-(?:grow|shrink))(?:$|-)' /*, 'flex-grow' | flex-shrink */),
   useTheme('(flex)-' /*, 'flex' */),
-  ['grow(?:-|$)', fromTheme('flexGrow')],
-  ['shrink(?:-|$)', fromTheme('flexShrink')],
-  ['basis-', fromTheme('flexBasis')],
+  useTheme('grow(?:$|-)', 'flexGrow'),
+  useTheme('shrink(?:$|-)', 'flexShrink'),
+  useTheme('basis-', 'flexBasis'),
 
-  ['-?(order)-', fromTheme(/* 'order' */)],
+  useTheme('-?(order)-' /*, 'order' */),
   withAutocomplete$('-?(order)-(\\d+)', DEV && (() => range({ end: 12 }))),
 
   /* GRID */
   // Grid Template Columns
-  ['grid-cols-', fromTheme('gridTemplateColumns')],
+  useTheme('grid-cols-', 'gridTemplateColumns'),
   withAutocomplete$(
-    ['grid-cols-(\\d+)', 'gridTemplateColumns', gridTemplate],
+    useMatch('grid-cols-(\\d+)', 'gridTemplateColumns', gridTemplate),
     DEV && (() => range({ end: 6 })),
   ),
 
   // Grid Column Start / End
-  ['col-', fromTheme('gridColumn')],
-  ['col-(span)-(\\d+)', 'gridColumn', span],
+  useTheme('col-', 'gridColumn'),
+  withAutocomplete$(
+    useMatch('col-(span)-(\\d+)', 'gridColumn', span),
+    DEV && (() => range({ end: 12 })),
+  ),
 
-  ['col-start-', fromTheme('gridColumnStart')],
-  ['col-start-(auto|\\d+)', 'gridColumnStart'],
+  useTheme('col-start-', 'gridColumnStart'),
+  withAutocomplete$(
+    useMatch('col-start-(auto|\\d+)', 'gridColumnStart'),
+    DEV && (({ 1: $1 }) => ($1 === 'auto' ? [''] : range({ end: 13 }))),
+  ),
 
-  ['col-end-', fromTheme('gridColumnEnd')],
-  ['col-end-(auto|\\d+)', 'gridColumnEnd'],
+  useTheme('col-end-', 'gridColumnEnd'),
+  withAutocomplete$(
+    useMatch('col-end-(auto|\\d+)', 'gridColumnEnd'),
+    DEV && (({ 1: $1 }) => ($1 === 'auto' ? [''] : range({ end: 13 }))),
+  ),
 
   // Grid Template Rows
-  ['grid-rows-', fromTheme('gridTemplateRows')],
-  ['grid-rows-(\\d+)', 'gridTemplateRows', gridTemplate],
+  useTheme('grid-rows-', 'gridTemplateRows'),
+  withAutocomplete$(
+    useMatch('grid-rows-(\\d+)', 'gridTemplateRows', gridTemplate),
+    DEV && (() => range({ end: 6 })),
+  ),
 
   // Grid Row Start / End
-  ['row-', fromTheme('gridRow')],
-  ['row-(span)-(\\d+)', 'gridRow', span],
+  useTheme('row-', 'gridRow'),
+  withAutocomplete$(
+    useMatch('row-(span)-(\\d+)', 'gridRow', span),
+    DEV && (() => range({ end: 6 })),
+  ),
 
-  ['row-start-', fromTheme('gridRowStart')],
-  ['row-start-(auto|\\d+)', 'gridRowStart'],
+  useTheme('row-start-', 'gridRowStart'),
+  withAutocomplete$(
+    useMatch('row-start-(auto|\\d+)', 'gridRowStart'),
+    DEV && (({ 1: $1 }) => ($1 === 'auto' ? [''] : range({ end: 7 }))),
+  ),
 
-  ['row-end-', fromTheme('gridRowEnd')],
-  ['row-end-(auto|\\d+)', 'gridRowEnd'],
+  useTheme('row-end-', 'gridRowEnd'),
+  withAutocomplete$(
+    useMatch('row-end-(auto|\\d+)', 'gridRowEnd'),
+    DEV && (({ 1: $1 }) => ($1 === 'auto' ? [''] : range({ end: 7 }))),
+  ),
 
   // Grid Auto Flow
-  ['grid-flow-((row|col)(-dense)?)', 'gridAutoFlow', (match) => spacify(columnify(match))],
-  ['grid-flow-(dense)', 'gridAutoFlow'],
+  useMatch('grid-flow-((row|col)(-dense)?)', 'gridAutoFlow', (match) => spacify(columnify(match))),
+  useMatch('grid-flow-(dense)', 'gridAutoFlow'),
 
   // Grid Auto Columns
-  ['auto-cols-', fromTheme('gridAutoColumns')],
+  useTheme('auto-cols-', 'gridAutoColumns'),
 
   // Grid Auto Rows
-  ['auto-rows-', fromTheme('gridAutoRows')],
+  useTheme('auto-rows-', 'gridAutoRows'),
 
   // Gap
-  ['gap-x(?:-|$)', fromTheme('gap', 'columnGap')],
-  ['gap-y(?:-|$)', fromTheme('gap', 'rowGap')],
-  ['gap(?:-|$)', fromTheme('gap')],
+  useTheme('gap-x(?:$|-)', 'gap', 'columnGap'),
+  useTheme('gap-y(?:$|-)', 'gap', 'rowGap'),
+  useTheme('gap(?:$|-)', 'gap'),
 
   /* BOX ALIGNMENT */
   // Justify Items
@@ -259,7 +268,7 @@ const rules: Rule<TailwindTheme>[] = [
 
   // Justify Content
   withAutocomplete$(
-    ['justify-', 'justifyContent', convertContentValue],
+    useMatch('justify-', 'justifyContent', convertContentValue),
     DEV && (() => ['start', 'end', 'center', 'between', 'around', 'evenly']),
   ),
 
@@ -267,12 +276,9 @@ const rules: Rule<TailwindTheme>[] = [
   // Align Items
   // Align Self
   withAutocomplete$(
-    [
-      '(content|items|self)-',
-      (match) => ({
-        [('align-' + match[1]) as 'align-content']: convertContentValue(match),
-      }),
-    ],
+    useMatch('(content|items|self)-', (match) => ({
+      [('align-' + match[1]) as 'align-content']: convertContentValue(match),
+    })),
     DEV &&
       (({ 1: $1 }) =>
         $1 == 'content'
@@ -286,12 +292,9 @@ const rules: Rule<TailwindTheme>[] = [
   // Place Items
   // Place Self
   withAutocomplete$(
-    [
-      '(place-(content|items|self))-',
-      ({ 1: $1, $$ }) => ({
-        [$1 as 'place-content']: ('wun'.includes($$[3]) ? 'space-' : '') + $$,
-      }),
-    ],
+    useMatch('(place-(content|items|self))-', ({ 1: $1, $$ }) => ({
+      [$1 as 'place-content']: ('wun'.includes($$[3]) ? 'space-' : '') + $$,
+    })),
     DEV &&
       (({ 1: $1 }) =>
         $1 == 'content'
@@ -303,85 +306,73 @@ const rules: Rule<TailwindTheme>[] = [
 
   /* SPACING */
   // Padding
-  ['p([xytrbl])?(?:-|$)', fromTheme('padding', edge('padding'))],
+  useTheme('p([xytrbl])?(?:$|-)', 'padding', edge('padding')),
 
   // Margin
-  ['-?m([xytrbl])?(?:-|$)', fromTheme('margin', edge('margin'))],
+  useTheme('-?m([xytrbl])?(?:$|-)', 'margin', edge('margin')),
 
   // Space Between
-  [
-    '-?space-(x|y)(?:-|$)',
-    fromTheme('space', ({ 1: $1, _ }) => ({
-      '&>:not([hidden])~:not([hidden])': {
-        [`--tw-space-${$1}-reverse`]: '0',
-        ['margin-' +
-        { y: 'top', x: 'left' }[
-          $1 as 'y' | 'x'
-        ]]: `calc(${_} * calc(1 - var(--tw-space-${$1}-reverse)))`,
-        ['margin-' +
-        { y: 'bottom', x: 'right' }[$1 as 'y' | 'x']]: `calc(${_} * var(--tw-space-${$1}-reverse))`,
-      },
-    })),
-  ],
+  useTheme('-?space-(x|y)(?:$|-)', 'space', ({ 1: $1, _ }) => ({
+    '&>:not([hidden])~:not([hidden])': {
+      [`--tw-space-${$1}-reverse`]: '0',
+      ['margin-' +
+      { y: 'top', x: 'left' }[
+        $1 as 'y' | 'x'
+      ]]: `calc(${_} * calc(1 - var(--tw-space-${$1}-reverse)))`,
+      ['margin-' +
+      { y: 'bottom', x: 'right' }[$1 as 'y' | 'x']]: `calc(${_} * var(--tw-space-${$1}-reverse))`,
+    },
+  })),
 
-  [
-    'space-(x|y)-reverse',
-    ({ 1: $1 }) => ({
-      '&>:not([hidden])~:not([hidden])': {
-        [`--tw-space-${$1}-reverse`]: '1',
-      },
-    }),
-  ],
+  useMatch('space-(x|y)-reverse', ({ 1: $1 }) => ({
+    '&>:not([hidden])~:not([hidden])': {
+      [`--tw-space-${$1}-reverse`]: '1',
+    },
+  })),
 
   /* SIZING */
   // Width
-  ['w-', fromTheme('width')],
+  useTheme('w-', 'width'),
 
   // Min-Width
-  ['min-w-', fromTheme('minWidth')],
+  useTheme('min-w-', 'minWidth'),
 
   // Max-Width
-  ['max-w-', fromTheme('maxWidth')],
+  useTheme('max-w-', 'maxWidth'),
 
   // Height
-  ['h-', fromTheme('height')],
+  useTheme('h-', 'height'),
 
   // Min-Height
-  ['min-h-', fromTheme('minHeight')],
+  useTheme('min-h-', 'minHeight'),
 
   // Max-Height
-  ['max-h-', fromTheme('maxHeight')],
+  useTheme('max-h-', 'maxHeight'),
 
   /* TYPOGRAPHY */
   // Font Weight
-  ['font-', fromTheme('fontWeight')],
+  useTheme('font-', 'fontWeight'),
 
   // Font Family
-  ['font-', fromTheme('fontFamily', 'fontFamily', join)],
+  useTheme('font-', 'fontFamily', 'fontFamily', join),
 
   // Font Smoothing
-  [
-    'antialiased',
-    {
-      WebkitFontSmoothing: 'antialiased',
-      MozOsxFontSmoothing: 'grayscale',
-    },
-  ],
+  useMatch('antialiased', {
+    WebkitFontSmoothing: 'antialiased',
+    MozOsxFontSmoothing: 'grayscale',
+  }),
 
-  [
-    'subpixel-antialiased',
-    {
-      WebkitFontSmoothing: 'auto',
-      MozOsxFontSmoothing: 'auto',
-    },
-  ],
+  useMatch('subpixel-antialiased', {
+    WebkitFontSmoothing: 'auto',
+    MozOsxFontSmoothing: 'auto',
+  }),
 
   // Font Style
-  ['italic', 'fontStyle'],
-  ['not-italic', { fontStyle: 'normal' }],
+  useMatch('italic', 'fontStyle'),
+  useMatch('not-italic', { fontStyle: 'normal' }),
 
   // Font Variant Numeric
-  [
+  useMatch(
     '(ordinal|slashed-zero|(normal|lining|oldstyle|proportional|tabular)-nums|(diagonal|stacked)-fractions)',
     ({ 1: $1, 2: $2 = '', 3: $3 }) =>
       // normal-nums
@@ -409,431 +400,401 @@ const rules: Rule<TailwindTheme>[] = [
               },
             },
           },
-  ],
+  ),
 
   // Letter Spacing
-  ['tracking-', fromTheme('letterSpacing')],
+  useTheme('tracking-', 'letterSpacing'),
 
   // Line Height
-  ['leading-', fromTheme('lineHeight')],
+  useTheme('leading-', 'lineHeight'),
 
   // List Style Position
-  ['list-(inside|outside)', 'listStylePosition'],
+  useMatch('list-(inside|outside)', 'listStylePosition'),
 
   // List Style Type
-  ['list-', fromTheme('listStyleType')],
-  withAutocomplete$(['list-', 'listStyleType'], DEV && (() => ['none', 'disc', 'decimal'])),
+  useTheme('list-', 'listStyleType'),
+  withAutocomplete$(useMatch('list-', 'listStyleType'), DEV && (() => ['none', 'disc', 'decimal'])),
 
   // Placeholder Opacity
-  [
-    'placeholder-opacity-',
-    fromTheme('placeholderOpacity', ({ _ }) => ({
-      ['&::placeholder']: { '--tw-placeholder-opacity': _ },
-    })),
-  ],
+  useTheme('placeholder-opacity-', 'placeholderOpacity', ({ _ }) => ({
+    ['&::placeholder']: { '--tw-placeholder-opacity': _ },
+  })),
 
   // Placeholder Color
-  ['placeholder-', colorFromTheme({ property: 'color', selector: '&::placeholder' })],
+  useColor('placeholder-', { property: 'color', selector: '&::placeholder' }),
 
   // Text Alignment
-  ['text-(left|center|right|justify|start|end)', 'textAlign'],
+  useMatch('text-(left|center|right|justify|start|end)', 'textAlign'),
+
+  useMatch('text-(ellipsis|clip)', 'textOverflow'),
 
   // Text Opacity
-  ['text-opacity-', fromTheme('textOpacity', '--tw-text-opacity')],
+  useTheme('text-opacity-', 'textOpacity', '--tw-text-opacity'),
 
   // Text Color
-  ['text-', colorFromTheme({ property: 'color' })],
+  useColor('text-', { property: 'color' }),
 
   // Font Size
-  [
-    'text-',
-    fromTheme('fontSize', ({ _ }) =>
-      typeof _ == 'string'
-        ? { fontSize: _ }
-        : {
-            fontSize: _[0],
-            ...(typeof _[1] == 'string' ? { lineHeight: _[1] } : _[1]),
-          },
-    ),
-  ],
+  useTheme('text-', 'fontSize', ({ _ }) =>
+    typeof _ == 'string'
+      ? { fontSize: _ }
+      : {
+          fontSize: _[0],
+          ...(typeof _[1] == 'string' ? { lineHeight: _[1] } : _[1]),
+        },
+  ),
 
   // Text Indent
-  ['indent-', fromTheme('textIndent')],
+  useTheme('indent-', 'textIndent'),
 
   // Text Decoration
-  ['(overline|underline|line-through)', 'textDecorationLine'],
-  ['no-underline', { textDecorationLine: 'none' }],
+  useMatch('(overline|underline|line-through)', 'textDecorationLine'),
+  useMatch('no-underline', { textDecorationLine: 'none' }),
 
   // Text Underline offset
-  ['underline-', fromTheme('textUnderlineOffset')],
+  useTheme('underline-', 'textUnderlineOffset'),
 
   // Text Decoration Color
-  [
-    'decoration-',
-    colorFromTheme({
-      section: 'textDecorationColor',
-      opacityVariable: false,
-      opacitySection: 'opacity',
-    }),
-  ],
+  useColor('decoration-', {
+    section: 'textDecorationColor',
+    opacityVariable: false,
+    opacitySection: 'opacity',
+  }),
 
   // Text Decoration Thickness
-  ['decoration-', fromTheme('textDecorationThickness')],
+  useTheme('decoration-', 'textDecorationThickness'),
 
   // Text Decoration Style
-  ['decoration-', 'textDecorationStyle'],
+  withAutocomplete$(
+    useMatch('decoration-', 'textDecorationStyle'),
+    DEV && (() => ['solid', 'double', 'dotted', 'dashed', 'wavy']),
+  ),
 
   // Text Transform
-  ['(uppercase|lowercase|capitalize)', 'textTransform'],
-  ['normal-case', { textTransform: 'none' }],
+  useMatch('(uppercase|lowercase|capitalize)', 'textTransform'),
+  useMatch('normal-case', { textTransform: 'none' }),
 
   // Text Overflow
-  [
-    'truncate',
-    {
-      overflow: 'hidden',
-      whiteSpace: 'nowrap',
-      textOverflow: 'ellipsis',
-    },
-  ],
-  ['text-(ellipsis|clip)', 'textOverflow'],
+  useMatch('truncate', {
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+  }),
 
   // Vertical Alignment
-  ['align-', 'verticalAlign'],
+  withAutocomplete$(
+    useMatch('align-', 'verticalAlign'),
+    DEV &&
+      (() => ['baseline', 'top', 'middle', 'bottom', 'text-top', 'text-bottom', 'sub', 'super']),
+  ),
 
   // Whitespace
   withAutocomplete$(
-    ['whitespace-', 'whiteSpace'],
+    useMatch('whitespace-', 'whiteSpace'),
     DEV && (() => ['normal', 'nowrap', 'pre', 'pre-line', 'pre-wrap']),
   ),
 
   // Word Break
-  ['break-normal', { wordBreak: 'normal', overflowWrap: 'normal' }],
-  ['break-words', { overflowWrap: 'break-word' }],
-  ['break-all', { wordBreak: 'break-all' }],
+  useMatch('break-normal', { wordBreak: 'normal', overflowWrap: 'normal' }),
+  useMatch('break-words', { overflowWrap: 'break-word' }),
+  useMatch('break-all', { wordBreak: 'break-all' }),
 
   // Caret Color
-  [
-    'caret-',
-    colorFromTheme({
-      section: 'caretColor',
-      opacityVariable: false,
-      opacitySection: 'opacity',
-    }),
-  ],
+  useColor('caret-', {
+    // section: 'caretColor',
+    opacityVariable: false,
+    opacitySection: 'opacity',
+  }),
 
   // Accent Color
-  [
-    'accent-',
-    colorFromTheme({
-      section: 'accentColor',
-      opacityVariable: false,
-      opacitySection: 'opacity',
-    }),
-  ],
+  useColor('accent-', {
+    // section: 'accentColor',
+    opacityVariable: false,
+    opacitySection: 'opacity',
+  }),
 
   // Gradient Color Stops
-  [
-    'bg-gradient-to-([trbl]{1,2})',
+  useMatch(
+    'bg-gradient-to-([trbl]|[tb][rl])',
     'backgroundImage',
     ({ 1: $1 }) => `linear-gradient(to ${position($1, ' ')},var(--tw-gradient-stops))`,
-  ],
+  ),
 
-  [
+  useColor(
     'from-',
-    colorFromTheme(
-      {
-        section: 'gradientColorStops',
-        opacityVariable: false,
-        opacitySection: 'opacity',
-      },
-      ({ _ }) => ({
-        '--tw-gradient-from': _.value,
-        '--tw-gradient-to': _.color({ opacityValue: '0' }),
-        '--tw-gradient-stops': `var(--tw-gradient-from),var(--tw-gradient-to)`,
-      }),
-    ),
-  ],
-  [
-    'via-',
-    colorFromTheme(
-      {
-        section: 'gradientColorStops',
-        opacityVariable: false,
-        opacitySection: 'opacity',
-      },
-      ({ _ }) => ({
-        '--tw-gradient-to': _.color({ opacityValue: '0' }),
-        '--tw-gradient-stops': `var(--tw-gradient-from),${_.value},var(--tw-gradient-to)`,
-      }),
-    ),
-  ],
-  [
-    'to-',
-    colorFromTheme({
+    {
       section: 'gradientColorStops',
-      property: '--tw-gradient-to',
       opacityVariable: false,
       opacitySection: 'opacity',
+    },
+    ({ _ }) => ({
+      '--tw-gradient-from': _.value,
+      '--tw-gradient-to': _.color({ opacityValue: '0' }),
+      '--tw-gradient-stops': `var(--tw-gradient-from),var(--tw-gradient-to)`,
     }),
-  ],
+  ),
+  useColor(
+    'via-',
+
+    {
+      section: 'gradientColorStops',
+      opacityVariable: false,
+      opacitySection: 'opacity',
+    },
+    ({ _ }) => ({
+      '--tw-gradient-to': _.color({ opacityValue: '0' }),
+      '--tw-gradient-stops': `var(--tw-gradient-from),${_.value},var(--tw-gradient-to)`,
+    }),
+  ),
+  useColor('to-', {
+    section: 'gradientColorStops',
+    property: '--tw-gradient-to',
+    opacityVariable: false,
+    opacitySection: 'opacity',
+  }),
 
   /* BACKGROUNDS */
   // Background Attachment
-  ['bg-(fixed|local|scroll)', 'backgroundAttachment'],
+  useMatch('bg-(fixed|local|scroll)', 'backgroundAttachment'),
 
   // Background Origin
-  ['bg-origin-(border|padding|content)', 'backgroundOrigin', ({ 1: $1 }) => $1 + '-box'],
+  useMatch('bg-origin-(border|padding|content)', 'backgroundOrigin', ({ 1: $1 }) => $1 + '-box'),
 
   // Background Repeat
-  [['bg-(no-repeat|repeat(-[xy])?)', 'bg-repeat-(round|space)'], 'backgroundRepeat'],
+  useMatch(['bg-(no-repeat|repeat(-[xy])?)', 'bg-repeat-(round|space)'], 'backgroundRepeat'),
 
   // Background Blend Mode
-  ['bg-blend-', 'backgroundBlendMode'],
+  withAutocomplete$(
+    useMatch('bg-blend-', 'backgroundBlendMode'),
+    DEV &&
+      (() => [
+        'normal',
+        'multiply',
+        'screen',
+        'overlay',
+        'darken',
+        'lighten',
+        'color-dodge',
+        'color-burn',
+        'hard-light',
+        'soft-light',
+        'difference',
+        'exclusion',
+        'hue',
+        'saturation',
+        'color',
+        'luminosity',
+      ]),
+  ),
 
   // Background Clip
-  [
+  useMatch(
     'bg-clip-(border|padding|content|text)',
     'backgroundClip',
     ({ 1: $1 }) => $1 + ($1 == 'text' ? '' : '-box'),
-  ],
+  ),
 
   // Background Opacity
-  ['bg-opacity-', fromTheme('backgroundOpacity', '--tw-bg-opacity')],
+  useTheme('bg-opacity-', 'backgroundOpacity', '--tw-bg-opacity'),
 
   // Background Color
   // bg-${backgroundColor}/${backgroundOpacity}
-  ['bg-', colorFromTheme({ section: 'backgroundColor' })],
+  useColor('bg-', { section: 'backgroundColor' }),
 
   // Background Image
   // supported arbitrary types are: length, color, angle, list
-  ['bg-', fromTheme('backgroundImage')],
+  useTheme('bg-', 'backgroundImage'),
 
   // Background Position
-  ['bg-', fromTheme('backgroundPosition')],
-  ['bg-(top|bottom|center|(left|right)(-(top|bottom))?)', 'backgroundPosition', spacify],
+  useTheme('bg-', 'backgroundPosition'),
+  useMatch('bg-(top|bottom|center|(left|right)(-(top|bottom))?)', 'backgroundPosition', spacify),
 
   // Background Size
-  ['bg-', fromTheme('backgroundSize')],
+  useTheme('bg-', 'backgroundSize'),
 
   /* BORDERS */
   // Border Radius
-  ['rounded(?:-|$)', fromTheme('borderRadius')],
-  [
-    'rounded-([trbl]{1,2})(?:-|$)',
-    fromTheme('borderRadius', ({ 1: $1, _ }) => {
-      const corners = (
-        {
-          t: ['tl', 'tr'],
-          r: ['tr', 'br'],
-          b: ['bl', 'br'],
-          l: ['bl', 'tl'],
-        } as const
-      )[$1] || [$1, $1]
+  useTheme('rounded(?:$|-)', 'borderRadius'),
+  useTheme('rounded-([trbl]|[tb][rl])(?:$|-)', 'borderRadius', ({ 1: $1, _ }) => {
+    const corners = (
+      {
+        t: ['tl', 'tr'],
+        r: ['tr', 'br'],
+        b: ['bl', 'br'],
+        l: ['bl', 'tl'],
+      } as const
+    )[$1] || [$1, $1]
 
-      return {
-        [`border-${position(corners[0])}-radius` as 'border-top-left-radius']: _,
-        [`border-${position(corners[1])}-radius` as 'border-top-right-radius']: _,
-      }
-    }),
-  ],
+    return {
+      [`border-${position(corners[0])}-radius` as 'border-top-left-radius']: _,
+      [`border-${position(corners[1])}-radius` as 'border-top-right-radius']: _,
+    }
+  }),
 
   // Border Collapse
-  ['border-(collapse|separate)', 'borderCollapse'],
+  useMatch('border-(collapse|separate)', 'borderCollapse'),
 
   // Border Opacity
-  ['border-opacity(?:-|$)', fromTheme('borderOpacity', '--tw-border-opacity')],
+  useTheme('border-opacity(?:$|-)', 'borderOpacity', '--tw-border-opacity'),
 
   // Border Style
-  ['border-(solid|dashed|dotted|double|none)', 'borderStyle'],
+  useMatch('border-(solid|dashed|dotted|double|none)', 'borderStyle'),
 
   // Border Spacing
-  [
-    'border-spacing(-[xy])?(?:-|$)',
-    fromTheme('borderSpacing', ({ 1: $1, _ }) => ({
-      '@layer defaults': {
-        '*,::before,::after,::backdrop': {
-          '--tw-border-spacing-x': 0,
-          '--tw-border-spacing-y': 0,
-        },
+  useTheme('border-spacing(-[xy])?(?:$|-)', 'borderSpacing', ({ 1: $1, _ }) => ({
+    '@layer defaults': {
+      '*,::before,::after,::backdrop': {
+        '--tw-border-spacing-x': 0,
+        '--tw-border-spacing-y': 0,
       },
-      [('--tw-border-spacing' + ($1 || '-x')) as '--tw-border-spacing-x']: _,
-      [('--tw-border-spacing' + ($1 || '-y')) as '--tw-border-spacing-y']: _,
-      'border-spacing': 'var(--tw-border-spacing-x) var(--tw-border-spacing-y)',
-    })),
-  ],
+    },
+    [('--tw-border-spacing' + ($1 || '-x')) as '--tw-border-spacing-x']: _,
+    [('--tw-border-spacing' + ($1 || '-y')) as '--tw-border-spacing-y']: _,
+    'border-spacing': 'var(--tw-border-spacing-x) var(--tw-border-spacing-y)',
+  })),
 
   // Border Color
-  ['border-([xytrbl])-', colorFromTheme({ section: 'borderColor' }, edge('border', 'Color'))],
-  ['border-', colorFromTheme()],
+  useColor('border-([xytrbl])-', { section: 'borderColor' }, edge('border', 'Color')),
+  useColor('border-'),
 
   // Border Width
-  ['border-([xytrbl])(?:-|$)', fromTheme('borderWidth', edge('border', 'Width'))],
-  ['border(?:-|$)', fromTheme('borderWidth')],
+  useTheme('border-([xytrbl])(?:$|-)', 'borderWidth', edge('border', 'Width')),
+  useTheme('border(?:$|-)', 'borderWidth'),
 
   // Divide Opacity
-  [
-    'divide-opacity(?:-|$)',
-    fromTheme('divideOpacity', ({ _ }) => ({
-      '&>:not([hidden])~:not([hidden])': { '--tw-divide-opacity': _ },
-    })),
-  ],
+  useTheme('divide-opacity(?:$|-)', 'divideOpacity', ({ _ }) => ({
+    '&>:not([hidden])~:not([hidden])': { '--tw-divide-opacity': _ },
+  })),
 
   // Divide Style
-  [
-    'divide-(solid|dashed|dotted|double|none)',
-    ({ 1: $1 }) => ({
-      '&>:not([hidden])~:not([hidden])': { borderStyle: $1 },
-    }),
-  ],
+  useMatch('divide-(solid|dashed|dotted|double|none)', ({ 1: $1 }) => ({
+    '&>:not([hidden])~:not([hidden])': { borderStyle: $1 },
+  })),
 
   // Divide Width
-  [
-    'divide-([xy]-reverse)',
-    ({ 1: $1 }) => ({
-      '&>:not([hidden])~:not([hidden])': { ['--tw-divide-' + $1]: '1' },
-    }),
-  ],
+  useMatch('divide-([xy]-reverse)', ({ 1: $1 }) => ({
+    '&>:not([hidden])~:not([hidden])': { ['--tw-divide-' + $1]: '1' },
+  })),
 
-  [
-    'divide-([xy])(?:-|$)',
-    fromTheme('divideWidth', ({ 1: $1, _ }) => {
-      const edges = (
-        {
-          x: 'lr',
-          y: 'tb',
-        } as const
-      )[$1 as 'x' | 'y']
+  useTheme('divide-([xy])(?:$|-)', 'divideWidth', ({ 1: $1, _ }) => {
+    const edges = (
+      {
+        x: 'lr',
+        y: 'tb',
+      } as const
+    )[$1 as 'x' | 'y']
 
-      return {
-        '&>:not([hidden])~:not([hidden])': {
-          [`--tw-divide-${$1}-reverse`]: '0',
-          [`border-${position(
-            edges[0],
-          )}Width`]: `calc(${_} * calc(1 - var(--tw-divide-${$1}-reverse)))`,
-          [`border-${position(edges[1])}Width`]: `calc(${_} * var(--tw-divide-${$1}-reverse))`,
-        },
-      }
-    }),
-  ],
+    return {
+      '&>:not([hidden])~:not([hidden])': {
+        [`--tw-divide-${$1}-reverse`]: '0',
+        [`border-${position(
+          edges[0],
+        )}Width`]: `calc(${_} * calc(1 - var(--tw-divide-${$1}-reverse)))`,
+        [`border-${position(edges[1])}Width`]: `calc(${_} * var(--tw-divide-${$1}-reverse))`,
+      },
+    }
+  }),
 
   // Divide Color
-  [
-    'divide-',
-    colorFromTheme({
-      // section: $0.replace('-', 'Color') -> 'divideColor'
-      property: 'borderColor',
-      // opacityVariable: '--tw-border-opacity',
-      // opacitySection: section.replace('Color', 'Opacity') -> 'divideOpacity'
-      selector: '&>:not([hidden])~:not([hidden])',
-    }),
-  ],
+  useColor('divide-', {
+    // section: $0.replace('-', 'Color') -> 'divideColor'
+    property: 'borderColor',
+    // opacityVariable: '--tw-border-opacity',
+    // opacitySection: section.replace('Color', 'Opacity') -> 'divideOpacity'
+    selector: '&>:not([hidden])~:not([hidden])',
+  }),
 
   // Ring Offset Opacity
-  ['ring-opacity(?:-|$)', fromTheme('ringOpacity', '--tw-ring-opacity')],
+  useTheme('ring-opacity(?:$|-)', 'ringOpacity', '--tw-ring-opacity'),
 
   // Ring Offset Color
-  [
-    'ring-offset(?:-|$)',
-    colorFromTheme({
-      // section: 'ringOffsetColor',
-      property: '--tw-ring-offset-color',
-      opacityVariable: false,
-      // opacitySection: section.replace('Color', 'Opacity') -> 'ringOffsetOpacity'
-    }),
-  ],
+  useColor('ring-offset-', {
+    // section: 'ringOffsetColor',
+    property: '--tw-ring-offset-color',
+    opacityVariable: false,
+    // opacitySection: section.replace('Color', 'Opacity') -> 'ringOffsetOpacity'
+  }),
 
   // Ring Offset Width
-  ['ring-offset(?:-|$)', fromTheme('ringOffsetWidth', '--tw-ring-offset-width')],
+  useTheme('ring-offset(?:$|-)', 'ringOffsetWidth', '--tw-ring-offset-width'),
 
   // Ring Inset
-  ['ring-inset', { '--tw-ring-inset': 'inset' }],
+  useMatch('ring-inset', { '--tw-ring-inset': 'inset' }),
 
   // Ring Color
-  [
-    'ring-',
-    colorFromTheme({
-      // section: 'ringColor',
-      property: '--tw-ring-color',
-      // opacityVariable: '--tw-ring-opacity',
-      // opacitySection: section.replace('Color', 'Opacity') -> 'ringOpacity'
-    }),
-  ],
+  useColor('ring-', {
+    // section: 'ringColor',
+    property: '--tw-ring-color',
+    // opacityVariable: '--tw-ring-opacity',
+    // opacitySection: section.replace('Color', 'Opacity') -> 'ringOpacity'
+  }),
 
   // Ring Width
-  [
-    'ring(?:-|$)',
-    fromTheme('ringWidth', ({ _ }, { theme }) => ({
-      '--tw-ring-offset-shadow': `var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)`,
-      '--tw-ring-shadow': `var(--tw-ring-inset) 0 0 0 calc(${_} + var(--tw-ring-offset-width)) var(--tw-ring-color)`,
-      boxShadow: `var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)`,
-      '@layer defaults': {
-        '*,::before,::after,::backdrop': {
-          '--tw-ring-offset-shadow': '0 0 #0000',
-          '--tw-ring-shadow': '0 0 #0000',
-          '--tw-shadow': '0 0 #0000',
-          '--tw-shadow-colored': '0 0 #0000',
-          // Within own declaration to have the defaults above to be merged with defaults from shadow
-          '&': {
-            '--tw-ring-inset': 'var(--tw-empty,/*!*/ /*!*/)',
-            '--tw-ring-offset-width': theme('ringOffsetWidth', '', '0px'),
-            '--tw-ring-offset-color': toColorValue(theme('ringOffsetColor', '', '#fff')),
-            '--tw-ring-color': toColorValue(theme('ringColor', '', '#93c5fd'), {
-              opacityVariable: '--tw-ring-opacity',
-            }),
-            '--tw-ring-opacity': theme('ringOpacity', '', '0.5'),
-          },
+  useTheme('ring(?:$|-)', 'ringWidth', ({ _ }, { theme }) => ({
+    '--tw-ring-offset-shadow': `var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)`,
+    '--tw-ring-shadow': `var(--tw-ring-inset) 0 0 0 calc(${_} + var(--tw-ring-offset-width)) var(--tw-ring-color)`,
+    boxShadow: `var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)`,
+    '@layer defaults': {
+      '*,::before,::after,::backdrop': {
+        '--tw-ring-offset-shadow': '0 0 #0000',
+        '--tw-ring-shadow': '0 0 #0000',
+        '--tw-shadow': '0 0 #0000',
+        '--tw-shadow-colored': '0 0 #0000',
+        // Within own declaration to have the defaults above to be merged with defaults from shadow
+        '&': {
+          '--tw-ring-inset': 'var(--tw-empty,/*!*/ /*!*/)',
+          '--tw-ring-offset-width': theme('ringOffsetWidth', '', '0px'),
+          '--tw-ring-offset-color': toColorValue(theme('ringOffsetColor', '', '#fff')),
+          '--tw-ring-color': toColorValue(theme('ringColor', '', '#93c5fd'), {
+            opacityVariable: '--tw-ring-opacity',
+          }),
+          '--tw-ring-opacity': theme('ringOpacity', '', '0.5'),
         },
       },
-    })),
-  ],
+    },
+  })),
 
   /* EFFECTS */
   // Box Shadow Color
-  [
-    'shadow(?:-|$)',
-    colorFromTheme(
-      {
-        section: 'boxShadowColor',
-        opacityVariable: false,
-        opacitySection: 'opacity',
-      },
-      ({ _ }) => ({
-        '--tw-shadow-color': _.value,
-        '--tw-shadow': 'var(--tw-shadow-colored)',
-      }),
-    ),
-  ],
+  useColor(
+    'shadow-',
+    {
+      section: 'boxShadowColor',
+      opacityVariable: false,
+      opacitySection: 'opacity',
+    },
+    ({ _ }) => ({
+      '--tw-shadow-color': _.value,
+      '--tw-shadow': 'var(--tw-shadow-colored)',
+    }),
+  ),
 
   // Box Shadow
-  [
-    'shadow(?:-|$)',
-    fromTheme('boxShadow', ({ _ }) => ({
-      '--tw-shadow': join(_),
-      // replace all colors with reference to --tw-shadow-colored
-      // this matches colors after non-comma char (keyword, offset) before comma or the end
-      '--tw-shadow-colored': (join(_) as string).replace(
-        /([^,]\s+)(?:#[a-f\d]+|(?:(?:hsl|rgb)a?|hwb|lab|lch|color|var)\(.+?\)|[a-z]+)(,|$)/g,
-        '$1var(--tw-shadow-color)$2',
-      ),
-      boxShadow: `var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)`,
-      '@layer defaults': {
-        '*,::before,::after,::backdrop': {
-          '--tw-ring-offset-shadow': '0 0 #0000',
-          '--tw-ring-shadow': '0 0 #0000',
-          '--tw-shadow': '0 0 #0000',
-          '--tw-shadow-colored': '0 0 #0000',
-        },
+  useTheme('shadow(?:$|-)', 'boxShadow', ({ _ }) => ({
+    '--tw-shadow': join(_),
+    // replace all colors with reference to --tw-shadow-colored
+    // this matches colors after non-comma char (keyword, offset) before comma or the end
+    '--tw-shadow-colored': (join(_) as string).replace(
+      /([^,]\s+)(?:#[a-f\d]+|(?:(?:hsl|rgb)a?|hwb|lab|lch|color|var)\(.+?\)|[a-z]+)(,|$)/g,
+      '$1var(--tw-shadow-color)$2',
+    ),
+    boxShadow: `var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)`,
+    '@layer defaults': {
+      '*,::before,::after,::backdrop': {
+        '--tw-ring-offset-shadow': '0 0 #0000',
+        '--tw-ring-shadow': '0 0 #0000',
+        '--tw-shadow': '0 0 #0000',
+        '--tw-shadow-colored': '0 0 #0000',
       },
-    })),
-  ],
+    },
+  })),
 
   // Opacity
-  ['(opacity)-', fromTheme(/* 'opacity' */)],
+  useTheme('(opacity)-' /*, 'opacity' */),
 
   // Mix Blend Mode
   withAutocomplete$(
-    ['mix-blend-', 'mixBlendMode'],
+    useMatch('mix-blend-', 'mixBlendMode'),
     DEV &&
       (() => [
         'normal',
@@ -861,89 +822,78 @@ const rules: Rule<TailwindTheme>[] = [
 
   /* TRANSITIONS AND ANIMATION */
   // Transition Property
-  [
-    'transition(?:-|$)',
-    fromTheme('transitionProperty', (match, { theme }) => ({
-      transitionProperty: join(match),
-      transitionTimingFunction:
-        match._ == 'none' ? undefined : join(theme('transitionTimingFunction', '')),
-      transitionDuration: match._ == 'none' ? undefined : join(theme('transitionDuration', '')),
-    })),
-  ],
+  useTheme('transition(?:$|-)', 'transitionProperty', (match, { theme }) => ({
+    transitionProperty: join(match),
+    transitionTimingFunction:
+      match._ == 'none' ? undefined : join(theme('transitionTimingFunction', '')),
+    transitionDuration: match._ == 'none' ? undefined : join(theme('transitionDuration', '')),
+  })),
 
   // Transition Duration
-  ['duration(?:-|$)', fromTheme('transitionDuration', 'transitionDuration', join)],
+  useTheme('duration(?:$|-)', 'transitionDuration', 'transitionDuration', join),
 
   // Transition Timing Function
-  ['ease(?:-|$)', fromTheme('transitionTimingFunction', 'transitionTimingFunction', join)],
+  useTheme('ease(?:$|-)', 'transitionTimingFunction', 'transitionTimingFunction', join),
 
   // Transition Delay
-  ['delay(?:-|$)', fromTheme('transitionDelay', 'transitionDelay', join)],
+  useTheme('delay(?:$|-)', 'transitionDelay', 'transitionDelay', join),
 
-  [
-    'animate(?:-|$)',
-    fromTheme('animation', (match, { theme, h }) => {
-      const animation: string = join(match)
+  useTheme('animate(?:$|-)', 'animation', (match, { theme, h }) => {
+    const animation: string = join(match)
 
-      // Try to auto inject keyframes
-      const parts = animation.split(' ')
-      const keyframeValues = theme('keyframes', parts[0]) as CSSBase
+    // Try to auto inject keyframes
+    const parts = animation.split(' ')
+    const keyframeValues = theme('keyframes', parts[0]) as CSSBase
 
-      if (keyframeValues) {
-        return {
-          [('@keyframes ' + (parts[0] = h(parts[0]))) as '@keyframes xxx']: keyframeValues,
-          animation: parts.join(' '),
-        }
+    if (keyframeValues) {
+      return {
+        [('@keyframes ' + (parts[0] = h(parts[0]))) as '@keyframes xxx']: keyframeValues,
+        animation: parts.join(' '),
       }
+    }
 
-      return { animation }
-    }),
-  ],
+    return { animation }
+  }),
 
   /* TRANSFORMS */
   // Transform
   '(transform)-(none)',
-  ['transform', tranformDefaults],
-  [
-    'transform-(cpu|gpu)',
-    ({ 1: $1 }) => ({
-      '--tw-transform': transformValue($1 == 'gpu'),
-    }),
-  ],
+  useMatch('transform', tranformDefaults),
+  useMatch('transform-(cpu|gpu)', ({ 1: $1 }) => ({
+    '--tw-transform': transformValue($1 == 'gpu'),
+  })),
 
   // Scale
-  [
+  useTheme(
     'scale(-[xy])?-',
-    fromTheme(
-      'scale',
-      ({ 1: $1, _ }) =>
-        ({
-          [('--tw-scale' + ($1 || '-x')) as '--tw-scale-x']: _,
-          [('--tw-scale' + ($1 || '-y')) as '--tw-scale-y']: _,
-          ...tranformDefaults(),
-        } as CSSObject),
-    ),
-  ],
+    'scale',
+    ({ 1: $1, _ }) =>
+      ({
+        [('--tw-scale' + ($1 || '-x')) as '--tw-scale-x']: _,
+        [('--tw-scale' + ($1 || '-y')) as '--tw-scale-y']: _,
+        ...tranformDefaults(),
+      } as CSSObject),
+  ),
 
   // Rotate
-  ['-?(rotate)-', fromTheme('rotate', transform)],
+  useTheme('-?(rotate)-', 'rotate', transform),
 
   // Translate
-  ['-?(translate-[xy])-', fromTheme('translate', transform)],
+  useTheme('-?(translate-[xy])-', 'translate', transform),
 
   // Skew
-  ['-?(skew-[xy])-', fromTheme('skew', transform)],
+  useTheme('-?(skew-[xy])-', 'skew', transform),
 
   // Transform Origin
-  ['origin(-center|(-top|-bottom)?(-(left|right))?)', 'transformOrigin', spacify],
+  useMatch('origin-(center|((top|bottom)(-(left|right))?)|left|right)', 'transformOrigin', spacify),
 
   /* INTERACTIVITY */
   // Appearance
   withAutocomplete$('(appearance)-', DEV && (() => ['auto', 'none'])),
 
   // Columns
-  ['(columns)-', fromTheme(/* 'columns' */)],
-  '(columns)-(\\d+)',
+  useTheme('(columns)-' /*, 'columns' */),
+  withAutocomplete$('(columns)-(\\d+)', DEV && (() => range({ end: 12 }))),
 
   // Break Before, After and Inside
   withAutocomplete$(
@@ -965,7 +915,7 @@ const rules: Rule<TailwindTheme>[] = [
   ),
 
   // Cursor
-  ['(cursor)-', fromTheme(/* 'cursor' */)],
+  useTheme('(cursor)-' /*, 'cursor' */),
   withAutocomplete$(
     '(cursor)-',
     DEV &&
@@ -1010,91 +960,79 @@ const rules: Rule<TailwindTheme>[] = [
   ),
 
   // Scroll Snap Type
-  ['snap-(none)', 'scroll-snap-type'],
-  [
-    'snap-(x|y|both)',
-    ({ 1: $1 }) => ({
-      'scroll-snap-type': $1 + ' var(--tw-scroll-snap-strictness)',
-      '@layer defaults': {
-        '*,::before,::after,::backdrop': {
-          '--tw-scroll-snap-strictness': 'proximity',
-        },
+  useMatch('snap-(none)', 'scroll-snap-type'),
+  useMatch('snap-(x|y|both)', ({ 1: $1 }) => ({
+    'scroll-snap-type': $1 + ' var(--tw-scroll-snap-strictness)',
+    '@layer defaults': {
+      '*,::before,::after,::backdrop': {
+        '--tw-scroll-snap-strictness': 'proximity',
       },
-    }),
-  ],
-  ['snap-(mandatory|proximity)', '--tw-scroll-snap-strictness'],
+    },
+  })),
+  useMatch('snap-(mandatory|proximity)', '--tw-scroll-snap-strictness'),
 
   // Scroll Snap Align
-  ['snap-(?:(start|end|center)|align-(none))', 'scroll-snap-align'],
+  useMatch('snap-(?:(start|end|center)|align-(none))', 'scroll-snap-align'),
 
   // Scroll Snap Stop
-  ['snap-(normal|always)', 'scroll-snap-stop'],
+  useMatch('snap-(normal|always)', 'scroll-snap-stop'),
 
-  ['scroll-(auto|smooth)', 'scroll-behavior'],
+  useMatch('scroll-(auto|smooth)', 'scroll-behavior'),
 
   // Scroll Margin
   // Padding
-  ['scroll-p([xytrbl])?(?:-|$)', fromTheme('padding', edge('scroll-padding'))],
+  useTheme('scroll-p([xytrbl])?(?:$|-)', 'padding', edge('scroll-padding')),
 
   // Margin
-  [
-    '-?scroll-m([xytrbl])?(?:-|$)',
-    fromTheme<TailwindTheme, 'scrollMargin'>('scroll-margin', edge('scroll-margin')),
-  ],
+  useTheme<TailwindTheme, 'scrollMargin'>(
+    '-?scroll-m([xytrbl])?(?:$|-)',
+    'scroll-margin',
+    edge('scroll-margin'),
+  ),
 
   // Touch Action
-  ['touch-(auto|none|manipulation)', 'touch-action'],
-  [
-    'touch-(pinch-zoom|pan-(?:(x|left|right)|(y|up|down)))',
-    ({ 1: $1, 2: $2, 3: $3 }) => ({
-      // x, left, right -> pan-x
-      // y, up, down -> pan-y
-      // -> pinch-zoom
-      [`--tw-${$2 ? 'pan-x' : $3 ? 'pan-y' : $1}` as '--tw-pan-x']: $1,
-      'touch-action': 'var(--tw-touch-action)',
-      '@layer defaults': {
-        '*,::before,::after,::backdrop': {
-          '--tw-pan-x': 'var(--tw-empty,/*!*/ /*!*/)',
-          '--tw-pan-y': 'var(--tw-empty,/*!*/ /*!*/)',
-          '--tw-pinch-zoom': 'var(--tw-empty,/*!*/ /*!*/)',
-          '--tw-touch-action': 'var(--tw-pan-x) var(--tw-pan-y) var(--tw-pinch-zoom)',
-        },
+  useMatch('touch-(auto|none|manipulation)', 'touch-action'),
+  useMatch('touch-(pinch-zoom|pan-(?:(x|left|right)|(y|up|down)))', ({ 1: $1, 2: $2, 3: $3 }) => ({
+    // x, left, right -> pan-x
+    // y, up, down -> pan-y
+    // -> pinch-zoom
+    [`--tw-${$2 ? 'pan-x' : $3 ? 'pan-y' : $1}` as '--tw-pan-x']: $1,
+    'touch-action': 'var(--tw-touch-action)',
+    '@layer defaults': {
+      '*,::before,::after,::backdrop': {
+        '--tw-pan-x': 'var(--tw-empty,/*!*/ /*!*/)',
+        '--tw-pan-y': 'var(--tw-empty,/*!*/ /*!*/)',
+        '--tw-pinch-zoom': 'var(--tw-empty,/*!*/ /*!*/)',
+        '--tw-touch-action': 'var(--tw-pan-x) var(--tw-pan-y) var(--tw-pinch-zoom)',
       },
-    }),
-  ],
+    },
+  })),
 
   // Outline Style
-  [
-    'outline-none',
-    {
-      outline: '2px solid transparent',
-      'outline-offset': '2px',
-    },
-  ],
-  ['outline', { outlineStyle: 'solid' }],
-  ['outline-(dashed|dotted|double|hidden)', 'outlineStyle'],
+  useMatch('outline-none', {
+    outline: '2px solid transparent',
+    'outline-offset': '2px',
+  }),
+  useMatch('outline', { outlineStyle: 'solid' }),
+  useMatch('outline-(dashed|dotted|double|hidden)', 'outlineStyle'),
 
   // Outline Offset
-  ['(outline-offset)-', fromTheme(/*'outlineOffset'*/)],
+  useTheme('(outline-offset)-' /*, 'outlineOffset'*/),
 
   // Outline Color
-  [
-    'outline-',
-    colorFromTheme({
-      section: 'outlineColor',
-      opacityVariable: false,
-      opacitySection: 'opacity',
-    }),
-  ],
+  useColor('outline-', {
+    opacityVariable: false,
+    opacitySection: 'opacity',
+  }),
 
   // Outline Width
-  ['outline-', fromTheme('outlineWidth')],
+  useTheme('outline-', 'outlineWidth'),
 
   // Pointer Events
   withAutocomplete$('(pointer-events)-', DEV && (() => ['auto', 'none'])),
 
   // Will Change
-  ['(will-change)-', fromTheme(/* 'willChange' */)],
+  useTheme('(will-change)-' /*, 'willChange' */),
   withAutocomplete$('(will-change)-', DEV && (() => ['auto', 'contents', 'transform'])),
 
   // Resize
@@ -1105,45 +1043,40 @@ const rules: Rule<TailwindTheme>[] = [
   ],
 
   // User Select
-  ['select-(none|text|all|auto)', 'userSelect'],
+  useMatch('select-(none|text|all|auto)', 'userSelect'),
 
   /* SVG */
   // Fill, Stroke
-  ['(fill|stroke)-', fromTheme(/* 'fill' | 'stroke' */)],
+  useColor('fill-', { section: 'fill', opacityVariable: false, opacitySection: 'opacity' }),
+  useColor('stroke-', { section: 'stroke', opacityVariable: false, opacitySection: 'opacity' }),
 
   // Stroke Width
-  ['stroke-', fromTheme('strokeWidth')],
+  useTheme('stroke-', 'strokeWidth'),
 
   /* ACCESSIBILITY */
   // Screen Readers
-  [
-    'sr-only',
-    {
-      position: 'absolute',
-      width: '1px',
-      height: '1px',
-      padding: '0',
-      margin: '-1px',
-      overflow: 'hidden',
-      whiteSpace: 'nowrap',
-      clip: 'rect(0,0,0,0)',
-      borderWidth: '0',
-    },
-  ],
+  useMatch('sr-only', {
+    position: 'absolute',
+    width: '1px',
+    height: '1px',
+    padding: '0',
+    margin: '-1px',
+    overflow: 'hidden',
+    whiteSpace: 'nowrap',
+    clip: 'rect(0,0,0,0)',
+    borderWidth: '0',
+  }),
 
-  [
-    'not-sr-only',
-    {
-      position: 'static',
-      width: 'auto',
-      height: 'auto',
-      padding: '0',
-      margin: '0',
-      overflow: 'visible',
-      whiteSpace: 'normal',
-      clip: 'auto',
-    },
-  ],
+  useMatch('not-sr-only', {
+    position: 'static',
+    width: 'auto',
+    height: 'auto',
+    padding: '0',
+    margin: '0',
+    overflow: 'visible',
+    whiteSpace: 'normal',
+    clip: 'auto',
+  }),
 ]
 
 export default rules
@@ -1244,24 +1177,22 @@ function filter(prefix = ''): Rule<TailwindTheme>[] {
   return [
     `(${prefix}filter)-(none)`,
 
-    [`${prefix}filter`, defaults],
+    useMatch(`${prefix}filter`, defaults),
 
-    ...filters.map(
-      (key) =>
-        [
-          // hue-rotate can be negated
-          `${key[0] == 'h' ? '-?' : ''}(${prefix}${key})(?:-|$)`,
-          fromTheme<TailwindTheme, 'hueRotate' | 'dropShadow'>(
-            key as 'hueRotate' | 'dropShadow',
-            ({ 1: $1, _ }) =>
-              ({
-                [`--tw-${$1}`]: asArray(_)
-                  .map((value) => `${key}(${value})`)
-                  .join(' '),
-                ...defaults,
-              } as CSSObject),
-          ),
-        ] as Rule<TailwindTheme>,
+    ...filters.map((key) =>
+      useTheme<TailwindTheme, 'hueRotate' | 'dropShadow'>(
+        // hue-rotate can be negated
+        `${key[0] == 'h' ? '-?' : ''}(${prefix}${key})(?:$|-)`,
+
+        key as 'hueRotate' | 'dropShadow',
+        ({ 1: $1, _ }) =>
+          ({
+            [`--tw-${$1}`]: asArray(_)
+              .map((value) => `${key}(${value})`)
+              .join(' '),
+            ...defaults,
+          } as CSSObject),
+      ),
     ),
   ]
 }

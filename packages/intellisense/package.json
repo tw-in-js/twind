@@ -1,13 +1,15 @@
 {
-  "name": "twind",
+  "name": "@twind/intellisense",
   "version": "1.0.0-next.39",
-  "description": "The core engine without any presets.",
+  "description": "Intellisense utils for Twind",
   "keywords": [
     "twind",
     "tailwind",
     "tailwindcss",
     "tw-in-js",
-    "tailwind-in-js"
+    "tailwind-in-js",
+    "intellisense",
+    "autocomplete"
   ],
   "type": "module",
   "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
@@ -19,42 +21,31 @@
   },
   "// These are relative from within the dist/ folder": "",
   "sideEffects": false,
-  "size-limit": [
-    {
-      "name": "twind",
-      "path": "dist/twind.esnext.js",
-      "brotli": true,
-      "limit": "8kb"
-    },
-    {
-      "name": "twind (setup)",
-      "path": "dist/twind.esnext.js",
-      "import": "{ setup }",
-      "brotli": true,
-      "limit": "5.45kb"
-    },
-    {
-      "name": "twind (twind + cssom)",
-      "path": "dist/twind.esnext.js",
-      "import": "{ twind, cssom }",
-      "brotli": true,
-      "limit": "4.8kb"
-    }
-  ],
   "dependencies": {
-    "csstype": "^3.1.1"
+    "@ctrl/tinycolor": "^3.4.1",
+    "css-tree": "^2.2.1",
+    "cssbeautify": "^0.3.1",
+    "csstree-validator": "^3.0.0",
+    "genex": "^1.1.0",
+    "match-sorter": "^6.3.1",
+    "quick-lru": "^6.1.1"
+  },
+  "devDependencies": {
+    "@twind/preset-autoprefix": "1.0.0-next.39",
+    "@twind/preset-tailwind": "1.0.0-next.39",
+    "@types/css-tree": "^2.0.0",
+    "@types/cssbeautify": "^0.3.2",
+    "twind": "1.0.0-next.39",
+    "typescript": "^4.8.4"
   },
   "peerDependencies": {
+    "twind": "1.0.0-next.39",
     "typescript": "^4.8.4"
   },
   "peerDependenciesMeta": {
     "typescript": {
       "optional": true
     }
-  },
-  "devDependencies": {
-    "@twind/preset-tailwind": "1.0.0-next.39",
-    "typescript": "^4.8.4"
   },
   "scripts": {
     "build": "distilt"

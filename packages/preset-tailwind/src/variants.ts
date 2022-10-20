@@ -1,7 +1,21 @@
-import type { Variant } from 'twind'
+import type { AutocompleteProvider, VariantResolver, Variant, AutocompleteItem } from 'twind'
 import type { TailwindTheme } from './types'
 
-import { normalize } from 'twind'
+import { DEV } from 'distilt/env'
+
+import { normalize, withAutocomplete } from 'twind'
+
+// indirection wrapper to remove autocomplete functions from production bundles
+function withAutocomplete$(
+  rule: VariantResolver<TailwindTheme>,
+  autocomplete: AutocompleteProvider<TailwindTheme> | false,
+): VariantResolver<TailwindTheme> {
+  if (DEV) {
+    return withAutocomplete(rule, autocomplete)
+  }
+
+  return rule
+}
 
 const variants: Variant<TailwindTheme>[] = [
   ['sticky', '@supports ((position: -webkit-sticky) or (position:sticky))'],
@@ -37,15 +51,36 @@ const variants: Variant<TailwindTheme>[] = [
   // these need to add a marker selector with the pseudo class
   // => '.group:focus .group-focus:selector'
   [
-    '((group|peer)(~[^-[]+)?)(-[a-z-]+|\\[.+])',
-    ({ 1: $1, 4: $4 }, { e, h, v }) =>
-      `:merge(.${e(h($1))})${$4[0] == '[' ? $4 : (v($4.slice(1)) as string).replace('&', '')}${
-        $1[0] == 'p' ? '~' : ' '
-      }&`,
+    '((group|peer)(~[^-[]+)?)(-[a-z-]+|-\\[(.+)]|\\[.+])',
+    withAutocomplete$(
+      ({ 1: $1, 4: $4, 5: $5 }, { e, h, v }) => {
+        const selector = ($5 && normalize($5)) || ($4[0] == '[' ? $4 : (v($4.slice(1)) as string))
+
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        return `${(selector.includes('&') ? selector : '&' + selector).replace(
+          /&/g,
+          `:merge(.${e(h($1))})`,
+        )}${$1[0] == 'p' ? '~' : ' '}&`
+      },
+      DEV &&
+        ((_, { variants }) =>
+          [...Object.entries(variants)]
+            .filter(([, selector]) => /^&(\[|:[^:])/.test(selector))
+            .flatMap(([variant, selector]): AutocompleteItem[] => [
+              { prefix: 'group-', suffix: variant, label: `${selector.replace('&', '.group')} &` },
+              { prefix: 'peer-', suffix: variant, label: `${selector.replace('&', '.peer')} &` },
+            ])),
+    ),
   ],
 
   // direction variants
-  ['(ltr|rtl)', ({ 1: $1 }) => `[dir="${$1}"] &`],
+  [
+    '(ltr|rtl)',
+    withAutocomplete$(
+      ({ 1: $1 }) => `[dir="${$1}"] &`,
+      DEV && (({ 1: $1 }) => [{ prefix: $1, suffix: '', label: `[dir="${$1}"] &` }]),
+    ),
+  ],
 
   // Arbitrary variants
   [/^\[(.+)]$/, ({ 1: $1 }) => /[&@]/.test($1) && normalize($1).replace(/[}]+$/, '').split('{')],

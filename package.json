@@ -43,33 +43,33 @@
       "name": "twind",
       "path": "packages/twind/dist/twind.esnext.js",
       "brotli": true,
-      "limit": "7.7kb"
+      "limit": "8kb"
     },
     {
       "name": "twind (setup)",
       "path": "packages/twind/dist/twind.esnext.js",
       "import": "{ setup }",
       "brotli": true,
-      "limit": "5.25kb"
+      "limit": "5.45kb"
     },
     {
       "name": "twind (twind + cssom)",
       "path": "packages/twind/dist/twind.esnext.js",
       "import": "{ twind, cssom }",
       "brotli": true,
-      "limit": "4.6kb"
+      "limit": "4.8kb"
     },
     {
       "name": "@twind/cdn",
       "path": "packages/cdn/dist/cdn.esnext.js",
       "brotli": true,
-      "limit": "15.25kb"
+      "limit": "15.5kb"
     },
     {
       "name": "@twind/preset-tailwind",
       "path": "packages/preset-tailwind/dist/preset-tailwind.esnext.js",
       "brotli": true,
-      "limit": "9.2kb",
+      "limit": "9.3kb",
       "ignore": [
         "twind"
       ]
@@ -97,6 +97,7 @@
     "@changesets/get-github-info": "^0.5.1",
     "@size-limit/esbuild": "^8.1.0",
     "@size-limit/file": "^8.1.0",
+    "@types/node": "^14.5.0",
     "@typescript-eslint/eslint-plugin": "^5.39.0",
     "@typescript-eslint/parser": "^5.39.0",
     "@vitest/coverage-c8": "^0.23.4",
@@ -124,7 +125,9 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "@size-limit/esbuild@8.1.0": "patches/@size-limit__esbuild@8.1.0.patch"
+      "@size-limit/esbuild@8.1.0": "patches/@size-limit__esbuild@8.1.0.patch",
+      "monaco-editor@0.34.0": "patches/monaco-editor@0.34.0.patch",
+      "csstree-validator@3.0.0": "patches/csstree-validator@3.0.0.patch"
     }
   },
   "prettier": {
@@ -132,7 +135,22 @@
     "semi": false,
     "singleQuote": true,
     "trailingComma": "all",
-    "bracketSpacing": true
+    "overrides": [
+      {
+        "files": "*.test.js",
+        "options": {
+          "semi": true
+        }
+      },
+      {
+        "files": [
+          "sites/twind.run/src/lib/templates/**"
+        ],
+        "options": {
+          "singleQuote": false
+        }
+      }
+    ]
   },
   "eslintConfig": {
     "root": true,

@@ -286,6 +286,14 @@
     ".shadow-inner{--tw-shadow:inset 0 2px 4px 0 rgba(0,0,0,0.05);--tw-shadow-colored:inset 0 2px 4px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}",
     ".shadow-black{--tw-shadow-color:rgba(0,0,0,1);--tw-shadow:var(--tw-shadow-colored)}"
   ],
+  "shadow-inherit shadow-current shadow-transparent": [
+    "shadow-current shadow-inherit shadow-transparent",
+    [
+      ".shadow-current{--tw-shadow-color:currentColor;--tw-shadow:var(--tw-shadow-colored)}",
+      ".shadow-inherit{--tw-shadow-color:inherit;--tw-shadow:var(--tw-shadow-colored)}",
+      ".shadow-transparent{--tw-shadow-color:transparent;--tw-shadow:var(--tw-shadow-colored)}"
+    ]
+  ],
   "opacity-100": ".opacity-100{opacity:1}",
   "opacity-50": ".opacity-50{opacity:0.5}",
   "opacity-0": ".opacity-0{opacity:0}",
@@ -338,6 +346,8 @@
   "resize-y": ".resize-y{resize:vertical}",
   "resize-none": ".resize-none{resize:none}",
   "fill-current": ".fill-current{fill:currentColor}",
+  "fill-zinc-100": ".fill-zinc-100{fill:rgba(244,244,245,1)}",
+  "fill-zinc-100/50": ".fill-zinc-100\\/50{fill:rgba(244,244,245,0.5)}",
   "stroke-current": ".stroke-current{stroke:currentColor}",
   "stroke-1": ".stroke-1{stroke-width:1}",
   "sr-only": ".sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;white-space:nowrap;clip:rect(0,0,0,0);border-width:0}",
@@ -698,6 +708,13 @@
     ".group\\~x:hover .group\\~x-hover\\:text-yellow-500{--tw-text-opacity:1;color:rgba(234,179,8,var(--tw-text-opacity))}"
   ],
   "group-odd:text-center": ".group:nth-child(odd) .group-odd\\:text-center{text-align:center}",
+  "group-hover:underline": ".group:hover .group-hover\\:underline{text-decoration-line:underline}",
+  "group-[&:focus]:underline": ".group:focus .group-\\[\\&\\:focus\\]\\:underline{text-decoration-line:underline}",
+  "group-[:hover]:underline": ".group:hover .group-\\[\\:hover\\]\\:underline{text-decoration-line:underline}",
+  "group-[&[data-open]]:underline": ".group[data-open] .group-\\[\\&\\[data-open\\]\\]\\:underline{text-decoration-line:underline}",
+  "group-[[data-open]]:underline": ".group[data-open] .group-\\[\\[data-open\\]\\]\\:underline{text-decoration-line:underline}",
+  "group-[.in-foo_&]:underline": ".in-foo .group .group-\\[\\.in-foo_\\&\\]\\:underline{text-decoration-line:underline}",
+  "group-[.in-foo]:underline": ".group.in-foo .group-\\[\\.in-foo\\]\\:underline{text-decoration-line:underline}",
   "peer-open:text-center": ".peer[open]~.peer-open\\:text-center{text-align:center}",
   "peer-invalid:visible": ".peer:invalid~.peer-invalid\\:visible{visibility:visible}",
   "peer-focus:visible": ".peer:focus~.peer-focus\\:visible{visibility:visible}",

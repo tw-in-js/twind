@@ -185,14 +185,7 @@ function createResolveFunction<Theme extends BaseTheme = BaseTheme>(
   resolve?: keyof CSSProperties | string | CSSObject | RuleResolver<Theme>,
   convert?: MatchConverter<Theme>,
 ): ResolveFunction<Theme> {
-  return createResolve(
-    patterns,
-    typeof resolve == 'function' ? resolve : fromMatch(resolve as keyof CSSProperties, convert),
-  )
-}
-
-export function maybeNegate<T>($_: string, value: T): T | string {
-  return $_[0] == '-' ? `calc(${value} * -1)` : value
+  return createResolve(patterns, fromMatch(resolve as keyof CSSProperties, convert))
 }
 
 function createResolve<Result, Theme extends BaseTheme = BaseTheme>(
@@ -227,7 +220,7 @@ function createRegExpExecutor<Result, Theme extends BaseTheme = any>(
   }
 }
 
-function toCondition(value: string | RegExp): RegExp {
+export function toCondition(value: string | RegExp): RegExp {
   // "visible" -> /^visible$/
   // "(float)-(left|right|none)" -> /^(float)-(left|right|none)$/
   // "auto-rows-" -> /^auto-rows-/

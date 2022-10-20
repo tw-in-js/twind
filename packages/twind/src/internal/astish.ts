@@ -1,6 +1,5 @@
 import type { CSSObject, CSSValue } from '../types'
 import { interleave } from './interleave'
-import { removeComments } from './parse'
 
 export function astish(
   strings: CSSObject | string | TemplateStringsArray,
@@ -57,4 +56,9 @@ function astish$(css: string): CSSObject[] {
 
   // console.log(rules)
   return rules
+}
+
+// Remove comments (multiline and single line)
+function removeComments(css: string): string {
+  return css.replace(/\/\*[^]*?\*\/|\s\s+|\n/gm, ' ')
 }

@@ -27,7 +27,7 @@
       "name": "@twind/tailwind",
       "path": "dist/tailwind.esnext.js",
       "brotli": true,
-      "limit": "10kb"
+      "limit": "10.2kb"
     }
   ],
   "dependencies": {

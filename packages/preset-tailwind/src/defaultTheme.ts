@@ -224,8 +224,8 @@ const theme: DefaultTheme = {
     125: '1.25',
   },
   borderColor: ({ theme }) => ({
-    ...theme('colors'),
     DEFAULT: theme('colors.gray.200', 'currentColor'),
+    ...theme('colors'),
   }),
   borderOpacity: /* #__PURE__ */ alias('opacity'),
   borderRadius: {
@@ -242,12 +242,12 @@ const theme: DefaultTheme = {
   },
   borderSpacing: /* #__PURE__ */ alias('spacing'),
   borderWidth: {
+    DEFAULT: '1px',
     .../* #__PURE__ */ exponential(8, 'px'),
     // 0: '0px',
     // 2: '2px',
     // 4: '4px',
     // 8: '8px',
-    DEFAULT: '1px',
   },
   boxShadow: {
     sm: '0 1px 2px 0 rgba(0,0,0,0.05)',
@@ -266,8 +266,8 @@ const theme: DefaultTheme = {
   // },
   caretColor: /* #__PURE__ */ alias('colors'),
   accentColor: ({ theme }) => ({
-    ...theme('colors'),
     auto: 'auto',
+    ...theme('colors'),
   }),
   contrast: {
     .../* #__PURE__ */ linear(200, '', 100, 0, 50),
@@ -295,8 +295,8 @@ const theme: DefaultTheme = {
   },
   fill: /* #__PURE__ */ alias('colors'),
   grayscale: {
-    0: '0',
     DEFAULT: '100%',
+    0: '0',
   },
   hueRotate: {
     0: '0deg',
@@ -307,8 +307,8 @@ const theme: DefaultTheme = {
     180: '180deg',
   },
   invert: {
-    0: '0',
     DEFAULT: '100%',
+    0: '0',
   },
   flex: {
     1: '1 1 0%',
@@ -352,12 +352,12 @@ const theme: DefaultTheme = {
     full: '100%',
   }),
   flexGrow: {
-    0: 0,
     DEFAULT: 1,
+    0: 0,
   },
   flexShrink: {
-    0: 0,
     DEFAULT: 1,
+    0: 0,
   },
   fontFamily: {
     sans: 'ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"'.split(
@@ -542,16 +542,16 @@ const theme: DefaultTheme = {
   //   // Defaults handled by plugin
   // },
   margin: ({ theme }) => ({
-    ...theme('spacing'),
     auto: 'auto',
+    ...theme('spacing'),
   }),
   maxHeight: ({ theme }) => ({
-    ...theme('spacing'),
     full: '100%',
     min: 'min-content',
     max: 'max-content',
     fit: 'fit-content',
     screen: '100vh',
+    ...theme('spacing'),
   }),
   maxWidth: ({ theme, breakpoints }) => ({
     ...breakpoints(theme('screens')),
@@ -659,13 +659,13 @@ const theme: DefaultTheme = {
     DEFAULT: '0.5',
   }),
   ringWidth: {
+    DEFAULT: '3px',
     .../* #__PURE__ */ exponential(8, 'px'),
     // 0: '0px',
     // 1: '1px',
     // 2: '2px',
     // 4: '4px',
     // 8: '8px',
-    DEFAULT: '3px',
   },
   rotate: {
     .../* #__PURE__ */ exponential(2, 'deg'),
@@ -785,11 +785,11 @@ const theme: DefaultTheme = {
     full: '100%',
   }),
   width: ({ theme }) => ({
-    ...theme('flexBasis'),
     min: 'min-content',
     max: 'max-content',
     fit: 'fit-content',
     screen: '100vw',
+    ...theme('flexBasis'),
   }),
   willChange: {
     scroll: 'scroll-position',
