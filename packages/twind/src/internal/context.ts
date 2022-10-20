@@ -16,9 +16,12 @@ import type {
   Falsey,
 } from '../types'
 
+import { DEV } from 'distilt/env'
+
 import { makeThemeFunction } from './theme'
 import { asArray, escape, hash as defaultHash, identity } from '../utils'
 import { fromMatch } from '../rules'
+import { warn } from './warn'
 
 type ResolveFunction<Theme extends BaseTheme = BaseTheme> = (
   className: string,
@@ -54,6 +57,8 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
   const ruleResolvers = new Map<Rule<Theme>, ResolveFunction<Theme>>()
 
   const ignored = createRegExpExecutor(ignorelist, (value, condition) => condition.test(value))
+
+  const reportedUnknownClasses = new Set<string>()
 
   // add dark as last variant to allow user to override it
   // we can modify variants as it has been passed through defineConfig which already made a copy
@@ -102,13 +107,26 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
 
     r(className, isDark) {
       const key = JSON.stringify([className, isDark])
+
       if (!ruleCache.has(key)) {
         ruleCache.set(
           key,
-          // TODO console.warn(`[twind] unknown rule "${value}"`),
           !ignored(className, this) &&
             find(className, rules, ruleResolvers, getRuleResolver, this, isDark),
         )
+
+        if (DEV) {
+          const rule = ruleCache.get(key)
+          if (rule == null && !reportedUnknownClasses.has(className)) {
+            reportedUnknownClasses.add(className)
+
+            warn(
+              `Unknown class ${JSON.stringify(className)} found.`,
+              'TWIND_INVALID_CLASS',
+              className,
+            )
+          }
+        }
       }
 
       return ruleCache.get(key)
