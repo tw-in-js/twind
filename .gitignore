@@ -83,3 +83,7 @@ documentation/api
 
 # gzthermal result
 gzthermal-result.png
+
+sites/twind.run/.mf
+.env.local
+.env.*.local

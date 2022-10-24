@@ -3,7 +3,6 @@ import type { ColorInformation, Diagnostics, DocumentationAt } from '../types'
 import type { IntellisenseContext, Boundary } from '../internal/types'
 
 import * as csstree from 'css-tree'
-import * as cssValidator from 'csstree-validator/validate'
 
 import { parse } from '../../../twind/src/internal/parse'
 import { fixClassList, parseHTML } from '../../../twind/src/internal/parse-html'
@@ -144,17 +143,22 @@ export function validate(
       })
 
       if (ast) {
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-        for (const error of cssValidator.validate(ast)) {
-          diagnostics.push({
-            ...adjustRuleLocation(token, rule, startIndex),
-            code: 'invalidCSS',
-            // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-            message: error.message,
-            severity: 'warning',
-            value: rule.n,
-          })
-        }
+        // TODO: csstree-validator uses createRequire to fetch mdn-data -> this does not work in the browser
+        // if (typeof document !== 'object') {
+        //   const cssValidator = await import('csstree-validator')
+
+        //   // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        //   for (const error of cssValidator.validate(ast)) {
+        //     diagnostics.push({
+        //       ...adjustRuleLocation(token, rule, startIndex),
+        //       code: 'invalidCSS',
+        //       // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+        //       message: error.message,
+        //       severity: 'warning',
+        //       value: rule.n,
+        //     })
+        //   }
+        // }
 
         if (typeof document == 'object') {
           csstree.walk(ast, {

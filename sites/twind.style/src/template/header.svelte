@@ -32,7 +32,7 @@
       <ThemeSwitcher class="ml-5 block w-5 hover:text-brand-12" />
 
       <a
-        class="ml-5 flex item-center hover:text-brand-12"
+        class="ml-5 flex items-center hover:text-brand-12"
         href="https://github.com/tw-in-js/twind/tree/next"
         rel="external nofollow noopener noreferrer"
         target="_blank"
@@ -40,7 +40,7 @@
         <Icon src={Github} class="h-4 w-4" label="Twind on GitHub" />
       </a>
       <a
-        class="ml-5 flex item-center hover:text-brand-12"
+        class="ml-5 flex items-center hover:text-brand-12"
         href="https://chat.twind.style"
         rel="external nofollow noopener noreferrer"
         target="_blank"

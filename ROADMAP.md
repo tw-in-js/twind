@@ -40,10 +40,20 @@
   For help, discussion about best practices, or any other conversation that would benefit from being searchable use [Github Discussions](https://github.com/tw-in-js/twind/discussions).
 
   To ask questions and discuss with other Twind users in real time use [Discord Chat](https://chat.twind.style).
+
+  ## Changelog
+
+  [The Changelog for this package is available on GitHub.](https://github.com/tw-in-js/twind/tree/next/<package>/CHANGELOG.md)
   ```
 
 ## v1
 
+- release on every CI build as insiders like tailwindcss
+  ```
+  changeset version --snapshot insiders
+  pnpm install
+  pnpm publish -r --tag insiders --dry-run
+  ```
 - @twind/devtools:
   - enumerate all classes and inject as empty for dev tools
 - @twind/with-remix: https://github.com/remix-run/remix/issues/1804

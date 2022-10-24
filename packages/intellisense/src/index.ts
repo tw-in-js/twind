@@ -142,6 +142,10 @@ export function createIntellisense(
         const { length } = input.replace(/[-\s]+/g, '')
 
         if (length === 0) {
+          if (prefix) {
+            source = source.sort((a, b) => compareSuggestions(a, b, prefix))
+          }
+
           suggestionCache.set(key, (result = source.map(toSuggestion)))
         } else {
           if (length < 2) {
@@ -156,7 +160,7 @@ export function createIntellisense(
             (result = matchSorter(source, search, {
               keys: ['filter'],
               threshold,
-              baseSort: (a, b) => compareSuggestions(a.item, b.item),
+              baseSort: (a, b) => compareSuggestions(a.item, b.item, prefix),
             }).map(toSuggestion)),
           )
         }

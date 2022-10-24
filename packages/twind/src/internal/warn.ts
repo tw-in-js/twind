@@ -28,14 +28,14 @@ export function warn<Code extends keyof WarningEventMap>(
       dispatchEvent(event)
 
       if (!event.defaultPrevented) {
-        console.warn(`[${code}] ${message}`, detail)
+        console.warn(`[${code}] ${message}`, { detail })
       }
     } else if (typeof process == 'object' && typeof process.emitWarning == 'function') {
       // Node.JS
       process.emitWarning(message, { code, detail } as unknown as string)
     } else {
       // Fallback
-      console.warn(`[${code}] ${message}`, detail)
+      console.warn(`[${code}] ${message}`, { detail })
     }
   }
 }

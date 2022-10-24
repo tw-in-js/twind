@@ -5,48 +5,53 @@ const collator = new Intl.Collator('en', { numeric: true })
 export function compareSuggestions(
   a: IntellisenseVariant | IntellisenseClass,
   b: IntellisenseVariant | IntellisenseClass,
+  prefix?: string | undefined,
 ): number {
-  // sort variants before classes
+  // sort variants and classes
+  const variantsFirst = !prefix
   if (a.type === 'variant' && b.type === 'class') {
-    return -1
+    return variantsFirst ? -1 : 1
   }
 
   if (a.type === 'class' && b.type === 'variant') {
-    return 1
+    return variantsFirst ? 1 : -1
   }
 
   // group by first part
-  const aInitial = a.value.replace(/^-/, '').split('-', 1)[0]
-  const bInitial = b.value.replace(/^-/, '').split('-', 1)[0]
-  const byInitial = collator.compare(aInitial, bInitial)
-  if (byInitial) {
-    return byInitial
-  }
+  if (!prefix) {
+    const aInitial = a.value.replace(/^-/, '').split('-', 1)[0]
+    const bInitial = b.value.replace(/^-/, '').split('-', 1)[0]
 
-  // bump root class up
-  if (a.value === aInitial) {
-    return -1
-  }
+    const byInitial = collator.compare(aInitial, bInitial)
+    if (byInitial) {
+      return byInitial
+    }
 
-  if (b.value === bInitial) {
-    return 1
+    // bump root class up
+    if (a.value === aInitial) {
+      return -1
+    }
+
+    if (b.value === bInitial) {
+      return 1
+    }
   }
 
   // sort arbitrary values after other values
-  if (/[-/]\[$/.test(a.value) && !/[-/]\[$/.test(b.value)) {
+  if (a.value.endsWith('[') && !b.value.endsWith('[')) {
     return 1
   }
 
-  if (!/[-/]\[$/.test(a.value) && /[-/]\[$/.test(b.value)) {
+  if (!a.value.endsWith('[') && b.value.endsWith('[')) {
     return -1
   }
 
   // sort modifier values after other values
-  if (/\/$/.test(a.value) && !/\/$/.test(b.value)) {
+  if (a.value.endsWith('/') && !b.value.endsWith('/')) {
     return 1
   }
 
-  if (!/\/$/.test(a.value) && /\/$/.test(b.value)) {
+  if (!a.value.endsWith('/') && b.value.endsWith('/')) {
     return -1
   }
 

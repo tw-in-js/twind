@@ -24,11 +24,10 @@ export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
   handleMutationRecords([{ target, type: '' }])
 
   // monkey patch tw.destroy to disconnect this observer
-  // eslint-disable-next-line @typescript-eslint/unbound-method
   const { destroy } = tw
-  tw.destroy = () => {
+  tw.destroy = function () {
     observer.disconnect()
-    destroy.call(tw)
+    destroy.call(this)
   }
 
   return tw
