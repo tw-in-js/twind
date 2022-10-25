@@ -1,10 +1,10 @@
-import type { ParsedDevRule } from '../../../twind/src/internal/parse'
+import type { ParsedDevRule } from 'twind'
 import type { ColorInformation, Diagnostics, DocumentationAt } from '../types'
 import type { IntellisenseContext, Boundary } from '../internal/types'
 
 import * as csstree from 'css-tree'
 
-import { parse } from '../../../twind/src/internal/parse'
+import { parse } from 'twind'
 import { fixClassList, parseHTML } from '../../../twind/src/internal/parse-html'
 import { toClassName } from '../../../twind/src/internal/to-class-name'
 

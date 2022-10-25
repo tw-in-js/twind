@@ -1,4 +1,4 @@
-import type { ParsedDevRule } from '../../../twind/src/internal/parse'
+import type { ParsedDevRule } from 'twind'
 
 export function adjustRuleLocation(
   token: string,

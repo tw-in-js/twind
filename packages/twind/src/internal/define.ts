@@ -1,5 +1,5 @@
 import type { Falsey } from '../types'
-import type { ParsedRule } from './parse'
+import type { ParsedRule } from '../parse'
 import { convert } from './precedence'
 import { register } from './registry'
 import { translateWith } from './translate'

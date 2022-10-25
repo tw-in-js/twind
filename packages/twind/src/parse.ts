@@ -1,9 +1,9 @@
 import { DEV } from 'distilt/env'
 
-import { hash } from '../utils'
-import { define } from './define'
-import { format } from './format'
-import { Layer } from './precedence'
+import { hash } from './utils'
+import { define } from './internal/define'
+import { format } from './internal/format'
+import { Layer } from './internal/precedence'
 
 export interface ParsedRule {
   /**

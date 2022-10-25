@@ -7,7 +7,7 @@ import QuickLRU from 'quick-lru'
 import type { Boundary } from './internal/types'
 import type { DocumentationAt, Intellisense, IntellisenseOptions, Suggestion } from './types'
 
-import { parse, ParsedDevRule } from '../../twind/src/internal/parse'
+import { parse, type ParsedDevRule } from 'twind'
 
 import { createIntellisenseContext } from './internal/create-context'
 import { spacify } from './internal/spacify'

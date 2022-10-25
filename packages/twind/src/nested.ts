@@ -1,6 +1,6 @@
 import type { Class, Nested } from './types'
 import { format } from './internal/format'
-import { parse } from './internal/parse'
+import { parse } from './parse'
 import { interpolate } from './internal/interpolate'
 
 export const apply = /* #__PURE__ */ nested('@')

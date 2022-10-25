@@ -1,13 +1,12 @@
 # Acknowledge
 
 - tailwindplay
-- jspm.dev
+- jspm.org
 - skypack.dev
 - unocss
 
 ## Ideas
 
-- TODO: importing twind/src/internal/parse leads to inline twind/src/internal/registry which means twind will not find `~(...)` and `@(...)`
 - inline version annotation like runkit for imports in js
 - TODO: splitpane splitter hover add ring for better visibility
 - TODO: help and feedback icon like https://runkit.com/sastan/63559e16d1d14c000845c889#

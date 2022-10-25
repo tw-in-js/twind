@@ -1,5 +1,5 @@
 import type { Class } from './types'
-import { parse } from './internal/parse'
+import { parse } from './parse'
 import { format } from './internal/format'
 import { interpolate } from './internal/interpolate'
 

@@ -1,7 +1,7 @@
 import type { TwindRule, Context, BaseTheme } from '../types'
-import type { ParsedRule } from './parse'
+import type { ParsedRule } from '../parse'
 
-import { parse } from './parse'
+import { parse } from '../parse'
 import { convert, Layer, moveToLayer } from './precedence'
 
 import { resolve } from './registry'

@@ -1,5 +1,5 @@
 import type { BaseTheme, Context } from '../types'
-import type { ParsedRule } from './parse'
+import type { ParsedRule } from '../parse'
 import { asArray, mql } from '../utils'
 import { toClassName } from './to-class-name'
 

@@ -1,5 +1,5 @@
 import type { BaseTheme, Context, Falsey, RuleResult, TwindRule } from '../types'
-import type { ParsedRule } from './parse'
+import type { ParsedRule } from '../parse'
 
 const registry = new Map<string, RegisterCallback>()
 

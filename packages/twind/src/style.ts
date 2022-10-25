@@ -2,7 +2,7 @@
 // License MIT
 
 import type { Falsey, MatchResult } from './types'
-import { parse } from './internal/parse'
+import { parse } from './parse'
 import { Layer } from './internal/precedence'
 
 import { escape, hash } from './utils'
