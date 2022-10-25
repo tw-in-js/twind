@@ -94,8 +94,8 @@
             {
               versions: JSON.parse(currentVersions),
               modules: {
-                '$/config': currentConfig
-              }
+                '$/config': currentConfig,
+              },
             },
           )
 

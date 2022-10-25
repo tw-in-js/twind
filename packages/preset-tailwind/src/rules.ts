@@ -222,10 +222,7 @@ const rules: Rule<TailwindTheme>[] = [
 
   // Grid Row Start / End
   matchTheme('row-', 'gridRow'),
-  withAutocomplete$(
-    match('row-(span)-(\\d+)', 'gridRow', span),
-    DEV && (() => range({ end: 6 })),
-  ),
+  withAutocomplete$(match('row-(span)-(\\d+)', 'gridRow', span), DEV && (() => range({ end: 6 }))),
 
   matchTheme('row-start-', 'gridRowStart'),
   withAutocomplete$(

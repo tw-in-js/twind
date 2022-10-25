@@ -11,7 +11,6 @@ import {
   BaseTheme,
   CSSObject,
   Preset,
-  Rule,
   RuleResolver,
   withAutocomplete,
 } from 'twind'

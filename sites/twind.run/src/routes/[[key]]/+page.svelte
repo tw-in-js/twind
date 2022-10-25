@@ -45,7 +45,7 @@
 
   import prettier from '$lib/prettier'
   import transpile from '$lib/transpile'
-  import intellisense, {INTELLISENSE_VERSION} from '$lib/intellisense'
+  import intellisense, { INTELLISENSE_VERSION } from '$lib/intellisense'
 
   import Code from './code.svelte'
   import Preview from './preview.svelte'
@@ -170,20 +170,25 @@
     lastVersions.set(versions)
     lastConfig.set($workspace.config.value)
 
-      transpile.transform({
-        entry: `
+    transpile
+      .transform(
+        {
+          entry: `
           import { defineConfig } from 'twind'
           import { createIntellisense } from '@twind/intellisense@${INTELLISENSE_VERSION}'
           import config from '$/config'
 
           export default createIntellisense(defineConfig(config))
         `,
-      }, {
-        versions,
-        modules: {
-          '$/config': $workspace.config.value
-        }
-      }).then(({entry, importMap}) => {
+        },
+        {
+          versions,
+          modules: {
+            '$/config': $workspace.config.value,
+          },
+        },
+      )
+      .then(({ entry, importMap }) => {
         if (get(lastVersions) === versions && get(lastConfig) === $workspace.config.value) {
           return intellisense.init({ entry, importMap })
         }

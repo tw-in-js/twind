@@ -1,7 +1,7 @@
 # all settings listed here - https://github.com/probot/stale#usage
 
-daysUntilStale: 90
-daysUntilClose: 5
+daysUntilStale: 270
+daysUntilClose: 30
 exemptAssignees: true
 # use this property to disable stale bot when we apply the wontfix label, prevents users from playing stale bot ping pong and keeping an issue open with no intent of action
 exemptLabels:

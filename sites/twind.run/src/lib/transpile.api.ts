@@ -243,7 +243,6 @@ const api: Transpile = {
     // TODO: same as transform but return only dependencies
     const [imports] = await parse(code)
 
-
     return imports.map(({ s: start, e: end }) => code.slice(start, end)).filter(isBareSpecifier)
   },
 }

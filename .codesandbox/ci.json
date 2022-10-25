@@ -14,6 +14,7 @@
   "publishDirectory": {
     "@twind/cdn": "packages/cdn/dist",
     "gatsby-plugin-twind": "packages/gatsby-plugin/dist",
+    "@twind/intellisense": "packages/intellisense/dist",
     "@twind/preset-autoprefix": "packages/preset-autoprefix/dist",
     "@twind/preset-ext": "packages/preset-ext/dist",
     "@twind/preset-line-clamp": "packages/preset-line-clamp/dist",

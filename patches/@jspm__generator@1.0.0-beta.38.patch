@@ -7,7 +7,7 @@ index 4b97b0a7d3426a1cf7b467b0788952b781d5eff2..ad95e691e809c366f4d0a6742ae93dfe
  import { parse } from 'es-module-lexer/js';
  import { ImportMap, getScopeMatches, getMapMatch as getMapMatch$1 } from '@jspm/import-map';
 -import process$1 from 'process';
-
+ 
  let babel$1;
  function setBabel$1(_babel) {
 @@ -3808,7 +3807,7 @@ class Generator {

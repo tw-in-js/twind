@@ -12,7 +12,12 @@ export interface ImportMap {
 }
 
 type ISystem = typeof System & {
-  onload?: (error: Error | null | undefined, id: string, dependencies: string[], isErrorSource: boolean) => void
+  onload?: (
+    error: Error | null | undefined,
+    id: string,
+    dependencies: string[],
+    isErrorSource: boolean,
+  ) => void
 
   addImportMap(map: ImportMap): void
 }
@@ -27,10 +32,13 @@ declare global {
   }
 }
 
-export function createSystem(importMap: ImportMap = {}, onLoad: ISystem['onload'] = () => {}): ISystem {
+export function createSystem(
+  importMap: ImportMap = {},
+  onLoad: ISystem['onload'] = () => {},
+): ISystem {
   const system = new (System.constructor as SystemConstructor)()
-  system.registerRegistry ??= Object.create(null);
-  system.namedRegisterAliases ??= Object.create(null);
+  system.registerRegistry ??= Object.create(null)
+  system.namedRegisterAliases ??= Object.create(null)
 
   system.onload = onLoad
 

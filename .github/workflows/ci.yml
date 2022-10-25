@@ -19,7 +19,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node: ['16.x', '18.x']
+        node: ['16.x']
         # os: [ubuntu-20.04]
         # Maybe add those later again
         # os: [ubuntu-20.04, macos-11, windows-2022]
@@ -70,7 +70,7 @@ jobs:
         # 1. prevents this step from running on forks
         # 2. only run for push events
         # 3. only run once in the matrix
-        if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'push' && matrix.node == '18.x' }}
+        if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'push' && matrix.node == '16.x' }}
         run: |
           cat << EOF > "$HOME/.npmrc"
             email=release-workflow@twind.style
@@ -84,7 +84,7 @@ jobs:
         # 1. prevents this step from running on forks
         # 2. only run for push events
         # 3. only run once in the matrix
-        if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'push' && matrix.node == '18.x' }}
+        if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'push' && matrix.node == '16.x' }}
         uses: changesets/action@v1
         with:
           version: pnpm changeset:version
@@ -96,7 +96,7 @@ jobs:
         # 1. prevents this step from running on forks
         # 2. only run if this is a pull_request or pull_request_target
         # 3. only run once in the matrix
-        if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'pull_request' && matrix.node == '18.x' }}
+        if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'pull_request' && matrix.node == '16.x' }}
         uses: tomjschuster/cloudflare-pages-deploy-action@v0
         continue-on-error: true
         with:
@@ -111,7 +111,7 @@ jobs:
         # 1. prevents this step from running on forks
         # 2. only run if this is a push to next
         # 3. only run once in the matrix
-        if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'push' && matrix.node == '18.x' }}
+        if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'push' && matrix.node == '16.x' }}
         # TODO: if: ${{ steps.changesets.outputs.published == 'true' }}
         uses: tomjschuster/cloudflare-pages-deploy-action@v0
         continue-on-error: true
