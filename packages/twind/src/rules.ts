@@ -53,25 +53,25 @@ function withAutocomplete$<Theme extends BaseTheme = BaseTheme>(
   return resolver
 }
 
-export function useMatch<Theme extends BaseTheme = BaseTheme>(
+export function match<Theme extends BaseTheme = BaseTheme>(
   pattern: MaybeArray<string | RegExp>,
 ): Rule<Theme>
-export function useMatch<Theme extends BaseTheme = BaseTheme>(
+export function match<Theme extends BaseTheme = BaseTheme>(
   pattern: MaybeArray<string | RegExp>,
   resolver: RuleResolver<Theme>,
 ): Rule<Theme>
-export function useMatch<Theme extends BaseTheme = BaseTheme>(
+export function match<Theme extends BaseTheme = BaseTheme>(
   pattern: MaybeArray<string | RegExp>,
   // eslint-disable-next-line @typescript-eslint/ban-types
   resolve: (string & {}) | CSSObject,
 ): Rule<Theme>
-export function useMatch<Theme extends BaseTheme = BaseTheme>(
+export function match<Theme extends BaseTheme = BaseTheme>(
   pattern: MaybeArray<string | RegExp>,
   resolve: keyof CSSProperties,
   convert?: MatchConverter<Theme>,
 ): Rule<Theme>
 
-export function useMatch<Theme extends BaseTheme = BaseTheme>(
+export function match<Theme extends BaseTheme = BaseTheme>(
   pattern: MaybeArray<string | RegExp>,
   // eslint-disable-next-line @typescript-eslint/ban-types
   resolve?: RuleResolver<Theme> | (string & {}) | CSSObject | keyof CSSProperties,
@@ -122,7 +122,7 @@ function maybeNegate<T>(
   return match.input[0] == '-' ? `calc(${value} * -1)` : value
 }
 
-export function useTheme<
+export function matchTheme<
   Theme extends BaseTheme = BaseTheme,
   Section extends keyof Theme & string = keyof Theme & string,
 >(
@@ -258,7 +258,7 @@ export interface ColorFromThemeOptions<
   selector?: string
 }
 
-export function useColor<
+export function matchColor<
   Theme extends BaseTheme = BaseTheme,
   Section extends keyof FilterByThemeValue<Theme, ColorValue> = keyof FilterByThemeValue<
     Theme,

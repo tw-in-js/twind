@@ -17,9 +17,9 @@ import { DEV } from 'distilt/env'
 
 import {
   mql,
-  useMatch,
-  useTheme,
-  useColor,
+  match,
+  matchTheme,
+  matchColor,
   toColorValue,
   toCSS,
   asArray,
@@ -43,7 +43,7 @@ function withAutocomplete$(
 
 const rules: Rule<TailwindTheme>[] = [
   /* arbitrary properties: [paint-order:markers] */
-  useMatch('\\[([-\\w]+):(.+)]', ({ 1: $1, 2: $2 }, context) => ({
+  match('\\[([-\\w]+):(.+)]', ({ 1: $1, 2: $2 }, context) => ({
     '@layer overrides': {
       '&': {
         [$1]: arbitrary(`[${$2}]`, $1, context),
@@ -53,14 +53,14 @@ const rules: Rule<TailwindTheme>[] = [
 
   /* Styling based on parent and peer state */
   withAutocomplete$(
-    useMatch('(group|peer)(~[^-[]+)?', ({ input }, { h }) => [{ c: h(input) }]),
+    match('(group|peer)(~[^-[]+)?', ({ input }, { h }) => [{ c: h(input) }]),
     DEV && (() => ['group', 'peer']),
   ),
 
   /* LAYOUT */
-  useTheme('aspect-', 'aspectRatio'),
+  matchTheme('aspect-', 'aspectRatio'),
 
-  useMatch('container', (_, { theme }) => {
+  match('container', (_, { theme }) => {
     const { screens = theme('screens'), center, padding } = theme('container')
 
     const rules = {
@@ -99,24 +99,24 @@ const rules: Rule<TailwindTheme>[] = [
   }),
 
   // Content
-  useTheme('content-', 'content', ({ _ }) => ({
+  matchTheme('content-', 'content', ({ _ }) => ({
     '--tw-content': _,
     content: 'var(--tw-content)',
   })),
 
   // Box Decoration Break
-  useMatch('(?:box-)?decoration-(slice|clone)', 'boxDecorationBreak'),
+  match('(?:box-)?decoration-(slice|clone)', 'boxDecorationBreak'),
 
   // Box Sizing
-  useMatch('box-(border|content)', 'boxSizing', ({ 1: $1 }) => $1 + '-box'),
+  match('box-(border|content)', 'boxSizing', ({ 1: $1 }) => $1 + '-box'),
 
   // Display
-  useMatch('hidden', { display: 'none' }),
+  match('hidden', { display: 'none' }),
 
   // Table Layout
-  useMatch('table-(auto|fixed)', 'tableLayout'),
+  match('table-(auto|fixed)', 'tableLayout'),
 
-  useMatch(
+  match(
     [
       '(block|flex|table|grid|inline|contents|flow-root|list-item)',
       '(inline-(block|flex|table|grid))',
@@ -138,121 +138,121 @@ const rules: Rule<TailwindTheme>[] = [
   '(isolation)-(auto)',
 
   // Isolation
-  useMatch('isolate', 'isolation'),
+  match('isolate', 'isolation'),
 
   // Object Fit
-  useMatch('object-(contain|cover|fill|none|scale-down)', 'objectFit'),
+  match('object-(contain|cover|fill|none|scale-down)', 'objectFit'),
 
   // Object Position
-  useTheme('object-', 'objectPosition'),
-  useMatch('object-(top|bottom|center|(left|right)(-(top|bottom))?)', 'objectPosition', spacify),
+  matchTheme('object-', 'objectPosition'),
+  match('object-(top|bottom|center|(left|right)(-(top|bottom))?)', 'objectPosition', spacify),
 
   // Overscroll Behavior
-  useMatch('overscroll(-[xy])?-(auto|contain|none)', ({ 1: $1 = '', 2: $2 }) => ({
+  match('overscroll(-[xy])?-(auto|contain|none)', ({ 1: $1 = '', 2: $2 }) => ({
     [('overscroll-behavior' + $1) as 'overscroll-behavior-x']: $2 as 'auto',
   })),
 
   // Position
-  useMatch('(static|fixed|absolute|relative|sticky)', 'position'),
+  match('(static|fixed|absolute|relative|sticky)', 'position'),
 
   // Top / Right / Bottom / Left
-  useTheme('-?inset(-[xy])?(?:$|-)', 'inset', ({ 1: $1, _ }) => ({
+  matchTheme('-?inset(-[xy])?(?:$|-)', 'inset', ({ 1: $1, _ }) => ({
     top: $1 != '-x' && _,
     right: $1 != '-y' && _,
     bottom: $1 != '-x' && _,
     left: $1 != '-y' && _,
   })),
 
-  useTheme('-?(top|bottom|left|right)(?:$|-)', 'inset'),
+  matchTheme('-?(top|bottom|left|right)(?:$|-)', 'inset'),
 
   // Visibility
-  useMatch('visible', 'visibility'),
-  useMatch('invisible', { visibility: 'hidden' }),
+  match('visible', 'visibility'),
+  match('invisible', { visibility: 'hidden' }),
 
   // Z-Index
-  useTheme('-?z-', 'zIndex'),
+  matchTheme('-?z-', 'zIndex'),
 
   /* FLEXBOX */
   // Flex Direction
-  useMatch('flex-((row|col)(-reverse)?)', 'flexDirection', columnify),
+  match('flex-((row|col)(-reverse)?)', 'flexDirection', columnify),
 
-  useMatch('flex-(wrap|wrap-reverse|nowrap)', 'flexWrap'),
-  useTheme('(flex-(?:grow|shrink))(?:$|-)' /*, 'flex-grow' | flex-shrink */),
-  useTheme('(flex)-' /*, 'flex' */),
-  useTheme('grow(?:$|-)', 'flexGrow'),
-  useTheme('shrink(?:$|-)', 'flexShrink'),
-  useTheme('basis-', 'flexBasis'),
+  match('flex-(wrap|wrap-reverse|nowrap)', 'flexWrap'),
+  matchTheme('(flex-(?:grow|shrink))(?:$|-)' /*, 'flex-grow' | flex-shrink */),
+  matchTheme('(flex)-' /*, 'flex' */),
+  matchTheme('grow(?:$|-)', 'flexGrow'),
+  matchTheme('shrink(?:$|-)', 'flexShrink'),
+  matchTheme('basis-', 'flexBasis'),
 
-  useTheme('-?(order)-' /*, 'order' */),
+  matchTheme('-?(order)-' /*, 'order' */),
   withAutocomplete$('-?(order)-(\\d+)', DEV && (() => range({ end: 12 }))),
 
   /* GRID */
   // Grid Template Columns
-  useTheme('grid-cols-', 'gridTemplateColumns'),
+  matchTheme('grid-cols-', 'gridTemplateColumns'),
   withAutocomplete$(
-    useMatch('grid-cols-(\\d+)', 'gridTemplateColumns', gridTemplate),
+    match('grid-cols-(\\d+)', 'gridTemplateColumns', gridTemplate),
     DEV && (() => range({ end: 6 })),
   ),
 
   // Grid Column Start / End
-  useTheme('col-', 'gridColumn'),
+  matchTheme('col-', 'gridColumn'),
   withAutocomplete$(
-    useMatch('col-(span)-(\\d+)', 'gridColumn', span),
+    match('col-(span)-(\\d+)', 'gridColumn', span),
     DEV && (() => range({ end: 12 })),
   ),
 
-  useTheme('col-start-', 'gridColumnStart'),
+  matchTheme('col-start-', 'gridColumnStart'),
   withAutocomplete$(
-    useMatch('col-start-(auto|\\d+)', 'gridColumnStart'),
+    match('col-start-(auto|\\d+)', 'gridColumnStart'),
     DEV && (({ 1: $1 }) => ($1 === 'auto' ? [''] : range({ end: 13 }))),
   ),
 
-  useTheme('col-end-', 'gridColumnEnd'),
+  matchTheme('col-end-', 'gridColumnEnd'),
   withAutocomplete$(
-    useMatch('col-end-(auto|\\d+)', 'gridColumnEnd'),
+    match('col-end-(auto|\\d+)', 'gridColumnEnd'),
     DEV && (({ 1: $1 }) => ($1 === 'auto' ? [''] : range({ end: 13 }))),
   ),
 
   // Grid Template Rows
-  useTheme('grid-rows-', 'gridTemplateRows'),
+  matchTheme('grid-rows-', 'gridTemplateRows'),
   withAutocomplete$(
-    useMatch('grid-rows-(\\d+)', 'gridTemplateRows', gridTemplate),
+    match('grid-rows-(\\d+)', 'gridTemplateRows', gridTemplate),
     DEV && (() => range({ end: 6 })),
   ),
 
   // Grid Row Start / End
-  useTheme('row-', 'gridRow'),
+  matchTheme('row-', 'gridRow'),
   withAutocomplete$(
-    useMatch('row-(span)-(\\d+)', 'gridRow', span),
+    match('row-(span)-(\\d+)', 'gridRow', span),
     DEV && (() => range({ end: 6 })),
   ),
 
-  useTheme('row-start-', 'gridRowStart'),
+  matchTheme('row-start-', 'gridRowStart'),
   withAutocomplete$(
-    useMatch('row-start-(auto|\\d+)', 'gridRowStart'),
+    match('row-start-(auto|\\d+)', 'gridRowStart'),
     DEV && (({ 1: $1 }) => ($1 === 'auto' ? [''] : range({ end: 7 }))),
   ),
 
-  useTheme('row-end-', 'gridRowEnd'),
+  matchTheme('row-end-', 'gridRowEnd'),
   withAutocomplete$(
-    useMatch('row-end-(auto|\\d+)', 'gridRowEnd'),
+    match('row-end-(auto|\\d+)', 'gridRowEnd'),
     DEV && (({ 1: $1 }) => ($1 === 'auto' ? [''] : range({ end: 7 }))),
   ),
 
   // Grid Auto Flow
-  useMatch('grid-flow-((row|col)(-dense)?)', 'gridAutoFlow', (match) => spacify(columnify(match))),
-  useMatch('grid-flow-(dense)', 'gridAutoFlow'),
+  match('grid-flow-((row|col)(-dense)?)', 'gridAutoFlow', (match) => spacify(columnify(match))),
+  match('grid-flow-(dense)', 'gridAutoFlow'),
 
   // Grid Auto Columns
-  useTheme('auto-cols-', 'gridAutoColumns'),
+  matchTheme('auto-cols-', 'gridAutoColumns'),
 
   // Grid Auto Rows
-  useTheme('auto-rows-', 'gridAutoRows'),
+  matchTheme('auto-rows-', 'gridAutoRows'),
 
   // Gap
-  useTheme('gap-x(?:$|-)', 'gap', 'columnGap'),
-  useTheme('gap-y(?:$|-)', 'gap', 'rowGap'),
-  useTheme('gap(?:$|-)', 'gap'),
+  matchTheme('gap-x(?:$|-)', 'gap', 'columnGap'),
+  matchTheme('gap-y(?:$|-)', 'gap', 'rowGap'),
+  matchTheme('gap(?:$|-)', 'gap'),
 
   /* BOX ALIGNMENT */
   // Justify Items
@@ -268,7 +268,7 @@ const rules: Rule<TailwindTheme>[] = [
 
   // Justify Content
   withAutocomplete$(
-    useMatch('justify-', 'justifyContent', convertContentValue),
+    match('justify-', 'justifyContent', convertContentValue),
     DEV && (() => ['start', 'end', 'center', 'between', 'around', 'evenly']),
   ),
 
@@ -276,7 +276,7 @@ const rules: Rule<TailwindTheme>[] = [
   // Align Items
   // Align Self
   withAutocomplete$(
-    useMatch('(content|items|self)-', (match) => ({
+    match('(content|items|self)-', (match) => ({
       [('align-' + match[1]) as 'align-content']: convertContentValue(match),
     })),
     DEV &&
@@ -292,7 +292,7 @@ const rules: Rule<TailwindTheme>[] = [
   // Place Items
   // Place Self
   withAutocomplete$(
-    useMatch('(place-(content|items|self))-', ({ 1: $1, $$ }) => ({
+    match('(place-(content|items|self))-', ({ 1: $1, $$ }) => ({
       [$1 as 'place-content']: ('wun'.includes($$[3]) ? 'space-' : '') + $$,
     })),
     DEV &&
@@ -306,13 +306,13 @@ const rules: Rule<TailwindTheme>[] = [
 
   /* SPACING */
   // Padding
-  useTheme('p([xytrbl])?(?:$|-)', 'padding', edge('padding')),
+  matchTheme('p([xytrbl])?(?:$|-)', 'padding', edge('padding')),
 
   // Margin
-  useTheme('-?m([xytrbl])?(?:$|-)', 'margin', edge('margin')),
+  matchTheme('-?m([xytrbl])?(?:$|-)', 'margin', edge('margin')),
 
   // Space Between
-  useTheme('-?space-(x|y)(?:$|-)', 'space', ({ 1: $1, _ }) => ({
+  matchTheme('-?space-(x|y)(?:$|-)', 'space', ({ 1: $1, _ }) => ({
     '&>:not([hidden])~:not([hidden])': {
       [`--tw-space-${$1}-reverse`]: '0',
       ['margin-' +
@@ -324,7 +324,7 @@ const rules: Rule<TailwindTheme>[] = [
     },
   })),
 
-  useMatch('space-(x|y)-reverse', ({ 1: $1 }) => ({
+  match('space-(x|y)-reverse', ({ 1: $1 }) => ({
     '&>:not([hidden])~:not([hidden])': {
       [`--tw-space-${$1}-reverse`]: '1',
     },
@@ -332,47 +332,47 @@ const rules: Rule<TailwindTheme>[] = [
 
   /* SIZING */
   // Width
-  useTheme('w-', 'width'),
+  matchTheme('w-', 'width'),
 
   // Min-Width
-  useTheme('min-w-', 'minWidth'),
+  matchTheme('min-w-', 'minWidth'),
 
   // Max-Width
-  useTheme('max-w-', 'maxWidth'),
+  matchTheme('max-w-', 'maxWidth'),
 
   // Height
-  useTheme('h-', 'height'),
+  matchTheme('h-', 'height'),
 
   // Min-Height
-  useTheme('min-h-', 'minHeight'),
+  matchTheme('min-h-', 'minHeight'),
 
   // Max-Height
-  useTheme('max-h-', 'maxHeight'),
+  matchTheme('max-h-', 'maxHeight'),
 
   /* TYPOGRAPHY */
   // Font Weight
-  useTheme('font-', 'fontWeight'),
+  matchTheme('font-', 'fontWeight'),
 
   // Font Family
-  useTheme('font-', 'fontFamily', 'fontFamily', join),
+  matchTheme('font-', 'fontFamily', 'fontFamily', join),
 
   // Font Smoothing
-  useMatch('antialiased', {
+  match('antialiased', {
     WebkitFontSmoothing: 'antialiased',
     MozOsxFontSmoothing: 'grayscale',
   }),
 
-  useMatch('subpixel-antialiased', {
+  match('subpixel-antialiased', {
     WebkitFontSmoothing: 'auto',
     MozOsxFontSmoothing: 'auto',
   }),
 
   // Font Style
-  useMatch('italic', 'fontStyle'),
-  useMatch('not-italic', { fontStyle: 'normal' }),
+  match('italic', 'fontStyle'),
+  match('not-italic', { fontStyle: 'normal' }),
 
   // Font Variant Numeric
-  useMatch(
+  match(
     '(ordinal|slashed-zero|(normal|lining|oldstyle|proportional|tabular)-nums|(diagonal|stacked)-fractions)',
     ({ 1: $1, 2: $2 = '', 3: $3 }) =>
       // normal-nums
@@ -403,39 +403,39 @@ const rules: Rule<TailwindTheme>[] = [
   ),
 
   // Letter Spacing
-  useTheme('tracking-', 'letterSpacing'),
+  matchTheme('tracking-', 'letterSpacing'),
 
   // Line Height
-  useTheme('leading-', 'lineHeight'),
+  matchTheme('leading-', 'lineHeight'),
 
   // List Style Position
-  useMatch('list-(inside|outside)', 'listStylePosition'),
+  match('list-(inside|outside)', 'listStylePosition'),
 
   // List Style Type
-  useTheme('list-', 'listStyleType'),
-  withAutocomplete$(useMatch('list-', 'listStyleType'), DEV && (() => ['none', 'disc', 'decimal'])),
+  matchTheme('list-', 'listStyleType'),
+  withAutocomplete$(match('list-', 'listStyleType'), DEV && (() => ['none', 'disc', 'decimal'])),
 
   // Placeholder Opacity
-  useTheme('placeholder-opacity-', 'placeholderOpacity', ({ _ }) => ({
+  matchTheme('placeholder-opacity-', 'placeholderOpacity', ({ _ }) => ({
     ['&::placeholder']: { '--tw-placeholder-opacity': _ },
   })),
 
   // Placeholder Color
-  useColor('placeholder-', { property: 'color', selector: '&::placeholder' }),
+  matchColor('placeholder-', { property: 'color', selector: '&::placeholder' }),
 
   // Text Alignment
-  useMatch('text-(left|center|right|justify|start|end)', 'textAlign'),
+  match('text-(left|center|right|justify|start|end)', 'textAlign'),
 
-  useMatch('text-(ellipsis|clip)', 'textOverflow'),
+  match('text-(ellipsis|clip)', 'textOverflow'),
 
   // Text Opacity
-  useTheme('text-opacity-', 'textOpacity', '--tw-text-opacity'),
+  matchTheme('text-opacity-', 'textOpacity', '--tw-text-opacity'),
 
   // Text Color
-  useColor('text-', { property: 'color' }),
+  matchColor('text-', { property: 'color' }),
 
   // Font Size
-  useTheme('text-', 'fontSize', ({ _ }) =>
+  matchTheme('text-', 'fontSize', ({ _ }) =>
     typeof _ == 'string'
       ? { fontSize: _ }
       : {
@@ -445,37 +445,37 @@ const rules: Rule<TailwindTheme>[] = [
   ),
 
   // Text Indent
-  useTheme('indent-', 'textIndent'),
+  matchTheme('indent-', 'textIndent'),
 
   // Text Decoration
-  useMatch('(overline|underline|line-through)', 'textDecorationLine'),
-  useMatch('no-underline', { textDecorationLine: 'none' }),
+  match('(overline|underline|line-through)', 'textDecorationLine'),
+  match('no-underline', { textDecorationLine: 'none' }),
 
   // Text Underline offset
-  useTheme('underline-', 'textUnderlineOffset'),
+  matchTheme('underline-', 'textUnderlineOffset'),
 
   // Text Decoration Color
-  useColor('decoration-', {
+  matchColor('decoration-', {
     section: 'textDecorationColor',
     opacityVariable: false,
     opacitySection: 'opacity',
   }),
 
   // Text Decoration Thickness
-  useTheme('decoration-', 'textDecorationThickness'),
+  matchTheme('decoration-', 'textDecorationThickness'),
 
   // Text Decoration Style
   withAutocomplete$(
-    useMatch('decoration-', 'textDecorationStyle'),
+    match('decoration-', 'textDecorationStyle'),
     DEV && (() => ['solid', 'double', 'dotted', 'dashed', 'wavy']),
   ),
 
   // Text Transform
-  useMatch('(uppercase|lowercase|capitalize)', 'textTransform'),
-  useMatch('normal-case', { textTransform: 'none' }),
+  match('(uppercase|lowercase|capitalize)', 'textTransform'),
+  match('normal-case', { textTransform: 'none' }),
 
   // Text Overflow
-  useMatch('truncate', {
+  match('truncate', {
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     textOverflow: 'ellipsis',
@@ -483,44 +483,44 @@ const rules: Rule<TailwindTheme>[] = [
 
   // Vertical Alignment
   withAutocomplete$(
-    useMatch('align-', 'verticalAlign'),
+    match('align-', 'verticalAlign'),
     DEV &&
       (() => ['baseline', 'top', 'middle', 'bottom', 'text-top', 'text-bottom', 'sub', 'super']),
   ),
 
   // Whitespace
   withAutocomplete$(
-    useMatch('whitespace-', 'whiteSpace'),
+    match('whitespace-', 'whiteSpace'),
     DEV && (() => ['normal', 'nowrap', 'pre', 'pre-line', 'pre-wrap']),
   ),
 
   // Word Break
-  useMatch('break-normal', { wordBreak: 'normal', overflowWrap: 'normal' }),
-  useMatch('break-words', { overflowWrap: 'break-word' }),
-  useMatch('break-all', { wordBreak: 'break-all' }),
+  match('break-normal', { wordBreak: 'normal', overflowWrap: 'normal' }),
+  match('break-words', { overflowWrap: 'break-word' }),
+  match('break-all', { wordBreak: 'break-all' }),
 
   // Caret Color
-  useColor('caret-', {
+  matchColor('caret-', {
     // section: 'caretColor',
     opacityVariable: false,
     opacitySection: 'opacity',
   }),
 
   // Accent Color
-  useColor('accent-', {
+  matchColor('accent-', {
     // section: 'accentColor',
     opacityVariable: false,
     opacitySection: 'opacity',
   }),
 
   // Gradient Color Stops
-  useMatch(
+  match(
     'bg-gradient-to-([trbl]|[tb][rl])',
     'backgroundImage',
     ({ 1: $1 }) => `linear-gradient(to ${position($1, ' ')},var(--tw-gradient-stops))`,
   ),
 
-  useColor(
+  matchColor(
     'from-',
     {
       section: 'gradientColorStops',
@@ -533,7 +533,7 @@ const rules: Rule<TailwindTheme>[] = [
       '--tw-gradient-stops': `var(--tw-gradient-from),var(--tw-gradient-to)`,
     }),
   ),
-  useColor(
+  matchColor(
     'via-',
 
     {
@@ -546,7 +546,7 @@ const rules: Rule<TailwindTheme>[] = [
       '--tw-gradient-stops': `var(--tw-gradient-from),${_.value},var(--tw-gradient-to)`,
     }),
   ),
-  useColor('to-', {
+  matchColor('to-', {
     section: 'gradientColorStops',
     property: '--tw-gradient-to',
     opacityVariable: false,
@@ -555,17 +555,17 @@ const rules: Rule<TailwindTheme>[] = [
 
   /* BACKGROUNDS */
   // Background Attachment
-  useMatch('bg-(fixed|local|scroll)', 'backgroundAttachment'),
+  match('bg-(fixed|local|scroll)', 'backgroundAttachment'),
 
   // Background Origin
-  useMatch('bg-origin-(border|padding|content)', 'backgroundOrigin', ({ 1: $1 }) => $1 + '-box'),
+  match('bg-origin-(border|padding|content)', 'backgroundOrigin', ({ 1: $1 }) => $1 + '-box'),
 
   // Background Repeat
-  useMatch(['bg-(no-repeat|repeat(-[xy])?)', 'bg-repeat-(round|space)'], 'backgroundRepeat'),
+  match(['bg-(no-repeat|repeat(-[xy])?)', 'bg-repeat-(round|space)'], 'backgroundRepeat'),
 
   // Background Blend Mode
   withAutocomplete$(
-    useMatch('bg-blend-', 'backgroundBlendMode'),
+    match('bg-blend-', 'backgroundBlendMode'),
     DEV &&
       (() => [
         'normal',
@@ -588,34 +588,34 @@ const rules: Rule<TailwindTheme>[] = [
   ),
 
   // Background Clip
-  useMatch(
+  match(
     'bg-clip-(border|padding|content|text)',
     'backgroundClip',
     ({ 1: $1 }) => $1 + ($1 == 'text' ? '' : '-box'),
   ),
 
   // Background Opacity
-  useTheme('bg-opacity-', 'backgroundOpacity', '--tw-bg-opacity'),
+  matchTheme('bg-opacity-', 'backgroundOpacity', '--tw-bg-opacity'),
 
   // Background Color
   // bg-${backgroundColor}/${backgroundOpacity}
-  useColor('bg-', { section: 'backgroundColor' }),
+  matchColor('bg-', { section: 'backgroundColor' }),
 
   // Background Image
   // supported arbitrary types are: length, color, angle, list
-  useTheme('bg-', 'backgroundImage'),
+  matchTheme('bg-', 'backgroundImage'),
 
   // Background Position
-  useTheme('bg-', 'backgroundPosition'),
-  useMatch('bg-(top|bottom|center|(left|right)(-(top|bottom))?)', 'backgroundPosition', spacify),
+  matchTheme('bg-', 'backgroundPosition'),
+  match('bg-(top|bottom|center|(left|right)(-(top|bottom))?)', 'backgroundPosition', spacify),
 
   // Background Size
-  useTheme('bg-', 'backgroundSize'),
+  matchTheme('bg-', 'backgroundSize'),
 
   /* BORDERS */
   // Border Radius
-  useTheme('rounded(?:$|-)', 'borderRadius'),
-  useTheme('rounded-([trbl]|[tb][rl])(?:$|-)', 'borderRadius', ({ 1: $1, _ }) => {
+  matchTheme('rounded(?:$|-)', 'borderRadius'),
+  matchTheme('rounded-([trbl]|[tb][rl])(?:$|-)', 'borderRadius', ({ 1: $1, _ }) => {
     const corners = (
       {
         t: ['tl', 'tr'],
@@ -632,16 +632,16 @@ const rules: Rule<TailwindTheme>[] = [
   }),
 
   // Border Collapse
-  useMatch('border-(collapse|separate)', 'borderCollapse'),
+  match('border-(collapse|separate)', 'borderCollapse'),
 
   // Border Opacity
-  useTheme('border-opacity(?:$|-)', 'borderOpacity', '--tw-border-opacity'),
+  matchTheme('border-opacity(?:$|-)', 'borderOpacity', '--tw-border-opacity'),
 
   // Border Style
-  useMatch('border-(solid|dashed|dotted|double|none)', 'borderStyle'),
+  match('border-(solid|dashed|dotted|double|none)', 'borderStyle'),
 
   // Border Spacing
-  useTheme('border-spacing(-[xy])?(?:$|-)', 'borderSpacing', ({ 1: $1, _ }) => ({
+  matchTheme('border-spacing(-[xy])?(?:$|-)', 'borderSpacing', ({ 1: $1, _ }) => ({
     '@layer defaults': {
       '*,::before,::after,::backdrop': {
         '--tw-border-spacing-x': 0,
@@ -654,29 +654,29 @@ const rules: Rule<TailwindTheme>[] = [
   })),
 
   // Border Color
-  useColor('border-([xytrbl])-', { section: 'borderColor' }, edge('border', 'Color')),
-  useColor('border-'),
+  matchColor('border-([xytrbl])-', { section: 'borderColor' }, edge('border', 'Color')),
+  matchColor('border-'),
 
   // Border Width
-  useTheme('border-([xytrbl])(?:$|-)', 'borderWidth', edge('border', 'Width')),
-  useTheme('border(?:$|-)', 'borderWidth'),
+  matchTheme('border-([xytrbl])(?:$|-)', 'borderWidth', edge('border', 'Width')),
+  matchTheme('border(?:$|-)', 'borderWidth'),
 
   // Divide Opacity
-  useTheme('divide-opacity(?:$|-)', 'divideOpacity', ({ _ }) => ({
+  matchTheme('divide-opacity(?:$|-)', 'divideOpacity', ({ _ }) => ({
     '&>:not([hidden])~:not([hidden])': { '--tw-divide-opacity': _ },
   })),
 
   // Divide Style
-  useMatch('divide-(solid|dashed|dotted|double|none)', ({ 1: $1 }) => ({
+  match('divide-(solid|dashed|dotted|double|none)', ({ 1: $1 }) => ({
     '&>:not([hidden])~:not([hidden])': { borderStyle: $1 },
   })),
 
   // Divide Width
-  useMatch('divide-([xy]-reverse)', ({ 1: $1 }) => ({
+  match('divide-([xy]-reverse)', ({ 1: $1 }) => ({
     '&>:not([hidden])~:not([hidden])': { ['--tw-divide-' + $1]: '1' },
   })),
 
-  useTheme('divide-([xy])(?:$|-)', 'divideWidth', ({ 1: $1, _ }) => {
+  matchTheme('divide-([xy])(?:$|-)', 'divideWidth', ({ 1: $1, _ }) => {
     const edges = (
       {
         x: 'lr',
@@ -696,7 +696,7 @@ const rules: Rule<TailwindTheme>[] = [
   }),
 
   // Divide Color
-  useColor('divide-', {
+  matchColor('divide-', {
     // section: $0.replace('-', 'Color') -> 'divideColor'
     property: 'borderColor',
     // opacityVariable: '--tw-border-opacity',
@@ -705,10 +705,10 @@ const rules: Rule<TailwindTheme>[] = [
   }),
 
   // Ring Offset Opacity
-  useTheme('ring-opacity(?:$|-)', 'ringOpacity', '--tw-ring-opacity'),
+  matchTheme('ring-opacity(?:$|-)', 'ringOpacity', '--tw-ring-opacity'),
 
   // Ring Offset Color
-  useColor('ring-offset-', {
+  matchColor('ring-offset-', {
     // section: 'ringOffsetColor',
     property: '--tw-ring-offset-color',
     opacityVariable: false,
@@ -716,13 +716,13 @@ const rules: Rule<TailwindTheme>[] = [
   }),
 
   // Ring Offset Width
-  useTheme('ring-offset(?:$|-)', 'ringOffsetWidth', '--tw-ring-offset-width'),
+  matchTheme('ring-offset(?:$|-)', 'ringOffsetWidth', '--tw-ring-offset-width'),
 
   // Ring Inset
-  useMatch('ring-inset', { '--tw-ring-inset': 'inset' }),
+  match('ring-inset', { '--tw-ring-inset': 'inset' }),
 
   // Ring Color
-  useColor('ring-', {
+  matchColor('ring-', {
     // section: 'ringColor',
     property: '--tw-ring-color',
     // opacityVariable: '--tw-ring-opacity',
@@ -730,7 +730,7 @@ const rules: Rule<TailwindTheme>[] = [
   }),
 
   // Ring Width
-  useTheme('ring(?:$|-)', 'ringWidth', ({ _ }, { theme }) => ({
+  matchTheme('ring(?:$|-)', 'ringWidth', ({ _ }, { theme }) => ({
     '--tw-ring-offset-shadow': `var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)`,
     '--tw-ring-shadow': `var(--tw-ring-inset) 0 0 0 calc(${_} + var(--tw-ring-offset-width)) var(--tw-ring-color)`,
     boxShadow: `var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)`,
@@ -756,7 +756,7 @@ const rules: Rule<TailwindTheme>[] = [
 
   /* EFFECTS */
   // Box Shadow Color
-  useColor(
+  matchColor(
     'shadow-',
     {
       section: 'boxShadowColor',
@@ -770,7 +770,7 @@ const rules: Rule<TailwindTheme>[] = [
   ),
 
   // Box Shadow
-  useTheme('shadow(?:$|-)', 'boxShadow', ({ _ }) => ({
+  matchTheme('shadow(?:$|-)', 'boxShadow', ({ _ }) => ({
     '--tw-shadow': join(_),
     // replace all colors with reference to --tw-shadow-colored
     // this matches colors after non-comma char (keyword, offset) before comma or the end
@@ -790,11 +790,11 @@ const rules: Rule<TailwindTheme>[] = [
   })),
 
   // Opacity
-  useTheme('(opacity)-' /*, 'opacity' */),
+  matchTheme('(opacity)-' /*, 'opacity' */),
 
   // Mix Blend Mode
   withAutocomplete$(
-    useMatch('mix-blend-', 'mixBlendMode'),
+    match('mix-blend-', 'mixBlendMode'),
     DEV &&
       (() => [
         'normal',
@@ -822,7 +822,7 @@ const rules: Rule<TailwindTheme>[] = [
 
   /* TRANSITIONS AND ANIMATION */
   // Transition Property
-  useTheme('transition(?:$|-)', 'transitionProperty', (match, { theme }) => ({
+  matchTheme('transition(?:$|-)', 'transitionProperty', (match, { theme }) => ({
     transitionProperty: join(match),
     transitionTimingFunction:
       match._ == 'none' ? undefined : join(theme('transitionTimingFunction', '')),
@@ -830,15 +830,15 @@ const rules: Rule<TailwindTheme>[] = [
   })),
 
   // Transition Duration
-  useTheme('duration(?:$|-)', 'transitionDuration', 'transitionDuration', join),
+  matchTheme('duration(?:$|-)', 'transitionDuration', 'transitionDuration', join),
 
   // Transition Timing Function
-  useTheme('ease(?:$|-)', 'transitionTimingFunction', 'transitionTimingFunction', join),
+  matchTheme('ease(?:$|-)', 'transitionTimingFunction', 'transitionTimingFunction', join),
 
   // Transition Delay
-  useTheme('delay(?:$|-)', 'transitionDelay', 'transitionDelay', join),
+  matchTheme('delay(?:$|-)', 'transitionDelay', 'transitionDelay', join),
 
-  useTheme('animate(?:$|-)', 'animation', (match, { theme, h }) => {
+  matchTheme('animate(?:$|-)', 'animation', (match, { theme, h }) => {
     const animation: string = join(match)
 
     // Try to auto inject keyframes
@@ -858,13 +858,13 @@ const rules: Rule<TailwindTheme>[] = [
   /* TRANSFORMS */
   // Transform
   '(transform)-(none)',
-  useMatch('transform', tranformDefaults),
-  useMatch('transform-(cpu|gpu)', ({ 1: $1 }) => ({
+  match('transform', tranformDefaults),
+  match('transform-(cpu|gpu)', ({ 1: $1 }) => ({
     '--tw-transform': transformValue($1 == 'gpu'),
   })),
 
   // Scale
-  useTheme(
+  matchTheme(
     'scale(-[xy])?-',
     'scale',
     ({ 1: $1, _ }) =>
@@ -876,23 +876,23 @@ const rules: Rule<TailwindTheme>[] = [
   ),
 
   // Rotate
-  useTheme('-?(rotate)-', 'rotate', transform),
+  matchTheme('-?(rotate)-', 'rotate', transform),
 
   // Translate
-  useTheme('-?(translate-[xy])-', 'translate', transform),
+  matchTheme('-?(translate-[xy])-', 'translate', transform),
 
   // Skew
-  useTheme('-?(skew-[xy])-', 'skew', transform),
+  matchTheme('-?(skew-[xy])-', 'skew', transform),
 
   // Transform Origin
-  useMatch('origin-(center|((top|bottom)(-(left|right))?)|left|right)', 'transformOrigin', spacify),
+  match('origin-(center|((top|bottom)(-(left|right))?)|left|right)', 'transformOrigin', spacify),
 
   /* INTERACTIVITY */
   // Appearance
   withAutocomplete$('(appearance)-', DEV && (() => ['auto', 'none'])),
 
   // Columns
-  useTheme('(columns)-' /*, 'columns' */),
+  matchTheme('(columns)-' /*, 'columns' */),
   withAutocomplete$('(columns)-(\\d+)', DEV && (() => range({ end: 12 }))),
 
   // Break Before, After and Inside
@@ -915,7 +915,7 @@ const rules: Rule<TailwindTheme>[] = [
   ),
 
   // Cursor
-  useTheme('(cursor)-' /*, 'cursor' */),
+  matchTheme('(cursor)-' /*, 'cursor' */),
   withAutocomplete$(
     '(cursor)-',
     DEV &&
@@ -960,8 +960,8 @@ const rules: Rule<TailwindTheme>[] = [
   ),
 
   // Scroll Snap Type
-  useMatch('snap-(none)', 'scroll-snap-type'),
-  useMatch('snap-(x|y|both)', ({ 1: $1 }) => ({
+  match('snap-(none)', 'scroll-snap-type'),
+  match('snap-(x|y|both)', ({ 1: $1 }) => ({
     'scroll-snap-type': $1 + ' var(--tw-scroll-snap-strictness)',
     '@layer defaults': {
       '*,::before,::after,::backdrop': {
@@ -969,30 +969,30 @@ const rules: Rule<TailwindTheme>[] = [
       },
     },
   })),
-  useMatch('snap-(mandatory|proximity)', '--tw-scroll-snap-strictness'),
+  match('snap-(mandatory|proximity)', '--tw-scroll-snap-strictness'),
 
   // Scroll Snap Align
-  useMatch('snap-(?:(start|end|center)|align-(none))', 'scroll-snap-align'),
+  match('snap-(?:(start|end|center)|align-(none))', 'scroll-snap-align'),
 
   // Scroll Snap Stop
-  useMatch('snap-(normal|always)', 'scroll-snap-stop'),
+  match('snap-(normal|always)', 'scroll-snap-stop'),
 
-  useMatch('scroll-(auto|smooth)', 'scroll-behavior'),
+  match('scroll-(auto|smooth)', 'scroll-behavior'),
 
   // Scroll Margin
   // Padding
-  useTheme('scroll-p([xytrbl])?(?:$|-)', 'padding', edge('scroll-padding')),
+  matchTheme('scroll-p([xytrbl])?(?:$|-)', 'padding', edge('scroll-padding')),
 
   // Margin
-  useTheme<TailwindTheme, 'scrollMargin'>(
+  matchTheme<TailwindTheme, 'scrollMargin'>(
     '-?scroll-m([xytrbl])?(?:$|-)',
     'scroll-margin',
     edge('scroll-margin'),
   ),
 
   // Touch Action
-  useMatch('touch-(auto|none|manipulation)', 'touch-action'),
-  useMatch('touch-(pinch-zoom|pan-(?:(x|left|right)|(y|up|down)))', ({ 1: $1, 2: $2, 3: $3 }) => ({
+  match('touch-(auto|none|manipulation)', 'touch-action'),
+  match('touch-(pinch-zoom|pan-(?:(x|left|right)|(y|up|down)))', ({ 1: $1, 2: $2, 3: $3 }) => ({
     // x, left, right -> pan-x
     // y, up, down -> pan-y
     // -> pinch-zoom
@@ -1009,30 +1009,30 @@ const rules: Rule<TailwindTheme>[] = [
   })),
 
   // Outline Style
-  useMatch('outline-none', {
+  match('outline-none', {
     outline: '2px solid transparent',
     'outline-offset': '2px',
   }),
-  useMatch('outline', { outlineStyle: 'solid' }),
-  useMatch('outline-(dashed|dotted|double|hidden)', 'outlineStyle'),
+  match('outline', { outlineStyle: 'solid' }),
+  match('outline-(dashed|dotted|double|hidden)', 'outlineStyle'),
 
   // Outline Offset
-  useTheme('(outline-offset)-' /*, 'outlineOffset'*/),
+  matchTheme('(outline-offset)-' /*, 'outlineOffset'*/),
 
   // Outline Color
-  useColor('outline-', {
+  matchColor('outline-', {
     opacityVariable: false,
     opacitySection: 'opacity',
   }),
 
   // Outline Width
-  useTheme('outline-', 'outlineWidth'),
+  matchTheme('outline-', 'outlineWidth'),
 
   // Pointer Events
   withAutocomplete$('(pointer-events)-', DEV && (() => ['auto', 'none'])),
 
   // Will Change
-  useTheme('(will-change)-' /*, 'willChange' */),
+  matchTheme('(will-change)-' /*, 'willChange' */),
   withAutocomplete$('(will-change)-', DEV && (() => ['auto', 'contents', 'transform'])),
 
   // Resize
@@ -1043,19 +1043,19 @@ const rules: Rule<TailwindTheme>[] = [
   ],
 
   // User Select
-  useMatch('select-(none|text|all|auto)', 'userSelect'),
+  match('select-(none|text|all|auto)', 'userSelect'),
 
   /* SVG */
   // Fill, Stroke
-  useColor('fill-', { section: 'fill', opacityVariable: false, opacitySection: 'opacity' }),
-  useColor('stroke-', { section: 'stroke', opacityVariable: false, opacitySection: 'opacity' }),
+  matchColor('fill-', { section: 'fill', opacityVariable: false, opacitySection: 'opacity' }),
+  matchColor('stroke-', { section: 'stroke', opacityVariable: false, opacitySection: 'opacity' }),
 
   // Stroke Width
-  useTheme('stroke-', 'strokeWidth'),
+  matchTheme('stroke-', 'strokeWidth'),
 
   /* ACCESSIBILITY */
   // Screen Readers
-  useMatch('sr-only', {
+  match('sr-only', {
     position: 'absolute',
     width: '1px',
     height: '1px',
@@ -1067,7 +1067,7 @@ const rules: Rule<TailwindTheme>[] = [
     borderWidth: '0',
   }),
 
-  useMatch('not-sr-only', {
+  match('not-sr-only', {
     position: 'static',
     width: 'auto',
     height: 'auto',
@@ -1177,10 +1177,10 @@ function filter(prefix = ''): Rule<TailwindTheme>[] {
   return [
     `(${prefix}filter)-(none)`,
 
-    useMatch(`${prefix}filter`, defaults),
+    match(`${prefix}filter`, defaults),
 
     ...filters.map((key) =>
-      useTheme<TailwindTheme, 'hueRotate' | 'dropShadow'>(
+      matchTheme<TailwindTheme, 'hueRotate' | 'dropShadow'>(
         // hue-rotate can be negated
         `${key[0] == 'h' ? '-?' : ''}(${prefix}${key})(?:$|-)`,
 
