@@ -34,6 +34,7 @@ export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = 
       darkColor: userConfig.darkColor,
       preflight: userConfig.preflight !== false && asArray(userConfig.preflight),
       theme: userConfig.theme as TwindConfig<BaseTheme & ExtractThemes<Theme, Presets>>['theme'],
+      hash: userConfig.hash,
       stringify: userConfig.stringify,
     } as TwindPresetConfig<Theme>,
   ])) {
@@ -44,8 +45,8 @@ export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = 
       theme,
       variants,
       rules,
-      hash = config.hash,
       ignorelist,
+      hash = config.hash,
       stringify = config.stringify,
     } = typeof preset == 'function' ? preset(config) : (preset as TwindPresetConfig<Theme>)
 

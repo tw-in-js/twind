@@ -50,10 +50,9 @@ if (dev) {
 
 export const handle = handlers.length > 1 ? sequence(...handlers) : handlers[0]
 
-/** @type {import('@sveltejs/kit').HandleServerError} */
-export const handleError: HandleServerError = ({ error, event }) => {
+export const handleError: HandleServerError = ({ error }) => {
   return {
-    message: 'Whoops!',
+    message: 'Whoops! ' + (error as Error).message,
     stack: (error as Error).stack,
     ...(error as any),
   }

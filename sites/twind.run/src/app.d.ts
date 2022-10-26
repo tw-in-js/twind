@@ -13,3 +13,8 @@ declare namespace App {
     }
   }
 }
+
+declare module 'es-module-lexer/js' {
+  export const parse: typeof import('es-module-lexer')['parse']
+  export const init: typeof import('es-module-lexer')['init']
+}

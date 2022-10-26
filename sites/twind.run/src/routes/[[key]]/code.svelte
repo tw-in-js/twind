@@ -5,112 +5,6 @@
   if (browser) {
     import('$lib/monaco').catch(() => {})
   }
-
-  import { injectGlobal } from 'twind'
-
-  if (browser) {
-    // Based on https://github.com/tailwindlabs/play.tailwindcss.com/blob/master/src/css/main.css
-    injectGlobal`
-      .monaco-editor .suggest-widget .monaco-list .monaco-list-row > .contents {
-        display: block;
-      }
-      .monaco-editor
-        .suggest-widget
-        .monaco-list
-        .monaco-list-row
-        > .contents
-        > .main
-        > .left {
-        flex: none !important;
-      }
-      .monaco-editor
-        .suggest-widget
-        .monaco-list
-        .monaco-list-row
-        > .contents
-        > .main
-        > .right {
-        flex: auto !important;
-        justify-content: flex-end !important;
-        max-width: none !important;
-      }
-      .monaco-editor
-        .suggest-widget
-        .monaco-list
-        .monaco-list-row
-        > .contents
-        > .main
-        > .right
-        > .details-label {
-        margin-left: 2em !important;
-        opacity: 1 !important;
-      }
-      .monaco-editor
-        .suggest-widget:not(.docs-side)
-        .monaco-list
-        .monaco-list-row:hover
-        > .contents
-        > .main
-        > .right.can-expand-details
-        > .details-label {
-        width: auto !important;
-      }
-      .monaco-editor
-        .suggest-widget
-        .details
-        > .monaco-scrollable-element
-        > .body
-        > .docs
-        .code {
-        font-family: theme('fontFamily', 'mono') !important;
-      }
-      .monaco-editor .suggest-widget {
-        border: 0 !important;
-        border-radius: 8px;
-        overflow: hidden;
-        @apply shadow-lg ring-1 ring-neutral-10/10;
-      }
-      .monaco-list:not(.drop-target)
-        .monaco-list-row:hover:not(.selected):not(.focused) {
-        @apply bg-neutral-4/[0.05] !important;
-      }
-      .vs-dark
-        .monaco-list:not(.drop-target)
-        .monaco-list-row:hover:not(.selected):not(.focused) {
-        @apply bg-neutral-4/[0.07] !important;
-      }
-      .monaco-editor .suggest-widget .monaco-list-rows {
-        padding: 4px 0;
-      }
-      .monaco-editor .suggest-details {
-        border-radius: 8px;
-        border: 0 !important;
-        @apply shadow-lg ring-1 ring-neutral-10/10;
-      }
-      .monaco-editor .suggest-widget .monaco-list .monaco-list-row .suggest-icon {
-        margin-left: 2px !important;
-        margin-right: 5px !important;
-      }
-      .monaco-editor .suggest-widget .monaco-list .monaco-list-row .icon.customcolor {
-        margin-left: 3px !important;
-        margin-right: 2px !important;
-      }
-      .monaco-editor
-        .suggest-widget
-        .monaco-list
-        .monaco-list-row
-        .icon.customcolor
-        .colorspan {
-        width:  0.8571428571em !important;
-        height: 0.8571428571em !important;
-      }
-      .monaco-hover {
-        border: 0 !important;
-        border-radius: 8px;
-        @apply shadow-lg ring-1 ring-brand-10/10;
-      }
-    `
-  }
 </script>
 
 <script>
@@ -123,6 +17,112 @@
 
   import prettier from '$lib/prettier'
   import { colorScheme } from '$lib/components/theme-switcher.svelte'
+
+  import { injectGlobal } from '$lib/twind'
+
+  if (browser) {
+    // Based on https://github.com/tailwindlabs/play.tailwindcss.com/blob/master/src/css/main.css
+    injectGlobal`
+    .monaco-editor .suggest-widget .monaco-list .monaco-list-row > .contents {
+      display: block;
+    }
+    .monaco-editor
+      .suggest-widget
+      .monaco-list
+      .monaco-list-row
+      > .contents
+      > .main
+      > .left {
+      flex: none !important;
+    }
+    .monaco-editor
+      .suggest-widget
+      .monaco-list
+      .monaco-list-row
+      > .contents
+      > .main
+      > .right {
+      flex: auto !important;
+      justify-content: flex-end !important;
+      max-width: none !important;
+    }
+    .monaco-editor
+      .suggest-widget
+      .monaco-list
+      .monaco-list-row
+      > .contents
+      > .main
+      > .right
+      > .details-label {
+      margin-left: 2em !important;
+      opacity: 1 !important;
+    }
+    .monaco-editor
+      .suggest-widget:not(.docs-side)
+      .monaco-list
+      .monaco-list-row:hover
+      > .contents
+      > .main
+      > .right.can-expand-details
+      > .details-label {
+      width: auto !important;
+    }
+    .monaco-editor
+      .suggest-widget
+      .details
+      > .monaco-scrollable-element
+      > .body
+      > .docs
+      .code {
+      font-family: theme('fontFamily', 'mono') !important;
+    }
+    .monaco-editor .suggest-widget {
+      border: 0 !important;
+      border-radius: 8px;
+      overflow: hidden;
+      @apply shadow-lg ring-1 ring-neutral-10/10;
+    }
+    .monaco-list:not(.drop-target)
+      .monaco-list-row:hover:not(.selected):not(.focused) {
+      @apply bg-neutral-4/[0.05] !important;
+    }
+    .vs-dark
+      .monaco-list:not(.drop-target)
+      .monaco-list-row:hover:not(.selected):not(.focused) {
+      @apply bg-neutral-4/[0.07] !important;
+    }
+    .monaco-editor .suggest-widget .monaco-list-rows {
+      padding: 4px 0;
+    }
+    .monaco-editor .suggest-details {
+      border-radius: 8px;
+      border: 0 !important;
+      @apply shadow-lg ring-1 ring-neutral-10/10;
+    }
+    .monaco-editor .suggest-widget .monaco-list .monaco-list-row .suggest-icon {
+      margin-left: 2px !important;
+      margin-right: 5px !important;
+    }
+    .monaco-editor .suggest-widget .monaco-list .monaco-list-row .icon.customcolor {
+      margin-left: 3px !important;
+      margin-right: 2px !important;
+    }
+    .monaco-editor
+      .suggest-widget
+      .monaco-list
+      .monaco-list-row
+      .icon.customcolor
+      .colorspan {
+      width:  0.8571428571em !important;
+      height: 0.8571428571em !important;
+    }
+    .monaco-hover {
+      border: 0 !important;
+      border-radius: 8px;
+      @apply shadow-lg ring-1 ring-brand-10/10;
+    }
+  `
+  }
 
   const dispatch = createEventDispatcher()
 
@@ -902,16 +902,17 @@
   }
 </script>
 
-<svelte:head>
-  <link rel="preconnect" href="https://cdn.skypack.dev" crossOrigin="anonymous" />
-</svelte:head>
-
 <div
-  class={cx('~(relative,flex,justify-center,content-center) ~([text-align:initial])', className)}
+  class={cx(
+    '~(relative,flex,justify-center,content-center,bg-brand-2) ~([text-align:initial])',
+    className,
+  )}
 >
   {#if !editor}
     <slot name="loading">
-      <div class="flex place-items-center text-neutral-11">Loading ...</div>
+      <div class="flex place-items-center text-neutral-11">
+        <span class="animate-pulse">Loading ...</span>
+      </div>
     </slot>
   {/if}
 

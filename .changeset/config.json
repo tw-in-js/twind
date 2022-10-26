@@ -1,6 +1,7 @@
 {
   "$schema": "https://unpkg.com/@changesets/config@1.6.3/schema.json",
   "changelog": ["./changelog-github-custom.cjs", { "repo": "tw-in-js/twind" }],
+  "fixed": [["*"]],
   "commit": false,
   "linked": [],
   "access": "public",

@@ -1,35 +1,6 @@
-<script context="module">
-  import { injectGlobal } from 'twind'
-
-  // Based on https://github.com/tailwindlabs/play.tailwindcss.com/blob/master/src/css/main.css
-  injectGlobal`
-    main .splitpanes.default-theme .splitpanes__pane {
-      background-color: inherit;
-      overflow: visible;
-    }
-
-    main .splitpanes.default-theme {
-      & .splitpanes__splitter {
-        @apply bg-brand-6 border-brand-7;
-
-        &::before,&::after {
-          @apply z-30;
-        }
-      }
-
-      &.splitpanes--vertical .splitpanes__splitter {
-        @apply w-px;
-      }
-
-      &.splitpanes--horizontal .splitpanes__splitter {
-        @apply h-px;
-      }
-    }
-  `
-</script>
-
 <script>
   import debounce from 'just-debounce'
+  import { compressToEncodedURIComponent } from 'lz-string'
 
   import { onMount } from 'svelte'
   import { get, writable } from 'svelte/store'
@@ -62,6 +33,34 @@
     Upload24,
   } from '$lib/icons'
   import { getTurnstileToken } from '$lib/turnstile'
+
+  import { injectGlobal } from '$lib/twind'
+
+  // Based on https://github.com/tailwindlabs/play.tailwindcss.com/blob/master/src/css/main.css
+  injectGlobal`
+    main .splitpanes.default-theme .splitpanes__pane {
+      background-color: inherit;
+      overflow: visible;
+    }
+
+    main .splitpanes.default-theme {
+      & .splitpanes__splitter {
+        @apply bg-brand-6 border-brand-7;
+
+        &::before,&::after {
+          @apply z-30;
+        }
+      }
+
+      &.splitpanes--vertical .splitpanes__splitter {
+        @apply w-px;
+      }
+
+      &.splitpanes--horizontal .splitpanes__splitter {
+        @apply h-px;
+      }
+    }
+  `
 
   /** @type {import('./$types').PageData} */
   export let data
@@ -324,8 +323,9 @@
 
 <Head />
 
-<div class="w-screen h-screen flex flex-col">
+<div class="w-screen h-screen flex flex-col antialiased bg-brand-1 text-brand-11">
   <Header>
+    <!--
     <button
       type="button"
       title="Save workspace"
@@ -353,7 +353,7 @@
       {/if}
       Fork
     </button>
-
+    -->
     <button
       type="button"
       title="Create share Link"
@@ -377,9 +377,10 @@
             if (!token) return
 
             const body = new FormData()
+            const stringifiedWorkspace = serialize($workspace)
 
             body.set('version', '1')
-            body.set('workspace', serialize($workspace))
+            body.set('workspace', stringifiedWorkspace)
             body.set('cf-turnstile-response', token)
 
             return fetch($page.url.pathname + '?/share', {
@@ -393,15 +394,25 @@
               .then(
                 /** @param { import('@sveltejs/kit').ActionResult} result */
                 (result) => {
+                  // TODO: workspace might have been changed??
                   console.debug(result)
+                  if (result.type === 'invalid' && result.status === 500) {
+                    result = {
+                      ...result,
+                      type: 'success',
+                      status: 200,
+                      data: { key: compressToEncodedURIComponent('1:' + stringifiedWorkspace) },
+                    }
+                  }
+
                   if (result.type === 'success') {
-                    // TODO: copy to clipboard, change url and show link
+                    // copy to clipboard, change url and show link
                     const url = new URL(`${base}/${result.data.key}`, location.href)
                     url.search = location.search
                     history.pushState(history.state, '', url)
                     // update tracking data to detect if something has changed
-                    data.workspace = JSON.parse(serialize($workspace))
-                    source = serialize($workspace)
+                    data.workspace = JSON.parse(stringifiedWorkspace)
+                    source = stringifiedWorkspace
                     return copyToClipboard(url).finally(() => {
                       shareLink = url
                     })
@@ -443,7 +454,7 @@
           Copied!
         {:else}
           <Icon src={Link16} class="-ml-1 mr-2 h-4 w-4" aria-hidden="true" />
-          …{shareLink.pathname.slice(0, 7)}…
+          …{shareLink.pathname.slice(0, 5)}…{shareLink.pathname.slice(-7)}
         {/if}
       </button>
     {/if}

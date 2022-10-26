@@ -1,42 +1,39 @@
 diff --git a/dist/generator-06673c1f.js b/dist/generator-06673c1f.js
-index 4b97b0a7d3426a1cf7b467b0788952b781d5eff2..ad95e691e809c366f4d0a6742ae93dfe63ed3fed 100644
+index 4b97b0a7d3426a1cf7b467b0788952b781d5eff2..1f38cf890c7b7d754ba842765e9f813ae944379f 100644
 --- a/dist/generator-06673c1f.js
 +++ b/dist/generator-06673c1f.js
-@@ -3,7 +3,6 @@ import convertRange from 'sver/convert-range.js';
- import { fetch as fetch$1, clearCache as clearCache$1 } from '#fetch';
+@@ -1,9 +1,9 @@
+ import sver, { SemverRange as SemverRange$2 } from 'sver';
+ import convertRange from 'sver/convert-range.js';
+-import { fetch as fetch$1, clearCache as clearCache$1 } from '#fetch';
++import { fetch as fetch$1, clearCache as clearCache$1 } from './fetch-native.js';
  import { parse } from 'es-module-lexer/js';
  import { ImportMap, getScopeMatches, getMapMatch as getMapMatch$1 } from '@jspm/import-map';
 -import process$1 from 'process';
++// import process$1 from 'process';
  
  let babel$1;
  function setBabel$1(_babel) {
-@@ -3808,7 +3807,7 @@ class Generator {
+@@ -3808,7 +3808,7 @@ class Generator {
              }
          }
          this.logStream = logStream;
 -        if (process$1.env.JSPM_GENERATOR_LOG) {
-+        if (false) {
++        if (false && process$1.env.JSPM_GENERATOR_LOG) {
              (async ()=>{
                  for await (const { type , message  } of this.logStream()){
                      console.log(type, message);
-diff --git a/lib/generator.js b/lib/generator.js
-index 4b9916658e4eb55d39e7870f09c4cbf7e9618501..4fca8dc972de144910e97068d4f4a58d9966f793 100644
---- a/lib/generator.js
-+++ b/lib/generator.js
-@@ -11,7 +11,6 @@ import { analyzeHtml } from "./html/analyze.js";
- import { SemverRange } from 'sver';
- import { Replacer } from "./common/str.js";
- import { getIntegrity } from "./common/integrity.js";
--import process from 'process';
- export { analyzeHtml };
- /**
-  * Supports clearing the global fetch cache in Node.js.
-@@ -541,7 +540,7 @@ export class Generator {
-             }
-         }
-         this.logStream = logStream;
--        if (process.env.JSPM_GENERATOR_LOG) {
-+        if (false) {
-             (async ()=>{
-                 for await (const { type , message  } of this.logStream()){
-                     console.log(type, message);
+diff --git a/dist/generator.js b/dist/generator.js
+index 644734e586d2799ff6e93ed1e5f93f0aa1655150..87ba901c7b0e02dcd60e52be53e16d637f6cdb5c 100644
+--- a/dist/generator.js
++++ b/dist/generator.js
+@@ -1,7 +1,7 @@
+ export { G as Generator, d as analyzeHtml, e as clearCache, f as fetch, h as getPackageBase, g as getPackageConfig, l as lookup } from './generator-06673c1f.js';
+-import '#fetch';
++import './fetch-native';
+ import '@jspm/import-map';
+ import 'sver';
+-import 'process';
++// import 'process';
+ import 'sver/convert-range.js';
+ import 'es-module-lexer/js';

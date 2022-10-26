@@ -1,17 +1,20 @@
 import { error, invalid } from '@sveltejs/kit'
 
+import { decompressFromEncodedURIComponent } from 'lz-string'
+
 import { dev } from '$app/environment'
 import { env } from '$env/dynamic/private'
 
 import initialTemplate from '$lib/templates/initial/_'
+import { toBase64 } from '$lib/base64'
 
-import wordlistraw from './wordlist.txt?raw'
+// import wordlistraw from './wordlist.txt?raw'
 
 // Based on
 // - https://gist.github.com/fogleman/c4a1f69f34c7e8a00da8
 // - https://www.eff.org/files/2016/09/08/eff_short_wordlist_1.txt from https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases
 // 4547 words that are 3-5 chars and good candidates for a prefix search
-const wordlist = wordlistraw.trim().split(/\s+/g)
+// const wordlist = wordlistraw.trim().split(/\s+/g)
 
 // content adressable store
 // twind.run/<base64url(integrity)> -> twind.run/Ttj8VsbHHK9N0k1KS94JH_RYFxFwOQ6D7hFg3XUnSTw
@@ -33,69 +36,89 @@ interface Metadata {
 const EXPECTED_VERSION = '1'
 
 export async function load({
+  setHeaders,
   params: { key },
   platform: { env },
 }: Parameters<import('./$types').PageServerLoad>[0]) {
+  setHeaders({
+    'Feature-Policy': `fullscreen 'self' https://challenges.cloudflare.com`,
+    'X-Content-Type-Options': 'nosniff',
+    'X-Frame-Options': 'SAMEORIGIN',
+    'X-XSS-Protection': '1; mode=block',
+  })
+
   if (!key) {
     return { workspace: initialTemplate }
   }
 
-  console.time('load:' + key)
-  try {
-    const data = await env.WORKSPACES.get(key)
+  const data = await env.WORKSPACES.get(key).catch((error) => {
+    if (error.message.includes('(10020)')) {
+      // get: The specified object name is not valid. (10020)
+      // maybe a lz-string encoded url
+      return null
+    }
+
+    throw error
+  })
+
+  if (!data) {
+    const data = decompressFromEncodedURIComponent(key)
 
     if (!data) {
       throw error(404, 'Not found')
     }
 
-    console.debug(data)
-    if (data.httpMetadata?.contentType !== 'application/json') {
+    if (!data.startsWith(`${EXPECTED_VERSION}:`)) {
       // TODO: better error message
       throw error(404, 'Not found')
     }
 
-    if (data.customMetadata?.version !== EXPECTED_VERSION) {
+    try {
+      const workspace = JSON.parse(data.slice(`${EXPECTED_VERSION}:`.length))
+      // TODO: validate workspace loaded from url
+      return { workspace }
+    } catch {
+      throw error(404, 'Not found')
+    }
+  }
+
+  if (data.httpMetadata?.contentType !== 'application/json') {
+    // TODO: better error message
+    throw error(404, 'Not found')
+  }
+
+  if (data.customMetadata?.version !== EXPECTED_VERSION) {
+    throw error(404, 'Not found')
+  }
+
+  if (data.httpMetadata.contentEncoding) {
+    if (data.httpMetadata.contentEncoding !== 'gzip') {
+      // TODO: better error message
       throw error(404, 'Not found')
     }
 
-    if (data.httpMetadata.contentEncoding) {
-      if (data.httpMetadata.contentEncoding !== 'gzip') {
-        // TODO: better error message
-        throw error(404, 'Not found')
-      }
-
-      const parts: BlobPart[] = []
-
-      await (async function read(reader): Promise<void> {
-        const { done, value } = await reader.read()
-        if (!done) {
-          parts.push(value)
-          return read(reader)
-        }
-      })(data.body.pipeThrough(await createDecompressionStream()).getReader())
-
-      return {
-        workspace: JSON.parse(await new Blob(parts).text()) as typeof initialTemplate,
-      }
-    }
+    const blob = await toBlob(data.body.pipeThrough(await createGunzipStream()), {
+      type: 'application/json',
+    })
 
     return {
-      workspace: (await data.json()) as typeof initialTemplate,
+      workspace: JSON.parse(await blob.text()) as typeof initialTemplate,
     }
-  } finally {
-    console.timeEnd('load:' + key)
+  }
+
+  return {
+    workspace: (await data.json()) as typeof initialTemplate,
   }
 }
 
 export const actions: import('./$types').Actions = {
   share: async ({ request, platform }) => {
-    console.time('share')
     try {
       const body = await request.formData()
 
       const token = body.get('cf-turnstile-response')
       if (!token) {
-        return invalid(400)
+        return invalid(400, { missing: 'turnstile' })
       }
 
       const ip = request.headers.get('CF-Connecting-IP')
@@ -127,7 +150,7 @@ export const actions: import('./$types').Actions = {
       } = await turnstileResult.json()
 
       if (!(outcome.success && (dev || outcome.action === 'share'))) {
-        return invalid(400)
+        return invalid(400, outcome)
       }
 
       // TODO: ensure the request is valid
@@ -144,10 +167,6 @@ export const actions: import('./$types').Actions = {
         return invalid(400, { workspace: 'missing' })
       }
 
-      const workspace = JSON.parse(
-        typeof workspaceRaw === 'string' ? workspaceRaw : await workspaceRaw.text(),
-      )
-
       // TODO: validate workspace {[html | script | config | manifest]: {path: string, value: string}}
       // if (workspace.html) {
       //   return invalid(400, { script: 'missing' })
@@ -158,33 +177,34 @@ export const actions: import('./$types').Actions = {
           ? new Blob([workspaceRaw], { type: 'application/json' })
           : workspaceRaw
 
-      const buffer = await blob.arrayBuffer()
-      let { key, slug, sha256 } = await generate(buffer)
+      let { key, sha256 } = await generate(await blob.arrayBuffer())
 
       const existing = await platform.env.WORKSPACES.head(key)
       if (!existing) {
         // not found
-        const stream = (await blob.stream()).pipeThrough(await createCompressionStream())
-
-        const data = await platform.env.WORKSPACES.put(key, stream, {
-          customMetadata: { version },
-          httpMetadata: {
-            contentType: 'application/json',
-            contentEncoding: 'gzip',
+        await platform.env.WORKSPACES.put(
+          key,
+          await toBlob((await blob.stream()).pipeThrough(await createGzipStream()), {
+            type: 'application/json',
+          }),
+          {
+            customMetadata: { version },
+            httpMetadata: {
+              contentType: 'application/json',
+              contentEncoding: 'gzip',
+            },
+            sha256,
           },
-          sha256,
-        })
-        console.debug('put', data)
+        )
       }
-
-      console.debug({ key, slug, sha256 })
 
       return { success: true, key }
     } catch (error) {
-      console.error(error)
-      return invalid(500)
-    } finally {
-      console.timeEnd('share')
+      return invalid(500, {
+        message: (error as Error).message,
+        code: (error as any).code,
+        stack: (error as Error).stack,
+      })
     }
   },
 }
@@ -193,26 +213,25 @@ async function generate(source: BufferSource) {
   const sha256 = await crypto.subtle.digest('SHA-256', source)
   const integrity = toBase64(sha256)
 
-  //key: three words plus hash
-  const view = new DataView(sha256, 0)
+  // const view = new DataView(sha256)
 
   return {
     sha256,
     key: toBase64url(integrity),
-    slug: [
-      // <word>-<word>-<word>-<hash>
-      wordlist[view.getUint16(0) & wordlist.length],
-      wordlist[view.getUint16(2) & wordlist.length],
-      wordlist[view.getUint16(4) & wordlist.length],
-      integrity
-        .toLowerCase()
-        // no vowels or similiar looking chars
-        .replace(/[=+/01aefijlout]/g, '')
-        .slice(-6),
-    ].join('-'),
+    // slug: [
+    //   // <word>-<word>-<word>-<hash>
+    //   wordlist[view.getUint16(0) & wordlist.length],
+    //   wordlist[view.getUint16(2) & wordlist.length],
+    //   wordlist[view.getUint16(4) & wordlist.length],
+    //   integrity
+    //     .toLowerCase()
+    //     // no vowels or similiar looking chars
+    //     .replace(/[=+/01aefijlout]/g, '')
+    //     .slice(-6),
+    // ].join('-'),
   }
 }
-async function createCompressionStream(): Promise<ReadableWritablePair<Uint8Array, Uint8Array>> {
+async function createGzipStream(): Promise<ReadableWritablePair<Uint8Array, Uint8Array>> {
   if (dev && typeof CompressionStream !== 'function') {
     const zlib = await import('node:zlib')
     const gzip = zlib.createGzip({ level: zlib.constants.Z_BEST_COMPRESSION })
@@ -228,7 +247,7 @@ async function createCompressionStream(): Promise<ReadableWritablePair<Uint8Arra
   return new CompressionStream('gzip')
 }
 
-async function createDecompressionStream(): Promise<ReadableWritablePair<Uint8Array, Uint8Array>> {
+async function createGunzipStream(): Promise<ReadableWritablePair<Uint8Array, Uint8Array>> {
   if (dev && typeof CompressionStream !== 'function') {
     const zlib = await import('node:zlib')
     const gzip = zlib.createGunzip()
@@ -244,8 +263,21 @@ async function createDecompressionStream(): Promise<ReadableWritablePair<Uint8Ar
   return new DecompressionStream('gzip')
 }
 
-function toBase64(buffer: ArrayBuffer): string {
-  return btoa(String.fromCharCode(...new Uint8Array(buffer)))
+async function toBlob(
+  readable: ReadableStream<BlobPart>,
+  options?: BlobPropertyBag,
+): Promise<Blob> {
+  const parts: BlobPart[] = []
+
+  await readable.pipeTo(
+    new WritableStream({
+      write(chunk) {
+        parts.push(chunk)
+      },
+    }),
+  )
+
+  return new Blob(parts, options)
 }
 
 function toBase64url(base64: string): string {

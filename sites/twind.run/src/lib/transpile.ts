@@ -2,6 +2,8 @@ import * as Comlink from 'comlink'
 
 import type { ImportMap } from './system'
 
+import TranspileWorker from './transpile.worker?worker'
+
 export interface Transpile {
   transform<Input extends Record<string, string>>(
     input: Input,
@@ -23,24 +25,24 @@ export interface Transpile {
 export default load()
 
 function load(): Transpile {
-  if (import.meta.env.PROD && !import.meta.env.SSR) {
-    try {
-      return Comlink.wrap<Transpile>(
-        new Worker(new URL('./transpile.worker.ts', import.meta.url), { type: 'module' }),
-      ) as Transpile
-    } catch {
-      // not supported
+  if (import.meta.env.SSR) {
+    return {
+      async transform(...args) {
+        const { default: api } = await import('./transpile.api')
+        return api.transform(...args)
+      },
+      async findImports(...args) {
+        const { default: api } = await import('./transpile.api')
+        return api.findImports(...args)
+      },
     }
   }
 
-  return {
-    async transform(...args) {
-      const { default: api } = await import('./transpile.api')
-      return api.transform(...args)
-    },
-    async findImports(...args) {
-      const { default: api } = await import('./transpile.api')
-      return api.findImports(...args)
-    },
-  }
+  return Comlink.wrap<Transpile>(
+    import.meta.env.PROD
+      ? new TranspileWorker()
+      : new Worker(new URL('./transpile.worker.ts', import.meta.url), {
+          type: 'module',
+        }),
+  ) as Transpile
 }

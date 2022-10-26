@@ -1,6 +1,3 @@
-import { img } from '$lib/image'
-import iconPNG from '$lib/assets/icon.png'
-
 import { twind, virtual } from 'twind'
 import config from '../../twind.config'
 
@@ -19,13 +16,13 @@ export function GET(): ReturnType<import('./$types').RequestHandler> {
       scope: '/',
       icons: [
         {
-          src: img({ src: iconPNG, width: 196, format: 'png' }),
+          src: 'https://imagedelivery.net/clgAS5HJ8HoJM1G5J8tcLA/ad127ccc-64a5-4460-d429-39ba2ab6ea00/196x196',
           sizes: '196x196',
           type: 'image/png',
           purpose: 'any maskable',
         },
         {
-          src: img({ src: iconPNG, width: 512, format: 'png' }),
+          src: 'https://imagedelivery.net/clgAS5HJ8HoJM1G5J8tcLA/ad127ccc-64a5-4460-d429-39ba2ab6ea00/512x512',
           sizes: '512x512',
           type: 'image/png',
           purpose: 'any maskable',

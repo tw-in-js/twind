@@ -7,10 +7,27 @@
 
 ## Ideas
 
+`wrangler pages publish .svelte-kit/cloudflare --project-name=twind-run --branch=main`
+
+- TODO: publish 0.0.0-insiders
+
+  - pnpm publish -r --tag insiders --no-git-checks --dry-run
+
+- TODO: safari: Feature policy 'Fullscreen' check failed for iframe with origin 'https://challenges.cloudflare.com' and allow attribute ''
+- TODO: safari copy to clipboard does not work
+- TODO: bucket.put -> Network connection lost.
+- TODO: use https://developers.cloudflare.com/images/cloudflare-images/serve-images/ instead of pro plan
+- TODO: service worker - how to notify about an update
+- TODO: use image resizing from twind.style and remove uses of `img`
 - inline version annotation like runkit for imports in js
+- report bug:
+
+  - extra label
+  - like prettier.io/play
+  - https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue#creating-an-issue-from-a-url-query
+
 - TODO: splitpane splitter hover add ring for better visibility
 - TODO: help and feedback icon like https://runkit.com/sastan/63559e16d1d14c000845c889#
-- TODO: firefox? browser support message or implement worker with systemjs or is type module really needed
 - TODO: suggest-widget and hover-widget are not fully visible sometimes
 - not found page with suggestions template or search in existing key (maybe with fuzzy search of the key that was not found)
 - autocomplete `theme(` within arbitrary value

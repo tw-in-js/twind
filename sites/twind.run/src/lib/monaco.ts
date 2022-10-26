@@ -585,7 +585,7 @@ async function fetchModuleTypeDeclarations(
   if (fetchedURLs.has(url)) return
   fetchedURLs.add(url)
 
-  console.debug(`Fetching type declarations for ${moduleName} (${url})`)
+  console.debug(`Fetching type declarations for ${moduleName} from ${url}`)
   let response = await fetch(url, {
     method: 'HEAD',
     redirect: 'follow',
@@ -644,9 +644,9 @@ async function fetchModuleTypeDeclarations(
       )
 
       console.debug(
-        `Installed type declarations facade for "${id}" (${model.uri.toString(
+        `Installed type declarations facade for ${id} from ${model.uri.toString(
           true,
-        )} -> ${importFrom})`,
+        )} to ${importFrom}`,
       )
     }
   }

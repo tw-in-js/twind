@@ -1,4 +1,4 @@
-export const builtinVersions = Object.fromEntries(
+export const currentVersions: Record<string, string> = Object.fromEntries(
   Object.entries(
     import.meta.glob(
       [
@@ -24,9 +24,9 @@ export function createResolutions(versions: Record<string, string> = {}): Record
   )
 
   if (!resolutions['@twind/*']) {
-    resolutions = { ...builtinVersions, ...resolutions }
+    resolutions = { ...currentVersions, ...resolutions }
   } else if (!resolutions.twind) {
-    resolutions.twind = builtinVersions.twind
+    resolutions.twind = currentVersions.twind
   }
 
   return resolutions

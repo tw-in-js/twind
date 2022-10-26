@@ -8,7 +8,7 @@
   class="relative flex-none overflow-visible flex items-center space-x-4 py-1 pl-5 pr-3 sm:pl-6 sm:pr-4 md:pr-3.5 lg:px-6"
 >
   <div class="flex-auto flex items-center justify-between gap-4">
-    <div class="flex gap-12">
+    <div class="flex gap-(4 lg:8 xl:12)">
       <a href="/" class="flex font-medium items-center hover:text-brand-12">
         <Icon src={TwindLogo} class="w-6 h-6" />
         <span class="sr-only md:(not-sr-only ml-3 text-xl)">

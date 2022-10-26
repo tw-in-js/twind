@@ -7,7 +7,9 @@ const config = {
 
   kit: {
     adapter: adapter(),
-    // TODO: checkOrigin: true,
+    csrf: {
+      checkOrigin: true,
+    },
   },
 }
 

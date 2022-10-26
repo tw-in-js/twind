@@ -1,6 +1,8 @@
 // based on https://svelte.dev/repl
 import type { Twind, Sheet, BaseTheme } from 'twind'
 
+import * as Comlink from 'comlink'
+
 import debounce from 'just-debounce'
 import { createSystem, type ImportMap } from '$lib/system'
 
@@ -123,6 +125,7 @@ const api: Preview = {
   },
 
   async update({ html }) {
+    console.debug('preview:update', { html })
     if (html != null) {
       tw?.clear()
 
@@ -135,7 +138,40 @@ const api: Preview = {
   },
 }
 
-export default api
+Comlink.expose(api, Comlink.windowEndpoint(parent))
+
+parent.postMessage('preview:ready', '*')
+
+addEventListener('message', function catchLinks(event) {
+  removeEventListener('message', catchLinks)
+
+  const top_origin = event.origin
+
+  document.body.addEventListener('click', (event) => {
+    if (event.which !== 1) return
+    if (event.metaKey || event.ctrlKey || event.shiftKey) return
+    if (event.defaultPrevented) return
+
+    // ensure target is a link
+    let el = event.target
+    while (el && el.nodeName !== 'A') el = el.parentNode
+    if (!el || el.nodeName !== 'A') return
+
+    if (el.hasAttribute('download') || el.getAttribute('rel') === 'external' || el.target) return
+
+    event.preventDefault()
+
+    if (el.href.startsWith(top_origin)) {
+      const url = new URL(el.href)
+      if (url.hash[0] === '#') {
+        window.location.hash = url.hash
+        return
+      }
+    }
+
+    window.open(el.href, '_blank')
+  })
+})
 
 function addLinks(importMap: ImportMap, rel: 'preload' | 'prefetch') {
   importMap[rel]?.forEach((url) => {

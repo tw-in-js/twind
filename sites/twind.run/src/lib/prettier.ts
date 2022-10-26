@@ -1,6 +1,9 @@
 import * as Comlink from 'comlink'
 
 import type { Options, CursorOptions, CursorResult } from 'prettier'
+
+import PrettierWorker from './prettier.worker?worker'
+
 export interface Prettier {
   /**
    * `format` is used to format text using Prettier. [Options](https://prettier.io/docs/en/options.html) may be provided to override the defaults.
@@ -24,28 +27,28 @@ export interface Prettier {
 export default load()
 
 function load(): Prettier {
-  if (import.meta.env.PROD && !import.meta.env.SSR) {
-    try {
-      return Comlink.wrap<Prettier>(
-        new Worker(new URL('./prettier.worker.ts', import.meta.url), { type: 'module' }),
-      )
-    } catch {
-      // not supported
+  if (import.meta.env.SSR) {
+    return {
+      async format(...args) {
+        const { default: api } = await import('./prettier.api')
+        return api.format(...args)
+      },
+      async formatWithCursor(...args) {
+        const { default: api } = await import('./prettier.api')
+        return api.formatWithCursor(...args)
+      },
+      async formatPreviewCSS(...args) {
+        const { default: api } = await import('./prettier.api')
+        return api.formatPreviewCSS(...args)
+      },
     }
   }
 
-  return {
-    async format(...args) {
-      const { default: api } = await import('./prettier.api')
-      return api.format(...args)
-    },
-    async formatWithCursor(...args) {
-      const { default: api } = await import('./prettier.api')
-      return api.formatWithCursor(...args)
-    },
-    async formatPreviewCSS(...args) {
-      const { default: api } = await import('./prettier.api')
-      return api.formatPreviewCSS(...args)
-    },
-  }
+  return Comlink.wrap<Prettier>(
+    import.meta.env.PROD
+      ? new PrettierWorker()
+      : new Worker(new URL('./prettier.worker.ts', import.meta.url), {
+          type: 'module',
+        }),
+  )
 }

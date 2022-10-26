@@ -6,16 +6,10 @@ compatibility_date = "2022-11-30"
 # Also opt into an upcoming fix to the FormData API.
 compatibility_flags = [ "transformstream_enable_standard_constructor", "streams_enable_constructors", "capture_async_api_throws", "url_standard" ]
 
-# CLOUDFLARE_ACCOUNT_ID=733d3f3180a14e2196bfcb9c4600adb8
-#
 
 # https://developers.cloudflare.com/pages/how-to/use-direct-upload-with-continuous-integration/
 # https://developers.cloudflare.com/pages/platform/build-configuration/#language-support-and-tools
-# NODE_VERSION=16.8.0
-# how to set secrets
-# echo "16" > .svelte-kit/cloudflare/.nvmrc
 # production
 # npx wrangler pages publish .svelte-kit/cloudflare
-CF_PAGES=1
 # preview
-# CLOUDFLARE_ACCOUNT_ID=733d3f3180a14e2196bfcb9c4600adb8 npx wrangler pages publish .svelte-kit/cloudflare --project-name=twind-run --branch=next
+# npx wrangler pages publish .svelte-kit/cloudflare --project-name=twind-run --branch=next

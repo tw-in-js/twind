@@ -1,14 +1,14 @@
 <script>
-  import { onMount, createEventDispatcher } from 'svelte'
+  import { onMount } from 'svelte'
   import * as Comlink from 'comlink'
-  import { cx } from 'twind'
+  import { cx } from '$lib/twind'
 
-  import { browser } from '$app/environment'
+  import { browser, dev } from '$app/environment'
 
   import transpile from '$lib/transpile'
 
   import srcdoc from './preview.html?raw'
-  import scriptSrc from './preview.ts?url'
+  import scriptSrc from './preview'
 
   /** The HTMl to render */
   export let html = ''
@@ -17,7 +17,7 @@
   export let script = ''
 
   /** The source of twind config module */
-  export let config = 'export const {}'
+  export let config = 'export default {}'
 
   /**
    * The versions to use for resolving imports.
@@ -28,7 +28,7 @@
 
   export let title = 'Preview'
   export let sandbox =
-    'allow-popups-to-escape-sandbox allow-scripts allow-popups allow-forms allow-pointer-lock allow-top-navigation allow-modals'
+    'allow-same-origin allow-top-navigation allow-top-navigation-to-custom-protocols allow-modals allow-popups allow-popups-to-escape-sandbox allow-scripts allow-forms allow-pointer-lock'
 
   /** Class name for the preview container */
   let className = ''
@@ -152,9 +152,16 @@
        */
       function waitForIframe(event) {
         if (event.data === 'preview:ready') {
-          removeEventListener('message', waitForIframe)
-          isReady = true
-          ready({ preview: Comlink.wrap(Comlink.windowEndpoint(iframeElement.contentWindow)) })
+          if (dev && isReady) {
+            pendingOperation = pendingOperation.then((state) => ({
+              ...state,
+              preview: Comlink.wrap(Comlink.windowEndpoint(iframeElement.contentWindow)),
+            }))
+          } else {
+            removeEventListener('message', waitForIframe)
+            isReady = true
+            ready({ preview: Comlink.wrap(Comlink.windowEndpoint(iframeElement.contentWindow)) })
+          }
         }
       }
 
@@ -162,21 +169,33 @@
       return () => removeEventListener('message', waitForIframe)
     })
   }
+
+  /** @type {string}*/
+  let srcUrl
+  onMount(() => {
+    srcUrl = URL.createObjectURL(
+      new Blob([srcdoc.replace(/%script.src%/g, scriptSrc)], { type: 'text/html' }),
+    )
+    return () => URL.revokeObjectURL(srcUrl)
+  })
 </script>
 
-<div class={cx('~(relative,flex,justify-center,content-center)', className)}>
+<div class={cx('~(relative,flex,justify-center,content-center,bg-brand-2)', className)}>
   {#if !isReady}
     <slot name="loading">
-      <div class="flex place-items-center text-neutral-11">Loading ...</div>
+      <div class="flex place-items-center text-neutral-11">
+        <span class="animate-pulse">Loading ...</span>
+      </div>
     </slot>
   {/if}
 
   <iframe
     bind:this={iframeElement}
-    srcdoc={browser ? srcdoc.replace('%script.src%', scriptSrc) : ''}
+    src={srcUrl}
     class={cx('w-full h-full', status && ' grayscale blur-sm')}
     hidden={!isReady}
     {title}
     {sandbox}
+    allow="fullscreen"
   />
 </div>

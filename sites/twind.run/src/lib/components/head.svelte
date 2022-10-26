@@ -1,7 +1,6 @@
 <script>
   import { tw } from 'twind'
   import { page } from '$app/stores'
-  import { img } from '$lib/image'
 
   import favicon from '$lib/assets/favicon.ico'
   import iconPNG from '$lib/assets/icon.png'
@@ -35,15 +34,12 @@
 
   <meta
     property="og:image"
-    content={img({
-      src: iconPNG,
-      width: 1200,
-      height: 630,
-      fit: 'pad',
-      format: 'png',
-    })}
+    content="https://imagedelivery.net/clgAS5HJ8HoJM1G5J8tcLA/ad127ccc-64a5-4460-d429-39ba2ab6ea00/1200x630"
   />
-  <meta name="twitter:image" content={img({ src: iconPNG, width: 512, format: 'png' })} />
+  <meta
+    name="twitter:image"
+    content="https://imagedelivery.net/clgAS5HJ8HoJM1G5J8tcLA/ad127ccc-64a5-4460-d429-39ba2ab6ea00/512x512"
+  />
 
   <meta property="og:type" content="article" />
   <meta name="twitter:card" content="summary" />
@@ -67,22 +63,23 @@
     rel="icon"
     type="image/png"
     sizes="32x32"
-    href={img({ src: iconPNG, width: 32, format: 'png' })}
+    href="https://imagedelivery.net/clgAS5HJ8HoJM1G5J8tcLA/ad127ccc-64a5-4460-d429-39ba2ab6ea00/32x32"
   />
   <link
     rel="icon"
     type="image/png"
     sizes="16x16"
-    href={img({ src: iconPNG, width: 16, format: 'png' })}
+    href="https://imagedelivery.net/clgAS5HJ8HoJM1G5J8tcLA/ad127ccc-64a5-4460-d429-39ba2ab6ea00/16x16"
   />
   <link rel="icon" type="image/svg+xml" href={iconSVG} />
   <link rel="icon" href={favicon} />
 
-  <link rel="apple-touch-icon" href={img({ src: iconPNG, width: 180, format: 'png' })} />
+  <link
+    rel="apple-touch-icon"
+    href="https://imagedelivery.net/clgAS5HJ8HoJM1G5J8tcLA/ad127ccc-64a5-4460-d429-39ba2ab6ea00/180x180"
+  />
 
-  <link rel="preconnect" href="https://static.cloudflareinsights.com" crossOrigin="true" />
-  <!-- TODO: update based on actual server used -->
-  <link rel="preconnect" href="https://bh4d9od16a-dsn.algolia.net" crossOrigin="true" />
+  <link rel="preconnect" href="https://cdn.skypack.dev" crossorigin="anonymous" />
 
   <slot />
 </svelte:head>
