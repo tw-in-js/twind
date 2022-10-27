@@ -5,7 +5,7 @@
   import { onMount } from 'svelte'
   import { get, writable } from 'svelte/store'
 
-  import tinykeys from 'tinykeys'
+  import { createKeybindingsHandler } from 'tinykeys'
   import copy from 'clipboard-copy'
   import { Pane, Splitpanes } from 'svelte-splitpanes'
   import { cx } from 'twind'
@@ -17,6 +17,7 @@
   import prettier from '$lib/prettier'
   import transpile from '$lib/transpile'
   import intellisense, { INTELLISENSE_VERSION } from '$lib/intellisense'
+  import {mounted} from '$lib/stores'
 
   import Code from './code.svelte'
   import Preview from './preview.svelte'
@@ -188,7 +189,7 @@
         },
       )
       .then(({ entry, importMap }) => {
-        if (get(lastVersions) === versions && get(lastConfig) === $workspace.config.value) {
+        if ($mounted && get(lastVersions) === versions && get(lastConfig) === $workspace.config.value) {
           return intellisense.init({ entry, importMap })
         }
       })
@@ -224,13 +225,13 @@
     prettier
       .format(output.html, { parser: 'html' })
       .then((result) => {
-        if (usedHtml === output.html) {
+        if ($mounted && usedHtml === output.html) {
           formatted.html = result
         }
       })
       .catch((error) => {
         console.error(`Failed to format output html`, error)
-        if (usedHtml === output.html) {
+        if ($mounted && usedHtml === output.html) {
           formatted.html = usedHtml
         }
       })
@@ -260,8 +261,8 @@
   const MOD_KEY = browser && /Mac|iPod|iPhone|iPad/.test(navigator.platform) ? '⌘' : 'Ctrl'
 
   if (browser) {
-    onMount(() =>
-      tinykeys(window, {
+    onMount(() => {
+      const keyHandler = createKeybindingsHandler({
         '$mod+Shift+KeyP': (event) => {
           event.preventDefault()
           editor?.trigger('editor.action.quickCommand', 'ctrl-shift-p')
@@ -278,8 +279,11 @@
           event.preventDefault()
           editor?.trigger('editor.action.formatDocument', 'shift-alt-f')
         },
-      }),
-    )
+      })
+
+      addEventListener('keydown', keyHandler)
+      return () => removeEventListener('keydown', keyHandler)
+    })
   }
 
   /** @type {string | null} */

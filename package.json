@@ -88,7 +88,7 @@
     "test:coverage": "vitest run --coverage",
     "release": "pnpm publish --recursive",
     "changeset": "changeset",
-    "changeset:version": "changeset version && pnpm i --lockfile-only",
+    "changeset:version": "changeset version && pnpm install --lockfile-only",
     "build:website": "pnpm run --filter=./sites/twind.style build",
     "prepare": "node ./.husky/prepare.cjs"
   },

@@ -100,7 +100,7 @@ const changelogFunctions = {
           commit: commitToFetchFrom,
         })
         // This is from the changeset action — remove pull and user leaving the commit to use
-        if (links.user.includes('github-actions')) {
+        if (links.user?.includes('github-actions')) {
           links = {
             ...links,
             pull: null,

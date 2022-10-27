@@ -43,5 +43,5 @@
   ],
   // Node.js version to use for building the PR.
   // Supported versions are '10' (10.24.1, default), '12' (12.22.7), '14' (14.18.1) and '16' (16.13.0).
-  "node": "16"
+  "node": "18"
 }

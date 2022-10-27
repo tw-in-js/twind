@@ -5,8 +5,10 @@ import { noop } from 'svelte/internal'
 export const mounted: Readable<boolean> = {
   subscribe(set) {
     set(false)
-    onMount(() => set(true))
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    onMount(() => {
+      set(true)
+      return () => set(false)
+    })
     return noop
   },
 }

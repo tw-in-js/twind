@@ -6,6 +6,7 @@
   import { browser, dev } from '$app/environment'
 
   import transpile from '$lib/transpile'
+  import {mounted} from '$lib/stores'
 
   import srcdoc from './preview.html?raw'
   import scriptSrc from './preview'
@@ -69,6 +70,8 @@
   /** @param {[html: string, script: string, config: string, versions: Record<string, string>]} _ */
   function update(..._) {
     pendingOperation = pendingOperation.then(async (state) => {
+      if (!$mounted) return state
+
       try {
         const currentHTML = html
         const currentScript = script

@@ -24,9 +24,9 @@
 - link to [transform css to tailwind](https://tailwind-converter.netlify.app/)
 - redirects
   - [x] 'chat.twind.style' -> 'https://discord.gg/3fwqsmXNYK'
-- 'cdn.twind.style' as proxy for 'https://cdn.jsdelivr.net/npm/@twind/cdn@next'
+- 'cdn.twind.style' as proxy for 'https://cdn.jsdelivr.net/npm/@twind/cdn@next' or jspm.io
   - redirects do not work because of cors issue
-- add https://twind.style/twind-logo-animated.svg for use in github readme
+- [x] add https://twind.style/twind-logo-animated.svg for use in github readme
 - update discord welcome with link to website
 - update readmes
 
@@ -48,12 +48,11 @@
 
 ## v1
 
-- release on every CI build as insiders like tailwindcss
-  ```
-  changeset version --snapshot insiders
-  pnpm install
-  pnpm publish -r --tag insiders --dry-run
-  ```
+- [x] dist tags
+  - latest: latest stable release - published by changesets/action 
+  - next: latest pre-release - published on every commit to main
+  - canary: the latest dev release (https://docusaurus.io/community/canary) - published on every commit (main or PR)
+
 - @twind/devtools:
   - enumerate all classes and inject as empty for dev tools
 - @twind/with-remix: https://github.com/remix-run/remix/issues/1804
