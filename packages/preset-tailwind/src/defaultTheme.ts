@@ -198,6 +198,7 @@ const theme: DefaultTheme = {
     contain: 'contain',
   },
   blur: {
+    none: 'none',
     0: '0',
     sm: '4px',
     DEFAULT: '8px',

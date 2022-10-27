@@ -1,18 +1,17 @@
+// See https://kit.svelte.dev/docs/types#app
+// for information about these interfaces
+// and what to do when importing types
 /// <reference types="@sveltejs/kit" />
 
-// See https://kit.svelte.dev/docs/typescript
-// for information about these interfaces
 declare namespace App {
-  interface Locals {}
+  interface Error {
+    stack?: string
+  }
 
-  interface Platform {}
-
-  interface Session {}
-
-  interface Stuff {
+  interface PageData {
     docStartHref: string
     file?: string
-    nav?: import('@/docs/index.json').Body
+    nav?: import('./routes/docs/$types').LayoutServerData['nav']
   }
 }
 

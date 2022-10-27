@@ -1,4 +1,3 @@
 # Cloudflare Redirects: https://developers.cloudflare.com/pages/platform/redirects
 
 /chat https://discord.gg/3fwqsmXNYK 301
-/docs /docs/installation 301

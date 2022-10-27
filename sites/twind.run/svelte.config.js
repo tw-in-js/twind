@@ -1,12 +1,13 @@
 import adapter from '@sveltejs/adapter-cloudflare'
-import preprocess from 'svelte-preprocess'
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
-  preprocess: preprocess(),
-
   kit: {
     adapter: adapter(),
+    prerender: {
+      concurrency: 1,
+      entries: ['*', '/manifest.json', '/msapplication-config.xml'],
+    },
     csrf: {
       checkOrigin: true,
     },

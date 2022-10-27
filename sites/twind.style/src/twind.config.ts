@@ -35,6 +35,7 @@ import {
 // TODO: @radix-ui/colors as own package with colors converted to rgb
 // TODO: preset-tailwind: tree-shakeable theme and preset
 // TODO: adjust theme and preflight default colors
+
 export default defineConfig({
   presets: [
     presetAutoprefix(),

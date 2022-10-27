@@ -1,12 +1,9 @@
 # Cloudflare Headers: https://developers.cloudflare.com/pages/platform/headers
 
-## Harden security for an application
-/*
-  X-Frame-Options: DENY
-  X-Content-Type-Options: nosniff
-  Referrer-Policy: no-referrer
-  Permissions-Policy: document-domain=()
-  # TODO CSP: https://support.cloudflare.com/hc/en-us/articles/216537517-What-is-Content-Security-Policy-CSP-and-how-can-I-use-it-with-Cloudflare-
+## Immutable assets
+/_app/immutable/*
+  Cache-Control: public, immutable, max-age=31536000
+  X-Robots-Tag: noindex
 
 ## Always revalidate service worker
 # https://stackoverflow.com/questions/38843970/service-worker-javascript-update-frequency-every-24-hours
@@ -14,16 +11,11 @@
 /service-worker.js
   Cache-Control: public, max-age=3600
 
-## Immutable assets
-/_build/*
-  Cache-Control: public, max-age=31536000, immutable
-  X-Robots-Tag: nosnippet
-
 ## Prevent *.pages.dev deployments showing in search results
-https://twind.pages.dev/*
+https://twind-style.pages.dev/*
   X-Robots-Tag: noindex
 
-https://:preview.twind.pages.dev/*
+https://:preview.twind-style.pages.dev/*
   X-Robots-Tag: noindex
 
 ## Allow cdn access from everywhere

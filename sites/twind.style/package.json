@@ -13,14 +13,15 @@
   },
   "type": "module",
   "engines": {
-    "node": ">=14"
+    "node": ">=18.12.0"
   },
   "scripts": {
-    "start": "svelte-kit dev",
-    "build": "svelte-kit build --verbose",
-    "preview": "svelte-kit preview",
-    "check": "svelte-check --tsconfig ./tsconfig.json",
-    "check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
+    "postinstall": "svelte-kit sync",
+    "start": "npm run dev",
+    "dev": "vite dev",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+    "build": "vite build",
+    "preview": "vite preview",
     "typedoc": "typedoc",
     "typedoc:watch": "typedoc --watch"
   },
@@ -31,12 +32,12 @@
     "@twind/preset-tailwind": "1.0.0-next.39",
     "@twind/preset-typography": "1.0.0-next.39",
     "@twind/with-sveltekit": "1.0.0-next.39",
-    "svelte-actions": "^0.2.2",
+    "tinykeys": "^1.4.0",
     "twind": "1.0.0-next.39"
   },
   "devDependencies": {
-    "@sveltejs/adapter-static": "1.0.0-next.28",
-    "@sveltejs/kit": "1.0.0-next.272",
+    "@sveltejs/adapter-static": "1.0.0-next.46",
+    "@sveltejs/kit": "1.0.0-next.525",
     "fast-glob": "^3.2.12",
     "find-up": "^6.3.0",
     "gray-matter": "^4.0.3",
@@ -55,8 +56,8 @@
     "remark-parse": "^10.0.1",
     "remark-rehype": "^10.1.0",
     "shiki": "^0.10.1",
-    "svelte": "^3.50.1",
-    "svelte-check": "^2.9.1",
+    "svelte": "^3.52.0",
+    "svelte-check": "^2.9.2",
     "tslib": "^2.4.0",
     "typedoc": "^0.22.18",
     "typedoc-plugin-markdown": "^3.13.6",
@@ -65,6 +66,7 @@
     "typescript": "^4.8.4",
     "unified": "^10.1.2",
     "unist-util-visit": "^4.1.1",
-    "vite": "^2.9.15"
+    "vite": "^3.1.8",
+    "wrangler": "^2.1.13"
   }
 }

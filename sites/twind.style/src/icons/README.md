@@ -1,2 +1,0 @@
-- **Outline**: For primary navigation and marketing sections, designed to be rendered at 24x24 – _2px stroke weight, 24x24 bounding box_
-- **Solid**: For buttons, form elements, and to support text, designed to be rendered at 20x20 – _Solid fill, 20x20 bounding box_
