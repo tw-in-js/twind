@@ -201,7 +201,7 @@ const gridPlugin = (kind: 'column' | 'row'): PluginHandler => (params, { theme }
   }
 }
 
-const border: PluginHandler = (params, { theme }, id): CSSRules | string | undefined => {
+const border: PluginHandler = (params, { theme }, id) => {
   switch (params[0]) {
     case 'solid':
     case 'dashed':
@@ -223,6 +223,30 @@ const border: PluginHandler = (params, { theme }, id): CSSRules | string | undef
         id,
         theme((id + 'Color') as 'borderColor' | 'divideColor', params) as string,
       )
+}
+
+const borderEdges: PluginHandler = (params, context, id) => {
+  const edges = expandEdges(params[0])?.map(capitalize)
+  if (edges) {
+    params = tail(params)
+  }
+
+  let rules = border(params, context, id)
+  if (edges && rules && typeof rules === 'object') {
+    rules = Object.entries(rules).reduce((newRules, [key, value]) => {
+      if (key.startsWith('border')) {
+        for (const edge of edges) {
+          newRules[key.slice(0, 6) + edge + key.slice(6)] = value
+        }
+      } else {
+        newRules[key] = value
+      }
+
+      return newRules
+    }, {} as CSSRules)
+  }
+
+  return rules
 }
 
 const transform = (gpu?: boolean): string =>
@@ -795,10 +819,7 @@ export const corePlugins: Record<string, Plugin | undefined> = {
   // .border-t	border-top-width: 1px;
   // .border-t-0	border-top-width: 0px;
   // .border-t-xs
-  border: (params, context, id) =>
-    expandEdges(params[0])
-      ? edges(context.theme('borderWidth', tail(params)), params[0], 'border', 'width')
-      : border(params, context, id),
+  border: borderEdges,
 
   // .divide-x
   // .divide-x-8
