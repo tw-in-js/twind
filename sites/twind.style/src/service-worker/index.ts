@@ -1,27 +1,10 @@
 /* eslint-env serviceworker */
 
-import { build } from '$service-worker'
+import { build, files, prerendered, version } from '$service-worker'
 
-// we are caching /_app/version.json because we want to use the cached version
-// until we can safely update
-const staticFiles = [
-  '/_app/version.json',
-  '/twind-logo-animated.svg',
-  // not adding '/docs.json' as it is explicitly loaded to detect endpoints
-]
-
-const namePromise = crypto.subtle
-  .digest(
-    'sha-1',
-    new TextEncoder().encode(JSON.stringify([...build, ...staticFiles].sort())),
-  )
-  .then(
-    (buffer) =>
-      'app-cache-' +
-      Array.from(new Uint8Array(buffer), (b) => b.toString(16).padStart(2, '0')).join(''),
-  )
-
-const cachePromise = namePromise.then((name) => caches.open(name))
+const CACHE_PREFIX = 'app-cache-'
+const cacheName = `${CACHE_PREFIX}${version}`
+const cachePromise = caches.open(cacheName)
 
 addEventListener('install', (event) => {
   // @ts-expect-error
@@ -30,6 +13,7 @@ addEventListener('install', (event) => {
       Promise.all([
         // re-use from existing cache for hashed files
         Promise.all(
+          // immutable
           build.map((file) =>
             caches
               .match(file)
@@ -38,16 +22,15 @@ addEventListener('install', (event) => {
         ),
 
         // always force load these
-        cache.addAll(staticFiles),
-
-        // load endpoints
-        load('/docs.json', cache).then(async (response) => {
-          if (response.ok && response.type === 'basic') {
-            const nav: import('$/routes/docs/index.json').Body = await response.json()
-
-            await cache.addAll(Object.keys(nav?.pages || {}).map((href) => `${href}.json`))
-          }
-        }),
+        cache.addAll([
+          // we are caching /_app/version.json because we want to use the cached version
+          // until we can safely update
+          '/_app/version.json',
+          // within static
+          // ...files.filter(file => !['_header', '_redirects'].includes(file)),
+          // pathnames corresponding to prerendered pages and endpoints
+          ...prerendered.map((path) => path.replace(/^\/$|(\/[^./]+)$/, '$1/index.html')),
+        ]),
       ]),
     ),
   )
@@ -71,13 +54,15 @@ addEventListener('message', (event) => {
 addEventListener('activate', (event) => {
   // @ts-expect-error
   event.waitUntil(
-    Promise.all([namePromise, caches.keys()]).then(([name, keys]) =>
-      Promise.all(
-        keys
-          .filter((key) => key.startsWith('app-cache-') && key !== name)
-          .map((key) => caches.delete(key)),
+    caches
+      .keys()
+      .then((keys) =>
+        Promise.all(
+          keys
+            .filter((key) => key.startsWith(CACHE_PREFIX) && key !== cacheName)
+            .map((key) => caches.delete(key)),
+        ),
       ),
-    ),
   )
 })
 

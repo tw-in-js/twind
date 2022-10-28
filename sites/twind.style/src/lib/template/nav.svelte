@@ -92,7 +92,6 @@
   <ul class={cx(navVisible && 'bg-brand-2 w-64 min-h-screen p-6 lg:(bg-transparent w-auto p-0)')}>
     <li class="mb-6 lg:mb-4">
       <a
-        data-sveltekit-prefetch
         class="flex items-center group hover:text-brand-12 font-medium leading-6"
         href={$page.data.docStartHref}
         title="Go to Twind documentation"
@@ -107,7 +106,7 @@
     <li class="mb-6 lg:mb-4">
       <a
         class="flex items-center group hover:text-brand-12 font-medium leading-6"
-        href="/packages"
+        href={new URL('/packages', $page.url).href}
         title="Go to Twind packages"
       >
         <div class="mr-4 rounded-md p-1.5 bg-brand-4 group-hover:(bg-brand-5 ring-1 ring-brand-7)">
@@ -155,7 +154,6 @@
             {#each entries as href (href)}
               <li>
                 <a
-                  data-sveltekit-prefetch
                   {href}
                   class={cx(
                     'block pl-4 border-l -ml-px transition-colors duration-300 ease-in-out',
@@ -174,7 +172,6 @@
         {#each entries as href (href)}
           <li>
             <a
-              data-sveltekit-prefetch
               {href}
               class={cx(
                 'block font-medium mb-6 lg:mb-2 transition-colors duration-300 ease-in-out',

@@ -53,7 +53,7 @@ export function registerServiceWorker(
 ): ServiceWorkerStore {
   const serviceWorker = writable<ServiceWorker | null>(null)
 
-  if (browser && 'serviceWorker' in navigator) {
+  if (browser && !navigator.connection?.saveData && 'serviceWorker' in navigator) {
     // First, do a one-off check if there's currently a
     // service worker in control.
     if (navigator.serviceWorker.controller) {
@@ -99,7 +99,6 @@ export function registerServiceWorker(
           }
 
           if (navigationPreload) {
-            // @ts-expect-error
             registration.navigationPreload?.enable()
           }
 
@@ -157,8 +156,12 @@ export function registerServiceWorker(
       if (to && $status === 'installed') {
         cancel()
         // TODO: show loading indicator — activate may take a few seconds
-        activate([from.href, to.href], () => {
-          location.href = to.href
+        const prefetch = [to.url.href]
+        if (from) {
+          prefetch.push(from.url.href)
+        }
+        activate(prefetch, () => {
+          location.href = to.url.href
         })
       }
     })
