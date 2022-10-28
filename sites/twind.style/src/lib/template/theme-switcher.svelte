@@ -41,10 +41,11 @@
     <label
       class="cursor-pointer flex items-center justify-center h-full absolute top-0 left-0 w-full"
       class:z-30={current === nextTheme}
+      title={`Switch theme to ${nextTheme}`}
     >
       <Icon
         src={ICONS[index]}
-        class={cx('w-4 h-4', current !== $theme && 'opacity-0')}
+        class={cx('w-5 h-5', current !== $theme && 'opacity-0')}
         label={`${current} theme`}
       />
       <input bind:group={$theme} name="theme" type="radio" value={current} class="sr-only" />

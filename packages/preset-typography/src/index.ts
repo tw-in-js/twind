@@ -1,10 +1,3 @@
-/**
- * [[include:packages/preset-typography/README.md]]
- *
- * @packageDocumentation
- * @module
- */
-
 import { DEV } from 'distilt/env'
 import {
   CSSNested,

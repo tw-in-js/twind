@@ -1,5 +1,13 @@
 <script>
-  import Icon, { TwindLogo, Github, Discord, Search, BookOpenMini } from '$lib/icons'
+  import Icon, {
+    TwindLogo,
+    Github,
+    Discord,
+    Search,
+    ChatBubbleLeftRightSolid,
+    CodeBracketSquareSolid,
+    BookHalf,
+  } from '$lib/icons'
 
   import { page } from '$app/stores'
   import ThemeSwitcher from './theme-switcher.svelte'
@@ -25,7 +33,7 @@
       {/if}
     </div>
 
-    <nav class="flex items-center" aria-label="Site Navigation">
+    <nav class="flex items-center md:gap-2 lg:gap-3" aria-label="Site Navigation">
       <button type="button" role="search" class="block w-5 hover:text-brand-12 lg:hidden">
         <Icon src={Search} class="w-4 h-4" label="Quick search..." />
       </button>
@@ -38,7 +46,27 @@
         href={$page.data.docStartHref}
         title="Go to Twind documentation"
       >
-        <Icon src={BookOpenMini} class="h-4 w-4" label="Twind Documentation" />
+        <Icon src={BookHalf} class="h-5 w-5" label="Twind Documentation" />
+      </a>
+
+      <a
+        class="ml-3 flex items-center hover:text-brand-12"
+        href="https://twind.run"
+        title="Go to Twind Playground"
+        rel="external nofollow noopener noreferrer"
+        target="_blank"
+      >
+        <Icon src={CodeBracketSquareSolid} class="h-5 w-5" label="Twind Playground" />
+      </a>
+
+      <a
+        class="ml-3 flex items-center hover:text-brand-12"
+        href="https://github.com/tw-in-js/twind/discussions"
+        title="Go to Twind discussions on GitHub"
+        rel="external nofollow noopener noreferrer"
+        target="_blank"
+      >
+        <Icon src={ChatBubbleLeftRightSolid} class="h-5 w-5" label="Discussions on GitHub" />
       </a>
 
       <a
@@ -48,8 +76,9 @@
         rel="external nofollow noopener noreferrer"
         target="_blank"
       >
-        <Icon src={Github} class="h-4 w-4" label="Twind on GitHub" />
+        <Icon src={Github} class="h-5 w-5" label="Twind on GitHub" />
       </a>
+
       <a
         class="ml-3 flex items-center hover:text-brand-12"
         href="https://chat.twind.style"
@@ -57,10 +86,10 @@
         rel="external nofollow noopener noreferrer"
         target="_blank"
       >
-        <Icon src={Discord} class="h-4 w-4" label="Twind on Discord" />
+        <Icon src={Discord} class="h-5 w-5" label="Twind on Discord" />
       </a>
 
-      <hr class="ml-3 w-0 h-5 border-l border-brand-6" aria-orientation="vertical" />
+      <hr class="ml-3 w-0 h-6 border-l border-brand-6" aria-orientation="vertical" />
 
       <ThemeSwitcher class="ml-3 block w-5 hover:text-brand-12" />
     </nav>

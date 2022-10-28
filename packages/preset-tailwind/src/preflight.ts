@@ -1,3 +1,7 @@
+/**
+ * @module @twind/preset-tailwind/preflight
+ */
+
 import type { Preflight } from 'twind'
 
 import defaultTheme from './defaultTheme'

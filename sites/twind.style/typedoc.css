@@ -1,0 +1,46 @@
+h2 {
+  margin-top: 2em;
+}
+
+h3 {
+  margin-top: 1.75em;
+}
+
+h4 {
+  margin-top: 1.5em;
+}
+
+h5 {
+  margin-top: 1.25em;
+}
+
+h5 {
+  margin-top: 1em;
+}
+
+pre,
+details {
+  margin: 1em 0;
+}
+
+.tsd-page-title h1 {
+  display: none;
+}
+
+.tsd-page-title + .tsd-sources {
+  display: none;
+}
+
+.tsd-page-title + .tsd-signature {
+  margin-top: 1em;
+}
+
+.tsd-sources + .tsd-panel-group {
+  margin-top: 0;
+}
+
+@media (min-width: 1024px) {
+  .col-menu .tsd-navigation:not(:last-child) {
+    padding-bottom: 0;
+  }
+}

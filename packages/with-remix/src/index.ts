@@ -1,9 +1,3 @@
-/**
- * [[include:packages/with-remix/README.md]]
- *
- * @packageDocumentation
- * @module
- */
 import type { Twind, BaseTheme, TwindConfig, TwindUserConfig, Preset, ExtractThemes } from 'twind'
 
 import { install as install$ } from 'twind'

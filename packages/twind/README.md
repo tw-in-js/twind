@@ -10,6 +10,8 @@
 
 Utility-first CSS without any build step right in the browser or any other environment like Node.js, deno, workers, ...
 
+> Visit [twind.style](https://twind.style) for a full documentation or explore [the examples](https://github.com/tw-in-js/twind/tree/next/examples#readme).
+
 Twind does **not** include any core utilities — use one or more of the existing presets:
 
 - [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix)
@@ -31,11 +33,15 @@ Additionally we provides several integrations:
 
 To get you started, take a look at the [examples](https://github.com/tw-in-js/twind/tree/next/examples).
 
-## Usage
+## 📦 Installation
+
+Install from npm:
 
 ```sh
 npm install twind@next
 ```
+
+Initialize Twind:
 
 ```js
 import { setup } from 'twind'
@@ -92,7 +98,7 @@ To add presets add their ids to the script `src` attribute:
 
 </details>
 
-## API
+## 🙇 Usage
 
 > If you are using the `script` tag these methods are available via the `twind` global object (eg `twind.setup`).
 
@@ -110,13 +116,12 @@ const tw = setup({
 // -> tw === import { tw } from 'twind'
 ```
 
-### `tw(...tokens)` — the current Twind instance
+### `tw(tokens: string): string` — the current Twind instance
 
 ```js
 import { tw } from 'twind'
 
-tw`underline`
-tw({ underline: true })
+tw('underline')
 
 tw.theme('colors.blue.500', 'blue')
 ```
@@ -156,68 +161,20 @@ TDB
 
 TDB
 
-### `extract(html, tw)`
+## 💬 Community
 
-Used for static HTML processing (usually to provide SSR support for your javascript-powered web apps) — powered by [consume(html, tw)](#consumehtml-tw)
+For help, discussion about best practices, or any other conversation that would benefit from being searchable use [Github Discussions](https://github.com/tw-in-js/twind/discussions).
 
-**Note**: Consider using [inline](#inlinehtml-tw) instead.
+To ask questions and discuss with other Twind users in real time use [Discord Chat](https://chat.twind.style).
 
-**Note**: This clears the Twind instance before processing the HTML.
+## 🧱 Contribute
 
-```js
-import { setup, extract, tw } from 'twind'
+See the [Contributing Guide](../../CONTRIBUTING.md) for information on how to contribute to this project.
 
-// can be in a different file — but should be called at least once
-setup({
-  /* config */
-})
+## 📜 Changelog
 
-function render() {
-  const { html, css } = extract(renderApp(), tw)
+[The Changelog for this package is available on GitHub.](https://github.com/tw-in-js/twind/tree/next/packages/twind/CHANGELOG.md)
 
-  // inject as last element into the head
-  return html.replace('</head>', `<style data-twind>${css}</style></head>`)
-}
-```
+## ⚖️ License
 
-## Low-Level API
-
-### `twind`
-
-TDB
-
-### `consume(html, tw)`
-
-Used for static HTML processing (usually to provide SSR support for your javascript-powered web apps)
-
-1. parse the markup and process element classes with the provided Twind instance
-2. update the class attributes _if_ necessary
-3. return the HTML string with the final element classes
-
-```js
-import { setup, consume, stringify, tw } from 'twind'
-
-// can be in a different file — but should be called at least once
-setup({
-  /* config */
-})
-
-function render() {
-  const html = renderApp()
-
-  // remember global classes
-  const restore = tw.snapshot()
-
-  // generated markup
-  const markup = consume(html)
-
-  // create CSS
-  const css = stringify(tw.target)
-
-  // restore global classes
-  restore()
-
-  // inject as last element into the head
-  return markup.replace('</head>', `<style data-twind>${css}</style></head>`)
-}
-```
+The [MIT license](https://github.com/tw-in-js/twind/blob/main/LICENSE) governs your use of Twind.

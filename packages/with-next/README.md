@@ -10,11 +10,13 @@
 
 Seamless integration of [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind) with [Next.js](https://nextjs.org) 12.x.
 
+> Visit [twind.style](https://twind.style) for a full documentation or explore [the examples](https://github.com/tw-in-js/twind/tree/next/examples#readme).
+
 Used within the following [examples](https://github.com/tw-in-js/twind/tree/next/examples):
 
 - [Next.js](https://github.com/tw-in-js/twind/tree/next/examples/with-next)
 
-## Installation
+## 📦 Installation
 
 Install from npm:
 
@@ -22,7 +24,7 @@ Install from npm:
 npm install twind@next @twind/with-next@next
 ```
 
-## Usage
+## 🙇 Usage
 
 Please see [examples/with-next](https://github.com/tw-in-js/twind/tree/next/examples/with-next) for detailed usage example.
 
@@ -149,6 +151,24 @@ export default install(MyDocument)
 > The code above is the default `Document` added by Next.js. Feel free to remove the `getInitialProps` or `render` function from `MyDocument` if you don't need to change them.
 
 </details>
+
+## 💬 Community
+
+For help, discussion about best practices, or any other conversation that would benefit from being searchable use [Github Discussions](https://github.com/tw-in-js/twind/discussions).
+
+To ask questions and discuss with other Twind users in real time use [Discord Chat](https://chat.twind.style).
+
+## 🧱 Contribute
+
+See the [Contributing Guide](../../CONTRIBUTING.md) for information on how to contribute to this project.
+
+## 📜 Changelog
+
+[The Changelog for this package is available on GitHub.](https://github.com/tw-in-js/twind/tree/next/packages/with-next/CHANGELOG.md)
+
+## ⚖️ License
+
+The [MIT license](https://github.com/tw-in-js/twind/blob/main/LICENSE) governs your use of Twind.
 
 [^1]: [Next.js › Custom App](https://nextjs.org/docs/advanced-features/custom-app)
 [^2]: [Next.js › Custom Document](https://nextjs.org/docs/advanced-features/custom-document)

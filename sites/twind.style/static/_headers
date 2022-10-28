@@ -11,6 +11,9 @@
 /service-worker.js
   Cache-Control: public, max-age=3600
 
+/packages/*
+  Cache-Control: public, max-age=3600
+
 ## Prevent *.pages.dev deployments showing in search results
 https://twind-style.pages.dev/*
   X-Robots-Tag: noindex

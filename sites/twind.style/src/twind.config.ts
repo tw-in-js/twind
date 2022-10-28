@@ -84,6 +84,7 @@ export default defineConfig({
       },
     },
   },
+  ignorelist: import.meta.env.DEV ? [/^counter-increment/] : undefined,
 })
 
 function mapColors(input: Record<string, string>, suffix = ''): Record<string, string> {

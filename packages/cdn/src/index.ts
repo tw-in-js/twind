@@ -1,10 +1,3 @@
-/**
- * [[include:packages/cdn/README.md]]
- *
- * @packageDocumentation
- * @module
- */
-
 // Fix exported global variable from `twindCdn` to `twind`
 /* @distilt-global-name twind */
 
@@ -24,7 +17,10 @@ import { twind, observe, auto, cssom, asArray } from 'twind'
 import presetAutoprefix from '@twind/preset-autoprefix'
 import presetTailwind from '@twind/preset-tailwind'
 
+/** @internal */
 export * as presetTailwind_colors from '@twind/preset-tailwind/colors'
+
+/** @internal */
 export { default as presetTailwind_defaultTheme } from '@twind/preset-tailwind/defaultTheme'
 
 // If we run in the browser as `<script src="..."></script>` auto call setup once the body starts rendering

@@ -24,6 +24,9 @@
     "./variants": "./src/variants.ts",
     "./package.json": "./package.json"
   },
+  "typedoc": {
+    "entryPoint": "./index.d.ts"
+  },
   "// These are relative from within the dist/ folder": "",
   "sideEffects": false,
   "size-limit": [
@@ -66,7 +69,6 @@
     "build": "distilt"
   },
   "publishConfig": {
-    "tag": "next",
     "access": "public",
     "directory": "dist"
   }

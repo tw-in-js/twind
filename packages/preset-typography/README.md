@@ -8,11 +8,15 @@
 
 ---
 
-A plugin that provides a set of `prose` classes you can use to add beautiful typographic defaults to any vanilla HTML you don't control, like HTML rendered from Markdown, or pulled from a CMS.
-
 > Based on [@tailwindcss/typography](https://github.com/tailwindlabs/tailwindcss-typography).
 
-## Installation
+A plugin that provides a set of `prose` classes you can use to add beautiful typographic defaults to any vanilla HTML you don't control, like HTML rendered from Markdown, or pulled from a CMS.
+
+> Visit [twind.style](https://twind.style) for a full documentation or explore [the examples](https://github.com/tw-in-js/twind/tree/next/examples#readme).
+
+## 📦 Installation
+
+**with [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)**
 
 Install from npm:
 
@@ -20,9 +24,7 @@ Install from npm:
 npm install twind@next @twind/preset-typography@next
 ```
 
-## Installation
-
-**with [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)**
+Add the preset to your twind config:
 
 ```js
 import { setup } from 'twind'
@@ -70,13 +72,29 @@ setup({
 </head>
 ```
 
-## Usage
-
-TBD
+## 🙇 Usage
 
 Most features of the [Tailwind CSSS › typography-plugin](https://tailwindcss.com/docs/typography-plugin) are implemented in the same way.
 
-## Differences
+### Differences
 
 - _Adding custom color themes_: every color from `theme.colors` is available via `prose-<color>`; the default color `gray` can be changed via `presetTypography({ defaultColor: '...'})`
 - _Customizing the CSS_: can be done using `presetTypography({ extend: { /* CSS object */ } })`
+
+## 💬 Community
+
+For help, discussion about best practices, or any other conversation that would benefit from being searchable use [Github Discussions](https://github.com/tw-in-js/twind/discussions).
+
+To ask questions and discuss with other Twind users in real time use [Discord Chat](https://chat.twind.style).
+
+## 🧱 Contribute
+
+See the [Contributing Guide](../../CONTRIBUTING.md) for information on how to contribute to this project.
+
+## 📜 Changelog
+
+[The Changelog for this package is available on GitHub.](https://github.com/tw-in-js/twind/tree/next/packages/preset-typography/CHANGELOG.md)
+
+## ⚖️ License
+
+The [MIT license](https://github.com/tw-in-js/twind/blob/main/LICENSE) governs your use of Twind.

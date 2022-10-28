@@ -8,11 +8,16 @@
 
 ---
 
+> Visit [twind.style](https://twind.style) for a full documentation or explore [the examples](https://github.com/tw-in-js/twind/tree/next/examples#readme).
+
 Used within the following [examples](https://github.com/tw-in-js/twind/tree/next/examples):
 
 - [Playground](https://github.com/tw-in-js/twind/tree/next/examples/playground)
 
-## Installation
+## 📦 Installation
+
+
+**with [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)**
 
 Install from npm:
 
@@ -20,9 +25,7 @@ Install from npm:
 npm install twind@next @twind/preset-ext@next
 ```
 
-Then add the preset to your twind config:
-
-**with [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)**
+Add the preset to your twind config:
 
 ```js
 import { setup } from 'twind'
@@ -70,9 +73,7 @@ setup({
 </head>
 ```
 
-## Usage
-
-TBD: Look at the [source](./src/index.ts) for now.
+## 🙇 Usage
 
 ### Short CSS
 
@@ -91,5 +92,23 @@ Allows any CSS properties to be added:
 ```
 
 When a value needs to contain a space, use an underscore (`_`) instead and Twind will automatically convert it to a space at build-time [^1].
+
+## 💬 Community
+
+For help, discussion about best practices, or any other conversation that would benefit from being searchable use [Github Discussions](https://github.com/tw-in-js/twind/discussions).
+
+To ask questions and discuss with other Twind users in real time use [Discord Chat](https://chat.twind.style).
+
+## 🧱 Contribute
+
+See the [Contributing Guide](../../CONTRIBUTING.md) for information on how to contribute to this project.
+
+## 📜 Changelog
+
+[The Changelog for this package is available on GitHub.](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind/CHANGELOG.md)
+
+## ⚖️ License
+
+The [MIT license](https://github.com/tw-in-js/twind/blob/main/LICENSE) governs your use of Twind.
 
 [^1]: [Tailwind CSS › Adding Custom Styles › Handling whitespace](https://tailwindcss.com/docs/adding-custom-styles#handling-whitespace)

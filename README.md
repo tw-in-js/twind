@@ -106,7 +106,7 @@ We have collected a list of changes in [Migration › Twind v0.16 › Notable Ch
 
 ## 🧱 Contribute
 
-See the [Contributing Guide](./CONTRIBUTING.md)
+See the [Contributing Guide](./CONTRIBUTING.md) for information on how to contribute to this project.
 
 ## 💡 Inspiration
 

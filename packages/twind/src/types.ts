@@ -9,7 +9,7 @@ export type MaybeThunk<T, Theme extends BaseTheme = BaseTheme> =
 
 // TODO read possible screen values from theme
 // TODO read possible keyframes values from theme
-type TypedAtRulesKeys =
+export type TypedAtRulesKeys =
   | `@layer ${'defaults' | 'base' | 'components' | 'shortcuts' | 'utilities' | 'overrides'}`
   | `@media screen(${string})`
   | `@media ${string}`
@@ -351,8 +351,11 @@ export interface TwindConfig<Theme extends BaseTheme = BaseTheme> {
   ignorelist: (string | RegExp)[]
 }
 
-type ArrayType<T> = T extends (infer Item)[] ? Item : T
-type ExtractTheme<T> = T extends Preset<infer Theme> ? Theme : T
+/** @internal */
+export type ArrayType<T> = T extends (infer Item)[] ? Item : T
+
+export type ExtractTheme<T> = T extends Preset<infer Theme> ? Theme : T
+
 export type ExtractUserTheme<T> = {
   [key in keyof T]: key extends 'extend'
     ? never
@@ -361,7 +364,8 @@ export type ExtractUserTheme<T> = {
     : T[key]
 } & BaseTheme
 
-type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (k: infer I) => void
+/** @internal */
+export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (k: infer I) => void
   ? I
   : never
 

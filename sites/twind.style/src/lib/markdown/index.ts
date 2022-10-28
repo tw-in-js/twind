@@ -46,6 +46,9 @@ export function read({
 
     const { data: frontmatter } = readFile(filename)
 
+    if (frontmatter.hidden) continue
+    if (frontmatter.draft && import.meta.env.PROD) continue
+
     const { section, label, title, excerpt, next } = frontmatter
 
     pages.set(href, {

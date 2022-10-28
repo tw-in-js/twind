@@ -1,10 +1,3 @@
-/**
- * [[include:packages/preset-ext/README.md]]
- *
- * @packageDocumentation
- * @module
- */
-
 import type { Preset } from 'twind'
 
 import rules from './rules'

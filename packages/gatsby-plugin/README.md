@@ -8,11 +8,13 @@
 
 A [Gatsby](https://github.com/gatsbyjs/gatsby) plugin for [Twind](<(https://www.npmjs.com/package/twind)>) with built-in server-side rendering support.
 
+> Visit [twind.style](https://twind.style) for a full documentation or explore [the examples](https://github.com/tw-in-js/twind/tree/next/examples#readme).
+
 Used within the following [examples](https://github.com/tw-in-js/twind/tree/next/examples):
 
 - [gatsby](https://github.com/tw-in-js/twind/tree/next/examples/with-gatsby)
 
-## Installation
+## 📦 Installation
 
 Install from npm:
 
@@ -20,7 +22,7 @@ Install from npm:
 npm install twind@next gatsby-plugin-twind@next
 ```
 
-## Usage
+## 🙇 Usage
 
 Please see [examples/gatsby](https://github.com/tw-in-js/twind/tree/next/examples/gatsby) for detailed usage example.
 
@@ -59,7 +61,7 @@ module.exports = {
 }
 ```
 
-## Options
+## 🔧 Options
 
 This plugin assumes a `twind.config.js` file in the root of your project.
 
@@ -77,3 +79,21 @@ module.exports = {
   ],
 }
 ```
+
+## 💬 Community
+
+For help, discussion about best practices, or any other conversation that would benefit from being searchable use [Github Discussions](https://github.com/tw-in-js/twind/discussions).
+
+To ask questions and discuss with other Twind users in real time use [Discord Chat](https://chat.twind.style).
+
+## 🧱 Contribute
+
+See the [Contributing Guide](../../CONTRIBUTING.md) for information on how to contribute to this project.
+
+## 📜 Changelog
+
+[The Changelog for this package is available on GitHub.](https://github.com/tw-in-js/twind/tree/next/packages/gatsby-plugin/CHANGELOG.md)
+
+## ⚖️ License
+
+The [MIT license](https://github.com/tw-in-js/twind/blob/main/LICENSE) governs your use of Twind.

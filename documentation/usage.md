@@ -1,5 +1,6 @@
 ---
 title: Usage
+hidden: true
 ---
 
 TODO list from /examples with title, description, and links to stackblitz/codesandbox

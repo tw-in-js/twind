@@ -10,7 +10,7 @@ import { fixClassList, parseHTML } from './internal/parse-html'
  */
 export interface InlineOptions {
   /**
-   * {@link Twind} instance to use (default: {@link tw$ | module tw})
+   * {@link Twind} instance to use (default: {@link twind.tw})
    */
   tw?: Twind<any, any>
 
@@ -69,7 +69,7 @@ export interface InlineMinify {
  * ```
  *
  * @param markup HTML to process
- * @param tw a {@link Twind} instance
+ * @param options to customize the processing
  * @returns the resulting HTML
  */
 export function inline(markup: string, options: InlineOptions['tw'] | InlineOptions = {}): string {

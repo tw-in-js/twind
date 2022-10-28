@@ -10,11 +10,13 @@
 
 Seamless integration of [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind) with [SvelteKit](https://kit.svelte.dev)
 
+> Visit [twind.style](https://twind.style) for a full documentation or explore [the examples](https://github.com/tw-in-js/twind/tree/next/examples#readme).
+
 Used within the following [examples](https://github.com/tw-in-js/twind/tree/next/examples):
 
 - [SvelteKit](https://github.com/tw-in-js/twind/tree/next/examples/with-sveltekit)
 
-## Installation
+## 📦 Installation
 
 Install from npm:
 
@@ -22,7 +24,7 @@ Install from npm:
 npm install twind@next @twind/with-sveltekit@next
 ```
 
-## Usage
+## 🙇 Usage
 
 Please see [examples/with-sveltekit](https://github.com/tw-in-js/twind/tree/next/examples/with-sveltekit) for detailed usage example.
 
@@ -74,6 +76,24 @@ import { sequence } from '@sveltejs/kit/hooks'
 
 export const handle = sequence(handleTwind(), ...otherHandlers)
 ```
+
+## 💬 Community
+
+For help, discussion about best practices, or any other conversation that would benefit from being searchable use [Github Discussions](https://github.com/tw-in-js/twind/discussions).
+
+To ask questions and discuss with other Twind users in real time use [Discord Chat](https://chat.twind.style).
+
+## 🧱 Contribute
+
+See the [Contributing Guide](../../CONTRIBUTING.md) for information on how to contribute to this project.
+
+## 📜 Changelog
+
+[The Changelog for this package is available on GitHub.](https://github.com/tw-in-js/twind/tree/next/packages/with-sveltekit/CHANGELOG.md)
+
+## ⚖️ License
+
+The [MIT license](https://github.com/tw-in-js/twind/blob/main/LICENSE) governs your use of Twind.
 
 [^1]: [SvelteKit › Routing › `+layout.js`](https://kit.svelte.dev/docs/routing#layout-layout-js)
 [^2]: [SvelteKit › Hooks › `handle`](https://kit.svelte.dev/docs/hooks#server-hooks-handle)

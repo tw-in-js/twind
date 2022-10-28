@@ -1,5 +1,5 @@
 <script>
-  import Icon, { TwindLogo, BookOpenMini, Github, Discord } from '$lib/icons'
+  import Icon, { TwindLogo, Github, Discord, BookHalf, CodeBracketSquareSolid, ChatBubbleLeftRightSolid } from '$lib/icons'
 
   import ThemeSwitcher from './theme-switcher.svelte'
 </script>
@@ -52,14 +52,33 @@
         aria-label="Site Navigation"
       >
         <a
-          data-sveltekit-prefetch
           class="ml-3 flex items-center hover:text-brand-12"
-          href="https://twind.style"
+          href="https://twind.style/docs"
           title="Go to Twind documentation"
           rel="external nofollow noopener noreferrer"
           target="_blank"
         >
-          <Icon src={BookOpenMini} class="h-4 w-4" label="Twind Documentation" />
+          <Icon src={BookHalf} class="h-4 w-4" label="Twind Documentation" />
+        </a>
+
+        <a
+          class="ml-3 flex items-center hover:text-brand-12"
+          href="https://twind.run"
+          title="Go to Twind Playground"
+          rel="external nofollow noopener noreferrer"
+          target="_blank"
+        >
+          <Icon src={CodeBracketSquareSolid} class="h-4 w-4" label="Twind Playground" />
+        </a>
+
+        <a
+          class="ml-3 flex items-center hover:text-brand-12"
+          href="https://github.com/tw-in-js/twind/discussions"
+          title="Go to Twind discussions on GitHub"
+          rel="external nofollow noopener noreferrer"
+          target="_blank"
+        >
+          <Icon src={ChatBubbleLeftRightSolid} class="h-4 w-4" label="Discussions on GitHub" />
         </a>
 
         <a
@@ -71,6 +90,7 @@
         >
           <Icon src={Github} class="h-4 w-4" label="Twind on GitHub" />
         </a>
+
         <a
           class="ml-3 flex items-center hover:text-brand-12"
           href="https://chat.twind.style"

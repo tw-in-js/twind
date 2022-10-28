@@ -30,6 +30,8 @@ import { cx } from 'twind'
 // TODO: replace style="..." with class?
 // TODO: highlight inline code: https://rehype-pretty-code.netlify.app
 
+// TODO: https://github.com/kevin940726/remark-codesandbox
+
 interface ClassNames {
   figure: string
   figcaption: string

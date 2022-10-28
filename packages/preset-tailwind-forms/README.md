@@ -8,15 +8,20 @@
 
 ---
 
+> Based on [@tailwindcss/forms](https://github.com/tailwindlabs/tailwindcss-forms).
+
 A [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind) preset that provides a basic reset for form styles that makes form elements easy to override with utilities.
 
-> Based on [@tailwindcss/forms](https://github.com/tailwindlabs/tailwindcss-forms).
+> Visit [twind.style](https://twind.style) for a full documentation or explore [the examples](https://github.com/tw-in-js/twind/tree/next/examples#readme).
+
 
 Used within the following [examples](https://github.com/tw-in-js/twind/tree/next/examples):
 
 - [Tailwind Forms](https://github.com/tw-in-js/twind/tree/next/examples/using-tailwind-forms)
 
-## Installation
+## 📦 Installation
+
+**with [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)**
 
 Install from npm:
 
@@ -24,9 +29,7 @@ Install from npm:
 npm install twind@next @twind/preset-tailwind@next @twind/preset-tailwind-forms@next
 ```
 
-Then add the preset to your twind config:
-
-**with [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)**
+Add the preset to your twind config:
 
 ```js
 import { setup } from 'twind'
@@ -75,11 +78,11 @@ setup({
 </head>
 ```
 
-## Usage
+All of the basic form elements you use will now have some simple default styles that are easy to override with utilities.
+
+## 🙇 Usage
 
 > Same as with [tailwindcss-forms › Basic Usage](https://github.com/tailwindlabs/tailwindcss-forms#basic-usage)
-
-All of the basic form elements you use will now have some simple default styles that are easy to override with utilities.
 
 ### Using classes instead of element selectors
 
@@ -95,3 +98,21 @@ setup({
   // ... additional config
 })
 ```
+
+## 💬 Community
+
+For help, discussion about best practices, or any other conversation that would benefit from being searchable use [Github Discussions](https://github.com/tw-in-js/twind/discussions).
+
+To ask questions and discuss with other Twind users in real time use [Discord Chat](https://chat.twind.style).
+
+## 🧱 Contribute
+
+See the [Contributing Guide](../../CONTRIBUTING.md) for information on how to contribute to this project.
+
+## 📜 Changelog
+
+[The Changelog for this package is available on GitHub.](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind-forms/CHANGELOG.md)
+
+## ⚖️ License
+
+The [MIT license](https://github.com/tw-in-js/twind/blob/main/LICENSE) governs your use of Twind.

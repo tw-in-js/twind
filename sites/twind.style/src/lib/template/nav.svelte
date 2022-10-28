@@ -4,13 +4,20 @@
   import { page } from '$app/stores'
   import { browser } from '$app/environment'
 
-  import Icon, { Bars3Outline, Search, X } from '$lib/icons'
+  import Icon, {
+    Bars3Outline,
+    BookHalf,
+    BoxSeamFill,
+    ChatBubbleLeftRightSolid,
+    CodeBracketSquareSolid,
+    Search,
+    X,
+  } from '$lib/icons'
   import { MOD_KEY } from '$lib/constants'
   import { shortcut } from '$lib/actions'
 
   /** @type {Exclude<App.PageData['nav'], undefined>}*/
   export let nav
-
 
   let navVisible = false
   $: active = nav.pages[$page.url.pathname]
@@ -83,10 +90,67 @@
   </div>
 
   <ul class={cx(navVisible && 'bg-brand-2 w-64 min-h-screen p-6 lg:(bg-transparent w-auto p-0)')}>
+    <li class="mb-6 lg:mb-4">
+      <a
+        data-sveltekit-prefetch
+        class="flex items-center group hover:text-brand-12 font-medium leading-6"
+        href={$page.data.docStartHref}
+        title="Go to Twind documentation"
+      >
+        <div class="mr-4 rounded-md p-1.5 bg-brand-4 group-hover:(bg-brand-5 ring-1 ring-brand-7)">
+          <Icon src={BookHalf} class="h-4 w-4" label="Twind Documentation" />
+        </div>
+        <span>Documentation</span>
+      </a>
+    </li>
+
+    <li class="mb-6 lg:mb-4">
+      <a
+        class="flex items-center group hover:text-brand-12 font-medium leading-6"
+        href="/packages"
+        title="Go to Twind packages"
+      >
+        <div class="mr-4 rounded-md p-1.5 bg-brand-4 group-hover:(bg-brand-5 ring-1 ring-brand-7)">
+          <Icon src={BoxSeamFill} class="h-4 w-4" label="Twind Packages" />
+        </div>
+        <span>Packages</span>
+      </a>
+    </li>
+
+    <li class="mb-6 lg:mb-4">
+      <a
+        class="flex items-center group hover:text-brand-12 font-medium leading-6"
+        href="https://twind.run"
+        title="Go to Twind Playground"
+        rel="external nofollow noopener noreferrer"
+        target="_blank"
+      >
+        <div class="mr-4 rounded-md p-1.5 bg-brand-4 group-hover:(bg-brand-5 ring-1 ring-brand-7)">
+          <Icon src={CodeBracketSquareSolid} class="h-4 w-4" label="Twind Playground" />
+        </div>
+        <span>Playground</span>
+      </a>
+    </li>
+
+    <li class="mb-6 lg:mb-4">
+      <a
+        class="flex items-center group hover:text-brand-12 font-medium leading-6"
+        href="https://github.com/tw-in-js/twind/discussions"
+        title="Go to Twind discussions on GitHub"
+        rel="external nofollow noopener noreferrer"
+        target="_blank"
+      >
+        <div class="mr-4 rounded-md p-1.5 bg-brand-4 group-hover:(bg-brand-5 ring-1 ring-brand-7)">
+          <Icon src={ChatBubbleLeftRightSolid} class="h-4 w-4" label="Discussions on GitHub" />
+        </div>
+        <span>Discussions</span>
+      </a>
+    </li>
+
     {#each nav.sections as [section, entries] (section)}
       {#if section}
-        <li class="mt-12 lg:mt-8">
-          <h5 class="mb-8 lg:mb-3 font-semibold text-brand-12">{section}</h5>
+        <li class="mt-10 lg:mt-6">
+          <h5 class="mb-6 lg:mb-2 font-semibold text-brand-12">{section}</h5>
           <ol class="space-y-6 lg:space-y-2 border-l border-brand-7">
             {#each entries as href (href)}
               <li>

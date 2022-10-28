@@ -8,15 +8,20 @@
 
 ---
 
+> Based on [@tailwindcss/line-clamp](https://github.com/tailwindlabs/tailwindcss-line-clamp).
+
 A [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind) preset that provides utilities for visually truncating text after a fixed number of lines.
 
-> Based on [@tailwindcss/line-clamp](https://github.com/tailwindlabs/tailwindcss-line-clamp).
+> Visit [twind.style](https://twind.style) for a full documentation or explore [the examples](https://github.com/tw-in-js/twind/tree/next/examples#readme).
+
 
 Used within the following [examples](https://github.com/tw-in-js/twind/tree/next/examples):
 
 - [Playground](https://github.com/tw-in-js/twind/tree/next/examples/playground)
 
-## Installation
+## 📦 Installation
+
+**with [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)**
 
 Install from npm:
 
@@ -24,9 +29,7 @@ Install from npm:
 npm install twind@next @twind/preset-line-clamp@next
 ```
 
-## Installation
-
-**with [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)**
+Add the preset to your twind config:
 
 ```js
 import { setup } from 'twind'
@@ -74,7 +77,7 @@ setup({
 </head>
 ```
 
-## Usage
+## 🙇 Usage
 
 Use the `line-clamp-{n}` utilities to specify how many lines of text should be visible before truncating:
 
@@ -96,9 +99,9 @@ To remove any line-clamping, use `line-clamp-none`:
 </p>
 ```
 
-## Theming
+## 🔧 Theme
 
-A `lineClamp` section is added to the theme. Its values are used for looking up the value. If no value us found the given parameter is used.
+A `lineClamp` section is added to the theme. Its values are used for looking up the value. If no value is found the given parameter is used.
 
 ```js
 setup({
@@ -116,3 +119,22 @@ tw('line-clamp-card')
 tw('line-clamp-7')
 // => -webkit-line-clamp:7
 ```
+
+
+## 💬 Community
+
+For help, discussion about best practices, or any other conversation that would benefit from being searchable use [Github Discussions](https://github.com/tw-in-js/twind/discussions).
+
+To ask questions and discuss with other Twind users in real time use [Discord Chat](https://chat.twind.style).
+
+## 🧱 Contribute
+
+See the [Contributing Guide](../../CONTRIBUTING.md) for information on how to contribute to this project.
+
+## 📜 Changelog
+
+[The Changelog for this package is available on GitHub.](https://github.com/tw-in-js/twind/tree/next/packages/preset-line-clamp/CHANGELOG.md)
+
+## ⚖️ License
+
+The [MIT license](https://github.com/tw-in-js/twind/blob/main/LICENSE) governs your use of Twind.

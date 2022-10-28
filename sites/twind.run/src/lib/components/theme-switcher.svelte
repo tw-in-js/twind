@@ -45,6 +45,7 @@
         src={ICONS[index]}
         class={cx('w-4 h-4', current !== $theme && 'opacity-0')}
         label={`${current} theme`}
+        title={`Switch theme to ${nextTheme}`}
       />
       <input bind:group={$theme} name="theme" type="radio" value={current} class="sr-only" />
     </label>

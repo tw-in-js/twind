@@ -1,11 +1,11 @@
 import { error } from '@sveltejs/kit'
 
-import { transformFile } from '$lib/server/markdown/transform'
-import { pages } from '../+layout.server'
+import { transformFile } from '$lib/markdown/transform'
+import { pages } from './+layout.server'
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load({ params }) {
-  const href = '/docs/' + params.slug
+  const href = '/' + params.slug
   const page = pages.get(href)
 
   if (!page) {

@@ -14,7 +14,6 @@
   - comments
   - hashed class names
 - algolia
-- playground
 - examples: template with all lang and css features
 - explain and examples of both modes (observe/shim vs library) with example
 - how to create a component library: shortcuts vs apply vs style
@@ -28,23 +27,6 @@
   - redirects do not work because of cors issue
 - [x] add https://twind.style/twind-logo-animated.svg for use in github readme
 - update discord welcome with link to website
-- update readmes
-
-  ```md
-  ## Documentation
-
-  For full documentation, visit [twind.style](https://twind.style) or explore [the examples](https://github.com/tw-in-js/twind/tree/next/examples#readme).
-
-  ## Community
-
-  For help, discussion about best practices, or any other conversation that would benefit from being searchable use [Github Discussions](https://github.com/tw-in-js/twind/discussions).
-
-  To ask questions and discuss with other Twind users in real time use [Discord Chat](https://chat.twind.style).
-
-  ## Changelog
-
-  [The Changelog for this package is available on GitHub.](https://github.com/tw-in-js/twind/tree/next/<package>/CHANGELOG.md)
-  ```
 
 ## v1
 

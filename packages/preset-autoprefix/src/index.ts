@@ -1,10 +1,3 @@
-/**
- * [[include:packages/preset-autoprefix/README.md]]
- *
- * @packageDocumentation
- * @module
- */
-
 import type { Preset } from 'twind'
 
 import { cssPropertyAlias, cssPropertyPrefixFlags, cssValuePrefixFlags } from 'style-vendorizer'

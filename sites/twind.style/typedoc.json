@@ -1,18 +1,42 @@
 {
   "$schema": "https://typedoc.org/schema.json",
-  "out": "./70-api",
-  "entryPoints": ["../packages/*"],
-  "entryPointStrategy": "Packages",
-  "name": "Twind API",
-  "readme": "none",
-  "includes": "..",
-  "namedAnchors": true,
-  "hideBreadcrumbs": true,
-  "hideInPageTOC": false,
+  "out": "./static/packages",
+  "name": "Packages",
   "includeVersion": false,
+  "readme": "none",
+  "entryPoints": ["../../packages/*"],
+  "entryPointStrategy": "packages",
+  "includes": "../..",
+  "customCss": "./typedoc.css",
+  "titleLink": "/packages",
+  "customTitle": "Twind.style",
+  "customTitleLink": "/",
+  "favicon": "https://twind.style/favicon.ico",
+  "skipErrorChecking": true,
   "categorizeByGroup": true,
   "defaultCategory": "Other",
-  "categoryOrder": ["Category Name", "Other Category", "*"],
   "sort": ["required-first", "visibility", "alphabetical"],
-  "githubPages": false
+  "visibilityFilters": {
+    "protected": true,
+    "inherited": true,
+    "private": false,
+    "external": false,
+    "@internal": false,
+    "@experimental": false,
+    "@alpha": false,
+    "@beta": true
+  },
+  "githubPages": false,
+  "navigationLinks": {
+    "Documentation": "/",
+    "Playground": "https://twind.run",
+    "Discussions": "https://github.com/tw-in-js/twind/discussions",
+    "GitHub": "https://github.com/tw-in-js/twind",
+    "Discord": "https://chat.twind.style"
+  },
+  "externalSymbolLinkMappings": {
+    "global": {
+      "URLSearchParams": "https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams"
+    }
+  }
 }

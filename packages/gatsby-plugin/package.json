@@ -28,7 +28,6 @@
   "// These are relative from within the dist/ folder": "",
   "sideEffects": true,
   "publishConfig": {
-    "tag": "next",
     "access": "public",
     "directory": "dist",
     "targets": {

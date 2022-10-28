@@ -49,7 +49,6 @@
     "build": "distilt"
   },
   "publishConfig": {
-    "tag": "next",
     "access": "public",
     "directory": "dist"
   }

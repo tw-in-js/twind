@@ -1,10 +1,3 @@
-/**
- * [[include:packages/preset-tailwind/README.md]]
- *
- * @packageDocumentation
- * @module
- */
-
 import type { Preset } from 'twind'
 import type { TailwindTheme } from './types'
 

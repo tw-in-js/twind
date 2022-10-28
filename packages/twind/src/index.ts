@@ -1,10 +1,3 @@
-/**
- * [[include:packages/twind/README.md]]
- *
- * @packageDocumentation
- * @module
- */
-
 export * from './animation'
 export * from './autocomplete'
 export * from './colors'

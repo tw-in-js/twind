@@ -131,7 +131,7 @@ export interface Style<Variants> {
    * }
    * ```
    *
-   * The first group is used to extract the props using {@link URLSearchParams}.
+   * The first group is used to extract the props using {@link !URLSearchParams | URLSearchParams}.
    */
   (match: MatchResult): string
 

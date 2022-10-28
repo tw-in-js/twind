@@ -1,3 +1,7 @@
+/**
+ * @module @twind/preset-tailwind/variants
+ */
+
 import type { AutocompleteProvider, VariantResolver, Variant, AutocompleteItem } from 'twind'
 import type { TailwindTheme } from './types'
 

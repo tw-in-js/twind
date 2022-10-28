@@ -1,5 +1,11 @@
 // Source from https://github.com/tailwindlabs/tailwindcss/blob/master/src/public/colors.js
 
+/**
+ * [[include:packages/preset-tailwind/documentation/colors.md]]
+ *
+ * @module @twind/preset-tailwind/colors
+ */
+
 export const inherit = 'inherit'
 export const current = 'currentColor'
 export const transparent = 'transparent'

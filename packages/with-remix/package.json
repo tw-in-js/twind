@@ -3,7 +3,6 @@
   "version": "1.0.0-next.39",
   "description": "remix integration for Twind",
   "publishConfig": {
-    "tag": "next",
     "access": "public",
     "directory": "dist",
     "targets": {

@@ -1,10 +1,3 @@
-/**
- * [[include:packages/preset-line-clamp/README.md]]
- *
- * @packageDocumentation
- * @module
- */
-
 import { DEV } from 'distilt/env'
 import {
   AutocompleteProvider,

@@ -1,9 +1,14 @@
+/**
+ * @module @twind/preset-tailwind/defaultTheme
+ */
+
 import type { ThemeSection, ThemeSectionResolver } from 'twind'
 import type { TailwindTheme } from './types'
 
 import * as colors from './colors'
 
-type OmitedSections =
+/** @internal */
+export type OmitedSections =
   | 'backgroundPosition'
   | 'container'
   | 'cursor'
@@ -15,7 +20,8 @@ type OmitedSections =
   | 'objectPosition'
   | 'transformOrigin'
 
-type StableSections =
+/** @internal */
+export type StableSections =
   | 'screens'
   | 'columns'
   | 'spacing'

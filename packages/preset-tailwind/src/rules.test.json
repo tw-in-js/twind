@@ -2084,6 +2084,7 @@
   "[@media_screen{@media(hover:hover){&:hover}}]:underline": "@media screen{@media(hover:hover){.\\[\\@media_screen\\{\\@media\\(hover\\:hover\\)\\{\\&\\:hover\\}\\}\\]\\:underline:hover{text-decoration-line:underline}}}",
   "[&[data-open]]:underline": ".\\[\\&\\[data-open\\]\\]\\:underline[data-open]{text-decoration-line:underline}",
   "[&[data-foo][data-bar]:not([data-baz])]:underline": ".\\[\\&\\[data-foo\\]\\[data-bar\\]\\:not\\(\\[data-baz\\]\\)\\]\\:underline[data-foo][data-bar]:not([data-baz]){text-decoration-line:underline}",
+  "[&_p]:mt-4": ".\\[\\&_p\\]\\:mt-4 p{margin-top:1rem}",
   "backdrop:shadow-md": [
     "*,::before,::after,::backdrop{--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000}",
     ".backdrop\\:shadow-md::backdrop{--tw-shadow:0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}"
