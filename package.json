@@ -38,43 +38,6 @@
     "packages/*",
     "sites/*"
   ],
-  "size-limit": [
-    {
-      "name": "twind",
-      "path": "packages/twind/dist/twind.esnext.js",
-      "brotli": true,
-      "limit": "8kb"
-    },
-    {
-      "name": "twind (setup)",
-      "path": "packages/twind/dist/twind.esnext.js",
-      "import": "{ setup }",
-      "brotli": true,
-      "limit": "5.45kb"
-    },
-    {
-      "name": "twind (twind + cssom)",
-      "path": "packages/twind/dist/twind.esnext.js",
-      "import": "{ twind, cssom }",
-      "brotli": true,
-      "limit": "4.8kb"
-    },
-    {
-      "name": "@twind/cdn",
-      "path": "packages/cdn/dist/cdn.esnext.js",
-      "brotli": true,
-      "limit": "15.6kb"
-    },
-    {
-      "name": "@twind/preset-tailwind",
-      "path": "packages/preset-tailwind/dist/preset-tailwind.esnext.js",
-      "brotli": true,
-      "limit": "9.3kb",
-      "ignore": [
-        "twind"
-      ]
-    }
-  ],
   "// start — use 'BROWSER=none' to prevent vite to open a browser if within codesandbox or stackblitz": "",
   "scripts": {
     "start": "BROWSER=none npm run test:ui",
@@ -89,7 +52,6 @@
     "release": "pnpm publish --recursive",
     "changeset": "changeset",
     "changeset:version": "changeset version && pnpm install --lockfile-only --offline",
-    "build:website": "pnpm run --filter=./sites/twind.style build",
     "prepare": "node ./.husky/prepare.cjs"
   },
   "// style-vendorizer is included here to allow examples to find it": "",

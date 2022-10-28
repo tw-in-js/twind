@@ -1,0 +1,65 @@
+name: Setup
+description: 'Checkout, setup Node.js, and setup pnpm'
+
+branding:
+  color: 'green'
+  icon: 'download'
+
+inputs:
+  nodeVersion:
+    description: 'the version of Node.js to be used — defaults to .nvmrc'
+    required: false
+  installArgs:
+    description: 'Additional arguments after `pnpm install --recursive --frozen-lockfile`'
+    required: false
+    default: ''
+
+outputs:
+  cache-hit:
+    description: "A boolean value to indicate an exact cache match was found."
+    value: ${{ steps.cache.outputs.cache-hit }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: 📥  Checkout
+      uses: actions/checkout@v3
+
+    - name: 🔧  Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ inputs.nodeVersion }}
+        node-version-file: .nvmrc
+
+    - name: 🔧  Setup pnpm
+      uses: pnpm/action-setup@v2
+      with:
+        run_install: false
+
+    - name: 🔧  Get pnpm store directory
+      id: pnpm-cache
+      shell: bash
+      run: |
+        echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+    - name: 🔧  Setup pnpm cache
+      id: cache
+      uses: actions/cache@v3
+      with:
+        path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+        key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+        restore-keys: |
+          ${{ runner.os }}-pnpm-store-
+
+    - name: 💡  Environment Info
+      shell: bash
+      run: |
+        echo cwd:     `pwd`;
+        echo branch:  `git branch --show-current`;
+        echo cached:  ${{ steps.cache.outputs.cache-hit }};
+        echo node:    `node --version`;
+        echo pnpm:    `pnpm --version`;
+
+    - name: 📦  Install dependencies
+      shell: bash
+      run: pnpm install --recursive --frozen-lockfile ${{ inputs.installArgs }}

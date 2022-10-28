@@ -1,0 +1,92 @@
+name: "Cloudflare Pages GitHub Action"
+description: "Publish to Cloudflare Pages"
+
+branding:
+  color: "orange"
+  icon: "upload-cloud"
+
+inputs:
+  run:
+    description: "The command to execute before publishing"
+    required: false
+    default: pnpm build
+  workingDirectory:
+    description: "Specifies the working directory where the command is run."
+    required: false
+  apiToken:
+    description: "Cloudflare API Token"
+    required: true
+  accountId:
+    description: "Cloudflare Account ID"
+    required: true
+  projectName:
+    description: "The name of the Pages project to upload to"
+    required: true
+  directory:
+    description: "The directory of static assets to upload"
+    required: true
+  gitHubToken:
+    description: "GitHub Token"
+    required: false
+  branch:
+    description: "The name of the branch you want to deploy to"
+    required: false
+    default: 'preview'
+
+outputs:
+  id:
+    description: "The ID of the pages deployment"
+    value: ${{ steps.deploy.outputs.id }}
+  url:
+    description: "The URL of the pages deployment"
+    value: ${{ steps.deploy.outputs.url }}
+  environment:
+    description: "The environment that was deployed to"
+    value: ${{ steps.deploy.outputs.environment }}
+  alias:
+    description: "The alias of the pages deployment"
+    value: ${{ steps.deploy.outputs.alias }}
+
+runs:
+  using: "composite"
+  steps:
+    # deploy twind.run using the published package versions
+    - name: 🏗️  Build
+      shell: bash
+      run: ${{ inputs.run }}
+      working-directory: ${{ inputs.workingDirectory }}
+
+    - name: 🚀  Deploy
+      id: deploy
+      # until https://github.com/cloudflare/pages-action/pull/33 is merged
+      uses: cloudflare/pages-action@walshy/general-improvements
+      with:
+        apiToken: ${{ inputs.apiToken }}
+        accountId: ${{ inputs.accountId }}
+        gitHubToken: ${{ inputs.gitHubToken }}
+        projectName: ${{ inputs.projectName }}
+        directory: ${{ inputs.directory }}
+        branch: ${{ inputs.branch }}
+
+    - name: 💡  Deployment Info
+      shell: bash
+      run: |
+        echo "## Deployed with [![Cloudflare](https://img.shields.io/badge/Cloudflare%20Pages-F38020?style=for-the-badge&logo=Cloudflare&logoColor=white)](https://pages.dev)" >> $GITHUB_STEP_SUMMARY
+        echo "<strong>ID:</strong> ${{ steps.deploy.outputs.id }}" >> $GITHUB_STEP_SUMMARY
+        echo "<strong>Preview URL:</strong> <a href='${{ steps.deploy.outputs.url }}'>${{ steps.deploy.outputs.url }}</a>" >> $GITHUB_STEP_SUMMARY
+        echo "<strong>Branch URL:</strong> <a href='https://${{ steps.deploy.outputs.alias }}${{ inputs.projectName }}.pages.dev'>https://${{ steps.deploy.outputs.alias }}${{ inputs.projectName }}.pages.dev</a>" >> $GITHUB_STEP_SUMMARY
+        echo "<strong>Environment:</strong> ${{ steps.deploy.outputs.environment }}" >> $GITHUB_STEP_SUMMARY
+
+    - name: 📝  Comment PR
+      if: ${{ github.event_name == 'pull_request' }}
+      uses: thollander/actions-comment-pull-request@v1
+      with:
+        GITHUB_TOKEN: ${{ inputs.gitHubToken }}
+        comment_includes: '## Deployed with [![Cloudflare Pages]'
+        message: |
+          ## Deployed with [![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F38020?style=for-the-badge&logo=Cloudflare&logoColor=white)](https://pages.dev)
+          <table>
+          <tr><td><strong>Latest commit:</strong></td><td><code>${{ github.sha }}</code></td></tr>
+          <tr><td><strong>Preview URL:</strong></td><td><a href='${{ steps.deploy.outputs.url }}'>${{ steps.deploy.outputs.url }}</a></td></tr>
+          <tr><td><strong>Branch URL:</strong></td><td><a href='https://${{ steps.deploy.outputs.alias }}${{ inputs.projectName }}.pages.dev'>https://${{ steps.deploy.outputs.alias }}${{ inputs.projectName }}.pages.dev</a></td></tr>
+          </table>

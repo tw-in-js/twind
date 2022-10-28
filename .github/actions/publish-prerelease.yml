@@ -1,0 +1,79 @@
+name: Publish Pre-releases
+description: 'Publish packages pre-releases to npm'
+
+branding:
+  color: 'red'
+  icon: 'package'
+
+inputs:
+  tag:
+    description: 'the npm dist-tag'
+    required: true
+  template:
+    description: 'the snapshot template'
+    required: true
+    default: "{tag}.{datetime}"
+  hasChangesets:
+    description: 'are there any changesets'
+    required: true
+  gitHubToken:
+    description: "GitHub Token"
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - name: 📝  Updating .npmrc
+      shell: bash
+      run: |
+        cat << EOF > "$HOME/.npmrc"
+          email=release-workflow@twind.style
+          //registry.npmjs.org/:_authToken=$NPM_TOKEN
+        EOF
+      env:
+        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    - name: 📝  Ensure atleast one changeset exists
+      if: ${{ inputs.hasChangesets != 'true' }}
+      shell: bash
+      run: pnpm changeset --empty
+
+    - name: 📦  Update packages
+      shell: bash
+      run: pnpm changeset version --no-git-tag --snapshot ${{ inputs.tag }} --snapshot-prerelease-template "${{ inputs.template }}"
+
+    - name: 📦  Update lockfile
+      shell: bash
+      run: pnpm install --lockfile-only --frozen-lockfile=false --offline --filter="./packages/*" --filter="@sites/*"
+
+    - name: 🏗️  Build packages
+      shell: bash
+      run: pnpm build
+
+    - name: 🚀  Publish packages
+      id: publish
+      shell: bash
+      run: |
+        pnpm release --tag ${{ inputs.tag }} --no-git-checks --report-summary
+        echo packages="`jq '[.publishedPackages[] | join("@")] | join("\n - ")' pnpm-publish-summary.json`" >> $GITHUB_OUTPUT
+
+    - name: 💡  Deployment Info
+      shell: bash
+      run: |
+        echo "## Published packages to npm (dist-tag: ${{ inputs.tag }})" >> $GITHUB_STEP_SUMMARY
+        jq '[.publishedPackages[] | join("@")] | join(", ")' pnpm-publish-summary.json >> $GITHUB_STEP_SUMMARY
+
+    - name: 📝  Comment PR
+      if: ${{ inputs.gitHubToken && github.event_name == 'pull_request' }}
+      uses: thollander/actions-comment-pull-request@v1
+      with:
+        GITHUB_TOKEN: ${{ inputs.gitHubToken }}
+        comment_includes: '## Published pre-releases to npm'
+        message: |
+          ## Published pre-releases to npm
+
+          **Dist Tag**: ${{ inputs.tag }}
+
+          **Packages**:
+
+          - ${{ stepps.publish.output.packages }}

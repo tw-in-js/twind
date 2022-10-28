@@ -61,7 +61,7 @@ body:
     attributes:
       label: System Info
       description: Output of `npx envinfo --system --binaries --browsers --npmPackages`
-      render: shell
+      render: sh
       placeholder: System, Binaries, Browsers, Packages
     validations:
       required: true

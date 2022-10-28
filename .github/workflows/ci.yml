@@ -18,9 +18,9 @@ env:
 
 jobs:
   build:
-    timeout-minutes: 15
-    name: Node v${{ matrix.node }}
+    name: 🏗️  Build on Node.js v${{ matrix.node }}
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     outputs:
       published: ${{ steps.changesets.outputs.published }}
       hasChangesets: ${{ steps.changesets.outputs.hasChangesets }}
@@ -33,35 +33,18 @@ jobs:
         # os: [ubuntu-20.04, macos-11, windows-2022]
 
     steps:
-      - name: 📥  Checkout
-        uses: actions/checkout@v2
-
-      - name: 🔧  Setup pnpm
-        uses: pnpm/action-setup@v2
+      - name: 🔧  Setup
+        uses: ./.github/actions/setup
         with:
-          version: 7.14.0
+          nodeVersion: ${{ matrix.node }}
 
-      - name: 🔧  Use Node ${{ matrix.node }}
-        uses: actions/setup-node@v2
-        with:
-          node-version: ${{ matrix.node }}
-          cache: pnpm
+      - name: 🤘  Validate packages
+      - run: |
+          pnpm check
+          pnpm test:coverage
 
-      - name: 💡  Environment Info
-        run: |
-          echo cwd: `pwd`;
-          echo branch `git branch --show-current`;
-          echo node `node --version`;
-          echo pnpm `pnpm --version`
-
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm check
-      - run: pnpm test:coverage
-
-      - run: pnpm build
-
-      # Uses the root package.json['size-limit'] config
-      - run: pnpm size-limit
+      - name: 🏗️  Build packages
+        run: pnpm build
 
       - name: 📖  Coveralls
         # prevents this step from running on forks
@@ -87,7 +70,7 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: 📦  Create Release Pull Request or Publish to npm
+      - name: 🚚  Create Release Pull Request or Publish to npm
         id: changesets
         if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'push' && matrix.node == '18.x' }}
         uses: changesets/action@v1
@@ -96,6 +79,33 @@ jobs:
           publish: pnpm release --tag latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🌎  Deploy twind.style
+        if: ${{ steps.changesets.outputs.published == 'true' && github.repository == 'tw-in-js/twind' }}
+        uses: ./.github/actions/publish-pages
+        with:
+          workingDirectory: sites/twind.style
+          run: |
+            pnpm typedoc
+            pnpm build
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          projectName: twind-style
+          directory: sites/twind.style/build
+          branch: main
+
+      - name: 🌎  Deploy twind.run
+        if: ${{ steps.changesets.outputs.published == 'true' && github.repository == 'tw-in-js/twind' }}
+        uses: ./.github/actions/publish-pages
+        with:
+          workingDirectory: sites/twind.run
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          projectName: twind-run
+          directory: sites/twind.run/.svelte-kit/cloudflare
+          branch: main
 
   coveralls:
     name: Collect Coverage
@@ -110,177 +120,64 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           parallel-finished: true
 
-  publish:
-    name: Publish to npm
+  publish-pre-releases:
+    name: 🚚  Publish pre-releases
     needs: build
-    timeout-minutes: 15
     runs-on: ubuntu-latest
-    if: ${{ needs.build.outputs.published == 'false' && github.repository == 'tw-in-js/twind' }}
+    timeout-minutes: 15
+    if: ${{ needs.build.outputs.published != 'true' && github.repository == 'tw-in-js/twind' }}
+    permissions:
+      contents: read
+      pull-requests: read
+      deployments: write
 
     steps:
-      - name: 📥  Checkout
-        uses: actions/checkout@v2
-
-      - name: 🔧  Setup pnpm
-        uses: pnpm/action-setup@v2
+      - name: 🔧  Setup
+        uses: ./.github/actions/setup
         with:
-          version: 7.14.0
+          # only install dependencies for packages that are published and for the sites
+          installArgs: --filter="./packages/*" --filter="@sites/*"
 
-      - name: 🔧  Use Node 18.x
-        uses: actions/setup-node@v2
-        with:
-          node-version: 18.x
-          cache: pnpm
-
-      - name: 💡  Environment Info
-        run: |
-          echo cwd: `pwd`;
-          echo branch `git branch --show-current`;
-          echo node `node --version`;
-          echo pnpm `pnpm --version`
-
-      - run: pnpm install --frozen-lockfile --filter=!./examples --filter=!./sites
-
-      - name: 📝  Updating .npmrc
-        run: |
-          cat << EOF > "$HOME/.npmrc"
-            email=release-workflow@twind.style
-            //registry.npmjs.org/:_authToken=$NPM_TOKEN
-          EOF
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
-      - name: Ensure atleast one changeset exists
-        if: ${{ needs.build.outputs.hasChangesets == 'false' }}
-        run: pnpm changeset --empty
-
-      - name: 🐣  Publish as pre-release (@next.<DATETIME>)
+      - name: 🚚  Publish as pre-release (@next.<DATETIME>)
         if: ${{ github.event_name == 'push' }}
-        run: |
-          pnpm changeset version --no-git-tag --snapshot next --snapshot-prerelease-template "{tag}.{datetime}"
-          pnpm install --lockfile-only --frozen-lockfile=false --offline --filter='./packages/*'
-          pnpm build
-          pnpm release --tag next --no-git-checks
-
-      - name: 🐣  Publish as canary release (@canary-<commit>)
-        if: ${{ github.event_name == 'pull_request' }}
-        run: |
-          pnpm changeset version --no-git-tag --snapshot canary --snapshot-prerelease-template "{tag}-{commit}"
-          pnpm install --lockfile-only --frozen-lockfile=false --offline --filter='./packages/*'
-          pnpm build
-          pnpm release --tag canary --no-git-checks
-
-  deploy__twind_run:
-    name: Deploy twind.run
-    needs: build
-    timeout-minutes: 15
-    runs-on: ubuntu-latest
-    if: ${{ (needs.build.outputs.published == 'true' || github.event_name == 'pull_request') && github.repository == 'tw-in-js/twind' }}
-    permissions:
-      contents: read
-      deployments: write
-
-    steps:
-      - name: 📥  Checkout
-        uses: actions/checkout@v2
-
-      - name: 🔧  Setup pnpm
-        uses: pnpm/action-setup@v2
+        uses: ./.github/actions/publish-prerelease
         with:
-          version: 7.14.0
-
-      - name: 🔧  Use Node 18.x
-        uses: actions/setup-node@v2
-        with:
-          node-version: 18.x
-          cache: pnpm
-
-      - name: 💡  Environment Info
-        run: |
-          echo cwd: `pwd`;
-          echo branch `git branch --show-current`;
-          echo node `node --version`;
-          echo pnpm `pnpm --version`
-
-      # - run: pnpm install --frozen-lockfile --filter=...twind.run
-      - run: pnpm install --frozen-lockfile --filter=twind.run --filter=twind --filter=@twind/intellisense --filter=@twind/preset-* --filter=@twind/with-sveltekit
-
-      - run: pnpm build
-        working-directory: sites/twind.run
-
-      - name: 🌎  Deploy twind.run
-        id: deploy
-        # until https://github.com/cloudflare/pages-action/pull/33 is merged
-        uses: cloudflare/pages-action@walshy/general-improvements
-        with:
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          tag: next
+          template: "{tag}.{datetime}"
+          hasChangesets: ${{ needs.build.outputs.hasChangesets }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          projectName: twind-run
-          directory: sites/twind.run/.svelte-kit/cloudflare
 
-      - name: 💡  Deployment Info
-        run: |
-          echo "ID: ${{ steps.deploy.outputs.id }}"
-          echo "URL: ${{ steps.deploy.outputs.url }}"
-          echo "Environment: ${{ steps.deploy.outputs.environment }}"
-          echo "Alias: ${{ steps.deploy.outputs.alias }}"
-
-  deploy__twind_style:
-    name: Deploy twind.style
-    needs: build
-    timeout-minutes: 15
-    runs-on: ubuntu-latest
-    if: ${{ (needs.build.outputs.published == 'true' || github.event_name == 'pull_request') && github.repository == 'tw-in-js/twind' }}
-    permissions:
-      contents: read
-      deployments: write
-
-    steps:
-      - name: 📥  Checkout
-        uses: actions/checkout@v2
-
-      - name: 🔧  Setup pnpm
-        uses: pnpm/action-setup@v2
+      - name: 🚚  Publish as canary release (@canary-<commit>)
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: ./.github/actions/publish-prerelease
         with:
-          version: 7.14.0
+          tag: canary
+          template: "{tag}-{commit}"
+          hasChangesets: ${{ needs.build.outputs.hasChangesets }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 🔧  Use Node 18.x
-        uses: actions/setup-node@v2
-        with:
-          node-version: 18.x
-          cache: pnpm
-
-      - name: 💡  Environment Info
-        run: |
-          echo cwd: `pwd`;
-          echo branch `git branch --show-current`;
-          echo node `node --version`;
-          echo pnpm `pnpm --version`
-
-      # - run: pnpm install --frozen-lockfile --filter=...twind.style
-      - run: pnpm install --frozen-lockfile --filter=twind.style --filter=twind --filter=@twind/preset-* --filter=@twind/with-sveltekit
-
-      - run: pnpm typedoc
-        working-directory: sites/twind.style
-
-      - run: pnpm build
-        working-directory: sites/twind.style
-
+      # deploy sites using the published package versions
       - name: 🌎  Deploy twind.style
-        id: deploy
-        # until https://github.com/cloudflare/pages-action/pull/33 is merged
-        uses: cloudflare/pages-action@walshy/general-improvements
+        uses: ./.github/actions/publish-pages
         with:
+          workingDirectory: sites/twind.style
+          run: |
+            pnpm typedoc
+            pnpm build
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           projectName: twind-style
           directory: sites/twind.style/build
+          branch: ${{ (github.event.number && format('pr-{0}', github.event.number)) || (github.event_name == 'pull_request' && 'canary') || 'next' }}
 
-      - name: 💡  Deployment Info
-        run: |
-          echo "ID: ${{ steps.deploy.outputs.id }}"
-          echo "URL: ${{ steps.deploy.outputs.url }}"
-          echo "Environment: ${{ steps.deploy.outputs.environment }}"
-          echo "Alias: ${{ steps.deploy.outputs.alias }}"
+      - name: 🌎  Deploy twind.run
+        uses: ./.github/actions/publish-pages
+        with:
+          workingDirectory: sites/twind.run
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          projectName: twind-run
+          directory: sites/twind.run/.svelte-kit/cloudflare
+          branch: ${{ (github.event.number && format('pr-{0}', github.event.number)) || (github.event_name == 'pull_request' && 'canary') || 'next' }}
