@@ -6,7 +6,6 @@ The full [Tailwind CSS](https://tailwindcss.com) v3 experience without any build
 
 ## 📦 Installation
 
-
 **with [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)**
 
 Install from npm:

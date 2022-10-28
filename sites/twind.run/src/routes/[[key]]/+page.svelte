@@ -17,7 +17,7 @@
   import prettier from '$lib/prettier'
   import transpile from '$lib/transpile'
   import intellisense, { INTELLISENSE_VERSION } from '$lib/intellisense'
-  import {mounted} from '$lib/stores'
+  import { mounted } from '$lib/stores'
 
   import Code from './code.svelte'
   import Preview from './preview.svelte'
@@ -189,7 +189,11 @@
         },
       )
       .then(({ entry, importMap }) => {
-        if ($mounted && get(lastVersions) === versions && get(lastConfig) === $workspace.config.value) {
+        if (
+          $mounted &&
+          get(lastVersions) === versions &&
+          get(lastConfig) === $workspace.config.value
+        ) {
           return intellisense.init({ entry, importMap })
         }
       })

@@ -6,7 +6,7 @@
   import { browser, dev } from '$app/environment'
 
   import transpile from '$lib/transpile'
-  import {mounted} from '$lib/stores'
+  import { mounted } from '$lib/stores'
 
   import srcdoc from './preview.html?raw'
   import scriptSrc from './preview'

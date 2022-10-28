@@ -16,11 +16,11 @@ inputs:
 
 outputs:
   cache-hit:
-    description: "A boolean value to indicate an exact cache match was found."
+    description: 'A boolean value to indicate an exact cache match was found.'
     value: ${{ steps.cache.outputs.cache-hit }}
 
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     - name: 📥  Checkout
       uses: actions/checkout@v3

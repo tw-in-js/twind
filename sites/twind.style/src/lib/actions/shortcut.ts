@@ -1,26 +1,26 @@
 // Copy from https://github.com/sw-yx/svelte-actions/blob/main/src/shortcut.ts
 
 export interface ShortcutConfig {
-	/**
-	 * Should the event be active or not.
-	 * Allows to remove listener when not necessary.
-	 */
-	active?: boolean;
-	alt?: boolean;
-	/**
-	 * The callback to be called when the shortcut is triggered.
-	 */
-	callback?: (node: HTMLElement) => void;
-	/**
-	 * The code of the key to listen for.
-	 * {@link https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code}
-	 */
-	code: KeyboardEventInit['code'];
-	control?: boolean;
-	shift?: boolean;
+  /**
+   * Should the event be active or not.
+   * Allows to remove listener when not necessary.
+   */
+  active?: boolean
+  alt?: boolean
+  /**
+   * The callback to be called when the shortcut is triggered.
+   */
+  callback?: (node: HTMLElement) => void
+  /**
+   * The code of the key to listen for.
+   * {@link https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code}
+   */
+  code: KeyboardEventInit['code']
+  control?: boolean
+  shift?: boolean
 }
 
-const callbackFallback = (node: HTMLElement) => node.click();
+const callbackFallback = (node: HTMLElement) => node.click()
 
 /**
  * Simplest possible way to add a keyboard shortcut to an element.
@@ -32,50 +32,48 @@ const callbackFallback = (node: HTMLElement) => node.click();
  * ```
  */
 export default function shortcut(node: HTMLElement, config: ShortcutConfig) {
-	const validate = (event: KeyboardEvent) => {
-		const { alt = false, code, control = false, shift = false } = config;
+  const validate = (event: KeyboardEvent) => {
+    const { alt = false, code, control = false, shift = false } = config
 
-		return [
-			code === event.code,
-			alt === event.altKey,
-			control == event.ctrlKey || control === event.metaKey,
-			shift === event.shiftKey,
-		].every(Boolean);
-	};
+    return [
+      code === event.code,
+      alt === event.altKey,
+      control == event.ctrlKey || control === event.metaKey,
+      shift === event.shiftKey,
+    ].every(Boolean)
+  }
 
-	const handleKeyboard = (event: KeyboardEvent) => {
-		if (!validate(event)) {
-			return;
-		}
+  const handleKeyboard = (event: KeyboardEvent) => {
+    if (!validate(event)) {
+      return
+    }
 
-		event.preventDefault();
-		(config.callback || callbackFallback)(node);
-	};
+    event.preventDefault()
+    ;(config.callback || callbackFallback)(node)
+  }
 
-	const activate = () => {
-		addEventListener('keydown', handleKeyboard);
-	};
+  const activate = () => {
+    addEventListener('keydown', handleKeyboard)
+  }
 
-	const deactivate = () => {
-		removeEventListener('keydown', handleKeyboard);
-	};
+  const deactivate = () => {
+    removeEventListener('keydown', handleKeyboard)
+  }
 
-	const init = () => {
-		const { active = true } = config;
-		active
-			? activate()
-			: deactivate();
-	};
+  const init = () => {
+    const { active = true } = config
+    active ? activate() : deactivate()
+  }
 
-	init();
+  init()
 
-	return {
-		update(updatedConfig) {
-			config = updatedConfig;
-			init();
-		},
-		destroy() {
-			deactivate();
-		}
-	};
-};
+  return {
+    update(updatedConfig) {
+      config = updatedConfig
+      init()
+    },
+    destroy() {
+      deactivate()
+    },
+  }
+}

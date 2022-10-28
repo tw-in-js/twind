@@ -33,7 +33,7 @@ export default defineConfig((env) => {
             server.ws.send({
               type: 'custom',
               event: 'docs-update',
-              data: {file}
+              data: { file },
             })
             return []
           }

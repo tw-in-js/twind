@@ -143,7 +143,7 @@ jobs:
         uses: ./.github/actions/publish-prerelease
         with:
           tag: next
-          template: "{tag}.{datetime}"
+          template: '{tag}.{datetime}'
           hasChangesets: ${{ needs.build.outputs.hasChangesets }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
@@ -152,7 +152,7 @@ jobs:
         uses: ./.github/actions/publish-prerelease
         with:
           tag: canary
-          template: "{tag}-{commit}"
+          template: '{tag}-{commit}'
           hasChangesets: ${{ needs.build.outputs.hasChangesets }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 

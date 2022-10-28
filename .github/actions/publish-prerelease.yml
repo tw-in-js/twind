@@ -12,16 +12,16 @@ inputs:
   template:
     description: 'the snapshot template'
     required: true
-    default: "{tag}.{datetime}"
+    default: '{tag}.{datetime}'
   hasChangesets:
     description: 'are there any changesets'
     required: true
   gitHubToken:
-    description: "GitHub Token"
+    description: 'GitHub Token'
     required: false
 
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     - name: 📝  Updating .npmrc
       shell: bash

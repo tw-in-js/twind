@@ -16,7 +16,6 @@ Used within the following [examples](https://github.com/tw-in-js/twind/tree/next
 
 ## 📦 Installation
 
-
 **with [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)**
 
 Install from npm:

@@ -1,7 +1,7 @@
 <script>
   import { dev } from '$app/environment'
 
-  import { page } from '$app/stores';
+  import { page } from '$app/stores'
 
   // TODO: https://github.com/sw-yx/swyxkit/blob/main/src/routes/__error.svelte
   import Icon, { ExclamationTriangleOutline } from '$lib/icons'

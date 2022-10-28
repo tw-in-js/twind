@@ -40,7 +40,12 @@
     {/if}
     {#if data.next}
       <!-- TODO: add dimmed "NEXT" -->
-      <a href={data.next.href} class="ml-auto hover:text-brand-12" rel="next" data-sveltekit-prefetch>
+      <a
+        href={data.next.href}
+        class="ml-auto hover:text-brand-12"
+        rel="next"
+        data-sveltekit-prefetch
+      >
         {data.next.label}
         <span class="inline-block ml-2" aria-hidden="true">›</span>
       </a>

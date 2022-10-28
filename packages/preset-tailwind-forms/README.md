@@ -14,7 +14,6 @@ A [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind) preset tha
 
 > Visit [twind.style](https://twind.style) for a full documentation or explore [the examples](https://github.com/tw-in-js/twind/tree/next/examples#readme).
 
-
 Used within the following [examples](https://github.com/tw-in-js/twind/tree/next/examples):
 
 - [Tailwind Forms](https://github.com/tw-in-js/twind/tree/next/examples/using-tailwind-forms)

@@ -1,54 +1,54 @@
-name: "Cloudflare Pages GitHub Action"
-description: "Publish to Cloudflare Pages"
+name: 'Cloudflare Pages GitHub Action'
+description: 'Publish to Cloudflare Pages'
 
 branding:
-  color: "orange"
-  icon: "upload-cloud"
+  color: 'orange'
+  icon: 'upload-cloud'
 
 inputs:
   run:
-    description: "The command to execute before publishing"
+    description: 'The command to execute before publishing'
     required: false
     default: pnpm build
   workingDirectory:
-    description: "Specifies the working directory where the command is run."
+    description: 'Specifies the working directory where the command is run.'
     required: false
   apiToken:
-    description: "Cloudflare API Token"
+    description: 'Cloudflare API Token'
     required: true
   accountId:
-    description: "Cloudflare Account ID"
+    description: 'Cloudflare Account ID'
     required: true
   projectName:
-    description: "The name of the Pages project to upload to"
+    description: 'The name of the Pages project to upload to'
     required: true
   directory:
-    description: "The directory of static assets to upload"
+    description: 'The directory of static assets to upload'
     required: true
   gitHubToken:
-    description: "GitHub Token"
+    description: 'GitHub Token'
     required: false
   branch:
-    description: "The name of the branch you want to deploy to"
+    description: 'The name of the branch you want to deploy to'
     required: false
     default: 'preview'
 
 outputs:
   id:
-    description: "The ID of the pages deployment"
+    description: 'The ID of the pages deployment'
     value: ${{ steps.deploy.outputs.id }}
   url:
-    description: "The URL of the pages deployment"
+    description: 'The URL of the pages deployment'
     value: ${{ steps.deploy.outputs.url }}
   environment:
-    description: "The environment that was deployed to"
+    description: 'The environment that was deployed to'
     value: ${{ steps.deploy.outputs.environment }}
   alias:
-    description: "The alias of the pages deployment"
+    description: 'The alias of the pages deployment'
     value: ${{ steps.deploy.outputs.alias }}
 
 runs:
-  using: "composite"
+  using: 'composite'
   steps:
     # deploy twind.run using the published package versions
     - name: 🏗️  Build

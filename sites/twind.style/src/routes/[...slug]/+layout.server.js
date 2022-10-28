@@ -22,7 +22,7 @@ export function load() {
           { section, label, prev, next },
         ]),
       ),
-    }
+    },
   }
 }
 

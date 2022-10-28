@@ -12,7 +12,7 @@ web_modules
 dist
 out
 
-documentation/70-api
+sites/twind.style/static/packages
 examples/with-gatsby/public
 examples/with-remix/public/build
 __generated__

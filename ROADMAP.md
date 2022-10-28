@@ -31,7 +31,8 @@
 ## v1
 
 - [x] dist tags
-  - latest: latest stable release - published by changesets/action 
+
+  - latest: latest stable release - published by changesets/action
   - next: latest pre-release - published on every commit to main
   - canary: the latest dev release (https://docusaurus.io/community/canary) - published on every commit (main or PR)
 

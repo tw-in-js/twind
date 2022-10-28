@@ -78,9 +78,15 @@ export async function transformFile(file: string): Promise<string> {
       .use(remarkGithubAdmonitions, {
         classNameMaps: {
           block: (title: string) =>
-            `relative rounded-md drop-shadow border-l-4 border-${getAdmonitionColor(title)}-7 text-${getAdmonitionColor(title)}-12 bg-${getAdmonitionColor(
+            `relative rounded-md drop-shadow border-l-4 border-${getAdmonitionColor(
               title,
-            )}-3 hover:bg-${getAdmonitionColor(title)}-4 mb-5 p-4 pl-10 pb-0.5 before:absolute before:left-2 before:top-4 before:content-['${getAdmonitionIcon(title)}'])`,
+            )}-7 text-${getAdmonitionColor(title)}-12 bg-${getAdmonitionColor(
+              title,
+            )}-3 hover:bg-${getAdmonitionColor(
+              title,
+            )}-4 mb-5 p-4 pl-10 pb-0.5 before:absolute before:left-2 before:top-4 before:content-['${getAdmonitionIcon(
+              title,
+            )}'])`,
           title: (title: string) => `font-medium text-${getAdmonitionColor(title)}-11 m-0 -mb-2`,
         },
         titleFilter: ['note', 'tip', 'hint', 'important', 'caution', 'warning'],

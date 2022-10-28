@@ -9,15 +9,14 @@ In an effort to help reduce repetition and improve readability, Twind provides a
 
 Let's see how we can use grouping to improve readability and save a few characters in the process.
 
-
 **Thinking in Groups**
 
 On common complain of Tailwind (and utility classes) is long and unwieldy class names in markup:
 
 ```html index.html
- <button
-   type="button"
-   class="
+<button
+  type="button"
+  class="
      w-full sm:w-auto inline-flex items-center px-4 py-2
      text-sm text-white font-medium
      border border-transparent rounded-md shadow-sm
@@ -25,9 +24,9 @@ On common complain of Tailwind (and utility classes) is long and unwieldy class 
      focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
      transition-colors duration-300
    "
- >
-   Button text
- </button>
+>
+  Button text
+</button>
 ```
 
 ---

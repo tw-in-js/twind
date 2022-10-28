@@ -12,5 +12,4 @@ export { default as scrollspy } from './scrollspy'
 
 export * from './wicked'
 
-
 export * from './types'

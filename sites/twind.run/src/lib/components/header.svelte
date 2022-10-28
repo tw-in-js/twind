@@ -1,5 +1,12 @@
 <script>
-  import Icon, { TwindLogo, Github, Discord, BookHalf, CodeBracketSquareSolid, ChatBubbleLeftRightSolid } from '$lib/icons'
+  import Icon, {
+    TwindLogo,
+    Github,
+    Discord,
+    BookHalf,
+    CodeBracketSquareSolid,
+    ChatBubbleLeftRightSolid,
+  } from '$lib/icons'
 
   import ThemeSwitcher from './theme-switcher.svelte'
 </script>
