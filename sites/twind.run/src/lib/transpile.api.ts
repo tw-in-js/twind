@@ -1,3 +1,4 @@
+import type { ImportMap } from './system'
 import type { Transpile } from './transpile'
 
 import { rollup } from '@rollup/browser'
@@ -5,43 +6,16 @@ import { transform } from 'sucrase'
 
 import { parse } from 'es-module-lexer/js'
 import { Generator } from '@jspm/generator'
+import { SemverRange } from 'sver'
 
-import { toBase64 } from './base64'
-import { currentVersions, createResolutions } from './versions'
-
-const builtinModules =
-  import.meta.env.DEV &&
-  Object.fromEntries(
-    Object.entries(
-      import.meta.glob(
-        [
-          '../../../../packages/*/src/index.ts',
-          '!../../../../packages/cdn/src/index.ts',
-          '!../../../../packages/gatsby-plugin/src/index.ts',
-          '!../../../../packages/with-*/src/index.ts',
-        ],
-        { as: 'url', eager: true },
-      ),
-    )
-      .map(([key, url]) => [
-        ('@twind/' + key.replace(/^.+\/packages\/([^\/]+)\/.+$/, '$1')).replace(
-          /^@twind\/twind$/,
-          'twind',
-        ),
-        new URL(url, import.meta.url).href,
-      ])
-      .filter(([key]) => currentVersions[key])
-      .flatMap(([key, value]) => [
-        // by bare import
-        [key, value],
-        // by bare import with version
-        [`${key}@${currentVersions[key]}`, value],
-      ]),
-  )
+import { toBase64, toBase64url } from './base64'
+import { withVersion } from './versions'
 
 const api: Transpile = {
-  async transform(input, { versions = {}, modules = {}, preload = [] } = {}) {
-    const resolutions = createResolutions(versions)
+  async transform(input, { manifest, modules = {}, preload = [] }) {
+    const inputMap: ImportMap = { scopes: manifest.scopes }
+
+    // console.debug({ manifest, normalizedImportMap })
 
     const dependencies = new Set<string>(preload)
     const staticDependencies = new Set<string>()
@@ -54,7 +28,6 @@ const api: Transpile = {
       ...Object.fromEntries(Object.entries(input).map(([name, value]) => [prefix + name, value])),
     }
 
-    const builtinPrefix = 'builtin:'
     const buildId = Date.now().toString(36)
 
     const bundle = await rollup({
@@ -91,39 +64,6 @@ const api: Transpile = {
             }
           },
         },
-        import.meta.env.DEV &&
-          builtinModules && {
-            name: 'dev',
-            outputOptions(options) {
-              return {
-                ...options,
-                banner(chunk) {
-                  return chunk.imports
-                    .filter((id) => builtinModules[id.slice(builtinPrefix.length)])
-                    .flatMap((id) => [
-                      `System.register('${id}', [], (exports) => {
-                        return {
-                          setters: [],
-                          async execute() {
-                            exports(await import('${
-                              builtinModules[id.slice(builtinPrefix.length)]
-                            }'))
-                          }
-                        }
-                      })`,
-                    ])
-                    .join(';\n')
-                },
-              }
-            },
-            resolveId(source, importer, options) {
-              if (options.isEntry) return null
-
-              if (builtinModules[source]) {
-                return { id: `${builtinPrefix}${source}`, external: true }
-              }
-            },
-          },
         {
           name: 'import-map-generator',
           resolveId(source, importer, options) {
@@ -141,23 +81,29 @@ const api: Transpile = {
 
             // or bare imports
             if (/^[^./]/.test(source)) {
-              const match = source.match(/^((?:@[^\s/]+\/)?[^\s/@]+)(\/[^\s/@]+)?$/)
+              const { found, input, output } = withVersion(source, manifest)
 
-              if (match) {
-                const id = match[1]
+              if (found) {
+                // check if versions satifies importMap version and use importMap resolution
+                const resolved = manifest.imports?.[output.id + output.path]
 
-                const version = resolutions[id] || versions[id.replace(/^(@[^\s/]+\/).+$/, '$1*')]
-
-                if (version) {
-                  // TODO: might be conflicting
-                  resolutions[id] ||= version
+                if (
+                  resolved &&
+                  (!input.version || SemverRange.match(input.version, output.version))
+                ) {
+                  source = output.id + output.path
                 }
+              }
+
+              const resolved = manifest.imports?.[source]
+              if (resolved) {
+                ;(inputMap.imports ||= {})[source] = resolved
               }
 
               dependencies.add(source)
 
               // treat every import as external
-              return false
+              return { id: source, external: true }
             }
 
             return this.error(
@@ -172,6 +118,7 @@ const api: Transpile = {
 
     const generator = new Generator({
       baseUrl: 'memory://',
+      inputMap,
       defaultProvider: 'jspm.system',
       env: [
         'development',
@@ -183,11 +130,11 @@ const api: Transpile = {
         'import',
         'default',
       ],
-      resolutions,
     })
 
     // TODO: trace generator.logStream
 
+    // TODO: add query identifier to https://ga.system.jspm.io/npm: request
     const [{ dynamicDeps = [], staticDeps = [] } = {}, { output }] = await Promise.all([
       generator.install([...dependencies]),
       bundle
@@ -204,6 +151,45 @@ const api: Transpile = {
         .finally(() => bundle.close()),
     ])
 
+    // scope all external import to the current manifest
+    // this allows to have distinct dependency tree within one System registry
+    const hash = import.meta.env.DEV
+      ? new URL(manifest.url).hostname
+      : toBase64url(
+          await crypto.subtle.digest('sha-256', await new Blob([manifest.url]).arrayBuffer()),
+        ).slice(0, 10)
+
+    const scopeToManifest = (input: string) => {
+      // we only need to do this for external url
+      if (input.startsWith('https://ga.system.jspm.io/npm:')) {
+        const url = new URL(input)
+        url.searchParams.set('_', hash)
+        input = url.href
+      }
+
+      return input
+    }
+
+    const scopeImports = (map: Record<string, string>) =>
+      Object.fromEntries(Object.entries(map).map(([key, url]) => [key, scopeToManifest(url)]))
+
+    const map = generator.getMap()
+    if (map.imports) {
+      map.imports = scopeImports(map.imports)
+    }
+    if (map.scopes) {
+      map.scopes = Object.fromEntries(
+        Object.entries(map.scopes).map(([key, scope]) => [key, scopeImports(scope)]),
+      )
+    }
+
+    const importMap = {
+      ...map,
+      preload: [...new Set([...staticDependencies, ...staticDeps])].map(scopeToManifest),
+      prefetch: dynamicDeps.map(scopeToManifest),
+    }
+
+    console.debug('importMap', importMap)
     return {
       ...Object.fromEntries(
         output
@@ -237,11 +223,7 @@ const api: Transpile = {
             throw new Error(`Invalid ${chunk.type} ${chunk.name} generated`)
           }),
       ),
-      importMap: {
-        ...generator.getMap(),
-        preload: [...new Set([...staticDependencies, ...staticDeps])],
-        prefetch: dynamicDeps,
-      },
+      importMap,
     } as any
   },
 

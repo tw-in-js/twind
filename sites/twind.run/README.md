@@ -9,16 +9,11 @@
 
 `wrangler pages publish .svelte-kit/cloudflare --project-name=twind-run --branch=main`
 
-- TODO: publish 0.0.0-insiders
-
-  - pnpm publish -r --tag insiders --no-git-checks --dry-run
-
+- TODO: format/prettier does not work in production
+- TODO: static/\_headers are not included in build
 - TODO: safari: Feature policy 'Fullscreen' check failed for iframe with origin 'https://challenges.cloudflare.com' and allow attribute ''
 - TODO: safari copy to clipboard does not work
 - TODO: bucket.put -> Network connection lost.
-- TODO: use https://developers.cloudflare.com/images/cloudflare-images/serve-images/ instead of pro plan
-- TODO: service worker - how to notify about an update
-- TODO: use image resizing from twind.style and remove uses of `img`
 - inline version annotation like runkit for imports in js
 - report bug:
 
@@ -44,7 +39,7 @@
   - show current preview size on resize
 - capture console.\* from iframe, with `Clear on reload` toggle and clear button
 - intercept cmd-s to save workspace as zip
-- show preview is update with spinner and status messages
+- show preview update with spinner and status messages
 - copy whole document
 - Add performance marks and measure in DEV build (https://developer.mozilla.org/en-US/docs/Web/API/User_Timing_API/Using_the_User_Timing_API)
 - preview expose tw, cx, tx, css in globalThis for scripts within html

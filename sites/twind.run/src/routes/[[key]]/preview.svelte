@@ -10,6 +10,7 @@
 
   import srcdoc from './preview.html?raw'
   import scriptSrc from './preview'
+  import Loader from './loader.svelte'
 
   /** The HTMl to render */
   export let html = ''
@@ -23,9 +24,9 @@
   /**
    * The versions to use for resolving imports.
    *
-   * @type {Record<string, string>}
+   * @type {import('$lib/types').Manifest}
    */
-  export let versions = {}
+  export let manifest
 
   export let title = 'Preview'
   export let sandbox =
@@ -59,15 +60,15 @@
 
   let isReady = false
 
-  /** @type {(state: {preview: import('./preview').Preview, html?: string, script?: string, config?: string, versions?: string }) => void} */
+  /** @type {(state: {preview: import('./preview').Preview, html?: string, script?: string, config?: string, manifest?: string }) => void} */
   let ready
 
-  /** @type {Promise<{preview: import('./preview').Preview, html?: string, script?: string, config?: string, versions?: string }>} */
+  /** @type {Promise<{preview: import('./preview').Preview, html?: string, script?: string, config?: string, manifest?: string }>} */
   let pendingOperation = new Promise((resolve) => {
     ready = resolve
   })
 
-  /** @param {[html: string, script: string, config: string, versions: Record<string, string>]} _ */
+  /** @param {[html: string, script: string, config: string, manifest: import('$lib/types').Manifest]} _ */
   function update(..._) {
     pendingOperation = pendingOperation.then(async (state) => {
       if (!$mounted) return state
@@ -76,12 +77,12 @@
         const currentHTML = html
         const currentScript = script
         const currentConfig = config
-        const currentVersions = JSON.stringify(versions)
+        const currentManifest = manifest.url
 
         if (
           state.config !== currentConfig ||
           state.script !== currentScript ||
-          state.versions !== currentVersions
+          state.manifest !== currentManifest
         ) {
           // full update
           status = 'Transpiling files ...'
@@ -95,7 +96,7 @@
               script: currentScript,
             },
             {
-              versions: JSON.parse(currentVersions),
+              manifest,
               modules: {
                 '$/config': currentConfig,
               },
@@ -133,7 +134,7 @@
           html: currentHTML,
           script: currentScript,
           config: currentConfig,
-          versions: currentVersions,
+          manifest: currentManifest,
         }
       } catch (error) {
         console.error(`Failed to update the preview`, error)
@@ -145,7 +146,7 @@
   }
 
   $: if (browser) {
-    update(html, script, config, versions)
+    update(html, script, config, manifest)
   }
 
   if (browser) {
@@ -183,15 +184,7 @@
   })
 </script>
 
-<div class={cx('~(relative,flex,justify-center,content-center,bg-brand-2)', className)}>
-  {#if !isReady}
-    <slot name="loading">
-      <div class="flex place-items-center text-neutral-11">
-        <span class="animate-pulse">Loading ...</span>
-      </div>
-    </slot>
-  {/if}
-
+<Loader {isReady} class={className}>
   <iframe
     bind:this={iframeElement}
     src={srcUrl}
@@ -201,4 +194,4 @@
     {sandbox}
     allow="fullscreen"
   />
-</div>
+</Loader>

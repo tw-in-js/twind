@@ -13,12 +13,13 @@
   import debounce from 'just-debounce'
   import diff from 'fast-diff'
 
-  import { cx, tw } from 'twind'
+  import { tw } from '$lib/twind'
 
   import prettier from '$lib/prettier'
   import { colorScheme } from '$lib/components/theme-switcher.svelte'
 
   import { injectGlobal } from '$lib/twind'
+  import Loader from './loader.svelte'
 
   if (browser) {
     // Based on https://github.com/tailwindlabs/play.tailwindcss.com/blob/master/src/css/main.css
@@ -149,7 +150,7 @@
    * @param {typeof import('$lib/monaco')} monaco
    */
   function emitChange(path, value, model, editor, monaco) {
-    monaco.loadModelTypeDeclarations(model, versions)
+    monaco.loadModelTypeDeclarations(model, manifest)
     dispatch('change', { path, value, model, editor, monaco })
   }
   /**
@@ -174,11 +175,11 @@
   export let defaultLanguage = undefined
 
   /**
-   * The versions to use for resolving imports.
+   * The manifest to use for resolving imports.
    *
-   * @type {Record<string, string>}
+   * @type {import('$lib/types').Manifest}
    */
-  export let versions = {}
+  export let manifest
 
   /**
    * Value of the current model.
@@ -268,12 +269,8 @@
   // reactive block - ORDDER IS IMPORTANT
 
   $: if (browser && monaco) {
-    for (const moduleName of Object.keys(versions)) {
-      monaco.loadModuleTypeDeclarations(moduleName, versions)
-    }
-
     for (const file of files.values()) {
-      monaco.loadModelTypeDeclarations(file.model, versions)
+      monaco.loadModelTypeDeclarations(file.model, manifest)
     }
   }
 
@@ -324,7 +321,7 @@
         (file = { value: model.getValue(), model, state: null, dirty: false, updateOn, readonly }),
       )
 
-      monaco.loadModelTypeDeclarations(model, versions)
+      monaco.loadModelTypeDeclarations(model, manifest)
 
       const self = file
 
@@ -333,11 +330,7 @@
           debounce(() => {
             if (self.model.isDisposed()) return
 
-            if (
-              monaco &&
-              versions &&
-              ['javascript', 'typescript'].includes(self.model.getLanguageId())
-            ) {
+            if (monaco && ['javascript', 'typescript'].includes(self.model.getLanguageId())) {
               for (const marker of monaco.editor.getModelMarkers({
                 owner: 'typescript',
                 resource: self.model.uri,
@@ -346,7 +339,7 @@
                 if (marker.code === '2307') {
                   const moduleName = self.model.getValueInRange(marker).slice(1, -1)
 
-                  monaco.loadModuleTypeDeclarations(moduleName, versions)
+                  monaco.loadModuleTypeDeclarations(moduleName, manifest)
                 }
               }
             }
@@ -402,7 +395,7 @@
   let valueEditsDecorations = writable(null)
 
   // update file when value changes
-  $: if (browser && monaco && editor) {
+  $: if (browser && monaco && editor && readonly) {
     const file = files.get(path)
     get(valueEditsDecorations)?.clear()
 
@@ -536,7 +529,7 @@
         file.model.applyEdits(edits)
       }
 
-      monaco.loadModelTypeDeclarations(file.model, versions)
+      monaco.loadModelTypeDeclarations(file.model, manifest)
     }
 
     scheduleLayout()
@@ -574,7 +567,7 @@
     if (file) {
       monaco.editor.setModelLanguage(file.model, language)
 
-      monaco.loadModelTypeDeclarations(file.model, versions)
+      monaco.loadModelTypeDeclarations(file.model, manifest)
     }
   }
 
@@ -875,48 +868,37 @@
       },
     })
 
-    monaco.editor.onDidChangeMarkers((uris) => {
-      if (editor && monaco) {
-        const file = files.get(path)
+    disposables.add(
+      monaco.editor.onDidChangeMarkers((uris) => {
+        if (editor && monaco) {
+          const file = files.get(path)
 
-        if (file && file.model === editor.getModel()) {
-          const editorUri = file.model.uri.toString()
+          if (file && file.model === editor.getModel()) {
+            const editorUri = file.model.uri.toString()
 
-          const currentEditorHasMarkerChanges = uris.find((uri) => uri.toString() === editorUri)
+            const currentEditorHasMarkerChanges = uris.find((uri) => uri.toString() === editorUri)
 
-          if (currentEditorHasMarkerChanges) {
-            dispatch('validate', {
-              markers: monaco.editor.getModelMarkers({ resource: file.model.uri }),
-              path,
-              value: file.value,
-              model: file.model,
-              editor,
-              monaco,
-            })
+            if (currentEditorHasMarkerChanges) {
+              dispatch('validate', {
+                markers: monaco.editor.getModelMarkers({ resource: file.model.uri }),
+                path,
+                value: file.value,
+                model: file.model,
+                editor,
+                monaco,
+              })
+            }
           }
         }
-      }
-    })
+      }),
+    )
 
     dispatch('ready', { editor, monaco })
   }
 </script>
 
-<div
-  class={cx(
-    '~(relative,flex,justify-center,content-center,bg-brand-2) ~([text-align:initial])',
-    className,
-  )}
->
-  {#if !editor}
-    <slot name="loading">
-      <div class="flex place-items-center text-neutral-11">
-        <span class="animate-pulse">Loading ...</span>
-      </div>
-    </slot>
-  {/if}
-
+<Loader isReady={editor} class={className}>
   <div class="relative flex-auto" hidden={!editor}>
     <div class="absolute inset-0 w-full h-full" bind:this={editorElement} />
   </div>
-</div>
+</Loader>

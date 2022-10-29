@@ -31,7 +31,7 @@ inputs:
   branch:
     description: 'The name of the branch you want to deploy to'
     required: false
-    default: 'preview'
+    default: ${{ (github.event.number && format('pr-{0}', github.event.number)) || (github.event_name == 'pull_request' && 'canary') || 'next' }}
 
 outputs:
   id:
@@ -43,20 +43,32 @@ outputs:
   environment:
     description: 'The environment that was deployed to'
     value: ${{ steps.deploy.outputs.environment }}
-  alias:
-    description: 'The alias of the pages deployment'
+  branch:
+    description: 'The branch alias of the pages deployment'
     value: ${{ steps.deploy.outputs.alias }}
+  version:
+    description: 'The version alias of the pages deployment'
+    value: ${{ steps.version.outputs.alias }}
+  branchURL:
+    description: 'The branch url of the pages deployment'
+    value: https://${{ steps.deploy.outputs.alias }}${{ inputs.projectName }}.pages.dev
+  versionURL:
+    description: 'The version url of the pages deployment'
+    value: https://${{ steps.alias.outputs.alias }}${{ inputs.projectName }}.pages.dev
 
 runs:
   using: 'composite'
   steps:
     # deploy twind.run using the published package versions
-    - name: 🏗️  Build
+    - name: 🏗️  Build ${{ inputs.workingDirectory }}
+      id: build
       shell: bash
-      run: ${{ inputs.run }}
+      run: |
+        ${{ inputs.run }}
+        echo version="`jq '.version' package.json`" >> $GITHUB_OUTPUT
       working-directory: ${{ inputs.workingDirectory }}
 
-    - name: 🚀  Deploy
+    - name: 🚀  Deploy ${{ inputs.workingDirectory }} as ${{ inputs.branch }}
       id: deploy
       # until https://github.com/cloudflare/pages-action/pull/33 is merged
       uses: cloudflare/pages-action@walshy/general-improvements
@@ -65,28 +77,30 @@ runs:
         accountId: ${{ inputs.accountId }}
         gitHubToken: ${{ inputs.gitHubToken }}
         projectName: ${{ inputs.projectName }}
-        directory: ${{ inputs.directory }}
+        directory: ${{ inputs.workingDirectory }}/${{ inputs.directory }}
         branch: ${{ inputs.branch }}
+
+    - name: 🚀  Deploy ${{ inputs.workingDirectory }} as v${{ steps.build.outputs.version }}
+      id: version
+      # until https://github.com/cloudflare/pages-action/pull/33 is merged
+      uses: cloudflare/pages-action@walshy/general-improvements
+      continue-on-error: true
+      with:
+        apiToken: ${{ inputs.apiToken }}
+        accountId: ${{ inputs.accountId }}
+        gitHubToken: ${{ inputs.gitHubToken }}
+        projectName: ${{ inputs.projectName }}
+        directory: ${{ inputs.workingDirectory }}/${{ inputs.directory }}
+        # Branch name aliases are lowercased and non-alphanumeric characters are replaced with a hyphen
+        # v1.0.0.next.39 -> v1-0-0-next-39
+        branch: v${{ steps.build.outputs.version }}
 
     - name: 💡  Deployment Info
       shell: bash
       run: |
         echo "## Deployed with [![Cloudflare](https://img.shields.io/badge/Cloudflare%20Pages-F38020?style=for-the-badge&logo=Cloudflare&logoColor=white)](https://pages.dev)" >> $GITHUB_STEP_SUMMARY
         echo "<strong>ID:</strong> ${{ steps.deploy.outputs.id }}" >> $GITHUB_STEP_SUMMARY
-        echo "<strong>Preview URL:</strong> <a href='${{ steps.deploy.outputs.url }}'>${{ steps.deploy.outputs.url }}</a>" >> $GITHUB_STEP_SUMMARY
+        echo "<strong>Deployment URL:</strong> <a href='${{ steps.deploy.outputs.url }}'>${{ steps.deploy.outputs.url }}</a>" >> $GITHUB_STEP_SUMMARY
         echo "<strong>Branch URL:</strong> <a href='https://${{ steps.deploy.outputs.alias }}${{ inputs.projectName }}.pages.dev'>https://${{ steps.deploy.outputs.alias }}${{ inputs.projectName }}.pages.dev</a>" >> $GITHUB_STEP_SUMMARY
+        echo "<strong>Version URL:</strong> <a href='https://${{ steps.alias.outputs.alias }}${{ inputs.projectName }}.pages.dev'>https://${{ steps.alias.outputs.alias }}${{ inputs.projectName }}.pages.dev</a>" >> $GITHUB_STEP_SUMMARY
         echo "<strong>Environment:</strong> ${{ steps.deploy.outputs.environment }}" >> $GITHUB_STEP_SUMMARY
-
-    - name: 📝  Comment PR
-      if: ${{ github.event_name == 'pull_request' }}
-      uses: thollander/actions-comment-pull-request@v1
-      with:
-        GITHUB_TOKEN: ${{ inputs.gitHubToken }}
-        comment_includes: '## Deployed with [![Cloudflare Pages]'
-        message: |
-          ## Deployed with [![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F38020?style=for-the-badge&logo=Cloudflare&logoColor=white)](https://pages.dev)
-          <table>
-          <tr><td><strong>Latest commit:</strong></td><td><code>${{ github.sha }}</code></td></tr>
-          <tr><td><strong>Preview URL:</strong></td><td><a href='${{ steps.deploy.outputs.url }}'>${{ steps.deploy.outputs.url }}</a></td></tr>
-          <tr><td><strong>Branch URL:</strong></td><td><a href='https://${{ steps.deploy.outputs.alias }}${{ inputs.projectName }}.pages.dev'>https://${{ steps.deploy.outputs.alias }}${{ inputs.projectName }}.pages.dev</a></td></tr>
-          </table>

@@ -15,6 +15,15 @@ export function toBase64(input: string | ArrayBufferLike | ArrayBufferView | Uin
   return fromUint8Array(new Uint8Array(ArrayBuffer.isView(input) ? input.buffer : input))
 }
 
+export function toBase64url(
+  input: string | ArrayBufferLike | ArrayBufferView | Uint8Array,
+): string {
+  return (typeof input === 'string' ? input : toBase64(input))
+    .replace(/=/g, '')
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+}
+
 function fromUint8Array(input: Uint8Array): string {
   const extraBytes = input.byteLength % 3 // if we have 1 byte left, pad 2 bytes
   const length = input.byteLength - extraBytes

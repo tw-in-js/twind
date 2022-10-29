@@ -1,0 +1,18 @@
+diff --git a/package.json b/package.json
+index 5395f77460c0d7aad353c4d77632f44b3c920887..3802d2572f8a734a42e6ee1839909e2a086661a6 100644
+--- a/package.json
++++ b/package.json
+@@ -20,12 +20,7 @@
+   },
+   "type": "module",
+   "exports": {
+-    ".": {
+-      "require": "./dist/commonjs/jsenv_logger.cjs",
+-      "browser": "./main.browser.js",
+-      "node": "./main.node.js",
+-      "import": "./main.node.js"
+-    },
++    ".": "./main.shared.js",
+     "./*": "./*"
+   },
+   "files": [

@@ -31,7 +31,7 @@
   "// These are relative from within the dist/ folder": "",
   "sideEffects": false,
   "peerDependencies": {
-    "@sveltejs/kit": "^1.0.0-next.507",
+    "@sveltejs/kit": "^1.0.0-next.531",
     "twind": "1.0.0-next.39",
     "typescript": "^4.8.4"
   },
@@ -41,7 +41,7 @@
     }
   },
   "devDependencies": {
-    "@sveltejs/kit": "^1.0.0-next.511",
+    "@sveltejs/kit": "^1.0.0-next.531",
     "svelte": "^3.50.1",
     "twind": "1.0.0-next.39",
     "typescript": "^4.8.4"

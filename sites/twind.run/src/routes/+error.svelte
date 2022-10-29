@@ -4,9 +4,17 @@
 
 <h1>{$page.status}: {$page.error?.message}</h1>
 
-<pre>
-  {$page.error?.stack}
+{#if $page.error?.frame}
+  <pre>
+  {$page.error.frame}
 </pre>
+{/if}
+
+{#if $page.error?.stack}
+  <pre>
+  {$page.error.stack}
+</pre>
+{/if}
 
 <pre>
   {JSON.stringify($page.error, null, 2)}

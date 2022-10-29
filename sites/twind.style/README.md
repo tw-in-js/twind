@@ -2,4 +2,4 @@
 
 ## ToDos
 
-- TOODO: code block copy element not rendered correctly
+- TODO: code block copy element not rendered correctly

@@ -1,5 +1,5 @@
 import type { Intellisense } from './intellisense'
-import { createSystem } from './system'
+import System from './system'
 
 let resolveInit: (autocomplte: Promise<import('@twind/intellisense').Intellisense>) => void
 
@@ -9,8 +9,7 @@ let intellisensePromise = new Promise<import('@twind/intellisense').Intellisense
 
 const api: Intellisense = {
   async init({ entry, importMap }) {
-    // No conflicts with other system users because we are in a worker
-    self.System = createSystem(importMap)
+    System.addImportMap(importMap)
 
     intellisensePromise = System.import(entry).then(({ default: intellisense }) => intellisense)
 

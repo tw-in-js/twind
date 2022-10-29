@@ -1,0 +1,16 @@
+diff --git a/package.json b/package.json
+index 8618f4e5b739f44d89681b8e5415ddd269222861..5a7029c0bd6503b68bdc94362663b9cdf27856fd 100644
+--- a/package.json
++++ b/package.json
+@@ -15,10 +15,7 @@
+   },
+   "type": "module",
+   "exports": {
+-    ".": {
+-      "import": "./main.js",
+-      "require": "./dist/commonjs/jsenv_importmap.cjs"
+-    },
++    ".": "./main.js",
+     "./*": "./*"
+   },
+   "main": "./dist/commonjs/jsenv_importmap.cjs",

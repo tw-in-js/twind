@@ -11,7 +11,7 @@ index 4b97b0a7d3426a1cf7b467b0788952b781d5eff2..1f38cf890c7b7d754ba842765e9f813a
  import { ImportMap, getScopeMatches, getMapMatch as getMapMatch$1 } from '@jspm/import-map';
 -import process$1 from 'process';
 +// import process$1 from 'process';
- 
+
  let babel$1;
  function setBabel$1(_babel) {
 @@ -3808,7 +3808,7 @@ class Generator {
@@ -30,7 +30,7 @@ index 644734e586d2799ff6e93ed1e5f93f0aa1655150..87ba901c7b0e02dcd60e52be53e16d63
 @@ -1,7 +1,7 @@
  export { G as Generator, d as analyzeHtml, e as clearCache, f as fetch, h as getPackageBase, g as getPackageConfig, l as lookup } from './generator-06673c1f.js';
 -import '#fetch';
-+import './fetch-native';
++import './fetch-native.js';
  import '@jspm/import-map';
  import 'sver';
 -import 'process';

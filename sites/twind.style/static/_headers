@@ -15,10 +15,10 @@
   Cache-Control: public, max-age=3600
 
 ## Prevent *.pages.dev deployments showing in search results
-https://twind-style.pages.dev/*
+https://:project.pages.dev/*
   X-Robots-Tag: noindex
 
-https://:preview.twind-style.pages.dev/*
+https://:deployment.:project.pages.dev/*
   X-Robots-Tag: noindex
 
 ## Allow cdn access from everywhere

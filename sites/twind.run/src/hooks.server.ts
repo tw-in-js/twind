@@ -1,4 +1,5 @@
 import type { Handle, HandleServerError } from '@sveltejs/kit'
+
 import { sequence } from '@sveltejs/kit/hooks'
 
 import handleTwind from '@twind/with-sveltekit/hooks'
@@ -37,9 +38,10 @@ if (dev) {
       })
 
       event.platform = {
+        caches: (await mf.getCaches()) as unknown as CacheStorage & { default: Cache },
         env: {
           // KVNamespace: await mf.getKVNamespace('KVNamespace'),
-          WORKSPACES: await mf.getR2Bucket('WORKSPACES'),
+          WORKSPACES: (await mf.getR2Bucket('WORKSPACES')) as unknown as R2Bucket,
         },
       }
     }

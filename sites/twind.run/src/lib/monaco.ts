@@ -16,6 +16,7 @@ import { injectGlobal } from 'twind'
 import transpile from './transpile'
 import intellisense from './intellisense'
 import { withVersion } from './versions'
+import type { Manifest } from './types'
 
 self.MonacoEnvironment = {
   getWorker: function (_, label) {
@@ -533,15 +534,11 @@ export function cleanupWorkspace() {
   }
 }
 
-export function loadTypeDeclarations(
-  value: string,
-  path: string,
-  versions?: Record<string, string>,
-) {
+export function loadTypeDeclarations(value: string, path: string, manifest: Manifest) {
   transpile
-    .findImports(value, { versions })
+    .findImports(value, { manifest })
     .then((imports) =>
-      imports.map((moduleName) => loadModuleTypeDeclarations(moduleName, versions)),
+      imports.map((moduleName) => loadModuleTypeDeclarations(moduleName, manifest)),
     )
     .catch((error) => {
       console.error(`Failed to fetch types for '${path}'`, error)
@@ -550,35 +547,29 @@ export function loadTypeDeclarations(
 
 export function loadModelTypeDeclarations(
   model: monaco.editor.ITextModel | null,
-  versions?: Record<string, string>,
+  manifest: Manifest,
 ) {
   if (!model) return
   if (model.isDisposed()) return
 
   if (!['javascript', 'typescript'].includes(model.getLanguageId())) return
 
-  loadTypeDeclarations(model.getValue(), model.uri.toString(true), versions)
+  loadTypeDeclarations(model.getValue(), model.uri.toString(true), manifest)
 }
 
-export function loadModuleTypeDeclarations(
-  moduleName: string,
-  versions?: Record<string, string>,
-): void {
-  fetchModuleTypeDeclarations(moduleName, versions).catch((error) => {
+export function loadModuleTypeDeclarations(moduleName: string, manifest: Manifest): void {
+  fetchModuleTypeDeclarations(moduleName, manifest).catch((error) => {
     console.error(`Failed to fetch type declarations for ${moduleName}`, error)
   })
 }
 
-async function fetchModuleTypeDeclarations(
-  moduleName: string,
-  versions?: Record<string, string>,
-): Promise<void> {
+async function fetchModuleTypeDeclarations(moduleName: string, manifest: Manifest): Promise<void> {
   // validate moduleName
   if (/[*\s]/.test(moduleName)) {
     return
   }
 
-  const id = withVersion(moduleName, versions)
+  const { specifier: id } = withVersion(moduleName, manifest)
 
   const url = `${cdn}/${id}?dts`
 
@@ -634,7 +625,7 @@ async function fetchModuleTypeDeclarations(
     if (dts) {
       await saveExtraLib(dts, url)
 
-      // not adding to cache as it depends on current workspace versions
+      // not adding to cache as it depends on current workspace manifest
       const importFrom = JSON.stringify(new URL(url).pathname.replace(/^\/-\/|\.d\.ts$/g, ''))
 
       const model = getOrCreateModel(`node_modules/${moduleName}.d.ts`)

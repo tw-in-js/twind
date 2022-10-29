@@ -1,0 +1,8 @@
+# Cloudflare Headers: https://developers.cloudflare.com/pages/platform/headers
+
+## Prevent *.pages.dev deployments showing in search results
+https:/:project.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:deployment.:project.pages.dev/*
+  X-Robots-Tag: noindex

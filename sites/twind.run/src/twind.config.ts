@@ -70,6 +70,8 @@ export default defineConfig({
       },
     },
   },
+  // For now no hashing - seems to break monaco
+  hash: false,
 })
 
 function mapColors(input: Record<string, string>, suffix = ''): Record<string, string> {

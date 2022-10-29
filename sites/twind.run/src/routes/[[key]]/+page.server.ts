@@ -1,12 +1,28 @@
 import { error, invalid } from '@sveltejs/kit'
 
-import { decompressFromEncodedURIComponent } from 'lz-string'
+import { normalizeImportMap } from '@jsenv/importmap'
+import { Semver } from 'sver'
 
 import { dev } from '$app/environment'
 import { env } from '$env/dynamic/private'
 
 import initialTemplate from '$lib/templates/initial/_'
-import { toBase64 } from '$lib/base64'
+import { toBase64, toBase64url } from '$lib/base64'
+import type { Manifest, Workspace } from '$lib/types'
+
+import pkg from 'lz-string'
+const { decompressFromEncodedURIComponent, compressToEncodedURIComponent } = pkg
+
+const MANIFEST_PATH = '/_app/cdn.json'
+const HOSTNAME = 'twind-run.pages.dev'
+
+// interface PageData {
+//   manifests: {
+//     latest: Manifest | undefined
+//     next: Manifest | undefined
+//     canary: Manifest | undefined
+//   }
+// }
 
 // import wordlistraw from './wordlist.txt?raw'
 
@@ -36,78 +52,137 @@ interface Metadata {
 const EXPECTED_VERSION = '1'
 
 export async function load({
-  setHeaders,
   params: { key },
   platform: { env },
+  fetch,
 }: Parameters<import('./$types').PageServerLoad>[0]) {
-  setHeaders({
-    'Feature-Policy': `fullscreen 'self' https://challenges.cloudflare.com`,
-    'X-Content-Type-Options': 'nosniff',
-    'X-Frame-Options': 'SAMEORIGIN',
-    'X-XSS-Protection': '1; mode=block',
-  })
+  const workspace = await loadWorkspace()
 
-  if (!key) {
-    return { workspace: initialTemplate }
+  // default no version: use version from local manifest
+  // specific version: load manifest from v1-0-0.twind-run.pages.dev
+  // dist tag: load manifest from twind-run.pages.dev for 'latest' or dist-tag.twind-run.pages.dev
+
+  const [localManifest, workspaceManifest, latestManifest, nextManifest] = await Promise.all([
+    loadManifest(),
+    loadManifest(workspace.version).catch(() => null),
+    loadManifest('latest').catch(() => null),
+    loadManifest('next').catch(() => null),
+  ])
+
+  workspace.version = workspaceManifest?.version || ''
+
+  if (
+    !(
+      workspace.version &&
+      [
+        localManifest.version,
+        workspaceManifest?.version,
+        latestManifest?.version,
+        nextManifest?.version,
+      ].includes(workspace.version)
+    )
+  ) {
+    workspace.version ||= localManifest.version
   }
 
-  const data = await env.WORKSPACES.get(key).catch((error) => {
-    if (error.message.includes('(10020)')) {
-      // get: The specified object name is not valid. (10020)
-      // maybe a lz-string encoded url
-      return null
+  const manifests = [localManifest, workspaceManifest, latestManifest, nextManifest]
+    // remove nullish (not found)
+    .filter(<T>(x: T): x is NonNullable<T> => x != null)
+    // remove duplicates
+    .filter((x, index, source) => source.indexOf(x) === index)
+    // sort in reverse order: latest, next, canary
+    // order: latest (current release), next (upcoming release), canary (PR preview),
+    .sort((a, b) => Semver.compare(b.version, a.version))
+
+  // console.debug({ workspace, manifests })
+  return { workspace, manifests }
+
+  async function loadWorkspace(): Promise<Workspace> {
+    if (!key) {
+      return initialTemplate
     }
 
-    throw error
-  })
+    const data = await env.WORKSPACES.get(key).catch((error) => {
+      if (error.message.includes('(10020)')) {
+        // get: The specified object name is not valid. (10020)
+        // maybe a lz-string encoded url
+        return null
+      }
 
-  if (!data) {
-    const data = decompressFromEncodedURIComponent(key)
-
-    if (!data) {
-      throw error(404, 'Not found')
-    }
-
-    if (!data.startsWith(`${EXPECTED_VERSION}:`)) {
-      // TODO: better error message
-      throw error(404, 'Not found')
-    }
-
-    try {
-      const workspace = JSON.parse(data.slice(`${EXPECTED_VERSION}:`.length))
-      // TODO: validate workspace loaded from url
-      return { workspace }
-    } catch {
-      throw error(404, 'Not found')
-    }
-  }
-
-  if (data.httpMetadata?.contentType !== 'application/json') {
-    // TODO: better error message
-    throw error(404, 'Not found')
-  }
-
-  if (data.customMetadata?.version !== EXPECTED_VERSION) {
-    throw error(404, 'Not found')
-  }
-
-  if (data.httpMetadata.contentEncoding) {
-    if (data.httpMetadata.contentEncoding !== 'gzip') {
-      // TODO: better error message
-      throw error(404, 'Not found')
-    }
-
-    const blob = await toBlob(data.body.pipeThrough(await createGunzipStream()), {
-      type: 'application/json',
+      throw error
     })
 
-    return {
-      workspace: JSON.parse(await blob.text()) as typeof initialTemplate,
+    if (!data) {
+      const data = decompressFromEncodedURIComponent(key)
+
+      if (!data) {
+        throw error(404, 'Not found')
+      }
+
+      if (!data.startsWith(`${EXPECTED_VERSION}:`)) {
+        // TODO: better error message
+        throw error(404, 'Not found')
+      }
+
+      try {
+        const workspace = JSON.parse(data.slice(`${EXPECTED_VERSION}:`.length))
+        // TODO: validate workspace loaded from url
+        // TODO:
+        return workspace
+      } catch {
+        throw error(404, 'Not found')
+      }
     }
+
+    if (data.httpMetadata?.contentType !== 'application/json') {
+      // TODO: better error message
+      throw error(404, 'Not found')
+    }
+
+    if (data.customMetadata?.version !== EXPECTED_VERSION) {
+      throw error(404, 'Not found')
+    }
+
+    if (data.httpMetadata.contentEncoding) {
+      if (data.httpMetadata.contentEncoding !== 'gzip') {
+        // TODO: better error message
+        throw error(404, 'Not found')
+      }
+
+      const blob = await toBlob(data.body.pipeThrough(await createGunzipStream()), {
+        type: 'application/json',
+      })
+
+      return JSON.parse(await blob.text())
+    }
+
+    return await data.json()
   }
 
-  return {
-    workspace: (await data.json()) as typeof initialTemplate,
+  async function loadManifest(version = ''): Promise<Manifest> {
+    // Branch name aliases are lowercased and non-alphanumeric characters are replaced with a hyphen
+    const alias = version === '*' ? '' : version.toLowerCase().replace(/[^a-z\d]/g, '-')
+
+    const origin =
+      alias && (alias === 'latest' ? `https://${HOSTNAME}` : `https://${alias}.${HOSTNAME}`)
+
+    const url = origin + MANIFEST_PATH
+
+    // TODO: https://developers.cloudflare.com/workers/runtime-apis/cache/
+    // platform.env.caches
+    const response = await fetch(url)
+
+    if (!(response.ok && response.status === 200)) {
+      throw new Error(`[${response.status}] ${response.statusText || 'request failed'}`)
+    }
+
+    const manifest = await response.json<Manifest>()
+
+    return {
+      ...manifest,
+      ...normalizeImportMap(manifest, response.url),
+      url: response.url,
+    }
   }
 }
 
@@ -163,42 +238,52 @@ export const actions: import('./$types').Actions = {
 
       const workspaceRaw = body.get('workspace')
 
-      if (workspaceRaw == null) {
+      if (!workspaceRaw) {
         return invalid(400, { workspace: 'missing' })
       }
 
-      // TODO: validate workspace {[html | script | config | manifest]: {path: string, value: string}}
+      // TODO: validate workspace {[html | script | config]: {path: string, value: string}, version: string }
       // if (workspace.html) {
       //   return invalid(400, { script: 'missing' })
       // }
 
-      const blob =
-        typeof workspaceRaw === 'string'
-          ? new Blob([workspaceRaw], { type: 'application/json' })
-          : workspaceRaw
+      try {
+        const blob =
+          typeof workspaceRaw === 'string'
+            ? new Blob([workspaceRaw], { type: 'application/json' })
+            : workspaceRaw
 
-      let { key, sha256 } = await generate(await blob.arrayBuffer())
+        let { key, sha256 } = await generate(await blob.arrayBuffer())
 
-      const existing = await platform.env.WORKSPACES.head(key)
-      if (!existing) {
-        // not found
-        await platform.env.WORKSPACES.put(
-          key,
-          await toBlob((await blob.stream()).pipeThrough(await createGzipStream()), {
-            type: 'application/json',
-          }),
-          {
-            customMetadata: { version },
-            httpMetadata: {
-              contentType: 'application/json',
-              contentEncoding: 'gzip',
+        const existing = await platform.env.WORKSPACES.head(key)
+        if (!existing) {
+          // not found
+          await platform.env.WORKSPACES.put(
+            key,
+            await toBlob((await blob.stream()).pipeThrough(await createGzipStream()), {
+              type: 'application/json',
+            }),
+            {
+              customMetadata: { version },
+              httpMetadata: {
+                contentType: 'application/json',
+                contentEncoding: 'gzip',
+              },
+              sha256,
             },
-            sha256,
-          },
-        )
-      }
+          )
+        }
 
-      return { success: true, key }
+        return { success: true, key }
+      } catch (error) {
+        return {
+          success: true,
+          key: compressToEncodedURIComponent(version + ':' + workspaceRaw),
+          message: (error as Error).message,
+          code: (error as any).code,
+          stack: (error as Error).stack,
+        }
+      }
     } catch (error) {
       return invalid(500, {
         message: (error as Error).message,
@@ -278,8 +363,4 @@ async function toBlob(
   )
 
   return new Blob(parts, options)
-}
-
-function toBase64url(base64: string): string {
-  return base64.replace(/=/g, '').replace(/\+/g, '-').replace(/\//g, '_')
 }

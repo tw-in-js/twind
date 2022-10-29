@@ -1,43 +1,38 @@
-export const currentVersions: Record<string, string> = Object.fromEntries(
-  Object.entries(
-    import.meta.glob(
-      [
-        '../../../../packages/*/package.json',
-        '!../../../../packages/cdn/package.json',
-        '!../../../../packages/gatsby-plugin/package.json',
-        '!../../../../packages/with-*/package.json',
-      ],
-      { import: 'version', eager: true },
-    ),
-  ).map(([key, version]) => [
-    ('@twind/' + key.replace(/^.+\packages\/([^\/]+)\/.+$/, '$1')).replace(
-      /^@twind\/twind$/,
-      'twind',
-    ),
-    version as string,
-  ]),
-)
+import { SemverRange } from 'sver'
+import type { Manifest } from './types'
 
-export function createResolutions(versions: Record<string, string> = {}): Record<string, string> {
-  let resolutions: Record<string, string> = Object.fromEntries(
-    Object.entries(versions).filter(([id]) => !id.includes('*')),
-  )
+export function withVersion(specifier: string, manifest: Manifest) {
+  const match = specifier.match(/^((?:@[^/]+\/)?[^/@]+)(?:@([^/]+))?(\/.+)?$/)
 
-  if (!resolutions['@twind/*']) {
-    resolutions = { ...currentVersions, ...resolutions }
-  } else if (!resolutions.twind) {
-    resolutions.twind = currentVersions.twind
+  if (match) {
+    const { 1: id, 2: version, 3: path = '' } = match
+
+    // check if versions satifies importMap version and use importMap resolution
+    const manifestVersion = manifest.packages[id]
+
+    if (!version || (manifestVersion && SemverRange.match(version, manifestVersion))) {
+      return {
+        found: true,
+        input: { id, version, path },
+        output: { id, version: manifestVersion, path },
+        specifier: `${id}@${manifestVersion}${path}`,
+      } as const
+    }
+
+    if (version) {
+      return {
+        found: false,
+        input: { id, version, path },
+        output: { id, version, path },
+        specifier,
+      } as const
+    }
   }
 
-  return resolutions
-}
-
-export function withVersion(moduleName: string, versions: Record<string, string> = {}): string {
-  return moduleName.replace(/^((?:@[^\s/]+\/)?[^\s/@]+)(\/[^\s/@]+)?$/, (_, id, path = '') => {
-    // check for exact match and fallback to scope wildcard like `@twind/*`
-    const version =
-      createResolutions(versions)[id] || versions[id.replace(/^(@[^\s/]+\/).+$/, '$1*')]
-
-    return version ? `${id}@${version}${path}` : id + path
-  })
+  return {
+    found: false,
+    input: { id: specifier, version: undefined, path: '' },
+    output: { id: specifier, version: undefined, path: '' },
+    specifier,
+  } as const
 }

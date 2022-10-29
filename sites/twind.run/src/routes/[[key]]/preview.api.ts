@@ -4,7 +4,9 @@ import type { Twind, Sheet, BaseTheme } from 'twind'
 import * as Comlink from 'comlink'
 
 import debounce from 'just-debounce'
-import { createSystem, type ImportMap } from '$lib/system'
+import System, { type ImportMap } from '$lib/system'
+
+export default import.meta.url
 
 export interface Preview {
   setup(
@@ -24,6 +26,22 @@ export interface Script {
 let tw: Twind<BaseTheme, string[]> | null = null
 let observer: MutationObserver | null = null
 let script: Script | null = null
+let lastEntryURL: string | null = null
+let lastScriptURL: string | null = null
+
+System.onload = (error, id, dependencies, isErrorSource) => {
+  if (error && isErrorSource) {
+    console.error({ error, id, dependencies, isErrorSource })
+  }
+
+  document.head
+    .querySelector(
+      `link[rel=prefetch][href=${JSON.stringify(id)}],link[rel=preload][href=${JSON.stringify(
+        id,
+      )}]`,
+    )
+    ?.remove()
+}
 
 const api: Preview = {
   async setup({ importMap, entry: entryURL, script: scriptURL, html }, notify) {
@@ -38,20 +56,12 @@ const api: Preview = {
       .querySelectorAll('link[rel=prefetch],link[rel=preload]')
       .forEach((link) => link.remove())
 
-    // Start fresh
-    self.System = createSystem(importMap, (error, id, dependencies, isErrorSource) => {
-      if (error && isErrorSource) {
-        console.error({ error, id, dependencies, isErrorSource })
-      }
+    if (lastEntryURL) System.delete(lastEntryURL)
+    if (lastScriptURL) System.delete(lastScriptURL)
+    lastEntryURL = entryURL
+    lastScriptURL = scriptURL
 
-      document.head
-        .querySelector(
-          `link[rel=prefetch][src=${JSON.stringify(id)}],link[rel=preload][src=${JSON.stringify(
-            id,
-          )}]`,
-        )
-        ?.remove()
-    })
+    System.addImportMap(importMap)
 
     // staticDeps
     addLinks(importMap, 'preload')
@@ -174,21 +184,29 @@ addEventListener('message', function catchLinks(event) {
 })
 
 function addLinks(importMap: ImportMap, rel: 'preload' | 'prefetch') {
-  importMap[rel]?.forEach((url) => {
-    const link = document.createElement('link')
+  importMap[rel]
+    ?.filter((url) => !System.has(url))
+    .forEach((url) => {
+      const link = document.createElement('link')
 
-    link.rel = rel
-    link.crossOrigin = 'anonymous'
+      link.rel = rel
 
-    link.as = /\.[mc]?[jt]sx?$/.test(url) ? 'script' : url.endsWith('.css') ? 'style' : 'fetch'
+      // Only add cross origin for actual cross origin
+      // this is because Safari triggers for all
+      // - https://bugs.webkit.org/show_bug.cgi?id=171566
+      if (url.indexOf(location.origin + '/')) {
+        link.crossOrigin = 'anonymous'
+      }
 
-    const integrity = importMap.integrity?.[url]
-    if (integrity) {
-      link.integrity = integrity
-    }
+      link.as = /\.[mc]?[jt]sx?$/.test(url) ? 'script' : url.endsWith('.css') ? 'style' : 'fetch'
 
-    link.href = url
+      const integrity = importMap.integrity?.[url]
+      if (integrity) {
+        link.integrity = integrity
+      }
 
-    document.head.appendChild(link)
-  })
+      link.href = url
+
+      document.head.appendChild(link)
+    })
 }

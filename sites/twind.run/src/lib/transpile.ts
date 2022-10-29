@@ -1,4 +1,5 @@
 import * as Comlink from 'comlink'
+import type { Manifest } from '$lib/types'
 
 import type { ImportMap } from './system'
 
@@ -7,8 +8,8 @@ import TranspileWorker from './transpile.worker?worker'
 export interface Transpile {
   transform<Input extends Record<string, string>>(
     input: Input,
-    options?: {
-      versions?: Record<string, string>
+    options: {
+      manifest: Manifest
       modules?: Record<string, string>
       preload?: string[]
     },
@@ -16,8 +17,8 @@ export interface Transpile {
 
   findImports(
     code: string,
-    options?: {
-      versions?: Record<string, string>
+    options: {
+      manifest: Manifest
     },
   ): Promise<string[]>
 }

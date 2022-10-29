@@ -32,9 +32,19 @@
 
 - [x] dist tags
 
+  - https://support.google.com/chrome/a/answer/9027636?hl=en
   - latest: latest stable release - published by changesets/action
-  - next: latest pre-release - published on every commit to main
-  - canary: the latest dev release (https://docusaurus.io/community/canary) - published on every commit (main or PR)
+  - next: upcoming release - published on every commit to main
+  - canary: the latest dev release (https://docusaurus.io/community/canary) - published for PR commits
+
+- [x] sites
+
+  - main: `twind-run.pages.dev` (`twind.run`) latest stable release - published on release
+  - next: `next.twind-run.pages.dev` upcoming release - published on every commit to main
+  - canary: `pr-*.twind-run.pages.dev` - published for PR commits
+  - version: `v1-0-0-next-39.twind-run.pages.dev` - specific version
+
+    Branch name aliases are lowercased and non-alphanumeric characters are replaced with a hyphen — for example, the `fix/api` branch creates the `fix-api.<project>.pages.dev` alias.
 
 - @twind/devtools:
   - enumerate all classes and inject as empty for dev tools

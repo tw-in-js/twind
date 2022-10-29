@@ -6,6 +6,7 @@
 
 declare namespace App {
   interface Platform {
+    caches: CacheStorage & { default: Cache }
     env: {
       // WORKSPACES: KVNamespace
       WORKSPACES: R2Bucket

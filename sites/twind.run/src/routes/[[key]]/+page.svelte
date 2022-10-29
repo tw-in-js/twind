@@ -1,6 +1,5 @@
 <script>
   import debounce from 'just-debounce'
-  import { compressToEncodedURIComponent } from 'lz-string'
 
   import { onMount } from 'svelte'
   import { get, writable } from 'svelte/store'
@@ -8,7 +7,6 @@
   import { createKeybindingsHandler } from 'tinykeys'
   import copy from 'clipboard-copy'
   import { Pane, Splitpanes } from 'svelte-splitpanes'
-  import { cx } from 'twind'
 
   import { base } from '$app/paths'
   import { browser } from '$app/environment'
@@ -19,19 +17,16 @@
   import intellisense, { INTELLISENSE_VERSION } from '$lib/intellisense'
   import { mounted } from '$lib/stores'
 
-  import Code from './code.svelte'
-  import Preview from './preview.svelte'
+  import Loader from './loader.svelte'
   import Head from '$lib/components/head.svelte'
   import Header from '$lib/components/header.svelte'
   import Icon, {
     CheckCircle16,
     EllipsisHorizontalMini,
-    GitBranch24,
     Link16,
     LoadingSpin,
     ShareAndroid24,
     Stars,
-    Upload24,
   } from '$lib/icons'
   import { getTurnstileToken } from '$lib/turnstile'
 
@@ -70,9 +65,10 @@
    * @param {import('./$types').PageData['workspace']} workspace
    */
   function serialize(workspace) {
-    return JSON.stringify(workspace, ['html', 'script', 'config', 'manifest', 'path', 'value'])
+    return JSON.stringify(workspace, ['version', 'html', 'script', 'config', 'path', 'value'])
   }
 
+  console.debug(data)
   let source = serialize(data.workspace)
 
   /** @type {import('svelte/store').Writable<import('./$types').PageData['workspace']>} */
@@ -92,11 +88,14 @@
     uid += 1
   }
 
-  /** @type {['html', 'script', 'config', 'manifest']} */
-  const fileTabOrder = ['html', 'script', 'config', 'manifest']
+  $: manifest =
+    data.manifests.find((manifest) => manifest.version === $workspace.version) || data.manifests[0]
+
+  /** @type {['html', 'script', 'config']} */
+  const fileTabOrder = ['html', 'script', 'config']
   /** @type {any} */
   const activeFileTabParam = $page.url.searchParams.get('file')
-  /** @type {'html' | 'script' | 'config' | 'manifest'} */
+  /** @type {'html' | 'script' | 'config'} */
   let activeFileTab = fileTabOrder.includes(activeFileTabParam) ? activeFileTabParam : 'html'
 
   /** @type {['preview', 'css', 'html']} */
@@ -135,39 +134,17 @@
   /** @type {Code | null} */
   let result = null
 
-  /** @type {Record<string, string>} */
-  let versions = {}
-
-  $: if (browser) {
-    try {
-      const manifest = JSON.parse($workspace.manifest.value || '{}')
-
-      const nextVersions = {
-        ...manifest.peerDependencies,
-        ...manifest.devDependencies,
-        ...manifest.dependencies,
-        ...manifest.versions,
-      }
-
-      if (JSON.stringify(versions) !== JSON.stringify(nextVersions)) {
-        versions = nextVersions
-      }
-    } catch (error) {
-      console.error(`Failed to parse manifest`, error)
-    }
-  }
-
-  /** @type {import('svelte/store').Writable<Record<string, string> | null>} */
-  const lastVersions = writable(null)
+  /** @type {import('svelte/store').Writable<string | null>} */
+  const lastVersion = writable(null)
 
   /** @type {import('svelte/store').Writable<string | null>} */
   const lastConfig = writable(null)
 
   $: if (
     browser &&
-    (get(lastVersions) !== versions || get(lastConfig) !== $workspace.config.value)
+    (get(lastVersion) !== $workspace.version || get(lastConfig) !== $workspace.config.value)
   ) {
-    lastVersions.set(versions)
+    lastVersion.set($workspace.version)
     lastConfig.set($workspace.config.value)
 
     transpile
@@ -175,14 +152,14 @@
         {
           entry: `
           import { defineConfig } from 'twind'
-          import { createIntellisense } from '@twind/intellisense@${INTELLISENSE_VERSION}'
+          import { createIntellisense } from '@twind/intellisense@^${INTELLISENSE_VERSION}'
           import config from '$/config'
 
           export default createIntellisense(defineConfig(config))
         `,
         },
         {
-          versions,
+          manifest,
           modules: {
             '$/config': $workspace.config.value,
           },
@@ -191,7 +168,7 @@
       .then(({ entry, importMap }) => {
         if (
           $mounted &&
-          get(lastVersions) === versions &&
+          get(lastVersion) === $workspace.version &&
           get(lastConfig) === $workspace.config.value
         ) {
           return intellisense.init({ entry, importMap })
@@ -404,15 +381,6 @@
                 (result) => {
                   // TODO: workspace might have been changed??
                   console.debug(result)
-                  if (result.type === 'invalid' && result.status === 500) {
-                    result = {
-                      ...result,
-                      type: 'success',
-                      status: 200,
-                      data: { key: compressToEncodedURIComponent('1:' + stringifiedWorkspace) },
-                    }
-                  }
-
                   if (result.type === 'success') {
                     // copy to clipboard, change url and show link
                     const url = new URL(`${base}/${result.data.key}`, location.href)
@@ -499,6 +467,17 @@
             {/each}
           </div>
           <div class="flex items-center gap-4">
+            <select
+              bind:value={$workspace.version}
+              title="Select version"
+              class="mt-1 block w-full rounded-md bg-brand-3 text-brand-11 border-brand-7 p-2 text-base hover:(bg-brand-4 text-brand-12) focus:(bg-brand-5 text-brand-12 border-brand-8 outline-none ring-brand-8) sm:text-sm"
+            >
+              {#each data.manifests as manifest (manifest.version)}
+                <option value={manifest.version}>{manifest.version} ({manifest['dist-tag']})</option
+                >
+              {/each}
+            </select>
+
             <button
               type="button"
               class="flex items-center hover:text-brand-12"
@@ -518,31 +497,36 @@
           </div>
         </div>
 
-        {#key uid}
-          <Code
-            class="flex-auto"
-            bind:this={editor}
-            path={$workspace[activeFileTab].path}
-            defaultValue={$workspace[activeFileTab].value}
-            bind:dirty={$workspace[activeFileTab].dirty}
-            bind:value={$workspace[activeFileTab].value}
-            updateOn={activeFileTab === 'html' ? 'input' : 'save'}
-            {versions}
-            on:ready={(event) => {
-              for (const file of [$workspace.config, $workspace.script]) {
-                event.detail.monaco.loadTypeDeclarations(file.value, file.path, versions)
-              }
-            }}
-            on:transient={(event) => {
-              const { path, value } = event.detail
-              if (path === 'index.html' && value != null) {
-                transientHTML = value
-              } else {
-                transientHTML = null
-              }
-            }}
-          />
-        {/key}
+        {#if browser}
+          {#await import('./code.svelte') then { default: Code }}
+            {#key uid}
+              <Code
+                bind:this={editor}
+                path={$workspace[activeFileTab].path}
+                defaultValue={$workspace[activeFileTab].value}
+                bind:dirty={$workspace[activeFileTab].dirty}
+                bind:value={$workspace[activeFileTab].value}
+                updateOn={activeFileTab === 'html' ? 'input' : 'save'}
+                {manifest}
+                on:ready={(event) => {
+                  for (const file of [$workspace.config, $workspace.script]) {
+                    event.detail.monaco.loadTypeDeclarations(file.value, file.path, manifest)
+                  }
+                }}
+                on:transient={(event) => {
+                  const { path, value } = event.detail
+                  if (path === 'index.html' && value != null) {
+                    transientHTML = value
+                  } else {
+                    transientHTML = null
+                  }
+                }}
+              />
+            {/key}
+          {/await}
+        {:else}
+          <Loader />
+        {/if}
       </Pane>
 
       <Pane class="flex-auto flex flex-col">
@@ -572,24 +556,33 @@
           </div>
         </div>
 
-        <Preview
-          bind:this={preview}
-          class={cx('flex-auto', activeResultTab !== 'preview' && 'hidden')}
-          html={transientHTML || $workspace.html.value}
-          script={$workspace.script.value}
-          config={$workspace.config.value}
-          {versions}
-          bind:output
-        />
+        {#if browser}
+          {#await import('./preview.svelte') then { default: Preview }}
+            <Preview
+              bind:this={preview}
+              class={activeResultTab !== 'preview' ? 'hidden' : ''}
+              html={transientHTML || $workspace.html.value}
+              script={$workspace.script.value}
+              config={$workspace.config.value}
+              {manifest}
+              bind:output
+            />
+          {/await}
 
-        <Code
-          class={cx('flex-auto', activeResultTab === 'preview' && 'hidden')}
-          bind:this={result}
-          path={`preview://output.${activeResultTab}`}
-          value={activeResultTab === 'preview' ? '' : formatted[activeResultTab]}
-          updateOn="save"
-          readonly
-        />
+          {#await import('./code.svelte') then { default: Code }}
+            <Code
+              class={activeResultTab === 'preview' ? 'hidden' : ''}
+              bind:this={result}
+              path={`preview://output.${activeResultTab}`}
+              value={activeResultTab === 'preview' ? '' : formatted[activeResultTab]}
+              {manifest}
+              updateOn="save"
+              readonly
+            />
+          {/await}
+        {:else}
+          <Loader />
+        {/if}
       </Pane>
     </Splitpanes>
   </main>

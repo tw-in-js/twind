@@ -7,8 +7,5 @@
   "access": "public",
   "baseBranch": "next",
   "updateInternalDependencies": "patch",
-  "ignore": [],
-  "snapshot": {
-    "useCalculatedVersion": true
-  }
+  "ignore": []
 }

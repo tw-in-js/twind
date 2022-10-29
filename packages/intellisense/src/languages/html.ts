@@ -2,7 +2,9 @@ import type { ParsedDevRule } from 'twind'
 import type { ColorInformation, Diagnostics, DocumentationAt } from '../types'
 import type { IntellisenseContext, Boundary } from '../internal/types'
 
-import * as csstree from 'css-tree'
+import csstreeParse from 'css-tree/parser'
+import csstreeWalk from 'css-tree/walker'
+import csstreeGenerate from 'css-tree/generator'
 
 import { parse } from 'twind'
 import { fixClassList, parseHTML } from '../../../twind/src/internal/parse-html'
@@ -125,7 +127,7 @@ export function validate(
 
       const css = generateCSS(rule.n)
 
-      const ast = csstree.parse(css, {
+      const ast = csstreeParse(css, {
         positions: false,
         parseAtrulePrelude: false,
         parseRulePrelude: false,
@@ -161,10 +163,10 @@ export function validate(
         // }
 
         if (typeof document == 'object') {
-          csstree.walk(ast, {
+          csstreeWalk(ast, {
             visit: 'SelectorList',
             enter(node) {
-              const selector = csstree.generate(node)
+              const selector = csstreeGenerate(node)
               try {
                 document.querySelector(selector)
               } catch (error) {
@@ -215,7 +217,7 @@ export function validate(
 
         const css = generateCSS(className)
 
-        const ast = csstree.parse(css, {
+        const ast = csstreeParse(css, {
           positions: false,
           parseAtrulePrelude: false,
           parseRulePrelude: false,
@@ -236,10 +238,10 @@ export function validate(
 
         if (ast) {
           if (typeof document == 'object') {
-            csstree.walk(ast, {
+            csstreeWalk(ast, {
               visit: 'SelectorList',
               enter(node) {
-                const selector = csstree.generate(node)
+                const selector = csstreeGenerate(node)
                 try {
                   document.querySelector(selector)
                 } catch {

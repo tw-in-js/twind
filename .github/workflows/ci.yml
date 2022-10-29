@@ -13,9 +13,6 @@ concurrency:
   group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
   cancel-in-progress: true
 
-env:
-  CI: true
-
 jobs:
   build:
     name: 🏗️  Build on Node.js v${{ matrix.node }}
@@ -24,6 +21,9 @@ jobs:
     outputs:
       published: ${{ steps.changesets.outputs.published }}
       hasChangesets: ${{ steps.changesets.outputs.hasChangesets }}
+    permissions:
+      contents: write # to create release (changesets/action)
+      pull-requests: write # to create pull request (changesets/action)
 
     strategy:
       matrix:
@@ -92,7 +92,7 @@ jobs:
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           projectName: twind-style
-          directory: sites/twind.style/build
+          directory: build
           branch: main
 
       - name: 🌎  Deploy twind.run
@@ -104,7 +104,7 @@ jobs:
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           projectName: twind-run
-          directory: sites/twind.run/.svelte-kit/cloudflare
+          directory: .svelte-kit/cloudflare
           branch: main
 
   coveralls:
@@ -128,7 +128,7 @@ jobs:
     if: ${{ needs.build.outputs.published != 'true' && github.repository == 'tw-in-js/twind' }}
     permissions:
       contents: read
-      pull-requests: read
+      pull-requests: write
       deployments: write
 
     steps:
@@ -138,26 +138,18 @@ jobs:
           # only install dependencies for packages that are published and for the sites
           installArgs: --filter="./packages/*" --filter="@sites/*"
 
-      - name: 🚚  Publish as pre-release (@next.<DATETIME>)
-        if: ${{ github.event_name == 'push' }}
+      - name: 🚚  Publish pre-release to npm
+        id: publish
         uses: ./.github/actions/publish-prerelease
         with:
-          tag: next
-          template: '{tag}.{datetime}'
-          hasChangesets: ${{ needs.build.outputs.hasChangesets }}
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: 🚚  Publish as canary release (@canary-<commit>)
-        if: ${{ github.event_name == 'pull_request' }}
-        uses: ./.github/actions/publish-prerelease
-        with:
-          tag: canary
-          template: '{tag}-{commit}'
+          tag: ${{ (github.event_name == 'push' && 'next') || 'canary'}}
+          template: ${{ (github.event_name == 'push' && '{tag}-{datetime}') || '{tag}-{commit}'}}
           hasChangesets: ${{ needs.build.outputs.hasChangesets }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
       # deploy sites using the published package versions
       - name: 🌎  Deploy twind.style
+        id: deploy_twind_style
         uses: ./.github/actions/publish-pages
         with:
           workingDirectory: sites/twind.style
@@ -168,10 +160,10 @@ jobs:
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           projectName: twind-style
-          directory: sites/twind.style/build
-          branch: ${{ (github.event.number && format('pr-{0}', github.event.number)) || (github.event_name == 'pull_request' && 'canary') || 'next' }}
+          directory: build
 
       - name: 🌎  Deploy twind.run
+        id: deploy_twind_run
         uses: ./.github/actions/publish-pages
         with:
           workingDirectory: sites/twind.run
@@ -179,5 +171,39 @@ jobs:
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           projectName: twind-run
-          directory: sites/twind.run/.svelte-kit/cloudflare
-          branch: ${{ (github.event.number && format('pr-{0}', github.event.number)) || (github.event_name == 'pull_request' && 'canary') || 'next' }}
+          directory: .svelte-kit/cloudflare
+
+      - name: 📝  Comment PR
+        if: ${{ github.event_name == 'pull_request' }}
+        uses: thollander/actions-comment-pull-request@v1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          comment_includes: '## Deployed site previews with [![Cloudflare Pages]'
+          message: |
+            > **Latest commit**: ${{ github.sha }}
+
+            ## Deployed site previews with [![Cloudflare Pages](https://img.shields.io/badge/Cloudflare%20Pages-F38020?style=for-the-badge&logo=Cloudflare&logoColor=white)](https://pages.dev)
+
+            ### twind.style
+
+            <table>
+            <tr><td><strong>Deployment URL:</strong></td><td><a href='${{ steps.deploy_twind_style.outputs.url }}'>${{ steps.deploy_twind_style.outputs.url }}</a></td></tr>
+            <tr><td><strong>Branch URL:</strong></td><td><a href='${{ steps.deploy_twind_style.outputs.branchURL }}'>${{ steps.deploy_twind_style.outputs.branchURL }}</a></td></tr>
+            <tr><td><strong>Version URL:</strong></td><td><a href='${{ steps.deploy_twind_style.outputs.versionURL }}'>${{ steps.deploy_twind_style.outputs.versionURL }}</a></td></tr>
+            </table>
+
+            ### twind.run
+
+            <table>
+            <tr><td><strong>Deployment URL:</strong></td><td><a href='${{ steps.deploy_twind_run.outputs.url }}'>${{ steps.deploy_twind_run.outputs.url }}</a></td></tr>
+            <tr><td><strong>Branch URL:</strong></td><td><a href='${{ steps.deploy_twind_run.outputs.branchURL }}'>${{ steps.deploy_twind_run.outputs.branchURL }}</a></td></tr>
+            <tr><td><strong>Version URL:</strong></td><td><a href='${{ steps.deploy_twind_run.outputs.versionURL }}'>${{ steps.deploy_twind_run.outputs.versionURL }}</a></td></tr>
+            </table>
+
+            ## Published to [npm](https://www.npmjs.com)
+
+            **Dist Tag**: ${{ steps.publish.output.tag }}
+
+            **Packages**:
+
+            ${{ steps.publish.output.packages }}
