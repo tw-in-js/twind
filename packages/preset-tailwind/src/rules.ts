@@ -453,7 +453,7 @@ const rules: Rule<TailwindTheme>[] = [
   match('no-underline', { textDecorationLine: 'none' }),
 
   // Text Underline offset
-  matchTheme('underline-', 'textUnderlineOffset'),
+  matchTheme('underline-offset-', 'textUnderlineOffset'),
 
   // Text Decoration Color
   matchColor('decoration-', {
