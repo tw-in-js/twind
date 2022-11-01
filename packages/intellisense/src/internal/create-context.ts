@@ -2,19 +2,19 @@ import genex from 'genex'
 
 import {
   asArray,
-  AutocompleteContext,
-  AutocompleteItem,
+  type AutocompleteContext,
+  type AutocompleteItem,
   defineConfig,
   getAutocompleteProvider,
-  MatchResult,
-  MaybeArray,
+  type MatchResult,
+  type MaybeArray,
   mql,
-  ScreenValue,
+  type ScreenValue,
   stringify,
   twind,
-  Twind,
-  TwindConfig,
-  TwindUserConfig,
+  type Twind,
+  type TwindConfig,
+  type TwindUserConfig,
   virtual,
 } from 'twind'
 

@@ -1,7 +1,7 @@
 blank_issues_enabled: false
 contact_links:
   - name: Documentation
-    url: https://twind.style/docs
+    url: https://twind.style
     about: Learn how to integrate Twind with your website or app.
   - name: Questions & Discussions
     url: https://github.com/tw-in-js/twind/discussions

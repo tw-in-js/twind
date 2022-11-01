@@ -36,12 +36,9 @@ declare global {
 }
 
 if (import.meta.env.DEV && typeof importScripts === 'function') {
-  // const instantiate = System.constructor.prototype.instantiate
-  System.constructor.prototype.instantiate = function (url: string) {
-    // if (this.registerRegistry[url]) {
-    //   return instantiate.apply(this, arguments)
-    // }
-    return import(/* @vite-ignore */ url).then(() => this.getRegister(url))
+  System.constructor.prototype.instantiate = async function (url: string) {
+    await import(/* @vite-ignore */ url)
+    return this.getRegister(url)
   }
 }
 

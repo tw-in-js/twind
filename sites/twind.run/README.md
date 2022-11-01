@@ -18,7 +18,7 @@
 - report bug:
 
   - extra label
-  - like prettier.io/play
+  - like https://swc.rs/playground or prettier.io/play
   - https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue#creating-an-issue-from-a-url-query
 
 - TODO: splitpane splitter hover add ring for better visibility

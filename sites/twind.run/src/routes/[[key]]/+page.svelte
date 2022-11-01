@@ -125,13 +125,13 @@
     history.replaceState(history.state, '', url)
   }
 
-  /** @type {Code | null} */
+  /** @type {import('./code.svelte').default | null} */
   let editor = null
 
-  /** @type {Preview | null} */
+  /** @type {import('./preview.svelte').default | null} */
   let preview = null
 
-  /** @type {Code | null} */
+  /** @type {import('./code.svelte').default | null} */
   let result = null
 
   /** @type {import('svelte/store').Writable<string | null>} */
@@ -270,8 +270,8 @@
   /** @type {string | null} */
   let transientHTML = null
 
-  let saving = false
-  let forking = false
+  // let saving = false
+  // let forking = false
   let sharing = false
 
   /** @type {ReturnType<typeof setTimeout> | undefined} */
@@ -284,26 +284,22 @@
   }
 
   /**
-   * @template T
-   * @param {T} text
+   * @param {unknown} text
    * @return {Promise<boolean>}
    */
-  const copyToClipboard = browser
-    ? (text) => {
-        return copy(String(text))
-          .then(() => {
-            clearTimeout(copied)
-            copied = setTimeout(() => {
-              copied = undefined
-            }, 2500)
-            return true
-          })
-          .catch((error) => {
-            console.error(error)
-            return false
-          })
-      }
-    : () => Promise.resolve(false)
+  async function copyToClipboard(text) {
+    try {
+      await copy(String(text))
+      clearTimeout(copied)
+      copied = setTimeout(() => {
+        copied = undefined
+      }, 2500)
+      return true
+    } catch (error) {
+      console.error(error)
+      return false
+    }
+  }
 </script>
 
 <Head />
@@ -381,7 +377,7 @@
                 (result) => {
                   // TODO: workspace might have been changed??
                   console.debug(result)
-                  if (result.type === 'success') {
+                  if (result.type === 'success' && result.data?.key) {
                     // copy to clipboard, change url and show link
                     const url = new URL(`${base}/${result.data.key}`, location.href)
                     url.search = location.search

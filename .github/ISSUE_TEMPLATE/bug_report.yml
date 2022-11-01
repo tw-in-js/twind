@@ -27,8 +27,10 @@ body:
     attributes:
       label: Reproduction
       description: |
-        A [minimal reproduction](https://minimum-reproduction.wtf) on Stackblitz or Codesandbox of an
-        [example](https://github.com/tw-in-js/twind/tree/next/examples#readme) that reproduces the issue.
+        Please create a [minimal reproduction](https://minimum-reproduction.wtf)
+
+        - on [twind.run](https://twind.run/) — use the _Something broken? File a bug!_ link on the top-right, or copy the share link and then paste the link here
+        - or use one of the [examples](https://github.com/tw-in-js/twind/tree/next/examples#readme) for Stackblitz or Codesandbox that reproduces the issue
 
         Explaining how to reproduce is generally not enough. It pushes the burden of creating a reproduction
         onto a small set of volunteer maintainers and isn't scalable.
@@ -60,12 +62,13 @@ body:
     id: system-info
     attributes:
       label: System Info
-      description: Output of `npx envinfo --system --binaries --browsers --npmPackages`
+      description: Output of `npx envinfo --binaries --browsers --npmPackages "*twind/*" --markdown`
       render: sh
-      placeholder: System, Binaries, Browsers, Packages
+      placeholder: Binaries, Browsers, Twind Packages
     validations:
       required: true
   - type: textarea
     id: additional-context
     attributes:
       label: Additional Information
+      placeholder: Add any other context or screenshots about the problem here.

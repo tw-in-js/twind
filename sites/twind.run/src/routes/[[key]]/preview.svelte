@@ -157,11 +157,15 @@
       function waitForIframe(event) {
         if (event.data === 'preview:ready') {
           if (dev && isReady) {
-            pendingOperation = pendingOperation.then((state) => ({
-              ...state,
-              preview: Comlink.wrap(Comlink.windowEndpoint(iframeElement.contentWindow)),
-            }))
-          } else {
+            pendingOperation = pendingOperation.then((state) =>
+              iframeElement.contentWindow
+                ? {
+                    ...state,
+                    preview: Comlink.wrap(Comlink.windowEndpoint(iframeElement.contentWindow)),
+                  }
+                : state,
+            )
+          } else if (iframeElement.contentWindow) {
             removeEventListener('message', waitForIframe)
             isReady = true
             ready({ preview: Comlink.wrap(Comlink.windowEndpoint(iframeElement.contentWindow)) })

@@ -821,11 +821,13 @@
     // Update the preview when scrolling through the suggest list
     // Based on https://github.com/tailwindlabs/play.tailwindcss.com/blob/master/src/monaco/html.js#L178
     let findSuggestWidgetTimer = setTimeout(function findSuggestWidget() {
+      // @ts-expect-error
       let widget = editor?._contentWidgets['editor.widget.suggestWidget']?.widget?._widget
       if (widget) {
         // widget.onDetailsKeyDown((...args) => console.debug('onDetailsKeyDown', ...args))
 
         disposables.add(
+          // @ts-expect-error
           widget.onDidFocus(({ item: { completion } }) => {
             const model = editor?.getModel()
 

@@ -66,7 +66,7 @@ const api: Transpile = {
         },
         {
           name: 'import-map-generator',
-          resolveId(source, importer, options) {
+          resolveId(source, _importer, options) {
             if (options.isEntry) return null
 
             // only support url-like imports
@@ -228,7 +228,7 @@ const api: Transpile = {
   },
 
   async findImports(source) {
-    const { code } = await transform(source, {
+    const { code } = transform(source, {
       transforms: ['typescript'],
       production: false,
       jsxRuntime: 'automatic',

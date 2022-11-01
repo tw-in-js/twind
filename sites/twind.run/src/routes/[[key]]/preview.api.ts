@@ -163,23 +163,28 @@ addEventListener('message', function catchLinks(event) {
     if (event.defaultPrevented) return
 
     // ensure target is a link
-    let el = event.target
-    while (el && el.nodeName !== 'A') el = el.parentNode
+    let el = event.target as HTMLElement | null
+    while (el && el.nodeName !== 'A') el = el.parentElement
     if (!el || el.nodeName !== 'A') return
 
-    if (el.hasAttribute('download') || el.getAttribute('rel') === 'external' || el.target) return
+    if (
+      el.hasAttribute('download') ||
+      el.getAttribute('rel') === 'external' ||
+      (el as HTMLAnchorElement).target
+    )
+      return
 
     event.preventDefault()
 
-    if (el.href.startsWith(top_origin)) {
-      const url = new URL(el.href)
+    if ((el as HTMLAnchorElement).href.startsWith(top_origin)) {
+      const url = new URL((el as HTMLAnchorElement).href)
       if (url.hash[0] === '#') {
         window.location.hash = url.hash
         return
       }
     }
 
-    window.open(el.href, '_blank')
+    window.open((el as HTMLAnchorElement).href, '_blank')
   })
 })
 

@@ -6,14 +6,14 @@
 
 {#if $page.error?.frame}
   <pre>
-  {$page.error.frame}
-</pre>
+    {$page.error.frame}
+  </pre>
 {/if}
 
 {#if $page.error?.stack}
   <pre>
-  {$page.error.stack}
-</pre>
+    {$page.error.stack}
+  </pre>
 {/if}
 
 <pre>

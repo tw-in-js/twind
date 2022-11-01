@@ -1,6 +1,6 @@
 import type { BaseTheme, ExtractThemes, Preset, Twind, TwindConfig, TwindUserConfig } from 'twind'
 
-import { matchSorter, MatchSorterOptions } from 'match-sorter'
+import { matchSorter, type MatchSorterOptions } from 'match-sorter'
 import cssbeautify from 'cssbeautify'
 import QuickLRU from 'quick-lru'
 

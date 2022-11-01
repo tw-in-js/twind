@@ -43,12 +43,6 @@ const HOSTNAME = 'twind-run.pages.dev'
 // twind.run/@<team>/<alias> -> twind.run/@twind/brother-santa-bruno
 
 // Metadata of up to 1024 bytes per key
-interface Metadata {
-  version: string
-
-  encoding?: 'gzip'
-}
-
 const EXPECTED_VERSION = '1'
 
 export async function load({
@@ -260,7 +254,7 @@ export const actions: import('./$types').Actions = {
           // not found
           await platform.env.WORKSPACES.put(
             key,
-            await toBlob((await blob.stream()).pipeThrough(await createGzipStream()), {
+            await toBlob(blob.stream().pipeThrough(await createGzipStream()), {
               type: 'application/json',
             }),
             {

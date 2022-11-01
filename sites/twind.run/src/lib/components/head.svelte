@@ -3,7 +3,6 @@
   import { page } from '$app/stores'
 
   import favicon from '$lib/assets/favicon.ico'
-  import iconPNG from '$lib/assets/icon.png'
   import iconSVG from '$lib/assets/icon.svg'
 
   /** @type {string | undefined} */

@@ -52,7 +52,7 @@ export const tw = /* #__PURE__ */ new Proxy(
   // -> using a delegation proxy here
   noop as unknown as Twind<any, any>,
   {
-    apply(target, thisArg, args) {
+    apply(_target, _thisArg, args) {
       return active(args[0])
     },
     get(target, property) {
