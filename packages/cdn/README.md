@@ -35,7 +35,7 @@ To configure Twind add a script block _after_ the previous one (optional):
 
 ```html
 <script>
-  twind.setup({
+  twind.install({
     /* options */
   })
 </script>
@@ -50,7 +50,7 @@ To add other presets add their ids to the script `src` attribute:
     crossorigin
   ></script>
   <script>
-    twind.setup({
+    twind.install({
       presets: [twind.presetExt()],
       // ...
     })
@@ -60,7 +60,7 @@ To add other presets add their ids to the script `src` attribute:
 
 ## 🙇 Usage
 
-### `twind.setup([config])`
+### `twind.install([config [, isProduction ]])`
 
 Can be called as many times as you want.
 

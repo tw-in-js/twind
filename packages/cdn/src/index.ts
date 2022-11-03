@@ -1,19 +1,11 @@
 // Fix exported global variable from `twindCdn` to `twind`
 /* @distilt-global-name twind */
 
-import type {
-  Twind,
-  BaseTheme,
-  TwindConfig,
-  TwindUserConfig,
-  Preset,
-  ExtractThemes,
-  Sheet,
-} from 'twind'
+import { Twind, TwindConfig, TwindUserConfig, Preset, ExtractThemes, defineConfig } from 'twind'
 
 import type { TailwindPresetOptions, TailwindTheme } from '@twind/preset-tailwind'
 
-import { twind, observe, auto, cssom, asArray } from 'twind'
+import { auto, install as install$, asArray } from 'twind'
 import presetAutoprefix from '@twind/preset-autoprefix'
 import presetTailwind from '@twind/preset-tailwind'
 
@@ -24,43 +16,33 @@ export * as presetTailwind_colors from '@twind/preset-tailwind/colors'
 export { default as presetTailwind_defaultTheme } from '@twind/preset-tailwind/defaultTheme'
 
 // If we run in the browser as `<script src="..."></script>` auto call setup once the body starts rendering
-const cancelAutoSetup = /* #__PURE__ */ auto(setup)
+const cancelAutoInstall = /* #__PURE__ */ auto(install)
 
-export function setup<Theme extends BaseTheme = TailwindTheme, SheetTarget = unknown>(
+export function install<Theme extends TailwindTheme = TailwindTheme>(
   config?: TwindConfig<Theme> & TailwindPresetOptions,
-  sheet?: Sheet<SheetTarget>,
-  target?: HTMLElement,
-): Twind<Theme & TailwindTheme, SheetTarget>
+  isProduction?: boolean,
+): Twind<Theme & TailwindTheme>
 
-export function setup<
-  Theme = TailwindTheme,
-  Presets extends Preset<any>[] = Preset[],
-  SheetTarget = unknown,
->(
+export function install<Theme = TailwindTheme, Presets extends Preset<any>[] = Preset[]>(
   config?: TwindUserConfig<Theme, Presets> & TailwindPresetOptions,
-  sheet?: Sheet<SheetTarget>,
-  target?: HTMLElement,
-): Twind<TailwindTheme & ExtractThemes<Theme, Presets>, SheetTarget>
+  isProduction?: boolean,
+): Twind<TailwindTheme & ExtractThemes<Theme, Presets>>
 
-export function setup(
+export function install(
   { disablePreflight, ...config }: (TwindConfig | TwindUserConfig) & TailwindPresetOptions = {},
-  sheet: Sheet = cssom(),
-  target?: HTMLElement,
+  isProduction?: boolean,
 ): Twind {
-  cancelAutoSetup()
+  cancelAutoInstall()
 
-  return observe(
-    twind(
-      {
-        ...(config as TwindUserConfig),
-        presets: [
-          presetAutoprefix(),
-          presetTailwind({ disablePreflight }),
-          ...asArray((config as TwindUserConfig).presets),
-        ],
-      } as any,
-      sheet,
-    ),
-    target,
-  ) as unknown as Twind
+  return install$(
+    defineConfig({
+      ...(config as TwindUserConfig),
+      presets: [
+        presetAutoprefix(),
+        presetTailwind({ disablePreflight }),
+        ...asArray((config as TwindUserConfig).presets),
+      ],
+    } as any),
+    isProduction,
+  )
 }
