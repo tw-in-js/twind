@@ -12,6 +12,7 @@ import { twind } from './twind'
 import { observe } from './observe'
 import { getSheet } from './sheets'
 import { noop } from './utils'
+import { DEV } from 'distilt/env'
 
 export function auto(setup: () => void): () => void {
   // If we run in the browser we call setup at latest when the body is inserted
@@ -42,10 +43,19 @@ export function auto(setup: () => void): () => void {
   return noop
 }
 
+let active: Twind
+
+function assertActive() {
+  if (DEV && !active) {
+    throw new Error(
+      `No active twind instance found. Make sure to call setup or install before accessing tw.`,
+    )
+  }
+}
+
 /**
  * A proxy to the currently active Twind instance.
  */
-
 export const tw = /* #__PURE__ */ new Proxy(
   // just exposing the active as tw should work with most bundlers
   // as ES module export can be re-assigned BUT some bundlers to not honor this
@@ -53,21 +63,28 @@ export const tw = /* #__PURE__ */ new Proxy(
   noop as unknown as Twind<any, any>,
   {
     apply(_target, _thisArg, args) {
+      if (DEV) assertActive()
+
       return active(args[0])
     },
-    get(target, property) {
-      const value = (active || target)[property as keyof Twind]
+    get(_target, property) {
+      if (DEV) assertActive()
+
+      const value = active[property as keyof Twind]
 
       if (typeof value === 'function') {
-        return value.bind(active)
+        return function () {
+          if (DEV) assertActive()
+
+          // eslint-disable-next-line prefer-rest-params
+          return value.apply(active, arguments)
+        }
       }
 
       return value
     },
   },
 )
-
-let active: Twind
 
 export type SheetFactory<SheetTarget = unknown> = () => Sheet<SheetTarget>
 
