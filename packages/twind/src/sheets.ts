@@ -2,8 +2,8 @@ import { warn } from './internal/warn'
 import type { Sheet, SheetRule } from './types'
 import { asArray, noop } from './utils'
 
-function getStyleElement(element?: Element | null | false): HTMLStyleElement {
-  let style = element || document.querySelector('style[data-twind]')
+function getStyleElement(selector: string | null | undefined | false): HTMLStyleElement {
+  let style = document.querySelector(selector || 'style[data-twind]')
 
   if (!style || style.tagName != 'STYLE') {
     style = document.createElement('style')
@@ -14,10 +14,15 @@ function getStyleElement(element?: Element | null | false): HTMLStyleElement {
   return style as HTMLStyleElement
 }
 
-export function cssom(element?: CSSStyleSheet | Element | null | false): Sheet<CSSStyleSheet> {
+export function cssom(
+  element?: CSSStyleSheet | HTMLStyleElement | string | null | false,
+): Sheet<CSSStyleSheet> {
   const target = (element as CSSStyleSheet)?.cssRules
     ? (element as CSSStyleSheet)
-    : (getStyleElement(element as Element | null | false).sheet as CSSStyleSheet)
+    : ((element && typeof element != 'string'
+        ? (element as HTMLStyleElement)
+        : getStyleElement(element)
+      ).sheet as CSSStyleSheet)
 
   return {
     target,
@@ -69,8 +74,8 @@ export function cssom(element?: CSSStyleSheet | Element | null | false): Sheet<C
   }
 }
 
-export function dom(element?: Element | null | false): Sheet<HTMLStyleElement> {
-  const target = getStyleElement(element)
+export function dom(element?: HTMLStyleElement | string | null | false): Sheet<HTMLStyleElement> {
+  const target = element && typeof element != 'string' ? element : getStyleElement(element)
 
   return {
     target,
