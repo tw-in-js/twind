@@ -3,3 +3,5 @@
 ---
 
 fix: `underline-offset-*` classes
+
+closes #389

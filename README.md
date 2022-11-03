@@ -108,7 +108,9 @@ We have collected a list of changes in [Migration › Twind v0.16 › Notable Ch
 
 See the [Contributing Guide](./CONTRIBUTING.md) for information on how to contribute to this project.
 
-## 💡 Inspiration
+## 🌸 Credits
+
+### 💡 Inspiration
 
 It would be untrue to suggest that the design here is totally original. Other than the founders' initial attempts at implementing such a module ([oceanwind](https://github.com/lukejacksonn/oceanwind) and [beamwind](https://github.com/kenoxa/beamwind)) we are truly standing on the shoulders of giants.
 
@@ -122,42 +124,21 @@ It would be untrue to suggest that the design here is totally original. Other th
 - [UnoCSS](https://github.com/antfu/unocss): for the configuration syntax.
 - [CSSType](https://github.com/frenic/csstype): providing autocompletion and type checking for CSS properties and values.
 
-## 🌸 Credits
-
 ### 🤝 Contributors
 
 Thank you to all the people who have <a href="https://github.com/tw-in-js/twind/graphs/contributors">already contributed</a> to twind!
 
 ### 🙏🏾 Sponsors
 
-<a href="https://www.kenoxa.com" target="_blank"><img src="https://images.opencollective.com/kenoxa/9c25796/logo/68.png" height="96"></a>
-<a href="https://www.copilottravel.com" target="_blank"><img src="https://assets.website-files.com/5f7bc722eed484e8af21e542/620edd53664c683a9cb371a3_copilot%20travel%20vector%20header%20logo.svg" height="96"></a>
-
 This project is kindly sponsored by <a href="https://www.kenoxa.com" target="_blank">Kenoxa GmbH</a> who support [@sastan](https://github.com/sastan) to maintain this project as part of their open-source engagement.
 
 <a href="https://www.copilottravel.com" target="_blank">COPILOT TRAVEL</a> is partnering with [@sastan](https://github.com/sastan) to keep twind aligned with the latest tailwindcss releases.
 
-Thank you to all our sponsors! (please ask your company to also support this open source project by [becoming a sponsor](https://opencollective.com/twind#sponsor))
+Thank you to all our sponsors!
 
-<a href="https://opencollective.com/twind/sponsor/0/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/twind/sponsor/1/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/twind/sponsor/2/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/twind/sponsor/3/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/twind/sponsor/4/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/twind/sponsor/5/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/twind/sponsor/6/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/twind/sponsor/7/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/twind/sponsor/8/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/twind/sponsor/9/website" target="_blank"><img src="https://opencollective.com/twind/sponsor/9/avatar.svg"></a>
+![Image](./sites/twind.style/static/sponsors.png)
 
-<a href="https://opencollective.com/twind#backers" target="_blank"><img src="https://opencollective.com/twind/backers.svg?width=890"></a>
-
-<a href="https://github.com/copilottravel" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/64566279?s=88&v=4" width="64" height="64" alt="@copilottravel"></a>
-<a href="https://github.com/denoland" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/42048915?s=88&v=4" width="64" height="64" alt="@denoland"></a>
-<a href="https://github.com/tylerforesthauser" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/1226786?v=4" width="64" height="64" alt="@tylerforesthauser"></a>
-<a href="https://github.com/tonysaad" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/1137569?v=4" width="64" height="64" alt="@tonysaad"></a>
-<a href="https://github.com/izznatsir" target="_blank"><img style="border-radius: 50%!important" src="https://avatars.githubusercontent.com/u/32354148?s=120&v=4" width="64" height="64" alt="@izznatsir"></a>
-[[Become a GitHub Sponsor](https://github.com/sponsors/tw-in-js)]
+Please ask your company to also support this open source project by becoming a sponsor on [opencollective](https://opencollective.com/twind#sponsor) or [GitHub](https://github.com/sponsors/tw-in-js)).
 
 ## ⚖️ License
 

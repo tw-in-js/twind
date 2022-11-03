@@ -13,10 +13,17 @@ dist
 out
 
 sites/twind.style/static/packages
+sites/twind.run/.mf
+sites/twind.style/static/api
+sites/twind.style/static/.cache.json
+sites/twind.style/.typedoc.data.json
 examples/with-gatsby/public
 examples/with-remix/public/build
 __generated__
 tsconfig.dist*.json
+
+.env.local
+.env.*.local
 
 benchmarks/*.min.mjs
 
@@ -83,7 +90,3 @@ documentation/api
 
 # gzthermal result
 gzthermal-result.png
-
-sites/twind.run/.mf
-.env.local
-.env.*.local

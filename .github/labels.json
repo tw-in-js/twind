@@ -7,7 +7,7 @@
   },
 
   {
-    "name": "🌬  Tailwind CSS compatibilty",
+    "name": "🌬  Tailwind CSS compatibility",
     "color": "f44336",
     "description": "Some feature of Tailwind CSS is missing or not working as expected",
     "aliases": ["compat"]

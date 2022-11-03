@@ -7,12 +7,16 @@ branding:
 
 inputs:
   nodeVersion:
-    description: 'the version of Node.js to be used — defaults to .nvmrc'
+    description: 'The version of Node.js to be used — defaults to .nvmrc'
     required: false
   installArgs:
     description: 'Additional arguments after `pnpm install --recursive --frozen-lockfile`'
     required: false
     default: ''
+  fetchDepth:
+    description: 'Number of commits to fetch. 0 indicates all history for all branches and tags.'
+    required: false
+    default: 1
 
 outputs:
   cache-hit:
@@ -25,8 +29,8 @@ runs:
     - name: 📥  Checkout
       uses: actions/checkout@v3
       with:
-        # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
-        fetch-depth: 0
+        ref: ${{ inputs.ref }}
+        fetch-depth: ${{ inputs.fetchDepth }}
 
     - name: 🔧  Setup Node.js
       uses: actions/setup-node@v3

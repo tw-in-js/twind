@@ -1,0 +1,31 @@
+name: Generate Sponsors
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  update-sponsors:
+    runs-on: ubuntu-latest
+    if: github.repository == 'tw-in-js/twind'
+    steps:
+      - name: 🔧  Setup
+        uses: ./.github/actions/setup
+        with:
+          installArgs: '--filter scripts'
+
+      - name: Update sponsors
+        run: pnpm run sponsor
+        working-directory: scripts
+        env:
+          SPONSORKIT_GITHUB_TOKEN: ${{ secrets.SPONSORS_TOKEN }}
+          SPONSORKIT_OPENCOLLECTIVE_KEY: ${{ secrets.OPENCOLLECTIVE_KEY }}
+
+      - name: Commit
+        uses: EndBug/add-and-commit@v9
+        with:
+          commit-message: "chore: update sponsors images"
+          add: "sites/twind.style/static/sponsors.*"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

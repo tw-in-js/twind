@@ -37,6 +37,8 @@ jobs:
         uses: ./.github/actions/setup
         with:
           nodeVersion: ${{ matrix.node }}
+          # This makes Actions fetch all Git history so that Changesets can generate changelogs with the correct commits
+          fetchDepth: 0
 
       - name: 🤘  Validate packages
       - run: |
