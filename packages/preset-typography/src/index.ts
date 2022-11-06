@@ -289,12 +289,13 @@ export default function presetTypography({
     // & :is(:where(code):not(:where([class~="not-prose"] *)))
 
     variants: [
-      ['headings', 'h1,h2,h3,h4,th'],
-      ['lead', '.lead'],
+      ['headings', 'h1,h2,h3,h4,h5,h6,th'],
       ['h1'],
       ['h2'],
       ['h3'],
       ['h4'],
+      ['h5'],
+      ['h6'],
       ['p'],
       ['a'],
       ['blockquote'],
@@ -315,6 +316,7 @@ export default function presetTypography({
       ['img'],
       ['video'],
       ['hr'],
+      ['lead', '.lead'],
     ].map(([name, selector = name]) => [
       `${className}-${name}`,
       (_, context) =>
@@ -393,6 +395,9 @@ export default function presetTypography({
                 strong: {
                   color: 'var(--tw-prose-bold)',
                   fontWeight: '600',
+                },
+                'a strong,blockquote strong,thead th strong': {
+                  color: 'inherit',
                 },
                 ul: {
                   listStyleType: 'disc',
@@ -497,6 +502,7 @@ export default function presetTypography({
                 },
                 'h1 strong': {
                   fontWeight: '900',
+                  color: 'inherit',
                 },
                 h2: {
                   color: 'var(--tw-prose-headings)',
@@ -508,6 +514,7 @@ export default function presetTypography({
                 },
                 'h2 strong': {
                   fontWeight: '800',
+                  color: 'inherit',
                 },
                 h3: {
                   color: 'var(--tw-prose-headings)',
@@ -519,6 +526,7 @@ export default function presetTypography({
                 },
                 'h3 strong': {
                   fontWeight: '700',
+                  color: 'inherit',
                 },
                 h4: {
                   color: 'var(--tw-prose-headings)',
@@ -529,6 +537,7 @@ export default function presetTypography({
                 },
                 'h4 strong': {
                   fontWeight: '700',
+                  color: 'inherit',
                 },
                 'hr+*,h2+*,h3+*,h4+*': {
                   marginTop: '0',
@@ -561,8 +570,8 @@ export default function presetTypography({
                 'h3 code': {
                   fontSize: em(18, 20),
                 },
-                'a code': {
-                  color: 'var(--tw-prose-links)',
+                'a code,h1 code,h2 code,h3 code,h4 code,blockquote code,thead th code': {
+                  color: 'inherit',
                 },
                 pre: {
                   color: 'var(--tw-prose-pre-code)',
@@ -630,17 +639,17 @@ export default function presetTypography({
                 'tbody tr:last-child': {
                   borderBottomWidth: '0',
                 },
-                'tbody td': {
+                'tbody td,tfoot td': {
                   verticalAlign: 'baseline',
                   paddingTop: em(8, 14),
                   paddingRight: em(8, 14),
                   paddingBottom: em(8, 14),
                   paddingLeft: em(8, 14),
                 },
-                'tbody td:first-child': {
+                'tbody td:first-child,tfoot td:first-child': {
                   paddingLeft: '0',
                 },
-                'tbody td:last-child': {
+                'tbody td:last-child,tfoot td:last-child': {
                   paddingRight: '0',
                 },
                 [`.${context.e(context.h('lead'))}`]: {
