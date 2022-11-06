@@ -19,41 +19,44 @@ export interface TailwindFormsPresetOptions {
 export default function presetTailwindForms({
   strategy,
 }: TailwindFormsPresetOptions = {}): Preset<TailwindTheme> {
-  return strategy == 'class'
-    ? {
-        rules: [
-          [
-            '(' +
-              rules
-                .map((r) => r.c)
-                .filter(Boolean)
-                .join('|') +
-              ')',
-            (match, context) =>
-              ({
-                '@layer base': rules
-                  .filter((r) => r.c?.includes(match[1]))
-                  .map(({ c: classes, s: styles }) => ({
-                    ['' +
-                    (classes as string[]).map(
-                      (className) => '.' + context.e(context.h(className)),
-                    )]: typeof styles == 'function' ? styles(context) : styles,
-                  })),
-              } as CSSObject),
-          ],
-        ],
-      }
-    : {
-        preflight(context) {
-          const preflight: Preflight = {}
+  const config: Preset<TailwindTheme> = {}
 
-          for (const { b: base, s: styles } of rules) {
-            preflight['' + base] = typeof styles == 'function' ? styles(context) : styles
-          }
+  if (strategy !== 'base') {
+    config.rules = [
+      [
+        '(' +
+          rules
+            .map((r) => r.c)
+            .filter(Boolean)
+            .join('|') +
+          ')',
+        (match, context) =>
+          ({
+            '@layer base': rules
+              .filter((r) => r.c?.includes(match[1]))
+              .map(({ c: classes, s: styles }) => ({
+                ['' +
+                (classes as string[]).map((className) => '.' + context.e(context.h(className)))]:
+                  typeof styles == 'function' ? styles(context) : styles,
+              })),
+          } as CSSObject),
+      ],
+    ]
+  }
 
-          return preflight
-        },
+  if (strategy !== 'class') {
+    config.preflight = (context) => {
+      const preflight: Preflight = {}
+
+      for (const { b: base, s: styles } of rules) {
+        preflight['' + base] = typeof styles == 'function' ? styles(context) : styles
       }
+
+      return preflight
+    }
+  }
+
+  return config
 }
 
 const rules: {
