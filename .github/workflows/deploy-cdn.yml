@@ -1,0 +1,26 @@
+name: Deploy cdn.twind.style
+
+on:
+  push:
+    branches:
+      - next
+    paths:
+      - 'sites/cdn.twind.style/**'
+
+jobs:
+  deploy-main:
+    runs-on: ubuntu-latest
+    if: github.repository == 'tw-in-js/twind'
+    steps:
+      - name: 🔧  Setup
+        uses: ./.github/actions/setup
+        with:
+          installArgs: '--filter sites/cdn.twind.style'
+
+      - name: 🌎  Deploy cdn.twind.style
+        shell: bash
+        run: pnpm run deploy
+        working-directory: sites/cdn.twind.style
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
