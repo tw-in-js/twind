@@ -77,6 +77,7 @@ export type When<Variants> = {
   [key in keyof Variants]?: StrictMorphVariant<keyof Variants[key]>
 }
 
+// eslint-disable-next-line @typescript-eslint/ban-types
 export interface StyleConfig<Variants, BaseVariants = {}> {
   /** Used as prefix */
   label?: string

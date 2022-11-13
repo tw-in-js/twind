@@ -12,6 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     if: github.repository == 'tw-in-js/twind'
     steps:
+      - name: 📥  Checkout
+        uses: actions/checkout@v3
+
       - name: 🔧  Setup
         uses: ./.github/actions/setup
         with:
