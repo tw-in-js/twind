@@ -53,18 +53,41 @@ function withAutocomplete$<Theme extends BaseTheme = BaseTheme>(
   return resolver
 }
 
+/**
+ * @group Configuration
+ * @param pattern
+ */
 export function match<Theme extends BaseTheme = BaseTheme>(
   pattern: MaybeArray<string | RegExp>,
 ): Rule<Theme>
+
+/**
+ * @group Configuration
+ * @param pattern
+ * @param resolver
+ */
 export function match<Theme extends BaseTheme = BaseTheme>(
   pattern: MaybeArray<string | RegExp>,
   resolver: RuleResolver<Theme>,
 ): Rule<Theme>
+
+/**
+ * @group Configuration
+ * @param pattern
+ * @param resolve
+ */
 export function match<Theme extends BaseTheme = BaseTheme>(
   pattern: MaybeArray<string | RegExp>,
   // eslint-disable-next-line @typescript-eslint/ban-types
   resolve: (string & {}) | CSSObject,
 ): Rule<Theme>
+
+/**
+ * @group Configuration
+ * @param pattern
+ * @param resolve
+ * @param convert
+ */
 export function match<Theme extends BaseTheme = BaseTheme>(
   pattern: MaybeArray<string | RegExp>,
   resolve: keyof CSSProperties,
@@ -80,17 +103,37 @@ export function match<Theme extends BaseTheme = BaseTheme>(
   return [pattern, fromMatch(resolve as keyof CSSProperties, convert)]
 }
 
+/**
+ * @group Configuration
+ * @internal
+ * @deprecated Use {@link match} instead.
+ */
 export function fromMatch<Theme extends BaseTheme = BaseTheme>(): RuleResolver<Theme>
 
+/**
+ * @group Configuration
+ * @internal
+ * @deprecated Use {@link match} instead.
+ */
 export function fromMatch<Theme extends BaseTheme = BaseTheme>(
   resolver: RuleResolver<Theme>,
 ): RuleResolver<Theme>
 
+/**
+ * @group Configuration
+ * @internal
+ * @deprecated Use {@link match} instead.
+ */
 export function fromMatch<Theme extends BaseTheme = BaseTheme>(
   resolve: keyof CSSProperties,
   convert?: MatchConverter<Theme>,
 ): RuleResolver<Theme>
 
+/**
+ * @group Configuration
+ * @internal
+ * @deprecated Use {@link match} instead.
+ */
 export function fromMatch<Theme extends BaseTheme = BaseTheme>(
   resolve: string | CSSObject,
 ): RuleResolver<Theme>
@@ -122,6 +165,14 @@ function maybeNegate<T>(
   return match.input[0] == '-' ? `calc(${value} * -1)` : value
 }
 
+/**
+ * @group Configuration
+ * @param pattern
+ * @param section
+ * @param resolve
+ * @param convert
+ * @returns
+ */
 export function matchTheme<
   Theme extends BaseTheme = BaseTheme,
   Section extends keyof Theme & string = keyof Theme & string,
@@ -139,6 +190,15 @@ export function matchTheme<
   return [pattern, fromTheme(section, resolve, convert)]
 }
 
+/**
+ * @group Configuration
+ * @internal
+ * @deprecated Use {@link matchTheme} instead.
+ * @param section
+ * @param resolve
+ * @param convert
+ * @returns
+ */
 export function fromTheme<
   Theme extends BaseTheme = BaseTheme,
   Section extends keyof Theme & string = keyof Theme & string,
@@ -258,6 +318,13 @@ export interface ColorFromThemeOptions<
   selector?: string
 }
 
+/**
+ * @group Configuration
+ * @param pattern
+ * @param options
+ * @param resolve
+ * @returns
+ */
 export function matchColor<
   Theme extends BaseTheme = BaseTheme,
   Section extends keyof FilterByThemeValue<Theme, ColorValue> = keyof FilterByThemeValue<
@@ -276,6 +343,14 @@ export function matchColor<
   return [pattern, colorFromTheme(options, resolve)]
 }
 
+/**
+ * @group Configuration
+ * @internal
+ * @deprecated Use {@link matchColor} instead.
+ * @param options
+ * @param resolve
+ * @returns
+ */
 export function colorFromTheme<
   Theme extends BaseTheme = BaseTheme,
   Section extends keyof FilterByThemeValue<Theme, ColorValue> = keyof FilterByThemeValue<
@@ -472,6 +547,12 @@ export function colorFromTheme<
   )
 }
 
+/**
+ * @internal
+ * @param property
+ * @param value
+ * @returns
+ */
 export function toCSS(property: string, value: string | ColorFromThemeValue): CSSObject {
   const properties: CSSObject = {}
 
@@ -488,6 +569,13 @@ export function toCSS(property: string, value: string | ColorFromThemeValue): CS
   return properties
 }
 
+/**
+ * @internal
+ * @param value
+ * @param section
+ * @param context
+ * @returns
+ */
 export function arbitrary<Theme extends BaseTheme = BaseTheme>(
   value: string,
   section: string,
@@ -530,6 +618,11 @@ function camelize(value: string): string {
   return value.replace(/-./g, (x) => x[1].toUpperCase())
 }
 
+/**
+ * @internal
+ * @param value
+ * @returns
+ */
 export function normalize(value: string): string {
   // Keep raw strings if it starts with `url(`
   if (value.includes('url(')) {

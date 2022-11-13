@@ -1,4 +1,6 @@
 <script>
+  import { page } from '$app/stores'
+
   import { tw } from '$lib/twind'
   import { scrollspy, wicked, lazy } from '$lib/actions'
   import Head from '$lib/template/head.svelte'
@@ -7,17 +9,75 @@
   export let data
 </script>
 
-<Head title={data.title} description={data.excerpt} />
+<Head
+  title={[data.section, data.label].filter(Boolean).join(': ')}
+  description={data.description}
+/>
 
-<header>
+<header class="flex flex-col gap-4">
   {#if data.section}
-    <p class="mb-2 text-sm leading-6 font-semibold text-accent-11">{data.section}</p>
+    <p class="text-sm leading-6 font-semibold text-accent-11">
+      {data.section}
+    </p>
   {/if}
-  <h1 class="text-2xl sm:text-3xl font-extrabold text-brand-12 tracking-tight">
-    {data.title}
-  </h1>
+  <div class="flex flex-col gap-2">
+    <h1 class="text-2xl sm:text-3xl font-extrabold text-brand-12 tracking-tight">
+      {data.title}
+    </h1>
+    {#if data.badges}
+      <div class="flex &>p:(flex gap-2)">{@html data.badges}</div>
+    {/if}
+  </div>
   {#if data.excerpt}
-    <p class="mt-2 text-lg text-brand-11">{data.excerpt}</p>
+    <div class="prose prose-lg">{@html data.excerpt}</div>
+  {/if}
+
+  {#if data.package || data.playground}
+    <div class="prose">
+      <ul>
+        {#if data.package && $page.url.pathname.startsWith('/packages/') && data.package !== 'twind'}
+          <li>
+            📖 Study <a
+              href="/{data.package === '@twind/cdn' ? 'installation#twind-cdn' : data.folder}"
+              >the documentation</a
+            >
+          </li>
+        {/if}
+        {#if data.playground}
+          <li>
+            🤖 Try <a
+              href="https://twind.run{data.package === 'twind' ? '' : '/' + data.playground}"
+              >the playground</a
+            >
+          </li>
+        {/if}
+        {#if data.example}
+          <li>
+            📝 Inspect <a href="https://github.com/tw-in-js/twind/tree/next/examples/{data.example}"
+              >the example</a
+            >
+          </li>
+        {/if}
+        {#if data.package}
+          {#if !data.example}
+            <li>
+              🧭 Explore <a href="/examples">the examples</a>
+            </li>
+          {/if}
+          {#if !$page.url.pathname.startsWith('/packages/')}
+            <li>
+              📓 Consult <a href="/packages/{data.package}">the API reference</a>
+            </li>
+          {/if}
+          <li>
+            📜 Read <a
+              href="https://github.com/tw-in-js/twind/tree/next/packages/{data.folder}/CHANGELOG.md"
+              >the changelog</a
+            >
+          </li>
+        {/if}
+      </ul>
+    </div>
   {/if}
 </header>
 
@@ -30,11 +90,21 @@
 </div>
 
 {#if data.prev || data.next}
-  <footer class="text-sm leading-6 mt-12 font-semibold flex items-center text-brand-11">
+  <footer
+    class="text-sm leading-6 mt-8 font-semibold flex items-center justify-between text-brand-11"
+  >
     <!-- TODO: add dimmed "PREVIOUS" -->
     {#if data.prev}
-      <a href={data.prev.href} class="hover:text-brand-12" rel="prev" data-sveltekit-prefetch>
-        <span class="inline-block mr-2" aria-hidden="true">‹</span>
+      <a
+        href={data.prev.href}
+        class="flex place-content-center gap-2 p-2 hover:text-brand-12"
+        rel="prev"
+        data-sveltekit-prefetch
+      >
+        <span aria-hidden="true">‹</span>
+        {#if data.section !== data.prev.section}
+          {data.prev.section}:
+        {/if}
         {data.prev.label}
       </a>
     {/if}
@@ -42,12 +112,15 @@
       <!-- TODO: add dimmed "NEXT" -->
       <a
         href={data.next.href}
-        class="ml-auto hover:text-brand-12"
+        class="ml-auto flex place-content-center gap-2 p-2 hover:text-brand-12"
         rel="next"
         data-sveltekit-prefetch
       >
+        {#if data.section !== data.next.section}
+          {data.next.section}:
+        {/if}
         {data.next.label}
-        <span class="inline-block ml-2" aria-hidden="true">›</span>
+        <span aria-hidden="true">›</span>
       </a>
     {/if}
   </footer>

@@ -3,29 +3,36 @@ import { format } from './internal/format'
 import { parse } from './parse'
 import { interpolate } from './internal/interpolate'
 
-export const apply = /* #__PURE__ */ nested('@')
-export const shortcut = /* #__PURE__ */ nested('~')
+/**
+ * @group Class Name Generators
+ */
+export const apply = /* #__PURE__ */ alias('@')
 
-function nested(marker: string): Nested {
+/**
+ * @group Class Name Generators
+ */
+export const shortcut = /* #__PURE__ */ alias('~')
+
+function alias(marker: string): Nested {
   return new Proxy(
-    function nested(strings: TemplateStringsArray | Class, ...interpolations: Class[]): string {
-      return nested$('', strings, interpolations)
+    function alias(strings: TemplateStringsArray | Class, ...interpolations: Class[]): string {
+      return alias$('', strings, interpolations)
     } as Nested,
     {
       get(target, name) {
         if (name in target) return target[name as string]
 
-        return function namedNested(
+        return function namedAlias(
           strings: TemplateStringsArray | Class,
           ...interpolations: Class[]
         ): string {
-          return nested$(name as string, strings, interpolations)
+          return alias$(name as string, strings, interpolations)
         }
       },
     },
   )
 
-  function nested$(
+  function alias$(
     name: string,
     strings: TemplateStringsArray | Class,
     interpolations: Class[],

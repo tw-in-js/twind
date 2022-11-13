@@ -1,19 +1,24 @@
 <script>
+  import { page } from '$app/stores'
+  import { shortcut } from '$lib/actions'
+
   import Icon, {
     TwindLogo,
     Github,
     Discord,
-    Search,
     ChatBubbleLeftRightSolid,
     CodeBracketSquareSolid,
     BookHalf,
+    MagnifyingGlassMini,
+    Mastodon,
   } from '$lib/icons'
 
-  import { page } from '$app/stores'
+  import { searchOpen } from '$lib/stores'
+
   import ThemeSwitcher from './theme-switcher.svelte'
 </script>
 
-<header class="w-full sticky top-0 z-30 border-b border-brand-7 backdrop-blur bg-brand-1/95">
+<header class="w-full sticky top-0 z-10 border-b border-brand-7 backdrop-blur bg-brand-1/95">
   <div class="max-w-8xl mx-auto p-4 flex-auto flex items-center justify-between gap-4">
     <div class="flex gap-(4 lg:8 xl:12)">
       <a data-sveltekit-prefetch href="/" class="flex font-medium items-center hover:text-brand-12">
@@ -34,8 +39,13 @@
     </div>
 
     <nav class="flex items-center md:gap-2 lg:gap-3" aria-label="Site Navigation">
-      <button type="button" role="search" class="block w-5 hover:text-brand-12 lg:hidden">
-        <Icon src={Search} class="w-4 h-4" label="Quick search..." />
+      <button
+        type="button"
+        class="block w-5 hover:text-brand-12 lg:hidden"
+        on:click={() => ($searchOpen = true)}
+        use:shortcut={{ control: true, code: 'KeyK' }}
+      >
+        <Icon src={MagnifyingGlassMini} class="w-4 h-4" label="Quick search..." />
       </button>
 
       <hr class="ml-5 w-0 h-5 border-l border-brand-6 lg:hidden" aria-orientation="vertical" />
@@ -87,6 +97,16 @@
         target="_blank"
       >
         <Icon src={Discord} class="h-5 w-5" label="Twind on Discord" />
+      </a>
+
+      <a
+        class="ml-3 flex items-center hover:text-brand-12"
+        href="https://mas.to/@twind"
+        title="Go to Twind on Mastodon"
+        rel="external nofollow noopener noreferrer me"
+        target="_blank"
+      >
+        <Icon src={Mastodon} class="h-5 w-5" label="Twind on Mastodon" />
       </a>
 
       <hr class="ml-3 w-0 h-6 border-l border-brand-6" aria-orientation="vertical" />

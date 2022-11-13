@@ -52,6 +52,7 @@ export interface TxFunction {
  * tx({'underline': true, 'italic': false})
  * ```
  *
+ * @group Style Injectors
  * @param this {@link Twind} instance to use (default: {@link tw})
  * @param strings
  * @param interpolations

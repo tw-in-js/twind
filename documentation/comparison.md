@@ -1,12 +1,12 @@
 ---
 section: Getting Started
 title: Comparison
-next: ./usage.md
+next: ./rules.md
 ---
 
 ## tailwindcss
 
-CDN: 96.4kB (brotli) vs 17.6kB (brotli) -> almost 5.5 times smaller (5.47)
+CDN: 106kB (brotli) vs 17kB (brotli) -> 6 times smaller
 
 - no implicit ordering of utilities: https://play.tailwindcss.com/EsRtpBotox
   - if two utilities use the same CSS property, the one used first anywhere in the document will be used

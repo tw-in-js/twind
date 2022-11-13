@@ -4,6 +4,12 @@ function parseColorComponent(chars: string, factor: number): number {
   return Math.round(parseInt(chars, 16) * factor)
 }
 
+/**
+ * @internal
+ * @param color
+ * @param options
+ * @returns
+ */
 export function toColorValue(color: ColorValue, options: ColorFunctionOptions = {}): string {
   if (typeof color == 'function') {
     return color(options)
@@ -47,6 +53,7 @@ export function toColorValue(color: ColorValue, options: ColorFunctionOptions = 
  *
  * **Note**: Does not work for arbitrary values like `[theme(colors.gray.500)]` or `[theme(colors.gray.500, #ccc)]`.
  *
+ * @group Configuration
  * @param section within theme to use
  * @param key of the light color or an arbitrary value
  * @param context to use

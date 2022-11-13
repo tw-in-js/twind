@@ -68,6 +68,7 @@ export interface InlineMinify {
  * }
  * ```
  *
+ * @group Static Extraction
  * @param markup HTML to process
  * @param options to customize the processing
  * @returns the resulting HTML
@@ -127,6 +128,7 @@ export interface ExtractResult {
  * }
  * ```
  *
+ * @group Static Extraction
  * @param markup HTML to process
  * @param tw a {@link Twind} instance (default: twind managed tw)
  * @returns the possibly modified html and css
@@ -199,6 +201,7 @@ export function extract(html: string, tw: Twind<any, any> = tw$): ExtractResult 
  * }
  * ```
  *
+ * @group Static Extraction
  * @param markup HTML to process
  * @param tw a {@link Twind} instance
  * @returns possibly modified HTML

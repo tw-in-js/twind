@@ -20,6 +20,11 @@ import { asArray } from './utils'
 import { serialize } from './internal/serialize'
 import { Layer } from './internal/precedence'
 
+/**
+ * @group Runtime
+ * @param config
+ * @param sheet
+ */
 export function twind<Theme extends BaseTheme = BaseTheme, Target = unknown>(
   config: TwindConfig<Theme>,
   sheet: Sheet<Target>,

@@ -1,5 +1,6 @@
 // Based on https://github.com/modulz/stitches
 // License MIT
+// eslint-disable @typescript-eslint/ban-types
 
 import type { Falsey, MatchResult } from './types'
 import { parse } from './parse'
@@ -30,6 +31,7 @@ export type StyleTokenValue = string | Falsey
 
 // No support for thunks yet — these may use props that are not in the generated class name
 // and may therefore override each other
+
 export type StyleToken = StyleTokenValue
 
 /**
@@ -75,7 +77,6 @@ export type When<Variants> = {
   [key in keyof Variants]?: StrictMorphVariant<keyof Variants[key]>
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 export interface StyleConfig<Variants, BaseVariants = {}> {
   /** Used as prefix */
   label?: string
@@ -88,6 +89,7 @@ export interface StyleConfig<Variants, BaseVariants = {}> {
   defaults?: DefaultVariants<Variants & BaseVariants>
   when?: [match: When<Variants & BaseVariants>, then: StyleToken][]
 }
+
 export interface StyleFunction {
   <Variants>(config?: StyleConfig<Variants>): Style<Variants>
   <Variants, BaseVariants>(
@@ -174,6 +176,9 @@ export interface Style<Variants> {
   readonly selector: string
 }
 
+/**
+ * @group Class Name Generators
+ */
 export const style = (<Variants, BaseVariants>(
   base: Style<BaseVariants> | StyleConfig<Variants>,
   config?: StyleConfig<Variants, BaseVariants>,

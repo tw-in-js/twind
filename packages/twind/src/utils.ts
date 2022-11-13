@@ -1,5 +1,8 @@
 import type { MaybeArray, ScreenValue } from './types'
 
+/**
+ * @internal
+ */
 export const escape =
   (typeof CSS !== 'undefined' && CSS.escape) ||
   // Simplified: escaping only special characters
@@ -13,6 +16,11 @@ export const escape =
       .replace(/^\d/, '\\3$& '))
 
 // Based on https://stackoverflow.com/a/52171480
+/**
+ * @group Configuration
+ * @param value
+ * @returns
+ */
 export function hash(value: string): string {
   // eslint-disable-next-line no-var
   for (var h = 9, index = value.length; index--; ) {
@@ -22,6 +30,12 @@ export function hash(value: string): string {
   return '#' + ((h ^ (h >>> 9)) >>> 0).toString(36)
 }
 
+/**
+ * @internal
+ * @param screen
+ * @param prefix
+ * @returns
+ */
 export function mql(screen: MaybeArray<ScreenValue>, prefix = '@media '): string {
   return (
     prefix +
@@ -42,16 +56,29 @@ export function mql(screen: MaybeArray<ScreenValue>, prefix = '@media '): string
   )
 }
 
+/**
+ * @internal
+ * @param value
+ * @returns
+ */
 export function asArray<T>(value: T = [] as unknown as T): T extends Array<any> ? T : T[] {
   return (Array.isArray(value) ? value : value == null ? [] : [value]) as T extends Array<any>
     ? T
     : T[]
 }
 
+/**
+ * @internal
+ * @param value
+ * @returns
+ */
 export function identity<T>(value: T): T {
   return value
 }
 
+/**
+ * @internal
+ */
 export function noop(): void {
   // no-op
 }

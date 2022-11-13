@@ -4,11 +4,11 @@
   "description": "twind preset that provides a basic reset for form styles that makes form elements easy to override with utilities",
   "keywords": [
     "twind",
+    "twind-preset",
     "tailwind",
     "tailwindcss",
     "tw-in-js",
     "tailwind-in-js",
-    "twind-preset",
     "preset"
   ],
   "type": "module",

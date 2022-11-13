@@ -1,4 +1,17 @@
-# Acknowledge
+# twind.run
+
+This is the [Twind playground](https://twind.run).
+
+## Developing
+
+Once you've [set up the repo](../../CONTRIBUTING.md), `cd` into this directory and start the dev server:
+
+```bash
+cd sites/twind.run
+pnpm start
+```
+
+## Acknowledge
 
 - tailwindplay
 - jspm.org
@@ -7,20 +20,12 @@
 
 ## Ideas
 
-`wrangler pages publish .svelte-kit/cloudflare --project-name=twind-run --branch=main`
-
-- TODO: format/prettier does not work in production
+- TODO: 404 and error like twind.style
+- TODO: service worker?
 - TODO: static/\_headers are not included in build
 - TODO: safari: Feature policy 'Fullscreen' check failed for iframe with origin 'https://challenges.cloudflare.com' and allow attribute ''
 - TODO: safari copy to clipboard does not work
-- TODO: bucket.put -> Network connection lost.
 - inline version annotation like runkit for imports in js
-- report bug:
-
-  - extra label
-  - like https://swc.rs/playground or prettier.io/play
-  - https://docs.github.com/en/issues/tracking-your-work-with-issues/creating-an-issue#creating-an-issue-from-a-url-query
-
 - TODO: splitpane splitter hover add ring for better visibility
 - TODO: help and feedback icon like https://runkit.com/sastan/63559e16d1d14c000845c889#
 - TODO: suggest-widget and hover-widget are not fully visible sometimes

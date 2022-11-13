@@ -11,8 +11,9 @@
 /service-worker.js
   Cache-Control: public, max-age=3600
 
-/packages/*
-  Cache-Control: public, max-age=3600
+## Allow favicon access from everywhere - used by cdn.twind.style
+/favicon.ico
+  Access-Control-Allow-Origin: *
 
 ## Prevent *.pages.dev deployments showing in search results
 https://:project.pages.dev/*

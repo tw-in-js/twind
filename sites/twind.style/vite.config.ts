@@ -15,7 +15,7 @@ export default defineConfig((env) => {
       env.command === 'serve' && {
         name: 'watch-external', // https://stackoverflow.com/questions/63373804/rollup-watch-include-directory/63548394#63548394
         async buildStart() {
-          for (const file of fg.sync('**/*.md', {
+          for (const file of await fg('**/*.md', {
             cwd: docsPath,
             ignore: ['**/README.md'],
             absolute: true,

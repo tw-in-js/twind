@@ -1,14 +1,15 @@
 {
   "name": "@twind/preset-tailwind",
   "version": "1.0.0-next.39",
-  "description": "tailwindcss preset for twind",
+  "description": "Tailwind CSS preset for twind",
+  "homepage": "https://twind.style/preset-tailwind",
   "keywords": [
     "twind",
+    "twind-preset",
     "tailwind",
     "tailwindcss",
     "tw-in-js",
     "tailwind-in-js",
-    "twind-preset",
     "preset"
   ],
   "type": "module",

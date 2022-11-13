@@ -225,6 +225,7 @@ export default defineConfig((env) => {
                 generatedCode: 'es2015',
                 sourcemap: true,
                 compact: isProd,
+                entryFileNames: process.env.CI ? '[name].js' : '[name]-[hash].js',
                 chunkFileNames: '_[hash].js',
               })
 
@@ -244,9 +245,6 @@ export default defineConfig((env) => {
                     // name/
                     mapping[manifest.name + input.entry.slice(1)] = './' + prefix + chunk.fileName
                     manifest.exports[input.entry] = './' + chunk.fileName
-                    // name@version/
-                    // mapping[prefix.slice(0, -1) + (input.entry === '.' ? '' : '/' + chunk.name)] =
-                    //   './' + prefix + chunk.fileName
                   }
 
                   emitFile(root + prefix + chunk.fileName, chunk.code)
@@ -260,8 +258,6 @@ export default defineConfig((env) => {
                     // name/
                     mapping[manifest.name + '/' + input.entry.slice(2)] =
                       './' + prefix + input.entry.slice(2)
-                    // name@version/
-                    // mapping[prefix.slice(0, -1) + '/' + input.entry.slice(2)] = './' + prefix + input.entry.slice(2)
 
                     emitFile(
                       root + prefix + input.entry.slice(2),
@@ -304,11 +300,11 @@ export default defineConfig((env) => {
               const result = await generator.install(
                 await Promise.all(
                   [...external].map(async (specifier) => {
-                    const match = specifier.match(/^((?:@[^\s/]+\/)?[^\s/@]+)(\/[^\s/@]+)?$/)
+                    const match = specifier.match(/^((?:@[^/]+\/)?[^/@]+)(?:@([^/]+))?(\/.+)?$/)
 
                     if (!match) return specifier
 
-                    const { 1: id, 2: path = '' } = match
+                    const { 1: id, 3: path = '' } = match
 
                     try {
                       const { version } = JSON.parse(
@@ -327,7 +323,6 @@ export default defineConfig((env) => {
                 ),
               )
 
-              // const pkgUrl = await getPackageBase('https://ga.jspm.io/npm:lit-element@2.5.1/lit-element.js');
               return {
                 prefix,
                 importMap: generator.importMap,
@@ -340,7 +335,6 @@ export default defineConfig((env) => {
             imports: Object.fromEntries(packages.flatMap(({ mapping }) => Object.entries(mapping))),
           }
 
-          // const deps = new Set<string>()
           for (const scope of scoped) {
             const imports = Object.entries(scope.importMap.imports).filter(
               ([key]) => !importMap.imports.hasOwnProperty(key),
@@ -355,52 +349,11 @@ export default defineConfig((env) => {
             }
 
             const scopes = scope.importMap.scopes
-            // const scopes = Object.entries(scope.importMap.scopes).map(([scope, mapping]) => [
-            //   scope.replace('https://ga.system.jspm.io/npm:', './'),
-            //   Object.fromEntries(
-            //     Object.entries(mapping).map(([key, value]) => [
-            //       key,
-            //       value.replace('https://ga.system.jspm.io/npm:', './'),
-            //     ]),
-            //   ),
-            // ])
 
             if (scopes) {
               importMap = composeTwoImportMaps(importMap, { scopes })
             }
-
-            // for (const dep of [...scope.staticDeps, ...scope.staticDeps]) {
-            //   deps.add(dep)
-            // }
           }
-
-          // await Promise.all(
-          //   Array.from(deps, async (dep) => {
-          //     const fileName = dep.replace('https://ga.system.jspm.io/npm:', '-/cdn/')
-          //     if (!cdn.has(fileName)) {
-          //       const response = await fetch(dep)
-
-          //       if (!(response.ok && response.status === 200)) {
-          //         throw new Error(`Failed to fetch ${dep}`)
-          //       }
-
-          //       emitFile(fileName, await response.text())
-
-          //       // try to load the sourcemap - TODO: extract from source text
-          //       await fetch(dep + '.map')
-          //         .then(async (response) => {
-          //           if (!(response.ok && response.status === 200)) {
-          //             throw new Error(`Failed to fetch ${dep}`)
-          //           }
-
-          //           emitFile(fileName + '.map', await response.text())
-          //         })
-          //         .catch(() => {
-          //           /* ignore */
-          //         })
-          //     }
-          //   }),
-          // )
 
           const manifestData = {
             // from version: 1.0.0 -> latest, 1.0.0-(next|canary)-*
@@ -419,10 +372,10 @@ export default defineConfig((env) => {
             ),
           }
 
-          console.debug({
-            ...manifestData,
-            // cdn: [...cdn.keys()],
-          })
+          // console.debug({
+          //   ...manifestData,
+          //   // cdn: [...cdn.keys()],
+          // })
 
           emitFile(root + 'cdn.json', JSON.stringify(manifestData, null, isProd ? undefined : 2))
         },
@@ -501,6 +454,16 @@ export default defineConfig((env) => {
           name: 'resolve-to-location',
           resolveFileUrl({ fileName }) {
             return `new URL('${fileName}',location.href).href`
+          },
+        },
+        {
+          name: 'fix-invalid-code',
+          generateBundle(options, bundle) {
+            for (const chunk of Object.values(bundle)) {
+              if (chunk.type === 'chunk') {
+                chunk.code = chunk.code.replaceAll('(1.toString)', '(1 .toString)')
+              }
+            }
           },
         },
       ].filter(Boolean),

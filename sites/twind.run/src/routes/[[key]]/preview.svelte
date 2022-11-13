@@ -192,7 +192,7 @@
   <iframe
     bind:this={iframeElement}
     src={srcUrl}
-    class={cx('w-full h-full', status && ' grayscale blur-sm')}
+    class={cx('w-full h-full bg-white', status && 'bg-brand-2 grayscale blur-sm')}
     hidden={!isReady}
     {title}
     {sandbox}

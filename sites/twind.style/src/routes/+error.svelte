@@ -3,9 +3,6 @@
 
   import { page } from '$app/stores'
 
-  // TODO: https://github.com/sw-yx/swyxkit/blob/main/src/routes/__error.svelte
-  import Icon, { ExclamationTriangleOutline } from '$lib/icons'
-
   $: status = $page.status
   $: error = $page.error
 
@@ -18,69 +15,41 @@
   <title>{status}</title>
 </svelte:head>
 
-<div
-  class="fixed z-10 inset-0 overflow-y-auto"
-  aria-labelledby="modal-title"
-  role="dialog"
-  aria-modal="true"
->
-  <div
-    class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0"
-  >
-    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" />
-
-    {#if online}
-      <h1>Yikes!</h1>
-
-      {#if error?.message}
-        <p class="error">{status}: {error.message}</p>
-      {:else}
-        <p class="error">Encountered a {status} error</p>
-      {/if}
-
-      {#if dev && error?.stack}
-        <pre>{error.stack}</pre>
-      {:else}
-        {#if status >= 500}
-          <p>Please try reloading the page.</p>
-        {/if}
-
-        <p>
+<div class="min-h-full px-4 py-16 sm:px-6 sm:py-24 md:grid md:place-items-center lg:px-8">
+  <div class="mx-auto max-w-max">
+    <div class="sm:flex">
+      <p class="text-4xl font-bold tracking-tight text-accent-11 sm:text-5xl">{status}</p>
+      <div class="sm:ml-6">
+        <div class="sm:border-l sm:border-brand-6 sm:pl-6">
+          <h1 class="text-4xl font-bold tracking-tight text-brand-12 sm:text-5xl">
+            {#if error?.message}
+              {error.message}
+            {:else}
+              Encountered a {status} error
+            {/if}
+          </h1>
+          <p class="mt-1 text-base text-brand-11">
+            {#if !online}
+              It looks like you're offline. Reload the page once you've found the internet.
+            {:else if status >= 500}
+              Please try reloading the page.
+            {:else}
+              Please check the URL in the address bar and try again.
+            {/if}
+          </p>
+        </div>
+        <p class="mt-10 max-w-md sm:border-l sm:border-transparent sm:pl-6 prose">
           If the error persists, please drop by <a href="https://chat.twind.style"
             >Discord chatroom</a
           >
           and let us know, or raise an issue on
           <a href="https://github.com/tw-in-js/twind">GitHub</a>. Thanks!
         </p>
-      {/if}
-    {:else}
-      <h1>It looks like you're offline</h1>
-
-      <p>Reload the page once you've found the internet.</p>
-    {/if}
-    <div
-      class="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-7xl sm:w-full sm:p-6"
-    >
-      <div class="sm:flex sm:items-start">
-        <div
-          class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10"
-        >
-          <Icon src={ExclamationTriangleOutline} class="h-6 w-6 text-red-600" />
-        </div>
-        <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-          <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-            {status}
-          </h3>
-          <div class="mt-2">
-            <p class="text-sm text-gray-500">
-              {error?.message}
-            </p>
-          </div>
-          {#if dev && error?.stack}
-            <pre class="mt-2">{error.stack}</pre>
-          {/if}
-        </div>
       </div>
     </div>
   </div>
+
+  {#if dev && error?.stack}
+    <pre class="mt-10 font-mono">{error.stack}</pre>
+  {/if}
 </div>

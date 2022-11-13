@@ -1,16 +1,14 @@
 # @twind/intellisense [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/intellisense/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/intellisense/v/next) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23intellisense?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/intellisense)
 
----
+IntelliSense utilities for [twind](https://twind.style)
 
-## READ THIS FIRST!
+- 📖 Study [the documentation](https://twind.style/intellisense)
+- 📓 Consult [the API reference](https://twind.style/packages/@twind/intellisense)
+- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/next/packages/intellisense/CHANGELOG.md)
 
-**Twind v1 is still in beta. Expect bugs!**
+## 📖 Documentation
 
----
-
-Intellisense utils for Twind
-
-> Visit [twind.style](https://twind.style) for a full documentation or explore [the examples](https://github.com/tw-in-js/twind/tree/next/examples#readme).
+The full documentation is available at [twind.style/intellisense](https://twind.style/intellisense).
 
 ## 💬 Community
 
@@ -24,7 +22,7 @@ See the [Contributing Guide](../../CONTRIBUTING.md) for information on how to co
 
 ## 📜 Changelog
 
-[The Changelog for this package is available on GitHub.](https://github.com/tw-in-js/twind/tree/next/packages/intellisense/CHANGELOG.md)
+The Changelog for this package is [available on GitHub](https://github.com/tw-in-js/twind/tree/next/packages/intellisense/CHANGELOG.md).
 
 ## ⚖️ License
 

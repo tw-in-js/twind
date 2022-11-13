@@ -2,62 +2,15 @@
 
 The full [Tailwind CSS](https://tailwindcss.com) v3 experience without any build step right in the browser or any other environment like Node.js, deno, workers, ...
 
-> Visit [twind.style](https://twind.style) for a full documentation or explore [the examples](https://github.com/tw-in-js/twind/tree/next/examples#readme).
+- 📖 Study [the documentation](https://twind.style/preset-tailwind)
+- 🤖 Try [the playground](https://twind.run/preset-tailwind)
+- 🧭 Explore [the examples](https://twind.style/examples)
+- 📓 Consult [the API reference](https://twind.style/packages/@twind/preset-tailwind)
+- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind/CHANGELOG.md)
 
-## 📦 Installation
+## 📖 Documentation
 
-**with [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)**
-
-Install from npm:
-
-```sh
-npm install twind@next @twind/preset-tailwind@next
-```
-
-Add the preset to your twind config:
-
-```js
-import { setup } from 'twind'
-import presetTailwind from '@twind/preset-tailwind'
-
-setup({
-  presets: [presetTailwind(/* options */)],
-  /* config */
-})
-```
-
-<details><summary>Usage with a script tag</summary>
-
-```html
-<head>
-  <script
-    src="https://cdn.jsdelivr.net/combine/npm/twind@next,npm/@twind/preset-tailwind@next"
-    crossorigin
-  ></script>
-  <script>
-    twind.setup({
-      presets: [twind.presetTailwind(/* options */)],
-      /* config */
-    })
-  </script>
-</head>
-```
-
-</details>
-
-**with [Twind CDN](https://github.com/tw-in-js/twind/tree/next/packages/cdn)** — a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn)
-
-_Already included in `@twind/cdn`_
-
-## 🙇 Usage
-
-All classes and variants from [tailwindcss](https://tailwindcss.com/docs/installation) are available.
-
-## 🔧 Options
-
-This preset can be configured with the following options:
-
-- `disablePreflight: boolean` — allows to disable the [preflight](https://tailwindcss.com/docs/preflight)
+The full documentation is available at [twind.style/preset-tailwind](https://twind.style/preset-tailwind).
 
 ## 💬 Community
 
@@ -71,7 +24,7 @@ See the [Contributing Guide](../../CONTRIBUTING.md) for information on how to co
 
 ## 📜 Changelog
 
-[The Changelog for this package is available on GitHub.](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind/CHANGELOG.md)
+The Changelog for this package is [available on GitHub](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind/CHANGELOG.md).
 
 ## ⚖️ License
 

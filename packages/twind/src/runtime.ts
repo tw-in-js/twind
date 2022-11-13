@@ -14,6 +14,11 @@ import { getSheet } from './sheets'
 import { noop } from './utils'
 import { DEV } from 'distilt/env'
 
+/**
+ * @group Runtime
+ * @param install
+ * @returns
+ */
 export function auto(install: () => void): () => void {
   // If we run in the browser we call install at latest when the body is inserted
   // This algorith works well for _normal_ scripts (`<script src="..."></script>`)
@@ -55,8 +60,9 @@ function assertActive() {
 
 /**
  * A proxy to the currently active Twind instance.
+ * @group Style Injectors
  */
-export const tw = /* #__PURE__ */ new Proxy(
+export const tw: Twind<any, any> = /* #__PURE__ */ new Proxy(
   // just exposing the active as tw should work with most bundlers
   // as ES module export can be re-assigned BUT some bundlers to not honor this
   // -> using a delegation proxy here
@@ -91,6 +97,7 @@ export type SheetFactory<SheetTarget = unknown> = () => Sheet<SheetTarget>
 /**
  * Manages a single Twind instance — works in browser, Node.js, Deno, workers...
  *
+ * @group Runtime
  * @param config
  * @param sheet
  * @param target

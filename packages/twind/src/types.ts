@@ -69,6 +69,7 @@ export interface TwindRule {
 }
 
 export type RestoreSnapshot = () => void
+
 export interface Twind<Theme extends BaseTheme = BaseTheme, Target = unknown> {
   (tokens: StringLike): string
 
@@ -351,7 +352,6 @@ export interface TwindConfig<Theme extends BaseTheme = BaseTheme> {
   ignorelist: (string | RegExp)[]
 }
 
-/** @internal */
 export type ArrayType<T> = T extends (infer Item)[] ? Item : T
 
 export type ExtractTheme<T> = T extends Preset<infer Theme> ? Theme : T
@@ -364,7 +364,7 @@ export type ExtractUserTheme<T> = {
     : T[key]
 } & BaseTheme
 
-/** @internal */
+/** @experimental */
 export type UnionToIntersection<U> = (U extends any ? (k: U) => void : never) extends (
   k: infer I,
 ) => void

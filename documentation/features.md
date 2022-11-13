@@ -1,7 +1,7 @@
 ---
 section: Getting Started
 title: Features
-next: ./grouping-syntax.md
+next: ./migration.md
 ---
 
 - grouping syntax

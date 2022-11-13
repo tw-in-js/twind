@@ -1,7 +1,4 @@
-import install from '@twind/with-sveltekit'
-import config from '../twind.config'
-
-install(config)
+import '$lib/twind'
 
 // /** @type {import('./$types').LayoutLoad} */
 // export function load() {

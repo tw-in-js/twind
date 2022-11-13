@@ -2,9 +2,14 @@
   import { browser } from '$app/environment'
   import { page } from '$app/stores'
 
+  import { shortcut } from '$lib/actions'
   import { MOD_KEY } from '$lib/constants'
-  import Icon, { Search } from '$lib/icons'
+  import Icon, { MagnifyingGlassSolid } from '$lib/icons'
+  import { searchOpen } from '$lib/stores'
   import Head from '$lib/template/head.svelte'
+
+  /** @type {import('./$types').PageData} */
+  export let data
 </script>
 
 <Head />
@@ -31,32 +36,33 @@
       data-sveltekit-prefetch
       href={$page.data.docStartHref}
       class="
-            text-accent-12 bg-accent-3
-            hover:(text-accent-12 bg-accent-4)
-            focus:(outline-none bg-accent-5 ring-(2 accent-7 offset-(2 brand-1)))
-            font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-auto
-          "
+        bg-accent-4 text-accent-12
+        hover:bg-accent-5
+        focus:(outline-none bg-accent-6 ring-(2 accent-7 offset-(2 brand-1)))
+        shadow-sm rounded-lg
+        font-semibold h-12 px-6 rounded-lg w-full flex items-center justify-center sm:w-48
+      "
     >
       Get started
     </a>
     <button
       type="button"
-      role="search"
       class="
-            bg-neutral-3 text-neutral-11
-            hover:(bg-neutral-4 text-neutral-12)
-            ring-(1 neutral-7 hover:neutral-8)
-            focus:(outline-none ring-(2 brand-8))
-            shadow-sm rounded-lg
-            hidden sm:flex items-center w-72 text-left space-x-3 px-4 h-12
-          "
+        bg-brand-4 text-brand-11
+        hover:(bg-brand-5 text-brand-12)
+        focus:(bg-brand-6 text-brand-12 outline-none ring-(2 brand-7 offset-(2 brand-1)))
+        shadow-sm rounded-lg
+        hidden sm:flex items-center justify-start w-72 text-left space-x-3 px-4 h-12
+      "
+      on:click={() => ($searchOpen = true)}
+      use:shortcut={{ control: true, code: 'KeyK' }}
     >
-      <Icon src={Search} class="mr-3 w-4 h-4 flex-none" />
+      <Icon src={MagnifyingGlassSolid} class="mr-3 w-4 h-4 flex-none" />
       <span class="flex-auto">Quick search...</span>
-      <kbd class="font-sans font-semibold" class:hidden={!browser}>
-        <abbr title="Command" class="no-underline">{MOD_KEY}</abbr>
-        K
-      </kbd>
+      <span class="ml-auto font-sans font-semibold" class:hidden={!browser}>
+        <kbd title="Command">{MOD_KEY}</kbd>
+        <kbd>K</kbd>
+      </span>
     </button>
   </div>
 </div>
@@ -66,7 +72,7 @@
     <dl class="space-y-10 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-8">
       <div>
         <dt class="mt-5 text-lg leading-6 font-medium text-brand-12">
-          <span aria-hidden="true">⚡️ </span>No build step
+          <span aria-hidden="true">⚡️&nbsp;</span>No build step
         </dt>
         <dd class="mt-2 text-base">
           Get all the benefits of Tailwind without the need for PostCSS, configuration, purging, or
@@ -76,7 +82,7 @@
 
       <div>
         <dt class="mt-5 text-lg leading-6 font-medium text-brand-12">
-          <span aria-hidden="true">🚀 </span>Framework agnostic
+          <span aria-hidden="true">🚀&nbsp;</span>Framework agnostic
         </dt>
         <dd class="mt-2 text-base">
           If your app uses HTML and JavaScript, it should work with Twind. This goes for
@@ -86,13 +92,19 @@
 
       <div>
         <dt class="mt-5 text-lg leading-6 font-medium text-brand-12">
-          <span aria-hidden="true">😎 </span>One low fixed cost
+          <span aria-hidden="true">😎&nbsp;</span>One low fixed cost
         </dt>
         <dd class="mt-2 text-base">
           Twind ships the compiler, not the CSS. This means unlimited styles and variants for one
-          low fixed cost of ~4.5kB.
+          low fixed cost.
         </dd>
       </div>
     </dl>
   </div>
+</section>
+
+<section
+  class="mt-4 lg:mt-8 prose prose-headings:scroll-mt-24 &>nav:hidden max-w-xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8"
+>
+  {@html data.content}
 </section>

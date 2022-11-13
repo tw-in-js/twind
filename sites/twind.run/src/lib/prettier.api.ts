@@ -9,7 +9,7 @@ import parserTypescript from 'prettier/esm/parser-typescript.mjs'
 
 import { Layer } from '../../../../packages/twind/src/internal/precedence'
 
-const defaults = { printWidth: 100, semi: false, trailingComma: 'all' }
+const defaults = { semi: false, trailingComma: 'all' }
 const plugins = [parserBabel, parserHtml, parserMarkdown, parserPostcss, parserTypescript]
 
 const api: Prettier = {
@@ -45,13 +45,13 @@ const api: Prettier = {
             ? 'defaults'
             : layer === Layer.b
             ? 'base'
-            : layer === Layer.s
-            ? 'shortcuts'
+            : layer === Layer.c
+            ? 'components'
+            : layer === Layer.a
+            ? 'aliases'
             : layer === Layer.u
             ? 'utilities'
-            : layer === Layer.o
-            ? 'overrides'
-            : 'components'
+            : 'overrides'
 
         if (lastLayerName !== layerName) {
           // if (lastLayerName) {

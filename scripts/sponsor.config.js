@@ -27,7 +27,12 @@ export default defineConfig({
 
     // convert github monthlyDollars into total just as it is reported for OpenCollective
     for (const sponsor of sponsors) {
-      if (sponsor.provider === 'github' && sponsor.createdAt) {
+      if (
+        sponsor.provider === 'github' &&
+        sponsor.monthlyDollars !== -1 &&
+        !sponsor.isOneTime &&
+        sponsor.createdAt
+      ) {
         sponsor.monthlyDollars *= monthDiff(new Date(sponsor.createdAt), new Date())
       }
     }
@@ -35,6 +40,11 @@ export default defineConfig({
     return sponsors
   },
   tiers: [
+    {
+      title: 'Past Sponsors',
+      monthlyDollars: -1,
+      preset: presets.xs,
+    },
     {
       title: 'Backers',
       preset: presets.small,

@@ -1,9 +1,23 @@
 ---
-title: Usage
 hidden: true
 ---
 
-TODO list from /examples with title, description, and links to stackblitz/codesandbox
+https://cdn.jsdelivr.net/npm/twind@next
+https://cdn.jsdelivr.net/combine/npm/twind@next,npm/@twind/preset-autoprefix@next,npm/@twind/preset-tailwind@next
+
+https://cdn.jsdelivr.net/npm/@twind/cdn@next
+https://cdn.jsdelivr.net/combine/npm/@twind/cdn@next,npm/@twind/preset-ext@next
+
+- default: https://cdn.twind.style
+
+  - version: latest
+  - presets: none
+    -> https://cdn.jsdelivr.net/combine/npm/@twind/cdn@next,npm/@twind/preset-ext@next
+
+- with presets: https://cdn.twind.style?presets=forms,typography,aspect-ratio,line-clamp
+  -> https://cdn.jsdelivr.net/combine/npm/@twind/cdn@next,npm/@twind/preset-ext@next
+
+- with dev: ?dev
 
 ## CDNs
 

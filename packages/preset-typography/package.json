@@ -1,14 +1,14 @@
 {
   "name": "@twind/preset-typography",
   "version": "1.0.0-next.39",
-  "description": "Typography preset for twind",
+  "description": "A twind preset that provides a set of `prose` classes you can use to add beautiful typographic defaults to any vanilla HTML you don't control, like HTML rendered from Markdown, or pulled from a CMS.",
   "keywords": [
     "twind",
+    "twind-preset",
     "tailwind",
     "tailwindcss",
     "tw-in-js",
     "tailwind-in-js",
-    "twind-preset",
     "preset"
   ],
   "type": "module",

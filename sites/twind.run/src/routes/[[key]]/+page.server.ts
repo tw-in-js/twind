@@ -6,7 +6,7 @@ import { Semver } from 'sver'
 import { dev } from '$app/environment'
 import { env } from '$env/dynamic/private'
 
-import initialTemplate from '$lib/templates/initial/_'
+import { loadDefaultTemplate, loadTemplate } from '$lib/templates'
 import { toBase64, toBase64url } from '$lib/base64'
 import type { Manifest, Workspace } from '$lib/types'
 
@@ -24,13 +24,13 @@ const HOSTNAME = 'twind-run.pages.dev'
 //   }
 // }
 
-// import wordlistraw from './wordlist.txt?raw'
+import wordlistraw from './wordlist.txt?raw'
 
 // Based on
 // - https://gist.github.com/fogleman/c4a1f69f34c7e8a00da8
 // - https://www.eff.org/files/2016/09/08/eff_short_wordlist_1.txt from https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases
 // 4547 words that are 3-5 chars and good candidates for a prefix search
-// const wordlist = wordlistraw.trim().split(/\s+/g)
+const wordlist = wordlistraw.trim().split(/\s+/g)
 
 // content adressable store
 // twind.run/<base64url(integrity)> -> twind.run/Ttj8VsbHHK9N0k1KS94JH_RYFxFwOQ6D7hFg3XUnSTw
@@ -50,7 +50,7 @@ export async function load({
   platform: { env },
   fetch,
 }: Parameters<import('./$types').PageServerLoad>[0]) {
-  const workspace = await loadWorkspace()
+  const { workspace } = await loadWorkspace()
 
   // default no version: use version from local manifest
   // specific version: load manifest from v1-0-0.twind-run.pages.dev
@@ -58,7 +58,7 @@ export async function load({
 
   const [localManifest, workspaceManifest, latestManifest, nextManifest] = await Promise.all([
     loadManifest(),
-    loadManifest(workspace.version).catch(() => null),
+    loadManifest(workspace?.version).catch(() => null),
     loadManifest('latest').catch(() => null),
     loadManifest('next').catch(() => null),
   ])
@@ -82,8 +82,11 @@ export async function load({
   const manifests = [localManifest, workspaceManifest, latestManifest, nextManifest]
     // remove nullish (not found)
     .filter(<T>(x: T): x is NonNullable<T> => x != null)
-    // remove duplicates
-    .filter((x, index, source) => source.indexOf(x) === index)
+    // remove duplicate versions
+    .filter(
+      ({ version }, index, source) =>
+        source.findIndex((other) => other.version === version) === index,
+    )
     // sort in reverse order: latest, next, canary
     // order: latest (current release), next (upcoming release), canary (PR preview),
     .sort((a, b) => Semver.compare(b.version, a.version))
@@ -91,14 +94,26 @@ export async function load({
   // console.debug({ workspace, manifests })
   return { workspace, manifests }
 
-  async function loadWorkspace(): Promise<Workspace> {
+  async function loadWorkspace(): Promise<{ workspace: Workspace }> {
     if (!key) {
-      return initialTemplate
+      return loadDefaultTemplate()
+    }
+
+    const template = await loadTemplate(key)
+
+    if (template) {
+      return template
     }
 
     const data = await env.WORKSPACES.get(key).catch((error) => {
       if (error.message.includes('(10020)')) {
         // get: The specified object name is not valid. (10020)
+        // maybe a lz-string encoded url
+        return null
+      }
+
+      if (error.message.includes('(414)')) {
+        // get: UTF-8 encoded length of 1747 exceeds key length limit of 1024. (414)
         // maybe a lz-string encoded url
         return null
       }
@@ -121,8 +136,7 @@ export async function load({
       try {
         const workspace = JSON.parse(data.slice(`${EXPECTED_VERSION}:`.length))
         // TODO: validate workspace loaded from url
-        // TODO:
-        return workspace
+        return { workspace }
       } catch {
         throw error(404, 'Not found')
       }
@@ -147,10 +161,10 @@ export async function load({
         type: 'application/json',
       })
 
-      return JSON.parse(await blob.text())
+      return { workspace: JSON.parse(await blob.text()) }
     }
 
-    return await data.json()
+    return { workspace: await data.json() }
   }
 
   async function loadManifest(version = ''): Promise<Manifest> {
@@ -241,38 +255,40 @@ export const actions: import('./$types').Actions = {
       //   return invalid(400, { script: 'missing' })
       // }
 
+      const blob =
+        typeof workspaceRaw === 'string'
+          ? new Blob([workspaceRaw], { type: 'application/json' })
+          : workspaceRaw
+
       try {
-        const blob =
-          typeof workspaceRaw === 'string'
-            ? new Blob([workspaceRaw], { type: 'application/json' })
-            : workspaceRaw
+        const { key, integrity, missing } = await generate(platform, await blob.arrayBuffer())
 
-        let { key, sha256 } = await generate(await blob.arrayBuffer())
+        // not found
+        if (missing) {
+          // This dance is the only way I could get it work
+          const value = await toBlob(blob.stream().pipeThrough(await createGzipStream()))
+          const { readable, writable } =
+            typeof FixedLengthStream === 'function'
+              ? new FixedLengthStream(value.size)
+              : { readable: value, writable: null }
 
-        const existing = await platform.env.WORKSPACES.head(key)
-        if (!existing) {
-          // not found
-          await platform.env.WORKSPACES.put(
-            key,
-            await toBlob(blob.stream().pipeThrough(await createGzipStream()), {
-              type: 'application/json',
-            }),
-            {
-              customMetadata: { version },
+          await Promise.all([
+            writable && value.stream().pipeTo(writable),
+            platform.env.WORKSPACES.put(key, readable, {
+              customMetadata: { version, integrity },
               httpMetadata: {
                 contentType: 'application/json',
                 contentEncoding: 'gzip',
               },
-              sha256,
-            },
-          )
+            }),
+          ])
         }
 
-        return { success: true, key }
+        return { success: true, key, inserted: missing }
       } catch (error) {
         return {
           success: true,
-          key: compressToEncodedURIComponent(version + ':' + workspaceRaw),
+          key: compressToEncodedURIComponent(version + ':' + (await blob.text())),
           message: (error as Error).message,
           code: (error as any).code,
           stack: (error as Error).stack,
@@ -288,28 +304,81 @@ export const actions: import('./$types').Actions = {
   },
 }
 
-async function generate(source: BufferSource) {
-  const sha256 = await crypto.subtle.digest('SHA-256', source)
+async function generate(platform: App.Platform, source: BufferSource) {
+  const sha256 = await crypto.subtle.digest('SHA-512', source)
   const integrity = toBase64(sha256)
 
-  // const view = new DataView(sha256)
+  const view = new DataView(sha256)
 
-  return {
-    sha256,
-    key: toBase64url(integrity),
-    // slug: [
-    //   // <word>-<word>-<word>-<hash>
-    //   wordlist[view.getUint16(0) & wordlist.length],
-    //   wordlist[view.getUint16(2) & wordlist.length],
-    //   wordlist[view.getUint16(4) & wordlist.length],
-    //   integrity
-    //     .toLowerCase()
-    //     // no vowels or similiar looking chars
-    //     .replace(/[=+/01aefijlout]/g, '')
-    //     .slice(-6),
-    // ].join('-'),
+  // try different slugs
+  for (let i = 0; i < view.byteLength - 6; i += 2) {
+    const key = [
+      // 4547 * 4547 * 4547 = 94.010.175.323
+      // <word>-<word>-<word>
+      wordlist[view.getUint16(i) % wordlist.length],
+      wordlist[view.getUint16((i += 2)) % wordlist.length],
+      wordlist[view.getUint16((i += 2)) % wordlist.length],
+    ].join('-')
+
+    const existing = await platform.env.WORKSPACES.head(key)
+
+    // does not exist or it is the same data
+    if (
+      !existing ||
+      (existing.customMetadata?.integrity && existing.customMetadata.integrity === integrity)
+    ) {
+      return { key, integrity, missing: !existing }
+    }
   }
+
+  // fallback to short readable integrity
+  {
+    const key = integrity
+      .toLowerCase()
+      // no vowels or similiar looking chars
+      .replace(/[=+/01aefijlout]/g, '')
+      .slice(-12)
+      .replace(/(.{4})(?!$)/g, '$1-')
+
+    const existing = await platform.env.WORKSPACES.head(key)
+
+    // does not exist or it is the same data
+    if (
+      !existing ||
+      (existing.customMetadata?.integrity && existing.customMetadata.integrity === integrity)
+    ) {
+      return { key, integrity, missing: !existing }
+    }
+  }
+
+  // fallback to long readable integrity
+  {
+    const key = integrity
+      .toLowerCase()
+      // no vowels or similiar looking chars
+      .replace(/[=+/01aefijlout]/g, '')
+      .slice(-25)
+      .replace(/(.{5})(?!$)/g, '$1-')
+
+    const existing = await platform.env.WORKSPACES.head(key)
+
+    // does not exist or it is the same data
+    if (
+      !existing ||
+      (existing.customMetadata?.integrity && existing.customMetadata.integrity === integrity)
+    ) {
+      return { key, integrity, missing: !existing }
+    }
+  }
+
+  // fallback to full integrity
+  const key = toBase64url(integrity)
+
+  const existing = await platform.env.WORKSPACES.head(key)
+
+  return { key, integrity, missing: !existing }
 }
+
 async function createGzipStream(): Promise<ReadableWritablePair<Uint8Array, Uint8Array>> {
   if (dev && typeof CompressionStream !== 'function') {
     const zlib = await import('node:zlib')

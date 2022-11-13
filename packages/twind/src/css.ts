@@ -7,6 +7,11 @@ import { Layer } from './internal/precedence'
 import { merge } from './internal/merge'
 import { astish } from './internal/astish'
 
+/**
+ * @group Class Name Generators
+ * @param strings
+ * @param interpolations
+ */
 export function css(strings: TemplateStringsArray, ...interpolations: readonly CSSValue[]): string
 
 export function css(style: CSSObject | string): string

@@ -5,7 +5,7 @@ const config = {
   kit: {
     adapter: adapter(),
     prerender: {
-      concurrency: 1,
+      origin: 'https://twind.run',
       entries: ['*', '/manifest.json', '/msapplication-config.xml'],
     },
     csrf: {

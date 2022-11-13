@@ -1,7 +1,7 @@
 {
   "name": "@twind/with-sveltekit",
   "version": "1.0.0-next.39",
-  "description": "sveltekit integration for Twind",
+  "description": "Seamless integration of Twind in a SvelteKit project",
   "publishConfig": {
     "access": "public",
     "directory": "dist",
@@ -12,6 +12,7 @@
   },
   "keywords": [
     "twind",
+    "twind-with",
     "tailwind",
     "tailwindcss",
     "tw-in-js",
@@ -31,7 +32,7 @@
   "// These are relative from within the dist/ folder": "",
   "sideEffects": false,
   "peerDependencies": {
-    "@sveltejs/kit": "^1.0.0-next.531",
+    "@sveltejs/kit": "^1.0.0-next.391",
     "twind": "1.0.0-next.39",
     "typescript": "^4.8.4"
   },
@@ -41,8 +42,8 @@
     }
   },
   "devDependencies": {
-    "@sveltejs/kit": "^1.0.0-next.531",
-    "svelte": "^3.50.1",
+    "@sveltejs/kit": "1.0.0-next.544",
+    "svelte": "^3.53.1",
     "twind": "1.0.0-next.39",
     "typescript": "^4.8.4"
   },

@@ -87,9 +87,6 @@ jobs:
         uses: ./.github/actions/publish-pages
         with:
           workingDirectory: sites/twind.style
-          run: |
-            pnpm typedoc
-            pnpm build
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
@@ -155,9 +152,6 @@ jobs:
         uses: ./.github/actions/publish-pages
         with:
           workingDirectory: sites/twind.style
-          run: |
-            pnpm typedoc
-            pnpm build
           apiToken: ${{ secrets.CF_API_TOKEN }}
           accountId: ${{ secrets.CF_ACCOUNT_ID }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}

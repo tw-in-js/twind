@@ -1,99 +1,125 @@
 ---
-section: Getting Started
+section: Advanced
 title: Grouping Syntax
 excerpt: Twind provides a terse syntax for grouping related classes together in an intuitive way.
-next: ./reference.md
+next: ./aliases.md
 ---
 
 In an effort to help reduce repetition and improve readability, Twind provides a domain specific grouping syntax that can be used in strings or template literals.
 
 Let's see how we can use grouping to improve readability and save a few characters in the process.
 
-**Thinking in Groups**
+## Thinking in Groups
 
-On common complain of Tailwind (and utility classes) is long and unwieldy class names in markup:
+1.  :::cols-12{.gap-4}
 
-```html index.html
-<button
-  type="button"
-  class="
-     w-full sm:w-auto inline-flex items-center px-4 py-2
-     text-sm text-white font-medium
-     border border-transparent rounded-md shadow-sm
-     bg-indigo-600 hover:bg-indigo-700 focus:bg-indigo-800
-     focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
-     transition-colors duration-300
-   "
->
-  Button text
-</button>
-```
+    ::col-span-4
 
----
+    On common complain of Tailwind (and utility classes) is long and unwieldy class names in markup.
 
-**Same prefix classes**
+    ::col-span-8
 
-These classes can be grouped using directive grouping:
+    ```html index.html
+    <button
+      type="button"
+      class="
+        w-full sm:w-auto inline-flex items-center px-4 py-2
+        text-sm text-white font-medium
+        border border-transparent rounded-md shadow-sm
+        bg-indigo-600 hover:bg-indigo-700 focus:bg-indigo-800
+        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
+        transition-colors duration-300
+      "
+    >
+      Button text
+    </button>
+    ```
 
-```html index.html focusLines[4,5] /w-(full sm:auto)/ /text-(sm white)/
-<button
-  type="button"
-  class="
-    w-(full sm:auto) inline-flex items-center px-4 py-2
-    text-(sm white) font-medium
-    border border-transparent rounded-md shadow-sm
-    bg-indigo-600 hover:bg-indigo-700 focus:bg-indigo-800
-    focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
-    transition-colors duration-300
-  "
->
-  Button text
-</button>
-```
+    :::
 
----
+1.  :::cols-12{.gap-4}
 
-**Same variant classes**
+    ::col-span-4
 
-The `focus` variant classes can be grouped using variant grouping:
+    ### Same prefix classes
 
-```html index.html focusLines[8]
-<button
-  type="button"
-  class="
-    w-(full sm:auto) inline-flex items-center px-4 py-2
-    text-(sm white) font-medium
-    border border-transparent rounded-md shadow-sm
-    bg-indigo-600 hover:bg-indigo-700 focus:bg-indigo-800
-    focus:(outline-none ring-2 ring-offset-2 ring-indigo-500)
-    transition-colors duration-300
-  "
->
-  Button text
-</button>
-```
+    These classes can be grouped using directive grouping.
 
----
+    ::col-span-8
 
-**Mixed classes**
+    ```html index.html focusLines[4,5] /w-(full sm:auto)/ /text-(sm white)/
+    <button
+      type="button"
+      class="
+        w-(full sm:auto) inline-flex items-center px-4 py-2
+        text-(sm white) font-medium
+        border border-transparent rounded-md shadow-sm
+        bg-indigo-600 hover:bg-indigo-700 focus:bg-indigo-800
+        focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500
+        transition-colors duration-300
+      "
+    >
+      Button text
+    </button>
+    ```
 
-The background classes can be grouped using a combination of directive and variant (mixed) grouping:
+    :::
 
-```html index.html focusLines[7] /bg-indigo-(600 hover:700 focus:800)/
-<button
-  type="button"
-  class="
-    w-(full sm:auto) inline-flex items-center px-4 py-2
-    text-(sm white) font-medium
-    border border-transparent rounded-md shadow-sm
-    bg-indigo-(600 hover:700 focus:800)
-    focus:(outline-none ring-(2 offset-2 indigo-500))
-    transition-colors duration-300
-  "
->
-  Button text
-</button>
-```
+1.  :::cols-12{.gap-4}
+
+    ::col-span-4
+
+    ### Same variant classes
+
+    The `focus` variant classes can be grouped using variant grouping.
+
+    ::col-span-8
+
+    ```html index.html focusLines[8]
+    <button
+      type="button"
+      class="
+        w-(full sm:auto) inline-flex items-center px-4 py-2
+        text-(sm white) font-medium
+        border border-transparent rounded-md shadow-sm
+        bg-indigo-600 hover:bg-indigo-700 focus:bg-indigo-800
+        focus:(outline-none ring-2 ring-offset-2 ring-indigo-500)
+        transition-colors duration-300
+      "
+    >
+      Button text
+    </button>
+    ```
+
+    :::
+
+1.  :::cols-12{.gap-4}
+
+    ::col-span-4
+
+    ### Mixed classes
+
+    The background classes can be grouped using a combination of directive and variant (mixed) grouping.
+
+    ::col-span-8
+
+    ```html index.html focusLines[7] /bg-indigo-(600 hover:700 focus:800)/
+    <button
+      type="button"
+      class="
+        w-(full sm:auto) inline-flex items-center px-4 py-2
+        text-(sm white) font-medium
+        border border-transparent rounded-md shadow-sm
+        bg-indigo-(600 hover:700 focus:800)
+        focus:(outline-none ring-(2 offset-2 indigo-500))
+        transition-colors duration-300
+      "
+    >
+      Button text
+    </button>
+    ```
+
+    :::
 
 As you can see, grouping saved a few characters. For some people, the grouped classes may improve readability. Other people may prefer the Tailwind style. Grouping is fully opt-in, highly expressive, and can be used as little or as much as you'd like.
 
@@ -132,7 +158,7 @@ cx`
   lg:(bg-red-800 shadow-xl)
 `
 
-cx`w(1/2 sm:1/3 lg:1/6) p-2`
+cx`w-(1/2 sm:1/3 lg:1/6) p-2`
 // => w-1/2 sm:w-1/3 lg:w-1/6 p-2
 ```
 
@@ -157,6 +183,15 @@ cx`rotate-(-3 hover:6 md:(3 hover:-6))`
 
 Thanks to some ordering logic in the compiler, both of the above groupings will result in the same output. That is to say more generally, that directive groupings always get expanded before variant groupings.
 
+## Important Grouping
+
+The important prefix `!` can be used for grouping as well:
+
+```js
+cx`!(text-(sm green-500))`
+// => !text-sm !text-green-500
+```
+
 ## Self Reference
 
 Some directives like `ring` need to be applied themselves as well as being a prefix. In this case you can use the reserved `&` character which is replaced literally with the current prefix:
@@ -166,5 +201,5 @@ cx`ring(& pink-700 offset(4 pink-200))`
 // => ring ring-pink-700 ring-offset-4 ring-offset-pink-200
 
 cx`bg-blue-500(hover:& focus:& active:&) rounded-full`
-// => hover:bg-blue-500 **focus:bg-blue-500** active:bg-blue-500 rounded-full
+// => hover:bg-blue-500 focus:bg-blue-500 active:bg-blue-500 rounded-full
 ```

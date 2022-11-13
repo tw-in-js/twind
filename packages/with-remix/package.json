@@ -1,7 +1,7 @@
 {
   "name": "@twind/with-remix",
   "version": "1.0.0-next.39",
-  "description": "remix integration for Twind",
+  "description": "Seamless integration of Twind in a Remix project",
   "publishConfig": {
     "access": "public",
     "directory": "dist",
@@ -12,6 +12,7 @@
   },
   "keywords": [
     "twind",
+    "twind-with",
     "tailwind",
     "tailwindcss",
     "tw-in-js",
@@ -45,11 +46,11 @@
     }
   },
   "devDependencies": {
-    "@types/node": "^14.18.31",
-    "@types/react": "^17.0.50",
+    "@types/node": "^14.18.33",
+    "@types/react": "^17.0.52",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "remix": "^1.7.2",
+    "remix": "^1.7.5",
     "twind": "1.0.0-next.39",
     "typescript": "^4.8.4"
   },

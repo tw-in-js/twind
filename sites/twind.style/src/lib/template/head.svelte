@@ -1,5 +1,5 @@
 <script>
-  import { tw } from 'twind'
+  import { tw } from '$lib/twind'
   import { page } from '$app/stores'
 
   import favicon from '$lib/assets/favicon.ico'

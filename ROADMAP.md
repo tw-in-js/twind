@@ -69,6 +69,7 @@
 - support `is(:hover,:focus-visible):underline`? in preset-ext
   - maybe as `is-hover,focus-visible:underline`
   - same for `:where` and `:has`
+- cdn.twind.style: auto register passed presets - no explicit `install(presets: [...])` call
 - @twind/cdn: parse style elements like tailwind? `<style type="text/tailwindcss">`
 
   https://github.com/tw-in-js/twind/issues/238#issuecomment-1021544996

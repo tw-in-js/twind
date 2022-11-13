@@ -14,6 +14,11 @@ function getStyleElement(selector: string | null | undefined | false): HTMLStyle
   return style as HTMLStyleElement
 }
 
+/**
+ * @group Sheets
+ * @param element
+ * @returns
+ */
 export function cssom(
   element?: CSSStyleSheet | HTMLStyleElement | string | null | false,
 ): Sheet<CSSStyleSheet> {
@@ -74,6 +79,11 @@ export function cssom(
   }
 }
 
+/**
+ * @group Sheets
+ * @param element
+ * @returns
+ */
 export function dom(element?: HTMLStyleElement | string | null | false): Sheet<HTMLStyleElement> {
   const target = element && typeof element != 'string' ? element : getStyleElement(element)
 
@@ -110,6 +120,11 @@ export function dom(element?: HTMLStyleElement | string | null | false): Sheet<H
   }
 }
 
+/**
+ * @group Sheets
+ * @param includeResumeData
+ * @returns
+ */
 export function virtual(includeResumeData?: boolean): Sheet<string[]> {
   const target: string[] = []
 
@@ -153,7 +168,8 @@ export function virtual(includeResumeData?: boolean): Sheet<string[]> {
 /**
  * Returns a sheet useable in the current environment.
  *
- * @param useDOMSheet usually something like `process.env.NODE_ENV != 'production'` (default: browser={@link cssom}, server={@link virtual})
+ * @group Sheets
+ * @param useDOMSheet usually something like `process.env.NODE_ENV != 'production'` or `import.meta.env.DEV` (default: browser={@link cssom}, server={@link virtual})
  * @param disableResume to not include or use resume data
  * @returns a sheet to use
  */
@@ -169,6 +185,11 @@ export function getSheet(
   return sheet
 }
 
+/**
+ * @group Sheets
+ * @param target
+ * @returns
+ */
 export function stringify(target: unknown): string {
   // string[] | CSSStyleSheet | HTMLStyleElement
   return (

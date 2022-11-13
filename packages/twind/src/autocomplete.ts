@@ -40,6 +40,12 @@ export type AutocompleteProvider<Theme extends BaseTheme = BaseTheme> = (
 
 const kAutocomplete = /* #__PURE__ */ Symbol('@twind/autocomplete')
 
+/**
+ * @experimental
+ * @group Configuration
+ * @param resolver
+ * @param autocomplete
+ */
 export function withAutocomplete<Theme extends BaseTheme = BaseTheme>(
   resolver: RuleResolver<Theme>,
   autocomplete: AutocompleteProvider<Theme> | false | null | undefined,
@@ -87,6 +93,11 @@ export function withAutocomplete<Theme extends BaseTheme = BaseTheme>(
   return rule
 }
 
+/**
+ * @internal
+ * @param resolver
+ * @returns
+ */
 export function getAutocompleteProvider<Theme extends BaseTheme = BaseTheme>(
   resolver: RuleResolver<Theme> | VariantResolver<Theme>,
 ): AutocompleteProvider<Theme> | undefined {

@@ -502,22 +502,11 @@ export function getOrCreateModel(path: string, defaultValue = '', defaultLanguag
 function detectLanguage(path: string) {
   const ext = path.replace(/^.+\.([^.]+)$/, '$1')
 
-  switch (ext) {
-    case 'ts':
-    case 'tsx':
-    case 'mts':
-    case 'cts':
-      return 'typescript'
-
-    case 'js':
-    case 'jsx':
-    case 'mjs':
-    case 'cjs':
-      return 'javascript'
-
-    default:
-      return ext
+  if (/^[cm]?[jt]sx?$/.test(ext)) {
+    return 'typescript'
   }
+
+  return ext
 }
 
 export function cleanupWorkspace() {

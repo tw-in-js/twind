@@ -2,10 +2,10 @@
   "name": "scripts",
   "version": "0.0.0",
   "scripts": {
-    "sponsor": "sponsorkit"
+    "sponsors": "sponsorkit"
   },
   "license": "ISC",
   "devDependencies": {
-    "sponsorkit": "^0.5.6"
+    "sponsorkit": "^0.6.1"
   }
 }

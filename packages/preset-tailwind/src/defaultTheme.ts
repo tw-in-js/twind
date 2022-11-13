@@ -7,7 +7,6 @@ import type { TailwindTheme } from './types'
 
 import * as colors from './colors'
 
-/** @internal */
 export type OmitedSections =
   | 'backgroundPosition'
   | 'container'
@@ -20,7 +19,6 @@ export type OmitedSections =
   | 'objectPosition'
   | 'transformOrigin'
 
-/** @internal */
 export type StableSections =
   | 'screens'
   | 'columns'

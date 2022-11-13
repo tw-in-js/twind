@@ -9,10 +9,10 @@ import { auto, install as install$, asArray } from 'twind'
 import presetAutoprefix from '@twind/preset-autoprefix'
 import presetTailwind from '@twind/preset-tailwind'
 
-/** @internal */
+/** @hidden */
 export * as presetTailwind_colors from '@twind/preset-tailwind/colors'
 
-/** @internal */
+/** @hidden */
 export { default as presetTailwind_defaultTheme } from '@twind/preset-tailwind/defaultTheme'
 
 // If we run in the browser as `<script src="..."></script>` auto call setup once the body starts rendering

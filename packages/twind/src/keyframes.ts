@@ -42,6 +42,11 @@ export type Keyframes = KeyframesFunction & {
   [label: string]: KeyframesFunction
 }
 
+/**
+ * **Note**: The styles will be injected on first use.
+ *
+ * @group Style Injectors
+ */
 export const keyframes = /* #__PURE__ */ bind()
 
 function bind(thisArg: ((tokens: string) => string) | undefined | void): Keyframes {

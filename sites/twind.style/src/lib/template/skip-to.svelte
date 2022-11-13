@@ -1,27 +1,26 @@
 <script>
-  import { browser } from '$app/environment'
-  import { onDestroy } from 'svelte'
-  import { mutationObserver } from '$lib/actions'
+  import { onMount } from 'svelte'
+  import { mutationObserver, shortcut } from '$lib/actions'
+  import { searchOpen } from '$lib/stores'
 
-  const links = [
-    ['#main', 'Skip to main content'],
-    ['#nav', 'Skip to site navigation'],
-    ['#toc', 'Skip to table of contents'],
-  ]
+  /** @type {string[][]}*/
+  let active = []
 
-  let active = links
-
-  if (browser) {
+  onMount(() => {
     const { destroy } = mutationObserver(document.body, {
       childList: true,
       subtree: true,
       callback() {
-        active = links.filter(([selector]) => document.querySelector(selector))
+        active = [
+          ['#main', 'Skip to main content'],
+          ['#nav', 'Skip to site navigation'],
+          ['#toc', 'Skip to table of contents'],
+        ].filter(([selector]) => document.querySelector(selector))
       },
     })
 
-    onDestroy(destroy)
-  }
+    return destroy
+  })
 </script>
 
 <nav
@@ -40,7 +39,12 @@
     {/each}
 
     <li class="pl-2">
-      <a href="#search" class="block"> Open search </a>
+      <button
+        type="button"
+        class="block"
+        on:click={() => ($searchOpen = true)}
+        use:shortcut={{ control: true, code: 'KeyK' }}>Open search</button
+      >
     </li>
   </ul>
 </nav>

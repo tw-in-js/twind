@@ -1,5 +1,14 @@
 # @twind/preset-typography
 
+## 1.0.0
+
+### Patch Changes
+
+- update to @tailwindcss/typography@0.5.7 (089b8977)
+
+- Updated dependencies [fe891f9c, e2c17a2e, d481948b, e6acbea2, 2ac8e695, 0705e419]:
+  - twind@1.0.0
+
 ## 1.0.0-next.39
 
 ### Patch Changes

@@ -16,12 +16,12 @@
 > **Important**
 > This is important
 
-> **Caution:Don't try this at home**
+> **Caution/Don't try this at home**
 > This is a caution
 
 To add a title to an admonition, add a colon after the admonition type and then the title.
 
-> **Caution:Don't try this at home**
+> **Caution/Don't try this at home**
 > This is a caution
 
 ### Code blocks

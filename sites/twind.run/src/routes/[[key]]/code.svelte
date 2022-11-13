@@ -396,83 +396,52 @@
 
   // update file when value changes
   $: if (browser && monaco && editor && readonly) {
-    const file = files.get(path)
-    get(valueEditsDecorations)?.clear()
+    setValue(value)
+  }
 
-    if (file && file.model.getValue() !== value) {
-      const hadValue = file.model.getValue().trim().length
+  /** @param {string} value */
+  function setValue(value) {
+    if (browser && monaco && editor) {
+      const file = files.get(path)
+      get(valueEditsDecorations)?.clear()
 
-      /** @type {import('$lib/monaco').editor.IIdentifiedSingleEditOperation[]} */
-      const edits = []
+      if (file && file.model.getValue() !== value) {
+        const hadValue = file.model.getValue().trim().length
 
-      /** @type {import('$lib/monaco').editor.IModelDeltaDecoration[]} */
-      const decorations = []
+        /** @type {import('$lib/monaco').editor.IIdentifiedSingleEditOperation[]} */
+        const edits = []
 
-      if (hadValue) {
-        const changes = diff(file.model.getValue(), value)
+        /** @type {import('$lib/monaco').editor.IModelDeltaDecoration[]} */
+        const decorations = []
 
-        let offset = 0
-        for (let index = 0; index < changes.length; index++) {
-          const change = changes[index]
+        if (hadValue) {
+          const changes = diff(file.model.getValue(), value)
 
-          if (change[0] === diff.EQUAL) {
-            offset += change[1].length
-          } else if (change[0] === diff.INSERT) {
-            const position = file.model.getPositionAt(offset)
+          let offset = 0
+          for (let index = 0; index < changes.length; index++) {
+            const change = changes[index]
 
-            edits.push({
-              range: {
-                startLineNumber: position.lineNumber,
-                startColumn: position.column,
-                endLineNumber: position.lineNumber,
-                endColumn: position.column,
-              },
-              text: change[1],
-              forceMoveMarkers: true,
-            })
+            if (change[0] === diff.EQUAL) {
+              offset += change[1].length
+            } else if (change[0] === diff.INSERT) {
+              const position = file.model.getPositionAt(offset)
 
-            const decorationEnd = file.model.getPositionAt(offset + change[1].length)
-            decorations.push({
-              range: {
-                startLineNumber: position.lineNumber,
-                startColumn: position.column,
-                endLineNumber: decorationEnd.lineNumber,
-                endColumn: decorationEnd.column,
-              },
-              options: {
-                marginClassName: tw('bg-info-7'),
-                className: tw('rounded-sm ring-1 ring-info-10'),
-              },
-            })
-          } /* if (change[0] === diff.DELETE) */ else {
-            const startPosition = file.model.getPositionAt(offset)
-            offset += change[1].length
-            const endPosition = file.model.getPositionAt(offset)
-
-            const nextChange = changes[index + 1]
-
-            if (nextChange?.[0] === diff.INSERT) {
-              index += 1
-
-              // replace
               edits.push({
                 range: {
-                  startLineNumber: startPosition.lineNumber,
-                  startColumn: startPosition.column,
-                  endLineNumber: endPosition.lineNumber,
-                  endColumn: endPosition.column,
+                  startLineNumber: position.lineNumber,
+                  startColumn: position.column,
+                  endLineNumber: position.lineNumber,
+                  endColumn: position.column,
                 },
-                text: nextChange[1],
+                text: change[1],
                 forceMoveMarkers: true,
               })
 
-              const decorationEnd = file.model.getPositionAt(
-                offset - change[1].length + nextChange[1].length,
-              )
+              const decorationEnd = file.model.getPositionAt(offset + change[1].length)
               decorations.push({
                 range: {
-                  startLineNumber: startPosition.lineNumber,
-                  startColumn: startPosition.column,
+                  startLineNumber: position.lineNumber,
+                  startColumn: position.column,
                   endLineNumber: decorationEnd.lineNumber,
                   endColumn: decorationEnd.column,
                 },
@@ -481,60 +450,97 @@
                   className: tw('rounded-sm ring-1 ring-info-10'),
                 },
               })
-            } else {
-              // simple delete
-              edits.push({
-                range: {
-                  startLineNumber: startPosition.lineNumber,
-                  startColumn: startPosition.column,
-                  endLineNumber: endPosition.lineNumber,
-                  endColumn: endPosition.column,
-                },
-                text: null,
-                forceMoveMarkers: true,
-              })
+            } /* if (change[0] === diff.DELETE) */ else {
+              const startPosition = file.model.getPositionAt(offset)
+              offset += change[1].length
+              const endPosition = file.model.getPositionAt(offset)
+
+              const nextChange = changes[index + 1]
+
+              if (nextChange?.[0] === diff.INSERT) {
+                index += 1
+
+                // replace
+                edits.push({
+                  range: {
+                    startLineNumber: startPosition.lineNumber,
+                    startColumn: startPosition.column,
+                    endLineNumber: endPosition.lineNumber,
+                    endColumn: endPosition.column,
+                  },
+                  text: nextChange[1],
+                  forceMoveMarkers: true,
+                })
+
+                const decorationEnd = file.model.getPositionAt(
+                  offset - change[1].length + nextChange[1].length,
+                )
+                decorations.push({
+                  range: {
+                    startLineNumber: startPosition.lineNumber,
+                    startColumn: startPosition.column,
+                    endLineNumber: decorationEnd.lineNumber,
+                    endColumn: decorationEnd.column,
+                  },
+                  options: {
+                    marginClassName: tw('bg-info-7'),
+                    className: tw('rounded-sm ring-1 ring-info-10'),
+                  },
+                })
+              } else {
+                // simple delete
+                edits.push({
+                  range: {
+                    startLineNumber: startPosition.lineNumber,
+                    startColumn: startPosition.column,
+                    endLineNumber: endPosition.lineNumber,
+                    endColumn: endPosition.column,
+                  },
+                  text: null,
+                  forceMoveMarkers: true,
+                })
+              }
             }
           }
+        } else {
+          edits.push({
+            range: file.model.getFullModelRange(),
+            text: value,
+            forceMoveMarkers: true,
+          })
         }
-      } else {
-        edits.push({
-          range: file.model.getFullModelRange(),
-          text: value,
-          forceMoveMarkers: true,
-        })
+
+        if (file.model === editor.getModel()) {
+          if (file.readonly) {
+            editor.updateOptions({ readOnly: false })
+          }
+
+          editor.executeEdits('', edits)
+
+          editor.revealRangeNearTop(
+            (edits.find((edit) => edit.text) || edits[0]).range,
+            monaco.editor.ScrollType.Smooth,
+          )
+
+          if (hadValue && file.readonly && decorations.length) {
+            valueEditsDecorations.set(editor.createDecorationsCollection(decorations))
+          }
+
+          editor.pushUndoStop()
+
+          if (file.readonly) {
+            editor.updateOptions({ readOnly: true })
+          }
+        } else {
+          file.model.applyEdits(edits)
+        }
+
+        monaco.loadModelTypeDeclarations(file.model, manifest)
       }
 
-      if (file.model === editor.getModel()) {
-        if (file.readonly) {
-          editor.updateOptions({ readOnly: false })
-        }
-
-        editor.executeEdits('', edits)
-
-        editor.revealRangeNearTop(
-          (edits.find((edit) => edit.text) || edits[0]).range,
-          monaco.editor.ScrollType.Smooth,
-        )
-
-        if (hadValue && file.readonly && decorations.length) {
-          valueEditsDecorations.set(editor.createDecorationsCollection(decorations))
-        }
-
-        editor.pushUndoStop()
-
-        if (file.readonly) {
-          editor.updateOptions({ readOnly: true })
-        }
-      } else {
-        file.model.applyEdits(edits)
-      }
-
-      monaco.loadModelTypeDeclarations(file.model, manifest)
+      scheduleLayout()
     }
-
-    scheduleLayout()
   }
-
   // sync readonly flag
   $: if (browser && monaco && editor) {
     const file = files.get(path)
@@ -756,7 +762,7 @@
               file.model === editor.getModel() &&
               source === file.model.getValue()
             ) {
-              value = formatted
+              setValue((value = formatted))
             }
           }
         }

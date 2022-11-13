@@ -24,7 +24,7 @@
   "dependencies": {
     "@twind/preset-autoprefix": "1.0.0-next.39",
     "@twind/preset-tailwind": "1.0.0-next.39",
-    "gatsby": "^4.24.3",
+    "gatsby": "^4.24.8",
     "gatsby-plugin-manifest": "^4.24.0",
     "gatsby-plugin-offline": "^5.24.0",
     "gatsby-plugin-react-helmet": "^5.24.0",

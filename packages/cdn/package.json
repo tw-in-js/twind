@@ -1,7 +1,7 @@
 {
   "name": "@twind/cdn",
   "version": "1.0.0-next.39",
-  "description": "Tailwind CSS CDN based on Twind",
+  "description": "Twind CDN is a drop-in replacement for Tailwind CSS Play CDN that is 6 times smaller (104kb vs 17kB) without any build step right in the browser",
   "keywords": [
     "twind",
     "tailwind",
@@ -27,7 +27,7 @@
       "name": "@twind/cdn",
       "path": "dist/cdn.esnext.js",
       "brotli": true,
-      "limit": "15.6kb"
+      "limit": "16kb"
     }
   ],
   "dependencies": {

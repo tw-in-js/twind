@@ -14,7 +14,7 @@ import { escape } from 'html-escaper'
 import { unified } from 'unified'
 import rehypeParse from 'rehype-parse'
 import rangeParser from 'parse-numeric-range'
-import { cx } from 'twind'
+import { cx } from '$lib/twind'
 
 // js title="..." showLineNumbers {1-3,4} /needle/3-5
 // diff-js title focus=1-3,5
@@ -322,7 +322,7 @@ export default function attacher({
       const body = [
         title &&
           `<figcaption class="${resolvedClassNames['figcaption']}">${escape(title)}</figcaption>`,
-        `<div class="${resolvedClassNames['toolbar']}">${toolbar}</div>`,
+        `<div class="${resolvedClassNames['toolbar']}" data-pagefind-ignore="all">${toolbar}</div>`,
         toHtml(html),
       ]
         .filter(Boolean)

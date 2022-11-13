@@ -1,23 +1,11 @@
 ---
-section: Getting Started
+section: Core Concepts
 title: Reference
-next: ./migration.md
+next: ./component-styles.md
 ---
 
 ## Lang
 
-- grouping variants
-  - `hover:(underline font-bold)` -> `hover:underline hover:font-bold`
-- grouping utilities
-  - `text-(sm green-500)` -> `text-sm text-green-500`
-- grouping important
-  - `!(text-(sm green-500))` -> `!text-sm !text-green-500`
-- inline apply: styles are generated in order they are declared
-  - `@(underline font-bold)` -> `@(underline,font-bold)`
-  - `Link@(underline font-bold)` -> `Link#12345`
-- inline shortcut: styles are generated as defined by twind — same as if they where used alone
-  - `~(underline font-bold)` -> `~(underline,font-bold)`
-  - `Link~(underline font-bold)` -> `Link#abcdef`
 - comments like in CSS: `/* ... */`
 - [`group~{name}-{modifier}`](https://tailwindcss.com/docs/hover-focus-and-other-states#styling-based-on-parent-state) and [`peer~{name}-{modifier}`](https://tailwindcss.com/docs/hover-focus-and-other-states#styling-based-on-sibling-state)
 
@@ -64,44 +52,22 @@ next: ./migration.md
 
 The following functions are all exports from `twind{:.module}`.
 
+> **Tip**
+> If you are using the `script` tag these methods are available via the `twind` global object (eg `twind.setup`).
+
+If you have used Tailwind or other CSS-in-JS solutions, then most of the API should feel very familiar.
+
 ### _Shim Mode_
 
 Observe class attributes to inject styles
 
+- `install(config, isProduction): Twind{:ts}`: configures the global `tw{:.fn}` instance, observes all class attributes and inject the styles into the DOM; returns a twind instance
 - `setup(config, sheet?, target?): Twind{:ts}`: configures the global `tw{:.fn}` instance, observes all class attributes and inject the styles into the DOM; returns a twind instance
 - `tw{:.fn}`: the global twind instance updated by each `setup{:.fn}` call
 
 ### _Library Mode_
 
-use `tw{:.fn}` or `tx{:.fn}` to inject styles
-
-- `twind(config, sheet?): Twind{:ts}`: creates a custom twind instance (`tw{:.fn}`)
-
-  Recommended custom twind pattern:
-
-  ```js
-  import {
-    twind,
-    getSheet,
-    virtual,
-    tx as tx$,
-    injectGlobal as injectGlobal$,
-    keyframes as keyframes$,
-  } from 'twind'
-
-  import config from './twind.config'
-
-  export const tw = /* #__PURE__ */ twind(
-    config,
-    // IS_DEV: `proces.env.NODE_ENV != 'production'` or `import.meta.env.DEV` (vite)
-    getSheet(IS_DEV),
-  )
-
-  export const tx = /* #__PURE__ */ tx$.bind(tw)
-  export const injectGlobal = /* #__PURE__ */ injectGlobal$.bind(tw)
-  export const keyframes = /* #__PURE__ */ keyframes$.bind(tw)
-  ```
-
+- `twind(config)`: create a twind instance
 - `observe(tw, target?)`: observes all class attributes and injects the styles into the DOM
 
 ### Twind instance — `tw{:.fn}`
@@ -110,10 +76,16 @@ use `tw{:.fn}` or `tx{:.fn}` to inject styles
 - `tw(className){:js}`: injects a className string into the sheet and return the resulting class names
 - `tw.config{:js}`: access the current config
 - `tw.theme(section?, key?, defaultValue?){:js}`: access the current theme
+
   - `tw.theme(){:js}`: returns the whole theme
   - `tw.theme(section){:js}`: returns the whole section
   - `tw.theme(dottedKey, defaultValue?){:js}`: returns the current value
   - `tw.theme(section?, key?, defaultValue?){:js}`: returns the theme value
+
+  ```js
+  tw.theme('colors.blue.500', 'blue')
+  ```
+
 - `tw.target{:js}`: the sheet target of this instance (`string[]`, `HTMLStyleSheet`, `CSSStyleSheet`)
 - `tw.clear(){:js}`: clears all CSS rules from the sheet
 - `tw.destroy(){:js}`: remove the sheet from the document
@@ -211,14 +183,29 @@ a) set the class attribute on an element (_Shim Mode_)<br>
 b) used with `tw{:.fn}` to inject styles and return a class name (_Library Mode_)
 
 - `cx(...args)`: creates a class name from the given arguments; no styles injected
+
+  ```js
+  import { cx } from 'twind'
+
+  // Set a className
+  element.className = cx`
+    underline
+    /* multi
+      line
+      comment
+    */
+    hover:focus:!{
+      sm:{italic why}
+      lg:-{px}
+      -mx-1
+    }
+    // Position
+    !top-1 !-bottom-2
+    text-{xl black}
+  `
+  ```
+
 - `css(...args)`: creates a class name from the given arguments; no styles injected
-- `shortcut(...args)`: creates a class name from the given arguments; order of styles determined by twind; no styles injected
-  - `shortcut.Button(...args): creates a named class name from the given arguments; order of styles determined by twind; no styles injected
-  - `~(...)` or `Button~(...)`: within a token
-- `apply(...args)`: creates a class name from the given arguments; order of styles determined by order in args; no styles injected
-  - `apply.Button(...args): creates a named class name from the given arguments; order of styles determined by order in args; no styles injected
-  - `@(...)` or `Button@(...)`: within a token
-  - `@apply ...` or `{ '@apply': '...' }`: within CSS string or object
 - `style(options)`: creates a stitches like helper; returns a `style` function
   - `style(props)`: creates a class name from the given props; no styles injected
 

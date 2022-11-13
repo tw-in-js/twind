@@ -38,7 +38,7 @@
       "path": "dist/twind.esnext.js",
       "import": "{ twind, cssom }",
       "brotli": true,
-      "limit": "4.8kb"
+      "limit": "4.85kb"
     }
   ],
   "dependencies": {

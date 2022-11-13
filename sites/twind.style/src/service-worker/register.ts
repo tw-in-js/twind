@@ -2,6 +2,7 @@ import { writable, type Readable } from 'svelte/store'
 import { dev, browser } from '$app/environment'
 import { beforeNavigate } from '$app/navigation'
 import { onDestroy } from 'svelte'
+import { updated } from '$app/stores'
 
 // https://developer.mozilla.org/en-US/docs/Web/API/ServiceWorker/state
 // "installing" - the install event has fired, but not yet complete
@@ -26,11 +27,6 @@ export interface ServiceWorkerOptions extends RegistrationOptions {
    * default: 30 minutes; set to `0` or `null` to not regulary check for updates
    */
   updateIntervall?: number | null | false
-
-  /**
-   * default `false`
-   */
-  navigationPreload?: boolean
 }
 
 export interface ServiceWorkerActivateInfo {
@@ -45,15 +41,16 @@ export interface ServiceWorkerStore extends Readable<ServiceWorkerStatus> {
 export function registerServiceWorker(
   scriptURL: string | URL,
   {
-    interceptNavigate,
-    updateIntervall = 30 * 60 * 1000,
-    navigationPreload,
+    interceptNavigate = true,
+    updateIntervall = (typeof __SVELTEKIT_APP_VERSION_POLL_INTERVAL__ !== 'undefined' &&
+      parseInt(__SVELTEKIT_APP_VERSION_POLL_INTERVAL__ as any, 10)) ||
+      30 * 60 * 1000,
     ...options
   }: ServiceWorkerOptions = {},
 ): ServiceWorkerStore {
   const serviceWorker = writable<ServiceWorker | null>(null)
 
-  if (browser && !navigator.connection?.saveData && 'serviceWorker' in navigator) {
+  if (browser && 'serviceWorker' in navigator) {
     // First, do a one-off check if there's currently a
     // service worker in control.
     if (navigator.serviceWorker.controller) {
@@ -68,20 +65,39 @@ export function registerServiceWorker(
           if (registration) {
             const unregistered = await registration.unregister()
 
-            if (unregistered) {
-              // reload page to remove controller
-              location.reload()
+            if (!unregistered) {
+              throw new Error('registration.unregister() failed')
             }
 
-            throw new Error('registration.unregister() failed')
+            // reload page to remove controller
+            if (interceptNavigate !== false) {
+              beforeNavigate(({ to, cancel }) => {
+                if (to) {
+                  cancel()
+                  location.href = to.url.href
+                }
+              })
+            }
           }
         })
         .catch((error) => {
           console.warn('Service worker unregistration failed:', error)
         })
     } else {
+      // TODO: unregister current service worker?
       let updateTimer: ReturnType<typeof setInterval>
       let cleanup: (() => void) | undefined
+      let update: (() => void) | undefined
+
+      onDestroy(
+        updated.subscribe(($updated) => {
+          if ($updated) {
+            console.debug('new app version detected')
+            update?.()
+          }
+        }),
+      )
+
       onDestroy(() => {
         clearInterval(updateTimer)
         cleanup?.()
@@ -90,19 +106,18 @@ export function registerServiceWorker(
       navigator.serviceWorker
         .register(scriptURL, options)
         .then((registration) => {
-          if (updateIntervall) {
-            updateTimer = setInterval(() => {
-              registration.update().catch((error) => {
-                console.warn('Service worker update failed:', error)
-              })
-            }, updateIntervall)
+          update = () => {
+            registration.update().catch((error) => {
+              console.warn('Service worker update failed:', error)
+            })
           }
 
-          if (navigationPreload) {
-            registration.navigationPreload?.enable()
+          if (updateIntervall) {
+            updateTimer = setInterval(update, updateIntervall)
           }
 
           function onUpdateFound(this: ServiceWorkerRegistration) {
+            // keep looking for updates
             serviceWorker.set(this.installing || this.waiting || this.active)
           }
 

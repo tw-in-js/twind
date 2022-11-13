@@ -12,11 +12,10 @@ web_modules
 dist
 out
 
-sites/twind.style/static/packages
 sites/twind.run/.mf
-sites/twind.style/static/api
 sites/twind.style/static/.cache.json
-sites/twind.style/.typedoc.data.json
+sites/twind.style/typedoc/data.json
+documentation/packages
 examples/with-gatsby/public
 examples/with-remix/public/build
 __generated__

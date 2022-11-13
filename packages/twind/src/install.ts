@@ -6,6 +6,11 @@ import { defineConfig } from './define-config'
 import { setup } from './runtime'
 import { getSheet } from './sheets'
 
+/**
+ * @group Runtime
+ * @param config
+ * @param isProduction
+ */
 export function install<Theme extends BaseTheme = BaseTheme>(
   config: TwindConfig<Theme>,
   isProduction?: boolean,

@@ -9,6 +9,11 @@ import type {
 
 import { asArray } from './utils'
 
+/**
+ * @group Configuration
+ * @param param0
+ * @returns
+ */
 export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = Preset[]>({
   presets = [] as unknown as Presets,
   ...userConfig

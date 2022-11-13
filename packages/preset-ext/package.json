@@ -4,11 +4,11 @@
   "description": "extension preset for twind",
   "keywords": [
     "twind",
+    "twind-preset",
     "tailwind",
     "tailwindcss",
     "tw-in-js",
     "tailwind-in-js",
-    "twind-preset",
     "preset"
   ],
   "type": "module",

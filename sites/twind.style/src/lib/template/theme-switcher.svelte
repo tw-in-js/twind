@@ -21,7 +21,7 @@
 
 <script>
   import { browser } from '$app/environment'
-  import { cx } from 'twind'
+  import { cx } from '$lib/twind'
   import Icon from '$lib/icons'
 
   /** @type {string | undefined} */

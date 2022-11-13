@@ -1,15 +1,17 @@
+# https://developers.cloudflare.com/pages/how-to/use-direct-upload-with-continuous-integration/
+# production
+# npx wrangler pages publish build --project-name=twind-style --branch=main
+# preview
+# npx wrangler pages publish build --project-name=twind-style --branch=next
+
 name = "twind-style"
 
 # https://developers.cloudflare.com/workers/platform/compatibility-dates/
 compatibility_date = "2022-11-30"
 
 # Also opt into an upcoming fix to the FormData API.
-compatibility_flags = [ "transformstream_enable_standard_constructor", "streams_enable_constructors", "capture_async_api_throws", "url_standard" ]
+compatibility_flags = [ "transformstream_enable_standard_constructor", "streams_enable_constructors" ]
 
-
-# https://developers.cloudflare.com/pages/how-to/use-direct-upload-with-continuous-integration/
+[vars]
 # https://developers.cloudflare.com/pages/platform/build-configuration/#language-support-and-tools
-# production
-# npx wrangler pages publish build
-# preview
-# npx wrangler pages publish build --project-name=twind-style --branch=main
+NODE_VERSION = "16"

@@ -19,19 +19,17 @@ The smallest, fastest, most feature complete Tailwind-in-JS solution in existenc
 [![CI](https://github.com/tw-in-js/twind/actions/workflows/ci.yml/badge.svg?branch=next)](https://github.com/tw-in-js/twind/actions/workflows/ci.yml)
 [![Coverage Status](https://flat.badgen.net/coveralls/c/github/tw-in-js/twind/next?icon=codecov&label&cache=10800)](https://coveralls.io/github/tw-in-js/twind?branch=next)
 
----
+Twind is a small compiler that converts utility classes into CSS at runtime. The goal of this project is to unify the flexibility of CSS-in-JS with the carefully considered constraints of the Tailwind API.
 
-## READ THIS FIRST!
+Utility-first CSS without any build step right in the browser or any other environment like Node.js, deno, workers, ...
 
-**Twind v1 is still in beta. Expect bugs!**
+- 📖 Study [the documentation](https://twind.style)
+- 🤖 Try [the playground](https://twind.run)
+- 🧭 Explore [the examples](https://twind.style/examples)
+- 📓 Consult [the API reference](https://twind.style/packages)
+- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/next/CHANGELOG.md)
 
----
-
-Twind is a small compiler that converts utility-classes into actual CSS rules without any build step right in the browser or any other environment like Node.js, deno, workers, ...
-
-If you have used Tailwind or other CSS-in-JS solutions, then most of the API should feel very familiar.
-
-## 🚀 Features
+## ✨ Features
 
 **⚡️ No build step**
 
@@ -45,12 +43,12 @@ If your app uses HTML and JavaScript, it should work with Twind. This goes for s
 
 Twind ships the compiler, not the CSS. This means unlimited styles and variants for one low fixed cost.
 
-Other features include:
+<details>
+  <summary><strong>Other features</strong></summary>
 
 - 🌎 No bundler required: Usable via CDN
 - 🎨 Seamless integration with Tailwind
 - 🤝 Feature parity with Tailwind v3
-- ✈️ Tailwind preflight by default
 - 🎯 Extended variants, rules, and syntax
 - 🚓 Escape hatch for arbitrary CSS
 - 🤖 Built in support for conditional rule combining
@@ -64,45 +62,17 @@ Other features include:
 - 🦾 Type Strong: Written in Typescript
 - and more!
 
-## 🦄 Quickstart
+</details>
 
-[twind](https://github.com/tw-in-js/twind/tree/next/packages/twind) does **not** include any core utilities — use one of the existing presets:
+## 📖 Documentation
 
-- [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix)
-- [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind) to get a full Tailwind v3 experience
-- [@twind/preset-tailwind-forms](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind-forms) to get Tailwind v3 and Tailwind Forms.
-- [@twind/preset-ext](hhttps://github.com/tw-in-js/twind/tree/next/packages/preset-ext)
+The full documentation is available at [twind.style](https://twind.style).
 
-For the full [Tailwind CSS](https://tailwindcss.com) experience try [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind) or start with [Twind CDN](https://github.com/tw-in-js/twind/tree/next/packages/cdn) a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn) that is almost 5.5 times smaller (96.4kb vs 17.6kB).
+## 💬 Community
 
-While we work on the new documentation website we have created a [reference sheet](https://github.com/tw-in-js/twind/blob/next/website/pages/docs/reference.md) to lookup up the available API.
+For help, discussion about best practices, or any other conversation that would benefit from being searchable use [Github Discussions](https://github.com/tw-in-js/twind/discussions).
 
-We have created a few [examples](https://github.com/tw-in-js/twind/tree/next/examples) to get you started:
-
-| Example                                                                       | Try it live at                                                                                                                                                                    | Description                                                                                                                                                                                                 |
-| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Basic](https://github.com/tw-in-js/twind/tree/next/examples/basic)           | [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/basic) • [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/basic)           | using [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix) and [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind) |
-| [Playground](https://github.com/tw-in-js/twind/tree/next/examples/playground) | [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/playground) • [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/playground) | using using all presets                                                                                                                                                                                     |
-
-**Packages**
-
-| Example                                                                               | Try it live at                                                                                                                                                                                        | Description                                                                                                                                                                                                                                                                                                                |
-| ------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Tailwind Forms](https://github.com/tw-in-js/twind/tree/next/examples/tailwind-forms) | [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/using-tailwind-forms) • [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/using-tailwind-forms) | using [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix) and [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind) and [@twind/preset-tailwind-forms](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind-forms) |
-| [Twind CDN](https://github.com/tw-in-js/twind/tree/next/examples/using-twind-cdn)     | [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/using-twind-cdn) • [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/using-twind-cdn)           | using [@twind/cdn](https://github.com/tw-in-js/twind/tree/next/packages/cdn)                                                                                                                                                                                                                                               |
-
-**Frameworks**
-
-| Example                                                                          | Try it live at                                                                                                                                                                            | Description                                                                                                                                                                                                                                                                                                                                          |
-| -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [Gatsby](https://github.com/tw-in-js/twind/tree/next/examples/gatsby)            | ~~[Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/with-gatsby)~~ • [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/with-gatsby)   | with [Gatsby](https://www.gatsbyjs.com) using [gatsby-plugin-twind](https://github.com/tw-in-js/twind/tree/next/packages/gatsby-plugin-twind), [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix) and [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind) |
-| [Next.js](https://github.com/tw-in-js/twind/tree/next/examples/with-next)        | [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/with-next) • [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/with-next)           | with [Next.js](https://nextjs.org) using [@twind/with-next](https://github.com/tw-in-js/twind/tree/next/packages/with-next), [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix) and [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind)                   |
-| [Remix](https://github.com/tw-in-js/twind/tree/next/examples/with-remix)         | [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/with-remix) • [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/with-remix)         | with [Remix](https://remix.run) using [@twind/with-remix](https://github.com/tw-in-js/twind/tree/next/packages/with-remix), [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix) and [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind)                    |
-| [SvelteKit](https://github.com/tw-in-js/twind/tree/next/examples/with-sveltekit) | [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/with-sveltekit) • [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/with-sveltekit) | with [SvelteKit](https://kit.svelte.dev) using [@twind/with-sveltekit](https://github.com/tw-in-js/twind/tree/next/packages/with-sveltekit), [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix) and [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind)   |
-
-## Migration from twind v0.16
-
-We have collected a list of changes in [Migration › Twind v0.16 › Notable Changes](https://github.com/tw-in-js/twind/blob/next/website/pages/docs/migration.md#notable-changes). A detailed migration guide will follow.
+To ask questions and discuss with other Twind users in real time use [Discord Chat](https://chat.twind.style).
 
 ## 🧱 Contribute
 
@@ -114,7 +84,7 @@ See the [Contributing Guide](./CONTRIBUTING.md) for information on how to contri
 
 It would be untrue to suggest that the design here is totally original. Other than the founders' initial attempts at implementing such a module ([oceanwind](https://github.com/lukejacksonn/oceanwind) and [beamwind](https://github.com/kenoxa/beamwind)) we are truly standing on the shoulders of giants.
 
-- [Tailwind](https://tailwindcss.com/): created a wonderfully thought out API on which the compiler's grammar was defined.
+- [Tailwind CSS](https://tailwindcss.com/): created a wonderfully thought out API on which the compiler's grammar was defined.
 - [styled-components](https://styled-components.com/): implemented and popularized the advantages of doing CSS-in-JS.
 - [htm](https://github.com/developit/htm): a JSX compiler that proved there is merit in doing runtime compilation of DSLs like JSX.
 - [goober](https://github.com/cristianbote/goober): an impossibly small yet efficient CSS-in-JS implementation that defines critical module features.
@@ -132,11 +102,13 @@ Thank you to all the people who have <a href="https://github.com/tw-in-js/twind/
 
 This project is kindly sponsored by <a href="https://www.kenoxa.com" target="_blank">Kenoxa GmbH</a> who support [@sastan](https://github.com/sastan) to maintain this project as part of their open-source engagement.
 
-<a href="https://www.copilottravel.com" target="_blank">COPILOT TRAVEL</a> is partnering with [@sastan](https://github.com/sastan) to keep twind aligned with the latest tailwindcss releases.
+<a href="https://www.copilottravel.com" target="_blank">COPILOT TRAVEL</a> is partnering with [@sastan](https://github.com/sastan) to keep twind aligned with the latest Tailwind CSS releases.
 
 Thank you to all our sponsors!
 
-![Image](./sites/twind.style/static/sponsors.png)
+<div align="center">
+  ![Image](./sites/twind.style/static/sponsors.png)
+</div>
 
 Please ask your company to also support this open source project by becoming a sponsor on [opencollective](https://opencollective.com/twind#sponsor) or [GitHub](https://github.com/sponsors/tw-in-js)).
 

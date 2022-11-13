@@ -20,6 +20,8 @@ export interface InjectGlobalFunction {
  * Injects styles into the global scope and is useful for applications such as gloabl styles, CSS resets or font faces.
  *
  * It **does not** return a class name, but adds the styles within the base layer to the stylesheet directly.
+ *
+ * @group Style Injectors
  */
 export const injectGlobal: InjectGlobalFunction = function injectGlobal(
   this: ((tokens: string) => string) | undefined | void,

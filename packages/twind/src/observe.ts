@@ -3,6 +3,12 @@ import type { BaseTheme, Twind } from './types'
 import { changed } from './internal/changed'
 import { tw as tw$ } from './runtime'
 
+/**
+ * @group Runtime
+ * @param tw
+ * @param target
+ * @returns
+ */
 export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
   tw: Twind<Theme, Target> = tw$ as unknown as Twind<Theme, Target>,
   target = typeof document != 'undefined' && document.documentElement,

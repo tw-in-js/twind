@@ -4,11 +4,11 @@
   "description": "A twind preset that provides utilities for visually truncating text after a fixed number of lines.",
   "keywords": [
     "twind",
+    "twind-preset",
     "tailwind",
     "tailwindcss",
     "tw-in-js",
     "tailwind-in-js",
-    "twind-preset",
     "preset"
   ],
   "type": "module",

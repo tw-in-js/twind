@@ -11,6 +11,7 @@ declare namespace App {
   interface PageData {
     docStartHref: string
     file?: string
+    editLink?: boolean
     nav?: import('./routes/docs/$types').LayoutServerData['nav']
   }
 }

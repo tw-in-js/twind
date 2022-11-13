@@ -1,0 +1,71 @@
+---
+section: Presets
+label: Tailwind CSS
+package: '@twind/preset-tailwind'
+playground: true
+excerpt: |
+  The full [Tailwind CSS](https://tailwindcss.com) v3 experience without any build step right in the browser or any other environment like Node.js, deno, workers, ...
+next: ./preset-tailwind-forms.md
+---
+
+## 🤝 Compatibility
+
+| @twind/preset-tailwind          | tailwindcss |
+| ------------------------------- | ----------- |
+| `>=1.0.0-next.39 <1`            | `3.1`       |
+| `>=1.0.0-next.1 <1.0.0-next.39` | `3.0`       |
+
+## 📦 Installation
+
+**with [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)**
+
+Install from npm:
+
+```sh
+npm install twind@next @twind/preset-tailwind@next
+```
+
+Add the preset to your twind config:
+
+```js title="twind.config.js"
+import { defineConfig } from 'twind'
+import presetTailwind from '@twind/preset-tailwind'
+
+export default defineConfig({
+  presets: [presetTailwind(/* options */)],
+  /* config */
+})
+```
+
+<details><summary>Usage with a script tag</summary>
+
+```html
+<head>
+  <script
+    src="https://cdn.jsdelivr.net/combine/npm/twind@next,npm/@twind/preset-tailwind@next"
+    crossorigin
+  ></script>
+  <script>
+    twind.install({
+      presets: [twind.presetTailwind(/* options */)],
+      /* config */
+    })
+  </script>
+</head>
+```
+
+</details>
+
+**with [Twind CDN](./installation#twind-cdn)**
+
+_Already included in `@twind/cdn`_
+
+## 🙇 Usage
+
+All utilities and variants from [Tailwind CSS](https://tailwindcss.com) are available.
+
+## 🔧 Options
+
+This preset can be configured with the following options:
+
+- `disablePreflight: boolean` — allows to disable the [preflight](https://tailwindcss.com/docs/preflight)

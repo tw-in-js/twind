@@ -89,6 +89,11 @@ function uniq<T>(value: T, index: number, values: T[]): boolean {
 
 const cache = new Map<string, ParsedRule[]>()
 
+/**
+ * @internal
+ * @param token
+ * @returns
+ */
 export function parse(token: string): ParsedRule[] {
   let parsed = cache.get(token)
 
@@ -183,7 +188,7 @@ export function parse(token: string): ParsedRule[] {
                   nested.length > 1
                     ? nested.slice(0, -1) + hash(JSON.stringify([nested, rules]))
                     : nested + '(' + format(rules) + ')',
-                  Layer.s,
+                  Layer.a,
                   rules,
                   /@$/.test(nested),
                 ),

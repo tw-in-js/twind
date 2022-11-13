@@ -95,9 +95,14 @@ const api: Transpile = {
                 }
               }
 
-              const resolved = manifest.imports?.[source]
-              if (resolved) {
-                ;(inputMap.imports ||= {})[source] = resolved
+              for (const [key, value] of Object.entries(manifest.imports || {})) {
+                // add all sub-path imports
+                if (
+                  key === source ||
+                  (key.startsWith(source + '/') && key !== source + '/package.json')
+                ) {
+                  ;(inputMap.imports ||= {})[key] = value
+                }
               }
 
               dependencies.add(source)
@@ -134,7 +139,6 @@ const api: Transpile = {
 
     // TODO: trace generator.logStream
 
-    // TODO: add query identifier to https://ga.system.jspm.io/npm: request
     const [{ dynamicDeps = [], staticDeps = [] } = {}, { output }] = await Promise.all([
       generator.install([...dependencies]),
       bundle
@@ -153,11 +157,12 @@ const api: Transpile = {
 
     // scope all external import to the current manifest
     // this allows to have distinct dependency tree within one System registry
-    const hash = import.meta.env.DEV
-      ? new URL(manifest.url).hostname
-      : toBase64url(
-          await crypto.subtle.digest('sha-256', await new Blob([manifest.url]).arrayBuffer()),
-        ).slice(0, 10)
+    const hash = toBase64url(
+      await crypto.subtle.digest(
+        'sha-256',
+        await new Blob([JSON.stringify(manifest)]).arrayBuffer(),
+      ),
+    ).slice(0, 10)
 
     const scopeToManifest = (input: string) => {
       // we only need to do this for external url

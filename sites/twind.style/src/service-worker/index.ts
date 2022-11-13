@@ -1,46 +1,48 @@
 /* eslint-env serviceworker */
+/// env serviceworker
+/// <reference no-default-lib="true"/>
+/// <reference lib="es2020" />
+/// <reference lib="WebWorker" />
 
-import { build, files, prerendered, version } from '$service-worker'
+const sw = self as unknown as ServiceWorkerGlobalScope & typeof globalThis
+
+import { build as immutables, version } from '$service-worker'
 
 const CACHE_PREFIX = 'app-cache-'
 const cacheName = `${CACHE_PREFIX}${version}`
 const cachePromise = caches.open(cacheName)
 
-addEventListener('install', (event) => {
-  // @ts-expect-error
+// Precaching
+//   - immutables
+// Runtime caching
+//   - /_app/version.json: network first - to detect new versions
+//   - *: cache first
+
+const NETWORK_FIRST = new Set(['/' + __SVELTEKIT_APP_VERSION_FILE__])
+
+sw.addEventListener('install', (event) => {
   event.waitUntil(
     cachePromise.then((cache) =>
-      Promise.all([
-        // re-use from existing cache for hashed files
-        Promise.all(
-          // immutable
-          build.map((file) =>
-            caches
-              .match(file)
-              .then((response) => (response ? cache.put(file, response) : cache.add(file))),
-          ),
-        ),
+      // re-use from existing cache for hashed files
+      Promise.all(
+        immutables.map((file) =>
+          caches.match(file).then((response) => {
+            if (response) {
+              return cache.put(file, response)
+            }
 
-        // always force load these
-        cache.addAll([
-          // we are caching /_app/version.json because we want to use the cached version
-          // until we can safely update
-          '/_app/version.json',
-          // within static
-          // ...files.filter(file => !['_header', '_redirects'].includes(file)),
-          // pathnames corresponding to prerendered pages and endpoints
-          ...prerendered.map((path) => path.replace(/^\/$|(\/[^./]+)$/, '$1/index.html')),
-        ]),
-      ]),
+            return cache.add(file)
+          }),
+        ),
+      ),
     ),
   )
 })
 
 // Activate the worker after notification from client
-addEventListener('message', (event) => {
+sw.addEventListener('message', (event) => {
   if (event.data?.type === 'activate') {
-    // @ts-expect-error
-    skipWaiting()
+    sw.skipWaiting()
 
     if (event.data.prefetch) {
       cachePromise
@@ -51,25 +53,32 @@ addEventListener('message', (event) => {
 })
 
 // On version update, remove old cached files
-addEventListener('activate', (event) => {
-  // @ts-expect-error
-  event.waitUntil(
-    caches
-      .keys()
-      .then((keys) =>
-        Promise.all(
-          keys
-            .filter((key) => key.startsWith(CACHE_PREFIX) && key !== cacheName)
-            .map((key) => caches.delete(key)),
-        ),
+sw.addEventListener('activate', (event) => {
+  // event.waitUntil(
+  //   (async function () {
+  //     // Feature-detect
+  //     if (sw.registration.navigationPreload) {
+  //       // Enable navigation preloads!
+  //       await sw.registration.navigationPreload.enable()
+  //     }
+  //   })(),
+  // )
+
+  sw.caches
+    .keys()
+    .then((keys) =>
+      Promise.all(
+        keys
+          .filter((key) => key.startsWith(CACHE_PREFIX) && key !== cacheName)
+          .map((key) => caches.delete(key)),
       ),
-  )
+    )
+    .catch((error) => console.warn('Failed to cleanup old caches', error))
 })
 
 // Cache falling back to network strategy
-addEventListener('fetch', (event) => {
-  // @ts-expect-error
-  const { request } = event
+sw.addEventListener('fetch', (event) => {
+  let { request } = event
 
   if (request.method !== 'GET' || request.headers.has('range')) return
 
@@ -77,30 +86,52 @@ addEventListener('fetch', (event) => {
 
   // only cache our resources
   if (url.origin === location.origin) {
-    // @ts-expect-error
-    event.respondWith(
-      cachePromise.then(async (cache) => {
-        // Respond from the cache if we can
-        const cachedResponse = await cache.match(request)
-        if (cachedResponse) return cachedResponse
+    if (url.pathname === '/-/search') {
+      // include x-app-version to create immutable response which can be cached
+      request = new Request(request, { headers: { 'x-app-version': version } })
+    }
 
-        // Else, use the preloaded response, if it's there
-        // @ts-expect-error
-        const preloadResponse = await event.preloadResponse
-        if (preloadResponse) return preloadResponse
-
-        // Else try the network.
-        return load(request, cache)
-      }),
-    )
+    event.respondWith(NETWORK_FIRST.has(url.pathname) ? networkFirst(request) : cacheFirst(request))
   }
 })
 
-function load(request: RequestInfo, cache: Cache) {
-  return fetch(request).then((response) => {
-    if (response.ok && response.type === 'basic') {
-      cache.put(request, response.clone())
-    }
-    return response
+function networkFirst(request: Request) {
+  return load(request).catch(async (error) => {
+    // If the network is unavailable
+
+    // Respond from the cache if we can
+    const cached = await fromCache(request)
+    if (cached) return cached
+
+    throw error
   })
+}
+
+async function cacheFirst(request: Request) {
+  const cached = await fromCache(request)
+  if (cached) return cached
+
+  return load(request)
+}
+
+async function fromCache(request: Request) {
+  // If the network is unavailable, get
+
+  // Respond from the cache if we can
+  const cached = await (await cachePromise).match(request)
+  if (cached) return cached
+
+  // // Else, use the preloaded response, if it's there
+  // const preloaded = await event.preloadResponse
+  // if (preloaded) return preloaded
+}
+
+async function load(request: Request) {
+  const response = await fetch(request)
+
+  if (response.ok && response.type === 'basic') {
+    await (await cachePromise).put(request, response.clone())
+  }
+
+  return response
 }

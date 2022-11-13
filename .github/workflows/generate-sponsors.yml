@@ -16,7 +16,7 @@ jobs:
           installArgs: '--filter scripts'
 
       - name: Update sponsors
-        run: pnpm run sponsor
+        run: pnpm run sponsors
         working-directory: scripts
         env:
           SPONSORKIT_GITHUB_TOKEN: ${{ secrets.SPONSORS_TOKEN }}
@@ -25,7 +25,7 @@ jobs:
       - name: Commit
         uses: EndBug/add-and-commit@v9
         with:
-          commit-message: "chore: update sponsors images"
-          add: "sites/twind.style/static/sponsors.*"
+          commit-message: 'chore: update sponsors images'
+          add: 'sites/twind.style/static/sponsors.*'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

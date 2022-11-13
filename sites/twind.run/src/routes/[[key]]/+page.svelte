@@ -68,7 +68,6 @@
     return JSON.stringify(workspace, ['version', 'html', 'script', 'config', 'path', 'value'])
   }
 
-  console.debug(data)
   let source = serialize(data.workspace)
 
   /** @type {import('svelte/store').Writable<import('./$types').PageData['workspace']>} */
@@ -289,6 +288,11 @@
    */
   async function copyToClipboard(text) {
     try {
+      if (!navigator.clipboard) {
+        throw makeError()
+      }
+      return navigator.clipboard.writeText(text)
+
       await copy(String(text))
       clearTimeout(copied)
       copied = setTimeout(() => {
@@ -300,23 +304,83 @@
       return false
     }
   }
+
+  /**
+   * @param {(link: string, workspace: import('./$types').PageData['workspace']) => any | Promise<any>} share
+   */
+  async function withShareLink(share) {
+    if (
+      hasDirtyFiles &&
+      !confirm(
+        `It looks like you have been editing ${
+          Object.values($workspace).find((file) => file.dirty)?.path || 'something'
+        }. Do you want to share without including these changes?`,
+      )
+    ) {
+      return
+    }
+
+    try {
+      const token = await getTurnstileToken('share')
+      if (!token) return
+
+      const body = new FormData()
+      const stringifiedWorkspace = serialize($workspace)
+
+      body.set('version', '1')
+      body.set('workspace', stringifiedWorkspace)
+      body.set('cf-turnstile-response', token)
+
+      const response = await fetch($page.url.pathname + '?/share', {
+        method: 'POST',
+        body: body,
+        headers: {
+          'x-sveltekit-action': 'true',
+        },
+      })
+      /** @type { import('@sveltejs/kit').ActionResult} result */
+      const result = await response.json()
+
+      // TODO: workspace might have been changed??
+      console.debug(result)
+
+      if (result.type === 'success' && result.data?.key) {
+        // copy to clipboard, change url and show link
+        const url = new URL(`${base}/${result.data.key}`, location.href)
+        url.search = location.search
+        history.pushState(history.state, '', url)
+        // update tracking data to detect if something has changed
+        data.workspace = JSON.parse(stringifiedWorkspace)
+        source = stringifiedWorkspace
+        try {
+          await share(url.toString(), data.workspace)
+        } finally {
+          shareLink = url
+        }
+      }
+      // TODO: handle non success response
+    } catch (error) {
+      // TODO: show error in toast
+      console.error(error)
+    }
+  }
 </script>
 
 <Head />
 
 <div class="w-screen h-screen flex flex-col antialiased bg-brand-1 text-brand-11">
-  <Header>
+  <Header {withShareLink}>
     <!--
     <button
       type="button"
       title="Save workspace"
-      class="flex items-center rounded-md border border-transparent px-3 py-1 text-sm font-medium text-brand-11 shadow-sm enabled:(hover:(text-brand-12 bg-brand-4) focus:(text-brand-12 bg-brand-5 bg-transparent)) disabled:opacity-70"
+      class="flex gap-2 items-center rounded-md border border-transparent px-3 py-1 text-sm font-medium text-brand-11 shadow-sm enabled:(hover:(text-brand-12 bg-brand-4) focus:(text-brand-12 bg-brand-5 bg-transparent)) disabled:opacity-70"
       disabled={saving || isDirty}
     >
       {#if saving}
-        <Icon src={LoadingSpin} class="-ml-1 mr-2 h-5 w-5 animate-spin" aria-hidden="true" />
+        <Icon src={LoadingSpin} class="-ml-1 h-5 w-5 animate-spin" />
       {:else}
-        <Icon src={Upload24} class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+        <Icon src={Upload24} class="-ml-1 h-5 w-5" />
       {/if}
       Save
     </button>
@@ -324,96 +388,46 @@
     <button
       type="button"
       title="Fork workspace"
-      class="flex items-center rounded-md border border-transparent px-3 py-1 text-sm font-medium text-brand-11 shadow-sm enabled:(hover:(text-brand-12 bg-brand-4) focus:(text-brand-12 bg-brand-5)) disabled:opacity-70"
+      class="flex gap-2 items-center rounded-md border border-transparent px-3 py-1 text-sm font-medium text-brand-11 shadow-sm enabled:(hover:(text-brand-12 bg-brand-4) focus:(text-brand-12 bg-brand-5)) disabled:opacity-70"
       disabled={forking}
     >
       {#if saving}
-        <Icon src={LoadingSpin} class="-ml-1 mr-2 h-5 w-5 animate-spin" aria-hidden="true" />
+        <Icon src={LoadingSpin} class="-ml-1 h-5 w-5 animate-spin" />
       {:else}
-        <Icon src={GitBranch24} class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+        <Icon src={GitBranch24} class="-ml-1 h-5 w-5" />
       {/if}
       Fork
     </button>
     -->
     <button
       type="button"
-      title="Create share Link"
-      class="flex items-center rounded-md border border-transparent px-3 py-1 text-sm font-medium text-brand-11 shadow-sm enabled:(hover:(text-brand-12 bg-brand-4) focus:(text-brand-12 bg-brand-5)) disabled:opacity-70"
+      title="Create shareable link"
+      class="flex gap-2 items-center rounded-md border border-transparent px-3 py-1 text-sm font-medium text-brand-11 shadow-sm enabled:(hover:(text-brand-12 bg-brand-4) focus:(text-brand-12 bg-brand-5)) disabled:opacity-70"
       disabled={sharing || !isDirty}
       on:click={() => {
-        if (
-          hasDirtyFiles &&
-          !confirm(
-            `It looks like you have been editing ${
-              Object.values($workspace).find((file) => file.dirty)?.path || 'something'
-            }. Do you want to share without including these changes?`,
-          )
-        ) {
-          return
-        }
-
         sharing = true
-        getTurnstileToken('share')
-          .then((token) => {
-            if (!token) return
-
-            const body = new FormData()
-            const stringifiedWorkspace = serialize($workspace)
-
-            body.set('version', '1')
-            body.set('workspace', stringifiedWorkspace)
-            body.set('cf-turnstile-response', token)
-
-            return fetch($page.url.pathname + '?/share', {
-              method: 'POST',
-              body: body,
-              headers: {
-                'x-sveltekit-action': 'true',
-              },
-            })
-              .then((response) => response.json())
-              .then(
-                /** @param { import('@sveltejs/kit').ActionResult} result */
-                (result) => {
-                  // TODO: workspace might have been changed??
-                  console.debug(result)
-                  if (result.type === 'success' && result.data?.key) {
-                    // copy to clipboard, change url and show link
-                    const url = new URL(`${base}/${result.data.key}`, location.href)
-                    url.search = location.search
-                    history.pushState(history.state, '', url)
-                    // update tracking data to detect if something has changed
-                    data.workspace = JSON.parse(stringifiedWorkspace)
-                    source = stringifiedWorkspace
-                    return copyToClipboard(url).finally(() => {
-                      shareLink = url
-                    })
-                  }
-                  // TODO: handle non success response
-                },
-              )
-          })
-          .catch((error) => {
-            console.error(error)
-          })
-          .finally(() => {
-            sharing = false
-          })
+        withShareLink(copyToClipboard).finally(() => {
+          sharing = false
+        })
       }}
     >
       {#if sharing}
-        <Icon src={LoadingSpin} class="-ml-1 mr-2 h-5 w-5 animate-spin" aria-hidden="true" />
+        <Icon
+          src={LoadingSpin}
+          class="-ml-1 h-5 w-5 animate-spin"
+          label="Creating a shareable link"
+        />
       {:else}
-        <Icon src={ShareAndroid24} class="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+        <Icon src={ShareAndroid24} class="-ml-1 h-5 w-5" label="Create shareable link" />
       {/if}
-      Share
+      <span aria-hidden="true">Share</span>
     </button>
 
     {#if shareLink}
       <button
         type="button"
         title="Copy link"
-        class="flex items-center -ml-2 px-3 py-1 text-xs font-medium text-brand-11 hover:text-brand-12 focus:text-brand-12"
+        class="flex gap-2 items-center -ml-2 px-3 py-1 text-xs font-medium text-brand-11 hover:text-brand-12 focus:text-brand-12"
         class:!text-success-11={copied}
         on:click={() => {
           if (shareLink) {
@@ -422,11 +436,17 @@
         }}
       >
         {#if copied}
-          <Icon src={CheckCircle16} class="-ml-1 mr-2 h-4 w-4" aria-hidden="true" />
+          <Icon src={CheckCircle16} class="-ml-1 h-4 w-4" />
           Copied!
         {:else}
-          <Icon src={Link16} class="-ml-1 mr-2 h-4 w-4" aria-hidden="true" />
-          …{shareLink.pathname.slice(0, 5)}…{shareLink.pathname.slice(-7)}
+          <Icon src={Link16} class="-ml-1 h-4 w-4" />
+          <span class="hidden md:flex">
+            {#if shareLink.pathname.length > 23}
+              …{shareLink.pathname.slice(0, 7)}…{shareLink.pathname.slice(-7)}
+            {:else}
+              …{shareLink.pathname}
+            {/if}
+          </span>
         {/if}
       </button>
     {/if}

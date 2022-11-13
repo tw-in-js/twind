@@ -1,4 +1,6 @@
 <script>
+  import { page } from '$app/stores'
+
   import Icon, {
     TwindLogo,
     Github,
@@ -6,9 +8,27 @@
     BookHalf,
     CodeBracketSquareSolid,
     ChatBubbleLeftRightSolid,
+    LoadingSpin,
+    BugAntSolid,
   } from '$lib/icons'
 
   import ThemeSwitcher from './theme-switcher.svelte'
+
+  /** @type {undefined | ((share: (link: string, workspace: import('../types').Workspace) => any | Promise<any>) => Promise<void>)} */
+  export let withShareLink = undefined
+
+  let sharing = false
+
+  function createBugReportURL(reproduction = $page.url.toString(), systemInfo = '') {
+    const url = new URL('https://github.com/tw-in-js/twind/issues/new')
+    url.searchParams.set('template', 'bug_report.yml')
+    url.searchParams.set('labels', '🐞 Bug')
+    url.searchParams.set('reproduction', reproduction)
+    if (systemInfo) {
+      url.searchParams.set('system-info', systemInfo)
+    }
+    return url.toString()
+  }
 </script>
 
 <header
@@ -32,17 +52,41 @@
       {/if}
     </div>
 
-    <div class="flex items-center">
-      <a
-        class="hidden lg:flex text-xs hover:text-brand-12"
-        href="https://github.com/tw-in-js/twind/issues/new"
-        rel="external nofollow noopener noreferrer"
-        target="_blank"
-      >
-        Something broken? File a bug!
-      </a>
+    <div class="flex gap-4 items-center">
+      <button
+        type="button"
+        class="flex gap-2 items-center rounded-md border border-transparent px-3 py-1 text-sm font-medium text-brand-11 shadow-sm enabled:(hover:(text-brand-12 bg-brand-4) focus:(text-brand-12 bg-brand-5)) disabled:opacity-70"
+        title="Create a bug report on GitHub"
+        disabled={sharing}
+        on:click={(event) => {
+          event.preventDefault()
 
-      <hr class="hidden lg:flex ml-3 w-0 h-5 border-l border-brand-6" aria-orientation="vertical" />
+          if (withShareLink) {
+            sharing = true
+            withShareLink((reproduction, workspace) => {
+              open(createBugReportURL(reproduction, `Version: ${workspace.version}`), '_blank')
+            }).finally(() => {
+              sharing = false
+            })
+          } else {
+            // use current url because after share the page.url is not updated
+            open(createBugReportURL(location.href), '_blank')
+          }
+        }}
+      >
+        {#if sharing}
+          <Icon
+            src={LoadingSpin}
+            class="-ml-1 h-5 w-5 animate-spin"
+            label="Creating a bug report"
+          />
+        {:else}
+          <Icon src={BugAntSolid} class="-ml-1 h-5 w-5" label="Something broken? File a bug!" />
+        {/if}
+        <span class="hidden lg:flex" aria-hidden="true">Something broken? File a bug!</span>
+      </button>
+
+      <hr class="w-0 h-5 border-l border-brand-6" aria-orientation="vertical" />
 
       <!-- <button type="button" class="ml-2 flex items-center text-accent-11">
         <Icon src={PanelLeftFilled} class="h-5 w-5" label="Switch to vertical split layout" />
@@ -55,11 +99,11 @@
       <hr class="ml-3 w-0 h-5 border-l border-brand-6" aria-orientation="vertical" /> -->
 
       <nav
-        class="flex flex-wrap items-center text-base justify-center"
+        class="flex flex-wrap gap-3 items-center text-base justify-center"
         aria-label="Site Navigation"
       >
         <a
-          class="ml-3 flex items-center hover:text-brand-12"
+          class="flex items-center hover:text-brand-12"
           href="https://twind.style/docs"
           title="Go to Twind documentation"
           rel="external nofollow noopener noreferrer"
@@ -69,7 +113,7 @@
         </a>
 
         <a
-          class="ml-3 flex items-center hover:text-brand-12"
+          class="flex items-center hover:text-brand-12"
           href="https://twind.run"
           title="Go to Twind Playground"
           rel="external nofollow noopener noreferrer"
@@ -79,7 +123,7 @@
         </a>
 
         <a
-          class="ml-3 flex items-center hover:text-brand-12"
+          class="flex items-center hover:text-brand-12"
           href="https://github.com/tw-in-js/twind/discussions"
           title="Go to Twind discussions on GitHub"
           rel="external nofollow noopener noreferrer"
@@ -89,7 +133,7 @@
         </a>
 
         <a
-          class="ml-3 flex items-center hover:text-brand-12"
+          class="flex items-center hover:text-brand-12"
           href="https://github.com/tw-in-js/twind/tree/next"
           title="Go to Twind on GitHub"
           rel="external nofollow noopener noreferrer"
@@ -99,7 +143,7 @@
         </a>
 
         <a
-          class="ml-3 flex items-center hover:text-brand-12"
+          class="flex items-center hover:text-brand-12"
           href="https://chat.twind.style"
           title="Go to Twind on Discord"
           rel="external nofollow noopener noreferrer"
@@ -108,9 +152,9 @@
           <Icon src={Discord} class="h-4 w-4" label="Twind on Discord" />
         </a>
 
-        <hr class="ml-3 w-0 h-5 border-l border-brand-6" aria-orientation="vertical" />
+        <hr class="w-0 h-5 border-l border-brand-6" aria-orientation="vertical" />
 
-        <ThemeSwitcher class="ml-3 block w-5 hover:text-brand-12" />
+        <ThemeSwitcher class="block w-5 hover:text-brand-12" />
       </nav>
     </div>
   </div>

@@ -1,7 +1,9 @@
-import { startHref } from './[...slug]/+layout.server'
+import { data } from '$lib/documentation'
+
+export const prerender = true
 
 /** @type {import('./$types').LayoutServerLoad} */
-export function load({ setHeaders }) {
+export async function load({ setHeaders, request }) {
   // Harden security for an application
   try {
     setHeaders({
@@ -12,6 +14,8 @@ export function load({ setHeaders }) {
       // TODO: CSP - https://support.cloudflare.com/hc/en-us/articles/216537517-What-is-Content-Security-Policy-CSP-and-how-can-I-use-it-with-Cloudflare-
     })
   } catch {}
+
+  const { startHref } = await data
 
   return { docStartHref: startHref }
 }

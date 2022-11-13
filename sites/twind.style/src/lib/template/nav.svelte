@@ -1,5 +1,5 @@
 <script>
-  import { cx } from 'twind'
+  import { cx } from '$lib/twind'
 
   import { page } from '$app/stores'
   import { browser } from '$app/environment'
@@ -10,11 +10,12 @@
     BoxSeamFill,
     ChatBubbleLeftRightSolid,
     CodeBracketSquareSolid,
-    Search,
+    MagnifyingGlassSolid,
     X,
   } from '$lib/icons'
   import { MOD_KEY } from '$lib/constants'
   import { shortcut } from '$lib/actions'
+  import { searchOpen } from '$lib/stores'
 
   /** @type {Exclude<App.PageData['nav'], undefined>}*/
   export let nav
@@ -42,7 +43,7 @@
 {/if}
 
 <nav
-  class="hidden w-full pr-8 fixed -ml-4 top-0 bottom-0 z-40 overflow-y-auto backdrop-blur bg-brand-1/75 overscroll-contain lg:(w-64 pb-10 block ml-0 top-16 z-auto backdrop-blur-none bg-brand-1) lg:(text-sm leading-6)"
+  class="hidden w-full pl-2 pr-8 fixed -ml-4 top-0 bottom-0 z-40 overflow-y-auto backdrop-blur bg-brand-1/75 overscroll-contain lg:(w-64 pb-10 block ml-0 top-16 z-auto backdrop-blur-none bg-brand-1) lg:(text-sm leading-6)"
   class:!block={navVisible}
   aria-label="Site navigation"
   role={navVisible ? 'dialog' : 'navigation'}
@@ -68,22 +69,22 @@
     <div class="pt-10 bg-brand-1 relative pointer-events-auto">
       <button
         type="button"
-        role="search"
-        class={cx`
-          bg-neutral-3 text-neutral-11
-          hover:(bg-neutral-4 text-neutral-12)
-          ring-(1 neutral-7 hover:neutral-8)
-          focus:(outline-none ring-(2 brand-8))
-          shadow-sm rounded-md
-          hidden w-full lg:flex items-center text-sm leading-6 py-1.5 pl-2 pr-3
-        `}
+        class="
+          bg-brand-4 text-brand-11
+          hover:(bg-brand-5 text-brand-12)
+          focus:(bg-brand-6 text-brand-12 outline-none ring-(2 brand-7 offset-(2 brand-1)))
+          shadow-sm rounded-lg
+          hidden w-full lg:flex items-center justify-start text-sm leading-6 py-1.5 pl-2 pr-3
+        "
+        on:click={() => ($searchOpen = true)}
+        use:shortcut={{ control: true, code: 'KeyK' }}
       >
-        <Icon src={Search} class="mr-3 w-4 h-4 flex-none" />
-        Quick search...
-        <kbd class="ml-auto text-xs font-sans font-semibold" class:hidden={!browser}>
-          <abbr title="Command" class="no-underline">{MOD_KEY}</abbr>
-          K
-        </kbd>
+        <Icon src={MagnifyingGlassSolid} class="mr-3 w-4 h-4 flex-none" />
+        <span class="flex-auto text-left">Quick search...</span>
+        <span class="ml-auto text-xs font-sans font-semibold" class:hidden={!browser}>
+          <kbd title="Command">{MOD_KEY}</kbd>
+          <kbd>K</kbd>
+        </span>
       </button>
     </div>
     <div class="h-8 bg-gradient-to-b from-brand-1" />
@@ -106,7 +107,7 @@
     <li class="mb-6 lg:mb-4">
       <a
         class="flex items-center group hover:text-brand-12 font-medium leading-6"
-        href={new URL('/packages', $page.url).href}
+        href="/packages"
         title="Go to Twind packages"
       >
         <div class="mr-4 rounded-md p-1.5 bg-brand-4 group-hover:(bg-brand-5 ring-1 ring-brand-7)">
@@ -122,7 +123,6 @@
         href="https://twind.run"
         title="Go to Twind Playground"
         rel="external nofollow noopener noreferrer"
-        target="_blank"
       >
         <div class="mr-4 rounded-md p-1.5 bg-brand-4 group-hover:(bg-brand-5 ring-1 ring-brand-7)">
           <Icon src={CodeBracketSquareSolid} class="h-4 w-4" label="Twind Playground" />
@@ -137,7 +137,6 @@
         href="https://github.com/tw-in-js/twind/discussions"
         title="Go to Twind discussions on GitHub"
         rel="external nofollow noopener noreferrer"
-        target="_blank"
       >
         <div class="mr-4 rounded-md p-1.5 bg-brand-4 group-hover:(bg-brand-5 ring-1 ring-brand-7)">
           <Icon src={ChatBubbleLeftRightSolid} class="h-4 w-4" label="Discussions on GitHub" />
