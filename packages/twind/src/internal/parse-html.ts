@@ -93,5 +93,5 @@ export function fixClassList(value: string, quote: string): string {
       ? // `"` -> &#34; &quot; &#x22;
         value.replace(/(=|\[)(?:&#34;|&quot;|&#x22;)|(?:&#34;|&quot;|&#x22;)(])/g, `$1"$2`)
       : value
-  ).replace(/(&amp;|&#38)/g, '&')
+  ).replace(/(&#38;|&amp;|&#x26;)/g, '&')
 }
