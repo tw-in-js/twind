@@ -24,12 +24,7 @@ export default function presetTailwindForms({
   if (strategy !== 'base') {
     config.rules = [
       [
-        '(' +
-          rules
-            .map((r) => r.c)
-            .filter(Boolean)
-            .join('|') +
-          ')',
+        '(' + [...new Set(rules.flatMap((r) => r.c).filter(Boolean))].join('|') + ')',
         (match, context) =>
           ({
             '@layer base': rules
