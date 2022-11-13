@@ -6,7 +6,7 @@ import type { TailwindTheme } from '@twind/preset-tailwind'
 
 import { toColorValue } from 'twind'
 
-import * as colors from '@twind/preset-tailwind/colors'
+import { gray, blue } from '@twind/preset-tailwind/colors'
 import defaultTheme from '@twind/preset-tailwind/defaultTheme'
 
 const [baseFontSize, baseLineHeight] = defaultTheme.fontSize.base
@@ -81,7 +81,7 @@ const rules: {
     s: ({ theme }) => ({
       appearance: 'none',
       'background-color': '#fff',
-      'border-color': toColorValue(theme('colors.gray.500', colors.gray[500])),
+      'border-color': toColorValue(theme('colors.gray.500', gray[500])),
       'border-width': borderWidth['DEFAULT'],
       'border-radius': borderRadius.none,
       'padding-top': spacing[2],
@@ -97,11 +97,11 @@ const rules: {
         '--tw-ring-inset': 'var(--tw-empty,/*!*/ /*!*/)',
         '--tw-ring-offset-width': '0px',
         '--tw-ring-offset-color': '#fff',
-        '--tw-ring-color': toColorValue(theme('colors.blue.600', colors.blue[600])),
+        '--tw-ring-color': toColorValue(theme('colors.blue.600', blue[600])),
         '--tw-ring-offset-shadow': `var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)`,
         '--tw-ring-shadow': `var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color)`,
         'box-shadow': `var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)`,
-        'border-color': toColorValue(theme('colors.blue.600', colors.blue[600])),
+        'border-color': toColorValue(theme('colors.blue.600', blue[600])),
       },
     }),
   },
@@ -110,7 +110,7 @@ const rules: {
     c: ['form-input', 'form-textarea'],
     s: ({ theme }) => ({
       '&::placeholder': {
-        color: toColorValue(theme('colors.gray.500', colors.gray[500])),
+        color: toColorValue(theme('colors.gray.500', gray[500])),
         opacity: '1',
       },
     }),
@@ -136,7 +136,7 @@ const rules: {
     s: ({ theme }) => ({
       'background-image': `url("${svgToDataUri(
         `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20"><path stroke="${toColorValue(
-          theme('colors.gray.500', colors.gray[500]),
+          theme('colors.gray.500', gray[500]),
         )}" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M6 8l4 4 4-4"/></svg>`,
       )}")`,
       'background-position': `right ${spacing[2]} center`,
@@ -172,9 +172,9 @@ const rules: {
       'flex-shrink': '0',
       height: spacing[4],
       width: spacing[4],
-      color: toColorValue(theme('colors.blue.600', colors.blue[600])),
+      color: toColorValue(theme('colors.blue.600', blue[600])),
       'background-color': '#fff',
-      'border-color': toColorValue(theme('colors.gray.500', colors.gray[500])),
+      'border-color': toColorValue(theme('colors.gray.500', gray[500])),
       'border-width': borderWidth['DEFAULT'],
       '--tw-shadow': '0 0 #0000',
       '&:focus': {
@@ -183,7 +183,7 @@ const rules: {
         '--tw-ring-inset': 'var(--tw-empty,/*!*/ /*!*/)',
         '--tw-ring-offset-width': '2px',
         '--tw-ring-offset-color': '#fff',
-        '--tw-ring-color': toColorValue(theme('colors.blue.600', colors.blue[600])),
+        '--tw-ring-color': toColorValue(theme('colors.blue.600', blue[600])),
         '--tw-ring-offset-shadow': `var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)`,
         '--tw-ring-shadow': `var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)`,
         'box-shadow': `var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow)`,
