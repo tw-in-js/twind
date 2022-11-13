@@ -1,9 +1,10 @@
 {
   "name": "gatsby-plugin-twind",
   "version": "1.0.0-next.39",
-  "description": "gatsby integration for Twind",
+  "description": "Seamless integration of Twind in a Gatsby project",
   "keywords": [
     "twind",
+    "twind-with",
     "tailwind",
     "tailwindcss",
     "tw-in-js",
@@ -27,6 +28,9 @@
   },
   "// These are relative from within the dist/ folder": "",
   "sideEffects": true,
+  "typedoc": {
+    "entryPoint": "./index.d.ts"
+  },
   "publishConfig": {
     "access": "public",
     "directory": "dist",
@@ -47,9 +51,9 @@
     }
   },
   "devDependencies": {
-    "@types/react": "^17.0.50",
-    "@types/react-dom": "^17.0.17",
-    "gatsby": "^4.24.3",
+    "@types/react": "^17.0.52",
+    "@types/react-dom": "^17.0.18",
+    "gatsby": "^4.24.8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "twind": "1.0.0-next.39",

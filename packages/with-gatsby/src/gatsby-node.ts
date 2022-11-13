@@ -18,7 +18,7 @@ export function onCreateWebpackConfig(
   actions.setWebpackConfig({
     resolve: {
       alias: {
-        '@twind/gatsby-plugin/config$': resolve(process.cwd(), config),
+        'gatsby-plugin-twind/config$': resolve(process.cwd(), config),
       },
     },
   })

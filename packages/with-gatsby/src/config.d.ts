@@ -1,4 +1,4 @@
-declare module '@twind/gatsby-plugin/config' {
+declare module 'gatsby-plugin-twind/config' {
   const config: import('twind').TwindConfig
   export default config
 }
