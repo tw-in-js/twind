@@ -11,14 +11,20 @@ body:
 
         Do you need some help?
         ======================
-        The issue tracker is meant for feature requests and bug reports only. This isn't the best place for
+
+        The issue tracker is meant for feature requests, bug reports, and documentation issues only. This isn't the best place for
         support or usage questions. Questions here don't have as much visibility as they do elsewhere. Before
         you ask a question, here are some resources to get help first:
 
-        - Read [the docs](https://twind.style)
-        - Explore [the examples](https://twind.style/examples)
-        - Use [Github Discussions](https://github.com/tw-in-js/twind/discussions) for message-board style questions and discussions that would benefit from being searchable.
-        - Ask questions and discuss with other Twind users in real time on [Discord Chat](https://chat.twind.style).
+        - 📖 Study [the documentation](https://twind.style)
+        - 🤖 Try [the playground](https://twind.run)
+        - 🧭 Explore [the examples](https://twind.style/examples)
+        - 📓 Consult [the API reference](https://twind.style/packages)
+        - 🧵 Use [Github Discussions](https://github.com/tw-in-js/twind/discussions) for message-board style questions and discussions that would benefit from being searchable.
+        - 💬 Ask questions and discuss with other Twind users in real time on [Discord Chat](https://chat.twind.style).
+
+        ### Bug Report Template:
+        https://twind.run/bug-report
 
         ### Test Case Starter:
         https://github.com/tw-in-js/twind/tree/next/examples/basic?file=index.html

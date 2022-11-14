@@ -13,17 +13,16 @@
   - framework agnostic
   - comments
   - hashed class names
-- algolia
 - examples: template with all lang and css features
 - explain and examples of both modes (observe/shim vs library) with example
 - how to create a component library: shortcuts vs apply vs style
 - migration from v0.16 guide
 - common patterns
-- debugging the generated CSS in the browser (cssom sheet)
+- debugging the generated CSS in the browser (dom sheet)
 - link to [transform css to tailwind](https://tailwind-converter.netlify.app/)
 - redirects
   - [x] 'chat.twind.style' -> 'https://discord.gg/3fwqsmXNYK'
-- 'cdn.twind.style' as proxy for 'https://cdn.jsdelivr.net/npm/@twind/cdn@next' or jspm.io
+- [x] 'cdn.twind.style' as proxy for 'https://cdn.jsdelivr.net/npm/@twind/cdn@next' or jspm.io
   - redirects do not work because of cors issue
 - [x] add https://twind.style/twind-logo-animated.svg for use in github readme
 - update discord welcome with link to website
@@ -56,13 +55,13 @@
   - createGlobalStyle: https://styled-components.com/docs/api#createglobalstyle
   - @twind/styled/css - like styled-components eg using css
 - framework integrations
-  - solid, wmr, nuxt, vue, stenciljs, angular, ...
+  - solid, wmr, nuxt, vue, stenciljs, angular, qwick, solidstart, fresh, marko6...
   - https://vercel.com/templates
 - development condition
   — [x] let distilt create development bundles
   - [x] warnings: console.warn(`[twind] unknown rule "${value}"`)
-  - additional checks
-  - performance marks for devtools
+  - [ ] additional checks
+  - [ ] performance marks for devtools
 - perf: large website with many different rules
 - pug support: https://github.com/tw-in-js/twind/issues/198
 - how to create a PR in contributing guide: https://codesandbox.io/docs/git

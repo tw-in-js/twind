@@ -52,7 +52,7 @@ runs:
 
     - name: 📦  Update lockfile
       shell: bash
-      run: pnpm install --lockfile-only --frozen-lockfile=false --offline --filter="./packages/*" --filter="@sites/*"
+      run: pnpm install --lockfile-only --frozen-lockfile=false --prefer-offline --filter="./packages/*" --filter="@sites/*"
 
     - name: 🏗️  Build packages
       shell: bash
@@ -68,7 +68,7 @@ runs:
     - name: 💡  Publish Info
       shell: bash
       run: |
-        echo "## Published packages to npm (dist-tag: ${{ inputs.tag }})" >> $GITHUB_STEP_SUMMARY
+        echo "## Published packages to npm" >> $GITHUB_STEP_SUMMARY
         echo "**Dist Tag**: ${{ inputs.tag }}" >> $GITHUB_STEP_SUMMARY
         echo "**Packages**:" >> $GITHUB_STEP_SUMMARY
         echo "${{ steps.publish.output.packages }}" >> $GITHUB_STEP_SUMMARY

@@ -59,7 +59,7 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    # deploy twind.run using the published package versions
+    # deploy sites using the published package versions
     - name: 🏗️  Build ${{ inputs.workingDirectory }}
       id: build
       shell: bash

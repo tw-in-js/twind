@@ -7,7 +7,14 @@
   },
 
   {
-    "name": "🌬  Tailwind CSS compatibility",
+    "name": "📚 Documentation",
+    "color": "0e8a16",
+    "description": "The documentation is lacking or missing something",
+    "aliases": ["docs"]
+  },
+
+  {
+    "name": "🌬 Tailwind CSS compatibility",
     "color": "f44336",
     "description": "Some feature of Tailwind CSS is missing or not working as expected",
     "aliases": ["compat"]
@@ -138,7 +145,7 @@
     "aliases": ["refactor"]
   },
   {
-    "name": "pr⁵ 🕵  Testing",
+    "name": "pr⁵ 🕵 Testing",
     "color": "257759",
     "description": "Adding missing tests or correcting existing tests",
     "aliases": ["test", "testing"]
@@ -150,7 +157,7 @@
     "aliases": ["greenkeeper", "maintenance"]
   },
   {
-    "name": "pr⁷ 🪄  CI",
+    "name": "pr⁷ 🪄 CI",
     "color": "ffd412",
     "description": "Changes to CI configuration files and scripts",
     "aliases": ["travis", "ci", "circleci"]

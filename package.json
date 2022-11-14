@@ -50,7 +50,7 @@
     "test:coverage": "vitest run --coverage",
     "release": "pnpm publish --recursive",
     "changeset": "changeset",
-    "changeset:version": "changeset version && pnpm install --lockfile-only --offline",
+    "changeset:version": "changeset version && pnpm install --lockfile-only --prefer-offline",
     "prepare": "node ./.husky/prepare.cjs"
   },
   "// style-vendorizer is included here to allow examples to find it": "",

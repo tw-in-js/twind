@@ -76,7 +76,7 @@ jobs:
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: 🚚  Create Release Pull Request or Publish to npm
+      - name: 🚚  Create Release PR or Publish to npm
         id: changesets
         if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'push' && matrix.node == '18.x' }}
         uses: changesets/action@v1

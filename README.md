@@ -106,9 +106,11 @@ This project is kindly sponsored by <a href="https://www.kenoxa.com" target="_bl
 
 Thank you to all our sponsors!
 
-<div align="center">
-  ![Image](./sites/twind.style/static/sponsors.png)
-</div>
+<p align="center">
+  <a href="https://twind.style/sponsors.svg">
+    <img src="https://twind.style/sponsors.svg" alt="Sponsors"/>
+  </a>
+</p>
 
 Please ask your company to also support this open source project by becoming a sponsor on [opencollective](https://opencollective.com/twind#sponsor) or [GitHub](https://github.com/sponsors/tw-in-js)).
 

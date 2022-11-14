@@ -1,6 +1,27 @@
 name: '📚 Documentation'
-description: Are the docs lacking or missing something? Do they need some new 🔥 hotness? Tell us here.
+description: Are the [docs](https://twind.style) lacking or missing something? Do they need some new 🔥 hotness? Tell us here.
+title: '[Docs]: '
+labels:
+  - 📚 Documentation
 body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this documentation issue!
+
+        Do you need some help?
+        ======================
+
+        The issue tracker is meant for feature requests, bug reports, and documentation issues only. This isn't the best place for
+        support or usage questions. Questions here don't have as much visibility as they do elsewhere. Before
+        you ask a question, here are some resources to get help first:
+
+        - 📖 Study [the documentation](https://twind.style)
+        - 🤖 Try [the playground](https://twind.run)
+        - 🧭 Explore [the examples](https://twind.style/examples)
+        - 📓 Consult [the API reference](https://twind.style/packages)
+        - 🧵 Use [Github Discussions](https://github.com/tw-in-js/twind/discussions) for message-board style questions and discussions that would benefit from being searchable.
+        - 💬 Ask questions and discuss with other Twind users in real time on [Discord Chat](https://chat.twind.style).
   - type: dropdown
     id: kind
     attributes:
@@ -12,6 +33,11 @@ body:
         - Not Sure?
     validations:
       required: true
+  - type: textarea
+    id: affects
+    attributes:
+      label: Link to relevant page or pages
+      description: If the issue affects a specific page or several pages, then please paste the url or urls here.
   - type: textarea
     id: problem
     attributes:

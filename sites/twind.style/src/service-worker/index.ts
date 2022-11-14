@@ -6,7 +6,7 @@
 
 const sw = self as unknown as ServiceWorkerGlobalScope & typeof globalThis
 
-import { build as immutables, version } from '$service-worker'
+import { build as immutables, files as staticFiles, version } from '$service-worker'
 
 const CACHE_PREFIX = 'app-cache-'
 const cacheName = `${CACHE_PREFIX}${version}`
@@ -16,9 +16,11 @@ const cachePromise = caches.open(cacheName)
 //   - immutables
 // Runtime caching
 //   - /_app/version.json: network first - to detect new versions
+//   - static: stale while revalidate - cache first and update cache from network
 //   - *: cache first
 
 const NETWORK_FIRST = new Set(['/' + __SVELTEKIT_APP_VERSION_FILE__])
+const STALE_WHILE_REVALIDATE = new Set(staticFiles)
 
 sw.addEventListener('install', (event) => {
   event.waitUntil(
@@ -91,7 +93,13 @@ sw.addEventListener('fetch', (event) => {
       request = new Request(request, { headers: { 'x-app-version': version } })
     }
 
-    event.respondWith(NETWORK_FIRST.has(url.pathname) ? networkFirst(request) : cacheFirst(request))
+    const strategy = NETWORK_FIRST.has(url.pathname)
+      ? networkFirst
+      : STALE_WHILE_REVALIDATE.has(url.pathname)
+      ? staleWhileRevalidate
+      : cacheFirst
+
+    event.respondWith(strategy(request))
   }
 })
 
@@ -114,11 +122,21 @@ async function cacheFirst(request: Request) {
   return load(request)
 }
 
+async function staleWhileRevalidate(request: Request) {
+  const cached = await fromCache(request)
+
+  // update cache from network
+  const revalidated = load(request)
+
+  // prioritize cached response over network
+  return cached || revalidated
+}
+
 async function fromCache(request: Request) {
   // If the network is unavailable, get
 
   // Respond from the cache if we can
-  const cached = await (await cachePromise).match(request)
+  const cached = await caches.match(request)
   if (cached) return cached
 
   // // Else, use the preloaded response, if it's there

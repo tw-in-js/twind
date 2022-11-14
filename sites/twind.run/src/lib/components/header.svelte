@@ -22,7 +22,6 @@
   function createBugReportURL(reproduction = $page.url.toString(), systemInfo = '') {
     const url = new URL('https://github.com/tw-in-js/twind/issues/new')
     url.searchParams.set('template', 'bug_report.yml')
-    url.searchParams.set('labels', '🐞 Bug')
     url.searchParams.set('reproduction', reproduction)
     if (systemInfo) {
       url.searchParams.set('system-info', systemInfo)
@@ -83,7 +82,7 @@
         {:else}
           <Icon src={BugAntSolid} class="-ml-1 h-5 w-5" label="Something broken? File a bug!" />
         {/if}
-        <span class="hidden lg:flex" aria-hidden="true">Something broken? File a bug!</span>
+        <span class="sr-only lg:not-sr-only">Something broken? File a bug!</span>
       </button>
 
       <hr class="w-0 h-5 border-l border-brand-6" aria-orientation="vertical" />
@@ -99,7 +98,7 @@
       <hr class="ml-3 w-0 h-5 border-l border-brand-6" aria-orientation="vertical" /> -->
 
       <nav
-        class="flex flex-wrap gap-3 items-center text-base justify-center"
+        class="flex gap-3 lg:gap-4 items-center text-base justify-center"
         aria-label="Site Navigation"
       >
         <a

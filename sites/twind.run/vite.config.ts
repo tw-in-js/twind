@@ -52,7 +52,7 @@ export default defineConfig((env) => {
           const files = await fg(
             [
               `../../packages/*/${process.env.CI ? 'dist/' : ''}package.json`,
-              '!**/{cdn,with-*,*-plugin}/**',
+              '!**/{cdn,with-*}/**',
             ],
             { absolute: true },
           )
