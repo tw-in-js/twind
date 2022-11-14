@@ -13,19 +13,22 @@ inputs:
   workingDirectory:
     description: 'Specifies the working directory where the command is run.'
     required: false
-  apiToken:
+  CLOUDFLARE_API_TOKEN:
     description: 'Cloudflare API Token'
     required: true
-  accountId:
+  CLOUDLFARE_ACCOUNT_ID:
     description: 'Cloudflare Account ID'
     required: true
+  deploymentName:
+    description: 'The name of the GitHub deployment'
+    required: false
   projectName:
     description: 'The name of the Pages project to upload to'
     required: true
   directory:
     description: 'The directory of static assets to upload'
     required: true
-  gitHubToken:
+  GITHUB_TOKEN:
     description: 'GitHub Token'
     required: false
   branch:
@@ -70,30 +73,31 @@ runs:
 
     - name: 🚀  Deploy ${{ inputs.workingDirectory }} as ${{ inputs.branch }}
       id: deploy
-      # until https://github.com/cloudflare/pages-action/pull/33 is merged
-      uses: cloudflare/pages-action@walshy/general-improvements
+      uses: sastan/pages-action@walshy/general-improvements
       with:
-        apiToken: ${{ inputs.apiToken }}
-        accountId: ${{ inputs.accountId }}
-        gitHubToken: ${{ inputs.gitHubToken }}
+        apiToken: ${{ inputs.CLOUDFLARE_API_TOKEN }}
+        accountId: ${{ inputs.CLOUDLFARE_ACCOUNT_ID }}
+        gitHubToken: ${{ inputs.GITHUB_TOKEN }}
+        deploymentName: ${{ inputs.deploymentName }}
         projectName: ${{ inputs.projectName }}
         directory: ${{ inputs.workingDirectory }}/${{ inputs.directory }}
         branch: ${{ inputs.branch }}
+        commitDirty: true
 
     - name: 🚀  Deploy ${{ inputs.workingDirectory }} as v${{ steps.build.outputs.version }}
       id: version
-      # until https://github.com/cloudflare/pages-action/pull/33 is merged
-      uses: cloudflare/pages-action@walshy/general-improvements
-      continue-on-error: true
+      uses: sastan/pages-action@walshy/general-improvements
       with:
-        apiToken: ${{ inputs.apiToken }}
-        accountId: ${{ inputs.accountId }}
-        gitHubToken: ${{ inputs.gitHubToken }}
+        apiToken: ${{ inputs.CLOUDFLARE_API_TOKEN }}
+        accountId: ${{ inputs.CLOUDLFARE_ACCOUNT_ID }}
+        # do NOT create a GitHub deployment for verson urls
+        # gitHubToken: ${{ inputs.GITHUB_TOKEN }}
         projectName: ${{ inputs.projectName }}
         directory: ${{ inputs.workingDirectory }}/${{ inputs.directory }}
         # Branch name aliases are lowercased and non-alphanumeric characters are replaced with a hyphen
         # v1.0.0.next.39 -> v1-0-0-next-39
         branch: v${{ steps.build.outputs.version }}
+        commitDirty: true
 
     - name: 💡  Deployment Info
       shell: bash

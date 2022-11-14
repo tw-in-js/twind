@@ -1,5 +1,6 @@
 import fs from 'node:fs'
 import path from 'node:path'
+import process from 'node:process'
 
 import fg from 'fast-glob'
 
@@ -23,9 +24,19 @@ export default defineConfig((env) => {
             this.addWatchFile(file)
           }
 
-          fs.watch(docsPath, { recursive: true, persistent: false }, (event, filename) => {
-            this.addWatchFile(path.resolve(docsPath, filename))
-          })
+          if (!process.env.CI) {
+            try {
+              fs.watch(docsPath, { recursive: true, persistent: false }, (event, filename) => {
+                this.addWatchFile(path.resolve(docsPath, filename))
+              })
+            } catch (error) {
+              if ((error as NodeJS.ErrnoException).code === 'ERR_FEATURE_UNAVAILABLE_ON_PLATFORM') {
+                console.warn('watching for changes is not supported on this platform')
+              } else {
+                throw error
+              }
+            }
+          }
         },
 
         handleHotUpdate({ file, timestamp, server }) {

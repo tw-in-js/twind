@@ -1,6 +1,4 @@
 import * as path from 'node:path'
-import zlib from 'node:zlib'
-import { promisify } from 'node:util'
 
 import fg, { type Options as FastGlobOptions } from 'fast-glob'
 import { findUpSync, pathExistsSync } from 'find-up'

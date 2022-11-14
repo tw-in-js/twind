@@ -91,9 +91,10 @@ jobs:
         uses: ./.github/actions/publish-pages
         with:
           workingDirectory: sites/twind.style
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDLFARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          deploymentName: twind.style
           projectName: twind-style
           directory: build
           branch: main
@@ -103,9 +104,10 @@ jobs:
         uses: ./.github/actions/publish-pages
         with:
           workingDirectory: sites/twind.run
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDLFARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          deploymentName: twind.run
           projectName: twind-run
           directory: .svelte-kit/cloudflare
           branch: main
@@ -142,7 +144,7 @@ jobs:
         uses: ./.github/actions/setup
         with:
           # only install dependencies for packages that are published and for the sites
-          installArgs: --filter="./packages/*" --filter="@sites/*"
+          installArgs: --filter="." --filter="./packages/*" --filter="./sites/*"
 
       - name: 🚚  Publish pre-release to npm
         id: publish
@@ -151,7 +153,8 @@ jobs:
           tag: ${{ (github.event_name == 'push' && 'next') || 'canary'}}
           template: ${{ (github.event_name == 'push' && '{tag}-{datetime}') || '{tag}-{commit}'}}
           hasChangesets: ${{ needs.build.outputs.hasChangesets }}
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       # deploy sites using the published package versions
       - name: 🌎  Deploy twind.style
@@ -159,9 +162,10 @@ jobs:
         uses: ./.github/actions/publish-pages
         with:
           workingDirectory: sites/twind.style
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDLFARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          deploymentName: twind.style
           projectName: twind-style
           directory: build
 
@@ -170,9 +174,10 @@ jobs:
         uses: ./.github/actions/publish-pages
         with:
           workingDirectory: sites/twind.run
-          apiToken: ${{ secrets.CF_API_TOKEN }}
-          accountId: ${{ secrets.CF_ACCOUNT_ID }}
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDLFARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          deploymentName: twind.run
           projectName: twind-run
           directory: .svelte-kit/cloudflare
 

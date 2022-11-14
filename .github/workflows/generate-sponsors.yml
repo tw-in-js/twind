@@ -16,7 +16,7 @@ jobs:
       - name: 🔧  Setup
         uses: ./.github/actions/setup
         with:
-          installArgs: '--filter scripts'
+          installArgs: --filter="." --filter="./scripts"
 
       - name: Update sponsors
         run: pnpm run sponsors

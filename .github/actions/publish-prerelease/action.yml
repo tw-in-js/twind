@@ -16,9 +16,12 @@ inputs:
   hasChangesets:
     description: 'are there any changesets'
     required: true
-  gitHubToken:
+  GITHUB_TOKEN:
     description: 'GitHub Token'
-    required: false
+    required: true
+  NPM_TOKEN:
+    description: 'NPM Token'
+    required: true
 
 outputs:
   tag:
@@ -39,7 +42,7 @@ runs:
           //registry.npmjs.org/:_authToken=$NPM_TOKEN
         EOF
       env:
-        NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        NPM_TOKEN: ${{ inputs.NPM_TOKEN }}
 
     - name: 📝  Ensure atleast one changeset exists
       if: ${{ inputs.hasChangesets != 'true' }}
@@ -49,10 +52,12 @@ runs:
     - name: 📦  Update packages
       shell: bash
       run: pnpm changeset version --no-git-tag --snapshot ${{ inputs.tag }} --snapshot-prerelease-template "${{ inputs.template }}"
+      env:
+        GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
 
     - name: 📦  Update lockfile
       shell: bash
-      run: pnpm install --lockfile-only --frozen-lockfile=false --prefer-offline --filter="./packages/*" --filter="@sites/*"
+      run: pnpm install --lockfile-only --frozen-lockfile=false --prefer-offline --filter="." --filter="./packages/*" --filter="./sites/*"
 
     - name: 🏗️  Build packages
       shell: bash

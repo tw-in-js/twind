@@ -8,7 +8,7 @@ on:
       - 'sites/cdn.twind.style/**'
 
 jobs:
-  deploy-main:
+  deploy:
     runs-on: ubuntu-latest
     if: github.repository == 'tw-in-js/twind'
     steps:
@@ -18,7 +18,7 @@ jobs:
       - name: 🔧  Setup
         uses: ./.github/actions/setup
         with:
-          installArgs: '--filter sites/cdn.twind.style'
+          installArgs: --filter="." --filter="./sites/cdn.twind.style"
 
       - name: 🌎  Deploy cdn.twind.style
         shell: bash
