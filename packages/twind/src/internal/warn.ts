@@ -21,7 +21,7 @@ export function warn<Code extends keyof WarningEventMap>(
   detail: WarningEventMap[Code],
 ): void {
   if (DEV) {
-    if (typeof dispatchEvent == 'function') {
+    if (typeof dispatchEvent == 'function' && typeof CustomEvent === 'function') {
       // Browser
       const event = new CustomEvent('warning', { detail: { message, code, detail } })
 
