@@ -98,7 +98,9 @@
       "ignoreDependencies": [
         "@size-limit/esbuild",
         "monaco-editor",
-        "@jspm/generator"
+        "@jspm/generator",
+        "@jsenv/logger",
+        "@jsenv/importmap"
       ]
     }
   },
