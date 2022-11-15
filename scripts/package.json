@@ -1,6 +1,7 @@
 {
   "name": "scripts",
-  "version": "0.0.0",
+  "version": "1.0.0-next.39",
+  "private": true,
   "scripts": {
     "sponsors": "sponsorkit"
   },

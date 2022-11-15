@@ -1,5 +1,5 @@
 {
-  "version": "0.0.1-next.2",
+  "version": "1.0.0-next.39",
   "name": "@example/using-twind-cdn",
   "description": "twind cdn twind example",
   "private": true,

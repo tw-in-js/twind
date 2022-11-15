@@ -1,7 +1,7 @@
 {
   "name": "@example/with-gatsby",
   "description": "gatsby with twind example",
-  "version": "0.0.1-next.19",
+  "version": "1.0.0-next.39",
   "private": true,
   "license": "MIT",
   "bugs": "https://github.com/tw-in-js/twind/issues",
