@@ -1,0 +1,19 @@
+{
+  "pnpm": {
+    "overrides": {
+      "@twind/cdn": "./packages/cdn",
+      "@twind/intellisense": "./packages/intellisense",
+      "@twind/preset-autoprefix": "./packages/preset-autoprefix",
+      "@twind/preset-ext": "./packages/preset-ext",
+      "@twind/preset-line-clamp": "./packages/preset-line-clamp",
+      "@twind/preset-tailwind": "./packages/preset-tailwind",
+      "@twind/preset-tailwind-forms": "./packages/preset-tailwind-forms",
+      "@twind/preset-typography": "./packages/preset-typography",
+      "twind": "./packages/twind",
+      "gatsby-plugin-twind": "./packages/with-gatsby",
+      "@twind/with-next": "./packages/with-next",
+      "@twind/with-remix": "./packages/with-remix",
+      "@twind/with-sveltekit": "./packages/with-sveltekit"
+    }
+  }
+}
