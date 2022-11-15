@@ -64,7 +64,8 @@ runs:
       id: build
       shell: bash
       env:
-        NODE_OPTIONS: '--max_old_space_size=4096'
+        # https://github.com/actions/runner-images/issues/70
+        NODE_OPTIONS: '--max_old_space_size=8192'
       # Retry 3 times before the steps actually fails
       run: |
         (${{ inputs.run }}) || (${{ inputs.run }}) || (${{ inputs.run }})
