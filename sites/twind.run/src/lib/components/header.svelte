@@ -14,7 +14,7 @@
 
   import ThemeSwitcher from './theme-switcher.svelte'
 
-  /** @type {undefined | ((share: (link: string, workspace: import('../types').Workspace) => any | Promise<any>) => Promise<void>)} */
+  /** @type {undefined | ((share: (link: string, workspace: import('../types').Workspace, manifest: import('../types').Manifest) => any | Promise<any>) => Promise<void>)} */
   export let withShareLink = undefined
 
   let sharing = false
@@ -62,8 +62,25 @@
 
           if (withShareLink) {
             sharing = true
-            withShareLink((reproduction, workspace) => {
-              open(createBugReportURL(reproduction, `Version: ${workspace.version}`), '_blank')
+            withShareLink((reproduction, workspace, manifest) => {
+              open(
+                createBugReportURL(
+                  reproduction,
+                  [
+                    `Version: ${manifest.version} (${[
+                      manifest['dist-tag'],
+                      manifest['git-sha'].slice(0, 7),
+                      manifest.pr && `#${manifest.pr}`,
+                    ]
+                      .filter(Boolean)
+                      .join(', ')})`,
+                    Object.entries(manifest.packages)
+                      .map(([pkg, version]) => `- ${pkg}: ${version}`)
+                      .join('\n'),
+                  ].join('\n\n'),
+                ),
+                '_blank',
+              )
             }).finally(() => {
               sharing = false
             })

@@ -288,11 +288,6 @@
    */
   async function copyToClipboard(text) {
     try {
-      if (!navigator.clipboard) {
-        throw makeError()
-      }
-      return navigator.clipboard.writeText(text)
-
       await copy(String(text))
       clearTimeout(copied)
       copied = setTimeout(() => {
@@ -306,7 +301,7 @@
   }
 
   /**
-   * @param {(link: string, workspace: import('./$types').PageData['workspace']) => any | Promise<any>} share
+   * @param {(link: string, workspace: import('./$types').PageData['workspace'], manifest: import('./$types').PageData['manifests'][number]) => any | Promise<any>} share
    */
   async function withShareLink(share) {
     if (
@@ -353,7 +348,7 @@
         data.workspace = JSON.parse(stringifiedWorkspace)
         source = stringifiedWorkspace
         try {
-          await share(url.toString(), data.workspace)
+          await share(url.toString(), data.workspace, manifest)
         } finally {
           shareLink = url
         }
