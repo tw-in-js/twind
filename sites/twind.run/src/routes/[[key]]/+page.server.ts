@@ -47,7 +47,7 @@ const EXPECTED_VERSION = '1'
 
 export async function load({
   params: { key },
-  platform: { env },
+  platform: { env, caches },
   fetch,
 }: Parameters<import('./$types').PageServerLoad>[0]) {
   const { workspace } = await loadWorkspace()
@@ -169,19 +169,25 @@ export async function load({
 
   async function loadManifest(version = ''): Promise<Manifest> {
     // Branch name aliases are lowercased and non-alphanumeric characters are replaced with a hyphen
-    const alias = version === '*' ? '' : version.toLowerCase().replace(/[^a-z\d]/g, '-')
+    const alias = version === '*' ? 'latest' : version.toLowerCase().replace(/[^a-z\d]/g, '-')
 
     const origin =
-      alias && (alias === 'latest' ? `https://${HOSTNAME}` : `https://${alias}.${HOSTNAME}`)
+      !alias || alias === 'latest' ? `https://${HOSTNAME}` : `https://${alias}.${HOSTNAME}`
 
     const url = origin + MANIFEST_PATH
 
-    // TODO: https://developers.cloudflare.com/workers/runtime-apis/cache/
-    // platform.env.caches
-    const response = await fetch(url)
+    const cache = caches?.default
 
-    if (!(response.ok && response.status === 200)) {
-      throw new Error(`[${response.status}] ${response.statusText || 'request failed'}`)
+    let response = await cache?.match(url)
+
+    if (!response) {
+      response = await fetch(url)
+
+      if (!(response.ok && response.status === 200)) {
+        throw new Error(`[${response.status}] ${response.statusText || 'request failed'}`)
+      }
+
+      cache?.put(url, response.clone())
     }
 
     const manifest = await response.json<Manifest>()
