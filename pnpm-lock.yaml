@@ -251,9 +251,9 @@ importers:
 
   packages/cdn:
     specifiers:
-      '@twind/preset-autoprefix': 1.0.0-next.39
-      '@twind/preset-tailwind': 1.0.0-next.39
-      twind: 1.0.0-next.39
+      '@twind/preset-autoprefix': ^1.0.0-next.39
+      '@twind/preset-tailwind': ^1.0.0-next.39
+      twind: ^1.0.0-next.39
       typescript: ^4.8.4
     dependencies:
       '@twind/preset-autoprefix': link:../preset-autoprefix
@@ -266,8 +266,8 @@ importers:
   packages/intellisense:
     specifiers:
       '@ctrl/tinycolor': ^3.4.1
-      '@twind/preset-autoprefix': 1.0.0-next.39
-      '@twind/preset-tailwind': 1.0.0-next.39
+      '@twind/preset-autoprefix': ^1.0.0-next.39
+      '@twind/preset-tailwind': ^1.0.0-next.39
       '@types/css-tree': ^2.0.0
       '@types/cssbeautify': ^0.3.2
       css-tree: ^2.2.1
@@ -275,7 +275,7 @@ importers:
       genex: ^1.1.0
       match-sorter: ^6.3.1
       quick-lru: ^6.1.1
-      twind: 1.0.0-next.39
+      twind: ^1.0.0-next.39
       typescript: ^4.8.4
     dependencies:
       '@ctrl/tinycolor': 3.4.1
@@ -296,7 +296,7 @@ importers:
   packages/preset-autoprefix:
     specifiers:
       style-vendorizer: ^2.2.3
-      twind: 1.0.0-next.39
+      twind: ^1.0.0-next.39
       typescript: ^4.8.4
     dependencies:
       style-vendorizer: 2.2.3
@@ -307,8 +307,8 @@ importers:
 
   packages/preset-ext:
     specifiers:
-      '@twind/preset-tailwind': 1.0.0-next.39
-      twind: 1.0.0-next.39
+      '@twind/preset-tailwind': ^1.0.0-next.39
+      twind: ^1.0.0-next.39
       typescript: ^4.8.4
     devDependencies:
       '@twind/preset-tailwind': link:../preset-tailwind
@@ -318,7 +318,7 @@ importers:
 
   packages/preset-line-clamp:
     specifiers:
-      twind: 1.0.0-next.39
+      twind: ^1.0.0-next.39
       typescript: ^4.8.4
     devDependencies:
       twind: link:../twind
@@ -327,7 +327,7 @@ importers:
 
   packages/preset-tailwind:
     specifiers:
-      twind: 1.0.0-next.39
+      twind: ^1.0.0-next.39
       typescript: ^4.8.4
     devDependencies:
       twind: link:../twind
@@ -336,8 +336,8 @@ importers:
 
   packages/preset-tailwind-forms:
     specifiers:
-      '@twind/preset-tailwind': 1.0.0-next.39
-      twind: 1.0.0-next.39
+      '@twind/preset-tailwind': ^1.0.0-next.39
+      twind: ^1.0.0-next.39
       typescript: ^4.8.4
     devDependencies:
       '@twind/preset-tailwind': link:../preset-tailwind
@@ -347,7 +347,7 @@ importers:
 
   packages/preset-typography:
     specifiers:
-      twind: 1.0.0-next.39
+      twind: ^1.0.0-next.39
       typescript: ^4.8.4
     devDependencies:
       twind: link:../twind
@@ -356,7 +356,7 @@ importers:
 
   packages/twind:
     specifiers:
-      '@twind/preset-tailwind': 1.0.0-next.39
+      '@twind/preset-tailwind': ^1.0.0-next.39
       csstype: ^3.1.1
       typescript: ^4.8.4
     dependencies:
@@ -373,7 +373,7 @@ importers:
       gatsby: ^4.24.8
       react: ^17.0.2
       react-dom: ^17.0.2
-      twind: 1.0.0-next.39
+      twind: ^1.0.0-next.39
       typescript: ^4.8.4
     devDependencies:
       '@types/react': 17.0.52
@@ -391,7 +391,7 @@ importers:
       next: ^12.3.3
       react: ^17.0.2
       react-dom: ^17.0.2
-      twind: 1.0.0-next.39
+      twind: ^1.0.0-next.39
       typescript: ^4.8.4
     devDependencies:
       '@types/react': 17.0.52
@@ -409,7 +409,7 @@ importers:
       react: ^17.0.2
       react-dom: ^17.0.2
       remix: ^1.7.5
-      twind: 1.0.0-next.39
+      twind: ^1.0.0-next.39
       typescript: ^4.8.4
     devDependencies:
       '@types/node': 14.18.33
@@ -425,7 +425,7 @@ importers:
     specifiers:
       '@sveltejs/kit': 1.0.0-next.544
       svelte: ^3.53.1
-      twind: 1.0.0-next.39
+      twind: ^1.0.0-next.39
       typescript: ^4.8.4
     devDependencies:
       '@sveltejs/kit': 1.0.0-next.544_svelte@3.53.1+vite@3.2.3
