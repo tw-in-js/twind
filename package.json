@@ -24,6 +24,10 @@
     {
       "type": "Github Sponsor",
       "url": "https://github.com/sponsors/tw-in-js"
+    },
+    {
+      "type": "Ko-fi",
+      "url": "https://ko-fi.com/twind"
     }
   ],
   "engines": {
