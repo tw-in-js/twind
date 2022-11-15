@@ -63,6 +63,8 @@ runs:
     - name: 🏗️  Build ${{ inputs.workingDirectory }}
       id: build
       shell: bash
+      env:
+        NODE_OPTIONS: '--max_old_space_size=4096'
       run: |
         ${{ inputs.run }}
         echo version="`jq '.version' package.json`" >> $GITHUB_OUTPUT
