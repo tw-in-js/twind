@@ -35,7 +35,7 @@
     "pnpm": "^7.14.0"
   },
   "// https://nodejs.org/dist/latest-v16.x/docs/api/corepack.html": "",
-  "packageManager": "pnpm@7.14.0",
+  "packageManager": "pnpm@7.16.0",
   "// for npm/yarn within codesandbox — same as in pnpm-workspace.yml": "",
   "workspaces": [
     "examples/*",

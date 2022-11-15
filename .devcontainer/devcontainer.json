@@ -3,7 +3,7 @@
   "features": {
     "ghcr.io/devcontainers/features/node:1": {},
     "ghcr.io/NicoVIII/devcontainer-features/pnpm:1": {
-      "version": "7.14.0"
+      "version": "7.16.0"
     }
   },
   "postCreateCommand": ". ${NVM_DIR}/nvm.sh && nvm install"
