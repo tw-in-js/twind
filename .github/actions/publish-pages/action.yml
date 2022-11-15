@@ -65,8 +65,9 @@ runs:
       shell: bash
       env:
         NODE_OPTIONS: '--max_old_space_size=4096'
+      # Retry 3 times before the steps actually fails
       run: |
-        ${{ inputs.run }}
+        (${{ inputs.run }}) || (${{ inputs.run }}) || (${{ inputs.run }})
         echo version="`jq '.version' package.json`" >> $GITHUB_OUTPUT
       working-directory: ${{ inputs.workingDirectory }}
 
