@@ -39,11 +39,5 @@ function load(): Transpile {
     }
   }
 
-  return Comlink.wrap<Transpile>(
-    import.meta.env.PROD
-      ? new TranspileWorker()
-      : new Worker(new URL('./transpile.worker.ts', import.meta.url), {
-          type: 'module',
-        }),
-  ) as Transpile
+  return Comlink.wrap<Transpile>(new TranspileWorker()) as Transpile
 }

@@ -63,11 +63,5 @@ function load(): Intellisense {
     }
   }
 
-  return Comlink.wrap<Intellisense>(
-    import.meta.env.PROD
-      ? new IntellisenseWorker()
-      : new Worker(new URL('./intellisense.worker.ts', import.meta.url), {
-          type: 'module',
-        }),
-  )
+  return Comlink.wrap<Intellisense>(new IntellisenseWorker())
 }

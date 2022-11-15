@@ -44,11 +44,5 @@ function load(): Prettier {
     }
   }
 
-  return Comlink.wrap<Prettier>(
-    import.meta.env.PROD
-      ? new PrettierWorker()
-      : new Worker(new URL('./prettier.worker.ts', import.meta.url), {
-          type: 'module',
-        }),
-  )
+  return Comlink.wrap<Prettier>(new PrettierWorker())
 }
