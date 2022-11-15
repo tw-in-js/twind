@@ -32,6 +32,7 @@ export default defineConfig((env) => {
         async buildStart() {
           cdn.clear()
 
+          console.time('generate-cdn')
           const isProd = env.mode === 'production'
 
           const emitFile = (fileName: string, source: string | Buffer | Uint8Array) => {
@@ -43,6 +44,7 @@ export default defineConfig((env) => {
               this.emitFile({ type: 'asset', fileName, source })
             }
           }
+
           // bundle current packages and generate resolutions fro @jsbpm/generator
           // TODO: refactor to cdn.twind.style
 
@@ -66,6 +68,8 @@ export default defineConfig((env) => {
             'import',
             'default',
           ]
+
+          console.time('generate-cdn:bundle')
 
           const packages = await Promise.all(
             files.map(async (manifestFile) => {
@@ -180,7 +184,6 @@ export default defineConfig((env) => {
                       const content = await fs.readFile(id, { encoding: 'utf8' })
 
                       if (id.endsWith('.json')) {
-                        // TODO: named exports
                         return dataToEsm(JSON.parse(content), {
                           compact: isProd,
                           indent: isProd ? '' : '\t',
@@ -261,9 +264,27 @@ export default defineConfig((env) => {
 
                     emitFile(
                       root + prefix + input.entry.slice(2),
-                      input.file === './package.json'
-                        ? JSON.stringify(manifest, null, isProd ? undefined : 2)
-                        : await fs.readFile(input.resolved, { encoding: 'utf8' }),
+                      input.entry === './package.json'
+                        ? JSON.stringify(
+                            {
+                              ...manifest,
+                              type: 'systemjs',
+                              engines: undefined,
+                              peerDependencies: undefined,
+                              peerDependenciesMeta: undefined,
+                              publishConfig: undefined,
+                              main: undefined,
+                              module: undefined,
+                              esnext: undefined,
+                              unpkg: undefined,
+                              jsdelivr: undefined,
+                              browser: undefined,
+                              types: undefined,
+                            },
+                            null,
+                            2,
+                          )
+                        : await fs.readFile(input.file, { encoding: 'utf8' }),
                     )
                   }),
               )
@@ -278,20 +299,81 @@ export default defineConfig((env) => {
               }
             }),
           )
+          console.timeEnd('generate-cdn:bundle')
 
           // 3. emit inputMap (application/importmap+json) with relative paths
           //   - file: `this.emitFile({ type: 'asset', fileName: '-/cdn/importmap.json', source: code })})`
 
+          console.time('generate-cdn:importMap')
+          // console.debug(packages)
           const scoped = await Promise.all(
             packages.map(async ({ url, prefix, external, manifest }) => {
+              const cdnUrl = 'https://cdn.jsdelivr.net/'
+              const exactPkgRegEx =
+                /^([^\/]+)\/((?:@[^/\\%@]+\/)?[^./\\%@][^/\\%@]*)@([^\/]+)(\/.*)?$/
+
               const generator: Generator = new Generator({
                 // Set the map URL for relative normalization when installing local packages
                 mapUrl: url,
-                defaultProvider: 'jspm.system',
                 env: conditions,
+                defaultProvider: 'jspm.system',
+                // jspm may not have the previously (a few seconds ago) published packages -> use
+                providers: {
+                  // unpkg or skypack may work as well
+                  '@twind': 'local',
+                  twind: 'local',
+                },
+                customProviders: {
+                  // Based on https://github.com/jspm/generator/blob/main/src/providers/jsdelivr.ts
+                  // but resolve latest to current build
+                  local: {
+                    // https://cdn.jsdelivr.net/npm/twind@1.0.0-next-20221115000153/package.json
+                    parseUrlPkg(url) {
+                      const pkg = packages.find((pkg) => new URL('.', pkg.url).href === url)
+
+                      if (pkg) {
+                        return {
+                          registry: 'npm',
+                          name: pkg.manifest.name,
+                          version: pkg.manifest.version,
+                        }
+                      }
+
+                      const match = url.slice(cdnUrl.length).match(exactPkgRegEx)
+                      if (match) {
+                        const [, registry, name, version] = match
+                        return { registry, name, version }
+                      }
+
+                      return undefined
+                    },
+                    pkgToUrl(target) {
+                      const pkg = packages.find((pkg) => pkg.manifest.name === target.name)
+
+                      if (pkg) {
+                        return `${cdnUrl}${target.registry}/${pkg.manifest.name}@${pkg.manifest.version}/`
+                      }
+
+                      return `${cdnUrl}${target.registry}/${target.name}@${target.version}/`
+                    },
+                    async resolveLatestTarget(target, layer, parentUrl) {
+                      const pkg = packages.find((pkg) => pkg.manifest.name === target.name)
+
+                      if (pkg && target.range.has(pkg.manifest.version)) {
+                        return {
+                          registry: 'npm',
+                          name: pkg.manifest.name,
+                          version: pkg.manifest.version,
+                        }
+                      }
+
+                      return null
+                    },
+                  },
+                },
               })
 
-              const versions = {
+              const versions: Record<string, string> = {
                 ...manifest.devDependencies,
                 ...manifest.peerDependencies,
                 ...manifest.dependencies,
@@ -331,19 +413,19 @@ export default defineConfig((env) => {
             }),
           )
 
-          let importMap = {
+          let importMap: import('@jsenv/importmap').ImportMap = {
             imports: Object.fromEntries(packages.flatMap(({ mapping }) => Object.entries(mapping))),
           }
 
           for (const scope of scoped) {
             const imports = Object.entries(scope.importMap.imports).filter(
-              ([key]) => !importMap.imports.hasOwnProperty(key),
+              ([key]) => !importMap.imports?.hasOwnProperty(key),
             )
 
             if (imports.length) {
               importMap = composeTwoImportMaps(importMap, {
                 scopes: {
-                  ['./' + scope.prefix]: Object.fromEntries(imports),
+                  ['./' + scope.prefix]: Object.fromEntries(imports) as Record<string, string>,
                 },
               })
             }
@@ -354,11 +436,13 @@ export default defineConfig((env) => {
               importMap = composeTwoImportMaps(importMap, { scopes })
             }
           }
+          console.timeEnd('generate-cdn:importMap')
 
-          const manifestData = {
-            // from version: 1.0.0 -> latest, 1.0.0-(next|canary)-*
+          // console.debug(importMap)
+          const cdnManifest = {
             version: VERSION,
-            'dist-tag': VERSION.replace(/^1.0.0(?:-([^.-]+).+)?$/, '$1') || 'latest',
+            // from version: 1.0.0 -> latest, 1.0.0-(next|canary)-*
+            'dist-tag': VERSION.replace(/^[.\d]+(?:-([^.-]+).+)?$/, '$1') || 'latest',
             'git-sha': process.env.GITHUB_SHA || execSync('git rev-parse HEAD').toString().trim(),
             pr:
               process.env.GITHUB_EVENT_NAME === 'pull_request'
@@ -377,7 +461,9 @@ export default defineConfig((env) => {
           //   // cdn: [...cdn.keys()],
           // })
 
-          emitFile(root + 'cdn.json', JSON.stringify(manifestData, null, isProd ? undefined : 2))
+          emitFile(root + 'cdn.json', JSON.stringify(cdnManifest, null, isProd ? undefined : 2))
+
+          console.timeEnd('generate-cdn')
         },
         configureServer(server) {
           server.middlewares.use('/' + root, (req, res, next) => {

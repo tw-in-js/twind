@@ -96,21 +96,23 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           deploymentName: twind.style
           projectName: twind-style
-          directory: build
           branch: main
+          directory: build
+          version: true
 
       - name: 🌎  Deploy twind.run
         if: ${{ steps.changesets.outputs.published == 'true' && github.repository == 'tw-in-js/twind' }}
         uses: ./.github/actions/publish-pages
         with:
           workingDirectory: sites/twind.run
+          directory: .svelte-kit/cloudflare
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CLOUDLFARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           deploymentName: twind.run
           projectName: twind-run
-          directory: .svelte-kit/cloudflare
           branch: main
+          version: true
 
   coveralls:
     name: Collect Coverage
@@ -162,24 +164,24 @@ jobs:
         uses: ./.github/actions/publish-pages
         with:
           workingDirectory: sites/twind.style
+          directory: build
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CLOUDLFARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           deploymentName: twind.style
           projectName: twind-style
-          directory: build
 
       - name: 🌎  Deploy twind.run
         id: deploy_twind_run
         uses: ./.github/actions/publish-pages
         with:
           workingDirectory: sites/twind.run
+          directory: .svelte-kit/cloudflare
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CLOUDLFARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           deploymentName: twind.run
           projectName: twind-run
-          directory: .svelte-kit/cloudflare
 
       - name: 📝  Comment PR
         if: ${{ github.event_name == 'pull_request' }}
@@ -196,16 +198,14 @@ jobs:
 
             <table>
             <tr><td><strong>Deployment URL:</strong></td><td><a href='${{ steps.deploy_twind_style.outputs.url }}'>${{ steps.deploy_twind_style.outputs.url }}</a></td></tr>
-            <tr><td><strong>Branch URL:</strong></td><td><a href='${{ steps.deploy_twind_style.outputs.branchURL }}'>${{ steps.deploy_twind_style.outputs.branchURL }}</a></td></tr>
-            <tr><td><strong>Version URL:</strong></td><td><a href='${{ steps.deploy_twind_style.outputs.versionURL }}'>${{ steps.deploy_twind_style.outputs.versionURL }}</a></td></tr>
+            <tr><td><strong>Branch URL:</strong></td><td><a href='${{ steps.deploy_twind_style.outputs.branch }}'>${{ steps.deploy_twind_style.outputs.branch }}</a></td></tr>
             </table>
 
             ### twind.run
 
             <table>
             <tr><td><strong>Deployment URL:</strong></td><td><a href='${{ steps.deploy_twind_run.outputs.url }}'>${{ steps.deploy_twind_run.outputs.url }}</a></td></tr>
-            <tr><td><strong>Branch URL:</strong></td><td><a href='${{ steps.deploy_twind_run.outputs.branchURL }}'>${{ steps.deploy_twind_run.outputs.branchURL }}</a></td></tr>
-            <tr><td><strong>Version URL:</strong></td><td><a href='${{ steps.deploy_twind_run.outputs.versionURL }}'>${{ steps.deploy_twind_run.outputs.versionURL }}</a></td></tr>
+            <tr><td><strong>Branch URL:</strong></td><td><a href='${{ steps.deploy_twind_run.outputs.branch }}'>${{ steps.deploy_twind_run.outputs.branch }}</a></td></tr>
             </table>
 
             ## Published to [npm](https://www.npmjs.com)
