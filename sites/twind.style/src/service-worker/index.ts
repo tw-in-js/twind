@@ -45,12 +45,6 @@ sw.addEventListener('install', (event) => {
 sw.addEventListener('message', (event) => {
   if (event.data?.type === 'activate') {
     sw.skipWaiting()
-
-    if (event.data.prefetch) {
-      cachePromise
-        .then((cache) => cache.addAll(event.data.prefetch))
-        .catch((error) => console.warn(`Failed to prefetch`, event.data.prefetch, error))
-    }
   }
 })
 

@@ -68,16 +68,6 @@ export function registerServiceWorker(
             if (!unregistered) {
               throw new Error('registration.unregister() failed')
             }
-
-            // reload page to remove controller
-            if (interceptNavigate !== false) {
-              beforeNavigate(({ to, cancel }) => {
-                if (to) {
-                  cancel()
-                  location.href = to.url.href
-                }
-              })
-            }
           }
         })
         .catch((error) => {
@@ -170,26 +160,21 @@ export function registerServiceWorker(
     beforeNavigate(({ from, to, cancel }) => {
       if (to && $status === 'installed') {
         cancel()
-        // TODO: show loading indicator — activate may take a few seconds
-        const prefetch = [to.url.href]
-        if (from) {
-          prefetch.push(from.url.href)
-        }
-        activate(prefetch, () => {
+        activate(() => {
           location.href = to.url.href
         })
       }
     })
   }
 
-  function activate(prefetch: string[] | undefined, callback: (acivated: boolean) => void): void {
+  function activate(callback: (activated: boolean) => void): void {
     if (!$serviceWorker) return callback(true)
 
     // Not using $status here because we need the unnormalized state name here
     function onStateChange(this: ServiceWorker): void {
       switch (this.state) {
         case 'installed': {
-          this.postMessage({ type: 'activate', prefetch })
+          this.postMessage({ type: 'activate' })
           break
         }
 
@@ -213,6 +198,6 @@ export function registerServiceWorker(
 
   return {
     subscribe: status.subscribe,
-    activate: () => new Promise((resolve) => activate(undefined, resolve)),
+    activate: () => new Promise((resolve) => activate(resolve)),
   }
 }
