@@ -9,7 +9,8 @@
   import { mounted } from '$lib/stores'
 
   import srcdoc from './preview.html?raw'
-  import scriptSrc from './preview'
+  // not really a worker - but this creates a standalone chunk which can be used as script in the preview iframe
+  import scriptSrc from './preview?worker&url'
   import Loader from './loader.svelte'
 
   /** The HTMl to render */
@@ -183,7 +184,9 @@
   let srcUrl
   onMount(() => {
     srcUrl = URL.createObjectURL(
-      new Blob([srcdoc.replace(/%script.src%/g, scriptSrc)], { type: 'text/html' }),
+      new Blob([srcdoc.replace(/%script.src%/g, new URL(scriptSrc, import.meta.url).href)], {
+        type: 'text/html',
+      }),
     )
     return () => URL.revokeObjectURL(srcUrl)
   })

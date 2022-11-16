@@ -562,6 +562,10 @@ export default defineConfig((env) => {
 
     clearScreen: false,
 
+    build: {
+      sourcemap: !process.env.CI,
+    },
+
     server: {
       fs: {
         // search up for workspace root
