@@ -151,7 +151,7 @@
         {
           entry: `
           import { defineConfig } from 'twind'
-          import { createIntellisense } from '@twind/intellisense@^${INTELLISENSE_VERSION}'
+          import { createIntellisense } from '@twind/intellisense'
           import config from '$/config'
 
           export default createIntellisense(defineConfig(config))
@@ -335,9 +335,6 @@
       })
       /** @type { import('@sveltejs/kit').ActionResult} result */
       const result = await response.json()
-
-      // TODO: workspace might have been changed??
-      console.debug(result)
 
       if (result.type === 'success' && result.data?.key) {
         // copy to clipboard, change url and show link

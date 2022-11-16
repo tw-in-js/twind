@@ -53,7 +53,8 @@
    * @type {string}
    */
   // TODO: display status overlay
-  let status = ''
+  let status = 'mounted'
+  $: console.debug('Preview status:', status)
 
   /** @type {HTMLIFrameElement} */
   let iframeElement
@@ -140,7 +141,7 @@
         console.error(`Failed to update the preview`, error)
         return state
       } finally {
-        status = ''
+        status = 'ready'
       }
     })
   }
@@ -192,7 +193,7 @@
   <iframe
     bind:this={iframeElement}
     src={srcUrl}
-    class={cx('w-full h-full bg-white', status && 'bg-brand-2 grayscale blur-sm')}
+    class={cx('w-full h-full bg-white', status !== 'ready' && 'bg-brand-2 grayscale blur-sm')}
     hidden={!isReady}
     {title}
     {sandbox}

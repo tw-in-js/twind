@@ -15,6 +15,12 @@
   "engines": {
     "node": ">=18.12.0"
   },
+  "imports": {
+    "#manifest": "./package.json"
+  },
+  "exports": {
+    "./package.json": "./package.json"
+  },
   "scripts": {
     "postinstall": "svelte-kit sync",
     "start": "npm run dev",

@@ -64,11 +64,8 @@ runs:
       run: pnpm build
 
     - name: 🚀  Publish packages
-      id: publish
       shell: bash
-      run: |
-        pnpm release --tag ${{ inputs.tag }} --no-git-checks --report-summary
-        echo packages="`jq '.publishedPackages | map("- [" +.name+"@"+.version+"](https://www.npmjs.com/package/"+.name+"/v/"+.version+")") | join("\n")' pnpm-publish-summary.json`" >> $GITHUB_OUTPUT
+      run: pnpm release --tag ${{ inputs.tag }} --no-git-checks --report-summary
 
     - name: 💡  Publish Info
       shell: bash
@@ -76,4 +73,4 @@ runs:
         echo "## Published packages to npm" >> $GITHUB_STEP_SUMMARY
         echo "**Dist Tag**: ${{ inputs.tag }}" >> $GITHUB_STEP_SUMMARY
         echo "**Packages**:" >> $GITHUB_STEP_SUMMARY
-        echo "${{ steps.publish.output.packages }}" >> $GITHUB_STEP_SUMMARY
+        jq '.publishedPackages | map("- [" +.name+"@"+.version+"](https://www.npmjs.com/package/"+.name+"/v/"+.version+")") | join("\n")' pnpm-publish-summary.json >> $GITHUB_STEP_SUMMARY

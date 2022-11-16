@@ -34,10 +34,6 @@ inputs:
   branch:
     description: 'The name of the branch you want to deploy to'
     required: true
-  version:
-    description: 'Create a version deployment'
-    default: 'false'
-    required: false
 
 outputs:
   id:
@@ -87,7 +83,6 @@ runs:
 
     - name: 🚀  Deploy ${{ inputs.workingDirectory }} as v${{ steps.build.outputs.version }}
       id: version
-      if: ${{ inputs.version == 'true' }}
       uses: sastan/pages-action@walshy/general-improvements
       with:
         apiToken: ${{ inputs.CLOUDFLARE_API_TOKEN }}
@@ -102,7 +97,6 @@ runs:
         commitDirty: true
 
     - name: 💡  Deployment Info
-      if: ${{ inputs.version == 'true' }}
       shell: bash
       run: |
         echo "## Deployed with [![Cloudflare](https://img.shields.io/badge/Cloudflare%20Pages-F38020?style=for-the-badge&logo=Cloudflare&logoColor=white)](https://pages.dev)" >> $GITHUB_STEP_SUMMARY
@@ -111,13 +105,3 @@ runs:
         echo "<strong>Deployment URL:</strong> <a href='${{ steps.deploy.outputs.url }}'>${{ steps.deploy.outputs.url }}</a>" >> $GITHUB_STEP_SUMMARY
         echo "<strong>Branch URL:</strong> <a href='${{ steps.deploy.outputs.alias }}'>${{ steps.deploy.outputs.alias }}</a>" >> $GITHUB_STEP_SUMMARY
         echo "<strong>Version URL:</strong> <a href='${{ steps.version.outputs.alias }}'>${{ steps.version.outputs.alias }}</a>" >> $GITHUB_STEP_SUMMARY
-
-    - name: 💡  Deployment Info
-      if: ${{ inputs.version != 'true' }}
-      shell: bash
-      run: |
-        echo "## Deployed with [![Cloudflare](https://img.shields.io/badge/Cloudflare%20Pages-F38020?style=for-the-badge&logo=Cloudflare&logoColor=white)](https://pages.dev)" >> $GITHUB_STEP_SUMMARY
-        echo "<strong>Environment:</strong> ${{ steps.deploy.outputs.environment }}" >> $GITHUB_STEP_SUMMARY
-        echo "<strong>ID:</strong> ${{ steps.deploy.outputs.id }}" >> $GITHUB_STEP_SUMMARY
-        echo "<strong>Deployment URL:</strong> <a href='${{ steps.deploy.outputs.url }}'>${{ steps.deploy.outputs.url }}</a>" >> $GITHUB_STEP_SUMMARY
-        echo "<strong>Branch URL:</strong> <a href='${{ steps.deploy.outputs.alias }}'>${{ steps.deploy.outputs.alias }}</a>" >> $GITHUB_STEP_SUMMARY

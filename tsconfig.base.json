@@ -4,9 +4,9 @@
     "baseUrl": "./",
     "target": "ESNext",
     "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     // Search under node_modules for non-relative imports.
-    "moduleResolution": "Node",
     "moduleDetection": "auto",
     // ensure that nobody can accidentally use this config for a build
     "noEmit": true,

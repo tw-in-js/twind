@@ -8,14 +8,14 @@ on:
 
   pull_request:
 
-# This allows a subsequently queued workflow run to interrupt previous runs
+# cancel in-progress runs on new commits to same PR (gitub.event.number)
 concurrency:
-  group: '${{ github.workflow }} @ ${{ github.event.pull_request.head.label || github.head_ref || github.ref }}'
+  group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
   cancel-in-progress: true
 
 jobs:
   build:
-    name: 🏗️  Build on Node.js v${{ matrix.node }}
+    name: 🏗️  Build
     runs-on: ubuntu-latest
     timeout-minutes: 15
     outputs:
@@ -24,13 +24,6 @@ jobs:
     permissions:
       contents: write # to create release (changesets/action)
       pull-requests: write # to create pull request (changesets/action)
-
-    strategy:
-      matrix:
-        node: ['18.x']
-        # os: [ubuntu-20.04]
-        # Maybe add those later again
-        # os: [ubuntu-20.04, macos-11, windows-2022]
 
     steps:
       - name: 📥  Checkout
@@ -41,33 +34,30 @@ jobs:
 
       - name: 🔧  Setup
         uses: ./.github/actions/setup
-        with:
-          nodeVersion: ${{ matrix.node }}
 
-      - name: 🤘  Validate packages
-        run: |
-          pnpm check
-          pnpm test:coverage
+      - name: 🩺  Check
+        run: pnpm check
 
-      - name: 🏗️  Build packages
-        run: pnpm build
+      - name: 🤘  Test
+        run: pnpm test:coverage
 
       - name: 📖  Coveralls
         # prevents this step from running on forks
         if: ${{ github.repository == 'tw-in-js/twind' }}
-        uses: coverallsapp/github-action@master
+        uses: chenrui333/github-action@update-runtime-to-nodejs@16
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
-          flag-name: build-${{ matrix.node }}
-          parallel: true
           path-to-lcov: ./coverage/lcov.info
+
+      - name: 🏗️  Build
+        run: pnpm build
 
       # if a .npmrc file is found, the GitHub Action does not recreate the file.
       - name: 📝  Updating .npmrc
         # 1. prevents this step from running on forks
         # 2. only run for push events
         # 3. only run once in the matrix
-        if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'push' && matrix.node == '18.x' }}
+        if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'push' }}
         run: |
           cat << EOF > "$HOME/.npmrc"
             email=release-workflow@twind.style
@@ -78,7 +68,7 @@ jobs:
 
       - name: 🚚  Create Release PR or Publish to npm
         id: changesets
-        if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'push' && matrix.node == '18.x' }}
+        if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'push' }}
         uses: changesets/action@v1
         with:
           version: pnpm changeset:version
@@ -98,7 +88,6 @@ jobs:
           projectName: twind-style
           branch: main
           directory: build
-          version: true
 
       - name: 🌎  Deploy twind.run
         if: ${{ steps.changesets.outputs.published == 'true' && github.repository == 'tw-in-js/twind' }}
@@ -112,20 +101,6 @@ jobs:
           deploymentName: twind.run
           projectName: twind-run
           branch: main
-          version: true
-
-  coveralls:
-    name: Collect Coverage
-    needs: build
-    runs-on: ubuntu-latest
-    # prevents this step from running on forks
-    if: ${{ github.repository == 'tw-in-js/twind' }}
-    steps:
-      - name: 📖  Coveralls Finished
-        uses: coverallsapp/github-action@master
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          parallel-finished: true
 
   publish-pre-releases:
     name: 🚚  Publish pre-releases
@@ -167,7 +142,8 @@ jobs:
           directory: build
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CLOUDLFARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # no github deployment for canary
+          GITHUB_TOKEN: ${{ (github.event_name == 'push' && '') || secrets.GITHUB_TOKEN }}
           deploymentName: twind.style
           projectName: twind-style
 
@@ -179,7 +155,8 @@ jobs:
           directory: .svelte-kit/cloudflare
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CLOUDLFARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # no github deployment for canary
+          GITHUB_TOKEN: ${{ (github.event_name == 'push' && '') || secrets.GITHUB_TOKEN }}
           deploymentName: twind.run
           projectName: twind-run
 
@@ -199,6 +176,7 @@ jobs:
             <table>
             <tr><td><strong>Deployment URL:</strong></td><td><a href='${{ steps.deploy_twind_style.outputs.url }}'>${{ steps.deploy_twind_style.outputs.url }}</a></td></tr>
             <tr><td><strong>Branch URL:</strong></td><td><a href='${{ steps.deploy_twind_style.outputs.branch }}'>${{ steps.deploy_twind_style.outputs.branch }}</a></td></tr>
+            <tr><td><strong>Version URL:</strong></td><td><a href='${{ steps.deploy_twind_style.outputs.version }}'>${{ steps.deploy_twind_style.outputs.version }}</a></td></tr>
             </table>
 
             ### twind.run
@@ -206,6 +184,7 @@ jobs:
             <table>
             <tr><td><strong>Deployment URL:</strong></td><td><a href='${{ steps.deploy_twind_run.outputs.url }}'>${{ steps.deploy_twind_run.outputs.url }}</a></td></tr>
             <tr><td><strong>Branch URL:</strong></td><td><a href='${{ steps.deploy_twind_run.outputs.branch }}'>${{ steps.deploy_twind_run.outputs.branch }}</a></td></tr>
+            <tr><td><strong>Version URL:</strong></td><td><a href='${{ steps.deploy_twind_run.outputs.version }}'>${{ steps.deploy_twind_run.outputs.version }}</a></td></tr>
             </table>
 
             ## Published to [npm](https://www.npmjs.com)

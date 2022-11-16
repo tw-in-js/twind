@@ -13,6 +13,8 @@ import type { Manifest, Workspace } from '$lib/types'
 import pkg from 'lz-string'
 const { decompressFromEncodedURIComponent, compressToEncodedURIComponent } = pkg
 
+import { version as SITE_VERSION } from '../../../package.json'
+
 const MANIFEST_PATH = '/_app/cdn.json'
 const HOSTNAME = 'twind-run.pages.dev'
 
@@ -46,6 +48,7 @@ const wordlist = wordlistraw.trim().split(/\s+/g)
 const EXPECTED_VERSION = '1'
 
 export async function load({
+  request,
   params: { key },
   platform: { env, caches },
   fetch,
@@ -57,7 +60,7 @@ export async function load({
   // dist tag: load manifest from twind-run.pages.dev for 'latest' or dist-tag.twind-run.pages.dev
 
   const [localManifest, workspaceManifest, latestManifest, nextManifest] = await Promise.all([
-    loadManifest(),
+    loadManifest(SITE_VERSION),
     loadManifest(workspace?.version).catch(() => null),
     loadManifest('latest').catch(() => null),
     loadManifest('next').catch(() => null),
@@ -167,12 +170,16 @@ export async function load({
     return { workspace: await data.json() }
   }
 
-  async function loadManifest(version = ''): Promise<Manifest> {
+  async function loadManifest(version: string): Promise<Manifest> {
     // Branch name aliases are lowercased and non-alphanumeric characters are replaced with a hyphen
     const alias = version === '*' ? 'latest' : version.toLowerCase().replace(/[^a-z\d]/g, '-')
 
     const origin =
-      !alias || alias === 'latest' ? `https://${HOSTNAME}` : `https://${alias}.${HOSTNAME}`
+      version === SITE_VERSION
+        ? new URL(request.url).origin
+        : alias === 'latest'
+        ? `https://${HOSTNAME}`
+        : `https://${/^\d\.\d\.\d/.test(alias) ? 'v' + alias : alias}.${HOSTNAME}`
 
     const url = origin + MANIFEST_PATH
 
@@ -181,6 +188,7 @@ export async function load({
     let response = await cache?.match(url)
 
     if (!response) {
+      console.debug(`Fetching CDN manifest for ${alias || '<empty>'} (${origin})`)
       response = await fetch(url)
 
       if (!(response.ok && response.status === 200)) {
@@ -191,6 +199,19 @@ export async function load({
     }
 
     const manifest = await response.json<Manifest>()
+
+    if (manifest.version !== version) {
+      try {
+        console.debug(
+          `Resolving  CDN manifest for ${alias || '<empty>'} (${origin}) using ${manifest.version}`,
+        )
+        return await loadManifest(manifest.version)
+      } catch {
+        console.warn(`Failed to fetch CDN manifest for ${manifest.version}`)
+      }
+    }
+
+    console.debug(`Loaded CDN manifest for ${alias || '<empty>'} (${origin})`)
 
     return {
       ...manifest,
