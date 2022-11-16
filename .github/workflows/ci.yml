@@ -44,7 +44,8 @@ jobs:
       - name: 📖  Coveralls
         # prevents this step from running on forks
         if: ${{ github.repository == 'tw-in-js/twind' }}
-        uses: chenrui333/github-action@update-runtime-to-nodejs@16
+        # until https://github.com/coverallsapp/github-action/issues/135 is closed
+        uses: JohnTitor/github-action@actions-core-bump
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./coverage/lcov.info

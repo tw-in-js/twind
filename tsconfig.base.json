@@ -4,7 +4,7 @@
     "baseUrl": "./",
     "target": "ESNext",
     "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "moduleResolution": "Node",
     "lib": ["DOM", "DOM.Iterable", "ESNext"],
     // Search under node_modules for non-relative imports.
     "moduleDetection": "auto",
