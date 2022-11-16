@@ -45,7 +45,7 @@ jobs:
         # prevents this step from running on forks
         if: ${{ github.repository == 'tw-in-js/twind' }}
         # until https://github.com/coverallsapp/github-action/issues/135 is closed
-        uses: JohnTitor/github-action@actions-core-bump
+        uses: chenrui333/github-action@a1a1a8a300a7e89df3630639df8fb23de5cc6368
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./coverage/lcov.info

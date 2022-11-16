@@ -11,6 +11,7 @@
   import { base } from '$app/paths'
   import { browser } from '$app/environment'
   import { page } from '$app/stores'
+  import { deserialize } from '$app/forms'
 
   import prettier from '$lib/prettier'
   import transpile from '$lib/transpile'
@@ -317,7 +318,10 @@
 
     try {
       const token = await getTurnstileToken('share')
-      if (!token) return
+      if (!token) {
+        console.warn('Failed to get turnstile token')
+        return
+      }
 
       const body = new FormData()
       const stringifiedWorkspace = serialize($workspace)
@@ -334,7 +338,7 @@
         },
       })
       /** @type { import('@sveltejs/kit').ActionResult} result */
-      const result = await response.json()
+      const result = deserialize(await response.text())
 
       if (result.type === 'success' && result.data?.key) {
         // copy to clipboard, change url and show link
@@ -344,13 +348,18 @@
         // update tracking data to detect if something has changed
         data.workspace = JSON.parse(stringifiedWorkspace)
         source = stringifiedWorkspace
+
+        console.debug(`Saved workspace as ${result.data.key}`, result)
+
         try {
           await share(url.toString(), data.workspace, manifest)
         } finally {
           shareLink = url
         }
+      } else {
+        // TODO: handle non success response
+        console.warn('Failed to get workspace id', result)
       }
-      // TODO: handle non success response
     } catch (error) {
       // TODO: show error in toast
       console.error(error)

@@ -74,7 +74,8 @@ runs:
       with:
         apiToken: ${{ inputs.CLOUDFLARE_API_TOKEN }}
         accountId: ${{ inputs.CLOUDLFARE_ACCOUNT_ID }}
-        gitHubToken: ${{ inputs.GITHUB_TOKEN }}
+        # only create github deployments for main and next
+        gitHubToken: ${{ ((inputs.branch == 'main' || inputs.branch == 'next') && inputs.GITHUB_TOKEN) || '' }}
         deploymentName: ${{ inputs.deploymentName }}
         projectName: ${{ inputs.projectName }}
         directory: ${{ inputs.workingDirectory }}/${{ inputs.directory }}
