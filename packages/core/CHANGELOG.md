@@ -1,5 +1,13 @@
 # @twind/core
 
+## 1.0.1
+
+### Patch Changes
+
+- introduce new @twind/core package to prevent issue with existing code that imports from CDNs without a version ([`4cab9d2f`](https://github.com/tw-in-js/twind/commit/4cab9d2fc573dd2a91cc6667510ff1b7b890854b))
+
+- prevent name mangling of toplevel variables when creating a iife script ([`4cab9d2f`](https://github.com/tw-in-js/twind/commit/4cab9d2fc573dd2a91cc6667510ff1b7b890854b))
+
 ## 1.0.0
 
 ### Patch Changes
