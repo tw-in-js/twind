@@ -19,7 +19,7 @@ export interface Env {
 }
 
 const CDN_ORIGIN = 'https://cdn.jsdelivr.net'
-const DEFAULT_VERSION = 'next'
+const DEFAULT_VERSION = 'latest'
 // clients can cache for 4 hours, shared caches for 1 hour
 const TAG_CACHE_CONTROL = 'public, max-age=14400, s-maxage=3600'
 
