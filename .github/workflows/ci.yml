@@ -11,7 +11,7 @@ on:
 
 # cancel in-progress runs on new commits to same PR (gitub.event.number)
 concurrency:
-  group: ${{ github.workflow }}-${{ github.event.number || github.ref_name }}
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
   cancel-in-progress: true
 
 env:
@@ -57,29 +57,17 @@ jobs:
       - name: 🏗️  Build
         run: pnpm build
 
-      # if a .npmrc file is found, the GitHub Action does not recreate the file.
-      - name: 📝  Updating .npmrc
-        # 1. prevents this step from running on forks
-        # 2. only run for push events
-        # 3. only run once in the matrix
-        if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'push' }}
-        run: |
-          cat << EOF > "$HOME/.npmrc"
-            email=release-workflow@twind.style
-            //registry.npmjs.org/:_authToken=$NPM_TOKEN
-          EOF
-        env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: 🚚  Create Release PR or Publish to npm
         id: changesets
         if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'push' }}
         uses: changesets/action@v1
         with:
+          createGithubReleases: true
           version: pnpm changeset:version
           publish: pnpm release --tag latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: 🌎  Deploy twind.style
         if: ${{ steps.changesets.outputs.published == 'true' && github.repository == 'tw-in-js/twind' }}
