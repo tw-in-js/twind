@@ -98,11 +98,11 @@
 
   ```js
   // package a
-  import { ensure } from 'twind'
+  import { ensure } from '@twind/core'
   ensure(presetTailwind())
 
   // package b
-  import { ensure } from 'twind'
+  import { ensure } from '@twind/core'
   ensure(presetTailwind(), presetTailwindForms())
   ```
 

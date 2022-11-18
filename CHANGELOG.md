@@ -1,7 +1,7 @@
 # Changelog
 
-- [twind](./packages/twind/CHANGELOG.md)
 - [@twind/cdn](./packages/cdn/CHANGELOG.md)
+- [@twind/core](./packages/core/CHANGELOG.md)
 - [@twind/intellisense](./packages/intellisense/CHANGELOG.md)
 
 ## Presets

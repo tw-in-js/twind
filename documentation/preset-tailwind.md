@@ -22,13 +22,13 @@ next: ./preset-tailwind-forms.md
 Install from npm:
 
 ```sh
-npm install twind @twind/preset-tailwind
+npm install @twind/core @twind/preset-tailwind
 ```
 
 Add the preset to your twind config:
 
 ```js title="twind.config.js"
-import { defineConfig } from 'twind'
+import { defineConfig } from '@twind/core'
 import presetTailwind from '@twind/preset-tailwind'
 
 export default defineConfig({

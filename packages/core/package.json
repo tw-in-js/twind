@@ -1,7 +1,7 @@
 {
-  "name": "@twind/cdn",
+  "name": "@twind/core",
   "version": "1.0.0",
-  "description": "Twind CDN is a drop-in replacement for Tailwind CSS Play CDN that is 6 times smaller (104kb vs 17kB) without any build step right in the browser",
+  "description": "The core engine without any presets.",
   "keywords": [
     "twind",
     "tailwind",
@@ -14,29 +14,36 @@
   "main": "src/index.ts",
   "// Each entry is expanded into several bundles (types, esnext, module, script, node, and default)": "",
   "exports": {
-    ".": {
-      "node": null,
-      "default": "./src/index.ts"
-    },
+    ".": "./src/index.ts",
     "./package.json": "./package.json"
   },
+  "globalName": "twind",
   "// These are relative from within the dist/ folder": "",
   "sideEffects": false,
   "size-limit": [
     {
-      "name": "@twind/cdn",
-      "path": "dist/cdn.esnext.js",
+      "name": "@twind/core",
+      "path": "dist/core.esnext.js",
       "brotli": true,
-      "limit": "16kb"
+      "limit": "8kb"
+    },
+    {
+      "name": "@twind/core (setup)",
+      "path": "dist/core.esnext.js",
+      "import": "{ setup }",
+      "brotli": true,
+      "limit": "5.45kb"
+    },
+    {
+      "name": "@twind/core (twind + cssom)",
+      "path": "dist/core.esnext.js",
+      "import": "{ twind, cssom }",
+      "brotli": true,
+      "limit": "4.85kb"
     }
   ],
   "dependencies": {
-    "@twind/core": "^1.0.0",
-    "@twind/preset-autoprefix": "^1.0.0",
-    "@twind/preset-tailwind": "^1.0.0"
-  },
-  "devDependencies": {
-    "typescript": "^4.8.4"
+    "csstype": "^3.1.1"
   },
   "peerDependencies": {
     "typescript": "^4.8.4"
@@ -45,6 +52,10 @@
     "typescript": {
       "optional": true
     }
+  },
+  "devDependencies": {
+    "@twind/preset-tailwind": "^1.0.0",
+    "typescript": "^4.8.4"
   },
   "scripts": {
     "build": "distilt"

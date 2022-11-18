@@ -1,5 +1,5 @@
-import type { CSSObject, Rule } from 'twind'
-import { arbitrary } from 'twind'
+import type { CSSObject, Rule } from '@twind/core'
+import { arbitrary } from '@twind/core'
 
 const rules: Rule[] = [
   // short css feature that allows any css properties to be added

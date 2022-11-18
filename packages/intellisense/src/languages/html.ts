@@ -1,4 +1,4 @@
-import type { ParsedDevRule } from 'twind'
+import type { ParsedDevRule } from '@twind/core'
 import type { ColorInformation, Diagnostics, DocumentationAt } from '../types'
 import type { IntellisenseContext, Boundary } from '../internal/types'
 
@@ -6,9 +6,9 @@ import csstreeParse from 'css-tree/parser'
 import csstreeWalk from 'css-tree/walker'
 import csstreeGenerate from 'css-tree/generator'
 
-import { parse } from 'twind'
-import { fixClassList, parseHTML } from '../../../twind/src/internal/parse-html'
-import { toClassName } from '../../../twind/src/internal/to-class-name'
+import { parse } from '@twind/core'
+import { fixClassList, parseHTML } from '../../../core/src/internal/parse-html'
+import { toClassName } from '../../../core/src/internal/to-class-name'
 
 import { editabelColorRe, parseColor } from '../internal/color'
 import { adjustRuleLocation } from '../internal/adjust-rule-location'

@@ -1,6 +1,6 @@
 import { assert, test, afterEach } from 'vitest'
 
-import { apply, css, cx, style, twind, virtual } from 'twind'
+import { apply, css, cx, style, twind, virtual } from '@twind/core'
 
 import tailwind from '.'
 import data from './rules.test.json'

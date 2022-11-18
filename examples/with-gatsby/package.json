@@ -22,6 +22,7 @@
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
   },
   "dependencies": {
+    "@twind/core": "1.0.0",
     "@twind/preset-autoprefix": "1.0.0",
     "@twind/preset-tailwind": "1.0.0",
     "gatsby": "^4.24.8",
@@ -31,8 +32,7 @@
     "gatsby-plugin-twind": "1.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-helmet": "^6.1.0",
-    "twind": "1.0.0"
+    "react-helmet": "^6.1.0"
   },
   "// Only used within the twind monorepo": "",
   "pnpm": {

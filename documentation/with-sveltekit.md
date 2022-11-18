@@ -27,7 +27,7 @@ next: ./reference.md
    ::col-span-8
 
    ```sh
-   npm install twind @twind/with-sveltekit
+   npm install @twind/core @twind/with-sveltekit
    ```
 
    :::
@@ -42,7 +42,7 @@ next: ./reference.md
    ::col-span-8
 
    ```js title="twind.config.js"
-   import { defineConfig } from 'twind'
+   import { defineConfig } from '@twind/core'
 
    export default defineConfig({
      /* @twind/with-sveltekit will use hashed class names in production by default
@@ -132,7 +132,7 @@ next: ./reference.md
    ::col-span-8
 
    ```js title="twind.config.js" [2-3,6]
-   import { defineConfig } from 'twind'
+   import { defineConfig } from '@twind/core'
    import presetAutoprefix from '@twind/preset-autoprefix'
    import presetTailwind from '@twind/preset-tailwind'
 

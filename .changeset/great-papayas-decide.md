@@ -2,7 +2,6 @@
 '@example/basic': patch
 '@example/playground': patch
 '@example/using-tailwind-forms': patch
-'@example/using-twind-cdn': patch
 '@example/with-gatsby': patch
 '@example/with-next': patch
 '@example/with-remix': patch
@@ -25,4 +24,4 @@
 '@sites/twind.style': patch
 ---
 
-re-publish
+introduce new @twind/core package to prevent issue with existing code that imports from CDNs without a version

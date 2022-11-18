@@ -40,7 +40,7 @@ export type StyleToken = StyleTokenValue
  * Here is an example for `react`
  * ```js
  * import { HTMLAttributes } from "react";
- * import { style, PropsOf } from "twind";
+ * import { style, PropsOf } from "@twind/core";
  * const button = style({ ... })
  * type ButtonProps = PropsOf<typeof button>
  * export const Button = (props: ButtonProps & HTMLAttributes<HTMLButtonElement>) => {

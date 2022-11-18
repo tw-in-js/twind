@@ -1,5 +1,5 @@
 /* eslint-env node */
 
-export { inline as default } from 'twind'
+export { inline as default } from '@twind/core'
 
-export type { InlineOptions, InlineMinify } from 'twind'
+export type { InlineOptions, InlineMinify } from '@twind/core'

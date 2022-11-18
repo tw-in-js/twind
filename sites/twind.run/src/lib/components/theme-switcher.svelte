@@ -22,7 +22,7 @@
 
 <script>
   import { browser } from '$app/environment'
-  import { cx } from 'twind'
+  import { cx } from '@twind/core'
   import Icon from '$lib/icons'
 
   /** @type {string | undefined} */

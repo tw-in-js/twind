@@ -52,9 +52,12 @@ export default defineConfig((env) => {
           // 1. find all packages
           //   - in dev use packages/*/package.json
           //   - in prod use packages/*/dist/package.json
-          const files = await fg([`../../packages/*/package.json`, '!**/{cdn,with-*}/**'], {
+          const files = await fg(
+            [`../../packages/*/package.json`, '!../../packages/{cdn,twind,with-*}/**'],
+            {
             absolute: true,
-          })
+            },
+          )
 
           const conditions = [
             'development',

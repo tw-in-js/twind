@@ -14,13 +14,13 @@ next: ./preset-line-clamp.md
 Install from npm:
 
 ```sh
-npm install twind @twind/preset-ext
+npm install @twind/core @twind/preset-ext
 ```
 
 Add the preset to your twind config:
 
 ```js title="twind.config.js"
-import { defineConfig } from 'twind'
+import { defineConfig } from '@twind/core'
 import presetExt from '@twind/preset-ext'
 
 export default defineConfig({

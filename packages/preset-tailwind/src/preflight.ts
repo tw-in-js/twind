@@ -2,7 +2,7 @@
  * @module @twind/preset-tailwind/preflight
  */
 
-import type { Preflight } from 'twind'
+import type { Preflight } from '@twind/core'
 
 import defaultTheme from './defaultTheme'
 

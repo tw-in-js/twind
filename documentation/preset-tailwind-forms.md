@@ -25,13 +25,13 @@ next: ./preset-typography.md
 Install from npm:
 
 ```sh
-npm install twind @twind/preset-tailwind @twind/preset-tailwind-forms
+npm install @twind/core @twind/preset-tailwind @twind/preset-tailwind-forms
 ```
 
 Add the preset to your twind config:
 
 ```js title="twind.config.js"
-import { defineConfig } from 'twind'
+import { defineConfig } from '@twind/core'
 import presetTailwind from '@twind/preset-tailwind'
 import presetTailwindForms from '@twind/preset-tailwind-forms'
 
@@ -88,7 +88,7 @@ All of the basic form elements you use will now have some simple default styles 
 > Same as with [tailwindcss-forms › Using only global styles or only classes](https://github.com/tailwindlabs/tailwindcss-forms#using-only-global-styles-or-only-classes)
 
 ```js title="twind.config.js"
-import { defineConfig } from 'twind'
+import { defineConfig } from '@twind/core'
 import presetTailwind from '@twind/preset-tailwind'
 import presetTailwindForms from '@twind/preset-tailwind-forms'
 

@@ -13,6 +13,7 @@
   // to our registry.
   "publishDirectory": {
     "@twind/cdn": "packages/cdn/dist",
+    "@twind/core": "packages/core/dist",
     "@twind/intellisense": "packages/intellisense/dist",
     "@twind/preset-autoprefix": "packages/preset-autoprefix/dist",
     "@twind/preset-ext": "packages/preset-ext/dist",
@@ -20,7 +21,6 @@
     "@twind/preset-tailwind": "packages/preset-tailwind/dist",
     "@twind/preset-tailwind-forms": "packages/preset-tailwind-forms/dist",
     "@twind/preset-typography": "packages/preset-typography/dist",
-    "twind": "packages/twind/dist",
     "gatsby-plugin-twind": "packages/with-gatsby/dist",
     "@twind/with-next": "packages/with-next/dist",
     "@twind/with-remix": "packages/with-remix/dist",

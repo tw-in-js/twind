@@ -8,7 +8,7 @@ import prettier from 'prettier/esm/standalone.mjs'
 // import parserPostcss from 'prettier/esm/parser-postcss.mjs'
 // import parserTypescript from 'prettier/esm/parser-typescript.mjs'
 
-import { Layer } from '../../../../packages/twind/src/internal/precedence'
+import { Layer } from '../../../../packages/core/src/internal/precedence'
 
 const defaults = { semi: false, trailingComma: 'all' }
 

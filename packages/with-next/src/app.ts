@@ -1,9 +1,9 @@
 /* eslint-env node, browser */
 import type { AppProps } from 'next/app'
-import type { TwindConfig, TwindUserConfig } from 'twind'
+import type { TwindConfig, TwindUserConfig } from '@twind/core'
 
 import { createElement } from 'react'
-import { install as install$ } from 'twind'
+import { install as install$ } from '@twind/core'
 
 export default install
 

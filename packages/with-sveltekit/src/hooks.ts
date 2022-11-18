@@ -1,8 +1,8 @@
 import type { Handle } from '@sveltejs/kit'
 
-import type { InlineOptions } from 'twind'
+import type { InlineOptions } from '@twind/core'
 
-import { inline } from 'twind'
+import { inline } from '@twind/core'
 
 export type { InlineOptions }
 

@@ -1,5 +1,5 @@
-import type { ColorValue } from 'twind'
-import { defineConfig } from 'twind'
+import type { ColorValue } from '@twind/core'
+import { defineConfig } from '@twind/core'
 import presetAutoprefix from '@twind/preset-autoprefix'
 import preseExt from '@twind/preset-ext'
 import presetTailwind from '@twind/preset-tailwind'

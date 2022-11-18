@@ -12,7 +12,8 @@ TODO with file diffs
 
 ### Notable Changes
 
-- [twind](https://github.com/tw-in-js/twind/tree/main/packages/twind) does **not** include any core utilities — use one or more of the following presets:
+- the main package is [@twind/core](https://github.com/tw-in-js/twind/tree/main/packages/core)
+- [@twind/core](https://github.com/tw-in-js/twind/tree/main/packages/core) does **not** include any core utilities — use one or more of the following presets:
 
   - [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/main/packages/preset-autoprefix)
   - [@twind/preset-ext](https://github.com/tw-in-js/twind/tree/main/packages/preset-ext)
@@ -155,7 +156,7 @@ TODO with file diffs
   The following layer exist in the given order: `defaults`, `base`, `components`, `shortcuts`, `utilities`, `overrides`
 
   ```js
-  import { injectGlobal } from 'twind'
+  import { injectGlobal } from '@twind/core'
 
   injectGlobal`
     /* rules with base are not sorted */

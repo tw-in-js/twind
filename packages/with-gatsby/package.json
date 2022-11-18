@@ -40,10 +40,10 @@
     }
   },
   "peerDependencies": {
+    "@twind/core": "^1.0.0",
     "gatsby": "2.x || 3.x || 4.x",
     "react": "16.x || 17.x || 18.x",
-    "react-dom": "16.x || 17.x || 18.x",
-    "twind": "^1.0.0"
+    "react-dom": "16.x || 17.x || 18.x"
   },
   "peerDependenciesMeta": {
     "typescript": {
@@ -51,12 +51,12 @@
     }
   },
   "devDependencies": {
+    "@twind/core": "^1.0.0",
     "@types/react": "^17.0.52",
     "@types/react-dom": "^17.0.18",
     "gatsby": "^4.24.8",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "twind": "^1.0.0",
     "typescript": "^4.8.4"
   },
   "pnpm": {

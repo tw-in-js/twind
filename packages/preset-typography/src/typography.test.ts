@@ -1,6 +1,6 @@
 import { assert, test } from 'vitest'
 
-import { colorFromTheme, fromTheme, twind, virtual } from 'twind'
+import { colorFromTheme, fromTheme, twind, virtual } from '@twind/core'
 import presetTypography from '.'
 
 test('using typography defaults', () => {

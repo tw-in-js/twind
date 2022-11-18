@@ -1,4 +1,4 @@
-import { twind, virtual } from 'twind'
+import { twind, virtual } from '@twind/core'
 import config from '../../twind.config'
 
 const tw = twind(config, virtual())

@@ -135,11 +135,11 @@ You may wish to test your locally-modified copy of Twind against another package
 ```json
 {
   "dependencies": {
-    "twind": "*"
+    "@twind/core": "*"
   },
   "pnpm": {
     "overrides": {
-      "twind": "link:../path/to/twind/packages/twind"
+      "@twind/core": "link:../path/to/twind/packages/core"
     }
   }
 }

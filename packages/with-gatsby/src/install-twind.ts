@@ -1,4 +1,4 @@
-import { install as install$ } from 'twind'
+import { install as install$ } from '@twind/core'
 
 import config from 'gatsby-plugin-twind/config'
 

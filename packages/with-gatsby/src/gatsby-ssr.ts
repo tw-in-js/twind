@@ -5,7 +5,7 @@ import type { ReplaceRendererArgs } from 'gatsby'
 
 import { renderToString } from 'react-dom/server'
 import { createElement } from 'react'
-import { extract } from 'twind'
+import { extract } from '@twind/core'
 
 import install from './install-twind'
 install()

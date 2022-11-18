@@ -21,12 +21,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@twind/core": "1.0.0",
     "@twind/preset-autoprefix": "1.0.0",
     "@twind/preset-ext": "1.0.0",
     "@twind/preset-line-clamp": "1.0.0",
     "@twind/preset-tailwind": "1.0.0",
-    "@twind/preset-tailwind-forms": "1.0.0",
-    "twind": "1.0.0"
+    "@twind/preset-tailwind-forms": "1.0.0"
   },
   "devDependencies": {
     "vite": "^3.2.3"

@@ -11,7 +11,7 @@ import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker'
 
 import debounce from 'just-debounce'
 
-import { injectGlobal } from 'twind'
+import { injectGlobal } from '@twind/core'
 
 import transpile from './transpile'
 import intellisense from './intellisense'

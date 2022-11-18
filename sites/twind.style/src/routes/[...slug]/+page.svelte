@@ -35,7 +35,7 @@
   {#if data.package || data.playground}
     <div class="prose">
       <ul>
-        {#if data.package && $page.url.pathname.startsWith('/packages/') && data.package !== 'twind'}
+        {#if data.package && $page.url.pathname.startsWith('/packages/') && !['@twind/core', 'twind'].includes(data.package)}
           <li>
             📖 Study <a
               href="/{data.package === '@twind/cdn' ? 'installation#twind-cdn' : data.folder}"

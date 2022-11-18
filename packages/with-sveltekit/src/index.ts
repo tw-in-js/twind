@@ -1,6 +1,13 @@
-import type { Twind, BaseTheme, TwindConfig, TwindUserConfig, Preset, ExtractThemes } from 'twind'
+import type {
+  Twind,
+  BaseTheme,
+  TwindConfig,
+  TwindUserConfig,
+  Preset,
+  ExtractThemes,
+} from '@twind/core'
 
-import { install as install$ } from 'twind'
+import { install as install$ } from '@twind/core'
 
 export default install
 

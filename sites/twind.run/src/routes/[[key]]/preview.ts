@@ -1,5 +1,5 @@
 // based on https://svelte.dev/repl
-import type { Twind, Sheet, BaseTheme } from 'twind'
+import type { Twind, Sheet, BaseTheme } from '@twind/core'
 
 import * as Comlink from 'comlink'
 

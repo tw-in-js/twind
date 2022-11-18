@@ -1,6 +1,6 @@
-import type { Variant } from 'twind'
+import type { Variant } from '@twind/core'
 
-import { normalize } from 'twind'
+import { normalize } from '@twind/core'
 
 const variants: Variant[] = [
   ['hocus', '&:hover,&:focus-visible'],

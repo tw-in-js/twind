@@ -161,7 +161,7 @@
       .transform(
         {
           entry: `
-          import { defineConfig } from 'twind'
+          import { defineConfig } from '@twind/core'
           import { createIntellisense } from '@twind/intellisense'
           import config from '$/config'
 

@@ -38,7 +38,7 @@ Shortcut aliases are the simplest type of aliases. They are used to create a sho
 Shortcuts are especially useful within component libraries as they allow users of the library to selectively override the styles of a component.
 
 ```jsx [3,6-8,16,19]
-import { cx } from 'twind'
+import { cx } from '@twind/core'
 
 function Card({ className, ...props }) {
   return (
@@ -64,7 +64,7 @@ function Card({ className, ...props }) {
 > **Important** > `shortcut` does **not** inject the styles into the document. The returned class name must be used within a class attribute or a class name string.
 
 ```js
-import { shortcut } from 'twind'
+import { shortcut } from '@twind/core'
 
 // anonymous
 const card = shortcut('py-2 px-4 font-semibold rounded-lg shadow-md')
@@ -104,7 +104,7 @@ Consider the following utilities: `py-2 p-4`.
 > **Important** > `apply` does **not** inject the styles into the document. The returned class name must be used within a class attribute or a class name string.
 
 ```js
-import { apply } from 'twind'
+import { apply } from '@twind/core'
 
 // anonymous
 const card = apply('py-2 px-4 font-semibold rounded-lg shadow-md')

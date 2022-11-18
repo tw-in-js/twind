@@ -10,6 +10,6 @@ This folder contains all the packages that are published to npm.
 - [ ] add to link in [`CHANGELOG.md`](../CHANGELOG.md)
 - [ ] add to `publishDirectory` in [`.codesandbox/ci.json`](../.codesandbox/ci.json)
 - [ ] add an example to [`examples`](../examples)
-- [ ] add a documentation page [`website/pages/docs`](../website/pages/docs) with the following frontmatter:
+- [ ] add a documentation page [`documentation/`](../documentation) with the following frontmatter:
   - for presets: `section: Presets`
   - for integrations: `section: Twind with`

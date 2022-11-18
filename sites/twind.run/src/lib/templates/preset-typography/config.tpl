@@ -1,4 +1,4 @@
-import { defineConfig } from "twind"
+import { defineConfig } from "@twind/core"
 import presetAutoprefix from "@twind/preset-autoprefix"
 import presetTypography from "@twind/preset-typography"
 import presetTailwind from "@twind/preset-tailwind"

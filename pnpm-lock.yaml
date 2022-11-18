@@ -87,48 +87,48 @@ importers:
 
   examples/basic:
     specifiers:
+      '@twind/core': 1.0.0
       '@twind/preset-autoprefix': 1.0.0
       '@twind/preset-tailwind': 1.0.0
-      twind: 1.0.0
       vite: ^3.2.3
     dependencies:
+      '@twind/core': link:../../packages/core
       '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
       '@twind/preset-tailwind': link:../../packages/preset-tailwind
-      twind: link:../../packages/twind
     devDependencies:
       vite: 3.2.3
 
   examples/playground:
     specifiers:
+      '@twind/core': 1.0.0
       '@twind/preset-autoprefix': 1.0.0
       '@twind/preset-ext': 1.0.0
       '@twind/preset-line-clamp': 1.0.0
       '@twind/preset-tailwind': 1.0.0
       '@twind/preset-tailwind-forms': 1.0.0
-      twind: 1.0.0
       vite: ^3.2.3
     dependencies:
+      '@twind/core': link:../../packages/core
       '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
       '@twind/preset-ext': link:../../packages/preset-ext
       '@twind/preset-line-clamp': link:../../packages/preset-line-clamp
       '@twind/preset-tailwind': link:../../packages/preset-tailwind
       '@twind/preset-tailwind-forms': link:../../packages/preset-tailwind-forms
-      twind: link:../../packages/twind
     devDependencies:
       vite: 3.2.3
 
   examples/using-tailwind-forms:
     specifiers:
+      '@twind/core': 1.0.0
       '@twind/preset-autoprefix': 1.0.0
       '@twind/preset-tailwind': 1.0.0
       '@twind/preset-tailwind-forms': 1.0.0
-      twind: 1.0.0
       vite: ^3.2.3
     dependencies:
+      '@twind/core': link:../../packages/core
       '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
       '@twind/preset-tailwind': link:../../packages/preset-tailwind
       '@twind/preset-tailwind-forms': link:../../packages/preset-tailwind-forms
-      twind: link:../../packages/twind
     devDependencies:
       vite: 3.2.3
 
@@ -140,6 +140,7 @@ importers:
 
   examples/with-gatsby:
     specifiers:
+      '@twind/core': 1.0.0
       '@twind/preset-autoprefix': 1.0.0
       '@twind/preset-tailwind': 1.0.0
       gatsby: ^4.24.8
@@ -150,8 +151,8 @@ importers:
       react: ^17.0.2
       react-dom: ^17.0.2
       react-helmet: ^6.1.0
-      twind: 1.0.0
     dependencies:
+      '@twind/core': link:../../packages/core
       '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
       '@twind/preset-tailwind': link:../../packages/preset-tailwind
       gatsby: 4.24.8_yahowwdbnaobmzz3bs65w4ehty
@@ -162,10 +163,10 @@ importers:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-helmet: 6.1.0_react@17.0.2
-      twind: link:../../packages/twind
 
   examples/with-next:
     specifiers:
+      '@twind/core': 1.0.0
       '@twind/preset-autoprefix': 1.0.0
       '@twind/preset-tailwind': 1.0.0
       '@twind/with-next': 1.0.0
@@ -176,9 +177,9 @@ importers:
       next-transpile-modules: ^9.1.0
       react: ^17.0.2
       react-dom: ^17.0.2
-      twind: 1.0.0
       typescript: ^4.8.4
     devDependencies:
+      '@twind/core': link:../../packages/core
       '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
       '@twind/preset-tailwind': link:../../packages/preset-tailwind
       '@twind/with-next': link:../../packages/with-next
@@ -189,7 +190,6 @@ importers:
       next-transpile-modules: 9.1.0
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
-      twind: link:../../packages/twind
       typescript: 4.8.4
 
   examples/with-remix:
@@ -197,6 +197,7 @@ importers:
       '@remix-run/dev': ^1.7.5
       '@remix-run/react': ^1.7.5
       '@remix-run/serve': ^1.7.5
+      '@twind/core': 1.0.0
       '@twind/preset-autoprefix': 1.0.0
       '@twind/preset-tailwind': 1.0.0
       '@twind/with-remix': 1.0.0
@@ -206,11 +207,11 @@ importers:
       react: ^17.0.2
       react-dom: ^17.0.2
       remix: ^1.7.5
-      twind: 1.0.0
       typescript: ^4.8.4
     dependencies:
       '@remix-run/react': 1.7.5_sfoxds7t5ydpegc3knd667wn6m
       '@remix-run/serve': 1.7.5_sfoxds7t5ydpegc3knd667wn6m
+      '@twind/core': link:../../packages/core
       '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
       '@twind/preset-tailwind': link:../../packages/preset-tailwind
       '@twind/with-remix': link:../../packages/with-remix
@@ -219,7 +220,6 @@ importers:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       remix: 1.7.5
-      twind: link:../../packages/twind
     devDependencies:
       '@remix-run/dev': 1.7.5_eeahpycm5e6orraz2s54jlxxca
       '@types/react-dom': 17.0.18
@@ -229,134 +229,43 @@ importers:
     specifiers:
       '@sveltejs/adapter-node': 1.0.0-next.100
       '@sveltejs/kit': 1.0.0-next.547
+      '@twind/core': 1.0.0
       '@twind/preset-autoprefix': 1.0.0
       '@twind/preset-tailwind': 1.0.0
       '@twind/with-sveltekit': 1.0.0
       svelte: ^3.53.1
       svelte-check: ^2.9.2
       svelte-preprocess: ^4.10.7
-      twind: 1.0.0
       typescript: ^4.8.4
       vite: ^3.2.3
     devDependencies:
       '@sveltejs/adapter-node': 1.0.0-next.100
       '@sveltejs/kit': 1.0.0-next.547_svelte@3.53.1+vite@3.2.3
+      '@twind/core': link:../../packages/core
       '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
       '@twind/preset-tailwind': link:../../packages/preset-tailwind
       '@twind/with-sveltekit': link:../../packages/with-sveltekit
       svelte: 3.53.1
       svelte-check: 2.9.2_svelte@3.53.1
       svelte-preprocess: 4.10.7_f4bsrsgtzvlkrtbz2ig7nipio4
-      twind: link:../../packages/twind
       typescript: 4.8.4
       vite: 3.2.3
 
   packages/cdn:
     specifiers:
+      '@twind/core': ^1.0.0
       '@twind/preset-autoprefix': ^1.0.0
       '@twind/preset-tailwind': ^1.0.0
-      twind: ^1.0.0
       typescript: ^4.8.4
     dependencies:
+      '@twind/core': link:../core
       '@twind/preset-autoprefix': link:../preset-autoprefix
       '@twind/preset-tailwind': link:../preset-tailwind
-      twind: link:../twind
     devDependencies:
       typescript: 4.8.4
     publishDirectory: dist
 
-  packages/intellisense:
-    specifiers:
-      '@ctrl/tinycolor': ^3.4.1
-      '@twind/preset-autoprefix': ^1.0.0
-      '@twind/preset-tailwind': ^1.0.0
-      '@types/css-tree': ^2.0.0
-      '@types/cssbeautify': ^0.3.2
-      css-tree: ^2.2.1
-      cssbeautify: ^0.3.1
-      genex: ^1.1.0
-      match-sorter: ^6.3.1
-      quick-lru: ^6.1.1
-      twind: ^1.0.0
-      typescript: ^4.8.4
-    dependencies:
-      '@ctrl/tinycolor': 3.4.1
-      css-tree: 2.2.1
-      cssbeautify: 0.3.1
-      genex: 1.1.0
-      match-sorter: 6.3.1
-      quick-lru: 6.1.1
-    devDependencies:
-      '@twind/preset-autoprefix': link:../preset-autoprefix
-      '@twind/preset-tailwind': link:../preset-tailwind
-      '@types/css-tree': 2.0.0
-      '@types/cssbeautify': 0.3.2
-      twind: link:../twind
-      typescript: 4.8.4
-    publishDirectory: dist
-
-  packages/preset-autoprefix:
-    specifiers:
-      style-vendorizer: ^2.2.3
-      twind: ^1.0.0
-      typescript: ^4.8.4
-    dependencies:
-      style-vendorizer: 2.2.3
-    devDependencies:
-      twind: link:../twind
-      typescript: 4.8.4
-    publishDirectory: dist
-
-  packages/preset-ext:
-    specifiers:
-      '@twind/preset-tailwind': ^1.0.0
-      twind: ^1.0.0
-      typescript: ^4.8.4
-    devDependencies:
-      '@twind/preset-tailwind': link:../preset-tailwind
-      twind: link:../twind
-      typescript: 4.8.4
-    publishDirectory: dist
-
-  packages/preset-line-clamp:
-    specifiers:
-      twind: ^1.0.0
-      typescript: ^4.8.4
-    devDependencies:
-      twind: link:../twind
-      typescript: 4.8.4
-    publishDirectory: dist
-
-  packages/preset-tailwind:
-    specifiers:
-      twind: ^1.0.0
-      typescript: ^4.8.4
-    devDependencies:
-      twind: link:../twind
-      typescript: 4.8.4
-    publishDirectory: dist
-
-  packages/preset-tailwind-forms:
-    specifiers:
-      '@twind/preset-tailwind': ^1.0.0
-      twind: ^1.0.0
-      typescript: ^4.8.4
-    devDependencies:
-      '@twind/preset-tailwind': link:../preset-tailwind
-      twind: link:../twind
-      typescript: 4.8.4
-    publishDirectory: dist
-
-  packages/preset-typography:
-    specifiers:
-      twind: ^1.0.0
-      typescript: ^4.8.4
-    devDependencies:
-      twind: link:../twind
-      typescript: 4.8.4
-    publishDirectory: dist
-
-  packages/twind:
+  packages/core:
     specifiers:
       '@twind/preset-tailwind': ^1.0.0
       csstype: ^3.1.1
@@ -368,71 +277,172 @@ importers:
       typescript: 4.8.4
     publishDirectory: dist
 
+  packages/intellisense:
+    specifiers:
+      '@ctrl/tinycolor': ^3.4.1
+      '@twind/core': ^1.0.0
+      '@twind/preset-autoprefix': ^1.0.0
+      '@twind/preset-tailwind': ^1.0.0
+      '@types/css-tree': ^2.0.0
+      '@types/cssbeautify': ^0.3.2
+      css-tree: ^2.2.1
+      cssbeautify: ^0.3.1
+      genex: ^1.1.0
+      match-sorter: ^6.3.1
+      quick-lru: ^6.1.1
+      typescript: ^4.8.4
+    dependencies:
+      '@ctrl/tinycolor': 3.4.1
+      css-tree: 2.2.1
+      cssbeautify: 0.3.1
+      genex: 1.1.0
+      match-sorter: 6.3.1
+      quick-lru: 6.1.1
+    devDependencies:
+      '@twind/core': link:../core
+      '@twind/preset-autoprefix': link:../preset-autoprefix
+      '@twind/preset-tailwind': link:../preset-tailwind
+      '@types/css-tree': 2.0.0
+      '@types/cssbeautify': 0.3.2
+      typescript: 4.8.4
+    publishDirectory: dist
+
+  packages/preset-autoprefix:
+    specifiers:
+      '@twind/core': ^1.0.0
+      style-vendorizer: ^2.2.3
+      typescript: ^4.8.4
+    dependencies:
+      style-vendorizer: 2.2.3
+    devDependencies:
+      '@twind/core': link:../core
+      typescript: 4.8.4
+    publishDirectory: dist
+
+  packages/preset-ext:
+    specifiers:
+      '@twind/core': ^1.0.0
+      '@twind/preset-tailwind': ^1.0.0
+      typescript: ^4.8.4
+    devDependencies:
+      '@twind/core': link:../core
+      '@twind/preset-tailwind': link:../preset-tailwind
+      typescript: 4.8.4
+    publishDirectory: dist
+
+  packages/preset-line-clamp:
+    specifiers:
+      '@twind/core': ^1.0.0
+      typescript: ^4.8.4
+    devDependencies:
+      '@twind/core': link:../core
+      typescript: 4.8.4
+    publishDirectory: dist
+
+  packages/preset-tailwind:
+    specifiers:
+      '@twind/core': ^1.0.0
+      typescript: ^4.8.4
+    devDependencies:
+      '@twind/core': link:../core
+      typescript: 4.8.4
+    publishDirectory: dist
+
+  packages/preset-tailwind-forms:
+    specifiers:
+      '@twind/core': ^1.0.0
+      '@twind/preset-tailwind': ^1.0.0
+      typescript: ^4.8.4
+    devDependencies:
+      '@twind/core': link:../core
+      '@twind/preset-tailwind': link:../preset-tailwind
+      typescript: 4.8.4
+    publishDirectory: dist
+
+  packages/preset-typography:
+    specifiers:
+      '@twind/core': ^1.0.0
+      typescript: ^4.8.4
+    devDependencies:
+      '@twind/core': link:../core
+      typescript: 4.8.4
+    publishDirectory: dist
+
+  packages/twind:
+    specifiers:
+      '@twind/core': ^1.0.0
+      typescript: ^4.8.4
+    dependencies:
+      '@twind/core': link:../core
+    devDependencies:
+      typescript: 4.8.4
+    publishDirectory: dist
+
   packages/with-gatsby:
     specifiers:
+      '@twind/core': ^1.0.0
       '@types/react': ^17.0.52
       '@types/react-dom': ^17.0.18
       gatsby: ^4.24.8
       react: ^17.0.2
       react-dom: ^17.0.2
-      twind: ^1.0.0
       typescript: ^4.8.4
     devDependencies:
+      '@twind/core': link:../core
       '@types/react': 17.0.52
       '@types/react-dom': 17.0.18
       gatsby: 4.24.8_yahowwdbnaobmzz3bs65w4ehty
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
-      twind: link:../twind
       typescript: 4.8.4
     publishDirectory: dist
 
   packages/with-next:
     specifiers:
+      '@twind/core': ^1.0.0
       '@types/react': ^17.0.52
       next: ^12.3.3
       react: ^17.0.2
       react-dom: ^17.0.2
-      twind: ^1.0.0
       typescript: ^4.8.4
     devDependencies:
+      '@twind/core': link:../core
       '@types/react': 17.0.52
       next: 12.3.3_sfoxds7t5ydpegc3knd667wn6m
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
-      twind: link:../twind
       typescript: 4.8.4
     publishDirectory: dist
 
   packages/with-remix:
     specifiers:
+      '@twind/core': ^1.0.0
       '@types/node': ^14.18.33
       '@types/react': ^17.0.52
       react: ^17.0.2
       react-dom: ^17.0.2
       remix: ^1.7.5
-      twind: ^1.0.0
       typescript: ^4.8.4
     devDependencies:
+      '@twind/core': link:../core
       '@types/node': 14.18.33
       '@types/react': 17.0.52
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       remix: 1.7.5
-      twind: link:../twind
       typescript: 4.8.4
     publishDirectory: dist
 
   packages/with-sveltekit:
     specifiers:
       '@sveltejs/kit': 1.0.0-next.544
+      '@twind/core': ^1.0.0
       svelte: ^3.53.1
-      twind: ^1.0.0
       typescript: ^4.8.4
     devDependencies:
       '@sveltejs/kit': 1.0.0-next.544_svelte@3.53.1+vite@3.2.3
+      '@twind/core': link:../core
       svelte: 3.53.1
-      twind: link:../twind
       typescript: 4.8.4
     publishDirectory: dist
 
@@ -466,6 +476,7 @@ importers:
       '@sastan/svelte-headlessui': ^1.0.2
       '@sveltejs/adapter-cloudflare': 1.0.0-next.40
       '@sveltejs/kit': 1.0.0-next.547
+      '@twind/core': 1.0.0
       '@twind/intellisense': 1.0.0
       '@twind/preset-autoprefix': 1.0.0
       '@twind/preset-tailwind': 1.0.0
@@ -495,7 +506,6 @@ importers:
       sver: ^1.8.3
       systemjs: ^6.13.0
       tinykeys: ^1.4.0
-      twind: 1.0.0
       typescript: ^4.8.4
       vite: ^3.2.3
       wrangler: ^2.2.1
@@ -513,6 +523,7 @@ importers:
       '@sastan/svelte-headlessui': 1.0.2_svelte@3.53.1
       '@sveltejs/adapter-cloudflare': 1.0.0-next.40
       '@sveltejs/kit': 1.0.0-next.547_svelte@3.53.1+vite@3.2.3
+      '@twind/core': link:../../packages/core
       '@twind/intellisense': link:../../packages/intellisense
       '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
       '@twind/preset-tailwind': link:../../packages/preset-tailwind
@@ -542,7 +553,6 @@ importers:
       sver: 1.8.3
       systemjs: 6.13.0
       tinykeys: 1.4.0
-      twind: link:../../packages/twind
       typescript: 4.8.4
       vite: 3.2.3_@types+node@18.11.9
       wrangler: 2.2.1
@@ -555,6 +565,7 @@ importers:
       '@sastan/svelte-headlessui': ^1.0.2
       '@sveltejs/adapter-static': 1.0.0-next.48
       '@sveltejs/kit': 1.0.0-next.547
+      '@twind/core': 1.0.0
       '@twind/preset-autoprefix': 1.0.0
       '@twind/preset-ext': 1.0.0
       '@twind/preset-tailwind': 1.0.0
@@ -596,7 +607,6 @@ importers:
       svelte-check: ^2.9.2
       tinykeys: ^1.4.0
       tslib: ^2.4.1
-      twind: 1.0.0
       typedoc: ^0.23.20
       typedoc-plugin-markdown: ^3.13.6
       typedoc-plugin-mdn-links: ^2.0.0
@@ -614,6 +624,7 @@ importers:
       '@sastan/svelte-headlessui': 1.0.2_svelte@3.53.1
       '@sveltejs/adapter-static': 1.0.0-next.48
       '@sveltejs/kit': 1.0.0-next.547_svelte@3.53.1+vite@3.2.3
+      '@twind/core': link:../../packages/core
       '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
       '@twind/preset-ext': link:../../packages/preset-ext
       '@twind/preset-tailwind': link:../../packages/preset-tailwind
@@ -655,7 +666,6 @@ importers:
       svelte-check: 2.9.2_svelte@3.53.1
       tinykeys: 1.4.0
       tslib: 2.4.1
-      twind: link:../../packages/twind
       typedoc: 0.23.20_typescript@4.8.4
       typedoc-plugin-markdown: 3.13.6_typedoc@0.23.20
       typedoc-plugin-mdn-links: 2.0.0_typedoc@0.23.20

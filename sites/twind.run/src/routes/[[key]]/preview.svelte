@@ -92,7 +92,7 @@
           const { entry, script, importMap } = await transpile.transform(
             {
               entry: `
-                export * from 'twind'
+                export * from '@twind/core'
                 export { default as config } from '$/config'
               `,
               script: currentScript,

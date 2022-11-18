@@ -2,12 +2,12 @@
  * @module @twind/preset-tailwind/variants
  */
 
-import type { AutocompleteProvider, VariantResolver, Variant, AutocompleteItem } from 'twind'
+import type { AutocompleteProvider, VariantResolver, Variant, AutocompleteItem } from '@twind/core'
 import type { TailwindTheme } from './types'
 
 import { DEV } from 'distilt/env'
 
-import { normalize, withAutocomplete } from 'twind'
+import { normalize, withAutocomplete } from '@twind/core'
 
 // indirection wrapper to remove autocomplete functions from production bundles
 function withAutocomplete$(

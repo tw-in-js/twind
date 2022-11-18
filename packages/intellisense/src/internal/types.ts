@@ -1,4 +1,4 @@
-import type { AutocompleteItem, Twind } from 'twind'
+import type { AutocompleteItem, Twind } from '@twind/core'
 import type { SuggestionCommon, SuggestionVariant, SuggestionClass } from '../types'
 
 export interface IntellisenseCommon extends SuggestionCommon {

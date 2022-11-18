@@ -20,7 +20,7 @@ The most common task of a preset is to add custom [rules](./rules) and [variants
 Presets need to be installed and added to the `presets` option of the `twind` config.
 
 ```js title="twind.config.js"
-import { defineConfig } from 'twind'
+import { defineConfig } from '@twind/core'
 import presetAutoprefix from '@twind/preset-autoprefix'
 import presetTailwind from '@twind/preset-tailwind'
 

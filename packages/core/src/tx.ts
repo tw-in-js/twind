@@ -28,7 +28,7 @@ export interface TxFunction {
  * Using the default `tw` instance:
  *
  * ```js
- * import { tw } from 'twind'
+ * import { tw } from '@twind/core'
  * tx`underline ${falsy && 'italic'}`
  * tx('underline', falsy && 'italic')
  * tx({'underline': true, 'italic': false})
@@ -42,7 +42,7 @@ export interface TxFunction {
  * Using a custom `tw` instance:
  *
  * ```js
- * import { tx as tx$ } from 'twind'
+ * import { tx as tx$ } from '@twind/core'
  * import { tw } from './custom/twind'
  *
  * export const tx = tx$.bind(tw)

@@ -15,7 +15,7 @@ import type {
   ThemeRuleResolver,
   ColorFromThemeValue,
   AutocompleteProvider,
-} from 'twind'
+} from '@twind/core'
 
 import { DEV } from 'distilt/env'
 
@@ -29,7 +29,7 @@ import {
   asArray,
   arbitrary,
   withAutocomplete,
-} from 'twind'
+} from '@twind/core'
 
 import type { TailwindTheme } from './types'
 

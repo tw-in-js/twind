@@ -25,13 +25,13 @@
   "devDependencies": {
     "@sveltejs/adapter-node": "1.0.0-next.100",
     "@sveltejs/kit": "1.0.0-next.547",
+    "@twind/core": "1.0.0",
     "@twind/preset-autoprefix": "1.0.0",
     "@twind/preset-tailwind": "1.0.0",
     "@twind/with-sveltekit": "1.0.0",
     "svelte": "^3.53.1",
     "svelte-check": "^2.9.2",
     "svelte-preprocess": "^4.10.7",
-    "twind": "1.0.0",
     "typescript": "^4.8.4",
     "vite": "^3.2.3"
   }

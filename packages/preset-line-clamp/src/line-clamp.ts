@@ -6,9 +6,9 @@ import {
   Preset,
   RuleResolver,
   withAutocomplete,
-} from 'twind'
+} from '@twind/core'
 
-import { fromTheme } from 'twind'
+import { fromTheme } from '@twind/core'
 
 export interface LineClampTheme extends BaseTheme {
   lineClamp: Record<string, string>

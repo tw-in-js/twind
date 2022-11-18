@@ -11,7 +11,7 @@ If you have used Tailwind CSS or other CSS-in-JS solutions, then most of the API
 
 > **Important**
 >
-> The `twind` package does **not** include any rules or variants. You need to install an [existing preset](./presets#official-presets) or bring your [own preset](./presets#create-a-new-preset) to get started.
+> The `@twind/core` package does **not** include any rules or variants. You need to install an [existing preset](./presets#official-presets) or bring your [own preset](./presets#create-a-new-preset) to get started.
 
 ## Local / Bundler
 
@@ -23,12 +23,12 @@ If you have used Tailwind CSS or other CSS-in-JS solutions, then most of the API
    ::col-span-4
    **Install twind**
 
-   Twind is [available on npm](https://www.npmjs.com/twind).
+   Twind is [available on npm](https://www.npmjs.com/@twind/core).
 
    ::col-span-8
 
    ```sh
-   npm install twind
+   npm install @twind/core
    ```
 
    :::
@@ -43,7 +43,7 @@ If you have used Tailwind CSS or other CSS-in-JS solutions, then most of the API
    ::col-span-8
 
    ```js title="twind.config.js"
-   import { defineConfig } from 'twind'
+   import { defineConfig } from '@twind/core'
 
    export default defineConfig({
      /* options */
@@ -62,7 +62,7 @@ If you have used Tailwind CSS or other CSS-in-JS solutions, then most of the API
    ::col-span-8
 
    ```js title="index.js"
-   import { install } from 'twind'
+   import { install } from '@twind/core'
    import config from './twind.config'
 
    // activate twind - must be called at least once
@@ -99,7 +99,7 @@ If you have used Tailwind CSS or other CSS-in-JS solutions, then most of the API
    ::col-span-8
 
    ```js title="twind.config.js" [2-3,6]
-   import { defineConfig } from 'twind'
+   import { defineConfig } from '@twind/core'
    import presetAutoprefix from '@twind/preset-autoprefix'
    import presetTailwind from '@twind/preset-tailwind'
 
@@ -163,7 +163,7 @@ Twind is available as a global browser script and can be used directly in the br
 
    ```html [2]
    <head>
-     <script src="https://cdn.jsdelivr.net/npm/twind" crossorigin></script>
+     <script src="https://cdn.jsdelivr.net/npm/@twind/core" crossorigin></script>
    </head>
    ```
 
@@ -180,7 +180,7 @@ Twind is available as a global browser script and can be used directly in the br
 
    ```html [3-7]
    <head>
-     <script src="https://cdn.jsdelivr.net/npm/twind" crossorigin></script>
+     <script src="https://cdn.jsdelivr.net/npm/@twind/core" crossorigin></script>
      <script>
        twind.install({
          /* options */
@@ -206,7 +206,7 @@ Twind is available as a global browser script and can be used directly in the br
    ```html [2-5]
    <head>
      <script
-       src="https://cdn.jsdelivr.net/combine/npm/twind,npm/@twind/preset-autoprefix,npm/@twind/preset-tailwind"
+       src="https://cdn.jsdelivr.net/combine/npm/@twind/core,npm/@twind/preset-autoprefix,npm/@twind/preset-tailwind"
        crossorigin
      ></script>
    </head>
@@ -222,7 +222,7 @@ Twind is available as a global browser script and can be used directly in the br
    ```html [6-10]
    <head>
      <script
-       src="https://cdn.jsdelivr.net/combine/npm/twind,npm/@twind/preset-autoprefix,npm/@twind/preset-tailwind"
+       src="https://cdn.jsdelivr.net/combine/npm/@twind/core,npm/@twind/preset-autoprefix,npm/@twind/preset-tailwind"
        crossorigin
      ></script>
      <script>

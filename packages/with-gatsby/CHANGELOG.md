@@ -62,7 +62,7 @@
   Resuming styles is enabled by default for `setup` (_Shim Mode_).
 
   ```js
-  import { setup } from 'twind'
+  import { setup } from '@twind/core'
   import config from './twind.config'
 
   // styles are resumed!
@@ -72,7 +72,7 @@
   If you want to used the `dom` sheet during development or if you currently pass a sheet as the second argument, please switch to the new `getSheet(useDOMSheet?: boolean, disableResume?: boolean)` function. This function returns a `Sheet` for the current environment — `virtual` on server, either `dom` or `cssom` in browsers.
 
   ```js
-  import { setup, getSheet } from 'twind'
+  import { setup, getSheet } from '@twind/core'
   import config from './twind.config'
 
   setup(config, getSheet(process.env.NODE_ENV != 'production'))
@@ -81,7 +81,7 @@
   If you want to use resuming styles with _Library Mode_ you need to adjust your code to use `getSheet`:
 
   ```js
-  import { twind, getSheet } from 'twind'
+  import { twind, getSheet } from '@twind/core'
   import config from './twind.config'
 
   export const tw = twind(config, getSheet(process.env.NODE_ENV != 'production'))
@@ -90,7 +90,7 @@
   To generate server side styles use either `inline` or `extract`:
 
   ```js
-  import { inline, extract } from 'twind'
+  import { inline, extract } from '@twind/core'
 
   // 1. using inline
   const html = inline(renderApp())

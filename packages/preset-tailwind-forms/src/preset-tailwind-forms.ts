@@ -1,10 +1,10 @@
 // Based on https://github.com/tailwindlabs/tailwindcss-forms/blob/ce5386b66a8a5833372fd245e95bf3c4e21da8d3/src/index.js
 // License MIT
 
-import type { Preset, CSSObject, MaybeThunk, Preflight } from 'twind'
+import type { Preset, CSSObject, MaybeThunk, Preflight } from '@twind/core'
 import type { TailwindTheme } from '@twind/preset-tailwind'
 
-import { toColorValue } from 'twind'
+import { toColorValue } from '@twind/core'
 
 import { gray, blue } from '@twind/preset-tailwind/colors'
 import defaultTheme from '@twind/preset-tailwind/defaultTheme'

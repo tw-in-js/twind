@@ -72,7 +72,7 @@ Observe class attributes to inject styles
 
 ### Twind instance — `tw{:.fn}`
 
-- global twind instance: `import { tw } from 'twind'{:js}`
+- global twind instance: `import { tw } from '@twind/core'{:js}`
 - `tw(className){:js}`: injects a className string into the sheet and return the resulting class names
 - `tw.config{:js}`: access the current config
 - `tw.theme(section?, key?, defaultValue?){:js}`: access the current theme
@@ -98,7 +98,7 @@ Observe class attributes to inject styles
   - `tx.bind(tw){:js}`: binds the `tx{:.fn}` function to a custom twind instance; returns a new `tx{:.fn}` function
 
   ```js
-  import { tx } from 'twind'
+  import { tx } from '@twind/core'
 
   const className = tx`underline bg-red-200 text-red-900`
   ```
@@ -108,7 +108,7 @@ Observe class attributes to inject styles
   - `injectGlobal.bind(tw){:js}`: binds the `injectGlobal{:.fn}` function to a custom twind instance; returns a new `injectGlobal{:.fn}` function
 
   ```js
-  import { injectGlobal } from 'twind'
+  import { injectGlobal } from '@twind/core'
 
   injectGlobal`
     @font-face {
@@ -128,7 +128,7 @@ Observe class attributes to inject styles
   - `keyframes.bind(tw)`: binds the `keyframes` function to a custom twind instance; returns a new `keyframes` function
 
   ```js
-  import { keyframes, css, tx } from 'twind'
+  import { keyframes, css, tx } from '@twind/core'
 
   const fadeIn = keyframes`
     0% {
@@ -158,7 +158,7 @@ Observe class attributes to inject styles
   - `animation.Name(animation: string | CSSProperties, waypoints: StringLike)`: lazily injects the named animation into the sheet and return a unique name
 
   ```js
-  import { animation, keyframes } from 'twind'
+  import { animation, keyframes } from '@twind/core'
 
   const fadeIn = animation(
     '1s ease-out',
@@ -185,7 +185,7 @@ b) used with `tw{:.fn}` to inject styles and return a class name (_Library Mode_
 - `cx(...args)`: creates a class name from the given arguments; no styles injected
 
   ```js
-  import { cx } from 'twind'
+  import { cx } from '@twind/core'
 
   // Set a className
   element.className = cx`
@@ -246,7 +246,7 @@ defineConfig({
 If enabled, automatic dark colors are generated for each light color (eg no `dark:` variant is present). This feature is opt-in and twind provides a builtin function that works with [tailwind color palettes](https://tailwindcss.com/docs/customizing-colors) (`50`, `100`, `200`, ..., `800`, `900`).
 
 ```ts
-import { autoDarkColor } from 'twind'
+import { autoDarkColor } from '@twind/core'
 
 defineConfig({
   // for tailwind color palettes: 50 -> 900, 100 -> 800, ..., 800 -> 100, 900 -> 50

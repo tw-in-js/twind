@@ -10,10 +10,10 @@ import {
   RuleResolver,
   AutocompleteProvider,
   withAutocomplete,
-} from 'twind'
-import { toColorValue } from 'twind'
+} from '@twind/core'
+import { toColorValue } from '@twind/core'
 
-declare module 'twind' {
+declare module '@twind/core' {
   export interface CustomProperties {
     '--tw-prose-body'?: string
     '--tw-prose-lead'?: string
@@ -223,7 +223,7 @@ function withAutocomplete$(
  *
  * ```js
  * // twind.config.js
- * import { defineConfig } from 'twind'
+ * import { defineConfig } from '@twind/core'
  * import presetTypography from '@twind/preset-typography'
  *
  * export default defineConfig({

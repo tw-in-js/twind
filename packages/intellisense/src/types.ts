@@ -1,4 +1,4 @@
-import type { BaseTheme, ExtractUserTheme, ThemeFunction, TwindConfig } from 'twind'
+import type { BaseTheme, ExtractUserTheme, ThemeFunction, TwindConfig } from '@twind/core'
 
 import type { Numberify, RGBA } from '@ctrl/tinycolor'
 

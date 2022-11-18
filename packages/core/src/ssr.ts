@@ -10,7 +10,7 @@ import { fixClassList, parseHTML } from './internal/parse-html'
  */
 export interface InlineOptions {
   /**
-   * {@link Twind} instance to use (default: {@link twind.tw})
+   * {@link Twind} instance to use (default: {@link @twind/core.tw})
    */
   tw?: Twind<any, any>
 
@@ -39,7 +39,7 @@ export interface InlineMinify {
  * 4. return the HTML string with the final element classes
  *
  * ```js
- * import { inline } from 'twind'
+ * import { inline } from '@twind/core'
  *
  * function render() {
  *   return inline(renderApp())
@@ -49,7 +49,7 @@ export interface InlineMinify {
  * Minify CSS with [@parcel/css](https://www.npmjs.com/package/@parcel/css):
  *
  * ```js
- * import { inline } from 'twind'
+ * import { inline } from '@twind/core'
  * import { transform } from '@parcel/css'
  *
  * function render() {
@@ -60,7 +60,7 @@ export interface InlineMinify {
  * You can provide your own Twind instance:
  *
  * ```js
- * import { inline } from 'twind'
+ * import { inline } from '@twind/core'
  * import { tw } from './custom/twind/instance'
  *
  * function render() {
@@ -104,7 +104,7 @@ export interface ExtractResult {
  * 3. return the HTML string with the final element classes
  *
  * ```js
- * import { extract } from 'twind'
+ * import { extract } from '@twind/core'
  *
  * function render() {
  *   const { html, css } = extract(renderApp())
@@ -117,7 +117,7 @@ export interface ExtractResult {
  * You can provide your own Twind instance:
  *
  * ```js
- * import { extract } from 'twind'
+ * import { extract } from '@twind/core'
  * import { tw } from './custom/twind/instance'
  *
  * function render() {
@@ -153,7 +153,7 @@ export function extract(html: string, tw: Twind<any, any> = tw$): ExtractResult 
  * 3. return the HTML string with the final element classes
  *
  * ```js
- * import { consume, stringify, tw } from 'twind'
+ * import { consume, stringify, tw } from '@twind/core'
  *
  * function render() {
  *   const html = renderApp()
@@ -178,7 +178,7 @@ export function extract(html: string, tw: Twind<any, any> = tw$): ExtractResult 
  * You can provide your own Twind instance:
  *
  * ```js
- * import { consume, stringify } from 'twind'
+ * import { consume, stringify } from '@twind/core'
  * import { tw } from './custom/twind/instance'
  *
  * function render() {

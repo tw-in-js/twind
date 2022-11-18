@@ -1,4 +1,4 @@
-import { tw, cx, tx, css, style } from "twind"
+import { tw, cx, tx, css, style } from "@twind/core"
 
 // imported and executed once after the tw instance has been created but before new document.body is set
 

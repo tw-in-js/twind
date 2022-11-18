@@ -17,7 +17,7 @@ import {
   tx as tx$,
   injectGlobal as injectGlobal$,
   keyframes as keyframes$,
-} from 'twind'
+} from '@twind/core'
 
 import config from './twind.config'
 

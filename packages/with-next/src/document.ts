@@ -3,7 +3,7 @@ import type { DocumentContext, DocumentInitialProps } from 'next/document'
 
 import { createElement, Fragment } from 'react'
 import Document from 'next/document'
-import { extract } from 'twind'
+import { extract } from '@twind/core'
 
 export default install
 

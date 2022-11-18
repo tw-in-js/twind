@@ -1,11 +1,18 @@
 // Fix exported global variable from `twindCdn` to `twind`
 /* @distilt-global-name twind */
 
-import { Twind, TwindConfig, TwindUserConfig, Preset, ExtractThemes, defineConfig } from 'twind'
+import {
+  Twind,
+  TwindConfig,
+  TwindUserConfig,
+  Preset,
+  ExtractThemes,
+  defineConfig,
+} from '@twind/core'
 
 import type { TailwindPresetOptions, TailwindTheme } from '@twind/preset-tailwind'
 
-import { auto, install as install$, asArray } from 'twind'
+import { auto, install as install$, asArray } from '@twind/core'
 import presetAutoprefix from '@twind/preset-autoprefix'
 import presetTailwind from '@twind/preset-tailwind'
 

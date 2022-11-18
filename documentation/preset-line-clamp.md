@@ -24,13 +24,13 @@ next: ./preset-tailwind.md
 Install from npm:
 
 ```sh
-npm install twind @twind/preset-line-clamp
+npm install @twind/core @twind/preset-line-clamp
 ```
 
 Add the preset to your twind config:
 
 ```js title="twind.config.js"
-import { defineConfig } from 'twind'
+import { defineConfig } from '@twind/core'
 import presetLineClamp from '@twind/preset-line-clamp'
 
 export default defineConfig({

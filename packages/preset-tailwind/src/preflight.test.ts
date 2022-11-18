@@ -1,6 +1,6 @@
 import { assert, test } from 'vitest'
 
-import { css, twind, virtual } from 'twind'
+import { css, twind, virtual } from '@twind/core'
 
 import tailwind from '.'
 

@@ -1,4 +1,4 @@
-import type { Preset } from 'twind'
+import type { Preset } from '@twind/core'
 
 import { cssPropertyAlias, cssPropertyPrefixFlags, cssValuePrefixFlags } from 'style-vendorizer'
 

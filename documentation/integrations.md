@@ -24,7 +24,7 @@ An integration usually has two parts:
    ::col-span-8
 
    ```js
-   import { install } from 'twind'
+   import { install } from '@twind/core'
    import config from './twind.config'
 
    // activate twind
@@ -45,7 +45,7 @@ An integration usually has two parts:
    ::col-span-8
 
    ```js
-   import { inline } from 'twind'
+   import { inline } from '@twind/core'
 
    function render() {
      const html = renderApp()

@@ -1,6 +1,6 @@
-import type { BaseTheme, CSSProperties, MaybeArray } from 'twind'
+import type { BaseTheme, CSSProperties, MaybeArray } from '@twind/core'
 
-declare module 'twind' {
+declare module '@twind/core' {
   export interface CustomProperties {
     '--tw-backdrop-blur'?: string
     '--tw-backdrop-brightness'?: string

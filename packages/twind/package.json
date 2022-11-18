@@ -1,7 +1,7 @@
 {
   "name": "twind",
   "version": "1.0.0",
-  "description": "The core engine without any presets.",
+  "description": "Proxy package for @twind/core",
   "keywords": [
     "twind",
     "tailwind",
@@ -19,30 +19,8 @@
   },
   "// These are relative from within the dist/ folder": "",
   "sideEffects": false,
-  "size-limit": [
-    {
-      "name": "twind",
-      "path": "dist/twind.esnext.js",
-      "brotli": true,
-      "limit": "8kb"
-    },
-    {
-      "name": "twind (setup)",
-      "path": "dist/twind.esnext.js",
-      "import": "{ setup }",
-      "brotli": true,
-      "limit": "5.45kb"
-    },
-    {
-      "name": "twind (twind + cssom)",
-      "path": "dist/twind.esnext.js",
-      "import": "{ twind, cssom }",
-      "brotli": true,
-      "limit": "4.85kb"
-    }
-  ],
   "dependencies": {
-    "csstype": "^3.1.1"
+    "@twind/core": "^1.0.0"
   },
   "peerDependencies": {
     "typescript": "^4.8.4"
@@ -53,7 +31,6 @@
     }
   },
   "devDependencies": {
-    "@twind/preset-tailwind": "^1.0.0",
     "typescript": "^4.8.4"
   },
   "scripts": {

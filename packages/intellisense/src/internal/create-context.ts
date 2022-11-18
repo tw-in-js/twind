@@ -16,9 +16,9 @@ import {
   type TwindConfig,
   type TwindUserConfig,
   virtual,
-} from 'twind'
+} from '@twind/core'
 
-import { toCondition } from '../../../twind/src/internal/context'
+import { toCondition } from '../../../core/src/internal/context'
 
 import type { IntellisenseOptions } from '../types'
 import type { IntellisenseContext, IntellisenseClass, IntellisenseVariant } from './types'

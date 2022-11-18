@@ -2,7 +2,7 @@
  * @module @twind/preset-tailwind/defaultTheme
  */
 
-import type { ThemeSection, ThemeSectionResolver } from 'twind'
+import type { ThemeSection, ThemeSectionResolver } from '@twind/core'
 import type { TailwindTheme } from './types'
 
 import * as colors from './colors'

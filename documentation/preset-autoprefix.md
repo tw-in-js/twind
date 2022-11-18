@@ -14,13 +14,13 @@ next: ./preset-ext.md
 Install from npm:
 
 ```sh
-npm install twind @twind/preset-autoprefix
+npm install @twind/core @twind/preset-autoprefix
 ```
 
 Add the preset to your twind config:
 
 ```js title="twind.config.js"
-import { defineConfig } from 'twind'
+import { defineConfig } from '@twind/core'
 import presetAutoprefix from '@twind/preset-autoprefix'
 
 export default defineConfig({
