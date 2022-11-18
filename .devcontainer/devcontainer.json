@@ -1,4 +1,5 @@
 {
+  "name": "Contribute to Twind CodeSpaces",
   "image": "mcr.microsoft.com/devcontainers/universal:2",
   "features": {
     "ghcr.io/devcontainers/features/node:1": {},

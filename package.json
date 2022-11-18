@@ -53,9 +53,9 @@
     "test": "vitest",
     "test:ui": "npm test -- --ui",
     "test:coverage": "vitest run --coverage",
-    "release": "pnpm publish --recursive",
     "changeset": "changeset",
-    "changeset:version": "changeset version && pnpm install --lockfile-only --prefer-offline",
+    "changeset:version": "changeset version && pnpm install --lockfile-only --no-frozen-lockfile --prefer-offline && pnpm run format",
+    "changeset:release": "pnpm run build && changeset publish",
     "prepare": "node ./.husky/prepare.cjs"
   },
   "// style-vendorizer is included here to allow examples to find it": "",

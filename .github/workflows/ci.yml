@@ -62,9 +62,8 @@ jobs:
         if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'push' }}
         uses: changesets/action@v1
         with:
-          createGithubReleases: true
-          version: pnpm changeset:version
-          publish: pnpm release --tag latest
+          version: pnpm run changeset:version
+          publish: pnpm run changeset:publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
