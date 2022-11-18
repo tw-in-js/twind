@@ -44,7 +44,7 @@
       "name": "twind",
       "path": "dist/twind.js",
       "brotli": true,
-      "limit": "12.1kb"
+      "limit": "12.2kb"
     },
     {
       "name": "twind/colors",
@@ -146,7 +146,7 @@
     "lint": "eslint --ext .js,.ts --ignore-path .gitignore .",
     "postlint": "tsc",
     "lint:fix": "yarn lint -- --fix",
-    "release": "npx np --contents dist",
+    "release": "npx np --contents dist --branch v0.16",
     "start": "snowpack --config example/snowpack.config.js dev",
     "test": "uvu -r esm -r ./src/__fixtures__/env.js",
     "test:coverage": "c8 --src src -x '**/__fixtures__/**' -x '**/__tests__/**' -x '**/*.test.ts' -x 'src/types/**' --all -r lcov -r text yarn test",

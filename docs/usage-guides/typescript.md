@@ -16,4 +16,4 @@ head:
 
 Twind modules bundle all TypeScript types for your convenience. For the most part, types will just work. However, if you are extending Twind or building plugins, you may find the type definitions useful.
 
-For more information about all of the available types, you can check out the types in GitHub: [https://github.com/tw-in-js/twind/tree/main/src/types](https://github.com/tw-in-js/twind/tree/main/src/types)
+For more information about all of the available types, you can check out the types in GitHub: [https://github.com/tw-in-js/twind/tree/v0.16/src/types](https://github.com/tw-in-js/twind/tree/v0.16/src/types)

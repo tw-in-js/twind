@@ -162,7 +162,7 @@ Yes, we are active both on Github Discussions and Discord.
 
 <Collapse title="How can I contribute to this project?">
 
-Hey, thanks for your interest! There are several ways that you can contribute to this project from spreading the word to fixing bugs to creating new features. We've put together a [Contributing Guide](https://github.com/tw-in-js/twind/blob/main/CONTRIBUTING.md) to get you started.
+Hey, thanks for your interest! There are several ways that you can contribute to this project from spreading the word to fixing bugs to creating new features. We've put together a [Contributing Guide](https://github.com/tw-in-js/twind/blob/v0.16/CONTRIBUTING.md) to get you started.
 
 </Collapse>
 

@@ -36,7 +36,7 @@ Because Twind is generating CSS during runtime there is no to need restrict the 
 
 #### Most pseudo classes can be used as variant or `group-*` variant
 
-Unknown variants (not listed in [core variants](https://github.com/tw-in-js/twind/blob/main/src/twind/variants.ts)) are assumed to be [pseudo classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes).
+Unknown variants (not listed in [core variants](https://github.com/tw-in-js/twind/blob/v0.16/src/twind/variants.ts)) are assumed to be [pseudo classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes).
 
 _Advanced_ pseudo classes (those that take parameters like `:is(header)`) are not supported out of the box as they use `(...)` which is parsed as a variant or directive. You can define an alias for those in your [configuration](configuration):
 
@@ -359,4 +359,3 @@ While Twind strives to maintain feature parity with Tailwind, we've added severa
 
 - Custom grouping syntax for directives and variants [View Docs](grouping-syntax)
 - Overwrite styles with the `important!` directive [View Docs](overwriting-styles)
-

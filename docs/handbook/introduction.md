@@ -16,15 +16,19 @@ head:
 
 > The smallest, fastest, most feature complete Tailwind-in-JS solution in existence
 
-[![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE)
+[![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/v0.16/LICENSE)
 [![Latest Release](https://flat.badgen.net/npm/v/twind?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/twind)
 [![Bundle Size](https://flat.badgen.net/bundlephobia/minzip/twind?icon=packagephobia&label&color=blue&cache=10800)](https://bundlephobia.com/result?p=twind 'gzip bundle size (including dependencies)')
 [![Package Size](https://flat.badgen.net/badgesize/brotli/https://cdn.jsdelivr.net/npm/twind/twind.min.js?icon=jsdelivr&label&color=blue&cache=10800)](https://unpkg.com/twind/twind.js 'brotli package size (without dependencies)')
 [![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.dev)
-[![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind?icon=github&label)](https://github.com/tw-in-js/twind)
+[![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind?icon=github&label)](https://github.com/tw-in-js/twind/tree/v0.16)
 [![Discord](https://flat.badgen.net/badge/icon/discord?icon=discord&label)](https://chat.twind.style)
 [![CI](https://github.com/tw-in-js/twind/workflows/CI/badge.svg)](https://github.com/tw-in-js/twind/actions?query=workflow%3Aci)
-[![Coverage Status](https://flat.badgen.net/coveralls/c/github/tw-in-js/twind/main?icon=codecov&label&cache=10800)](https://coveralls.io/github/tw-in-js/twind?branch=main)
+[![Coverage Status](https://flat.badgen.net/coveralls/c/github/tw-in-js/twind/v0.16?icon=codecov&label&cache=10800)](https://coveralls.io/github/tw-in-js/twind?branch=v0.16)
+
+:::tip Nov 18, 2022: Twind v1 is now in stable release!
+Check out the [Migration Guide](https://twind.style/migration#from-twind-v016) to upgrade.
+:::
 
 <!-- Hmmm?... -->
 <!-- <Quote author="Adam Wathan (creator of Tailwind)">I've wanted to do a CSS-in-JS flavor of Tailwind for over 2 years because of all the neat benefits you get there so it's cool to see projects like this!</Quote> -->
@@ -211,7 +215,7 @@ The implementation is tested for speed alongside several popular CSS-in-JS solut
 | emotion@11.0.0          | x 35,349 ops/sec ±1.01% (93 runs sampled) |
 | styled-components@5.2.1 | x 38,284 ops/sec ±0.48% (93 runs sampled) |
 
-For a more detailed testing summary please see the [benchmarks](https://github.com/tw-in-js/twind/blob/main/benchmarks) directory.
+For a more detailed testing summary please see the [benchmarks](https://github.com/tw-in-js/twind/blob/v0.16/benchmarks) directory.
 
 ## <Emoji symbol="🙏🏾" /> Sponsors
 

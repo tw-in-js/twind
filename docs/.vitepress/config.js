@@ -235,7 +235,7 @@ module.exports = {
     nav: [
       { text: 'Guide', link: '/handbook/introduction' },
       { text: 'API', link: '/api/README.html' },
-      { text: 'GitHub', link: 'https://github.com/tw-in-js/twind' },
+      { text: 'GitHub', link: 'https://github.com/tw-in-js/twind/tree/v0.16' },
       { text: 'Discord', link: 'https://chat.twind.style' },
     ],
     sidebar: {

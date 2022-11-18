@@ -7,7 +7,7 @@
 The smallest, fastest, most feature complete Tailwind-in-JS solution in existence
 </p>
 
-[![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE)
+[![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/v0.16/LICENSE)
 [![Latest Release](https://flat.badgen.net/npm/v/twind?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/twind)
 [![Bundle Size](https://flat.badgen.net/bundlephobia/minzip/twind?icon=packagephobia&label&color=blue&cache=10800)](https://bundlephobia.com/result?p=twind 'gzip bundle size (including dependencies)')
 [![Package Size](https://flat.badgen.net/badgesize/brotli/https://cdn.jsdelivr.net/npm/twind/twind.min.js?icon=jsdelivr&label&color=blue&cache=10800)](https://unpkg.com/twind/twind.js 'brotli package size (without dependencies)')
@@ -15,9 +15,17 @@ The smallest, fastest, most feature complete Tailwind-in-JS solution in existenc
 [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind?icon=github&label)](https://github.com/tw-in-js/twind)
 [![Discord](https://flat.badgen.net/badge/icon/discord?icon=discord&label)](https://chat.twind.style)
 [![CI](https://github.com/tw-in-js/twind/workflows/CI/badge.svg)](https://github.com/tw-in-js/twind/actions?query=workflow%3Aci)
-[![Coverage Status](https://flat.badgen.net/coveralls/c/github/tw-in-js/twind/main?icon=codecov&label&cache=10800)](https://coveralls.io/github/tw-in-js/twind?branch=main)
+[![Coverage Status](https://flat.badgen.net/coveralls/c/github/tw-in-js/twind/v0.16?icon=codecov&label&cache=10800)](https://coveralls.io/github/tw-in-js/twind?branch=v0.16)
 
 </div>
+
+---
+
+**Nov 18, 2022: [Twind v1](https://github.com/tw-in-js/twind/tree/main) is now in stable release!**
+
+Check out the [Migration Guide](https://twind.style/migration#from-twind-v016) to upgrade.
+
+---
 
 Twind is a small compiler (~13kB) that converts Tailwind classes into actual CSS rules at runtime. If you have used Tailwind or other CSS-in-JS solutions, then most of the API should feel very familiar.
 
@@ -131,8 +139,8 @@ Support us with a monthly donation and help us continue our activities.
 
 ## 🤝 Contributing
 
-We are excited that you are interested in contributing to this project! We've put together a whole [contribution guide](https://github.com/tw-in-js/twind/blob/main/CONTRIBUTING.md) to get you started.
+We are excited that you are interested in contributing to this project! We've put together a whole [contribution guide](https://github.com/tw-in-js/twind/blob/v0.16/CONTRIBUTING.md) to get you started.
 
 ## ⚖️ License
 
-The [MIT license](https://github.com/tw-in-js/twind/blob/main/LICENSE) governs your use of Twind.
+The [MIT license](https://github.com/tw-in-js/twind/blob/v0.16/LICENSE) governs your use of Twind.

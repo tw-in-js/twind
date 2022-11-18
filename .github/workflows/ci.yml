@@ -3,14 +3,16 @@ name: CI
 on:
   push:
     branches:
-      # Push events on main branch
-      - main
+      # Push events on v0.16 branch
+      - v0.16
     paths-ignore:
       # Do not run for docs changes
       - 'docs/**'
       - '**/*.md'
 
   pull_request:
+    branches:
+      - v0.16
     paths-ignore:
       # Do not run for docs changes
       - 'docs/**'
@@ -22,7 +24,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node: ['10.x', '12.x', '14.x', '16.x']
+        node: ['14.x', '16.x']
         os: [ubuntu-20.04]
         # Maybe add those later again
         # os: [ubuntu-20.04, macos-10.15, windows-2019]

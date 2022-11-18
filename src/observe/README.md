@@ -1,5 +1,5 @@
 [![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.dev/api/modules/twind_observe.html)
-[![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%2Fsrc%2Fobserve?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/src/observe)
+[![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%2Fsrc%2Fobserve?icon=github&label)](https://github.com/tw-in-js/twind/tree/v0.16/src/observe)
 [![Module Size](https://flat.badgen.net/badgesize/brotli/https://cdn.jsdelivr.net/npm/twind/observe/observe.min.js?icon=jsdelivr&label&color=blue&cache=10800)](https://unpkg.com/twind/observe/observe.js 'brotli module size')
 [![Typescript](https://flat.badgen.net/badge/icon/included?icon=typescript&label)](https://unpkg.com/browse/twind/observe/observe.d.ts)
 
@@ -27,7 +27,7 @@ document.body.innerHTML = `
 
 > 🚀 [live and interactive shim demo](https://esm.codes/#aW1wb3J0IHsgb2JzZXJ2ZSB9IGZyb20gJ2h0dHBzOi8vY2RuLnNreXBhY2suZGV2L3R3aW5kL29ic2VydmUnCgpvYnNlcnZlKGRvY3VtZW50LmJvZHkpCgpkb2N1bWVudC5ib2R5LmlubmVySFRNTCA9IGAKICA8bWFpbiBjbGFzcz0iaC1zY3JlZW4gYmctcHVycGxlLTQwMCBmbGV4IGl0ZW1zLWNlbnRlciBqdXN0aWZ5LWNlbnRlciI+CiAgICA8aDEgY2xhc3M9ImZvbnQtYm9sZCB0ZXh0KGNlbnRlciA1eGwgd2hpdGUgc206Z3JheS04MDAgbWQ6cGluay03MDApIj4KICAgICAgVGhpcyBpcyBUd2luZCEKICAgIDwvaDE+CiAgPC9tYWluPgpg)
 
-All Twind syntax features like [grouping](https://github.com/tw-in-js/twind/blob/main/docs/grouping.md) are supported within class attributes
+All Twind syntax features like [grouping](https://github.com/tw-in-js/twind/blob/v0.16/docs/grouping.md) are supported within class attributes
 
 > If you want to simplify the instantiation and automatically observe take look at {@link twind/shim}.
 

@@ -1,5 +1,5 @@
 [![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.dev/api/modules/twind_shim.html)
-[![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%2Fsrc%2Fshim?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/src/shim)
+[![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%2Fsrc%2Fshim?icon=github&label)](https://github.com/tw-in-js/twind/tree/v0.16/src/shim)
 [![Module Size](https://flat.badgen.net/badgesize/brotli/https://cdn.jsdelivr.net/npm/twind/shim/shim.min.js?icon=jsdelivr&label&color=blue&cache=10800)](https://unpkg.com/twind/shim/shim.js 'brotli module size')
 [![Typescript](https://flat.badgen.net/badge/icon/included?icon=typescript&label)](https://unpkg.com/browse/twind/shim/shim.d.ts)
 

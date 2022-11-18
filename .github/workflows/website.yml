@@ -3,7 +3,7 @@ name: Build and Deploy Website
 on:
   push:
     branches:
-      - main
+      - v0.16
 
 jobs:
   build-and-deploy:
@@ -31,7 +31,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          BASE_BRANCH: main
+          BASE_BRANCH: v0.16
           BRANCH: gh-pages # The branch the action should deploy to.
           FOLDER: docs/.vitepress/dist # The folder the action should deploy.
           CLEAN: true # Automatically remove deleted files from the deploy branch
