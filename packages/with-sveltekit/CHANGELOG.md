@@ -1,5 +1,14 @@
 # @twind/with-sveltekit
 
+## 1.0.1
+
+### Patch Changes
+
+- introduce new @twind/core package to prevent issue with existing code that imports from CDNs without a version ([`97805f45`](https://github.com/tw-in-js/twind/commit/97805f4584ef70a527beacc1ca6c622e0f17885b))
+
+- Updated dependencies [[`97805f45`](https://github.com/tw-in-js/twind/commit/97805f4584ef70a527beacc1ca6c622e0f17885b), [`5949d61a`](https://github.com/tw-in-js/twind/commit/5949d61adeb3008c7b76f5ddb9453c000849fcb9)]:
+  - @twind/core@1.0.1
+
 ## 1.0.0
 
 ### Patch Changes
