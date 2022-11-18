@@ -18,10 +18,15 @@ export interface Env {
   // MY_BUCKET: R2Bucket;
 }
 
+// clear previous cache
+;(async (cache) => {
+  for (const key of await cache.keys()) {
+    await cache.delete(key)
+  }
+})((caches as CacheStorage & { readonly default: Cache }).default)
+
 const CDN_ORIGIN = 'https://cdn.jsdelivr.net'
 const DEFAULT_VERSION = 'latest'
-// clients can cache for 4 hours, shared caches for 1 hour
-const TAG_CACHE_CONTROL = 'public, max-age=14400, s-maxage=3600'
 
 const WELL_KNOWN_PRESETS: Record<string, string> = {
   ext: '@twind/preset-ext',
@@ -78,7 +83,7 @@ export default {
       let hasTagVersion = !/^\d/.test(version)
 
       const modules = [
-        `@twind/cdn${version && version !== 'latest' ? '@' + version : version}`,
+        `@twind/cdn${version && version !== 'latest' ? '@' + version : ''}`,
         pathname.slice(1),
         url.searchParams.get('presets') || '',
       ]
