@@ -27,7 +27,7 @@ body:
         https://twind.run/bug-report
 
         ### Test Case Starter:
-        https://github.com/tw-in-js/twind/tree/next/examples/basic?file=index.html
+        https://github.com/tw-in-js/twind/tree/main/examples/basic?file=index.html
   - type: textarea
     id: reproduction
     attributes:
@@ -36,7 +36,7 @@ body:
         Please create a [minimal reproduction](https://minimum-reproduction.wtf)
 
         - on [twind.run](https://twind.run/bug-report) — use the _Something broken? File a bug!_ link on the top-right, or copy the share link and then paste the link here
-        - or use one of the [examples](https://github.com/tw-in-js/twind/tree/next/examples#readme) for Stackblitz or Codesandbox that reproduces the issue
+        - or use one of the [examples](https://github.com/tw-in-js/twind/tree/main/examples#readme) for Stackblitz or Codesandbox that reproduces the issue
 
         Explaining how to reproduce is generally not enough. It pushes the burden of creating a reproduction
         onto a small set of volunteer maintainers and isn't scalable.

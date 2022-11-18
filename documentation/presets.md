@@ -51,8 +51,8 @@ TODO: Add documentation for creating a new preset.
 
 Here are some examples of how to write your own preset:
 
-- [@twind/preset-ext/src/index.ts](https://github.com/tw-in-js/twind/blob/next/packages/preset-ext/src/index.ts)
-- [@twind/preset-line-clamp/src/index.ts](https://github.com/tw-in-js/twind/blob/next/packages/preset-line-clamp/src/index.ts)
-- [@twind/preset-tailwind/src/index.ts](https://github.com/tw-in-js/twind/blob/next/packages/preset-tailwind/src/index.ts)
-- [@twind/preset-tailwind-forms/src/index.ts](https://github.com/tw-in-js/twind/blob/next/packages/preset-tailwind-forms/src/index.ts)
-- [@twind/preset-typography/src/index.ts](https://github.com/tw-in-js/twind/blob/next/packages/preset-typography/src/index.ts)
+- [@twind/preset-ext/src/index.ts](https://github.com/tw-in-js/twind/blob/main/packages/preset-ext/src/index.ts)
+- [@twind/preset-line-clamp/src/index.ts](https://github.com/tw-in-js/twind/blob/main/packages/preset-line-clamp/src/index.ts)
+- [@twind/preset-tailwind/src/index.ts](https://github.com/tw-in-js/twind/blob/main/packages/preset-tailwind/src/index.ts)
+- [@twind/preset-tailwind-forms/src/index.ts](https://github.com/tw-in-js/twind/blob/main/packages/preset-tailwind-forms/src/index.ts)
+- [@twind/preset-typography/src/index.ts](https://github.com/tw-in-js/twind/blob/main/packages/preset-typography/src/index.ts)

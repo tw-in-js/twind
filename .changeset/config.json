@@ -3,7 +3,7 @@
   "changelog": ["./changelog-github-custom.cjs", { "repo": "tw-in-js/twind" }],
   "commit": false,
   "access": "public",
-  "baseBranch": "next",
+  "baseBranch": "main",
   "updateInternalDependencies": "patch",
   "snapshot": {
     "useCalculatedVersion": true

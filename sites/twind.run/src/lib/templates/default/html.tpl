@@ -22,7 +22,7 @@
 
   <footer class="mt-auto flex gap-4 text-sm">
     <a href="https://twind.style/">Docs</a>
-    <a href="https://github.com/tw-in-js/twind/tree/next">Github</a>
+    <a href="https://github.com/tw-in-js/twind">Github</a>
     <a href="https://chat.twind.style/">Discord</a>
   </footer>
 </main>

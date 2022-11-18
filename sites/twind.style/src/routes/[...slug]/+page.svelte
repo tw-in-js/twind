@@ -53,7 +53,7 @@
         {/if}
         {#if data.example}
           <li>
-            📝 Inspect <a href="https://github.com/tw-in-js/twind/tree/next/examples/{data.example}"
+            📝 Inspect <a href="https://github.com/tw-in-js/twind/tree/main/examples/{data.example}"
               >the example</a
             >
           </li>
@@ -71,7 +71,7 @@
           {/if}
           <li>
             📜 Read <a
-              href="https://github.com/tw-in-js/twind/tree/next/packages/{data.folder}/CHANGELOG.md"
+              href="https://github.com/tw-in-js/twind/tree/main/packages/{data.folder}/CHANGELOG.md"
               >the changelog</a
             >
           </li>

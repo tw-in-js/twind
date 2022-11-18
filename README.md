@@ -11,13 +11,13 @@ The smallest, fastest, most feature complete Tailwind-in-JS solution in existenc
 
 ---
 
-[![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE)
-[![Latest Release](https://flat.badgen.net/npm/v/twind/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/twind/v/next)
+[![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE)
+[![Latest Release](https://flat.badgen.net/npm/v/twind?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/twind)
 [![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.style)
-[![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind?icon=github&label)](https://github.com/tw-in-js/twind/tree/next)
+[![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind?icon=github&label)](https://github.com/tw-in-js/twind)
 [![Discord](https://img.shields.io/discord/798324011980423188?label=chat&logo=discord)](https://chat.twind.style)
-[![CI](https://github.com/tw-in-js/twind/actions/workflows/ci.yml/badge.svg?branch=next)](https://github.com/tw-in-js/twind/actions/workflows/ci.yml)
-[![Coverage Status](https://flat.badgen.net/coveralls/c/github/tw-in-js/twind/next?icon=codecov&label&cache=10800)](https://coveralls.io/github/tw-in-js/twind?branch=next)
+[![CI](https://github.com/tw-in-js/twind/actions/workflows/ci.yml/badge.svg)](https://github.com/tw-in-js/twind/actions/workflows/ci.yml)
+[![Coverage Status](https://flat.badgen.net/coveralls/c/github/tw-in-js/twind?icon=codecov&label&cache=10800)](https://coveralls.io/github/tw-in-js/twind)
 
 Twind is a small compiler that converts utility classes into CSS at runtime. The goal of this project is to unify the flexibility of CSS-in-JS with the carefully considered constraints of the Tailwind API.
 
@@ -27,7 +27,15 @@ Utility-first CSS without any build step right in the browser or any other envir
 - 🤖 Try [the playground](https://twind.run)
 - 🧭 Explore [the examples](https://twind.style/examples)
 - 📓 Consult [the API reference](https://twind.style/packages)
-- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/next/CHANGELOG.md)
+- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/main/CHANGELOG.md)
+
+---
+
+**Nov 18, 2022: [Twind v1](https://github.com/tw-in-js/twind/tree/main) is now in stable release!**
+
+Check out the [Migration Guide](https://twind.style/migration#from-twind-v016) to upgrade or go to the [v0.16 branch](https://github.com/tw-in-js/twind/tree/v0.16).
+
+---
 
 ## ✨ Features
 

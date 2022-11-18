@@ -26,7 +26,7 @@ next: ./with-sveltekit.md
    ::col-span-8
 
    ```sh
-   npm install twind@next @twind/with-remix@next
+   npm install twind @twind/with-remix
    ```
 
    :::
@@ -122,7 +122,7 @@ next: ./with-sveltekit.md
    ::col-span-8
 
    ```sh
-   npm install @twind/preset-autoprefix@next @twind/preset-tailwind@next
+   npm install @twind/preset-autoprefix @twind/preset-tailwind
    ```
 
    :::

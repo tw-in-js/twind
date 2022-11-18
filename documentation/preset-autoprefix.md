@@ -9,12 +9,12 @@ next: ./preset-ext.md
 
 ## 📦 Installation
 
-**with [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)**
+**with [twind](https://github.com/tw-in-js/twind/tree/main/packages/twind)**
 
 Install from npm:
 
 ```sh
-npm install twind@next @twind/preset-autoprefix@next
+npm install twind @twind/preset-autoprefix
 ```
 
 Add the preset to your twind config:
@@ -34,7 +34,7 @@ export default defineConfig({
 ```html
 <head>
   <script
-    src="https://cdn.jsdelivr.net/combine/npm/twind@next,npm/@twind/preset-autoprefix@next"
+    src="https://cdn.jsdelivr.net/combine/npm/twind,npm/@twind/preset-autoprefix"
     crossorigin
   ></script>
   <script>

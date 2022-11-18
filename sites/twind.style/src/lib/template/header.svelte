@@ -109,7 +109,7 @@
 
       <a
         class="flex items-center hover:text-brand-12"
-        href="https://github.com/tw-in-js/twind/tree/next"
+        href="https://github.com/tw-in-js/twind"
         title="Go to Twind on GitHub"
         rel="external nofollow noopener noreferrer"
         target="_blank"

@@ -1,4 +1,4 @@
-# @twind/preset-typography [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/preset-typography/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/preset-typography/v/next) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23preset-typography?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/preset-typography)
+# @twind/preset-typography [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/preset-typography?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/preset-typography) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23preset-typography?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/packages/preset-typography)
 
 > Based on [@tailwindcss/typography](https://github.com/tailwindlabs/tailwindcss-typography).
 
@@ -8,7 +8,7 @@ A plugin that provides a set of `prose` classes you can use to add beautiful typ
 - 🤖 Try [the playground](https://twind.run/preset-typography)
 - 🧭 Explore [the examples](https://twind.style/examples)
 - 📓 Consult [the API reference](https://twind.style/packages/@twind/preset-typography)
-- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/next/packages/preset-typography/CHANGELOG.md)
+- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/main/packages/preset-typography/CHANGELOG.md)
 
 ## 📖 Documentation
 
@@ -26,7 +26,7 @@ See the [Contributing Guide](../../CONTRIBUTING.md) for information on how to co
 
 ## 📜 Changelog
 
-The Changelog for this package is [available on GitHub](https://github.com/tw-in-js/twind/tree/next/packages/preset-typography/CHANGELOG.md).
+The Changelog for this package is [available on GitHub](https://github.com/tw-in-js/twind/tree/main/packages/preset-typography/CHANGELOG.md).
 
 ## ⚖️ License
 

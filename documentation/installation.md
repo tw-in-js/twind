@@ -28,7 +28,7 @@ If you have used Tailwind CSS or other CSS-in-JS solutions, then most of the API
    ::col-span-8
 
    ```sh
-   npm install twind@next
+   npm install twind
    ```
 
    :::
@@ -84,7 +84,7 @@ If you have used Tailwind CSS or other CSS-in-JS solutions, then most of the API
    ::col-span-8
 
    ```sh
-   npm install @twind/preset-autoprefix@next @twind/preset-tailwind@next
+   npm install @twind/preset-autoprefix @twind/preset-tailwind
    ```
 
    :::
@@ -163,7 +163,7 @@ Twind is available as a global browser script and can be used directly in the br
 
    ```html [2]
    <head>
-     <script src="https://cdn.jsdelivr.net/npm/twind@next" crossorigin></script>
+     <script src="https://cdn.jsdelivr.net/npm/twind" crossorigin></script>
    </head>
    ```
 
@@ -180,7 +180,7 @@ Twind is available as a global browser script and can be used directly in the br
 
    ```html [3-7]
    <head>
-     <script src="https://cdn.jsdelivr.net/npm/twind@next" crossorigin></script>
+     <script src="https://cdn.jsdelivr.net/npm/twind" crossorigin></script>
      <script>
        twind.install({
          /* options */
@@ -206,7 +206,7 @@ Twind is available as a global browser script and can be used directly in the br
    ```html [2-5]
    <head>
      <script
-       src="https://cdn.jsdelivr.net/combine/npm/twind@next,npm/@twind/preset-autoprefix@next,npm/@twind/preset-tailwind@next"
+       src="https://cdn.jsdelivr.net/combine/npm/twind,npm/@twind/preset-autoprefix,npm/@twind/preset-tailwind"
        crossorigin
      ></script>
    </head>
@@ -222,7 +222,7 @@ Twind is available as a global browser script and can be used directly in the br
    ```html [6-10]
    <head>
      <script
-       src="https://cdn.jsdelivr.net/combine/npm/twind@next,npm/@twind/preset-autoprefix@next,npm/@twind/preset-tailwind@next"
+       src="https://cdn.jsdelivr.net/combine/npm/twind,npm/@twind/preset-autoprefix,npm/@twind/preset-tailwind"
        crossorigin
      ></script>
      <script>

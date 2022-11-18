@@ -26,7 +26,7 @@ next: ./with-next.md
    ::col-span-8
 
    ```sh
-   npm install twind@next gatsby-plugin-twind@next
+   npm install twind gatsby-plugin-twind
    ```
 
    :::
@@ -93,7 +93,7 @@ next: ./with-next.md
    ::col-span-8
 
    ```sh
-   npm install @twind/preset-autoprefix@next @twind/preset-tailwind@next
+   npm install @twind/preset-autoprefix @twind/preset-tailwind
    ```
 
    :::

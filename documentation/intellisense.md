@@ -11,7 +11,7 @@ excerpt: |
 Install from npm:
 
 ```sh
-npm install twind@next @twind/intellisense@next
+npm install twind @twind/intellisense
 ```
 
 ## 🙇 Usage

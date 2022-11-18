@@ -12,12 +12,12 @@ TODO with file diffs
 
 ### Notable Changes
 
-- [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind) does **not** include any core utilities — use one or more of the following presets:
+- [twind](https://github.com/tw-in-js/twind/tree/main/packages/twind) does **not** include any core utilities — use one or more of the following presets:
 
-  - [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix)
-  - [@twind/preset-ext](https://github.com/tw-in-js/twind/tree/next/packages/preset-ext)
-  - [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind) to get a full Tailwind v3 experience
-  - [@twind/preset-tailwind-forms](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind-forms) to get Tailwind v3 and Tailwind Forms.
+  - [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/main/packages/preset-autoprefix)
+  - [@twind/preset-ext](https://github.com/tw-in-js/twind/tree/main/packages/preset-ext)
+  - [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/main/packages/preset-tailwind) to get a full Tailwind v3 experience
+  - [@twind/preset-tailwind-forms](https://github.com/tw-in-js/twind/tree/main/packages/preset-tailwind-forms) to get Tailwind v3 and Tailwind Forms.
 
 - API
   - `setup` can be called as many times as you want.
@@ -102,7 +102,7 @@ TODO with file diffs
     })
     ```
 
-    There are lots of things possible. See [preset-tailwind/rules](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind/src/rules.ts) and [preset-ext/rules](https://github.com/tw-in-js/twind/tree/next/packages/preset-ext/src/rules.ts) for more examples.
+    There are lots of things possible. See [preset-tailwind/rules](https://github.com/tw-in-js/twind/tree/main/packages/preset-tailwind/src/rules.ts) and [preset-ext/rules](https://github.com/tw-in-js/twind/tree/main/packages/preset-ext/src/rules.ts) for more examples.
 
   - ignorelist: can be used ignore certain rules
 

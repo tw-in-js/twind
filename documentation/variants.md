@@ -39,5 +39,5 @@ variants: [
 
 There are some more options and helpers available to create variants. You can find more examples in the official presets:
 
-- [@twind/preset-ext/src/variants.ts](https://github.com/tw-in-js/twind/blob/next/packages/preset-ext/src/variants.ts)
-- [@twind/preset-tailwind/src/variants.ts](https://github.com/tw-in-js/twind/blob/next/packages/preset-tailwind/src/variants.ts)
+- [@twind/preset-ext/src/variants.ts](https://github.com/tw-in-js/twind/blob/main/packages/preset-ext/src/variants.ts)
+- [@twind/preset-tailwind/src/variants.ts](https://github.com/tw-in-js/twind/blob/main/packages/preset-tailwind/src/variants.ts)

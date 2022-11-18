@@ -22,7 +22,7 @@
 - [ ] link to [transform css to tailwind](https://tailwind-converter.netlify.app/)
 - redirects
   - [x] 'chat.twind.style' -> 'https://discord.gg/3fwqsmXNYK'
-- [x] 'cdn.twind.style' as proxy for 'https://cdn.jsdelivr.net/npm/@twind/cdn@next' or jspm.io
+- [x] 'cdn.twind.style' as proxy for 'https://cdn.jsdelivr.net/npm/@twind/cdn' or jspm.io
   - redirects do not work because of cors issue
 - [x] add https://twind.style/twind-logo-animated.svg for use in github readme
 - update discord welcome with link to website

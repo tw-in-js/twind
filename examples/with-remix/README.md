@@ -1,6 +1,6 @@
 # Example: Remix
 
-> Try it live at [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/next/examples/with-remix) or [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/next/examples/with-remix).
+> Try it live at [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/main/examples/with-remix) or [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/main/examples/with-remix).
 
 ## How does this work?
 
@@ -11,7 +11,7 @@
 ## What is included?
 
 - [remix](https://www.npmjs.com/package/remix)
-- [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)
-- [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix)
-- [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind)
-- [@twind/with-remix](https://github.com/tw-in-js/twind/tree/next/packages/with-remix)
+- [twind](https://github.com/tw-in-js/twind/tree/main/packages/twind)
+- [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/main/packages/preset-autoprefix)
+- [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/main/packages/preset-tailwind)
+- [@twind/with-remix](https://github.com/tw-in-js/twind/tree/main/packages/with-remix)

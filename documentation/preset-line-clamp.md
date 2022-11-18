@@ -19,12 +19,12 @@ next: ./preset-tailwind.md
 
 ## 📦 Installation
 
-**with [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)**
+**with [twind](https://github.com/tw-in-js/twind/tree/main/packages/twind)**
 
 Install from npm:
 
 ```sh
-npm install twind@next @twind/preset-line-clamp@next
+npm install twind @twind/preset-line-clamp
 ```
 
 Add the preset to your twind config:
@@ -44,7 +44,7 @@ export default defineConfig({
 ```html
 <head>
   <script
-    src="https://cdn.jsdelivr.net/combine/npm/twind@next,npm/@twind/preset-line-clamp@next"
+    src="https://cdn.jsdelivr.net/combine/npm/twind,npm/@twind/preset-line-clamp"
     crossorigin
   ></script>
   <script>
@@ -63,7 +63,7 @@ export default defineConfig({
 ```html
 <head>
   <script
-    src="https://cdn.jsdelivr.net/combine/npm/@twind/cdn@next,npm/@twind/preset-line-clamp@next"
+    src="https://cdn.jsdelivr.net/combine/npm/@twind/cdn,npm/@twind/preset-line-clamp"
     crossorigin
   ></script>
   <script>

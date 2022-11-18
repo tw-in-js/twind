@@ -1,11 +1,11 @@
-# @twind/with-next [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/with-next/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/with-next/v/next) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23next?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/next)
+# @twind/with-next [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/with-next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/with-next) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23with-next?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/packages/with-next)
 
 Seamless integration of [Twind](https://twind.style) with [Next.js](https://nextjs.org).
 
 - 📖 Study [the documentation](https://twind.style/with-next)
-- 🧭 Inspect [the example](https://github.com/tw-in-js/twind/tree/next/examples/with-next)
+- 🧭 Inspect [the example](https://github.com/tw-in-js/twind/tree/main/examples/with-next)
 - 📓 Consult [the API reference](https://twind.style/packages/@twind/with-next)
-- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/next/packages/with-next/CHANGELOG.md)
+- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/main/packages/with-next/CHANGELOG.md)
 
 ## 📖 Documentation
 
@@ -23,7 +23,7 @@ See the [Contributing Guide](../../CONTRIBUTING.md) for information on how to co
 
 ## 📜 Changelog
 
-The Changelog for this package is [available on GitHub](https://github.com/tw-in-js/twind/tree/next/packages/with-next/CHANGELOG.md).
+The Changelog for this package is [available on GitHub](https://github.com/tw-in-js/twind/tree/main/packages/with-next/CHANGELOG.md).
 
 ## ⚖️ License
 

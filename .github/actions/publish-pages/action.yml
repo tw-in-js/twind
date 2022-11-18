@@ -78,7 +78,7 @@ runs:
         gitHubToken: ${{ ((inputs.branch == 'main' || inputs.branch == 'next') && inputs.GITHUB_TOKEN) || '' }}
         deploymentName: ${{ inputs.deploymentName }}
         projectName: ${{ inputs.projectName }}
-        directory: ${{ inputs.workingDirectory }}/${{ inputs.directory }}
+        directory: ${{inputs.workingDirectory}}/${{inputs.directory}}
         branch: ${{ inputs.branch }}
         commitDirty: true
 
@@ -91,10 +91,10 @@ runs:
         # do NOT create a GitHub deployment for version urls
         # gitHubToken: ${{ inputs.GITHUB_TOKEN }}
         projectName: ${{ inputs.projectName }}
-        directory: ${{ inputs.workingDirectory }}/${{ inputs.directory }}
+        directory: ${{inputs.workingDirectory}}/${{inputs.directory}}
         # Branch name aliases are lowercased and non-alphanumeric characters are replaced with a hyphen
         # v1.0.0.next.39 -> v1-0-0-next-39
-        branch: v${{ steps.build.outputs.version }}
+        branch: v${{steps.build.outputs.version}}
         commitDirty: true
 
     - name: 💡  Deployment Info

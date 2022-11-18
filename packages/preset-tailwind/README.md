@@ -1,4 +1,4 @@
-# @twind/preset-tailwind [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/preset-tailwind/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/preset-tailwind/v/next) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23preset-tailwind?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind)
+# @twind/preset-tailwind [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/preset-tailwind?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/preset-tailwind) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23preset-tailwind?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/packages/preset-tailwind)
 
 The full [Tailwind CSS](https://tailwindcss.com) v3 experience without any build step right in the browser or any other environment like Node.js, deno, workers, ...
 
@@ -6,7 +6,7 @@ The full [Tailwind CSS](https://tailwindcss.com) v3 experience without any build
 - 🤖 Try [the playground](https://twind.run/preset-tailwind)
 - 🧭 Explore [the examples](https://twind.style/examples)
 - 📓 Consult [the API reference](https://twind.style/packages/@twind/preset-tailwind)
-- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind/CHANGELOG.md)
+- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/main/packages/preset-tailwind/CHANGELOG.md)
 
 ## 📖 Documentation
 
@@ -24,7 +24,7 @@ See the [Contributing Guide](../../CONTRIBUTING.md) for information on how to co
 
 ## 📜 Changelog
 
-The Changelog for this package is [available on GitHub](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind/CHANGELOG.md).
+The Changelog for this package is [available on GitHub](https://github.com/tw-in-js/twind/tree/main/packages/preset-tailwind/CHANGELOG.md).
 
 ## ⚖️ License
 

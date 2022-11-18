@@ -1,4 +1,4 @@
-# @twind/preset-tailwind-forms [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/preset-tailwind-forms/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/preset-tailwind-forms/v/next) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23preset-tailwind-forms?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind-forms)
+# @twind/preset-tailwind-forms [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/preset-tailwind-forms?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/preset-tailwind-forms) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23preset-tailwind-forms?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/packages/preset-tailwind-forms)
 
 > Based on [@tailwindcss/forms](https://github.com/tailwindlabs/tailwindcss-forms).
 
@@ -8,7 +8,7 @@ A [twind](https://twind.style) preset that provides a basic reset for form style
 - 🤖 Try [the playground](https://twind.run/preset-tailwind-forms)
 - 🧭 Explore [the examples](https://twind.style/examples)
 - 📓 Consult [the API reference](https://twind.style/packages/@twind/preset-tailwind-forms)
-- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind-forms/CHANGELOG.md)
+- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/main/packages/preset-tailwind-forms/CHANGELOG.md)
 
 ## 📖 Documentation
 
@@ -26,7 +26,7 @@ See the [Contributing Guide](../../CONTRIBUTING.md) for information on how to co
 
 ## 📜 Changelog
 
-The Changelog for this package is [available on GitHub](https://github.com/tw-in-js/twind/tree/next/packages/preset-tailwind-forms/CHANGELOG.md).
+The Changelog for this package is [available on GitHub](https://github.com/tw-in-js/twind/tree/main/packages/preset-tailwind-forms/CHANGELOG.md).
 
 ## ⚖️ License
 

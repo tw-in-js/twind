@@ -1,11 +1,11 @@
-# @twind/cdn [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/cdn/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/cdn/v/next) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23cdn?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/cdn)
+# @twind/cdn [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/cdn?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/cdn) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23cdn?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/packages/cdn)
 
 Twind CDN is a drop-in replacement for [Tailwind CSS Play CDN](https://tailwindcss.com/docs/installation/play-cdn) that is 6 times smaller (104kb vs 17kB) without any build step right in the browser.
 
 - 📖 Study [the documentation](https://twind.style/installation#twind-cdn)
 - 🧭 Explore [the examples](https://twind.style/examples)
 - 📓 Consult [the API reference](https://twind.style/packages/@twind/cdn)
-- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/next/packages/cdn/CHANGELOG.md)
+- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/main/packages/cdn/CHANGELOG.md)
 
 ## 📖 Documentation
 
@@ -23,7 +23,7 @@ See the [Contributing Guide](../../CONTRIBUTING.md) for information on how to co
 
 ## 📜 Changelog
 
-The Changelog for this package is [available on GitHub](https://github.com/tw-in-js/twind/tree/next/packages/cdn/CHANGELOG.md).
+The Changelog for this package is [available on GitHub](https://github.com/tw-in-js/twind/tree/main/packages/cdn/CHANGELOG.md).
 
 ## ⚖️ License
 

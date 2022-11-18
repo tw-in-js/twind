@@ -19,12 +19,12 @@ next: ./with-gatsby.md
 
 ## 📦 Installation
 
-**with [twind](https://github.com/tw-in-js/twind/tree/next/packages/twind)**
+**with [twind](https://github.com/tw-in-js/twind/tree/main/packages/twind)**
 
 Install from npm:
 
 ```sh
-npm install twind@next @twind/preset-tailwind@next @twind/preset-typography@next
+npm install twind @twind/preset-tailwind @twind/preset-typography
 ```
 
 Add the preset to your twind config:
@@ -45,7 +45,7 @@ setup({
 ```html
 <head>
   <script
-    src="https://cdn.jsdelivr.net/combine/npm/twind@next,npm/@twind/preset-typography@next"
+    src="https://cdn.jsdelivr.net/combine/npm/twind,npm/@twind/preset-typography"
     crossorigin
   ></script>
   <script>
@@ -64,7 +64,7 @@ setup({
 ```html
 <head>
   <script
-    src="https://cdn.jsdelivr.net/combine/npm/@twind/cdn@next,npm/@twind/preset-typography@next"
+    src="https://cdn.jsdelivr.net/combine/npm/@twind/cdn,npm/@twind/preset-typography"
     crossorigin
   ></script>
   <script>

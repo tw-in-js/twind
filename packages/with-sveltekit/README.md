@@ -1,11 +1,11 @@
-# @twind/with-sveltekit [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/with-sveltekit/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/with-sveltekit/v/next) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23sveltekit?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/sveltekit)
+# @twind/with-sveltekit [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/with-sveltekit?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/with-sveltekit) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23with-sveltekit?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/packages/with-sveltekit)
 
 Seamless integration of [Twind](https://twind.style) with [SvelteKit](https://kit.svelte.dev)
 
 - 📖 Study [the documentation](https://twind.style/with-sveltekit)
-- 🧭 Inspect [the example](https://github.com/tw-in-js/twind/tree/next/examples/with-sveltekit)
+- 🧭 Inspect [the example](https://github.com/tw-in-js/twind/tree/main/examples/with-sveltekit)
 - 📓 Consult [the API reference](https://twind.style/packages/@twind/with-sveltekit)
-- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/next/packages/with-sveltekit/CHANGELOG.md)
+- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/main/packages/with-sveltekit/CHANGELOG.md)
 
 ## 📖 Documentation
 
@@ -23,7 +23,7 @@ See the [Contributing Guide](../../CONTRIBUTING.md) for information on how to co
 
 ## 📜 Changelog
 
-The Changelog for this package is [available on GitHub](https://github.com/tw-in-js/twind/tree/next/packages/with-sveltekit/CHANGELOG.md).
+The Changelog for this package is [available on GitHub](https://github.com/tw-in-js/twind/tree/main/packages/with-sveltekit/CHANGELOG.md).
 
 ## ⚖️ License
 

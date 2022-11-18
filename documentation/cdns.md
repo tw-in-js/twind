@@ -2,20 +2,20 @@
 hidden: true
 ---
 
-https://cdn.jsdelivr.net/npm/twind@next
-https://cdn.jsdelivr.net/combine/npm/twind@next,npm/@twind/preset-autoprefix@next,npm/@twind/preset-tailwind@next
+https://cdn.jsdelivr.net/npm/twind
+https://cdn.jsdelivr.net/combine/npm/twind,npm/@twind/preset-autoprefix,npm/@twind/preset-tailwind
 
-https://cdn.jsdelivr.net/npm/@twind/cdn@next
-https://cdn.jsdelivr.net/combine/npm/@twind/cdn@next,npm/@twind/preset-ext@next
+https://cdn.jsdelivr.net/npm/@twind/cdn
+https://cdn.jsdelivr.net/combine/npm/@twind/cdn,npm/@twind/preset-ext
 
 - default: https://cdn.twind.style
 
   - version: latest
   - presets: none
-    -> https://cdn.jsdelivr.net/combine/npm/@twind/cdn@next,npm/@twind/preset-ext@next
+    -> https://cdn.jsdelivr.net/combine/npm/@twind/cdn,npm/@twind/preset-ext
 
 - with presets: https://cdn.twind.style?presets=forms,typography,aspect-ratio,line-clamp
-  -> https://cdn.jsdelivr.net/combine/npm/@twind/cdn@next,npm/@twind/preset-ext@next
+  -> https://cdn.jsdelivr.net/combine/npm/@twind/cdn,npm/@twind/preset-ext
 
 - with dev: ?dev
 
@@ -38,9 +38,9 @@ script: no
 type="module"
 package.json: exports
 
-https://cdn.skypack.dev/twind@next?min
-https://cdn.skypack.dev/@twind/preset-tailwind@next?min
-https://cdn.skypack.dev/@twind/preset-tailwind@next/colors?min
+https://cdn.skypack.dev/twind?min
+https://cdn.skypack.dev/@twind/preset-tailwind?min
+https://cdn.skypack.dev/@twind/preset-tailwind/colors?min
 
 
 
@@ -96,7 +96,7 @@ script: no
 
 type="module"
 package.json: exports
-https://jspm.dev/twind@next
+https://jspm.dev/twind
 
 
 https://jspm.org

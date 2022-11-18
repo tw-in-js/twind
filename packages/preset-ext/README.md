@@ -1,4 +1,4 @@
-# @twind/preset-ext [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/preset-ext/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/preset-ext/v/next) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23preset-ext?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/preset-ext)
+# @twind/preset-ext [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/preset-ext?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/preset-ext) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23preset-ext?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/packages/preset-ext)
 
 Extension preset for [twind](https://twind.style) providing utilities and variants that are not _yet_ part of [@twind/preset-tailwind](https://twind.style/preset-tailwind) eg Tailwind CSS.
 
@@ -6,7 +6,7 @@ Extension preset for [twind](https://twind.style) providing utilities and varian
 - 🤖 Try [the playground](https://twind.run/preset-ext)
 - 🧭 Explore [the examples](https://twind.style/examples)
 - 📓 Consult [the API reference](https://twind.style/packages/@twind/preset-ext)
-- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/next/packages/preset-ext/CHANGELOG.md)
+- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/main/packages/preset-ext/CHANGELOG.md)
 
 ## 📖 Documentation
 
@@ -24,7 +24,7 @@ See the [Contributing Guide](../../CONTRIBUTING.md) for information on how to co
 
 ## 📜 Changelog
 
-The Changelog for this package is [available on GitHub](https://github.com/tw-in-js/twind/tree/next/packages/preset-ext/CHANGELOG.md).
+The Changelog for this package is [available on GitHub](https://github.com/tw-in-js/twind/tree/main/packages/preset-ext/CHANGELOG.md).
 
 ## ⚖️ License
 

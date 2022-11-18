@@ -252,6 +252,6 @@ rules: [
 
 There are some more options and helpers available to create rules. You can find more examples in the official presets:
 
-- [@twind/preset-ext/src/rules.ts](https://github.com/tw-in-js/twind/blob/next/packages/preset-ext/src/rules.ts)
-- [@twind/preset-line-clamp/src/rules.ts](https://github.com/tw-in-js/twind/blob/next/packages/preset-line-clamp/src/rules.ts)
-- [@twind/preset-tailwind/src/rules.ts](https://github.com/tw-in-js/twind/blob/next/packages/preset-tailwind/src/rules.ts)
+- [@twind/preset-ext/src/rules.ts](https://github.com/tw-in-js/twind/blob/main/packages/preset-ext/src/rules.ts)
+- [@twind/preset-line-clamp/src/rules.ts](https://github.com/tw-in-js/twind/blob/main/packages/preset-line-clamp/src/rules.ts)
+- [@twind/preset-tailwind/src/rules.ts](https://github.com/tw-in-js/twind/blob/main/packages/preset-tailwind/src/rules.ts)

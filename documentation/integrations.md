@@ -77,7 +77,7 @@ TODO: Add documentation for creating a new integration.
 
 Here are some examples of how to write your own integration:
 
-- [gatsby-plugin-twind](https://github.com/tw-in-js/twind/blob/next/packages/with-gatsby/src)
-- [@twind/with-next/src](https://github.com/tw-in-js/twind/blob/next/packages/with-next/src)
-- [@twind/with-remix/src](https://github.com/tw-in-js/twind/blob/next/packages/with-remix/src)
-- [@twind/with-sveltekit/src](https://github.com/tw-in-js/twind/blob/next/packages/with-sveltekit/src)
+- [gatsby-plugin-twind](https://github.com/tw-in-js/twind/blob/main/packages/with-gatsby/src)
+- [@twind/with-next/src](https://github.com/tw-in-js/twind/blob/main/packages/with-next/src)
+- [@twind/with-remix/src](https://github.com/tw-in-js/twind/blob/main/packages/with-remix/src)
+- [@twind/with-sveltekit/src](https://github.com/tw-in-js/twind/blob/main/packages/with-sveltekit/src)

@@ -1,4 +1,4 @@
-You might find our contributing section about [Submitting Pull Requests](https://github.com/tw-in-js/twind/blob/next/CONTRIBUTING.md#submitting-pull-requests) helpful.
+You might find our contributing section about [Submitting Pull Requests](https://github.com/tw-in-js/twind/blob/main/CONTRIBUTING.md#submitting-pull-requests) helpful.
 
 ### Please don't delete this checklist! Before submitting the PR, please make sure you do the following:
 

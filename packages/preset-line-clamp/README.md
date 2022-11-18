@@ -1,4 +1,4 @@
-# @twind/preset-line-clamp [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/preset-line-clamp/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/preset-line-clamp/v/next) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23preset-line-clamp?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/preset-line-clamp)
+# @twind/preset-line-clamp [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/preset-line-clamp?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/preset-line-clamp) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23preset-line-clamp?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/packages/preset-line-clamp)
 
 > Based on [@tailwindcss/line-clamp](https://github.com/tailwindlabs/tailwindcss-line-clamp).
 
@@ -8,7 +8,7 @@ A [twind](https://twind.style) preset that provides utilities for visually trunc
 - 🤖 Try [the playground](https://twind.run/preset-line-clamp)
 - 🧭 Explore [the examples](https://twind.style/examples)
 - 📓 Consult [the API reference](https://twind.style/packages/@twind/preset-line-clamp)
-- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/next/packages/preset-line-clamp/CHANGELOG.md)
+- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/main/packages/preset-line-clamp/CHANGELOG.md)
 
 ## 📖 Documentation
 
@@ -26,7 +26,7 @@ See the [Contributing Guide](../../CONTRIBUTING.md) for information on how to co
 
 ## 📜 Changelog
 
-The Changelog for this package is [available on GitHub](https://github.com/tw-in-js/twind/tree/next/packages/preset-line-clamp/CHANGELOG.md).
+The Changelog for this package is [available on GitHub](https://github.com/tw-in-js/twind/tree/main/packages/preset-line-clamp/CHANGELOG.md).
 
 ## ⚖️ License
 

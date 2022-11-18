@@ -47,6 +47,20 @@ const wordlist = wordlistraw.trim().split(/\s+/g)
 // Metadata of up to 1024 bytes per key
 const EXPECTED_VERSION = '1'
 
+import { z } from 'zod'
+
+const workspaceFileSchema = z.object({
+  path: z.string().min(1),
+  value: z.string(),
+})
+
+const workspaceSchema = z.object({
+  version: z.string().min(1),
+  html: workspaceFileSchema,
+  script: workspaceFileSchema,
+  config: workspaceFileSchema,
+})
+
 export async function load({
   request,
   params: { key },
@@ -136,13 +150,15 @@ export async function load({
         throw error(404, 'Not found')
       }
 
-      try {
-        const workspace = JSON.parse(data.slice(`${EXPECTED_VERSION}:`.length))
-        // TODO: validate workspace loaded from url
-        return { workspace }
-      } catch {
-        throw error(404, 'Not found')
+      const workspace = JSON.parse(data.slice(`${EXPECTED_VERSION}:`.length))
+
+      const result = workspaceSchema.safeParse(workspace)
+
+      if (!result.success) {
+        throw error(400, 'invalid workspace')
       }
+
+      return { workspace: result.data }
     }
 
     if (data.httpMetadata?.contentType !== 'application/json') {
@@ -277,15 +293,17 @@ export const actions: import('./$types').Actions = {
         return invalid(400, { workspace: 'missing' })
       }
 
-      // TODO: validate workspace {[html | script | config]: {path: string, value: string}, version: string }
-      // if (workspace.html) {
-      //   return invalid(400, { script: 'missing' })
-      // }
+      if (typeof workspaceRaw !== 'string') {
+        return invalid(400, { workspace: 'invalid' })
+      }
 
-      const blob =
-        typeof workspaceRaw === 'string'
-          ? new Blob([workspaceRaw], { type: 'application/json' })
-          : workspaceRaw
+      const result = workspaceSchema.safeParse(JSON.parse(workspaceRaw))
+
+      if (!result.success) {
+        return invalid(400, { workspace: 'invalid', error: result.error.format() })
+      }
+
+      const blob = new Blob([JSON.stringify(result.data)], { type: 'application/json' })
 
       try {
         const { key, integrity, missing } = await generate(platform, await blob.arrayBuffer())
@@ -340,7 +358,7 @@ async function generate(platform: App.Platform, source: BufferSource) {
   // try different slugs
   for (let i = 0; i < view.byteLength - 6; i += 2) {
     const key = [
-      // 4547 * 4547 * 4547 = 94.010.175.323
+      // 2685 * 2685 * 2685 = 19.356.769.125
       // <word>-<word>-<word>
       wordlist[view.getUint16(i) % wordlist.length],
       wordlist[view.getUint16((i += 2)) % wordlist.length],

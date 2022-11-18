@@ -1,4 +1,4 @@
-# @twind/preset-autoprefix [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/preset-autoprefix/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/preset-autoprefix/v/next) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23preset-autoprefix?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix)
+# @twind/preset-autoprefix [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/preset-autoprefix?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/preset-autoprefix) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23preset-autoprefix?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/packages/preset-autoprefix)
 
 CSS vendor prefixer and property alias mapper preset for [twind](https://twind.style).
 
@@ -6,7 +6,7 @@ CSS vendor prefixer and property alias mapper preset for [twind](https://twind.s
 - 🤖 Try [the playground](https://twind.run/preset-autoprefix)
 - 🧭 Explore [the examples](https://twind.style/examples)
 - 📓 Consult [the API reference](https://twind.style/packages/@twind/preset-autoprefix)
-- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix/CHANGELOG.md)
+- 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/main/packages/preset-autoprefix/CHANGELOG.md)
 
 ## 📖 Documentation
 
@@ -24,7 +24,7 @@ See the [Contributing Guide](../../CONTRIBUTING.md) for information on how to co
 
 ## 📜 Changelog
 
-The Changelog for this package is [available on GitHub](https://github.com/tw-in-js/twind/tree/next/packages/preset-autoprefix/CHANGELOG.md).
+The Changelog for this package is [available on GitHub](https://github.com/tw-in-js/twind/tree/main/packages/preset-autoprefix/CHANGELOG.md).
 
 ## ⚖️ License
 

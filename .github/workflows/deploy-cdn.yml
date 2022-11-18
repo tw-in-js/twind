@@ -3,7 +3,7 @@ name: Deploy cdn.twind.style
 on:
   push:
     branches:
-      - next
+      - main
     paths:
       - 'sites/cdn.twind.style/**'
 

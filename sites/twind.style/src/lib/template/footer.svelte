@@ -11,7 +11,7 @@
 >
   <div class="flex place-content-center gap-1">
     <a
-      href="https://github.com/tw-in-js/twind/blob/next/LICENSE"
+      href="https://github.com/tw-in-js/twind/blob/main/LICENSE"
       rel="external noopener noreferrer license"
       class="hover:text-brand-12"
     >
@@ -30,7 +30,7 @@
 
   {#if $page.data.file && $page.data.editLink !== false}
     <a
-      href={`https://github.com/tw-in-js/twind/edit/next/${$page.data.file}`}
+      href={`https://github.com/tw-in-js/twind/edit/main/${$page.data.file}`}
       rel="external noopener noreferrer nofollow"
       target="_blank"
       class="hover:text-brand-12"

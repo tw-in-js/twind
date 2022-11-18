@@ -52,9 +52,9 @@ function renderBadges(pkg) {
 
   return transform(
     [
-      `[![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/next/LICENSE)`,
-      `[![Latest Release](https://flat.badgen.net/npm/v/${pkg}/next?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/${pkg}/v/next)`,
-      `[![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23${folder}?icon=github&label)](https://github.com/tw-in-js/twind/tree/next/packages/${folder})`,
+      `[![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE)`,
+      `[![Latest Release](https://flat.badgen.net/npm/v/${pkg}?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/${pkg})`,
+      `[![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23${folder}?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/packages/${folder})`,
     ].join(' '),
   )
 }

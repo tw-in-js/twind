@@ -45,7 +45,7 @@
 
   <!--TODO: <meta name="twitter:site" content="@tw-in-js" />-->
 
-  <link rel="external copyright" href="https://github.com/tw-in-js/twind/blob/next/LICENSE" />
+  <link rel="external copyright" href="https://github.com/tw-in-js/twind/blob/main/LICENSE" />
 
   <meta
     name="theme-color"

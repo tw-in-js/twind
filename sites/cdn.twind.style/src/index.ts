@@ -65,7 +65,7 @@ export default {
       // /@canary?presets=forms,typography,line-clamp
       // /@canary/forms,typography,line-clamp
       const match = pathname.match(
-        /^\/(?:@(latest|next|canary|(?:0|[1-9]\d{0,9}?)(?:\.(?:0|[1-9]\d{0,9})){2}(?:-[^/]+)?)(?=$|\/))/,
+        /^\/(?:@(latest|next|canary|dev|(?:0|[1-9]\d{0,9}?)(?:\.(?:0|[1-9]\d{0,9})){2}(?:-[^/]+)?)(?=$|\/))/,
       )
       let version = DEFAULT_VERSION
 
@@ -110,8 +110,8 @@ export default {
           return specifier
         })
 
-      // -> https://cdn.jsdelivr.net/npm/twind@next
-      // -> https://cdn.jsdelivr.net/combine/npm/@twind/cdn@next,npm/@twind/preset-ext@next
+      // -> https://cdn.jsdelivr.net/npm/twind
+      // -> https://cdn.jsdelivr.net/combine/npm/@twind/cdn,npm/@twind/preset-ext
       targetURL =
         CDN_ORIGIN +
         (modules.length > 1 ? '/combine/' : '/') +
