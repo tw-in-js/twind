@@ -4,6 +4,69 @@
 
 ### Patch Changes
 
+- helpful error message during dev when no active twind instance is found ([`fe891f9c`](https://github.com/tw-in-js/twind/commit/fe891f9c7990a041e0eccaff9a4f58d0834d46d2))
+
+- big documentation update ([`a63ca2cb`](https://github.com/tw-in-js/twind/commit/a63ca2cbf450d8a6f72f4d60f5856cee88d16911))
+
+- allow for `cssom` and `dom` to accept a selector string to find the server rendered stylesheet ([`e2c17a2e`](https://github.com/tw-in-js/twind/commit/e2c17a2e8087875f1725e3b07bc32218d2f0c2c0))
+
+- BREAKING: use `install` instead of `setup` for cdn configuration to align with other integrations ([`d481948b`](https://github.com/tw-in-js/twind/commit/d481948b0513a59cc3495d5e31f0437c9690d59b))
+
+- handle hex encoded ampersand ([`a61e0d1d`](https://github.com/tw-in-js/twind/commit/a61e0d1d4a31be6f398b57ceefffdb04b6bceccf))
+
+- warn about invalid classes and invalid css during development ([`e6acbea2`](https://github.com/tw-in-js/twind/commit/e6acbea2f48e3c6441e0cf71cd069f48500ca493))
+
+  When run in development mode, which is determined by the [export condition](https://nodejs.org/api/packages.html#packages_conditional_exports) `development`, twind notifies about invalid classes and invalid css.
+
+  > Further reading:
+  >
+  > - [Conditional exports](https://nodejs.org/api/packages.html#packages_conditional_exports)
+  > - [Vite](https://vitejs.dev/config/shared-options.html#resolve-conditions)
+  > - [esbuild](https://esbuild.github.io/api/#conditions)
+
+  In the the browser a `warning` event is emitted on the `window` object and, in case there is no event listener or the event listener did not call `event.preventDefault()`, a warning is logged to the console.
+
+  ```js
+  addEventListener('warning', (event) => {
+    // prevent default console.warn(`[<code>] <message>: <detail>`) logging
+    event.preventDefault()
+
+    const warning = event.detail
+
+    // { message: '...', code: 'TWIND_INVALID_CLASS', detail: '<className>'}
+    // { message: '...', code: 'TWIND_INVALID_CSS', detail: '<css>'}
+    console.warn(warning)
+  })
+  ```
+
+  In Node.js a warning is emitted using [`process.emitWarning`](https://nodejs.org/api/process.html#processemitwarningwarning-options).
+
+  If there is no `warning` event listener, the warning is printed to `stderr`.
+
+  ```
+  (node:56338) [TWIND_INVALID_CLASS] Warning: ...
+  ```
+
+  Alternatively, you can use the [`process.on('warning', ...)`](https://nodejs.org/api/process.html#event-warning) to handle warnings.
+
+  ```js
+  import process from 'node:process'
+
+  process.on('warning', (warning) => {
+    console.warn(warning.message) // Print the warning message
+    console.warn(warning.code) // 'TWIND_INVALID_CLASS' | 'TWIND_INVALID_CSS'
+    console.warn(warning.detail) // '<className>' | '<css>'
+  })
+  ```
+
+- initial intellisense support ([`2ac8e695`](https://github.com/tw-in-js/twind/commit/2ac8e6950ad37bac0eb88116448bee8738388f59))
+
+- stringify in user config always wins ([`0705e419`](https://github.com/tw-in-js/twind/commit/0705e41946e191974da76c2b27019755520d9c0a))
+
+## 1.0.0
+
+### Patch Changes
+
 - helpful error message during dev when no active twind instance is found (fe891f9c)
 
 - allow for `cssom` and `dom` to accept a selector string to find the server rendered stylesheet (e2c17a2e)

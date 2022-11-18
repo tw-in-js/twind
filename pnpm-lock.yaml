@@ -87,9 +87,9 @@ importers:
 
   examples/basic:
     specifiers:
-      '@twind/preset-autoprefix': 1.0.0-next.39
-      '@twind/preset-tailwind': 1.0.0-next.39
-      twind: 1.0.0-next.39
+      '@twind/preset-autoprefix': 1.0.0
+      '@twind/preset-tailwind': 1.0.0
+      twind: 1.0.0
       vite: ^3.2.3
     dependencies:
       '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
@@ -100,12 +100,12 @@ importers:
 
   examples/playground:
     specifiers:
-      '@twind/preset-autoprefix': 1.0.0-next.39
-      '@twind/preset-ext': 1.0.0-next.39
-      '@twind/preset-line-clamp': 1.0.0-next.39
-      '@twind/preset-tailwind': 1.0.0-next.39
-      '@twind/preset-tailwind-forms': 1.0.0-next.39
-      twind: 1.0.0-next.39
+      '@twind/preset-autoprefix': 1.0.0
+      '@twind/preset-ext': 1.0.0
+      '@twind/preset-line-clamp': 1.0.0
+      '@twind/preset-tailwind': 1.0.0
+      '@twind/preset-tailwind-forms': 1.0.0
+      twind: 1.0.0
       vite: ^3.2.3
     dependencies:
       '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
@@ -119,10 +119,10 @@ importers:
 
   examples/using-tailwind-forms:
     specifiers:
-      '@twind/preset-autoprefix': 1.0.0-next.39
-      '@twind/preset-tailwind': 1.0.0-next.39
-      '@twind/preset-tailwind-forms': 1.0.0-next.39
-      twind: 1.0.0-next.39
+      '@twind/preset-autoprefix': 1.0.0
+      '@twind/preset-tailwind': 1.0.0
+      '@twind/preset-tailwind-forms': 1.0.0
+      twind: 1.0.0
       vite: ^3.2.3
     dependencies:
       '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
@@ -140,17 +140,17 @@ importers:
 
   examples/with-gatsby:
     specifiers:
-      '@twind/preset-autoprefix': 1.0.0-next.39
-      '@twind/preset-tailwind': 1.0.0-next.39
+      '@twind/preset-autoprefix': 1.0.0
+      '@twind/preset-tailwind': 1.0.0
       gatsby: ^4.24.8
       gatsby-plugin-manifest: ^4.24.0
       gatsby-plugin-offline: ^5.24.0
       gatsby-plugin-react-helmet: ^5.24.0
-      gatsby-plugin-twind: 1.0.0-next.39
+      gatsby-plugin-twind: 1.0.0
       react: ^17.0.2
       react-dom: ^17.0.2
       react-helmet: ^6.1.0
-      twind: 1.0.0-next.39
+      twind: 1.0.0
     dependencies:
       '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
       '@twind/preset-tailwind': link:../../packages/preset-tailwind
@@ -166,9 +166,9 @@ importers:
 
   examples/with-next:
     specifiers:
-      '@twind/preset-autoprefix': 1.0.0-next.39
-      '@twind/preset-tailwind': 1.0.0-next.39
-      '@twind/with-next': 1.0.0-next.39
+      '@twind/preset-autoprefix': 1.0.0
+      '@twind/preset-tailwind': 1.0.0
+      '@twind/with-next': 1.0.0
       '@types/node': ^14.18.33
       '@types/react': ^17.0.52
       next: ^12.3.3
@@ -176,7 +176,7 @@ importers:
       next-transpile-modules: ^9.1.0
       react: ^17.0.2
       react-dom: ^17.0.2
-      twind: 1.0.0-next.39
+      twind: 1.0.0
       typescript: ^4.8.4
     devDependencies:
       '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
@@ -197,16 +197,16 @@ importers:
       '@remix-run/dev': ^1.7.5
       '@remix-run/react': ^1.7.5
       '@remix-run/serve': ^1.7.5
-      '@twind/preset-autoprefix': 1.0.0-next.39
-      '@twind/preset-tailwind': 1.0.0-next.39
-      '@twind/with-remix': 1.0.0-next.39
+      '@twind/preset-autoprefix': 1.0.0
+      '@twind/preset-tailwind': 1.0.0
+      '@twind/with-remix': 1.0.0
       '@types/react': ^17.0.52
       '@types/react-dom': ^17.0.18
       cross-env: ^7.0.3
       react: ^17.0.2
       react-dom: ^17.0.2
       remix: ^1.7.5
-      twind: 1.0.0-next.39
+      twind: 1.0.0
       typescript: ^4.8.4
     dependencies:
       '@remix-run/react': 1.7.5_sfoxds7t5ydpegc3knd667wn6m
@@ -229,13 +229,13 @@ importers:
     specifiers:
       '@sveltejs/adapter-node': 1.0.0-next.100
       '@sveltejs/kit': 1.0.0-next.547
-      '@twind/preset-autoprefix': 1.0.0-next.39
-      '@twind/preset-tailwind': 1.0.0-next.39
-      '@twind/with-sveltekit': 1.0.0-next.39
+      '@twind/preset-autoprefix': 1.0.0
+      '@twind/preset-tailwind': 1.0.0
+      '@twind/with-sveltekit': 1.0.0
       svelte: ^3.53.1
       svelte-check: ^2.9.2
       svelte-preprocess: ^4.10.7
-      twind: 1.0.0-next.39
+      twind: 1.0.0
       typescript: ^4.8.4
       vite: ^3.2.3
     devDependencies:
@@ -253,9 +253,9 @@ importers:
 
   packages/cdn:
     specifiers:
-      '@twind/preset-autoprefix': ^1.0.0-next.39
-      '@twind/preset-tailwind': ^1.0.0-next.39
-      twind: ^1.0.0-next.39
+      '@twind/preset-autoprefix': ^1.0.0
+      '@twind/preset-tailwind': ^1.0.0
+      twind: ^1.0.0
       typescript: ^4.8.4
     dependencies:
       '@twind/preset-autoprefix': link:../preset-autoprefix
@@ -268,8 +268,8 @@ importers:
   packages/intellisense:
     specifiers:
       '@ctrl/tinycolor': ^3.4.1
-      '@twind/preset-autoprefix': ^1.0.0-next.39
-      '@twind/preset-tailwind': ^1.0.0-next.39
+      '@twind/preset-autoprefix': ^1.0.0
+      '@twind/preset-tailwind': ^1.0.0
       '@types/css-tree': ^2.0.0
       '@types/cssbeautify': ^0.3.2
       css-tree: ^2.2.1
@@ -277,7 +277,7 @@ importers:
       genex: ^1.1.0
       match-sorter: ^6.3.1
       quick-lru: ^6.1.1
-      twind: ^1.0.0-next.39
+      twind: ^1.0.0
       typescript: ^4.8.4
     dependencies:
       '@ctrl/tinycolor': 3.4.1
@@ -298,7 +298,7 @@ importers:
   packages/preset-autoprefix:
     specifiers:
       style-vendorizer: ^2.2.3
-      twind: ^1.0.0-next.39
+      twind: ^1.0.0
       typescript: ^4.8.4
     dependencies:
       style-vendorizer: 2.2.3
@@ -309,8 +309,8 @@ importers:
 
   packages/preset-ext:
     specifiers:
-      '@twind/preset-tailwind': ^1.0.0-next.39
-      twind: ^1.0.0-next.39
+      '@twind/preset-tailwind': ^1.0.0
+      twind: ^1.0.0
       typescript: ^4.8.4
     devDependencies:
       '@twind/preset-tailwind': link:../preset-tailwind
@@ -320,7 +320,7 @@ importers:
 
   packages/preset-line-clamp:
     specifiers:
-      twind: ^1.0.0-next.39
+      twind: ^1.0.0
       typescript: ^4.8.4
     devDependencies:
       twind: link:../twind
@@ -329,7 +329,7 @@ importers:
 
   packages/preset-tailwind:
     specifiers:
-      twind: ^1.0.0-next.39
+      twind: ^1.0.0
       typescript: ^4.8.4
     devDependencies:
       twind: link:../twind
@@ -338,8 +338,8 @@ importers:
 
   packages/preset-tailwind-forms:
     specifiers:
-      '@twind/preset-tailwind': ^1.0.0-next.39
-      twind: ^1.0.0-next.39
+      '@twind/preset-tailwind': ^1.0.0
+      twind: ^1.0.0
       typescript: ^4.8.4
     devDependencies:
       '@twind/preset-tailwind': link:../preset-tailwind
@@ -349,7 +349,7 @@ importers:
 
   packages/preset-typography:
     specifiers:
-      twind: ^1.0.0-next.39
+      twind: ^1.0.0
       typescript: ^4.8.4
     devDependencies:
       twind: link:../twind
@@ -358,7 +358,7 @@ importers:
 
   packages/twind:
     specifiers:
-      '@twind/preset-tailwind': ^1.0.0-next.39
+      '@twind/preset-tailwind': ^1.0.0
       csstype: ^3.1.1
       typescript: ^4.8.4
     dependencies:
@@ -375,7 +375,7 @@ importers:
       gatsby: ^4.24.8
       react: ^17.0.2
       react-dom: ^17.0.2
-      twind: ^1.0.0-next.39
+      twind: ^1.0.0
       typescript: ^4.8.4
     devDependencies:
       '@types/react': 17.0.52
@@ -393,7 +393,7 @@ importers:
       next: ^12.3.3
       react: ^17.0.2
       react-dom: ^17.0.2
-      twind: ^1.0.0-next.39
+      twind: ^1.0.0
       typescript: ^4.8.4
     devDependencies:
       '@types/react': 17.0.52
@@ -411,7 +411,7 @@ importers:
       react: ^17.0.2
       react-dom: ^17.0.2
       remix: ^1.7.5
-      twind: ^1.0.0-next.39
+      twind: ^1.0.0
       typescript: ^4.8.4
     devDependencies:
       '@types/node': 14.18.33
@@ -427,7 +427,7 @@ importers:
     specifiers:
       '@sveltejs/kit': 1.0.0-next.544
       svelte: ^3.53.1
-      twind: ^1.0.0-next.39
+      twind: ^1.0.0
       typescript: ^4.8.4
     devDependencies:
       '@sveltejs/kit': 1.0.0-next.544_svelte@3.53.1+vite@3.2.3
@@ -466,10 +466,10 @@ importers:
       '@sastan/svelte-headlessui': ^1.0.2
       '@sveltejs/adapter-cloudflare': 1.0.0-next.40
       '@sveltejs/kit': 1.0.0-next.547
-      '@twind/intellisense': 1.0.0-next.39
-      '@twind/preset-autoprefix': 1.0.0-next.39
-      '@twind/preset-tailwind': 1.0.0-next.39
-      '@twind/with-sveltekit': 1.0.0-next.39
+      '@twind/intellisense': 1.0.0
+      '@twind/preset-autoprefix': 1.0.0
+      '@twind/preset-tailwind': 1.0.0
+      '@twind/with-sveltekit': 1.0.0
       '@types/lz-string': ^1.3.34
       '@types/node': ^18.11.9
       '@types/prettier': ^2.7.1
@@ -495,7 +495,7 @@ importers:
       sver: ^1.8.3
       systemjs: ^6.13.0
       tinykeys: ^1.4.0
-      twind: 1.0.0-next.39
+      twind: 1.0.0
       typescript: ^4.8.4
       vite: ^3.2.3
       wrangler: ^2.2.1
@@ -555,11 +555,11 @@ importers:
       '@sastan/svelte-headlessui': ^1.0.2
       '@sveltejs/adapter-static': 1.0.0-next.48
       '@sveltejs/kit': 1.0.0-next.547
-      '@twind/preset-autoprefix': 1.0.0-next.39
-      '@twind/preset-ext': 1.0.0-next.39
-      '@twind/preset-tailwind': 1.0.0-next.39
-      '@twind/preset-typography': 1.0.0-next.39
-      '@twind/with-sveltekit': 1.0.0-next.39
+      '@twind/preset-autoprefix': 1.0.0
+      '@twind/preset-ext': 1.0.0
+      '@twind/preset-tailwind': 1.0.0
+      '@twind/preset-typography': 1.0.0
+      '@twind/with-sveltekit': 1.0.0
       '@types/graceful-fs': ^4.1.5
       esbuild: ^0.15.13
       fast-glob: ^3.2.12
@@ -596,7 +596,7 @@ importers:
       svelte-check: ^2.9.2
       tinykeys: ^1.4.0
       tslib: ^2.4.1
-      twind: 1.0.0-next.39
+      twind: 1.0.0
       typedoc: ^0.23.20
       typedoc-plugin-markdown: ^3.13.6
       typedoc-plugin-mdn-links: ^2.0.0
@@ -4277,7 +4277,7 @@ packages:
       svelte: 3.53.1
       tiny-glob: 0.2.9
       undici: 5.12.0
-      vite: 3.2.3_@types+node@18.11.9
+      vite: 3.2.3
     transitivePeerDependencies:
       - diff-match-patch
       - supports-color
@@ -4299,7 +4299,7 @@ packages:
       magic-string: 0.26.7
       svelte: 3.53.1
       svelte-hmr: 0.15.0_svelte@3.53.1
-      vite: 3.2.3_@types+node@18.11.9
+      vite: 3.2.3
     transitivePeerDependencies:
       - supports-color
 
@@ -4415,12 +4415,6 @@ packages:
     resolution: {integrity: sha512-rEUrBSGIoSFuYxwBYtlUFMlE2CwGhmW+w9355/5oduSw8e5h2+Tj4UrAGNNgP9915++wj5vkQo0UuOBqOAq4nw==}
     dependencies:
       tslib: 2.4.1
-
-  /@swc/helpers/0.4.13:
-    resolution: {integrity: sha512-WOoZMSqpmUgL72xOeaWcU9IG7C6t5Wh1e8NGpSyBvmN5BSCXleK4/PLS6Oko1i/Lvn/yGYOv62bxlfsDvmRurg==}
-    dependencies:
-      tslib: 2.4.1
-    dev: true
 
   /@szmarczak/http-timer/1.1.2:
     resolution: {integrity: sha512-XIB2XbzHTN6ieIjfIMV9hlVcfPU26s2vafYWQcZHWXHOxiaRZYEDKEwdl129Zyg50+foYV2jCgtrqSA6qNuNSA==}
@@ -6426,13 +6420,6 @@ packages:
     resolution: {integrity: sha512-CLOGsVDrVamzv8sXJGaILUVI6dsuAkouJP/n6t+OxLPeeA4DDby7zn9SB6EUpa1H7oIKoE+rMmkW80zYsFfUjA==}
     dev: true
 
-  /clap/3.1.1:
-    resolution: {integrity: sha512-vp42956Ax06WwaaheYEqEOgXZ3VKJxgccZ0gJL0HpyiupkIS9RVJFo5eDU1BPeQAOqz+cclndZg4DCqG1sJReQ==}
-    engines: {node: ^12.20.0 || ^14.13.0 || >=15.0.0, npm: '>=7.0.0'}
-    dependencies:
-      ansi-colors: 4.1.3
-    dev: true
-
   /class-utils/0.3.6:
     resolution: {integrity: sha512-qOhPa/Fj7s6TY8H8esGu5QNpMMQxz79h+urzrNYN6mn+9BnxlDGf5QZ+XeCDsxSjPqsSR56XOZOJmpeurnLMeg==}
     engines: {node: '>=0.10.0'}
@@ -6982,6 +6969,7 @@ packages:
     dependencies:
       mdn-data: 2.0.28
       source-map-js: 1.0.2
+    dev: false
 
   /css-what/6.1.0:
     resolution: {integrity: sha512-HTUrgRJ7r4dsZKU6GjmpfRK1O76h97Z8MfS1G0FozR+oF2kG6Vfe8JE6zwrkbxigziPHinCJ+gCPjA9EaBDtRw==}
@@ -7063,16 +7051,6 @@ packages:
     engines: {node: '>=8.0.0'}
     dependencies:
       css-tree: 1.1.3
-
-  /csstree-validator/3.0.0:
-    resolution: {integrity: sha512-Y5OSq3wI0Xz6L7DCgJQtQ97U+v99SkX9r663VjpvUMJPhEr0A149OxiAGqcnokB5bt81irgnMudspBzujzqn0w==}
-    engines: {node: ^12.20.0 || ^14.13.0 || >=15.0.0, npm: '>=7.0.0'}
-    hasBin: true
-    dependencies:
-      clap: 3.1.1
-      css-tree: 2.2.1
-      resolve: 1.22.1
-    dev: true
 
   /csstype/3.1.1:
     resolution: {integrity: sha512-DJR/VvkAvSZW9bTouZue2sSxDwdTN92uHjqeKVm+0dAqdfNykRzQ95tay8aXMBAAPpUiq4Qcug2L7neoRh2Egw==}
@@ -10265,6 +10243,7 @@ packages:
     resolution: {integrity: sha512-m1hoKhRbUdG/NZdexSzmUwnue/f4oDJBOW+oJQjP6O5aNMgd7QyVOlJp1wMa2b4QYPACt7Ejt1TNcpD18Yaugg==}
     dependencies:
       ret: 0.2.2
+    dev: false
 
   /gensync/1.0.0-beta.2:
     resolution: {integrity: sha512-3hN7NaskYvMDLQY55gnW3NQ+mesEAepTqlg+VEbj7zzqEMBVNhzcGYYeqFo/TlYz6eQiFcp1HcsCZO+nGgS8zg==}
@@ -12668,6 +12647,7 @@ packages:
     dependencies:
       '@babel/runtime': 7.19.0
       remove-accents: 0.4.2
+    dev: false
 
   /md5-file/5.0.0:
     resolution: {integrity: sha512-xbEFXCYVWrSx/gEKS1VPlg84h/4L20znVIulKw6kMfmBUAZNAnF00eczz9ICMl+/hjQGo5KSXRxbL/47X3rmMw==}
@@ -12874,6 +12854,7 @@ packages:
 
   /mdn-data/2.0.28:
     resolution: {integrity: sha512-aylIc7Z9y4yzHYAJNuESG3hfhC+0Ibp/MAMiaOZgNv4pmEdFyfZhhhny4MNiAfWdBQ1RQ2mfDWmM1x8SvGyp8g==}
+    dev: false
 
   /mdurl/1.0.1:
     resolution: {integrity: sha512-/sKlQJCBYVY9Ers9hqzKou4H6V5UWc/M59TH2dvkt+84itfnq7uFOMLpOiOS4ujvHP4etln18fmIxA5R5fll0g==}
@@ -15235,6 +15216,7 @@ packages:
   /quick-lru/6.1.1:
     resolution: {integrity: sha512-S27GBT+F0NTRiehtbrgaSE1idUAJ5bX8dPAQTdylEyNlrdcH5X4Lz7Edz3DYzecbsCluD5zO8ZNEe04z3D3u6Q==}
     engines: {node: '>=12'}
+    dev: false
 
   /randombytes/2.1.0:
     resolution: {integrity: sha512-vYl3iOX+4CKUWuxGi9Ukhie6fsqXqS9FE2Zaic4tNFD2N2QQaXOMFbuKK4QmDHC0JO6B1Zp41J0LpT0oR68amQ==}
@@ -15790,6 +15772,7 @@ packages:
 
   /remove-accents/0.4.2:
     resolution: {integrity: sha512-7pXIJqJOq5tFgG1A2Zxti3Ht8jJF337m4sowbuHsW30ZnkQFnDzy9qBNhgzX8ZLW4+UBcXiiR7SwR6pokHsxiA==}
+    dev: false
 
   /remove-trailing-separator/1.1.0:
     resolution: {integrity: sha512-/hS+Y0u3aOfIETiaiirUFwDBDzmXPvO+jAfKTitUngIPzdKc6Z0LoFjM/CK5PL4C+eKwHohlHAb6H0VFfmmUsw==}
@@ -15922,6 +15905,7 @@ packages:
   /ret/0.2.2:
     resolution: {integrity: sha512-M0b3YWQs7R3Z917WRQy1HHA7Ba7D8hvZg6UE5mLykJxQVE2ju0IXbGlaHPPlkY+WN7wFP+wUMXmBFA0aV6vYGQ==}
     engines: {node: '>=4'}
+    dev: false
 
   /retimer/3.0.0:
     resolution: {integrity: sha512-WKE0j11Pa0ZJI5YIk0nflGI7SQsfl2ljihVy7ogh7DeQSeYAUi0ubZ/yEueGtDfUPk6GH5LRw1hBdLq4IwUBWA==}
@@ -18298,6 +18282,7 @@ packages:
       rollup: 2.79.1
     optionalDependencies:
       fsevents: 2.3.2
+    dev: true
 
   /vitest/0.25.2_lrmr3amye6vt3qfg4edzstsqo4:
     resolution: {integrity: sha512-qqkzfzglEFbQY7IGkgSJkdOhoqHjwAao/OrphnHboeYHC5JzsVFoLCaB2lnAy8krhj7sbrFTVRApzpkTOeuDWQ==}
