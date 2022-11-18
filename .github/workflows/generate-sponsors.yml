@@ -28,7 +28,7 @@ jobs:
       - name: Commit
         uses: EndBug/add-and-commit@v9
         with:
-          commit-message: 'chore: update sponsors images'
+          message: 'chore: update sponsors images'
           add: 'sites/twind.style/static/sponsors.*'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
