@@ -65,7 +65,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      # wait a bit and then run "npm dist-tag add package@version latest" for all published packages
+      # wait a bit and then set latest for twind back to v0.16
+      # because some are using CDNs without specifing a version
       - name: 📝  Keep latest tag on twind@v0.16.18
         if: steps.changesets.outputs.published == 'true'
         run: |
@@ -73,8 +74,8 @@ jobs:
           cat << EOF > "$HOME/.npmrc"
             //registry.npmjs.org/:_authToken=$NPM_TOKEN
           EOF
-          npm dist-tag add twind@0.16.18 latest
-          npm deprecate twind@1.x "use @twind/core instead"
+          npm dist-tag add twind@0.16.18 latest || true
+          npm deprecate twind@1.x "use @twind/core instead" || true
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 

@@ -55,7 +55,7 @@ export default defineConfig((env) => {
           const files = await fg(
             [`../../packages/*/package.json`, '!../../packages/{cdn,twind,with-*}/**'],
             {
-            absolute: true,
+              absolute: true,
             },
           )
 
