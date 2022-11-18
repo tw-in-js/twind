@@ -47,7 +47,7 @@ runs:
 
     - name: 📦  Update lockfile
       shell: bash
-      run: pnpm install --lockfile-only --no-fozen-lockfile --prefer-offline --filter="." --filter="./packages/*" --filter="./sites/*"
+      run: pnpm install --lockfile-only --no-frozen-lockfile --prefer-offline --filter="." --filter="./packages/*" --filter="./sites/*"
 
     - name: 🏗️  Build packages
       shell: bash
