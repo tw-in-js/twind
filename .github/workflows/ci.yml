@@ -46,6 +46,7 @@ jobs:
         run: pnpm test:coverage
 
       - name: 📖  Coveralls
+        continue-on-error: true
         # prevents this step from running on forks
         if: ${{ github.repository == 'tw-in-js/twind' }}
         # until https://github.com/coverallsapp/github-action/issues/135 is closed

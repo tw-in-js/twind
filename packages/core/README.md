@@ -1,4 +1,4 @@
-# twind [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/core?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/core) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23core?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/packages/core)
+# @twind/core [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/core?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/core) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23core?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/packages/core)
 
 Utility-first CSS without any build step right in the browser or any other environment like Node.js, deno, workers, ...
 
