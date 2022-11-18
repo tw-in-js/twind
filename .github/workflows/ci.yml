@@ -13,6 +13,9 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
   cancel-in-progress: true
 
+env:
+  NODE_OPTIONS: --max_old_space_size=4096
+
 jobs:
   build:
     name: 🏗️  Build
@@ -82,13 +85,13 @@ jobs:
         uses: ./.github/actions/publish-pages
         with:
           workingDirectory: sites/twind.style
+          directory: build
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CLOUDLFARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           deploymentName: twind.style
           projectName: twind-style
           branch: main
-          directory: build
 
       - name: 🌎  Deploy twind.run
         if: ${{ steps.changesets.outputs.published == 'true' && github.repository == 'tw-in-js/twind' }}
@@ -144,9 +147,10 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CLOUDLFARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
           # no github deployment for canary
-          GITHUB_TOKEN: ${{ (github.event_name == 'push' && '') || secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ (github.event.number && '') || secrets.GITHUB_TOKEN }}
           deploymentName: twind.style
           projectName: twind-style
+          branch: ${{ (github.event.number && ('pr-' + github.event.number)) || (github.event_name == 'push' && 'next') || 'canary' }}
 
       - name: 🌎  Deploy twind.run
         id: deploy_twind_run
@@ -157,12 +161,13 @@ jobs:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
           CLOUDLFARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
           # no github deployment for canary
-          GITHUB_TOKEN: ${{ (github.event_name == 'push' && '') || secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ (github.event.number && '') || secrets.GITHUB_TOKEN }}
           deploymentName: twind.run
           projectName: twind-run
+          branch: ${{ (github.event.number && ('pr-' + github.event.number)) || (github.event_name == 'push' && 'next') || 'canary' }}
 
       - name: 📝  Comment PR
-        if: ${{ github.event_name == 'pull_request' }}
+        if: ${{ github.event.number }}
         uses: thollander/actions-comment-pull-request@v1
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

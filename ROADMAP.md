@@ -2,7 +2,7 @@
 
 ## Documentation
 
-- why twind?
+- [ ] why twind?
   - no build step
   - one line installation
   - grouping - but still atomic utilities
@@ -13,37 +13,42 @@
   - framework agnostic
   - comments
   - hashed class names
-- examples: template with all lang and css features
-- explain and examples of both modes (observe/shim vs library) with example
-- how to create a component library: shortcuts vs apply vs style
-- migration from v0.16 guide
-- common patterns
-- debugging the generated CSS in the browser (dom sheet)
-- link to [transform css to tailwind](https://tailwind-converter.netlify.app/)
+- [ ] examples: template with all lang and css features
+- [ ] explain and examples of both modes (observe/shim vs library) with example
+- [ ] how to create a component library: shortcuts vs apply vs style
+- [ ] migration from v0.16 guide
+- [ ] common patterns
+- [ ] debugging the generated CSS in the browser (dom sheet)
+- [ ] link to [transform css to tailwind](https://tailwind-converter.netlify.app/)
 - redirects
   - [x] 'chat.twind.style' -> 'https://discord.gg/3fwqsmXNYK'
 - [x] 'cdn.twind.style' as proxy for 'https://cdn.jsdelivr.net/npm/@twind/cdn@next' or jspm.io
   - redirects do not work because of cors issue
 - [x] add https://twind.style/twind-logo-animated.svg for use in github readme
 - update discord welcome with link to website
-
-## v1
-
-- [x] dist tags
+- [ ] page about dist tags and stes
 
   - https://support.google.com/chrome/a/answer/9027636?hl=en
+  - https://docusaurus.io/community/release-process#stable-version
   - latest: latest stable release - published by changesets/action
   - next: upcoming release - published on every commit to main
   - canary: the latest dev release (https://docusaurus.io/community/canary) - published for PR commits
 
-- [x] sites
+  - sites
 
-  - main: `twind-run.pages.dev` (`twind.run`) latest stable release - published on release
-  - next: `next.twind-run.pages.dev` upcoming release - published on every commit to main
-  - canary: `pr-*.twind-run.pages.dev` - published for PR commits
-  - version: `v1-0-0-next-39.twind-run.pages.dev` - specific version
+    - latest: `twind-run.pages.dev` (`twind.run`) latest stable release - published on release
+    - next: `next.twind-run.pages.dev` upcoming release - published on every commit to main
+    - canary: `pr-*.twind-run.pages.dev` - published for PR commits
+    - version: `v1-0-0-next-39.twind-run.pages.dev` - specific version
 
-    Branch name aliases are lowercased and non-alphanumeric characters are replaced with a hyphen — for example, the `fix/api` branch creates the `fix-api.<project>.pages.dev` alias.
+      Branch name aliases are lowercased and non-alphanumeric characters are replaced with a hyphen — for example, the `fix/api` branch creates the `fix-api.<project>.pages.dev` alias.
+
+## v1
+
+- ci:
+
+  - only publish pre-releases if something package related has changed: https://github.com/dorny/paths-filter
+  - only build packages that have changed: https://github.com/pnpm/pnpm/pull/2201
 
 - @twind/devtools:
   - enumerate all classes and inject as empty for dev tools

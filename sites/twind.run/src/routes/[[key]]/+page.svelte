@@ -7,6 +7,14 @@
   import { createKeybindingsHandler } from 'tinykeys'
   import copy from 'clipboard-copy'
   import { Pane, Splitpanes } from 'svelte-splitpanes'
+  import {
+    Transition,
+    Listbox,
+    ListboxLabel,
+    ListboxButton,
+    ListboxOptions,
+    ListboxOption,
+  } from '@sastan/svelte-headlessui'
 
   import { base } from '$app/paths'
   import { browser } from '$app/environment'
@@ -15,7 +23,7 @@
 
   import prettier from '$lib/prettier'
   import transpile from '$lib/transpile'
-  import intellisense, { INTELLISENSE_VERSION } from '$lib/intellisense'
+  import intellisense from '$lib/intellisense'
   import { mounted } from '$lib/stores'
 
   import Loader from './loader.svelte'
@@ -23,6 +31,8 @@
   import Header from '$lib/components/header.svelte'
   import Icon, {
     CheckCircle16,
+    CheckSolid,
+    ChevronUpDownMini,
     EllipsisHorizontalMini,
     Link16,
     LoadingSpin,
@@ -31,7 +41,7 @@
   } from '$lib/icons'
   import { getTurnstileToken } from '$lib/turnstile'
 
-  import { injectGlobal } from '$lib/twind'
+  import { cx, injectGlobal } from '$lib/twind'
 
   // Based on https://github.com/tailwindlabs/play.tailwindcss.com/blob/master/src/css/main.css
   injectGlobal`
@@ -400,10 +410,97 @@
       Fork
     </button>
     -->
+    <Listbox
+      class="relative group max-w-([6rem] lg:[12rem] xl:fit)"
+      value={$workspace.version}
+      on:change={(event) => ($workspace.version = event.detail)}
+      let:open
+    >
+      <ListboxLabel class="sr-only">Change selected version</ListboxLabel>
+
+      <ListboxButton
+        class="relative w-full cursor-default rounded-md text-sm text-brand-11 border border-transparent px-3 py-1 pr-8 text-left hover:(text-brand-12 bg-brand-4 border-brand-8 shadow-sm) group-focus-within:(text-brand-12 bg-brand-5 border-brand-8 shadow-sm outline-none ring-1 ring-brand-7)"
+      >
+        <span class="flex items-center">
+          <span class="block truncate">v{manifest.version}</span>
+        </span>
+        <span class="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
+          <Icon
+            src={ChevronUpDownMini}
+            class="h-5 w-5 text-neutral-11 group-focus-within:text-neutral-12"
+          />
+        </span>
+      </ListboxButton>
+
+      <Transition
+        show={open}
+        leave="transition ease-in motion-safe:duration-100"
+        leaveFrom="opacity-100"
+        leaveTo="opacity-0"
+      >
+        <ListboxOptions
+          static
+          class="absolute left-0 z-10 mt-2 w-64 origin-top-left divide-y divide-brand-6 overflow-hidden rounded-md bg-brand-3 shadow-lg ring-1 ring-brand-7 ring-opacity-5 focus:outline-none"
+        >
+          {#each data.manifests as manifest (manifest.version)}
+            <ListboxOption
+              value={manifest.version}
+              class={({ active, selected }) =>
+                cx(
+                  'cursor-default select-none p-2 text-sm',
+                  active
+                    ? 'text-brand-12 bg-brand-4'
+                    : selected
+                    ? 'text-accent-11 bg-brand-3'
+                    : 'text-brand-11 bg-brand-3',
+                )}
+              let:active
+              let:selected
+            >
+              <div class="flex flex-col gap-1">
+                <div class="flex justify-between">
+                  <p class={selected ? 'font-semibold' : 'font-normal'}>
+                    v{manifest.version}
+                  </p>
+                  {#if selected}
+                    <Icon src={CheckSolid} class="h-5 w-5" />
+                  {/if}
+                </div>
+                <p
+                  class={cx(
+                    'flex gap-1 justify-between text-xs',
+                    active ? 'text-neutral-12' : 'text-neutral-11',
+                  )}
+                >
+                  {#if manifest.pr}
+                    <a
+                      href={`https://github.com/tw-in-js/twind/pull/${manifest.pr}`}
+                      class="underline"
+                      target="_blank"
+                      rel="external noopener noreferrer nofollow"
+                    >
+                      PR #{manifest.pr}</a
+                    >
+                    — for testing only
+                  {:else if manifest['dist-tag'] === 'latest'}
+                    stable version — for most users
+                  {:else if manifest['dist-tag'] === 'next'}
+                    future version — for early adopters
+                  {:else}
+                    development version — for testing only
+                  {/if}
+                </p>
+              </div>
+            </ListboxOption>
+          {/each}
+        </ListboxOptions>
+      </Transition>
+    </Listbox>
+
     <button
       type="button"
       title="Create shareable link"
-      class="flex gap-2 items-center rounded-md border border-transparent px-3 py-1 text-sm font-medium text-brand-11 shadow-sm enabled:(hover:(text-brand-12 bg-brand-4) focus:(text-brand-12 bg-brand-5)) disabled:opacity-70"
+      class="flex gap-2 items-center rounded-md border border-transparent px-(1 md:3) py-1 text-sm font-medium text-brand-11 enabled:(hover:(text-brand-12 bg-brand-4 border-brand-8 shadow-sm) focus:(text-brand-12 bg-brand-5 border-brand-8 shadow-sm outline-none ring-1 ring-brand-7)) disabled:opacity-70"
       disabled={sharing || !isDirty}
       on:click={() => {
         sharing = true
@@ -428,7 +525,7 @@
       <button
         type="button"
         title="Copy link"
-        class="flex gap-2 items-center -ml-2 px-3 py-1 text-xs font-medium text-brand-11 hover:text-brand-12 focus:text-brand-12"
+        class="flex gap-2 items-center px-(1 md:3) py-1 text-xs font-medium text-brand-11 hover:text-brand-12 focus:text-brand-12"
         class:!text-success-11={copied}
         on:click={() => {
           if (shareLink) {
@@ -439,15 +536,10 @@
         {#if copied}
           <Icon src={CheckCircle16} class="-ml-1 h-4 w-4" />
           Copied!
+        {:else if shareLink.pathname.length > 23}
+          {shareLink.pathname.slice(0, 7)}…{shareLink.pathname.slice(-7)}
         {:else}
-          <Icon src={Link16} class="-ml-1 h-4 w-4" />
-          <span class="hidden md:flex">
-            {#if shareLink.pathname.length > 23}
-              …{shareLink.pathname.slice(0, 7)}…{shareLink.pathname.slice(-7)}
-            {:else}
-              …{shareLink.pathname}
-            {/if}
-          </span>
+          {shareLink.pathname}
         {/if}
       </button>
     {/if}
@@ -461,9 +553,7 @@
       }, 10)}
     >
       <Pane class="flex-auto flex flex-col">
-        <div
-          class="flex-none overflow-auto flex items-center justify-between gap-4 pl-(5 sm:6) pr-(4 lg:6)"
-        >
+        <div class="flex-none flex items-center justify-between gap-4 pl-(5 sm:6) pr-(4 lg:6)">
           <div class="flex space-x-5">
             {#each fileTabOrder as file (file)}
               <button
@@ -483,18 +573,7 @@
               >
             {/each}
           </div>
-          <div class="flex items-center gap-4">
-            <select
-              bind:value={$workspace.version}
-              title="Select version"
-              class="mt-1 block w-full rounded-md bg-brand-3 text-brand-11 border-brand-7 p-2 text-base hover:(bg-brand-4 text-brand-12) focus:(bg-brand-5 text-brand-12 border-brand-8 outline-none ring-brand-8) sm:text-sm"
-            >
-              {#each data.manifests as manifest (manifest.version)}
-                <option value={manifest.version}>{manifest.version} ({manifest['dist-tag']})</option
-                >
-              {/each}
-            </select>
-
+          <div class="flex items-center gap-4 overflow-auto">
             <button
               type="button"
               class="flex items-center hover:text-brand-12"
@@ -505,7 +584,7 @@
             </button>
             <button
               type="button"
-              class="flex items-center hover:text-brand-12"
+              class="flex items-center hover:text-brand-12 sr-only md:not-sr-only"
               title={`Command Palette (⇧ ${MOD_KEY} P)`}
               on:click={() => editor?.trigger('editor.action.quickCommand')}
             >

@@ -11,8 +11,6 @@ import type { ImportMap } from './system'
 
 import IntellisenseWorker from './intellisense.worker?worker'
 
-export { version as INTELLISENSE_VERSION } from '@twind/intellisense/package.json'
-
 export interface Intellisense {
   init(options: { entry: string; importMap: ImportMap }): Promise<void>
 

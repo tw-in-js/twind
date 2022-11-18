@@ -18,6 +18,7 @@ import { searchForWorkspaceRoot, defineConfig, transformWithEsbuild, send } from
 import commonjs from '@rollup/plugin-commonjs'
 import nodePolyfills from 'rollup-plugin-polyfill-node'
 
+import format from 'date-fns/format'
 import { version as VERSION } from './package.json'
 
 export default defineConfig((env) => {
@@ -51,13 +52,9 @@ export default defineConfig((env) => {
           // 1. find all packages
           //   - in dev use packages/*/package.json
           //   - in prod use packages/*/dist/package.json
-          const files = await fg(
-            [
-              `../../packages/*/${process.env.CI ? 'dist/' : ''}package.json`,
-              '!**/{cdn,with-*}/**',
-            ],
-            { absolute: true },
-          )
+          const files = await fg([`../../packages/*/package.json`, '!**/{cdn,with-*}/**'], {
+            absolute: true,
+          })
 
           const conditions = [
             'development',
@@ -73,6 +70,17 @@ export default defineConfig((env) => {
 
           const packages = await Promise.all(
             files.map(async (manifestFile) => {
+              // try to re-use already build dist files
+              if (process.env.CI) {
+                const distManifestFile = path.resolve(manifestFile, '../dist/package.json')
+                try {
+                  fs.access(distManifestFile)
+                  manifestFile = distManifestFile
+                } catch {
+                  // ignore
+                }
+              }
+
               // 2. generate systemjs bundle with rollup for all entry points
               //   - https://www.npmjs.com/package/resolve.exports
 
@@ -439,10 +447,14 @@ export default defineConfig((env) => {
           console.timeEnd('generate-cdn:importMap')
 
           // console.debug(importMap)
+          const version = process.env.CI
+            ? VERSION
+            : VERSION.replace(/^([.\d]+)(-.+)?$/, `$1-dev-${format(Date.now(), 'yyyyMMddHHmmss')}`)
+
           const cdnManifest = {
-            version: VERSION,
-            // from version: 1.0.0 -> latest, 1.0.0-(next|canary)-*
-            'dist-tag': VERSION.replace(/^[.\d]+(?:-([^.-]+).+)?$/, '$1') || 'latest',
+            version,
+            // from version: 1.0.0 -> latest, 1.0.0-(canary|next|dev)-*
+            'dist-tag': version.replace(/^[.\d]+(?:-([^.-]+).+)?$/, '$1') || 'latest',
             'git-sha': process.env.GITHUB_SHA || execSync('git rev-parse HEAD').toString().trim(),
             pr:
               process.env.GITHUB_EVENT_NAME === 'pull_request'

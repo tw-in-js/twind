@@ -1,7 +1,7 @@
 export interface Manifest {
   url: string
   version: string
-  'dist-tag': 'latest' | 'next' | 'canary'
+  'dist-tag': 'latest' | 'next' | 'canary' | 'dev'
   'git-sha': string
   pr?: string
   packages: Record<string, string>

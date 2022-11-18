@@ -31,10 +31,10 @@
 </script>
 
 <header
-  class="relative flex-none overflow-visible flex items-center space-x-4 py-1 pl-5 pr-3 sm:pl-6 sm:pr-4 md:pr-3.5 lg:px-6"
+  class="relative flex-none overflow-visible flex items-center space-x-(1 md:2 lg:4) text-small py-1 pl-5 pr-3 sm:pl-6 sm:pr-4 md:pr-3.5 lg:px-6"
 >
-  <div class="flex-auto flex items-center justify-between gap-4">
-    <div class="flex gap-(4 lg:8 xl:12)">
+  <div class="flex-auto flex items-center justify-between gap-(1 md:3 lg:4)">
+    <div class="flex gap-(2 lg:4 xl:10)">
       <a href="/" class="flex font-medium items-center hover:text-brand-12">
         <Icon src={TwindLogo} class="w-6 h-6" />
         <span class="sr-only md:(not-sr-only ml-3 text-xl)">
@@ -45,16 +45,16 @@
         </span></a
       >
       {#if $$slots.default}
-        <div class="flex items-center gap-4">
+        <div class="flex items-center gap-(1 md:2 lg:4)">
           <slot />
         </div>
       {/if}
     </div>
 
-    <div class="flex gap-4 items-center">
+    <div class="flex gap-(1 md:2 lg:4) items-center">
       <button
         type="button"
-        class="flex gap-2 items-center rounded-md border border-transparent px-3 py-1 text-sm font-medium text-brand-11 shadow-sm enabled:(hover:(text-brand-12 bg-brand-4) focus:(text-brand-12 bg-brand-5)) disabled:opacity-70"
+        class="flex gap-2 items-center rounded-md border border-transparent px-3 py-1 text-sm font-medium text-brand-11 enabled:(hover:(text-brand-12 bg-brand-4 border-brand-8 shadow-sm) focus:(text-brand-12 bg-brand-5 border-brand-8 shadow-sm outline-none ring-1 ring-brand-7)) disabled:opacity-70"
         title="Create a bug report on GitHub"
         disabled={sharing}
         on:click={(event) => {
@@ -99,7 +99,7 @@
         {:else}
           <Icon src={BugAntSolid} class="-ml-1 h-5 w-5" label="Something broken? File a bug!" />
         {/if}
-        <span class="sr-only lg:not-sr-only">Something broken? File a bug!</span>
+        <span class="sr-only xl:not-sr-only">Something broken? File a bug!</span>
       </button>
 
       <hr class="w-0 h-5 border-l border-brand-6" aria-orientation="vertical" />
