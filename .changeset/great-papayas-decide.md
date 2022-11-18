@@ -7,6 +7,7 @@
 '@example/with-remix': patch
 '@example/with-sveltekit': patch
 '@twind/cdn': patch
+'@twind/core': patch
 '@twind/intellisense': patch
 '@twind/preset-autoprefix': patch
 '@twind/preset-ext': patch
