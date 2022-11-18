@@ -1,6 +1,6 @@
 {
   "name": "@twind/core",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "The core engine without any presets.",
   "keywords": [
     "twind",
@@ -54,7 +54,7 @@
     }
   },
   "devDependencies": {
-    "@twind/preset-tailwind": "^1.0.0",
+    "@twind/preset-tailwind": "^1.0.1",
     "typescript": "^4.8.4"
   },
   "scripts": {
