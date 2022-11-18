@@ -30,7 +30,7 @@ importers:
       '@typescript-eslint/parser': ^5.42.1
       '@vitest/coverage-c8': ^0.25.2
       '@vitest/ui': ^0.25.2
-      distilt: ^0.18.0
+      distilt: ^0.18.1
       dotenv: ^10.0.0
       eslint: ^8.27.0
       eslint-config-prettier: ^8.5.0
@@ -62,7 +62,7 @@ importers:
       '@typescript-eslint/parser': 5.42.1_rmayb2veg2btbq6mbmnyivgasy
       '@vitest/coverage-c8': 0.25.2_lrmr3amye6vt3qfg4edzstsqo4
       '@vitest/ui': 0.25.2
-      distilt: 0.18.0_typescript@4.8.4
+      distilt: 0.18.1_typescript@4.8.4
       dotenv: 10.0.0
       eslint: 8.27.0
       eslint-config-prettier: 8.5.0_eslint@8.27.0
@@ -7404,8 +7404,8 @@ packages:
     dependencies:
       path-type: 4.0.0
 
-  /distilt/0.18.0_typescript@4.8.4:
-    resolution: {integrity: sha512-0u8t+m1KTnVRdcIbLTlLMRu9ubfRxYbJ7kpPnXS+zLDelFAKxcI4wCtbYUb5p02ACRgxDJ9pE22POD0OcYx8SA==}
+  /distilt/0.18.1_typescript@4.8.4:
+    resolution: {integrity: sha512-yQPvesDZ9kZOw1XYd0tI0dkc7WfPYYGapFTlaoSTqEkVIy0Ph1Nithd6OaF1t0KIkR/C3+66Kqa8VE4GkeFLng==}
     engines: {node: '>=14'}
     hasBin: true
     peerDependencies:
