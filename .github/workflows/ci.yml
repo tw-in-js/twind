@@ -150,7 +150,7 @@ jobs:
           GITHUB_TOKEN: ${{ (github.event.number && '') || secrets.GITHUB_TOKEN }}
           deploymentName: twind.style
           projectName: twind-style
-          branch: ${{ (github.event.number && ('pr-' + github.event.number)) || (github.event_name == 'push' && 'next') || 'canary' }}
+          branch: ${{ (github.event.number && format('pr-{0}', github.event.number)) || (github.event_name == 'push' && 'next') || 'canary' }}
 
       - name: 🌎  Deploy twind.run
         id: deploy_twind_run
@@ -164,7 +164,7 @@ jobs:
           GITHUB_TOKEN: ${{ (github.event.number && '') || secrets.GITHUB_TOKEN }}
           deploymentName: twind.run
           projectName: twind-run
-          branch: ${{ (github.event.number && ('pr-' + github.event.number)) || (github.event_name == 'push' && 'next') || 'canary' }}
+          branch: ${{ (github.event.number && format('pr-{0}', github.event.number)) || (github.event_name == 'push' && 'next') || 'canary' }}
 
       - name: 📝  Comment PR
         if: ${{ github.event.number }}

@@ -203,7 +203,7 @@ export async function load({
     if (manifest.version !== version) {
       try {
         console.debug(
-          `Resolving  CDN manifest for ${alias || '<empty>'} (${origin}) using ${manifest.version}`,
+          `Resolving CDN manifest for ${alias || '<empty>'} (${origin}) using ${manifest.version}`,
         )
         return await loadManifest(manifest.version)
       } catch {

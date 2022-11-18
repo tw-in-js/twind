@@ -108,11 +108,11 @@
   /** @type {'html' | 'script' | 'config'} */
   let activeFileTab = fileTabOrder.includes(activeFileTabParam) ? activeFileTabParam : 'html'
 
-  /** @type {['preview', 'css', 'html']} */
-  const resultTabOrder = ['preview', 'css', 'html']
+  /** @type {['preview', 'css', 'html', 'info']} */
+  const resultTabOrder = ['preview', 'css', 'html', 'info']
   /** @type {any} */
   const activeResultTabParam = $page.url.searchParams.get('result')
-  /** @type {'preview' | 'css' | 'html'} */
+  /** @type {'preview' | 'css' | 'html' | 'info'} */
   let activeResultTab = resultTabOrder.includes(activeResultTabParam)
     ? activeResultTabParam
     : 'preview'
@@ -481,13 +481,13 @@
                     >
                       PR #{manifest.pr}</a
                     >
-                    — for testing only
+                    — still in development
                   {:else if manifest['dist-tag'] === 'latest'}
                     stable version — for most users
                   {:else if manifest['dist-tag'] === 'next'}
-                    future version — for early adopters
+                    next version — for early adopters
                   {:else}
-                    development version — for testing only
+                    canary version — still in development
                   {/if}
                 </p>
               </div>
@@ -631,7 +631,7 @@
             {#each resultTabOrder as tab (tab)}
               <button
                 type="button"
-                class={'relative flex py-3 text-sm leading-6 font-semibold focus:outline-none ' +
+                class={'relative flex py-3 text-sm leading-6 uppercase font-semibold focus:outline-none ' +
                   (activeResultTab === tab
                     ? 'text-accent-11'
                     : 'text-brand-11 hover:text-brand-12 focus:text-brand-12')}
@@ -646,7 +646,7 @@
                 ><span
                   class="absolute bottom-0 inset-x-0 bg-accent-11 h-0.5 rounded-full transition-opacity duration-150"
                   class:opacity-0={activeResultTab !== tab}
-                />{tab === 'preview' ? 'Preview' : tab.toUpperCase()}</button
+                />{tab}</button
               >
             {/each}
           </div>
@@ -656,7 +656,7 @@
           {#await import('./preview.svelte') then { default: Preview }}
             <Preview
               bind:this={preview}
-              class={activeResultTab !== 'preview' ? 'hidden' : ''}
+              class={activeResultTab === 'preview' ? '' : 'hidden'}
               html={transientHTML || $workspace.html.value}
               script={$workspace.script.value}
               config={$workspace.config.value}
@@ -667,14 +667,20 @@
 
           {#await import('./code.svelte') then { default: Code }}
             <Code
-              class={activeResultTab === 'preview' ? 'hidden' : ''}
+              class={activeResultTab === 'css' || activeResultTab === 'html' ? '' : 'hidden'}
               bind:this={result}
               path={`preview://output.${activeResultTab}`}
-              value={activeResultTab === 'preview' ? '' : formatted[activeResultTab]}
+              value={activeResultTab === 'css' || activeResultTab === 'html'
+                ? formatted[activeResultTab]
+                : ''}
               {manifest}
               updateOn="save"
               readonly
             />
+          {/await}
+
+          {#await import('./manifest.svelte') then { default: Manifest }}
+            <Manifest class={activeResultTab === 'info' ? '' : 'hidden'} {manifest} />
           {/await}
         {:else}
           <Loader />
