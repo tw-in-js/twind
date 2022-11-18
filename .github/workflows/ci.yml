@@ -54,18 +54,28 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: ./coverage/lcov.info
 
-      - name: 🏗️  Build
-        run: pnpm build
-
       - name: 🚚  Create Release PR or Publish to npm
         id: changesets
         if: ${{ github.repository == 'tw-in-js/twind' && github.event_name == 'push' }}
         uses: changesets/action@v1
         with:
-          version: pnpm run changeset:version
-          publish: pnpm run changeset:publish
+          version: pnpm changeset:version
+          publish: pnpm changeset:publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      # wait a bit and then run "npm dist-tag add package@version latest" for all published packages
+      - name: 📝  Keep latest tag on twind@v0.16.18
+        if: steps.changesets.outputs.published == 'true'
+        run: |
+          sleep 20
+          cat << EOF > "$HOME/.npmrc"
+            //registry.npmjs.org/:_authToken=$NPM_TOKEN
+          EOF
+          npm dist-tag add twind@0.16.18 latest
+          npm deprecate twind@1.x "use @twind/core instead"
+        env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: 🌎  Deploy twind.style

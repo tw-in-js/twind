@@ -34,16 +34,6 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    - name: 📝  Updating .npmrc
-      shell: bash
-      run: |
-        cat << EOF > "$HOME/.npmrc"
-          email=release-workflow@twind.style
-          //registry.npmjs.org/:_authToken=$NPM_TOKEN
-        EOF
-      env:
-        NPM_TOKEN: ${{ inputs.NPM_TOKEN }}
-
     - name: 📝  Ensure atleast one changeset exists
       if: ${{ inputs.hasChangesets != 'true' }}
       shell: bash
@@ -57,7 +47,7 @@ runs:
 
     - name: 📦  Update lockfile
       shell: bash
-      run: pnpm install --lockfile-only --frozen-lockfile=false --prefer-offline --filter="." --filter="./packages/*" --filter="./sites/*"
+      run: pnpm install --lockfile-only --no-fozen-lockfile --prefer-offline --filter="." --filter="./packages/*" --filter="./sites/*"
 
     - name: 🏗️  Build packages
       shell: bash
@@ -65,7 +55,13 @@ runs:
 
     - name: 🚀  Publish packages
       shell: bash
-      run: pnpm release --tag ${{ inputs.tag }} --no-git-checks --report-summary
+      run: |
+        cat << EOF > "$HOME/.npmrc"
+          //registry.npmjs.org/:_authToken=$NPM_TOKEN
+        EOF
+        pnpm --recursive publish --tag ${{ inputs.tag }} --no-git-checks --report-summary
+      env:
+        NPM_TOKEN: ${{ inputs.NPM_TOKEN }}
 
     - name: 💡  Publish Info
       shell: bash
