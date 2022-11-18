@@ -1,6 +1,6 @@
 {
   "name": "@sites/cdn.twind.style",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Twind CDN",
   "private": true,
   "license": "MIT",

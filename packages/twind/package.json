@@ -1,6 +1,6 @@
 {
   "name": "twind",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "Proxy package for @twind/core",
   "keywords": [
     "twind",
@@ -20,7 +20,7 @@
   "// These are relative from within the dist/ folder": "",
   "sideEffects": false,
   "dependencies": {
-    "@twind/core": "^1.0.1"
+    "@twind/core": "^1.0.0"
   },
   "peerDependencies": {
     "typescript": "^4.8.4"
