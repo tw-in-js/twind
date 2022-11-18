@@ -17,7 +17,7 @@ next: ./preset-tailwind-forms.md
 
 ## 📦 Installation
 
-**with [twind](https://github.com/tw-in-js/twind/tree/main/packages/twind)**
+**with [@twind/core](https://github.com/tw-in-js/twind/tree/main/packages/core)**
 
 Install from npm:
 

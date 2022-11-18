@@ -13,7 +13,7 @@ _Does not work in [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind
 
 - [gatsby](https://www.npmjs.com/package/gatsby)
 - [gatsby-plugin-twind](https://github.com/tw-in-js/twind/tree/main/packages/with-gatsby)
-- [twind](https://github.com/tw-in-js/twind/tree/main/packages/twind)
+- [@twind/core](https://github.com/tw-in-js/twind/tree/main/packages/core)
 - [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/main/packages/preset-autoprefix)
 - [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/main/packages/preset-tailwind)
 

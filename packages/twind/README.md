@@ -1,4 +1,4 @@
-# twind [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/twind?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/twind) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23twind?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/packages/twind)
+# twind [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/core?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/twind) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23twind?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/packages/twind)
 
 ---
 
@@ -11,7 +11,7 @@ Utility-first CSS without any build step right in the browser or any other envir
 - 📖 Study [the documentation](https://twind.style)
 - 🤖 Try [the playground](https://twind.run)
 - 🧭 Explore [the examples](https://twind.style/examples)
-- 📓 Consult [the API reference](https://twind.style/packages/twind)
+- 📓 Consult [the API reference](https://twind.style/packages/@twind/core)
 - 📜 Read [the changelog](https://github.com/tw-in-js/twind/tree/main/packages/twind/CHANGELOG.md)
 
 ## 📖 Documentation

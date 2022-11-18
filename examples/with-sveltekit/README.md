@@ -11,7 +11,7 @@
 ## What is included?
 
 - [sveltekit](https://www.npmjs.com/package/@sveltejs/kit)
-- [twind](https://github.com/tw-in-js/twind/tree/main/packages/twind)
+- [@twind/core](https://github.com/tw-in-js/twind/tree/main/packages/core)
 - [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/main/packages/preset-autoprefix)
 - [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/main/packages/preset-tailwind)
 - [@twind/with-sveltekit](https://github.com/tw-in-js/twind/tree/main/packages/with-sveltekit)

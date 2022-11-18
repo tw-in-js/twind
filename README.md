@@ -12,7 +12,7 @@ The smallest, fastest, most feature complete Tailwind-in-JS solution in existenc
 ---
 
 [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE)
-[![Latest Release](https://flat.badgen.net/npm/v/twind?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/twind)
+[![Latest Release](https://flat.badgen.net/npm/v/@twind/core?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/core)
 [![Documentation](https://flat.badgen.net/badge/icon/Documentation?icon=awesome&label)](https://twind.style)
 [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind?icon=github&label)](https://github.com/tw-in-js/twind)
 [![Discord](https://img.shields.io/discord/798324011980423188?label=chat&logo=discord)](https://chat.twind.style)

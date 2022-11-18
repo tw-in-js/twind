@@ -5,7 +5,7 @@ excerpt: Presets group common configuration, like rules and variants, into a reu
 next: ./integrations.md
 ---
 
-The [Twind package](./packages/twind) does not include any utilities — all utilities are provided via presets or user configuration.
+The [Twind core package](./packages/@twind/core) does not include any utilities — all utilities are provided via presets or user configuration.
 
 The most common task of a preset is to add custom [rules](./rules) and [variants](./variants).
 
