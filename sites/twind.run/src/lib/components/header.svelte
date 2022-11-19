@@ -22,6 +22,7 @@
   function createBugReportURL(reproduction = $page.url.toString(), systemInfo = '') {
     const url = new URL('https://github.com/tw-in-js/twind/issues/new')
     url.searchParams.set('template', 'bug_report.yml')
+    url.searchParams.set('labels', '🐞 Bug')
     url.searchParams.set('reproduction', reproduction)
     if (systemInfo) {
       url.searchParams.set('system-info', systemInfo)

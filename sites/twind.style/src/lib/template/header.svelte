@@ -23,6 +23,7 @@
   function createBugReportURL(link = $page.url.toString()) {
     const url = new URL('https://github.com/tw-in-js/twind/issues/new')
     url.searchParams.set('template', 'docs.yml')
+    url.searchParams.set('labels', '📚 Documentation')
     url.searchParams.set('affects', `- ${link}`)
     return url.toString()
   }
