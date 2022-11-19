@@ -63,10 +63,7 @@ setup({
 
 ```html
 <head>
-  <script
-    src="https://cdn.jsdelivr.net/combine/npm/@twind/cdn,npm/@twind/preset-typography"
-    crossorigin
-  ></script>
+  <script src="https:///cdn.twind.style/typography" crossorigin></script>
   <script>
     twind.install({
       presets: [twind.presetTypography(/* options */)],

@@ -52,10 +52,7 @@ export default defineConfig({
 
 ```html
 <head>
-  <script
-    src="https://cdn.jsdelivr.net/combine/npm/@twind/cdn,npm/@twind/preset-ext"
-    crossorigin
-  ></script>
+  <script src="https://cdn.twind.style/ext" crossorigin></script>
   <script>
     twind.install({
       presets: [twind.presetExt()],

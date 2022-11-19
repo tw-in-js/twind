@@ -64,10 +64,7 @@ export default defineConfig({
 
 ```html
 <head>
-  <script
-    src="https://cdn.jsdelivr.net/combine/npm/npm/@twind/cdn,npm/@twind/preset-tailwind-forms"
-    crossorigin
-  ></script>
+  <script src="https://cdn.twind.style/tailwind-forms" crossorigin></script>
   <script>
     twind.install({
       presets: [twind.presetTailwindForms(/* options */)],
@@ -81,11 +78,11 @@ All of the basic form elements you use will now have some simple default styles 
 
 ## 🙇 Usage
 
-> Same as with [tailwindcss-forms › Basic Usage](https://github.com/tailwindlabs/tailwindcss-forms#basic-usage)
+> Same as with [@tailwindcss/forms › Basic Usage](https://github.com/tailwindlabs/tailwindcss-forms#basic-usage)
 
 ### Using only global styles or only classes
 
-> Same as with [tailwindcss-forms › Using only global styles or only classes](https://github.com/tailwindlabs/tailwindcss-forms#using-only-global-styles-or-only-classes)
+> Same as with [@tailwindcss/forms › Using only global styles or only classes](https://github.com/tailwindlabs/tailwindcss-forms#using-only-global-styles-or-only-classes)
 
 ```js title="twind.config.js"
 import { defineConfig } from '@twind/core'

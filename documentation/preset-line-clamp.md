@@ -62,10 +62,7 @@ export default defineConfig({
 
 ```html
 <head>
-  <script
-    src="https://cdn.jsdelivr.net/combine/npm/@twind/cdn,npm/@twind/preset-line-clamp"
-    crossorigin
-  ></script>
+  <script src="https://cdn.twind.style/line-clamp" crossorigin></script>
   <script>
     twind.install({
       presets: [twind.presetLineClamp()],
