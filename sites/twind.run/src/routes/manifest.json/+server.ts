@@ -9,7 +9,7 @@ export function GET(): ReturnType<import('./$types').RequestHandler> {
       // "$schema": "https://json.schemastore.org/web-manifest-combined.json",
       name: 'Twind.run',
       short_name: 'Twind',
-      description: `An advanced online playground for Twind that lets you use all of Twind's build-time features directly in the browser.`,
+      description: `An advanced online playground for Twind that lets you use all of Twind's features directly in the browser.`,
       theme_color: '' + tw.theme('colors.brand.1-dark'),
       background_color: '' + tw.theme('colors.brand.1-dark'),
       display: 'standalone',

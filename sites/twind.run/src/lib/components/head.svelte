@@ -9,7 +9,7 @@
   export let title = undefined
 
   /** @type {string | undefined} */
-  export let description = `An advanced online playground for Twind that lets you use all of Twind's build-time features directly in the browser.`
+  export let description = `An advanced online playground for Twind that lets you use all of Twind's features directly in the browser.`
 </script>
 
 <svelte:head>
