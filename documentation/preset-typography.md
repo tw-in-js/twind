@@ -14,7 +14,7 @@ next: ./with-gatsby.md
 
 | @twind/preset-typography         | @tailwindcss/typography |
 | -------------------------------- | ----------------------- |
-| `>=1.0.0-next.40 <1`             | `>=0.5.3 <0.6`          |
+| `>=1.0.0-next.40 <1.1.0`         | `>=0.5.3 <0.6`          |
 | `>=1.0.0-next.27 <1.0.0-next.40` | `>=0.4 <0.5.3`          |
 
 ## 📦 Installation

@@ -15,7 +15,7 @@ next: ./preset-tailwind.md
 
 | @twind/preset-line-clamp | @tailwindcss/line-clamp |
 | ------------------------ | ----------------------- |
-| `>=1.0.0-next.27 <1`     | `>=0.3 <0.5`            |
+| `>=1.0.0-next.27 <1.1.0` | `>=0.3 <0.5`            |
 
 ## 📦 Installation
 

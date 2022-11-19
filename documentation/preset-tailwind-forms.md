@@ -15,7 +15,7 @@ next: ./preset-typography.md
 
 | @twind/preset-tailwind-forms     | @tailwindcss/forms |
 | -------------------------------- | ------------------ |
-| `>=1.0.0-next.40 <1`             | `>=0.5 <0.6`       |
+| `>=1.0.0-next.40 <1.1.0`         | `>=0.5 <0.6`       |
 | `>=1.0.0-next.27 <1.0.0-next.40` | `>=0.4 <0.5`       |
 
 ## 📦 Installation
