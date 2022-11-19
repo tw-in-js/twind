@@ -28,6 +28,7 @@ jobs:
     permissions:
       contents: write # to create release (changesets/action)
       pull-requests: write # to create pull request (changesets/action)
+      deployments: write # to create deployments (cloudflare/pages)
 
     steps:
       - name: 📥  Checkout
