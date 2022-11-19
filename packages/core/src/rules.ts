@@ -376,9 +376,9 @@ export function colorFromTheme<
       // [hsl(0_100%_/_50%)]       -> ['[hsl(0_100%_/_50%)]']
       // indigo-500/100            -> ['indigo-500', '100']
       // [hsl(0_100%_/_50%)]/[.25] -> ['[hsl(0_100%_/_50%)]', '[.25]']
-      if (!/^(\[[^\]]+]|[^/]+?)(?:\/(.+))?$/.test(match.$$)) return
+      const [colorMatch, opacityMatch] = parseValue(match.$$)
 
-      const { $1: colorMatch, $2: opacityMatch } = RegExp
+      if (!colorMatch) return
 
       const colorValue =
         (context.theme(section, colorMatch) as ColorValue) ||
@@ -461,7 +461,7 @@ export function colorFromTheme<
 
         const isKeyLookup = match.input.endsWith('-')
 
-        const opacities = Object.entries(context.theme(opacitySection) || {}).filter(
+        const opacities = Object.entries<string>(context.theme(opacitySection) || {}).filter(
           ([key, value]) => key != 'DEFAULT' && /^[\w-]+$/.test(key) && typeof value == 'string',
         )
 
@@ -491,9 +491,7 @@ export function colorFromTheme<
                       ([key, opacityValue]): AutocompleteModifier => ({
                         modifier: key,
                         theme: { section: opacitySection, key },
-                        color: toColorValue(value as ColorValue, {
-                          opacityValue: opacityValue as string,
-                        }),
+                        color: toColorValue(value as ColorValue, { opacityValue }),
                       }),
                     )
                     .concat([
@@ -527,9 +525,7 @@ export function colorFromTheme<
                     ([key, opacityValue]): AutocompleteModifier => ({
                       modifier: key,
                       theme: { section: opacitySection, key },
-                      color: toColorValue(value as ColorValue, {
-                        opacityValue: opacityValue as string,
-                      }),
+                      color: toColorValue(value as ColorValue, { opacityValue }),
                     }),
                   )
                   .concat([
@@ -545,6 +541,26 @@ export function colorFromTheme<
         return []
       }),
   )
+}
+
+/**
+ * @internal
+ * @param input
+ */
+export function parseValue(
+  input: string,
+):
+  | [value: string, modifier: string | undefined]
+  | [value: undefined, modifier: string | undefined] {
+  // extract color and opacity
+  // rose-500                  -> ['rose-500']
+  // [hsl(0_100%_/_50%)]       -> ['[hsl(0_100%_/_50%)]']
+  // indigo-500/100            -> ['indigo-500', '100']
+  // [hsl(0_100%_/_50%)]/[.25] -> ['[hsl(0_100%_/_50%)]', '[.25]']
+  return (input.match(/^(\[[^\]]+]|[^/]+?)(?:\/(.+))?$/) || []).slice(1) as [
+    value: string,
+    modifier: string | undefined,
+  ]
 }
 
 /**

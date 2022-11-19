@@ -1,0 +1,51 @@
+{
+  "name": "@twind/preset-container-queries",
+  "version": "1.0.1",
+  "description": "A twind preset that provides utilities for container queries.",
+  "keywords": [
+    "twind",
+    "twind-preset",
+    "tailwind",
+    "tailwindcss",
+    "tw-in-js",
+    "tailwind-in-js",
+    "preset"
+  ],
+  "type": "module",
+  "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
+  "main": "src/container-queries.ts",
+  "// Each entry is expanded into several bundles (types, esnext, module, script, node, and default)": "",
+  "exports": {
+    ".": "./src/container-queries.ts"
+  },
+  "// These are relative from within the dist/ folder": "",
+  "sideEffects": false,
+  "size-limit": [
+    {
+      "name": "@twind/preset-container-queries",
+      "path": "dist/preset-container-queries.esnext.js",
+      "brotli": true,
+      "limit": "0.4kb"
+    }
+  ],
+  "peerDependencies": {
+    "@twind/core": "^1.0.1",
+    "typescript": "^4.8.4"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@twind/core": "^1.0.1",
+    "typescript": "^4.8.4"
+  },
+  "scripts": {
+    "build": "distilt"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  }
+}

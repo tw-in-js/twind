@@ -5,6 +5,7 @@
       "@twind/core": "./packages/core",
       "@twind/intellisense": "./packages/intellisense",
       "@twind/preset-autoprefix": "./packages/preset-autoprefix",
+      "@twind/preset-container-queries": "./packages/preset-container-queries",
       "@twind/preset-ext": "./packages/preset-ext",
       "@twind/preset-line-clamp": "./packages/preset-line-clamp",
       "@twind/preset-tailwind": "./packages/preset-tailwind",

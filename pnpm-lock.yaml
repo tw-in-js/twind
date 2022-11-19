@@ -319,6 +319,15 @@ importers:
       typescript: 4.8.4
     publishDirectory: dist
 
+  packages/preset-container-queries:
+    specifiers:
+      '@twind/core': ^1.0.1
+      typescript: ^4.8.4
+    devDependencies:
+      '@twind/core': link:../core
+      typescript: 4.8.4
+    publishDirectory: dist
+
   packages/preset-ext:
     specifiers:
       '@twind/core': ^1.0.1

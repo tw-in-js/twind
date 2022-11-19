@@ -16,6 +16,7 @@
     "@twind/core": "packages/core/dist",
     "@twind/intellisense": "packages/intellisense/dist",
     "@twind/preset-autoprefix": "packages/preset-autoprefix/dist",
+    "@twind/preset-container-queries": "packages/preset-container-queries/dist",
     "@twind/preset-ext": "packages/preset-ext/dist",
     "@twind/preset-line-clamp": "packages/preset-line-clamp/dist",
     "@twind/preset-tailwind": "packages/preset-tailwind/dist",

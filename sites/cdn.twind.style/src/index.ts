@@ -30,6 +30,7 @@ const DEFAULT_VERSION = 'latest'
 
 const WELL_KNOWN_PRESETS: Record<string, string> = {
   ext: '@twind/preset-ext',
+  'container-queries': '@twind/preset-container-queries',
   'line-clamp': '@twind/preset-line-clamp',
   'tailwind-forms': '@twind/preset-tailwind-forms',
   // compat for Tailwind CSS Play CDN
