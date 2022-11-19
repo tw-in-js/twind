@@ -51,7 +51,7 @@
     "format": "pnpm prettier . '!pnpm-lock.yaml'",
     "prettier": "prettier --write --plugin-search-dir=. --ignore-path .gitignore",
     "test": "vitest",
-    "test:ui": "pnpm test --ui",
+    "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
     "changeset": "changeset",
     "changeset:version": "changeset version && pnpm install --lockfile-only --no-frozen-lockfile --prefer-offline && pnpm prettier **/CHANGELOG.md",
