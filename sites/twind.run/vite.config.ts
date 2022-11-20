@@ -370,7 +370,9 @@ export default defineConfig((env) => {
                     async resolveLatestTarget(target, layer, parentUrl) {
                       const pkg = packages.find((pkg) => pkg.manifest.name === target.name)
 
-                      if (pkg && target.range.has(pkg.manifest.version)) {
+                      // no version range check because pre-release versions would not match
+                      // && target.range.has(pkg.manifest.version)
+                      if (pkg) {
                         return {
                           registry: 'npm',
                           name: pkg.manifest.name,

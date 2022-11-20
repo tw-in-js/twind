@@ -204,7 +204,7 @@ export async function load({
     let response = await cache?.match(url)
 
     if (!response) {
-      console.debug(`Fetching CDN manifest for ${alias || '<empty>'} (${origin})`)
+      console.debug(`Fetching CDN manifest for ${version} (${origin})`)
       response = await fetch(url)
 
       if (!(response.ok && response.status === 200)) {
@@ -219,15 +219,15 @@ export async function load({
     if (manifest.version !== version) {
       try {
         console.debug(
-          `Resolving CDN manifest for ${alias || '<empty>'} (${origin}) using ${manifest.version}`,
+          `Resolving CDN manifest for ${version} (${origin}) using v${manifest.version}`,
         )
         return await loadManifest(manifest.version)
       } catch {
-        console.warn(`Failed to fetch CDN manifest for ${manifest.version}`)
+        console.warn(`Failed to fetch CDN manifest for v${manifest.version}`)
       }
     }
 
-    console.debug(`Loaded CDN manifest for ${alias || '<empty>'} (${origin})`)
+    console.debug(`Loaded CDN manifest for ${version} (${origin})`)
 
     return {
       ...manifest,
