@@ -198,7 +198,7 @@ export function createIntellisense(
 
       if (!boundary) return null
 
-      const isEmptyPosition = /[\s():/!-]$/.test(boundary.content)
+      const isEmptyPosition = !boundary.content || /[\s():/!-@]$/.test(boundary.content)
 
       const parsed = parse(boundary.content + (isEmptyPosition ? '\uffff' : ''))
 
