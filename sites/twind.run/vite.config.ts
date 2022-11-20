@@ -562,7 +562,7 @@ export default defineConfig((env) => {
           generateBundle(options, bundle) {
             for (const chunk of Object.values(bundle)) {
               if (chunk.type === 'chunk') {
-                chunk.code = chunk.code.replaceAll('(1.toString)', '(1 .toString)')
+                chunk.code = chunk.code.replaceAll('(1.toString)', '((1).toString)')
               }
             }
           },
