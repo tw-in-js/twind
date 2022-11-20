@@ -17,6 +17,15 @@ export function compareSuggestions(
     return variantsFirst ? 1 : -1
   }
 
+  // Move special chars after "normal"
+  if (!/^[a-z\d]/i.test(a.value) && /^[a-z\d]/i.test(b.value)) {
+    return 1
+  }
+
+  if (/^[a-z\d]/i.test(a.value) && !/^[a-z\d]/i.test(b.value)) {
+    return -1
+  }
+
   // group by first part
   if (!prefix) {
     const aInitial = a.value.replace(/^-/, '').split('-', 1)[0]
@@ -37,25 +46,29 @@ export function compareSuggestions(
     }
   }
 
+  const isVariant = a.type === 'variant'
+
   // sort arbitrary values after other values
-  if (a.value.endsWith('[') && !b.value.endsWith('[')) {
+  const arbitrarySuffix = isVariant ? '[:' : '['
+  if (a.value.endsWith(arbitrarySuffix) && !b.value.endsWith(arbitrarySuffix)) {
     return 1
   }
 
-  if (!a.value.endsWith('[') && b.value.endsWith('[')) {
+  if (!a.value.endsWith(arbitrarySuffix) && b.value.endsWith(arbitrarySuffix)) {
     return -1
   }
 
   // sort modifier values after other values
-  if (a.value.endsWith('/') && !b.value.endsWith('/')) {
+  const modifierSuffix = isVariant ? '/:' : '/'
+  if (a.value.endsWith(modifierSuffix) && !b.value.endsWith(modifierSuffix)) {
     return 1
   }
 
-  if (!a.value.endsWith('/') && b.value.endsWith('/')) {
+  if (!a.value.endsWith(modifierSuffix) && b.value.endsWith(modifierSuffix)) {
     return -1
   }
 
-  if (a.type === 'class' && b.type === 'class') {
+  if (!isVariant) {
     // opacity last
     if (a.value.includes('-opacity') && !b.value.includes('-opacity')) {
       return 1

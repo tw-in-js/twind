@@ -6,6 +6,7 @@ import {
   parseValue,
   Preset,
   RuleResolver,
+  VariantResolver,
   withAutocomplete,
 } from '@twind/core'
 
@@ -14,12 +15,14 @@ export interface ContainerQueriesTheme extends BaseTheme {
 }
 
 // indirection wrapper to remove autocomplete functions from production bundles
-function withAutocomplete$(
-  resolver: RuleResolver<ContainerQueriesTheme>,
-  autocomplete: AutocompleteProvider<ContainerQueriesTheme> | false,
-): RuleResolver<ContainerQueriesTheme> {
+function withAutocomplete$<
+  Resolver extends RuleResolver<ContainerQueriesTheme> | VariantResolver<ContainerQueriesTheme>,
+>(resolver: Resolver, autocomplete: AutocompleteProvider<ContainerQueriesTheme> | false): Resolver {
   if (DEV) {
-    return withAutocomplete(resolver, autocomplete)
+    return withAutocomplete(
+      resolver as RuleResolver<ContainerQueriesTheme>,
+      autocomplete,
+    ) as Resolver
   }
 
   return resolver
@@ -44,31 +47,54 @@ export default function presetContainerQueries(): Preset<ContainerQueriesTheme> 
     },
     rules: [
       [
-        '@container($|-|\\/)',
-        ({ 1: $1, $$ }, context) => {
-          // eslint-disable-next-line no-sparse-arrays
-          const [type = '', name] = $1 == '/' ? [, $$] : parseValue($$)
+        '@container($|-|\\/.+)',
+        withAutocomplete$(
+          ({ 1: $1, $$ }, context) => {
+            // eslint-disable-next-line no-sparse-arrays
+            const [type = '', name] = $1 == '/' ? [, $$] : parseValue($$)
 
-          return {
-            'container-type': arbitrary(type, '', context) || type || 'inline-size',
-            'container-name': name,
-          }
-        },
+            return {
+              'container-type': arbitrary(type, '', context) || type || 'inline-size',
+              'container-name': name,
+            }
+          },
+          DEV &&
+            (() => [
+              { prefix: '@container', suffix: '', modifiers: [] },
+              { prefix: '@container', suffix: '-normal', modifiers: [] },
+              { prefix: '@container', suffix: '-size', modifiers: [] },
+              { prefix: '@container', suffix: '-inline-size', modifiers: [] },
+              { prefix: '@container', suffix: '-[', modifiers: [] },
+            ]),
+        ),
       ],
     ],
     variants: [
       [
         '@(.+)',
-        (match, context) => {
-          const [value, name] = parseValue(match[1])
+        withAutocomplete$(
+          (match, context) => {
+            const [value, name] = parseValue(match[1])
 
-          if (value) {
-            const minWidth =
-              arbitrary(value, 'containers', context) || context.theme('containers', value)
+            if (value) {
+              const minWidth =
+                arbitrary(value, 'containers', context) || context.theme('containers', value)
 
-            return minWidth && `@container ${name ? name + ' ' : ''}(min-width:${minWidth})`
-          }
-        },
+              return minWidth && `@container ${name ? name + ' ' : ''}(min-width:${minWidth})`
+            }
+          },
+          DEV &&
+            ((match, context) => [
+              ...Object.entries(context.theme('containers')).map(([suffix, minWidth]) => ({
+                prefix: '@',
+                suffix,
+                label: `@container (min-width: ${minWidth})`,
+                theme: { section: 'containers', key: suffix },
+                modifiers: [],
+              })),
+              { prefix: '@', suffix: '[', modifiers: [] },
+            ]),
+        ),
       ],
     ],
   }

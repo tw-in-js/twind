@@ -107,7 +107,7 @@ track(
 // Provide autocompletion
 track(
   monaco.languages.registerCompletionItemProvider('html', {
-    triggerCharacters: [' ', '"', ':', '!', '/', '-', '('],
+    triggerCharacters: [' ', '"', ':', '!', '/', '-', '(', '@'],
     async provideCompletionItems(model, position) {
       const suggestionAt = await intellisense.suggestAt(
         model.getValue(),
@@ -133,12 +133,14 @@ track(
           if (suggestion.type === 'variant') {
             return {
               label: {
-                label: suggestion.value,
+                label: suggestion.value.endsWith('[:')
+                  ? suggestion.value.slice(0, -1)
+                  : suggestion.value,
                 detail:
                   suggestion.detail ||
-                  (suggestion.value.endsWith('[')
-                    ? '…]'
-                    : suggestion.value.endsWith('/')
+                  (suggestion.value.endsWith('[:')
+                    ? '…]:'
+                    : suggestion.value.endsWith('/:')
                     ? '…'
                     : undefined),
                 description: suggestion.description,
@@ -149,7 +151,9 @@ track(
                 : monaco.languages.CompletionItemKind.Module,
               sortText: index.toString().padStart(8, '0'),
               filterText: suggestion.name,
-              insertText: suggestion.value,
+              insertText: suggestion.value.endsWith('[:')
+                ? suggestion.value.slice(0, -1)
+                : suggestion.value,
               range,
               command: {
                 id: 'editor.action.triggerSuggest',
