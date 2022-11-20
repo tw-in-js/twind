@@ -10,25 +10,50 @@ TODO with file diffs
 
 ## from twind v0.16
 
+### Breaking Changes
+
+- the main package is [@twind/core](./packages/@twind/core)
+- [@twind/core](./packages/@twind/core) does **not** include any core utilities — use one or more of the [presets](./presets#official-presets)
+- no more `twind/shim` — `install()` (recommended) and `setup()` atomatically observe all `class` attributes
+- `tw`: only accepts a single string argument `tw('... class names ...')` — for the v0.16 behavior use `tx` instead
+- `css`: only accepts a single CSS object or can be used as tagged template literal
+  - no more `@global` — you must use `&` for nested selectors (this follows the [CSS Nesting Module](https://tabatkins.github.io/specs/css-nesting/))
+  - no more string support for nested selectors — use `@apply` within the CSS object instead (see [example on twind.run](https://twind.run/junior-crazy-mummy?file=script))
+- no more important suffix: `rule!` -> `!rule`
+- no more `@screen sm` -> use the [tailwindcss syntax](https://tailwindcss.com/docs/functions-and-directives#screen) `@media screen(sm)`
+- strict tailwindcss v3 compatibility
+  - no IE 11 fallbacks (color, box-shadow, ...)
+  - no more `font-*` and `text-*` shortcuts
+  - no `border-tr` but `border-[xytrbl]*` still exists
+  - no `bg-origin-*`
+  - droped IE 11 support
+- config [theme section function](https://tailwindcss.com/docs/theme#referencing-other-values) has a changed signature
+
+  ```diff
+  theme: {
+    extend: {
+  -  fill: (theme) => ({
+  +  fill: ({ theme }) => ({
+      gray: theme('colors.gray')
+    })
+    }
+  }
+  ```
+
 ### Notable Changes
 
-- the main package is [@twind/core](https://github.com/tw-in-js/twind/tree/main/packages/core)
-- [@twind/core](https://github.com/tw-in-js/twind/tree/main/packages/core) does **not** include any core utilities — use one or more of the following presets:
-
-  - [@twind/preset-autoprefix](https://github.com/tw-in-js/twind/tree/main/packages/preset-autoprefix)
-  - [@twind/preset-ext](https://github.com/tw-in-js/twind/tree/main/packages/preset-ext)
-  - [@twind/preset-tailwind](https://github.com/tw-in-js/twind/tree/main/packages/preset-tailwind) to get a full Tailwind v3 experience
-  - [@twind/preset-tailwind-forms](https://github.com/tw-in-js/twind/tree/main/packages/preset-tailwind-forms) to get Tailwind v3 and Tailwind Forms.
+> See [reference](./reference) for a complete list of all available features until we have documentation for all of them.
 
 - API
+
+  - new function `install` to simplify setup
   - `setup` can be called as many times as you want.
   - classes are returned in order they are applied by the browser - last one wins
-  - `tw` as known from twind v0.16; additional it can be used to access:
+  - `tw`:
     - the theme: `tw.theme(...)`
     - the target sheet: `tw.target`
     - allows to reset twind (start clean): `tw.clear()`
     - allows to remove twind (remove the associated style element): `tw.destroy()`
-  - `css` as known from twind v0.16
   - `apply` finally works — styles are generated in order they are declared
   - `shortcut` — styles are generated as defined by twind — same as if they where used alone
     - with support for creating named shortcuts: `` shortcut.PrimaryButton`bg-red-500 text-white`​ `` -> `PrimaryButton#<hash>`
@@ -40,7 +65,8 @@ TODO with file diffs
       - `style#1hvn013 style--variant-gray#1hvn013 style--size-sm#1hvn013 style--outlined-@sm-true#1hvn013`
     - with label: `style({ label: 'button', ... })`
       - `button#p8xtwh button--color-orange#p8xtwh button--size-small#p8xtwh button--color-orange_outlined-true$0#p8xtwh`
-- grouping syntax:
+
+- [grouping syntax](./grouping-syntax):
   - allow trailing dash before parentheses for utilities -> `border-(md:{2 black opacity-50 hover:dashed}}`
   - shortcuts: `~` to apply/merge utilities -> `~(text(5xl,red-700),bg-red-100)`
     - anonymous shortcuts: `~(!text-(3xl center) !underline italic focus:not-italic)`
@@ -52,8 +78,8 @@ TODO with file diffs
 - config
 
   - presets are executed in order they are defined
-  - presets can currently not contain other presets — a work-around may by to use `defineConfig()` within the preset (not tested)
-  - `defineConfig() helper for typing
+  - presets can currently not contain other presets — a work-around may by to use `defineConfig()` within the preset
+  - `defineConfig()` helper for typing
   - preset merging:
 
     - `preflight` — last one wins
@@ -70,7 +96,7 @@ TODO with file diffs
 
   - darkMode can be selector string `{ darkMode: '.dark-mode &' }` or `{ darkMode: 'html[data-theme="dark"] &` }`
 
-  - rules based on ideas from [UnoCSS](https://github.com/antfu/unocss)
+  - [rules](./rules) based on ideas from [UnoCSS](https://github.com/antfu/unocss)
 
     ```js
     // defineConfig is optional but helps with type inference
@@ -122,35 +148,14 @@ TODO with file diffs
     })
     ```
 
-  - config [theme section function](https://tailwindcss.com/docs/theme#referencing-other-values) has a changed signature
-
-    ```diff
-    theme: {
-      extend: {
-    -  fill: (theme) => ({
-    +  fill: ({ theme }) => ({
-        gray: theme('colors.gray')
-      })
-      }
-    }
-    ```
-
   - no implicit ordering within preflight
 
 - comments (single and multiline)
-- no more important suffix: `rule!` -> `!rule`
 - styles (the generated CSS rules) are sorted predictably and stable — no matter in which order the rules are injected
 - support `label` for a more readable class names (https://emotion.sh/docs/labels)
 - support [theme(...)](https://tailwindcss.com/docs/functions-and-directives#theme) in property and arbitrary values
-- no more `@screen sm` -> use the [tailwindcss syntax](https://tailwindcss.com/docs/functions-and-directives#screen) `@media screen(sm)`
 - [@apply](https://tailwindcss.com/docs/functions-and-directives#apply) finally works as expected
 - full support for color functions: `primary: ({ opacityVariable, opacityValue }) => ...`
-- strict tailwindcss v3 compatibility
-  - no IE 11 fallbacks (color, box-shadow, ...)
-  - no more `font-*` and `text-*` shortcuts
-  - no `border-tr` but `border-[xytrbl]*` still exists
-  - no `bg-origin-*`
-- no more `@global` — you must use `&` for nested selectors (this follows the [CSS Nesting Module](https://tabatkins.github.io/specs/css-nesting/))
 - new `@layer` directive following the [Cascade Layers (CSS @layer) spec](https://www.bram.us/2021/09/15/the-future-of-css-cascade-layers-css-at-layer/)
 
   The following layer exist in the given order: `defaults`, `base`, `components`, `shortcuts`, `utilities`, `overrides`
@@ -182,5 +187,3 @@ TODO with file diffs
     }
   `
   ```
-
-- drop IE 11 support
