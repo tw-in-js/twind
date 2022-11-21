@@ -3,7 +3,8 @@ name: Generate Sponsors
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * *'
+    # run every 5 days at 4:03 am
+    - cron: '3 4 */5 * *'
 
 jobs:
   update-sponsors:
