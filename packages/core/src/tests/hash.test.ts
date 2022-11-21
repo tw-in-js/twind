@@ -42,8 +42,8 @@ test('accept already hashed rules', () => {
 test('different variant produce different hashes', () => {
   assert.strictEqual(tw('sm:text-center lg:text-center'), '#1t8l2lu #1b1gwwj')
   assert.deepEqual(tw.target, [
-    '/*!epppts,y,sm:text-center*/@media (min-width:640px){.\\#1t8l2lu{text-align:center}}',
-    '/*!eupiio,y,lg:text-center*/@media (min-width:1024px){.\\#1b1gwwj{text-align:center}}',
+    '/*!eupiio,y,sm:text-center*/@media (min-width:640px){.\\#1t8l2lu{text-align:center}}',
+    '/*!f277k0,y,lg:text-center*/@media (min-width:1024px){.\\#1b1gwwj{text-align:center}}',
   ])
 })
 
