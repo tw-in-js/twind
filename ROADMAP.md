@@ -50,6 +50,11 @@
   - only publish pre-releases if something package related has changed: https://github.com/dorny/paths-filter
   - only build packages that have changed: https://github.com/pnpm/pnpm/pull/2201
 
+- @twind/intellisense:
+
+  - cursor position on arbitrary insert
+  - missing modifier suggestion for variants
+
 - @twind/devtools:
   - enumerate all classes and inject as empty for dev tools
 - @twind/with-remix: https://github.com/remix-run/remix/issues/1804
