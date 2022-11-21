@@ -112,7 +112,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 60
-    if: ${{ needs.build.outputs.published != 'true' && github.repository == 'tw-in-js/twind' }}
+    if: ${{ needs.build.outputs.published != 'true' && needs.build.outputs.hasChangesets == 'true' && github.repository == 'tw-in-js/twind' }}
     permissions:
       contents: read
       pull-requests: write
