@@ -29,18 +29,9 @@ test.each([
   ['@container-normal', '.\\@container-normal{container-type:normal}'],
   ['@container-[size]', '.\\@container-\\[size\\]{container-type:size}'],
   ['@container-size', '.\\@container-size{container-type:size}'],
-  [
-    '@container/sidebar',
-    '.\\@container\\/sidebar{container-type:inline-size;container-name:sidebar}',
-  ],
-  [
-    '@container-normal/sidebar',
-    '.\\@container-normal\\/sidebar{container-type:normal;container-name:sidebar}',
-  ],
-  [
-    '@container-[size]/sidebar',
-    '.\\@container-\\[size\\]\\/sidebar{container-type:size;container-name:sidebar}',
-  ],
+  ['@container/sidebar', '.\\@container\\/sidebar{container:sidebar / inline-size}'],
+  ['@container-normal/sidebar', '.\\@container-normal\\/sidebar{container:sidebar / normal}'],
+  ['@container-[size]/sidebar', '.\\@container-\\[size\\]\\/sidebar{container:sidebar / size}'],
 
   // variants
   [
@@ -112,32 +103,33 @@ test('sorted', () => {
   tw('@lg/container10:underline')
   tw('@[1024px]:underline')
   tw('@[1024px]/container1:underline')
-  tw('@[312px]:underline')
+  tw('@[234px]:underline')
   tw('@[200rem]:underline')
   tw('@[123px]:underline')
 
+  // XXX: this sort order is not 100% identical to tailwindcss — but it should meet most real world requirements
   assert.deepEqual(tw.target, [
-    '.\\@container-\\[size\\]\\/sidebar{container-type:size;container-name:sidebar}',
-    '.\\@container-normal\\/sidebar{container-type:normal;container-name:sidebar}',
-    '.\\@container\\/sidebar{container-type:inline-size;container-name:sidebar}',
     '.\\@container{container-type:inline-size}',
     '.\\@container-normal{container-type:normal}',
+    '.\\@container\\/sidebar{container:sidebar / inline-size}',
+    '.\\@container-normal\\/sidebar{container:sidebar / normal}',
+    '.\\@container-\\[size\\]\\/sidebar{container:sidebar / size}',
     '@container (min-width:123px){.\\@\\[123px\\]\\:underline{text-decoration-line:underline}}',
-    '@container (min-width:312px){.\\@\\[312px\\]\\:underline{text-decoration-line:underline}}',
-    '@container (min-width:320px){.\\@sm\\:underline{text-decoration-line:underline}}',
+    '@container (min-width:234px){.\\@\\[234px\\]\\:underline{text-decoration-line:underline}}',
     '@container container1 (min-width:320px){.\\@sm\\/container1\\:underline{text-decoration-line:underline}}',
     '@container container2 (min-width:320px){.\\@sm\\/container2\\:underline{text-decoration-line:underline}}',
     '@container container10 (min-width:320px){.\\@sm\\/container10\\:underline{text-decoration-line:underline}}',
-    '@container (min-width:768px){.\\@md\\:underline{text-decoration-line:underline}}',
+    '@container (min-width:320px){.\\@sm\\:underline{text-decoration-line:underline}}',
     '@container container1 (min-width:768px){.\\@md\\/container1\\:underline{text-decoration-line:underline}}',
     '@container container2 (min-width:768px){.\\@md\\/container2\\:underline{text-decoration-line:underline}}',
     '@container container10 (min-width:768px){.\\@md\\/container10\\:underline{text-decoration-line:underline}}',
-    '@container (min-width:1024px){.\\@\\[1024px\\]\\:underline{text-decoration-line:underline}}',
-    '@container container1 (min-width:1024px){.\\@\\[1024px\\]\\/container1\\:underline{text-decoration-line:underline}}',
-    '@container (min-width:1024px){.\\@lg\\:underline{text-decoration-line:underline}}',
+    '@container (min-width:768px){.\\@md\\:underline{text-decoration-line:underline}}',
     '@container container1 (min-width:1024px){.\\@lg\\/container1\\:underline{text-decoration-line:underline}}',
     '@container container2 (min-width:1024px){.\\@lg\\/container2\\:underline{text-decoration-line:underline}}',
     '@container container10 (min-width:1024px){.\\@lg\\/container10\\:underline{text-decoration-line:underline}}',
+    '@container (min-width:1024px){.\\@lg\\:underline{text-decoration-line:underline}}',
+    '@container container1 (min-width:1024px){.\\@\\[1024px\\]\\/container1\\:underline{text-decoration-line:underline}}',
+    '@container (min-width:1024px){.\\@\\[1024px\\]\\:underline{text-decoration-line:underline}}',
     '@container (min-width:200rem){.\\@\\[200rem\\]\\:underline{text-decoration-line:underline}}',
   ])
 })

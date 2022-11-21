@@ -47,16 +47,14 @@ export default function presetContainerQueries(): Preset<ContainerQueriesTheme> 
     },
     rules: [
       [
-        '@container($|-|\\/.+)',
+        '@container($|-|\\/)',
         withAutocomplete$(
           ({ 1: $1, $$ }, context) => {
             // eslint-disable-next-line no-sparse-arrays
-            const [type = '', name] = $1 == '/' ? [, $$] : parseValue($$)
+            const [value = '', name] = $1 == '/' ? [, $$] : parseValue($$)
 
-            return {
-              'container-type': arbitrary(type, '', context) || type || 'inline-size',
-              'container-name': name,
-            }
+            const type = arbitrary(value, '', context) || value || 'inline-size'
+            return name ? { container: `${name} / ${type}` } : { 'container-type': type }
           },
           DEV &&
             (() => [
