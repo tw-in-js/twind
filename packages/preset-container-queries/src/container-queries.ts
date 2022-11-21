@@ -57,13 +57,15 @@ export default function presetContainerQueries(): Preset<ContainerQueriesTheme> 
             return name ? { container: `${name} / ${type}` } : { 'container-type': type }
           },
           DEV &&
-            (() => [
-              { prefix: '@container', suffix: '', modifiers: [] },
-              { prefix: '@container', suffix: '-normal', modifiers: [] },
-              { prefix: '@container', suffix: '-size', modifiers: [] },
-              { prefix: '@container', suffix: '-inline-size', modifiers: [] },
-              { prefix: '@container', suffix: '-[', modifiers: [] },
-            ]),
+            ((match) =>
+              match[1] // we get called 3 times ('', '-', '/') - only answer once
+                ? []
+                : [
+                    { prefix: '@container', suffix: '', modifiers: [] },
+                    { prefix: '@container', suffix: '-normal', modifiers: [] },
+                    { prefix: '@container', suffix: '-size', modifiers: [] },
+                    { prefix: '@container', suffix: '-[', modifiers: [] },
+                  ]),
         ),
       ],
     ],
