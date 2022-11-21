@@ -1,5 +1,17 @@
 # twind.style
 
+## 1.0.2
+
+### Patch Changes
+
+- update tailwind compatibility tables ([`7bf96049`](https://github.com/tw-in-js/twind/commit/7bf96049c52613439979f2a8758738dba5c0624c))
+
+- add labels to new issue links ([`65dad262`](https://github.com/tw-in-js/twind/commit/65dad262de40904d82b6b756302c9a5bb65ff404))
+
+- use cdn.twind.style in play examples ([`518fa821`](https://github.com/tw-in-js/twind/commit/518fa821db4c4a8669de93cbf59ee6955bc02492))
+
+- add `Breaking Changes` section to migration guide ([`dd737fcd`](https://github.com/tw-in-js/twind/commit/dd737fcdb8679f2bc2add69d05441876807b4a17))
+
 ## 1.0.1
 
 ### Patch Changes

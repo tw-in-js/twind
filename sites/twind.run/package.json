@@ -1,6 +1,6 @@
 {
   "name": "@sites/twind.run",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Twind Run",
   "private": true,
   "license": "MIT",
@@ -43,7 +43,7 @@
     "@sveltejs/adapter-cloudflare": "1.0.0-next.40",
     "@sveltejs/kit": "1.0.0-next.547",
     "@twind/core": "1.0.1",
-    "@twind/intellisense": "1.0.1",
+    "@twind/intellisense": "1.0.2",
     "@twind/preset-autoprefix": "1.0.1",
     "@twind/preset-tailwind": "1.0.1",
     "@twind/with-sveltekit": "1.0.1",
