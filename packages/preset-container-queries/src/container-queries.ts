@@ -54,6 +54,7 @@ export default function presetContainerQueries(): Preset<ContainerQueriesTheme> 
             const [value = '', name] = $1 == '/' ? [, $$] : parseValue($$)
 
             const type = arbitrary(value, '', context) || value || 'inline-size'
+
             return name ? { container: `${name} / ${type}` } : { 'container-type': type }
           },
           DEV &&
@@ -78,7 +79,7 @@ export default function presetContainerQueries(): Preset<ContainerQueriesTheme> 
 
             if (value) {
               const minWidth =
-                arbitrary(value, 'containers', context) || context.theme('containers', value)
+                context.theme('containers', value) || arbitrary(value, 'containers', context)
 
               return minWidth && `@container ${name ? name + ' ' : ''}(min-width:${minWidth})`
             }

@@ -4,9 +4,23 @@
   /** @type {import('$lib/types').Manifest } */
   export let manifest
 
+  /** @type {import('$lib/system').ImportMap | null} */
+  export let importMap
+
   /** Class name for the editor container */
   let className = ''
   export { className as class }
+
+  /** @type {[name: string, version: string][]} */
+  let packages = []
+
+  $: if (importMap) {
+    const imports = Object.keys(importMap.imports || {})
+
+    packages = Object.entries(manifest.packages).filter(([pkg, version]) =>
+      imports.some((i) => i === pkg || i.startsWith(`${pkg}/`)),
+    )
+  }
 </script>
 
 <section class={cx('px-4 py-5 sm:px-6 max-w-prose mx-auto', className)}>
@@ -44,7 +58,7 @@
     </p>
   </header>
   <div class="mt-8 flex flex-wrap items-center justify-start gap-4">
-    {#each Object.entries(manifest.packages) as [name, version]}
+    {#each packages as [name, version]}
       <div
         class="relative basis-[calc(50%-1rem)] min-w-[16rem] flex-shrink flex-grow rounded-lg border border-brand-7 bg-brand-3 text-brand-11 px-3 py-2 shadow-sm focus-within:ring-2 focus-within:ring-brand-7 focus-within:ring-offset-2 hover:(border-brand-8 bg-brand-4 text-brand-12)"
       >

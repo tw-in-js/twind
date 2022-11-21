@@ -67,7 +67,7 @@ export function createSearch({
 
     const results = term
       ? index
-          .search(term, 35, { suggest: true })
+          .searchCache(term, 35, { suggest: true })
           .flatMap((x) => x.result)
           .slice(0, 35)
           .map((id) => {

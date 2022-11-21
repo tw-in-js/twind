@@ -150,6 +150,9 @@
   /** @type {import('svelte/store').Writable<string | null>} */
   const lastConfig = writable(null)
 
+  /** @type {import('$lib/system').ImportMap | null} */
+  let currentImportMap = null
+
   $: if (
     browser &&
     (get(lastVersion) !== $workspace.version || get(lastConfig) !== $workspace.config.value)
@@ -175,16 +178,18 @@
           },
         },
       )
-      .then(({ entry, importMap }) => {
+      .then(async ({ entry, importMap }) => {
         if (
           $mounted &&
           get(lastVersion) === $workspace.version &&
           get(lastConfig) === $workspace.config.value
         ) {
-          return intellisense.init({ entry, importMap })
+          await intellisense.init({ entry, importMap })
+          currentImportMap = importMap
         }
       })
       .catch((error) => {
+        currentImportMap = null
         console.error(`Failed to initialized autocomplete`, error)
       })
   }
@@ -675,7 +680,11 @@
           {/await}
 
           {#await import('./manifest.svelte') then { default: Manifest }}
-            <Manifest class={activeResultTab === 'info' ? '' : 'hidden'} {manifest} />
+            <Manifest
+              class={activeResultTab === 'info' ? '' : 'hidden'}
+              {manifest}
+              importMap={currentImportMap}
+            />
           {/await}
         {:else}
           <Loader />
