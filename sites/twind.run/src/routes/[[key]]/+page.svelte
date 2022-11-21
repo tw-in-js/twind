@@ -466,12 +466,7 @@
                     <Icon src={CheckSolid} class="h-5 w-5" />
                   {/if}
                 </div>
-                <p
-                  class={cx(
-                    'flex gap-1 justify-between text-xs',
-                    active ? 'text-neutral-12' : 'text-neutral-11',
-                  )}
-                >
+                <p class={cx('text-xs', active ? 'text-neutral-12' : 'text-neutral-11')}>
                   {#if manifest.pr}
                     <a
                       href={`https://github.com/tw-in-js/twind/pull/${manifest.pr}`}

@@ -14,7 +14,7 @@ TODO with file diffs
 
 - the main package is [@twind/core](./packages/@twind/core)
 - [@twind/core](./packages/@twind/core) does **not** include any core utilities — use one or more of the [presets](./presets#official-presets)
-- no more `twind/shim` — `install()` (recommended) and `setup()` atomatically observe all `class` attributes
+- no more `twind/shim` — `install()` (recommended) and `setup()` automatically observe all `class` attributes
 - `tw`: only accepts a single string argument `tw('... class names ...')` — for the v0.16 behavior use `tx` instead
 - `css`: only accepts a single CSS object or can be used as tagged template literal
   - no more `@global` — you must use `&` for nested selectors (this follows the [CSS Nesting Module](https://tabatkins.github.io/specs/css-nesting/))

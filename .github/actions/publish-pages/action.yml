@@ -65,7 +65,7 @@ runs:
       # Retry 3 times before the steps actually fails
       run: |
         (${{ inputs.run }}) || (${{ inputs.run }}) || (${{ inputs.run }})
-        echo version="`jq '.version' package.json`" >> $GITHUB_OUTPUT
+        echo version=`jq '.version' package.json` >> $GITHUB_OUTPUT
       working-directory: ${{ inputs.workingDirectory }}
 
     - name: 🚀  Deploy ${{ inputs.workingDirectory }} as ${{ inputs.branch }}
@@ -94,7 +94,7 @@ runs:
         directory: ${{inputs.workingDirectory}}/${{inputs.directory}}
         # Branch name aliases are lowercased and non-alphanumeric characters are replaced with a hyphen
         # v1.0.0.next.39 -> v1-0-0-next-39
-        branch: v${{steps.build.outputs.version}}
+        branch: ${{format('v{0}', steps.build.outputs.version)}}
         commitDirty: true
 
     - name: 💡  Deployment Info

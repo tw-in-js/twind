@@ -34,15 +34,17 @@ outputs:
 runs:
   using: 'composite'
   steps:
+    - name: 📝  Ensure atleast one changeset exists
+      if: ${{ inputs.hasChangesets != 'true' }}
+      continue-on-error: true
+      shell: bash
+      run: pnpm changeset --empty
+
     - name: 📦  Update packages
       shell: bash
       run: pnpm changeset version --no-git-tag --snapshot ${{ inputs.tag }} --snapshot-prerelease-template "${{ inputs.template }}"
       env:
         GITHUB_TOKEN: ${{ inputs.GITHUB_TOKEN }}
-
-    - name: 📦  Update lockfile
-      shell: bash
-      run: pnpm install --lockfile-only --no-frozen-lockfile --prefer-offline --filter="." --filter="./packages/*" --filter="./sites/*"
 
     - name: 🏗️  Build packages
       shell: bash
