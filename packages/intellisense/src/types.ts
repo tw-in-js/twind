@@ -23,7 +23,7 @@ export interface Intellisense<Theme extends BaseTheme = BaseTheme> {
 
   suggest(input: string, options?: SuggestAtOptions): Promise<Suggestion[]>
   suggestAt(content: string, offset: number, language: LanguageId): Promise<SuggestionAt | null>
-  documentationFor(token: string): Promise<string | null>
+  documentationFor(token: string, options?: DocumentationForOptions): Promise<string | null>
   documentationAt(
     content: string,
     offset: number,
@@ -32,6 +32,10 @@ export interface Intellisense<Theme extends BaseTheme = BaseTheme> {
   collectColors(content: string, language: LanguageId): Promise<ColorInformation[]>
   validate(content: string, language: LanguageId): Promise<Diagnostics[]>
   enumerate(): IterableIterator<Suggestion>
+}
+
+export interface DocumentationForOptions {
+  format?: 'md' | 'html'
 }
 
 export interface Diagnostics {
@@ -119,4 +123,6 @@ export interface IntellisenseOptions {
     */
     readonly maxSize: number
   }
+
+  mdnOrigin?: string
 }

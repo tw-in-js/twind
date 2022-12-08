@@ -108,11 +108,11 @@
   /** @type {'html' | 'script' | 'config'} */
   let activeFileTab = fileTabOrder.includes(activeFileTabParam) ? activeFileTabParam : 'html'
 
-  /** @type {['preview', 'css', 'html', 'info']} */
-  const resultTabOrder = ['preview', 'css', 'html', 'info']
+  /** @type {['preview', 'css', 'html', 'info', 'discover']} */
+  const resultTabOrder = ['preview', 'css', 'html', 'info', 'discover']
   /** @type {any} */
   const activeResultTabParam = $page.url.searchParams.get('result')
-  /** @type {'preview' | 'css' | 'html' | 'info'} */
+  /** @type {'preview' | 'css' | 'html' | 'info' | 'discover'} */
   let activeResultTab = resultTabOrder.includes(activeResultTabParam)
     ? activeResultTabParam
     : 'preview'
@@ -168,7 +168,10 @@
           import { createIntellisense } from '@twind/intellisense'
           import config from '$/config'
 
-          export default createIntellisense(defineConfig(config))
+          export default createIntellisense(
+            defineConfig(config),
+            { mdnOrigin: 'https://mdn.twind.run' }
+          )
         `,
         },
         {
@@ -679,10 +682,17 @@
             />
           {/await}
 
-          {#await import('./manifest.svelte') then { default: Manifest }}
-            <Manifest
+          {#await import('./info.svelte') then { default: Info }}
+            <Info
               class={activeResultTab === 'info' ? '' : 'hidden'}
               {manifest}
+              importMap={currentImportMap}
+            />
+          {/await}
+
+          {#await import('./discover.svelte') then { default: Discover }}
+            <Discover
+              class={activeResultTab === 'discover' ? '' : 'hidden'}
               importMap={currentImportMap}
             />
           {/await}

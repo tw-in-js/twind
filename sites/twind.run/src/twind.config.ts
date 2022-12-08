@@ -2,6 +2,7 @@ import type { ColorValue } from '@twind/core'
 import { defineConfig } from '@twind/core'
 import presetAutoprefix from '@twind/preset-autoprefix'
 import presetTailwind from '@twind/preset-tailwind'
+import presetTypography from '@twind/preset-typography'
 
 // https://www.radix-ui.com/docs/colors/palette-composition/composing-a-palette
 // Using semantic color names
@@ -35,7 +36,33 @@ import {
 // TODO: adjust theme and preflight default colors
 
 export default defineConfig({
-  presets: [presetAutoprefix(), presetTailwind()],
+  presets: [
+    presetAutoprefix(),
+    presetTailwind(),
+    presetTypography({
+      defaultColor: 'brand',
+      colors: {
+        body: '11',
+        headings: '12',
+        lead: '11',
+        links: '12',
+        bold: '12',
+        counters: '7',
+        bullets: '6',
+        hr: '6',
+        quotes: '12',
+        'quote-borders': '6',
+        captions: '11',
+        code: '11',
+        'pre-code': '11',
+        'pre-bg': '3',
+        'th-borders': '7',
+        'td-borders': '6',
+        // invert colors (dark mode) — default to auto dark color
+        dark: null,
+      },
+    }),
+  ],
   ignorelist: import.meta.env.DEV
     ? [
         // Some well known css-in.js prefixes
