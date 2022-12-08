@@ -1,5 +1,17 @@
 # twind.style
 
+## 1.0.3
+
+### Patch Changes
+
+- Updated dependencies [[`17bdfce6`](https://github.com/tw-in-js/twind/commit/17bdfce63a463f43614062040c2156112c87b50d), [`17bdfce6`](https://github.com/tw-in-js/twind/commit/17bdfce63a463f43614062040c2156112c87b50d), [`17bdfce6`](https://github.com/tw-in-js/twind/commit/17bdfce63a463f43614062040c2156112c87b50d)]:
+  - @twind/core@1.0.2
+  - @twind/preset-autoprefix@1.0.2
+  - @twind/preset-ext@1.0.2
+  - @twind/preset-tailwind@1.0.2
+  - @twind/preset-typography@1.0.2
+  - @twind/with-sveltekit@1.0.2
+
 ## 1.0.2
 
 ### Patch Changes
