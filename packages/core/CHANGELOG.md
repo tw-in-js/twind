@@ -1,5 +1,15 @@
 # @twind/core
 
+## 1.0.2
+
+### Patch Changes
+
+- add @twind/preset-container-queries ([#399](https://github.com/tw-in-js/twind/pull/399))
+
+- respect modifier and non-alphanumeric chars in precedence ([#399](https://github.com/tw-in-js/twind/pull/399))
+
+- improve slotting based on at-rule width ([#399](https://github.com/tw-in-js/twind/pull/399))
+
 ## 1.0.1
 
 ### Patch Changes
