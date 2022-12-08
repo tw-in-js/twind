@@ -76,7 +76,7 @@ jobs:
           cat << EOF > "$HOME/.npmrc"
             //registry.npmjs.org/:_authToken=$NPM_TOKEN
           EOF
-          npm dist-tag add twind@0.16.18 latest || true
+          npm dist-tag add twind@0.16.19 latest || true
           npm deprecate twind@1.x "use @twind/core instead" || true
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
@@ -169,7 +169,7 @@ jobs:
 
       - name: 📝  Comment PR
         if: ${{ github.event.number }}
-        uses: thollander/actions-comment-pull-request@v1
+        uses: thollander/actions-comment-pull-request@v2
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           comment_includes: '## Deployed site previews with [![Cloudflare Pages]'
