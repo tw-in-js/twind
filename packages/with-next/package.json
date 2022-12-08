@@ -1,6 +1,6 @@
 {
   "name": "@twind/with-next",
-  "version": "1.0.2",
+  "version": "1.0.1",
   "description": "Seamless integration of Twind in a Next.js project",
   "publishConfig": {
     "access": "public",
@@ -34,7 +34,7 @@
     "entryPoint": "./index.d.ts"
   },
   "peerDependencies": {
-    "@twind/core": "^1.0.2",
+    "@twind/core": "^1.0.1",
     "next": "12.x",
     "react": "^16.6.0 || 17.x || 18.x",
     "typescript": "^4.8.4"
@@ -45,7 +45,7 @@
     }
   },
   "devDependencies": {
-    "@twind/core": "^1.0.2",
+    "@twind/core": "^1.0.1",
     "@types/react": "^17.0.52",
     "next": "^12.3.3",
     "react": "^17.0.2",

@@ -1,13 +1,5 @@
 # @twind/preset-tailwind-forms
 
-## 1.0.2
-
-### Patch Changes
-
-- Updated dependencies [[`17bdfce6`](https://github.com/tw-in-js/twind/commit/17bdfce63a463f43614062040c2156112c87b50d), [`17bdfce6`](https://github.com/tw-in-js/twind/commit/17bdfce63a463f43614062040c2156112c87b50d), [`17bdfce6`](https://github.com/tw-in-js/twind/commit/17bdfce63a463f43614062040c2156112c87b50d)]:
-  - @twind/core@1.0.2
-  - @twind/preset-tailwind@1.0.2
-
 ## 1.0.1
 
 ### Patch Changes

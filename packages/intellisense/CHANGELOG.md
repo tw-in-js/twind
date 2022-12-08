@@ -1,14 +1,5 @@
 # @twind/intellisense
 
-## 1.0.3
-
-### Patch Changes
-
-- improve sorting of suggested values ([#399](https://github.com/tw-in-js/twind/pull/399))
-
-- Updated dependencies [[`17bdfce6`](https://github.com/tw-in-js/twind/commit/17bdfce63a463f43614062040c2156112c87b50d), [`17bdfce6`](https://github.com/tw-in-js/twind/commit/17bdfce63a463f43614062040c2156112c87b50d), [`17bdfce6`](https://github.com/tw-in-js/twind/commit/17bdfce63a463f43614062040c2156112c87b50d)]:
-  - @twind/core@1.0.2
-
 ## 1.0.2
 
 ### Patch Changes
