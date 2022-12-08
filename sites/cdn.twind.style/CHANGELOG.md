@@ -1,5 +1,11 @@
 # @sites/cdn.twind.style
 
+## 1.0.2
+
+### Patch Changes
+
+- add @twind/preset-container-queries ([`0ba8cca0`](https://github.com/tw-in-js/twind/commit/0ba8cca0c5c18dcad7831ae3107c55eedeadc8e1))
+
 ## 1.0.1
 
 ### Patch Changes
