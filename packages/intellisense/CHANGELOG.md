@@ -1,5 +1,11 @@
 # @twind/intellisense
 
+## 1.0.2
+
+### Patch Changes
+
+- trigger suggestion on start of class attribute ([`689c41a0`](https://github.com/tw-in-js/twind/commit/689c41a0856978352d964d8b4e863d2d7344e13d))
+
 ## 1.0.1
 
 ### Patch Changes
