@@ -87,9 +87,9 @@ importers:
 
   examples/basic:
     specifiers:
-      '@twind/core': 1.0.1
-      '@twind/preset-autoprefix': 1.0.1
-      '@twind/preset-tailwind': 1.0.1
+      '@twind/core': 1.0.2
+      '@twind/preset-autoprefix': 1.0.2
+      '@twind/preset-tailwind': 1.0.2
       vite: ^3.2.3
     dependencies:
       '@twind/core': link:../../packages/core
@@ -100,12 +100,12 @@ importers:
 
   examples/playground:
     specifiers:
-      '@twind/core': 1.0.1
-      '@twind/preset-autoprefix': 1.0.1
-      '@twind/preset-ext': 1.0.1
-      '@twind/preset-line-clamp': 1.0.1
-      '@twind/preset-tailwind': 1.0.1
-      '@twind/preset-tailwind-forms': 1.0.1
+      '@twind/core': 1.0.2
+      '@twind/preset-autoprefix': 1.0.2
+      '@twind/preset-ext': 1.0.2
+      '@twind/preset-line-clamp': 1.0.2
+      '@twind/preset-tailwind': 1.0.2
+      '@twind/preset-tailwind-forms': 1.0.2
       vite: ^3.2.3
     dependencies:
       '@twind/core': link:../../packages/core
@@ -119,10 +119,10 @@ importers:
 
   examples/using-tailwind-forms:
     specifiers:
-      '@twind/core': 1.0.1
-      '@twind/preset-autoprefix': 1.0.1
-      '@twind/preset-tailwind': 1.0.1
-      '@twind/preset-tailwind-forms': 1.0.1
+      '@twind/core': 1.0.2
+      '@twind/preset-autoprefix': 1.0.2
+      '@twind/preset-tailwind': 1.0.2
+      '@twind/preset-tailwind-forms': 1.0.2
       vite: ^3.2.3
     dependencies:
       '@twind/core': link:../../packages/core
@@ -140,14 +140,14 @@ importers:
 
   examples/with-gatsby:
     specifiers:
-      '@twind/core': 1.0.1
-      '@twind/preset-autoprefix': 1.0.1
-      '@twind/preset-tailwind': 1.0.1
+      '@twind/core': 1.0.2
+      '@twind/preset-autoprefix': 1.0.2
+      '@twind/preset-tailwind': 1.0.2
       gatsby: ^4.24.8
       gatsby-plugin-manifest: ^4.24.0
       gatsby-plugin-offline: ^5.24.0
       gatsby-plugin-react-helmet: ^5.24.0
-      gatsby-plugin-twind: 1.0.1
+      gatsby-plugin-twind: 1.0.2
       react: ^17.0.2
       react-dom: ^17.0.2
       react-helmet: ^6.1.0
@@ -166,10 +166,10 @@ importers:
 
   examples/with-next:
     specifiers:
-      '@twind/core': 1.0.1
-      '@twind/preset-autoprefix': 1.0.1
-      '@twind/preset-tailwind': 1.0.1
-      '@twind/with-next': 1.0.1
+      '@twind/core': 1.0.2
+      '@twind/preset-autoprefix': 1.0.2
+      '@twind/preset-tailwind': 1.0.2
+      '@twind/with-next': 1.0.2
       '@types/node': ^14.18.33
       '@types/react': ^17.0.52
       next: ^12.3.3
@@ -197,10 +197,10 @@ importers:
       '@remix-run/dev': ^1.7.5
       '@remix-run/react': ^1.7.5
       '@remix-run/serve': ^1.7.5
-      '@twind/core': 1.0.1
-      '@twind/preset-autoprefix': 1.0.1
-      '@twind/preset-tailwind': 1.0.1
-      '@twind/with-remix': 1.0.1
+      '@twind/core': 1.0.2
+      '@twind/preset-autoprefix': 1.0.2
+      '@twind/preset-tailwind': 1.0.2
+      '@twind/with-remix': 1.0.2
       '@types/react': ^17.0.52
       '@types/react-dom': ^17.0.18
       cross-env: ^7.0.3
@@ -229,10 +229,10 @@ importers:
     specifiers:
       '@sveltejs/adapter-node': 1.0.0-next.100
       '@sveltejs/kit': 1.0.0-next.547
-      '@twind/core': ^1.0.1
-      '@twind/preset-autoprefix': ^1.0.1
-      '@twind/preset-tailwind': ^1.0.1
-      '@twind/with-sveltekit': ^1.0.1
+      '@twind/core': ^1.0.2
+      '@twind/preset-autoprefix': ^1.0.2
+      '@twind/preset-tailwind': ^1.0.2
+      '@twind/with-sveltekit': ^1.0.2
       svelte: ^3.53.1
       svelte-check: ^2.9.2
       svelte-preprocess: ^4.10.7
@@ -253,9 +253,9 @@ importers:
 
   packages/cdn:
     specifiers:
-      '@twind/core': ^1.0.1
-      '@twind/preset-autoprefix': ^1.0.1
-      '@twind/preset-tailwind': ^1.0.1
+      '@twind/core': ^1.0.2
+      '@twind/preset-autoprefix': ^1.0.2
+      '@twind/preset-tailwind': ^1.0.2
       typescript: ^4.8.4
     dependencies:
       '@twind/core': link:../core
@@ -267,7 +267,7 @@ importers:
 
   packages/core:
     specifiers:
-      '@twind/preset-tailwind': ^1.0.1
+      '@twind/preset-tailwind': ^1.0.2
       csstype: ^3.1.1
       typescript: ^4.8.4
     dependencies:
@@ -280,9 +280,9 @@ importers:
   packages/intellisense:
     specifiers:
       '@ctrl/tinycolor': ^3.4.1
-      '@twind/core': ^1.0.1
-      '@twind/preset-autoprefix': ^1.0.1
-      '@twind/preset-tailwind': ^1.0.1
+      '@twind/core': ^1.0.2
+      '@twind/preset-autoprefix': ^1.0.2
+      '@twind/preset-tailwind': ^1.0.2
       '@types/css-tree': ^2.0.0
       '@types/cssbeautify': ^0.3.2
       css-tree: ^2.2.1
@@ -309,7 +309,7 @@ importers:
 
   packages/preset-autoprefix:
     specifiers:
-      '@twind/core': ^1.0.1
+      '@twind/core': ^1.0.2
       style-vendorizer: ^2.2.3
       typescript: ^4.8.4
     dependencies:
@@ -321,7 +321,7 @@ importers:
 
   packages/preset-container-queries:
     specifiers:
-      '@twind/core': ^1.0.1
+      '@twind/core': ^1.0.2
       typescript: ^4.8.4
     devDependencies:
       '@twind/core': link:../core
@@ -330,8 +330,8 @@ importers:
 
   packages/preset-ext:
     specifiers:
-      '@twind/core': ^1.0.1
-      '@twind/preset-tailwind': ^1.0.1
+      '@twind/core': ^1.0.2
+      '@twind/preset-tailwind': ^1.0.2
       typescript: ^4.8.4
     devDependencies:
       '@twind/core': link:../core
@@ -341,7 +341,7 @@ importers:
 
   packages/preset-line-clamp:
     specifiers:
-      '@twind/core': ^1.0.1
+      '@twind/core': ^1.0.2
       typescript: ^4.8.4
     devDependencies:
       '@twind/core': link:../core
@@ -350,7 +350,7 @@ importers:
 
   packages/preset-tailwind:
     specifiers:
-      '@twind/core': ^1.0.1
+      '@twind/core': ^1.0.2
       typescript: ^4.8.4
     devDependencies:
       '@twind/core': link:../core
@@ -359,8 +359,8 @@ importers:
 
   packages/preset-tailwind-forms:
     specifiers:
-      '@twind/core': ^1.0.1
-      '@twind/preset-tailwind': ^1.0.1
+      '@twind/core': ^1.0.2
+      '@twind/preset-tailwind': ^1.0.2
       typescript: ^4.8.4
     devDependencies:
       '@twind/core': link:../core
@@ -370,7 +370,7 @@ importers:
 
   packages/preset-typography:
     specifiers:
-      '@twind/core': ^1.0.1
+      '@twind/core': ^1.0.2
       typescript: ^4.8.4
     devDependencies:
       '@twind/core': link:../core
@@ -379,7 +379,7 @@ importers:
 
   packages/twind:
     specifiers:
-      '@twind/core': ^1.0.1
+      '@twind/core': ^1.0.2
       typescript: ^4.8.4
     dependencies:
       '@twind/core': link:../core
@@ -389,7 +389,7 @@ importers:
 
   packages/with-gatsby:
     specifiers:
-      '@twind/core': ^1.0.1
+      '@twind/core': ^1.0.2
       '@types/react': ^17.0.52
       '@types/react-dom': ^17.0.18
       gatsby: ^4.24.8
@@ -408,7 +408,7 @@ importers:
 
   packages/with-next:
     specifiers:
-      '@twind/core': ^1.0.1
+      '@twind/core': ^1.0.2
       '@types/react': ^17.0.52
       next: ^12.3.3
       react: ^17.0.2
@@ -425,7 +425,7 @@ importers:
 
   packages/with-remix:
     specifiers:
-      '@twind/core': ^1.0.1
+      '@twind/core': ^1.0.2
       '@types/node': ^14.18.33
       '@types/react': ^17.0.52
       react: ^17.0.2
@@ -445,7 +445,7 @@ importers:
   packages/with-sveltekit:
     specifiers:
       '@sveltejs/kit': 1.0.0-next.544
-      '@twind/core': ^1.0.1
+      '@twind/core': ^1.0.2
       svelte: ^3.53.1
       typescript: ^4.8.4
     devDependencies:
@@ -485,11 +485,11 @@ importers:
       '@sastan/svelte-headlessui': ^1.0.2
       '@sveltejs/adapter-cloudflare': 1.0.0-next.40
       '@sveltejs/kit': 1.0.0-next.547
-      '@twind/core': ^1.0.1
-      '@twind/intellisense': ^1.0.1
-      '@twind/preset-autoprefix': ^1.0.1
-      '@twind/preset-tailwind': ^1.0.1
-      '@twind/with-sveltekit': ^1.0.1
+      '@twind/core': ^1.0.2
+      '@twind/intellisense': ^1.0.3
+      '@twind/preset-autoprefix': ^1.0.2
+      '@twind/preset-tailwind': ^1.0.2
+      '@twind/with-sveltekit': ^1.0.2
       '@types/lz-string': ^1.3.34
       '@types/node': ^18.11.9
       '@types/prettier': ^2.7.1
@@ -574,12 +574,12 @@ importers:
       '@sastan/svelte-headlessui': ^1.0.2
       '@sveltejs/adapter-static': 1.0.0-next.48
       '@sveltejs/kit': 1.0.0-next.547
-      '@twind/core': ^1.0.1
-      '@twind/preset-autoprefix': ^1.0.1
-      '@twind/preset-ext': ^1.0.1
-      '@twind/preset-tailwind': ^1.0.1
-      '@twind/preset-typography': ^1.0.1
-      '@twind/with-sveltekit': ^1.0.1
+      '@twind/core': ^1.0.2
+      '@twind/preset-autoprefix': ^1.0.2
+      '@twind/preset-ext': ^1.0.2
+      '@twind/preset-tailwind': ^1.0.2
+      '@twind/preset-typography': ^1.0.2
+      '@twind/with-sveltekit': ^1.0.2
       '@types/graceful-fs': ^4.1.5
       esbuild: ^0.15.13
       fast-glob: ^3.2.12
