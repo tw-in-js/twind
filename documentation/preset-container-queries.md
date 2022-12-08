@@ -19,7 +19,7 @@ next: ./preset-ext.md
 
 ## 📦 Installation
 
-**with [@twind/core](https://github.com/tw-in-js/twind/tree/main/packages/core)**
+**with [@twind/core](./installation#local--bundler)**
 
 Install from npm:
 
@@ -44,7 +44,7 @@ export default defineConfig({
 ```html
 <head>
   <script
-    src="https://cdn.jsdelivr.net/combine/npm/twind,npm/@twind/preset-container-queries"
+    src="https://cdn.jsdelivr.net/combine/npm/@twind/core@1,npm/@twind/preset-container-queries@1"
     crossorigin
   ></script>
   <script>

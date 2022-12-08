@@ -163,7 +163,7 @@ Twind is available as a global browser script and can be used directly in the br
 
    ```html [2]
    <head>
-     <script src="https://cdn.jsdelivr.net/npm/@twind/core" crossorigin></script>
+     <script src="https://cdn.jsdelivr.net/npm/@twind/core@1" crossorigin></script>
    </head>
    ```
 
@@ -180,7 +180,7 @@ Twind is available as a global browser script and can be used directly in the br
 
    ```html [3-7]
    <head>
-     <script src="https://cdn.jsdelivr.net/npm/@twind/core" crossorigin></script>
+     <script src="https://cdn.jsdelivr.net/npm/@twind/core@1" crossorigin></script>
      <script>
        twind.install({
          /* options */
@@ -206,7 +206,7 @@ Twind is available as a global browser script and can be used directly in the br
    ```html [2-5]
    <head>
      <script
-       src="https://cdn.jsdelivr.net/combine/npm/@twind/core,npm/@twind/preset-autoprefix,npm/@twind/preset-tailwind"
+       src="https://cdn.jsdelivr.net/combine/npm/@twind/core@1,npm/@twind/preset-autoprefix@1,npm/@twind/preset-tailwind@1"
        crossorigin
      ></script>
    </head>
@@ -222,7 +222,7 @@ Twind is available as a global browser script and can be used directly in the br
    ```html [6-10]
    <head>
      <script
-       src="https://cdn.jsdelivr.net/combine/npm/@twind/core,npm/@twind/preset-autoprefix,npm/@twind/preset-tailwind"
+       src="https://cdn.jsdelivr.net/combine/npm/@twind/core@1,npm/@twind/preset-autoprefix@1,npm/@twind/preset-tailwind@1"
        crossorigin
      ></script>
      <script>

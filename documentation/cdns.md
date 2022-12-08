@@ -3,7 +3,7 @@ hidden: true
 ---
 
 https://cdn.jsdelivr.net/npm/twind
-https://cdn.jsdelivr.net/combine/npm/twind,npm/@twind/preset-autoprefix,npm/@twind/preset-tailwind
+https://cdn.jsdelivr.net/combine/npm/@twind/core@1,npm/@twind/preset-autoprefix,npm/@twind/preset-tailwind
 
 https://cdn.jsdelivr.net/npm/@twind/cdn
 https://cdn.jsdelivr.net/combine/npm/@twind/cdn,npm/@twind/preset-ext
