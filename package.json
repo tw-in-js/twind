@@ -54,7 +54,7 @@
     "test:ui": "vitest --ui",
     "test:coverage": "vitest run --coverage",
     "changeset": "changeset",
-    "changeset:version": "changeset version && pnpm prettier **/CHANGELOG.md",
+    "changeset:version": "changeset version && pnpm install --lockfile-only --no-frozen-lockfile --prefer-offline && && pnpm prettier **/CHANGELOG.md",
     "changeset:publish": "pnpm build && changeset publish",
     "prepare": "node ./.husky/prepare.cjs"
   },
