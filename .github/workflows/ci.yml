@@ -21,7 +21,7 @@ jobs:
   build:
     name: 🏗️  Build
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 60
     outputs:
       published: ${{ steps.changesets.outputs.published }}
       hasChangesets: ${{ steps.changesets.outputs.hasChangesets }}
@@ -111,7 +111,7 @@ jobs:
     name: 🚚  Publish pre-releases
     needs: build
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 60
     if: ${{ needs.build.outputs.published != 'true' && github.repository == 'tw-in-js/twind' }}
     permissions:
       contents: read

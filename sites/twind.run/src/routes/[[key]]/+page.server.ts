@@ -75,9 +75,18 @@ export async function load({
 
   const [localManifest, workspaceManifest, latestManifest, nextManifest] = await Promise.all([
     loadManifest(SITE_VERSION),
-    loadManifest(workspace?.version).catch(() => null),
-    loadManifest('latest').catch(() => null),
-    loadManifest('next').catch(() => null),
+    loadManifest(workspace?.version).catch((error) => {
+      console.warn(`Failed to fetch CDN manifest for ${workspace?.version}`, error)
+      return null
+    }),
+    loadManifest('latest').catch((error) => {
+      console.warn(`Failed to fetch CDN manifest for latest`, error)
+      return null
+    }),
+    loadManifest('next').catch((error) => {
+      console.warn(`Failed to fetch CDN manifest for next`, error)
+      return null
+    }),
   ])
 
   workspace.version = workspaceManifest?.version || ''
@@ -201,7 +210,10 @@ export async function load({
 
     const cache = caches?.default
 
-    let response = await cache?.match(url)
+    let response = await cache?.match(url).catch((error) => {
+      console.warn(`Failed to use cached CDN manifest for ${version} (${origin})`, error)
+      return null
+    })
 
     if (!response) {
       console.debug(`Fetching CDN manifest for ${version} (${origin})`)
@@ -222,8 +234,8 @@ export async function load({
           `Resolving CDN manifest for ${version} (${origin}) using v${manifest.version}`,
         )
         return await loadManifest(manifest.version)
-      } catch {
-        console.warn(`Failed to fetch CDN manifest for v${manifest.version}`)
+      } catch (error) {
+        console.warn(`Failed to fetch CDN manifest for v${manifest.version}`, error)
       }
     }
 

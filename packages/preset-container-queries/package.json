@@ -1,51 +1,35 @@
 {
-  "name": "@twind/core",
+  "name": "@twind/preset-container-queries",
   "version": "1.0.1",
-  "description": "The core engine without any presets.",
+  "description": "A twind preset that provides utilities for container queries.",
   "keywords": [
     "twind",
+    "twind-preset",
     "tailwind",
     "tailwindcss",
     "tw-in-js",
-    "tailwind-in-js"
+    "tailwind-in-js",
+    "preset"
   ],
   "type": "module",
   "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
-  "main": "src/index.ts",
+  "main": "src/container-queries.ts",
   "// Each entry is expanded into several bundles (types, esnext, module, script, node, and default)": "",
   "exports": {
-    ".": "./src/index.ts",
-    "./package.json": "./package.json"
+    ".": "./src/container-queries.ts"
   },
-  "globalName": "twind",
   "// These are relative from within the dist/ folder": "",
   "sideEffects": false,
   "size-limit": [
     {
-      "name": "@twind/core",
-      "path": "dist/core.esnext.js",
+      "name": "@twind/preset-container-queries",
+      "path": "dist/preset-container-queries.esnext.js",
       "brotli": true,
-      "limit": "8.1kb"
-    },
-    {
-      "name": "@twind/core (setup)",
-      "path": "dist/core.esnext.js",
-      "import": "{ setup }",
-      "brotli": true,
-      "limit": "5.55kb"
-    },
-    {
-      "name": "@twind/core (twind + cssom)",
-      "path": "dist/core.esnext.js",
-      "import": "{ twind, cssom }",
-      "brotli": true,
-      "limit": "4.9kb"
+      "limit": "0.4kb"
     }
   ],
-  "dependencies": {
-    "csstype": "^3.1.1"
-  },
   "peerDependencies": {
+    "@twind/core": "^1.0.1",
     "typescript": "^4.8.4"
   },
   "peerDependenciesMeta": {
@@ -54,7 +38,7 @@
     }
   },
   "devDependencies": {
-    "@twind/preset-tailwind": "^1.0.1",
+    "@twind/core": "^1.0.1",
     "typescript": "^4.8.4"
   },
   "scripts": {

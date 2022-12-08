@@ -361,6 +361,6 @@ How to use Twind in different frameworks and environments.
 
 ### Migration
 
-We have collected a list of changes in [Migration › Twind v0.16 › Notable Changes](./migration#notable-changes). A detailed migration guide will follow.
+We have collected a list of changes in [Migration › Twind v0.16](./migration#from-twind-v016). A detailed migration guide will follow.
 
 :::

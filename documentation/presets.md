@@ -34,6 +34,7 @@ export default defineConfig({
 All official presets are [available on npm](https://www.npmjs.com/search?q=keywords:twind-preset) with the prefix `@twind/preset-`.
 
 - [@twind/preset-autoprefix](./preset-autoprefix) — provides a CSS vendor prefixer and property alias mapper
+- [@twind/preset-container-queries](./preset-container-queries) — provides utilities for container queries
 - [@twind/preset-ext](./preset-ext) — adds some commonly used rules and variants that are not part of Tailwind CSS
 - [@twind/preset-line-clamp](./preset-line-clamp) - adds utilities for visually truncating text after a fixed number of lines
 - [@twind/preset-tailwind](./preset-tailwind) — adds all Tailwind v3 classes

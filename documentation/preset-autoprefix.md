@@ -4,7 +4,7 @@ label: Autoprefix
 package: '@twind/preset-autoprefix'
 excerpt: |
   CSS vendor prefixer and property alias mapper preset.
-next: ./preset-ext.md
+next: ./preset-container-queries.md
 ---
 
 ## 📦 Installation

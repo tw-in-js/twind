@@ -46,5 +46,18 @@ export function compareTwindRules(a: SortableRule, b: SortableRule): number {
     return 0
   }
 
-  return a.p - b.p || a.o - b.o || collator.compare(a.n as string, b.n as string)
+  return (
+    a.p - b.p ||
+    a.o - b.o ||
+    collator.compare(byModifier(a.n), byModifier(b.n)) ||
+    collator.compare(byName(a.n), byName(b.n))
+  )
+}
+
+function byModifier(s: string | null | undefined) {
+  return ((s || '').split(/:/).pop() as string).split('/').pop() || '\x00'
+}
+
+function byName(s: string | null | undefined) {
+  return (s || '').replace(/\W/g, (c) => String.fromCharCode(127 + c.charCodeAt(0))) + '\x00'
 }

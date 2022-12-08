@@ -169,15 +169,30 @@ export function seperatorPrecedence(string: string): number {
 }
 
 export function atRulePrecedence(css: string): number {
-  // 0=none, 1=sm, 2=md, 3=lg, 4=xl, 5=2xl, 6=??, 7=??
-  // 0 - 15: 4 bits (max 150rem or 2250px)
-  //  576px -> 3
-  // 1536px -> 10
-  //  36rem -> 3
-  //  96rem -> 9
+  // 0 - 15: 4 bits (max 144rem or 2304px)
+  // rem -> bit
+  // <20 ->  0 (<320px)
+  //  20 ->  1 (320px)
+  //  24 ->  2 (384px)
+  //  28 ->  3 (448px)
+  //  32 ->  4 (512px)
+  //  36 ->  5 (576px)
+  //  42 ->  6 (672px)
+  //  48 ->  7 (768px)
+  //  56 ->  8 (896px)
+  //  64 ->  9 (1024px)
+  //  72 -> 10 (1152px)
+  //  80 -> 11 (1280px)
+  //  96 -> 12 (1536px)
+  // 112 -> 13 (1792px)
+  // 128 -> 14 (2048px)
+  // 144 -> 15 (2304px)
+  // https://www.dcode.fr/function-equation-finder
   return (
     (Math.min(
-      /(?:^|width[^\d]+)(\d+(?:.\d+)?)(p)?/.test(css) ? +RegExp.$1 / (RegExp.$2 ? 15 : 1) / 10 : 0,
+      /(?:^|width[^\d]+)(\d+(?:.\d+)?)(p)?/.test(css)
+        ? Math.max(0, 29.63 * (+RegExp.$1 / (RegExp.$2 ? 15 : 1)) ** 0.137 - 43)
+        : 0,
       15,
     ) <<
       22) /* Shifts.responsive */ |
@@ -245,6 +260,9 @@ function pseudoPrecedence(selector: string): number {
 
 // 	/* ^c.{7}$ */
 // 	"continue",
+
+// 	/* ^c.{8}$ */
+// 	"container",
 // ],
 
 // "-1": [
@@ -259,6 +277,7 @@ function pseudoPrecedence(selector: string): number {
 // 	"place-content",
 // 	"place-items",
 // 	"place-self",
+
 // ],
 
 // group: 1 => +1
@@ -270,7 +289,7 @@ export function declarationPropertyPrecedence(property: string): number {
   return property[0] == '-'
     ? 0
     : seperatorPrecedence(property) +
-        (/^(?:(border-(?!w|c|sty)|[tlbr].{2,4}m?$|c.{7}$)|([fl].{5}l|g.{8}$|pl))/.test(property)
+        (/^(?:(border-(?!w|c|sty)|[tlbr].{2,4}m?$|c.{7,8}$)|([fl].{5}l|g.{8}$|pl))/.test(property)
           ? +!!RegExp.$1 /* +1 */ || -!!RegExp.$2 /* -1 */
           : 0) +
         1

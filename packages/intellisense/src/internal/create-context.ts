@@ -415,7 +415,16 @@ export function createIntellisenseContext(
 
         const isVariant = variants.has(token)
 
-        let name = token.endsWith('[') ? `${token}…]` : token.endsWith('/') ? `${token}…` : token
+        let name =
+          isVariant && token.endsWith('[:')
+            ? `${token.slice(0, -1)}…]:`
+            : token.endsWith('[')
+            ? `${token}…]`
+            : isVariant && token.endsWith('/:')
+            ? `${token.slice(0, -1)}…:`
+            : token.endsWith('/')
+            ? `${token}…`
+            : token
 
         if (isVariant) {
           if (!name.endsWith(':')) {

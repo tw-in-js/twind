@@ -7,6 +7,7 @@
 ## Presets
 
 - [@twind/preset-autoprefix](./packages/preset-autoprefix/CHANGELOG.md)
+- [@twind/preset-conatiner-queries](./packages/preset-conatiner-queries/CHANGELOG.md)
 - [@twind/preset-ext](./packages/preset-ext/CHANGELOG.md)
 - [@twind/preset-line-clamp](./packages/preset-line-clamp/CHANGELOG.md)
 - [@twind/preset-tailwind](./packages/preset-tailwind/CHANGELOG.md)
