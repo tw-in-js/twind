@@ -69,7 +69,7 @@ jobs:
 
       # wait a bit and then set latest for twind back to v0.16
       # because some are using CDNs without specifing a version
-      - name: 📝  Keep latest tag on twind@v0.16.18
+      - name: 📝  Keep latest tag on twind@v0.16.19
         if: steps.changesets.outputs.published == 'true'
         run: |
           sleep 20
