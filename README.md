@@ -1,5 +1,24 @@
 <div align="center">
 
+
+<h1>
+
+Nov 18, 2022: [Twind v1](https://github.com/tw-in-js/twind/tree/main#readme) is now in stable release!
+
+</h1>
+
+<h2>
+
+Please check out the [Migration Guide](https://twind.style/migration#from-twind-v016) to upgrade and use the new [@twind/core](https://www.npmjs.com/package/@twind/core) package.
+
+<h2>
+
+</div>
+
+----
+
+<div align="center">
+
 <img src="https://twind.dev/assets/twind-logo-animated.svg" height="125" width="125" />
 <a href="https://twind.dev" align="center"><h1>Twind</h1></a>
 
@@ -18,14 +37,6 @@ The smallest, fastest, most feature complete Tailwind-in-JS solution in existenc
 [![Coverage Status](https://flat.badgen.net/coveralls/c/github/tw-in-js/twind/v0.16?icon=codecov&label&cache=10800)](https://coveralls.io/github/tw-in-js/twind?branch=v0.16)
 
 </div>
-
----
-
-**Nov 18, 2022: [Twind v1](https://github.com/tw-in-js/twind/tree/main) is now in stable release!**
-
-Check out the [Migration Guide](https://twind.style/migration#from-twind-v016) to upgrade.
-
----
 
 Twind is a small compiler (~13kB) that converts Tailwind classes into actual CSS rules at runtime. If you have used Tailwind or other CSS-in-JS solutions, then most of the API should feel very familiar.
 

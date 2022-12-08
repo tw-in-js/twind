@@ -12,6 +12,12 @@ head:
       content: twind tailwind css-in-js
 ---
 
+# Nov 18, 2022: [Twind v1](https://github.com/tw-in-js/twind/tree/main#readme) is now in stable release!
+
+Please check out the [Migration Guide](https://twind.style/migration#from-twind-v016) to upgrade and use the new [@twind/core](https://www.npmjs.com/package/@twind/core) package.
+
+----
+
 # {{ $frontmatter.title }}
 
 > The smallest, fastest, most feature complete Tailwind-in-JS solution in existence
