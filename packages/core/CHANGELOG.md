@@ -1,5 +1,11 @@
 # @twind/core
 
+## 1.0.3
+
+### Patch Changes
+
+- Fixes "warn" message doesn't respect `event.preventDefault()` (#403) ([#412](https://github.com/tw-in-js/twind/pull/412)) 🙏🏽 [@wzulfikar](https://github.com/wzulfikar)!
+
 ## 1.0.2
 
 ### Patch Changes

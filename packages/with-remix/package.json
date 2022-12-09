@@ -1,6 +1,6 @@
 {
   "name": "@twind/with-remix",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Seamless integration of Twind in a Remix project",
   "publishConfig": {
     "access": "public",
@@ -35,7 +35,7 @@
   "// These are relative from within the dist/ folder": "",
   "sideEffects": false,
   "peerDependencies": {
-    "@twind/core": "^1.0.2",
+    "@twind/core": "^1.0.3",
     "react": "^16.6.0 || 17.x || 18.x",
     "remix": "1.x",
     "typescript": "^4.8.4"
@@ -46,7 +46,7 @@
     }
   },
   "devDependencies": {
-    "@twind/core": "^1.0.2",
+    "@twind/core": "^1.0.3",
     "@types/node": "^14.18.33",
     "@types/react": "^17.0.52",
     "react": "^17.0.2",
