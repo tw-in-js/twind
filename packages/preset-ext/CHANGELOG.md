@@ -1,5 +1,12 @@
 # @twind/preset-ext
 
+## 1.0.3
+
+### Patch Changes
+
+- Updated dependencies [[`8eb316c6`](https://github.com/tw-in-js/twind/commit/8eb316c6e2736c1c8fde76d0d9b967261a411ced)]:
+  - @twind/core@1.0.3
+
 ## 1.0.2
 
 ### Patch Changes
