@@ -104,7 +104,7 @@
 </section>
 
 <section
-  class="mt-4 lg:mt-8 prose prose-headings:scroll-mt-24 &>nav:hidden max-w-xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8"
+  class="mt-4 lg:mt-8 prose prose-headings:scroll-mt-24 &>nav:hidden max-w-xl mx-auto px-4 sm:px-6 lg:max-w-7xl lg:px-8 overflow-hidden lg:overflow-visible"
 >
   {@html data.content}
 </section>
