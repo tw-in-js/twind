@@ -26,23 +26,14 @@ const variants: Variant<TailwindTheme>[] = [
   ['motion-reduce', '@media (prefers-reduced-motion:reduce)'],
   ['motion-safe', '@media (prefers-reduced-motion:no-preference)'],
   ['print', '@media print'],
-  ['portrait', '@media (orientation:portrait)'],
-  ['landscape', '@media (orientation:landscape)'],
-  ['contrast-more', '@media (prefers-contrast:more)'],
-  ['contrast-less', '@media (prefers-contrast:less)'],
+  ['(portrait|landscape)', ({ 1: $1 }) => `@media (orientation:${$1})`],
+  ['contrast-(more|less)', ({ 1: $1 }) => `@media (prefers-contrast:${$1})`],
 
-  ['marker', '& *::marker,&::marker'],
-  ['selection', '& *::selection,&::selection'],
-
-  // TODO: use pseudoElement helper?
-  ['first-letter', '&::first-letter'],
-  ['first-line', '&::first-line'],
+  ['(first-(letter|line)|placeholder|backdrop|before|after)', ({ 1: $1 }) => `&::${$1}`],
+  ['(marker|selection)', ({ 1: $1 }) => `& *::${$1},&::${$1}`],
   ['file', '&::file-selector-button'],
-  ['placeholder', '&::placeholder'],
-  ['backdrop', '&::backdrop'],
 
-  ['first', '&:first-child'],
-  ['last', '&:last-child'],
+  ['(first|last|only)', ({ 1: $1 }) => `&:${$1}-child`],
   ['even', '&:nth-child(2n)'],
   ['odd', '&:nth-child(odd)'],
 

@@ -1899,12 +1899,12 @@
   "scroll-auto": ".scroll-auto{scroll-behavior:auto}",
   "scroll-smooth": ".scroll-smooth{scroll-behavior:smooth}",
   "content-none": ".content-none{--tw-content:none;content:var(--tw-content)}",
-  "after:content-['_↗']": ".after\\:content-\\[\\'_↗\\'\\]:after{--tw-content:' ↗';content:var(--tw-content)}",
-  "before:content-[attr(before)]": ".before\\:content-\\[attr\\(before\\)\\]:before{--tw-content:attr(before);content:var(--tw-content)}",
+  "after:content-['_↗']": ".after\\:content-\\[\\'_↗\\'\\]::after{--tw-content:' ↗';content:var(--tw-content)}",
+  "before:content-[attr(before)]": ".before\\:content-\\[attr\\(before\\)\\]::before{--tw-content:attr(before);content:var(--tw-content)}",
   "grid-cols-[1fr_500px_2fr]": ".grid-cols-\\[1fr_500px_2fr\\]{grid-template-columns:1fr 500px 2fr}",
   "bg-[url('/what_a_rush.png')]": ".bg-\\[url\\(\\'\\/what_a_rush\\.png\\'\\)\\]{background-image:url('/what_a_rush.png')}",
-  "after:content-['__↗__\\_']": ".after\\:content-\\[\\'__↗__\\\\_\\'\\]:after{--tw-content:'  ↗  _';content:var(--tw-content)}",
-  "after:content-['_']": ".after\\:content-\\[\\'_\\'\\]:after{--tw-content:' ';content:var(--tw-content)}",
+  "after:content-['__↗__\\_']": ".after\\:content-\\[\\'__↗__\\\\_\\'\\]::after{--tw-content:'  ↗  _';content:var(--tw-content)}",
+  "after:content-['_']": ".after\\:content-\\[\\'_\\'\\]::after{--tw-content:' ';content:var(--tw-content)}",
   "[mask-type:luminance] hover:[mask-type:alpha]": [
     ".\\[mask-type\\:luminance\\]{mask-type:luminance}",
     ".hover\\:\\[mask-type\\:alpha\\]:hover{mask-type:alpha}"
