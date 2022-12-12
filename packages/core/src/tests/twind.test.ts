@@ -23,5 +23,6 @@ test('the config can accessed', () => {
     ignorelist: [],
     hash: undefined,
     stringify: tw.config.stringify,
+    finalize: [],
   })
 })

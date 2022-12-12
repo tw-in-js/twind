@@ -65,9 +65,9 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
   )
 
   function insert(rule: TwindRule): string | undefined {
-    const name = rule.n && context.h(rule.n)
+    const finalRule = context.f(rule)
 
-    const cssText = stringify(name ? { ...rule, n: name } : rule)
+    const cssText = stringify(finalRule)
 
     // If not already inserted
     if (cssText && !insertedRules.has(cssText)) {
@@ -84,7 +84,7 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
       sortedPrecedences.splice(index, 0, rule)
     }
 
-    return name
+    return finalRule.n
   }
 
   return Object.defineProperties(

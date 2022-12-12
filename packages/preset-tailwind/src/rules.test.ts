@@ -365,3 +365,20 @@ test('font-size utilities can include a font-weight', () => {
     '.text-sm{font-size:12px}',
   ])
 })
+
+test('after and before content hashed', () => {
+  const tw = twind(
+    {
+      presets: [tailwind({ disablePreflight: true })],
+      hash: true,
+    },
+    virtual(),
+  )
+
+  assert.strictEqual(tw('before:block'), '#1r4qyix')
+  assert.strictEqual(tw('after:block'), '#qwvwoi')
+  assert.deepEqual(tw.target, [
+    '.\\#qwvwoi::after{content:var(--328t5w);display:block}',
+    '.\\#1r4qyix::before{content:var(--328t5w);display:block}',
+  ])
+})

@@ -21,15 +21,16 @@ export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = 
   // most user config values go first to have precendence over preset config
   // only `preflight` and `theme` are applied as last preset to override all presets
   let config: TwindConfig<BaseTheme & ExtractThemes<Theme, Presets>> = {
-    preflight: userConfig.preflight !== false && [],
     darkMode: undefined,
     darkColor: undefined,
+    preflight: userConfig.preflight !== false && [],
     theme: {},
     variants: asArray(userConfig.variants),
     rules: asArray(userConfig.rules),
     ignorelist: asArray(userConfig.ignorelist),
-    hash: userConfig.hash,
-    stringify: userConfig.stringify || noprefix,
+    hash: undefined,
+    stringify: (property, value) => property + ':' + value,
+    finalize: [],
   }
 
   for (const preset of asArray([
@@ -41,6 +42,7 @@ export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = 
       theme: userConfig.theme as TwindConfig<BaseTheme & ExtractThemes<Theme, Presets>>['theme'],
       hash: userConfig.hash,
       stringify: userConfig.stringify,
+      finalize: userConfig.finalize,
     } as TwindPresetConfig<Theme>,
   ])) {
     const {
@@ -53,6 +55,7 @@ export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = 
       ignorelist,
       hash = config.hash,
       stringify = config.stringify,
+      finalize,
     } = typeof preset == 'function' ? preset(config) : (preset as TwindPresetConfig<Theme>)
 
     config = {
@@ -78,12 +81,10 @@ export function defineConfig<Theme = BaseTheme, Presets extends Preset<any>[] = 
 
       hash,
       stringify,
+
+      finalize: [...config.finalize, ...asArray(finalize)],
     } as TwindConfig<BaseTheme & ExtractThemes<Theme, Presets>>
   }
 
   return config
-}
-
-function noprefix(property: string, value: string): string {
-  return property + ':' + value
 }

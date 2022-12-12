@@ -19,7 +19,7 @@ import type {
 import { DEV } from 'distilt/env'
 
 import { makeThemeFunction } from './theme'
-import { asArray, escape, hash as defaultHash, identity } from '../utils'
+import { asArray, escape, hash as defaultHash, identity, noop } from '../utils'
 import { fromMatch } from '../rules'
 import { warn } from './warn'
 
@@ -37,12 +37,13 @@ type VariantFunction<Theme extends BaseTheme = BaseTheme> = (
 export function createContext<Theme extends BaseTheme = BaseTheme>({
   theme,
   darkMode,
-  darkColor,
+  darkColor = noop,
   variants,
   rules,
   hash,
   stringify,
   ignorelist,
+  finalize,
 }: TwindConfig<Theme>): Context<Theme> {
   // Used to cache resolved rule values
   const variantCache = new Map<string, MaybeArray<string>>()
@@ -58,7 +59,7 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
 
   const ignored = createRegExpExecutor(ignorelist, (value, condition) => condition.test(value))
 
-  const reportedUnknownClasses = new Set<string>()
+  const reportedUnknownClasses = /* #__PURE__ */ new Set<string>()
 
   // add dark as last variant to allow user to override it
   // we can modify variants as it has been passed through defineConfig which already made a copy
@@ -78,6 +79,17 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
       ? defaultHash
       : identity
 
+  if (h !== identity) {
+    finalize.push((rule) => ({
+      ...rule,
+      n: rule.n && h(rule.n),
+      d: rule.d?.replace(
+        /--(tw(?:-[\w-]+)?)\b/g,
+        (_: string, property: string) => '--' + h(property).replace('#', ''),
+      ),
+    }))
+  }
+
   return {
     theme: makeThemeFunction(theme),
 
@@ -86,12 +98,11 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
     h,
 
     s(property, value) {
-      // Hash/Tag tailwind custom properties during serialization
-      return stringify(hashVars(property, h), hashVars(value, h), this)
+      return stringify(property, value, this)
     },
 
     d(section, key, color) {
-      return darkColor?.(section, key, this, color)
+      return darkColor(section, key, this, color)
     },
 
     v(value) {
@@ -130,6 +141,10 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
       }
 
       return ruleCache.get(key)
+    },
+
+    f(rule) {
+      return finalize.reduce((rule, p) => p(rule, this), rule)
     },
   }
 }
@@ -228,16 +243,4 @@ export function toCondition(value: string | RegExp): RegExp {
   return typeof value == 'string'
     ? new RegExp('^' + value + (value.includes('$') || value.slice(-1) == '-' ? '' : '$'))
     : value
-}
-
-function hashVars(value: string, h: Context['h']): string {
-  // PERF: check for --tw before running the regexp
-  // if (value.includes('--tw')) {
-  return value.replace(
-    /--(tw(?:-[\w-]+)?)\b/g,
-    (_: string, property: string) => '--' + h(property).replace('#', ''),
-  )
-  // }
-
-  // return value
 }
