@@ -60,7 +60,7 @@
   },
   "// style-vendorizer is included here to allow examples to find it": "",
   "devDependencies": {
-    "@changesets/cli": "^2.25.2",
+    "@changesets/cli": "^2.24.4",
     "@changesets/get-github-info": "^0.5.1",
     "@size-limit/esbuild": "^8.1.0",
     "@size-limit/file": "^8.1.0",
