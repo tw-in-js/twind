@@ -2847,6 +2847,12 @@ exports[`suggest with single char input 1`] = `
 
 exports[`suggest with two chars 1`] = `
 [
+  "max-[:",
+  "max-sm:",
+  "max-md:",
+  "max-lg:",
+  "max-xl:",
+  "max-2xl:",
   "marker:",
   "max-h-0",
   "max-h-0.5",

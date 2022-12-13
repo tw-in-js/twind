@@ -2178,5 +2178,39 @@
   "// No value give for the property, defaulting to prop: var(--tw)": "",
   "supports-[container-type]:underline": "@supports (container-type:var(--tw)){.supports-\\[container-type\\]\\:underline{text-decoration-line:underline}}",
   "// Named supports usage": "",
-  "supports-grid:underline": "@supports (display: grid){.supports-grid\\:underline{text-decoration-line:underline}}"
+  "supports-grid:underline": "@supports (display: grid){.supports-grid\\:underline{text-decoration-line:underline}}",
+  "px-(max-sm:2 sm:4 5)": [
+    "px-5 max-sm:px-2 sm:px-4",
+    [
+      ".px-5{padding-left:1.25rem;padding-right:1.25rem}",
+      "@media not all and (min-width:640px){.max-sm\\:px-2{padding-left:0.5rem;padding-right:0.5rem}}",
+      "@media (min-width:640px){.sm\\:px-4{padding-left:1rem;padding-right:1rem}}"
+    ]
+  ],
+  "sm:max-md:px-2": "@media (min-width:640px){@media not all and (min-width:768px){.sm\\:max-md\\:px-2{padding-left:0.5rem;padding-right:0.5rem}}}",
+  "max-[320px]:px-2 max-sm:px-4 px-5": [
+    "px-5 max-[320px]:px-2 max-sm:px-4",
+    [
+      ".px-5{padding-left:1.25rem;padding-right:1.25rem}",
+      "@media not all and (min-width:320px){.max-\\[320px\\]\\:px-2{padding-left:0.5rem;padding-right:0.5rem}}",
+      "@media not all and (min-width:640px){.max-sm\\:px-4{padding-left:1rem;padding-right:1rem}}"
+    ]
+  ],
+  "// max-* works only for 'simple' screen values": "",
+  "max-special": ["max-special", []],
+  "min-[320px]:px-2 px-5": [
+    "px-5 min-[320px]:px-2",
+    [
+      ".px-5{padding-left:1.25rem;padding-right:1.25rem}",
+      "@media (min-width:320px){.min-\\[320px\\]\\:px-2{padding-left:0.5rem;padding-right:0.5rem}}"
+    ]
+  ],
+  "px-(min-[320px]:2 sm:4 5)": [
+    "px-5 min-[320px]:px-2 sm:px-4",
+    [
+      ".px-5{padding-left:1.25rem;padding-right:1.25rem}",
+      "@media (min-width:320px){.min-\\[320px\\]\\:px-2{padding-left:0.5rem;padding-right:0.5rem}}",
+      "@media (min-width:640px){.sm\\:px-4{padding-left:1rem;padding-right:1rem}}"
+    ]
+  ]
 }

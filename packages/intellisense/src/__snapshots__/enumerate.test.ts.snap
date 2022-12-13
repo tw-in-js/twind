@@ -2,11 +2,18 @@
 
 exports[`enumerate 1`] = `
 [
+  "max-[:",
+  "min-[:",
+  "max-sm:",
   "sm:",
+  "max-md:",
   "md:",
   "lg:",
+  "max-lg:",
+  "max-xl:",
   "xl:",
   "2xl:",
+  "max-2xl:",
   "active:",
   "after:",
   "any-link:",

@@ -16,7 +16,7 @@ const $ = (suggestions: Promise<Suggestion[]>) =>
   suggestions.then((suggestions) => suggestions.map(({ value }) => value))
 
 test('suggest with empty input', async () => {
-  await expect(intellisense.suggest('')).resolves.toHaveLength(14727)
+  await expect(intellisense.suggest('')).resolves.toHaveLength(14734)
 })
 
 test('suggest with single char input', async () => {

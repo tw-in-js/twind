@@ -169,6 +169,38 @@ const variants: Variant<TailwindTheme>[] = [
     ),
   ],
 
+  [
+    'max-',
+    withAutocomplete$(
+      ({ $$ }, context) => {
+        $$ &&= (context.theme('screens', $$) || arbitrary($$, '', context)) as string
+        if (typeof $$ == 'string') {
+          return `@media not all and (min-width:${$$})`
+        }
+      },
+      DEV &&
+        ((_, { theme }) =>
+          Object.entries(theme('screens') || {})
+            .filter(([, value]) => typeof value == 'string')
+            .map(
+              ([key, value]): AutocompleteItem => ({
+                suffix: key,
+                label: `@media not all and (min-width:${value})`,
+                theme: { section: 'screens', key },
+              }),
+            )
+            .concat([{ suffix: '[', label: `@media not all and (min-width: …)` }])),
+    ),
+  ],
+
+  [
+    'min-',
+    withAutocomplete$(({ $$ }, context) => {
+      $$ &&= arbitrary($$, '', context) as string
+      return $$ && `@media (min-width:${$$})`
+    }, DEV && (() => [{ suffix: '[', label: `@media (min-width: …)` }])),
+  ],
+
   // Arbitrary variants
   [/^\[(.+)]$/, ({ 1: $1 }) => /[&@]/.test($1) && normalize($1).replace(/[}]+$/, '').split('{')],
 ]
