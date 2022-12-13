@@ -8,15 +8,18 @@ import type { TailwindTheme } from './types'
 import * as colors from './colors'
 
 export type OmitedSections =
+  | 'aria'
   | 'backgroundPosition'
   | 'container'
   | 'cursor'
+  | 'data'
   | 'gridColumnEnd'
   | 'gridColumnStart'
   | 'gridRowEnd'
   | 'gridRowStart'
   | 'listStyleType'
   | 'objectPosition'
+  | 'supports'
   | 'transformOrigin'
 
 export type StableSections =
@@ -298,7 +301,10 @@ const theme: DefaultTheme = {
     '2xl': '0 25px 25px rgba(0,0,0,0.15)',
     none: '0 0 #0000',
   },
-  fill: /* #__PURE__ */ alias('colors'),
+  fill: ({ theme }) => ({
+    ...theme('colors'),
+    none: 'none',
+  }),
   grayscale: {
     DEFAULT: '100%',
     0: '0',
@@ -650,7 +656,7 @@ const theme: DefaultTheme = {
   // 8: '8px',,
   ringColor: ({ theme }) => ({
     ...theme('colors'),
-    DEFAULT: theme('colors.blue.500', '#3b82f6'),
+    DEFAULT: '#3b82f6',
   }),
   ringOffsetColor: /* #__PURE__ */ alias('colors'),
   ringOffsetWidth: /* #__PURE__ */ exponential(8, 'px'),
@@ -723,7 +729,10 @@ const theme: DefaultTheme = {
     // 12: '12deg',
   },
   space: /* #__PURE__ */ alias('spacing'),
-  stroke: /* #__PURE__ */ alias('colors'),
+  stroke: ({ theme }) => ({
+    ...theme('colors'),
+    none: 'none',
+  }),
   strokeWidth: /* #__PURE__ */ linear(2),
   // 0: '0',
   // 1: '1',

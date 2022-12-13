@@ -25,6 +25,7 @@ const preflight: Preflight = {
     2. Prevent adjustments of font size after orientation changes in iOS.
     3. Use a more readable tab size.
     4. Use the user's configured `sans` font-family by default.
+    5. Use the user's configured `sans` font-feature-settings by default.
     */
   html: {
     lineHeight: 1.5 /* 1 */,
@@ -34,6 +35,7 @@ const preflight: Preflight = {
     fontFamily: `theme(fontFamily.sans, ${
       (defaultTheme.fontFamily as Record<string, string>).sans
     })` /* 4 */,
+    fontFeatureSettings: 'theme(fontFamily.sans[1].fontFeatureSettings, normal)' /* 5 */,
   },
 
   /*
@@ -71,12 +73,14 @@ const preflight: Preflight = {
 
   /*
     1. Use the user's configured `mono` font family by default.
-    2. Correct the odd `em` font sizing in all browsers.
+    2. Use the user's configured `mono` font-feature-settings by default.
+    3. Correct the odd `em` font sizing in all browsers.
     */
   'code,kbd,samp,pre': {
     fontFamily: `theme(fontFamily.mono, ${
       (defaultTheme.fontFamily as Record<string, string>).mono
     })`,
+    fontFeatureSettings: 'theme(fontFamily.mono[1].fontFeatureSettings, normal)',
     fontSize: '1em',
   },
 

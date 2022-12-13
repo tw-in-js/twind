@@ -50,14 +50,14 @@ const rules: Rule<TailwindTheme>[] = [
   match('\\[([-\\w]+):(.+)]', ({ 1: $1, 2: $2 }, context) => ({
     '@layer overrides': {
       '&': {
-        [$1]: arbitrary(`[${$2}]`, $1, context),
+        [$1]: arbitrary(`[${$2}]`, '', context),
       },
     },
   })),
 
   /* Styling based on parent and peer state */
   withAutocomplete$(
-    match('(group|peer)(~[^-[]+)?', ({ input }, { h }) => [{ c: h(input) }]),
+    match('(group|peer)([~/][^-[]+)?', ({ input }, { h }) => [{ c: h(input) }]),
     DEV && (() => ['group', 'peer']),
   ),
 
@@ -170,7 +170,7 @@ const rules: Rule<TailwindTheme>[] = [
   matchTheme('-?(top|bottom|left|right)(?:$|-)', 'inset'),
 
   // Visibility
-  match('visible', 'visibility'),
+  match('(visible|collapse)', 'visibility'),
   match('invisible', { visibility: 'hidden' }),
 
   // Z-Index
@@ -283,9 +283,9 @@ const rules: Rule<TailwindTheme>[] = [
     DEV &&
       (({ 1: $1 }) =>
         $1 == 'content'
-          ? ['center', 'start', 'end', 'between', 'around', 'evenly']
+          ? ['center', 'start', 'end', 'between', 'around', 'evenly', 'stretch', 'baseline']
           : $1 == 'items'
-          ? ['start', 'end', 'center', 'baseline', 'stretch']
+          ? ['start', 'end', 'center', 'stretch', 'baseline']
           : /* $1 == 'self' */ ['auto', 'start', 'end', 'center', 'stretch', 'baseline']),
   ),
 
@@ -297,12 +297,12 @@ const rules: Rule<TailwindTheme>[] = [
       [$1 as 'place-content']: ('wun'.includes($$[3]) ? 'space-' : '') + $$,
     })),
     DEV &&
-      (({ 1: $1 }) =>
-        $1 == 'content'
-          ? ['center', 'start', 'end', 'between', 'around', 'evenly', 'stretch']
-          : $1 == 'items'
-          ? ['start', 'end', 'center', 'stretch']
-          : /* $1 == 'self' */ ['auto', 'start', 'end', 'center', 'stretch']),
+      (({ 2: $2 }) =>
+        $2 == 'content'
+          ? ['center', 'start', 'end', 'between', 'around', 'evenly', 'stretch', 'baseline']
+          : $2 == 'items'
+          ? ['start', 'end', 'center', 'stretch', 'baseline']
+          : /* $2 == 'self' */ ['auto', 'start', 'end', 'center', 'stretch', 'baseline']),
   ),
 
   /* SPACING */
@@ -355,7 +355,18 @@ const rules: Rule<TailwindTheme>[] = [
   matchTheme('font-', 'fontWeight'),
 
   // Font Family
-  matchTheme('font-', 'fontFamily', 'fontFamily', join),
+  matchTheme('font-', 'fontFamily', ({ _ }) => {
+    _ = asArray(_)
+
+    if (typeof _[1] == 'string') {
+      return { fontFamily: join(_ as MaybeArray<string>) }
+    }
+
+    return {
+      fontFamily: join(_[0]),
+      ...(_[1] as { fontFeatureSettings?: string }),
+    }
+  }),
 
   // Font Smoothing
   match('antialiased', {
@@ -499,6 +510,7 @@ const rules: Rule<TailwindTheme>[] = [
   match('break-normal', { wordBreak: 'normal', overflowWrap: 'normal' }),
   match('break-words', { overflowWrap: 'break-word' }),
   match('break-all', { wordBreak: 'break-all' }),
+  match('break-keep', { wordBreak: 'keep-all' }),
 
   // Caret Color
   matchColor('caret-', {
@@ -1015,10 +1027,10 @@ const rules: Rule<TailwindTheme>[] = [
     'outline-offset': '2px',
   }),
   match('outline', { outlineStyle: 'solid' }),
-  match('outline-(dashed|dotted|double|hidden)', 'outlineStyle'),
+  match('outline-(dashed|dotted|double)', 'outlineStyle'),
 
   // Outline Offset
-  matchTheme('(outline-offset)-' /*, 'outlineOffset'*/),
+  matchTheme('-?(outline-offset)-' /*, 'outlineOffset'*/),
 
   // Outline Color
   matchColor('outline-', {

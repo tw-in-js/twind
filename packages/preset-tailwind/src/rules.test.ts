@@ -10,6 +10,9 @@ const tw = twind(
     presets: [tailwind({ disablePreflight: true })],
     variants: [['not-logged-in', 'body:not(.logged-in) &']],
     theme: {
+      supports: {
+        grid: 'display: grid',
+      },
       extend: {
         screens: {
           '<sm': { max: '399px' },
@@ -33,6 +36,13 @@ const tw = twind(
             emerald: theme('colors.emerald.500 / theme(opacity.50)'),
           },
         }),
+        aria: {
+          asc: 'sort="ascending"',
+          desc: 'sort="descending"',
+        },
+        data: {
+          checked: 'ui~="checked"',
+        },
         backgroundImage: {
           'hero-pattern': "url('/img/hero-pattern.svg')",
         },
@@ -50,6 +60,11 @@ const tw = twind(
         },
         gridAutoRows: {
           '2fr': 'minmax(0,2fr)',
+        },
+        margin: {
+          min: 'min(100vmin, 3rem)',
+          max: 'max(100vmax, 3rem)',
+          clamp: 'clamp(1rem, 100vh, 3rem)',
         },
       },
     },
@@ -295,6 +310,22 @@ test('group and peer marker classes', () => {
   assert.deepEqual(tw.target, [
     '.peer\\~name:focus-visible~.peer\\~name-focus-visible\\:underline{text-decoration-line:underline}',
   ])
+
+  tw.clear()
+
+  assert.strictEqual(tw('group/label'), 'group/label')
+  assert.strictEqual(tw('group[disabled]/label:underline'), 'group[disabled]/label:underline')
+  assert.deepEqual(tw.target, [
+    '.group\\/label[disabled] .group\\[disabled\\]\\/label\\:underline{text-decoration-line:underline}',
+  ])
+
+  tw.clear()
+
+  assert.strictEqual(tw('peer/label'), 'peer/label')
+  assert.strictEqual(tw('peer-focus-visible/label:underline'), 'peer-focus-visible/label:underline')
+  assert.deepEqual(tw.target, [
+    '.peer\\/label:focus-visible~.peer-focus-visible\\/label\\:underline{text-decoration-line:underline}',
+  ])
 })
 
 test('group and peer hashed marker classes', () => {
@@ -327,6 +358,20 @@ test('group and peer hashed marker classes', () => {
   assert.strictEqual(tw('peer~name'), '#1krcwoi')
   assert.strictEqual(tw('peer~name[disabled]:underline'), '#1tsl4h5')
   assert.deepEqual(tw.target, ['.\\#1krcwoi[disabled]~.\\#1tsl4h5{text-decoration-line:underline}'])
+
+  tw.clear()
+
+  assert.strictEqual(tw('group/label'), '#ooal8')
+  assert.strictEqual(tw('group[disabled]/label:underline'), '#v0jdie')
+  assert.deepEqual(tw.target, ['.\\#ooal8[disabled] .\\#v0jdie{text-decoration-line:underline}'])
+
+  tw.clear()
+
+  assert.strictEqual(tw('peer/label'), '#1wrxcbs')
+  assert.strictEqual(tw('peer-focus-visible/label:underline'), '#skcvd2')
+  assert.deepEqual(tw.target, [
+    '.\\#1wrxcbs:focus-visible~.\\#skcvd2{text-decoration-line:underline}',
+  ])
 })
 
 test('arbitrary variants with @apply', () => {
@@ -364,4 +409,148 @@ test('font-size utilities can include a font-weight', () => {
     '.text-md{font-size:16px;line-height:24px;font-weight:500}',
     '.text-sm{font-size:12px}',
   ])
+})
+
+test('after and before content hashed', () => {
+  const tw = twind(
+    {
+      presets: [tailwind({ disablePreflight: true })],
+      hash: true,
+    },
+    virtual(),
+  )
+
+  assert.strictEqual(tw('before:block'), '#1r4qyix')
+  assert.strictEqual(tw('after:block'), '#qwvwoi')
+  assert.deepEqual(tw.target, [
+    '.\\#qwvwoi::after{content:var(--328t5w);display:block}',
+    '.\\#1r4qyix::before{content:var(--328t5w);display:block}',
+  ])
+})
+
+test('hashed supports', () => {
+  const tw = twind(
+    {
+      presets: [tailwind({ disablePreflight: true })],
+      hash: true,
+    },
+    virtual(),
+  )
+
+  assert.strictEqual(tw('supports-[grid]:underline'), '#13gfo47')
+  assert.deepEqual(tw.target, [
+    '@supports (grid:var(--tw)){.\\#13gfo47{text-decoration-line:underline}}',
+  ])
+})
+
+test('font-family utilities can be defined as a string', () => {
+  const tw = twind(
+    {
+      presets: [tailwind({ disablePreflight: true })],
+      theme: {
+        fontFamily: {
+          sans: 'Helvetica, Arial, sans-serif',
+        },
+      },
+    },
+    virtual(),
+  )
+
+  assert.strictEqual(tw('font-sans'), 'font-sans')
+  assert.deepEqual(tw.target, ['.font-sans{font-family:Helvetica, Arial, sans-serif}'])
+})
+
+test('font-family utilities can be defined as an array', () => {
+  const tw = twind(
+    {
+      presets: [tailwind({ disablePreflight: true })],
+      theme: {
+        fontFamily: {
+          sans: ['Helvetica', 'Arial', 'sans-serif'],
+        },
+      },
+    },
+    virtual(),
+  )
+
+  assert.strictEqual(tw('font-sans'), 'font-sans')
+  assert.deepEqual(tw.target, ['.font-sans{font-family:Helvetica,Arial,sans-serif}'])
+})
+
+test('font-family values are not automatically escaped', () => {
+  const tw = twind(
+    {
+      presets: [tailwind({ disablePreflight: true })],
+      theme: {
+        fontFamily: {
+          sans: ["'Exo 2'", 'sans-serif'],
+        },
+      },
+    },
+    virtual(),
+  )
+
+  assert.strictEqual(tw('font-sans'), 'font-sans')
+  assert.deepEqual(tw.target, [".font-sans{font-family:'Exo 2',sans-serif}"])
+})
+
+test('font-feature-settings can be provided when families are defined as a string', () => {
+  const tw = twind(
+    {
+      presets: [tailwind({ disablePreflight: true })],
+      theme: {
+        fontFamily: {
+          sans: ['Helvetica, Arial, sans-serif', { fontFeatureSettings: '"cv11", "ss01"' }],
+        },
+      },
+    },
+    virtual(),
+  )
+
+  assert.strictEqual(tw('font-sans'), 'font-sans')
+  assert.deepEqual(tw.target, [
+    `.font-sans{font-family:Helvetica, Arial, sans-serif;font-feature-settings:"cv11", "ss01"}`,
+  ])
+})
+
+test('font-feature-settings can be provided when families are defined as an array', () => {
+  const tw = twind(
+    {
+      presets: [tailwind({ disablePreflight: true })],
+      theme: {
+        fontFamily: {
+          sans: [['Helvetica', 'Arial', 'sans-serif'], { fontFeatureSettings: '"cv11", "ss01"' }],
+        },
+      },
+    },
+    virtual(),
+  )
+
+  assert.strictEqual(tw('font-sans'), 'font-sans')
+  assert.deepEqual(tw.target, [
+    `.font-sans{font-family:Helvetica,Arial,sans-serif;font-feature-settings:"cv11", "ss01"}`,
+  ])
+})
+
+test('font-feature-settings values can be retrieved', () => {
+  const tw = twind(
+    {
+      presets: [tailwind({ disablePreflight: true })],
+      theme: {
+        fontFamily: {
+          sans: ['Inter', { fontFeatureSettings: "'cv11'" }],
+        },
+      },
+    },
+    virtual(),
+  )
+
+  assert.strictEqual(
+    tw(css`
+      font-family: theme(fontFamily.sans);
+      font-feature-settings: theme(fontFamily.sans[1].fontFeatureSettings, normal);
+    `),
+    'css#13n96aj',
+  )
+  assert.deepEqual(tw.target, [`.css\\#13n96aj{font-family:Inter;font-feature-settings:'cv11'}`])
 })

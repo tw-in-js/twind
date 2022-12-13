@@ -32,6 +32,7 @@
   "sticky": ".sticky{position:sticky}",
   "visible": ".visible{visibility:visible}",
   "invisible": ".invisible{visibility:hidden}",
+  "collapse": ".collapse{visibility:collapse}",
   "antialiased": ".antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}",
   "subpixel-antialiased": ".subpixel-antialiased{-webkit-font-smoothing:auto;-moz-osx-font-smoothing:auto}",
   "italic": ".italic{font-style:italic}",
@@ -101,6 +102,7 @@
   "content-between": ".content-between{align-content:space-between}",
   "content-around": ".content-around{align-content:space-around}",
   "content-center": ".content-center{align-content:center}",
+  "content-baseline": ".content-baseline{align-content:baseline}",
   "justify-start": ".justify-start{justify-content:flex-start}",
   "justify-end": ".justify-end{justify-content:flex-end}",
   "justify-between": ".justify-between{justify-content:space-between}",
@@ -121,11 +123,13 @@
   "self-end": ".self-end{align-self:flex-end}",
   "self-center": ".self-center{align-self:center}",
   "self-stretch": ".self-stretch{align-self:stretch}",
+  "self-baseline": ".self-baseline{align-self:baseline}",
   "place-items-auto": ".place-items-auto{place-items:auto}",
   "place-items-start": ".place-items-start{place-items:start}",
   "place-items-end": ".place-items-end{place-items:end}",
   "place-items-stretch": ".place-items-stretch{place-items:stretch}",
   "place-items-center": ".place-items-center{place-items:center}",
+  "place-items-baseline": ".place-items-baseline{place-items:baseline}",
   "place-content-center": ".place-content-center{place-content:center}",
   "place-content-start": ".place-content-start{place-content:start}",
   "place-content-end": ".place-content-end{place-content:end}",
@@ -133,6 +137,7 @@
   "place-content-between": ".place-content-between{place-content:space-between}",
   "place-content-around": ".place-content-around{place-content:space-around}",
   "place-content-evenly": ".place-content-evenly{place-content:space-evenly}",
+  "place-content-baseline": ".place-content-baseline{place-content:baseline}",
   "place-self-auto": ".place-self-auto{place-self:auto}",
   "place-self-start": ".place-self-start{place-self:start}",
   "place-self-end": ".place-self-end{place-self:end}",
@@ -193,6 +198,7 @@
   "break-normal": ".break-normal{word-break:normal;overflow-wrap:normal}",
   "break-words": ".break-words{overflow-wrap:break-word}",
   "break-all": ".break-all{word-break:break-all}",
+  "break-keep": ".break-keep{word-break:keep-all}",
   "bg-fixed": ".bg-fixed{background-attachment:fixed}",
   "bg-bottom": ".bg-bottom{background-position:bottom}",
   "bg-repeat": ".bg-repeat{background-repeat:repeat}",
@@ -340,15 +346,28 @@
       ".outline-pink-500{outline-color:rgba(236,72,153,1)}"
     ]
   ],
-
+  "outline outline-dashed outline-none outline-black outline-4 outline-offset-2 -outline-offset-2": [
+    "outline-none -outline-offset-2 outline outline-4 outline-black outline-dashed outline-offset-2",
+    [
+      ".outline-none{outline:2px solid transparent;outline-offset:2px}",
+      ".-outline-offset-2{outline-offset:calc(2px * -1)}",
+      ".outline{outline-style:solid}",
+      ".outline-4{outline-width:4px}",
+      ".outline-black{outline-color:rgba(0,0,0,1)}",
+      ".outline-dashed{outline-style:dashed}",
+      ".outline-offset-2{outline-offset:2px}"
+    ]
+  ],
   "resize": ".resize{resize:both}",
   "resize-x": ".resize-x{resize:horizontal}",
   "resize-y": ".resize-y{resize:vertical}",
   "resize-none": ".resize-none{resize:none}",
   "fill-current": ".fill-current{fill:currentColor}",
+  "fill-none": ".fill-none{fill:none}",
   "fill-zinc-100": ".fill-zinc-100{fill:rgba(244,244,245,1)}",
   "fill-zinc-100/50": ".fill-zinc-100\\/50{fill:rgba(244,244,245,0.5)}",
   "stroke-current": ".stroke-current{stroke:currentColor}",
+  "stroke-none": ".stroke-none{stroke:none}",
   "stroke-1": ".stroke-1{stroke-width:1}",
   "sr-only": ".sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;white-space:nowrap;clip:rect(0,0,0,0);border-width:0}",
   "not-sr-only": ".not-sr-only{position:static;width:auto;height:auto;padding:0;margin:0;overflow:visible;white-space:normal;clip:auto}",
@@ -1742,10 +1761,7 @@
     ".backdrop-sepia{--tw-backdrop-sepia:sepia(100%);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}"
   ],
   "!underline": ".\\!underline{text-decoration-line:underline !important}",
-  "cursor bg-red-500": [
-    "cursor bg-red-500",
-    [".bg-red-500{--tw-bg-opacity:1;background-color:rgba(239,68,68,var(--tw-bg-opacity))}"]
-  ],
+  "bg-red-500": ".bg-red-500{--tw-bg-opacity:1;background-color:rgba(239,68,68,var(--tw-bg-opacity))}",
   "~(text-(center 2xl) underline)": [
     "~(text-center,text-2xl,underline)",
     [
@@ -1899,12 +1915,12 @@
   "scroll-auto": ".scroll-auto{scroll-behavior:auto}",
   "scroll-smooth": ".scroll-smooth{scroll-behavior:smooth}",
   "content-none": ".content-none{--tw-content:none;content:var(--tw-content)}",
-  "after:content-['_↗']": ".after\\:content-\\[\\'_↗\\'\\]:after{--tw-content:' ↗';content:var(--tw-content)}",
-  "before:content-[attr(before)]": ".before\\:content-\\[attr\\(before\\)\\]:before{--tw-content:attr(before);content:var(--tw-content)}",
+  "after:content-['_↗']": ".after\\:content-\\[\\'_↗\\'\\]::after{--tw-content:' ↗';content:var(--tw-content)}",
+  "before:content-[attr(before)]": ".before\\:content-\\[attr\\(before\\)\\]::before{--tw-content:attr(before);content:var(--tw-content)}",
   "grid-cols-[1fr_500px_2fr]": ".grid-cols-\\[1fr_500px_2fr\\]{grid-template-columns:1fr 500px 2fr}",
   "bg-[url('/what_a_rush.png')]": ".bg-\\[url\\(\\'\\/what_a_rush\\.png\\'\\)\\]{background-image:url('/what_a_rush.png')}",
-  "after:content-['__↗__\\_']": ".after\\:content-\\[\\'__↗__\\\\_\\'\\]:after{--tw-content:'  ↗  _';content:var(--tw-content)}",
-  "after:content-['_']": ".after\\:content-\\[\\'_\\'\\]:after{--tw-content:' ';content:var(--tw-content)}",
+  "after:content-['__↗__\\_']": ".after\\:content-\\[\\'__↗__\\\\_\\'\\]::after{--tw-content:'  ↗  _';content:var(--tw-content)}",
+  "after:content-['_']": ".after\\:content-\\[\\'_\\'\\]::after{--tw-content:' ';content:var(--tw-content)}",
   "[mask-type:luminance] hover:[mask-type:alpha]": [
     ".\\[mask-type\\:luminance\\]{mask-type:luminance}",
     ".hover\\:\\[mask-type\\:alpha\\]:hover{mask-type:alpha}"
@@ -2018,9 +2034,9 @@
   "after:content-['*'] after:ml-0.5 after:text-red-500": [
     "after:content-['*'] after:text-red-500 after:ml-0.5",
     [
-      ".after\\:content-\\[\\'\\*\\'\\]:after{--tw-content:'*';content:var(--tw-content)}",
-      ".after\\:text-red-500:after{--tw-text-opacity:1;color:rgba(239,68,68,var(--tw-text-opacity))}",
-      ".after\\:ml-0\\.5:after{margin-left:0.125rem}"
+      ".after\\:content-\\[\\'\\*\\'\\]::after{--tw-content:'*';content:var(--tw-content)}",
+      ".after\\:text-red-500::after{content:var(--tw-content);--tw-text-opacity:1;color:rgba(239,68,68,var(--tw-text-opacity))}",
+      ".after\\:ml-0\\.5::after{content:var(--tw-content);margin-left:0.125rem}"
     ]
   ],
   "h-[14px]": ".h-\\[14px\\]{height:14px}",
@@ -2116,6 +2132,122 @@
   "bg-[image:var(--my-image)]": ".bg-\\[image\\:var\\(--my-image\\)\\]{background-image:var(--my-image)}",
   "bg-[length:200px_100px]": ".bg-\\[length\\:200px_100px\\]{background-size:200px 100px}",
   "bg-[size:200px_100px]": ".bg-\\[size\\:200px_100px\\]{background-size:200px 100px}",
+  "bg-[position:200px_100px]": ".bg-\\[position\\:200px_100px\\]{background-position:200px 100px}",
+  "bg-[200px_100px]": ".bg-\\[200px_100px\\]{background-position:200px 100px}",
   "bg-[center_top_1rem]": ".bg-\\[center_top_1rem\\]{background-position:center top 1rem}",
-  "bg-[position:center_top_1rem]": ".bg-\\[position\\:center_top_1rem\\]{background-position:center top 1rem}"
+  "bg-[position:center_top_1rem]": ".bg-\\[position\\:center_top_1rem\\]{background-position:center top 1rem}",
+  "before:absolute": ".before\\:absolute::before{content:var(--tw-content);position:absolute}",
+  "aria-checked:underline": ".aria-checked\\:underline[aria-checked=\"true\"]{text-decoration-line:underline}",
+  "aria-[sort=ascending]:underline": ".aria-\\[sort\\=ascending\\]\\:underline[aria-sort=ascending]{text-decoration-line:underline}",
+  "group-aria-checked:underline": ".group[aria-checked=\"true\"] .group-aria-checked\\:underline{text-decoration-line:underline}",
+  "peer-aria-checked:underline": ".peer[aria-checked=\"true\"]~.peer-aria-checked\\:underline{text-decoration-line:underline}",
+  "group-aria-checked/foo:underline": ".group\\/foo[aria-checked=\"true\"] .group-aria-checked\\/foo\\:underline{text-decoration-line:underline}",
+  "peer-aria-checked/foo:underline": ".peer\\/foo[aria-checked=\"true\"]~.peer-aria-checked\\/foo\\:underline{text-decoration-line:underline}",
+  "group-aria-[sort=ascending]:underline": ".group[aria-sort=ascending] .group-aria-\\[sort\\=ascending\\]\\:underline{text-decoration-line:underline}",
+  "peer-aria-[sort=ascending]:underline": ".peer[aria-sort=ascending]~.peer-aria-\\[sort\\=ascending\\]\\:underline{text-decoration-line:underline}",
+  "group-aria-[sort=ascending]/foo:underline": ".group\\/foo[aria-sort=ascending] .group-aria-\\[sort\\=ascending\\]\\/foo\\:underline{text-decoration-line:underline}",
+  "peer-aria-[sort=ascending]/foo:underline": ".peer\\/foo[aria-sort=ascending]~.peer-aria-\\[sort\\=ascending\\]\\/foo\\:underline{text-decoration-line:underline}",
+  "aria-asc:underline": ".aria-asc\\:underline[aria-sort=\"ascending\"]{text-decoration-line:underline}",
+  "aria-desc:underline": ".aria-desc\\:underline[aria-sort=\"descending\"]{text-decoration-line:underline}",
+  "data-checked:underline": ".data-checked\\:underline[data-ui~=\"checked\"]{text-decoration-line:underline}",
+  "data-[position=top]:underline": ".data-\\[position\\=top\\]\\:underline[data-position=top]{text-decoration-line:underline}",
+  "group-data-checked:underline": ".group[data-ui~=\"checked\"] .group-data-checked\\:underline{text-decoration-line:underline}",
+  "peer-data-checked:underline": ".peer[data-ui~=\"checked\"]~.peer-data-checked\\:underline{text-decoration-line:underline}",
+  "group-data-checked/foo:underline": ".group\\/foo[data-ui~=\"checked\"] .group-data-checked\\/foo\\:underline{text-decoration-line:underline}",
+  "peer-data-checked/foo:underline": ".peer\\/foo[data-ui~=\"checked\"]~.peer-data-checked\\/foo\\:underline{text-decoration-line:underline}",
+  "group-data-[position=top]:underline": ".group[data-position=top] .group-data-\\[position\\=top\\]\\:underline{text-decoration-line:underline}",
+  "peer-data-[position=top]:underline": ".peer[data-position=top]~.peer-data-\\[position\\=top\\]\\:underline{text-decoration-line:underline}",
+  "group-data-[position=top]/foo:underline": ".group\\/foo[data-position=top] .group-data-\\[position\\=top\\]\\/foo\\:underline{text-decoration-line:underline}",
+  "peer-data-[position=top]/foo:underline": ".peer\\/foo[data-position=top]~.peer-data-\\[position\\=top\\]\\/foo\\:underline{text-decoration-line:underline}",
+  "aria-[labelledby=a_b]:underline": ".aria-\\[labelledby\\=a_b\\]\\:underline[aria-labelledby=a b]{text-decoration-line:underline}",
+  "group-aria-[labelledby=a_b]:underline": ".group[aria-labelledby=a b] .group-aria-\\[labelledby\\=a_b\\]\\:underline{text-decoration-line:underline}",
+  "peer-aria-[labelledby=a_b]:underline": ".peer[aria-labelledby=a b]~.peer-aria-\\[labelledby\\=a_b\\]\\:underline{text-decoration-line:underline}",
+  "data-[foo=bar_baz]:underline": ".data-\\[foo\\=bar_baz\\]\\:underline[data-foo=bar baz]{text-decoration-line:underline}",
+  "group-data-[foo=bar_baz]:underline": ".group[data-foo=bar baz] .group-data-\\[foo\\=bar_baz\\]\\:underline{text-decoration-line:underline}",
+  "peer-data-[foo=bar_baz]:underline": ".peer[data-foo=bar baz]~.peer-data-\\[foo\\=bar_baz\\]\\:underline{text-decoration-line:underline}",
+  "// Property check": "",
+  "supports-[display:grid]:grid": "@supports (display:grid){.supports-\\[display\\:grid\\]\\:grid{display:grid}}",
+  "// Value with spaces, needs to be normalized": "",
+  "supports-[transform-origin:5%_5%]:underline": "@supports (transform-origin:5% 5%){.supports-\\[transform-origin\\:5\\%_5\\%\\]\\:underline{text-decoration-line:underline}}",
+  "// Selectors (raw)": "",
+  "supports-[selector(A>B)]:underline": "@supports selector(A>B):var(--tw){.supports-\\[selector\\(A\\>B\\)\\]\\:underline{text-decoration-line:underline}}",
+  "// 'not' check (raw)": "",
+  "supports-[not(foo:bar)]:underline": "@supports not (foo:bar){.supports-\\[not\\(foo\\:bar\\)\\]\\:underline{text-decoration-line:underline}}",
+  "// 'or' check (raw)": "",
+  "supports-[(foo:bar)or(bar:baz)]:underline": "@supports (foo:bar) or (bar:baz){.supports-\\[\\(foo\\:bar\\)or\\(bar\\:baz\\)\\]\\:underline{text-decoration-line:underline}}",
+  "// 'and' check (raw)": "",
+  "supports-[(foo:bar)and(bar:baz)]:underline": "@supports (foo:bar) and (bar:baz){.supports-\\[\\(foo\\:bar\\)and\\(bar\\:baz\\)\\]\\:underline{text-decoration-line:underline}}",
+  "// No value give for the property, defaulting to prop: var(--tw)": "",
+  "supports-[container-type]:underline": "@supports (container-type:var(--tw)){.supports-\\[container-type\\]\\:underline{text-decoration-line:underline}}",
+  "// Named supports usage": "",
+  "supports-grid:underline": "@supports (display: grid){.supports-grid\\:underline{text-decoration-line:underline}}",
+  "px-(max-sm:2 sm:4 5)": [
+    "px-5 max-sm:px-2 sm:px-4",
+    [
+      ".px-5{padding-left:1.25rem;padding-right:1.25rem}",
+      "@media not all and (min-width:640px){.max-sm\\:px-2{padding-left:0.5rem;padding-right:0.5rem}}",
+      "@media (min-width:640px){.sm\\:px-4{padding-left:1rem;padding-right:1rem}}"
+    ]
+  ],
+  "sm:max-md:px-2": "@media (min-width:640px){@media not all and (min-width:768px){.sm\\:max-md\\:px-2{padding-left:0.5rem;padding-right:0.5rem}}}",
+  "max-[320px]:px-2 max-sm:px-4 px-5": [
+    "px-5 max-[320px]:px-2 max-sm:px-4",
+    [
+      ".px-5{padding-left:1.25rem;padding-right:1.25rem}",
+      "@media not all and (min-width:320px){.max-\\[320px\\]\\:px-2{padding-left:0.5rem;padding-right:0.5rem}}",
+      "@media not all and (min-width:640px){.max-sm\\:px-4{padding-left:1rem;padding-right:1rem}}"
+    ]
+  ],
+  "// max-* works only for 'simple' screen values": "",
+  "max-special": ["max-special", []],
+  "min-[320px]:px-2 px-5": [
+    "px-5 min-[320px]:px-2",
+    [
+      ".px-5{padding-left:1.25rem;padding-right:1.25rem}",
+      "@media (min-width:320px){.min-\\[320px\\]\\:px-2{padding-left:0.5rem;padding-right:0.5rem}}"
+    ]
+  ],
+  "px-(min-[320px]:2 sm:4 5)": [
+    "px-5 min-[320px]:px-2 sm:px-4",
+    [
+      ".px-5{padding-left:1.25rem;padding-right:1.25rem}",
+      "@media (min-width:320px){.min-\\[320px\\]\\:px-2{padding-left:0.5rem;padding-right:0.5rem}}",
+      "@media (min-width:640px){.sm\\:px-4{padding-left:1rem;padding-right:1rem}}"
+    ]
+  ],
+  "mt-min -mt-min mt-max -mt-max mt-clamp -mt-clamp": [
+    "-mt-clamp -mt-max -mt-min mt-clamp mt-max mt-min",
+    [
+      ".-mt-clamp{margin-top:calc(clamp(1rem, 100vh, 3rem) * -1)}",
+      ".-mt-max{margin-top:calc(max(100vmax, 3rem) * -1)}",
+      ".-mt-min{margin-top:calc(min(100vmin, 3rem) * -1)}",
+      ".mt-clamp{margin-top:clamp(1rem, 100vh, 3rem)}",
+      ".mt-max{margin-top:max(100vmax, 3rem)}",
+      ".mt-min{margin-top:min(100vmin, 3rem)}"
+    ]
+  ],
+  "[color:var(--a)] [--a:theme('colors.blue.500')]": [
+    "[--a:theme('colors.blue.500')] [color:var(--a)]",
+    [
+      ".\\[color\\:var\\(--a\\)\\]{color:var(--a)}",
+      ".\\[--a\\:theme\\(\\'colors\\.blue\\.500\\'\\)\\]{--a:#3b82f6}"
+    ]
+  ],
+  "underline lg:underline [&>*]:underline": [
+    "underline [&>*]:underline lg:underline",
+    [
+      ".underline{text-decoration-line:underline}",
+      ".\\[\\&\\>\\*\\]\\:underline>*{text-decoration-line:underline}",
+      "@media (min-width:1024px){.lg\\:underline{text-decoration-line:underline}}"
+    ]
+  ],
+  "bg-[linear-gradient(to_left,rgb(var(--green)),blue)]": ".bg-\\[linear-gradient\\(to_left\\,rgb\\(var\\(--green\\)\\)\\,blue\\)\\]{background-image:linear-gradient(to left,rgb(var(--green)),blue)}",
+  "[border:_calc(5vw_-_theme(spacing[2.5]))_double_theme('colors.fuchsia.700')]": ".\\[border\\:_calc\\(5vw_-_theme\\(spacing\\[2\\.5\\]\\)\\)_double_theme\\(\\'colors\\.fuchsia\\.700\\'\\)\\]{border: calc(5vw - 0.625rem) double #a21caf}",
+  "[height:_calc(100vh_-_theme(spacing[2.5]))] [box-shadow:_0_calc(theme(spacing[0.5])_*_-1)_theme(colors.red.400)_inset]": [
+    "[box-shadow:_0_calc(theme(spacing[0.5])_*_-1)_theme(colors.red.400)_inset] [height:_calc(100vh_-_theme(spacing[2.5]))]",
+    [
+      ".\\[height\\:_calc\\(100vh_-_theme\\(spacing\\[2\\.5\\]\\)\\)\\]{height: calc(100vh - 0.625rem)}",
+      ".\\[box-shadow\\:_0_calc\\(theme\\(spacing\\[0\\.5\\]\\)_\\*_-1\\)_theme\\(colors\\.red\\.400\\)_inset\\]{box-shadow: 0 calc(0.125rem * -1) #f87171 inset}"
+    ]
+  ]
 }

@@ -81,7 +81,10 @@ export function makeThemeFunction<Theme extends BaseTheme = BaseTheme>({
 
       if (key == null) return section
 
-      const value = section[key || 'DEFAULT'] ?? defaultValue
+      key ||= 'DEFAULT'
+
+      const value =
+        section[key] ?? key.split('-').reduce((obj, prop) => obj?.[prop], section) ?? defaultValue
 
       return opacityValue
         ? toColorValue(value, { opacityValue: resolveThemeFunction(opacityValue, theme) })

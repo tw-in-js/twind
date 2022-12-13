@@ -108,21 +108,28 @@ export interface Context<Theme extends BaseTheme = BaseTheme> {
    *
    * @private
    */
-  v: (value: string) => MaybeArray<string>
+  v(value: string): MaybeArray<string>
 
   /**
    * resolves a rule
    *
    * @private
    */
-  r: (value: string, isDark?: boolean) => RuleResult
+  r(value: string, isDark?: boolean): RuleResult
 
   /**
    * stringifies a CSS property and value to a declaration
    *
    * @private
    */
-  s: (property: string, value: string) => string
+  s(property: string, value: string): string
+
+  /**
+   * called right before the rule is stringified and inserted into the sheet
+   *
+   * @private
+   */
+  f(rule: TwindRule): TwindRule
 }
 
 // Get the leaf theme value and omit nested records like for colors
@@ -336,6 +343,11 @@ export type DarkColor<Theme extends BaseTheme> = (
   color: ColorValue,
 ) => ColorValue | Falsey
 
+export type Finalize<Theme extends BaseTheme = BaseTheme> = (
+  rule: TwindRule,
+  context: Context<Theme>,
+) => TwindRule
+
 export interface TwindConfig<Theme extends BaseTheme = BaseTheme> {
   /** Allows to change how the `dark` variant is used (default: `"media"`) */
   darkMode?: DarkModeConfig
@@ -350,6 +362,8 @@ export interface TwindConfig<Theme extends BaseTheme = BaseTheme> {
   hash?: boolean | undefined | HashFunction
   stringify: StringifyDeclaration<Theme>
   ignorelist: (string | RegExp)[]
+
+  finalize: Finalize<Theme>[]
 }
 
 export type ArrayType<T> = T extends (infer Item)[] ? Item : T
@@ -389,6 +403,8 @@ export interface TwindPresetConfig<Theme = BaseTheme> {
   hash?: boolean | undefined | HashFunction
   stringify?: StringifyDeclaration<Theme & BaseTheme>
   ignorelist?: MaybeArray<string | RegExp>
+
+  finalize?: MaybeArray<Finalize<Theme & BaseTheme>>
 }
 
 export interface TwindUserConfig<Theme = BaseTheme, Presets extends Preset<any>[] = Preset[]> {
@@ -427,6 +443,8 @@ export interface TwindUserConfig<Theme = BaseTheme, Presets extends Preset<any>[
 
   stringify?: StringifyDeclaration<BaseTheme & ExtractThemes<Theme, Presets>>
   ignorelist?: MaybeArray<string | RegExp>
+
+  finalize?: MaybeArray<Finalize<Theme & BaseTheme>>
 }
 
 export interface BaseTheme {

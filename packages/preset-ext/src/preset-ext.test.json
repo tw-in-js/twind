@@ -1,11 +1,11 @@
 {
   "background-color[#1da1f1]": ".background-color\\[\\#1da1f1\\]{background-color:#1da1f1}",
-  "after::block": ".after\\:\\:block::after{display:block}",
+  "after::block": ".after\\:\\:block::after{content:var(--tw-content);display:block}",
   "before::(block inset-0)": [
     "before::inset-0 before::block",
     [
-      ".before\\:\\:inset-0::before{top:0px;right:0px;bottom:0px;left:0px}",
-      ".before\\:\\:block::before{display:block}"
+      ".before\\:\\:inset-0::before{content:var(--tw-content);top:0px;right:0px;bottom:0px;left:0px}",
+      ".before\\:\\:block::before{content:var(--tw-content);display:block}"
     ]
   ],
   "children:underline": ".children\\:underline>*{text-decoration-line:underline}",

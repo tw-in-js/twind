@@ -22,5 +22,13 @@ export default function presetTailwind({
     theme,
     variants,
     rules,
+    finalize(rule) {
+      // automatically add `content: ''` to before and after so you don’t have to specify it unless you want a different value
+      if (rule.r.some((r) => /^&::(before|after)$/.test(r)) && !rule.d?.includes('content:')) {
+        return { ...rule, d: ['content:var(--tw-content)', rule.d].filter(Boolean).join(';') }
+      }
+
+      return rule
+    },
   }
 }

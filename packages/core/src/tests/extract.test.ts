@@ -42,7 +42,7 @@ test('expand class names', () => {
       '.items-center{align-items:center}',
       '.justify-center{justify-content:center}',
       '.text-center{text-align:center}',
-      ".after\\:content-\\[\\'xxx\\'\\]:after{--tw-content:'xxx';content:var(--tw-content)}",
+      ".after\\:content-\\[\\'xxx\\'\\]::after{--tw-content:'xxx';content:var(--tw-content)}",
       '@media (min-width:640px){.sm\\:text-gray-800{--tw-text-opacity:1;color:rgba(31,41,55,var(--tw-text-opacity))}}',
       '@media (min-width:768px){.md\\:text-pink-700{--tw-text-opacity:1;color:rgba(190,24,93,var(--tw-text-opacity))}}',
     ].join(''),
