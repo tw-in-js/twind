@@ -283,9 +283,9 @@ const rules: Rule<TailwindTheme>[] = [
     DEV &&
       (({ 1: $1 }) =>
         $1 == 'content'
-          ? ['center', 'start', 'end', 'between', 'around', 'evenly']
+          ? ['center', 'start', 'end', 'between', 'around', 'evenly', 'stretch', 'baseline']
           : $1 == 'items'
-          ? ['start', 'end', 'center', 'baseline', 'stretch']
+          ? ['start', 'end', 'center', 'stretch', 'baseline']
           : /* $1 == 'self' */ ['auto', 'start', 'end', 'center', 'stretch', 'baseline']),
   ),
 
@@ -297,12 +297,12 @@ const rules: Rule<TailwindTheme>[] = [
       [$1 as 'place-content']: ('wun'.includes($$[3]) ? 'space-' : '') + $$,
     })),
     DEV &&
-      (({ 1: $1 }) =>
-        $1 == 'content'
-          ? ['center', 'start', 'end', 'between', 'around', 'evenly', 'stretch']
-          : $1 == 'items'
-          ? ['start', 'end', 'center', 'stretch']
-          : /* $1 == 'self' */ ['auto', 'start', 'end', 'center', 'stretch']),
+      (({ 2: $2 }) =>
+        $2 == 'content'
+          ? ['center', 'start', 'end', 'between', 'around', 'evenly', 'stretch', 'baseline']
+          : $2 == 'items'
+          ? ['start', 'end', 'center', 'stretch', 'baseline']
+          : /* $2 == 'self' */ ['auto', 'start', 'end', 'center', 'stretch', 'baseline']),
   ),
 
   /* SPACING */
