@@ -5230,6 +5230,7 @@ exports[`suggestAt html 5`] = `
     "box-content",
     "box-decoration-clone",
     "box-decoration-slice",
+    "break-keep",
     "break-all",
     "break-words",
     "break-normal",

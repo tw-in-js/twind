@@ -499,6 +499,7 @@ const rules: Rule<TailwindTheme>[] = [
   match('break-normal', { wordBreak: 'normal', overflowWrap: 'normal' }),
   match('break-words', { overflowWrap: 'break-word' }),
   match('break-all', { wordBreak: 'break-all' }),
+  match('break-keep', { wordBreak: 'keep-all' }),
 
   // Caret Color
   matchColor('caret-', {

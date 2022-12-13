@@ -193,6 +193,7 @@
   "break-normal": ".break-normal{word-break:normal;overflow-wrap:normal}",
   "break-words": ".break-words{overflow-wrap:break-word}",
   "break-all": ".break-all{word-break:break-all}",
+  "break-keep": ".break-keep{word-break:keep-all}",
   "bg-fixed": ".bg-fixed{background-attachment:fixed}",
   "bg-bottom": ".bg-bottom{background-position:bottom}",
   "bg-repeat": ".bg-repeat{background-repeat:repeat}",
