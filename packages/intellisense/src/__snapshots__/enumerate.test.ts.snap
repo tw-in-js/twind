@@ -8652,7 +8652,6 @@ exports[`enumerate 1`] = `
   "outline-dashed",
   "outline-dotted",
   "outline-double",
-  "outline-hidden",
   "outline-none",
   "outline-black",
   "outline-transparent",
