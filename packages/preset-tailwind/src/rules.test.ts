@@ -61,6 +61,11 @@ const tw = twind(
         gridAutoRows: {
           '2fr': 'minmax(0,2fr)',
         },
+        margin: {
+          min: 'min(100vmin, 3rem)',
+          max: 'max(100vmax, 3rem)',
+          clamp: 'clamp(1rem, 100vh, 3rem)',
+        },
       },
     },
     rules: [

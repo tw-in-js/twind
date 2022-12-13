@@ -2212,5 +2212,16 @@
       "@media (min-width:320px){.min-\\[320px\\]\\:px-2{padding-left:0.5rem;padding-right:0.5rem}}",
       "@media (min-width:640px){.sm\\:px-4{padding-left:1rem;padding-right:1rem}}"
     ]
+  ],
+  "mt-min -mt-min mt-max -mt-max mt-clamp -mt-clamp": [
+    "-mt-clamp -mt-max -mt-min mt-clamp mt-max mt-min",
+    [
+      ".-mt-clamp{margin-top:calc(clamp(1rem, 100vh, 3rem) * -1)}",
+      ".-mt-max{margin-top:calc(max(100vmax, 3rem) * -1)}",
+      ".-mt-min{margin-top:calc(min(100vmin, 3rem) * -1)}",
+      ".mt-clamp{margin-top:clamp(1rem, 100vh, 3rem)}",
+      ".mt-max{margin-top:max(100vmax, 3rem)}",
+      ".mt-min{margin-top:min(100vmin, 3rem)}"
+    ]
   ]
 }
