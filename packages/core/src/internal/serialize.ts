@@ -237,15 +237,14 @@ export function resolveThemeFunction<Theme extends BaseTheme = BaseTheme>(
   // if (value.includes('theme')) {
   return value.replace(
     /theme\((["'`])?(.+?)\1(?:\s*,\s*(["'`])?(.+?)\3)?\)/g,
-    (_, __, key: string, ___, defaultValue: string | undefined) => {
+    (_, __, key: string, ___, defaultValue = '') => {
       const value = theme(key, defaultValue)
 
       if (typeof value == 'function' && /color|fill|stroke/i.test(key)) {
         return toColorValue(value as ColorValue)
       }
 
-      // TODO: warn if not a string
-      return '' + value
+      return '' + asArray(value as unknown).filter((v) => Object(v) !== v)
     },
   )
   // }

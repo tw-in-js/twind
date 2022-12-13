@@ -433,5 +433,119 @@ test('hashed supports', () => {
   )
 
   assert.strictEqual(tw('supports-[grid]:underline'), '#13gfo47')
-  assert.deepEqual(tw.target, ['@supports (grid:var(--tw)){.\\#13gfo47{text-decoration-line:underline}}'])
-  })
+  assert.deepEqual(tw.target, [
+    '@supports (grid:var(--tw)){.\\#13gfo47{text-decoration-line:underline}}',
+  ])
+})
+
+test('font-family utilities can be defined as a string', () => {
+  const tw = twind(
+    {
+      presets: [tailwind({ disablePreflight: true })],
+      theme: {
+        fontFamily: {
+          sans: 'Helvetica, Arial, sans-serif',
+        },
+      },
+    },
+    virtual(),
+  )
+
+  assert.strictEqual(tw('font-sans'), 'font-sans')
+  assert.deepEqual(tw.target, ['.font-sans{font-family:Helvetica, Arial, sans-serif}'])
+})
+
+test('font-family utilities can be defined as an array', () => {
+  const tw = twind(
+    {
+      presets: [tailwind({ disablePreflight: true })],
+      theme: {
+        fontFamily: {
+          sans: ['Helvetica', 'Arial', 'sans-serif'],
+        },
+      },
+    },
+    virtual(),
+  )
+
+  assert.strictEqual(tw('font-sans'), 'font-sans')
+  assert.deepEqual(tw.target, ['.font-sans{font-family:Helvetica,Arial,sans-serif}'])
+})
+
+test('font-family values are not automatically escaped', () => {
+  const tw = twind(
+    {
+      presets: [tailwind({ disablePreflight: true })],
+      theme: {
+        fontFamily: {
+          sans: ["'Exo 2'", 'sans-serif'],
+        },
+      },
+    },
+    virtual(),
+  )
+
+  assert.strictEqual(tw('font-sans'), 'font-sans')
+  assert.deepEqual(tw.target, [".font-sans{font-family:'Exo 2',sans-serif}"])
+})
+
+test('font-feature-settings can be provided when families are defined as a string', () => {
+  const tw = twind(
+    {
+      presets: [tailwind({ disablePreflight: true })],
+      theme: {
+        fontFamily: {
+          sans: ['Helvetica, Arial, sans-serif', { fontFeatureSettings: '"cv11", "ss01"' }],
+        },
+      },
+    },
+    virtual(),
+  )
+
+  assert.strictEqual(tw('font-sans'), 'font-sans')
+  assert.deepEqual(tw.target, [
+    `.font-sans{font-family:Helvetica, Arial, sans-serif;font-feature-settings:"cv11", "ss01"}`,
+  ])
+})
+
+test('font-feature-settings can be provided when families are defined as an array', () => {
+  const tw = twind(
+    {
+      presets: [tailwind({ disablePreflight: true })],
+      theme: {
+        fontFamily: {
+          sans: [['Helvetica', 'Arial', 'sans-serif'], { fontFeatureSettings: '"cv11", "ss01"' }],
+        },
+      },
+    },
+    virtual(),
+  )
+
+  assert.strictEqual(tw('font-sans'), 'font-sans')
+  assert.deepEqual(tw.target, [
+    `.font-sans{font-family:Helvetica,Arial,sans-serif;font-feature-settings:"cv11", "ss01"}`,
+  ])
+})
+
+test('font-feature-settings values can be retrieved', () => {
+  const tw = twind(
+    {
+      presets: [tailwind({ disablePreflight: true })],
+      theme: {
+        fontFamily: {
+          sans: ['Inter', { fontFeatureSettings: "'cv11'" }],
+        },
+      },
+    },
+    virtual(),
+  )
+
+  assert.strictEqual(
+    tw(css`
+      font-family: theme(fontFamily.sans);
+      font-feature-settings: theme(fontFamily.sans[1].fontFeatureSettings, normal);
+    `),
+    'css#13n96aj',
+  )
+  assert.deepEqual(tw.target, [`.css\\#13n96aj{font-family:Inter;font-feature-settings:'cv11'}`])
+})

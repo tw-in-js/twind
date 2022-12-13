@@ -70,6 +70,10 @@ export type FontSizeValue =
   | [size: string, lineHeight: string]
   | [size: string, options: { lineHeight?: string; letterSpacing?: string; fontWeight?: string }]
 
+export type FontFamilyValue =
+  | MaybeArray<string>
+  | [fontFamily: MaybeArray<string>, configuration: { fontFeatureSettings?: string }]
+
 export interface Container {
   screens?: BaseTheme['screens']
   center?: boolean
@@ -123,7 +127,7 @@ export interface TailwindTheme extends BaseTheme {
   flexBasis: Record<string, string>
   flexGrow: Record<string, number | string>
   flexShrink: Record<string, number | string>
-  fontFamily: Record<string, MaybeArray<string>>
+  fontFamily: Record<string, FontFamilyValue>
   fontSize: Record<string, FontSizeValue>
   fontWeight: Record<string, string>
   gap: Record<string, string>

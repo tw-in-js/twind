@@ -355,7 +355,18 @@ const rules: Rule<TailwindTheme>[] = [
   matchTheme('font-', 'fontWeight'),
 
   // Font Family
-  matchTheme('font-', 'fontFamily', 'fontFamily', join),
+  matchTheme('font-', 'fontFamily', ({ _ }) => {
+    _ = asArray(_)
+
+    if (typeof _[1] == 'string') {
+      return { fontFamily: join(_ as MaybeArray<string>) }
+    }
+
+    return {
+      fontFamily: join(_[0]),
+      ...(_[1] as { fontFeatureSettings?: string }),
+    }
+  }),
 
   // Font Smoothing
   match('antialiased', {
