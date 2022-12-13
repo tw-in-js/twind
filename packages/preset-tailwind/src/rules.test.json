@@ -346,7 +346,18 @@
       ".outline-pink-500{outline-color:rgba(236,72,153,1)}"
     ]
   ],
-
+  "outline outline-dashed outline-none outline-black outline-4 outline-offset-2 -outline-offset-2": [
+    "outline-none -outline-offset-2 outline outline-4 outline-black outline-dashed outline-offset-2",
+    [
+      ".outline-none{outline:2px solid transparent;outline-offset:2px}",
+      ".-outline-offset-2{outline-offset:calc(2px * -1)}",
+      ".outline{outline-style:solid}",
+      ".outline-4{outline-width:4px}",
+      ".outline-black{outline-color:rgba(0,0,0,1)}",
+      ".outline-dashed{outline-style:dashed}",
+      ".outline-offset-2{outline-offset:2px}"
+    ]
+  ],
   "resize": ".resize{resize:both}",
   "resize-x": ".resize-x{resize:horizontal}",
   "resize-y": ".resize-y{resize:vertical}",

@@ -1019,7 +1019,7 @@ const rules: Rule<TailwindTheme>[] = [
   match('outline-(dashed|dotted|double|hidden)', 'outlineStyle'),
 
   // Outline Offset
-  matchTheme('(outline-offset)-' /*, 'outlineOffset'*/),
+  matchTheme('-?(outline-offset)-' /*, 'outlineOffset'*/),
 
   // Outline Color
   matchColor('outline-', {
