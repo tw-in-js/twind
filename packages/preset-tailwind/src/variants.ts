@@ -2,7 +2,13 @@
  * @module @twind/preset-tailwind/variants
  */
 
-import type { AutocompleteProvider, VariantResolver, Variant, AutocompleteItem } from '@twind/core'
+import {
+  AutocompleteProvider,
+  VariantResolver,
+  Variant,
+  AutocompleteItem,
+  arbitrary,
+} from '@twind/core'
 import type { TailwindTheme } from './types'
 
 import { DEV } from 'distilt/env'
@@ -40,6 +46,48 @@ const variants: Variant<TailwindTheme>[] = [
   ['open', '&[open]'],
 
   // All other pseudo classes are already supported by twind
+
+  [
+    '(aria|data)-',
+    withAutocomplete$(
+      ({ 1: $1 /* aria or data */, $$ /* everything after the dash */ }, context) =>
+        `&[${$1}-${
+          // aria-asc or data-checked -> from theme
+          context.theme($1, $$) ||
+          // aria-[...] or data-[...]
+          arbitrary($$, $1, context) ||
+          // default handling
+          `${$$}="true"`
+        }]`,
+      DEV &&
+        (({ 1: $1 }, { theme }) =>
+          [
+            ...new Set([
+              ...($1 == 'aria'
+                ? [
+                    'checked',
+                    'disabled',
+                    'expanded',
+                    'hidden',
+                    'pressed',
+                    'readonly',
+                    'required',
+                    'selected',
+                  ]
+                : []),
+              ...Object.keys(theme($1 as 'aria' | 'data') || {}),
+            ]),
+          ]
+            .map(
+              (key): AutocompleteItem => ({
+                suffix: key,
+                label: `&[${$1}-${theme($1, key) || `${key}="true"`}]`,
+                theme: { section: $1, key },
+              }),
+            )
+            .concat([{ suffix: '[', label: `&[${$1}-…]` }])),
+    ),
+  ],
 
   /* Styling based on parent and peer state */
   // Groups classes like: group-focus and group-hover

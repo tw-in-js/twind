@@ -33,6 +33,13 @@ const tw = twind(
             emerald: theme('colors.emerald.500 / theme(opacity.50)'),
           },
         }),
+        aria: {
+          asc: 'sort="ascending"',
+          desc: 'sort="descending"',
+        },
+        data: {
+          checked: 'ui~="checked"',
+        },
         backgroundImage: {
           'hero-pattern': "url('/img/hero-pattern.svg')",
         },

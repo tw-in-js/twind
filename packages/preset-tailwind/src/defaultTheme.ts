@@ -8,9 +8,11 @@ import type { TailwindTheme } from './types'
 import * as colors from './colors'
 
 export type OmitedSections =
+  | 'aria'
   | 'backgroundPosition'
   | 'container'
   | 'cursor'
+  | 'data'
   | 'gridColumnEnd'
   | 'gridColumnStart'
   | 'gridRowEnd'
@@ -19,7 +21,7 @@ export type OmitedSections =
   | 'objectPosition'
   | 'transformOrigin'
 
-export type StableSections =
+  export type StableSections =
   | 'screens'
   | 'columns'
   | 'spacing'

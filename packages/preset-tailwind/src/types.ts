@@ -81,7 +81,9 @@ export interface TailwindTheme extends BaseTheme {
   spacing: Record<string, string>
   durations: Record<string, MaybeArray<string>>
 
+  accentColor: BaseTheme['colors']
   animation: Record<string, MaybeArray<string>>
+  aria: Record<string, string>
   aspectRatio: Record<string, string>
   backdropBlur: Record<string, string>
   backdropBrightness: Record<string, string>
@@ -106,12 +108,12 @@ export interface TailwindTheme extends BaseTheme {
   boxShadow: Record<string, MaybeArray<string>>
   boxShadowColor: BaseTheme['colors']
   brightness: Record<string, string>
+  caretColor: BaseTheme['colors']
   container: Container
+  content: Record<string, string>
   contrast: Record<string, string>
   cursor: Record<string, MaybeArray<string>>
-  caretColor: BaseTheme['colors']
-  accentColor: BaseTheme['colors']
-  content: Record<string, string>
+  data: Record<string, string>
   divideColor: BaseTheme['colors']
   divideOpacity: Record<string, string>
   divideWidth: Record<string, string>
@@ -177,9 +179,9 @@ export interface TailwindTheme extends BaseTheme {
   textColor: BaseTheme['colors']
   textDecorationColor: BaseTheme['colors']
   textDecorationThickness: Record<string, string>
-  textUnderlineOffset: Record<string, string>
   textIndent: Record<string, string>
   textOpacity: Record<string, string>
+  textUnderlineOffset: Record<string, string>
   transformOrigin: Record<string, string>
   transitionDelay: Record<string, MaybeArray<string>>
   transitionDuration: Record<string, MaybeArray<string>>

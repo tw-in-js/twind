@@ -1742,10 +1742,7 @@
     ".backdrop-sepia{--tw-backdrop-sepia:sepia(100%);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}"
   ],
   "!underline": ".\\!underline{text-decoration-line:underline !important}",
-  "cursor bg-red-500": [
-    "cursor bg-red-500",
-    [".bg-red-500{--tw-bg-opacity:1;background-color:rgba(239,68,68,var(--tw-bg-opacity))}"]
-  ],
+  "bg-red-500": ".bg-red-500{--tw-bg-opacity:1;background-color:rgba(239,68,68,var(--tw-bg-opacity))}",
   "~(text-(center 2xl) underline)": [
     "~(text-center,text-2xl,underline)",
     [
@@ -2118,5 +2115,25 @@
   "bg-[size:200px_100px]": ".bg-\\[size\\:200px_100px\\]{background-size:200px 100px}",
   "bg-[center_top_1rem]": ".bg-\\[center_top_1rem\\]{background-position:center top 1rem}",
   "bg-[position:center_top_1rem]": ".bg-\\[position\\:center_top_1rem\\]{background-position:center top 1rem}",
-  "before:absolute": ".before\\:absolute::before{content:var(--tw-content);position:absolute}"
+  "before:absolute": ".before\\:absolute::before{content:var(--tw-content);position:absolute}",
+  "aria-checked:underline": ".aria-checked\\:underline[aria-checked=\"true\"]{text-decoration-line:underline}",
+  "aria-[sort=ascending]:underline": ".aria-\\[sort\\=ascending\\]\\:underline[aria-sort=ascending]{text-decoration-line:underline}",
+  "group-aria-checked:underline": ".group[aria-checked=\"true\"] .group-aria-checked\\:underline{text-decoration-line:underline}",
+  "peer-aria-checked:underline": ".peer[aria-checked=\"true\"]~.peer-aria-checked\\:underline{text-decoration-line:underline}",
+  "group-aria-[sort=ascending]:underline": ".group[aria-sort=ascending] .group-aria-\\[sort\\=ascending\\]\\:underline{text-decoration-line:underline}",
+  "peer-aria-[sort=ascending]:underline": ".peer[aria-sort=ascending]~.peer-aria-\\[sort\\=ascending\\]\\:underline{text-decoration-line:underline}",
+  "aria-asc:underline": ".aria-asc\\:underline[aria-sort=\"ascending\"]{text-decoration-line:underline}",
+  "aria-desc:underline": ".aria-desc\\:underline[aria-sort=\"descending\"]{text-decoration-line:underline}",
+  "data-checked:underline": ".data-checked\\:underline[data-ui~=\"checked\"]{text-decoration-line:underline}",
+  "data-[position=top]:underline": ".data-\\[position\\=top\\]\\:underline[data-position=top]{text-decoration-line:underline}",
+  "group-data-checked:underline": ".group[data-ui~=\"checked\"] .group-data-checked\\:underline{text-decoration-line:underline}",
+  "peer-data-checked:underline": ".peer[data-ui~=\"checked\"]~.peer-data-checked\\:underline{text-decoration-line:underline}",
+  "group-data-[position=top]:underline": ".group[data-position=top] .group-data-\\[position\\=top\\]\\:underline{text-decoration-line:underline}",
+  "peer-data-[position=top]:underline": ".peer[data-position=top]~.peer-data-\\[position\\=top\\]\\:underline{text-decoration-line:underline}",
+  "aria-[labelledby=a_b]:underline": ".aria-\\[labelledby\\=a_b\\]\\:underline[aria-labelledby=a b]{text-decoration-line:underline}",
+  "group-aria-[labelledby=a_b]:underline": ".group[aria-labelledby=a b] .group-aria-\\[labelledby\\=a_b\\]\\:underline{text-decoration-line:underline}",
+  "peer-aria-[labelledby=a_b]:underline": ".peer[aria-labelledby=a b]~.peer-aria-\\[labelledby\\=a_b\\]\\:underline{text-decoration-line:underline}",
+  "data-[foo=bar_baz]:underline": ".data-\\[foo\\=bar_baz\\]\\:underline[data-foo=bar baz]{text-decoration-line:underline}",
+  "group-data-[foo=bar_baz]:underline": ".group[data-foo=bar baz] .group-data-\\[foo\\=bar_baz\\]\\:underline{text-decoration-line:underline}",
+  "peer-data-[foo=bar_baz]:underline": ".peer[data-foo=bar baz]~.peer-data-\\[foo\\=bar_baz\\]\\:underline{text-decoration-line:underline}"
 }
