@@ -2240,5 +2240,14 @@
       ".\\[\\&\\>\\*\\]\\:underline>*{text-decoration-line:underline}",
       "@media (min-width:1024px){.lg\\:underline{text-decoration-line:underline}}"
     ]
+  ],
+  "bg-[linear-gradient(to_left,rgb(var(--green)),blue)]": ".bg-\\[linear-gradient\\(to_left\\,rgb\\(var\\(--green\\)\\)\\,blue\\)\\]{background-image:linear-gradient(to left,rgb(var(--green)),blue)}",
+  "[border:_calc(5vw_-_theme(spacing[2.5]))_double_theme('colors.fuchsia.700')]": ".\\[border\\:_calc\\(5vw_-_theme\\(spacing\\[2\\.5\\]\\)\\)_double_theme\\(\\'colors\\.fuchsia\\.700\\'\\)\\]{border: calc(5vw - 0.625rem) double #a21caf}",
+  "[height:_calc(100vh_-_theme(spacing[2.5]))] [box-shadow:_0_calc(theme(spacing[0.5])_*_-1)_theme(colors.red.400)_inset]": [
+    "[box-shadow:_0_calc(theme(spacing[0.5])_*_-1)_theme(colors.red.400)_inset] [height:_calc(100vh_-_theme(spacing[2.5]))]",
+    [
+      ".\\[height\\:_calc\\(100vh_-_theme\\(spacing\\[2\\.5\\]\\)\\)\\]{height: calc(100vh - 0.625rem)}",
+      ".\\[box-shadow\\:_0_calc\\(theme\\(spacing\\[0\\.5\\]\\)_\\*_-1\\)_theme\\(colors\\.red\\.400\\)_inset\\]{box-shadow: 0 calc(0.125rem * -1) #f87171 inset}"
+    ]
   ]
 }
