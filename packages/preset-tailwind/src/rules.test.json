@@ -2225,5 +2225,20 @@
       ".mt-max{margin-top:max(100vmax, 3rem)}",
       ".mt-min{margin-top:min(100vmin, 3rem)}"
     ]
+  ],
+  "[color:var(--a)] [--a:theme('colors.blue.500')]": [
+    "[--a:theme('colors.blue.500')] [color:var(--a)]",
+    [
+      ".\\[color\\:var\\(--a\\)\\]{color:var(--a)}",
+      ".\\[--a\\:theme\\(\\'colors\\.blue\\.500\\'\\)\\]{--a:#3b82f6}"
+    ]
+  ],
+  "underline lg:underline [&>*]:underline": [
+    "underline [&>*]:underline lg:underline",
+    [
+      ".underline{text-decoration-line:underline}",
+      ".\\[\\&\\>\\*\\]\\:underline>*{text-decoration-line:underline}",
+      "@media (min-width:1024px){.lg\\:underline{text-decoration-line:underline}}"
+    ]
   ]
 }

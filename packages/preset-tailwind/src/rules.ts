@@ -50,7 +50,7 @@ const rules: Rule<TailwindTheme>[] = [
   match('\\[([-\\w]+):(.+)]', ({ 1: $1, 2: $2 }, context) => ({
     '@layer overrides': {
       '&': {
-        [$1]: arbitrary(`[${$2}]`, $1, context),
+        [$1]: arbitrary(`[${$2}]`, '', context),
       },
     },
   })),
