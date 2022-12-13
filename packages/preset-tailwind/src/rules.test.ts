@@ -10,6 +10,9 @@ const tw = twind(
     presets: [tailwind({ disablePreflight: true })],
     variants: [['not-logged-in', 'body:not(.logged-in) &']],
     theme: {
+      supports: {
+        grid: 'display: grid',
+      },
       extend: {
         screens: {
           '<sm': { max: '399px' },
@@ -419,3 +422,16 @@ test('after and before content hashed', () => {
     '.\\#1r4qyix::before{content:var(--328t5w);display:block}',
   ])
 })
+
+test('hashed supports', () => {
+  const tw = twind(
+    {
+      presets: [tailwind({ disablePreflight: true })],
+      hash: true,
+    },
+    virtual(),
+  )
+
+  assert.strictEqual(tw('supports-[grid]:underline'), '#13gfo47')
+  assert.deepEqual(tw.target, ['@supports (grid:var(--tw)){.\\#13gfo47{text-decoration-line:underline}}'])
+  })

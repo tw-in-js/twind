@@ -11,6 +11,9 @@ test('enumerate', () => {
       data: {
         checked: 'ui~="checked"',
       },
+      supports: {
+        grid: 'display: grid',
+      },
       extend: {
         aria: {
           asc: 'sort="ascending"',

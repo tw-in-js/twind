@@ -176,6 +176,7 @@ export interface TailwindTheme extends BaseTheme {
   space: Record<string, string>
   stroke: BaseTheme['colors']
   strokeWidth: Record<string, string>
+  supports: Record<string, string>
   textColor: BaseTheme['colors']
   textDecorationColor: BaseTheme['colors']
   textDecorationThickness: Record<string, string>

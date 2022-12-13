@@ -19,6 +19,7 @@ export type OmitedSections =
   | 'gridRowStart'
   | 'listStyleType'
   | 'objectPosition'
+  | 'supports'
   | 'transformOrigin'
 
 export type StableSections =

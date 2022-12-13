@@ -180,6 +180,8 @@ exports[`enumerate 1`] = `
   "rtl:",
   "selection:",
   "sticky:",
+  "supports-grid:",
+  "supports-[:",
   "target:",
   "valid:",
   "visited:",

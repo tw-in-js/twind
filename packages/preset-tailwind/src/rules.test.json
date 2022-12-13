@@ -2151,5 +2151,21 @@
   "peer-aria-[labelledby=a_b]:underline": ".peer[aria-labelledby=a b]~.peer-aria-\\[labelledby\\=a_b\\]\\:underline{text-decoration-line:underline}",
   "data-[foo=bar_baz]:underline": ".data-\\[foo\\=bar_baz\\]\\:underline[data-foo=bar baz]{text-decoration-line:underline}",
   "group-data-[foo=bar_baz]:underline": ".group[data-foo=bar baz] .group-data-\\[foo\\=bar_baz\\]\\:underline{text-decoration-line:underline}",
-  "peer-data-[foo=bar_baz]:underline": ".peer[data-foo=bar baz]~.peer-data-\\[foo\\=bar_baz\\]\\:underline{text-decoration-line:underline}"
+  "peer-data-[foo=bar_baz]:underline": ".peer[data-foo=bar baz]~.peer-data-\\[foo\\=bar_baz\\]\\:underline{text-decoration-line:underline}",
+  "// Property check": "",
+  "supports-[display:grid]:grid": "@supports (display:grid){.supports-\\[display\\:grid\\]\\:grid{display:grid}}",
+  "// Value with spaces, needs to be normalized": "",
+  "supports-[transform-origin:5%_5%]:underline": "@supports (transform-origin:5% 5%){.supports-\\[transform-origin\\:5\\%_5\\%\\]\\:underline{text-decoration-line:underline}}",
+  "// Selectors (raw)": "",
+  "supports-[selector(A>B)]:underline": "@supports selector(A>B):var(--tw){.supports-\\[selector\\(A\\>B\\)\\]\\:underline{text-decoration-line:underline}}",
+  "// 'not' check (raw)": "",
+  "supports-[not(foo:bar)]:underline": "@supports not (foo:bar){.supports-\\[not\\(foo\\:bar\\)\\]\\:underline{text-decoration-line:underline}}",
+  "// 'or' check (raw)": "",
+  "supports-[(foo:bar)or(bar:baz)]:underline": "@supports (foo:bar) or (bar:baz){.supports-\\[\\(foo\\:bar\\)or\\(bar\\:baz\\)\\]\\:underline{text-decoration-line:underline}}",
+  "// 'and' check (raw)": "",
+  "supports-[(foo:bar)and(bar:baz)]:underline": "@supports (foo:bar) and (bar:baz){.supports-\\[\\(foo\\:bar\\)and\\(bar\\:baz\\)\\]\\:underline{text-decoration-line:underline}}",
+  "// No value give for the property, defaulting to prop: var(--tw)": "",
+  "supports-[container-type]:underline": "@supports (container-type:var(--tw)){.supports-\\[container-type\\]\\:underline{text-decoration-line:underline}}",
+  "// Named supports usage": "",
+  "supports-grid:underline": "@supports (display: grid){.supports-grid\\:underline{text-decoration-line:underline}}"
 }

@@ -181,6 +181,7 @@ exports[`suggest with single char input 1`] = `
   "peer-picture-in-picture:",
   "picture-in-picture:",
   "required:",
+  "supports-[:",
   "absolute",
   "accent-auto",
   "accent-current",

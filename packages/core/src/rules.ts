@@ -594,11 +594,13 @@ export function toCSS(property: string, value: string | ColorFromThemeValue): CS
  */
 export function arbitrary<Theme extends BaseTheme = BaseTheme>(
   value: string,
-  section: string,
+  section: string | undefined,
   context: Context<Theme>,
 ): string | undefined {
   if (value[0] == '[' && value.slice(-1) == ']') {
     value = normalize(resolveThemeFunction(value.slice(1, -1), context.theme))
+
+    if (!section) return value
 
     if (
       // Respect type hints from the user on ambiguous arbitrary values - https://tailwindcss.com/docs/adding-custom-styles#resolving-ambiguities

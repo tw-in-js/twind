@@ -51,11 +51,12 @@ const variants: Variant<TailwindTheme>[] = [
     '(aria|data)-',
     withAutocomplete$(
       ({ 1: $1 /* aria or data */, $$ /* everything after the dash */ }, context) =>
+        $$ &&
         `&[${$1}-${
           // aria-asc or data-checked -> from theme
           context.theme($1, $$) ||
           // aria-[...] or data-[...]
-          arbitrary($$, $1, context) ||
+          arbitrary($$, '', context) ||
           // default handling
           `${$$}="true"`
         }]`,
@@ -132,6 +133,39 @@ const variants: Variant<TailwindTheme>[] = [
     withAutocomplete$(
       ({ 1: $1 }) => `[dir="${$1}"] &`,
       DEV && (({ 1: $1 }) => [{ prefix: $1, suffix: '', label: `[dir="${$1}"] &` }]),
+    ),
+  ],
+
+  [
+    'supports-',
+    withAutocomplete$(
+      ({ $$ /* everything after the dash */ }, context) => {
+        $$ &&= (context.theme('supports', $$) || arbitrary($$, '', context)) as string
+
+        if ($$) {
+          if (!$$.includes(':')) {
+            $$ += ':var(--tw)'
+          }
+
+          if (!/^\w*\s*\(/.test($$)) {
+            $$ = `(${$$})`
+          }
+
+          // Chrome has a bug where `(condtion1)or(condition2)` is not valid
+          // But `(condition1) or (condition2)` is supported.
+          return `@supports ${$$.replace(/\b(and|or|not)\b/g, ' $1 ').trim()}`
+        }
+      },
+      DEV &&
+        ((_, { theme }) =>
+          Object.keys(theme('supports') || {})
+            .map(
+              (key): AutocompleteItem => ({
+                suffix: key,
+                theme: { section: 'supports', key },
+              }),
+            )
+            .concat([{ suffix: '[', label: `@supports …` }])),
     ),
   ],
 
