@@ -32,6 +32,7 @@
   "sticky": ".sticky{position:sticky}",
   "visible": ".visible{visibility:visible}",
   "invisible": ".invisible{visibility:hidden}",
+  "collapse": ".collapse{visibility:collapse}",
   "antialiased": ".antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}",
   "subpixel-antialiased": ".subpixel-antialiased{-webkit-font-smoothing:auto;-moz-osx-font-smoothing:auto}",
   "italic": ".italic{font-style:italic}",

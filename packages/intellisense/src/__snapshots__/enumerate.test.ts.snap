@@ -5282,6 +5282,7 @@ exports[`enumerate 1`] = `
   "col-span-full",
   "col-end-[",
   "col-start-[",
+  "collapse",
   "columns-1",
   "columns-2",
   "columns-3",

@@ -170,7 +170,7 @@ const rules: Rule<TailwindTheme>[] = [
   matchTheme('-?(top|bottom|left|right)(?:$|-)', 'inset'),
 
   // Visibility
-  match('visible', 'visibility'),
+  match('(visible|collapse)', 'visibility'),
   match('invisible', { visibility: 'hidden' }),
 
   // Z-Index
