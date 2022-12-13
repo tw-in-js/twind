@@ -12,6 +12,7 @@ next: ./preset-tailwind-forms.md
 
 | @twind/preset-tailwind          | tailwindcss |
 | ------------------------------- | ----------- |
+| `>=1.1.0 <1.2.0`                | `3.2`       |
 | `>=1.0.0-next.39 <1.1.0`        | `3.1`       |
 | `>=1.0.0-next.1 <1.0.0-next.39` | `3.0`       |
 
