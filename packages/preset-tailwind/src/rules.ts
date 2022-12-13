@@ -57,7 +57,7 @@ const rules: Rule<TailwindTheme>[] = [
 
   /* Styling based on parent and peer state */
   withAutocomplete$(
-    match('(group|peer)(~[^-[]+)?', ({ input }, { h }) => [{ c: h(input) }]),
+    match('(group|peer)([~/][^-[]+)?', ({ input }, { h }) => [{ c: h(input) }]),
     DEV && (() => ['group', 'peer']),
   ),
 

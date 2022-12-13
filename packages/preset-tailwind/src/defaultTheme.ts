@@ -21,7 +21,7 @@ export type OmitedSections =
   | 'objectPosition'
   | 'transformOrigin'
 
-  export type StableSections =
+export type StableSections =
   | 'screens'
   | 'columns'
   | 'spacing'

@@ -94,24 +94,34 @@ const variants: Variant<TailwindTheme>[] = [
   // these need to add a marker selector with the pseudo class
   // => '.group:focus .group-focus:selector'
   [
-    '((group|peer)(~[^-[]+)?)(-[a-z-]+|-\\[(.+)]|\\[.+])',
+    '((group|peer)(~[^-[]+)?)(-\\[(.+)]|[-[].+?)(\\/.+)?',
     withAutocomplete$(
-      ({ 1: $1, 4: $4, 5: $5 }, { e, h, v }) => {
-        const selector = ($5 && normalize($5)) || ($4[0] == '[' ? $4 : (v($4.slice(1)) as string))
+      ({ 2: type, 3: name = '', 4: $4, 5: $5 = '', 6: label = name }, { e, h, v }) => {
+        const selector = normalize($5) || ($4[0] == '[' ? $4 : (v($4.slice(1)) as string))
 
         // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
         return `${(selector.includes('&') ? selector : '&' + selector).replace(
           /&/g,
-          `:merge(.${e(h($1))})`,
-        )}${$1[0] == 'p' ? '~' : ' '}&`
+          `:merge(.${e(h(type + label))})`,
+        )}${type[0] == 'p' ? '~' : ' '}&`
       },
       DEV &&
         ((_, { variants }) =>
-          [...Object.entries(variants)]
+          Object.entries(variants)
             .filter(([, selector]) => /^&(\[|:[^:])/.test(selector))
             .flatMap(([variant, selector]): AutocompleteItem[] => [
-              { prefix: 'group-', suffix: variant, label: `${selector.replace('&', '.group')} &` },
-              { prefix: 'peer-', suffix: variant, label: `${selector.replace('&', '.peer')} &` },
+              {
+                prefix: 'group-',
+                suffix: variant,
+                label: `${selector.replace('&', '.group')} &`,
+                modifiers: [],
+              },
+              {
+                prefix: 'peer-',
+                suffix: variant,
+                label: `${selector.replace('&', '.peer')} &`,
+                modifiers: [],
+              },
             ])),
     ),
   ],

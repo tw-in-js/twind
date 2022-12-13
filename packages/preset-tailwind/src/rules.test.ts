@@ -302,6 +302,22 @@ test('group and peer marker classes', () => {
   assert.deepEqual(tw.target, [
     '.peer\\~name:focus-visible~.peer\\~name-focus-visible\\:underline{text-decoration-line:underline}',
   ])
+
+  tw.clear()
+
+  assert.strictEqual(tw('group/label'), 'group/label')
+  assert.strictEqual(tw('group[disabled]/label:underline'), 'group[disabled]/label:underline')
+  assert.deepEqual(tw.target, [
+    '.group\\/label[disabled] .group\\[disabled\\]\\/label\\:underline{text-decoration-line:underline}',
+  ])
+
+  tw.clear()
+
+  assert.strictEqual(tw('peer/label'), 'peer/label')
+  assert.strictEqual(tw('peer-focus-visible/label:underline'), 'peer-focus-visible/label:underline')
+  assert.deepEqual(tw.target, [
+    '.peer\\/label:focus-visible~.peer-focus-visible\\/label\\:underline{text-decoration-line:underline}',
+  ])
 })
 
 test('group and peer hashed marker classes', () => {
@@ -334,6 +350,20 @@ test('group and peer hashed marker classes', () => {
   assert.strictEqual(tw('peer~name'), '#1krcwoi')
   assert.strictEqual(tw('peer~name[disabled]:underline'), '#1tsl4h5')
   assert.deepEqual(tw.target, ['.\\#1krcwoi[disabled]~.\\#1tsl4h5{text-decoration-line:underline}'])
+
+  tw.clear()
+
+  assert.strictEqual(tw('group/label'), '#ooal8')
+  assert.strictEqual(tw('group[disabled]/label:underline'), '#v0jdie')
+  assert.deepEqual(tw.target, ['.\\#ooal8[disabled] .\\#v0jdie{text-decoration-line:underline}'])
+
+  tw.clear()
+
+  assert.strictEqual(tw('peer/label'), '#1wrxcbs')
+  assert.strictEqual(tw('peer-focus-visible/label:underline'), '#skcvd2')
+  assert.deepEqual(tw.target, [
+    '.\\#1wrxcbs:focus-visible~.\\#skcvd2{text-decoration-line:underline}',
+  ])
 })
 
 test('arbitrary variants with @apply', () => {
