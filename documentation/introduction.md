@@ -59,7 +59,7 @@ This project is kindly sponsored by <a href="https://www.kenoxa.com" target="_bl
 
 Thank you to all our sponsors!
 
-<object data="/sponsors.svg" type="image/svg+xml">
+<object class="sponsors" data="/sponsors.svg" type="image/svg+xml">
   <img src="/sponsors.png" />
 </object>
 
