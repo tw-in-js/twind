@@ -656,7 +656,7 @@ const theme: DefaultTheme = {
   // 8: '8px',,
   ringColor: ({ theme }) => ({
     ...theme('colors'),
-    DEFAULT: theme('colors.blue.500', '#3b82f6'),
+    DEFAULT: '#3b82f6',
   }),
   ringOffsetColor: /* #__PURE__ */ alias('colors'),
   ringOffsetWidth: /* #__PURE__ */ exponential(8, 'px'),
