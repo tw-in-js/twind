@@ -2132,6 +2132,8 @@
   "bg-[image:var(--my-image)]": ".bg-\\[image\\:var\\(--my-image\\)\\]{background-image:var(--my-image)}",
   "bg-[length:200px_100px]": ".bg-\\[length\\:200px_100px\\]{background-size:200px 100px}",
   "bg-[size:200px_100px]": ".bg-\\[size\\:200px_100px\\]{background-size:200px 100px}",
+  "bg-[position:200px_100px]": ".bg-\\[position\\:200px_100px\\]{background-position:200px 100px}",
+  "bg-[200px_100px]": ".bg-\\[200px_100px\\]{background-position:200px 100px}",
   "bg-[center_top_1rem]": ".bg-\\[center_top_1rem\\]{background-position:center top 1rem}",
   "bg-[position:center_top_1rem]": ".bg-\\[position\\:center_top_1rem\\]{background-position:center top 1rem}",
   "before:absolute": ".before\\:absolute::before{content:var(--tw-content);position:absolute}",
