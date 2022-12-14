@@ -75,7 +75,7 @@ This preset can be configured with the following options:
 
 This presets allows to omit the [default color palette](https://tailwindcss.com/docs/customizing-colors) to reduce the file size.
 
-The following example selectively imports colors from the default palette but custom colors can be used as well.
+The following example selectively imports colors from the default palette but different colors can be used as well (see [@twind/preset-radix-ui](./preset-radix-ui#with-twindpreset-tailwind) for an example).
 
 ```js title="twind.config.js"
 import { defineConfig } from '@twind/core'

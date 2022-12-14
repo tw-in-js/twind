@@ -5,7 +5,7 @@ package: '@twind/preset-line-clamp'
 playground: true
 excerpt: |
   A preset that provides utilities for visually truncating text after a fixed number of lines.
-next: ./preset-tailwind.md
+next: ./preset-radix-ui.md
 ---
 
 > **Note**

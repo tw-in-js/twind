@@ -1,0 +1,74 @@
+{
+  "name": "@twind/preset-radix-ui",
+  "version": "1.0.3",
+  "description": "The Radix UI color scales as a twind preset with automatic dark colors.",
+  "homepage": "https://twind.style/preset-radix-ui",
+  "keywords": [
+    "twind",
+    "twind-preset",
+    "radix-ui",
+    "tw-in-js",
+    "tailwind-in-js",
+    "preset"
+  ],
+  "type": "module",
+  "// The 'module', 'unpkg' and 'types' fields are added by distilt": "",
+  "main": "src/index.ts",
+  "// Each entry is expanded into several bundles (types, esnext, module, script, node, and default)": "",
+  "exports": {
+    ".": "./src/index.ts",
+    "./colors": "./src/colors.ts",
+    "./darkColor": "./src/darkColor.ts",
+    "./defaultTheme": "./src/defaultTheme.ts",
+    "./package.json": "./package.json"
+  },
+  "typedoc": {
+    "entryPoint": "./index.d.ts"
+  },
+  "// These are relative from within the dist/ folder": "",
+  "sideEffects": false,
+  "size-limit": [
+    {
+      "name": "@twind/preset-radix-ui",
+      "path": "dist/preset-radix-ui.esnext.js",
+      "brotli": true,
+      "limit": "2.7kb",
+      "ignore": [
+        "twind"
+      ]
+    },
+    {
+      "name": "@twind/preset-radix-ui/colors",
+      "path": "dist/colors.esnext.js",
+      "brotli": true,
+      "limit": "2.3kb"
+    },
+    {
+      "name": "@twind/preset-radix-ui/defaultTheme",
+      "path": "dist/defaultTheme.esnext.js",
+      "brotli": true,
+      "limit": "2.6kb"
+    }
+  ],
+  "peerDependencies": {
+    "@twind/core": "^1.0.3",
+    "typescript": "^4.8.4"
+  },
+  "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@radix-ui/colors": "^0.1.8",
+    "@twind/core": "^1.0.3",
+    "typescript": "^4.8.4"
+  },
+  "scripts": {
+    "build": "distilt"
+  },
+  "publishConfig": {
+    "access": "public",
+    "directory": "dist"
+  }
+}
