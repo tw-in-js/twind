@@ -61,7 +61,7 @@ export default defineConfig({
         infoDark,
       },
     }),
-   presetTypography({
+    presetTypography({
       defaultColor: 'brand',
       colors: {
         body: '11',
