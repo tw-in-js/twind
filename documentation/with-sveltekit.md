@@ -5,7 +5,7 @@ package: '@twind/with-sveltekit'
 example: true
 excerpt: |
   Setting up Twind for seamless integration in a [SvelteKit](https://kit.svelte.dev) project.
-next: ./reference.md
+next: ./with-web-components.md
 ---
 
 ## 🤝 Compatibility

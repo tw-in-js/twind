@@ -32,7 +32,7 @@
     <div class="prose prose-lg">{@html data.excerpt}</div>
   {/if}
 
-  {#if data.package || data.playground}
+  {#if data.package || data.playground || data.example}
     <div class="prose">
       <ul>
         {#if data.package && $page.url.pathname.startsWith('/packages/') && !['@twind/core', 'twind'].includes(data.package)}

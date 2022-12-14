@@ -121,7 +121,7 @@
       >
         <a
           class="flex items-center hover:text-brand-12"
-          href="https://twind.style/docs"
+          href="https://twind.style"
           title="Go to Twind documentation"
           rel="external nofollow noopener noreferrer"
           target="_blank"
