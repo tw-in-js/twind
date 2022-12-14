@@ -61,7 +61,8 @@ export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
 
   function handleClassAttributeChange(target: Element): void {
     // Not using target.classList.value (not supported in all browsers) or target.class (this is an SVGAnimatedString for svg)
-    const tokens = target.getAttribute('class')
+    // safe guard access to getAttribute because ShadowRoot does not have attribute but child nodes
+    const tokens = target.getAttribute?.('class')
 
     let className: string
 

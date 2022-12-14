@@ -136,6 +136,19 @@ importers:
     devDependencies:
       serve: 13.0.4
 
+  examples/with-web-components:
+    specifiers:
+      '@twind/core': 1.0.3
+      '@twind/preset-autoprefix': 1.0.3
+      '@twind/preset-tailwind': 1.0.3
+      vite: ^4.0.1
+    dependencies:
+      '@twind/core': link:../../packages/core
+      '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
+      '@twind/preset-tailwind': link:../../packages/preset-tailwind
+    devDependencies:
+      vite: 4.0.1
+
   examples/with-gatsby:
     specifiers:
       '@twind/core': 1.0.3
