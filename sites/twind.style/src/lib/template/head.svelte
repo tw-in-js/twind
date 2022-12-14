@@ -78,22 +78,5 @@
     href="https://imagedelivery.net/clgAS5HJ8HoJM1G5J8tcLA/ad127ccc-64a5-4460-d429-39ba2ab6ea00/180x180"
   />
 
-  <style>
-    /* fix for sponsors on mobile viewports */
-    /* the "sponsors" node is object with svg and img fallback */
-    /* those assets have doubled width, this logic will resize and crop it */
-    @media screen and (max-width: 1024px) {
-      .sponsors {
-        /* ancient syntax of getting center */
-        position: relative;
-        left: 50%;
-        transform: translateX(-50%);
-
-        /* scale to be 2 times bigger than parent, parent has overflow-hidden at this breakpoint */
-        width: 200%;
-      }
-    }
-  </style>
-
   <slot />
 </svelte:head>
