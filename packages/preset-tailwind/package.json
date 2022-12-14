@@ -18,6 +18,8 @@
   "// Each entry is expanded into several bundles (types, esnext, module, script, node, and default)": "",
   "exports": {
     ".": "./src/index.ts",
+    "./base": "./src/base.ts",
+    "./baseTheme": "./src/baseTheme.ts",
     "./colors": "./src/colors.ts",
     "./defaultTheme": "./src/defaultTheme.ts",
     "./preflight": "./src/preflight.ts",
@@ -51,6 +53,21 @@
       "path": "dist/defaultTheme.esnext.js",
       "brotli": true,
       "limit": "3.5kb"
+    },
+    {
+      "name": "@twind/preset-tailwind/base",
+      "path": "dist/base.esnext.js",
+      "brotli": true,
+      "limit": "8.6kb",
+      "ignore": [
+        "twind"
+      ]
+    },
+    {
+      "name": "@twind/preset-tailwind/baseTheme",
+      "path": "dist/baseTheme.esnext.js",
+      "brotli": true,
+      "limit": "2.5kb"
     }
   ],
   "peerDependencies": {
