@@ -692,7 +692,7 @@ export default function presetTypography({
 
       // support auto dark colors
       const darkColor =
-        target != darkProperties && context.d('colors', `${colorName}.${shade}`, color)
+        target != darkProperties && context.d('colors', `${colorName}-${shade}`, color)
 
       if (darkColor) {
         darkProperties[('--tw-prose-' + key) as keyof CustomProperties] = toColorValue(darkColor)
