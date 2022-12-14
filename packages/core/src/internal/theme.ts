@@ -51,7 +51,7 @@ export function makeThemeFunction<Theme extends BaseTheme = BaseTheme>({
     if (sectionKey) {
       ;({ 1: sectionKey, 2: opacityValue } =
         // eslint-disable-next-line no-sparse-arrays
-        /^(\S+?)(?:\s*\/\s*([^/]+))?$/.exec(sectionKey) || ([, sectionKey] as RegExpExecArray))
+        /^(\S+?)(?:\s*\/\s*([^/]+))?$/.exec(sectionKey) || ([, sectionKey] as [undefined, string]))
 
       if (/[.[]/.test(sectionKey)) {
         const path: string[] = []

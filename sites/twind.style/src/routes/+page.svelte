@@ -33,7 +33,6 @@
   </p>
   <div class="mt-6 sm:mt-10 flex justify-center space-x-6 text-sm">
     <a
-      data-sveltekit-prefetch
       href={$page.data.docStartHref}
       class="
         bg-accent-4 text-accent-12

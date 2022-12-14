@@ -12,8 +12,8 @@ export function GET(): ReturnType<import('./$types').RequestHandler> {
       name: 'Twind.style',
       short_name: 'Twind',
       description: `The smallest, fastest, most feature complete tailwind-in-js solution in existence`,
-      theme_color: '' + tw.theme('colors.brand.1-dark'),
-      background_color: '' + tw.theme('colors.brand.1-dark'),
+      theme_color: '' + tw.theme('colors.brandDark.1'),
+      background_color: '' + tw.theme('colors.brandDark.1'),
       display: 'standalone',
       scope: '/',
       icons: [

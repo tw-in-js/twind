@@ -9,7 +9,7 @@ export function GET(): ReturnType<import('./$types').RequestHandler> {
   <browserconfig>
       <msapplication>
           <tile>
-              <TileColor>${'' + tw.theme('colors.brand.1-dark')}</TileColor>
+              <TileColor>${'' + tw.theme('colors.brandDark.1')}</TileColor>
               <TileImage src="https://imagedelivery.net/clgAS5HJ8HoJM1G5J8tcLA/ad127ccc-64a5-4460-d429-39ba2ab6ea00/150x150" />
               <square70x70logo src="https://imagedelivery.net/clgAS5HJ8HoJM1G5J8tcLA/ad127ccc-64a5-4460-d429-39ba2ab6ea00/70x70"/>
               <square150x150logo src="https://imagedelivery.net/clgAS5HJ8HoJM1G5J8tcLA/ad127ccc-64a5-4460-d429-39ba2ab6ea00/150x150"/>

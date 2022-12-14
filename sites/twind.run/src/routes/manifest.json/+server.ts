@@ -10,8 +10,8 @@ export function GET(): ReturnType<import('./$types').RequestHandler> {
       name: 'Twind.run',
       short_name: 'Twind',
       description: `An advanced online playground for Twind that lets you use all of Twind's features directly in the browser.`,
-      theme_color: '' + tw.theme('colors.brand.1-dark'),
-      background_color: '' + tw.theme('colors.brand.1-dark'),
+      theme_color: '' + tw.theme('colors.brandDark.1'),
+      background_color: '' + tw.theme('colors.brandDark.1'),
       display: 'standalone',
       scope: '/',
       icons: [

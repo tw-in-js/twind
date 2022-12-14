@@ -54,7 +54,7 @@
   />
   <meta
     name="theme-color"
-    content={'' + tw.theme('colors.brand.1-dark')}
+    content={'' + tw.theme('colors.brandDark.1')}
     media="(prefers-color-scheme: dark)"
   />
 

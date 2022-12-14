@@ -32,7 +32,7 @@
 <header class="w-full sticky top-0 z-10 border-b border-brand-7 backdrop-blur bg-brand-1/95">
   <div class="max-w-8xl mx-auto p-4 flex-auto flex items-center justify-between gap-4">
     <div class="flex gap-(4 lg:8 xl:12)">
-      <a data-sveltekit-prefetch href="/" class="flex font-medium items-center hover:text-brand-12">
+      <a href="/" class="flex font-medium items-center hover:text-brand-12">
         <Icon src={TwindLogo} class="w-8 h-8" />
         <span class="sr-only md:(not-sr-only ml-3 text-xl)">
           <span class="text-brand-12">Twind</span><span
@@ -62,7 +62,6 @@
       <hr class="w-0 h-5 border-l border-brand-6 lg:hidden" aria-orientation="vertical" />
 
       <a
-        data-sveltekit-prefetch
         class="flex items-center gap-2 hover:text-brand-12"
         href={docsIssueURL}
         title="Something lacking or missing? Create a documentation issue"
@@ -80,7 +79,6 @@
       <hr class="w-0 h-5 border-l border-brand-6" aria-orientation="vertical" />
 
       <a
-        data-sveltekit-prefetch
         class="flex items-center hover:text-brand-12"
         href={$page.data.docStartHref}
         title="Go to Twind documentation"

@@ -1,4 +1,4 @@
-import { error, invalid } from '@sveltejs/kit'
+import { error, fail } from '@sveltejs/kit'
 
 import { normalizeImportMap } from '@jsenv/importmap'
 import { Semver } from 'sver'
@@ -256,7 +256,7 @@ export const actions: import('./$types').Actions = {
 
       const token = body.get('cf-turnstile-response')
       if (!token) {
-        return invalid(400, { missing: 'turnstile' })
+        return fail(400, { missing: 'turnstile' })
       }
 
       const ip = request.headers.get('CF-Connecting-IP')
@@ -288,7 +288,7 @@ export const actions: import('./$types').Actions = {
       } = await turnstileResult.json()
 
       if (!(outcome.success && (dev || outcome.action === 'share'))) {
-        return invalid(400, outcome)
+        return fail(400, outcome)
       }
 
       // TODO: ensure the request is valid
@@ -296,23 +296,23 @@ export const actions: import('./$types').Actions = {
       const version = body.get('version')
 
       if (version !== EXPECTED_VERSION) {
-        return invalid(400, { version: 'mismatch' })
+        return fail(400, { version: 'mismatch' })
       }
 
       const workspaceRaw = body.get('workspace')
 
       if (!workspaceRaw) {
-        return invalid(400, { workspace: 'missing' })
+        return fail(400, { workspace: 'missing' })
       }
 
       if (typeof workspaceRaw !== 'string') {
-        return invalid(400, { workspace: 'invalid' })
+        return fail(400, { workspace: 'invalid' })
       }
 
       const result = workspaceSchema.safeParse(JSON.parse(workspaceRaw))
 
       if (!result.success) {
-        return invalid(400, { workspace: 'invalid', error: result.error.format() })
+        return fail(400, { workspace: 'invalid', error: result.error.format() })
       }
 
       const blob = new Blob([JSON.stringify(result.data)], { type: 'application/json' })
@@ -352,7 +352,7 @@ export const actions: import('./$types').Actions = {
         }
       }
     } catch (error) {
-      return invalid(500, {
+      return fail(500, {
         message: (error as Error).message,
         code: (error as any).code,
         stack: (error as Error).stack,

@@ -13,7 +13,7 @@
 
   import debounce from 'just-debounce'
 
-  import { goto, prefetch } from '$app/navigation'
+  import { goto, preloadData } from '$app/navigation'
 
   import { cx, tw } from '$lib/twind'
 
@@ -43,7 +43,7 @@
       window.scrollTo(0, scroll)
 
       if (href) {
-        prefetch(href)
+        preloadData(href)
         requestAnimationFrame(() => goto(href))
       }
     }
@@ -130,7 +130,7 @@
       leave="ease-in motion-safe:duration-75"
       leaveFrom="opacity-100 scale-100"
       leaveTo="opacity-0 scale-95"
-      class="fixed w-[36rem] xl:w-[42rem] 2xl:w-[48rem] max-w-full overflow-y-auto top-4 sm:top-6 md:top-20 left-1/2 -translate-x-1/2 overflow-hidden rounded-xl bg-brand-1 dark:bg-brand-3-dark shadow-2xl ring-1 ring-brand-7/25"
+      class="fixed w-[36rem] xl:w-[42rem] 2xl:w-[48rem] max-w-full overflow-y-auto top-4 sm:top-6 md:top-20 left-1/2 -translate-x-1/2 overflow-hidden rounded-xl bg-brand-1 dark:bg-brandDark-3 shadow-2xl ring-1 ring-brand-7/25"
     >
       <Combobox class="divide-y divide-brand-6" on:change={(event) => close(event.detail.href)}>
         <div class="relative flex items-center justify-between gap-4 px-4">
@@ -196,7 +196,6 @@
               >
                 <a
                   href={result.href}
-                  data-sveltekit-prefetch
                   on:click={(event) => {
                     event.preventDefault()
                     close(result.href)

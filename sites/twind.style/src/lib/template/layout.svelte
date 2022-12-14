@@ -13,7 +13,7 @@
 
 <Header />
 
-<div class="max-w-8xl mx-auto px-4 relative" data-sveltekit-prefetch>
+<div class="max-w-8xl mx-auto px-4 relative">
   {#if $page.data.nav}
     <Nav nav={$page.data.nav} />
   {/if}

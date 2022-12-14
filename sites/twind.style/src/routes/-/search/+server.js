@@ -1,11 +1,11 @@
-import { dev, prerendering } from '$app/environment'
+import { dev, building } from '$app/environment'
 import { createSearch } from '$lib/search'
 
 export const prerender = true
 
 /** @type {import('./$types').RequestHandler} */
 export async function GET({ request, fetch }) {
-  if (prerendering) {
+  if (building) {
     return new Response(JSON.stringify({ term: '', results: [] }), {
       headers: {
         'content-type': 'application/json',

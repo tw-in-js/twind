@@ -99,7 +99,6 @@
         href={data.prev.href}
         class="flex place-content-center gap-2 p-2 hover:text-brand-12"
         rel="prev"
-        data-sveltekit-prefetch
       >
         <span aria-hidden="true">‹</span>
         {#if data.section !== data.prev.section}
@@ -114,7 +113,6 @@
         href={data.next.href}
         class="ml-auto flex place-content-center gap-2 p-2 hover:text-brand-12"
         rel="next"
-        data-sveltekit-prefetch
       >
         {#if data.section !== data.next.section}
           {data.next.section}:
