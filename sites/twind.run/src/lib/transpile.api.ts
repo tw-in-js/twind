@@ -92,16 +92,7 @@ const api: Transpile = {
                   (!input.version || SemverRange.match(input.version, output.version))
                 ) {
                   source = output.id + output.path
-                }
-              }
-
-              for (const [key, value] of Object.entries(manifest.imports || {})) {
-                // add all sub-path imports
-                if (
-                  key === source ||
-                  (key.startsWith(source + '/') && key !== source + '/package.json')
-                ) {
-                  ;(inputMap.imports ||= {})[key] = value
+                  ;(inputMap.imports ||= {})[source] = resolved
                 }
               }
 
@@ -121,10 +112,11 @@ const api: Transpile = {
       ],
     })
 
+    // console.debug({ manifest, dependencies, inputMap })
+
     const generator = new Generator({
       baseUrl: 'memory://',
       inputMap,
-      defaultProvider: 'jspm.system',
       env: [
         'development',
         'modern',
@@ -135,9 +127,49 @@ const api: Transpile = {
         'import',
         'default',
       ],
+      defaultProvider: 'jspm.system',
+      providers: {
+        '@twind': 'local',
+      },
+      customProviders: {
+        local: {
+          pkgToUrl(pkg) {
+            if (manifest.packages[pkg.name] === pkg.version) {
+              return new URL(`./immutable/cdn/${pkg.name}@${pkg.version}/`, manifest.url)
+                .href as 'x/'
+            }
+
+            return `https://ga.system.jspm.io/${pkg.registry}:${pkg.name}@${pkg.version}/`
+          },
+          parseUrlPkg(url) {
+            const base = new URL(`./immutable/cdn/`, manifest.url).href
+            if (url.startsWith(base)) {
+              const [, name, version] =
+                url
+                  .slice(base.length)
+                  .match(/^((?:@[^/\\%@]+\/)?[^./\\%@][^/\\%@]*)@([^\/]+)(\/.*)?$/) || []
+
+              return { registry: 'npm', name, version }
+            }
+          },
+          async resolveLatestTarget(target, layer, parentUrl) {
+            const version = manifest.packages[target.name]
+
+            if (version) {
+              return { registry: target.registry, name: target.name, version }
+            }
+
+            return null
+          },
+        },
+      },
     })
 
-    // TODO: trace generator.logStream
+    // ;(async () => {
+    //   for await (const { type, message } of generator.logStream()) {
+    //     console.log(`${type}: ${message}`);
+    //   }
+    // })();
 
     const [{ dynamicDeps = [], staticDeps = [] } = {}, { output }] = await Promise.all([
       generator.install([...dependencies]),
@@ -194,7 +226,7 @@ const api: Transpile = {
       prefetch: dynamicDeps.map(scopeToManifest),
     }
 
-    console.debug('importMap', importMap)
+    // console.debug('importMap', importMap)
     return {
       ...Object.fromEntries(
         output
