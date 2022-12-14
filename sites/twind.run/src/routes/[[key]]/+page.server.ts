@@ -200,7 +200,7 @@ export async function load({
     const alias = version === '*' ? 'latest' : version.toLowerCase().replace(/[^a-z\d]/g, '-')
 
     const origin =
-      version === SITE_VERSION || alias.includes('-dev-')
+      !(dev && version === SITE_VERSION) || alias.includes('-dev-')
         ? new URL(request.url).origin
         : alias === 'latest'
         ? `https://${HOSTNAME}`
