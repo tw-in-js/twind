@@ -1,0 +1,30 @@
+name: Deploy mdn.twind.run
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - 'sites/mdn.twind.style/**'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    if: github.repository == 'tw-in-js/twind'
+    steps:
+      - name: 📥  Checkout
+        uses: actions/checkout@v3
+
+      - name: 🔧  Setup
+        uses: ./.github/actions/setup
+        with:
+          installArgs: --filter="." --filter="./sites/mdn.twind.style"
+
+      - name: 🌎  Deploy mdn.twind.style
+        shell: bash
+        run: pnpm run deploy
+        working-directory: sites/mdn.twind.style
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CF_ACCOUNT_ID }}
