@@ -40,6 +40,19 @@ runs:
       shell: bash
       run: pnpm changeset --empty
 
+    - name: 📝  Ensure sites versions are bumped
+      uses: fertrig/create-file-action@1.0.2
+      with:
+        path: '.changesets'
+        file: 'sites-versions-bump.md'
+        content: |
+          ---
+          '@sites/twind.run': patch
+          '@sites/twind.style': patch
+          ---
+
+          bump version
+
     - name: 📦  Update packages
       shell: bash
       run: pnpm changeset version --no-git-tag --snapshot ${{ inputs.tag }} --snapshot-prerelease-template "${{ inputs.template }}"

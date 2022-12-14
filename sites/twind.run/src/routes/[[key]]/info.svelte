@@ -20,16 +20,7 @@
   /** @type {Record<string, Record<string, string>>} */
   let colors = {}
 
-  /** @type {import('svelte/store').Writable<import('$lib/types').Manifest | null>} */
-  const lastManifest = writable(null)
-
-  /** @type {import('svelte/store').Writable<import('$lib/system').ImportMap | null>} */
-  const lastImportMap = writable(null)
-
-  $: if (importMap && get(lastImportMap) !== importMap && get(lastManifest) !== manifest) {
-    lastImportMap.set(importMap)
-    lastManifest.set(manifest)
-
+  $: if (importMap) {
     const imports = Object.keys(importMap.imports || {})
 
     packages = Object.entries(manifest.packages).filter(([pkg]) =>
@@ -39,9 +30,7 @@
     intellisense
       .getColors()
       .then((_) => {
-        if (get(lastImportMap) === importMap) {
-          colors = _
-        }
+        colors = _
       })
       .catch((error) => {
         console.warn(error)
@@ -52,7 +41,7 @@
 
 <Loader isReady={importMap} class={className}>
   <div class="absolute inset-0 w-full h-full overflow-auto">
-    <section class="px-4 py-5 sm:px-6 max-w-3xl mx-auto space-y-10">
+    <section class="px-4 py-5 sm:px-6 max-w-5xl mx-auto space-y-10">
       <header>
         <h2 class="flex flex-wrap gap-2 text-2xl font-medium leading-6 text-brand-12">
           <span>Workspace</span><small>v{manifest.version}</small>

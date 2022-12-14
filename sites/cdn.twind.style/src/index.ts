@@ -32,6 +32,7 @@ const WELL_KNOWN_PRESETS: Record<string, string> = {
   ext: '@twind/preset-ext',
   'container-queries': '@twind/preset-container-queries',
   'line-clamp': '@twind/preset-line-clamp',
+  'radix-ui': '@twind/preset-radix-ui',
   'tailwind-forms': '@twind/preset-tailwind-forms',
   // compat for Tailwind CSS Play CDN
   forms: '@twind/preset-tailwind-forms',

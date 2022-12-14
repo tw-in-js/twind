@@ -3,9 +3,6 @@
 export { default } from './src/index'
 export * from './src/index'
 
-export * as base from './src/base'
-export * as baseTheme from './src/baseTheme'
 export * as colors from './src/colors'
+export * as darkColor from './src/darkColor'
 export * as defaultTheme from './src/defaultTheme'
-export * as rules from './src/rules'
-export * as variants from './src/variants'

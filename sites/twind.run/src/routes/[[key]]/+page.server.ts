@@ -200,11 +200,11 @@ export async function load({
     const alias = version === '*' ? 'latest' : version.toLowerCase().replace(/[^a-z\d]/g, '-')
 
     const origin =
-      version === SITE_VERSION
+      !(dev && version === SITE_VERSION) || alias.includes('-dev-')
         ? new URL(request.url).origin
         : alias === 'latest'
         ? `https://${HOSTNAME}`
-        : `https://${/^\d\.\d\.\d/.test(alias) ? 'v' + alias : alias}.${HOSTNAME}`
+        : `https://${/\d/.test(alias) ? 'v' + alias : alias}.${HOSTNAME}`
 
     const url = origin + MANIFEST_PATH
 
@@ -220,7 +220,7 @@ export async function load({
       response = await fetch(url)
 
       if (!(response.ok && response.status === 200)) {
-        throw new Error(`[${response.status}] ${response.statusText || 'request failed'}`)
+        throw new Error(`[${response.status}] ${response.statusText || 'request failed'}: ${url}`)
       }
 
       cache?.put(url, response.clone())

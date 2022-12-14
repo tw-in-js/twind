@@ -4,7 +4,7 @@
 
 import type { Preflight } from '@twind/core'
 
-import defaultTheme from './defaultTheme'
+import baseTheme from './baseTheme'
 
 const preflight: Preflight = {
   /*
@@ -33,7 +33,7 @@ const preflight: Preflight = {
     MozTabSize: '4' /* 3 */,
     tabSize: 4 /* 3 */,
     fontFamily: `theme(fontFamily.sans, ${
-      (defaultTheme.fontFamily as Record<string, string>).sans
+      (baseTheme.fontFamily as Record<string, string>).sans
     })` /* 4 */,
     fontFeatureSettings: 'theme(fontFamily.sans[1].fontFeatureSettings, normal)' /* 5 */,
   },
@@ -77,9 +77,7 @@ const preflight: Preflight = {
     3. Correct the odd `em` font sizing in all browsers.
     */
   'code,kbd,samp,pre': {
-    fontFamily: `theme(fontFamily.mono, ${
-      (defaultTheme.fontFamily as Record<string, string>).mono
-    })`,
+    fontFamily: `theme(fontFamily.mono, ${(baseTheme.fontFamily as Record<string, string>).mono})`,
     fontFeatureSettings: 'theme(fontFamily.mono[1].fontFeatureSettings, normal)',
     fontSize: '1em',
   },

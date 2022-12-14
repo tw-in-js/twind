@@ -70,3 +70,34 @@ All utilities and variants from [Tailwind CSS](https://tailwindcss.com) are avai
 This preset can be configured with the following options:
 
 - `disablePreflight: boolean` — allows to disable the [preflight](https://tailwindcss.com/docs/preflight)
+
+## 🪄 Advanced
+
+This presets allows to omit the [default color palette](https://tailwindcss.com/docs/customizing-colors) to reduce the file size.
+
+The following example selectively imports colors from the default palette but different colors can be used as well (see [@twind/preset-radix-ui](./preset-radix-ui#with-twindpreset-tailwind) for an example).
+
+```js title="twind.config.js"
+import { defineConfig } from '@twind/core'
+import presetAutoprefix from '@twind/preset-autoprefix'
+// Using @twind/preset-tailwind/base to exclude the default tailwind colors
+import presetTailwind from '@twind/preset-tailwind/base'
+
+// Selectively import colors
+import {
+  slate as gray,
+  red,
+  amber as yellow,
+  emerald as green,
+  indigo as blue,
+} from '@twind/preset-tailwind/colors'
+
+export default defineConfig({
+  presets: [
+    presetAutoprefix(),
+    presetTailwind({
+      colors: { gray, yellow, green, blue },
+    }),
+  ],
+})
+```

@@ -8,6 +8,7 @@
       "@twind/preset-container-queries": "./packages/preset-container-queries",
       "@twind/preset-ext": "./packages/preset-ext",
       "@twind/preset-line-clamp": "./packages/preset-line-clamp",
+      "@twind/preset-radix-ui": "./packages/preset-radix-ui",
       "@twind/preset-tailwind": "./packages/preset-tailwind",
       "@twind/preset-tailwind-forms": "./packages/preset-tailwind-forms",
       "@twind/preset-typography": "./packages/preset-typography",

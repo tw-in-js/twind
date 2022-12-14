@@ -73,7 +73,7 @@
 
 <Loader isReady={importMap} class={className}>
   <div class="absolute inset-0 w-full h-full overflow-auto">
-    <section class="px-4 py-5 sm:px-6 max-w-3xl mx-auto space-y-5">
+    <section class="px-4 py-5 sm:px-6 max-w-5xl mx-auto space-y-5">
       <header>
         <p class="mt-3 text-sm">Type anything to search for utilities or variants!</p>
       </header>

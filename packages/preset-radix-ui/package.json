@@ -1,13 +1,12 @@
 {
-  "name": "@twind/preset-tailwind",
+  "name": "@twind/preset-radix-ui",
   "version": "1.0.3",
-  "description": "Tailwind CSS preset for twind",
-  "homepage": "https://twind.style/preset-tailwind",
+  "description": "The Radix UI color scales as a twind preset with automatic dark colors.",
+  "homepage": "https://twind.style/preset-radix-ui",
   "keywords": [
     "twind",
     "twind-preset",
-    "tailwind",
-    "tailwindcss",
+    "radix-ui",
     "tw-in-js",
     "tailwind-in-js",
     "preset"
@@ -18,13 +17,9 @@
   "// Each entry is expanded into several bundles (types, esnext, module, script, node, and default)": "",
   "exports": {
     ".": "./src/index.ts",
-    "./base": "./src/base.ts",
-    "./baseTheme": "./src/baseTheme.ts",
     "./colors": "./src/colors.ts",
+    "./darkColor": "./src/darkColor.ts",
     "./defaultTheme": "./src/defaultTheme.ts",
-    "./preflight": "./src/preflight.ts",
-    "./rules": "./src/rules.ts",
-    "./variants": "./src/variants.ts",
     "./package.json": "./package.json"
   },
   "typedoc": {
@@ -34,40 +29,25 @@
   "sideEffects": false,
   "size-limit": [
     {
-      "name": "@twind/preset-tailwind",
-      "path": "dist/preset-tailwind.esnext.js",
+      "name": "@twind/preset-radix-ui",
+      "path": "dist/preset-radix-ui.esnext.js",
       "brotli": true,
-      "limit": "9.6kb",
+      "limit": "2.7kb",
       "ignore": [
         "twind"
       ]
     },
     {
-      "name": "@twind/preset-tailwind/colors",
+      "name": "@twind/preset-radix-ui/colors",
       "path": "dist/colors.esnext.js",
       "brotli": true,
-      "limit": "1kb"
+      "limit": "2.3kb"
     },
     {
-      "name": "@twind/preset-tailwind/defaultTheme",
+      "name": "@twind/preset-radix-ui/defaultTheme",
       "path": "dist/defaultTheme.esnext.js",
       "brotli": true,
-      "limit": "3.5kb"
-    },
-    {
-      "name": "@twind/preset-tailwind/base",
-      "path": "dist/base.esnext.js",
-      "brotli": true,
-      "limit": "8.6kb",
-      "ignore": [
-        "twind"
-      ]
-    },
-    {
-      "name": "@twind/preset-tailwind/baseTheme",
-      "path": "dist/baseTheme.esnext.js",
-      "brotli": true,
-      "limit": "2.5kb"
+      "limit": "2.6kb"
     }
   ],
   "peerDependencies": {
@@ -80,6 +60,7 @@
     }
   },
   "devDependencies": {
+    "@radix-ui/colors": "^0.1.8",
     "@twind/core": "^1.0.3",
     "typescript": "^4.8.4"
   },

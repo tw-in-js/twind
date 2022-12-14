@@ -4,12 +4,6 @@
  * @module @twind/preset-tailwind/colors
  */
 
-export const inherit = 'inherit'
-export const current = 'currentColor'
-export const transparent = 'transparent'
-export const black = '#000'
-export const white = '#fff'
-
 export const slate = {
   50: '#f8fafc',
   100: '#f1f5f9',

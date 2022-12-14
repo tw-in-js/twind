@@ -8,7 +8,6 @@
   import copy from 'clipboard-copy'
   import { Pane, Splitpanes } from 'svelte-splitpanes'
   import {
-    Transition,
     Listbox,
     ListboxLabel,
     ListboxButton,
@@ -34,7 +33,6 @@
     CheckSolid,
     ChevronUpDownMini,
     EllipsisHorizontalMini,
-    Link16,
     LoadingSpin,
     ShareAndroid24,
     Stars,
@@ -422,7 +420,6 @@
       class="relative group max-w-([6rem] lg:[12rem] xl:fit)"
       value={$workspace.version}
       on:change={(event) => ($workspace.version = event.detail)}
-      let:open
     >
       <ListboxLabel class="sr-only">Change selected version</ListboxLabel>
 
@@ -440,64 +437,56 @@
         </span>
       </ListboxButton>
 
-      <Transition
-        show={open}
-        leave="transition ease-in motion-safe:duration-100"
-        leaveFrom="opacity-100"
-        leaveTo="opacity-0"
+      <ListboxOptions
+        class="absolute left-0 z-10 mt-2 w-64 origin-top-left divide-y divide-brand-6 overflow-hidden rounded-md bg-brand-3 shadow-lg ring-1 ring-brand-7 ring-opacity-5 focus:outline-none"
       >
-        <ListboxOptions
-          static
-          class="absolute left-0 z-10 mt-2 w-64 origin-top-left divide-y divide-brand-6 overflow-hidden rounded-md bg-brand-3 shadow-lg ring-1 ring-brand-7 ring-opacity-5 focus:outline-none"
-        >
-          {#each data.manifests as manifest (manifest.version)}
-            <ListboxOption
-              value={manifest.version}
-              class={({ active, selected }) =>
-                cx(
-                  'cursor-default select-none p-2 text-sm',
-                  active
-                    ? 'text-brand-12 bg-brand-4'
-                    : selected
-                    ? 'text-accent-11 bg-brand-3'
-                    : 'text-brand-11 bg-brand-3',
-                )}
-              let:active
-              let:selected
-            >
-              <div class="flex flex-col gap-1">
-                <div class="flex justify-between">
-                  <p class={selected ? 'font-semibold' : 'font-normal'}>
-                    v{manifest.version}
-                  </p>
-                  {#if selected}
-                    <Icon src={CheckSolid} class="h-5 w-5" />
-                  {/if}
-                </div>
-                <p class={cx('text-xs', active ? 'text-neutral-12' : 'text-neutral-11')}>
-                  {#if manifest.pr}
-                    <a
-                      href={`https://github.com/tw-in-js/twind/pull/${manifest.pr}`}
-                      class="underline"
-                      target="_blank"
-                      rel="external noopener noreferrer nofollow"
-                    >
-                      PR #{manifest.pr}</a
-                    >
-                    — still in development
-                  {:else if manifest['dist-tag'] === 'latest'}
-                    stable version — for most users
-                  {:else if manifest['dist-tag'] === 'next'}
-                    next version — for early adopters
-                  {:else}
-                    canary version — still in development
-                  {/if}
+        {#each data.manifests as manifest (manifest.version)}
+          <ListboxOption
+            value={manifest.version}
+            class={({ active, selected }) =>
+              cx(
+                'cursor-default select-none p-2 text-sm',
+                active
+                  ? 'text-brand-12 bg-brand-4'
+                  : selected
+                  ? 'text-accent-11 bg-brand-3'
+                  : 'text-brand-11 bg-brand-3',
+              )}
+            let:active
+            let:selected
+          >
+            <div class="flex flex-col gap-1">
+              <div class="flex justify-between">
+                <p class={selected ? 'font-semibold' : 'font-normal'}>
+                  v{manifest.version}
                 </p>
+                {#if selected}
+                  <Icon src={CheckSolid} class="h-5 w-5" />
+                {/if}
               </div>
-            </ListboxOption>
-          {/each}
-        </ListboxOptions>
-      </Transition>
+              <p class={cx('text-xs', active ? 'text-neutral-12' : 'text-neutral-11')}>
+                {#if manifest.pr}
+                  <a
+                    href={`https://github.com/tw-in-js/twind/pull/${manifest.pr}`}
+                    class="underline"
+                    target="_blank"
+                    rel="external noopener noreferrer nofollow"
+                  >
+                    PR #{manifest.pr}</a
+                  >
+                  — still in development
+                {:else if manifest['dist-tag'] === 'latest'}
+                  stable version — for most users
+                {:else if manifest['dist-tag'] === 'next'}
+                  next version — for early adopters
+                {:else}
+                  canary version — still in development
+                {/if}
+              </p>
+            </div>
+          </ListboxOption>
+        {/each}
+      </ListboxOptions>
     </Listbox>
 
     <button

@@ -19,6 +19,7 @@
     "@twind/preset-container-queries": "packages/preset-container-queries/dist",
     "@twind/preset-ext": "packages/preset-ext/dist",
     "@twind/preset-line-clamp": "packages/preset-line-clamp/dist",
+    "@twind/preset-radix-ui": "packages/preset-radix-ui/dist",
     "@twind/preset-tailwind": "packages/preset-tailwind/dist",
     "@twind/preset-tailwind-forms": "packages/preset-tailwind-forms/dist",
     "@twind/preset-typography": "packages/preset-typography/dist",
