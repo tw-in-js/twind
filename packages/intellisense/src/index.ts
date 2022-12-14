@@ -12,7 +12,13 @@ import cssbeautify from 'cssbeautify'
 import QuickLRU from 'quick-lru'
 
 import type { Boundary } from './internal/types'
-import type { DocumentationAt, Intellisense, IntellisenseOptions, Suggestion } from './types'
+import type {
+  DocumentationAt,
+  DocumentationForOptions,
+  Intellisense,
+  IntellisenseOptions,
+  Suggestion,
+} from './types'
 
 import { parse, type ParsedDevRule } from '@twind/core'
 
@@ -21,6 +27,8 @@ import { spacify } from './internal/spacify'
 import { compareSuggestions } from './internal/compare-suggestion'
 
 export * from './types'
+
+const MDN = 'https://developer.mozilla.org'
 
 export function createIntellisense<Theme extends BaseTheme = BaseTheme>(
   twind: Twind<Theme>,
@@ -48,6 +56,7 @@ export function createIntellisense(
   })
 
   const context = createIntellisenseContext(config, options)
+  const { mdnOrigin = MDN } = options
 
   // Precache empty input as it is the most common and take a while
   suggestionCache.set('', context.suggestions.map(toSuggestion))
@@ -90,6 +99,14 @@ export function createIntellisense(
     }
   }
 
+  let mdnIndexPromise: Promise<{ title: string; url: string }[]> | null = null
+  const mdnCache = new QuickLRU<
+    string,
+    Promise<{ title: string; summary?: string | undefined; browserCompat?: string[] | undefined }>
+  >({
+    maxSize: 1000,
+    ...options.cache,
+  })
   return {
     get theme() {
       return context.tw.theme
@@ -192,7 +209,24 @@ export function createIntellisense(
       const { extractBoundary } =
         language === 'html'
           ? await import('./languages/html')
-          : { extractBoundary: (): Boundary | null => null }
+          : {
+              extractBoundary: (content: string, position?: number): Boundary | null => {
+                const start =
+                  Math.max(
+                    content.lastIndexOf(' ', position),
+                    content.lastIndexOf('\n', position),
+                    content.lastIndexOf('\t', position),
+                  ) + 1
+
+                let end = content.indexOf(' ', start)
+
+                if (end === -1) end = content.indexOf('\n', start)
+                if (end === -1) end = content.indexOf('\t', start)
+                if (end === -1) end = content.length
+
+                return { start, end, content: content.slice(start, end) }
+              },
+            }
 
       const boundary = extractBoundary(content, position)
 
@@ -256,25 +290,153 @@ export function createIntellisense(
       }
     },
     // eslint-disable-next-line @typescript-eslint/require-await
-    async documentationFor(token) {
+    async documentationFor(token, { format = 'md' }: DocumentationForOptions = {}) {
       if (documentationCache.has(token)) {
-        return documentationCache.get(token) as string | null
+        return convert(documentationCache.get(token), format)
       }
 
       const rule = parse(token)[0] || {
         n: token.endsWith(':') ? '' : token,
         v: token.endsWith(':') ? [token] : [],
       }
+
+      const css = cssbeautify(context.generateCSS(token), { autosemicolon: true, indent: '  ' })
+
+      // { title: "display", url: "/en-US/docs/Web/CSS/display" },
+      // { title: "@media", url: "/en-US/docs/Web/CSS/@media" },
+      // { title: "prefers-contrast", url: "/en-US/docs/Web/CSS/@media/prefers-contrast" }
+      // https://developer.mozilla.org/en-US/docs/Web/CSS/@media/index.json
+      // {doc: { summary: "", "browserCompat": [ "css.properties.display" ] },
+      // https://caniuse.com/mdn-css_properties_display
+      const mdnIndex = await (mdnIndexPromise ||= (async () => {
+        try {
+          const response = await fetch(`${mdnOrigin}/en-US/search-index.json`)
+
+          if (response.ok && response.status === 200) {
+            const index: { title: string; url: string }[] = await response.json()
+
+            return index.filter(({ url }) => url.includes('/CSS/'))
+          }
+        } catch (error) {
+          console.warn('Failed to fetch MDN index')
+        }
+
+        return []
+      })())
+
+      const cssFeatureLinks =
+        mdnIndex.length &&
+        (await Promise.all(
+          Array.from(
+            css.matchAll(
+              /\\[!"'`*+.,;:\\/<=>?@#$%&^|~()[\]{}]|(@\S+|:?:[a-z-]+(?:\([^)]+\))?|[a-z-]+:)/g,
+            ),
+            (match) => {
+              const candidate = match[1]
+              if (candidate && !candidate.startsWith('-')) {
+                // color: transparent
+                // @media (prefers-contrast:) -> @media, prefers-contrast
+                // &:hover -> :hover, hover
+                // ::backdrop -> ::backdrop, backdrop
+                // :nth-child(odd) -> :nth-child(odd), :nth-child(), :nth-child, nth-child
+                const candidates = new Set([
+                  candidate,
+                  // :nth-child(odd) -> :nth-child()
+                  candidate.replace(/\(.+?\)/g, '()'),
+                  // :nth-child(odd) -> :nth-child
+                  candidate.replace(/\(.*?\)/g, ''),
+                  // :nth-child(odd) -> nth-child
+                  // ::backdrop -> backdrop
+                  candidate.replace(/\(.*?\)|[^a-z-]+/gi, ''),
+                ])
+
+                for (const candidate of candidates) {
+                  const found = mdnIndex.find(({ title }) => title === candidate)
+                  if (found) {
+                    return { match, mdn: found }
+                  }
+                }
+              }
+            },
+          )
+            .filter(
+              <T>(result: T, index: number, list: T[]): result is NonNullable<T> =>
+                result && list.indexOf(result) === index,
+            )
+            .map(async (result) => {
+              let cached = mdnCache.get(result.mdn.url)
+
+              if (!cached) {
+                mdnCache.set(
+                  result.mdn.url,
+                  (cached = (async () => {
+                    try {
+                      const response = await fetch(`${mdnOrigin}${result.mdn.url}/index.json`)
+
+                      // http://www.whateverorigin.org/get?url=https://developer.mozilla.org/en-US/search-index.json
+                      // http://www.whateverorigin.org/get?url=https%3A%2F%2Fdeveloper.mozilla.org%2Fen-US%2Fsearch-index.json
+                      // https://cors-anywhere.herokuapp.com/https://developer.mozilla.org/en-US/search-index.json
+                      // https://mdn-twind-run.sastan.workers.dev/en-US/search-index.json
+                      if (response.ok && response.status === 200) {
+                        const index: {
+                          doc: { title: string; summary?: string; browserCompat?: string[] }
+                        } = await response.json()
+
+                        return {
+                          title: index.doc.title,
+                          summary: index.doc.summary,
+                          browserCompat: index.doc.browserCompat,
+                        }
+                      }
+                    } catch (error) {
+                      console.warn('Failed to fetch MDN index')
+                    }
+
+                    return { title: result.mdn.title }
+                  })()),
+                )
+              }
+
+              const { title, browserCompat } = await cached
+              const links = [
+                `[Documentation](${MDN}${result.mdn.url})`,
+                browserCompat?.[0] &&
+                  `[Browser Support](https://caniuse.com/mdn-${browserCompat[0].replaceAll(
+                    '.',
+                    '_',
+                  )})`,
+              ]
+                .filter(Boolean)
+                .join(' • ')
+
+              return `⁃ \`${title}\` (${links})`
+            }),
+        ))
+
       let theme: any
       const sources: string[] = []
+
       // TODO: arbitrary class/variant lookup would not work
       for (const completion of [
-        context.classes.get(rule.n),
         ...rule.v.map((v) => context.variants.get(v + ':')),
+        context.classes.get(rule.n),
       ]) {
         if (!completion) continue
 
-        sources.push(`⁃ \`${completion.name}\` → \`${completion.source}\``)
+        const links =
+          // regexp -> create links to Regex101 and Regexper
+          completion.source.startsWith('/') && completion.source.endsWith('/')
+            ? [
+                `[Regex101](https://regex101.com/?flavor=JavaScript&regex=${encodeURIComponent(
+                  completion.source.slice(1, -1),
+                )}&testString=${encodeURIComponent(completion.value)})`,
+                `[Regexper](https://regexper.com/#${encodeURIComponent(completion.source)})`,
+              ].join(' • ')
+            : ''
+
+        sources.push(
+          `⁃ \`${completion.name}\` → \`${completion.source}\`${links && ' (' + links + ')'}`,
+        )
 
         if (completion.theme) {
           const { section, key } = completion.theme
@@ -296,20 +458,21 @@ export function createIntellisense(
         }
       }
 
-      const css = cssbeautify(context.generateCSS(token), { autosemicolon: true, indent: '  ' })
-
       const result =
         [
           css && '```css\n' + css + '\n```',
-          theme && '**Theme**\n\n```json\n' + JSON.stringify(theme, null, 2) + '\n```',
-          sources.length && `**Source**:\n\n${sources.join('\n<br>\n')}\n`,
+          cssFeatureLinks &&
+            cssFeatureLinks.length &&
+            `### CSS Features\n\n${cssFeatureLinks.join('<br>')}\n`,
+          theme && '### Theme\n\n```json\n' + JSON.stringify(theme, null, 2) + '\n```',
+          sources.length && `### Source\n\n${sources.join('<br>')}\n`,
         ]
           .filter(Boolean)
-          .join('\n\n<br>\n\n') || null
+          .join('\n\n') || null
 
       documentationCache.set(token, result)
 
-      return result
+      return convert(result, format)
     },
     async documentationAt(content, offset, language) {
       let result: DocumentationAt | null = null
@@ -354,4 +517,20 @@ export function createIntellisense(
       }
     },
   }
+}
+
+function convert(
+  md: string | null | undefined,
+  format?: DocumentationForOptions['format'],
+): string | null | Promise<string> {
+  if (md && format === 'html') {
+    return import('showdown').then((showdown) => {
+      const Converter = showdown.Converter || showdown.default.Converter
+      const converter = new Converter({ openLinksInNewWindow: true })
+      converter.setFlavor('github')
+      return converter.makeHtml(md)
+    })
+  }
+
+  return md ?? null
 }

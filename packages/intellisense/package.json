@@ -23,11 +23,12 @@
   "sideEffects": false,
   "dependencies": {
     "@ctrl/tinycolor": "^3.4.1",
-    "cssbeautify": "^0.3.1",
     "css-tree": "^2.2.1",
+    "cssbeautify": "^0.3.1",
     "genex": "^1.1.0",
     "match-sorter": "^6.3.1",
-    "quick-lru": "^6.1.1"
+    "quick-lru": "^6.1.1",
+    "showdown": "^2.1.0"
   },
   "devDependencies": {
     "@twind/core": "^1.0.3",
@@ -35,6 +36,7 @@
     "@twind/preset-tailwind": "^1.0.3",
     "@types/css-tree": "^2.0.0",
     "@types/cssbeautify": "^0.3.2",
+    "@types/showdown": "^2.0.0",
     "typescript": "^4.8.4"
   },
   "peerDependencies": {

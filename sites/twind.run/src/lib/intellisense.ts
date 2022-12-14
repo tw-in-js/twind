@@ -4,6 +4,9 @@ import type {
   LanguageId,
   DocumentationAt,
   Diagnostics,
+  SuggestAtOptions,
+  Suggestion,
+  DocumentationForOptions,
 } from '@twind/intellisense'
 
 import * as Comlink from 'comlink'
@@ -14,9 +17,10 @@ import IntellisenseWorker from './intellisense.worker?worker'
 export interface Intellisense {
   init(options: { entry: string; importMap: ImportMap }): Promise<void>
 
+  suggest(input: string, options?: SuggestAtOptions): Promise<Suggestion[]>
   suggestAt(source: string, offset: number, language: LanguageId): Promise<SuggestionAt | null>
 
-  documentationFor(token: string): Promise<string | null>
+  documentationFor(token: string, options?: DocumentationForOptions): Promise<string | null>
 
   documentationAt(
     content: string,
@@ -27,6 +31,8 @@ export interface Intellisense {
   collectColors(source: string, language: LanguageId): Promise<ColorInformation[]>
 
   validate(content: string, language: LanguageId): Promise<Diagnostics[]>
+
+  getColors(): Promise<Record<string, Record<string, string>>>
 }
 
 export default load()
@@ -37,6 +43,10 @@ function load(): Intellisense {
       async init(...args) {
         const { default: api } = await import('./intellisense.api')
         return api.init(...args)
+      },
+      async suggest(...args) {
+        const { default: api } = await import('./intellisense.api')
+        return api.suggest(...args)
       },
       async suggestAt(...args) {
         const { default: api } = await import('./intellisense.api')
@@ -57,6 +67,10 @@ function load(): Intellisense {
       async validate(...args) {
         const { default: api } = await import('./intellisense.api')
         return api.validate(...args)
+      },
+      async getColors(...args) {
+        const { default: api } = await import('./intellisense.api')
+        return api.getColors(...args)
       },
     }
   }

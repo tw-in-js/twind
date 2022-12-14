@@ -1,0 +1,17 @@
+# https://developers.cloudflare.com/workers/wrangler/ci-cd/
+# npx wrangler publlish
+
+name = "mdn-twind-run"
+type = "javascript"
+main = "src/index.ts"
+workers_dev = true
+
+# https://developers.cloudflare.com/workers/platform/compatibility-dates/
+compatibility_date = "2022-11-11"
+
+# Also opt into an upcoming fix to the FormData API.
+compatibility_flags = [ "transformstream_enable_standard_constructor", "streams_enable_constructors" ]
+
+[vars]
+# https://developers.cloudflare.com/pages/platform/build-configuration/#language-support-and-tools
+NODE_VERSION = "16"
