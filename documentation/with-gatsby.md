@@ -5,7 +5,7 @@ package: 'gatsby-plugin-twind'
 example: 'with-gatsby'
 excerpt: |
   Setting up Twind for seamless integration in a [Gatsby](https://gatsbyjs.com) project.
-next: ./with-next.md
+next: ./with-lit.md
 ---
 
 ## 🤝 Compatibility

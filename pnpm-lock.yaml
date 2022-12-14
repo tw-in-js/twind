@@ -136,19 +136,6 @@ importers:
     devDependencies:
       serve: 13.0.4
 
-  examples/with-web-components:
-    specifiers:
-      '@twind/core': 1.0.3
-      '@twind/preset-autoprefix': 1.0.3
-      '@twind/preset-tailwind': 1.0.3
-      vite: ^4.0.1
-    dependencies:
-      '@twind/core': link:../../packages/core
-      '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
-      '@twind/preset-tailwind': link:../../packages/preset-tailwind
-    devDependencies:
-      vite: 4.0.1
-
   examples/with-gatsby:
     specifiers:
       '@twind/core': 1.0.3
@@ -174,6 +161,23 @@ importers:
       react: 17.0.2
       react-dom: 17.0.2_react@17.0.2
       react-helmet: 6.1.0_react@17.0.2
+
+  examples/with-lit:
+    specifiers:
+      '@twind/core': 1.0.3
+      '@twind/preset-autoprefix': 1.0.3
+      '@twind/preset-tailwind': 1.0.3
+      lit: ^2.5.0
+      typescript: ~4.8.4
+      vite: ^4.0.1
+    dependencies:
+      '@twind/core': link:../../packages/core
+      '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
+      '@twind/preset-tailwind': link:../../packages/preset-tailwind
+      lit: 2.5.0
+    devDependencies:
+      typescript: 4.8.4
+      vite: 4.0.1
 
   examples/with-next:
     specifiers:
@@ -260,6 +264,19 @@ importers:
       svelte-check: 2.10.2_svelte@3.55.0
       svelte-preprocess: 4.10.7_glsdxddlaertg66rhhvanbinpy
       typescript: 4.8.4
+      vite: 4.0.1
+
+  examples/with-web-components:
+    specifiers:
+      '@twind/core': 1.0.3
+      '@twind/preset-autoprefix': 1.0.3
+      '@twind/preset-tailwind': 1.0.3
+      vite: ^4.0.1
+    dependencies:
+      '@twind/core': link:../../packages/core
+      '@twind/preset-autoprefix': link:../../packages/preset-autoprefix
+      '@twind/preset-tailwind': link:../../packages/preset-tailwind
+    devDependencies:
       vite: 4.0.1
 
   packages/cdn:
@@ -2921,6 +2938,10 @@ packages:
     dependencies:
       '@lezer/common': 0.15.12
 
+  /@lit/reactive-element/1.5.0:
+    resolution: {integrity: sha512-fQh9FDK0LPTwDk+0HhSZEtb8K0LTN1wXerwpGrWA+a8tWulYRDLI4vQDWp4GOIsewn0572KYV/oZ3+492D7osA==}
+    dev: false
+
   /@lmdb/lmdb-darwin-arm64/2.5.2:
     resolution: {integrity: sha512-+F8ioQIUN68B4UFiIBYu0QQvgb9FmlKw2ctQMSBfW2QBrZIxz9vD9jCGqTCPqZBRbPHAS/vG1zSXnKqnS2ch/A==}
     cpu: [arm64]
@@ -4940,6 +4961,10 @@ packages:
 
   /@types/tmp/0.0.33:
     resolution: {integrity: sha512-gVC1InwyVrO326wbBZw+AO3u2vRXz/iRWq9jYhpG4W8LXyIgDv3ZmcLQ5Q4Gs+gFMyqx+viFoFT+l3p61QFCmQ==}
+
+  /@types/trusted-types/2.0.2:
+    resolution: {integrity: sha512-F5DIZ36YVLE+PN+Zwws4kJogq47hNgX3Nx6WyDJ3kcplxyke3XIzB8uK5n/Lpm1HBsbGzd6nmGehL8cPekP+Tg==}
+    dev: false
 
   /@types/unist/2.0.6:
     resolution: {integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==}
@@ -12409,6 +12434,27 @@ packages:
       through: 2.3.8
       wrap-ansi: 7.0.0
     dev: true
+
+  /lit-element/3.2.2:
+    resolution: {integrity: sha512-6ZgxBR9KNroqKb6+htkyBwD90XGRiqKDHVrW/Eh0EZ+l+iC+u+v+w3/BA5NGi4nizAVHGYvQBHUDuSmLjPp7NQ==}
+    dependencies:
+      '@lit/reactive-element': 1.5.0
+      lit-html: 2.5.0
+    dev: false
+
+  /lit-html/2.5.0:
+    resolution: {integrity: sha512-bLHosg1XL3JRUcKdSVI0sLCs0y1wWrj2sqqAN3cZ7bDDPNgmDHH29RV48x6Wz3ZmkxIupaE+z7uXSZ/pXWAO1g==}
+    dependencies:
+      '@types/trusted-types': 2.0.2
+    dev: false
+
+  /lit/2.5.0:
+    resolution: {integrity: sha512-DtnUP6vR3l4Q8nRPPNBD+UxbAhwJPeky+OVbi3pdgMqm0g57xFSl1Sj64D1rIB+nVNdiVVg8YxB0hqKjvdadZA==}
+    dependencies:
+      '@lit/reactive-element': 1.5.0
+      lit-element: 3.2.2
+      lit-html: 2.5.0
+    dev: false
 
   /lmdb/2.5.2:
     resolution: {integrity: sha512-V5V5Xa2Hp9i2XsbDALkBTeHXnBXh/lEmk9p22zdr7jtuOIY9TGhjK6vAvTpOOx9IKU4hJkRWZxn/HsvR1ELLtA==}

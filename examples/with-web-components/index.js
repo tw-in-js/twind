@@ -16,7 +16,7 @@ try {
 
       const shadow = this.attachShadow({ mode: 'open' })
 
-      // 3. Apply the same style to each instance of this component
+      // 3. Apply the same style to each instance of this element
       shadow.adoptedStyleSheets = [sheet.target]
 
       // 4a. Observe using "own" tw function
@@ -32,8 +32,8 @@ try {
 
       // 4b. Use "own" tw function directly
       // shadow.innerHTML = `
-      //   <main class="${tw`h-screen bg-purple-400 flex items-center justify-center`}">
-      //     <h1 class="${tw`font-bold text(center 5xl white sm:gray-800 md:pink-700)`}">
+      //   <main class="${tw('h-screen bg-purple-400 flex items-center justify-center')}">
+      //     <h1 class="${tw('font-bold text(center 5xl white sm:gray-800 md:pink-700)')}">
       //       This is Twind!
       //     </h1>
       //   </main>

@@ -11,7 +11,8 @@ import { tw as tw$ } from './runtime'
  */
 export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
   tw: Twind<Theme, Target> = tw$ as unknown as Twind<Theme, Target>,
-  target = typeof document != 'undefined' && document.documentElement,
+  target: false | HTMLElement | ShadowRoot = typeof document != 'undefined' &&
+    document.documentElement,
 ): Twind<Theme, Target> {
   if (!target) return tw
 
@@ -24,7 +25,7 @@ export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
   })
 
   // handle class attribute on target
-  handleClassAttributeChange(target)
+  handleClassAttributeChange(target as HTMLElement)
 
   // handle children of target
   handleMutationRecords([{ target, type: '' }])
