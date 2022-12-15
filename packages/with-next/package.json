@@ -1,6 +1,6 @@
 {
   "name": "@twind/with-next",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Seamless integration of Twind in a Next.js project",
   "publishConfig": {
     "access": "public",
