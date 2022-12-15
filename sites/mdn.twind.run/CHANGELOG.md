@@ -1,5 +1,15 @@
 # @sites/cdn.twind.style
 
+## 1.1.0
+
+### Minor Changes
+
+- add discover tab to twind.run to explore available utilities and variants ([#420](https://github.com/tw-in-js/twind/pull/420))
+
+### Patch Changes
+
+- update vite, vitest, sveltekit, and typescript ([`5183718b`](https://github.com/tw-in-js/twind/commit/5183718ba54d927818a5c6e67efa59eb9a98246e))
+
 ## 1.0.1
 
 ### Patch Changes

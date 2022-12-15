@@ -1,5 +1,30 @@
 # twind.style
 
+## 1.0.5
+
+### Patch Changes
+
+- update vite, vitest, sveltekit, and typescript ([`5183718b`](https://github.com/tw-in-js/twind/commit/5183718ba54d927818a5c6e67efa59eb9a98246e))
+
+- support observing shadow dom (fixes [#421](https://github.com/tw-in-js/twind/issues/421)) ([`1e16652d`](https://github.com/tw-in-js/twind/commit/1e16652d4d7a5aae72390e0ceef29519a5e18d4d))
+
+- add radix-ui example to twind.run ([#419](https://github.com/tw-in-js/twind/pull/419))
+
+- document how to use with web components (fixes [#421](https://github.com/tw-in-js/twind/issues/421)) ([`e71dee05`](https://github.com/tw-in-js/twind/commit/e71dee050b5257c84eaf315e73ca5b8fd1e68f60))
+
+- crop sponsors padding on mobile ([#416](https://github.com/tw-in-js/twind/pull/416)) 🙏🏽 [@Danielduel](https://github.com/Danielduel)!
+
+- add Lit example ([`e06a4830`](https://github.com/tw-in-js/twind/commit/e06a4830e31b27591eb574f106dddd65ab41a26a))
+
+- Updated dependencies [[`29099993`](https://github.com/tw-in-js/twind/commit/290999932cc5621fc8de42d4b3557db3584d5e80), [`5183718b`](https://github.com/tw-in-js/twind/commit/5183718ba54d927818a5c6e67efa59eb9a98246e), [`29099993`](https://github.com/tw-in-js/twind/commit/290999932cc5621fc8de42d4b3557db3584d5e80), [`28b83c74`](https://github.com/tw-in-js/twind/commit/28b83c74b024ddc7f3fc736171b6e844dbcbbb86), [`1e16652d`](https://github.com/tw-in-js/twind/commit/1e16652d4d7a5aae72390e0ceef29519a5e18d4d), [`29099993`](https://github.com/tw-in-js/twind/commit/290999932cc5621fc8de42d4b3557db3584d5e80), [`f194c5b8`](https://github.com/tw-in-js/twind/commit/f194c5b8e13bdc0dd66ec7c0df9dbc20d869e14a), [`88bebcf5`](https://github.com/tw-in-js/twind/commit/88bebcf570292b1f2d624de04a513045f6fe6498), [`c64fb457`](https://github.com/tw-in-js/twind/commit/c64fb4577267b5e339ae86d5f96179fdf764465b), [`bf5f6785`](https://github.com/tw-in-js/twind/commit/bf5f67852f4323314bef24546cb7e2a3ab850675), [`58c87006`](https://github.com/tw-in-js/twind/commit/58c870060e13e95ac50bcd8b98de441126dafb05), [`6e64c33f`](https://github.com/tw-in-js/twind/commit/6e64c33f8f69155979cc4a90a74e695a484bcc9d), [`b24af095`](https://github.com/tw-in-js/twind/commit/b24af09537c889eda791f675499f73acb37e7fb0), [`622b08dc`](https://github.com/tw-in-js/twind/commit/622b08dc4d74448abd78041586f5888bd82bb655), [`20428cf4`](https://github.com/tw-in-js/twind/commit/20428cf4d27d563456e3fa76b79f8a867a353fb8), [`e06a4830`](https://github.com/tw-in-js/twind/commit/e06a4830e31b27591eb574f106dddd65ab41a26a), [`29099993`](https://github.com/tw-in-js/twind/commit/290999932cc5621fc8de42d4b3557db3584d5e80), [`cb70ab66`](https://github.com/tw-in-js/twind/commit/cb70ab6609bc7a017bd80aeefcda8a6a5526997c), [`eef016b9`](https://github.com/tw-in-js/twind/commit/eef016b907d73b2a954c33548ee1c513dec94375), [`e9d8dccf`](https://github.com/tw-in-js/twind/commit/e9d8dccfaa919cc5b1b080cc2e05d65d53f44b67), [`7f72cb0e`](https://github.com/tw-in-js/twind/commit/7f72cb0ea61925fe5a9fca067656fd76f7df2f52), [`3818a19a`](https://github.com/tw-in-js/twind/commit/3818a19ab31f0a92de87e6f8e3cc44a45cc6c0e2), [`ab7220ef`](https://github.com/tw-in-js/twind/commit/ab7220ef7a780e7f4cdf325f17527c5865ef2d28), [`6fd10056`](https://github.com/tw-in-js/twind/commit/6fd100563c76135f8e281c804ee4bd1cae97bbde), [`9254d208`](https://github.com/tw-in-js/twind/commit/9254d20855db6c4b1ce3e114f28d4af1d307ac51), [`5183718b`](https://github.com/tw-in-js/twind/commit/5183718ba54d927818a5c6e67efa59eb9a98246e), [`64f1ea37`](https://github.com/tw-in-js/twind/commit/64f1ea3796ae28e3f6b4be1682940287828c3323)]:
+  - @twind/preset-typography@1.0.4
+  - @twind/with-sveltekit@1.1.0
+  - @twind/preset-tailwind@1.1.0
+  - @twind/core@1.1.0
+  - @twind/preset-radix-ui@1.0.4
+  - @twind/preset-ext@1.0.4
+  - @twind/preset-autoprefix@1.0.4
+
 ## 1.0.4
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@twind/preset-tailwind",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Tailwind CSS preset for twind",
   "homepage": "https://twind.style/preset-tailwind",
   "keywords": [
@@ -80,7 +80,7 @@
     }
   },
   "devDependencies": {
-    "@twind/core": "^1.0.3",
+    "@twind/core": "^1.1.0",
     "typescript": "^4.8.4"
   },
   "scripts": {

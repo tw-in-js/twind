@@ -1,5 +1,17 @@
 # @twind/with-sveltekit
 
+## 1.1.0
+
+### Minor Changes
+
+- do not use `process.env.NODE_ENV` to detect production environment — instead use import condition ([`e9d8dccf`](https://github.com/tw-in-js/twind/commit/e9d8dccfaa919cc5b1b080cc2e05d65d53f44b67))
+
+### Patch Changes
+
+- update vite, vitest, sveltekit, and typescript ([`5183718b`](https://github.com/tw-in-js/twind/commit/5183718ba54d927818a5c6e67efa59eb9a98246e))
+
+- add worker condition to published package (fixes [#418](https://github.com/tw-in-js/twind/issues/418)) ([`5183718b`](https://github.com/tw-in-js/twind/commit/5183718ba54d927818a5c6e67efa59eb9a98246e))
+
 ## 1.0.3
 
 ### Patch Changes

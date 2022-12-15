@@ -1,5 +1,11 @@
 # @example/sveltekit
 
+## 1.0.2
+
+### Patch Changes
+
+- update vite, vitest, sveltekit, and typescript ([`5183718b`](https://github.com/tw-in-js/twind/commit/5183718ba54d927818a5c6e67efa59eb9a98246e))
+
 ## 1.0.1
 
 ### Patch Changes
