@@ -1,5 +1,12 @@
 # @example/gatsby
 
+## 1.0.5
+
+### Patch Changes
+
+- Updated dependencies [[`269fb67d`](https://github.com/tw-in-js/twind/commit/269fb67d6708cb732dd350f81f0865010481d6d2)]:
+  - gatsby-plugin-twind@1.1.1
+
 ## 1.0.4
 
 ### Patch Changes

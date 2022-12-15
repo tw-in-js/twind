@@ -1,5 +1,11 @@
 # @twind/with-next
 
+## 1.1.1
+
+### Patch Changes
+
+- revert relying on export condition for detection production environment ([`269fb67d`](https://github.com/tw-in-js/twind/commit/269fb67d6708cb732dd350f81f0865010481d6d2))
+
 ## 1.1.0
 
 ### Minor Changes

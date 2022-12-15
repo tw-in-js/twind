@@ -1,6 +1,6 @@
 {
   "name": "@twind/with-remix",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Seamless integration of Twind in a Remix project",
   "publishConfig": {
     "access": "public",

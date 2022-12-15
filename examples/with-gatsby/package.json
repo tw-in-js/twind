@@ -1,7 +1,7 @@
 {
   "name": "@example/with-gatsby",
   "description": "gatsby with twind example",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "private": true,
   "license": "MIT",
   "bugs": "https://github.com/tw-in-js/twind/issues",
@@ -29,7 +29,7 @@
     "gatsby-plugin-manifest": "^4.24.0",
     "gatsby-plugin-offline": "^5.24.0",
     "gatsby-plugin-react-helmet": "^5.24.0",
-    "gatsby-plugin-twind": "1.1.0",
+    "gatsby-plugin-twind": "1.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-helmet": "^6.1.0"

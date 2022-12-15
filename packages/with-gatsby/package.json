@@ -1,6 +1,6 @@
 {
   "name": "gatsby-plugin-twind",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Seamless integration of Twind in a Gatsby project",
   "keywords": [
     "twind",
