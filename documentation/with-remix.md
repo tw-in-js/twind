@@ -21,7 +21,7 @@ next: ./with-sveltekit.md
    ::col-span-4
    **Install from npm**
 
-   `twind` and `@twind/with-remix` are available on npm and need to be installed together.
+   `@twind/core` and `@twind/with-remix` are available on npm and need to be installed together.
 
    ::col-span-8
 

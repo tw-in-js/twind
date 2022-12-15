@@ -23,7 +23,7 @@ next: ./with-web-components.md
    ::col-span-4
    **Install from npm**
 
-   `twind` and `@twind/with-sveltekit` are available on npm and need to be installed together.
+   `@twind/core` and `@twind/with-sveltekit` are available on npm and need to be installed together.
 
    ::col-span-8
 

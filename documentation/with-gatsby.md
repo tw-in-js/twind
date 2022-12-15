@@ -21,7 +21,7 @@ next: ./with-lit.md
    ::col-span-4
    **Install from npm**
 
-   `twind` and `gatsby-plugin-twind` are available on npm and need to be installed together.
+   `@twind/core` and `gatsby-plugin-twind` are available on npm and need to be installed together.
 
    ::col-span-8
 
