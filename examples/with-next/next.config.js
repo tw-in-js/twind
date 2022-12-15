@@ -8,7 +8,7 @@ const withTM = require('next-transpile-modules')
  * @type {import('next').NextConfig}
  **/
 module.exports = withPlugins(
-  [withTM(['twind', '@twind/preset-autoprefix', '@twind/preset-tailwind', '@twind/with-next'])],
+  [withTM(['@twind/core', '@twind/preset-autoprefix', '@twind/preset-tailwind', '@twind/with-next'])],
   {
     /* regular next.js config options here */
     reactStrictMode: true,
