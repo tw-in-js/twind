@@ -851,7 +851,7 @@ const rules: Rule<TailwindTheme>[] = [
   // Transition Delay
   matchTheme('delay(?:$|-)', 'transitionDelay', 'transitionDelay', join),
 
-  matchTheme('animate(?:$|-)', 'animation', (match, { theme, h }) => {
+  matchTheme('animate(?:$|-)', 'animation', (match, { theme, h, e }) => {
     const animation: string = join(match)
 
     // Try to auto inject keyframes
@@ -860,7 +860,7 @@ const rules: Rule<TailwindTheme>[] = [
 
     if (keyframeValues) {
       return {
-        [('@keyframes ' + (parts[0] = h(parts[0]))) as '@keyframes xxx']: keyframeValues,
+        [('@keyframes ' + (parts[0] = e(h(parts[0])))) as '@keyframes xxx']: keyframeValues,
         animation: parts.join(' '),
       }
     }

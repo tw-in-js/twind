@@ -443,6 +443,22 @@ test('hashed supports', () => {
   ])
 })
 
+test('hashed animate', () => {
+  const tw = twind(
+    {
+      presets: [tailwind({ disablePreflight: true })],
+      hash: true,
+    },
+    virtual(),
+  )
+
+  assert.strictEqual(tw('animate-spin'), '#1gsib12')
+  assert.deepEqual(tw.target, [
+    '@keyframes \\#1mm0hdv{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}',
+    '.\\#1gsib12{animation:\\#1mm0hdv 1s linear infinite}',
+  ])
+})
+
 test('font-family utilities can be defined as a string', () => {
   const tw = twind(
     {
