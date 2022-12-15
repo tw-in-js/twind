@@ -186,7 +186,7 @@
                 value={result}
                 class={({ active }) => {
                   if (active) {
-                    prefetch(result.href)
+                    preloadData(result.href)
                   }
                   return cx(
                     'select-none p-3 hover:bg-brand-4 motion-safe:transition-colors',
