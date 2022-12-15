@@ -4,7 +4,6 @@ import type { TwindConfig, TwindUserConfig } from '@twind/core'
 
 import { createElement } from 'react'
 import { install as install$ } from '@twind/core'
-import { PROD } from 'distilt/env'
 
 export default install
 
@@ -21,7 +20,7 @@ function install<Props, Component>(
 function install<Props, Component>(
   config: TwindConfig | TwindUserConfig,
   AppComponent: React.JSXElementConstructor<Props> & Component = TwindApp as any,
-  isProduction = PROD,
+  isProduction = process.env.NODE_ENV == 'production',
 ): Component {
   install$(config as TwindUserConfig, isProduction)
 
