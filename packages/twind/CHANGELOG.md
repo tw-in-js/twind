@@ -1,5 +1,12 @@
 # twind
 
+## 1.0.4
+
+### Patch Changes
+
+- Updated dependencies [[`1e16652d`](https://github.com/tw-in-js/twind/commit/1e16652d4d7a5aae72390e0ceef29519a5e18d4d), [`c64fb457`](https://github.com/tw-in-js/twind/commit/c64fb4577267b5e339ae86d5f96179fdf764465b), [`58c87006`](https://github.com/tw-in-js/twind/commit/58c870060e13e95ac50bcd8b98de441126dafb05), [`b24af095`](https://github.com/tw-in-js/twind/commit/b24af09537c889eda791f675499f73acb37e7fb0), [`e06a4830`](https://github.com/tw-in-js/twind/commit/e06a4830e31b27591eb574f106dddd65ab41a26a), [`9254d208`](https://github.com/tw-in-js/twind/commit/9254d20855db6c4b1ce3e114f28d4af1d307ac51), [`64f1ea37`](https://github.com/tw-in-js/twind/commit/64f1ea3796ae28e3f6b4be1682940287828c3323)]:
+  - @twind/core@1.1.0
+
 ## 1.0.3
 
 ### Patch Changes

@@ -1,7 +1,7 @@
 {
   "name": "@example/with-remix",
   "description": "remix with twind example",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "private": true,
   "license": "MIT",
   "bugs": "https://github.com/tw-in-js/twind/issues",
@@ -24,10 +24,10 @@
   "dependencies": {
     "@remix-run/react": "^1.7.5",
     "@remix-run/serve": "^1.7.5",
-    "@twind/core": "1.0.3",
-    "@twind/preset-autoprefix": "1.0.3",
-    "@twind/preset-tailwind": "1.0.3",
-    "@twind/with-remix": "1.0.3",
+    "@twind/core": "1.1.0",
+    "@twind/preset-autoprefix": "1.0.4",
+    "@twind/preset-tailwind": "1.1.0",
+    "@twind/with-remix": "1.1.0",
     "@types/react": "^17.0.52",
     "cross-env": "^7.0.3",
     "react": "^17.0.2",

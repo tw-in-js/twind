@@ -1,5 +1,15 @@
 # @twind/intellisense
 
+## 1.1.0
+
+### Minor Changes
+
+- add discover tab to twind.run to explore available utilities and variants ([#420](https://github.com/tw-in-js/twind/pull/420))
+
+### Patch Changes
+
+- fix autocomplete for `place-*` utilities ([`bf5f6785`](https://github.com/tw-in-js/twind/commit/bf5f67852f4323314bef24546cb7e2a3ab850675))
+
 ## 1.0.4
 
 ### Patch Changes

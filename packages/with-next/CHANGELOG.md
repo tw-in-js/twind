@@ -1,5 +1,11 @@
 # @twind/with-next
 
+## 1.1.0
+
+### Minor Changes
+
+- do not use `process.env.NODE_ENV` to detect production environment — instead use import condition ([`e9d8dccf`](https://github.com/tw-in-js/twind/commit/e9d8dccfaa919cc5b1b080cc2e05d65d53f44b67))
+
 ## 1.0.3
 
 ### Patch Changes

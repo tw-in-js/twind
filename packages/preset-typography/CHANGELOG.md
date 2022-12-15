@@ -1,5 +1,11 @@
 # @twind/preset-typography
 
+## 1.0.4
+
+### Patch Changes
+
+- use flattend color name to lookup dark shade for a color ([#419](https://github.com/tw-in-js/twind/pull/419))
+
 ## 1.0.3
 
 ### Patch Changes

@@ -1,5 +1,19 @@
 # @sites/twind.run
 
+## 1.1.0
+
+### Minor Changes
+
+- add discover tab to twind.run to explore available utilities and variants ([#420](https://github.com/tw-in-js/twind/pull/420))
+
+### Patch Changes
+
+- update vite, vitest, sveltekit, and typescript ([`5183718b`](https://github.com/tw-in-js/twind/commit/5183718ba54d927818a5c6e67efa59eb9a98246e))
+
+- support observing shadow dom (fixes [#421](https://github.com/tw-in-js/twind/issues/421)) ([`1e16652d`](https://github.com/tw-in-js/twind/commit/1e16652d4d7a5aae72390e0ceef29519a5e18d4d))
+
+- add radix-ui example to twind.run ([#419](https://github.com/tw-in-js/twind/pull/419))
+
 ## 1.0.2
 
 ### Patch Changes
