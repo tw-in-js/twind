@@ -73,8 +73,16 @@ export const tw: Twind<any, any> = /* #__PURE__ */ new Proxy(
 
       return active(args[0])
     },
-    get(_target, property) {
-      if (DEV) assertActive()
+    get(target, property) {
+      if (DEV) {
+        // Workaround webpack accessing the prototype in dev mode
+        if (!active && property in target) {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+          return (target as any)[property]
+        }
+
+        assertActive()
+      }
 
       const value = active[property as keyof Twind]
 
