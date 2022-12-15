@@ -17,7 +17,8 @@
 
 ## Integrations
 
+- [gatsby-plugin-twind](./packages/with-gatsby/CHANGELOG.md)
 - [@twind/with-next](./packages/with-next/CHANGELOG.md)
 - [@twind/with-remix](./packages/with-remix/CHANGELOG.md)
 - [@twind/with-sveltekit](./packages/with-sveltekit/CHANGELOG.md)
-- [gatsby-plugin-twind](./packages/with-gatsby/CHANGELOG.md)
+- [@twind/with-web-components](./packages/with-web-components/CHANGELOG.md)

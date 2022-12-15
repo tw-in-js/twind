@@ -1,25 +1,12 @@
 import { LitElement, html } from 'lit'
 import { customElement } from 'lit/decorators.js'
 
-import { twind, cssom, observe } from '@twind/core'
+import install from '@twind/with-web-components'
 import config from './twind.config'
 
-// 1. Create separate CSSStyleSheet
-const sheet = cssom(new CSSStyleSheet())
-
-// 2. Use that to create an own twind instance
-const tw = twind(config, sheet)
-
 @customElement('twind-element')
-export class TwindElement extends LitElement {
-  // 3. Apply the same style to each instance of this element
-  static override styles = [sheet.target]
-
-  // 4a. Observe using "own" tw function
-  override firstUpdated(): void {
-    observe(tw, this.renderRoot)
-  }
-
+@install(config)
+export class TwindElement extends LitElement /* install(config)(LitElement) */ {
   override render() {
     return html`
       <main class="h-screen bg-purple-400 flex items-center justify-center">
@@ -27,13 +14,15 @@ export class TwindElement extends LitElement {
       </main>
     `
 
-    // 4b. Use "own" tw function directly
+    // Alternativly use tw function directly (required `class extends withTwind(config)(LitElement) { }`)
     // return html`
-    //   <main class="${tw('h-screen bg-purple-400 flex items-center justify-center')}">
-    //     <h1 class="${tw('font-bold text(center 5xl white sm:gray-800 md:pink-700')}">
+    //   <main class="${this.tw('h-screen bg-purple-400 flex items-center justify-center')}">
+    //     <h1 class="${this.tw('font-bold text(center 5xl white sm:gray-800 md:pink-700')}">
     //       This is Twind!
     //     </h1>
     //   </main>
     // `
   }
 }
+
+document.body.innerHTML = '<twind-element></twind-element>'

@@ -3,42 +3,41 @@ import type { BaseTheme, Twind } from './types'
 import { changed } from './internal/changed'
 import { tw as tw$ } from './runtime'
 
+export interface TwindMutationObserver {
+  observe: (target: Node) => void
+  disconnect: () => void
+}
+
 /**
  * @group Runtime
  * @param tw
  * @param target
  * @returns
+ * @internal
  */
-export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
-  tw: Twind<Theme, Target> = tw$ as unknown as Twind<Theme, Target>,
-  target: false | HTMLElement | ShadowRoot = typeof document != 'undefined' &&
-    document.documentElement,
-): Twind<Theme, Target> {
-  if (!target) return tw
-
+export function mo<Theme extends BaseTheme = BaseTheme, Target = unknown>(
+  tw: Twind<Theme, Target>,
+): TwindMutationObserver {
   const observer = new MutationObserver(handleMutationRecords)
 
-  observer.observe(target, {
-    attributeFilter: ['class'],
-    subtree: true,
-    childList: true,
-  })
+  return {
+    observe(target) {
+      observer.observe(target, {
+        attributeFilter: ['class'],
+        subtree: true,
+        childList: true,
+      })
 
-  // handle class attribute on target
-  handleClassAttributeChange(target as HTMLElement)
+      // handle class attribute on target
+      handleClassAttributeChange(target as Element)
 
-  // handle children of target
-  handleMutationRecords([{ target, type: '' }])
-
-  // monkey patch tw.destroy to disconnect this observer
-  // eslint-disable-next-line @typescript-eslint/unbound-method
-  const { destroy } = tw
-  tw.destroy = () => {
-    observer.disconnect()
-    destroy.call(tw)
+      // handle children of target
+      handleMutationRecords([{ target, type: '' }])
+    },
+    disconnect() {
+      observer.disconnect()
+    },
   }
-
-  return tw
 
   function handleMutationRecords(records: MinimalMutationRecord[]): void {
     for (const { type, target } of records) {
@@ -73,6 +72,33 @@ export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
       target.setAttribute('class', className)
     }
   }
+}
+
+/**
+ * @group Runtime
+ * @param tw
+ * @param target
+ * @returns
+ */
+export function observe<Theme extends BaseTheme = BaseTheme, Target = unknown>(
+  tw: Twind<Theme, Target> = tw$ as unknown as Twind<Theme, Target>,
+  target: false | Node = typeof document != 'undefined' && document.documentElement,
+): Twind<Theme, Target> {
+  if (target) {
+    const observer = mo(tw)
+
+    observer.observe(target)
+
+    // monkey patch tw.destroy to disconnect this observer
+    // eslint-disable-next-line @typescript-eslint/unbound-method
+    const { destroy } = tw
+    tw.destroy = () => {
+      observer.disconnect()
+      destroy.call(tw)
+    }
+  }
+
+  return tw
 }
 
 /**

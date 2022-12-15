@@ -26,7 +26,8 @@
     "gatsby-plugin-twind": "packages/with-gatsby/dist",
     "@twind/with-next": "packages/with-next/dist",
     "@twind/with-remix": "packages/with-remix/dist",
-    "@twind/with-sveltekit": "packages/with-sveltekit/dist"
+    "@twind/with-sveltekit": "packages/with-sveltekit/dist",
+    "@twind/with-web-components": "packages/with-web-components/dist"
   },
   // A list of sandboxes that you want generated for a PR, if this list
   // is not set we will default to `vanilla`. The built library will automatically
@@ -39,9 +40,11 @@
     "/examples/basic",
     "/examples/playground",
     "/examples/with-gatsby",
+    "/examples/with-lit",
     "/examples/with-next",
     "/examples/with-remix",
-    "/examples/with-sveltekit"
+    "/examples/with-sveltekit",
+    "/examples/with-web-components"
   ],
   // Node.js version to use for building the PR.
   // Supported versions are '10' (10.24.1, default), '12' (12.22.7), '14' (14.18.1) and '16' (16.13.0).

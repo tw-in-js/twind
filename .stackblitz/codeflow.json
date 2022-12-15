@@ -15,7 +15,8 @@
       "gatsby-plugin-twind": "./packages/with-gatsby",
       "@twind/with-next": "./packages/with-next",
       "@twind/with-remix": "./packages/with-remix",
-      "@twind/with-sveltekit": "./packages/with-sveltekit"
+      "@twind/with-sveltekit": "./packages/with-sveltekit",
+      "@twind/with-web-components": "./packages/with-web-components"
     }
   }
 }

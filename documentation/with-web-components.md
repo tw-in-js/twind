@@ -1,7 +1,8 @@
 ---
 section: Use With
 title: Web Components
-example: with-web-components
+package: '@twind/with-web-components'
+example: true
 excerpt: |
   Using Twind with [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) and [Shadow DOM](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_shadow_DOM)
 next: ./reference.md
@@ -9,82 +10,116 @@ next: ./reference.md
 
 This guide shows how [Custom Elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements) can have their styles separated without having the side effect of polluting the root document's styles.
 
-> **Caution**
-> This example is using [Constructable Stylesheet Objects](https://wicg.github.io/construct-stylesheets/) and `DocumentOrShadowRoot.adoptedStyleSheets` which have [limited browser support](https://caniuse.com/mdn-api_document_adoptedstylesheets) at the moment (December 2022). The [Constructible style sheets polyfill](https://github.com/calebdwilliams/construct-style-sheets) offers a solution for all modern browsers and IE 11.
+> **Note**
+> In [modern browsers](https://caniuse.com/mdn-api_document_adoptedstylesheets) this integration uses [Constructable Stylesheet Objects](https://wicg.github.io/construct-stylesheets/) and [`adoptedStyleSheets`](https://developer.mozilla.org/en-US/docs/Web/API/ShadowRoot/adoptedStyleSheets) for optimal performance. In legacy browsers, it falls back to using separate style elements (one per element instance) that are all kept in sync.
 
-```js
-import { twind, cssom, observe } from '@twind/core'
-import config from './twind.config'
+1. :::cols-12{.gap-4}
 
-// 1. Create separate CSSStyleSheet
-const sheet = cssom(new CSSStyleSheet())
+   ::col-span-4
+   **Install from npm**
 
-// 2. Use that to create an own twind instance
-const tw = twind(config, sheet)
+   `@twind/core` and `@twind/with-web-components` are available on npm and need to be installed together.
 
-class TwindElement extends HTMLElement {
-  constructor() {
-    super()
+   ::col-span-8
 
-    const shadow = this.attachShadow({ mode: 'open' })
+   ```sh
+   npm install @twind/core @twind/with-web-components
+   ```
 
-    // 3. Apply the same style to each instance of this element
-    shadow.adoptedStyleSheets = [sheet.target]
+   :::
 
-    // 4a. Observe using "own" tw function
-    observe(tw, shadow)
+1. :::cols-12{.gap-4}
 
-    shadow.innerHTML = `
-      <main class="h-screen bg-purple-400 flex items-center justify-center">
-        <h1 class="font-bold text(center 5xl white sm:gray-800 md:pink-700)">
-          This is Twind!
-        </h1>
-      </main>
-    `
+   ::col-span-4
+   **Define the configuration**
 
-    // 4b. Use "own" tw function directly
-    // shadow.innerHTML = `
-    //   <main class="${tw('h-screen bg-purple-400 flex items-center justify-center')}">
-    //     <h1 class="${tw('font-bold text(center 5xl white sm:gray-800 md:pink-700)')}">
-    //       This is Twind!
-    //     </h1>
-    //   </main>
-    // `
-  }
-}
+   Using an extra file, `twind.config.js`, allows some tools like [IntelliSense](./installation) to find your configuration.
 
-customElements.define('twind-element', TwindElement)
+   ::col-span-8
 
-document.body.innerHTML = '<twind-element></twind-element>'
-```
+   ```js title="twind.config.js"
+   import { defineConfig } from '@twind/core'
 
-> **Tip**
-> The [Library Mode guide](./library-mode) might be helpful for advanced use cases like creating a dedicated `twind` module.
+   export default defineConfig({
+     /* @twind/with-web-components will use
+      * hashed class names in production by default
+      * If you don't want this, uncomment the next line
+      */
+     // hash: false,
+   })
+   ```
 
-```js title="twind.js"
-import {
-  twind,
-  cssom,
-  tx as tx$,
-  injectGlobal as injectGlobal$,
-  keyframes as keyframes$,
-} from '@twind/core'
+   :::
 
-import config from './twind.config'
+1. :::cols-12{.gap-4}
 
-// 1. Create separate CSSStyleSheet
-export const sheet = /* #__PURE__ */ cssom(new CSSStyleSheet())
+   ::col-span-4
+   **Create a Custom Element**
 
-// 2. Use that to create an own twind instance
-export const tw = /* #__PURE__ */ twind(config, sheet)
+   `install` creates a mixin that can be used to enhance elements with a shared stylesheet, generates styles for all used CSS classes and adds `this.tw` (the twind instance) to the element instance.
 
-// tx allow tagged template usage like: tx`text(center 5xl white sm:gray-800 md:pink-700)`
-export const tx = /* #__PURE__ */ tx$.bind(tw)
+   The mixin function can be used with several elements — they all will share the same twind instance.
 
-// bind some helper function
-export const injectGlobal = /* #__PURE__ */ injectGlobal$.bind(tw)
-export const keyframes = /* #__PURE__ */ keyframes$.bind(tw)
+   ::col-span-8
 
-// export additional useful functions
-export { observe, cx } from from '@twind/core'
-```
+   ```js
+   import install from '@twind/with-web-components'
+   import config from './twind.config'
+
+   const withTwind = install(config)
+
+   class TwindElement extends withTwind(HTMLElement) {
+     constructor() {
+       super()
+
+       const shadow = this.attachShadow({ mode: 'open' })
+
+       shadow.innerHTML = `<h1 class="text-3xl font-bold underline">Hello world!</h1>`
+     }
+   }
+
+   customElements.define('twind-element', TwindElement)
+   ```
+
+   :::
+
+1. <details>
+   <summary><strong>Optional</strong>: Install and configure the recommended presets <a href="./preset-autoprefix"><code>@twind/preset-autoprefix</code></a> and <a href="./preset-tailwind"><code>@twind/preset-tailwind</code></a>.</summary>
+
+   :::cols-12{.gap-4}
+
+   ::col-span-4
+   **Install the presets**
+
+   All presets are [available on npm](https://www.npmjs.com/search?q=keywords:twind-preset).
+
+   ::col-span-8
+
+   ```sh
+   npm install @twind/preset-autoprefix @twind/preset-tailwind
+   ```
+
+   :::
+
+   :::cols-12{.gap-4}
+
+   ::col-span-4
+   **Configure the presets**
+
+   Each preset must be added to the `presets` array in the configuration.
+
+   ::col-span-8
+
+   ```js title="twind.config.js" [2-3,6]
+   import { defineConfig } from '@twind/core'
+   import presetAutoprefix from '@twind/preset-autoprefix'
+   import presetTailwind from '@twind/preset-tailwind'
+
+   export default defineConfig({
+     presets: [presetAutoprefix(), presetTailwind()],
+   })
+   ```
+
+   :::
+
+   </details>
