@@ -559,16 +559,6 @@ export default defineConfig((env) => {
             return `new URL('${fileName}',location.href).href`
           },
         },
-        {
-          name: 'fix-invalid-code',
-          generateBundle(options, bundle) {
-            for (const chunk of Object.values(bundle)) {
-              if (chunk.type === 'chunk') {
-                chunk.code = chunk.code.replaceAll('(1.toString)', '((1).toString)')
-              }
-            }
-          },
-        },
       ].filter(Boolean),
       rollupOptions: {
         output: {

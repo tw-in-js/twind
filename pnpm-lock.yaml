@@ -16,6 +16,9 @@ patchedDependencies:
   '@jsenv/importmap@1.2.1':
     hash: x4kvtnlfhhtsajb4py2iyzfui4
     path: patches/@jsenv__importmap@1.2.1.patch
+  prettier@2.8.1:
+    hash: zqxs2i72kfgkpp463rqfjwo634
+    path: patches/prettier@2.8.1.patch
 
 importers:
 
@@ -571,8 +574,8 @@ importers:
       just-debounce: ^1.1.0
       lz-string: ^1.4.4
       miniflare: ^2.11.0
-      monaco-editor: ^0.34.1
-      prettier: ^2.7.1
+      monaco-editor: 0.34.1
+      prettier: 2.8.1
       resolve.exports: ^1.1.0
       rollup-plugin-polyfill-node: ^0.10.2
       sucrase: ^3.28.0
@@ -620,7 +623,7 @@ importers:
       lz-string: 1.4.4
       miniflare: 2.11.0
       monaco-editor: 0.34.1_qlubxv3rumgt2yot5js2f4zeeq
-      prettier: 2.7.1
+      prettier: 2.8.1
       resolve.exports: 1.1.0
       rollup-plugin-polyfill-node: 0.10.2_rollup@2.79.1
       sucrase: 3.28.0
@@ -2090,7 +2093,7 @@ packages:
       fs-extra: 7.0.1
       lodash.startcase: 4.4.0
       outdent: 0.5.0
-      prettier: 2.7.1
+      prettier: 2.8.1_zqxs2i72kfgkpp463rqfjwo634
       resolve-from: 5.0.0
       semver: 5.7.1
     dev: true
@@ -2266,7 +2269,7 @@ packages:
       '@changesets/types': 5.2.0
       fs-extra: 7.0.1
       human-id: 1.0.2
-      prettier: 2.7.1
+      prettier: 2.8.1_zqxs2i72kfgkpp463rqfjwo634
     dev: true
 
   /@cloudflare/kv-asset-handler/0.2.0:
