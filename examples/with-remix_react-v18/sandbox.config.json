@@ -1,0 +1,7 @@
+{
+  "// https://github.com/codesandbox/codesandbox-importers/blob/master/packages/types/index.d.ts#L39-L64": "",
+  "template": "node",
+  "container": {
+    "node": "16"
+  }
+}

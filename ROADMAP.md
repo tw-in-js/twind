@@ -57,8 +57,6 @@
 
 - @twind/devtools:
   - enumerate all classes and inject as empty for dev tools
-- @twind/with-remix: https://github.com/remix-run/remix/issues/1804
-- @twind/preset-\* from tailwind core
 - @twind/styled (previously @twind/react)
   - Global: https://emotion.sh/docs/globals
   - createGlobalStyles: https://goober.js.org/api/createGlobalStyles

@@ -10,9 +10,9 @@ next: ./with-lit.md
 
 ## 🤝 Compatibility
 
-| gatsby-plugin-twind  | gatsby   |
-| -------------------- | -------- |
-| `>=1.0.0-next.38 <1` | `>=2 <5` |
+| gatsby-plugin-twind | gatsby   |
+| ------------------- | -------- |
+| `>=1.0.0 <2`        | `>=2 <5` |
 
 ## 📦 Installation
 

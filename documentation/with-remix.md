@@ -1,32 +1,38 @@
 ---
 section: Use With
 title: Remix
-package: '@twind/with-remix'
-example: true
+package: '@twind/with-react'
+example: 'with-remix'
 excerpt: |
   Setting up Twind for seamless integration in a [Remix](https://remix.run) project.
 next: ./with-sveltekit.md
 ---
 
+> **Hint**
+> The `@twind/with-remix` package is deprecated in favor of the `@twind/with-react` package which is used throughout this guide.
+
 ## 🤝 Compatibility
 
-| @twind/with-remix   | remix |
-| ------------------- | ----- |
-| `>=1.0.0-next.1 <1` | `1.x` |
+| @twind/with-react | remix |
+| ----------------- | ----- |
+| `>=1.0.0 <2`      | `1.x` |
 
 ## 📦 Installation
+
+> **Tip**
+> This guide uses [renderToString](https://reactjs.org/docs/react-dom-server.html#rendertostring) to generate server-side rendered styles. For an example with React v18 and [renderToPipeableStream](https://reactjs.org/docs/react-dom-server.html#rendertopipeablestream) take a look at [examples/with-remix_react-v18](https://github.com/tw-in-js/twind/tree/main/examples/with-remix_react-v18).
 
 1. :::cols-12{.gap-4}
 
    ::col-span-4
    **Install from npm**
 
-   `@twind/core` and `@twind/with-remix` are available on npm and need to be installed together.
+   `@twind/core` and `@twind/with-react` are available on npm and need to be installed together.
 
    ::col-span-8
 
    ```sh
-   npm install @twind/core @twind/with-remix
+   npm install @twind/core @twind/with-react
    ```
 
    :::
@@ -86,9 +92,9 @@ next: ./with-sveltekit.md
 
    ```diff title="app/entry.server.jsx"
    import { renderToString } from 'react-dom/server'
-   import { RemixServer } from 'remix'
+   import { RemixServer } from '@remix-run/react'
 
-   + import inline from '@twind/with-remix/server'
+   + import inline from '@twind/with-react/inline'
 
    export default function handleRequest(
      request,

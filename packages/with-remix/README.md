@@ -1,5 +1,11 @@
 # @twind/with-remix [![MIT License](https://flat.badgen.net/github/license/tw-in-js/twind)](https://github.com/tw-in-js/twind/blob/main/LICENSE) [![Latest Release](https://flat.badgen.net/npm/v/@twind/with-remix?icon=npm&label&cache=10800&color=blue)](https://www.npmjs.com/package/@twind/with-remix) [![Github](https://flat.badgen.net/badge/icon/tw-in-js%2Ftwind%23with-remix?icon=github&label)](https://github.com/tw-in-js/twind/tree/main/packages/with-remix)
 
+---
+
+**Deprecated** Use [@twind/with-react](https://www.npmjs.com/package/@twind/with-react) instead.
+
+---
+
 Seamless integration of [Twind](https://twind.style) with [Remix](https://remix.run)
 
 - 📖 Study [the documentation](https://twind.style/with-remix)

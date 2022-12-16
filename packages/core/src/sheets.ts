@@ -3,13 +3,14 @@ import type { Sheet, SheetRule } from './types'
 import { asArray, noop } from './utils'
 
 function getStyleElement(selector: string | null | undefined | false): HTMLStyleElement {
-  let style = document.querySelector(selector || 'style[data-twind]')
+  let style = document.querySelector(selector || 'style[data-twind=""]')
 
   if (!style || style.tagName != 'STYLE') {
     style = document.createElement('style')
-    ;(style as HTMLElement).dataset.twind = ''
     document.head.prepend(style)
   }
+
+  ;(style as HTMLElement).dataset.twind = 'claimed'
 
   return style as HTMLStyleElement
 }

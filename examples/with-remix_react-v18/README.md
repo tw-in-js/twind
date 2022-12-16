@@ -1,8 +1,8 @@
-# Example: Remix with React v17
+# Example: Remix with React v18
 
-> Try it live at [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/main/examples/with-remix) or [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/main/examples/with-remix).
+> Try it live at [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/main/examples/with-remix_react-v18) or [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/main/examples/with-remix_react-v18).
 
-This example uses [renderToString](https://reactjs.org/docs/react-dom-server.html#rendertostring) to generate server-side rendered styles. For an example with React v18 and [renderToPipeableStream](https://reactjs.org/docs/react-dom-server.html#rendertopipeablestream) take a look at [with-remix_react-v18](../with-remix_react-v18).
+This example uses [renderToPipeableStream](https://reactjs.org/docs/react-dom-server.html#rendertopipeablestream) to generate server-side rendered styles. For an example with [renderToString](https://reactjs.org/docs/react-dom-server.html#rendertostring) take a look at [with-remix](../with-remix).
 
 ## How does this work?
 

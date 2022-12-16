@@ -25,7 +25,7 @@
     "@twind/preset-typography": "packages/preset-typography/dist",
     "gatsby-plugin-twind": "packages/with-gatsby/dist",
     "@twind/with-next": "packages/with-next/dist",
-    "@twind/with-remix": "packages/with-remix/dist",
+    "@twind/with-react": "packages/with-react/dist",
     "@twind/with-sveltekit": "packages/with-sveltekit/dist",
     "@twind/with-web-components": "packages/with-web-components/dist"
   },
@@ -43,6 +43,7 @@
     "/examples/with-lit",
     "/examples/with-next",
     "/examples/with-remix",
+    "/examples/with-remix_react-v18",
     "/examples/with-sveltekit",
     "/examples/with-web-components"
   ],

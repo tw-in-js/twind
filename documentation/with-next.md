@@ -5,14 +5,14 @@ package: '@twind/with-next'
 example: true
 excerpt: |
   Setting up Twind for seamless integration in a [Next.js](https://nextjs.org) project.
-next: ./with-remix.md
+next: ./with-react.md
 ---
 
 ## 🤝 Compatibility
 
-| @twind/with-remix   | next   |
-| ------------------- | ------ |
-| `>=1.0.0-next.1 <1` | `12.x` |
+| @twind/with-next | next           |
+| ---------------- | -------------- |
+| `>=1.0.0 <2`     | `12.x`, `13.x` |
 
 ## 📦 Installation
 
