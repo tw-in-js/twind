@@ -34,7 +34,7 @@
     "entryPoint": "./index.d.ts"
   },
   "peerDependencies": {
-    "@twind/core": "^1.0.3",
+    "@twind/core": "^1.1.0",
     "next": "12.x",
     "react": "^16.6.0 || 17.x || 18.x",
     "typescript": "^4.8.4"

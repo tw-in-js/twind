@@ -33,7 +33,7 @@
   "sideEffects": false,
   "peerDependencies": {
     "@sveltejs/kit": "^1.0.0",
-    "@twind/core": "^1.0.3",
+    "@twind/core": "^1.1.0",
     "typescript": "^4.8.4"
   },
   "peerDependenciesMeta": {

@@ -35,7 +35,7 @@
   "// These are relative from within the dist/ folder": "",
   "sideEffects": false,
   "peerDependencies": {
-    "@twind/core": "^1.0.3",
+    "@twind/core": "^1.1.0",
     "react": "^16.6.0 || 17.x || 18.x",
     "remix": "1.x",
     "typescript": "^4.8.4"
