@@ -90,7 +90,7 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
     }))
   }
 
-  return {
+  const ctx: Context<Theme> = {
     theme: makeThemeFunction(theme),
 
     e: escape,
@@ -98,18 +98,18 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
     h,
 
     s(property, value) {
-      return stringify(property, value, this)
+      return stringify(property, value, ctx)
     },
 
     d(section, key, color) {
-      return darkColor(section, key, this, color)
+      return darkColor(section, key, ctx, color)
     },
 
     v(value) {
       if (!variantCache.has(value)) {
         variantCache.set(
           value,
-          find(value, variants, variantResolvers, getVariantResolver, this) || '&:' + value,
+          find(value, variants, variantResolvers, getVariantResolver, ctx) || '&:' + value,
         )
       }
 
@@ -122,8 +122,8 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
       if (!ruleCache.has(key)) {
         ruleCache.set(
           key,
-          !ignored(className, this) &&
-            find(className, rules, ruleResolvers, getRuleResolver, this, isDark),
+          !ignored(className, ctx) &&
+            find(className, rules, ruleResolvers, getRuleResolver, ctx, isDark),
         )
 
         if (DEV) {
@@ -144,9 +144,11 @@ export function createContext<Theme extends BaseTheme = BaseTheme>({
     },
 
     f(rule) {
-      return finalize.reduce((rule, p) => p(rule, this), rule)
+      return finalize.reduce((rule, p) => p(rule, ctx), rule)
     },
   }
+
+  return ctx
 }
 
 function find<Value, Config, Result, Theme extends BaseTheme = BaseTheme>(

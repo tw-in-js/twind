@@ -101,35 +101,35 @@ export interface Context<Theme extends BaseTheme = BaseTheme> {
    *
    * @private
    */
-  d(section: string, key: string, color: ColorValue): ColorValue | Falsey
+  d: (section: string, key: string, color: ColorValue) => ColorValue | Falsey
 
   /**
    * resolves a variant
    *
    * @private
    */
-  v(value: string): MaybeArray<string>
+  v: (value: string) => MaybeArray<string>
 
   /**
    * resolves a rule
    *
    * @private
    */
-  r(value: string, isDark?: boolean): RuleResult
+  r: (value: string, isDark?: boolean) => RuleResult
 
   /**
    * stringifies a CSS property and value to a declaration
    *
    * @private
    */
-  s(property: string, value: string): string
+  s: (property: string, value: string) => string
 
   /**
    * called right before the rule is stringified and inserted into the sheet
    *
    * @private
    */
-  f(rule: TwindRule): TwindRule
+  f: (rule: TwindRule) => TwindRule
 }
 
 // Get the leaf theme value and omit nested records like for colors
