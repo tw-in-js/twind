@@ -34,6 +34,9 @@
   },
   "// These are relative from within the dist/ folder": "",
   "sideEffects": false,
+  "typedoc": {
+    "entryPoint": "./index.d.ts"
+  },
   "peerDependencies": {
     "@twind/core": "^1.1.0",
     "react": "^16.6.0 || 17.x || 18.x",

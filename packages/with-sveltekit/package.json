@@ -31,6 +31,9 @@
   },
   "// These are relative from within the dist/ folder": "",
   "sideEffects": false,
+  "typedoc": {
+    "entryPoint": "./index.d.ts"
+  },
   "peerDependencies": {
     "@sveltejs/kit": "^1.0.0",
     "@twind/core": "^1.1.0",
