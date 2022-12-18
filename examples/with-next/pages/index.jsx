@@ -17,9 +17,7 @@ export default function Home() {
           </a>
         </h1>
 
-        <Link href="/about">
-          <a>About Us</a>
-        </Link>
+        <Link href="/about">About Us</Link>
 
         <p className="mt-3 text-2xl">
           Get started by editing{' '}

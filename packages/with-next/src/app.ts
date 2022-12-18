@@ -1,4 +1,5 @@
 /* eslint-env node, browser */
+import type { ComponentType } from 'react'
 import type { AppProps } from 'next/app'
 import type { TwindConfig, TwindUserConfig } from '@twind/core'
 
@@ -28,5 +29,5 @@ function install<Props, Component>(
 }
 
 function TwindApp(props: AppProps) {
-  return createElement(props.Component, props.pageProps)
+  return createElement(props.Component as ComponentType<any>, props.pageProps)
 }
