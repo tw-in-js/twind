@@ -1,6 +1,6 @@
 {
   "name": "@twind/preset-ext",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "extension preset for twind",
   "keywords": [
     "twind",
@@ -44,8 +44,8 @@
     }
   },
   "devDependencies": {
-    "@twind/core": "^1.1.0",
-    "@twind/preset-tailwind": "^1.1.0",
+    "@twind/core": "^1.1.1",
+    "@twind/preset-tailwind": "^1.1.1",
     "typescript": "^4.8.4"
   },
   "scripts": {

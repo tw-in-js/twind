@@ -1,5 +1,22 @@
 # @example/with-remix
 
+## 0.0.7
+
+### Patch Changes
+
+- create dedicated worker and deno bundles, and downgrade module to es2019 (fixes [#426](https://github.com/tw-in-js/twind/issues/426)) ([`02ea227a`](https://github.com/tw-in-js/twind/commit/02ea227afffe474cde5e843c3519f0836ee18f8a))
+
+- add `@twind/with-react` package with support for React v18 streamed responses (fixes [#409](https://github.com/tw-in-js/twind/issues/409)) ([`6521e678`](https://github.com/tw-in-js/twind/commit/6521e678821f05de8cd3a87b0176083efee43405))
+
+  - the `@twind/with-remix` package is deprecated in favor of the `@twind/with-react` package
+  - added a Remix with React v18 and [renderToPipeableStream](https://reactjs.org/docs/react-dom-server.html#rendertopipeablestream) example: [examples/with-remix_react-v18](https://github.com/tw-in-js/twind/tree/main/examples/with-remix_react-v18) (related to #400 & #408)
+
+- Updated dependencies [[`02ea227a`](https://github.com/tw-in-js/twind/commit/02ea227afffe474cde5e843c3519f0836ee18f8a), [`a26657cf`](https://github.com/tw-in-js/twind/commit/a26657cf025aa7ad207372b30034d81417ad41c7), [`6521e678`](https://github.com/tw-in-js/twind/commit/6521e678821f05de8cd3a87b0176083efee43405), [`c832b338`](https://github.com/tw-in-js/twind/commit/c832b33849690545e7a4dffbdada2f5b97f6aa08)]:
+  - @twind/core@1.1.1
+  - @twind/preset-autoprefix@1.0.5
+  - @twind/preset-tailwind@1.1.1
+  - @twind/with-react@1.1.1
+
 ## 0.0.6
 
 ### Patch Changes

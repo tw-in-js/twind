@@ -1,5 +1,14 @@
 # twind
 
+## 1.0.5
+
+### Patch Changes
+
+- create dedicated worker and deno bundles, and downgrade module to es2019 (fixes [#426](https://github.com/tw-in-js/twind/issues/426)) ([`02ea227a`](https://github.com/tw-in-js/twind/commit/02ea227afffe474cde5e843c3519f0836ee18f8a))
+
+- Updated dependencies [[`02ea227a`](https://github.com/tw-in-js/twind/commit/02ea227afffe474cde5e843c3519f0836ee18f8a), [`6521e678`](https://github.com/tw-in-js/twind/commit/6521e678821f05de8cd3a87b0176083efee43405), [`c832b338`](https://github.com/tw-in-js/twind/commit/c832b33849690545e7a4dffbdada2f5b97f6aa08)]:
+  - @twind/core@1.1.1
+
 ## 1.0.4
 
 ### Patch Changes

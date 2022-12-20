@@ -1,5 +1,11 @@
 # @example/sveltekit
 
+## 1.0.3
+
+### Patch Changes
+
+- create dedicated worker and deno bundles, and downgrade module to es2019 (fixes [#426](https://github.com/tw-in-js/twind/issues/426)) ([`02ea227a`](https://github.com/tw-in-js/twind/commit/02ea227afffe474cde5e843c3519f0836ee18f8a))
+
 ## 1.0.2
 
 ### Patch Changes
