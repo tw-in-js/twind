@@ -33,7 +33,7 @@ importers:
       '@typescript-eslint/parser': ^5.42.1
       '@vitest/coverage-c8': ^0.25.8
       '@vitest/ui': ^0.25.8
-      distilt: ^0.19.0
+      distilt: ^0.19.1
       dotenv: ^10.0.0
       eslint: ^8.27.0
       eslint-config-prettier: ^8.5.0
