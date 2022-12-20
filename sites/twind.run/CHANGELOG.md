@@ -1,5 +1,13 @@
 # @sites/twind.run
 
+## 1.1.1
+
+### Patch Changes
+
+- create dedicated worker and deno bundles, and downgrade module to es2019 (fixes [#426](https://github.com/tw-in-js/twind/issues/426)) ([`02ea227a`](https://github.com/tw-in-js/twind/commit/02ea227afffe474cde5e843c3519f0836ee18f8a))
+
+- patch all occurences of `1 .toString` using pnpm instead of relying on built-time patching ([`8861034c`](https://github.com/tw-in-js/twind/commit/8861034c48287e35953ad2bd5b5ab3d1b0793b9d))
+
 ## 1.1.0
 
 ### Minor Changes
