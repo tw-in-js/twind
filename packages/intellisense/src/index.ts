@@ -401,8 +401,8 @@ export function createIntellisense(
               const links = [
                 `[Documentation](${MDN}${result.mdn.url})`,
                 browserCompat?.[0] &&
-                  `[Browser Support](https://caniuse.com/mdn-${browserCompat[0].replaceAll(
-                    '.',
+                  `[Browser Support](https://caniuse.com/mdn-${browserCompat[0].replace(
+                    /\./g,
                     '_',
                   )})`,
               ]
