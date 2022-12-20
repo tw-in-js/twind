@@ -2,6 +2,8 @@
 
 > Try it live at [Stackblitz](https://stackblitz.com/fork/github/tw-in-js/twind/tree/main/examples/with-next) or [Codesandbox](https://githubbox.com/tw-in-js/twind/tree/main/examples/with-next).
 
+This example is using `next@12` and `react@17` because `next@13` is not working in Stackblitz or Codesandbox. You can upgrade this example to `next@13` and `react@18` when you are using it locally.
+
 ## How does this work?
 
 1. a custom [pages/\_app](./pages/_app.js) [^1]
