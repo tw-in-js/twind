@@ -64,7 +64,7 @@ importers:
       '@typescript-eslint/parser': 5.42.1_rmayb2veg2btbq6mbmnyivgasy
       '@vitest/coverage-c8': 0.25.8_k5wiumq7uyw7xmxxn6w6kpox5u
       '@vitest/ui': 0.25.8
-      distilt: 0.19.0_typescript@4.8.4
+      distilt: 0.19.1_typescript@4.8.4
       dotenv: 10.0.0
       eslint: 8.27.0
       eslint-config-prettier: 8.5.0_eslint@8.27.0
@@ -7862,8 +7862,8 @@ packages:
     dependencies:
       path-type: 4.0.0
 
-  /distilt/0.19.0_typescript@4.8.4:
-    resolution: {integrity: sha512-qpmkiwrZLwxwKK/XbqxlB9YI7xQAKUiHoBwYH47RJqMBpgeK+p4oQSTLHhQXs/FNQvC0XHXwDA0XHot9vtQl0w==}
+  /distilt/0.19.1_typescript@4.8.4:
+    resolution: {integrity: sha512-/KVMbt7FGGAWSMeVvaW9UkbyZ5Hr2JvImprWN5bnXntxXoO1Pi+v1DhMUttBittX2LSHdg1UYCYqKUPCqr18Yg==}
     engines: {node: '>=14'}
     hasBin: true
     dependencies:
