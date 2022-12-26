@@ -1,5 +1,15 @@
 # @example/gatsby
 
+## 1.0.7
+
+### Patch Changes
+
+- Updated dependencies [[`5fd4bb08`](https://github.com/tw-in-js/twind/commit/5fd4bb082857c6f5504a23a641a2b61a33e7db88)]:
+  - @twind/core@1.1.2
+  - @twind/preset-autoprefix@1.0.6
+  - @twind/preset-tailwind@1.1.2
+  - gatsby-plugin-twind@1.1.3
+
 ## 1.0.6
 
 ### Patch Changes

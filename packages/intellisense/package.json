@@ -1,6 +1,6 @@
 {
   "name": "@twind/intellisense",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "IntelliSense utilities for Twind",
   "keywords": [
     "twind",
@@ -31,9 +31,9 @@
     "showdown": "^2.1.0"
   },
   "devDependencies": {
-    "@twind/core": "^1.1.1",
-    "@twind/preset-autoprefix": "^1.0.5",
-    "@twind/preset-tailwind": "^1.1.1",
+    "@twind/core": "^1.1.2",
+    "@twind/preset-autoprefix": "^1.0.6",
+    "@twind/preset-tailwind": "^1.1.2",
     "@types/css-tree": "^2.0.0",
     "@types/cssbeautify": "^0.3.2",
     "@types/showdown": "^2.0.0",

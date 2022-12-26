@@ -1,5 +1,22 @@
 # twind.style
 
+## 1.0.7
+
+### Patch Changes
+
+- do not replace window and document for deno bundles ([`5fd4bb08`](https://github.com/tw-in-js/twind/commit/5fd4bb082857c6f5504a23a641a2b61a33e7db88))
+
+- fix remix with react@18 links ([`e12a247e`](https://github.com/tw-in-js/twind/commit/e12a247e71d5465066552933b33602948f8a4aa9))
+
+- Updated dependencies [[`5fd4bb08`](https://github.com/tw-in-js/twind/commit/5fd4bb082857c6f5504a23a641a2b61a33e7db88)]:
+  - @twind/core@1.1.2
+  - @twind/preset-autoprefix@1.0.6
+  - @twind/preset-ext@1.0.6
+  - @twind/preset-radix-ui@1.0.6
+  - @twind/preset-tailwind@1.1.2
+  - @twind/preset-typography@1.0.6
+  - @twind/with-sveltekit@1.1.2
+
 ## 1.0.6
 
 ### Patch Changes
