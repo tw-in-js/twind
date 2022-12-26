@@ -14,8 +14,7 @@ next: ./with-react.md
 | ---------------- | -------------- |
 | `>=1.0.0 <2`     | `12.x`, `13.x` |
 
-> **Caution**
-> [Next 13 app directory](https://beta.nextjs.org/docs/getting-started) is currently not supported. Please use the [legacy app directory](https://nextjs.org/docs/advanced-features/custom-app) for now.
+> **Caution** > [Next 13 app directory](https://beta.nextjs.org/docs/getting-started) is currently not supported. Please use the [legacy app directory](https://nextjs.org/docs/advanced-features/custom-app) for now.
 
 ## 📦 Installation
 
