@@ -1,7 +1,7 @@
 {
   "name": "@example/using-tailwind-forms",
   "description": "tailwind-forms example",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "private": true,
   "main": "index.js",
   "license": "MIT",
@@ -21,10 +21,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@twind/core": "1.1.1",
-    "@twind/preset-autoprefix": "1.0.5",
-    "@twind/preset-tailwind": "1.1.1",
-    "@twind/preset-tailwind-forms": "1.0.5"
+    "@twind/core": "1.1.2",
+    "@twind/preset-autoprefix": "1.0.6",
+    "@twind/preset-tailwind": "1.1.2",
+    "@twind/preset-tailwind-forms": "1.1.0"
   },
   "devDependencies": {
     "vite": "^4.0.1"

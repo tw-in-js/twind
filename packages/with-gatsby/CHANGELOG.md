@@ -1,5 +1,11 @@
 # gatsby-plugin-twind
 
+## 1.1.3
+
+### Patch Changes
+
+- do not replace window and document for deno bundles ([`5fd4bb08`](https://github.com/tw-in-js/twind/commit/5fd4bb082857c6f5504a23a641a2b61a33e7db88))
+
 ## 1.1.2
 
 ### Patch Changes
