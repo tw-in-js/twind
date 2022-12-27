@@ -23,6 +23,21 @@ test('default color', () => {
   assert.deepEqual(theme(), { colors: { gray: '#aaa', 'gray-DEFAULT': '#aaa' } })
 })
 
+test('adjust the opacity of a color', () => {
+  const theme = makeThemeFunction({
+    colors: {},
+    extend: {
+      colors: {
+        gray: {
+          DEFAULT: '#aaa',
+        },
+      },
+    },
+  })
+
+  assert.strictEqual(theme('colors.gray / 75%'), 'rgba(170,170,170,75%)')
+})
+
 test('custom color', () => {
   const theme = makeThemeFunction({
     colors: {
