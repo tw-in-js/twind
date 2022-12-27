@@ -116,3 +116,19 @@ test('reference the default theme', () => {
 
   assert.deepEqual(theme('fontFamily', 'sans'), ['"Inter var"', ['ui-sans-serif', 'system-ui']])
 })
+
+test('access values with dots', () => {
+  const theme = makeThemeFunction({
+    colors: {},
+    screens: {},
+    spacing: {
+      0.5: '0.125rem',
+    },
+  })
+
+  assert.strictEqual(theme('spacing', '0.5'), '0.125rem')
+  assert.strictEqual(theme('spacing[0.5]'), '0.125rem')
+
+  // dotted values need to use square bracket syntax
+  assert.strictEqual(theme('spacing.0.5'), undefined)
+})
