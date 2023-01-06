@@ -1,6 +1,6 @@
 {
   "name": "@twind/preset-tailwind",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "Tailwind CSS preset for twind",
   "homepage": "https://twind.style/preset-tailwind",
   "keywords": [

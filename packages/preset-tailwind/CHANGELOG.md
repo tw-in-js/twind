@@ -1,5 +1,13 @@
 # @twind/preset-tailwind
 
+## 1.1.3
+
+### Patch Changes
+
+- prevent adding `content` property to defaults ([`b7c1636c`](https://github.com/tw-in-js/twind/commit/b7c1636cec002124ed8fcfd0dd269a3109e1af93))
+
+  Previously the defaults for `blur`, `ordinal`, `ring`, `shadow`, `snap-x`, `touch-pan-x`, and `transform`, would include `content:var(--tw-content)` for **all** elements, including the pseudo elements `::before`, `::after`, and `::backdrop`, causing a shift in layout.
+
 ## 1.1.2
 
 ### Patch Changes
