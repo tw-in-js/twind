@@ -1,7 +1,7 @@
 {
   "name": "@example/basic",
   "description": "basic twind example",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "private": true,
   "main": "index.js",
   "license": "MIT",
@@ -23,7 +23,7 @@
   "dependencies": {
     "@twind/core": "1.1.2",
     "@twind/preset-autoprefix": "1.0.6",
-    "@twind/preset-tailwind": "1.1.2"
+    "@twind/preset-tailwind": "1.1.3"
   },
   "devDependencies": {
     "vite": "^4.0.1"

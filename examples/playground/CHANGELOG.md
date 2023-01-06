@@ -1,5 +1,13 @@
 # @example/playground
 
+## 1.0.7
+
+### Patch Changes
+
+- Updated dependencies [[`b7c1636c`](https://github.com/tw-in-js/twind/commit/b7c1636cec002124ed8fcfd0dd269a3109e1af93)]:
+  - @twind/preset-tailwind@1.1.3
+  - @twind/preset-tailwind-forms@1.1.1
+
 ## 1.0.6
 
 ### Patch Changes
