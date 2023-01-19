@@ -19,6 +19,6 @@ module.exports = {
     '@twind/core',
     '@twind/preset-autoprefix',
     '@twind/preset-tailwind',
-    '@twind/with-remix',
+    '@twind/with-react',
   ],
 }
