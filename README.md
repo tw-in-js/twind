@@ -120,7 +120,7 @@ Thank you to all our sponsors!
   </a>
 </p>
 
-Please ask your company to also support this open source project by becoming a sponsor on [opencollective](https://opencollective.com/twind#sponsor) or [GitHub](https://github.com/sponsors/tw-in-js)).
+Please ask your company to also support this open source project by becoming a sponsor on [opencollective](https://opencollective.com/twind#sponsor) or [GitHub](https://github.com/sponsors/tw-in-js).
 
 ## ⚖️ License
 
