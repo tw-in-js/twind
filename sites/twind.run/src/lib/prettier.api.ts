@@ -10,7 +10,13 @@ import prettier from 'prettier/esm/standalone.mjs'
 
 import { Layer } from '../../../../packages/core/src/internal/precedence'
 
-const defaults = { useTabs: false, semi: false, trailingComma: 'all', bracketSameLine: false }
+const defaults = {
+  printWidth: 80,
+  useTabs: false,
+  semi: false,
+  trailingComma: 'all',
+  bracketSameLine: false,
+}
 
 const plugins = [
   {
