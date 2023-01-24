@@ -335,7 +335,7 @@ export default function presetTypography({
       [
         `${className}-invert`,
         {
-          '@layer defaults': {
+          '@layer base': {
             '--tw-prose-body': 'var(--tw-prose-invert-body)',
             '--tw-prose-headings': 'var(--tw-prose-invert-headings)',
             '--tw-prose-lead': 'var(--tw-prose-invert-lead)',

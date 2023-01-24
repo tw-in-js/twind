@@ -78,7 +78,7 @@ function serialize$<Theme extends BaseTheme = BaseTheme>(
               {
                 n: name,
                 p: moveToLayer(precedence, Layer[key[7] as 'b']),
-                r: conditions,
+                r: key[7] == 'd' ? [] : conditions,
                 i: important,
               },
               context,

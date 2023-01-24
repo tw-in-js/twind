@@ -35,7 +35,8 @@ test('inject global styles', () => {
 
   assert.deepEqual(tw.target, [
     "/*!0,0*/@font-face{font-family:'Patrick Hand SC';font-style:normal;font-weight:400;src:local('Patrick Hand SC'), local('PatrickHandSC-Regular'), url(https://fonts.gstatic.com/s/patrickhandsc/v4/OYFWCgfCR-7uHIovjUZXsZ71Uis0Qeb9Gqo8IZV7ckE.woff2) format('woff2');unicode-range:U+0100-024f, U+1-1eff, U+20a0-20ab, U+20ad-20cf, U+2c60-2c7f, U+A720-A7FF}",
-    '/*!0,1v*/*,::before,::after,::backdrop{--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000}',
+    '/*!0,1v*/*,::before,::after{--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000}',
+    '/*!0,1v*/::backdrop{--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000}',
     '/*!27wr28,y*/*{box-sizing:border-box}',
     '/*!dbgidc,u,shadow*/.shadow{--tw-shadow:0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px -1px rgba(0,0,0,0.1);--tw-shadow-colored:0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}',
     '/*!dbgidc,11,underline*/.underline{text-decoration-line:underline}',
@@ -83,7 +84,8 @@ test('inject global styles using custom tw', () => {
   tw$('shadow')
 
   assert.deepEqual(tw$.target, [
-    '*,::before,::after,::backdrop{--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000}',
+    '*,::before,::after{--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000}',
+    '::backdrop{--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000}',
     ':root > body{border:3px solid red}',
     ':root > body{--tw-bg-opacity:1;background-color:rgba(255,255,255,var(--tw-bg-opacity))}',
     ':root > body{--tw-text-opacity:1;color:rgba(0,0,0,var(--tw-text-opacity))}',
@@ -124,7 +126,8 @@ test('layers', () => {
   `
 
   assert.deepEqual(tw.target, [
-    '/*!0,1v*/*,::before,::after,::backdrop{--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000}',
+    '/*!0,1v*/*,::before,::after{--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000}',
+    '/*!0,1v*/::backdrop{--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000}',
     '/*!27wr28,0*/h1{font-size:1.5rem;line-height:2rem}',
     '/*!27wr28,0*/h2{font-size:1.25rem;line-height:1.75rem}',
     '/*!4fti4g,0*/.select2-dropdown{border-bottom-left-radius:0.5rem;border-bottom-right-radius:0.5rem;--tw-shadow:0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -2px rgba(0,0,0,0.1);--tw-shadow-colored:0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)}',

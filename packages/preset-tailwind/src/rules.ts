@@ -402,15 +402,13 @@ const rules: Rule<TailwindTheme>[] = [
                   $1)) as 'numeric-spacing']: $1,
             fontVariantNumeric:
               'var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)',
-            '@layer defaults': {
-              '*,::before,::after,::backdrop': {
-                '--tw-ordinal': 'var(--tw-empty,/*!*/ /*!*/)',
-                '--tw-slashed-zero': 'var(--tw-empty,/*!*/ /*!*/)',
-                '--tw-numeric-figure': 'var(--tw-empty,/*!*/ /*!*/)',
-                '--tw-numeric-spacing': 'var(--tw-empty,/*!*/ /*!*/)',
-                '--tw-numeric-fraction': 'var(--tw-empty,/*!*/ /*!*/)',
-              },
-            },
+            ...asDefaults({
+              '--tw-ordinal': 'var(--tw-empty,/*!*/ /*!*/)',
+              '--tw-slashed-zero': 'var(--tw-empty,/*!*/ /*!*/)',
+              '--tw-numeric-figure': 'var(--tw-empty,/*!*/ /*!*/)',
+              '--tw-numeric-spacing': 'var(--tw-empty,/*!*/ /*!*/)',
+              '--tw-numeric-fraction': 'var(--tw-empty,/*!*/ /*!*/)',
+            }),
           },
   ),
 
@@ -655,12 +653,10 @@ const rules: Rule<TailwindTheme>[] = [
 
   // Border Spacing
   matchTheme('border-spacing(-[xy])?(?:$|-)', 'borderSpacing', ({ 1: $1, _ }) => ({
-    '@layer defaults': {
-      '*,::before,::after,::backdrop': {
-        '--tw-border-spacing-x': 0,
-        '--tw-border-spacing-y': 0,
-      },
-    },
+    ...asDefaults({
+      '--tw-border-spacing-x': '0',
+      '--tw-border-spacing-y': '0',
+    }),
     [('--tw-border-spacing' + ($1 || '-x')) as '--tw-border-spacing-x']: _,
     [('--tw-border-spacing' + ($1 || '-y')) as '--tw-border-spacing-y']: _,
     'border-spacing': 'var(--tw-border-spacing-x) var(--tw-border-spacing-y)',
@@ -744,27 +740,25 @@ const rules: Rule<TailwindTheme>[] = [
 
   // Ring Width
   matchTheme('ring(?:$|-)', 'ringWidth', ({ _ }, { theme }) => ({
+    ...asDefaults({
+      '--tw-ring-offset-shadow': '0 0 #0000',
+      '--tw-ring-shadow': '0 0 #0000',
+      '--tw-shadow': '0 0 #0000',
+      '--tw-shadow-colored': '0 0 #0000',
+      // Within own declaration to have the defaults above to be merged with defaults from shadow
+      '&': {
+        '--tw-ring-inset': 'var(--tw-empty,/*!*/ /*!*/)',
+        '--tw-ring-offset-width': theme('ringOffsetWidth', '', '0px'),
+        '--tw-ring-offset-color': toColorValue(theme('ringOffsetColor', '', '#fff')),
+        '--tw-ring-color': toColorValue(theme('ringColor', '', '#93c5fd'), {
+          opacityVariable: '--tw-ring-opacity',
+        }),
+        '--tw-ring-opacity': theme('ringOpacity', '', '0.5'),
+      },
+    }),
     '--tw-ring-offset-shadow': `var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)`,
     '--tw-ring-shadow': `var(--tw-ring-inset) 0 0 0 calc(${_} + var(--tw-ring-offset-width)) var(--tw-ring-color)`,
     boxShadow: `var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)`,
-    '@layer defaults': {
-      '*,::before,::after,::backdrop': {
-        '--tw-ring-offset-shadow': '0 0 #0000',
-        '--tw-ring-shadow': '0 0 #0000',
-        '--tw-shadow': '0 0 #0000',
-        '--tw-shadow-colored': '0 0 #0000',
-        // Within own declaration to have the defaults above to be merged with defaults from shadow
-        '&': {
-          '--tw-ring-inset': 'var(--tw-empty,/*!*/ /*!*/)',
-          '--tw-ring-offset-width': theme('ringOffsetWidth', '', '0px'),
-          '--tw-ring-offset-color': toColorValue(theme('ringOffsetColor', '', '#fff')),
-          '--tw-ring-color': toColorValue(theme('ringColor', '', '#93c5fd'), {
-            opacityVariable: '--tw-ring-opacity',
-          }),
-          '--tw-ring-opacity': theme('ringOpacity', '', '0.5'),
-        },
-      },
-    },
   })),
 
   /* EFFECTS */
@@ -784,6 +778,12 @@ const rules: Rule<TailwindTheme>[] = [
 
   // Box Shadow
   matchTheme('shadow(?:$|-)', 'boxShadow', ({ _ }) => ({
+    ...asDefaults({
+      '--tw-ring-offset-shadow': '0 0 #0000',
+      '--tw-ring-shadow': '0 0 #0000',
+      '--tw-shadow': '0 0 #0000',
+      '--tw-shadow-colored': '0 0 #0000',
+    }),
     '--tw-shadow': join(_),
     // replace all colors with reference to --tw-shadow-colored
     // this matches colors after non-comma char (keyword, offset) before comma or the end
@@ -792,14 +792,6 @@ const rules: Rule<TailwindTheme>[] = [
       '$1var(--tw-shadow-color)$2',
     ),
     boxShadow: `var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow)`,
-    '@layer defaults': {
-      '*,::before,::after,::backdrop': {
-        '--tw-ring-offset-shadow': '0 0 #0000',
-        '--tw-ring-shadow': '0 0 #0000',
-        '--tw-shadow': '0 0 #0000',
-        '--tw-shadow-colored': '0 0 #0000',
-      },
-    },
   })),
 
   // Opacity
@@ -975,12 +967,10 @@ const rules: Rule<TailwindTheme>[] = [
   // Scroll Snap Type
   match('snap-(none)', 'scroll-snap-type'),
   match('snap-(x|y|both)', ({ 1: $1 }) => ({
+    ...asDefaults({
+      '--tw-scroll-snap-strictness': 'proximity',
+    }),
     'scroll-snap-type': $1 + ' var(--tw-scroll-snap-strictness)',
-    '@layer defaults': {
-      '*,::before,::after,::backdrop': {
-        '--tw-scroll-snap-strictness': 'proximity',
-      },
-    },
   })),
   match('snap-(mandatory|proximity)', '--tw-scroll-snap-strictness'),
 
@@ -1006,19 +996,17 @@ const rules: Rule<TailwindTheme>[] = [
   // Touch Action
   match('touch-(auto|none|manipulation)', 'touch-action'),
   match('touch-(pinch-zoom|pan-(?:(x|left|right)|(y|up|down)))', ({ 1: $1, 2: $2, 3: $3 }) => ({
+    ...asDefaults({
+      '--tw-pan-x': 'var(--tw-empty,/*!*/ /*!*/)',
+      '--tw-pan-y': 'var(--tw-empty,/*!*/ /*!*/)',
+      '--tw-pinch-zoom': 'var(--tw-empty,/*!*/ /*!*/)',
+      '--tw-touch-action': 'var(--tw-pan-x) var(--tw-pan-y) var(--tw-pinch-zoom)',
+    }),
     // x, left, right -> pan-x
     // y, up, down -> pan-y
     // -> pinch-zoom
     [`--tw-${$2 ? 'pan-x' : $3 ? 'pan-y' : $1}` as '--tw-pan-x']: $1,
     'touch-action': 'var(--tw-touch-action)',
-    '@layer defaults': {
-      '*,::before,::after,::backdrop': {
-        '--tw-pan-x': 'var(--tw-empty,/*!*/ /*!*/)',
-        '--tw-pan-y': 'var(--tw-empty,/*!*/ /*!*/)',
-        '--tw-pinch-zoom': 'var(--tw-empty,/*!*/ /*!*/)',
-        '--tw-touch-action': 'var(--tw-pan-x) var(--tw-pan-y) var(--tw-pinch-zoom)',
-      },
-    },
   })),
 
   // Outline Style
@@ -1179,12 +1167,10 @@ function filter(prefix = ''): Rule<TailwindTheme>[] {
   }
 
   defaults = {
+    // move defaults
+    ...asDefaults(defaults),
     // add default filter which allows standalone usage
     [`${prefix}filter`]: filters.map((key) => `var(--tw-${prefix}${key})`).join(' '),
-    // move defaults
-    '@layer defaults': {
-      '*,::before,::after,::backdrop': defaults,
-    },
   } as CSSObject
 
   return [
@@ -1219,19 +1205,17 @@ function transform({ 1: $1, _ }: ThemeMatchResult<string>): CSSObject {
 
 function tranformDefaults(): CSSObject {
   return {
+    ...asDefaults({
+      '--tw-translate-x': '0',
+      '--tw-translate-y': '0',
+      '--tw-rotate': '0',
+      '--tw-skew-x': '0',
+      '--tw-skew-y': '0',
+      '--tw-scale-x': '1',
+      '--tw-scale-y': '1',
+      '--tw-transform': transformValue(),
+    }),
     transform: 'var(--tw-transform)',
-    '@layer defaults': {
-      '*,::before,::after,::backdrop': {
-        '--tw-translate-x': '0',
-        '--tw-translate-y': '0',
-        '--tw-rotate': '0',
-        '--tw-skew-x': '0',
-        '--tw-skew-y': '0',
-        '--tw-scale-x': '1',
-        '--tw-scale-y': '1',
-        '--tw-transform': transformValue(),
-      },
-    },
   }
 }
 
@@ -1271,4 +1255,13 @@ function range({
   }
 
   return result
+}
+
+function asDefaults(props: CSSObject): { '@layer defaults': CSSBase } {
+  return {
+    '@layer defaults': {
+      '*,::before,::after': props,
+      '::backdrop': props,
+    },
+  }
 }
