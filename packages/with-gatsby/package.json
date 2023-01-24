@@ -1,6 +1,6 @@
 {
   "name": "gatsby-plugin-twind",
-  "version": "1.1.3",
+  "version": "1.1.4",
   "description": "Seamless integration of Twind in a Gatsby project",
   "keywords": [
     "twind",
@@ -51,7 +51,7 @@
     }
   },
   "devDependencies": {
-    "@twind/core": "^1.1.2",
+    "@twind/core": "^1.1.3",
     "@types/react": "^17.0.52",
     "@types/react-dom": "^17.0.18",
     "gatsby": "^4.24.8",

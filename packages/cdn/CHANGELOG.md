@@ -1,5 +1,14 @@
 # @twind/cdn
 
+## 1.0.8
+
+### Patch Changes
+
+- Updated dependencies [[`ccc9c9a9`](https://github.com/tw-in-js/twind/commit/ccc9c9a959c8b61b7429c3539e709e7b39cc3ae8)]:
+  - @twind/core@1.1.3
+  - @twind/preset-tailwind@1.1.4
+  - @twind/preset-autoprefix@1.0.7
+
 ## 1.0.7
 
 ### Patch Changes

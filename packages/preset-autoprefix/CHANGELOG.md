@@ -1,5 +1,7 @@
 # @twind/preset-autoprefix
 
+## 1.0.7
+
 ## 1.0.6
 
 ### Patch Changes

@@ -1,5 +1,7 @@
 # @twind/preset-tailwind-forms
 
+## 1.1.2
+
 ## 1.1.1
 
 ## 1.1.0

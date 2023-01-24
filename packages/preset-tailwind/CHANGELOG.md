@@ -1,5 +1,11 @@
 # @twind/preset-tailwind
 
+## 1.1.4
+
+### Patch Changes
+
+- prevent invalid default rule in legacy browsers ([`ccc9c9a9`](https://github.com/tw-in-js/twind/commit/ccc9c9a959c8b61b7429c3539e709e7b39cc3ae8))
+
 ## 1.1.3
 
 ### Patch Changes
