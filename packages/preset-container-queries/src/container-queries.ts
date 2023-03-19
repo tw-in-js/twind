@@ -1,12 +1,12 @@
 import { DEV } from 'distilt/env'
 import {
   arbitrary,
-  AutocompleteProvider,
-  BaseTheme,
+  type AutocompleteProvider,
+  type BaseTheme,
   parseValue,
-  Preset,
-  RuleResolver,
-  VariantResolver,
+  type Preset,
+  type RuleResolver,
+  type VariantResolver,
   withAutocomplete,
 } from '@twind/core'
 

@@ -36,10 +36,10 @@
     "@twind/preset-tailwind": "^1.1.4"
   },
   "devDependencies": {
-    "typescript": "^4.8.4"
+    "typescript": "^5.0.2"
   },
   "peerDependencies": {
-    "typescript": "^4.8.4"
+    "typescript": ">=4.1.0"
   },
   "peerDependenciesMeta": {
     "typescript": {

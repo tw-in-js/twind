@@ -14,8 +14,7 @@
     "declarationMap": true,
     "noEmitOnError": true,
     "noErrorTruncation": true,
-    // Enforce using `import type` instead of `import` for Types
-    "importsNotUsedAsValues": "error",
+    "verbatimModuleSyntax": true,
     "allowJs": true,
     // Generate inline sourcemaps
     "sourceMap": false,
@@ -23,8 +22,6 @@
     "inlineSources": true,
     // Enable strictest settings like strictNullChecks & noImplicitAny.
     "strict": true,
-    // Disallow features that require cross-file information for emit.
-    "isolatedModules": true,
     "allowSyntheticDefaultImports": true,
     // Import non-ES modules as default imports.
     "esModuleInterop": true,

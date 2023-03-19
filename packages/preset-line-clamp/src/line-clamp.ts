@@ -1,10 +1,10 @@
 import { DEV } from 'distilt/env'
 import {
-  AutocompleteProvider,
-  BaseTheme,
-  CSSObject,
-  Preset,
-  RuleResolver,
+  type AutocompleteProvider,
+  type BaseTheme,
+  type CSSObject,
+  type Preset,
+  type RuleResolver,
   withAutocomplete,
 } from '@twind/core'
 
