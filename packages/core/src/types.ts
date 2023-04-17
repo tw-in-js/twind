@@ -79,6 +79,8 @@ export interface Twind<Theme extends BaseTheme = BaseTheme, Target = unknown> {
 
   readonly config: TwindConfig<Theme>
 
+  readonly cache: Map<string, string>
+
   snapshot(): RestoreSnapshot
 
   /** Clears all CSS rules from the sheet. */
@@ -282,7 +284,7 @@ export interface Sheet<Target = unknown> {
   clear(): void
   destroy(): void
   resume(
-    addClassName: (className: string) => void,
+    addClassName: (tokens: string, className?: string) => void,
     insert: (cssText: string, rule: SheetRule) => void,
   ): void
 }
