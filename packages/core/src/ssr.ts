@@ -126,10 +126,12 @@ export interface ExtractResult {
  * import { tw } from './custom/twind/instance'
  *
  * function render() {
- *   const { html, css } = extract(renderApp(), tw)
+ *   const { html, css, json } = extract(renderApp(), tw)
  *
  *   // inject as last element into the head
- *   return html.replace('</head>', `<style data-twind>${css}</style></head>`)
+ *   return html
+ *      .replace('</head>', `<style data-twind>${css}</style></head>`)
+ *      .replace('</body>', `<script type="application/json" data-twind-cache>${json}</script></body>`)
  * }
  * ```
  *

@@ -31,18 +31,27 @@ function install<Component extends typeof Document = typeof Document>(
       ctx.defaultGetInitialProps = async (ctx, options: { nonce?: string } = {}) => {
         const props = await defaultGetInitialProps(ctx, options)
 
-        const { html, css } = extract(props.html)
+        const { html, css, json } = extract(props.html)
 
         const styles = createElement(
           Fragment,
           null,
-          createElement('style', {
-            'data-twind': '',
-            nonce: options.nonce,
-            dangerouslySetInnerHTML: {
-              __html: css,
-            },
-          }),
+          [
+            createElement('style', {
+              'data-twind': '',
+              nonce: options.nonce,
+              dangerouslySetInnerHTML: {
+                __html: css,
+              },
+            }),
+            createElement('script', {
+              type: 'application/json',
+              'data-twind-cache': '',
+              dangerouslySetInnerHTML: {
+                __html: json,
+              },
+            }),
+          ],
           props.styles,
         )
 
