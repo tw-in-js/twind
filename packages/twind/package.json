@@ -23,7 +23,7 @@
     "@twind/core": "^1.1.3"
   },
   "peerDependencies": {
-    "typescript": "^4.8.4"
+    "typescript": ">=4.1.0"
   },
   "peerDependenciesMeta": {
     "typescript": {
@@ -31,7 +31,7 @@
     }
   },
   "devDependencies": {
-    "typescript": "^4.8.4"
+    "typescript": "^5.0.2"
   },
   "scripts": {
     "build": "distilt"

@@ -1,14 +1,14 @@
 import { DEV } from 'distilt/env'
 import {
-  CSSNested,
-  Preset,
-  CustomProperties,
-  CSSObject,
-  Context,
-  BaseTheme,
-  ColorValue,
-  RuleResolver,
-  AutocompleteProvider,
+  type CSSNested,
+  type Preset,
+  type CustomProperties,
+  type CSSObject,
+  type Context,
+  type BaseTheme,
+  type ColorValue,
+  type RuleResolver,
+  type AutocompleteProvider,
   withAutocomplete,
 } from '@twind/core'
 import { toColorValue } from '@twind/core'

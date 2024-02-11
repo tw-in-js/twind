@@ -36,7 +36,7 @@
   "peerDependencies": {
     "@twind/core": "^1.1.0",
     "@twind/preset-tailwind": "^1.0.3",
-    "typescript": "^4.8.4"
+    "typescript": ">=4.1.0"
   },
   "peerDependenciesMeta": {
     "typescript": {
@@ -46,7 +46,7 @@
   "devDependencies": {
     "@twind/core": "^1.1.3",
     "@twind/preset-tailwind": "^1.1.4",
-    "typescript": "^4.8.4"
+    "typescript": "^5.0.2"
   },
   "scripts": {
     "build": "distilt"

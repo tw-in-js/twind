@@ -2,11 +2,11 @@
 /* @distilt-global-name twind */
 
 import {
-  Twind,
-  TwindConfig,
-  TwindUserConfig,
-  Preset,
-  ExtractThemes,
+  type Twind,
+  type TwindConfig,
+  type TwindUserConfig,
+  type Preset,
+  type ExtractThemes,
   defineConfig,
 } from '@twind/core'
 

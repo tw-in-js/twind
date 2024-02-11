@@ -38,7 +38,7 @@
     "@twind/core": "^1.1.0",
     "react": "^16.6.0 || 17.x || 18.x",
     "react-dom": "^16.6.0 || 17.x || 18.x",
-    "typescript": "^4.8.4"
+    "typescript": ">=4.1.0"
   },
   "// react & react-dom are optional because this package does not use them but we specify a compatibilty version range for them": "",
   "peerDependenciesMeta": {
@@ -60,7 +60,7 @@
     "@types/react-dom": "^18.0.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "typescript": "^4.8.4"
+    "typescript": "^5.0.2"
   },
   "scripts": {
     "build": "distilt"

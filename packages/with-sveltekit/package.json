@@ -37,7 +37,7 @@
   "peerDependencies": {
     "@sveltejs/kit": "^1.0.0",
     "@twind/core": "^1.1.0",
-    "typescript": "^4.8.4"
+    "typescript": ">=4.1.0"
   },
   "peerDependenciesMeta": {
     "typescript": {
@@ -48,7 +48,7 @@
     "@sveltejs/kit": "^1.0.0",
     "@twind/core": "^1.1.3",
     "svelte": "^3.54.0",
-    "typescript": "^4.8.4"
+    "typescript": "^5.0.2"
   },
   "scripts": {
     "build": "distilt"

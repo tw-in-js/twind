@@ -3,10 +3,10 @@
  */
 
 import {
-  AutocompleteProvider,
-  VariantResolver,
-  Variant,
-  AutocompleteItem,
+  type AutocompleteProvider,
+  type VariantResolver,
+  type Variant,
+  type AutocompleteItem,
   arbitrary,
 } from '@twind/core'
 import type { TailwindTheme } from './types'
