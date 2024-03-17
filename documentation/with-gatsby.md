@@ -1,6 +1,6 @@
 ---
 section: Use With
-title: Gatbsy
+title: Gatsby
 package: 'gatsby-plugin-twind'
 example: 'with-gatsby'
 excerpt: |
