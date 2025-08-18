@@ -16,15 +16,22 @@ export function replaceRenderer({
   setHeadComponents,
 }: ReplaceRendererArgs): void {
   const bodyHTML = renderToString(bodyComponent as ReactElement)
-  const { html, css } = extract(bodyHTML)
+  const { html, css, json } = extract(bodyHTML)
 
   replaceBodyHTMLString(html)
   setHeadComponents([
     // <style data-twind>{css}</style>
     createElement('style', {
-      'data-twind': true,
+      'data-twind': '',
       dangerouslySetInnerHTML: {
         __html: css,
+      },
+    }),
+    createElement('script', {
+      type: 'application/json',
+      'data-twind-cache': '',
+      dangerouslySetInnerHTML: {
+        __html: json,
       },
     }),
   ])
