@@ -130,7 +130,7 @@ export function setup<
 export function setup<Theme extends BaseTheme = BaseTheme, SheetTarget = unknown>(
   config: TwindConfig<any> | TwindUserConfig<any> = {},
   sheet: Sheet<SheetTarget> | SheetFactory<SheetTarget> = getSheet as SheetFactory<SheetTarget>,
-  target?: HTMLElement,
+  target?: HTMLElement | false,
 ): Twind<Theme, SheetTarget> {
   active?.destroy()
 

@@ -205,7 +205,7 @@ export function stringify(target: unknown): string {
 
 function resume(
   this: Sheet,
-  addClassName: (className: string) => void,
+  addClassName: (tokens: string, className?: string) => void,
   insert: (cssText: string, rule: SheetRule) => void,
 ) {
   // hydration from SSR sheet
@@ -217,17 +217,14 @@ function resume(
     // RE has global flag — reset index to get the first match as well
     RE.lastIndex = 0
 
-    // 1. start with a fresh sheet
-    this.clear()
-
-    // 2. add all existing class attributes to the token/className cache
+    // 1. add all existing class attributes to the token/className cache
     if (typeof document != 'undefined') {
       for (const el of document.querySelectorAll('[class]')) {
         addClassName(el.getAttribute('class') as string)
       }
     }
 
-    // 3. parse SSR styles
+    // 2. parse SSR styles
     let lastMatch: RegExpExecArray | null | undefined
 
     while (

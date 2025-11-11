@@ -77,10 +77,12 @@ export function inline(markup: string, options: InlineOptions['tw'] | InlineOpti
   const { tw = tw$, minify = identity } =
     typeof options == 'function' ? ({ tw: options } as InlineOptions) : options
 
-  const { html, css } = extract(markup, tw)
+  const { html, css, json } = extract(markup, tw)
 
   // inject as last element into the head
-  return html.replace('</head>', `<style data-twind>${minify(css, html)}</style></head>`)
+  return html
+    .replace('</head>', `<style data-twind>${minify(css, html)}</style></head>`)
+    .replace('</body>', `<script type="application/json" data-twind-cache>${json}</script></body>`)
 }
 
 /**
@@ -92,6 +94,9 @@ export interface ExtractResult {
 
   /** The generated CSS */
   css: string
+
+  /** The json state necessary for hydration on the browser */
+  json: string
 }
 
 /**
@@ -121,10 +126,12 @@ export interface ExtractResult {
  * import { tw } from './custom/twind/instance'
  *
  * function render() {
- *   const { html, css } = extract(renderApp(), tw)
+ *   const { html, css, json } = extract(renderApp(), tw)
  *
  *   // inject as last element into the head
- *   return html.replace('</head>', `<style data-twind>${css}</style></head>`)
+ *   return html
+ *      .replace('</head>', `<style data-twind>${css}</style></head>`)
+ *      .replace('</body>', `<script type="application/json" data-twind-cache>${json}</script></body>`)
  * }
  * ```
  *
@@ -136,7 +143,7 @@ export interface ExtractResult {
 export function extract(html: string, tw: Twind<any, any> = tw$): ExtractResult {
   const restore = tw.snapshot()
 
-  const result = { html: consume(html, tw), css: stringify(tw.target) }
+  const result = { html: consume(html, tw), css: stringify(tw.target), json: tw.cache.toString() }
 
   restore()
 

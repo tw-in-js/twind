@@ -2,8 +2,8 @@ import type {
   BaseTheme,
   ExtractThemes,
   Preset,
-  Twind,
   Sheet,
+  Twind,
   TwindConfig,
   TwindRule,
   TwindUserConfig,
@@ -19,6 +19,60 @@ import { defineConfig } from './define-config'
 import { asArray } from './utils'
 import { serialize } from './internal/serialize'
 import { Layer } from './internal/precedence'
+import { hash } from './utils'
+
+export function twCache() {
+  let serialized = '[]'
+
+  if (typeof document !== 'undefined') {
+    const element: HTMLElement | null = document.querySelector('script[data-twind-cache=""]')
+
+    if (element) {
+      element.dataset.twindCache = 'restored'
+      serialized = element.innerText
+
+      console.log(serialized)
+    }
+  }
+
+  let cache = new Map<string, string>(Object.entries(JSON.parse(serialized)))
+
+  return {
+    get(key: string) {
+      return cache.get(hash(key))
+    },
+
+    set(key: string, value: string) {
+      cache.set(hash(key), value)
+    },
+
+    size() {
+      return cache.size
+    },
+
+    clear() {
+      cache = new Map()
+    },
+
+    snapshot() {
+      const cache$ = new Map(cache)
+
+      return () => {
+        cache = cache$
+      }
+    },
+
+    toString() {
+      return JSON.stringify(
+        Object.fromEntries(
+          Array.from(cache.entries()).filter(([key, value]) => key !== hash(value)),
+        ),
+      )
+    },
+  }
+}
+
+type Cache = ReturnType<typeof twCache>
 
 /**
  * @group Runtime
@@ -45,7 +99,7 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
   const context = createContext(config)
 
   // Map of tokens to generated className
-  let cache = new Map<string, string>()
+  const cache = twCache()
 
   // An array of precedence by index within the sheet
   // always sorted
@@ -56,9 +110,8 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
   let insertedRules = new Set<string>()
 
   sheet.resume(
-    (className) => cache.set(className, className),
+    (tokens, className) => cache.set(tokens, className ?? tokens),
     (cssText, rule) => {
-      sheet.insert(cssText, sortedPrecedences.length, rule)
       sortedPrecedences.push(rule)
       insertedRules.add(cssText)
     },
@@ -89,7 +142,7 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
 
   return Object.defineProperties(
     function tw(tokens) {
-      if (!cache.size) {
+      if (!cache.size()) {
         for (let preflight of asArray(config.preflight)) {
           if (typeof preflight == 'function') {
             preflight = preflight(context)
@@ -118,7 +171,7 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
         className = [...classNames].filter(Boolean).join(' ')
 
         // Remember the generated class name
-        cache.set(tokens, className).set(className, className)
+        cache.set(tokens, className)
       }
 
       return className
@@ -132,26 +185,28 @@ export function twind(userConfig: TwindConfig<any> | TwindUserConfig<any>, sheet
 
       config,
 
+      cache,
+
       snapshot() {
         const restoreSheet = sheet.snapshot()
+        const restoreCache = cache.snapshot()
         const insertedRules$ = new Set(insertedRules)
-        const cache$ = new Map(cache)
         const sortedPrecedences$ = [...sortedPrecedences]
 
         return () => {
           restoreSheet()
+          restoreCache()
 
           insertedRules = insertedRules$
-          cache = cache$
           sortedPrecedences = sortedPrecedences$
         }
       },
 
       clear() {
         sheet.clear()
+        cache.clear()
 
         insertedRules = new Set()
-        cache = new Map()
         sortedPrecedences = []
       },
 
