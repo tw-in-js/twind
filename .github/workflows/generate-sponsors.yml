@@ -27,7 +27,7 @@ jobs:
           SPONSORKIT_OPENCOLLECTIVE_KEY: ${{ secrets.OPENCOLLECTIVE_KEY }}
 
       - name: Commit
-        uses: EndBug/add-and-commit@v9
+        uses: EndBug/add-and-commit@v10
         with:
           message: 'chore: update sponsors images'
           add: 'sites/twind.style/static/sponsors.*'
