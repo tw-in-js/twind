@@ -636,6 +636,7 @@ function camelize(value: string): string {
   return value.replace(/-./g, (x) => x[1].toUpperCase())
 }
 
+const cssVariableRE = /var\((--.+?)[,)]/g
 /**
  * @internal
  * @param value
@@ -662,11 +663,15 @@ export function normalize(value: string): string {
 
       // Add spaces around operators inside math functions like calc() that do not follow an operator
       // or '('.
-      .replace(/(calc|min|max|clamp)\(.+\)/g, (match) =>
-        match.replace(
-          /(-?\d*\.?\d(?!\b-.+[,)](?![^+\-/*])\D)(?:%|[a-z]+)?|\))([+\-/*])/g,
-          '$1 $2 ',
-        ),
-      )
+      .replace(/(calc|min|max|clamp)\(.+\)/g, (match) => {
+        const vars: string[] = []
+        return match
+          .replace(cssVariableRE, (match, g1) => {
+            vars.push(g1)
+            return match.replace(g1, '--v')
+          })
+          .replace(/(-?\d*\.?\d(?!\b-\d.+[,)](?![^+\-/*])\D)(?:%|[a-z]+)?|\))([+\-/*])/g, '$1 $2 ')
+          .replace(cssVariableRE, (match, g1) => match.replace(g1, vars.shift() as string))
+      })
   )
 }

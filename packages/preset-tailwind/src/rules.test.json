@@ -1146,6 +1146,9 @@
   "w-[calc((100%+2rem)/2)]": ".w-\\[calc\\(\\(100\\%\\+2rem\\)\\/2\\)\\]{width:calc((100% + 2rem) / 2)}",
   "w-[calc(var(--index,1)*0.2s)]": ".w-\\[calc\\(var\\(--index\\,1\\)\\*0\\.2s\\)\\]{width:calc(var(--index,1) * 0.2s)}",
   "w-[calc(var(--index)*0.2s)]": ".w-\\[calc\\(var\\(--index\\)\\*0\\.2s\\)\\]{width:calc(var(--index) * 0.2s)}",
+  "w-[calc(1-var(--something)*0.5)]": ".w-\\[calc\\(1-var\\(--something\\)\\*0\\.5\\)\\]{width:calc(1 - var(--something) * 0.5)}",
+  "w-[calc(1-(var(--something)*0.5))]": ".w-\\[calc\\(1-\\(var\\(--something\\)\\*0\\.5\\)\\)\\]{width:calc(1 - (var(--something) * 0.5))}",
+  "w-[calc(1-((12-3)*0.5))]": ".w-\\[calc\\(1-\\(\\(12-3\\)\\*0\\.5\\)\\)\\]{width:calc(1 - ((12 - 3) * 0.5))}",
   "bg-[#1da1f2]": ".bg-\\[\\#1da1f2\\]{--tw-bg-opacity:1;background-color:rgba(29,161,242,var(--tw-bg-opacity))}",
   "translate-x-[-650px]": [
     "*,::before,::after{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-transform:translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}",
