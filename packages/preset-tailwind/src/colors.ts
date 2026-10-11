@@ -15,6 +15,7 @@ export const slate = {
   700: '#334155',
   800: '#1e293b',
   900: '#0f172a',
+  950: '#020617',
 } as const
 
 export const gray = {
@@ -28,6 +29,7 @@ export const gray = {
   700: '#374151',
   800: '#1f2937',
   900: '#111827',
+  950: '#030712',
 } as const
 
 export const zinc = {
@@ -41,6 +43,7 @@ export const zinc = {
   700: '#3f3f46',
   800: '#27272a',
   900: '#18181b',
+  950: '#09090b',
 } as const
 
 export const neutral = {
@@ -54,6 +57,7 @@ export const neutral = {
   700: '#404040',
   800: '#262626',
   900: '#171717',
+  950: '#0a0a0a',
 } as const
 
 export const stone = {
@@ -67,6 +71,7 @@ export const stone = {
   700: '#44403c',
   800: '#292524',
   900: '#1c1917',
+  950: '#0c0a09',
 } as const
 
 export const red = {
@@ -80,6 +85,7 @@ export const red = {
   700: '#b91c1c',
   800: '#991b1b',
   900: '#7f1d1d',
+  950: '#450a0a',
 } as const
 
 export const orange = {
@@ -93,6 +99,7 @@ export const orange = {
   700: '#c2410c',
   800: '#9a3412',
   900: '#7c2d12',
+  950: '#431407',
 } as const
 
 export const amber = {
@@ -106,6 +113,7 @@ export const amber = {
   700: '#b45309',
   800: '#92400e',
   900: '#78350f',
+  950: '#451a03',
 } as const
 
 export const yellow = {
@@ -119,6 +127,7 @@ export const yellow = {
   700: '#a16207',
   800: '#854d0e',
   900: '#713f12',
+  950: '#422006',
 } as const
 
 export const lime = {
@@ -132,6 +141,7 @@ export const lime = {
   700: '#4d7c0f',
   800: '#3f6212',
   900: '#365314',
+  950: '#1a2e05',
 } as const
 
 export const green = {
@@ -145,6 +155,7 @@ export const green = {
   700: '#15803d',
   800: '#166534',
   900: '#14532d',
+  950: '#052e16',
 } as const
 
 export const emerald = {
@@ -158,6 +169,7 @@ export const emerald = {
   700: '#047857',
   800: '#065f46',
   900: '#064e3b',
+  950: '#022c22',
 } as const
 
 export const teal = {
@@ -171,6 +183,7 @@ export const teal = {
   700: '#0f766e',
   800: '#115e59',
   900: '#134e4a',
+  950: '#042f2e',
 } as const
 
 export const cyan = {
@@ -184,6 +197,7 @@ export const cyan = {
   700: '#0e7490',
   800: '#155e75',
   900: '#164e63',
+  950: '#083344',
 } as const
 
 export const sky = {
@@ -197,6 +211,7 @@ export const sky = {
   700: '#0369a1',
   800: '#075985',
   900: '#0c4a6e',
+  950: '#082f49',
 } as const
 
 export const blue = {
@@ -210,6 +225,7 @@ export const blue = {
   700: '#1d4ed8',
   800: '#1e40af',
   900: '#1e3a8a',
+  950: '#172554',
 } as const
 
 export const indigo = {
@@ -223,6 +239,7 @@ export const indigo = {
   700: '#4338ca',
   800: '#3730a3',
   900: '#312e81',
+  950: '#1e1b4b',
 } as const
 
 export const violet = {
@@ -236,6 +253,7 @@ export const violet = {
   700: '#6d28d9',
   800: '#5b21b6',
   900: '#4c1d95',
+  950: '#2e1065',
 } as const
 
 export const purple = {
@@ -249,6 +267,7 @@ export const purple = {
   700: '#7e22ce',
   800: '#6b21a8',
   900: '#581c87',
+  950: '#3b0764',
 } as const
 
 export const fuchsia = {
@@ -262,6 +281,7 @@ export const fuchsia = {
   700: '#a21caf',
   800: '#86198f',
   900: '#701a75',
+  950: '#4a044e',
 } as const
 
 export const pink = {
@@ -275,6 +295,7 @@ export const pink = {
   700: '#be185d',
   800: '#9d174d',
   900: '#831843',
+  950: '#500724',
 } as const
 
 export const rose = {
@@ -288,6 +309,7 @@ export const rose = {
   700: '#be123c',
   800: '#9f1239',
   900: '#881337',
+  950: '#4c0519',
 } as const
 
 // get lightBlue() {
